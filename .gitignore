@@ -1,0 +1,16 @@
+*.pyc
+
+app/static/css/site.css
+app/static/css/packed.css
+app/static/js/packed.js
+app/media/
+app/static/admin/
+app/static/tiny_mce/
+app/static/.webassets-cache/
+
+env_*
+
+*.wpr
+*.wpu
+
+test.lite

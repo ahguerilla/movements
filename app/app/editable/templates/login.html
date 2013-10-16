@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+	<title>Admin Login</title>
+	<style type="text/css">
+	body {
+		font-family:Georgia;
+		font-size:14px;
+		line-height:20px;
+	}
+	
+	h1, h2, h3, h4, h5, h6 {
+		margin:0px;
+		padding:0px;
+	}
+	
+	#wrapper {
+		width:300px;
+		margin:250px auto;
+		padding:0px;
+	}
+	
+	form {
+		width:250px;
+		background: #EEEEEE;
+		border: 1px solid #CCCCCC;
+		margin:0px auto;
+		padding:10px;
+	}
+	
+	#login_heading {
+		text-align:center;
+	}
+	
+	#id_username, #id_password {
+		padding:2px;
+		width:95%;
+	}
+	
+	input#login {
+		border:1px solid black;
+		font-size:14px;
+		margin-left:175px;
+	}
+	
+	#form_errors {
+		width:300px;
+		border: 1px solid red;
+		background:#FF7575;
+		margin:30px auto;
+		padding: 5px;
+		text-align:center;
+	}
+	
+	#form_errors p {
+		font-weight:700;
+	}
+	</style>
+</head>
+<body>
+<div id="wrapper">
+	<form method="post" action="">
+		<h3 id="login_heading">Login:</h3>
+		{% csrf_token %}
+		<p><label for="id_username">Username:</label><br/>
+		{{form.username}}</p>
+		<p><label for="id_password">Password:<label><br/>
+		{{form.password}}</p>
+		<input type="submit" value="login" id="login" />
+		<input type="hidden" name="next" value="/" />
+	</form>
+	{% if form.errors %}
+	<div id="form_errors">
+		<p>Your username or password did not match. Please try again.</p>
+	</div>
+</div>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <title>Content Edit Page</title>
+</head>
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{placeholder_form.redirectaddr}}
+        <label for="id_content">Content:</label><br/>
+        <p style="margin:0px; padding:0px; font-size:12px; color:#555555;">{{placeholder_form.content.help_text}}</p>
+        {{placeholder_form.content}}<br/>
+
+    {% if placeholder_form.content.errors %}
+        <ul>
+        {% for error in placeholder_form.content.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

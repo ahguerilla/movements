@@ -1,0 +1,5 @@
+-r base.txt
+
+ipython==1.0.0
+PIL==1.1.7
+MySQL-python==1.2.4
