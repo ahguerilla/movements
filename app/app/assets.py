@@ -1,35 +1,21 @@
-from django_assets import register
-from webassets.ext.jinja2 import Bundle
+from django_assets import register,Bundle
 from unipath import Path
 from django.conf import settings
 
-from django_jinja.base import env as Jinja2Environment
-from webassets import Environment as AssetsEnvironment
-
-PROJECT_DIR = Path(__file__).ancestor(2)
-assets_env = AssetsEnvironment(PROJECT_DIR.child("static"),)
-assets_env.url = settings.ASSETS_URL
-assets_env.debug = settings.ASSETS_DEBUG
-Jinja2Environment.assets_environment = assets_env
-
+js = Bundle(
+	Bundle(
+	    './js/lib/modernizr.custom.18630.js',
+	    './js/lib/jquery-1.10.2.min.js',
+	    './js/lib/underscore-min.js',
+	    './js/lib/backbone-min.js',
+	    './js/lib/jquery.contextMenu.js',
+	    './js/lib/jquery.ui.position.js',
+	    ),
+	filters='jsmin',
+	output='./js/packed.js'
+)
 
 if settings.PRODUCTION:
-
-	js = Bundle(
-		Bundle(
-		    './js/lib/modernizr.custom.18630.js',
-		    './js/lib/jquery-1.10.2.min.js',
-		    './js/lib/underscore-min.js',
-		    './js/lib/backbone-min.js',
-		    './js/lib/jquery.contextMenu.js',
-		    './js/lib/jquery.ui.position.js',
-		    ),
-		Bundle(
-		    './js/lib/editable.js',
-		    ),
-		filters='jsmin',
-		output='./js/packed.js'
-	)
 
 	css = Bundle(
 	    './css/cssreset-min.css',
@@ -40,22 +26,6 @@ if settings.PRODUCTION:
 	)
 
 else:
-
-	js = Bundle(
-		Bundle(
-		    './js/lib/modernizr.custom.18630.js',
-		    './js/lib/jquery-1.10.2.min.js',
-		    './js/lib/underscore-min.js',
-		    './js/lib/backbone-min.js',
-		    './js/lib/jquery.contextMenu.js',
-		    './js/lib/jquery.ui.position.js',
-		    ),
-		Bundle(
-		    './js/lib/editable.js',
-		    ),
-		filters='jsmin',
-		output='./js/packed.js'
-	)
 
 	css = Bundle(
 		Bundle(
@@ -71,7 +41,7 @@ else:
 		output='./css/packed.css'
 	)
 
-assets_env.register('js_all', js)
-assets_env.register('css_all', css)
+register('js_all', js)
+register('css_all', css)
 
 

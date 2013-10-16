@@ -1,15 +1,13 @@
-django==1.4.5
-Jinja2==2.7.1
-MarkupSafe==0.18
-South==0.8.1
-cssmin==0.1.4
-distribute==0.6.34
-django-assets==0.8
-django-jinja==0.20
-django-tinymce==1.5.1
-jsmin==2.0.3
-sorl-thumbnail==11.12
-webassets==0.8
-Unipath==1.0
-
+django==1.5.4
+MarkupSafe
+South
+cssmin
+distribute
+django-assets
+django-tinymce
+jsmin
+sorl-thumbnail
+webassets
+Unipath
+PIL
 
