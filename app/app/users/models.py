@@ -6,7 +6,7 @@ from sorl.thumbnail import ImageField
 import uuid
 
 def user_image_upload_path_handler(instance, filename):
-    return 'user/img/{file}'.format(file=str(uuid.uuid1()))
+    return 'user/img/{file}'.format(file=str(uuid.uuid1())+filename[-4:])
 
 class UserProfile(models.Model):
 	user = models.ForeignKey(User)
