@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
+#from json_field import JSONField
 
 import uuid
 
@@ -14,7 +15,11 @@ class UserProfile(models.Model):
 	web_url = models.CharField(_('website url'), max_length=255, null=True, blank=True)
 	fb_url = models.CharField(_('facebook page'), max_length=255, null=True, blank=True)
 	tweet_url = models.CharField(_('twitter page'), max_length=255, null=True, blank=True)
-	
+	occupation = models.CharField(_('occupation'), max_length=255, null=True)
+	is_organisation = models.BooleanField(_('organisation'), default=False)
+	is_journalist = models.BooleanField(_('journalist'), default=False)
+	get_newsletter = models.BooleanField(_('newsletter'), default=False)
+	#notifications = JSONField()
 
 	def save(self, *args, **kwargs):
 		model = self.__class__
@@ -31,13 +36,11 @@ class Skills(models.Model):
 class UserSkills(models.Model):
 	pass
 
-
 class Issues(models.Model):
 	pass
 
 class UserIssues(models.Model):
 	pass
-
 
 class Countries(models.Model):
 	pass
