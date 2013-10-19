@@ -10,4 +10,3 @@ sorl-thumbnail
 webassets
 Unipath
 PIL
-

@@ -1,8 +1,8 @@
+from json_field import JSONField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
-#from json_field import JSONField
 
 import uuid
 
@@ -16,10 +16,13 @@ class UserProfile(models.Model):
 	fb_url = models.CharField(_('facebook page'), max_length=255, null=True, blank=True)
 	tweet_url = models.CharField(_('twitter page'), max_length=255, null=True, blank=True)
 	occupation = models.CharField(_('occupation'), max_length=255, null=True)
+	expertise = models.CharField(_('area of expertise'), max_length=255, null=True, blank=True)
 	is_organisation = models.BooleanField(_('organisation'), default=False)
 	is_journalist = models.BooleanField(_('journalist'), default=False)
-	get_newsletter = models.BooleanField(_('newsletter'), default=False)
-	#notifications = JSONField()
+	get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
+	notifications = JSONField(_('notifications'))
+	privacy_settings = JSONField(_('privacy settings'))
+
 
 	def save(self, *args, **kwargs):
 		model = self.__class__
