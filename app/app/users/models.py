@@ -9,19 +9,29 @@ import uuid
 def user_image_upload_path_handler(instance, filename):
     return 'user/img/{file}'.format(file=str(uuid.uuid1())+filename[-4:])
 
+class Skills(models.Model):
+	skills = models.CharField(_('skill set'), max_length=255, null=True)
+
+class Issues(models.Model):
+	issues = models.CharField(_('issues of interest'), max_length=255, null=True)
+
+class Countries(models.Model):
+	countries = models.CharField(_('countries of interest'), max_length=255, null=True)
+
 class UserProfile(models.Model):
 	NATIONALITY_CHOICES = (
-		('GBR', 'Great Britain'),
 		('AFG', 'Afganistan'),
+		('GBR', 'Great Britain'),
 		('EGY', 'Egypt'),
 	)
 	RESIDENCE_CHOICES = (
-		('GBR', 'Great Britain'),
 		('AFG', 'Afganistan'),
+		('GBR', 'Great Britain'),
 		('EGY', 'Egypt'),
 	)
 	user = models.ForeignKey(User)
 	image = ImageField(upload_to=user_image_upload_path_handler)
+	tag_ling = models.CharField(_('tag line'), max_length=255, null=True, blank=True)
 	web_url = models.CharField(_('website url'), max_length=255, null=True, blank=True)
 	fb_url = models.CharField(_('facebook page'), max_length=255, null=True, blank=True)
 	tweet_url = models.CharField(_('twitter page'), max_length=255, null=True, blank=True)
@@ -32,8 +42,11 @@ class UserProfile(models.Model):
 	get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
 	notifications = JSONField(_('notifications'))
 	privacy_settings = JSONField(_('privacy settings'))
-	nationality = models.CharField(max_length=3, choices=NATIONALITY_CHOICES)
-	resident_country = models.CharField(max_length=3, choices=RESIDENCE_CHOICES)
+	nationality = models.CharField(_('nationality'), max_length=3, default=NATIONALITY_CHOICES[0][0], choices=NATIONALITY_CHOICES)
+	resident_country = models.CharField(_('country of residence'), max_length=3, default=RESIDENCE_CHOICES[0][0], choices=RESIDENCE_CHOICES)
+	skills = models.ManyToManyField(Skills)
+	issues = models.ManyToManyField(Issues)
+	countries = models.ManyToManyField(Countries)
 
 	def save(self, *args, **kwargs):
 		model = self.__class__
@@ -44,20 +57,3 @@ class UserProfile(models.Model):
 		except:
 			return
 
-class Skills(models.Model):
-	pass
-
-class UserSkills(models.Model):
-	pass
-
-class Issues(models.Model):
-	pass
-
-class UserIssues(models.Model):
-	pass
-
-class Countries(models.Model):
-	pass
-
-class UserCountries(models.Model):
-	pass
