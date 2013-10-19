@@ -10,6 +10,16 @@ def user_image_upload_path_handler(instance, filename):
     return 'user/img/{file}'.format(file=str(uuid.uuid1())+filename[-4:])
 
 class UserProfile(models.Model):
+	NATIONALITY_CHOICES = (
+		('GBR', 'Great Britain'),
+		('AFG', 'Afganistan'),
+		('EGY', 'Egypt'),
+	)
+	RESIDENCE_CHOICES = (
+		('GBR', 'Great Britain'),
+		('AFG', 'Afganistan'),
+		('EGY', 'Egypt'),
+	)
 	user = models.ForeignKey(User)
 	image = ImageField(upload_to=user_image_upload_path_handler)
 	web_url = models.CharField(_('website url'), max_length=255, null=True, blank=True)
@@ -22,7 +32,8 @@ class UserProfile(models.Model):
 	get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
 	notifications = JSONField(_('notifications'))
 	privacy_settings = JSONField(_('privacy settings'))
-
+	nationality = models.CharField(max_length=3, choices=NATIONALITY_CHOICES)
+	resident_country = models.CharField(max_length=3, choices=RESIDENCE_CHOICES)
 
 	def save(self, *args, **kwargs):
 		model = self.__class__
