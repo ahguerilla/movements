@@ -1,4 +1,7 @@
 git clone blah/app
+# ahr
+
+## setup
 
 virtualenv env-foo
 
@@ -12,16 +15,13 @@ django-admin.py runserver --settings=app.settings.local
  or 
 django-admin.py runserver --settings=app.settings.production
 
-
-
-Adapting default lists - fixtures:
-----------------------------------
+## Adapting default lists - fixtures:
 
 app.fixtures
 
 FIXTURE_DIR set in base settings
 
-**To load data into db:**
+## To load data into db:
 
  - python manage.py loaddata $(fixture) --settings=app.settings.local
 
@@ -29,7 +29,7 @@ Fixture file names should be unique otherwise django will not know what to run.
 Fixture models are built based on the db models.
 Run manage.py dumpdata $(app) for a textual view of the db model.
 
-Example:
+## Example:
 
 To load nationalities list into database run
 
