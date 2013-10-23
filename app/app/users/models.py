@@ -18,6 +18,12 @@ class Issues(models.Model):
 class Countries(models.Model):
 	countries = models.CharField(_('countries of interest'), max_length=255, null=True)
 
+class Nationality(models.Model):
+	nationality = models.CharField(_('nationality'), max_length=255, null=True)
+
+class Residence(models.Model):
+	residence = models.CharField(_('country of residence'), max_length=255, null=True)
+
 class UserProfile(models.Model):
 	NATIONALITY_CHOICES = (
 		('AFG', 'Afganistan'),
