@@ -19,22 +19,12 @@ class Countries(models.Model):
 	countries = models.CharField(_('countries of interest'), max_length=255, null=True)
 
 class Nationality(models.Model):
-	nationality = models.CharField(_('nationality'), max_length=255, null=True)
+	nationality = models.CharField(_('nationality'), max_length=255, null=True, blank=True)
 
 class Residence(models.Model):
-	residence = models.CharField(_('country of residence'), max_length=255, null=True)
+	residence = models.CharField(_('country of residence'), max_length=255, null=True, blank=True)
 
 class UserProfile(models.Model):
-	NATIONALITY_CHOICES = (
-		('AFG', 'Afganistan'),
-		('GBR', 'Great Britain'),
-		('EGY', 'Egypt'),
-	)
-	RESIDENCE_CHOICES = (
-		('AFG', 'Afganistan'),
-		('GBR', 'Great Britain'),
-		('EGY', 'Egypt'),
-	)
 	user = models.ForeignKey(User)
 	image = ImageField(upload_to=user_image_upload_path_handler)
 	tag_ling = models.CharField(_('tag line'), max_length=255, null=True, blank=True)
@@ -48,8 +38,8 @@ class UserProfile(models.Model):
 	get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
 	notifications = JSONField(_('notifications'))
 	privacy_settings = JSONField(_('privacy settings'))
-	nationality = models.CharField(_('nationality'), max_length=3, default=NATIONALITY_CHOICES[0][0], choices=NATIONALITY_CHOICES)
-	resident_country = models.CharField(_('country of residence'), max_length=3, default=RESIDENCE_CHOICES[0][0], choices=RESIDENCE_CHOICES)
+	nationality = models.ForeignKey(Nationality)
+	#resident_country = models.ForeignKey(Residence)
 	skills = models.ManyToManyField(Skills)
 	issues = models.ManyToManyField(Issues)
 	countries = models.ManyToManyField(Countries)
