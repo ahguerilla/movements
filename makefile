@@ -23,6 +23,9 @@ mf:
 mfs:
 	cd app && python manage.py migrate $(app) --fake $(ver) --settings=app.settings.staging
 
+loaddata:
+	cd app && python manage.py loaddata $(fixture) --settings=app.settings.local
+
 runlocal:
 	cd app && python manage.py runserver --settings=app.settings.local
 

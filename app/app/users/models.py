@@ -21,8 +21,14 @@ class Countries(models.Model):
 class Nationality(models.Model):
 	nationality = models.CharField(_('nationality'), max_length=255, null=True, blank=True)
 
+	def __unicode__(self):
+		return self.nationality
+
 class Residence(models.Model):
 	residence = models.CharField(_('country of residence'), max_length=255, null=True, blank=True)
+
+	def __unicode__(self):
+		return self.residence
 
 class UserProfile(models.Model):
 	user = models.ForeignKey(User)
