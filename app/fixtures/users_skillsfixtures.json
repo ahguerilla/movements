@@ -1,0 +1,128 @@
+[
+	{
+		"pk": 1,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Public Relations"
+		}
+	},
+	{
+		"pk": 2,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Advertising"
+		}
+	},
+	{
+		"pk": 3,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Image Consulting"
+		}
+	},
+	{
+		"pk": 4,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Branding"
+		}
+	},
+	{
+		"pk": 5,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Policy"
+		}
+	},
+	{
+		"pk": 6,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Advocacy"
+		}
+	},
+	{
+		"pk": 7,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Analysis"
+		}
+	},
+	{
+		"pk": 8,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Legislative Relations"
+		}
+	},
+	{
+		"pk": 9,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Hardware"
+		}
+	},
+	{
+		"pk": 10,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Servers"
+		}
+	},
+	{
+		"pk": 11,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Sat Phones"
+		}
+	},
+	{
+		"pk": 12,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Mesh Networks"
+		}
+	},
+	{
+		"pk": 13,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Mac"
+		}
+	},
+	{
+		"pk": 14,
+		"model": "users.skills",
+		"fields": {
+			"skills": "PC"
+		}
+	},
+	{
+		"pk": 15,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Mobile"
+		}
+	},
+	{
+		"pk": 16,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Security"
+		}
+	},
+	{
+		"pk": 17,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Applications"
+		}
+	},
+	{
+		"pk": 18,
+		"model": "users.skills",
+		"fields": {
+			"skills": "Fundraising"
+		}
+	}
+]

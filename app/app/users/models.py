@@ -12,11 +12,20 @@ def user_image_upload_path_handler(instance, filename):
 class Skills(models.Model):
 	skills = models.CharField(_('skill set'), max_length=255, null=True)
 
+	def __unicode__(self):
+		return self.skills
+
 class Issues(models.Model):
 	issues = models.CharField(_('issues of interest'), max_length=255, null=True)
 
+	def __unicode__(self):
+		return self.issues
+
 class Countries(models.Model):
 	countries = models.CharField(_('countries of interest'), max_length=255, null=True)
+
+	def __unicode__(self):
+		return self.countries
 
 class Nationality(models.Model):
 	nationality = models.CharField(_('nationality'), max_length=255, null=True, blank=True)

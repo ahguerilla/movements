@@ -1,0 +1,93 @@
+[
+	{
+		"pk": 1,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Speech"
+		}
+	},
+	{
+		"pk": 2,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Press"
+		}
+	},
+	{
+		"pk": 3,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Conscience"
+		}
+	},
+	{
+		"pk": 4,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Association"
+		}
+	},
+	{
+		"pk": 5,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Minorities"
+		}
+	},
+	{
+		"pk": 6,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Women"
+		}
+	},
+	{
+		"pk": 7,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Religion"
+		}
+	},
+	{
+		"pk": 8,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Sexuality"
+		}
+	},
+	{
+		"pk": 9,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Comedy"
+		}
+	},
+	{
+		"pk": 10,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Art"
+		}
+	},
+	{
+		"pk": 11,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Poltical Prisoners"
+		}
+	},
+	{
+		"pk": 12,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Movement"
+		}
+	},
+	{
+		"pk": 13,
+		"model": "users.issues",
+		"fields": {
+			"issues": "Internet"
+		}
+	}
+]
