@@ -39,7 +39,7 @@ class UserProfile(models.Model):
 	notifications = JSONField(_('notifications'))
 	privacy_settings = JSONField(_('privacy settings'))
 	nationality = models.ForeignKey(Nationality)
-	#resident_country = models.ForeignKey(Residence)
+	resident_country = models.ForeignKey(Residence)
 	skills = models.ManyToManyField(Skills)
 	issues = models.ManyToManyField(Issues)
 	countries = models.ManyToManyField(Countries)

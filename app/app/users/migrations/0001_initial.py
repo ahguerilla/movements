@@ -8,20 +8,117 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'Skills'
+        db.create_table(u'users_skills', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('skills', self.gf('django.db.models.fields.CharField')(max_length=255, null=True)),
+        ))
+        db.send_create_signal(u'users', ['Skills'])
+
+        # Adding model 'Issues'
+        db.create_table(u'users_issues', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('issues', self.gf('django.db.models.fields.CharField')(max_length=255, null=True)),
+        ))
+        db.send_create_signal(u'users', ['Issues'])
+
+        # Adding model 'Countries'
+        db.create_table(u'users_countries', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('countries', self.gf('django.db.models.fields.CharField')(max_length=255, null=True)),
+        ))
+        db.send_create_signal(u'users', ['Countries'])
+
+        # Adding model 'Nationality'
+        db.create_table(u'users_nationality', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('nationality', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'users', ['Nationality'])
+
+        # Adding model 'Residence'
+        db.create_table(u'users_residence', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('residence', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'users', ['Residence'])
+
         # Adding model 'UserProfile'
         db.create_table(u'users_userprofile', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('image', self.gf('sorl.thumbnail.fields.ImageField')(max_length=100)),
-            ('web_url', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('fb_url', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('tag_ling', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('web_url', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('fb_url', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('tweet_url', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('occupation', self.gf('django.db.models.fields.CharField')(max_length=255, null=True)),
+            ('expertise', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('is_organisation', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('is_journalist', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('get_newsletter', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('notifications', self.gf('json_field.fields.JSONField')(default=u'null')),
+            ('privacy_settings', self.gf('json_field.fields.JSONField')(default=u'null')),
+            ('nationality', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.Nationality'])),
+            ('resident_country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.Residence'])),
         ))
         db.send_create_signal(u'users', ['UserProfile'])
 
+        # Adding M2M table for field skills on 'UserProfile'
+        m2m_table_name = db.shorten_name(u'users_userprofile_skills')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('userprofile', models.ForeignKey(orm[u'users.userprofile'], null=False)),
+            ('skills', models.ForeignKey(orm[u'users.skills'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['userprofile_id', 'skills_id'])
+
+        # Adding M2M table for field issues on 'UserProfile'
+        m2m_table_name = db.shorten_name(u'users_userprofile_issues')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('userprofile', models.ForeignKey(orm[u'users.userprofile'], null=False)),
+            ('issues', models.ForeignKey(orm[u'users.issues'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['userprofile_id', 'issues_id'])
+
+        # Adding M2M table for field countries on 'UserProfile'
+        m2m_table_name = db.shorten_name(u'users_userprofile_countries')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('userprofile', models.ForeignKey(orm[u'users.userprofile'], null=False)),
+            ('countries', models.ForeignKey(orm[u'users.countries'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['userprofile_id', 'countries_id'])
+
 
     def backwards(self, orm):
+        # Deleting model 'Skills'
+        db.delete_table(u'users_skills')
+
+        # Deleting model 'Issues'
+        db.delete_table(u'users_issues')
+
+        # Deleting model 'Countries'
+        db.delete_table(u'users_countries')
+
+        # Deleting model 'Nationality'
+        db.delete_table(u'users_nationality')
+
+        # Deleting model 'Residence'
+        db.delete_table(u'users_residence')
+
         # Deleting model 'UserProfile'
         db.delete_table(u'users_userprofile')
+
+        # Removing M2M table for field skills on 'UserProfile'
+        db.delete_table(db.shorten_name(u'users_userprofile_skills'))
+
+        # Removing M2M table for field issues on 'UserProfile'
+        db.delete_table(db.shorten_name(u'users_userprofile_issues'))
+
+        # Removing M2M table for field countries on 'UserProfile'
+        db.delete_table(db.shorten_name(u'users_userprofile_countries'))
 
 
     models = {
@@ -61,13 +158,52 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'users.countries': {
+            'Meta': {'object_name': 'Countries'},
+            'countries': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+        },
+        u'users.issues': {
+            'Meta': {'object_name': 'Issues'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'issues': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'})
+        },
+        u'users.nationality': {
+            'Meta': {'object_name': 'Nationality'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nationality': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+        },
+        u'users.residence': {
+            'Meta': {'object_name': 'Residence'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'residence': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+        },
+        u'users.skills': {
+            'Meta': {'object_name': 'Skills'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'skills': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'})
+        },
         u'users.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
-            'fb_url': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'countries': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['users.Countries']", 'symmetrical': 'False'}),
+            'expertise': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'fb_url': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'get_newsletter': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('sorl.thumbnail.fields.ImageField', [], {'max_length': '100'}),
+            'is_journalist': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_organisation': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'issues': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['users.Issues']", 'symmetrical': 'False'}),
+            'nationality': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.Nationality']"}),
+            'notifications': ('json_field.fields.JSONField', [], {'default': "u'null'"}),
+            'occupation': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'}),
+            'privacy_settings': ('json_field.fields.JSONField', [], {'default': "u'null'"}),
+            'resident_country': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.Residence']"}),
+            'skills': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['users.Skills']", 'symmetrical': 'False'}),
+            'tag_ling': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'tweet_url': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
-            'web_url': ('django.db.models.fields.CharField', [], {'max_length': '255'})
+            'web_url': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
         }
     }
 
