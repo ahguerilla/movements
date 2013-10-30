@@ -13,10 +13,11 @@ class RegisterForm(forms.Form):
 	skills = forms.ModelMultipleChoiceField(queryset=Skills.objects.all())
 	issues = forms.ModelMultipleChoiceField(queryset=Issues.objects.all())
 	countries = forms.ModelMultipleChoiceField(queryset=Countries.objects.all())
-	is_oranisation = forms.BooleanField()
-	is_journalist = forms.BooleanField()
-	get_newsletter = forms.BooleanField()
+	is_oranisation = forms.BooleanField(required=False)
+	is_journalist = forms.BooleanField(required=False)
+	get_newsletter = forms.BooleanField(required=False)
 
 class LoginForm(forms.Form):
 	username = forms.CharField(max_length=100)
 	password = forms.CharField(max_length=100, widget=forms.PasswordInput())
+	remember_me = forms.BooleanField()
