@@ -13,7 +13,15 @@ def register(request):
 	if request.method == "POST":
 		form = RegisterForm(request.POST)
 		if form.is_valid():
-			return HttpResponseRedirect("/dashboard")
+			flag = True
+
+			password = request.POST.get('password')
+			check = request.POST.get('check_password')
+			if password != check:
+				flag = False
+
+			if flag:
+				return HttpResponseRedirect("/dashboard")
 	else:
 		form = RegisterForm()
 
