@@ -1,35 +1,63 @@
 {% load assets %}
-
+{% load url from future %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block head_title %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    {% assets "css_all"  %}
+      <LINK href="{{ STATIC_URL }}{{ ASSET_URL }}" rel="stylesheet" type="text/css">
+    {% endassets %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Basic django setup</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  {% assets "css_all"  %}
-    <LINK href="{{ STATIC_URL }}{{ ASSET_URL }}" rel="stylesheet" type="text/css">
-  {% endassets %}
+    {% assets "js_all" %}
+      <script type="text/javascript" src="{{ STATIC_URL }}{{ ASSET_URL }}"></script>
+    {% endassets %}
 
-  {% assets "js_all" %}
-    <script type="text/javascript" src="{{ STATIC_URL }}{{ ASSET_URL }}"></script>
-  {% endassets %}
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+  <body>
+    {% block body %}
 
-</head>
+    {% if messages %}
+    <div>
+      <strong>Messages:</strong>
+      <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
 
-<body>
-  <p class='test'>Welcome to basic jinja/django setup.</p>
-  <p> If you are not seeing the above text with size 5em something is not working!</p>
+    <div>
+      <strong>Menu:</strong>
+      <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    {% block content %}
+    {% endblock %}
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+    {% block javascript %}
+    {% endblock %}
 
-  {% block javascript %}
-  {% endblock %}
-
-  {% block endjavascript %}
-  {% endblock %}
-</body>
+    {% block endjavascript %}
+    {% endblock %}
+  </body>
 </html>
