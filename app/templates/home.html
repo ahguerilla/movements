@@ -15,10 +15,10 @@
     <form class="form-horizontal" role="form">
       <div class="form-group">
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="firstname" placeholder="Firstname">
+          <input type="text" class="form-control" id="first_name" placeholder="Firstname">
         </div>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="lastname" placeholder="Lastname">
+          <input type="text" class="form-control" id="last_name" placeholder="Lastname">
         </div>
       </div>
       <div class="form-group">
@@ -41,6 +41,7 @@
     <div><a href="{% provider_login_url "google" %}">Goolge</a></div>
     <div><a href="{% provider_login_url "twitter" %}">Twitter</a></div>
     <div><a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook</a></div>
+    <div><a href="{% url 'account_login' %}">Login with Email</a></div>
   </div>
   <div class="col-md-2"></div>
 </div>

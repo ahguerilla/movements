@@ -8,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
+    url(r'^exchange', 'app.views.exchange', name='exchange'),
     #url(r'^register$', 'app.users.views.register', name='register'),
     #url(r'^login$', 'app.users.views.login', name='login'),
     #url(r'^dashboard$', 'app.users.views.dashboard', name='dashboard'),
