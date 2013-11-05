@@ -1,0 +1,74 @@
+{% load assets %}
+{% load url from future %}
+{% load account %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block head_title %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    {% assets "css_all"  %}
+      <LINK href="{{ STATIC_URL }}{{ ASSET_URL }}" rel="stylesheet" type="text/css">
+    {% endassets %}
+
+    {% assets "js_all" %}
+      <script type="text/javascript" src="{{ STATIC_URL }}{{ ASSET_URL }}"></script>
+    {% endassets %}
+
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Exchangivist</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Exchange</a></li>
+          <li><a href="#">Contact Us</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="#">Users</a></li>
+          <li><a href="#">My Messages</a></li>
+          <li><a href="#">My Posts</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% user_display user %} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">My Profile</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#">Sign Out</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li><a href="{% url 'account_login' %}">Sign In</a></li>
+          <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    {% block body %}
+    {% endblock %}
+    
+    {% block extra_body %}
+    {% endblock %}
+    
+    {% block javascript %}
+    {% endblock %}
+
+    {% block endjavascript %}
+    {% endblock %}
+  </body>
+</html>
