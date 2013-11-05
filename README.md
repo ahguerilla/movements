@@ -3,9 +3,8 @@
 
 ## setup
 
-- git clone blah/app
-- virtualenv env-foo
-- . env-foo/bin/activate
+- git git@bitbucket.org:guerillasoftware/ahr.git
+- create virtualenv
 
 pip install -r app/requirements/local.txt
 
@@ -40,3 +39,9 @@ To load nationalities list into database run
  - python manage.py loaddate users_nationalityfixtures --settings=app.settings.local
 
 
+## Configure Social SignIn
+Configure site object for domain by going to admin>Sites>Sites. In development should be localhost:8000
+
+To configure social app, goto admin>social account>socialapps and create entries for Facebook, Google and Twitter
+
+Client ID and Secret can be found in settings>local.py

@@ -12,3 +12,5 @@ Unipath
 PIL
 psycopg2
 django-json-field
+django-allauth
+django-avatar
