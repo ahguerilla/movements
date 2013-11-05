@@ -10,3 +10,5 @@ sorl-thumbnail
 webassets
 Unipath
 PIL
+psycopg2
+django-json-field

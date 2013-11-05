@@ -40,7 +40,7 @@ class Residence(models.Model):
 		return self.residence
 
 class UserProfile(models.Model):
-	user = models.ForeignKey(User)
+	user = models.OneToOneField(User)
 	image = ImageField(upload_to=user_image_upload_path_handler)
 	tag_ling = models.CharField(_('tag line'), max_length=255, null=True, blank=True)
 	web_url = models.CharField(_('website url'), max_length=255, null=True, blank=True)
@@ -53,8 +53,8 @@ class UserProfile(models.Model):
 	get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
 	notifications = JSONField(_('notifications'))
 	privacy_settings = JSONField(_('privacy settings'))
-	nationality = models.ForeignKey(Nationality)
-	resident_country = models.ForeignKey(Residence)
+	nationality = models.OneToOneField(Nationality)
+	resident_country = models.OneToOneField(Residence)
 	skills = models.ManyToManyField(Skills)
 	issues = models.ManyToManyField(Issues)
 	countries = models.ManyToManyField(Countries)
