@@ -36,7 +36,7 @@ Run manage.py dumpdata $(app) for a textual view of the db model.
 
 To load nationalities list into database run
 
- - python manage.py loaddate users_nationalityfixtures --settings=app.settings.local
+ - python manage.py loaddata users_nationalityfixtures --settings=app.settings.local
 
 
 ## Configure Social SignIn

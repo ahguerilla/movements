@@ -43,3 +43,12 @@ runprodext:
 
 clean:
 	rm -rf app/static/.webassets-cache/
+
+fixtures:
+	cd app && \
+	python manage.py loaddata users_nationalityfixtures --settings=app.settings.local && \
+	python manage.py loaddata users_countriesfixtures --settings=app.settings.local && \
+	python manage.py loaddata users_issuesfixtures --settings=app.settings.local && \
+	python manage.py loaddata users_residencefixtures --settings=app.settings.local && \
+	python manage.py loaddata users_skillsfixtures --settings=app.settings.local
+
