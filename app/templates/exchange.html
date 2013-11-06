@@ -1,6 +1,10 @@
 {% extends "base_site.html" %}
 {% load socialaccount %}
+{% load avatar_tags %}
 
 {% block body %}
 <h1>My Exchange</h1>
+
+{% avatar user %}
+
 {% endblock %}
