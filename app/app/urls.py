@@ -15,4 +15,8 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/', include('app.api.urls')),
+    url(r'^create/offer/', 'app.market.views.index',name="create_offer"),
 )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

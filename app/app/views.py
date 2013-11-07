@@ -2,7 +2,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader
 from django.shortcuts import render_to_response
-import app.assets
 
 
 def home(request):
