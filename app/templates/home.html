@@ -1,5 +1,6 @@
 {% extends "base_site.html" %}
 {% load socialaccount %}
+{% load i18n %}
 
 {% block body %}
 <div class="row">
@@ -11,10 +12,9 @@
 </div>
 
 <div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
+  <div class="col-md-offset-4 col-md-4">
     <div class="row in-container">
-      <div><h4>Sign Up</h4></div>
+      <div><h4>{% trans "Sign Up" %}</h4></div>
       <form id="signup_form" action="/home-page-sign" method="GET" class="form-horizontal" role="form">
         <div class="form-group">
           <div class="col-xs-6">
@@ -31,17 +31,17 @@
         </div>
         <div class="form-group">
           <div class="col-xs-6">
-            <button type="submit" class="btn btn-success full-width">I'm an activist</button>
+            <button type="submit" class="btn btn-success full-width">{% trans "I'm an activist" %}</button>
           </div>
           <div class="col-xs-6">
-            <button type="submit" class="btn btn-success full-width">I'm ready to help</button>
+            <button type="submit" class="btn btn-success full-width">{% trans "I'm ready to help" %}</button>
           </div>
         </div>
       </form>
     </div>
   </div>
   <div class="col-md-2">
-    <div><h4>Social Sign In</h4></div>
+    <div><h4>{% trans "Social Sign In" %}</h4></div>
     <div><a href="{% provider_login_url "google" %}">Google</a></div>
     <div><a href="{% provider_login_url "twitter" %}">Twitter</a></div>
     <div><a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook</a></div>
