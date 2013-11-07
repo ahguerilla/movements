@@ -1,0 +1,146 @@
+{% extends "base_site.html" %}
+
+
+{% block body %}
+
+<form class="form-horizontal" role="form">  
+    <legend>OFFER A SERVICE</legend>
+	<div class="row">
+		<span class="col-lg-6">I can help to advance freedom of:</span>
+	</div>
+	<div class="row">
+		<div class="col-lg-2">
+		  <div class="input-group">
+			<input id="issues" class="form-control" type="text"/>			
+			<span class="input-group-btn">
+				<button class="btn" type="button">Add</button>
+	      	</span>	
+		  </div>		  
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="well col-lg-3">
+			<div class="row" id="issueTags"></div>
+		</div>
+	</div>
+
+	<div class="row">
+		<span class="col-lg-6">Please select the countries where you can help</span>
+	</div>
+	<div class="row">
+		<div class="col-lg-2">
+			<div class="input-group">
+  				<input id="countries" class="form-control" type="text"/>
+  				<span class="input-group-btn">
+					<button class="btn" type="button">Add</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="well col-lg-3">
+			<div class="row" id="countryTags"></div>
+		</div>
+	</div>
+
+	<div class="row">
+		<span class="col-xs-2">Skills</span>
+	</div>
+	<div class="row">
+		<div class="col-xs-2">
+			<div class="input-group">
+  				<input id="skills" class="form-control" type="text"/>
+  				<span class="input-group-btn">
+					<button class="btn" type="button">Add</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="well col-lg-3">
+			<div class="row" id="skillTags"></div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="form-group">
+			<label for="post-title" class="col-sm-2 control-label">Title of post</label>
+			<div class="col-xs-2">
+					<input id="post-title" class="form-control" type="text"/>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">						
+            <div class="form-group">	            	
+				<label for="exp-date" class="col-sm-2 control-label">Expiry date</label>
+                <div class='input-group date col-xs-2' id='datetimepicker1'>
+                    <input type='text' id="exp-date" class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>	        		        	    
+	</div>
+
+	<div class="row">
+		<div class="col-lg-2">
+			<div class="form-group">
+  				<textarea class="form-control" height="400" placeholder="Please give details of what you can help with?"></textarea>
+			</div>
+		</div>
+	</div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}
+
+{% block javascript %}	
+<script type="text/javascript">
+
+	function maketag(selector,container, item, jsonfiled, aurl){
+		$(selector).tagsManager({
+			onlyTagList: true,
+			tagsContainer: container			
+		});
+
+		$(selector).typeahead({      		
+      		valueKey: item,
+      		limit: 15,    
+      		validator:function(tag){
+      			alert('test');
+
+      		},
+      		template:  _.template('<div class="tt-suggestion"><p class="notes-creator-typeahead" style="white-space: normal;"> <%= '+item+' %> </div>'),
+      		remote: {
+	            url: aurl,
+	            filter: function (response) {                
+	                var arr = [];
+	                for (var i = 0; i < response.length; i++) {
+	                    var itm = new Object();
+	                    itm.Id = response[i].pk;
+	                    itm[item] = response[i].fields[jsonfiled];
+	                    arr.push(itm);
+	                }
+	                	return arr;
+	            	}
+        	}
+		}).on('typeahead:selected', function (e, d) { 
+      		 $(selector).tagsManager("pushTag", d.value);	
+	    });
+	}
+
+	$(document).ready(function(){
+		$('#datetimepicker1').datetimepicker();
+
+		maketag('#issues','#issueTags','issue','issues','/api/issues/json');
+		maketag('#countries','#countryTags','country','countries','/api/countries/json');
+		maketag('#skills','#skillTags','skill','skills','/api/skills/json');
+	
+	});
+</script>
+{% endblock %}
