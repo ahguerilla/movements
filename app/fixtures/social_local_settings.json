@@ -1,0 +1,41 @@
+[
+    {
+        "pk": 1, 
+        "model": "socialaccount.socialapp", 
+        "fields": 
+            {
+                "name": "Twitter", 
+                "sites": [1], 
+                "secret": "BHdE6uBbs9nae6PnqRHpl7pM754yFQVzhe0bRmujao", 
+                "client_id": "6V3er97MVqgFyS8gqjs2yA", 
+                "key": "", "provider": 
+                "twitter"
+            }
+    }, 
+    {
+        "pk": 2, 
+        "model": "socialaccount.socialapp", 
+        "fields": 
+            {
+                "name": "Google", 
+                "sites": [1], 
+                "secret": "UdNY3Xd_abJoqsAdap0TfdM5", 
+                "client_id": "36580195505.apps.googleusercontent.com", 
+                "key": "", 
+                "provider": "google"
+            }
+    }, 
+    {
+        "pk": 3, 
+        "model": "socialaccount.socialapp", 
+        "fields": 
+            {
+                "name": "Facebook", 
+                "sites": [1], 
+                "secret": "737a28d6b9d58f945b489aa39fbcad82", 
+                "client_id": "564720613600351", 
+                "key": "", 
+                "provider": "facebook"
+            }
+    }
+]

@@ -8,9 +8,6 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'UserProfile.image'
-        db.delete_column(u'users_userprofile', 'image')
-
 
         # Changing field 'UserProfile.privacy_settings'
         db.alter_column(u'users_userprofile', 'privacy_settings', self.gf('json_field.fields.JSONField')(null=True))
