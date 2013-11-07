@@ -4,16 +4,16 @@ from django.conf import settings
 
 js = Bundle(
     Bundle(
-        './js/lib/modernizr.custom.18630.js',
+        # './js/lib/modernizr.custom.18630.js',
         './js/lib/jquery-1.10.2.min.js',
         './js/lib/underscore-min.js',
         './js/lib/backbone-min.js',        
         './js/lib/jquery.ui.position.js',
         './js/lib/moment-with-langs.min.js',
         './js/lib/bootstrap.js',
-        './js/lib/bootstrap-datetimepicker.min.js',        
-        './js/lib/typeahead.min.js',
+        './js/lib/bootstrap-datetimepicker.min.js',                
         './js/lib/tagmanager.js',
+        './js/lib/typeahead.min.js',
         ),
     filters='jsmin',
     output='./js/packed.js'
@@ -22,7 +22,6 @@ js = Bundle(
 if settings.PRODUCTION:
 
     css = Bundle(
-        # './css/cssreset-min.css',        
         './css/bootstrap.css',
         './css/bootstrap-datetimepicker.min.css',
         './css/tagmanager.css',
@@ -37,7 +36,6 @@ else:
 
     css = Bundle(
         Bundle(
-            # './css/cssreset-min.css',
             './css/bootstrap.css',
             './css/bootstrap-datetimepicker.min.css',
             './css/tagmanager.css',
