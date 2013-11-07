@@ -7,5 +7,7 @@ urlpatterns = patterns('',
     url(r'issues/(?P<rtype>\S+)','app.api.views.issues', name="issues"),
     url(r'countries/(?P<rtype>\S+)','app.api.views.countries', name="countries"),
     url(r'nationalities/(?P<rtype>\S+)','app.api.views.nationalities', name="nationalities"),
-    url(r'skills/(?P<rtype>\S+)','app.api.views.skills', name="skills")
+    url(r'skills/(?P<rtype>\S+)','app.api.views.skills', name="skills"),
+    url(r'new/offer','app.api.views.newoffer', name="newoffer")
+
 )
