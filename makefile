@@ -52,3 +52,7 @@ fixtures:
 	python manage.py loaddata users_residencefixtures --settings=app.settings.local && \
 	python manage.py loaddata users_skillsfixtures --settings=app.settings.local
 
+dev-social:
+	cd app && \
+	python manage.py loaddata social_local_settings --settings=app.settings.local
+
