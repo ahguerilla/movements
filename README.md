@@ -45,3 +45,6 @@ Configure site object for domain by going to admin>Sites>Sites. In development s
 To configure social app, goto admin>social account>socialapps and create entries for Facebook, Google and Twitter
 
 Client ID and Secret can be found in settings>local.py
+
+## Widget Tweaks Reference
+https://pypi.python.org/pypi/django-widget-tweaks

@@ -1,0 +1,139 @@
+{% extends "base_site.html" %}
+{% load socialaccount %}
+{% load avatar_tags %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div class="row">
+  <div class="col-md-5"></div>
+  <div class="col-md-4">
+    <form class="form-horizontal" method="POST" action="" enctype="multipart/formdata" role="form">{% csrf_token %}
+    {{form.non_field_errors}}
+      <div class="form-group">
+        <div class="col-sm-6">
+          {% render_field form.first_name class="form-control input-sm" placeholder="First Name" %}
+        </div>
+        <div class="col-sm-6">
+          {% render_field form.last_name class="form-control input-sm" placeholder="Last Name" %}
+        </div> 
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.email class="form-control input-sm" placeholder="Email" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.password class="form-control input-sm" placeholder="Password" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.check_password class="form-control input-sm" placeholder="Repeat Password" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.bio class="form-control input-sm" placeholder="Write a short bio about yourself" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.web_url class="form-control input-sm" placeholder="Website URL" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.fb_url class="form-control input-sm" placeholder="Facebook URL" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.tweet_url class="form-control input-sm" placeholder="Twitter URL" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.occupation class="form-control input-sm" placeholder="Occupation" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.expertise class="form-control input-sm" placeholder="Expertise" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.nationality class="form-control input-sm" placeholder="Nationality" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {% render_field form.country_of_residence class="form-control input-sm" placeholder="Country of Residence" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          I'd like to advance the freedom of:
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <small><b>Issues</b></small>
+          {{ form.issues | attr:"multiple" | attr:"class:form-control" }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <small><b>Countries</b></small>
+          {{ form.countries | attr:"multiple" | attr:"class:form-control" }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <small><b>Skills</b></small>
+          {{ form.skills | attr:"multiple" | attr:"class:form-control" }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <small><b>I am...</b></small>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5 radio">
+          <label>
+            {{ form.is_individual | attr:"name:inorgradio" | attr:"type:radio" | attr:"value:individual" }}
+            <small>an individual</small>
+          </label>
+        </div>
+        <div class="col-sm-5 radio">
+          <label>
+            {{ form.is_organisation | attr:"name:inorgradio" | attr:"type:radio" | attr:"value:organisation" }}
+            <small>an organisation</small>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="id_is_journalist" class="col-sm-4 control-label"><small>I'm a journalist</small></label>
+        <div class="col-sm-8">
+          {{ form.is_journalist }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {{ form.is_journalist }}
+          Sign up to the Exchangivist Newsletter
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-7"></div>
+        <div class="col-sm-5">
+          <button type="submit" class="btn btn-block">Update Settings</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-mid-3"></div>
+</div>
+
+{% endblock %}

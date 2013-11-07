@@ -41,6 +41,7 @@ class Residence(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
+    bio = models.TextField(_('bio'), null=True, blank=True)
     tag_ling = models.CharField(_('tag line'), max_length=255, null=True, blank=True)
     web_url = models.CharField(_('website url'), max_length=255, null=True, blank=True)
     fb_url = models.CharField(_('facebook page'), max_length=255, null=True, blank=True)
@@ -48,6 +49,7 @@ class UserProfile(models.Model):
     occupation = models.CharField(_('occupation'), max_length=255, null=True, blank=True)
     expertise = models.CharField(_('area of expertise'), max_length=255, null=True, blank=True)
     is_organisation = models.BooleanField(_('organisation'), default=False)
+    is_individual = models.BooleanField(_('individual'), default=True)
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
     notifications = JSONField(_('notifications'), null=True, blank=True)

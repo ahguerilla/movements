@@ -3,42 +3,46 @@
 
 {% block body %}
 <div class="row">
-  <div class="col-md-12 center-content">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 center-content">
     <h2>Exchangivist is an online portal giving activists the tools they need to advance human rights in closed societies around the world.</h2>
   </div>
+  <div class="col-md-2"></div>
 </div>
 
 <div class="row">
-  <div class="col-md-2"></div>
+  <div class="col-md-4"></div>
   <div class="col-md-4">
-    <div><h4>Sign Up</h4></div>
-    <form class="form-horizontal" role="form">
-      <div class="form-group">
-        <div class="col-sm-6">
-          <input type="text" class="form-control" id="first_name" placeholder="Firstname">
+    <div class="row in-container">
+      <div><h4>Sign Up</h4></div>
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <div class="col-xs-6">
+            <input type="text" class="form-control" id="first_name" placeholder="Firstname">
+          </div>
+          <div class="col-xs-6">
+            <input type="text" class="form-control" id="last_name" placeholder="Lastname">
+          </div>
         </div>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" id="last_name" placeholder="Lastname">
+        <div class="form-group">
+          <div class="col-md-12">
+            <input type="email" class="form-control" id="email" placeholder="Email">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-12">
-          <input type="email" class="form-control" id="email" placeholder="Email">
+        <div class="form-group">
+          <div class="col-xs-6">
+            <button type="submit" class="btn btn-success full-width">I'm an activist</button>
+          </div>
+          <div class="col-xs-6">
+            <button type="submit" class="btn btn-success full-width">I'm ready to help</button>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-6">
-          <button type="submit" class="btn btn-success full-width">I'm an activist</button>
-        </div>
-        <div class="col-sm-6">
-          <button type="submit" class="btn btn-success full-width">I'm ready to help</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-2">
     <div><h4>Social Sign In</h4></div>
-    <div><a href="{% provider_login_url "google" %}">Goolge</a></div>
+    <div><a href="{% provider_login_url "google" %}">Google</a></div>
     <div><a href="{% provider_login_url "twitter" %}">Twitter</a></div>
     <div><a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook</a></div>
     <div><a href="{% url 'account_login' %}">Login with Email</a></div>
@@ -47,8 +51,10 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12 center-content">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 center-content">
     <h2>Activists and experts can connect to exchange their expertise in support of basic freedoms like speech, press, association, religion and movement.</h2>
   </div>
+  <div class="col-md-2"></div>
 </div>
 {% endblock %}

@@ -1,6 +1,30 @@
+$border-color = #e7e7e7;
+
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  -ms-{prop} args
+  -o-{prop} args
+  {prop} args
+
+border-radius()
+  vendor('border-radius', arguments)
+
+box-shadow()
+  vendor('box-shadow', arguments)
+
+.container-liquid
+  padding: 0 15px
+  margin: 0 auto
+
 .center-content
     text-align: center
 
 .full-width
     width: 100%
+
+.in-container
+    border: 1px solid $border-color
+    padding: 15px
+    border-radius: 5px
 
