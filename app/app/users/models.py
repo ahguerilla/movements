@@ -1,7 +1,7 @@
-from json_field import JSONField
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
+from json_field import JSONField
 
 
 class Skills(models.Model):

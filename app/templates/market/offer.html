@@ -3,181 +3,53 @@
 
 {% block body %}
 
-<form class="form-horizontal" role="form" id="offerform"> {% csrf_token %}
-    <legend>OFFER A SERVICE</legend>
-	<div class="row">
-		<span class="col-lg-6">I can help to advance freedom of:</span>
-	</div>
-	<div class="row">
-		<div class="col-lg-2">
-		  <div class="input-group">
-			<input id="issues" class="form-control" type="text"/>
-			<span class="input-group-btn">
-				<button class="btn issues" type="button">Add</button>
-	      	</span>
-		  </div>
-		</div>
-	</div>
+	<form class="form-horizontal" role="form" id="offerform"> {% csrf_token %}
+	    <legend>OFFER A SERVICE</legend>
 
-	<div class="row">
-		<div class="well col-lg-3">
-			<div class="row" id="issueTags"></div>
-		</div>
-	</div>
+		<span id="issuesplace"></span>
+		<span id="countriesplace"></span>
+		<span id="skillsplace"></span>
 
-	<div class="row">
-		<span class="col-lg-6">Please select the countries where you can help</span>
-	</div>
-	<div class="row">
-		<div class="col-lg-2">
-			<div class="input-group">
-  				<input id="countries" class="form-control" type="text"/>
-  				<span class="input-group-btn">
-					<button class="btn countries" type="button">Add</button>
-				</span>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="well col-lg-3">
-			<div class="row" id="countryTags"></div>
-		</div>
-	</div>
-
-	<div class="row">
-		<span class="col-xs-2">Skills</span>
-	</div>
-	<div class="row">
-		<div class="col-xs-2">
-			<div class="input-group">
-  				<input id="skills" class="form-control" type="text"/>
-  				<span class="input-group-btn">
-					<button class="btn skills" type="button">Add</button>
-				</span>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="well col-lg-3">
-			<div class="row" id="skillTags"></div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="form-group">
-			<label for="post-title" class="col-sm-2 control-label">Title of post</label>
-			<div class="col-xs-2">
-					<input id="post-title" name="post-title" class="form-control" type="text"/>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-            <div class="form-group">
-				<label for="exp-date" class="col-sm-2 control-label">Expiry date</label>
-                <div class='input-group date col-xs-2' id='datetimepicker1'>
-                    <input type='text' id="exp-date"  name="exp-date" class="form-control" />
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-	</div>
-
-	<div class="row">
-		<div class="col-lg-2">
+		<div class="row">
 			<div class="form-group">
-  				<textarea class="form-control" name="details" id="details" height="400" placeholder="Please give details of what you can help with?"></textarea>
+				<label for="post-title" class="col-sm-2 control-label">Title of post</label>
+				<div class="col-xs-2">
+					<input id="post-title" name="post-title" class="form-control" type="text"/>
+				</div>
 			</div>
 		</div>
-	</div>
 
+		<div class="row">
+	        <div class="form-group">
+				<label for="exp-date" class="col-sm-2 control-label">Expiry date</label>
+	            <div class='input-group date col-xs-2' id='datetimepicker1'>
+	                <input type='text' id="exp-date"  name="exp-date" class="form-control" />
+	                <span class="input-group-addon">
+	                	<span class="glyphicon glyphicon-calendar"></span>
+	                </span>
+	            </div>
+	        </div>
+		</div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+		<div class="row">
+			<div class="col-lg-2">
+				<div class="form-group">
+	  				<textarea class="form-control" name="details" id="details" height="400" placeholder="Please give details of what you can help with?"></textarea>
+				</div>
+			</div>
+		</div>
+
+	    <button type="submit" class="btn btn-primary">POST</button>
+	</form>
 
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript">
-	var dict={}
 
-	function maketypeahead(jsonfiled,selector, aurl){
-		var typeaheadval = [],values=[];
-		$.getJSON(aurl,function(data){
-			for (var i = 0; i < data.length; i++) {
-				typeaheadval.push({
-					tokens: [data[i].fields[jsonfiled],],
-					value: data[i].fields[jsonfiled]
-					});
-				values.push(data[i].fields[jsonfiled]);
-				dict[data[i].fields[jsonfiled]]=data[i].pk;
-			}
-			$(selector).typeahead({
-	      		limit: 5,
-	      		local: typeaheadval
-			}).on('typeahead:selected', function (e, d) {
-      		 	$(selector).tagsManager("pushTag", d.value);
-	    	});
+	<script type="text/javascript">
+		$(document).ready(function(){
+			window.offer.initOffer({{ offer|safe }});
 		});
-		return values;
-	}
+	</script>
 
-
-	function maketag(selector,container, item, jsonfiled, aurl){
-		$(selector).tagsManager({
-			tagsContainer: container,
-			deleteTagsOnBackspace: false,
-			blinkBGColor_1: '#FFFF9C',
-    		blinkBGColor_2: '#CDE69C',
-    		hiddenTagListName: 'hidden-'+item,
-			validator:function(tag){
-				if (values.indexOf(tag)!=-1){
-					return true;
-				}else{
-					return false;
-				}
-      		},
-		});
-		var values = maketypeahead(jsonfiled,selector, aurl);
-	}
-
-
-	function getIds(name){
-		var val_ids=[],
-			val_names = $('input[name="hidden-'+name+'"]').val().split(',');
-		_.each(val_names,function(val){
-			val_ids.push(dict[val]);
-		})
-		return val_ids;
-	}
-
-	$(document).ready(function(){
-		$('#datetimepicker1').datetimepicker();
-		maketag('#issues','#issueTags','issue','issues','/api/issues/json');
-		maketag('#countries','#countryTags','country','countries','/api/countries/json');
-		maketag('#skills','#skillTags','skill','skills','/api/skills/json');
-
-		$('#offerform').on('submit',function(e){
-			e.preventDefault();
-			$.ajax({
-				type: 'POST',
-				url: '/api/new/offer',
-				dataType:'json',
-				data:{
-					"issues": getIds('issue'),
-					"countries": getIds('country'),
-					"skills": getIds('skill'),
-					"exp_date": $('#exp-date').val(),
-					"title": $('#post-title').val(),
-					"details": $('#details').val(),
-					"csrfmiddlewaretoken": $('input[name="csrfmiddlewaretoken"]').val()
-				}
-			});
-
-			return false;
-		});
-	});
-</script>
 {% endblock %}
