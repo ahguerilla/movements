@@ -11,38 +11,34 @@ def settings(request):
     if request.method == "POST":
         form = SettingsForm(request.POST)
 
-        if form.is_valid(): # is_valid always returns false??
-            print('valid')
-        else:
-            print('not valid')
-        
-        password = request.POST.get('password')
-        check = request.POST.get('check_password')
-        if password != check:
-            pass # don't reset password
+        if form.is_valid():
+            print("valid form")
+            password = request.POST.get('password')
+            check = request.POST.get('check_password')
+            if password != check:
+                pass # don't reset password
 
-        cur_user = User.objects.get(id=request.user.id)
-        cur_id = cur_user.id
-        userprofile = UserProfile.objects.filter(user_id=cur_id)
+            cur_user = User.objects.get(id=request.user.id)
+            cur_id = cur_user.id
+            userprofile = UserProfile.objects.filter(user_id=cur_id)
 
-        if not userprofile:
-            print('No UserProfile')
-            new_profile = UserProfile(user_id=cur_id)
-            new_profile.save()
+            if not userprofile:
+                print('No UserProfile')
+                new_profile = UserProfile(user_id=cur_id)
+                new_profile.save()
 
-        cur_user.first_name = request.POST.get('first_name')
-        cur_user.last_name = request.POST.get('last_name')
-        cur_user.save()
+            cur_user.first_name = request.POST.get('first_name')
+            cur_user.last_name = request.POST.get('last_name')
+            cur_user.save()
 
-        update_profile = UserProfile(user_id=cur_id)
-        update_profile.bio = request.POST.get('bio')
-        updated_profile.web_url = request.POST.get('web_url')
-        updated_profile.fb_url = request.POST.get('fb_url')
-        updated_profile.tweet_url = request.POST.get('tweet_url')
-        updated_profile.occupation = request.POST.get('occupation')
-        updated_profile.expertise = request.POST.get('expertise')        
-        update_profile.save()
-
+            update_profile = UserProfile(user_id=cur_id)
+            update_profile.bio = request.POST.get('bio')
+            update_profile.web_url = request.POST.get('web_url')
+            update_profile.fb_url = request.POST.get('fb_url')
+            update_profile.tweet_url = request.POST.get('tweet_url')
+            update_profile.occupation = request.POST.get('occupation')
+            update_profile.expertise = request.POST.get('expertise')        
+            update_profile.save()
     else:
         form = SettingsForm()
 

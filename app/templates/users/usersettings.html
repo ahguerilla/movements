@@ -13,18 +13,21 @@
         {% if field.label = "Is journalist" %}
         <div class="form-group">
           <div class="col-sm-12">
+            {{ field.errors }}
             {{ field }} <small>I am a journalist</small>
           </div>
         </div> 
       {% elif field.label = "Get newsletter" %}
         <div class="form-group">
           <div class="col-sm-12">
+            {{ field.errors }}
             {{ field }} <small>Sign up for the Exchangivist Newsletter</small>
           </div>
         </div> 
       {% elif field.label = "Is organisation" %}
         <div class="form-group">
           <div class="col-sm-12">
+            {{ field.errors }}
             <small><b>I am...</b></small>
           </div>
           <div class="col-sm-2"></div>
@@ -44,9 +47,11 @@
       {% elif field.label = "First name" %}
         <div class="form-group">
           <div class="col-sm-6">
+            {{ field.errors }}
             {% render_field form.first_name class="form-control input-sm" placeholder="First Name" %}
           </div>
           <div class="col-sm-6">
+            {{ field.errors }}
             {% render_field form.last_name class="form-control input-sm" placeholder="Last Name" %}
           </div> 
         </div>
