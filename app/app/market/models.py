@@ -15,6 +15,13 @@ def resouse_upload_path_handler(instance, filename):
     return 'resource_files/{file}'.format(file=str(uuid.uuid1())+filename[-4:])
 
 
+class Comment(models.Model):
+    title = models.CharField(_('title'),max_length=200,blank=False)
+    owner =  models.ForeignKey(auth.models.User,blank=True)
+    contents = tinymce.models.HTMLField(_('contents'),blank=False)
+    pub_date = models.DateTimeField(_('publish date'),default=datetime.now())
+
+
 class MarketItemBase(models.Model):
     owner = models.ForeignKey(auth.models.User,blank=True)
     title = models.CharField(_('title'),max_length=200,blank=False)
@@ -22,7 +29,7 @@ class MarketItemBase(models.Model):
     ip_address = models.GenericIPAddressField(_('publisher IP address when submited'),blank=True)
     countries = models.ManyToManyField(users.models.Countries)
     issues = models.ManyToManyField(users.models.Issues)
-    comments = JSONField(blank=True)
+    comments = models.ManyToManyField(Comment)
     published = models.BooleanField(_('is published?'),default=True)
     pub_date = models.DateTimeField(_('publish date'),default=datetime.now())
     exp_date = models.DateTimeField(_('expiry date'))

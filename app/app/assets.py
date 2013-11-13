@@ -9,6 +9,7 @@ js = Bundle(
         './js/lib/jquery-1.10.2.min.js',
         './js/lib/underscore-min.js',
         './js/lib/backbone-min.js',
+        'tiny_mce/tiny_mce.js',
         './js/lib/jquery.ui.position.js',
         './js/lib/moment-with-langs.min.js',
         './js/lib/bootstrap.js',
@@ -16,7 +17,8 @@ js = Bundle(
         './js/lib/tagmanager.js',
         './js/lib/typeahead.min.js',
         './js/templates/typeaheadtag.js',
-        './js/offer.js'
+        './js/offer.js',
+        './js/comment.js',
         ),
     filters='jsmin',
     output='./js/packed.js'

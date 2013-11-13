@@ -4,13 +4,25 @@ from django import forms
 
 
 class newofferForm(forms.ModelForm):
-	exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',])
-	class Meta:
-		model = market.models.Offer
-		fields = ['issues','skills','countries','title','details','exp_date']
+    exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',])
+    class Meta:
+        model = market.models.Offer
+        fields = ['issues','skills','countries','title','details','exp_date']
 
-	def save(self, commit=False, *args, **kwargs):
-		instance = super(newofferForm, self).save(commit=commit, *args, **kwargs)
-		instance.ip_address = self.cleaned_data['ip_address']
-		instance.owner = self.cleaned_data['owner']
-		return instance
+    def save(self, commit=False, *args, **kwargs):
+        instance = super(newofferForm, self).save(commit=commit, *args, **kwargs)
+        instance.ip_address = self.cleaned_data['ip_address']
+        instance.owner = self.cleaned_data['owner']
+        return instance
+
+
+class commentForm(forms.ModelForm):
+    class Meta:
+        model = market.models.Comment
+        fields = ['title','contents']
+
+    def save(self, commit=False, *args, **kwargs):
+        instance = super(commentForm, self).save(commit=commit, *args, **kwargs)
+        if instance.pk == None:
+            instance.owner = self.cleaned_data['owner']
+        return instance

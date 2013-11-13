@@ -9,10 +9,15 @@ class OfferAdmin(admin.ModelAdmin):
 class RequestAdmin(admin.ModelAdmin):
 	pass
 
+
 class ResourceAdmin(admin.ModelAdmin):
 	pass
 
+class CommentAdmin(admin.ModelAdmin):
+	pass
 
+
+admin.site.register(models.Comment,CommentAdmin)
 admin.site.register(models.Offer,OfferAdmin)
 admin.site.register(models.Request,RequestAdmin)
 admin.site.register(models.Resource,ResourceAdmin)
