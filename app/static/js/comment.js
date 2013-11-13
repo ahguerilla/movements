@@ -24,9 +24,9 @@
 			$('#comment-title').val(data[0].fields.title);
 		},
 
-		initialize : function(coment,obj_type,obj_id){
+		initialize : function(coment,obj_id){
 			if(coment === false){
-				this.url = '/api/json/add/comment/'+obj_type+'/'+obj_id;
+				this.url = '/api/json/add/comment/'+obj_id;
 			}else{
 				var that=this;
 				this.getComment(coment.id,function(comment_obj){
@@ -50,7 +50,7 @@
 	});
 
 	window.comment = window.comment|| {};
-	window.comment.initComment = function(coment,obj_type,obj_id){
-  		var comment = new CommentView(coment,obj_type, obj_id);
+	window.comment.initComment = function(coment,obj_id){
+  		var comment = new CommentView(coment, obj_id);
 	};
 })();

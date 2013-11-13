@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import app
 import app.users as users
 from django import forms
 from django.db import models
@@ -35,6 +35,32 @@ class MarketItem(models.Model):
     class Meta:
         ordering = ['pub_date']
 
+
+#class CommentManager(models.Manager):
+    #def get_by_natural_key(self, owner,pub_date):
+        #return self.get(owner=owner, pub_date=pubdate)
+
+
+class Comment(models.Model):
+    #objects = CommentManager()
+    title = models.CharField(_('title'),max_length=200,blank=False)
+    owner =  models.ForeignKey(auth.models.User,blank=True)
+    contents = tinymce.models.HTMLField(_('contents'),blank=False)
+    pub_date = models.DateTimeField(_('publish date'),default=datetime.now())
+    item = models.ForeignKey(MarketItem,null=True,blank=True,related_name='comments')
+
+    #def natural_key(self):
+        #return (self.owner, self.pub_date )
+
+    #class Meta:
+        #unique_together = (('owner','pub_date'))
+
+
+class Files(models.Model):
+    title = models.CharField(_('name'),max_length=255)
+    afile = models.FileField(upload_to=resouse_upload_path_handler, blank=True)
+    item = models.ForeignKey(MarketItem)
+
     def save(self, *args, **kwargs):
         model = self.__class__
         try:
@@ -43,21 +69,4 @@ class MarketItem(models.Model):
                 this.afile.delete(save=False)
         except:
             return
-
-
-
-
-class Comment(models.Model):
-    title = models.CharField(_('title'),max_length=200,blank=False)
-    owner =  models.ForeignKey(auth.models.User,blank=True)
-    contents = tinymce.models.HTMLField(_('contents'),blank=False)
-    pub_date = models.DateTimeField(_('publish date'),default=datetime.now())
-    item = models.ForeignKey(MarketItem,null=True,blank=True)
-
-
-class Files(models.Model):
-    title = models.CharField(_('name'),max_length=255)
-    afile = models.FileField(upload_to=resouse_upload_path_handler, blank=True)
-    item = models.ForeignKey(MarketItem)
-
 

@@ -9,10 +9,11 @@ from app.api.utils import *
 
 
 
-def saveComment(form, owner):
+def saveComment(form, owner,item):
     import datetime
     if form.instance.pk == None:
         form.cleaned_data['owner'] = owner
+        form.cleaned_data['item'] = item
         form.cleaned_data['pub_date'] = datetime.datetime.now()
     obj = form.save()
     obj.save()
@@ -20,10 +21,10 @@ def saveComment(form, owner):
 
 
 def addComment(request, obj_id, rtype):
-    obj = get_object_or_404(market.models.MarketItem.objects.only('comments'),pk=obj_id)
+    obj = get_object_or_404(market.models.MarketItem.objects.only('pk'),pk=obj_id)
     form = commentForm(request.POST)
     if form.is_valid():
-        saveComment(form,request.user)
+        saveComment(form,request.user,obj)
         return HttpResponse(json.dumps({ 'success' : True}), mimetype="application"+rtype)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
@@ -46,15 +47,21 @@ def getComment(request, obj_id, rtype):
     return HttpResponse(value(rtype,[obj]), mimetype="application"+rtype)
 
 
-def getComments(request,obj_type,obj_id,count,rtype):
-    objs = obj_types[obj_type].filter(id=obj_id).only('comments')
+def getComments(request,obj_id,count,rtype):
+    # TODO: Add a "natural_key(self)" to comment model
+    obj = get_object_or_404(market.models.MarketItem,pk=obj_id)
+    return HttpResponse(value(rtype,
+                              obj.comments.all()[:count],
+                              indent=2,
+                              use_natural_keys=True),
+                        mimetype="application"+rtype)
 
 
 def editComment(request,obj_id, rtype):
     obj = get_object_or_404(market.models.Comment,pk=obj_id)
     form = commentForm(request.POST, instance=obj)
     if form.is_valid():
-        saveComment(form,request.user)
+        saveComment(form,request.user,None)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)

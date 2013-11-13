@@ -82,8 +82,8 @@
 		}
 	});
 
-	window.offer = window.offer|| {};
-	window.offer.initOffer = function(offer){
-  		var offer = new OfferView(offer);
+	window.offer_form = window.offer_form|| {};
+	window.offer_form.initOffer = function(offer){
+  		var offer_form = new OfferView(offer);
 	};
 })();

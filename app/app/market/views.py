@@ -9,7 +9,7 @@ from app.market.forms import newofferForm,commentForm
 
 def addOffer_form(request):
     form = newofferForm()
-    return render_to_response('market/offer.html',
+    return render_to_response('market/offer_form.html',
                               {
                                   'offer':'false',
                                   'form':form
@@ -19,7 +19,7 @@ def addOffer_form(request):
 
 def editOffer_form(request,obj_id):
     form = newofferForm()
-    return render_to_response('market/offer.html',
+    return render_to_response('market/offer_form.html',
                               {
                                   'offer': {'id':str(obj_id)},
                                   'form':form
@@ -29,18 +29,17 @@ def editOffer_form(request,obj_id):
 
 def viewOffer(request,obj_id):
     #get the object , populate the form? can we do that?
-    return render_to_response('market/viewsingleoffer.html',
+    return render_to_response('market/offer_single.html',
                               {
                                 'offer': {'id':str(obj_id)}
                               },
                               context_instance=RequestContext(request))
 
 
-def addComment_form(request,obj_type,obj_id):
+def addComment_form(request,obj_id):
     form = commentForm()
-    return render_to_response('market/commentform.html',
+    return render_to_response('market/comment_form.html',
                               {
-                                  'obj_type' : obj_type,
                                   'obj_id': str(obj_id),
                                   'form': form,
                                   'coment': 'false'
@@ -48,13 +47,10 @@ def addComment_form(request,obj_type,obj_id):
                               context_instance=RequestContext(request))
 
 
-def viewComment(request,obj_id):
-    pass
-
 
 def editComment_form(request,obj_id):
     form = commentForm()
-    return render_to_response('market/commentform.html',
+    return render_to_response('market/comment_form.html',
                               {
                                   'obj_type' : '',
                                   'obj_id': '""',

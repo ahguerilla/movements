@@ -25,4 +25,5 @@ class commentForm(forms.ModelForm):
         instance = super(commentForm, self).save(commit=commit, *args, **kwargs)
         if instance.pk == None:
             instance.owner = self.cleaned_data['owner']
+            instance.item = self.cleaned_data['item']
         return instance
