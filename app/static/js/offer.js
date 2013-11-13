@@ -23,7 +23,7 @@
 		},
 
 		getOffer: function(offer,func){
-			this.offer=$.getJSON('/api/json/get/offer/'+offer.id, func);
+			this.offer=$.getJSON('/api/json/get/market/'+offer.id, func);
 		},
 
 		setExpDate: function(datestr){
@@ -54,7 +54,7 @@
 
 		initialize : function(offer){
 			if(offer === false){
-				this.url = '/api/json/add/offer';
+				this.url = '/api/json/add/market/offer';
 				$('#datetimepicker1').datetimepicker({format:'D/M/YYYY HH:mm'});
 				_.each(this.ar,function(item){
 					$('#'+item.jsonfield+'place').html(generateTypeAhead(item.title, item.jsonfield));
@@ -63,7 +63,7 @@
 			}else{
 				var that=this;
 				this.getOffer(offer,function(offerobj){
-					that.url = '/api/json/edit/offer/'+offerobj[0].pk;
+					that.url = '/api/json/edit/market/'+offerobj[0].pk;
 					that.setForm(offerobj);
 				});
 			}

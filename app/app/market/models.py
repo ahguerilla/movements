@@ -45,6 +45,8 @@ class MarketItem(models.Model):
             return
 
 
+
+
 class Comment(models.Model):
     title = models.CharField(_('title'),max_length=200,blank=False)
     owner =  models.ForeignKey(auth.models.User,blank=True)

@@ -8,12 +8,6 @@ import json
 from app.api.utils import *
 
 
-obj_types={
-    'offer':market.models.Offer,
-    'request':market.models.Request,
-    'resource':market.models.Resource
-}
-
 
 def saveComment(form, owner):
     import datetime
@@ -25,8 +19,8 @@ def saveComment(form, owner):
     return obj
 
 
-def addComment(request, obj_type, obj_id, rtype):
-    obj = get_object_or_404(obj_types[obj_type].objects.only('comments'),pk=obj_id)
+def addComment(request, obj_id, rtype):
+    obj = get_object_or_404(market.models.MarketItem.objects.only('comments'),pk=obj_id)
     form = commentForm(request.POST)
     if form.is_valid():
         saveComment(form,request.user)
@@ -35,15 +29,15 @@ def addComment(request, obj_type, obj_id, rtype):
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
 
 
-def getlenComments(request, obj_type, obj_id, rtype):
+def getlenComments(request, obj_id, rtype):
     pass
 
 
-def getCommentIds(request, obj_type, obj_id, rtype):
+def getCommentIds(request, obj_id, rtype):
     pass
 
 
-def getCommentIdsRange(request, obj_type, obj_id,st_date, end_date, rtype):
+def getCommentIdsRange(request, obj_id,st_date, end_date, rtype):
     pass
 
 

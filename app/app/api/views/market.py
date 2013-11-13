@@ -8,25 +8,25 @@ import json
 from app.api.utils import *
 
 
-def saveOffer(form,ipadd, owner):
-    form.cleaned_data['ip_address'] = ipadd
+def saveMarketItem(form, obj_type, owner):
+    form.cleaned_data['item_type'] = obj_type
     form.cleaned_data['owner'] = owner
     obj = form.save()
     obj.save()
     form.save_m2m()
 
 
-def addOffer(request,rtype):
+def addMarketItem(request, obj_type, rtype):
     form = newofferForm(request.POST)
     if form.is_valid():
-        saveOffer(form, get_client_ip(request), request.user)
+        saveMarketItem(form, obj_type, request.user)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
 
 
-def getOffer(request,obj_id,rtype):
-    obj = get_object_or_404(market.models.Offer.objects.defer('comments'), pk=obj_id)
+def getMarketItem(request,obj_id,rtype):
+    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'), pk=obj_id)
     return HttpResponse(
         value(rtype,
               [obj],
@@ -35,8 +35,8 @@ def getOffer(request,obj_id,rtype):
         mimetype="application/"+rtype)
 
 
-def editOffer(request,obj_id,rtype):
-    obj = get_object_or_404(market.models.Offer.objects.defer('comments'),pk=obj_id)
+def editMarketItem(request,obj_id,rtype):
+    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),pk=obj_id)
     form = newofferForm(request.POST, instance=obj)
     if form.is_valid():
         saveOffer(form, obj.ip_address, obj.owner)
@@ -45,5 +45,5 @@ def editOffer(request,obj_id,rtype):
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
 
 
-def deleteOffer(request,obj_id,rtype):
+def deleteMarketItem(request,obj_id,rtype):
     pass
