@@ -29,7 +29,7 @@ class MarketItemBase(models.Model):
     ip_address = models.GenericIPAddressField(_('publisher IP address when submited'),blank=True)
     countries = models.ManyToManyField(users.models.Countries)
     issues = models.ManyToManyField(users.models.Issues)
-    comments = models.ManyToManyField(Comment)
+    comments = models.ForeignKey(Comment,null=True,blank=True)
     published = models.BooleanField(_('is published?'),default=True)
     pub_date = models.DateTimeField(_('publish date'),default=datetime.now())
     exp_date = models.DateTimeField(_('expiry date'))

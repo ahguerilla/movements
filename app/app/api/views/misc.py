@@ -10,11 +10,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
 
 
-def getSCRFToken(request):
-	c={}
-	c.update(csrf(request))
-	return HttpResponse( value(rtype,c), mimetype="application/"+rtype)
-	
+def getSCRFToken(request,rtype):
+    c={}
+    c.update(csrf(request))
+    return HttpResponse( json.dumps({'csrfmiddlewaretoken': c['csrf_token'].decode()}), mimetype="application/"+rtype)
+
 
 def getIssues(request,rtype):
     issues = users.models.Issues.objects.all()
@@ -34,5 +34,4 @@ def getNationalities(request,rtype):
 def getSkills(request,rtype):
     sklls = users.models.Skills.objects.all()
     return HttpResponse( value(rtype,sklls), mimetype="application/"+rtype)
-
 

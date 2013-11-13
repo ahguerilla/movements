@@ -53,7 +53,7 @@ def getComment(request, obj_id, rtype):
 
 
 def getComments(request,obj_type,obj_id,count,rtype):
-    pass
+    objs = obj_types[obj_type].filter(id=obj_id).only('comments')
 
 
 def editComment(request,obj_id, rtype):
