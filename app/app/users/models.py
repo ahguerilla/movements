@@ -54,11 +54,19 @@ class UserProfile(models.Model):
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
     notifications = JSONField(_('notifications'), null=True, blank=True)
     privacy_settings = JSONField(_('privacy settings'), null=True, blank=True)
-    nationality = models.OneToOneField(Nationality)
-    resident_country = models.OneToOneField(Residence)
-    skills = models.ManyToManyField(Skills)
-    issues = models.ManyToManyField(Issues)
-    countries = models.ManyToManyField(Countries)
+    nationality = models.OneToOneField(Nationality, null=True)
+    resident_country = models.OneToOneField(Residence, null=True)
+    skills = models.ManyToManyField(Skills, null=True)
+    issues = models.ManyToManyField(Issues, null=True)
+    countries = models.ManyToManyField(Countries, null=True)
+
+    def save(self, *args, **kwargs):
+        try:
+            existing = UserProfile.objects.get(user=self.user)
+            self.id = existing.id 
+        except UserProfile.DoesNotExist:
+            pass 
+        models.Model.save(self, *args, **kwargs)
 
 #    def save(self, *args, **kwargs):
 #        model = self.__class__
