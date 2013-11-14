@@ -18,8 +18,11 @@
 				{type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
 				],
 			'request':[
-				{type:'typeahead', title:'I need help to advance freedom of:', jsonfield:'issues'},
-				{type:'typeahead', title:'Please select the countries where you need help',  jsonfield:'countries'}
+				{type:'typeahead', title:'I need help to advance freedom of:', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds},
+				{type:'typeahead', title:'Please select the countries where you need help',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
+				{type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
+				{type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
+				{type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
 				],
 			'resource':[
 				{type:'typeahead', title:'Issues', jsonfield:'issues'},
@@ -31,13 +34,13 @@
 		getFormData: function(){
 			var retdict={};
 			_.each(this.widget_arrs[this.item_type],function(item){
-				if(item.customGet !== undefined){
+				if(item.customGet){
 					retdict[item.jsonfield] = item.customGet(item.jsonfield);
 				}else{
 					retdict[item.jsonfield] = $('#'+item.jsonfield).val();	
 				}					
 			});
-			retdict["csrfmiddlewaretoken"]=$('input[name="csrfmiddlewaretoken"]').val();
+			retdict.csrfmiddlewaretoken=$('input[name="csrfmiddlewaretoken"]').val();
 			return retdict;
 		},
 
@@ -87,8 +90,7 @@
 				_.each(this.widget_arrs[obj_type],function(item){
 					that.makeWidget(item);					
 				});
-			}else{
-				var that=this;
+			}else{				
 				this.getItem(item,function(item_obj){
 					that.url = '/api/json/edit/market/'+item_obj[0].pk;
 					that.item_type = item_obj[0].fields.item_type;

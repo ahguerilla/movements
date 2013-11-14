@@ -3,8 +3,6 @@ import app.users as users
 from django import forms
 
 
-
-
 class offerForm(forms.ModelForm):
     exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',])
     class Meta:
@@ -19,7 +17,16 @@ class offerForm(forms.ModelForm):
 
 
 class requestForm(forms.ModelForm):
-    pass
+    exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',])
+    class Meta:
+        model = market.models.MarketItem
+        fields = ['issues','countries','title','details','exp_date']
+
+    def save(self, commit=False, *args, **kwargs):
+        instance = super(requestForm, self).save(commit=commit, *args, **kwargs)
+        instance.item_type = self.cleaned_data['item_type']
+        instance.owner = self.cleaned_data['owner']
+        return instance
 
 
 class resourceForm(forms.ModelForm):
