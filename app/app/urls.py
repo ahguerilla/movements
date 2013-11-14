@@ -18,9 +18,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include('app.api.urls')),
 
-    url(r'^add/offer', 'app.market.views.addOffer_form',name="form_add_offer"),
-    url(r'^view/offer/(?P<obj_id>\d+)$','app.market.views.viewOffer', name="view_offer"),
-    url(r'^edit/offer/(?P<obj_id>\d+)$','app.market.views.editOffer_form', name="form_edit_offer"),
+    url(r'^add/(?P<obj_type>offer|request|resource)', 'app.market.views.addItem_form',name="form_add_item"),
+    url(r'^view/(offer|request|resource|item)/(?P<obj_id>\d+)$','app.market.views.viewItem', name="view_item"),
+    url(r'^edit/(?P<obj_id>\d+)$','app.market.views.editItem_form', name="form_edit_item"),
 
     url(r'^add/comment/(?P<obj_id>\d+)$','app.market.views.addComment_form', name="form_add_comment"),
     url(r'^edit/comment/(?P<obj_id>\d+)$','app.market.views.editComment_form', name="form_edit_comment"),

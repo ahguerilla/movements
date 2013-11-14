@@ -4,34 +4,31 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response,get_object_or_404
 from django.template import RequestContext, loader
 from app.api.utils import *
-from app.market.forms import newofferForm,commentForm
+from app.market.forms import item_forms,commentForm
 
 
-def addOffer_form(request):
-    form = newofferForm()
-    return render_to_response('market/offer_form.html',
+def addItem_form(request,obj_type):
+    return render_to_response('market/item_form.html',
                               {
-                                  'offer':'false',
-                                  'form':form
+                                  'item':'false',
+                                  'obj_type':'"%s"'%obj_type
                                },
                               context_instance=RequestContext(request))
 
 
-def editOffer_form(request,obj_id):
-    form = newofferForm()
-    return render_to_response('market/offer_form.html',
+def editItem_form(request,obj_id):
+    return render_to_response('market/item_form.html',
                               {
-                                  'offer': {'id':str(obj_id)},
-                                  'form':form
+                                  'item': {'id':str(obj_id)},
+                                  'obj_type':'false'
                                },
                               context_instance=RequestContext(request))
 
 
-def viewOffer(request,obj_id):
-    #get the object , populate the form? can we do that?
-    return render_to_response('market/offer_single.html',
+def viewItem(request,obj_id):
+    return render_to_response('market/item_single.html',
                               {
-                                'offer': {'id':str(obj_id)}
+                                'item': {'id':str(obj_id)}
                               },
                               context_instance=RequestContext(request))
 

@@ -25,7 +25,7 @@ class MarketItem(models.Model):
     skills = models.ManyToManyField(users.models.Skills)
     url = models.CharField(_('URL Link'),max_length=500, blank=True)
     published = models.BooleanField(_('is published?'),default=True)
-    pub_date = models.DateTimeField(_('publish date'),default=datetime.now())
+    pub_date = models.DateTimeField(_('publish date'),default=datetime.now)
     exp_date = models.DateTimeField(_('expiry date'))
 
 
@@ -46,7 +46,7 @@ class Comment(models.Model):
     title = models.CharField(_('title'),max_length=200,blank=False)
     owner =  models.ForeignKey(auth.models.User,blank=True)
     contents = tinymce.models.HTMLField(_('contents'),blank=False)
-    pub_date = models.DateTimeField(_('publish date'),default=datetime.now())
+    pub_date = models.DateTimeField(_('publish date'),default=datetime.now)
     item = models.ForeignKey(MarketItem,null=True,blank=True,related_name='comments')
 
     #def natural_key(self):

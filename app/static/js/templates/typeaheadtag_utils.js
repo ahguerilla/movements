@@ -1,44 +1,18 @@
-var typeAheadTag,
-		widget =
-		['<div class="row">',
-			'<span class="col-xs-12"><%= title %></span>',
-		'</div>',
-		'<div class="row">',
-			'<span class="col-xs-12 <%= item%>_error"></span>',
-		'</div>',
-		'<div class="row">',
-			'<div class="col-xs-2">',
-			  	'<div class="input-group">',
-					'<input id="<%= item %>" class="form-control" type="text"/>',
-					'<span class="input-group-btn">',
-						'<button class="btn <%= item %>" type="button">Add</button>',
-	      			'</span>',
-		  		'</div>',
-			'</div>',
-		'</div>',
+var typeAheadTag;
 
-		'<div class="row">',
-			'<div class="well col-xs-3">',
-				'<div class="row" id="<%= item %>Tags"></div>',
-			'</div>',
-		'</div>'].join("");
-
-
-typeAheadTag = _.template(widget);
+$(document).ready(function(){
+	typeAheadTag = _.template($('#typeahead_template').html());
+});
 
 window.tagdict={};
 
-
 var invert = function (obj) {
-
   var new_obj = {};
-
   for (var prop in obj) {
     if(obj.hasOwnProperty(prop)) {
       new_obj[obj[prop]] = prop;
     }
   }
-
   return new_obj;
 };
 
@@ -109,3 +83,7 @@ function getTagIds(name){
 }
 
 
+function genTagWidget(item,preval){
+	$('#'+item.jsonfield+'_place').html(generateTypeAhead(item.title, item.jsonfield));
+	makeTagWidget(item.jsonfield,'/api/json/get/'+item.jsonfield, preval);
+}

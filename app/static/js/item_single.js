@@ -1,6 +1,6 @@
 (function(){
 
-    var SingleOfferView = Backbone.View.extend({
+    var SingleItemView = Backbone.View.extend({
         el: '#offer-single',
         events:{
             'submit' : 'submit',
@@ -16,6 +16,7 @@
 
 
     setPage: function(){
+        var that=this,
         fields = this.item.fields;
         $('#marketitem_title').text(fields.title);
         $('#marketitem_owner').text(fields.owner[0]);
@@ -24,12 +25,18 @@
 
         _.each(this.comments,function(comment){
 
-            $.noop();
+            var comment = that.comment_tmp({pk:0,
+                userpic:'test pic',
+                user:'test user',
+                pub_date:'test date',
+                content:'test contents'});
+            $('#marketitem_comments').append(comment);
         });
     },
 
     initialize : function(obj_id){
         var that = this;
+        this.comment_tmp = _.template($('#comment_template').html());
         $.getJSON('/api/json/get/market/'+obj_id.id,function(data){
             that.item = data[0];
             $.getJSON('/api/json/get/comments/'+obj_id.id+'/last/100',function(data){
@@ -45,8 +52,8 @@
     }
 });
 
-    window.offer_single = window.offer_single|| {};
-    window.offer_single.initSingleOffer = function(obj_id){
-        var offer = new SingleOfferView(obj_id);
+    window.item_single = window.item_single|| {};
+    window.item_single.initSingleItem = function(obj_id){
+        var offer = new SingleItemView(obj_id);
     };
 })();

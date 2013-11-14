@@ -2,7 +2,6 @@ import json
 
 from app.api.utils import *
 import app.market as market
-from app.market.forms import newofferForm
 import app.users as users
 from django.core import serializers
 from django.core.context_processors import csrf
