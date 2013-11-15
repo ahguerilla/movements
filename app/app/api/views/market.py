@@ -1,4 +1,4 @@
-from app.market.forms import item_forms,fileForm,saveMarketItem
+from app.market.forms import item_forms,saveMarketItem
 import app.market as market
 import app.users as users
 from django.core import serializers
@@ -9,25 +9,10 @@ from app.api.utils import *
 
 
 
-
-def validate(request,obj_type):
-    forms = [ form(request.POST,request.FILES) for form in item_forms[obj_type]['forms'] ]
-    valid = [form.is_valid() for form in forms]
-    if all(valid):
-        return True,forms
-    return False,forms
-
-
-def save(request,forms,obj_type):
-    objs=[]
-    for form in forms:
-        objs.append(item_forms[obj_type]['save'][form](form, obj_type, request.user,objs))
-
-
 def addMarketItem(request, obj_type, rtype):
-    form = item_forms[obj_type](request)
+    form = item_forms[obj_type](request.POST)
     if form.is_valid():
-        save(request, forms, obj_type)
+        saveMarketItem(form, obj_type, request.user)
     else:
         return HttpResponse(json.dumps(get_validation_errors(forms)), mimetype="application"+rtype)
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)

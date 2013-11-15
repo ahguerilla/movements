@@ -9,6 +9,7 @@ from json_field import JSONField
 import tinymce
 
 import django.contrib.auth as auth
+import uuid
 
 
 def resouse_upload_path_handler(instance, filename):
@@ -61,12 +62,13 @@ class File(models.Model):
     afile = models.FileField(upload_to=resouse_upload_path_handler, blank=True)
     item = models.ForeignKey(MarketItem,related_name="files")
 
-    def save(self, *args, **kwargs):
-        model = self.__class__
-        try:
-            this = MarketItem.objects.get(id=self.id)
-            if this.afile != self.afile:
-                this.afile.delete(save=False)
-        except:
-            return
+    #def save(self, *args, **kwargs):
+        #model = self.__class__
+        #try:
+            #this = File.objects.get(id=self.id)
+            #if this.afile != self.afile:
+                #this.afile.delete(save=False)
+        #except:
+            #pass
+        #super(File,self).save(*args,**kwargs)
 

@@ -69,7 +69,7 @@ class commentForm(forms.ModelForm):
         return instance
 
 
-def saveMarketItem(form, obj_type, owner,objs):
+def saveMarketItem(form, obj_type, owner):
     form.cleaned_data['item_type'] = obj_type
     form.cleaned_data['owner'] = owner
     obj = form.save()

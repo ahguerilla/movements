@@ -36,8 +36,7 @@ function progressHandlingFunction(e){
 				{type:'typeahead', title:'Skills',  jsonfield:'skills', customGen: genTagWidget, customGet:getTagIds},
 				{type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
 				{type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
-				{type: 'input', title:'URL link', jsonfield:'url', placeholder:''},
-				// {type: 'afile', title:'Attach file', jsonfield:'afile', placeholder:'',specialSubmit:function(item){}},
+				{type: 'input', title:'URL link', jsonfield:'url', placeholder:''},				
 				{type: 'textarea', title:'', jsonfield:'details', placeholder:'Add a description'}
 				]
   		},
@@ -47,12 +46,8 @@ function progressHandlingFunction(e){
 			_.each(this.widget_arrs[this.item_type],function(item){
 				if(item.customGet){
 					retdict[item.jsonfield] = item.customGet(item.jsonfield);
-				}else{
-					if(item.jsonfield =="afile"){
-						retdict[item.jsonfield] = $('#'+item.jsonfield)[0].files[0];
-					}else{
-						retdict[item.jsonfield] = $('#'+item.jsonfield).val();	
-					}
+				}else{					
+					retdict[item.jsonfield] = $('#'+item.jsonfield).val();					
 				}					
 			});
 			retdict.csrfmiddlewaretoken=$('input[name="csrfmiddlewaretoken"]').val();
@@ -121,14 +116,7 @@ function progressHandlingFunction(e){
 				type: 'POST',
 				url: this.url,
 				dataType:'json',
-				data: this.getFormData(),
-	            xhr: function() {  // Custom XMLHttpRequest
-	          	  var myXhr = $.ajaxSettings.xhr();
-	            	if(myXhr.upload){ // Check if upload property exists
-	                	myXhr.upload.addEventListener('progress',progressHandlingFunction, false); // For handling the progress of the upload
-	            	}
-            		return myXhr;
-    			},
+				data: this.getFormData()	           
 			});
 			return false;
 		}
