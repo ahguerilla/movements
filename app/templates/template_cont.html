@@ -1,10 +1,8 @@
 <script type="text/template" id="textarea_template">
 
-	<div class="row">
-		<div class="col-lg-2">
-			<div class="form-group">
-  				<textarea class="form-control" name="<%=jsonfield%>" id="<%=jsonfield%>" height="400" placeholder="<%=placeholder%>"></textarea>
-			</div>
+	<div class="row">		
+		<div class="form-group  col-sm-4">	
+			<textarea class="form-control col-sm-12" name="<%=jsonfield%>" id="<%=jsonfield%>" style="height:200px;" placeholder="<%=placeholder%>"></textarea>	
 		</div>
 	</div>
 		
@@ -16,7 +14,7 @@
 	<div class="row">
 		<div class="form-group">
 			<label for="post-title" class="col-sm-2 control-label"><%=title%></label>
-			<div class="col-xs-2">
+			<div class="col-sm-2">
 				<input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control" type="text" placeholder="<%=placeholder%>"/>
 			</div>
 		</div>
@@ -30,7 +28,7 @@
 	<div class="row">
         <div class="form-group">
 			<label for="exp-date" class="col-sm-2 control-label"><%=title%>Expiry date</label>
-            <div class='input-group date col-xs-2' id='datetimepicker-<%=jsonfield%>'>
+            <div class='input-group date col-sm-2' id='datetimepicker-<%=jsonfield%>'>
                 <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control" />
                 <span class="input-group-addon">
                 	<span class="glyphicon glyphicon-calendar"></span>
@@ -44,28 +42,26 @@
 
 <script type="text/template" id="typeahead_template">
 
-	<div class="row">
-		<span class="col-xs-12"><%=title%></span>
-	</div>
-	<div class="row">
-		<span class="col-xs-12 <%=item%>_error"></span>
-	</div>
-	<div class="row">
-		<div class="col-xs-2">
-		  	<div class="input-group">
-				<input id="<%=item%>" class="form-control" type="text"/>
-				<span class="input-group-btn">
-					<button class="btn <%=item%>" type="button">Add</button>
-      			</span>
-	  		</div>
-		</div>
+	<div class="row">		
+		<span class="col-sm-4"><%=title%></span>
 	</div>
 
-	<div class="row">
-		<div class="well col-xs-3">
-			<div class="row" id="<%=item%>Tags"></div>
+
+	<div class="row">		
+	  	<div class="input-group col-sm-4">
+			<input id="<%=item%>" class="form-control" type="text"/>
+			<span class="input-group-addon">
+				<span class="glyphicon <%=item%>">Add</span>
+  			</span>
+  		</div>		
+	</div>
+	<div class="row errors">&nbsp;</div>
+	<div class="row">		
+		<div class="col-sm-4">		
+			<div class="input-group" id="<%=item%>Tags"></div>
 		</div>
 	</div>
+	<div class="row">&nbsp;</div>
 
 </script>
 
@@ -75,7 +71,7 @@
 	<div class="row">
 		<div class="form-group">
 			<label for="post-title" class="col-sm-2 control-label"><%=title%></label>
-			<div class="col-xs-2">
+			<div class="col-sm-4">
 				<input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control file-input" type="file" placeholder="<%=placeholder%>"/>
 			</div>
 		</div>

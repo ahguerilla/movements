@@ -75,6 +75,7 @@ def saveMarketItem(form, obj_type, owner):
     obj = form.save()
     obj.save()
     form.save_m2m()
+    return obj
 
 
 def saveFile(form,obj_type,owner,objs):

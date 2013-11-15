@@ -1,21 +1,22 @@
-from app.market.forms import item_forms,saveMarketItem
+import json
+
+from app.api.utils import *
 import app.market as market
+from app.market.forms import item_forms,saveMarketItem
 import app.users as users
 from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
-import json
-from app.api.utils import *
 
 
 
 def addMarketItem(request, obj_type, rtype):
     form = item_forms[obj_type](request.POST)
     if form.is_valid():
-        saveMarketItem(form, obj_type, request.user)
+        obj = saveMarketItem(form, obj_type, request.user)
     else:
         return HttpResponse(json.dumps(get_validation_errors(forms)), mimetype="application"+rtype)
-    return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
+    return HttpResponse(json.dumps({ 'success' : True, 'pk':obj.id}),mimetype="application"+rtype)
 
 
 def getMarketItem(request,obj_id,rtype):
