@@ -8,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
+    url(r'^messages/', include('postman.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^exchange', 'app.views.exchange', name='exchange'),
     url(r'^settings', 'app.users.views.settings', name='settings'),
