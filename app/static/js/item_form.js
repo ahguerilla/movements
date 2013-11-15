@@ -14,6 +14,13 @@ function progressHandlingFunction(e){
 		events:{
 				'submit' : 'submit',
   		},
+
+  		form_title:{
+  			'offer': 'OFFER A SERVICE',
+  			'resource': 'SHARE A RESOURCE',
+  			'request': 'REQUEST A SERVICE'
+  		},
+
   		widget_arrs: {
   			'offer':[
 				{type:'typeahead', title:'I can help to advance freedom of:', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds },
@@ -96,6 +103,7 @@ function progressHandlingFunction(e){
 			var that= this;
 			this.item_type = obj_type;
 			if(item === false){
+				$('#form-title').html(that.form_title[that.item_type]);
 				this.url = '/api/json/add/market/'+obj_type;				
 				_.each(this.widget_arrs[obj_type],function(item){
 					that.makeWidget(item);					
@@ -105,8 +113,10 @@ function progressHandlingFunction(e){
 					that.url = '/api/json/edit/market/'+item_obj[0].pk;
 					that.item_type = item_obj[0].fields.item_type;
 					that.setForm(item_obj, that.item_type);
+					$('#form-title').html(that.form_title[that.item_type]);
 				});
 			}
+
 		},
 
 		submit: function(e){
