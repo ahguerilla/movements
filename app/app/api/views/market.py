@@ -1,4 +1,4 @@
-from app.market.forms import item_forms
+from app.market.forms import item_forms,fileForm,saveMarketItem
 import app.market as market
 import app.users as users
 from django.core import serializers
@@ -9,20 +9,27 @@ from app.api.utils import *
 
 
 
-def saveMarketItem(form, obj_type, owner):
-    form.cleaned_data['item_type'] = obj_type
-    form.cleaned_data['owner'] = owner
-    obj = form.save()
-    obj.save()
-    form.save_m2m()
+
+def validate(request,obj_type):
+    forms = [ form(request.POST,request.FILES) for form in item_forms[obj_type]['forms'] ]
+    valid = [form.is_valid() for form in forms]
+    if all(valid):
+        return True,forms
+    return False,forms
+
+
+def save(request,forms,obj_type):
+    objs=[]
+    for form in forms:
+        objs.append(item_forms[obj_type]['save'][form](form, obj_type, request.user,objs))
 
 
 def addMarketItem(request, obj_type, rtype):
-    form = item_forms[obj_type](request.POST)
+    form = item_forms[obj_type](request)
     if form.is_valid():
-        saveMarketItem(form, obj_type,request.user)
+        save(request, forms, obj_type)
     else:
-        return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
+        return HttpResponse(json.dumps(get_validation_errors(forms)), mimetype="application"+rtype)
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
 
 
@@ -32,7 +39,7 @@ def getMarketItem(request,obj_id,rtype):
         value(rtype,
               [obj],
               use_natural_keys=True,
-              fields=('item_type','issues','countries','skills','title','details', 'pub_date','exp_date', 'owner')
+              fields=('item_type','issues','countries','skills','title','details', 'pub_date','exp_date', 'owner', 'url','files')
               ),
         mimetype="application/"+rtype)
 

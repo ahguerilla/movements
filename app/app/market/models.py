@@ -56,10 +56,10 @@ class Comment(models.Model):
         #unique_together = (('owner','pub_date'))
 
 
-class Files(models.Model):
-    title = models.CharField(_('name'),max_length=255)
+class File(models.Model):
+    filename = models.CharField(_('file name'),max_length=255)
     afile = models.FileField(upload_to=resouse_upload_path_handler, blank=True)
-    item = models.ForeignKey(MarketItem)
+    item = models.ForeignKey(MarketItem,related_name="files")
 
     def save(self, *args, **kwargs):
         model = self.__class__

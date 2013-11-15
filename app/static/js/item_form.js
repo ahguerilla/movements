@@ -1,3 +1,9 @@
+function progressHandlingFunction(e){
+    if(e.lengthComputable){
+        $('progress').attr({value:e.loaded,max:e.total});
+    }
+}
+
 (function(){
 
 	var ItemView = Backbone.View.extend({
@@ -25,9 +31,14 @@
 				{type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
 				],
 			'resource':[
-				{type:'typeahead', title:'Issues', jsonfield:'issues'},
-				{type:'typeahead', title:'Country',  jsonfield:'countries'},
-				{type:'typeahead', title:'Skills',  jsonfield:'skills'}
+				{type:'typeahead', title:'Issues', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds },
+				{type:'typeahead', title:'Country',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
+				{type:'typeahead', title:'Skills',  jsonfield:'skills', customGen: genTagWidget, customGet:getTagIds},
+				{type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
+				{type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
+				{type: 'input', title:'URL link', jsonfield:'url', placeholder:''},
+				// {type: 'afile', title:'Attach file', jsonfield:'afile', placeholder:'',specialSubmit:function(item){}},
+				{type: 'textarea', title:'', jsonfield:'details', placeholder:'Add a description'}
 				]
   		},
   		
@@ -37,7 +48,11 @@
 				if(item.customGet){
 					retdict[item.jsonfield] = item.customGet(item.jsonfield);
 				}else{
-					retdict[item.jsonfield] = $('#'+item.jsonfield).val();	
+					if(item.jsonfield =="afile"){
+						retdict[item.jsonfield] = $('#'+item.jsonfield)[0].files[0];
+					}else{
+						retdict[item.jsonfield] = $('#'+item.jsonfield).val();	
+					}
 				}					
 			});
 			retdict.csrfmiddlewaretoken=$('input[name="csrfmiddlewaretoken"]').val();
@@ -106,7 +121,14 @@
 				type: 'POST',
 				url: this.url,
 				dataType:'json',
-				data: this.getFormData()
+				data: this.getFormData(),
+	            xhr: function() {  // Custom XMLHttpRequest
+	          	  var myXhr = $.ajaxSettings.xhr();
+	            	if(myXhr.upload){ // Check if upload property exists
+	                	myXhr.upload.addEventListener('progress',progressHandlingFunction, false); // For handling the progress of the upload
+	            	}
+            		return myXhr;
+    			},
 			});
 			return false;
 		}
@@ -117,3 +139,4 @@
   		var item_form = new ItemView(item,obj_type);
 	};
 })();
+
