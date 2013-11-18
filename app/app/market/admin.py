@@ -15,7 +15,12 @@ class Offer(models.MarketItem):
 
 
 class OfferAdmin(admin.ModelAdmin):
-    pass
+    exclude=('item_type',)    
+    def get_readonly_fields(self, request, obj=None):
+        if obj:        
+            return self.readonly_fields + ('owner','pub_date')
+        return self.readonly_fields
+
 
 admin.site.register(Offer, OfferAdmin)
 
@@ -31,7 +36,11 @@ class Request(models.MarketItem):
 
 
 class RequestAdmin(admin.ModelAdmin):
-    pass
+    exclude=('item_type',)    
+    def get_readonly_fields(self, request, obj=None):
+        if obj:        
+            return self.readonly_fields + ('owner','pub_date')
+        return self.readonly_fields
 
 
 admin.site.register(Request,RequestAdmin)

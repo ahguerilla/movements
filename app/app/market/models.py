@@ -28,7 +28,7 @@ class MarketItem(models.Model):
     published = models.BooleanField(_('is published?'),default=True)
     pub_date = models.DateTimeField(_('publish date'),default=datetime.now)
     exp_date = models.DateTimeField(_('expiry date'))
-
+    commentcount = models.IntegerField(_('commentcount'),default=0)
 
     def __unicode__(self):
         return self.details
@@ -37,38 +37,25 @@ class MarketItem(models.Model):
         ordering = ['pub_date']
 
 
-#class CommentManager(models.Manager):
-    #def get_by_natural_key(self, owner,pub_date):
-        #return self.get(owner=owner, pub_date=pubdate)
-
 
 class Comment(models.Model):
-    #objects = CommentManager()
     title = models.CharField(_('title'),max_length=200,blank=False)
     owner =  models.ForeignKey(auth.models.User,blank=True)
     contents = tinymce.models.HTMLField(_('contents'),blank=False)
     pub_date = models.DateTimeField(_('publish date'),default=datetime.now)
     item = models.ForeignKey(MarketItem,null=True,blank=True,related_name='comments')
+    published = models.BooleanField(_('is published?'),default=True)
 
-    #def natural_key(self):
-        #return (self.owner, self.pub_date )
+    def save(self, *args, **kwargs):
+        model = self.__class__
+        self.item.commentcount = Comment.objects.filter(id=self.item).count()
+        super(Comment,self).save(*args,**kwargs)
 
-    #class Meta:
-        #unique_together = (('owner','pub_date'))
+
 
 
 class File(models.Model):
     filename = models.CharField(_('file name'),max_length=255)
     afile = models.FileField(upload_to=resouse_upload_path_handler, blank=True)
     item = models.ForeignKey(MarketItem,related_name="files")
-
-    #def save(self, *args, **kwargs):
-        #model = self.__class__
-        #try:
-            #this = File.objects.get(id=self.id)
-            #if this.afile != self.afile:
-                #this.afile.delete(save=False)
-        #except:
-            #pass
-        #super(File,self).save(*args,**kwargs)
 

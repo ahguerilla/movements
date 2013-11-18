@@ -8,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
+    url(r'^market', include('app.market.urls')),
     url(r'^messages/', include('postman.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^exchange', 'app.views.exchange', name='exchange'),
@@ -17,14 +18,6 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/', include('app.api.urls')),
-
-    url(r'^add/(?P<obj_type>offer|request|resource)', 'app.market.views.addItem_form',name="form_add_item"),
-    url(r'^view/(offer|request|resource|item)/(?P<obj_id>\d+)$','app.market.views.viewItem', name="view_item"),
-    url(r'^edit/(?P<obj_id>\d+)$','app.market.views.editItem_form', name="form_edit_item"),
-
-    url(r'^add/comment/(?P<obj_id>\d+)$','app.market.views.addComment_form', name="form_add_comment"),
-    url(r'^edit/comment/(?P<obj_id>\d+)$','app.market.views.editComment_form', name="form_edit_comment"),
 
 )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

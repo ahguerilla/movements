@@ -1,6 +1,6 @@
 import json
 
-from app.api.utils import *
+from app.market.api.utils import *
 import app.market as market
 import app.users as users
 from django.core import serializers

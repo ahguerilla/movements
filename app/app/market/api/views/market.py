@@ -1,6 +1,6 @@
 import json
 
-from app.api.utils import *
+from app.market.api.utils import *
 import app.market as market
 from app.market.forms import item_forms,saveMarketItem
 import app.users as users
@@ -26,6 +26,39 @@ def getMarketItem(request,obj_id,rtype):
               [obj],
               use_natural_keys=True,
               fields=('item_type','issues','countries','skills','title','details', 'pub_date','exp_date', 'owner', 'url','files')
+              ),
+        mimetype="application/"+rtype)
+
+
+def getMarketItemLast(request,count,rtype):
+    obj = market.models.MarketItem.objects.order_by('pub_date').defer('comments')[:count]
+    return HttpResponse(
+        value(rtype,
+              obj,
+              use_natural_keys=True,
+              fields=('item_type','issues','countries','skills','title','details', 'pub_date','exp_date', 'owner', 'url','files')
+              ),
+        mimetype="application/"+rtype)
+
+
+def getMarketItemFromTo(request,sfrom,to,rtype):
+    obj = market.models.MarketItem.objects.order_by('pub_date').defer('comments')[sfrom:to]
+    return HttpResponse(
+        value(rtype,
+              obj,
+              use_natural_keys=True,
+              fields=('item_type',
+                      'issues',
+                      'countries',
+                      'skills',
+                      'title',
+                      'details',
+                      'pub_date',
+                      'exp_date',
+                      'owner',
+                      'url',
+                      'files',
+                      'commentcount')
               ),
         mimetype="application/"+rtype)
 

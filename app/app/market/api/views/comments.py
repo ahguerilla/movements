@@ -5,7 +5,7 @@ from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
 import json
-from app.api.utils import *
+from app.market.api.utils import *
 
 
 
@@ -43,22 +43,22 @@ def getCommentIdsRange(request, obj_id,st_date, end_date, rtype):
 
 
 def getComment(request, obj_id, rtype):
-    obj = get_object_or_404(market.models.Comment,pk=obj_id)
+    obj = get_object_or_404(market.models.Comment, pk=obj_id)
     return HttpResponse(value(rtype,[obj]), mimetype="application"+rtype)
 
 
 def getComments(request,obj_id,count,rtype):
-    # TODO: Add a "natural_key(self)" to comment model
-    obj = get_object_or_404(market.models.MarketItem,pk=obj_id)
+    obj = get_object_or_404(market.models.MarketItem, pk=obj_id)
     return HttpResponse(value(rtype,
                               obj.comments.all()[:count],
                               indent=2,
-                              use_natural_keys=True),
+                              #use_natural_keys=True
+                              ),
                         mimetype="application"+rtype)
 
 
 def editComment(request,obj_id, rtype):
-    obj = get_object_or_404(market.models.Comment,pk=obj_id)
+    obj = get_object_or_404(market.models.Comment, pk=obj_id)
     form = commentForm(request.POST, instance=obj)
     if form.is_valid():
         saveComment(form,request.user,None)
