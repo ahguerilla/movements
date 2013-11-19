@@ -1,5 +1,6 @@
 {% load socialaccount %}
 
+<ul class="list-unstyled">
 {% for provider in socialaccount.providers %}
 {% if provider.id == "openid" %}
 {% for brand in provider.get_brands %}
@@ -16,4 +17,5 @@
      href="{% provider_login_url provider.id process=process %}">{{provider.name}}</a>
 </li>
 {% endfor %}
+</ul>
 
