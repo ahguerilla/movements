@@ -34,24 +34,26 @@ class MarketItem(models.Model):
         return self.details
 
     class Meta:
-        ordering = ['pub_date']
-
+        ordering = ['-pub_date']
 
 
 class Comment(models.Model):
-    title = models.CharField(_('title'),max_length=200,blank=False)
     owner =  models.ForeignKey(auth.models.User,blank=True)
     contents = tinymce.models.HTMLField(_('contents'),blank=False)
     pub_date = models.DateTimeField(_('publish date'),default=datetime.now)
     item = models.ForeignKey(MarketItem,null=True,blank=True,related_name='comments')
     published = models.BooleanField(_('is published?'),default=True)
 
+    class Meta:
+        ordering = ['-pub_date']
+
+
     def save(self, *args, **kwargs):
         model = self.__class__
-        self.item.commentcount = Comment.objects.filter(id=self.item).count()
+        self.item.commentcount = Comment.objects.filter(id=self.item.id).count()
+        self.item.commentcount+=1
+        self.item.save()
         super(Comment,self).save(*args,**kwargs)
-
-
 
 
 class File(models.Model):

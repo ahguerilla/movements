@@ -1,0 +1,224 @@
+<script type="text/template" id="textarea_template">
+
+	<div class="row">
+	<div class="form-group col-sm-4">
+		<textarea class="form-control" name="<%=jsonfield%>" id="<%=jsonfield%>" rows="6" placeholder="<%=placeholder%>"></textarea>
+	</div>
+	</div>
+
+</script>
+
+
+<script type="text/template" id="input_template">
+
+	<div class="form-group">
+		<label for="post-title" class="col-sm-2 control-label"><%=title%></label>
+		<div class="col-sm-2">
+			<input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control input-sm" type="text" placeholder="<%=placeholder%>"/>
+		</div>
+	</div>
+
+</script>
+
+
+<script type="text/template" id="datetimepicker_template">
+
+    <div class="form-group">
+		<label for="exp-date" class="col-sm-2 control-label"><%=title%>Expiry date</label>
+        <div class='input-group date col-sm-2' id='datetimepicker-<%=jsonfield%>'>
+            <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control input-sm" />
+            <span class="input-group-addon">
+            	<span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+
+</script>
+
+
+<script type="text/template" id="typeahead_template">
+
+	<div class="row">
+		<span class="col-sm-4"><%=title%></span>
+	</div>
+
+	<div class="row">
+	  	<div class="input-group col-sm-4">
+			<input id="<%=item%>" class="form-control input-sm" type="text"/>
+			<span class="input-group-addon">
+				<span class="glyphicon <%=item%>">Add</span>
+  			</span>
+  		</div>
+	</div>
+	<div class="row errors">&nbsp;</div>
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="input-group" id="<%=item%>Tags"></div>
+		</div>
+	</div>
+	<div class="row">&nbsp;</div>
+
+</script>
+
+
+<script type="text/template" id="afile_template">
+
+	<div class="row">
+		<div class="form-group">
+			<label for="post-title" class="col-sm-2 control-label"><%=title%></label>
+			<div class="col-sm-4">
+				<input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control file-input" type="file" placeholder="<%=placeholder%>"/>
+			</div>
+		</div>
+	</div>
+
+</script>
+
+
+<script type="text/template" id="comment_view_template">
+
+	<div class="comment row well" comment-owner="<%=owner%>" comment-id="<%=pk%>">
+		<div class="comment-wrap">
+			<div class="comment-userpic col-lg-2"><img width="100" height="100" src="<%=userpic%>"/></div>
+			<div class="comment-right col-lg-10">
+				<div class="comment-head">
+					<div class="comment-user col-lg-3"><strong><%=user%></strong></div>
+					<div class="comment-date  col-lg-3"><strong><%=pub_date%></strong></div>
+					<div class="comment-date col-lg-offset-4 col-lg-2">&nbsp;<% if(owner===window.user_id){ %> <a href="<%= window.app_urls.formeditcomment+pk %>">Edit</a> <% } %></div>
+				</div>
+				<div class="comment-content" style="margin-top:30px;"><%=content%></div>
+			</div>
+		</div>
+	</div>
+
+</script>
+
+
+<script type="text/template" id="comment_edit_template">
+
+	<div class="comment" comment-id="<%=pk%>">
+		<div class="comment-wrap">
+			<div class="comment-userpic"><img src="<%=userpic%>"/></div>
+			<div class="comment-right">
+				<div class="comment-head">
+					<div class="comment-user"><%=user%></div>
+					<div class="comment-date"><%=pub_date%></div>
+				</div>
+				<div class="comment-content"><%=content%></div>
+			</div>
+		</div>
+	</div>
+
+</script>
+
+
+<script type="text/template" id="comment_add_template">
+
+	<div class="new-comment row well" >
+		<div class="comment-wrap">			
+			<div>
+				<textarea class="form-control" name="newcomment" id="newcomment" rows="3" placeholder="Post a comment"></textarea>
+			</div>
+		</div>
+		<div class="btn pull-right btn-default btn-sm comment-btn" style="margin-top: 5px;"> Comment </div>
+	</div>
+
+</script>
+
+
+<script type="text/template" id="item_template">
+
+	<div class="row item_container" item_id="<%=pk%>">
+		<div class="col-lg-11 well">
+			<div class="row">
+				<div class="col-lg-10"><h4><%=title%></h4></div>
+				<div class="col-lg-2"><strong><%=item_type%></strong></div>
+			</div>
+
+			<div class="row" style="margin-bottom: 10px;">
+				<div class="item-header" style="margin-left:15px;margin-bottom:10px;">
+					<div class="item-user">By <strong><%=owner%></strong></div>
+					<div class="item-pub-date"><%=moment(pub_date).format("D MMM YYYY")%></div>
+				</div>
+				<div class="item-contents col-lg-12"><%=details%></div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-2"><%=commentcount%> Comments</div>
+				<div class="col-lg-10">Tags:
+					<% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.issues[ind] %> </div> <% }); %>
+					<% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.countries[ind] %> </div> <% }); %>
+					<% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.skills[ind] %> </div> <% }); %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</script>
+
+
+<script type="text/javascript" id="api_urls">
+	window.user_id = {{ user.id }};
+
+
+	window.app_urls={
+		getcsrf: "{% url 'get_csrftoken' 'json' %}",
+		getuserdetail: "{% url 'get_userdetail' 'json' 0 %}".slice(0,-1),
+		getavatar: "{% url 'get_avatar' 'json' 0 %}".slice(0,-1),
+
+		getissues: "{% url 'get_issues' 'json' %}",
+		getskills: "{% url 'get_skills' 'json' %}",
+		getcountries: "{% url 'get_countries' 'json' %}",
+		getNationalities: "{% url 'get_nationalities' 'json' %}",
+		
+		viewitem: "{% url 'view_item' 'offer' 0 %}".slice(0,-1),
+		edititem: "{% url 'form_edit_item' 0 %}".slice(0,-1),
+		getitemform:  "{% url 'form_add_item' 'offer' %}",
+
+		getposts:  "{% url 'posts'  %}",
+		getmarketitem: "{% url 'get_marketitem' 'json' 0 %}".slice(0,-1),
+		getmarketitemlast: "{% url 'get_marketitems_last' 'json' 0 %}".slice(0,-1),
+		getmarketitemfromto: "{% url 'get_marketitems_fromto' 'json' 0 0 %}".slice(0,-1),
+		addmarketitem: "{% url 'add_marketitem' 'json' 'offer' %}".slice(0,-5),
+		editmarketitem: "{% url 'edit_marketitem' 'json' 0 %}".slice(0,-1),
+		deletemarketitem: "{% url 'delete_marketitem' 'json' 0 %}".slice(0,-1),
+		getuseritems: "{% url 'user_marketitems' 'json' %}",
+
+		formeditcomment: "{% url 'form_edit_comment' 0 %}".slice(0,-1),
+
+		addcomment: "{% url 'add_comment' 'json' 0 %}".slice(0,-1),
+		getcomment: "{% url 'get_comment' 'json' 0 %}".slice(0,-1),
+		getcommentsrange: "{% url 'get_comments_range' 'json' 0 'stdate' 'enddate' %}",
+		getcommentslast: "{% url 'get_comments_last' 'json' 0 0 %}".slice(0,-1),
+		editcomment: "{% url 'edit_comment' 'json' 0 %}".slice(0,-1),
+		deletecomment: "{% url 'delete_comment' 'json' 0 %}".slice(0,-1),
+	};
+
+	window.getcsrf = function(callback){
+		$.getJSON(window.app_urls.getcsrf, function(data){callback(data);});
+	}
+
+	function getpkname(data,item){
+		var ar={};
+		for(index in data){
+			ar[data[index].pk] = data[index].fields[item];
+		}
+		return ar;
+	}
+
+	$.getJSON(window.app_urls.getissues,function(data){
+		window.issues = getpkname(data,'issues');
+	});
+
+	$.getJSON(window.app_urls.getskills,function(data){
+		window.skills = getpkname(data,'skills');
+	});
+
+	$.getJSON(window.app_urls.getcountries,function(data){
+		window.countries = getpkname(data,'countries');
+	});
+
+
+
+
+</script>

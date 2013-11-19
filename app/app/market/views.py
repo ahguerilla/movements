@@ -10,7 +10,8 @@ from app.market.forms import item_forms,commentForm
 def index(request):
     return render_to_response('market.html',
                               {
-                                  'item':'false'
+                                  'title':'My Exchange',
+                                  'init': 'market'
                                },
                               context_instance=RequestContext(request))
 
@@ -64,4 +65,14 @@ def editComment_form(request,obj_id):
                                   'coment': {'id':str(obj_id)}
                                },
                               context_instance=RequestContext(request))
+
+
+def posts(request):
+   return render_to_response('market.html',
+                              {
+                                  'title':'My Posts',
+                                  'init': 'posts'
+                               },
+                              context_instance=RequestContext(request))
+
 

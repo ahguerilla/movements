@@ -4,33 +4,46 @@
 
 	<div id="market" class="container">
 		<div class="row">
-			<div class="col-lg-offset-2 col-lg-8">
-				<h3>My Exchange</h3>
+			<div class="input-group col-lg-offset-3 col-md-6">
+			<input type="text" class="form-control">
+  			<span class="input-group-addon">Search</span>
+		</div>
+
+		</div>
+		<div class="row">
+			<div class="col-lg-offset-3 col-lg-8">
+				<h3>{{title}}</h3>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-2">
-				<h4> FILTER BY</h4>
+			<div class="col-lg-2 panel panel-default">
+				<div class="panel-body">
+					<h5> FILTER BY</h5>
+				</div>
 			</div>
-			<div class="col-lg-8">
+			<div class="col-md-offset-1 col-lg-7">
 				<div id="marketitems"></div>
 			</div>
 
 			<div class="col-lg-2">
+				
 				<div class="small">
 					<h4> How it works</h4>
 					<p>Nulla pretium tempus ante in pharetra. Maecenas eleifend rhoncus congue.
 					Sed eu massa eros. Suspendisse potenti. Quisque elementum nibh ligula, sed varius magna mollis pulvinar.
 					Aliquam ipsum sapien, vehicula ac nunc nec, volutpat elementum arcu. Duis at pellentesque sapien.</p>
 				</div>
-				<button type="button" class="btn btn-default btn-sm btn-block">
-					<a href="#" onclick="alert(window.app_urls.getitemform);">Create an offer</a>
+
+				<button type="button" class="btn btn-default btn-sm btn-block">					
+					<a href="#" onclick="window.location = window.app_urls.getitemform;">Create an offer</a>
 				</button>
+
 				<button type="button" class="btn btn-default btn-sm btn-block">
-					<a href="javascript:window.app_urls.addmarketitem+'request';">Create an request</a>
+					<a href="#" onclick="window.location = window.app_urls.getitemform.replace('offer','request');">Create an request</a>
 				</button>
+
 				<button type="button" class="btn btn-default btn-sm btn-block">
-					<a href="javascript:window.app_urls.addmarketitem+'resource';">Share a resource</a>
+					<a href="#" onclick="window.location = window.app_urls.getitemform.replace('offer','resource');">Share a resource</a>
 				</button>
 			</div>
 
@@ -42,9 +55,18 @@
 {% block endjavascript %}
 
 	<script type="text/javascript">
+
 		$(document).ready(function(){
-			window.market.initMarket();
+			if("{{init}}"=="market"){
+
+				window.market.initMarket();
+
+			}else if("{{init}}"=="posts"){
+
+				window.posts.initPosts();
+			}
 		});
+
 	</script>
 
 {% endblock %}

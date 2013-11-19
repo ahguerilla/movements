@@ -22,6 +22,7 @@ js = Bundle(
         './js/item_form.js',
         './js/comment.js',
         './js/market.js',
+        './js/posts.js',
         ),
     filters='jsmin',
     output='./js/packed.js'

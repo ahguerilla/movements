@@ -59,7 +59,7 @@ class fileForm(forms.ModelForm):
 class commentForm(forms.ModelForm):
     class Meta:
         model = market.models.Comment
-        fields = ['title','contents']
+        fields = ['contents',]
 
     def save(self, commit=False, *args, **kwargs):
         instance = super(commentForm, self).save(commit=commit, *args, **kwargs)
