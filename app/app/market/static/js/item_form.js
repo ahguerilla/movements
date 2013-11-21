@@ -122,11 +122,18 @@ function progressHandlingFunction(e){
 		submit: function(e){
 			e.preventDefault();
 			$.ajaxSetup({traditional: true});
-			$.ajax({
+			var dfrd = $.ajax({
 				type: 'POST',
 				url: this.url,
 				dataType:'json',
 				data: this.getFormData()	           
+			});			
+			dfrd.done(function(){
+				window.location = window.app_urls.market;
+			});
+
+			dfrd.fail(function(data){
+				alert('failed');
 			});
 			return false;
 		}

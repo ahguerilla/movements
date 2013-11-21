@@ -1,10 +1,11 @@
 <script type="text/template" id="textarea_template">
 
 	<div class="row">
-	<div class="form-group col-sm-4">
-		<textarea class="form-control" name="<%=jsonfield%>" id="<%=jsonfield%>" rows="6" placeholder="<%=placeholder%>"></textarea>
+		<div class="form-group col-sm-4">
+			<textarea class="form-control" name="<%=jsonfield%>" id="<%=jsonfield%>" rows="6" placeholder="<%=placeholder%>"></textarea>
+		</div>
 	</div>
-	</div>
+	<div class="row <%=jsonfield%> error"></div>
 
 </script>
 
@@ -17,7 +18,7 @@
 			<input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control input-sm" type="text" placeholder="<%=placeholder%>"/>
 		</div>
 	</div>
-
+	<div class="row <%=jsonfield%> error"></div>
 </script>
 
 
@@ -32,6 +33,7 @@
             </span>
         </div>
     </div>
+    <div class="row <%=jsonfield%> error"></div>
 
 </script>
 
@@ -56,6 +58,7 @@
 			<div class="input-group" id="<%=item%>Tags"></div>
 		</div>
 	</div>
+	<div class="row <%=item%> error"></div>
 	<div class="row">&nbsp;</div>
 
 </script>
@@ -175,6 +178,7 @@
 		edititem: "{% url 'form_edit_item' 0 %}".slice(0,-1),
 		getitemform:  "{% url 'form_add_item' 'offer' %}",
 
+		market: "{% url 'show_market' %}",
 		getposts:  "{% url 'posts'  %}",
 		getmarketitem: "{% url 'get_marketitem' 'json' 0 %}".slice(0,-1),
 		getmarketitemlast: "{% url 'get_marketitems_last' 'json' 0 %}".slice(0,-1),
@@ -184,7 +188,7 @@
 		deletemarketitem: "{% url 'delete_marketitem' 'json' 0 %}".slice(0,-1),
 		getuseritems: "{% url 'user_marketitems' 'json' %}",
 
-		formeditcomment: "{% url 'form_edit_comment' 0 %}".slice(0,-1),
+		formeditcomment: "{% url 'form_edit_comment' 0 %}".slice(0,-1),		
 
 		addcomment: "{% url 'add_comment' 'json' 0 %}".slice(0,-1),
 		getcomment: "{% url 'get_comment' 'json' 0 %}".slice(0,-1),

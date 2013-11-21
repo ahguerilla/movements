@@ -35,7 +35,7 @@ def addMarketItem(request, obj_type, rtype):
     if form.is_valid():
         obj = saveMarketItem(form, obj_type, request.user)
     else:
-        return HttpResponse(json.dumps(get_validation_errors(forms)), mimetype="application"+rtype)
+        return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
     return HttpResponse(json.dumps({ 'success' : True, 'pk':obj.id}),mimetype="application"+rtype)
 
 
@@ -60,7 +60,7 @@ def editMarketItem(request,obj_id,rtype):
     if form.is_valid():
         saveMarketItem(form, obj.item_type, obj.owner)
     else:
-        return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
+        return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
 
 

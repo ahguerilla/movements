@@ -1,5 +1,12 @@
 from django.core import serializers
 
+from django.http import HttpResponse
+
+
+class HttpResponseError(HttpResponse):
+	status_code=500
+
+
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:

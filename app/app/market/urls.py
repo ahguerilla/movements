@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
     url(r'add/comment/(?P<obj_id>\d+)$','app.market.views.addComment_form', name="form_add_comment"),
     url(r'edit/comment/(?P<obj_id>\d+)$','app.market.views.editComment_form', name="form_edit_comment"),
+    url(r'^search/', include('haystack.urls')),
 )
 
 
