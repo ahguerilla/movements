@@ -69,5 +69,5 @@ def deleteMarketItem(request,obj_id,rtype):
 
 
 def userMarketItems(request, rtype):
-    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),owner=request.user)
-    return returnItemList([obj], rtype)
+    obj = market.models.MarketItem.objects.defer('comments').filter(owner=request.user).all()
+    return returnItemList(obj, rtype)

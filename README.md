@@ -48,3 +48,15 @@ Client ID and Secret can be found in settings>local.py
 
 ## Widget Tweaks Reference
 https://pypi.python.org/pypi/django-widget-tweaks
+
+
+
+## Configure search
+
+Install solr. 
+You need apache and tomcat to run solr. 
+If you are using Ubuntu you can install all three with apt-get and run apache service after that.
+Do a "pip install -r requirements/base.txt" too.
+If solr is installed correctly http://localhost:8080/solr/ should show the solr welcome page.
+
+

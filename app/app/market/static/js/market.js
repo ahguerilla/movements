@@ -7,16 +7,12 @@
         },
 
         search: function(){
-            window.getcsrf(function(csrf){
-                var dfrd = $.ajax({
-                    url:'search/',
-                    type: 'POST',
-                    data: {
-                        q:$('#q').val(),
-                        csrfmiddlewaretoken:csrf.csrfmiddlewaretoken,
-                    }                
-                });
-                dfrd.done(function(data){alert(data);});
+            window.getcsrf(function(csrf){                
+                var data= {
+                    q:$('#q').val(),
+                    csrfmiddlewaretoken:csrf.csrfmiddlewaretoken,
+                };
+                window.location = 'search?'+$.param(data);
             });            
         },
 
