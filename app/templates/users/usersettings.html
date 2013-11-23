@@ -11,21 +11,42 @@
   <div class="col-md-4">
     <form class="form-horizontal" method="POST" action="" enctype="multipart/formdata" role="form">{% csrf_token %}
       {% for field in form %}
-        {% if field.label = "Is journalist" %}
+        {% if field.label = "Username" or field.label = "Email" or field.label = "Password" or field.label = "Repeat password" %}
+          <div class="form-group">
+            <div class="col-sm-12">
+              {{ field.errors }}
+              {% render_field field class="form-control input-sm" placeholder=field.label %}
+            </div>
+          </div>
+        {% elif field.label = "First name" %}
+          <div class="form-group">
+            <div class="col-sm-6">
+              {{ field.errors }}
+              {% render_field form.first_name class="form-control input-sm" placeholder="First Name" %}
+            </div>
+            <div class="col-sm-6">
+              {{ field.errors }}
+              {% render_field form.last_name class="form-control input-sm" placeholder="Last Name" %}
+            </div> 
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% for field in form %}
+        {% if field.label = "Journalist" %}
         <div class="form-group">
           <div class="col-sm-12">
             {{ field.errors }}
             {{ field }} <small>I am a journalist</small>
           </div>
         </div> 
-      {% elif field.label = "Get newsletter" %}
+      {% elif field.label = "Recieves newsletter" %}
         <div class="form-group">
           <div class="col-sm-12">
             {{ field.errors }}
             {{ field }} <small>Sign up for the Exchangivist Newsletter</small>
           </div>
         </div> 
-      {% elif field.label = "Is organisation" %}
+      {% elif field.label = "Organisation" %}
         <div class="form-group">
           <div class="col-sm-12">
             {{ field.errors }}
@@ -45,18 +66,7 @@
             </label>
           </div>
         </div> 
-      {% elif field.label = "First name" %}
-        <div class="form-group">
-          <div class="col-sm-6">
-            {{ field.errors }}
-            {% render_field form.first_name class="form-control input-sm" placeholder="First Name" %}
-          </div>
-          <div class="col-sm-6">
-            {{ field.errors }}
-            {% render_field form.last_name class="form-control input-sm" placeholder="Last Name" %}
-          </div> 
-        </div>
-      {% elif field.label = "Is individual" or field.label = "Last name" %} 
+      {% elif field.label = "First name" or field.label = "Individual" or field.label = "Last name" or field.label = "Username" or field.label = "Email" or field.label = "Password" or field.label = "Repeat password" %} 
       {% else %}
         <div class="form-group">
           <div class="col-sm-12">
