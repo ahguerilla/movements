@@ -1,5 +1,5 @@
 from django import forms
-from models import Nationality, Residence, Skills, Issues, Countries
+from models import Nationality, Residence, Skills, Issues, Countries, UserProfile
 
 
 class SignupForm(forms.Form):
@@ -12,25 +12,30 @@ class SignupForm(forms.Form):
         user.save()
 
 
-class SettingsForm(forms.Form):
+class SettingsForm(forms.ModelForm):
     username = forms.CharField(max_length=100)
     first_name = forms.CharField(max_length=100)
     last_name = forms.CharField(max_length=100)
     email = forms.EmailField()
     password = forms.CharField(max_length=100, widget=forms.PasswordInput())
-    check_password = forms.CharField(max_length=100, widget=forms.PasswordInput())
-    occupation = forms.CharField()
-    expertise = forms.CharField()
-    bio = forms.CharField(widget=forms.Textarea, required=False)
-    web_url = forms.CharField(required=False)
-    facebook_url = forms.CharField(required=False)
-    twitter_url = forms.CharField(required=False)
-    nationality = forms.ModelChoiceField(queryset=Nationality.objects.all()) 	
-    country_of_residence = forms.ModelChoiceField(queryset=Residence.objects.all())
-    skills = forms.ModelMultipleChoiceField(queryset=Skills.objects.all(), required=False)
-    issues = forms.ModelMultipleChoiceField(queryset=Issues.objects.all(), required=False)
-    countries = forms.ModelMultipleChoiceField(queryset=Countries.objects.all(), required=False)
-    is_organisation = forms.BooleanField(required=False)
-    is_individual = forms.BooleanField(required=False)
-    is_journalist = forms.BooleanField(required=False)
-    get_newsletter = forms.BooleanField(required=False)
+    repeat_password = forms.CharField(max_length=100, widget=forms.PasswordInput())    
+    class Meta:
+        model = UserProfile  
+        exclude = ['user','privacy_settings','notifications',]
+
+    def __init__(self, user=None, *args, **kwargs):
+        super(SettingsForm, self).__init__(*args, **kwargs)
+        self._user = user
+
+def saveUser(self, user):
+    user.first_name = self.cleaned_data['first_name']
+    user.last_name = self.cleaned_data['last_name']
+    user.email = self.cleaned_data['email']
+    #user.password = self.cleaned_data['password']
+    user.save()
+
+def saveSettings(self, profile):
+    profile.bio = self.cleaned_data['bio']
+    profile.web_rul = self.cleaned_data['web_url']
+    # ...?
+    profile.save()
