@@ -59,6 +59,7 @@ class UserProfile(models.Model):
     is_individual = models.BooleanField(_('individual'), default=True)
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
+    firstlogin = models.BooleanField(_('first_login'), default=True)
 
 
     def save(self, *args, **kwargs):
