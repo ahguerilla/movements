@@ -7,6 +7,7 @@ import app.users as users
 from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
+from django.db.models import Q,Count,Avg
 
 
 def returnItemList(obj, rtype):
@@ -29,6 +30,10 @@ def returnItemList(obj, rtype):
               ),
         mimetype="application/"+rtype)
 
+def createQuery(reg,item,obj):
+    pass
+    #for item in request.GET[item]:
+        #obj = obj |Q("skills"=item)
 
 def addMarketItem(request, obj_type, rtype):
     form = item_forms[obj_type](request.POST)
@@ -49,8 +54,28 @@ def getMarketItemLast(request,count,rtype):
     return returnItemList(obj, rtype)
 
 
-def getMarketItemFromTo(request,sfrom,to,rtype):
-    obj = market.models.MarketItem.objects.order_by('pub_date').defer('comments')[sfrom:to]
+def getMarketItemFromTo(request,sfrom,to,rtype):    
+    import operator
+    if request.GET.has_key('skills'):        
+        query = Q(skills__in= request.GET.getlist('skills')) 
+
+    if request.GET.has_key('countries'):        
+        query = query | Q(countries__in = request.GET.getlist('countries'))
+    
+    if request.GET.has_key('issues'):        
+        query = query | Q(issues__in=request.GET.getlist('issues'))
+    query = query & Q(published=True)
+    
+    obj = market.models.MarketItem.objects\
+        .filter(query)\
+        .annotate(num_skills=Count('skills'))\
+        .annotate(num_issues=Count('issues'))\
+        .annotate(num_countries=Count('countries'))\
+        .defer('comments')[sfrom:to]
+    
+    #.extra(select={'numsum':'Count(market_marketitem_skills) + Count(market_marketitem_issues) + Count(market_marketitem_countries)'},
+                                   #order_by=('numsum',))\    
+    #obj = market.models.MarketItem.objects.filter(query).order_by('pub_date').defer('comments')[sfrom:to]
     return returnItemList(obj, rtype)
 
 

@@ -3,33 +3,36 @@
 
 {% block content %}
 
-	<form class="form-horizontal container" role="form" enctype="multipart/form-data" id="itemform"> {% csrf_token %}
-	    <legend id="form-title"></legend>
+    <form class="form-horizontal container" role="form" enctype="multipart/form-data" id="itemform"> {% csrf_token %}
+        <legend id="form-title"></legend>
 
-		<span id="issues_place"></span>
-		<span id="countries_place"></span>
-		<span id="skills_place"></span>
-		<span id="title_place"></span>		
-		<span id="exp_date_place"></span>
-		<span id="url_place"></span>
-		<span id="afile_place"></span>
-		<span id="details_place"></span>
-		<span>
-		<div class="form-group">
-			<div class="col-sm-3">&nbsp</div>	
-	    	<button type="submit" class="btn btn-primary">Save</button>
-	    </div>
-		</span>
-	</form>
-	
+    <span id="issues_place"></span>
+    <span id="countries_place"></span>
+    <span id="skills_place"></span>
+    <span id="title_place"></span>		
+    <span id="exp_date_place"></span>
+    <span id="url_place"></span>
+    <span id="afile_place"></span>
+    <span id="details_place"></span>
+    <span>
+    <div class="form-group">
+        <div class="col-sm-3">&nbsp</div>	
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+    </span>
+</form>
+
 {% endblock %}
 
 {% block javascript %}
 
-	<script type="text/javascript">
-		$(document).ready(function(){
-			window.item_form.initItem({{ item|safe }},{{ obj_type|safe }});
-		});
-	</script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var dfrd = getstatics();
+            dfrd.done(function(){
+                window.item_form.initItem({{ item|safe }},{{ obj_type|safe }});
+            });
+        });
+    </script>
 
 {% endblock %}

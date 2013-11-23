@@ -33,8 +33,8 @@ class MarketItem(models.Model):
     def __unicode__(self):
         return self.details
 
-    class Meta:
-        ordering = ['-pub_date']
+    #class Meta:
+        #ordering = ['-pub_date']
 
 
 class Comment(models.Model):

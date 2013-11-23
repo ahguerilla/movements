@@ -14,7 +14,10 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			window.comment.initComment({{ coment|safe }}, {{ obj_id|safe }});
+			var dfrd = getstatics();
+			dfrd.done(function(){
+				window.comment.initComment({{ coment|safe }}, {{ obj_id|safe }});
+			)};
 		});
 	</script>
 

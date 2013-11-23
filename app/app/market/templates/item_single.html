@@ -48,7 +48,10 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			window.item_single.initSingleItem({{ item|safe }},{{ obj_type|safe }});
+			var dfrd = getstatics();
+			dfrd.done(function(){
+				window.item_single.initSingleItem({{ item|safe }},{{ obj_type|safe }});
+			});
 		});
 	</script>
 

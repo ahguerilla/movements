@@ -7,12 +7,17 @@ from .api.utils import *
 from app.market.forms import item_forms,commentForm
 
 
+def getUserTags(user):
+    return {'skills': [1,2,3], 'countries':[1,2], 'issues': [1,2,3]}
+
+
 def index(request):
     return render_to_response('market.html',
                               {
                                   'title':'My Exchange',
-                                  'init': 'market'
-                               },
+                                  'init': 'market',
+                                  'tags': getUserTags(request.user)
+                                  },
                               context_instance=RequestContext(request))
 
 
@@ -21,7 +26,7 @@ def addItem_form(request,obj_type):
                               {
                                   'item':'false',
                                   'obj_type':'"%s"'%obj_type
-                               },
+                                  },
                               context_instance=RequestContext(request))
 
 
@@ -30,16 +35,16 @@ def editItem_form(request,obj_id):
                               {
                                   'item': {'id':str(obj_id)},
                                   'obj_type':'false'
-                               },
+                                  },
                               context_instance=RequestContext(request))
 
 
 def viewItem(request,obj_type,obj_id):
     return render_to_response('item_single.html',
                               {
-                                'item': {'id':str(obj_id)},
-                                'obj_type': '"%s"'%obj_type
-                              },
+                                  'item': {'id':str(obj_id)},
+                                  'obj_type': '"%s"'%obj_type
+                                  },
                               context_instance=RequestContext(request))
 
 
@@ -50,7 +55,7 @@ def addComment_form(request,obj_id):
                                   'obj_id': str(obj_id),
                                   'form': form,
                                   'coment': 'false'
-                               },
+                                  },
                               context_instance=RequestContext(request))
 
 
@@ -63,16 +68,15 @@ def editComment_form(request,obj_id):
                                   'obj_id': '""',
                                   'form': form,
                                   'coment': {'id':str(obj_id)}
-                               },
+                                  },
                               context_instance=RequestContext(request))
 
 
 def posts(request):
-   return render_to_response('market.html',
+    return render_to_response('market.html',
                               {
                                   'title':'My Posts',
                                   'init': 'posts'
-                               },
+                                  },
                               context_instance=RequestContext(request))
-
 

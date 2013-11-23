@@ -53,10 +53,10 @@ https://pypi.python.org/pypi/django-widget-tweaks
 
 ## Configure search
 
-Install solr. 
-You need apache and tomcat to run solr. 
-If you are using Ubuntu you can install all three with apt-get and run apache service after that.
-Do a "pip install -r requirements/base.txt" too.
+If you are using Ubuntu you can install apache2 , tomcat6 and solr-common with apt-get and start apache service.
 If solr is installed correctly http://localhost:8080/solr/ should show the solr welcome page.
+Do a "pip install -r requirements/base.txt" too.
+Make a backup of /etc/solr/conf/schema.xml and copy ahr/app/schema.xml over it.
+You may need to copy ahr/app/stopwords_en.txt /etc/solr/conf/stopwords_en.txt 
 
 
