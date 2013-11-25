@@ -161,13 +161,17 @@
 
 <script type="text/template" id="filter-tag">
     <div style="display:inline-block;margin:3px;">
-        <button type="button" class="btn btn-default <%=active%>"><%=filtertag%></button>
+        <button type="button" class="btn btn-default btn-xs tagbutton <%=active%>"><%=filtertag%></button>
     </div>
 </script>
 
 
 <script type="text/javascript" id="api_urls">
-    window.user_id = {{ user.id }};
+    try{
+        window.user_id = {{ user.id }};
+    }catch(err){
+        $.noop();
+    }
 
     window.market_filter_custom = {skills:[1],country:[1],issues:[1,2,3]};
 
