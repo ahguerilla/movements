@@ -1,10 +1,12 @@
 (function(){
-    var MarketView = Backbone.View.extend({
-        el: '#market',
+    var MarketView = Backbone.View.extend({        
+        el: '#market',        
         events:{
             'click .item_container': 'showItem',
-            'click #searchbtn': 'search'
+            'click #searchbtn': 'search',
+            'click .tagbutton': 'filter'
         },
+        
 
     search: function(){
         window.getcsrf(function(csrf){                
@@ -31,21 +33,45 @@
         });
     },
     
-    createFilters: function(filters){
-        var tagtemp = _.template($('#filter-tag').html());
-        for(item_ind in filters){
-            var item = filters[item_ind];
+    filter: function(ev){
+        $.noop();
+    },
+    
+    getfilter: function(){
+        $.noop();
+    },
+    
+    initFilters:function(items){       
+        var that = this;        
+        _.each(window[items],function(item,key){            
+            if (that.filters[items].indexOf(parseInt(key))>-1){
+                 $.noop();
+            }else{
+                $('.row.btn-group-sm.'+items).append(that.tagtemp({filtertag:item, active:' '}));
+            }
+        }); 
+    },
+    
+    setFilters: function(){
+        var that = this;                
+        for(item_ind in that.filters){
+            var item = that.filters[item_ind];
             for(ind in item){
                 var i = item[ind];
-                $('.row.btn-group-sm.'+item_ind).append(tagtemp({filtertag:window[item_ind][i], active:'btn-success'}));
-            }
+                $('.row.btn-group-sm.'+item_ind).append(that.tagtemp({filtertag:window[item_ind][i], active:'btn-success'}));
+            }        
         }         
     },
 
     initialize : function(filters){
-        var that = this;        
+        var that = this;     
+        this.tagtemp = _.template($('#filter-tag').html());
         this.item_tmp = _.template($('#item_template').html());
-        this.createFilters(filters);
+        that.filters = filters;
+        this.setFilters(filters);
+        for(item_ind in that.filters){
+            that.initFilters(item_ind);
+        }
         var dfrd = this.getItems(0,100,filters);
         dfrd.done(function(data){
             $.each(data, function(item){
