@@ -8,15 +8,6 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'UserProfile.bio'
-        db.add_column(u'users_userprofile', 'bio',
-                      self.gf('django.db.models.fields.TextField')(null=True, blank=True),
-                      keep_default=False)
-
-        # Adding field 'UserProfile.is_individual'
-        db.add_column(u'users_userprofile', 'is_individual',
-                      self.gf('django.db.models.fields.BooleanField')(default=True),
-                      keep_default=False)
 
 
         # Changing field 'UserProfile.resident_country'
@@ -26,11 +17,6 @@ class Migration(SchemaMigration):
         db.alter_column(u'users_userprofile', 'nationality_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['users.Nationality'], unique=True, null=True))
 
     def backwards(self, orm):
-        # Deleting field 'UserProfile.bio'
-        db.delete_column(u'users_userprofile', 'bio')
-
-        # Deleting field 'UserProfile.is_individual'
-        db.delete_column(u'users_userprofile', 'is_individual')
 
 
         # User chose to not deal with backwards NULL issues for 'UserProfile.resident_country'
