@@ -1,4 +1,18 @@
 (function(){
+
+    var MarketRoute = Backbone.Router.extend({
+        routes:{
+            "p:page": "page"
+        },
+        page: function(page){
+            $('#marketitems').empty();
+            this.market.setItems(parseInt(page)-1);
+        },
+        initialize: function(market){
+            this.market=market;
+        }
+    });
+    
     var MarketView = Backbone.View.extend({        
         el: '#market',        
         events:{
@@ -61,7 +75,7 @@
             }
         }
         $('#marketitems').empty();
-        this.setItems();
+        this.setItems(0);
         
     },
     
@@ -91,9 +105,9 @@
         }         
     },
     
-    setItems: function(){
+    setItems: function(page){
         var that = this;
-        var dfrd = this.getItems(0,10,this.filters);
+        var dfrd = this.getItems(0+(10*page),10+(10*page),this.filters);
         dfrd.done(function(data){
             $.each(data, function(item){
                 data[item].fields.pk = data[item].pk;
@@ -101,13 +115,7 @@
                 $('#marketitems').append(item_html);
             });
         });
-        cdfrd = this.getItemsCount(this.filters);
-        cdfrd.done(function(data){
-            var pages = Math.ceil(data.count/10);
-            for(i=0;i<pages;i++){
-                $(".marketitems.pagination").append("<li><a href='#'>"+(i+1)+"</a></li>");
-            }
-        });
+       
     },
 
     initialize : function(filters){
@@ -119,7 +127,14 @@
         for(item_ind in that.filters){
             that.initFilters(item_ind);
         }
-        this.setItems();
+        this.setItems(0);
+        cdfrd = this.getItemsCount(this.filters);
+        cdfrd.done(function(data){
+            var pages = Math.ceil(data.count/10);
+            for(i=0;i<pages;i++){
+                $(".marketitems.pagination").append("<li><a class='itempage' page='"+i+"' href='#p"+(i+1)+"'>"+(i+1)+"</a></li>");
+            }
+        });
     },
     });
 
@@ -127,5 +142,7 @@
     window.market.initMarket = function(filters){
         window.default_filters = filters;
         var market = new MarketView(filters);
+        var market_route = new MarketRoute(market);
+        Backbone.history.start();
     };
 })();
