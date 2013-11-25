@@ -170,7 +170,7 @@
     try{
         window.user_id = {{ user.id }};
     }catch(err){
-        $.noop();
+         window.user_id = 0;
     }
 
     window.market_filter_custom = {skills:[1],country:[1],issues:[1,2,3]};
