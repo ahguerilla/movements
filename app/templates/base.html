@@ -3,13 +3,11 @@
 {% block body %}
 
 {% if messages %}
-<div>
-  <strong>Messages:</strong>
-  <ul>
-    {% for message in messages %}
-    <li>{{message}}</li>
-    {% endfor %}
-  </ul>
+<div class="alert alert-success alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  {% for message in messages %}
+  <div>{{message}}</div>
+  {% endfor %}
 </div>
 {% endif %}
 
