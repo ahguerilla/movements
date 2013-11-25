@@ -8,6 +8,8 @@ from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
 from django.db.models import Q,Count,Avg
+from haystack.views import SearchView
+from haystack.query import SearchQuerySet
 
 
 def returnItemList(obj, rtype):
@@ -32,15 +34,24 @@ def returnItemList(obj, rtype):
 
 
 def createQuery(request):
+    query = Q(published=True)
     if request.GET.has_key('skills'):        
-        query = Q(skills__in= request.GET.getlist('skills')) 
+        query = query | Q(skills__in= request.GET.getlist('skills')) 
 
     if request.GET.has_key('countries'):        
         query = query | Q(countries__in = request.GET.getlist('countries'))
     
     if request.GET.has_key('issues'):        
         query = query | Q(issues__in=request.GET.getlist('issues'))
-    query = query & Q(published=True)
+        
+    if request.GET.has_key('types'): 
+        query = query & Q(item_type__in=request.GET.getlist('types'))
+    
+    if request.GET.has_key('search') and request.GET['search']!='':
+        objs = SearchQuerySet().filter(text=request.GET['search'])    
+        ids= [int(obj.pk) for obj in objs]
+        query = query & Q(id__in = ids)
+        
     return query
 
 
@@ -64,35 +75,14 @@ def getMarketItemLast(request,count,rtype):
 
 
 def getMarketItemFromTo(request,sfrom,to,rtype):    
-    if request.GET.has_key('skills'):        
-        query = Q(skills__in= request.GET.getlist('skills')) 
-
-    if request.GET.has_key('countries'):        
-        query = query | Q(countries__in = request.GET.getlist('countries'))
-    
-    if request.GET.has_key('issues'):        
-        query = query | Q(issues__in=request.GET.getlist('issues'))
-    query = query & Q(published=True)
-        
-    #obj = market.models.MarketItem.objects\
-        #.filter(query)\
-        #.annotate(num_skills=Count('skills'))\
-        #.annotate(num_issues=Count('issues'))\
-        #.annotate(num_countries=Count('countries'))\
-        #.defer('comments')[sfrom:to]
-    
-    #.extra(select={'numsum':'Count(market_marketitem_skills) + Count(market_marketitem_issues) + Count(market_marketitem_countries)'},
-                                   #order_by=('numsum',))\    
-                                   
-    qset =  market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','pub_date').defer('comments')
-    qset.count()
-    obj = qset[sfrom:to]
+    query = createQuery(request)    
+    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','-pub_date').defer('comments')[sfrom:to]                                
     return returnItemList(obj, rtype)
 
 
 def getMarketItemCount(request,rtype):
-    query = createQuery(request)
-    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','pub_date').count()
+    query = createQuery(request)    
+    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','-pub_date').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
 
     

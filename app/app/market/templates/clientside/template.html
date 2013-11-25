@@ -167,13 +167,14 @@
 
 
 <script type="text/javascript" id="api_urls">
+    window.ahr={};
     try{
         window.user_id = {{ user.id }};
     }catch(err){
          window.user_id = 0;
     }
 
-    window.market_filter_custom = {skills:[1],country:[1],issues:[1,2,3]};
+    window.ahr.market_filter_custom = {skills:[1],country:[1],issues:[1,2,3]};
 
     window.app_urls={
         getcsrf: "{% url 'get_csrftoken' 'json' %}",

@@ -22,21 +22,22 @@
     
     
     var MarketView = Backbone.View.extend({        
-        el: '#market',        
+        el: '#market',
         events:{
             'click .item_container': 'showItem',
-            'click #searchbtn': 'search',
-            'click .tagbutton': 'filter'
+            'click .tagbutton': 'filter',
+            'click #searchbtn': 'search',            
+            'keyup input[name="q"]': 'search',
+            'click .item-type': 'typefilter'
         },
-        
+        types:{"Resources":"resource","Offers":"offer","Request":"request"},
+                
         search: function(){
-            window.getcsrf(function(csrf){                
-                var data= {
-                    q:$('#q').val(),
-                    csrfmiddlewaretoken:csrf.csrfmiddlewaretoken,
-                };
-                window.location = 'search?'+$.param(data);
-            });            
+            this.filters.search = $('#q').val();
+            $('#marketitems').empty();                        
+            window.location.hash="";
+            this.setItems(0);     
+            this.setpagecoutner();
         },
     
         showItem: function(ev){
@@ -44,7 +45,8 @@
             window.location = window.app_urls.viewitem+id;
         },
     
-        getItems: function(from,to,filts){           
+        getItems: function(from,to,filts){
+            filts.search=$('#q').val();
             return $.ajax({
                 url:window.app_urls.getmarketitemfromto.replace('0',from)+to,
                 dataType: 'json',
@@ -64,6 +66,20 @@
             });
         },
         
+        typefilter: function(ev){
+            var ind = this.filters.types.indexOf(this.types[ev.currentTarget.textContent]);
+            if(ind<0){
+                this.filters.types.push(this.types[ev.currentTarget.textContent]);
+                $(ev.currentTarget).addClass('btn-success');
+            }else{
+                this.filters.types.splice(ind,1);
+                $(ev.currentTarget).removeClass('btn-success');
+            }
+            $('#marketitems').empty();                        
+            window.location.hash="";
+            this.setItems(0);
+            this.setpagecoutner();
+        },
         
         filter: function(ev){
             var that=this;
@@ -81,8 +97,10 @@
                     $(ev.currentTarget).removeClass('btn-success');
                 }
             }
-            $('#marketitems').empty();
+            $('#marketitems').empty();                        
+            window.location.hash="";
             this.setItems(0);
+            this.setpagecoutner();
             
         },
         
@@ -124,30 +142,38 @@
             });
            
         },
-    
-        initialize : function(filters){
-            var that = this;     
-            this.tagtemp = _.template($('#filter-tag').html());
-            this.item_tmp = _.template($('#item_template').html());
-            that.filters = filters;
-            this.setFilters(filters);
-            for(item_ind in that.filters){
-                that.initFilters(item_ind);
-            }       
-            cdfrd = this.getItemsCount(this.filters);
+        
+        setpagecoutner:function(){
+            $(".marketitems.pagination").empty();
+            filters = this.filters;
+            filters.search=$('#q').val();
+            var cdfrd = this.getItemsCount(filters);
             cdfrd.done(function(data){
                 var pages = Math.ceil(data.count/10);
-                for(i=0;i<pages;i++){
-                    $(".marketitems.pagination").append("<li><a class='itempage' page='"+i+"' href='#p"+(i+1)+"'>"+(i+1)+"</a></li>");
+                for(i=1;i<=pages;i++){
+                    $(".marketitems.pagination").append("<li><a class='itempage' page='"+i+"' href='#p"+i+"'>"+i+"</a></li>");
                 }
             });
+        },
+    
+        initialize : function(filters){
+            var that = this;                 
+            this.tagtemp = _.template($('#filter-tag').html());
+            this.item_tmp = _.template($('#item_template').html());
+            that.filters = filters;            
+            this.setFilters(filters);            
+            for(item_ind in that.filters){
+                that.initFilters(item_ind);
+            }            
+            this.setpagecoutner();
+            this.filters.types=["resource","offer","request"];
             return this;
         },
     });
 
     window.market = window.market || {};
     window.market.initMarket = function(filters){
-        window.default_filters = filters;
+        window.ahr.default_filters = filters;
         var market = new MarketView(filters);
         var market_route = new MarketRoute(market);
         Backbone.history.start();        
