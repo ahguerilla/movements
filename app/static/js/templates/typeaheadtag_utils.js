@@ -78,7 +78,7 @@ function getTagIds(name){
 		val_names = $('input[name="hidden-'+name+'"]').val().split(',');
 	_.each(val_names,function(val){
 		val_ids.push(window.tagdict[val]);
-	})
+	});
 	return val_ids;
 }
 
