@@ -1,15 +1,16 @@
-{% extends "base_site.html" %}
+{% extends "base.html" %}
 
 {% load socialaccount %}
 {% load avatar_tags %}
 {% load widget_tweaks %}
 
-{% block body %}
+{% block content %}
 
 <div class="row">
   <div class="col-md-5"></div>
   <div class="col-md-4">
-    <form class="form-horizontal" method="POST" action="" enctype="multipart/formdata" role="form">{% csrf_token %}
+    <form class="form-horizontal" method="POST" action="" enctype="multipart/formdata" role="form">
+      {% csrf_token %}
       {% for field in form %}
         {% if field.label = "Username" or field.label = "Email" or field.label = "Password" or field.label = "Repeat password" %}
           <div class="form-group">

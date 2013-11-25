@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% load avatar_tags %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-offset-4 col-md-4">
+    <div class="row in-container">
+      <div><h4>{% trans "User Profile" %}</h4></div>
+      <form method="post" class="form-horizontal" role="form">
+        {% csrf_token %}
+        <div class="form-group">
+          <div class="col-xs-6">
+            {{ user_form.first_name.errors }}
+            {% render_field user_form.first_name class="form-control input-sm" placeholder="First Name" required="true" %}
+          </div>
+          <div class="col-xs-6">
+            {{ user_form.last_name.errors }}
+            {% render_field user_form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ user_form.username.errors }}
+            {% render_field user_form.username class="form-control input-sm" placeholder="Username" required="true" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ settings_form.nationality.errors }}
+            {% render_field settings_form.nationality class="form-control input-sm" placeholder="Nationality" required="true" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ settings_form.occupation.errors }}
+            {% render_field settings_form.occupation class="form-control input-sm" placeholder="Occupation" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ settings_form.resident_country.errors }}
+            {% render_field settings_form.resident_country class="form-control input-sm" placeholder="Country of Residence" required="true" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ settings_form.expertise.errors }}
+            {% render_field settings_form.expertise class="form-control input-sm" placeholder="Area of expertise if any" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ settings_form.web_url.errors }}
+            {% render_field settings_form.web_url class="form-control input-sm" placeholder="Website/Blog URL" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ settings_form.fb_url.errors }}
+            {% render_field settings_form.fb_url class="form-control input-sm" placeholder="Facebook Page" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ settings_form.tweet_url.errors }}
+            {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Twitter Handle" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ settings_form.tag_ling.errors }}
+            {% render_field settings_form.tag_ling class="form-control input-sm" placeholder="Tag Line" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ settings_form.bio.errors }}
+            {% render_field settings_form.bio class="form-control input-sm" placeholder="Bio" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <p>I'd like to advance the freedom of:</p>
+          </div>
+          <div class="col-md-12">
+            <label>Issues:</label>
+          </div>
+          <div class="col-md-12">
+            {{ settings_form.issues.errors }}
+            {% render_field settings_form.issues class="form-control input-sm" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <label>Countries:</label>
+          </div>
+          <div class="col-md-12">
+            {{ settings_form.countries.errors }}
+            {% render_field settings_form.countries class="form-control input-sm" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <label>Skills:</label>
+          </div>
+          <div class="col-md-12">
+            {{ settings_form.skills.errors }}
+            {% render_field settings_form.skills class="form-control input-sm" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            {{ settings_form.is_organisation.errors }}
+            {{ settings_form.is_organisation }} <small>I am an organisation</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            {{ settings_form.is_journalist.errors }}
+            {{ settings_form.is_journalist }} <small>I am a journalist</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            {{ settings_form.get_newsletter.errors }}
+            {{ settings_form.get_newsletter }} <small>I would like to recieve a weekly newsletter</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-offset-6 col-xs-6">
+            <button type="submit" class="btn btn-success full-width">{% trans "Save" %}</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

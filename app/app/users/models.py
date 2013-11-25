@@ -50,32 +50,14 @@ class UserProfile(models.Model):
     expertise = models.CharField(_('area of expertise'), max_length=255, null=True, blank=True)
     notifications = JSONField(_('notifications'), null=True, blank=True)
     privacy_settings = JSONField(_('privacy settings'), null=True, blank=True)
-    nationality = models.OneToOneField(Nationality, null=True)
-    resident_country = models.OneToOneField(Residence, null=True)
-    skills = models.ManyToManyField(Skills, null=True)
-    issues = models.ManyToManyField(Issues, null=True)
-    countries = models.ManyToManyField(Countries, null=True)
+    nationality = models.ForeignKey(Nationality, null=True)
+    resident_country = models.ForeignKey(Residence, null=True)
+    skills = models.ManyToManyField(Skills, blank=True, null=True)
+    issues = models.ManyToManyField(Issues, blank=True, null=True)
+    countries = models.ManyToManyField(Countries, blank=True, null=True)
     is_organisation = models.BooleanField(_('organisation'), default=False)
     is_individual = models.BooleanField(_('individual'), default=True)
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
     firstlogin = models.BooleanField(_('first_login'), default=True)
-
-
-    def save(self, *args, **kwargs):
-        try:
-            existing = UserProfile.objects.get(user=self.user)
-            self.id = existing.id 
-        except UserProfile.DoesNotExist:
-            pass 
-        models.Model.save(self, *args, **kwargs)
-
-#    def save(self, *args, **kwargs):
-#        model = self.__class__
-#        try:
-#            this = UserProfile.objects.get(id=self.id)
-#            if this.image != self.image:
-#                this.image.delete(save=False)
-#        except:
-#            return
 
