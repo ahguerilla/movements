@@ -30,10 +30,19 @@ def returnItemList(obj, rtype):
               ),
         mimetype="application/"+rtype)
 
-def createQuery(reg,item,obj):
-    pass
-    #for item in request.GET[item]:
-        #obj = obj |Q("skills"=item)
+
+def createQuery(request):
+    if request.GET.has_key('skills'):        
+        query = Q(skills__in= request.GET.getlist('skills')) 
+
+    if request.GET.has_key('countries'):        
+        query = query | Q(countries__in = request.GET.getlist('countries'))
+    
+    if request.GET.has_key('issues'):        
+        query = query | Q(issues__in=request.GET.getlist('issues'))
+    query = query & Q(published=True)
+    return query
+
 
 def addMarketItem(request, obj_type, rtype):
     form = item_forms[obj_type](request.POST)
@@ -74,10 +83,19 @@ def getMarketItemFromTo(request,sfrom,to,rtype):
     
     #.extra(select={'numsum':'Count(market_marketitem_skills) + Count(market_marketitem_issues) + Count(market_marketitem_countries)'},
                                    #order_by=('numsum',))\    
-    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','pub_date').defer('comments')[sfrom:to]
+                                   
+    qset =  market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','pub_date').defer('comments')
+    qset.count()
+    obj = qset[sfrom:to]
     return returnItemList(obj, rtype)
 
 
+def getMarketItemCount(request,rtype):
+    query = createQuery(request)
+    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','pub_date').count()
+    return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
+
+    
 def editMarketItem(request,obj_id,rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),pk=obj_id)
     form = item_forms[obj.item_type](request.POST, instance=obj)

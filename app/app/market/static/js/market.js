@@ -33,6 +33,17 @@
         });
     },
     
+    getItemsCount: function(filts){           
+        return $.ajax({               
+            url:window.app_urls.getmarketcount,
+            dataType: 'json',
+            contentType:"application/json; charset=utf-8",
+            data: filts,
+            traditional: true
+        });
+    },
+    
+    
     filter: function(ev){
         var that=this;
         a=$(ev.currentTarget.parentElement.parentElement).attr("item_title");
@@ -82,13 +93,20 @@
     
     setItems: function(){
         var that = this;
-        var dfrd = this.getItems(0,100,this.filters);
+        var dfrd = this.getItems(0,10,this.filters);
         dfrd.done(function(data){
             $.each(data, function(item){
                 data[item].fields.pk = data[item].pk;
                 var item_html = that.item_tmp(data[item].fields);
                 $('#marketitems').append(item_html);
             });
+        });
+        cdfrd = this.getItemsCount(this.filters);
+        cdfrd.done(function(data){
+            var pages = Math.ceil(data.count/10);
+            for(i=0;i<pages;i++){
+                $(".marketitems.pagination").append("<li><a href='#'>"+(i+1)+"</a></li>");
+            }
         });
     },
 

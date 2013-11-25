@@ -46,6 +46,10 @@ urlpatterns = patterns('',
         'app.market.api.views.market.getMarketItemLast',
         name="get_marketitems_last"),
 
+    url(r'(?P<rtype>\S+)/item/get/count$',
+            'app.market.api.views.market.getMarketItemCount',
+            name="get_marketitem_count"),    
+
     url(r'(?P<rtype>\S+)/item/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
         'app.market.api.views.market.getMarketItemFromTo',
         name="get_marketitems_fromto"),
