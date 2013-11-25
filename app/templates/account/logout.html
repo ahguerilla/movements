@@ -9,16 +9,14 @@
 <div class="row">
   <div class="col-md-offset-2 col-md-8 center-content">
     <h1>{% trans "Sign Out" %}</h1>
-
     <p>{% trans 'Are you sure you want to sign out?' %}</p>
-
     <form method="POST" action="{% url 'account_logout' %}">
       <div class="form-group">
         {% csrf_token %}
         {% if redirect_field_value %}
         <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
         {% endif %}
-        <button class="btn" type="submit">{% trans 'Sign Out' %}</button>
+        <button class="btn btn-success" type="submit">{% trans 'Sign Out' %}</button>
       </div>
     </form>
   </div>
