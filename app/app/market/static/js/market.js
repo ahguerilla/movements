@@ -34,7 +34,24 @@
     },
     
     filter: function(ev){
-        $.noop();
+        var that=this;
+        a=$(ev.currentTarget.parentElement.parentElement).attr("item_title");
+        ar = this.filters[a];
+        inv = invert(window[a]);
+        if (inv.hasOwnProperty(ev.currentTarget.textContent)){
+            ind = inv[ev.currentTarget.textContent];
+            filtind = ar.indexOf(parseInt(ind));
+            if(filtind<0){
+                that.filters[a].push(parseInt(ind));
+                $(ev.currentTarget).addClass('btn-success');
+            }else{
+                that.filters[a].splice(filtind,1);
+                $(ev.currentTarget).removeClass('btn-success');
+            }
+        }
+        $('#marketitems').empty();
+        this.setItems();
+        
     },
     
     getfilter: function(){
@@ -62,6 +79,18 @@
             }        
         }         
     },
+    
+    setItems: function(){
+        var that = this;
+        var dfrd = this.getItems(0,100,this.filters);
+        dfrd.done(function(data){
+            $.each(data, function(item){
+                data[item].fields.pk = data[item].pk;
+                var item_html = that.item_tmp(data[item].fields);
+                $('#marketitems').append(item_html);
+            });
+        });
+    },
 
     initialize : function(filters){
         var that = this;     
@@ -72,14 +101,7 @@
         for(item_ind in that.filters){
             that.initFilters(item_ind);
         }
-        var dfrd = this.getItems(0,100,filters);
-        dfrd.done(function(data){
-            $.each(data, function(item){
-                data[item].fields.pk = data[item]. pk;
-                var item_html = that.item_tmp(data[item].fields);
-                $('#marketitems').append(item_html);
-            });
-        });
+        this.setItems();
     },
     });
 

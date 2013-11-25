@@ -74,7 +74,7 @@ def getMarketItemFromTo(request,sfrom,to,rtype):
     
     #.extra(select={'numsum':'Count(market_marketitem_skills) + Count(market_marketitem_issues) + Count(market_marketitem_countries)'},
                                    #order_by=('numsum',))\    
-    obj = market.models.MarketItem.objects.filter(query).order_by('pub_date').defer('comments')[sfrom:to]
+    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','pub_date').defer('comments')[sfrom:to]
     return returnItemList(obj, rtype)
 
 
