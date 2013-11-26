@@ -48,6 +48,30 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
 	    });
 	},
 
+	setItems: function(page){
+        var that = this;
+        var dfrd = that.getItems(0+(10*page),
+                    10+(10*page),
+                    this.filters,
+                    this.getitemfromto);
+
+        dfrd.done(function(data){
+            $.each(data, function(item){
+                data[item].fields.pk = data[item].pk;
+                var item_html = that.item_tmp(data[item].fields);
+                $('#marketitems').append(item_html);
+            });
+        });
+       
+    },
+
+ 	resetMarket: function(){
+        $('#marketitems').empty();                        
+        window.location.hash="";
+        this.setItems(0);     
+        this.setpagecoutner(this.filters, this.itemcount_url);
+    },
+            
 	setpagecoutner: function(filters, aurl){
 	    $(".marketitems.pagination").empty();
 	    var cdfrd = this.getItemsCount(filters,aurl);
@@ -61,8 +85,7 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
 
 	initTemplates: function(){
         this.typetag_tmp = _.template($('#type-tag').html());
-        this.tagtemp = _.template($('#filter-tag').html());
-        this.item_tmp = _.template($('#item_template').html());
+        this.tagtemp = _.template($('#filter-tag').html());        
         for(key in this.filters){
             this.initFilters(this, key, this.tagtemp);
         }
@@ -112,6 +135,35 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
 	 		$('.typetags').append(tmp({typetag:item}));
 	 	}
 	},
+
+ 	setFilterType: function(ftype){
+        $('.filter-type').removeClass('btn-success');
+        $('.filter-type.'+ftype).addClass('btn-success');
+    },
+
+    search: function(){
+        this.filters.search = $('#q').val();
+        this.resetMarket();        
+    },
+
+	itemTypesfilter: function(ev){
+        this.updateTypefilter(this,ev);
+        this.resetMarket();
+    },
+    
+    tagsfilter: function(ev){
+        this.updateTagsfilter(this,ev);
+        this.setFilterType("custom");
+        this.resetMarket();            
+    },
+
+	init: function(filters){
+		this.default_filters = window.ahr.clone(filters);
+        this.filters = filters;            
+        this.initTemplates(filters);           
+        this.filters.search=$('#q').val();
+        this.setpagecoutner(this.filters, this.itemcount_url);
+	}
 
 });
 

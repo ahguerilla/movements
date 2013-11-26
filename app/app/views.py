@@ -12,5 +12,5 @@ def home(request):
 
 
 def exchange(request):
-	return HttpResponseRedirect(reverse('show_market'))
+    return HttpResponseRedirect(reverse('show_market'))
     # return render_to_response('exchange.html', {}, context_instance=RequestContext(request))
