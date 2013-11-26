@@ -78,19 +78,19 @@ function getTagIds(name){
 		val_names = $('input[name="hidden-'+name+'"]').val().split(',');
 	_.each(val_names,function(val){
 		val_ids.push(window.tagdict[val]);
-	})
+	});
 	return val_ids;
 }
 
 
-function genTagWidget(item,preval){
+function genTagWidget(item, preval){
 	$('#'+item.jsonfield+'_place').html(generateTypeAhead(item.title, item.jsonfield));
 	if (item.jsonfield == 'skills'){
-		makeTagWidget(item.jsonfield,window.ahr.app_urls.getskills, preval);	
+		makeTagWidget(item.jsonfield,window.ahr.app_urls.getskills, preval);
 	}else if (item.jsonfield == 'issues'){
-		makeTagWidget(item.jsonfield,window.ahr.app_urls.getissues, preval);	
+		makeTagWidget(item.jsonfield,window.ahr.app_urls.getissues, preval);
 	}else{
-		makeTagWidget(item.jsonfield,window.ahr.app_urls.getcountries, preval);	
+		makeTagWidget(item.jsonfield,window.ahr.app_urls.getcountries, preval);
 	}
 	
 }
