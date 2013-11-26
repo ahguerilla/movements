@@ -28,3 +28,11 @@ def getDetails(request,obj_id, rtype):
 			 ),
 		mimetype="application"+rtype)
 
+
+def getUsers(request,rtype):
+	pass
+
+
+def getUserCount(request,rtype):
+	pass
+	
