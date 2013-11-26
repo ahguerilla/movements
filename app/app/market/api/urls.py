@@ -11,6 +11,13 @@ urlpatterns = patterns('',
         'app.market.api.views.users.getDetails',
         name="get_userdetail"),
 
+    url(r'(?P<rtype>\S+)/users/get/count$',
+        'app.market.api.views.users.getUserCount',
+        name="get_usercount"),
+
+    url(r'(?P<rtype>\S+)/users/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
+        'app.market.api.views.users.getUsersFromto',
+        name="get_user_fromto"),
 
     url(r'(?P<rtype>\S+)/csrftoken/get$',
         'app.market.api.views.misc.getSCRFToken',
