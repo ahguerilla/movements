@@ -1,6 +1,6 @@
 <script type="text/template" id="textarea_template">
   <div class="col-md-12">
-    <textarea class="form-control" name="<%=jsonfield%>" id="<%=jsonfield%>" rows="6" placeholder="<%=placeholder%>"></textarea>
+    <textarea class="form-control" name="<%=jsonfield%>" id="<%=jsonfield%>" rows="6" placeholder="<%=placeholder%>" required="true"></textarea>
   </div>
   <div class="col-md-12">
     <div class="<%=jsonfield%> error"></div>
@@ -11,7 +11,7 @@
 <script type="text/template" id="input_template">
   <div class="col-md-12">
     <label for="<%=jsonfield%>"><%=title%></label>
-    <input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control input-sm" type="text" placeholder="<%=placeholder%>" />
+    <input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control input-sm" type="text" placeholder="<%=placeholder%>" required="true" />
   </div>
   <div class="col-md-12">
     <div class="<%=jsonfield%> error"></div>
@@ -23,7 +23,7 @@
   <div class="col-md-12">
     <label for="<%=jsonfield%>"><%=title%></label>
     <div class='input-group date' id='datetimepicker-<%=jsonfield%>'>
-      <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control input-sm" />
+      <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control input-sm" required="true" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
@@ -39,13 +39,13 @@
   <div class="col-md-12">
     <label for="<%=item%>"><%=title%></label>
     <div class="input-group">
-      <input id="<%=item%>" class="form-control input-sm" type="text"/>
+      <input id="<%=item%>" class="form-control input-sm" type="text" required="true" />
       <span class="input-group-addon">
         <span class="glyphicon <%=item%>">Add</span>
       </span>
     </div>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-12" style="margin-top:5px">
     <div class="input-group" id="<%=item%>Tags"></div>
   </div>
   <div class="col-md-12">
