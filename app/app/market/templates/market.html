@@ -15,87 +15,86 @@
             <h3>{{title}}</h3>
         </div>
     </div>
-    <div class="row">
-<div class="col-sm-3 panel panel-default text-center filters" style="margin-left:-30px;margin-right:30px;">
-    <div class="panel-body">
-        <h5> FILTER BY</h5>
-    </div>
-    <div class=" btn-group">
-        <button type="button" class="btn btn-default filter-type">All</button>
-        <button type="button" class="btn btn-default btn-success filter-type">Default</button>
-        <button type="button" class="btn btn-default filter-type">Custom</button>
-    </div>
-    <div class="row"> &nbsp;</div>
-    <div class="row">
-        {% block types %}
-        <button type="button" class="btn item-type offer btn-default btn-success">Offers</button>
-        <button type="button" class="btn item-type request btn-default btn-success">Request</button>
-        <button type="button" class="btn item-type resource btn-default btn-success">Resources</button>
-        {% endblock %}
-    </div>
-    <div class="row"> &nbsp;</div>
-    <div class="row">
-        <div class="pull-left" style="margin-left:30px;">
-        <strong>Issues:</strong>
+    <div class="row">        
+        <div class="col-lg-3 panel panel-default text-center filters">
+
+            <div class="panel-body">
+                <h5> FILTER BY</h5>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default filter-type all">All</button>
+                <button type="button" class="btn btn-default btn-success filter-type default">Default</button>
+                <button type="button" class="btn btn-default filter-type custom">Custom</button>
+            </div>
+            
+            <div class="row"> &nbsp;</div>
+            <div class="row typetags"></div>
+            <div class="row"> &nbsp;</div>
+
+            <div class="row">
+                <div style="margin-left:30px;">
+                    <strong>Issues:</strong>
+                </div>
+            </div>
+            <div class="row issues btn-group-sm pull-left" item_title="issues" style="margin-left:10px;"></div>
+
+
+            <div class="row"> &nbsp;</div><div class="row"> &nbsp;</div>
+            <div class="row">
+                <div style="margin-left:30px;">
+                    <strong>Country:</strong>
+                </div>
+            </div>
+            <div class="row countries btn-group-sm pull-left" item_title="countries" style="margin-left:10px;"></div>
+            
+            
+            <div class="row"> &nbsp;</div><div class="row"> &nbsp;</div>
+            <div class="row">
+                <div style="margin-left:30px;">
+                    <strong>Skills:</strong>
+                </div>
+            </div>
+            <div class="row skills btn-group-sm pull-left" item_title="skills" style="margin-left:10px;"></div>
+
+            <div class="row"> &nbsp;</div><div class="row"> &nbsp;</div>
+
         </div>
-    </div>
-    <div class="row issues btn-group-sm pull-left" item_title="issues" style="margin-left:10px;">
-
-    </div>
-
-    <div class="row"> &nbsp;</div><div class="row"> &nbsp;</div>
-    <div class="row">
-        <div class="pull-left" style="margin-left:30px;">
-        <strong>Country:</strong>
+        
+        <div class="col-lg-7">                         
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="marketitems"></div>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="marketitems pagination"></ul>
+            </div>
         </div>
-    </div>
-    <div class="row countries btn-group-sm pull-left" item_title="countries" style="margin-left:10px;">
 
-    </div>
-    
-    
-    <div class="row"> &nbsp;</div><div class="row"> &nbsp;</div>
-    <div class="row">
-        <div class="pull-left" style="margin-left:30px;">
-        <strong>Skills:</strong>
+        <div class="col-lg-2">
+
+            <div class="small">
+                <h4> How it works</h4>
+                {% block how_it_works %}
+                <p>Nulla pretium tempus ante in pharetra. Maecenas eleifend rhoncus congue.
+                Sed eu massa eros. Suspendisse potenti. Quisque elementum nibh ligula, sed varius magna mollis pulvinar.
+                Aliquam ipsum sapien, vehicula ac nunc nec, volutpat elementum arcu. Duis at pellentesque sapien.</p>
+                {% endblock %}
+            </div>
+
+            <button type="button" class="btn btn-default btn-sm btn-block">					
+                <a href="#" onclick="window.location = window.ahr.app_urls.getitemform;">Create an offer</a>
+            </button>
+
+            <button type="button" class="btn btn-default btn-sm btn-block">
+                <a href="#" onclick="window.location = window.ahr.app_urls.getitemform.replace('offer','request');">Create an request</a>
+            </button>
+
+            <button type="button" class="btn btn-default btn-sm btn-block">
+                <a href="#" onclick="window.location = window.ahr.app_urls.getitemform.replace('offer','resource');">Share a resource</a>
+            </button>
         </div>
-    </div>
-    <div class="row skills btn-group-sm pull-left" item_title="skills" style="margin-left:10px;">
-
-    </div>
-    <div class="row"> &nbsp;</div><div class="row"> &nbsp;</div>
-
-    </div>
-    <!--col-md-offset-1-->
-    <div class="col-lg-7">
-        <div id="marketitems"></div>
-        <ul class="marketitems pagination">                        
-        </ul>
-    </div>
-
-    <div class="col-lg-2">
-
-    <div class="small">
-        <h4> How it works</h4>
-        {% block how_it_works %}
-        <p>Nulla pretium tempus ante in pharetra. Maecenas eleifend rhoncus congue.
-        Sed eu massa eros. Suspendisse potenti. Quisque elementum nibh ligula, sed varius magna mollis pulvinar.
-        Aliquam ipsum sapien, vehicula ac nunc nec, volutpat elementum arcu. Duis at pellentesque sapien.</p>
-        {% endblock %}
-    </div>
-
-    <button type="button" class="btn btn-default btn-sm btn-block">					
-        <a href="#" onclick="window.location = window.ahr.app_urls.getitemform;">Create an offer</a>
-    </button>
-
-    <button type="button" class="btn btn-default btn-sm btn-block">
-        <a href="#" onclick="window.location = window.ahr.app_urls.getitemform.replace('offer','request');">Create an request</a>
-    </button>
-
-    <button type="button" class="btn btn-default btn-sm btn-block">
-        <a href="#" onclick="window.location = window.ahr.app_urls.getitemform.replace('offer','resource');">Share a resource</a>
-    </button>
-</div>
 
     </div>
    
