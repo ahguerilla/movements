@@ -7,12 +7,12 @@
 
         editItem: function(ev){
             var id = ev.currentTarget.getAttribute('item_id');
-            window.location = window.app_urls.edititem+id;
+            window.location = window.ahr.app_urls.edititem+id;
         },
 
         getItems: function(){
             return $.ajax({
-                url:window.app_urls.getuseritems,
+                url:window.ahr.app_urls.getuseritems,
                 dataType: 'json'
             });
         },
@@ -34,6 +34,7 @@
 
     window.posts = window.posts || {};
     window.posts.initPosts = function(){
+        // $(".panel.filters").hide();
         var posts = new PostsView();
     };
 })();

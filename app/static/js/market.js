@@ -4,7 +4,7 @@
 
         getItems: function(from,to){
             return $.ajax({
-                url:window.app_urls.getmarketitemfromto.replace('0',from)+to,
+                url:window.ahr.app_urls.getmarketitemfromto.replace('0',from)+to,
                 dataType: 'json'
             });
         },

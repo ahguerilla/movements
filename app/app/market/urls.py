@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = patterns('',
     url(r'api/', include('app.market.api.urls')),
     url(r'^$', 'app.market.views.index',name="show_market"),
+    url(r'^users$', 'app.market.views.users',name="show_users"),
     url(r'add/(?P<obj_type>offer|request|resource)', 'app.market.views.addItem_form',name="form_add_item"),
     url(r'view/(?P<obj_type>offer|request|resource|item)/(?P<obj_id>\d+)$','app.market.views.viewItem', name="view_item"),
     url(r'view/posts', 'app.market.views.posts',name="posts"),

@@ -21,15 +21,17 @@
         <h5> FILTER BY</h5>
     </div>
     <div class=" btn-group">
-        <button type="button" class="btn btn-default">All</button>
-        <button type="button" class="btn btn-default btn-success">Default</button>
-        <button type="button" class="btn btn-default">Custom</button>
+        <button type="button" class="btn btn-default filter-type">All</button>
+        <button type="button" class="btn btn-default btn-success filter-type">Default</button>
+        <button type="button" class="btn btn-default filter-type">Custom</button>
     </div>
     <div class="row"> &nbsp;</div>
     <div class="row">
+        {% block types %}
         <button type="button" class="btn item-type offer btn-default btn-success">Offers</button>
         <button type="button" class="btn item-type request btn-default btn-success">Request</button>
         <button type="button" class="btn item-type resource btn-default btn-success">Resources</button>
+        {% endblock %}
     </div>
     <div class="row"> &nbsp;</div>
     <div class="row">
@@ -75,21 +77,23 @@
 
     <div class="small">
         <h4> How it works</h4>
+        {% block how_it_works %}
         <p>Nulla pretium tempus ante in pharetra. Maecenas eleifend rhoncus congue.
         Sed eu massa eros. Suspendisse potenti. Quisque elementum nibh ligula, sed varius magna mollis pulvinar.
         Aliquam ipsum sapien, vehicula ac nunc nec, volutpat elementum arcu. Duis at pellentesque sapien.</p>
+        {% endblock %}
     </div>
 
     <button type="button" class="btn btn-default btn-sm btn-block">					
-        <a href="#" onclick="window.location = window.app_urls.getitemform;">Create an offer</a>
+        <a href="#" onclick="window.location = window.ahr.app_urls.getitemform;">Create an offer</a>
     </button>
 
     <button type="button" class="btn btn-default btn-sm btn-block">
-        <a href="#" onclick="window.location = window.app_urls.getitemform.replace('offer','request');">Create an request</a>
+        <a href="#" onclick="window.location = window.ahr.app_urls.getitemform.replace('offer','request');">Create an request</a>
     </button>
 
     <button type="button" class="btn btn-default btn-sm btn-block">
-        <a href="#" onclick="window.location = window.app_urls.getitemform.replace('offer','resource');">Share a resource</a>
+        <a href="#" onclick="window.location = window.ahr.app_urls.getitemform.replace('offer','resource');">Share a resource</a>
     </button>
 </div>
 
@@ -107,9 +111,9 @@
         var dfrd = getstatics();
         dfrd.done(function(){
             if("{{init}}"=="market"){
-                window.market.initMarket({{tags|safe}});
+                window.ahr.market.initMarket({{tags|safe}});
             }else if("{{init}}"=="posts"){
-                window.posts.initPosts();
+                window.posts.initPosts({{tags|safe}});
             }
         });        
     });

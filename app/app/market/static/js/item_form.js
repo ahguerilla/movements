@@ -62,7 +62,7 @@ function progressHandlingFunction(e){
     },
 
     getItem: function(item,func){
-        this.item=$.getJSON(window.app_urls.getmarketitem + item.id, func);
+        this.item=$.getJSON(window.ahr.app_urls.getmarketitem + item.id, func);
     },
 
 
@@ -104,13 +104,13 @@ function progressHandlingFunction(e){
         this.item_type = obj_type;
         if(item === false){
             $('#form-title').html(that.form_title[that.item_type]);
-            this.url = window.app_urls.addmarketitem+obj_type;				
+            this.url = window.ahr.app_urls.addmarketitem+obj_type;				
             _.each(this.widget_arrs[obj_type],function(item){
                 that.makeWidget(item);					
             });
         }else{				
             this.getItem(item,function(item_obj){
-                that.url = window.app_urls.editmarketitem+item_obj[0].pk;
+                that.url = window.ahr.app_urls.editmarketitem+item_obj[0].pk;
                 that.item_type = item_obj[0].fields.item_type;
                 that.setForm(item_obj, that.item_type);
                 $('#form-title').html(that.form_title[that.item_type]);
@@ -129,7 +129,7 @@ function progressHandlingFunction(e){
             data: this.getFormData()	           
         });			
         dfrd.done(function(){
-            window.location = window.app_urls.market;
+            window.location = window.ahr.app_urls.market;
         });
 
     dfrd.fail(function(data){

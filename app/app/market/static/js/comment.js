@@ -14,7 +14,7 @@
 		},
 
 		getComment: function(coment,func){
-			this.comment=$.getJSON(window.app_urls.getcomment+coment, func);
+			this.comment=$.getJSON(window.ahr.app_urls.getcomment+coment, func);
 		},
 
 
@@ -28,7 +28,7 @@
 			}else{
 				var that=this;
 				this.getComment(coment.id,function(comment_obj){
-					that.url = window.app_urls.editcomment+comment_obj[0].pk;
+					that.url = window.ahr.app_urls.editcomment+comment_obj[0].pk;
 					that.setForm(comment_obj);
 				});
 			}
