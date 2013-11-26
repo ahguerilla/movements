@@ -23,24 +23,24 @@ function progressHandlingFunction(e){
 
     widget_arrs: {
         'offer':[
-            {type:'typeahead', title:'I can help to advance freedom of:', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds },
-            {type:'typeahead', title:'Please select the countries where you can help',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
-            {type:'typeahead', title:'Skills',  jsonfield:'skills', customGen: genTagWidget, customGet:getTagIds},
+            {type: 'typeahead', title:'I can help to advance freedom of:', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds },
+            {type: 'typeahead', title:'Please select the countries where you can help',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
+            {type: 'typeahead', title:'Skills',  jsonfield:'skills', customGen: genTagWidget, customGet:getTagIds},
             {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
             {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
             {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
         ],
         'request':[
-            {type:'typeahead', title:'I need help to advance freedom of:', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds},
-            {type:'typeahead', title:'Please select the countries where you need help',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
+            {type: 'typeahead', title:'I need help to advance freedom of:', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds},
+            {type: 'typeahead', title:'Please select the countries where you need help',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
             {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
             {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
             {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
         ],
         'resource':[
-            {type:'typeahead', title:'Issues', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds },
-            {type:'typeahead', title:'Country',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
-            {type:'typeahead', title:'Skills',  jsonfield:'skills', customGen: genTagWidget, customGet:getTagIds},
+            {type: 'typeahead', title:'Issues', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds },
+            {type: 'typeahead', title:'Country',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
+            {type: 'typeahead', title:'Skills',  jsonfield:'skills', customGen: genTagWidget, customGet:getTagIds},
             {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
             {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
             {type: 'input', title:'URL link', jsonfield:'url', placeholder:''},
