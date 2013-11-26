@@ -29,22 +29,22 @@ function progressHandlingFunction(e){
             {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
             {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
             {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
-            ],
-    'request':[
-        {type:'typeahead', title:'I need help to advance freedom of:', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds},
-        {type:'typeahead', title:'Please select the countries where you need help',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
-        {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
-        {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
-        {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
         ],
-    'resource':[
-        {type:'typeahead', title:'Issues', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds },
-        {type:'typeahead', title:'Country',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
-        {type:'typeahead', title:'Skills',  jsonfield:'skills', customGen: genTagWidget, customGet:getTagIds},
-        {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
-        {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
-        {type: 'input', title:'URL link', jsonfield:'url', placeholder:''},				
-        {type: 'textarea', title:'', jsonfield:'details', placeholder:'Add a description'}
+        'request':[
+            {type:'typeahead', title:'I need help to advance freedom of:', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds},
+            {type:'typeahead', title:'Please select the countries where you need help',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
+            {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
+            {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
+            {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
+        ],
+        'resource':[
+            {type:'typeahead', title:'Issues', jsonfield:'issues', customGen: genTagWidget, customGet:getTagIds },
+            {type:'typeahead', title:'Country',  jsonfield:'countries', customGen: genTagWidget, customGet:getTagIds},
+            {type:'typeahead', title:'Skills',  jsonfield:'skills', customGen: genTagWidget, customGet:getTagIds},
+            {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'',	customSet:setDateTimePicker, afterGen:afterDateTimePicker },
+            {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
+            {type: 'input', title:'URL link', jsonfield:'url', placeholder:''},
+            {type: 'textarea', title:'', jsonfield:'details', placeholder:'Add a description'}
         ]
     },
 
@@ -53,9 +53,9 @@ function progressHandlingFunction(e){
         _.each(this.widget_arrs[this.item_type],function(item){
             if(item.customGet){
                 retdict[item.jsonfield] = item.customGet(item.jsonfield);
-            }else{					
-                retdict[item.jsonfield] = $('#'+item.jsonfield).val();					
-            }					
+            }else{
+                retdict[item.jsonfield] = $('#'+item.jsonfield).val();
+            }
         });
         retdict.csrfmiddlewaretoken=$('input[name="csrfmiddlewaretoken"]').val();
         return retdict;
@@ -68,10 +68,10 @@ function progressHandlingFunction(e){
 
     setForm: function(data,obj_type){
         var that=this;
-        window.tempfields = data[0].fields;			
+        window.tempfields = data[0].fields;
 
     _.each(this.widget_arrs[obj_type],function(item){
-        that.makeWidget(item,window.tempfields[item.jsonfield]);				
+        that.makeWidget(item,window.tempfields[item.jsonfield]);
     });
 },
 
@@ -85,7 +85,7 @@ function progressHandlingFunction(e){
                 'jsonfield': item.jsonfield,
                 'placeholder': item.placeholder
             });
-            $('#'+item.jsonfield+'_place').html(widget);				
+            $('#'+item.jsonfield+'_place').html(widget);
             if(preval){
                 if(item.customSet){
                     item.customSet(item,preval);
@@ -104,11 +104,11 @@ function progressHandlingFunction(e){
         this.item_type = obj_type;
         if(item === false){
             $('#form-title').html(that.form_title[that.item_type]);
-            this.url = window.ahr.app_urls.addmarketitem+obj_type;				
+            this.url = window.ahr.app_urls.addmarketitem+obj_type;
             _.each(this.widget_arrs[obj_type],function(item){
-                that.makeWidget(item);					
+                that.makeWidget(item);
             });
-        }else{				
+        }else{
             this.getItem(item,function(item_obj){
                 that.url = window.ahr.app_urls.editmarketitem+item_obj[0].pk;
                 that.item_type = item_obj[0].fields.item_type;
@@ -126,8 +126,8 @@ function progressHandlingFunction(e){
             url: this.url,
             dataType:'json',
             traditional: true,
-            data: this.getFormData()	           
-        });			
+            data: this.getFormData()
+        });
         dfrd.done(function(){
             window.location = window.ahr.app_urls.market;
         });
