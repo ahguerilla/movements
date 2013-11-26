@@ -70,19 +70,19 @@ def getMarketItem(request,obj_id,rtype):
 
 
 def getMarketItemLast(request,count,rtype):
-    obj = market.models.MarketItem.objects.order_by('pub_date').defer('comments')[:count]
+    obj = market.models.MarketItem.objects.order_by('-pub_date').defer('comments')[:count]
     return returnItemList(obj, rtype)
 
 
 def getMarketItemFromTo(request,sfrom,to,rtype):    
     query = createQuery(request)    
-    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','-pub_date').defer('comments')[sfrom:to]                                
+    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]    
     return returnItemList(obj, rtype)
 
 
 def getMarketItemCount(request,rtype):
     query = createQuery(request)    
-    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('id','-pub_date').count()
+    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
 
     
@@ -105,4 +105,3 @@ def userMarketItems(request, rtype):
     return returnItemList(obj, rtype)
 
 
-  

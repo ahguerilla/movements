@@ -20,8 +20,8 @@ js = Bundle(
         './js/templates/datetimepicker_utils.js',
         './js/item_single.js',
         './js/item_form.js',
-        './js/comment.js',
-        './js/utils.js',
+        './js/marketbase.js',
+        './js/comment.js',        
         './js/market.js',
         './js/posts.js',        
         './js/users.js'

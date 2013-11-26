@@ -1,7 +1,7 @@
 (function(){
 
 	var UserRoute = Backbone.Router.extend({});
-    var UsersView = Backbone.View.extend({
+    var UsersView = window.ahr.market.MarketBaseView.extend({
     	
     });
 
