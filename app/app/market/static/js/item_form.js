@@ -54,6 +54,7 @@ function progressHandlingFunction(e){
             if(item.customGet){
                 retdict[item.jsonfield] = item.customGet(item.jsonfield);
             }else{
+
                 retdict[item.jsonfield] = $('#'+item.jsonfield).val();
             }
         });
@@ -70,10 +71,10 @@ function progressHandlingFunction(e){
         var that=this;
         window.tempfields = data[0].fields;
 
-    _.each(this.widget_arrs[obj_type],function(item){
-        that.makeWidget(item,window.tempfields[item.jsonfield]);
-    });
-},
+        _.each(this.widget_arrs[obj_type],function(item){
+            that.makeWidget(item,window.tempfields[item.jsonfield]);
+        });
+    },
 
     makeWidget: function(item,preval){
         var that = this;
@@ -99,7 +100,7 @@ function progressHandlingFunction(e){
         }
     },
 
-    initialize : function(item,obj_type){
+    initialize : function(item, obj_type){
         var that= this;
         this.item_type = obj_type;
         if(item === false){

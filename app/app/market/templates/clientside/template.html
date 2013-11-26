@@ -1,66 +1,56 @@
 <script type="text/template" id="textarea_template">
-
-    <div class="row">
-        <div class="form-group col-sm-4">
-            <textarea class="form-control" name="<%=jsonfield%>" id="<%=jsonfield%>" rows="6" placeholder="<%=placeholder%>"></textarea>
-        </div>
-    </div>
-    <div class="row <%=jsonfield%> error"></div>
-
+  <div class="col-md-12">
+    <textarea class="form-control" name="<%=jsonfield%>" id="<%=jsonfield%>" rows="6" placeholder="<%=placeholder%>"></textarea>
+  </div>
+  <div class="col-md-12">
+    <div class="<%=jsonfield%> error"></div>
+  </div>
 </script>
 
 
 <script type="text/template" id="input_template">
-
-    <div class="form-group">
-        <label for="post-title" class="col-sm-2 control-label"><%=title%></label>
-        <div class="col-sm-2">
-            <input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control input-sm" type="text" placeholder="<%=placeholder%>"/>
-        </div>
-    </div>
-    <div class="row <%=jsonfield%> error"></div>
+  <div class="col-md-12">
+    <label for="<%=jsonfield%>"><%=title%></label>
+    <input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control input-sm" type="text" placeholder="<%=placeholder%>" />
+  </div>
+  <div class="col-md-12">
+    <div class="<%=jsonfield%> error"></div>
+  </div>
 </script>
 
 
 <script type="text/template" id="datetimepicker_template">
-
-    <div class="form-group">
-        <label for="exp-date" class="col-sm-2 control-label"><%=title%>Expiry date</label>
-    <div class='input-group date col-sm-2' id='datetimepicker-<%=jsonfield%>'>
-        <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control input-sm" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
+  <div class="col-md-12">
+    <label for="<%=jsonfield%>"><%=title%></label>
+    <div class='input-group date' id='datetimepicker-<%=jsonfield%>'>
+      <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control input-sm" />
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
     </div>
-    </div>
-    <div class="row <%=jsonfield%> error"></div>
-
+  </div>
+  <div class="col-md-12">
+    <div class="<%=jsonfield%> error"></div>
+  </div>
 </script>
 
 
 <script type="text/template" id="typeahead_template">
-
-    <div class="row">
-        <span class="col-sm-4"><%=title%></span>
+  <div class="col-md-12">
+    <label for="<%=item%>"><%=title%></label>
+    <div class="input-group">
+      <input id="<%=item%>" class="form-control input-sm" type="text"/>
+      <span class="input-group-addon">
+        <span class="glyphicon <%=item%>">Add</span>
+      </span>
     </div>
-
-    <div class="row">
-        <div class="input-group col-sm-4">
-            <input id="<%=item%>" class="form-control input-sm" type="text"/>
-            <span class="input-group-addon">
-                <span class="glyphicon <%=item%>">Add</span>
-            </span>
-        </div>
-    </div>
-    <div class="row errors">&nbsp;</div>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="input-group" id="<%=item%>Tags"></div>
-        </div>
-    </div>
-    <div class="row <%=item%> error"></div>
-    <div class="row">&nbsp;</div>
-
+  </div>
+  <div class="col-md-12">
+    <div class="input-group" id="<%=item%>Tags"></div>
+  </div>
+  <div class="col-md-12">
+    <div class="<%=item%> error"></div>
+  </div>
 </script>
 
 
