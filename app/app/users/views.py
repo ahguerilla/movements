@@ -1,12 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from models import UserProfile
 from forms import SettingsForm, UserForm
 from allauth.account.views import SignupView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 
 @login_required
 def settings(request):
@@ -39,6 +40,37 @@ def settings(request):
                               }, 
                               context_instance=RequestContext(request))
 
+
+@login_required
+def profile_for_user(request, user_name):
+    return profile(request, user_name)
+
+
+@login_required
+def profile(request, user_name=None):
+    print "user_name " + str(user_name)
+    if not user_name:
+        user = User.objects.get(pk=request.user.id)
+    else:
+        user = get_object_or_404(User, username=user_name)
+
+    try:
+        user_profile = UserProfile.objects.get(user=user)
+    except UserProfile.DoesNotExist:
+        user_profile = None
+
+    is_self = False
+    if user.id == request.user.id:
+        is_self = True
+
+    return render_to_response('users/user_profile.html', 
+                                {
+                                    'user': user,
+                                    'user_profile': user_profile,
+                                    'is_self': is_self,
+
+                                }, 
+                                context_instance=RequestContext(request))
 
 
 class AccountSignupView(SignupView):

@@ -5,11 +5,13 @@
 {% load widget_tweaks %}
 {% load account %}
 
+{% block head_title %}{% trans "User Settings" %}{% endblock %}
+
 {% block content %}
 <div class="row">
   <div class="col-md-offset-4 col-md-4">
     <div class="row in-container">
-      <div><h4>{% trans "User Profile" %}</h4></div>
+      <div><h4>{% trans "User Settings" %}</h4></div>
       {% avatar user %}
       <a href="{% url 'avatar_change' %}">Change</a>
       <div>&nbsp;</div>

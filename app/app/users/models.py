@@ -61,3 +61,11 @@ class UserProfile(models.Model):
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
     firstlogin = models.BooleanField(_('first_login'), default=True)
 
+    def get_twitter_url(self):
+        base_twitter = 'https://twitter.com/'
+        if self.tweet_url:
+            if self.tweet_url.startswith('@'):
+                return base_twitter + self.tweet_url[1:]
+            else:
+                return base_twitter + self.tweet_url
+        return None
