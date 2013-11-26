@@ -16,14 +16,14 @@
 
     getUserAvatar: function(id,callback){
         return $.ajax({
-            url: window.app_urls.getavatar+id,
+            url: window.ahr.app_urls.getavatar+id,
             dataType: "json",
         });
     },
 
     getUserDetail: function(id,callback){    
         return $.ajax({
-            url: window.app_urls.getuserdetail+id,
+            url: window.ahr.app_urls.getuserdetail+id,
             dataType: "json",
             });
     },
@@ -64,10 +64,10 @@
         var that = this;
         this.comment_tmp = _.template($('#comment_view_template').html());
         $.getJSON(
-            window.app_urls.getmarketitem+obj_id.id,
+            window.ahr.app_urls.getmarketitem+obj_id.id,
             function(data){
                 that.item = data[0];
-                $.getJSON(window.app_urls.getcommentslast.replace('0',obj_id.id)+'100',function(data){
+                $.getJSON(window.ahr.app_urls.getcommentslast.replace('0',obj_id.id)+'100',function(data){
                     that.comments = data;
                     that.setPage();
                 });

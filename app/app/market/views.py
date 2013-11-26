@@ -8,7 +8,7 @@ from app.market.forms import item_forms,commentForm
 
 
 def getUserTags(user):
-    return {'skills': [1,2,3], 'countries':[1,2], 'issues': [1,2,3]}
+    return {'skills': [1,2,3,7], 'countries':[1,2,9], 'issues': [1,2,3]}
 
 
 def index(request):
@@ -19,6 +19,16 @@ def index(request):
                                   'tags': getUserTags(request.user)
                                   },
                               context_instance=RequestContext(request))
+
+
+def users(request):
+  return render_to_response('market.html',
+                            {
+                                'title':'Users',
+                                'init': 'users',
+                                'tags': getUserTags(request.user)
+                                },
+                            context_instance=RequestContext(request))
 
 
 def addItem_form(request,obj_type):
@@ -76,7 +86,8 @@ def posts(request):
     return render_to_response('market.html',
                               {
                                   'title':'My Posts',
-                                  'init': 'posts'
+                                  'init': 'posts',
+                                  'tags': getUserTags(request.user)
                                   },
                               context_instance=RequestContext(request))
 
