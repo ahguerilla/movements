@@ -21,15 +21,7 @@
     });
     
     
-    var MarketView = Backbone.View.extend({        
-        el: '#market',
-        events:{
-            'click .item_container': 'showItem',
-            'click .tagbutton': 'tagsfilter',
-            'click #searchbtn': 'search',
-            'click .filter-type': 'changeFilterType',
-            'click .item-type': 'itemTypesfilter'            
-        },
+    var MarketView = window.ahr.market.MarketBaseView.extend({                
         types:{"Resources":"resource","Offers":"offer","Request":"request"},
 
         changeFilterType: function(ev){            
@@ -37,13 +29,13 @@
             $('.filter-type').removeClass('btn-success');        
             $(ev.currentTarget).addClass('btn-success');
             if(ev.currentTarget.textContent=="Defaul"){
-                this.filters = window.ahr.market.clone(window.ahr.default_filters);
+                this.filters = window.ahr.clone(window.ahr.market.default_filters);
             }else{
-                this.filters = window.ahr.market.clone(window.ahr.default_filters);
+                this.filters = window.ahr.clone(window.ahr.market.default_filters);
             }
             for(key in this.filters){
                 $('.row.'+key).empty();
-                window.ahr.market.initFilters(that, key, that.tagtemp);
+                this.initFilters(that, key, that.tagtemp);
             }
             this.resetMarket();
         },
@@ -57,7 +49,7 @@
             $('#marketitems').empty();                        
             window.location.hash="";
             this.setItems(0);     
-            window.ahr.market.setpagecoutner(this.filters,window.ahr.app_urls.getmarketcount);
+            this.setpagecoutner(this.filters,window.ahr.app_urls.getmarketcount);
         },
                 
         search: function(){
@@ -76,14 +68,14 @@
         },
         
         tagsfilter: function(ev){
-            window.ahr.market.updateTagsfilter(this,ev);
+            this.updateTagsfilter(this,ev);
             this.setFilterType("custom");
             this.resetMarket();            
         },
             
         setItems: function(page){
             var that = this;
-            var dfrd = window.ahr.market.getItems(0+(10*page),
+            var dfrd = that.getItems(0+(10*page),
                         10+(10*page),
                         this.filters,
                         window.ahr.app_urls.getmarketitemfromto);
@@ -106,12 +98,12 @@
             this.item_tmp = _.template($('#item_template').html());
             
             for(key in filters){
-                window.ahr.market.initFilters(that, key, this.tagtemp);
+                that.initFilters(that, key, this.tagtemp);
             }
             window.ahr.market.initTypeTags(this.types, this.typetag_tmp);
             
             this.filters.search=$('#q').val();
-            window.ahr.market.setpagecoutner(this.filters, window.ahr.app_urls.getmarketcount);
+            this.setpagecoutner(this.filters, window.ahr.app_urls.getmarketcount);
             this.filters.types=["resource", "offer", "request"];
             return this;
         },
@@ -120,7 +112,7 @@
     window.ahr= window.ahr || {};
     window.ahr.market = window.ahr.market || {};
     window.ahr.market.initMarket = function(filters){
-        window.ahr.default_filters = window.ahr.market.clone(filters);
+        window.ahr.market.default_filters = window.ahr.clone(filters);
         var market = new MarketView(filters);
         var market_route = new MarketRoute(market);
         Backbone.history.start();        

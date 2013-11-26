@@ -21,9 +21,10 @@ js = Bundle(
         './js/item_single.js',
         './js/item_form.js',
         './js/comment.js',
+        './js/utils.js',
         './js/market.js',
-        './js/posts.js',
-        './js/utils.js'
+        './js/posts.js',        
+        './js/users.js'
         ),
     filters='jsmin',
     output='./js/packed.js'

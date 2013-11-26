@@ -103,3 +103,6 @@ def deleteMarketItem(request,obj_id,rtype):
 def userMarketItems(request, rtype):
     obj = market.models.MarketItem.objects.defer('comments').filter(owner=request.user).all()
     return returnItemList(obj, rtype)
+
+
+  
