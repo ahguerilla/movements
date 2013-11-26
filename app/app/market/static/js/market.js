@@ -23,23 +23,7 @@
     
     var MarketView = window.ahr.market.MarketBaseView.extend({                
         types:{"Resources":"resource","Offers":"offer","Request":"request"},
-
-        changeFilterType: function(ev){            
-            var that = this;
-            $('.filter-type').removeClass('btn-success');        
-            $(ev.currentTarget).addClass('btn-success');
-            if(ev.currentTarget.textContent=="Defaul"){
-                this.filters = window.ahr.clone(window.ahr.market.default_filters);
-            }else{
-                this.filters = window.ahr.clone(window.ahr.market.default_filters);
-            }
-            for(key in this.filters){
-                $('.row.'+key).empty();
-                this.initFilters(that, key, that.tagtemp);
-            }
-            this.resetMarket();
-        },
-
+        
         setFilterType: function(ftype){
             $('.filter-type').removeClass('btn-success');
             $('.filter-type.'+ftype).addClass('btn-success');
@@ -92,16 +76,9 @@
             
         initialize : function(filters){
             var that = this;    
-            that.filters = filters;
-            this.typetag_tmp = _.template($('#type-tag').html());
-            this.tagtemp = _.template($('#filter-tag').html());
-            this.item_tmp = _.template($('#item_template').html());
-            
-            for(key in filters){
-                that.initFilters(that, key, this.tagtemp);
-            }
-            this.initTypeTags(this.types, this.typetag_tmp);
-            
+            this.default_filters = window.ahr.clone(filters);
+            this.filters = filters;            
+            this.initTemplates(filters);           
             this.filters.search=$('#q').val();
             this.setpagecoutner(this.filters, window.ahr.app_urls.getmarketcount);
             this.filters.types=["resource", "offer", "request"];
@@ -111,8 +88,7 @@
 
     window.ahr= window.ahr || {};
     window.ahr.market = window.ahr.market || {};
-    window.ahr.market.initMarket = function(filters){
-        window.ahr.market.default_filters = window.ahr.clone(filters);
+    window.ahr.market.initMarket = function(filters){        
         var market = new MarketView(filters);
         var market_route = new MarketRoute(market);
         Backbone.history.start();        
