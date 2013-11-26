@@ -63,7 +63,7 @@
         },
             
         itemTypesfilter: function(ev){
-            window.ahr.market.updateTypefilter(this,ev);
+            this.updateTypefilter(this,ev);
             this.resetMarket();
         },
         
@@ -100,7 +100,7 @@
             for(key in filters){
                 that.initFilters(that, key, this.tagtemp);
             }
-            window.ahr.market.initTypeTags(this.types, this.typetag_tmp);
+            this.initTypeTags(this.types, this.typetag_tmp);
             
             this.filters.search=$('#q').val();
             this.setpagecoutner(this.filters, window.ahr.app_urls.getmarketcount);

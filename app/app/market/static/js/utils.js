@@ -70,38 +70,25 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
 		}
 	},
 
+	updateTypefilter: function(that,ev){
+		var ind = that.filters.types.indexOf(that.types[ev.currentTarget.textContent]);
+	    if(ind<0){
+	        that.filters.types.push(that.types[ev.currentTarget.textContent]);
+	        $(ev.currentTarget).addClass('btn-success');
+	    }else{
+	        that.filters.types.splice(ind,1);
+	        $(ev.currentTarget).removeClass('btn-success');
+	    }
+	},
 
-
+	initTypeTags: function(types,tmp){
+	 	for(item in types){
+	 		$('.typetags').append(tmp({typetag:item}));
+	 	}
+	}
 
 });
 
-
-
-
-
-
-
-
-
-
-
-window.ahr.market.updateTypefilter = function(that,ev){
-	var ind = that.filters.types.indexOf(that.types[ev.currentTarget.textContent]);
-    if(ind<0){
-        that.filters.types.push(that.types[ev.currentTarget.textContent]);
-        $(ev.currentTarget).addClass('btn-success');
-    }else{
-        that.filters.types.splice(ind,1);
-        $(ev.currentTarget).removeClass('btn-success');
-    }
-}
-
-
-window.ahr.market.initTypeTags = function(types,tmp){
- 	for(item in types){
- 		$('.typetags').append(tmp({typetag:item}));
- 	}
-}
 
 
 window.ahr.clone = function(obj) {
