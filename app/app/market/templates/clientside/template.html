@@ -131,39 +131,52 @@
 
 <script type="text/template" id="item_template">
 
-    <div class="row item_container" item_id="<%=pk%>">
-        <div class="col-lg-11 well">
-            <div class="row">
-                <div class="col-lg-10"><h4><%=title%></h4></div>
-                <div class="col-lg-2"><strong><%=item_type%></strong></div>
+    <div class="row item_container" item_id="<%=pk%>">        
+        <div class="col-lg-12">
+            <div class="row well well-sm">
+                <div class="row">
+                    <div class="col-lg-10"><h4><%=title%></h4></div>
+                    <div class="col-lg-2"><strong><%=item_type%></strong></div>
+                </div>
+
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="item-header" style="margin-left:15px;margin-bottom:10px;">
+                        <div class="item-user">By <strong><%=owner%></strong></div>
+                        <div class="item-pub-date"><%=moment(pub_date).format("D MMM YYYY")%></div>
+                    </div>
+                    <div class="item-contents col-lg-12"><%=details%></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2"><%=commentcount%> Comments</div>
+                    <div class="col-lg-10">Tags:
+                        <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.issues[ind] %> </div> <% }); %>
+                        <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.countries[ind] %> </div> <% }); %>
+                        <% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.skills[ind] %> </div> <% }); %>
+                    </div>
+                </div>
             </div>
-
-    <div class="row" style="margin-bottom: 10px;">
-        <div class="item-header" style="margin-left:15px;margin-bottom:10px;">
-            <div class="item-user">By <strong><%=owner%></strong></div>
-            <div class="item-pub-date"><%=moment(pub_date).format("D MMM YYYY")%></div>
-        </div>
-        <div class="item-contents col-lg-12"><%=details%></div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-2"><%=commentcount%> Comments</div>
-        <div class="col-lg-10">Tags:
-            <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.issues[ind] %> </div> <% }); %>
-            <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.countries[ind] %> </div> <% }); %>
-            <% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.skills[ind] %> </div> <% }); %>
         </div>
     </div>
-</div>
-</div>
 
 </script>
 
+
 <script type="text/template" id="filter-tag">
+
     <div style="display:inline-block;margin:3px;">
         <button type="button" class="btn btn-default btn-xs tagbutton <%=active%>"><%=filtertag%></button>
     </div>
+
 </script>
+
+
+<script type="text/template" id="type-tag">
+
+    <button type="button" class="btn item-type offer btn-default btn-sm btn-success"><%=typetag%></button>
+    
+</script>
+
 
 
 <script type="text/javascript" id="api_urls">

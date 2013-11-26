@@ -47,7 +47,6 @@ window.ahr.market.initFilters = function(that,items,templ){
 }
 
 
-
 window.ahr.market.updateTagsfilter = function(that,ev){	
 	a=$(ev.currentTarget.parentElement.parentElement).attr("item_title");
 	ar = that.filters[a];
@@ -65,6 +64,7 @@ window.ahr.market.updateTagsfilter = function(that,ev){
 	}
 }
 
+
 window.ahr.market.updateTypefilter = function(that,ev){
 	var ind = that.filters.types.indexOf(that.types[ev.currentTarget.textContent]);
     if(ind<0){
@@ -74,4 +74,44 @@ window.ahr.market.updateTypefilter = function(that,ev){
         that.filters.types.splice(ind,1);
         $(ev.currentTarget).removeClass('btn-success');
     }
+}
+
+
+window.ahr.market.initTypeTags = function(types,tmp){
+ 	for(item in types){
+ 		$('.typetags').append(tmp({typetag:item}));
+ 	}
+}
+
+
+window.ahr.market.clone = function(obj) {
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || "object" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+        var copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+    }
+
+    // Handle Array
+    if (obj instanceof Array) {
+        var copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = window.ahr.market.clone(obj[i]);
+        }
+        return copy;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+        var copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = window.ahr.market.clone(obj[attr]);
+        }
+        return copy;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
 }
