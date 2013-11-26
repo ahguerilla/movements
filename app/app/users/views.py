@@ -6,11 +6,10 @@ from models import UserProfile
 from forms import SettingsForm, UserForm
 from allauth.account.views import SignupView
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 
 @login_required
 def settings(request):
-    messages = None
     user = User.objects.get(pk=request.user.id)
     try:
         settings = UserProfile.objects.get(user=user)
@@ -28,8 +27,7 @@ def settings(request):
             settings.user_id = request.user.id
             settings.save()
             settings_form.save_m2m()
-            messages = ["Profile Update Successfull"]
-
+            messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
     else:
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)
@@ -38,7 +36,6 @@ def settings(request):
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
-                                'messages': messages
                               }, 
                               context_instance=RequestContext(request))
 

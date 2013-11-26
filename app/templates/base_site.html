@@ -48,7 +48,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% user_display user %} <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="#">My Profile</a></li>
-              <li><a href="/settings">Settings</a></li>
+              <li><a href="{% url 'user_settings' %}">Settings</a></li>
               <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
             </ul>
           </li>
