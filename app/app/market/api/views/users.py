@@ -14,13 +14,14 @@ import avatar
 
 
 def getUserDict(userprofile):
-  adict= {'fields':{}}
-  adict['pk'] = userprofile.user.id
-  adict['fields']['avatar'] = reverse('avatar_render_primary', args=[userprofile.user.username,80])
-  adict['fields']['bio'] = userprofile.bio
-  adict['fields']['username'] = userprofile.user.username  
-  adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[userprofile.user.username])
-  return adict
+    adict= {'fields':{}}
+    adict['pk'] = userprofile.user.id
+    adict['fields']['avatar'] = reverse('avatar_render_primary', args=[userprofile.user.username,80])
+    adict['fields']['bio'] = userprofile.bio
+    adict['fields']['tag_line'] = userprofile.tag_ling
+    adict['fields']['username'] = userprofile.user.username  
+    adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[userprofile.user.username])
+    return adict
 
 
 def returnItemList(obj, rtype):
