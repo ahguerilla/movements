@@ -31,9 +31,10 @@
         initialize : function(filters){
             this.itemcount_url = window.ahr.app_urls.getusercount;
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
-            this.item_tmp = _.template($('#user-template').html());
+            this.item_tmp = _.template($('#user-template').html());                        
+            filters.types=["activist", "readytohelp"];  
             this.init(filters);
-            this.filters.types=["activist", "readytohelp"];
+
             return this;
         },
     });

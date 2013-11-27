@@ -112,7 +112,9 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
         this.typetag_tmp = _.template($('#type-tag').html());
         this.tagtemp = _.template($('#filter-tag').html());
         for(var key in this.filters){
-            this.initFilters(this, key, this.tagtemp);
+            if(["skills","countries","issues"].indexOf(key)>0){
+                this.initFilters(this, key, this.tagtemp);
+            }
         }
         this.initTypeTags(this.types, this.typetag_tmp);
     },
