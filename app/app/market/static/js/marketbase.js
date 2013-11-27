@@ -1,19 +1,19 @@
 window.ahr = window.ahr || {};
 window.ahr.market = window.ahr.market || {};
 
-window.ahr.market.MarketBaseView = Backbone.View.extend({ 
-	el: '#market',
+window.ahr.market.MarketBaseView = Backbone.View.extend({
+    el: '#market',
     events:{
         'click .item_container': 'showItem',
         'click .tagbutton': 'tagsfilter',
         'click #searchbtn': 'search',
         'click .filter-type': 'changeFilterType',
-        'click .item-type': 'itemTypesfilter'            
+        'click .item-type': 'itemTypesfilter'
     },
 
-    changeFilterType: function(ev){            
+    changeFilterType: function(ev){
         var that = this;
-        $('.filter-type').removeClass('btn-success');        
+        $('.filter-type').removeClass('btn-success');
         $(ev.currentTarget).addClass('btn-success');
         if(ev.currentTarget.textContent=="Defaul"){
             this.filters = window.ahr.clone(this.default_filters);
@@ -28,27 +28,27 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
     },
 
     getItems: function(from,to,filters,aurl){
-	    filters.search=$('#q').val();
-	    return $.ajax({
-	        url: aurl.replace('0',from)+to,
-	        dataType: 'json',
-	        contentType:"application/json; charset=utf-8",
-	        data: filters,
-	        traditional: true
-	    });
-	},
+        filters.search=$('#q').val();
+        return $.ajax({
+            url: aurl.replace('0',from)+to,
+            dataType: 'json',
+            contentType:"application/json; charset=utf-8",
+            data: filters,
+            traditional: true
+        });
+    },
 
-	getItemsCount: function(filters,aurl){           
-	    return $.ajax({               
-	        url: aurl,
-	        dataType: 'json',
-	        contentType:"application/json; charset=utf-8",
-	        data: filters,
-	        traditional: true
-	    });
-	},
+    getItemsCount: function(filters,aurl){
+        return $.ajax({
+            url: aurl,
+            dataType: 'json',
+            contentType:"application/json; charset=utf-8",
+            data: filters,
+            traditional: true
+        });
+    },
 
-	setItems: function(page){
+    setItems: function(page){
         var that = this;
         var dfrd = that.getItems(0+(10*page),
                     10+(10*page),
@@ -65,85 +65,85 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
        
     },
 
- 	resetMarket: function(){
-        $('#marketitems').empty();                        
+    resetMarket: function(){
+        $('#marketitems').empty();
         window.location.hash="";
-        this.setItems(0);     
+        this.setItems(0);
         this.setpagecoutner(this.filters, this.itemcount_url);
     },
-            
-	setpagecoutner: function(filters, aurl){
-	    $(".marketitems.pagination").empty();
-	    var cdfrd = this.getItemsCount(filters,aurl);
-	    cdfrd.done(function(data){
-	        var pages = Math.ceil(data.count/10);
-	        for(i=1;i<=pages;i++){
-	            $(".marketitems.pagination").append("<li><a class='itempage' page='"+i+"' href='#p"+i+"'>"+i+"</a></li>");
-	        }
-	    });
-	},
 
-	initTemplates: function(){
+    setpagecoutner: function(filters, aurl){
+        $(".marketitems.pagination").empty();
+        var cdfrd = this.getItemsCount(filters,aurl);
+        cdfrd.done(function(data){
+            var pages = Math.ceil(data.count/10);
+            for(i=1;i<=pages;i++){
+                $(".marketitems.pagination").append("<li><a class='itempage' page='"+i+"' href='#p"+i+"'>"+i+"</a></li>");
+            }
+        });
+    },
+
+    initTemplates: function(){
         this.typetag_tmp = _.template($('#type-tag').html());
-        this.tagtemp = _.template($('#filter-tag').html());        
-        for(key in this.filters){
+        this.tagtemp = _.template($('#filter-tag').html());
+        for(var key in this.filters){
             this.initFilters(this, key, this.tagtemp);
         }
         this.initTypeTags(this.types, this.typetag_tmp);
-	},
+    },
 
-	initFilters: function(that,items,templ){           
-	    _.each(window[items],function(item,key){            
-	        if (that.filters[items].indexOf(parseInt(key))>-1){
-	             $('.row.btn-group-sm.'+items).append(templ({filtertag:item, active:'btn-success'}));
-	        }else{
-	            $('.row.btn-group-sm.'+items).append(templ({filtertag:item, active:' '}));
-	        }
-	    }); 
-	},
+    initFilters: function(that,items,templ){
+        _.each(window[items],function(item,key){
+            if (that.filters[items].indexOf(parseInt(key))>-1){
+                 $('.row.btn-group-sm.'+items).append(templ({filtertag:item, active:'btn-success'}));
+            }else{
+                $('.row.btn-group-sm.'+items).append(templ({filtertag:item, active:' '}));
+            }
+        });
+    },
 
-	updateTagsfilter: function(that,ev){	
-		a=$(ev.currentTarget.parentElement.parentElement).attr("item_title");
-		ar = that.filters[a];
-		inv = invert(window[a]);
-		if (inv.hasOwnProperty(ev.currentTarget.textContent)){
-		    ind = inv[ev.currentTarget.textContent];
-		    filtind = ar.indexOf(parseInt(ind));
-		    if(filtind<0){
-		        that.filters[a].push(parseInt(ind));
-		        $(ev.currentTarget).addClass('btn-success');
-		    }else{
-		        that.filters[a].splice(filtind,1);
-		        $(ev.currentTarget).removeClass('btn-success');
-		    }
+    updateTagsfilter: function(that,ev){
+        a=$(ev.currentTarget.parentElement.parentElement).attr("item_title");
+        ar = that.filters[a];
+        inv = invert(window[a]);
+        if (inv.hasOwnProperty(ev.currentTarget.textContent)){
+            ind = inv[ev.currentTarget.textContent];
+            filtind = ar.indexOf(parseInt(ind));
+            if(filtind<0){
+                that.filters[a].push(parseInt(ind));
+                $(ev.currentTarget).addClass('btn-success');
+            }else{
+                that.filters[a].splice(filtind,1);
+                $(ev.currentTarget).removeClass('btn-success');
+            }
 		}
 	},
 
 	updateTypefilter: function(that,ev){
 		var ind = that.filters.types.indexOf(that.types[ev.currentTarget.textContent]);
-	    if(ind<0){
-	        that.filters.types.push(that.types[ev.currentTarget.textContent]);
-	        $(ev.currentTarget).addClass('btn-success');
-	    }else{
-	        that.filters.types.splice(ind,1);
-	        $(ev.currentTarget).removeClass('btn-success');
-	    }
+        if(ind<0){
+            that.filters.types.push(that.types[ev.currentTarget.textContent]);
+            $(ev.currentTarget).addClass('btn-success');
+        }else{
+            that.filters.types.splice(ind,1);
+            $(ev.currentTarget).removeClass('btn-success');
+        }
 	},
 
 	initTypeTags: function(types,tmp){
-	 	for(item in types){
-	 		$('.typetags').append(tmp({typetag:item}));
-	 	}
+        for(var item in types){
+            $('.typetags').append(tmp({typetag:item}));
+        }
 	},
 
- 	setFilterType: function(ftype){
+    setFilterType: function(ftype){
         $('.filter-type').removeClass('btn-success');
         $('.filter-type.'+ftype).addClass('btn-success');
     },
 
     search: function(){
         this.filters.search = $('#q').val();
-        this.resetMarket();        
+        this.resetMarket();
     },
 
 	itemTypesfilter: function(ev){
@@ -154,13 +154,13 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
     tagsfilter: function(ev){
         this.updateTagsfilter(this,ev);
         this.setFilterType("custom");
-        this.resetMarket();            
+        this.resetMarket();
     },
 
 	init: function(filters){
 		this.default_filters = window.ahr.clone(filters);
-        this.filters = filters;            
-        this.initTemplates(filters);           
+        this.filters = filters;
+        this.initTemplates(filters);
         this.filters.search=$('#q').val();
         this.setpagecoutner(this.filters, this.itemcount_url);
 	}
@@ -171,7 +171,7 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
 
 window.ahr.clone = function(obj) {
     // Handle the 3 simple types, and null or undefined
-    if (null == obj || "object" != typeof obj) return obj;
+    if (null === obj || "object" != typeof obj) return obj;
 
     // Handle Date
     if (obj instanceof Date) {
@@ -182,21 +182,21 @@ window.ahr.clone = function(obj) {
 
     // Handle Array
     if (obj instanceof Array) {
-        var copy = [];
+        var copy_a = [];
         for (var i = 0, len = obj.length; i < len; i++) {
-            copy[i] = window.ahr.clone(obj[i]);
+            copy_a[i] = window.ahr.clone(obj[i]);
         }
-        return copy;
+        return copy_a;
     }
 
     // Handle Object
     if (obj instanceof Object) {
-        var copy = {};
+        var copy_b = {};
         for (var attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = window.ahr.clone(obj[attr]);
+            if (obj.hasOwnProperty(attr)) copy_b[attr] = window.ahr.clone(obj[attr]);
         }
-        return copy;
+        return copy_b;
     }
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
-}
+};

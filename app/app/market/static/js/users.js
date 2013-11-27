@@ -1,6 +1,6 @@
 (function(){
 
- 	var UserRoute = Backbone.Router.extend({
+    var UserRoute = Backbone.Router.extend({
         routes:{
             "": "page",
             "p:page": "page"
@@ -16,34 +16,34 @@
         },
         
         initialize: function(users){
-            this.users=users;        
+            this.users=users;
         }
     });
 
     var UsersView = window.ahr.market.MarketBaseView.extend({
-	 	types:{"Activist" : "activist", "Ready to help" : "readytohelp" },
+        types:{"Activist" : "activist", "Ready to help" : "readytohelp" },
        
         showItem: function(ev){
             var id = ev.currentTarget.getAttribute('item_id');
             window.location = window.ahr.app_urls.viewuserprofile+id;
         },
             
-        initialize : function(filters){            
+        initialize : function(filters){
             this.itemcount_url = window.ahr.app_urls.getusercount;
-            this.getitemfromto = window.ahr.app_urls.getuserfromto
-            this.item_tmp = _.template($('#user-template').html());           
+            this.getitemfromto = window.ahr.app_urls.getuserfromto;
+            this.item_tmp = _.template($('#user-template').html());
             this.init(filters);
-            this.filters.types=["activist", "readytohelp"];            
+            this.filters.types=["activist", "readytohelp"];
             return this;
         },
     });
 
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
-    window.ahr.users.initUsers = function(filters){       
+    window.ahr.users.initUsers = function(filters){
         var users = new UsersView(filters);
         var user_route = new UserRoute(users);
-        Backbone.history.start();        
+        Backbone.history.start();
     };
 
 })();

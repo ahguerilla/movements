@@ -21,8 +21,9 @@
                             userpic: comment_item.fields.avatar,
                             user: comment_item.fields.username,
                             owner: comment_item.fields.owner,
+                            owner_url: comment_item.fields.profile_url,
                             pub_date: moment(comment_item.fields.pub_date).format("D MMM YYYY"),
-                            content: comment_item.fields.contents
+                            content: comment_item.fields.contents.replace(/\n/g, '<br />')
                         });
             
             if(front){

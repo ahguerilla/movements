@@ -80,8 +80,8 @@
       </div>
       <div class="row" style="margin-top:15px;">
         <div class="col-md-2">
-          <img src="<%=userpic%>" />
-          <div class="center-content"><strong><%=user%></strong></div>
+          <a href="<%= owner_url %>"><img src="<%=userpic%>" /></a>
+          <!-- <div class="center-content"><strong><%=user%></strong></div> -->
         </div>
         <div class="col-md-10">
           <div class="comment-content"><%=content%></div>
@@ -178,14 +178,36 @@
 
 
 <script type="text/template" id="user-template">
-    <div class="row well">
-        <a href="<%=profile_url%>"><img src="<%=avatar%>"/></a>
-        <div><%=username%></div>
-        <div><%=bio%></div>
-        <button type="button" class="btn btn-default btn-sm"> Recommend </button>
-        <button type="button" class="btn btn-default btn-sm"> Private message </button>
-        <button type="button" class="btn btn-default btn-sm"> Rate user </button>
+  <div class="row" item_id="<%=pk%>">
+    <div class="col-md-12">
+      <div class="well">
+        <div class="row">
+          <div class="col-md-2">
+            <a href="<%=profile_url%>"><img src="<%=avatar%>"/></a>
+          </div>
+          <div class="col-md-10">
+            <div class="row">
+              <div><strong>User: </strong><a href="<%=profile_url%>"><%=username%></a></div>
+              <div><strong>Tag: </strong><%=tag_line%></div>
+              <div><strong>Bio: </strong><%=bio%></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 center-content" style="margin-top:15px;">
+            <button type="button" class="btn btn-default btn-sm"> Recommend </button>
+            <button type="button" class="btn btn-default btn-sm"> Private message </button>
+            <button type="button" class="btn btn-default btn-sm"> Rate user </button>
+          </div>
+        </div>
+      </div>      
     </div>
+  </div>
+
+
+
+
+
 </script>
 
 
