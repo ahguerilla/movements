@@ -14,8 +14,27 @@
             return dfrd;
         },
 
+        addCommentToCommentList: function(comment_item, front){
+            front = front === true ? front : false;
+
+            var comment_html = this.comment_tmp({pk:comment_item.pk,
+                            userpic: comment_item.fields.avatar,
+                            user: comment_item.fields.username,
+                            owner: comment_item.fields.owner,
+                            pub_date: moment(comment_item.fields.pub_date).format("D MMM YYYY"),
+                            content: comment_item.fields.contents
+                        });
+            
+            if(front){
+                $('#marketitem_comments').prepend(comment_html);
+            } else {
+                $('#marketitem_comments').append(comment_html);
+            }
+        },
+
         comment: function(){
             var comment = $('#newcomment').val();
+            var that = this;
             if(comment){
                 var dfrd = this.getCommentData();
                 dfrd.done(function(csrf){
@@ -28,8 +47,10 @@
                             "csrfmiddlewaretoken":csrf.csrfmiddlewaretoken,
                             "contents": comment
                         },
-                        success: function(){
-                            alert("wooo just posted");
+                        success: function(item){
+                            console.log(item);
+                            $('#newcomment').val("");
+                            that.addCommentToCommentList(item.obj, true);
                         }
                     });
                 });
@@ -52,7 +73,7 @@
 
 
         setPage: function(){
-            var that=this,
+            
             fields = this.item.fields;
             $('#marketitem_type').text(fields.item_type.toUpperCase());
             $('#marketitem_title').text(fields.title);
@@ -61,15 +82,9 @@
             $('#marketitem_date').text(moment(fields.pub_date).format("D MMM YYYY"));
             $('#marketitem_details').html(fields.details.replace(/\n/g, '<br />'));
 
-            _.each(this.comments,function(comment){
-               var comment_html = that.comment_tmp({pk:comment.pk,
-                            userpic: comment.fields.avatar,
-                            user: comment.fields.username,
-                            owner: comment.fields.owner,
-                            pub_date: moment(comment.fields.pub_date).format("D MMM YYYY"),
-                            content: comment.fields.contents
-                        });
-                $('#marketitem_comments').append(comment_html);
+            var self = this;
+            _.each(this.comments, function(comment){
+                self.addCommentToCommentList(comment);
             });
         },
         
