@@ -7,10 +7,10 @@
         },
 
         getCommentData: function(){
-            var dfrd = $.Deferred();                        
+            var dfrd = $.Deferred();
             window.getcsrf(function(csrf){
                 dfrd.resolve(csrf);
-            });            
+            });
             return dfrd;
         },
 
@@ -27,8 +27,8 @@
                         data: {
                             "csrfmiddlewaretoken":csrf.csrfmiddlewaretoken,
                             "contents": comment
-                            } 
-                    });    
+                        }
+                    });
                 });
             }
         },
@@ -40,11 +40,11 @@
             });
         },
 
-        getUserDetail: function(id,callback){    
+        getUserDetail: function(id,callback){
             return $.ajax({
                 url: window.ahr.app_urls.getuserdetail+id,
                 dataType: "json",
-                });
+            });
         },
 
 
@@ -54,7 +54,7 @@
             $('#marketitem_title').text(fields.title);
             $('#marketitem_owner').text(fields.owner[0]);
             $('#marketitem_date').text(moment(fields.pub_date).format("D MMM YYYY"));
-            $('#marketitem_details').html(fields.details);
+            $('#marketitem_details').html(fields.details.replace(/\n/g, '<br />'));
 
             _.each(this.comments,function(comment){
                 var username, avatar, username_dfrd, avatar_dfrd;
@@ -63,7 +63,7 @@
                 username_dfrd = that.getUserDetail(comment.fields.owner);
 
                 avatar_dfrd.done(function(data){
-                   try{ 
+                   try{
                     avatar = '/media/'+data[0].fields.avatar;
                    }catch(err){
                     avatar = '/static/images/male200.png';
@@ -75,11 +75,11 @@
                             user: username,
                             owner: comment.fields.owner,
                             pub_date: moment(comment.fields.pub_date).format("D MMM YYYY"),
-                            content: comment.fields.contents});
-
+                            content: comment.fields.contents
+                        });
                         $('#marketitem_comments').append(comment_html);
-                    });   
-                });            
+                    });
+                });
             });
         },
         
@@ -89,7 +89,7 @@
             this.comment_form_tmp = _.template($('#comment_add_template').html());
             $('#marketitem_comment_form').html(this.comment_form_tmp());
 
-            this.comment_tmp = _.template($('#comment_view_template').html());        
+            this.comment_tmp = _.template($('#comment_view_template').html());
             $.getJSON(
                 window.ahr.app_urls.getmarketitem+obj_id.id,
                 function(data){

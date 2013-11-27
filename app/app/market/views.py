@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.db.models import Q,Max,F
 from django.http import HttpResponse
-from django.shortcuts import render_to_response,get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext, loader
 from .api.utils import *
 from app.market.forms import item_forms,commentForm
