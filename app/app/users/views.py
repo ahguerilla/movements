@@ -7,10 +7,11 @@ from forms import SettingsForm, UserForm
 from allauth.account.views import SignupView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 
 
-@login_required
-def settings(request):
+def render_settings(request, initial=False):
+    template = 'users/user_settings.html'
     user = User.objects.get(pk=request.user.id)
     try:
         settings = UserProfile.objects.get(user=user)
@@ -29,16 +30,31 @@ def settings(request):
             settings.save()
             settings_form.save_m2m()
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
+            if initial:
+                template = 'users/welcome.html'
     else:
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)
 
-    return render_to_response('users/user_settings.html', 
+    return render_to_response(template, 
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
+                                'initial': initial,
                               }, 
                               context_instance=RequestContext(request))
+
+
+@login_required
+def initial_settings(request):
+    if hasattr(request.user,'userprofile'):
+        return HttpResponseRedirect(reverse('user_settings'))
+    return render_settings(request, True)
+
+
+@login_required
+def settings(request):
+    return render_settings(request)
 
 
 @login_required
