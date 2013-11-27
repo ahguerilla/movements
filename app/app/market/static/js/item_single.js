@@ -62,29 +62,14 @@
             $('#marketitem_details').html(fields.details.replace(/\n/g, '<br />'));
 
             _.each(this.comments,function(comment){
-                var username, avatar, username_dfrd, avatar_dfrd;
-
-                avatar_dfrd = that.getUserAvatar(comment.fields.owner);
-                username_dfrd = that.getUserDetail(comment.fields.owner);
-
-                avatar_dfrd.done(function(data){
-                   try{
-                    avatar = '/media/'+data[0].fields.avatar;
-                   }catch(err){
-                    avatar = '/static/images/male200.png';
-                   }
-                   username_dfrd.done(function(data){
-                        username = data[0].fields.username;
-                        var comment_html = that.comment_tmp({pk:comment.pk,
-                            userpic: avatar,
-                            user: username,
+               var comment_html = that.comment_tmp({pk:comment.pk,
+                            userpic: comment.fields.avatar,
+                            user: comment.fields.username,
                             owner: comment.fields.owner,
                             pub_date: moment(comment.fields.pub_date).format("D MMM YYYY"),
                             content: comment.fields.contents
                         });
-                        $('#marketitem_comments').append(comment_html);
-                    });
-                });
+                $('#marketitem_comments').append(comment_html);
             });
         },
         

@@ -7,17 +7,20 @@ from django.shortcuts import get_object_or_404,render_to_response, RequestContex
 import json
 from app.market.api.utils import *
 from django.core.urlresolvers import reverse
+import avatar
 
 
 def createCommentDict(comment):
-    adict={}
-    for field in ['pk','contents','pub_date','owner']:
-        adict[field]= getattr(comment,field)
-        
-    adict['userpic'] = comment.owner.avatar_set.all()
-    adict['user'] = comment.owner.username
-    adict['profile_url'] = reverse('user_profile_for_user', comment.owner.username)
+    adict={'fields':{}}       
+    adict['fields']['pub_date'] = str(comment.pub_date)
+    adict['fields']['contents'] = comment.contents
+    adict['pk'] = comment.pk    
+    adict['fields']['owner'] = comment.owner.id    
+    adict['fields']['avatar'] = reverse('avatar_render_primary', args=[comment.owner.username,80])
+    adict['fields']['username'] = comment.owner.username
+    adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[comment.owner.username])
     return adict
+    
     
 def saveComment(form, owner,item):
     import datetime
@@ -60,11 +63,7 @@ def getComment(request, obj_id, rtype):
 def getComments(request,obj_id,count,rtype):
     obj = get_object_or_404(market.models.MarketItem, pk=obj_id)
     comments = obj.comments.filter(published=True).order_by('-pub_date').all()[:count]
-    return HttpResponse(value(rtype,
-                              json.dumps([createCommentDict(c) for c in comments]),
-                              indent=2,
-                              #use_natural_keys=True
-                              ),
+    return HttpResponse(json.dumps([createCommentDict(c) for c in comments]),
                         mimetype="application"+rtype)
 
 
