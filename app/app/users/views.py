@@ -81,7 +81,7 @@ def profile(request, user_name=None):
 
     return render_to_response('users/user_profile.html', 
                                 {
-                                    'user': user,
+                                    'user_details': user,
                                     'user_profile': user_profile,
                                     'is_self': is_self,
 
