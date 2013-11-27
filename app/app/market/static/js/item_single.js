@@ -14,8 +14,13 @@
             return dfrd;
         },
 
+/*        addCommentCommentList: function(comment_item, front){
+            front = front == true ? front : false
+        }
+*/
         comment: function(){
             var comment = $('#newcomment').val();
+            var that = this;
             if(comment){
                 var dfrd = this.getCommentData();
                 dfrd.done(function(csrf){
@@ -28,8 +33,16 @@
                             "csrfmiddlewaretoken":csrf.csrfmiddlewaretoken,
                             "contents": comment
                         },
-                        success: function(){
-                            alert("wooo just posted");
+                        success: function(item){
+                            $('#newcomment').val("");
+                            var comment_html = that.comment_tmp({pk:comment.pk,
+                                user: "TO COME",
+                                owner: "TO COME",
+                                userpic: "TO COME",
+                                pub_date: moment(new Date()).format("D MMM YYYY"),
+                                content: comment
+                            });
+                            $('#marketitem_comments').prepend(comment_html);
                         }
                     });
                 });

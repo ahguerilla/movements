@@ -70,19 +70,25 @@
 
 <script type="text/template" id="comment_view_template">
 
-    <div class="comment row well" comment-owner="<%=owner%>" comment-id="<%=pk%>">
-        <div class="comment-wrap">
-            <div class="comment-userpic col-lg-2"><img width="100" height="100" src="<%=userpic%>"/></div>
-            <div class="comment-right col-lg-10">
-                <div class="comment-head">
-                    <div class="comment-user col-lg-3"><strong><%=user%></strong></div>
-                    <div class="comment-date  col-lg-3"><strong><%=pub_date%></strong></div>
-                    <div class="comment-date col-lg-offset-4 col-lg-2">&nbsp;<% if(owner===window.user_id){ %> <a href="<%= window.ahr.app_urls.formeditcomment+pk %>">Edit</a> <% } %></div>
-                </div>
-                <div class="comment-content" style="margin-top:30px;"><%=content%></div>
-            </div>
+<div class="comment row well" comment-owner="<%=owner%>" comment-id="<%=pk%>">
+  <div class="col-md-12">
+      <!-- <div class="comment-userpic col-md-2"><img width="80" src="<%=userpic%>"/></div> -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="pull-left"><strong><%=user%></strong></div>
         </div>
-    </div>
+        <div class="col-md-6">
+          <div class="pull-right"><strong><%=pub_date%></strong></div>
+        </div>
+        <!-- <div class="comment-date col-lg-offset-4 col-lg-2">&nbsp;<% if(owner===window.user_id){ %> <a href="<%= window.ahr.app_urls.formeditcomment+pk %>">Edit</a> <% } %></div>  -->      
+      </div>
+      <div class="row" style="margin-top:15px;">
+        <div class="col-md-12">
+          <div class="comment-content"><%=content%></div>
+        </div>
+      </div>
+  </div>
+</div>
 
 </script>
 
