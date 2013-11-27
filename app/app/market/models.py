@@ -38,15 +38,14 @@ class MarketItem(models.Model):
 
 
 class Comment(models.Model):
-    owner =  models.ForeignKey(auth.models.User,blank=True)
-    contents = tinymce.models.HTMLField(_('contents'),blank=False)
-    pub_date = models.DateTimeField(_('publish date'),default=datetime.now)
-    item = models.ForeignKey(MarketItem,null=True,blank=True,related_name='comments')
-    published = models.BooleanField(_('is published?'),default=True)
+    owner =  models.ForeignKey(auth.models.User, blank=True)
+    contents = tinymce.models.HTMLField(_('contents'), blank=False)
+    pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
+    item = models.ForeignKey(MarketItem, null=True, blank=True, related_name='comments')
+    published = models.BooleanField(_('is published?'), default=True)
 
     class Meta:
         ordering = ['-pub_date']
-
 
     def save(self, *args, **kwargs):
         model = self.__class__

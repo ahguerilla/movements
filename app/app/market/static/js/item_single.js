@@ -27,6 +27,9 @@
                         data: {
                             "csrfmiddlewaretoken":csrf.csrfmiddlewaretoken,
                             "contents": comment
+                        },
+                        success: function(){
+                            alert("wooo just posted");
                         }
                     });
                 });

@@ -49,8 +49,9 @@ def getComment(request, obj_id, rtype):
 
 def getComments(request,obj_id,count,rtype):
     obj = get_object_or_404(market.models.MarketItem, pk=obj_id)
+    comments = obj.comments.filter(published=True).order_by('-pub_date').all()[:count]
     return HttpResponse(value(rtype,
-                              obj.comments.all()[:count],
+                              comments,
                               indent=2,
                               #use_natural_keys=True
                               ),
