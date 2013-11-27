@@ -8,7 +8,16 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
         'click .tagbutton': 'tagsfilter',
         'click #searchbtn': 'search',
         'click .filter-type': 'changeFilterType',
-        'click .item-type': 'itemTypesfilter'
+        'click .item-type': 'itemTypesfilter',
+        'click #create_offer': 'create_offer',
+        'click #create_request': 'create_request'
+    },
+
+    create_request: function(){
+        window.location = window.ahr.app_urls.getitemform.replace('offer','request');
+    },
+    create_offer: function(){
+        window.location = window.ahr.app_urls.getitemform;
     },
 
     changeFilterType: function(ev){

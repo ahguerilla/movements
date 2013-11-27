@@ -6,6 +6,14 @@
 - git git@bitbucket.org:guerillasoftware/ahr.git
 - create virtualenv
 
+
+if you are installing on a 64 bit Ubuntu: 
+	sudo apt-get install libjpeg-dev libpng12-dev libfreetype6-dev
+
+	ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+	ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+	ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
+
 pip install -r app/requirements/local.txt
 
  or 
