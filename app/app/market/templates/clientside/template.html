@@ -166,6 +166,17 @@
 </script>
 
 
+<script type="text/template" id="user-template">
+    <div class="row">
+        <img src=""/>
+        <div></div>
+        <button type="button" class="btn btn-default btn-sm"> Recommend </button>
+        <button type="button" class="btn btn-default btn-sm"> Private message </button>
+        <button type="button" class="btn btn-default btn-sm"> Rate user </button>
+    </div>
+</script>
+
+
 
 <script type="text/javascript" id="api_urls">
     window.ahr= window.ahr || {};
@@ -181,6 +192,8 @@
         getcsrf: "{% url 'get_csrftoken' 'json' %}",
         getuserdetail: "{% url 'get_userdetail' 'json' 0 %}".slice(0,-1),
         getavatar: "{% url 'get_avatar' 'json' 0 %}".slice(0,-1),
+        getusercount: "{% url 'get_usercount' 'json' %}",
+        getuserfromto: "{% url 'get_user_fromto' 'json' 0 0 %}".slice(0,-1),
 
         getissues: "{% url 'get_issues' 'json' %}",
         getskills: "{% url 'get_skills' 'json' %}",
@@ -191,7 +204,7 @@
         edititem: "{% url 'form_edit_item' 0 %}".slice(0,-1),
         getitemform:  "{% url 'form_add_item' 'offer' %}",
     
-        market: "{% url 'show_market' %}",
+        market: "{% url 'show_market' %}",        
         getposts:  "{% url 'posts'  %}",
         getmarketitem: "{% url 'get_marketitem' 'json' 0 %}".slice(0,-1),
         getmarketitemlast: "{% url 'get_marketitems_last' 'json' 0 %}".slice(0,-1),

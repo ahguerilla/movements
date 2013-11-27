@@ -34,8 +34,7 @@
             this.getitemfromto = window.ahr.app_urls.getmarketitemfromto
             this.item_tmp = _.template($('#item_template').html());           
             this.init(filters);
-            this.filters.types=["resource", "offer", "request"];
-            
+            this.filters.types=["resource", "offer", "request"];            
             return this;
         },
     });
