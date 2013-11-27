@@ -51,8 +51,10 @@
         setPage: function(){
             var that=this,
             fields = this.item.fields;
+            $('#marketitem_type').text(fields.item_type.toUpperCase());
             $('#marketitem_title').text(fields.title);
-            $('#marketitem_owner').text(fields.owner[0]);
+            // TODO: should get returned by api
+            $('#marketitem_owner').html("<a href='/user/profile/" + fields.owner[0] + "'>" + fields.owner[0] + "</a>");
             $('#marketitem_date').text(moment(fields.pub_date).format("D MMM YYYY"));
             $('#marketitem_details').html(fields.details.replace(/\n/g, '<br />'));
 

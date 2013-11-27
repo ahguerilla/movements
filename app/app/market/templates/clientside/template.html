@@ -130,7 +130,8 @@
         </div>
         <div class="row" style="margin-bottom: 10px;">
           <div class="item-header" style="margin-left:15px;margin-bottom:10px;">
-            <div class="item-user">By <strong><%=owner%></strong></div>
+            <!-- TODO: Remove hardcoded path --> 
+            <div class="item-user">By <strong><a href="/user/profile/<%=owner%>"><%=owner%></a></strong></div>
             <div class="item-pub-date"><%=moment(pub_date).format("D MMM YYYY")%></div>
           </div>
           <div class="item-contents col-md-12"><%=details%></div>
