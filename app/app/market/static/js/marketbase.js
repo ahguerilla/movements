@@ -20,7 +20,7 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
         }else{
             this.filters = window.ahr.clone(this.default_filters);
         }
-        for(key in this.filters){
+        for(var key in this.filters){
             $('.row.'+key).empty();
             this.initFilters(that, key, that.tagtemp);
         }
