@@ -8,6 +8,19 @@ from django.core import serializers
 from django.db.models import Q,Count,Avg
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
+from django.core.urlresolvers import reverse
+import avatar
+
+
+
+def getUserDict(userprofile):
+  adict= {'fields':{}}
+  adict['pk'] = userprofile.user.id
+  adict['fields']['avatar'] = reverse('avatar_render_primary', args=[userprofile.user.username,80])
+  adict['fields']['bio'] = userprofile.bio
+  adict['fields']['username'] = userprofile.user.username  
+  adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[userprofile.user.username])
+  return adict
 
 
 def returnItemList(obj, rtype):
@@ -71,8 +84,11 @@ def getDetails(request,obj_id, rtype):
 
 def getUsersFromto(request,sfrom,to,rtype):
     query = createQuery(request)    
-    obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id')[sfrom:to]    
-    return returnItemList(obj, rtype)
+    obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id')[sfrom:to]        
+    return HttpResponse(            
+            json.dumps([getUserDict(user) for user in obj]),
+            mimetype="application/"+rtype)
+
 
 
 def getUserCount(request,rtype):
