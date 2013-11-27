@@ -37,44 +37,44 @@ def createQuery(request):
 
     if request.GET.has_key('countries'):        
         query = query | Q(countries__in = request.GET.getlist('countries'))
-    
+
     if request.GET.has_key('issues'):        
         query = query | Q(issues__in=request.GET.getlist('issues'))
-         
+
     if request.GET.has_key('search') and request.GET['search']!='':
         # objs = SearchQuerySet().filter(text=request.GET['search'])    
         # ids= [int(obj.pk) for obj in objs]
         ids = [1,2] 
         query = query & Q(id__in = ids)
-        
+
     return query
 
 
 def getAvatar(request,obj_id, rtype):
-	user = get_object_or_404(users.models.User, pk=obj_id)
-	obj = user.avatar_set.all()
-	if obj != []:
-		return HttpResponse(value(rtype,obj),mimetype="application"+rtype)
-	return HttpResponse(value(rtype, [{'pk': 0, 'avatar': '/static/images/male200.png' },]),mimetype="application"+rtype)
+    user = get_object_or_404(users.models.User, pk=obj_id)
+    obj = user.avatar_set.all()
+    if obj != []:
+        return HttpResponse(value(rtype,obj),mimetype="application"+rtype)
+    return HttpResponse(value(rtype, [{'pk': 0, 'avatar': '/static/images/male200.png' },]),mimetype="application"+rtype)
 
 
 def getDetails(request,obj_id, rtype):
-	user = get_object_or_404(users.models.User, pk=obj_id)
-	return HttpResponse(
-		value(rtype,
-			[user],
-			fields=('username',)
-			 ),
-		mimetype="application"+rtype)
+    user = get_object_or_404(users.models.User, pk=obj_id)
+    return HttpResponse(
+        value(rtype,
+              [user],
+              fields=('username',)
+              ),
+        mimetype="application"+rtype)
 
 
 def getUsersFromto(request,sfrom,to,rtype):
-	query = createQuery(request)    
-	obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id')[sfrom:to]    
-	return returnItemList(obj, rtype)
+    query = createQuery(request)    
+    obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id')[sfrom:to]    
+    return returnItemList(obj, rtype)
 
 
 def getUserCount(request,rtype):
-	query = createQuery(request)
-	obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id').count()
-	return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
+    query = createQuery(request)
+    obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id').count()
+    return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
