@@ -6,9 +6,19 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
 import json
 from app.market.api.utils import *
+from django.core.urlresolvers import reverse
 
 
-
+def createCommentDict(comment):
+    adict={}
+    for field in ['pk','contents','pub_date','owner']:
+        adict[field]= getattr(comment,field)
+        
+    adict['userpic'] = comment.owner.avatar_set.all()
+    adict['user'] = comment.owner.username
+    adict['profile_url'] = reverse('user_profile_for_user', comment.owner.username)
+    return adict
+    
 def saveComment(form, owner,item):
     import datetime
     if form.instance.pk == None:
@@ -24,8 +34,8 @@ def addComment(request, obj_id, rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.only('pk'),pk=obj_id)
     form = commentForm(request.POST)
     if form.is_valid():
-        saveComment(form,request.user,obj)
-        return HttpResponse(json.dumps({ 'success' : True}), mimetype="application"+rtype)
+        obj = saveComment(form,request.user,obj)
+        return HttpResponse(json.dumps({ 'success' : True, 'obj': createCommentDict(obj) }), mimetype="application"+rtype)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
 
@@ -51,7 +61,7 @@ def getComments(request,obj_id,count,rtype):
     obj = get_object_or_404(market.models.MarketItem, pk=obj_id)
     comments = obj.comments.filter(published=True).order_by('-pub_date').all()[:count]
     return HttpResponse(value(rtype,
-                              comments,
+                              json.dumps([createCommentDict(c) for c in comments]),
                               indent=2,
                               #use_natural_keys=True
                               ),
