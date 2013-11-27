@@ -56,3 +56,6 @@ dev-social:
 	cd app && \
 	python manage.py loaddata social_local_settings --settings=app.settings.local
 
+staging-social:
+	cd app && \
+	python manage.py loaddata social_staging_settings --settings=app.settings.local
