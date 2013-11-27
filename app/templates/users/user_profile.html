@@ -14,12 +14,12 @@
         {% if is_self %}
         My Public Profile <a href="{% url 'user_settings' %}">edit</a>
         {% else %}
-        Profile for {{ user.username }}
+        Profile for {{ user_details.username }}
         {% endif %}
         </h4>
       </div>
       <div class="col-md-12 col-spacing-bottom">
-        {% avatar user %}
+        {% avatar user_details %}
       </div>
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
@@ -27,7 +27,7 @@
             <strong>Name:</strong> 
           </div>
           <div class="col-md-9">
-            {{ user.first_name }}&nbsp;{{ user.last_name }} <em>({{ user.username }})</em>
+            {{ user_details.first_name }}&nbsp;{{ user_details.last_name }} <em>({{ user_details.username }})</em>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
             <strong>Email:</strong> 
           </div>
           <div class="col-md-9">
-            {{ user.email }}
+            {{ user_details.email }}
           </div>
         </div>
       </div>
