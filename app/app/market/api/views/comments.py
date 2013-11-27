@@ -6,9 +6,22 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
 import json
 from app.market.api.utils import *
+from django.core.urlresolvers import reverse
+import avatar
 
 
-
+def createCommentDict(comment):
+    adict={'fields':{}}       
+    adict['fields']['pub_date'] = str(comment.pub_date)
+    adict['fields']['contents'] = comment.contents
+    adict['pk'] = comment.pk    
+    adict['fields']['owner'] = comment.owner.id    
+    adict['fields']['avatar'] = reverse('avatar_render_primary', args=[comment.owner.username,80])
+    adict['fields']['username'] = comment.owner.username
+    adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[comment.owner.username])
+    return adict
+    
+    
 def saveComment(form, owner,item):
     import datetime
     if form.instance.pk == None:
@@ -24,8 +37,8 @@ def addComment(request, obj_id, rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.only('pk'),pk=obj_id)
     form = commentForm(request.POST)
     if form.is_valid():
-        saveComment(form,request.user,obj)
-        return HttpResponse(json.dumps({ 'success' : True}), mimetype="application"+rtype)
+        obj = saveComment(form,request.user,obj)
+        return HttpResponse(json.dumps({ 'success' : True, 'obj': createCommentDict(obj) }), mimetype="application"+rtype)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
 
@@ -50,11 +63,7 @@ def getComment(request, obj_id, rtype):
 def getComments(request,obj_id,count,rtype):
     obj = get_object_or_404(market.models.MarketItem, pk=obj_id)
     comments = obj.comments.filter(published=True).order_by('-pub_date').all()[:count]
-    return HttpResponse(value(rtype,
-                              comments,
-                              indent=2,
-                              #use_natural_keys=True
-                              ),
+    return HttpResponse(json.dumps([createCommentDict(c) for c in comments]),
                         mimetype="application"+rtype)
 
 

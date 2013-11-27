@@ -25,7 +25,7 @@
        
         showItem: function(ev){
             var id = ev.currentTarget.getAttribute('item_id');
-            window.location = window.ahr.app_urls.viewitem+id;
+            window.location = window.ahr.app_urls.viewuserprofile+id;
         },
             
         initialize : function(filters){            
