@@ -75,6 +75,7 @@ admin.site.register(Resource,ResourceAdmin)
 
 
 class CommentAdmin(admin.ModelAdmin):
+    list_display = ('contents', 'pub_date', 'published',)
     pass
 
 

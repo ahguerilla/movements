@@ -1,59 +1,85 @@
 {% extends "base.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Marketplace Item" %}{% endblock %}
 
 {% block content %}
-
-	<div id="item-single" item-id="{{item.id}}" class="container">
-		<div class="row">
-
-			<div class="col-lg-2">
-				<button type="button" class="btn btn-default btn-sm">Back to my exchange</button>
-			</div>
-
-			<div class="col-lg-8 panel panel-default">
-				<div id="marketitem" class="panel-body">
-					<div>
-						<div>
-							<div class="col-lg-offset-11 col-lg-1"><strong>OFFER</strong></div>
-							<div><strong id="marketitem_title"></strong></div>
-							<div>By <strong id="marketitem_owner"></strong></div>
-							<div id="marketitem_date"></div>
-						</div>
-						<div id="marketitem_details"></div>
-						<div id="marketitem_tags"></div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-2">
-				<button type="button" class="btn btn-default btn-sm btn-block">PRIVATE MESSAGE</button>
-				<button type="button" class="btn btn-default btn-sm btn-block">RECOMMEND</button>
-				<button type="button" class="btn btn-default btn-sm btn-block">REPORT POST</button>
-				<button type="button" class="btn btn-default btn-sm btn-block">RATE USER</button>
-				<button type="button" class="btn btn-default btn-sm btn-block">RATE RESOURCE</button>
-			</div>
-
-		</div>
-
-		<div class="row">
-			<div class="col-lg-offset-2 col-lg-8">
-				<div id="marketitem_comment_form"></div>
-				<div id="marketitem_comments"></div>				
-			</div>
-		</div>
-	</div>
-
+<div id="item-single" item-id="{{item.id}}" class="row">
+  <div id="market" class="col-md-offset-2 col-md-8">
+    <!-- detail -->
+    <div class="row">
+      <!-- Back -->
+      <div class="col-md-3">
+        <a href="{% url 'show_market' %}"><button type="button" class="btn btn-success full-width">Back to my exchange</button></a>
+      </div>
+      <!-- Item -->
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-md-12 panel panel-default">
+            <div id="marketitem" class="panel-body">
+              <div class="row">
+                <div class="pull-right">
+                	<strong id="marketitem_type"></strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 id="marketitem_title"></h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  By <strong id="marketitem_owner"></strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <em id="marketitem_date"></em>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="marketitem_details"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="marketitem_tags"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-sm btn-block">PRIVATE MESSAGE</button>
+        <button type="button" class="btn btn-default btn-sm btn-block">RECOMMEND</button>
+        <button type="button" class="btn btn-default btn-sm btn-block">REPORT POST</button>
+        <button type="button" class="btn btn-default btn-sm btn-block">RATE USER</button>
+        <button type="button" class="btn btn-default btn-sm btn-block">RATE RESOURCE</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-7">
+        <div id="marketitem_comment_form"></div>
+        <div id="marketitem_comments"></div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block endjavascript %}
 
-	<script type="text/javascript">
-		$(document).ready(function(){
-			var dfrd = getstatics();
-			dfrd.done(function(){
-				window.item_single.initSingleItem({{ item|safe }},{{ obj_type|safe }});
-			});
-		});
-	</script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dfrd = getstatics();
+      dfrd.done(function(){
+        window.item_single.initSingleItem({{ item|safe }},{{ obj_type|safe }});
+      });
+    });
+  </script>
 
 {% endblock %}
 

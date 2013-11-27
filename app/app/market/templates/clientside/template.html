@@ -125,12 +125,17 @@
     <div class="col-md-12">
       <div class="well well-sm">
         <div class="row">
-          <div class="col-md-10"><h4><%=title%></h4></div>
-          <div class="col-md-2"><strong><%=item_type%></strong></div>
+          <div class="col-md-12">
+            <div class="pull-right"><strong><%= item_type.toUpperCase() %></strong></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12"><h4><%=title%></h4></div>
         </div>
         <div class="row" style="margin-bottom: 10px;">
           <div class="item-header" style="margin-left:15px;margin-bottom:10px;">
-            <div class="item-user">By <strong><%=owner%></strong></div>
+            <!-- TODO: Remove hardcoded path --> 
+            <div class="item-user">By <strong><a href="/user/profile/<%=owner%>"><%=owner%></a></strong></div>
             <div class="item-pub-date"><%=moment(pub_date).format("D MMM YYYY")%></div>
           </div>
           <div class="item-contents col-md-12"><%=details%></div>
