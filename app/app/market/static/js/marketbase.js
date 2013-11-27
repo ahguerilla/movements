@@ -15,10 +15,26 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
         var that = this;
         $('.filter-type').removeClass('btn-success');
         $(ev.currentTarget).addClass('btn-success');
-        if(ev.currentTarget.textContent=="Defaul"){
+        if(ev.currentTarget.textContent=="Default"){
             this.filters = window.ahr.clone(this.default_filters);
-        }else{
-            this.filters = window.ahr.clone(this.default_filters);
+        }else if(ev.currentTarget.textContent=="All"){
+            var skillarr=[];
+            for(var key in window.skills){
+                skillarr.push(parseInt(key));
+            }
+            this.filters.skills =  skillarr;
+            
+            var countriesarr=[];
+            for(key in window.countries){
+                countriesarr.push(parseInt(key));
+            }
+            this.filters.countries =  countriesarr;
+
+            var isssuesarr=[];
+            for(key in window.issues){
+                isssuesarr.push(parseInt(key));
+            }
+            this.filters.issues =  isssuesarr;
         }
         for(var key in this.filters){
             $('.row.'+key).empty();
