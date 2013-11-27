@@ -45,7 +45,8 @@ def returnItemList(obj, rtype):
         mimetype="application/"+rtype)
 
 
-def createQuery(request):    
+def createQuery(request):
+    query = Q()  
     if request.GET.has_key('skills'):
         query = Q(skills__in= request.GET.getlist('skills')) 
 
