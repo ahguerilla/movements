@@ -169,7 +169,8 @@
 <script type="text/template" id="user-template">
     <div class="row">
         <img src=""/>
-        <div></div>
+        <div><%=user%></div>
+        <div><%=bio%></div>
         <button type="button" class="btn btn-default btn-sm"> Recommend </button>
         <button type="button" class="btn btn-default btn-sm"> Private message </button>
         <button type="button" class="btn btn-default btn-sm"> Rate user </button>
@@ -194,6 +195,7 @@
         getavatar: "{% url 'get_avatar' 'json' 0 %}".slice(0,-1),
         getusercount: "{% url 'get_usercount' 'json' %}",
         getuserfromto: "{% url 'get_user_fromto' 'json' 0 0 %}".slice(0,-1),
+        viewuserprofile: "{% url 'user_profile_for_user' 'a' %}".slice(0,-1),
 
         getissues: "{% url 'get_issues' 'json' %}",
         getskills: "{% url 'get_skills' 'json' %}",

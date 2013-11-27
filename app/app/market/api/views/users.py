@@ -15,24 +15,25 @@ def returnItemList(obj, rtype):
         value(rtype,
               obj,
               use_natural_keys=True,
-              fields=('item_type',
+              fields=('user',
                       'issues',
                       'countries',
                       'skills',
-                      'title',
-                      'details',
-                      'pub_date',
-                      'exp_date',
-                      'owner',
-                      'url',
-                      'files',
-                      'commentcount')
+                      'bio',
+                      'tag_ling',
+                      'is_organisation',
+                      'is_individual',
+                      'is_journalist',
+                      'occupation',
+                      'expertise',
+                      'resident_country',
+                      'nationality')
               ),
         mimetype="application/"+rtype)
 
 
 def createQuery(request):    
-    if request.GET.has_key('skills'):        
+    if request.GET.has_key('skills'):
         query = Q(skills__in= request.GET.getlist('skills')) 
 
     if request.GET.has_key('countries'):        
