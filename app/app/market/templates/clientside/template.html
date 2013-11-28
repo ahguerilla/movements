@@ -178,6 +178,7 @@
 
 
 <script type="text/template" id="user-template">
+
   <div class="row" item_id="<%=pk%>">
     <div class="col-md-12">
       <div class="well">
@@ -204,10 +205,6 @@
     </div>
   </div>
 
-
-
-
-
 </script>
 
 
@@ -223,6 +220,11 @@
     window.ahr.market_filter_custom = {skills:[1],country:[1],issues:[1,2,3]};
 
     window.ahr.app_urls={
+        postmanwrite: "{% url 'postman_write' 'a' %}".slice(0,-1),
+        postmanreply: "{% url 'postman_reply' 0 %}".slice(0,-1),
+        // postman_view_conversation
+        // postman_delete
+
         getcsrf: "{% url 'get_csrftoken' 'json' %}",
         getuserdetail: "{% url 'get_userdetail' 'json' 0 %}".slice(0,-1),
         getavatar: "{% url 'get_avatar' 'json' 0 %}".slice(0,-1),
@@ -249,6 +251,7 @@
         editmarketitem: "{% url 'edit_marketitem' 'json' 0 %}".slice(0,-1),
         deletemarketitem: "{% url 'delete_marketitem' 'json' 0 %}".slice(0,-1),
         getuseritems: "{% url 'user_marketitems' 'json' %}",
+        sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
     
         formeditcomment: "{% url 'form_edit_comment' 0 %}".slice(0,-1),		
     

@@ -10,7 +10,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
 from django.core.urlresolvers import reverse
 import avatar
-
+from django.contrib.auth.decorators import login_required
+from postman.api import pm_write
 
 
 def getUserDict(userprofile):
@@ -66,6 +67,7 @@ def createQuery(request):
     return query
 
 
+@login_required
 def getAvatar(request,obj_id, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     obj = user.avatar_set.all()
@@ -74,6 +76,7 @@ def getAvatar(request,obj_id, rtype):
     return HttpResponse(value(rtype, [{'pk': 0, 'avatar': '/static/images/male200.png' },]),mimetype="application"+rtype)
 
 
+@login_required
 def getDetails(request,obj_id, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     return HttpResponse(
@@ -84,6 +87,7 @@ def getDetails(request,obj_id, rtype):
         mimetype="application"+rtype)
 
 
+@login_required
 def getUsersFromto(request,sfrom,to,rtype):
     query = createQuery(request)    
     obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id')[sfrom:to]        
@@ -92,8 +96,19 @@ def getUsersFromto(request,sfrom,to,rtype):
             mimetype="application/"+rtype)
 
 
-
+@login_required
 def getUserCount(request,rtype):
     query = createQuery(request)
     obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
+
+
+@login_required
+def sendMessage(request,to_user,rtype):
+    pm_write(sender=request.user,
+             recipient=users.models.User.objects.filter(username=to_user)[0],
+             subject=request.POST['subject'],
+             body=request.POST['message'])
+    return HttpResponse(            
+            json.dumps({'success': 'true'}),
+            mimetype="application/"+rtype)

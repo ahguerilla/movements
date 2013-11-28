@@ -3,7 +3,42 @@
     var SingleItemView = Backbone.View.extend({
         el: '#item-single',
         events:{
-            'click .comment-btn': 'comment'
+            'click .comment-btn': 'comment',
+            'click #private_message': 'private_message',
+            'click #cancel_message': 'cancel_message',
+            'click #send_message': 'send_message'
+        },
+
+        cancel_message: function(){
+            $('#marketitem_message_form').addClass('hide');
+            $('#marketitem_comment_form').show();
+        },
+
+        send_message: function(){
+            var that = this;
+            window.getcsrf(function(csrf){
+                var dfrd = $.ajax({
+                    url:window.ahr.app_urls.sendmessage+that.item.fields.owner[0],
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+                        subject: $('#msgsub').val(),
+                        message: $('#newmessage').val()
+                    }
+                });
+                dfrd.done(function(){
+                   $('#market').prepend('<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Your message was sent successfuly.</div>');
+                   $('#marketitem_message_form').addClass('hide');
+                   $('#marketitem_comment_form').show();
+                });
+            });
+            
+        },
+
+        private_message: function(){            
+            $('#marketitem_comment_form').hide();
+            $('#marketitem_message_form').removeClass('hide');
         },
 
         getCommentData: function(){

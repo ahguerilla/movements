@@ -53,15 +53,32 @@
       </div>
       <!-- Actions -->
       <div class="col-md-2">
-        <button type="button" class="btn btn-default btn-sm btn-block">PRIVATE MESSAGE</button>
-        <button type="button" class="btn btn-default btn-sm btn-block">RECOMMEND</button>
-        <button type="button" class="btn btn-default btn-sm btn-block">REPORT POST</button>
-        <button type="button" class="btn btn-default btn-sm btn-block">RATE USER</button>
-        <button type="button" class="btn btn-default btn-sm btn-block">RATE RESOURCE</button>
+        <button type="button" id="private_message" class="btn btn-default btn-sm btn-block">RIVATE MESSAGE</button>
+        <button type="button" id="recommend" class="btn btn-default btn-sm btn-block">RECOMMEND</button>
+        <button type="button" id="report_post" class="btn btn-default btn-sm btn-block">REPORT POST</button>
+        <button type="button" id="rate_user" class="btn btn-default btn-sm btn-block">RATE USER</button>
+        <button type="button" id="rate_resource" class="btn btn-default btn-sm btn-block">RATE RESOURCE</button>
       </div>
     </div>
     <div class="row">
       <div class="col-md-offset-3 col-md-7">
+        <div id="marketitem_message_form" class="hide">
+          <div class="new-message row well">
+            <div class="message-wrap">      
+              <div>Subject</div>
+              <div style="margin-bottom:5px;">
+                <input  class="form-control" id="msgsub" type="text" name="subject"/>
+              </div>
+
+              <div>Message</div>
+              <div>
+                <textarea class="form-control" name="newmessage" id="newmessage" rows="3" placeholder=""></textarea>
+              </div>
+            </div>
+            <div class="btn pull-right btn-default btn-sm message-btn" id="send_message" style="margin-top: 5px;"> Send </div>
+            <div class="btn pull-right btn-default btn-sm message-btn" id="cancel_message" style="margin-top: 5px; margin-right:5px;"> Cancel </div>            
+          </div>
+        </div>
         <div id="marketitem_comment_form"></div>
         <div id="marketitem_comments"></div>
       </div>

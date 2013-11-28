@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404,render_to_response, RequestContex
 from django.db.models import Q,Count,Avg
 from haystack.views import SearchView
 from haystack.query import SearchQuerySet
+from django.contrib.auth.decorators import login_required
 
 
 def returnItemList(obj, rtype):
@@ -55,6 +56,7 @@ def createQuery(request):
     return query
 
 
+@login_required
 def addMarketItem(request, obj_type, rtype):
     form = item_forms[obj_type](request.POST)
     if form.is_valid():
@@ -64,28 +66,33 @@ def addMarketItem(request, obj_type, rtype):
     return HttpResponse(json.dumps({ 'success' : True, 'pk':obj.id}),mimetype="application"+rtype)
 
 
+@login_required
 def getMarketItem(request,obj_id,rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'), pk=obj_id)
     return returnItemList([obj], rtype)
 
 
+@login_required
 def getMarketItemLast(request,count,rtype):
     obj = market.models.MarketItem.objects.order_by('-pub_date').defer('comments')[:count]
     return returnItemList(obj, rtype)
 
 
+@login_required
 def getMarketItemFromTo(request,sfrom,to,rtype):    
     query = createQuery(request)    
     obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]    
     return returnItemList(obj, rtype)
 
 
+@login_required
 def getMarketItemCount(request,rtype):
     query = createQuery(request)    
     obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
 
-    
+
+@login_required    
 def editMarketItem(request,obj_id,rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),pk=obj_id)
     form = item_forms[obj.item_type](request.POST, instance=obj)
@@ -96,10 +103,12 @@ def editMarketItem(request,obj_id,rtype):
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
 
 
+@login_required
 def deleteMarketItem(request,obj_id,rtype):
     pass
 
 
+@login_required
 def userMarketItems(request, rtype):
     obj = market.models.MarketItem.objects.defer('comments').filter(owner=request.user).all()
     return returnItemList(obj, rtype)

@@ -17,14 +17,15 @@ js = Bundle(
         './js/lib/tagmanager.js',
         './js/lib/typeahead.min.js',        
         './js/templates/typeaheadtag_utils.js',
-        './js/templates/datetimepicker_utils.js',
+        './js/templates/datetimepicker_utils.js',        
         './js/item_single.js',
         './js/item_form.js',
         './js/marketbase.js',
         './js/comment.js',        
         './js/market.js',
+        './js/inbox.js',
         './js/posts.js',        
-        './js/users.js'
+        './js/users.js'        
         ),
     filters='jsmin',
     output='./js/packed.js'

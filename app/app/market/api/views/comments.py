@@ -8,6 +8,7 @@ import json
 from app.market.api.utils import *
 from django.core.urlresolvers import reverse
 import avatar
+from django.contrib.auth.decorators import login_required
 
 
 def createCommentDict(comment):
@@ -33,6 +34,7 @@ def saveComment(form, owner,item):
     return obj
 
 
+@login_required
 def addComment(request, obj_id, rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.only('pk'),pk=obj_id)
     form = commentForm(request.POST)
@@ -43,23 +45,28 @@ def addComment(request, obj_id, rtype):
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
 
 
+@login_required
 def getlenComments(request, obj_id, rtype):
     pass
 
 
+@login_required
 def getCommentIds(request, obj_id, rtype):
     pass
 
 
+@login_required
 def getCommentIdsRange(request, obj_id,st_date, end_date, rtype):
     pass
 
 
+@login_required
 def getComment(request, obj_id, rtype):
     obj = get_object_or_404(market.models.Comment, pk=obj_id)
     return HttpResponse(value(rtype,[obj]), mimetype="application"+rtype)
 
 
+@login_required
 def getComments(request,obj_id,count,rtype):
     obj = get_object_or_404(market.models.MarketItem, pk=obj_id)
     comments = obj.comments.filter(published=True).order_by('-pub_date').all()[:count]
@@ -67,6 +74,7 @@ def getComments(request,obj_id,count,rtype):
                         mimetype="application"+rtype)
 
 
+@login_required
 def editComment(request,obj_id, rtype):
     obj = get_object_or_404(market.models.Comment, pk=obj_id)
     form = commentForm(request.POST, instance=obj)
@@ -78,5 +86,6 @@ def editComment(request,obj_id, rtype):
 
 
 
+@login_required
 def deleteComment(request, obj_id, rtype):
     pass

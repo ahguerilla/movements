@@ -19,6 +19,10 @@ urlpatterns = patterns('',
         'app.market.api.views.users.getUsersFromto',
         name="get_user_fromto"),
 
+    url(r'(?P<rtype>\S+)/users/sendmessage/(?P<to_user>\S+)$',
+        'app.market.api.views.users.sendMessage',
+        name="send_message"),
+
     url(r'(?P<rtype>\S+)/csrftoken/get$',
         'app.market.api.views.misc.getSCRFToken',
         name="get_csrftoken"),
