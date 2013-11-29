@@ -49,10 +49,9 @@ class Comment(models.Model):
 
     def save(self, *args, **kwargs):
         model = self.__class__
-        self.item.commentcount = Comment.objects.filter(id=self.item.id).count()
         self.item.commentcount+=1
         self.item.save()
-        super(Comment,self).save(*args,**kwargs)
+        #super(Comment,self).save(*args,**kwargs)
 
 
 class File(models.Model):
