@@ -51,14 +51,11 @@
             $('#messagedialog').modal('show');
         },
 
-        showItem: function(ev){
-            var id = ev.currentTarget.getAttribute('item_id');
-            window.location = window.ahr.app_urls.viewuserprofile+id;
-        },
 
         initialize : function(filters){
             this.itemcount_url = window.ahr.app_urls.getusercount;
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
+            this.viewurl = window.ahr.app_urls.viewuserprofile;
             this.item_tmp = _.template($('#user-template').html());
             filters.types=["activist", "readytohelp"];
             this.init(filters);

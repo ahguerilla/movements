@@ -52,6 +52,11 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
         this.resetMarket();
     },
 
+    showItem: function(ev){
+	var id = ev.currentTarget.getAttribute('item_id');
+	window.location = this.viewurl+id;
+    },
+
     getItems: function(from,to,filters,aurl){
         filters.search=$('#q').val();
         return $.ajax({

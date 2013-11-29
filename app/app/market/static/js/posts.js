@@ -22,16 +22,12 @@
     var PostsView = window.ahr.market.MarketBaseView.extend({
         types:{"Resources":"resource","Offers":"offer","Request":"request"},
 
-        showItem: function(ev){
-            var id = ev.currentTarget.getAttribute('item_id');
-            window.location = window.ahr.app_urls.edititem+id;
-        },
-
         initialize : function(filters){
             var that = this;
             this.item_tmp = _.template($('#item_template').html());
             this.itemcount_url = window.ahr.app_urls.getuseritemscount;
-            this.getitemfromto = window.ahr.app_urls.getusermarketitemsfromto
+            this.getitemfromto = window.ahr.app_urls.getusermarketitemsfromto;
+            this.viewurl = window.ahr.app_urls.edititem;
             filters.types=["resource", "offer", "request"];
             this.init(filters);
             return this;
