@@ -36,23 +36,23 @@ def returnItemList(obj, rtype):
 
 def createQuery(request):
     query = Q(published=True)
-    if request.GET.has_key('skills'):        
-        query = query | Q(skills__in= request.GET.getlist('skills')) 
+    if request.GET.has_key('skills'):
+        query = query | Q(skills__in= request.GET.getlist('skills'))
 
-    if request.GET.has_key('countries'):        
+    if request.GET.has_key('countries'):
         query = query | Q(countries__in = request.GET.getlist('countries'))
-    
-    if request.GET.has_key('issues'):        
+
+    if request.GET.has_key('issues'):
         query = query | Q(issues__in=request.GET.getlist('issues'))
-        
-    if request.GET.has_key('types'): 
+
+    if request.GET.has_key('types'):
         query = query & Q(item_type__in=request.GET.getlist('types'))
-    
+
     if request.GET.has_key('search') and request.GET['search']!='':
-        objs = SearchQuerySet().filter(text=request.GET['search'])    
+        objs = SearchQuerySet().filter(text=request.GET['search'])
         ids= [int(obj.pk) for obj in objs]
         query = query & Q(id__in = ids)
-        
+
     return query
 
 
@@ -79,20 +79,20 @@ def getMarketItemLast(request,count,rtype):
 
 
 @login_required
-def getMarketItemFromTo(request,sfrom,to,rtype):    
-    query = createQuery(request)    
-    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]    
+def getMarketItemFromTo(request,sfrom,to,rtype):
+    query = createQuery(request)
+    obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     return returnItemList(obj, rtype)
 
 
 @login_required
 def getMarketItemCount(request,rtype):
-    query = createQuery(request)    
+    query = createQuery(request)
     obj = market.models.MarketItem.objects.filter(query).distinct('id').order_by('-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
 
 
-@login_required    
+@login_required
 def editMarketItem(request,obj_id,rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),pk=obj_id)
     form = item_forms[obj.item_type](request.POST, instance=obj)
@@ -113,4 +113,17 @@ def userMarketItems(request, rtype):
     obj = market.models.MarketItem.objects.defer('comments').filter(owner=request.user).all()
     return returnItemList(obj, rtype)
 
+
+@login_required
+def userMarketItemsCount(request,rtype):
+    query = createQuery(request)
+    obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').count()
+    return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
+
+
+@login_required
+def getUserMarketItemFromTo(request,sfrom,to,rtype):
+    query = createQuery(request)
+    obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
+    return returnItemList(obj, rtype)
 

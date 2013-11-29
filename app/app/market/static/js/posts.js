@@ -1,40 +1,47 @@
 (function(){
-    var PostsView = Backbone.View.extend({
-        el: '#market',
-        events:{
-            'click .item_container': 'editItem'
+    var PosttRoute = Backbone.Router.extend({
+        routes:{
+            "": "page",
+            "p:page": "page"
         },
 
-        editItem: function(ev){
+        page: function(page){
+            if(page){
+                $('#marketitems').empty();
+                this.posts.setItems(parseInt(page)-1);
+            }else{
+                this.posts.setItems(0);
+            }
+        },
+
+        initialize: function(posts){
+            this.posts=posts;
+        }
+    });
+
+    var PostsView = window.ahr.market.MarketBaseView.extend({
+        types:{"Resources":"resource","Offers":"offer","Request":"request"},
+
+        showItem: function(ev){
             var id = ev.currentTarget.getAttribute('item_id');
             window.location = window.ahr.app_urls.edititem+id;
         },
 
-        getItems: function(){
-            return $.ajax({
-                url:window.ahr.app_urls.getuseritems,
-                dataType: 'json'
-            });
-        },
-
-        initialize : function(obj_id){
+        initialize : function(filters){
             var that = this;
             this.item_tmp = _.template($('#item_template').html());
-
-            var dfrd = this.getItems();
-            dfrd.done(function(data){
-                $.each(data, function(item){
-                    data[item].fields.pk = data[item]. pk;
-                    var item_html = that.item_tmp(data[item].fields);
-                    $('#marketitems').append(item_html);
-                });
-            });
+            this.itemcount_url = window.ahr.app_urls.getuseritemscount;
+            this.getitemfromto = window.ahr.app_urls.getusermarketitemsfromto
+            filters.types=["resource", "offer", "request"];
+            this.init(filters);
+            return this;
         },
 });
-
-    window.posts = window.posts || {};
-    window.posts.initPosts = function(){
-        // $(".panel.filters").hide();
-        var posts = new PostsView();
+    window.ahr= window.ahr || {};
+    window.ahr.posts = window.ahr.posts|| {};
+    window.ahr.posts.initPosts = function(filters){
+        var posts = new PostsView(filters);
+        var posts_route = new PosttRoute(posts);
+        Backbone.history.start();
     };
 })();

@@ -21,11 +21,6 @@
     });
 
     var UsersView = window.ahr.market.MarketBaseView.extend({
-        events:{
-            'click .sendprivatemessageuser': 'showpMessage',
-            'click .sendpm': 'sendpm',
-            'click .cancelpm': 'cancelpm'
-        },
         types:{"Activist" : "activist", "Ready to help" : "readytohelp" },
 
         sendpm:function(ev){
@@ -68,6 +63,11 @@
             filters.types=["activist", "readytohelp"];
             this.init(filters);
             window.ahr.expandTextarea('#newmessage');
+            this.delegateEvents(_.extend(this.events,{
+                'click .sendprivatemessageuser': 'showpMessage',
+                'click .sendpm': 'sendpm',
+                'click .cancelpm': 'cancelpm'
+            }));
             return this;
         },
     });
