@@ -5,7 +5,9 @@
                 var text = $(item).text()
                 var ind = text.indexOf('(');
                 var txt = text.slice(0,ind+1);
-                $(item).text(txt+data+")");
+                if(ind>-1){
+                    $(item).text(txt+data+")");
+                }
             });
         });
     }
