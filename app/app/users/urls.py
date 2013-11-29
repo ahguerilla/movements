@@ -8,3 +8,4 @@ urlpatterns = patterns("",
     url(r'^profile$', views.profile, name='user_profile'),
     url(r'^profile/(?P<user_name>\S+)$', views.profile_for_user, name='user_profile_for_user'),
 )
+

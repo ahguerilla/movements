@@ -1,0 +1,147 @@
+{% extends "postman/base.html" %}
+
+{% load url from future %}
+{% load i18n postman_tags %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+
+{% comment %}
+	WARNING: 'pagination_tags' is a name from the django-pagination application.
+	For convenience, the design of this template is done with the use of that application.
+	Django-postman will still be working, even if that application is not installed, by providing a mock
+	for the template tag library.
+	If the real implementation is to be used, just make sure that 'pagination' is declared before 'postman'
+	in the INSTALLED_APPS setting.
+{% endcomment %}
+
+{% block content %}
+<div id="postman">
+	<h3>{% block pm_folder_title %}{% endblock %}</h3>
+	{% autopaginate pm_messages %}
+	{% if invalid_page %}
+		<p>{% trans "Sorry, this page number is invalid." %}</p>
+	{% else %}
+		{% if pm_messages %}
+
+			<form action="{% block pm_form_action %}{% endblock %}" method="post">{% csrf_token %}
+
+				<div id="pm_messages">
+ 					<div class="col-md-5">
+					<div class="panel panel-default panel-sm">
+					<div class="panel-heading">
+					    {% block pm_form_buttons %}
+					    Actions:
+					    <span id="pm_buttons">
+						    {% block pm_delete_button %}
+							    <button type="submit" class="btn default-btn btn-xs" onclick="this.form.action='{% url 'postman_delete' %}'">{% trans "Delete" %}</button>
+						    {% endblock %}
+						    {% block pm_archive_button %}
+							    <button type="submit" class="btn default-btn btn-xs" onclick="this.form.action='{% url 'postman_archive' %}'">{% trans "Archive" %}</button>
+						    {% endblock %}
+						    {% block pm_undelete_button %}
+							    <button type="submit" class="btn default-btn btn-xs" onclick="this.form.action='{% url 'postman_undelete' %}'">{% trans "Undelete" %}</button>
+						    {% endblock %}
+					    </span>
+					    {% endblock %}
+
+
+					    <div style="margin-top:10px;">
+					    Order By:
+					    {% block pm_sender_header %}
+						     <button class="btn btn-xs default-btn"><a href="{% postman_order_by sender %}">{% trans "Sender" %}</a></button>
+					    {% endblock %}
+
+					    {% block pm_recipient_header %}
+						     <button class="btn btn-xs default-btn"><a href="{% postman_order_by recipient %}">{% trans "Recipient" %}</a></button>
+					    {% endblock %}
+					    <button class="btn btn-xs default-btn"><a href="{% postman_order_by subject %}">{% trans "Subject" %}</a></button>
+					    <button class="btn btn-xs default-btn"><a href="{% postman_order_by date %}">{% block pm_date %}{% trans "Date" %}{% endblock %}</a></button>
+					    </div>
+
+					    {% block pm_by_modes %}
+					    <div id="pm_by_modes" style="margin-top:10px;">
+					    List by:
+						    <span class="pm_by_mode">
+							    {% if by_message %}
+								    <button class="btn btn-xs default-btn"><a href="{{ by_conversation_url }}">{% trans "conversation" %}</a></button>
+								    <button class="btn btn-xs default-btn disabled">{% trans "message" %}</button>
+							    {% endif %}
+							    {% if by_conversation %}
+								<button class="btn btn-xs default-btn disabled">{% trans "conversation" %}</button>
+								<button class="btn btn-xs default-btn"><a href="{{ by_message_url }}">{% trans "message" %}</a></button>
+							    {% endif %}
+						    </span>
+					    </div>
+					    {% endblock pm_by_modes %}
+					</div>
+					<div class="panel-body">
+				 	{% for message in pm_messages %}
+					<div class="col-lg-12">
+					  <div class="row well well-sm">
+					    <div class="col-xs-1">
+					    	<input type="checkbox" {% if by_conversation and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %} />
+					    </div>
+					    <div class="col-xs-3">
+					    	{% avatar message.sender %}
+					    </div>
+					    <div class="col-xs-8">
+					    	<div class="row">
+					    		<div class="col-xs-12">
+							    	{% if message.is_new %}<strong>{% endif %}{% if message.is_replied %}<em>{% endif %}
+
+									{% block pm_subject %}
+									    <a class="conv_link" href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
+									    {% include "postman/inc_subject_ex.html" %}
+									    </a>
+									{% endblock %}
+
+								   	{% if message.is_replied %}</em>{% endif %}{% if message.is_new %}</strong>{% endif %}
+						   		</div>
+						    </div>
+
+							<div class="row">
+								<div class="col-sm-8">
+									{% block pm_sender_cell %}
+								    		{{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}
+								    {% endblock %}
+
+									{% block pm_recipient_cell %}
+											{{ message.obfuscated_recipient|or_me:user }}
+											{% if message.count %}
+												({{ message.count }})
+											{% endif %}
+									{% endblock %}
+								</div>
+
+							    <div class="col-sm-4 pull-right">
+						   			{{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}
+						   		</div>
+					   		</div>
+					   	</div>
+
+					  </div>
+					</div>
+				  	{% endfor %}
+					</div>
+					</div>
+					</div>
+					<div class="col-md-7 panel">
+						<div class="col-md-12 panel panel-default panel-sm">
+
+	    					<div class="panel-body" id="conversation"></div>
+	    				</div>
+				    </div>
+				</div>
+			</form>
+	{% paginate %}
+	{% else %}
+		<p>{% trans "No messages." %}</p>
+	{% endif %}
+	{% endif %}
+	{% block pm_footer_info %}{% endblock %}
+</div>
+{% endblock content %}
+
+
+
+

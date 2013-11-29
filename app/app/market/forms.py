@@ -1,6 +1,30 @@
 import app.market as market
 import app.users as users
 from django import forms
+from postman.forms import WriteForm,FullReplyForm,QuickReplyForm
+from postman.fields import CommaSeparatedUserField
+
+
+class MarketQuickReplyForm(QuickReplyForm):
+    class Meta(QuickReplyForm.Meta):
+        widgets = {
+            'body': forms.Textarea(attrs={'cols': 55, 'rows': 12, 'class':"form-control"}),
+        }
+
+
+class MarketFullReplyForm(FullReplyForm):
+    class Meta(FullReplyForm.Meta):
+        widgets = {
+            'body': forms.Textarea(attrs={'cols': 55, 'rows': 12, 'class':"form-control"}),
+        }
+
+
+
+class MarketWriteForm(WriteForm):
+    class Meta(WriteForm.Meta):
+        widgets = {
+            'body': forms.Textarea(attrs={'cols': 55, 'rows': 12, 'class':"form-control"}),
+        }
 
 
 class offerForm(forms.ModelForm):
