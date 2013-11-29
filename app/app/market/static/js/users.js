@@ -5,7 +5,7 @@
             "": "page",
             "p:page": "page"
         },
-        
+
         page: function(page){
             if(page){
                 $('#marketitems').empty();
@@ -14,27 +14,60 @@
                 this.users.setItems(0);
             }
         },
-        
+
         initialize: function(users){
             this.users=users;
         }
     });
 
     var UsersView = window.ahr.market.MarketBaseView.extend({
+        events:{
+            'click .sendprivatemessageuser': 'showpMessage',
+            'click .sendpm': 'sendpm',
+            'click .cancelpm': 'cancelpm'
+        },
         types:{"Activist" : "activist", "Ready to help" : "readytohelp" },
-       
+
+        sendpm:function(ev){
+            var that = this;
+            window.getcsrf(function(csrf){
+                var dfrd = $.ajax({
+                    url:window.ahr.app_urls.sendmessage+$('#usernameh').text(),
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+                        subject: $('#msgsub').val(),
+                        message: $('#newmessage').val()
+                    }
+                });
+                dfrd.done(function(){
+                   $('#messagedialog').modal('hide');
+                   $('#market').prepend('<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Your message was sent successfuly.</div>');
+                });
+            });
+        },
+        cancelpm:function(ev){},
+
+        showpMessage: function(ev){
+            var username = ev.currentTarget.getAttribute('username');
+            //alert(username);
+            $('#usernameh').text(username);
+            $('#messagedialog').modal('show');
+        },
+
         showItem: function(ev){
             var id = ev.currentTarget.getAttribute('item_id');
             window.location = window.ahr.app_urls.viewuserprofile+id;
         },
-            
+
         initialize : function(filters){
             this.itemcount_url = window.ahr.app_urls.getusercount;
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
-            this.item_tmp = _.template($('#user-template').html());                        
-            filters.types=["activist", "readytohelp"];  
+            this.item_tmp = _.template($('#user-template').html());
+            filters.types=["activist", "readytohelp"];
             this.init(filters);
-
+            window.ahr.expandTextarea('#newmessage');
             return this;
         },
     });

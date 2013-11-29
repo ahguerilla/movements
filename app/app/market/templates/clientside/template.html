@@ -76,7 +76,7 @@
         <div class="col-md-12">
           <div class="pull-right"><strong><%=pub_date%></strong></div>
         </div>
-        <!-- <div class="comment-date col-lg-offset-4 col-lg-2">&nbsp;<% if(owner===window.user_id){ %> <a href="<%= window.ahr.app_urls.formeditcomment+pk %>">Edit</a> <% } %></div>  -->      
+        <!-- <div class="comment-date col-lg-offset-4 col-lg-2">&nbsp;<% if(owner===window.user_id){ %> <a href="<%= window.ahr.app_urls.formeditcomment+pk %>">Edit</a> <% } %></div>  -->
       </div>
       <div class="row" style="margin-top:15px;">
         <div class="col-md-2">
@@ -114,9 +114,9 @@
 <script type="text/template" id="comment_add_template">
 
     <div class="new-comment row well" >
-        <div class="comment-wrap">			
+        <div class="comment-wrap">
             <div>
-                <textarea class="form-control" name="newcomment" id="newcomment" rows="3" placeholder="Post a comment"></textarea>
+                <textarea class="form-control" name="newcomment" id="newcomment" rows="1" placeholder="Post a comment"></textarea>
             </div>
         </div>
         <div class="btn pull-right btn-default btn-sm comment-btn" style="margin-top: 5px;"> Comment </div>
@@ -140,7 +140,7 @@
         </div>
         <div class="row" style="margin-bottom: 10px;">
           <div class="item-header" style="margin-left:15px;margin-bottom:10px;">
-            <!-- TODO: Remove hardcoded path --> 
+            <!-- TODO: Remove hardcoded path -->
             <div class="item-user">By <strong><a href="/user/profile/<%=owner%>"><%=owner%></a></strong></div>
             <div class="item-pub-date"><%=moment(pub_date).format("D MMM YYYY")%></div>
           </div>
@@ -173,7 +173,7 @@
 <script type="text/template" id="type-tag">
 
     <button type="button" class="btn item-type offer btn-default btn-sm btn-success"><%=typetag%></button>
-    
+
 </script>
 
 
@@ -188,7 +188,7 @@
           </div>
           <div class="col-md-10">
             <div class="row">
-              <div><strong>User: </strong><a href="<%=profile_url%>"><%=username%></a></div>
+              <div><strong>User: </strong><a class="username" href="<%=profile_url%>"><%=username%></a></div>
               <div><strong>Tag: </strong><%=tag_line%></div>
               <div><strong>Bio: </strong><%=bio%></div>
             </div>
@@ -197,17 +197,15 @@
         <div class="row">
           <div class="col-md-12 center-content" style="margin-top:15px;">
             <button type="button" class="btn btn-default btn-sm"> Recommend </button>
-            <button type="button" class="btn btn-default btn-sm"> Private message </button>
+            <button type="button"  username="<%=username%>" class="btn btn-default btn-sm sendprivatemessageuser" class="btn btn-default btn-sm"> Private message </button>
             <button type="button" class="btn btn-default btn-sm"> Rate user </button>
           </div>
         </div>
-      </div>      
+      </div>
     </div>
   </div>
 
 </script>
-
-
 
 <script type="text/javascript" id="api_urls">
     window.ahr= window.ahr || {};
@@ -236,12 +234,13 @@
         getskills: "{% url 'get_skills' 'json' %}",
         getcountries: "{% url 'get_countries' 'json' %}",
         getNationalities: "{% url 'get_nationalities' 'json' %}",
-    
+        getmessagecount: "{% url 'get_messagecount' 'json' %}",
+
         viewitem: "{% url 'view_item' 'offer' 0 %}".slice(0,-1),
         edititem: "{% url 'form_edit_item' 0 %}".slice(0,-1),
         getitemform:  "{% url 'form_add_item' 'offer' %}",
-    
-        market: "{% url 'show_market' %}",        
+
+        market: "{% url 'show_market' %}",
         getposts:  "{% url 'posts'  %}",
         getmarketitem: "{% url 'get_marketitem' 'json' 0 %}".slice(0,-1),
         getmarketitemlast: "{% url 'get_marketitems_last' 'json' 0 %}".slice(0,-1),
@@ -252,9 +251,9 @@
         deletemarketitem: "{% url 'delete_marketitem' 'json' 0 %}".slice(0,-1),
         getuseritems: "{% url 'user_marketitems' 'json' %}",
         sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
-    
-        formeditcomment: "{% url 'form_edit_comment' 0 %}".slice(0,-1),		
-    
+
+        formeditcomment: "{% url 'form_edit_comment' 0 %}".slice(0,-1),
+
         addcomment: "{% url 'add_comment' 'json' 0 %}".slice(0,-1),
         getcomment: "{% url 'get_comment' 'json' 0 %}".slice(0,-1),
         getcommentsrange: "{% url 'get_comments_range' 'json' 0 'stdate' 'enddate' %}",
@@ -273,9 +272,9 @@
             ar[data[index].pk] = data[index].fields[item];
         }
         return ar;
-    }    
-    
-    
+    }
+
+
     function getstatics(){
     var dfrd = $.Deferred();
     var dfrd1=$.ajax({url:window.ahr.app_urls.getissues,dataType:'json'});

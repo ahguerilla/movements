@@ -44,6 +44,10 @@ urlpatterns = patterns('',
         'app.market.api.views.misc.getSkills',
         name="get_skills"),
 
+    url(r'(?P<rtype>\S+)/message/get/count$',
+        'app.market.api.views.misc.getUnraedCount',
+        name="get_messagecount"),
+
 
     url(r'(?P<rtype>\S+)/item/add/(?P<obj_type>offer|request|resource)$',
         'app.market.api.views.market.addMarketItem',
@@ -59,7 +63,7 @@ urlpatterns = patterns('',
 
     url(r'(?P<rtype>\S+)/item/get/count$',
             'app.market.api.views.market.getMarketItemCount',
-            name="get_marketitem_count"),    
+            name="get_marketitem_count"),
 
     url(r'(?P<rtype>\S+)/item/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
         'app.market.api.views.market.getMarketItemFromTo',

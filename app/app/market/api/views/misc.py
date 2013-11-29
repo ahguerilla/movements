@@ -7,6 +7,7 @@ from django.core import serializers
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
+from postman.models import Message
 
 
 def getSCRFToken(request,rtype):
@@ -34,3 +35,8 @@ def getSkills(request,rtype):
     sklls = users.models.Skills.objects.all()
     return HttpResponse( value(rtype,sklls), mimetype="application/"+rtype)
 
+
+
+def getUnraedCount(request,rtype):
+    count=Message.objects.inbox_unread_count(request.user)
+    return HttpResponse( json.dumps(count), mimetype="application/"+rtype)

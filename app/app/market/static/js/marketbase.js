@@ -32,7 +32,7 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
                 skillarr.push(parseInt(key));
             }
             this.filters.skills =  skillarr;
-            
+
             var countriesarr=[];
             for(key in window.countries){
                 countriesarr.push(parseInt(key));
@@ -87,7 +87,7 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
                 $('#marketitems').append(item_html);
             });
         });
-       
+
     },
 
     resetMarket: function(){
@@ -177,7 +177,7 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
         this.updateTypefilter(this,ev);
         this.resetMarket();
     },
-    
+
     tagsfilter: function(ev){
         this.updateTagsfilter(this,ev);
         this.setFilterType("custom");
@@ -227,3 +227,15 @@ window.ahr.clone = function(obj) {
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
 };
+
+
+window.ahr.expandTextarea= function(id) {
+    var $element = $(id).get(0);
+
+    $element.addEventListener('keyup', function() {
+        this.style.overflow = 'hidden';
+        this.style.height = 0;
+        this.style.height = this.scrollHeight + 'px';
+    }, false);
+}
+

@@ -138,7 +138,12 @@
 		<p>{% trans "No messages." %}</p>
 	{% endif %}
 	{% endif %}
-	{% block pm_footer_info %}{% endblock %}
+	<div class="row">
+	    <div class="col-lg-6">
+	        {% block pm_footer_info %}
+	        {% endblock %}
+	    </div>
+	</div>
 </div>
 {% endblock content %}
 

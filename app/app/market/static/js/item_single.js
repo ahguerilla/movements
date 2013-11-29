@@ -33,10 +33,11 @@
                    $('#marketitem_comment_form').show();
                 });
             });
-            
+
         },
 
-        private_message: function(){            
+        private_message: function(){
+            $('#msgsub').val('Re: '+$('#marketitem_title').text());
             $('#marketitem_comment_form').hide();
             $('#marketitem_message_form').removeClass('hide');
         },
@@ -60,7 +61,7 @@
                             pub_date: moment(comment_item.fields.pub_date).format("D MMM YYYY"),
                             content: comment_item.fields.contents.replace(/\n/g, '<br />')
                         });
-            
+
             if(front){
                 $('#marketitem_comments').prepend(comment_html);
             } else {
@@ -109,7 +110,7 @@
 
 
         setPage: function(){
-            
+
             fields = this.item.fields;
             $('#marketitem_type').text(fields.item_type.toUpperCase());
             $('#marketitem_title').text(fields.title);
@@ -123,13 +124,14 @@
                 self.addCommentToCommentList(comment);
             });
         },
-        
+
 
         initialize : function(obj_id){
             var that = this;
+            window.ahr.expandTextarea('#newmessage');
             this.comment_form_tmp = _.template($('#comment_add_template').html());
             $('#marketitem_comment_form').html(this.comment_form_tmp());
-
+            window.ahr.expandTextarea('#newcomment');
             this.comment_tmp = _.template($('#comment_view_template').html());
             $.getJSON(
                 window.ahr.app_urls.getmarketitem+obj_id.id,
@@ -142,7 +144,7 @@
             });
 
         },
-     
+
     });
 
     window.item_single = window.item_single|| {};
