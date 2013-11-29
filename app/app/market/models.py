@@ -51,7 +51,6 @@ class Comment(models.Model):
         model = self.__class__
         self.item.commentcount+=1
         self.item.save()
-        #super(Comment,self).save(*args,**kwargs)
 
 
 class File(models.Model):

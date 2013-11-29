@@ -95,6 +95,8 @@ def getMarketItemCount(request,rtype):
 @login_required
 def editMarketItem(request,obj_id,rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),pk=obj_id)
+    if request.user != obj.owner:
+        return HttpResponseRedirect('/')
     form = item_forms[obj.item_type](request.POST, instance=obj)
     if form.is_valid():
         saveMarketItem(form, obj.item_type, obj.owner)
