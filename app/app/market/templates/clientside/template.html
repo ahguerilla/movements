@@ -197,8 +197,8 @@
         <div class="row">
           <div class="col-md-12 center-content" style="margin-top:15px;">
             <button type="button" class="btn btn-default btn-sm"> Recommend </button>
-            <button type="button"  username="<%=username%>" class="btn btn-default btn-sm sendprivatemessageuser" class="btn btn-default btn-sm"> Private message </button>
-            <button type="button" class="btn btn-default btn-sm"> Rate user </button>
+            <button type="button" username="<%=username%>" class="btn btn-default btn-sm sendprivatemessageuser"> Private message </button>
+            <button type="button" image_src="<%=avatar%>" score="<%=score%>" ratecount="<%=ratecount%>" username="<%=username%>" class="btn btn-default btn-sm rateuser"> Rate user </button>
           </div>
         </div>
       </div>
@@ -229,6 +229,7 @@
         getusercount: "{% url 'get_usercount' 'json' %}",
         getuserfromto: "{% url 'get_user_fromto' 'json' 0 0 %}".slice(0,-1),
         viewuserprofile: "{% url 'user_profile_for_user' 'a' %}".slice(0,-1),
+        getuserrate: "{% url 'user_set_rate' 'json' 'a' %}".slice(0,-1),
 
         getissues: "{% url 'get_issues' 'json' %}",
         getskills: "{% url 'get_skills' 'json' %}",
@@ -252,7 +253,7 @@
         getuseritems: "{% url 'user_marketitems' 'json' %}",
         getuseritemscount: "{% url 'user_items_count' 'json' %}",
         getusermarketitemsfromto : "{% url 'get_usermarketitems_fromto' 'json' 0 0 %}".slice(0,-1),
-        sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
+        sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),        
 
         formeditcomment: "{% url 'form_edit_comment' 0 %}".slice(0,-1),
 

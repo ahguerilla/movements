@@ -42,15 +42,27 @@
                 });
             });
         },
-        cancelpm:function(ev){},
-
-        showpMessage: function(ev){
-            var username = ev.currentTarget.getAttribute('username');
-            //alert(username);
-            $('#usernameh').text(username);
-            $('#messagedialog').modal('show');
+        cancelpm:function(ev){
         },
 
+        showpMessage: function(ev){
+            var username = ev.currentTarget.getAttribute('username');            
+            $('#usernameh').text(username);            
+            $('#messagedialog').modal('show');
+        },
+        
+        showRateuser: function(ev){
+            var username = ev.currentTarget.getAttribute('username');
+            var image_src = ev.currentTarget.getAttribute('image_src');
+            var score = ev.currentTarget.getAttribute('score');
+            var ratecount = ev.currentTarget.getAttribute('ratecount');
+            $('#rateusertitle').text(username);
+            $('#username').text(username);
+            $('#ratecount').text(ratecount);
+            $('#numstars').html(score);
+            $('#profileimage').attr('src',image_src);
+            $('#rateuserdialog').modal('show');
+        },
 
         initialize : function(filters){
             this.itemcount_url = window.ahr.app_urls.getusercount;
@@ -63,7 +75,8 @@
             this.delegateEvents(_.extend(this.events,{
                 'click .sendprivatemessageuser': 'showpMessage',
                 'click .sendpm': 'sendpm',
-                'click .cancelpm': 'cancelpm'
+                'click .cancelpm': 'cancelpm',
+                'click .rateuser': 'showRateuser'
             }));
             return this;
         },

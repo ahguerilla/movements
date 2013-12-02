@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from json_field import JSONField
+import django.contrib.auth as auth
+from datetime import datetime
+
 
 
 class Skills(models.Model):
@@ -60,6 +63,8 @@ class UserProfile(models.Model):
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
     firstlogin = models.BooleanField(_('first_login'), default=True)
+    ratecount = models.IntegerField(_('ratecount'),default=0)
+    score = models.IntegerField(_('score'),default=0)
 
     def get_twitter_url(self):
         base_twitter = 'https://twitter.com/'
@@ -69,3 +74,18 @@ class UserProfile(models.Model):
             else:
                 return base_twitter + self.tweet_url
         return None
+
+
+
+class UserRate(models.Model):
+    owner = models.ForeignKey(auth.models.User, blank=True)
+    user = models.ForeignKey(auth.models.User, null=True, blank=True, related_name='rates')
+    pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
+    title = models.CharField(_('title'),max_length=200,blank=False)
+    score = models.IntegerField(_('score'),default=0)
+
+    def save(self, *args, **kwargs):
+        model = self.__class__
+        self.user.userprofile.ratecount+=1
+        self.user.userprofile.score = (self.score + self.user.userprofile.score)/self.user.userprofile.ratecount
+        self.user.userprofile.save()

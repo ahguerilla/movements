@@ -38,9 +38,8 @@ if settings.PRODUCTION:
         './css/bootstrap.css',
         './css/bootstrap-datetimepicker.min.css',
         './css/tagmanager.css',
-        './css/typeahead.css',
-        # './css/bootstrap-theme.css',
-        './css/site.css',
+        './css/typeahead.css',        
+        './css/site.css',        
         filters='cssmin',
         output='./css/packed.css'
     )
@@ -52,11 +51,11 @@ else:
             './css/bootstrap.css',
             './css/bootstrap-datetimepicker.min.css',
             './css/tagmanager.css',
-            './css/typeahead.css',
-            #'./css/bootstrap-theme.css',
+            './css/typeahead.css',            
             ),
         Bundle(
             './css/site.styl',
+            './css/market.styl',
             filters='stylus',
             output ='./css/site.css'
             ),

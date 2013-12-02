@@ -29,6 +29,7 @@ class MarketItem(models.Model):
     pub_date = models.DateTimeField(_('publish date'),default=datetime.now)
     exp_date = models.DateTimeField(_('expiry date'))
     commentcount = models.IntegerField(_('commentcount'),default=0)
+    ratecount = models.IntegerField(_('ratecount'),default=0)
 
     def __unicode__(self):
         return self.details
@@ -58,3 +59,16 @@ class File(models.Model):
     afile = models.FileField(upload_to=resouse_upload_path_handler, blank=True)
     item = models.ForeignKey(MarketItem,related_name="files")
 
+
+
+class ItemRate(models.Model):
+    owner = models.ForeignKey(auth.models.User, blank=True)
+    item = models.ForeignKey(MarketItem, null=True, blank=True, related_name='rates')
+    pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
+    title = models.CharField(_('title'),max_length=200,blank=False)
+    score = models.IntegerField(_('score'),default=0)
+
+    def save(self, *args, **kwargs):
+        model = self.__class__
+        self.item.ratecount+=1
+        self.item.save()

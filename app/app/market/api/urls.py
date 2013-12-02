@@ -23,6 +23,10 @@ urlpatterns = patterns('',
         'app.market.api.views.users.sendMessage',
         name="send_message"),
 
+    url(r'(?P<rtype>\S+)/users/set/rate/(?P<username>\S+)$',
+        'app.market.api.views.users.setRate',
+        name="user_set_rate"),    
+
     url(r'(?P<rtype>\S+)/csrftoken/get$',
         'app.market.api.views.misc.getSCRFToken',
         name="get_csrftoken"),

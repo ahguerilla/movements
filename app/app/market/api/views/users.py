@@ -20,7 +20,9 @@ def getUserDict(userprofile):
     adict['fields']['avatar'] = reverse('avatar_render_primary', args=[userprofile.user.username,80])
     adict['fields']['bio'] = userprofile.bio
     adict['fields']['tag_line'] = userprofile.tag_ling
-    adict['fields']['username'] = userprofile.user.username  
+    adict['fields']['username'] = userprofile.user.username
+    adict['fields']['ratecount'] = userprofile.ratecount
+    adict['fields']['score'] = userprofile.score
     adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[userprofile.user.username])
     return adict
 
@@ -48,20 +50,20 @@ def returnItemList(obj, rtype):
 
 
 def createQuery(request):
-    query = Q()  
+    query = Q()
     if request.GET.has_key('skills'):
-        query = Q(skills__in= request.GET.getlist('skills')) 
+        query = Q(skills__in= request.GET.getlist('skills'))
 
-    if request.GET.has_key('countries'):        
+    if request.GET.has_key('countries'):
         query = query | Q(countries__in = request.GET.getlist('countries'))
 
-    if request.GET.has_key('issues'):        
+    if request.GET.has_key('issues'):
         query = query | Q(issues__in=request.GET.getlist('issues'))
 
     if request.GET.has_key('search') and request.GET['search']!='':
-        # objs = SearchQuerySet().filter(text=request.GET['search'])    
+        # objs = SearchQuerySet().filter(text=request.GET['search'])
         # ids= [int(obj.pk) for obj in objs]
-        ids = [1,2] 
+        ids = [1,2]
         query = query & Q(id__in = ids)
 
     return query
@@ -89,11 +91,11 @@ def getDetails(request,obj_id, rtype):
 
 @login_required
 def getUsersFromto(request,sfrom,to,rtype):
-    query = createQuery(request)    
-    obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id')[sfrom:to]        
-    return HttpResponse(            
-            json.dumps([getUserDict(user) for user in obj]),
-            mimetype="application/"+rtype)
+    query = createQuery(request)
+    obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id')[sfrom:to]
+    return HttpResponse(
+        json.dumps([getUserDict(user) for user in obj]),
+        mimetype="application/"+rtype)
 
 
 @login_required
@@ -109,6 +111,16 @@ def sendMessage(request,to_user,rtype):
              recipient=users.models.User.objects.filter(username=to_user)[0],
              subject=request.POST['subject'],
              body=request.POST['message'])
-    return HttpResponse(            
-            json.dumps({'success': 'true'}),
-            mimetype="application/"+rtype)
+    return HttpResponse(
+        json.dumps({'success': 'true'}),
+        mimetype="application/"+rtype)
+
+
+@login_required
+def setRate(request,username,rtype):
+    user = User.objects.filter(username=username)[0]
+    owner = request.user
+    user.request.POST['ratecount']
+    return HttpResponse(
+        json.dumps({'success': 'true'}),
+        mimetype="application/"+rtype)
