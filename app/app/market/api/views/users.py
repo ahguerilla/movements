@@ -118,9 +118,18 @@ def sendMessage(request,to_user,rtype):
 
 @login_required
 def setRate(request,username,rtype):
-    user = User.objects.filter(username=username)[0]
+    if not request.POST.has_key('score'):
+        return HttpResponseError()
+    user = users.models.User.objects.filter(username=username)[0]
     owner = request.user
-    user.request.POST['ratecount']
+    rate = users.models.UserRate.objects.filter(owner=owner).filter(user=user)
+    if len(rate)==0:
+        rate = users.models.UserRate(owner=owner,user=user)
+    else:
+        rate = rate[0]
+    rate.score =  int(request.POST['score'])
+    rate.save()
+    rate.save_base()
     return HttpResponse(
         json.dumps({'success': 'true'}),
         mimetype="application/"+rtype)

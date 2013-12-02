@@ -46,11 +46,11 @@
         },
 
         showpMessage: function(ev){
-            var username = ev.currentTarget.getAttribute('username');            
-            $('#usernameh').text(username);            
+            var username = ev.currentTarget.getAttribute('username');
+            $('#usernameh').text(username);
             $('#messagedialog').modal('show');
         },
-        
+
         showRateuser: function(ev){
             var username = ev.currentTarget.getAttribute('username');
             var image_src = ev.currentTarget.getAttribute('image_src');
@@ -59,9 +59,29 @@
             $('#rateusertitle').text(username);
             $('#username').text(username);
             $('#ratecount').text(ratecount);
-            $('#numstars').html(score);
+            $('#numstars').text(score);
             $('#profileimage').attr('src',image_src);
             $('#rateuserdialog').modal('show');
+        },
+
+        setrate: function(ev){
+            window.getcsrf(function(csrf){
+                var dfrd = $.ajax({
+                    url:window.ahr.app_urls.setuserrate+$('#username').text(),
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        score:$('input[name="stars"]:checked').val(),
+                        csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+                        }
+                });
+                dfrd.done(function(data){
+                    $('#rateuserdialog').modal('show');
+                });
+                dfrd.fail(function(data){
+                    $('#market').prepend('<div class="alert alert-fail alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Rating failed.</div>');
+                });
+            });
         },
 
         initialize : function(filters){
@@ -76,7 +96,8 @@
                 'click .sendprivatemessageuser': 'showpMessage',
                 'click .sendpm': 'sendpm',
                 'click .cancelpm': 'cancelpm',
-                'click .rateuser': 'showRateuser'
+                'click .rateuser': 'showRateuser',
+                'click .sendurate': 'setrate',
             }));
             return this;
         },

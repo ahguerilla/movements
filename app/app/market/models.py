@@ -30,6 +30,7 @@ class MarketItem(models.Model):
     exp_date = models.DateTimeField(_('expiry date'))
     commentcount = models.IntegerField(_('commentcount'),default=0)
     ratecount = models.IntegerField(_('ratecount'),default=0)
+    score = models.FloatField(_('score'),default=0)
 
     def __unicode__(self):
         return self.details

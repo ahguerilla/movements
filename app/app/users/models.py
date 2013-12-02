@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from json_field import JSONField
 import django.contrib.auth as auth
 from datetime import datetime
+from django.db.models import Q
 
 
 
@@ -64,7 +65,7 @@ class UserProfile(models.Model):
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
     firstlogin = models.BooleanField(_('first_login'), default=True)
     ratecount = models.IntegerField(_('ratecount'),default=0)
-    score = models.IntegerField(_('score'),default=0)
+    score = models.FloatField(_('score'),default=0)
 
     def get_twitter_url(self):
         base_twitter = 'https://twitter.com/'
@@ -86,6 +87,12 @@ class UserRate(models.Model):
 
     def save(self, *args, **kwargs):
         model = self.__class__
-        self.user.userprofile.ratecount+=1
-        self.user.userprofile.score = (self.score + self.user.userprofile.score)/self.user.userprofile.ratecount
-        self.user.userprofile.save()
+        rates = UserRate.objects.filter(user=self.user).filter(~Q(owner=self.owner))
+        if self.id == None:
+            self.user.userprofile.ratecount+=1
+        if len(rates) == 0:
+            self.user.userprofile.score = int(self.score)
+        else:
+            self.user.userprofile.score = (int(self.score) + sum([rate.score for rate in rates]))/self.user.userprofile.ratecount
+        self.user.userprofile.save_base()
+        super(UserRate,self).save(*args,**kwargs)
