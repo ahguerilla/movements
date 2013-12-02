@@ -93,6 +93,6 @@ class UserRate(models.Model):
         if len(rates) == 0:
             self.user.userprofile.score = int(self.score)
         else:
-            self.user.userprofile.score = (int(self.score) + sum([rate.score for rate in rates]))/self.user.userprofile.ratecount
+            self.user.userprofile.score = (int(self.score) + sum([rate.score for rate in rates]))/float(self.user.userprofile.ratecount)
         self.user.userprofile.save_base()
         super(UserRate,self).save(*args,**kwargs)
