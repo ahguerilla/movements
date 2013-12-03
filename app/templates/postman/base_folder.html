@@ -35,8 +35,8 @@
 						    {% block pm_delete_button %}
 							    <button type="submit" class="btn default-btn btn-xs" onclick="this.form.action='{% url 'postman_delete' %}'">{% trans "Delete" %}</button>
 						    {% endblock %}
-						    {% block pm_archive_button %}
-							    <button type="submit" class="btn default-btn btn-xs" onclick="this.form.action='{% url 'postman_archive' %}'">{% trans "Archive" %}</button>
+		    {% block pm_archive_button %}
+											    <button type="submit" class="btn default-btn btn-xs" onclick="this.form.action='{% url 'postman_archive' %}'">{% trans "Archive" %}</button>
 						    {% endblock %}
 						    {% block pm_undelete_button %}
 							    <button type="submit" class="btn default-btn btn-xs" onclick="this.form.action='{% url 'postman_undelete' %}'">{% trans "Undelete" %}</button>
