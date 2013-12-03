@@ -10,7 +10,13 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
         'click .filter-type': 'changeFilterType',
         'click .item-type': 'itemTypesfilter',
         'click #create_offer': 'create_offer',
-        'click #create_request': 'create_request'
+        'click #create_request': 'create_request',
+	'click .sendprivatemessageuser': 'showpMessage',
+	'click .sendpm': 'sendpm',
+	'click .cancelpm': 'cancelpm',
+	'click .rateuser': 'showRateuser',
+	'click .sendurate': 'setrate',
+	'click .cancelrate': 'resetrate'
     },
     alert: function(message,selector){
 	$(selector).prepend('<div class="alert alert-warning alert-dismissable">'+
@@ -30,6 +36,79 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
     create_offer: function(){
         window.location = window.ahr.app_urls.getitemform;
     },
+    sendpm:function(ev){
+	var that = this;
+	window.getcsrf(function(csrf){
+	    var dfrd = $.ajax({
+		url:window.ahr.app_urls.sendmessage+$('#usernameh').text(),
+		type: 'POST',
+		dataType: 'json',
+		data: {
+		    csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+		    subject: $('#msgsub').val(),
+		    message: $('#newmessage').val()
+		}
+	    });
+	    dfrd.done(function(){
+	       $('#messagedialog').modal('hide');
+	       $('#market').prepend('<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Your message was sent successfuly.</div>');
+	    });
+	});
+    },
+    cancelpm:function(ev){
+    },
+
+    showpMessage: function(ev){
+	var username = ev.currentTarget.getAttribute('username');            
+	$('#usernameh').text(username);
+	$('#messagedialog').modal('show');
+    },
+
+    showRateuser: function(ev){
+	var username = ev.currentTarget.getAttribute('username');
+	var image_src = ev.currentTarget.getAttribute('image_src');
+	var score = ev.currentTarget.getAttribute('score');
+	var ratecount = ev.currentTarget.getAttribute('ratecount');
+	$('#rateusertitle').text(username);
+	$('#username').text(username);
+	$('#ratecount').text(ratecount);
+	$('#numstars').html('<div class="stars'+parseInt(Math.ceil(score))+'"></div>');
+	$('#profileimage').attr('src',image_src);
+	$('#rateuserdialog').modal('show');
+    },
+
+    setrate: function(ev){
+	var that = this;
+	if($('input[name="stars"]:checked').val() == undefined){
+	    this.alert('You have to select a rateing.','#rateerror');
+	    return;
+	}
+	window.getcsrf(function(csrf){
+	    var dfrd = $.ajax({
+		url:window.ahr.app_urls.setuserrate+$('#username').text(),
+		type: 'POST',
+		dataType: 'json',
+		data: {
+		    score:$('input[name="stars"]:checked').val(),
+		    csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+		    }
+	    });
+	    dfrd.done(function(data){
+		$('.btn.rateuser').attr('ratecount',data.ratecount);
+		$('.btn.rateuser').attr('score',data.score);
+		$('#rateuserdialog').modal('hide');
+		that.resetrate();
+	    });
+	    dfrd.fail(function(data){
+		this.alert('Rating failed.','#rateerror');
+	    });
+	});
+    },
+        
+    resetrate: function(){
+	$('input[name="stars"]:checked').prop('checked',false);
+    },
+
 
     changeFilterType: function(ev){
         var that = this;
@@ -200,13 +279,13 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
         this.resetMarket();
     },
 
-	init: function(filters){
-		this.default_filters = window.ahr.clone(filters);
-        this.filters = filters;
-        this.initTemplates(filters);
-        this.filters.search=$('#q').val();
-        this.setpagecoutner(this.filters, this.itemcount_url);
-	}
+    init: function(filters){
+	    this.default_filters = window.ahr.clone(filters);
+    this.filters = filters;
+    this.initTemplates(filters);
+    this.filters.search=$('#q').val();
+    this.setpagecoutner(this.filters, this.itemcount_url);
+    }
 
 });
 

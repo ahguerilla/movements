@@ -7,7 +7,7 @@ import app.users as users
 from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
-from django.db.models import Q,Count,Avg
+from django.db.models import Q,Count,Avg 
 from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 from django.contrib.auth.decorators import login_required
