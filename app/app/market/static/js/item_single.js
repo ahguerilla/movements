@@ -139,6 +139,14 @@
                 window.ahr.app_urls.getmarketitem+obj_id.id,
                 function(data){
                     that.item = data[0];
+                    if(that.item.fields.item_type == "resource"){
+                        $('#rate_resource').attr('username',that.item.fields.owner[0]);
+                        $('#rate_resource').attr('ratecount',that.item.fields.userratecount);
+                        $('#rate_resource').attr('score',that.item.fields.usercore);
+                        $('#rate_resource').attr('image_src',that.item.fields.avatar);
+                    }else{
+                        $('#rate_resource').hide();
+                    }
                     $('#rate_user').attr('username',that.item.fields.owner[0]);
                     $('#rate_user').attr('ratecount',that.item.fields.userratecount);
                     $('#rate_user').attr('score',that.item.fields.usercore);

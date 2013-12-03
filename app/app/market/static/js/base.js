@@ -20,50 +20,50 @@ window.ahr.BaseView = Backbone.View.extend({
         'click .sendprivatemessageuser': 'showpMessage',
         'click .sendpm': 'sendpm',
         'click .cancelpm': 'cancelpm',
-        'click .rateuser': 'showRateuser',
-        'click .sendurate': 'setrate',
+        'click .btn.rate': 'showrate',
+        'click .sendrate': 'setrate',
         'click .cancelrate': 'resetrate'
     },
-    
+
     alert: function(message,selector){
-	$(selector).empty();
-	$(selector).prepend('<div class="alert alert-warning alert-dismissable">'+
-	'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
-	message+'</div>');
-    },
-    
-    info: function (message,selector){
-	$(selector).empty();
-	$(selector).prepend('<div class="alert alert-success alert-dismissable">'+
-	    '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
-	    message+'</div>');
-    },
-    
-    sendpm:function(ev){
-      var that = this;	
-      if( $('#msgsub').val()!= '' &&  $('#newmessage').val() != ''){
-	  $('#messagedialog').modal('hide');
-	  window.getcsrf(function(csrf){
-	      var dfrd = $.ajax({
-		  url:window.ahr.app_urls.sendmessage+$('#usernameh').text(),
-		  type: 'POST',
-		  dataType: 'json',
-		  data: {
-		      csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
-		      subject: $('#msgsub').val(),
-		      message: $('#newmessage').val()
-		  }
-	      });
-	      dfrd.done(function(){	       
-		 $('#market').prepend('<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Your message was sent successfuly.</div>');
-	      });
-	  });    
-      }else{
-	  this.alert('Please provide a subject and message.','#pmerror');
-      }    
+        $(selector).empty();
+        $(selector).prepend('<div class="alert alert-warning alert-dismissable">'+
+        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+        message+'</div>');
     },
 
-    
+    info: function (message,selector){
+        $(selector).empty();
+        $(selector).prepend('<div class="alert alert-success alert-dismissable">'+
+            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+            message+'</div>');
+    },
+
+    sendpm:function(ev){
+        var that = this;	
+        if( $('#msgsub').val()!= '' &&  $('#newmessage').val() != ''){
+            $('#messagedialog').modal('hide');
+            window.getcsrf(function(csrf){
+                var dfrd = $.ajax({
+                    url:window.ahr.app_urls.sendmessage+$('#usernameh').text(),
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+                        subject: $('#msgsub').val(),
+                        message: $('#newmessage').val()
+                    }
+                });
+                dfrd.done(function(){	       
+                    $('#market').prepend('<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Your message was sent successfuly.</div>');
+                });
+            });    
+        }else{
+            this.alert('Please provide a subject and message.','#pmerror');
+        }    
+    },
+
+
     cancelpm:function(ev){
     },
 
@@ -72,20 +72,20 @@ window.ahr.BaseView = Backbone.View.extend({
         $('#usernameh').text(username);
         $('#messagedialog').modal('show');
     }, 
-    
-    showRateuser: function(ev){
+
+    showrate: function(ev){
         var username = ev.currentTarget.getAttribute('username');
         var image_src = ev.currentTarget.getAttribute('image_src');
         var score = ev.currentTarget.getAttribute('score');
         var ratecount = ev.currentTarget.getAttribute('ratecount');
-        $('#rateusertitle').text(username);
+        $('#ratetitle').text(username);
         $('#username').text(username);
         $('#ratecount').text(ratecount);
         $('#numstars').html('<div class="stars'+parseInt(Math.ceil(score))+'"></div>');
         $('#profileimage').attr('src',image_src);
-        $('#rateuserdialog').modal('show');
+        $('#ratedialog').modal('show');
     },
-    
+
     setrate: function(ev){
         var that = this;
         if($('input[name="stars"]:checked').val() == undefined){
@@ -93,8 +93,12 @@ window.ahr.BaseView = Backbone.View.extend({
             return;
         }
         window.getcsrf(function(csrf){
+            if ($('.btn.rate').attr('rateing')=='user'){
+                this.rateurl = window.ahr.app_urls.setuserrate+$('#username').text();
+            }else{
+            }
             var dfrd = $.ajax({
-                url:window.ahr.app_urls.setuserrate+$('#username').text(),
+                url: this.rateurl,
                 type: 'POST',
                 dataType: 'json',
                 data: {
@@ -103,17 +107,17 @@ window.ahr.BaseView = Backbone.View.extend({
                     }
             });
             dfrd.done(function(data){
-                $('.btn.rateuser').attr('ratecount',data.ratecount);
-                $('.btn.rateuser').attr('score',data.score);
-                $('#rateuserdialog').modal('hide');
+                $('.btn.rate').attr('ratecount',data.ratecount);
+                $('.btn.rate').attr('score',data.score);
+                $('#ratedialog').modal('hide');
                 that.resetrate();
             });
             dfrd.fail(function(data){
-                this.alert('Rating failed.','#rateerror');
+                that.alert('Rating failed.','#rateerror');
             });
         });
     },
-    
+
     resetrate: function(){
         $('input[name="stars"]:checked').prop('checked',false);
     },
