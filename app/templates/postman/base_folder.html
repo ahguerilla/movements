@@ -48,14 +48,14 @@
 					    <div style="margin-top:10px;">
 					    Order By:
 					    {% block pm_sender_header %}
-						     <button class="btn btn-xs default-btn"><a href="{% postman_order_by sender %}">{% trans "Sender" %}</a></button>
+						     <div class="btn btn-xs default-btn"><a href="{% postman_order_by sender %}">{% trans "Sender" %}</a></div>
 					    {% endblock %}
 
 					    {% block pm_recipient_header %}
-						     <button class="btn btn-xs default-btn"><a href="{% postman_order_by recipient %}">{% trans "Recipient" %}</a></button>
+						     <div class="btn btn-xs default-btn"><a href="{% postman_order_by recipient %}">{% trans "Recipient" %}</a></div>
 					    {% endblock %}
-					    <button class="btn btn-xs default-btn"><a href="{% postman_order_by subject %}">{% trans "Subject" %}</a></button>
-					    <button class="btn btn-xs default-btn"><a href="{% postman_order_by date %}">{% block pm_date %}{% trans "Date" %}{% endblock %}</a></button>
+					    <div class="btn btn-xs default-btn"><a href="{% postman_order_by subject %}">{% trans "Subject" %}</a></div>
+					    <div class="btn btn-xs default-btn"><a href="{% postman_order_by date %}">{% block pm_date %}{% trans "Date" %}{% endblock %}</a></div>
 					    </div>
 
 					    {% block pm_by_modes %}
@@ -63,12 +63,12 @@
 					    List by:
 						    <span class="pm_by_mode">
 							    {% if by_message %}
-								    <button class="btn btn-xs default-btn"><a href="{{ by_conversation_url }}">{% trans "conversation" %}</a></button>
-								    <button class="btn btn-xs default-btn disabled">{% trans "message" %}</button>
+								    <div class="btn btn-xs default-btn"><a href="{{ by_conversation_url }}">{% trans "conversation" %}</a></div>
+								    <div class="btn btn-xs default-btn disabled">{% trans "message" %}</div>
 							    {% endif %}
 							    {% if by_conversation %}
-								<button class="btn btn-xs default-btn disabled">{% trans "conversation" %}</button>
-								<button class="btn btn-xs default-btn"><a href="{{ by_message_url }}">{% trans "message" %}</a></button>
+								<div class="btn btn-xs default-btn disabled">{% trans "conversation" %}</div>
+								<div class="btn btn-xs default-btn"><a href="{{ by_message_url }}">{% trans "message" %}</a></div>
 							    {% endif %}
 						    </span>
 					    </div>
