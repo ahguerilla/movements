@@ -6,7 +6,7 @@
 {% block content %}
 <div id="item-single" item-id="{{item.id}}" class="row">
   <div id="market" class="col-md-offset-2 col-md-8">
-    {% include "clientside/rateuser.html" %}
+    {% include "clientside/rate.html" %}
     <!-- detail -->
     <div class="row">
       <!-- Back -->
@@ -57,8 +57,8 @@
         <button type="button" id="private_message" class="btn btn-default btn-sm btn-block">PRIVATE MESSAGE</button>
         <button type="button" id="recommend" class="btn btn-default btn-sm btn-block">RECOMMEND</button>
         <button type="button" id="report_post" class="btn btn-default btn-sm btn-block">REPORT POST</button>
-        <button type="button"  image_src="" score="" ratecount="" username=""  id="rate_user" class="btn btn-default btn-sm btn-block rateuser">RATE USER</button>
-        <button type="button" id="rate_resource" class="btn btn-default btn-sm btn-block">RATE RESOURCE</button>
+        <button type="button" image_src="" rateing="user" score="" ratecount="" username=""  id="rate_user" class="btn btn-default btn-sm btn-block rate">RATE USER</button>
+        <button type="button" image_src="/static/images/male200.png" rateing="resource" score="" ratecount="" username="" id="rate_resource" class="btn btn-default btn-sm btn-block rate">RATE RESOURCE</button>
       </div>
     </div>
     <div class="row">
