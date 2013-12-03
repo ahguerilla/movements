@@ -26,82 +26,115 @@
       <form method="post" class="form-horizontal" id="settingform" role="form">
         {% csrf_token %}
         <div class="form-group">
-          <div class="col-xs-6">
+          <div class="col-xs-5">
             {{ user_form.first_name.errors }}
             {% render_field user_form.first_name class="form-control input-sm" placeholder="First Name" required="true" %}
-            <label><input type="checkbox" name="notperm-name"/> Hide</label>
+            
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-5">
             {{ user_form.last_name.errors }}
             {% render_field user_form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}            
           </div>
+          <div class="col-md-2">
+            <label><input type="checkbox" name="notperm-name"/> Hide</label>
+          </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ user_form.username.errors }}            
             {% render_field user_form.username class="form-control input-sm" placeholder="Username" required="true" %}                        
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ settings_form.nationality.errors }}
             {% render_field settings_form.nationality class="form-control input-sm" placeholder="Nationality" required="true" %}
+            
+          </div>
+          <div class="col-md-2">
             <label><input type="checkbox" name="notperm-nationality"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ settings_form.occupation.errors }}
             {% render_field settings_form.occupation class="form-control input-sm" placeholder="Occupation" %}
+            
+          </div>
+          <div class="col-md-2">
             <label><input type="checkbox" name="notperm-occupation"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ settings_form.resident_country.errors }}
             {% render_field settings_form.resident_country class="form-control input-sm" placeholder="Country of Residence" required="true" %}
+            
+          </div>
+          <div class="col-md-2">
             <label><input type="checkbox" name="notperm-resident_country"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ settings_form.expertise.errors }}
             {% render_field settings_form.expertise class="form-control input-sm" placeholder="Area of expertise if any" %}
+            
+          </div>
+          <div class="col-md-2">
             <label><input type="checkbox" name="notperm-experties"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ settings_form.web_url.errors }}
             {% render_field settings_form.web_url class="form-control input-sm" placeholder="Website/Blog URL" %}
+            
+          </div>
+          <div class="col-md-2">
             <label><input type="checkbox" name="notperm-web_url"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ settings_form.fb_url.errors }}
             {% render_field settings_form.fb_url class="form-control input-sm" placeholder="Facebook Page" %}
+            
+          </div>
+          <div class="col-md-2">
             <label><input type="checkbox" name="notperm-fb_url"/> Hide</label>
           </div>
+
+          
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ settings_form.tweet_url.errors }}
-            {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Twitter Handle" %}
+            {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Twitter Handle" %}            
+          </div>
+          <div class="col-md-2">
             <label><input type="checkbox" name="notperm-tweet_url"/> Hide</label>
           </div>
+
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ settings_form.tag_ling.errors }}
             {% render_field settings_form.tag_ling class="form-control input-sm" placeholder="Tag Line" %}
+            
+          </div>
+          <div class="col-md-2">
             <label><input type="checkbox" name="notperm-tag_ling"/> Hide</label>
           </div>
+
         </div>
         <div class="form-group">
-          <div class="col-md-12">
+          <div class="col-md-10">
             {{ settings_form.bio.errors }}
             {% render_field settings_form.bio class="form-control input-sm" placeholder="Bio" %}
+            
+          </div>
+          <div class="col-md-2">
             <label><input type="checkbox" name="notperm-bio"/> Hide</label>
           </div>
         </div>
