@@ -46,7 +46,7 @@
         },
 
         showpMessage: function(ev){
-            var username = ev.currentTarget.getAttribute('username');
+            var username = ev.currentTarget.getAttribute('username');            
             $('#usernameh').text(username);
             $('#messagedialog').modal('show');
         },
@@ -59,12 +59,17 @@
             $('#rateusertitle').text(username);
             $('#username').text(username);
             $('#ratecount').text(ratecount);
-            $('#numstars').text(score);
+            $('#numstars').html('<div class="stars'+parseInt(Math.ceil(score))+'"></div>');
             $('#profileimage').attr('src',image_src);
             $('#rateuserdialog').modal('show');
         },
 
         setrate: function(ev){
+            var that = this;
+            if($('input[name="stars"]:checked').val() == undefined){
+                this.alert('You have to select a rateing.','#rateerror');
+                return;
+            }
             window.getcsrf(function(csrf){
                 var dfrd = $.ajax({
                     url:window.ahr.app_urls.setuserrate+$('#username').text(),
@@ -76,12 +81,19 @@
                         }
                 });
                 dfrd.done(function(data){
-                    $('#rateuserdialog').modal('show');
+                    $('.btn.rateuser').attr('ratecount',data.ratecount);
+                    $('.btn.rateuser').attr('score',data.score);
+                    $('#rateuserdialog').modal('hide');
+                    that.resetrate();
                 });
                 dfrd.fail(function(data){
-                    $('#market').prepend('<div class="alert alert-fail alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Rating failed.</div>');
+                    this.alert('Rating failed.','#rateerror');
                 });
             });
+        },
+        
+        resetrate: function(){
+            $('input[name="stars"]:checked').prop('checked',false);
         },
 
         initialize : function(filters){
@@ -98,6 +110,7 @@
                 'click .cancelpm': 'cancelpm',
                 'click .rateuser': 'showRateuser',
                 'click .sendurate': 'setrate',
+                'click .cancelrate': 'resetrate'
             }));
             return this;
         },

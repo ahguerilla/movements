@@ -12,6 +12,17 @@ window.ahr.market.MarketBaseView = Backbone.View.extend({
         'click #create_offer': 'create_offer',
         'click #create_request': 'create_request'
     },
+    alert: function(message,selector){
+	$(selector).prepend('<div class="alert alert-warning alert-dismissable">'+
+	'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+	message+'</div>');
+    },
+    
+    info: function (message,selector){
+	$(selector).prepend('<div class="alert alert-success alert-dismissable">'+
+	    '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+	    message+'</div>');
+    },
 
     create_request: function(){
         window.location = window.ahr.app_urls.getitemform.replace('offer','request');

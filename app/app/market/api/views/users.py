@@ -131,5 +131,8 @@ def setRate(request,username,rtype):
     rate.save()
     rate.save_base()
     return HttpResponse(
-        json.dumps({'success': 'true'}),
+        json.dumps({'success': 'true',
+                    'score':user.userprofile.score ,
+                    'ratecount':user.userprofile.ratecount
+                    }),
         mimetype="application/"+rtype)
