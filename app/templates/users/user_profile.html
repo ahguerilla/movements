@@ -27,7 +27,11 @@
             <strong>Name:</strong> 
           </div>
           <div class="col-md-9">
+            {% if user_profile.notperm.name != 'on' %}
             {{ user_details.first_name }}&nbsp;{{ user_details.last_name }} <em>({{ user_details.username }})</em>
+            {% else %}
+              Hidden
+            {% endif %}
           </div>
         </div>
       </div>
@@ -37,7 +41,11 @@
             <strong>Email:</strong> 
           </div>
           <div class="col-md-9">
-            {{ user_details.email }}
+            {% if user_profile.notperm.email != 'on' %}
+              {{ user_details.email }}
+            {% else %}
+              Hidden
+            {% endif %}
           </div>
         </div>
       </div>
@@ -48,7 +56,11 @@
             <strong>Nationality:</strong> 
           </div>
           <div class="col-md-9">
+          {% if user_profile.notperm.nationality != 'on' %}
             {{ user_profile.nationality }}
+          {% else %}
+            Hidden
+          {% endif %}
           </div>
         </div>
       </div>
@@ -58,7 +70,11 @@
             <strong>Occupation:</strong> 
           </div>
           <div class="col-md-9">
+          {% if user_profile.notperm.occupation != 'on' %}
             {{ user_profile.occupation }}
+          {% else %}
+            Hidden
+          {% endif %}
           </div>
         </div>
       </div>
@@ -68,7 +84,11 @@
             <strong>Area of expertise:</strong> 
           </div>
           <div class="col-md-9">
+          {% if user_profile.notperm.expertise != 'on' %}
             {{ user_profile.expertise }}
+          {% else %}
+            Hidden
+          {% endif %}
           </div>
         </div>
       </div>
@@ -79,7 +99,11 @@
             <strong>Website:</strong> 
           </div>
           <div class="col-md-9">
+          {% if user_profile.notperm.web_url != 'on' %}
             <a target="_blank" href="{{ user_profile.web_url }}">{{ user_profile.web_url }}</a>
+          {% else %}
+            Hidden
+          {% endif %}
           </div>
         </div>
       </div>
@@ -91,7 +115,11 @@
             <strong>Facebook:</strong> 
           </div>
           <div class="col-md-9">
+          {% if user_profile.notperm.fb_url != 'on' %}
             <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.fb_url }}</a>
+          {% else %}
+            Hidden
+          {% endif %}
           </div>
         </div>
       </div>
@@ -103,7 +131,11 @@
             <strong>Twitter:</strong> 
           </div>
           <div class="col-md-9">
+          {% if user_profile.notperm.tweet_url != 'on' %}
             <a target="_blank" href="{{ user_profile.get_twitter_url }}">{{ user_profile.tweet_url }}</a>
+          {% else %}
+            Hidden
+          {% endif %}
           </div>
         </div>
       </div>
@@ -114,7 +146,11 @@
             <strong>Tag:</strong> 
           </div>
           <div class="col-md-9">
+          {% if user_profile.notperm.tag_ling != 'on' %}
             {{ user_profile.tag_ling }}
+          {% else %}
+            Hidden
+          {% endif %}
           </div>
         </div>
       </div>
@@ -124,7 +160,11 @@
             <strong>Bio:</strong> 
           </div>
           <div class="col-md-9">
+          {% if user_profile.notperm.bio != 'on' %}
             {{ user_profile.bio }}
+          {% else %}
+            Hidden
+          {% endif %}
           </div>
         </div>
       </div>

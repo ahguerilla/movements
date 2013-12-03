@@ -28,7 +28,21 @@ class UserForm(forms.ModelForm):
 class SettingsForm(forms.ModelForm):
     class Meta:
         model = UserProfile  
-        fields = ['nationality','occupation','resident_country','expertise','web_url','fb_url','tweet_url','tag_ling','bio','issues','countries','skills','is_organisation','is_journalist','get_newsletter',]
+        fields = ['nationality',
+                  'occupation',
+                  'resident_country',
+                  'expertise',
+                  'web_url',
+                  'fb_url',
+                  'tweet_url',
+                  'tag_ling',
+                  'bio',
+                  'issues',
+                  'countries',
+                  'skills',
+                  'is_organisation',
+                  'is_journalist',
+                  'get_newsletter']
 
     def save(self, force_insert=False, force_update=False, commit=True):
         m = super(SettingsForm, self).save(commit=False)

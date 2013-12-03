@@ -16,82 +16,93 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       {% else %}
       <div><h4>{% trans "User Settings" %}</h4></div>
-      {% avatar user %}
+      
+      {% avatar user %}      
       <a href="{% url 'avatar_change' %}">Change</a>
-      <div>&nbsp;</div>
+      <div>&nbsp;</div>      
       <div><a href="{% url 'account_change_password' %}">Change Password</a></div>
       <div>&nbsp;</div>
       {% endif %}
-      <form method="post" class="form-horizontal" role="form">
+      <form method="post" class="form-horizontal" id="settingform" role="form">
         {% csrf_token %}
         <div class="form-group">
           <div class="col-xs-6">
             {{ user_form.first_name.errors }}
             {% render_field user_form.first_name class="form-control input-sm" placeholder="First Name" required="true" %}
+            <label><input type="checkbox" name="notperm-name"/> Hide</label>
           </div>
           <div class="col-xs-6">
             {{ user_form.last_name.errors }}
-            {% render_field user_form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}
+            {% render_field user_form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}            
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
-            {{ user_form.username.errors }}
-            {% render_field user_form.username class="form-control input-sm" placeholder="Username" required="true" %}
+            {{ user_form.username.errors }}            
+            {% render_field user_form.username class="form-control input-sm" placeholder="Username" required="true" %}                        
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
             {{ settings_form.nationality.errors }}
             {% render_field settings_form.nationality class="form-control input-sm" placeholder="Nationality" required="true" %}
+            <label><input type="checkbox" name="notperm-nationality"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
             {{ settings_form.occupation.errors }}
             {% render_field settings_form.occupation class="form-control input-sm" placeholder="Occupation" %}
+            <label><input type="checkbox" name="notperm-occupation"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
             {{ settings_form.resident_country.errors }}
             {% render_field settings_form.resident_country class="form-control input-sm" placeholder="Country of Residence" required="true" %}
+            <label><input type="checkbox" name="notperm-resident_country"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
             {{ settings_form.expertise.errors }}
             {% render_field settings_form.expertise class="form-control input-sm" placeholder="Area of expertise if any" %}
+            <label><input type="checkbox" name="notperm-experties"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
             {{ settings_form.web_url.errors }}
             {% render_field settings_form.web_url class="form-control input-sm" placeholder="Website/Blog URL" %}
+            <label><input type="checkbox" name="notperm-web_url"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
             {{ settings_form.fb_url.errors }}
             {% render_field settings_form.fb_url class="form-control input-sm" placeholder="Facebook Page" %}
+            <label><input type="checkbox" name="notperm-fb_url"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
             {{ settings_form.tweet_url.errors }}
             {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Twitter Handle" %}
+            <label><input type="checkbox" name="notperm-tweet_url"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
             {{ settings_form.tag_ling.errors }}
             {% render_field settings_form.tag_ling class="form-control input-sm" placeholder="Tag Line" %}
+            <label><input type="checkbox" name="notperm-tag_ling"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
             {{ settings_form.bio.errors }}
             {% render_field settings_form.bio class="form-control input-sm" placeholder="Bio" %}
+            <label><input type="checkbox" name="notperm-bio"/> Hide</label>
           </div>
         </div>
         <div class="form-group">
@@ -145,9 +156,9 @@
         <div class="form-group">
           <div class="col-xs-offset-6 col-xs-6">
             {% if initial %}
-            <button type="submit" class="btn btn-success full-width">{% trans "Continue" %}</button>
+            <button type="submit" class="submitsetting btn btn-success full-width">{% trans "Continue" %}</button>
             {% else %}
-            <button type="submit" class="btn btn-success full-width">{% trans "Save" %}</button>
+            <button type="submit" class="submitsetting btn btn-success full-width">{% trans "Save" %}</button>
             {% endif %}
           </div>
         </div>
@@ -156,3 +167,22 @@
   </div>
 </div>
 {% endblock %}
+
+{%block endjavascript%}
+<script type="text/javascript">
+  (function(){
+    //alert("{{notperm|safe}}");
+    var perms = {{notperm|safe}};
+    for(item in perms){
+      $('input[name=notperm-'+item+']').attr('checked',true);
+    }
+    $('.submitsetting').on('click',function(e){
+      e.preventDefault();
+      $('#settingform').serialize();
+      $('#settingform').submit();    
+    });
+  })(); 
+  
+
+</script>
+{%endblock%}
