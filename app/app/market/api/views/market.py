@@ -11,26 +11,56 @@ from django.db.models import Q,Count,Avg
 from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+import avatar
+
+
+def getMarketjson(objs):
+    alist=[]
+    for obj in objs:
+        adict = {'fields':{}}
+        adict['pk'] = obj.id
+        adict['fields']['item_type'] = obj.item_type
+        adict['fields']['issues']= [ob.id for ob in obj.issues.all()]
+        adict['fields']['countries']= [ob.id for ob in obj.countries.all()]
+        adict['fields']['skills']= [ob.id for ob in obj.skills.all()]
+        adict['fields']['title']= obj.title
+        adict['fields']['details']= obj.details
+        adict['fields']['pub_date']= str(obj.pub_date)
+        adict['fields']['exp_date']= str(obj.exp_date)
+        adict['fields']['owner']= [obj.owner.username]
+        adict['fields']['url']= obj.url
+        adict['fields']['files']= [afile.url for afile in obj.files.all()]
+        adict['fields']['commentcount']= obj.commentcount
+        adict['fields']['usercore']= obj.owner.userprofile.score
+        adict['fields']['userratecount']= obj.owner.userprofile.ratecount    
+        adict['fields']['ratecount']= obj.ratecount
+        adict['fields']['score']= obj.score
+        adict['fields']['avatar'] = reverse('avatar_render_primary', args=[obj.owner.username,80])
+        
+        alist.append(adict)
+    return json.dumps(alist)
 
 
 def returnItemList(obj, rtype):
+    #value(rtype,
+          #obj,
+          #use_natural_keys=True,
+          #fields=('item_type',
+                  #'issues',
+                  #'countries',
+                  #'skills',
+                  #'title',
+                  #'details',
+                  #'pub_date',
+                  #'exp_date',
+                  #'owner',
+                  #'url',
+                  #'files',
+                  #'commentcount')
+          #)
     return HttpResponse(
-        value(rtype,
-              obj,
-              use_natural_keys=True,
-              fields=('item_type',
-                      'issues',
-                      'countries',
-                      'skills',
-                      'title',
-                      'details',
-                      'pub_date',
-                      'exp_date',
-                      'owner',
-                      'url',
-                      'files',
-                      'commentcount')
-              ),
+        getMarketjson(obj),
         mimetype="application/"+rtype)
 
 

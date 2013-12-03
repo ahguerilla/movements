@@ -14,6 +14,7 @@ js = Bundle(
         './js/lib/moment-with-langs.min.js',
         './js/lib/bootstrap.js',
         './js/lib/bootstrap-datetimepicker.min.js',
+        './js/base.js',
         './js/lib/tagmanager.js',
         './js/lib/typeahead.min.js',
         './js/templates/typeaheadtag_utils.js',
@@ -25,8 +26,7 @@ js = Bundle(
         './js/comment.js',
         './js/market.js',
         './js/posts.js',
-        './js/users.js',
-        './js/base.js'
+        './js/users.js',        
         ),
     filters='jsmin',
     output='./js/packed.js'

@@ -1,13 +1,7 @@
 (function(){
 
-    var SingleItemView = Backbone.View.extend({
-        el: '#item-single',
-        events:{
-            'click .comment-btn': 'comment',
-            'click #private_message': 'private_message',
-            'click #cancel_message': 'cancel_message',
-            'click #send_message': 'send_message'
-        },
+    var SingleItemView = window.ahr.BaseView.extend({
+        el: '#item-single',        
 
         cancel_message: function(){
             $('#marketitem_message_form').addClass('hide');
@@ -133,10 +127,22 @@
             $('#marketitem_comment_form').html(this.comment_form_tmp());
             window.ahr.expandTextarea('#newcomment');
             this.comment_tmp = _.template($('#comment_view_template').html());
+            
+            this.delegateEvents(_.extend(this.events,{
+                'click .comment-btn': 'comment',
+                'click #private_message': 'private_message',
+                'click #cancel_message': 'cancel_message',
+                'click #send_message': 'send_message'
+            }));
+            
             $.getJSON(
                 window.ahr.app_urls.getmarketitem+obj_id.id,
                 function(data){
                     that.item = data[0];
+                    $('#rate_user').attr('username',that.item.fields.owner[0]);
+                    $('#rate_user').attr('ratecount',that.item.fields.userratecount);
+                    $('#rate_user').attr('score',that.item.fields.usercore);
+                    $('#rate_user').attr('image_src',that.item.fields.avatar);
                     $.getJSON(window.ahr.app_urls.getcommentslast.replace('0',obj_id.id)+'100',function(data){
                         that.comments = data;
                         that.setPage();
