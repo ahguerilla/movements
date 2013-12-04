@@ -1,0 +1,17 @@
+<script type="text/template" id="typeahead_template">
+  <div class="col-md-12">
+    <label for="<%=item%>"><%=title%></label>
+    <div class="input-group">
+      <input id="<%=item%>" class="form-control input-sm" type="text"/>
+      <span class="input-group-addon">
+        <span class="glyphicon <%=item%>">Add</span>
+      </span>
+    </div>
+  </div>
+  <div class="col-md-12" style="margin-top:5px">
+    <div class="input-group" id="<%=item%>Tags"></div>
+  </div>
+  <div class="col-md-12">
+    <div class="<%=item%> error"></div>
+  </div>
+</script>

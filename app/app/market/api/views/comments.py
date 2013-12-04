@@ -31,6 +31,7 @@ def saveComment(form, owner,item):
         form.cleaned_data['pub_date'] = datetime.datetime.now()
     obj = form.save()
     obj.save()
+    obj.save_base()
     return obj
 
 

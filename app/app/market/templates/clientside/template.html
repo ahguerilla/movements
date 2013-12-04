@@ -1,100 +1,4 @@
-<script type="text/template" id="textarea_template">
-  <div class="col-md-12">
-    <textarea class="form-control" name="<%=jsonfield%>" id="<%=jsonfield%>" rows="6" placeholder="<%=placeholder%>" required="true"></textarea>
-  </div>
-  <div class="col-md-12">
-    <div class="<%=jsonfield%> error"></div>
-  </div>
-</script>
-
-
-<script type="text/template" id="input_template">
-  <div class="col-md-12">
-    <label for="<%=jsonfield%>"><%=title%></label>
-    <input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control input-sm" type="text" placeholder="<%=placeholder%>" required="true" />
-  </div>
-  <div class="col-md-12">
-    <div class="<%=jsonfield%> error"></div>
-  </div>
-</script>
-
-
-<script type="text/template" id="datetimepicker_template">
-  <div class="col-md-12">
-    <label for="<%=jsonfield%>"><%=title%></label>
-    <div class='input-group date' id='datetimepicker-<%=jsonfield%>'>
-      <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control input-sm" required="true" />
-      <span class="input-group-addon">
-        <span class="glyphicon glyphicon-calendar"></span>
-      </span>
-    </div>
-  </div>
-  <div class="col-md-12">
-    <div class="<%=jsonfield%> error"></div>
-  </div>
-</script>
-
-
-<script type="text/template" id="typeahead_template">
-  <div class="col-md-12">
-    <label for="<%=item%>"><%=title%></label>
-    <div class="input-group">
-      <input id="<%=item%>" class="form-control input-sm" type="text" required="true" />
-      <span class="input-group-addon">
-        <span class="glyphicon <%=item%>">Add</span>
-      </span>
-    </div>
-  </div>
-  <div class="col-md-12" style="margin-top:5px">
-    <div class="input-group" id="<%=item%>Tags"></div>
-  </div>
-  <div class="col-md-12">
-    <div class="<%=item%> error"></div>
-  </div>
-</script>
-
-
-<script type="text/template" id="afile_template">
-
-    <div class="row">
-        <div class="form-group">
-            <label for="post-title" class="col-sm-2 control-label"><%=title%></label>
-            <div class="col-sm-4">
-                <input id="<%=jsonfield%>" name="<%=jsonfield%>" class="form-control file-input" type="file" placeholder="<%=placeholder%>"/>
-            </div>
-        </div>
-    </div>
-
-</script>
-
-
-<script type="text/template" id="comment_view_template">
-
-<div class="comment row well" comment-owner="<%=owner%>" comment-id="<%=pk%>">
-  <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="pull-right"><strong><%=pub_date%></strong></div>
-        </div>
-        <!-- <div class="comment-date col-lg-offset-4 col-lg-2">&nbsp;<% if(owner===window.user_id){ %> <a href="<%= window.ahr.app_urls.formeditcomment+pk %>">Edit</a> <% } %></div>  -->
-      </div>
-      <div class="row" style="margin-top:15px;">
-        <div class="col-md-2">
-          <a href="<%= owner_url %>"><img src="<%=userpic%>" /></a>
-          <!-- <div class="center-content"><strong><%=user%></strong></div> -->
-        </div>
-        <div class="col-md-10">
-          <div class="comment-content"><%=content%></div>
-        </div>
-      </div>
-  </div>
-</div>
-
-</script>
-
-
 <script type="text/template" id="comment_edit_template">
-
     <div class="comment" comment-id="<%=pk%>">
         <div class="comment-wrap">
             <div class="comment-userpic"><img src="<%=userpic%>"/></div>
@@ -107,105 +11,20 @@
             </div>
         </div>
     </div>
-
 </script>
-
-
-<script type="text/template" id="comment_add_template">
-
-    <div class="new-comment row well" >
-        <div class="comment-wrap">
-            <div>
-                <textarea class="form-control" name="newcomment" id="newcomment" rows="1" placeholder="Post a comment"></textarea>
-            </div>
-        </div>
-        <div class="btn pull-right btn-default btn-sm comment-btn" style="margin-top: 5px;"> Comment </div>
-    </div>
-
-</script>
-
-
-<script type="text/template" id="item_template">
-
-  <div class="row item_container" item_id="<%=pk%>">
-    <div class="col-md-12">
-      <div class="well well-sm">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="pull-right"><strong><%= item_type.toUpperCase() %></strong></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12"><h4><%=title%></h4></div>
-        </div>
-        <div class="row" style="margin-bottom: 10px;">
-          <div class="item-header" style="margin-left:15px;margin-bottom:10px;">
-            <!-- TODO: Remove hardcoded path -->
-            <div class="item-user">By <strong><a href="/user/profile/<%=owner%>"><%=owner%></a></strong></div>
-            <div class="item-pub-date"><%=moment(pub_date).format("D MMM YYYY")%></div>
-          </div>
-          <div class="item-contents col-md-12"><%=details%></div>
-        </div>
-        <div class="row">
-          <div class="col-md-2"><%=commentcount%> Comments</div>
-          <div class="col-md-10">Tags:
-            <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.issues[ind] %> </div> <% }); %>
-            <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.countries[ind] %> </div> <% }); %>
-            <% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.skills[ind] %> </div> <% }); %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</script>
-
 
 <script type="text/template" id="filter-tag">
-
     <div style="display:inline-block;margin:3px;">
         <button type="button" class="btn btn-default btn-xs tagbutton <%=active%>"><%=filtertag%></button>
     </div>
-
 </script>
 
 
 <script type="text/template" id="type-tag">
-
     <button type="button" class="btn item-type offer btn-default btn-sm btn-success"><%=typetag%></button>
-
 </script>
 
 
-<script type="text/template" id="user-template">
-
-  <div class="row" item_id="<%=pk%>">
-    <div class="col-md-12">
-      <div class="well">
-        <div class="row">
-          <div class="col-md-2">
-            <a href="<%=profile_url%>"><img src="<%=avatar%>"/></a>
-          </div>
-          <div class="col-md-10">
-            <div class="row">
-              <div><strong>User: </strong><a class="username" href="<%=profile_url%>"><%=username%></a></div>
-              <div><strong>Tag: </strong><%=tag_line%></div>
-              <div><strong>Bio: </strong><%=bio%></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 center-content" style="margin-top:15px;">
-            <button type="button" class="btn btn-default btn-sm"> Recommend </button>
-            <button type="button" username="<%=username%>" class="btn btn-default btn-sm sendprivatemessageuser"> Private message </button>
-            <button type="button" rateing="user" image_src="<%=avatar%>" score="<%=score%>" ratecount="<%=ratecount%>" username="<%=username%>" class="btn btn-default btn-sm rate"> Rate user </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</script>
 
 <script type="text/javascript" id="api_urls">
     window.ahr= window.ahr || {};

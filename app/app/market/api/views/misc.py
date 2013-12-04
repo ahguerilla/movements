@@ -38,5 +38,8 @@ def getSkills(request,rtype):
 
 
 def getUnraedCount(request,rtype):
-    count=Message.objects.inbox_unread_count(request.user)
+    try:
+        count=Message.objects.inbox_unread_count(request.user)
+    except:
+        return HttpResponse( json.dumps(0), mimetype="application/"+rtype)
     return HttpResponse( json.dumps(count), mimetype="application/"+rtype)

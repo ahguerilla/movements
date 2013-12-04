@@ -4,6 +4,9 @@
 {% block head_title %}{% trans "Marketplace Item" %}{% endblock %}
 
 {% block content %}
+{% include "clientside/commentview.html" %} 
+{% include "clientside/commentadd.html" %} 
+
 <div id="item-single" item-id="{{item.id}}" class="row">
   <div id="market" class="col-md-offset-2 col-md-8">
     {% include "clientside/rate.html" %}

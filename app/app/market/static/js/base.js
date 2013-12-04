@@ -23,7 +23,8 @@
 	    'click .cancelpm': 'cancelpm',
 	    'click .btn.rate': 'showrate',
 	    'click .sendrate': 'setrate',
-	    'click .cancelrate': 'resetrate'
+	    'click .cancelrate': 'resetrate',
+	    'click #expdate-neverexpire': 'neverexp'
 	},
 	
 	invert: function (obj) {
@@ -34,6 +35,27 @@
 	      }
 	    }
 	    return new_obj;
+	},
+	
+	neverexp: function(){
+	    $.noop();
+	    $('#exp_date').attr('readonly','true');
+	    $('#exp_date').val('100 years');
+	},
+	
+	
+	setExpDate:function(item,date){
+	    str = moment(date).fromNow(' ');
+	    //tz = jstz.determine();
+	    //tzName = tz.name();
+	    //ad=moment.utc(date).tz(tzName).format();
+	    $('#'+item.jsonfield).val(str);
+	},
+	
+	getExpDate:function(data){
+	   var val = $('#'+data).val().split(' ');
+	   var date = moment().add(parseInt(val[0]),val[1]);
+	   return date.format('D/M/YYYY HH:m');
 	},
     
 	generateTypeAhead:function(title,  item){
