@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 def render_settings(request, initial=False):
     template = 'users/user_settings.html'
     user = User.objects.get(pk=request.user.id)
+    perms= request.user.userprofile.notperm
     try:
         settings = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
@@ -36,8 +37,7 @@ def render_settings(request, initial=False):
                 template = 'users/welcome.html'
     else:
         user_form = UserForm(instance=request.user)
-        settings_form = SettingsForm(instance=settings)
-        perms= request.user.userprofile.notperm
+        settings_form = SettingsForm(instance=settings)        
 
     return render_to_response(template, 
                               {
