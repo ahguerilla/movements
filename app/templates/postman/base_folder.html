@@ -77,50 +77,39 @@
                   {% endblock pm_by_modes %}
                 </div>
               </div>
-
-
               <div class="panel-body">
               	<div class="row">
                   {% for message in pm_messages %}
                   <div class="col-md-12">
                     <div class="row message-well">
-                      <div class="col-md-1">
+                      <div class="col-md-2">
                         <input type="checkbox" {% if by_conversation and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %} />
+                        {% avatar message.sender 30 %}
                       </div>
-                      <div class="col-md-3">
-                        {% avatar message.sender %}
+                      <div class="col-md-2">
+                  	    {% block pm_sender_cell %}
+                          {{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}
+                        {% endblock %}
+                        {% block pm_recipient_cell %}
+                          {{ message.obfuscated_recipient|or_me:user }}
+                          {% if message.count %}
+                            ({{ message.count }})
+                           {% endif %}
+                        {% endblock %}
                       </div>
-                      <div class="col-md-8">
-                        <div class="row">
-                          <div class="col-xs-12">
-                            {% if message.is_new %}<strong>{% endif %}{% if message.is_replied %}<em>{% endif %}
+                      <div class="col-md-6">
+                        {% if message.is_new %}<strong>{% endif %}{% if message.is_replied %}<em>{% endif %}
 
-                            {% block pm_subject %}
-                            <a class="conv_link" href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
-                                {% include "postman/inc_subject_ex.html" %}
-                            </a>
-                            {% endblock %}
+                        {% block pm_subject %}
+                        <a class="conv_link" href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
+                            {% include "postman/inc_subject_ex.html" %}
+                        </a>
+                        {% endblock %}
 
-                            {% if message.is_replied %}</em>{% endif %}{% if message.is_new %}</strong>{% endif %}
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-sm-8">
-                            {% block pm_sender_cell %}
-                              {{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}
-                            {% endblock %}
-                            {% block pm_recipient_cell %}
-                              {{ message.obfuscated_recipient|or_me:user }}
-                              {% if message.count %}
-                                ({{ message.count }})
-                               {% endif %}
-                            {% endblock %}
-                          </div>
-                          <div class="col-sm-4 pull-right">
-                            {{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}
-                          </div>
-                        </div>
+                        {% if message.is_replied %}</em>{% endif %}{% if message.is_new %}</strong>{% endif %}
+                      </div>
+                      <div class="col-md-2 pull-right align-right">
+                        {{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}
                       </div>
                     </div>
                   </div>
