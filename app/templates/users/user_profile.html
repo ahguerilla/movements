@@ -24,150 +24,140 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
+            <strong>Rating:</strong> 
+          </div>
+          <div class="col-md-9">
+            {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
+          </div>
+        </div>        
+      </div>
+      {% if user_profile.notperm.name != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
             <strong>Name:</strong> 
           </div>
           <div class="col-md-9">
-            {% if user_profile.notperm.name != 'on' %}
             {{ user_details.first_name }}&nbsp;{{ user_details.last_name }} <em>({{ user_details.username }})</em>
-            {% else %}
-              Hidden
-            {% endif %}
           </div>
         </div>
       </div>
+      {% endif %}
+<!--       {% if user_profile.notperm.email != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
             <strong>Email:</strong> 
           </div>
           <div class="col-md-9">
-            {% if user_profile.notperm.email != 'on' %}
-              {{ user_details.email }}
-            {% else %}
-              Hidden
-            {% endif %}
+            {{ user_details.email }}
           </div>
         </div>
       </div>
+      {% endif %} -->
       {% if user_profile %}
+      {% if user_profile.notperm.nationality != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
             <strong>Nationality:</strong> 
           </div>
           <div class="col-md-9">
-          {% if user_profile.notperm.nationality != 'on' %}
             {{ user_profile.nationality }}
-          {% else %}
-            Hidden
-          {% endif %}
           </div>
         </div>
       </div>
+      {% endif %}
+      {% if user_profile.notperm.occupation != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
             <strong>Occupation:</strong> 
           </div>
           <div class="col-md-9">
-          {% if user_profile.notperm.occupation != 'on' %}
             {{ user_profile.occupation }}
-          {% else %}
-            Hidden
-          {% endif %}
           </div>
         </div>
       </div>
+      {% endif %}
+      {% if user_profile.notperm.expertise != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
             <strong>Area of expertise:</strong> 
           </div>
           <div class="col-md-9">
-          {% if user_profile.notperm.expertise != 'on' %}
             {{ user_profile.expertise }}
-          {% else %}
-            Hidden
-          {% endif %}
           </div>
         </div>
       </div>
+      {% endif %}
       {% if user_profile.web_url %}
+      {% if user_profile.notperm.web_url != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
             <strong>Website:</strong> 
           </div>
           <div class="col-md-9">
-          {% if user_profile.notperm.web_url != 'on' %}
             <a target="_blank" href="{{ user_profile.web_url }}">{{ user_profile.web_url }}</a>
-          {% else %}
-            Hidden
-          {% endif %}
           </div>
         </div>
       </div>
       {% endif %}
+      {% endif %}
       {% if user_profile.fb_url %}
+      {% if user_profile.notperm.fb_url != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
             <strong>Facebook:</strong> 
           </div>
           <div class="col-md-9">
-          {% if user_profile.notperm.fb_url != 'on' %}
             <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.fb_url }}</a>
-          {% else %}
-            Hidden
-          {% endif %}
           </div>
         </div>
       </div>
       {% endif %}
+      {% endif %}
       {% if user_profile.tweet_url %}
+      {% if user_profile.notperm.tweet_url != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
             <strong>Twitter:</strong> 
           </div>
           <div class="col-md-9">
-          {% if user_profile.notperm.tweet_url != 'on' %}
             <a target="_blank" href="{{ user_profile.get_twitter_url }}">{{ user_profile.tweet_url }}</a>
-          {% else %}
-            Hidden
-          {% endif %}
           </div>
         </div>
       </div>
       {% endif %}
+      {% endif %}
+      {% if user_profile.notperm.tag_ling != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
             <strong>Tag:</strong> 
           </div>
           <div class="col-md-9">
-          {% if user_profile.notperm.tag_ling != 'on' %}
             {{ user_profile.tag_ling }}
-          {% else %}
-            Hidden
-          {% endif %}
           </div>
         </div>
       </div>
+      {% endif %}
+      {% if user_profile.notperm.bio != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
             <strong>Bio:</strong> 
           </div>
           <div class="col-md-9">
-          {% if user_profile.notperm.bio != 'on' %}
             {{ user_profile.bio }}
-          {% else %}
-            Hidden
-          {% endif %}
           </div>
         </div>
       </div>
+      {% endif %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">

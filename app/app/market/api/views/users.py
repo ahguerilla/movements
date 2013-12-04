@@ -92,7 +92,7 @@ def getDetails(request,obj_id, rtype):
 @login_required
 def getUsersFromto(request,sfrom,to,rtype):
     query = createQuery(request)
-    obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id')[sfrom:to]
+    obj = users.models.UserProfile.get_application_users(query=query, distinct='id', order='-id', start=sfrom, finish=to)
     return HttpResponse(
         json.dumps([getUserDict(user) for user in obj]),
         mimetype="application/"+rtype)
@@ -101,7 +101,7 @@ def getUsersFromto(request,sfrom,to,rtype):
 @login_required
 def getUserCount(request,rtype):
     query = createQuery(request)
-    obj = users.models.UserProfile.objects.filter(query).distinct('id').order_by('-id').count()
+    obj = users.models.UserProfile.get_application_users(query=query, distinct='id', order='-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
 
 
