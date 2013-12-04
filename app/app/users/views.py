@@ -13,11 +13,16 @@ from django.core.urlresolvers import reverse
 def render_settings(request, initial=False):
     template = 'users/user_settings.html'
     user = User.objects.get(pk=request.user.id)
-    perms= request.user.userprofile.notperm
     try:
         settings = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
         settings = None
+    try:
+        perms= request.user.userprofile.notperm
+    except:
+        perms={}
+
+
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=user)
         if settings:
