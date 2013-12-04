@@ -25,7 +25,7 @@ def createCommentDict(comment):
 
 def saveComment(form, owner,item):
     import datetime
-    if form.instance.pk == None:
+    if form.is_valid() and form.instance.pk == None:
         form.cleaned_data['owner'] = owner
         form.cleaned_data['item'] = item
         form.cleaned_data['pub_date'] = datetime.datetime.now()

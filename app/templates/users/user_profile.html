@@ -21,6 +21,16 @@
       <div class="col-md-12 col-spacing-bottom">
         {% avatar user_details %}
       </div>
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Rating:</strong> 
+          </div>
+          <div class="col-md-9">
+            {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
+          </div>
+        </div>        
+      </div>
       {% if user_profile.notperm.name != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
