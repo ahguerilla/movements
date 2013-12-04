@@ -78,6 +78,14 @@ class UserProfile(models.Model):
                 return base_twitter + self.tweet_url
         return None
 
+    @classmethod
+    def get_application_users(cls, **kwargs):
+        query = kwargs.get('query', None)
+        distinct=kwargs.get('distinct', None)
+        order=kwargs.get('order', None)
+        start=kwargs.get('start', None)
+        finish=kwargs.get('finish', None)
+        return cls.objects.filter(query).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
 
 
 class UserRate(models.Model):
