@@ -78,7 +78,7 @@
                 </div>
               </div>
               <div class="panel-body">
-              	<div class="row">
+                <div class="row">
                   {% for message in pm_messages %}
                   <div class="col-md-12">
                     <div class="row message-well">
@@ -87,7 +87,7 @@
                         {% avatar message.sender 30 %}
                       </div>
                       <div class="col-md-2">
-                  	    {% block pm_sender_cell %}
+                        {% block pm_sender_cell %}
                           {{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}
                         {% endblock %}
                         {% block pm_recipient_cell %}
@@ -118,29 +118,29 @@
               </div>
             </div>
           </div>
-
-
-
-
           <div class="col-md-7">
-            <div class="col-md-12 panel panel-default panel-sm">
-              <div class="panel-body" id="conversation"></div>
+            <div class="row">
+              <div class="col-md-12" id="conversation"></div>
             </div>
           </div>
-
         </div>
       </form>
       {% paginate %}
       {% else %}
-        <p>{% trans "No messages." %}</p>
+        <div class="col-md-12">
+          <p>{% trans "No messages." %}</p>
+        </div>
       {% endif %}
-
     {% endif %}
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        {% block pm_footer_info %}
+        {% endblock %}
+      </div>
+    </div>  
   </div>
 </div>
-
-
 {% endblock content %}
 
 
