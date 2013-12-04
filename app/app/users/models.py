@@ -50,6 +50,7 @@ class UserProfile(models.Model):
     tag_ling = models.CharField(_('tag line'), max_length=255, null=True, blank=True)
     web_url = models.CharField(_('website url'), max_length=255, null=True, blank=True)
     fb_url = models.CharField(_('facebook page'), max_length=255, null=True, blank=True)
+    linkedin_url = models.CharField(_('linkedin page'), max_length=255, null=True, blank=True)
     tweet_url = models.CharField(_('twitter page'), max_length=255, null=True, blank=True)
     occupation = models.CharField(_('occupation'), max_length=255, null=True, blank=True)
     expertise = models.CharField(_('area of expertise'), max_length=255, null=True, blank=True)
@@ -107,3 +108,4 @@ class UserRate(models.Model):
         self.user.userprofile.save_base()
         super(UserRate,self).save(*args,**kwargs)
         #test
+

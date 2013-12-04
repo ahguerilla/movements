@@ -23,7 +23,7 @@ function progressHandlingFunction(e){
                     {type: 'typeahead', title:'I can help to advance freedom of:', jsonfield:'issues', customGen: that.genTagWidget, customGet: that.getTagIds },
                     {type: 'typeahead', title:'Please select the countries where you can help',  jsonfield:'countries', customGen: that.genTagWidget, customGet: that.getTagIds},
                     {type: 'typeahead', title:'Skills',  jsonfield:'skills', customGen: that.genTagWidget, customGet:that.getTagIds},
-                    {type: 'expdate', title:'Expires in (Example : 10 days / 10 years / 2 months)', jsonfield:'exp_date', customGet:that.getExpDate, customSet: that.setExpDate, placeholder:'' },
+                    {type: 'expdate', title:'Expires in days', jsonfield:'exp_date', customGet:that.getExpDate, customSet: that.setExpDate, placeholder:'' },
                     {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
                     {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
                 ],
@@ -90,7 +90,8 @@ function progressHandlingFunction(e){
                 $('#'+item.jsonfield+'_place').html(widget);
                 if(preval){
                     if(item.customSet){
-                        item.customSet(item,preval);
+                        var func = _.bind(item.customSet,that);
+                        func(item,preval);
                     }else{
                         $('#'+item.jsonfield).val(preval);
                     }
@@ -116,6 +117,7 @@ function progressHandlingFunction(e){
                 this.getItem(item,function(item_obj){
                     that.url = window.ahr.app_urls.editmarketitem+item_obj[0].pk;
                     that.item_type = item_obj[0].fields.item_type;
+                    that.item_obj = item_obj[0].fields;
                     that.setForm(item_obj, that.item_type);
                     $('#form-title').html(that.form_title[that.item_type]);
                 });

@@ -1,14 +1,17 @@
 (function(){
 
     setInterval(function(){
+	var text;
         $.getJSON(window.ahr.app_urls.getmessagecount,function(data){
             $('.message-counter').each(function(tmp,item){
-                var text = $(item).html()
-                var ind = text.indexOf('(');
-                var txt = text.slice(0,ind+1);
+                var text = $(item).html();
+                var ind = text.indexOf('(');                
                 if(ind>-1){
-                    $(item).html(txt+data+")<b class='caret'></b>");
-                }
+		    text = text.slice(0,ind+1);
+                }else{
+		    text = text.slice(0,text.length-21)+' (';
+		}
+		$(item).html(text+data+")<b class='caret'></b>");
             });
         });
     }
@@ -37,26 +40,41 @@
 	    return new_obj;
 	},
 	
-	neverexp: function(){
-	    $.noop();
-	    $('#exp_date').attr('readonly','true');
-	    $('#exp_date').val('100 years');
+	neverexp: function(ev){
+	    if($(ev.currentTarget).prop('checked') == false){		
+		$('#exp_date').attr('readonly',false);		
+		$('#exp_date').show();
+	    }else{
+		$('#exp_date').attr('readonly',true);
+    		$('#exp_date').hide();    		
+	    }
 	},
 	
 	
 	setExpDate:function(item,date){
-	    str = moment(date).fromNow(' ');
 	    //tz = jstz.determine();
 	    //tzName = tz.name();
-	    //ad=moment.utc(date).tz(tzName).format();
-	    $('#'+item.jsonfield).val(str);
+	    //ad=moment.utc(date).tz(tzName).format();	    
+	    days = moment(date).diff(moment(),'days');	    
+	    $('#'+item.jsonfield).val(days);
+	    if (moment(this.item_obj.pub_date).diff(moment(date),'days') == -36501){
+		$('#exp_date').attr('readonly',true);
+    		$('#exp_date').hide();   
+		$('#expdate-neverexpire').prop('checked',true);
+	    }
 	},
 	
 	getExpDate:function(data){
-	   var val = $('#'+data).val().split(' ');
-	   if(val[0]==""){return "";}
-	   var date = moment().add(parseInt(val[0]),val[1]);
-	   return date.format('D/M/YYYY HH:m');
+	    var val;
+	    if($('#expdate-neverexpire').prop('checked') == true){
+	      val = 36500;
+	    }else{
+	      val = $('#'+data).val();
+	    }
+	   
+	   if(val==""){return "";}
+	   var date = moment().add('days',parseInt(val)+1).format("D/M/YYYY HH:m")
+	   return date;
 	},
     
 	generateTypeAhead:function(title,  item){
@@ -200,6 +218,8 @@
 	showpMessage: function(ev){
 	    var username = ev.currentTarget.getAttribute('username');            
 	    $('#usernameh').text(username);
+	    $('#msgsub').val('');
+	    $('#newmessage').val('');
 	    $('#messagedialog').modal('show');
 	}, 
     
