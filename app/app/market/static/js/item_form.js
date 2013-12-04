@@ -23,7 +23,7 @@ function progressHandlingFunction(e){
                     {type: 'typeahead', title:'I can help to advance freedom of:', jsonfield:'issues', customGen: that.genTagWidget, customGet: that.getTagIds },
                     {type: 'typeahead', title:'Please select the countries where you can help',  jsonfield:'countries', customGen: that.genTagWidget, customGet: that.getTagIds},
                     {type: 'typeahead', title:'Skills',  jsonfield:'skills', customGen: that.genTagWidget, customGet:that.getTagIds},
-                    {type: 'expdate', title:'Expires in (10 days, 10 years, 2 months)', jsonfield:'exp_date', customGet:that.getExpDate, customSet: that.setExpDate, placeholder:'' },
+                    {type: 'expdate', title:'Expires in (Example : 10 days / 10 years / 2 months)', jsonfield:'exp_date', customGet:that.getExpDate, customSet: that.setExpDate, placeholder:'' },
                     {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
                     {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
                 ],
