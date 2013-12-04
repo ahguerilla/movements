@@ -4,31 +4,26 @@ from unipath import Path
 
 
 js = Bundle(
-    Bundle(
-        # './js/lib/modernizr.custom.18630.js',
+    Bundle(                
         './js/lib/jquery-1.10.2.min.js',
         './js/lib/underscore-min.js',
         './js/lib/backbone-min.js',
-        'tiny_mce/tiny_mce.js',
+        #'tiny_mce/tiny_mce.js',        
         './js/lib/jquery.ui.position.js',
         './js/lib/moment-with-langs.min.js',
-        './js/lib/bootstrap.js',
+        './js/lib/bootstrap.js',        
         './js/lib/bootstrap-datetimepicker.min.js',
         './js/lib/tagmanager.js',
-        './js/lib/typeahead.min.js',
-        './js/templates/typeaheadtag_utils.js',
-        './js/templates/datetimepicker_utils.js',
+        './js/lib/typeahead.min.js',               
         './js/base.js',
         './js/marketbase.js',
         './js/market.js',
-        './js/users.js', 
-        
+        './js/users.js',         
         './js/item_single.js',
         './js/item_form.js',        
         './js/messages.js',
         './js/comment.js',        
-        './js/posts.js',
-              
+        './js/posts.js',            
         ),
     filters='jsmin',
     output='./js/packed.js'

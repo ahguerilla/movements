@@ -128,7 +128,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     updateTagsfilter: function(that,ev){
         a=$(ev.currentTarget.parentElement.parentElement).attr("item_title");
         ar = that.filters[a];
-        inv = invert(window[a]);
+        inv = this.invert(window[a]);
         if (inv.hasOwnProperty(ev.currentTarget.textContent)){
             ind = inv[ev.currentTarget.textContent];
             filtind = ar.indexOf(parseInt(ind));
