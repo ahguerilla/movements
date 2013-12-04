@@ -1,14 +1,15 @@
 <script type="text/template" id="expdate_template">
+  <div class="col-md-12">
+    <div class="<%=jsonfield%> error"></div>
+  </div>
   <div class="col-md-12">  
     <label for="<%=jsonfield%>"><%=title%></label>        
   </div>
   <div class="col-md-6">
-    <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control input-sm" required="true" />    
+    <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control input-sm" />    
   </div>
   <div class="col-md-6">
     <label for="expdate-neverexpire"><input type="checkbox" id="expdate-neverexpire" name="expdate-neverexpire"/>Never expire</label>
   </div>
-  <div class="col-md-12">
-    <div class="<%=jsonfield%> error"></div>
-  </div>
+  
 </script>

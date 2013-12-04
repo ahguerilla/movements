@@ -54,6 +54,7 @@
 	
 	getExpDate:function(data){
 	   var val = $('#'+data).val().split(' ');
+	   if(val[0]==""){return "";}
 	   var date = moment().add(parseInt(val[0]),val[1]);
 	   return date.format('D/M/YYYY HH:m');
 	},

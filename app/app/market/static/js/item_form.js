@@ -124,6 +124,7 @@ function progressHandlingFunction(e){
         },
     
         submit: function(e){
+            $('.error').empty()
             var that = this;
             e.preventDefault();
             var dfrd = $.ajax({
