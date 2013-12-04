@@ -120,7 +120,7 @@
         },
 
 
-        initialize : function(obj_id){
+        initialize : function(obj_id){            
             var that = this;
             window.ahr.expandTextarea('#newmessage');
             this.comment_form_tmp = _.template($('#comment_add_template').html());
@@ -140,12 +140,13 @@
                 function(data){
                     that.item = data[0];
                     if(that.item.fields.item_type == "resource"){
+                        $('#rate_resource').removeClass('hidden');
                         $('#rate_resource').attr('username',that.item.fields.owner[0]);
                         $('#rate_resource').attr('ratecount',that.item.fields.userratecount);
                         $('#rate_resource').attr('score',that.item.fields.usercore);
                         $('#rate_resource').attr('image_src',that.item.fields.avatar);
                     }else{
-                        $('#rate_resource').hide();
+                        $.noop();
                     }
                     $('#rate_user').attr('username',that.item.fields.owner[0]);
                     $('#rate_user').attr('ratecount',that.item.fields.userratecount);

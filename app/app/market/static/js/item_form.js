@@ -6,15 +6,11 @@ function progressHandlingFunction(e){
 
 (function(){
 
-    var ItemView = Backbone.View.extend({
+    var ItemView = window.ahr.BaseView.extend({
         el: '#itemform',
         item_type: '',
         item:'',
-
-    events:{
-        'submit' : 'submit',
-    },
-
+    
     form_title:{
         'offer': 'OFFER A SERVICE',
         'resource': 'SHARE A RESOURCE',
@@ -103,6 +99,7 @@ function progressHandlingFunction(e){
     initialize : function(item, obj_type){
         var that= this;
         this.item_type = obj_type;
+        this.delegateEvents(_.extend(this.events,{'submit' : 'submit'}));
         if(item === false){
             $('#form-title').html(that.form_title[that.item_type]);
             this.url = window.ahr.app_urls.addmarketitem+obj_type;
@@ -121,6 +118,7 @@ function progressHandlingFunction(e){
     },
 
     submit: function(e){
+        var that = this;
         e.preventDefault();
         var dfrd = $.ajax({
             type: 'POST',
@@ -133,11 +131,14 @@ function progressHandlingFunction(e){
             window.location = window.ahr.app_urls.market;
         });
 
-    dfrd.fail(function(data){
-        alert('failed');
-    });
-    return false;
-}
+        dfrd.fail(function(data){
+            for(item in data.responseJSON.errors){
+                $('.'+data.responseJSON.errors[item][0]+'.error').html(data.responseJSON.errors[item][1]);
+            }
+            that.alert('Correct the errors (you have to select items from drop down menu)','#itemformerror');
+        });
+        return false;
+    }
 });
 
     window.item_form = window.item_form|| {};

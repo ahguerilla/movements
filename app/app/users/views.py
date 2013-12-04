@@ -24,10 +24,12 @@ def render_settings(request, initial=False):
         else:
             settings_form = SettingsForm(request.POST)
         if user_form.is_valid() and settings_form.is_valid():
+            perms = {k[8:]:v for k, v in request.POST.items() if k.startswith('notperm-')}
             user = user_form.save()
             settings = settings_form.save(commit=False)
             settings.user_id = request.user.id
-            settings.save()
+            settings.notperm = perms
+            settings.save()        
             settings_form.save_m2m()
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
             if initial:
@@ -35,11 +37,13 @@ def render_settings(request, initial=False):
     else:
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)
+        perms= request.user.userprofile.notperm
 
     return render_to_response(template, 
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
+                                'notperm': str(perms).replace("u'","'"),
                                 'initial': initial,
                               }, 
                               context_instance=RequestContext(request))

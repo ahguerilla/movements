@@ -5,6 +5,7 @@ from json_field import JSONField
 import django.contrib.auth as auth
 from datetime import datetime
 from django.db.models import Q
+from json_field import JSONField
 
 
 
@@ -66,6 +67,7 @@ class UserProfile(models.Model):
     firstlogin = models.BooleanField(_('first_login'), default=True)
     ratecount = models.IntegerField(_('ratecount'),default=0)
     score = models.FloatField(_('score'),default=0)
+    notperm = JSONField()
 
     def get_twitter_url(self):
         base_twitter = 'https://twitter.com/'

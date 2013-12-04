@@ -81,7 +81,7 @@ window.ahr.BaseView = Backbone.View.extend({
         $('#ratetitle').text(username);
         $('#username').text(username);
         $('#ratecount').text(ratecount);
-        $('#numstars').html('<div class="stars'+parseInt(Math.ceil(score))+'"></div>');
+        $('#numstars').html('<div class="stars'+parseInt(Math.round(score))+'"></div>');
         $('#profileimage').attr('src',image_src);
         $('#ratedialog').modal('show');
     },
