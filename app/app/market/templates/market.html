@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{% include "clientside/marketitem.html" %}    
+{% include "clientside/marketuser.html" %}    
+{% include "clientside/filtertag.html" %}
+{% include "clientside/typetag.html" %}
 
 <div class="row">
   <div id="market" class="col-md-offset-1 col-md-10">  
     {% include "clientside/messagedialog.html" %}
     {% include "clientside/rate.html" %}    
-    {% include "clientside/marketitem.html" %}    
-    {% include "clientside/marketuser.html" %}    
-    {% include "clientside/filtertag.html" %}
-    {% include "clientside/typetag.html" %}
+    
     
     <!-- Search -->
     <div class="row">

@@ -9,6 +9,8 @@
         },
 
         send_message: function(){
+            $('#marketitem_message_form').addClass('hide');
+            $('#marketitem_comment_form').show();
             var that = this;
             window.getcsrf(function(csrf){
                 var dfrd = $.ajax({
@@ -21,10 +23,14 @@
                         message: $('#newmessage').val()
                     }
                 });
-                dfrd.done(function(){
-                   $('#market').prepend('<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Your message was sent successfuly.</div>');
-                   $('#marketitem_message_form').addClass('hide');
+                dfrd.done(function(){                   
+                   that.info('Your message was sent successfuly.','#infobar');                   
                    $('#marketitem_comment_form').show();
+                });
+                dfrd.fail(function(){
+                    that.alert('Unable to send message now. Please try again.','#infobar');
+                    $('#marketitem_message_form').removeClass('hide');
+                    $('#marketitem_comment_form').hide();
                 });
             });
 
