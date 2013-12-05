@@ -1,10 +1,8 @@
-from django.contrib.auth.decorators import permission_required
-from django.db.models import Q,Max,F
-from django.http import HttpResponse
-from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext, loader
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from .api.utils import *
-from app.market.forms import item_forms,commentForm
+from app.market.forms import commentForm
+from django.contrib.auth.decorators import login_required
 
 
 def getUserTags(user):
@@ -13,6 +11,7 @@ def getUserTags(user):
             'issues': [up.pk for up in user.userprofile.issues.all()]}
 
 
+@login_required
 def index(request):
     return render_to_response('market.html',
                               {
@@ -23,6 +22,7 @@ def index(request):
                               context_instance=RequestContext(request))
 
 
+@login_required
 def users(request):
     return render_to_response('market.html',
                               {
@@ -33,6 +33,18 @@ def users(request):
                               context_instance=RequestContext(request))
 
 
+@login_required
+def posts(request):
+    return render_to_response('market.html',
+                              {
+                                  'title':'My Posts',
+                                  'init': 'posts',
+                                  'tags': getUserTags(request.user)
+                                  },
+                              context_instance=RequestContext(request))
+
+
+@login_required
 def addItem_form(request,obj_type):
     return render_to_response('item_form.html',
                               {
@@ -42,6 +54,7 @@ def addItem_form(request,obj_type):
                               context_instance=RequestContext(request))
 
 
+@login_required
 def editItem_form(request,obj_id):
     return render_to_response('item_form.html',
                               {
@@ -51,6 +64,7 @@ def editItem_form(request,obj_id):
                               context_instance=RequestContext(request))
 
 
+@login_required
 def viewItem(request,obj_type,obj_id):
     return render_to_response('item_single.html',
                               {
@@ -60,6 +74,7 @@ def viewItem(request,obj_type,obj_id):
                               context_instance=RequestContext(request))
 
 
+@login_required
 def addComment_form(request,obj_id):
     form = commentForm()
     return render_to_response('comment_form.html',
@@ -71,7 +86,7 @@ def addComment_form(request,obj_id):
                               context_instance=RequestContext(request))
 
 
-
+@login_required
 def editComment_form(request,obj_id):
     form = commentForm()
     return render_to_response('comment_form.html',
@@ -80,15 +95,5 @@ def editComment_form(request,obj_id):
                                   'obj_id': '""',
                                   'form': form,
                                   'coment': {'id':str(obj_id)}
-                                  },
-                              context_instance=RequestContext(request))
-
-
-def posts(request):
-    return render_to_response('market.html',
-                              {
-                                  'title':'My Posts',
-                                  'init': 'posts',
-                                  'tags': getUserTags(request.user)
                                   },
                               context_instance=RequestContext(request))

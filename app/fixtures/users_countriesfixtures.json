@@ -124,5 +124,12 @@
 		"fields": {
 			"countries": "Etheopia"
 		}
+	},
+	{
+		"pk": 19,
+		"model": "users.countries",
+		"fields": {
+			"countries": "China"
+		}
 	}
 ]
