@@ -7,7 +7,7 @@ import app.users as users
 from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
-from django.db.models import Q,Count,Avg 
+from django.db.models import Q,Count,Avg
 from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 from django.contrib.auth.decorators import login_required
@@ -33,11 +33,11 @@ def getMarketjson(objs):
         adict['fields']['files']= [afile.url for afile in obj.files.all()]
         adict['fields']['commentcount']= obj.commentcount
         adict['fields']['usercore']= obj.owner.userprofile.score
-        adict['fields']['userratecount']= obj.owner.userprofile.ratecount    
+        adict['fields']['userratecount']= obj.owner.userprofile.ratecount
         adict['fields']['ratecount']= obj.ratecount
         adict['fields']['score']= obj.score
         adict['fields']['avatar'] = reverse('avatar_render_primary', args=[obj.owner.username,80])
-        
+
         alist.append(adict)
     return json.dumps(alist)
 
@@ -65,7 +65,7 @@ def returnItemList(obj, rtype):
 
 
 def createQuery(request):
-    query = Q(published=True)
+    query = Q()
     if request.GET.has_key('skills'):
         query = query | Q(skills__in= request.GET.getlist('skills'))
 
@@ -82,7 +82,7 @@ def createQuery(request):
         objs = SearchQuerySet().filter(text=request.GET['search'])
         ids= [int(obj.pk) for obj in objs]
         query = query & Q(id__in = ids)
-
+    query = query & Q(published=True)
     return query
 
 

@@ -60,11 +60,10 @@ def createQuery(request):
     if request.GET.has_key('issues'):
         query = query | Q(issues__in=request.GET.getlist('issues'))
 
-    if request.GET.has_key('search') and request.GET['search']!='':
+    # if request.GET.has_key('search') and request.GET['search']!='':
         # objs = SearchQuerySet().filter(text=request.GET['search'])
         # ids= [int(obj.pk) for obj in objs]
-        ids = [1,2]
-        query = query & Q(id__in = ids)
+        # query = query & Q(id__in = ids)
 
     return query
 
