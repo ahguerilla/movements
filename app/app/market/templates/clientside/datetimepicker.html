@@ -1,15 +1,14 @@
-
 <script type="text/template" id="datetimepicker_template">
   <div class="col-md-12">
-    <label for="<%=jsonfield%>"><%=title%></label>
-    <div class='input-group date' id='datetimepicker-<%=jsonfield%>'>
-      <input type='text' id="<%=jsonfield%>"  name="<%=jsonfield%>" class="form-control input-sm" required="true" />
+    <label for="<%- jsonfield %>"><%- title %></label>
+    <div class='input-group date' id='datetimepicker-<%- jsonfield %>'>
+      <input type='text' id="<%- jsonfield%>"  name="<%- jsonfield %>" class="form-control input-sm" required="true" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
     </div>
   </div>
   <div class="col-md-12">
-    <div class="<%=jsonfield%> error"></div>
+    <div class="<%- jsonfield %> error"></div>
   </div>
 </script>
