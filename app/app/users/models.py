@@ -14,12 +14,18 @@ class Skills(models.Model):
     def __unicode__(self):
         return self.skills
 
+    class Meta:
+        ordering = ['skills']
+
 
 class Issues(models.Model):
     issues = models.CharField(_('issues of interest'), max_length=255, null=True)
 
     def __unicode__(self):
         return self.issues
+
+    class Meta:
+        ordering = ['issues']
 
 
 class Countries(models.Model):
@@ -28,6 +34,9 @@ class Countries(models.Model):
     def __unicode__(self):
         return self.countries
 
+    class Meta:
+        ordering = ['countries']
+
 
 class Nationality(models.Model):
     nationality = models.CharField(_('nationality'), max_length=255, null=True, blank=True)
@@ -35,12 +44,18 @@ class Nationality(models.Model):
     def __unicode__(self):
         return self.nationality
 
+    class Meta:
+        ordering = ['nationality']
+
 
 class Residence(models.Model):
     residence = models.CharField(_('country of residence'), max_length=255, null=True, blank=True)
 
     def __unicode__(self):
         return self.residence
+
+    class Meta:
+        ordering = ['residence']
 
 
 class UserProfile(models.Model):
