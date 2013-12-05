@@ -5,7 +5,6 @@ from json_field import JSONField
 import django.contrib.auth as auth
 from datetime import datetime
 from django.db.models import Q
-from json_field import JSONField
 
 
 
