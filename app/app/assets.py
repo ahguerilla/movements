@@ -16,6 +16,7 @@ js = Bundle(
         './js/lib/bootstrap-datetimepicker.min.js',
         './js/lib/tagmanager.js',
         './js/lib/typeahead.min.js',  
+        './js/lib/jquery.rateit.min.js',
         './js/lib/jstz.js',        
         './js/base.js',
         './js/marketbase.js',
@@ -37,7 +38,8 @@ if settings.PRODUCTION:
         './css/bootstrap.css',
         './css/bootstrap-datetimepicker.min.css',
         './css/tagmanager.css',
-        './css/typeahead.css',        
+        './css/typeahead.css', 
+        './css/rateit.css',
         './css/site.css',        
         filters='cssmin',
         output='./css/packed.css'
@@ -50,7 +52,8 @@ else:
             './css/bootstrap.css',
             './css/bootstrap-datetimepicker.min.css',
             './css/tagmanager.css',
-            './css/typeahead.css',            
+            './css/typeahead.css',
+            './css/rateit.css'
             ),
         Bundle(
             './css/site.styl',
