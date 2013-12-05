@@ -120,6 +120,22 @@
       </div>
       {% endif %}
       {% endif %}
+  
+      {% if user_profile.linkedin_url %}
+      {% if user_profile.notperm.linkedin_url != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>LinkedIn:</strong> 
+          </div>
+          <div class="col-md-9">
+            <a target="_blank" href="{{ user_profile.linkedin_url }}">{{ user_profile.linkedin_url }}</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}      
+      
       {% if user_profile.tweet_url %}
       {% if user_profile.notperm.tweet_url != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
