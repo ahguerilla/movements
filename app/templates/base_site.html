@@ -46,9 +46,9 @@
           {% if user.is_authenticated %}
           <li><a href="{% url 'show_users' %}">Users</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown"> My Messages{% if unread_count %} ({{ unread_count }}){%endif%} <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown"> My Messages  <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){%endif%} </span> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a class="message-counter" href="{% url 'postman_inbox' %}">Inbox {% if unread_count %} ({{ unread_count }}){%endif%} </a></li>
+                <li><a class="message-counter" href="{% url 'postman_inbox' %}">Inbox <span id="msgcntr"> {% if unread_count %} ({{ unread_count }}){%endif%}</span> </a></li>
                 <li><a href="{% url 'postman_sent' %}">Sent</a></li>
                 <li><a href="{% url 'postman_archives' %}">Archive</a></li>
                 <li><a href="{% url 'postman_trash' %}">Trash</a></li>

@@ -4,14 +4,9 @@
         var text;
         $.getJSON(window.ahr.app_urls.getmessagecount,function(data){
             $('.message-counter').each(function(tmp,item){
-                var text = $(item).html();
-                var ind = text.indexOf('(');                
-                if(ind>-1){
-                    text = text.slice(0,ind+1);
-                }else{
-                    text = text.slice(0,text.length-21)+' (';
+                if(data>0){
+                   $('#msgcntr',$(item)).text('('+data+')');
                 }
-                $(item).html(text+data+")<b class='caret'></b>");
             });
         });
     }
