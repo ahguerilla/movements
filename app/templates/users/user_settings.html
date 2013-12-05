@@ -95,6 +95,7 @@
             <label><input type="checkbox" name="notperm-web_url"/> Hide</label>
           </div>
         </div>
+        
         <div class="form-group">
           <div class="col-md-10">
             {{ settings_form.fb_url.errors }}
@@ -103,10 +104,20 @@
           </div>
           <div class="col-md-2">
             <label><input type="checkbox" name="notperm-fb_url"/> Hide</label>
-          </div>
-
-          
+          </div>                  
         </div>
+        
+        <div class="form-group">
+          <div class="col-md-10">
+            {{ settings_form.linkedin_url.errors }}
+            {% render_field settings_form.linkedin_url class="form-control input-sm" placeholder="LinkedIn Page" %}
+            
+          </div>
+          <div class="col-md-2">
+            <label><input type="checkbox" name="notperm-linkedin_url"/> Hide</label>
+          </div>                  
+        </div>
+        
         <div class="form-group">
           <div class="col-md-10">
             {{ settings_form.tweet_url.errors }}
