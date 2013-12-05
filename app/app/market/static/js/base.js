@@ -21,7 +21,7 @@
             'click .btn.rate': 'showrate',
             'click .sendrate': 'setrate',
             'click .cancelrate': 'resetrate',
-            'click #expdate-neverexpire': 'neverexp'
+            'click #expdate-neverexpire': 'neverexp',
         },
 
     invert: function (obj) {
@@ -33,7 +33,8 @@
         }
         return new_obj;
     },
-
+    
+    
     neverexp: function(ev){
         if($(ev.currentTarget).prop('checked') === false){
             $('#exp_date').attr('readonly',false);
@@ -106,6 +107,8 @@
                 local: typeaheadval
                 }).on('typeahead:selected', function (e, d) {
                     $('#'+jsonfield).tagsManager("pushTag", d.value);
+            }).blur(function(){
+                $('#'+jsonfield).val('');
             });
         func(values);
         });
@@ -122,7 +125,7 @@
                 });
             }
 
-        $('#'+jsonfield).tagsManager({
+        $('#'+jsonfield).tagsManager({            
             tagsContainer: '#'+jsonfield+'Tags',
             deleteTagsOnBackspace: false,
             blinkBGColor_1: '#FFFF9C',
@@ -134,7 +137,7 @@
                     return true;
                 }else{
                     return false;
-                    }
+                }
             }});
         });
     },

@@ -7,6 +7,7 @@
     line-height: 1.428571429;
     border: 1px solid transparent;
     border-radius:4px;
+    color: transparent;
 }
 
 .twitter-typeahead .hint-small
@@ -77,12 +78,6 @@
   margin: 0;
 }
 
-
-
-
-
-
-
 .twitter-typeahead {
     width: 100%;
 }
@@ -94,23 +89,7 @@
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
-.tt-hint {
-  display: block;
-  width: 100%;
-  height: 56px;
-  padding: 14px 16px;
-  font-size: 18px;
-  line-height: 25px;
-  color: #999;
-  vertical-align: middle;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-}
+
 .tt-dropdown-menu {
   min-width: 160px;
     width: 100%;
