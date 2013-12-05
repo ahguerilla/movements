@@ -1,31 +1,31 @@
 
 <script type="text/template" id="item_template">
 
-  <div class="row item_container" item_id="<%=pk%>">
+  <div class="row item_container" item_id="<%- pk %>">
     <div class="col-md-12">
       <div class="well well-sm">
         <div class="row">
           <div class="col-md-12">
-            <div class="pull-right"><strong><%= item_type.toUpperCase() %></strong></div>
+            <div class="pull-right"><strong><%- item_type.toUpperCase() %></strong></div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12"><h4><%=title%></h4></div>
+          <div class="col-md-12"><h4><%- title %></h4></div>
         </div>
         <div class="row" style="margin-bottom: 10px;">
           <div class="item-header" style="margin-left:15px;margin-bottom:10px;">
             <!-- TODO: Remove hardcoded path -->
-            <div class="item-user">By <strong><a href="/user/profile/<%=owner%>"><%=owner%></a></strong></div>
-            <div class="item-pub-date"><%=moment(pub_date).format("D MMM YYYY")%></div>
+            <div class="item-user">By <strong><a href="/user/profile/<%- owner %>"><%- owner %></a></strong></div>
+            <div class="item-pub-date"><%- moment(pub_date).format("D MMM YYYY") %></div>
           </div>
-          <div class="item-contents col-md-12"><%=details%></div>
+          <div class="item-contents col-md-12"><%- details %></div>
         </div>
         <div class="row">
-          <div class="col-md-2"><%=commentcount%> Comments</div>
+          <div class="col-md-2"><%- commentcount %> Comments</div>
           <div class="col-md-10">Tags:
-            <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.issues[ind] %> </div> <% }); %>
-            <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.countries[ind] %> </div> <% }); %>
-            <% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%= window.skills[ind] %> </div> <% }); %>
+            <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.issues[ind] %> </div> <% }); %>
+            <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.countries[ind] %> </div> <% }); %>
+            <% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.skills[ind] %> </div> <% }); %>
           </div>
         </div>
       </div>
