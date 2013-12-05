@@ -233,14 +233,3 @@ window.ahr.clone = function(obj) {
     throw new Error("Unable to copy obj! Its type isn't supported.");
 };
 
-
-window.ahr.expandTextarea= function(id) {
-    var $element = $(id).get(0);
-
-    $element.addEventListener('keyup', function() {
-        this.style.overflow = 'hidden';
-        this.style.height = 0;
-        this.style.height = this.scrollHeight + 'px';
-    }, false);
-};
-

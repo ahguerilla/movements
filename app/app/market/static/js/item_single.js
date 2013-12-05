@@ -33,6 +33,8 @@
         private_message: function(){
             $('#msgsub').val('Re: '+$('#marketitem_title').text());
             $('#marketitem_comment_form').hide();
+            $('#newmessage').css('height','110px');
+            $('#newmessage').val('');
             $('#marketitem_message_form').removeClass('hide');
         },
 
