@@ -1,5 +1,7 @@
 from .base import *
 
+SETTINGS_TYPE= 'STAGING'
+
 MEDIA_ROOT = PROJECT_DIR.child("media")
 STATIC_ROOT = PROJECT_DIR.child("static")
 

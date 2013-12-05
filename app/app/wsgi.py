@@ -14,17 +14,21 @@ framework.
 
 """
 import os
-import newrelic.agent
+from django.conf import settings
 
-newrelic.agent.initialize('/opt/ahr/ahr/app/newrelic.ini')
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings.staging")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
 from django.core.wsgi import get_wsgi_application
-wrapapp = get_wsgi_application()
-application = newrelic.agent.wsgi_application()(wrapapp)
+application = get_wsgi_application()
+
+if settings.SETTINGS_TYPE == 'STAGING':
+    import newrelic.agent
+    newrelic.agent.initialize('/opt/ahr/ahr/app/newrelic.ini')
+    application = newrelic.agent.wsgi_application()(application)
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
