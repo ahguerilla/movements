@@ -10,10 +10,10 @@
             });
         });
     }
-    ,30000);    
+    ,30000);
 
     window.ahr= window.ahr || {};
-    window.ahr.BaseView = Backbone.View.extend({	
+    window.ahr.BaseView = Backbone.View.extend({
         tagdict: {},
         events:{
             'click .sendprivatemessageuser': 'showpMessage',
@@ -36,12 +36,12 @@
     },
 
     neverexp: function(ev){
-        if($(ev.currentTarget).prop('checked') == false){		
-            $('#exp_date').attr('readonly',false);		
+        if($(ev.currentTarget).prop('checked') == false){
+            $('#exp_date').attr('readonly',false);
             $('#exp_date').show();
         }else{
             $('#exp_date').attr('readonly',true);
-                $('#exp_date').hide();    		
+                $('#exp_date').hide();
         }
     },
 
@@ -49,12 +49,12 @@
     setExpDate:function(item,date){
         //tz = jstz.determine();
         //tzName = tz.name();
-        //ad=moment.utc(date).tz(tzName).format();	    
-        days = moment(date).diff(moment(),'days');	    
+        //ad=moment.utc(date).tz(tzName).format();
+        days = moment(date).diff(moment(),'days');
         $('#'+item.jsonfield).val(days);
         if (moment(this.item_obj.pub_date).diff(moment(date),'days') == -36501){
             $('#exp_date').attr('readonly',true);
-                $('#exp_date').hide();   
+                $('#exp_date').hide();
             $('#expdate-neverexpire').prop('checked',true);
         }
     },
@@ -79,8 +79,8 @@
         return this.typeAheadTag({'title':title,'item':item});
     },
 
-    setDateTimePicker: function(item,preval){	
-        if(preval){														
+    setDateTimePicker: function(item,preval){
+        if(preval){
             $('#'+item.jsonfield).val(preval.slice(8,10)+'/'+
                 preval.slice(5,7)+'/'+
                 preval.slice(0,4)+' '+
@@ -182,7 +182,7 @@
     },
 
     sendpm:function(ev){
-        var that = this;	
+        var that = this;
         if( $('#msgsub').val()!= '' &&  $('#newmessage').val() != ''){
             $('#messagedialog').modal('hide');
             window.getcsrf(function(csrf){
@@ -196,13 +196,13 @@
                         message: $('#newmessage').val()
                     }
                 });
-                dfrd.done(function(){	       
+                dfrd.done(function(){
                     $('#market').prepend('<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Your message was sent successfuly.</div>');
                 });
-            });    
+            });
         }else{
             this.alert('Please provide a subject and message.','#pmerror');
-        }    
+        }
     },
 
 
@@ -210,12 +210,12 @@
     },
 
     showpMessage: function(ev){
-        var username = ev.currentTarget.getAttribute('username');            
+        var username = ev.currentTarget.getAttribute('username');
         $('#usernameh').text(username);
         $('#msgsub').val('');
         $('#newmessage').val('');
         $('#messagedialog').modal('show');
-    }, 
+    },
 
     showrate: function(ev){
         var username = ev.currentTarget.getAttribute('username');
@@ -278,7 +278,7 @@ window.ahr.expandTextarea= function(id) {
         var sh = this.scrollHeight;
         if(sh<100){
             sh = 100;
-        }        
+        }
         this.style.height =  sh+10 + 'px';
     }, false);
 };
