@@ -8,6 +8,8 @@ from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
 from postman.models import Message
+from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def getSCRFToken(request,rtype):
