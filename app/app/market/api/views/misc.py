@@ -43,7 +43,7 @@ def getSkills(request,rtype):
 
 
 @login_required
-def getUnraedCount(request,rtype):
+def getUnreadCount(request,rtype):
     try:
         count=Message.objects.inbox_unread_count(request.user)
     except:

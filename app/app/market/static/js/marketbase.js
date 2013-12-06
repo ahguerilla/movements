@@ -19,21 +19,21 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             this.filters = window.ahr.clone(this.default_filters);
         }else if(ev.currentTarget.textContent=="All"){
             var skillarr=[];
-            for(var key in window.skills){
-                skillarr.push(parseInt(key));
-            }
+            _.each(window.ahr.skills, function(item){
+                skillarr.push(parseInt(item.pk));
+            });
             this.filters.skills =  skillarr;
 
             var countriesarr=[];
-            for(key in window.countries){
-                countriesarr.push(parseInt(key));
-            }
+            _.each(window.ahr.countries, function(item){
+                countriesarr.push(parseInt(item.pk));
+            });
             this.filters.countries =  countriesarr;
 
             var isssuesarr=[];
-            for(key in window.issues){
-                isssuesarr.push(parseInt(key));
-            }
+            _.each(window.ahr.issues, function(item){
+                isssuesarr.push(parseInt(item.pk));
+            });
             this.filters.issues =  isssuesarr;
         }
         for(var key in this.filters){
@@ -77,9 +77,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                     this.getitemfromto);
 
         dfrd.done(function(data){
-            $.each(data, function(item){
-                data[item].fields.pk = data[item].pk;
-                var item_html = that.item_tmp(data[item].fields);
+            _.each(data, function(item){
+                item.fields.pk = item.pk;
+                var item_html = that.item_tmp(item.fields);
                 $('#marketitems').append(item_html);
             });
         });
@@ -115,35 +115,38 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.initTypeTags(this.types, this.typetag_tmp);
     },
 
-    initFilters: function(that,items,templ){
-        _.each(window[items],function(item,key){
-            if (that.filters[items].indexOf(parseInt(key))>-1){
-                 $('.row.btn-group-sm.'+items).append(templ({filtertag:item, active:'btn-success'}));
-            }else{
-                $('.row.btn-group-sm.'+items).append(templ({filtertag:item, active:' '}));
+    initFilters: function(that, items, templ){
+        _.each(window.ahr[items], function(item){
+            var activeFlag = ' ';
+            if(_.contains(that.filters[items], item.pk)){
+                 activeFlag = 'btn-success';
             }
+            $('.row.btn-group-sm.'+items).append(templ({filtertag:item.value, active:activeFlag}));
         });
     },
 
-    updateTagsfilter: function(that,ev){
+    updateTagsfilter: function(that, ev){
         a=$(ev.currentTarget.parentElement.parentElement).attr("item_title");
         ar = that.filters[a];
-        inv = this.invert(window[a]);
-        if (inv.hasOwnProperty(ev.currentTarget.textContent)){
-            ind = inv[ev.currentTarget.textContent];
-            filtind = ar.indexOf(parseInt(ind));
-            if(filtind<0){
-                that.filters[a].push(parseInt(ind));
-                $(ev.currentTarget).addClass('btn-success');
-            }else{
-                that.filters[a].splice(filtind,1);
+        data = window.ahr[a];
+        var tagData = _.find(data, function(test){
+            return (test.value == ev.currentTarget.textContent);
+        });
+        if(tagData) {
+            if(_.contains(ar, tagData.pk)){
+                that.filters[a] = _.filter(ar, function(item){
+                   return item != tagData.pk;
+                });
                 $(ev.currentTarget).removeClass('btn-success');
+            } else {
+                that.filters[a].push(tagData.pk);
+                $(ev.currentTarget).addClass('btn-success');
             }
-		}
-	},
+        }
+    },
 
-	updateTypefilter: function(that,ev){
-		var ind = that.filters.types.indexOf(that.types[ev.currentTarget.textContent]);
+    updateTypefilter: function(that,ev){
+        var ind = that.filters.types.indexOf(that.types[ev.currentTarget.textContent]);
         if(ind<0){
             that.filters.types.push(that.types[ev.currentTarget.textContent]);
             $(ev.currentTarget).addClass('btn-success');
@@ -151,13 +154,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             that.filters.types.splice(ind,1);
             $(ev.currentTarget).removeClass('btn-success');
         }
-	},
+    },
 
-	initTypeTags: function(types,tmp){
+    initTypeTags: function(types,tmp){
         for(var item in types){
             $('.typetags').append(tmp({typetag:item}));
         }
-	},
+    },
 
     setFilterType: function(ftype){
         $('.filter-type').removeClass('btn-success');
@@ -169,7 +172,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.resetMarket();
     },
 
-	itemTypesfilter: function(ev){
+    itemTypesfilter: function(ev){
         this.updateTypefilter(this,ev);
         this.resetMarket();
     },
@@ -181,20 +184,20 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     init: function(filters){
-	this.default_filters = window.ahr.clone(filters);
-	this.filters = filters;
-	this.initTemplates(filters);
-	this.filters.search=$('#q').val();
-	this.setpagecoutner(this.filters, this.itemcount_url);
-	this.delegateEvents(_.extend(this.events,{	    
-	   'click .item_container': 'showItem',
-	   'click .tagbutton': 'tagsfilter',
-	   'click #searchbtn': 'search',
-	   'click .filter-type': 'changeFilterType',
-	   'click .item-type': 'itemTypesfilter',
-	   'click #create_offer': 'create_offer',
-	   'click #create_request': 'create_request',	  
-	}));
+        this.default_filters = window.ahr.clone(filters);
+        this.filters = filters;
+        this.initTemplates(filters);
+        this.filters.search=$('#q').val();
+        this.setpagecoutner(this.filters, this.itemcount_url);
+        this.delegateEvents(_.extend(this.events,{
+            'click .item_container': 'showItem',
+            'click .tagbutton': 'tagsfilter',
+            'click #searchbtn': 'search',
+            'click .filter-type': 'changeFilterType',
+            'click .item-type': 'itemTypesfilter',
+            'click #create_offer': 'create_offer',
+            'click #create_request': 'create_request',
+        }));
     }
 
 });

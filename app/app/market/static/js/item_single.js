@@ -87,7 +87,6 @@
                             "contents": comment
                         },
                         success: function(item){
-                            console.log(item);
                             $('#newcomment').val("");
                             that.addCommentToCommentList(item.obj, true);
                         }

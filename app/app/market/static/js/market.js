@@ -6,19 +6,19 @@
             "p:page": "page"
         },
 
-    page: function(page){
-        if(page){
-            $('#marketitems').empty();
-            this.market.setItems(parseInt(page)-1);
-        }else{
-            this.market.setItems(0);
-        }
-    },
+        page: function(page){
+            if(page){
+                $('#marketitems').empty();
+                this.market.setItems(parseInt(page)-1);
+            }else{
+                this.market.setItems(0);
+            }
+        },
 
-    initialize: function(market){
-        this.market=market;
-    }
-});
+        initialize: function(market){
+            this.market=market;
+        }
+    });
 
 
     var MarketView = window.ahr.market.MarketBaseView.extend({

@@ -49,7 +49,7 @@ urlpatterns = patterns('',
         name="get_skills"),
 
     url(r'(?P<rtype>\S+)/message/get/count$',
-        'app.market.api.views.misc.getUnraedCount',
+        'app.market.api.views.misc.getUnreadCount',
         name="get_messagecount"),
 
 

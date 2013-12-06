@@ -110,11 +110,11 @@
             }).blur(function(){
                 $('#'+jsonfield).val('');
             });
-        func(values);
+            func(values);
         });
     },
 
-    makeTagWidget:function (jsonfield, aurl,prefilled){
+    makeTagWidget:function (jsonfield, aurl, prefilled){
         var that = this;
         this.makeTypeAhead(jsonfield, aurl,function(data){
             var pref=[],values = data;
@@ -125,20 +125,21 @@
                 });
             }
 
-        $('#'+jsonfield).tagsManager({            
-            tagsContainer: '#'+jsonfield+'Tags',
-            deleteTagsOnBackspace: false,
-            blinkBGColor_1: '#FFFF9C',
-            blinkBGColor_2: '#CDE69C',
-            hiddenTagListName: 'hidden-'+jsonfield,
-            prefilled: pref,
-            validator:function(tag){
-                if (values.indexOf(tag)!=-1){
-                    return true;
-                }else{
-                    return false;
+            $('#'+jsonfield).tagsManager({
+                tagsContainer: '#'+jsonfield+'Tags',
+                deleteTagsOnBackspace: false,
+                blinkBGColor_1: '#FFFF9C',
+                blinkBGColor_2: '#CDE69C',
+                hiddenTagListName: 'hidden-'+jsonfield,
+                prefilled: pref,
+                validator:function(tag){
+                    if (values.indexOf(tag)!=-1){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }
-            }});
+            });
         });
     },
 
