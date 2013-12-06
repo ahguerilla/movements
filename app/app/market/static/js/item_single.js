@@ -119,8 +119,7 @@
             // TODO: should get returned by api
             $('#marketitem_owner').html("<a href='/user/profile/" + fields.owner[0] + "'>" + fields.owner[0] + "</a>");
             $('#marketitem_date').text(moment(fields.pub_date).format("D MMM YYYY"));
-            $('#marketitem_details').html(fields.details.replace(/\n/g, '<br />'));
-
+            $('#marketitem_details').html($('<div/>').text(fields.details).html().replace(/\n/g, '<br />'));
             var self = this;
             _.each(this.comments, function(comment){
                 self.addCommentToCommentList(comment);

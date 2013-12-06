@@ -14,6 +14,8 @@ framework.
 
 """
 import os
+from django.conf import settings
+
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings.staging")
 
@@ -22,6 +24,11 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings.staging")
 # setting points here.
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
+
+if settings.SETTINGS_TYPE == 'STAGING':
+    import newrelic.agent
+    newrelic.agent.initialize('/opt/ahr/ahr/app/newrelic.ini')
+    application = newrelic.agent.wsgi_application()(application)
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication

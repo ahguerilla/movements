@@ -16,7 +16,7 @@ function progressHandlingFunction(e){
             'request': 'REQUEST A SERVICE'
         },
         
-        setWidgetArr:function(){    
+        setWidgetArr:function(){
             var that = this;
             this.widget_arrs = {
                 'offer':[
@@ -44,7 +44,7 @@ function progressHandlingFunction(e){
                     {type: 'textarea', title:'', jsonfield:'details', placeholder:'Add a description'}
                 ]
             };
-        },        
+        },
     
         getFormData: function(){
             var that = this;
@@ -90,8 +90,8 @@ function progressHandlingFunction(e){
                 $('#'+item.jsonfield+'_place').html(widget);
                 if(preval){
                     if(item.customSet){
-                        var func = _.bind(item.customSet,that);
-                        func(item,preval);
+                        var func2 = _.bind(item.customSet,that);
+                        func2(item,preval);
                     }else{
                         $('#'+item.jsonfield).val(preval);
                     }
@@ -126,7 +126,7 @@ function progressHandlingFunction(e){
         },
     
         submit: function(e){
-            $('.error').empty()
+            $('.error').empty();
             var that = this;
             e.preventDefault();
             var dfrd = $.ajax({
@@ -141,7 +141,7 @@ function progressHandlingFunction(e){
             });
     
             dfrd.fail(function(data){
-                for(item in data.responseJSON.errors){
+                for(var item in data.responseJSON.errors){
                     $('.'+data.responseJSON.errors[item][0]+'.error').html(data.responseJSON.errors[item][1]);
                 }
                 that.alert('Correct the errors (you have to select items from drop down menu)','#itemformerror');
