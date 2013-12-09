@@ -12,7 +12,7 @@
             $('#marketitem_message_form').addClass('hide');
             $('#marketitem_comment_form').show();
             var that = this;
-            window.getcsrf(function(csrf){
+            window.ahr.getcsrf(function(csrf){
                 var dfrd = $.ajax({
                     url:window.ahr.app_urls.sendmessage+that.item.fields.owner[0],
                     type: 'POST',
@@ -46,7 +46,7 @@
 
         getCommentData: function(){
             var dfrd = $.Deferred();
-            window.getcsrf(function(csrf){
+            window.ahr.getcsrf(function(csrf){
                 dfrd.resolve(csrf);
             });
             return dfrd;

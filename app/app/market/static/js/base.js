@@ -188,7 +188,7 @@
         var that = this;
             if( $('#msgsub').val()!== '' &&  $('#newmessage').val() !== ''){
             $('#messagedialog').modal('hide');
-            window.getcsrf(function(csrf){
+            window.ahr.getcsrf(function(csrf){
                 var dfrd = $.ajax({
                     url:window.ahr.app_urls.sendmessage+$('#usernameh').text(),
                     type: 'POST',
@@ -239,7 +239,7 @@
             this.alert('You have to select a rateing.','#rateerror');
             return;
         }
-        window.getcsrf(function(csrf){
+        window.ahr.getcsrf(function(csrf){
             if ($('.btn.rate').attr('rateing')=='user'){
                 this.rateurl = window.ahr.app_urls.setuserrate+$('#username').text();
             }else{

@@ -54,7 +54,7 @@
         deletecomment: "{% url 'delete_comment' 'json' 0 %}".slice(0,-1)
     };
 
-    window.getcsrf = function(callback){
+    window.ahr.getcsrf = function(callback){
         $.getJSON(window.ahr.app_urls.getcsrf, function(data){callback(data);});
     }
 
