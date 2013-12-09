@@ -16,7 +16,7 @@
         },
 
         initialize: function(market){
-            this.market=market;
+            this.market = market;
         }
     });
 

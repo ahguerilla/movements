@@ -39,14 +39,12 @@
 {% endblock %}
 
 {% block javascript %}
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-            var dfrd = getstatics();
-            dfrd.done(function(){
-                window.item_form.initItem({{ item|safe }},{{ obj_type|safe }});
-            });
-        });
-    </script>
-
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dfrd = window.ahr.getStatics();
+      dfrd.done(function(){
+        window.item_form.initItem({{ item|safe }},{{ obj_type|safe }});
+      });
+    });
+  </script>
 {% endblock %}

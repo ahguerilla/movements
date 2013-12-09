@@ -133,7 +133,7 @@
     <script type="text/javascript">
 
     $(document).ready(function(){        
-        var dfrd = getstatics();
+        var dfrd = window.ahr.getStatics();
         dfrd.done(function(){
             if("{{init}}"=="market"){
                 window.ahr.market.initMarket({{tags|safe}});

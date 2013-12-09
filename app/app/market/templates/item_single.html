@@ -96,7 +96,7 @@
 
   <script type="text/javascript">
     $(document).ready(function(){      
-      var dfrd = getstatics();
+      var dfrd = window.ahr.getStatics();
       dfrd.done(function(){
         window.item_single.initSingleItem({{ item|safe }},{{ obj_type|safe }});
       });

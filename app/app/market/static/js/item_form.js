@@ -1,9 +1,3 @@
-function progressHandlingFunction(e){
-    if(e.lengthComputable){
-        $('progress').attr({value:e.loaded,max:e.total});
-    }
-}
-
 (function(){
 
     var ItemView = window.ahr.BaseView.extend({

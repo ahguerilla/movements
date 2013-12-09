@@ -14,7 +14,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			var dfrd = getstatics();
+			var dfrd = window.ahr.getStatics();
 			dfrd.done(function(){
 				window.comment.initComment({{ coment|safe }}, {{ obj_id|safe }});
 			)};
