@@ -1,12 +1,10 @@
 <script type="text/javascript" id="api_urls">
-    window.ahr= window.ahr || {};
+    window.ahr = window.ahr || {};
     try{
-        window.user_id = {{ user.id }};
+        window.ahr.user_id = {{ user.id }};
     }catch(err){
-         window.user_id = 0;
+         window.ahr.user_id = 0;
     }
-
-    window.ahr.market_filter_custom = {skills:[1],country:[1],issues:[1,2,3]};
 
     window.ahr.app_urls={
         postmanwrite: "{% url 'postman_write' 'a' %}".slice(0,-1),
@@ -94,7 +92,7 @@
                 dfrd3.done(function(data){
                     window.ahr.countries = getpkname(data,'countries');
                     window.ahr.countries_lookup = getpklookup(window.ahr.countries);
-					dfrd.resolve();
+                    dfrd.resolve();
                 });
             });
         });
