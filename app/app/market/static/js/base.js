@@ -66,7 +66,7 @@
             }
 
             if(val===""){return "";}
-            var date = moment().add('days',parseInt(val)+1).format("D/M/YYYY HH:m");
+            var date = moment().add('days', parseInt(val, 10) + 1).format("D/M/YYYY HH:m");
             return date;
         },
 

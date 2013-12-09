@@ -9,7 +9,7 @@
         page: function(page){
             if(page){
                 $('#marketitems').empty();
-                this.market.setItems(parseInt(page)-1);
+                this.market.setItems(parseInt(page, 10)-1);
             }else{
                 this.market.setItems(0);
             }
