@@ -75,7 +75,7 @@
             if(item.customGen){
                 var func = _.bind(item.customGen,this);
                 func(item,preval);
-            }else{
+            } else {
                 var tmpl = _.template($('#'+item.type+'_template').html());
                 var widget = tmpl({'title':item.title,
                     'jsonfield': item.jsonfield,
@@ -107,7 +107,7 @@
                 _.each(this.widget_arrs[obj_type],function(item){
                     that.makeWidget(item);
                 });
-            }else{
+            } else {
                 this.getItem(item,function(item_obj){
                     that.url = window.ahr.app_urls.editmarketitem+item_obj[0].pk;
                     that.item_type = item_obj[0].fields.item_type;

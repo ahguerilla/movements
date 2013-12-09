@@ -1,7 +1,5 @@
 (function(){
   
-
-
   function getpkname(data, item){
     var ar=[];
     _.each(data, function(i){
@@ -20,7 +18,6 @@
     });
     return ar;
   }
-
 
   function getStatics(){
     var dfrd = $.Deferred();
@@ -43,13 +40,45 @@
     return dfrd;
   }
 
-
   function getcsrf(callback){
     $.getJSON(window.ahr.app_urls.getcsrf, function(data){callback(data);});
+  }
+
+  function clone(obj){
+    // Handle the 3 simple types, and null or undefined
+    if (null === obj || "object" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+        var copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+    }
+
+    // Handle Array
+    if (obj instanceof Array) {
+        var copy_a = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy_a[i] = window.ahr.clone(obj[i]);
+        }
+        return copy_a;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+        var copy_b = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy_b[attr] = window.ahr.clone(obj[attr]);
+        }
+        return copy_b;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
   }
 
   window.ahr = window.ahr || {};
   window.ahr.getcsrf = getcsrf;
   window.ahr.getStatics = getStatics;
+  window.ahr.clone = clone;
 
 })();

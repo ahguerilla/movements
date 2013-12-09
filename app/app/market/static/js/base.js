@@ -61,7 +61,7 @@
             var val;
             if($('#expdate-neverexpire').prop('checked') === true){
                 val = 36500;
-            }else{
+            } else {
                 val = $('#'+data).val();
             }
 
