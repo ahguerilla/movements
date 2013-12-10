@@ -1,6 +1,4 @@
-from django.conf.urls import patterns, include, url
-from django.conf import settings
-
+from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
     url(r'(?P<rtype>\S+)/avatar/get/(?P<obj_id>\d+)$',
@@ -31,14 +29,13 @@ urlpatterns = patterns('',
         'app.market.api.views.misc.getSCRFToken',
         name="get_csrftoken"),
 
-
     url(r'(?P<rtype>\S+)/issues/get$',
         'app.market.api.views.misc.getIssues',
         name="get_issues"),
 
     url(r'(?P<rtype>\S+)/countries/get$',
-        'app.market.api.views.misc.getCountries'
-        , name="get_countries"),
+        'app.market.api.views.misc.getCountries', 
+        name="get_countries"),
 
     url(r'(?P<rtype>\S+)/nationalities/get$',
         'app.market.api.views.misc.getNationalities',
@@ -51,7 +48,6 @@ urlpatterns = patterns('',
     url(r'(?P<rtype>\S+)/message/get/count$',
         'app.market.api.views.misc.getUnreadCount',
         name="get_messagecount"),
-
 
     url(r'(?P<rtype>\S+)/item/add/(?P<obj_type>offer|request|resource)$',
         'app.market.api.views.market.addMarketItem',
@@ -66,8 +62,8 @@ urlpatterns = patterns('',
         name="get_marketitems_last"),
 
     url(r'(?P<rtype>\S+)/item/get/count$',
-            'app.market.api.views.market.getMarketItemCount',
-            name="get_marketitem_count"),
+        'app.market.api.views.market.getMarketItemCount',
+        name="get_marketitem_count"),
 
     url(r'(?P<rtype>\S+)/useritem/get/count$',
         'app.market.api.views.market.userMarketItemsCount',
@@ -78,8 +74,8 @@ urlpatterns = patterns('',
         name="get_marketitems_fromto"),
 
     url(r'(?P<rtype>\S+)/useritem/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
-           'app.market.api.views.market.getUserMarketItemFromTo',
-           name="get_usermarketitems_fromto"),
+        'app.market.api.views.market.getUserMarketItemFromTo',
+        name="get_usermarketitems_fromto"),
 
     url(r'(?P<rtype>\S+)/item/edit/(?P<obj_id>\d+)$',
         'app.market.api.views.market.editMarketItem',
@@ -92,7 +88,6 @@ urlpatterns = patterns('',
     url(r'(?P<rtype>\S+)/item/userposts$',
         'app.market.api.views.market.userMarketItems',
         name="user_marketitems"),
-
 
     url(r'(?P<rtype>\S+)/comment/add/(?P<obj_id>\d+)$',
         'app.market.api.views.comments.addComment',
@@ -117,5 +112,9 @@ urlpatterns = patterns('',
     url(r'(?P<rtype>\S+)/comment/delete/(?P<obj_id>\d+)$',
         'app.market.api.views.comments.getComment',
         name="delete_comment"),
+
+    url(r'(?P<rtype>\S+)/report/(?P<obj_id>\d+)$',
+        'app.market.api.views.report.reportMarketItem',
+        name="report_post"),
 
 )

@@ -35,18 +35,29 @@
             });
         },
 
-        reportPost: function(){
-
-        },
-
         reportPostClicked: function(){
             this.showModalDialog('#report_template', {}, '#reportdialog', function(){
                 $('#reportdialog .send').click(function(){
-                    alert("clicked send");
+                    window.ahr.getcsrf(function(csrf){
+                        $.ajax({
+                            type: "POST",
+                            url: window.ahr.app_urls.reportpost + '1',
+                            dataType: 'json',
+                            data: {
+                                "csrfmiddlewaretoken": csrf.csrfmiddlewaretoken,
+                                "contents": $("#reportdialog #content").val()
+                            },
+                            success: function(data) {
+                                console.log(data);
+                            },
+                            statusCode: {
+                                400: function(data) { console.log(data); },
+                            }
+                        });
+                    });
                 });
 
                 $('#reportdialog .cancel').click(function(){
-                    alert("clicked cancel");
                 });
             });
         },

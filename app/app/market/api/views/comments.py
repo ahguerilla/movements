@@ -1,13 +1,10 @@
 from app.market.forms import commentForm
 import app.market as market
-import app.users as users
-from django.core import serializers
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404,render_to_response, RequestContext
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 import json
 from app.market.api.utils import *
 from django.core.urlresolvers import reverse
-import avatar
 from django.contrib.auth.decorators import login_required
 
 

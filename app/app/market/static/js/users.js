@@ -9,7 +9,7 @@
         page: function(page){
             if(page){
                 $('#marketitems').empty();
-                this.users.setItems(parseInt(page)-1);
+                this.users.setItems(parseInt(page, 10)-1);
             }else{
                 this.users.setItems(0);
             }
@@ -21,7 +21,7 @@
     });
 
     var UsersView = window.ahr.market.MarketBaseView.extend({
-        types:{"Activist" : "activist", "Ready to help" : "readytohelp" },       
+        types:{"Activist" : "activist", "Ready to help" : "readytohelp" },
         initialize : function(filters){
             this.itemcount_url = window.ahr.app_urls.getusercount;
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
