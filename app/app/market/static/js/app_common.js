@@ -76,9 +76,23 @@
     throw new Error("Unable to copy obj! Its type isn't supported.");
   }
 
+  function expandTextarea(id){
+    var $element = $(id).get(0);
+    $element.addEventListener('keyup', function() {
+      this.style.overflow = 'hidden';
+      this.style.height = 0;
+      var sh = this.scrollHeight;
+      if(sh < 100){
+        sh = 100;
+      }
+      this.style.height = sh+10 + 'px';
+    }, false);
+  }
+
   window.ahr = window.ahr || {};
   window.ahr.getcsrf = getcsrf;
   window.ahr.getStatics = getStatics;
   window.ahr.clone = clone;
+  window.ahr.expandTextarea = expandTextarea;
 
 })();

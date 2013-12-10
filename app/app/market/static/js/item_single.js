@@ -1,7 +1,7 @@
 (function(){
 
     var SingleItemView = window.ahr.BaseView.extend({
-        el: '#item-single',        
+        el: '#item-single',
 
         cancel_message: function(){
             $('#marketitem_message_form').addClass('hide');
@@ -23,8 +23,8 @@
                         message: $('#newmessage').val()
                     }
                 });
-                dfrd.done(function(){                   
-                   that.info('Your message was sent successfuly.','#infobar');                   
+                dfrd.done(function(){
+                   that.info('Your message was sent successfuly.','#infobar');
                    $('#marketitem_comment_form').show();
                 });
                 dfrd.fail(function(){
@@ -33,7 +33,22 @@
                     $('#marketitem_comment_form').hide();
                 });
             });
+        },
 
+        reportPost: function(){
+
+        },
+
+        reportPostClicked: function(){
+            this.showModalDialog('#report_template', {}, '#reportdialog', function(){
+                $('#reportdialog .send').click(function(){
+                    alert("clicked send");
+                });
+
+                $('#reportdialog .cancel').click(function(){
+                    alert("clicked cancel");
+                });
+            });
         },
 
         private_message: function(){
@@ -95,21 +110,6 @@
             }
         },
 
-        getUserAvatar: function(id,callback){
-            return $.ajax({
-                url: window.ahr.app_urls.getavatar+id,
-                dataType: "json",
-            });
-        },
-
-        getUserDetail: function(id,callback){
-            return $.ajax({
-                url: window.ahr.app_urls.getuserdetail+id,
-                dataType: "json",
-            });
-        },
-
-
         setPage: function(){
 
             fields = this.item.fields;
@@ -126,7 +126,7 @@
         },
 
 
-        initialize : function(obj_id){            
+        initialize : function(obj_id){
             var that = this;
             window.ahr.expandTextarea('#newmessage');
             this.comment_form_tmp = _.template($('#comment_add_template').html());
@@ -138,7 +138,8 @@
                 'click .comment-btn': 'comment',
                 'click #private_message': 'private_message',
                 'click #cancel_message': 'cancel_message',
-                'click #send_message': 'send_message'
+                'click #send_message': 'send_message',
+                'click #report_post': 'reportPostClicked'
             }));
             
             $.getJSON(

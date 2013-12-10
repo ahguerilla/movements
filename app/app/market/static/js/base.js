@@ -24,6 +24,16 @@
             'click #expdate-neverexpire': 'neverexp',
         },
 
+        showModalDialog: function(templateId, templateData, dialogId, callback) {
+            var tmpl = _.template($(templateId).html());
+            var tmpl_html = tmpl(templateData);
+            $('#modal-placeholder').html(tmpl_html);
+            $(dialogId).modal('show');
+            if(callback){
+                $(dialogId).on('shown.bs.modal', callback);
+            }
+        },
+
         invert: function (obj) {
             var new_obj = {};
             for (var prop in obj) {
@@ -226,7 +236,7 @@
             $('#ratetitle').text(username);
             $('#username').text(username);
             $('#ratecount').text(ratecount);
-            $('#numstars').html('<div class="stars'+parseInt(Math.round(score))+'"></div>');
+            $('#numstars').html('<div class="stars'+parseInt(Math.round(score), 10)+'"></div>');
             $('#profileimage').attr('src',image_src);
             $('#ratedialog').modal('show');
         },
@@ -268,19 +278,4 @@
         },
     });
 })();
-
-
-window.ahr.expandTextarea= function(id) {
-    var $element = $(id).get(0);
-
-    $element.addEventListener('keyup', function() {
-        this.style.overflow = 'hidden';
-        this.style.height = 0;
-        var sh = this.scrollHeight;
-        if(sh<100){
-            sh = 100;
-        }
-        this.style.height =  sh+10 + 'px';
-    }, false);
-};
 
