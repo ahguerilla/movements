@@ -15,9 +15,10 @@ class Offer(models.MarketItem):
 
 
 class OfferAdmin(admin.ModelAdmin):
-    exclude=('item_type',)    
+    exclude = ('item_type',)
+    list_display = ('title', 'owner', 'pub_date', 'published')
     def get_readonly_fields(self, request, obj=None):
-        if obj:        
+        if obj:
             return self.readonly_fields + ('owner','pub_date')
         return self.readonly_fields
 
@@ -36,9 +37,10 @@ class Request(models.MarketItem):
 
 
 class RequestAdmin(admin.ModelAdmin):
-    exclude=('item_type',)    
+    exclude=('item_type',)
+    list_display = ('title', 'owner', 'pub_date', 'published')
     def get_readonly_fields(self, request, obj=None):
-        if obj:        
+        if obj:
             return self.readonly_fields + ('owner','pub_date')
         return self.readonly_fields
 
@@ -69,9 +71,8 @@ class ResourceAdmin(admin.ModelAdmin):
             return self.readonly_fields + ('owner','pub_date')
         return self.readonly_fields
 
-
-
 admin.site.register(Resource,ResourceAdmin)
+
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -80,3 +81,11 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Comment,CommentAdmin)
+
+
+
+class MarketItemPostReportAdmin(admin.ModelAdmin):
+    list_display = ('item', 'contents', 'owner', )
+    pass
+
+admin.site.register(models.MarketItemPostReport, MarketItemPostReportAdmin)
