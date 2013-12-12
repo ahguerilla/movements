@@ -7,9 +7,7 @@
         setWidgetArr:function(){
             var that = this;
             this.widget_arrs = {
-                'offer':[                    
-                    {type: 'typeahead', title:'Please select the countries where you can help',  jsonfield:'countries', customGen: that.genTagWidget, customGet: that.getTagIds},
-                    {type: 'typeahead', title:'Skills',  jsonfield:'skills', customGen: that.genTagWidget, customGet:that.getTagIds},
+                'offer':[                                        
                     {type: 'expdate', title:'Expires in days', jsonfield:'exp_date', customGet:that.getExpDate, customSet: that.setExpDate, placeholder:'' },
                     {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
                     {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
@@ -19,7 +17,10 @@
     
         getFormData: function(){
             var that = this;
-            var retdict={};            
+            var retdict={};  
+            retdict['skills'] = this.skills_widget.getTagIds();
+            retdict['countries'] = this.countries_widget.getTagIds();
+            retdict['issues'] = this.issues_widget.getTagIds();
             _.each(this.widget_arrs[this.item_type],function(item){
                 if(item.customGet){
                     var func = _.bind(item.customGet,that);
@@ -80,10 +81,15 @@
             this.delegateEvents(_.extend(this.events,{'submit' : 'submit'}));
             if(item === false){                
                 this.url = window.ahr.app_urls.addmarketitem+'offer';
-                var widg = window.ahr.typeahead_widget.initWidget(
+                this.issues_widget = window.ahr.typeahead_widget.initWidget(
                             '#issues_place',
-                            {title:'I can help to advance freedom of:', jsonfield:'issues'}
-                            );
+                            {title:'I can help to advance freedom of:', jsonfield:'issues'});
+                this.countries_widget = window.ahr.typeahead_widget.initWidget(
+                            '#countries_place',
+                            {title:'Please select the countries where you can help',  jsonfield:'countries'});
+                this.skills_widget = window.ahr.typeahead_widget.initWidget(
+                            '#skills_place',
+                            {title:'Skills',  jsonfield:'skills'});
                 _.each(this.widget_arrs['offer'],function(item){
                     that.makeWidget(item);
                 });
@@ -128,4 +134,5 @@
         var offer_form = new OfferView(item);
     };
 })();
+
 
