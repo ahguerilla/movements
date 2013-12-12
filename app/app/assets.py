@@ -20,6 +20,8 @@ js = Bundle(
         './js/lib/jstz.js', 
         './js/app_common.js',       
         './js/base.js',
+        './js/item_form_base.js',
+        './js/offer_form.js',
         './js/marketbase.js',
         './js/market.js',
         './js/users.js',         

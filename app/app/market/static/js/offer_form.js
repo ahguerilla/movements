@@ -1,48 +1,25 @@
 (function(){
 
-    var ItemView = window.ahr.item_form_base.extend({
-        el: '#itemform',
+    var OfferView = window.ahr.item_form_base.extend({        
         item_type: '',
-        item:'',
-        form_title:{
-            'offer': 'OFFER A SERVICE',
-            'resource': 'SHARE A RESOURCE',
-            'request': 'REQUEST A SERVICE'
-        },
+        item:'',        
         
         setWidgetArr:function(){
             var that = this;
             this.widget_arrs = {
-                'offer':[
-                    {type: 'typeahead', title:'I can help to advance freedom of:', jsonfield:'issues', customGen: that.genTagWidget, customGet: that.getTagIds },
+                'offer':[                    
                     {type: 'typeahead', title:'Please select the countries where you can help',  jsonfield:'countries', customGen: that.genTagWidget, customGet: that.getTagIds},
                     {type: 'typeahead', title:'Skills',  jsonfield:'skills', customGen: that.genTagWidget, customGet:that.getTagIds},
                     {type: 'expdate', title:'Expires in days', jsonfield:'exp_date', customGet:that.getExpDate, customSet: that.setExpDate, placeholder:'' },
                     {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
                     {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
-                ],
-                'request':[
-                    {type: 'typeahead', title:'I need help to advance freedom of:', jsonfield:'issues', customGen: that.genTagWidget, customGet: that.getTagIds},
-                    {type: 'typeahead', title:'Please select the countries where you need help',  jsonfield:'countries', customGen: that.genTagWidget, customGet:that.getTagIds},
-                    {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'', customSet:that.setDateTimePicker, afterGen:that.afterDateTimePicker },
-                    {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
-                    {type: 'textarea', title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'}
-                ],
-                'resource':[
-                    {type: 'typeahead', title:'Issues', jsonfield:'issues', customGen: that.genTagWidget, customGet:that.getTagIds },
-                    {type: 'typeahead', title:'Country',  jsonfield:'countries', customGen: that.genTagWidget, customGet:that.getTagIds},
-                    {type: 'typeahead', title:'Skills',  jsonfield:'skills', customGen: that.genTagWidget, customGet:that.getTagIds},
-                    {type: 'datetimepicker', title:'Expiry date', jsonfield:'exp_date', placeholder:'', customSet:that.setDateTimePicker, afterGen:that.afterDateTimePicker },
-                    {type: 'input', title:'Title of post', jsonfield:'title', placeholder:''},
-                    {type: 'input', title:'URL link', jsonfield:'url', placeholder:''},
-                    {type: 'textarea', title:'', jsonfield:'details', placeholder:'Add a description'}
                 ]
             };
         },
     
         getFormData: function(){
             var that = this;
-            var retdict={};
+            var retdict={};            
             _.each(this.widget_arrs[this.item_type],function(item){
                 if(item.customGet){
                     var func = _.bind(item.customGet,that);
@@ -59,7 +36,6 @@
         getItem: function(item,func){
             this.item=$.getJSON(window.ahr.app_urls.getmarketitem + item.id, func);
         },
-    
     
         setForm: function(data,obj_type){
             var that=this;
@@ -96,15 +72,19 @@
             }
         },
     
-        initialize : function(item, obj_type){
+        initialize : function(item){
             var that= this;
             this.setWidgetArr();
-            this.item_type = obj_type;
+            this.item_type = 'offer';
+            this.item_obj = null;
             this.delegateEvents(_.extend(this.events,{'submit' : 'submit'}));
-            if(item === false){
-                $('#form-title').html(that.form_title[that.item_type]);
-                this.url = window.ahr.app_urls.addmarketitem+obj_type;
-                _.each(this.widget_arrs[obj_type],function(item){
+            if(item === false){                
+                this.url = window.ahr.app_urls.addmarketitem+'offer';
+                var widg = window.ahr.typeahead_widget.initWidget(
+                            '#issues_place',
+                            {title:'I can help to advance freedom of:', jsonfield:'issues'}
+                            );
+                _.each(this.widget_arrs['offer'],function(item){
                     that.makeWidget(item);
                 });
             } else {
@@ -112,8 +92,7 @@
                     that.url = window.ahr.app_urls.editmarketitem+item_obj[0].pk;
                     that.item_type = item_obj[0].fields.item_type;
                     that.item_obj = item_obj[0].fields;
-                    that.setForm(item_obj, that.item_type);
-                    $('#form-title').html(that.form_title[that.item_type]);
+                    that.setForm(item_obj, that.item_type);                    
                 });
             }
     
@@ -144,9 +123,9 @@
         }
     });
 
-    window.item_form = window.item_form|| {};
-    window.item_form.initItem= function(item,obj_type){
-        var item_form = new ItemView(item,obj_type);
+    window.ahr.offer_form = window.ahr.offer_form|| {};
+    window.ahr.offer_form.initItem= function(item){
+        var offer_form = new OfferView(item);
     };
 })();
 

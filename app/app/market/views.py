@@ -46,6 +46,13 @@ def posts(request):
 
 @login_required
 def addItem_form(request,obj_type):
+    if obj_type=='offer':
+        return render_to_response('offer_form.html',
+                                  {
+                                      'item':'false',                                      
+                                      },
+                                  context_instance=RequestContext(request))
+        
     return render_to_response('item_form.html',
                               {
                                   'item':'false',

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Add Item" %}{% endblock %}
+
+{% block content %}
+{% include "clientside/expdate.html"%}
+{% include "clientside/datetimepicker.html"%}
+{% include "clientside/typeahead.html" %}
+{% include "clientside/input.html" %}
+{% include "clientside/textarea.html" %}
+    
+<div class="row">
+  <div class="col-md-offset-4 col-md-4">
+    <div class="row in-container">
+      <div><h4 id="form-title">OFFER A SERVICE</h4></div>
+      <div id="itemformerror"></div>
+      <form class="form-horizontal" role="form" enctype="multipart/form-data" id="itemform"> 
+        {% csrf_token %}
+        <div class="form-group" id="issues_place"></div>
+        <div class="form-group" id="countries_place"></div>
+        <div class="form-group" id="skills_place"></div>
+        <div class="form-group" id="title_place"></div>		
+        <div class="form-group" id="exp_date_place"></div>
+        <!--
+        <span id="url_place"></span>
+        <span id="afile_place"></span>
+        -->
+        <div class="form-group"  id="details_place"></div>
+        <div class="form-group">
+          <div class="col-xs-offset-6 col-xs-6">
+            <button type="submit" class="btn btn-success full-width">{% trans "Save" %}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dfrd = window.ahr.getStatics();
+      dfrd.done(function(){
+        window.ahr.offer_form.initItem({{ item|safe }});
+      });
+    });
+  </script>
+{% endblock %}

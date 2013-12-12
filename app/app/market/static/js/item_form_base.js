@@ -1,30 +1,59 @@
-<script type="text/template" id="typeahead_template">
-  <div class="col-md-12">
-    <div class="<%- item %> error"></div>
-  </div>
-  <div class="col-md-12">
-    <label for="<%- item %>"><%- title %></label>
-    <div class="input-group">
-      <input id="<%- item %>" class="form-control input-sm typeaheadtag_input" type="text"/>
-      <span class="input-group-addon">
-        <span class="glyphicon <%- item %>">Add</span>
-      </span>
-    </div>
-  </div>
-  <div class="col-md-12" style="margin-top:5px">
-    <div class="input-group" id="<%- item %>Tags"></div>
-  </div>  
-</script>
+(function(){
+    window.ahr = window.ahr || {};
+    window.ahr.item_form_base = window.ahr.BaseView.extend({
+        el: '#itemform',
+        neverexp: function(ev){
+            if($(ev.currentTarget).prop('checked') === false){
+                $('#exp_date').attr('readonly',false);
+                $('#exp_date').show();
+            }else{
+                $('#exp_date').attr('readonly',true);
+                    $('#exp_date').hide();
+            }
+        },
+        setExpDate: function(item,date){
+            //tz = jstz.determine();
+            //tzName = tz.name();
+            //ad=moment.utc(date).tz(tzName).format();
+            days = moment(date).diff(moment(),'days');
+            $('#'+item.jsonfield).val(days);
+            if (moment(this.item_obj.pub_date).diff(moment(date),'days') == -36501){
+                $('#exp_date').attr('readonly',true);
+                    $('#exp_date').hide();
+                $('#expdate-neverexpire').prop('checked',true);
+            }
+        },
+        
+        getExpDate: function(data){
+            var val;
+            if($('#expdate-neverexpire').prop('checked') === true){
+                val = 36500;
+            } else {
+                val = $('#'+data).val();
+            }
+        
+            if(val===""){return "";}
+            var date = moment().add('days', parseInt(val, 10) + 1).format("D/M/YYYY HH:m");
+            return date;
+        },
+          
 
-<script type="text/javascript" id="typeahead_view">
-  (function(){
-
-    var TypeaheadWidget = window.ahr.BaseView.extend({
         generateTypeAhead: function(title,  item){
             if (this.typeAheadTag  === undefined){
                 this.typeAheadTag = _.template($('#typeahead_template').html());
             }
             return this.typeAheadTag({'title':title,'item':item});
+        },
+
+        setDateTimePicker: function(item,preval){
+            if(preval){
+                $('#'+item.jsonfield).val(preval.slice(8,10)+'/'+
+                    preval.slice(5,7)+'/'+
+                    preval.slice(0,4)+' '+
+                    preval.slice(11,13)+':'+
+                    preval.slice(14,16)
+                );
+            }
         },
 
         makeTypeAhead: function(jsonfield, aurl,func){
@@ -80,10 +109,10 @@
             });
         },
 
-        getTagIds: function(){
+        getTagIds: function(name){
             var that = this;
             var val_ids=[],
-                val_names = $('input[name="hidden-'+this.item.jsonfield+'"]').val().split(',');
+                val_names = $('input[name="hidden-'+name+'"]').val().split(',');
             _.each(val_names,function(val){
                 val_ids.push(that.tagdict[val]);
             });
@@ -92,24 +121,22 @@
 
         genTagWidget: function (item, preval){
             var that = this;
-            $(this.container).html(that.generateTypeAhead(item.title, item.jsonfield));
-            this.makeTagWidget(item.jsonfield,window.ahr.app_urls['get'+item.jsonfield], preval);                      
+            $('#'+item.jsonfield+'_place').html(that.generateTypeAhead(item.title, item.jsonfield));
+            if (item.jsonfield == 'skills'){
+                this.makeTagWidget(item.jsonfield,window.ahr.app_urls.getskills, preval);
+            }else if (item.jsonfield == 'issues'){
+                this.makeTagWidget(item.jsonfield,window.ahr.app_urls.getissues, preval);
+            }else{
+                this.makeTagWidget(item.jsonfield,window.ahr.app_urls.getcountries, preval);
+            }
+
         },
-        
-        initialize: function(initobj){  
-            this.container = initobj.cont;
-            this.item = initobj.itm;
-            this.genTagWidget(initobj.itm, initobj.prvl);                           
-            return this;
+
+        afterDateTimePicker: function(item){
+            $('#'+item.type+'-'+item.jsonfield).datetimepicker({format:'D/M/YYYY HH:mm'});
         }
 
-    });
+   });
     
-    window.ahr.typeahead_widget = window.typeahead_widget|| {};
-    window.ahr.typeahead_widget.initWidget= function(container,item,preval){        
-        var widget = new TypeaheadWidget({'cont':container,'itm':item,'prvl':preval});
-        return widget;
-        
-    };
 })();
-</script>
+
