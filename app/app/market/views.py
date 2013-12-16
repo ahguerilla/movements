@@ -64,14 +64,7 @@ def editItem_form(request,obj_id):
                                   'item': getMarketjson([obj]),                                      
                                   },
                               context_instance=RequestContext(request))    
-    #return render_to_response('item_form.html',
-                              #{
-                                  #'item': {'id':str(obj_id)},
-                                  #'obj_type':'false'
-                                  #},
-                              #context_instance=RequestContext(request))
-
-
+ 
 @login_required
 def viewItem(request,obj_type,obj_id):
     return render_to_response('item_single.html',

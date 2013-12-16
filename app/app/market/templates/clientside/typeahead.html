@@ -27,33 +27,32 @@
             return this.typeAheadTag({'title':title,'item':item});
         },
 
-        makeTypeAhead: function(jsonfield, aurl,func){
+        makeTypeAhead: function(jsonfield, func){
             var that = this;
             var typeaheadval = [],values=[];
-            $.getJSON(aurl,function(data){
-                for (var i = 0; i < data.length; i++){
-                    typeaheadval.push({
-                        tokens: [data[i].fields[jsonfield],],
-                        value: data[i].fields[jsonfield]
-                    });
-                    values.push(data[i].fields[jsonfield]);
-                    that.tagdict[data[i].fields[jsonfield]]=data[i].pk;
-                }
-                $('#'+jsonfield).typeahead({
-                    limit: 5,
-                    local: typeaheadval
-                    }).on('typeahead:selected', function (e, d) {
-                        $('#'+jsonfield).tagsManager("pushTag", d.value);
-                }).blur(function(){
-                    $('#'+jsonfield).val('');
+            var data = window.ahr[jsonfield];
+            for (var i = 0; i < data.length; i++){
+                typeaheadval.push({
+                    tokens: [data[i].value,],
+                    value: data[i].value
                 });
-                func(values);
+                values.push(data[i].value);
+                that.tagdict[data[i].value]=data[i].pk;
+            }
+            $('#'+jsonfield).typeahead({
+                limit: 5,
+                local: typeaheadval
+                }).on('typeahead:selected', function (e, d) {
+                    $('#'+jsonfield).tagsManager("pushTag", d.value);
+            }).blur(function(){
+                $('#'+jsonfield).val('');
             });
+            func(values);
         },
 
-        makeTagWidget: function (jsonfield, aurl, prefilled){
+        makeTagWidget: function (jsonfield, prefilled){
             var that = this;
-            this.makeTypeAhead(jsonfield, aurl,function(data){
+            this.makeTypeAhead(jsonfield, function(data){
                 var pref=[],values = data;
                 if (prefilled){
                     inv = that.invert(that.tagdict);
@@ -93,7 +92,7 @@
         genTagWidget: function (item, preval){
             var that = this;
             $(this.container).html(that.generateTypeAhead(item.title, item.jsonfield));
-            this.makeTagWidget(item.jsonfield,window.ahr.app_urls['get'+item.jsonfield], preval[item.jsonfield]);                      
+            this.makeTagWidget(item.jsonfield, preval[item.jsonfield]);                      
         },
         
         initialize: function(initobj){  
