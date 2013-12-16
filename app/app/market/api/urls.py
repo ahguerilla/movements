@@ -23,7 +23,11 @@ urlpatterns = patterns('',
 
     url(r'(?P<rtype>\S+)/users/set/rate/(?P<username>\S+)$',
         'app.market.api.views.users.setRate',
-        name="user_set_rate"),    
+        name="user_set_rate"),
+
+    url(r'(?P<rtype>\S+)/users/get/usernames$',
+        'app.market.api.views.users.getUsernames',
+        name="user_get_usernames"),
 
     url(r'(?P<rtype>\S+)/csrftoken/get$',
         'app.market.api.views.misc.getSCRFToken',
@@ -34,7 +38,7 @@ urlpatterns = patterns('',
         name="get_issues"),
 
     url(r'(?P<rtype>\S+)/countries/get$',
-        'app.market.api.views.misc.getCountries', 
+        'app.market.api.views.misc.getCountries',
         name="get_countries"),
 
     url(r'(?P<rtype>\S+)/nationalities/get$',

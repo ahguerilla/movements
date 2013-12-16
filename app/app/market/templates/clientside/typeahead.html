@@ -13,7 +13,7 @@
   </div>
   <div class="col-md-12" style="margin-top:5px">
     <div class="input-group" id="<%- item %>Tags"></div>
-  </div>  
+  </div>
 </script>
 
 <script type="text/javascript" id="typeahead_view">
@@ -92,22 +92,22 @@
         genTagWidget: function (item, preval){
             var that = this;
             $(this.container).html(that.generateTypeAhead(item.title, item.jsonfield));
-            this.makeTagWidget(item.jsonfield, preval[item.jsonfield]);                      
+            this.makeTagWidget(item.jsonfield, preval? preval[item.jsonfield]: null);
         },
-        
-        initialize: function(initobj){  
+
+        initialize: function(initobj){
             this.container = initobj.cont;
             this.item = initobj.itm;
-            this.genTagWidget(initobj.itm, initobj.prvl);                           
+            this.genTagWidget(initobj.itm, initobj.prvl);
             return this;
         }
 
     });
-    
+
     window.ahr.typeahead_widget = window.typeahead_widget|| {};
-    window.ahr.typeahead_widget.initWidget= function(container,item,preval){        
+    window.ahr.typeahead_widget.initWidget= function(container,item,preval){
         var widget = new TypeaheadWidget({'cont':container,'itm':item,'prvl':preval});
-        return widget;        
+        return widget;
     };
 })();
 </script>

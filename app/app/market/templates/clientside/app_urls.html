@@ -14,6 +14,7 @@
         getuserfromto: "{% url 'get_user_fromto' 'json' 0 0 %}".slice(0,-1),
         viewuserprofile: "{% url 'user_profile_for_user' 'a' %}".slice(0,-1),
         setuserrate: "{% url 'user_set_rate' 'json' 'a' %}".slice(0,-1),
+        getusernames: "{% url 'user_get_usernames' 'json' %}",
 
         getissues: "{% url 'get_issues' 'json' %}",
         getskills: "{% url 'get_skills' 'json' %}",
@@ -23,7 +24,7 @@
 
         viewitem: "{% url 'view_item' 'offer' 0 %}".slice(0,-1),
         edititem: "{% url 'form_edit_item' 0 %}".slice(0,-1),
-        getitemform:  "{% url 'form_add_item' 'offer' %}",
+        getitemform: "{% url 'form_add_item' 'offer' %}",
 
         market: "{% url 'show_market' %}",
         getposts:  "{% url 'posts'  %}",

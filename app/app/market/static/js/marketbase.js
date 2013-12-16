@@ -3,14 +3,14 @@ window.ahr.market = window.ahr.market || {};
 
 window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     el: '#market',
-      
+
     create_request: function(){
         window.location = window.ahr.app_urls.getitemform.replace('offer','request');
     },
     create_offer: function(){
         window.location = window.ahr.app_urls.getitemform;
     },
-  
+
     changeFilterType: function(ev){
         var that = this;
         $('.filter-type').removeClass('btn-success');
@@ -44,8 +44,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     showItem: function(ev){
-	var id = ev.currentTarget.getAttribute('item_id');
-	window.location = this.viewurl+id;
+        var id = ev.currentTarget.getAttribute('item_id');
+        window.location = this.viewurl+id;
     },
 
     getItems: function(from,to,filters,aurl){

@@ -135,3 +135,13 @@ def setRate(request,username,rtype):
                     'ratecount':user.userprofile.ratecount
                     }),
         mimetype="application/"+rtype)
+
+
+@login_required
+def getUsernames(request,rtype):
+    usernames = users.models.User.objects.filter(username__contains=request.GET['username']).only('username')[:10]
+    return HttpResponse(
+        json.dumps(
+            [user.username for user in usernames]
+        ),
+        mimetype="application/"+rtype)

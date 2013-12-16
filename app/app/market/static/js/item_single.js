@@ -3,6 +3,10 @@
     var SingleItemView = window.ahr.BaseView.extend({
         el: '#item-single',
 
+        recommend: function(){
+            $('#recommenddialog').modal('show');
+        },
+
         reportPostClicked: function(){
             this.showModalDialog('#report_template', {}, '#reportdialog', function(){
                 $('#reportdialog .send').click(function(){
@@ -49,7 +53,6 @@
 
         addCommentToCommentList: function(comment_item, front){
             front = front === true ? front : false;
-
             var comment_html = this.comment_tmp({pk:comment_item.pk,
                             userpic: comment_item.fields.avatar,
                             user: comment_item.fields.username,
@@ -104,7 +107,6 @@
             });
         },
 
-
         initialize : function(obj_id){
             var that = this;
             window.ahr.expandTextarea('#newmessage');
@@ -116,6 +118,7 @@
             this.delegateEvents(_.extend(this.events,{
                 'click .comment-btn': 'comment',
                 'click #private_message': 'private_message',
+                'click #recommend': 'recommend',
                 'click #send_message': 'send_message',
                 'click #report_post': 'reportPostClicked'
             }));
@@ -133,6 +136,8 @@
                     }else{
                         $.noop();
                     }
+                    window.ahr.recommend_widget.initWidget(that.item.fields.owner[0]);
+                    $('#recommend').attr('username',that.item.fields.owner[0]);
                     $('#private_message').attr('username',that.item.fields.owner[0]);
                     $('#rate_user').attr('username',that.item.fields.owner[0]);
                     $('#rate_user').attr('ratecount',that.item.fields.userratecount);
@@ -143,9 +148,7 @@
                         that.setPage();
                     });
             });
-
         },
-
     });
 
     window.item_single = window.item_single|| {};
