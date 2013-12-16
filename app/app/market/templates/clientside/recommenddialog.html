@@ -4,7 +4,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Recommed<span id="usernameh"></span></h4>
-        <div id="pmerror"></div>
+        <div id="recerror"></div>
       </div>
       <div class="modal-body">
         <div>To</div>
@@ -13,11 +13,11 @@
         </div>
         <div>Subject</div>
         <div style="margin-bottom:5px;">
-          <input  class="form-control" id="msgsub" type="text" name="subject" required="true"/>
+          <input  class="form-control" id="recsub" type="text" name="subject" required="true"/>
         </div>
         <div>Message</div>
         <div>
-          <textarea class="form-control" name="newmessage" id="newmessage" rows="4" placeholder="" required="true"></textarea>
+          <textarea class="form-control" name="recmessage" id="recmessage" rows="4" placeholder="" required="true"></textarea>
         </div>
       </div>
       <div class="modal-footer">
@@ -32,13 +32,39 @@
 <script type="text/javascript" id="recommend_view">
  (function(){
     var RecommendDialog = window.ahr.BaseView.extend({
-        el: '#itemform',
+        el: '#item-single',
         events:{
           'click .sendrec': 'send'
         },
 
         send: function(){
-          $.noop();
+          var that = this;
+          if( $('#touser').val() !== '' && $('#recsub').val()!== '' &&  $('#recmessage').val() !== ''){
+                $.blockUI({theme: true,baseZ: 200});
+                window.ahr.getcsrf(function(csrf){
+                    var dfrd = $.ajax({
+                        url:window.ahr.app_urls.sendmessage+$('#touser').val(),
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+                            subject: $('#recsub').val(),
+                            message: $('#recmessage').val()
+                        }
+                    });
+                    dfrd.done(function(){
+                      $.unblockUI();
+                      $('#recommenddialog').modal('hide');
+                      that.info('Your message was sent successfuly.','#infobar');
+                    });
+                    dfrd.fail(function(){
+                      $.unblockUI();
+                      that.alert('Faild to send message','#recerror');
+                    });
+                });
+            }else{
+                this.alert('Please provide a recipient subject and message.','#recerror');
+            }
         },
 
         initialize: function(data){
@@ -49,9 +75,6 @@
                 remote: window.ahr.app_urls['getusernames']+'?username='+$('#touser').val()
                 }).on('typeahead:selected', function (e, d){
                   $.noop();
-            }).blur(function(){
-              //$('#touser').val('');
-              $.noop();
             });
         }
     });

@@ -60,7 +60,7 @@
 
         sendpm: function(ev){
             var that = this;
-                if( $('#msgsub').val()!== '' &&  $('#newmessage').val() !== ''){
+            if( $('#msgsub').val()!== '' &&  $('#newmessage').val() !== ''){
                 $('#messagedialog').modal('hide');
                 window.ahr.getcsrf(function(csrf){
                     var dfrd = $.ajax({

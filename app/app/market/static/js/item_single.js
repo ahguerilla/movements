@@ -4,6 +4,9 @@
         el: '#item-single',
 
         recommend: function(){
+            $('#recsub').val('');
+            $('#recmessage').val('');
+            $('#touser').val('');
             $('#recommenddialog').modal('show');
         },
 

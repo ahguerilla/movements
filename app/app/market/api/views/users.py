@@ -106,10 +106,16 @@ def getUserCount(request,rtype):
 
 @login_required
 def sendMessage(request,to_user,rtype):
-    pm_write(sender=request.user,
-             recipient=users.models.User.objects.filter(username=to_user)[0],
-             subject=request.POST['subject'],
-             body=request.POST['message'])
+    try:
+        pm_write(sender=request.user,
+                 recipient=users.models.User.objects.filter(username=to_user)[0],
+                 subject=request.POST['subject'],
+                 body=request.POST['message'])
+    except:
+        return HttpResponseError(
+            json.dumps({'success': 'false'}),
+            mimetype="application/"+rtype)
+
     return HttpResponse(
         json.dumps({'success': 'true'}),
         mimetype="application/"+rtype)
