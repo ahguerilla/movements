@@ -3,38 +3,6 @@
     var SingleItemView = window.ahr.BaseView.extend({
         el: '#item-single',
 
-        cancel_message: function(){
-            $('#marketitem_message_form').addClass('hide');
-            $('#marketitem_comment_form').show();
-        },
-
-        send_message: function(){
-            $('#marketitem_message_form').addClass('hide');
-            $('#marketitem_comment_form').show();
-            var that = this;
-            window.ahr.getcsrf(function(csrf){
-                var dfrd = $.ajax({
-                    url:window.ahr.app_urls.sendmessage+that.item.fields.owner[0],
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
-                        subject: $('#msgsub').val(),
-                        message: $('#newmessage').val()
-                    }
-                });
-                dfrd.done(function(){
-                   that.info('Your message was sent successfuly.','#infobar');
-                   $('#marketitem_comment_form').show();
-                });
-                dfrd.fail(function(){
-                    that.alert('Unable to send message now. Please try again.','#infobar');
-                    $('#marketitem_message_form').removeClass('hide');
-                    $('#marketitem_comment_form').hide();
-                });
-            });
-        },
-
         reportPostClicked: function(){
             this.showModalDialog('#report_template', {}, '#reportdialog', function(){
                 $('#reportdialog .send').click(function(){
@@ -62,12 +30,13 @@
             });
         },
 
-        private_message: function(){
+        private_message: function(ev){
+            var username = ev.currentTarget.getAttribute('username');
+            $('#usernameh').text(username);
             $('#msgsub').val('Re: '+$('#marketitem_title').text());
-            $('#marketitem_comment_form').hide();
-            $('#newmessage').css('height','110px');
+            $('#msgsub').attr('readonly',true);
             $('#newmessage').val('');
-            $('#marketitem_message_form').removeClass('hide');
+            $('#messagedialog').modal('show');
         },
 
         getCommentData: function(){
@@ -122,7 +91,6 @@
         },
 
         setPage: function(){
-
             fields = this.item.fields;
             $('#marketitem_type').text(fields.item_type.toUpperCase());
             $('#marketitem_title').text(fields.title);
@@ -144,15 +112,14 @@
             $('#marketitem_comment_form').html(this.comment_form_tmp());
             window.ahr.expandTextarea('#newcomment');
             this.comment_tmp = _.template($('#comment_view_template').html());
-            
+
             this.delegateEvents(_.extend(this.events,{
                 'click .comment-btn': 'comment',
                 'click #private_message': 'private_message',
-                'click #cancel_message': 'cancel_message',
                 'click #send_message': 'send_message',
                 'click #report_post': 'reportPostClicked'
             }));
-            
+
             $.getJSON(
                 window.ahr.app_urls.getmarketitem+obj_id.id,
                 function(data){
@@ -166,6 +133,7 @@
                     }else{
                         $.noop();
                     }
+                    $('#private_message').attr('username',that.item.fields.owner[0]);
                     $('#rate_user').attr('username',that.item.fields.owner[0]);
                     $('#rate_user').attr('ratecount',that.item.fields.userratecount);
                     $('#rate_user').attr('score',that.item.fields.usercore);
