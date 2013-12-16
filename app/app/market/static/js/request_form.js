@@ -1,6 +1,6 @@
 (function(){
 
-    var OfferView = window.ahr.item_form_base.extend({                
+    var RequestView = window.ahr.item_form_base.extend({                
         item:'',
         init:function(){
             this.url = window.ahr.app_urls.addmarketitem+'offer';
@@ -8,9 +8,8 @@
         getFormData: function(){
             var that = this;
             var retdict={};  
-            retdict['skills'] = this.skills_widget.getTagIds();
-            retdict['countries'] = this.countries_widget.getTagIds();
             retdict['issues'] = this.issues_widget.getTagIds();
+            retdict['countries'] = this.countries_widget.getTagIds();            
             retdict['exp_date'] = this.expdate_widget.getExpDate();
             retdict['title'] = this.title_widget.getval();
             retdict['details'] = this.details_widget.getval();            
@@ -22,18 +21,13 @@
             var that = this;          
             this.issues_widget = window.ahr.typeahead_widget.initWidget(
                         '#issues_place',
-                        {title:'I can help to advance freedom of:', jsonfield:'issues'},
+                        {title:'I need help to advance freedom of:', jsonfield:'issues'},
                         this.item_obj);
                         
             this.countries_widget = window.ahr.typeahead_widget.initWidget(
                         '#countries_place',
-                        {title:'Please select the countries where you can help',  jsonfield:'countries'},
-                        this.item_obj);
-                        
-            this.skills_widget = window.ahr.typeahead_widget.initWidget(
-                        '#skills_place',
-                        {title:'Skills',  jsonfield:'skills'},
-                        this.item_obj);
+                        {title:'Please select the countries where you need help',  jsonfield:'countries'},
+                        this.item_obj);           
                         
             this.expdate_widget = window.ahr.expdate_widget.initWidget(
                         '#exp_date_place',
@@ -52,9 +46,9 @@
         }    
     });
 
-    window.ahr.offer_form = window.ahr.offer_form|| {};
-    window.ahr.offer_form.initItem= function(item){
-        var offer_form = new OfferView(item);
+    window.ahr.request_form = window.ahr.request_form|| {};
+    window.ahr.request_form.initItem= function(item){
+        var request_form = new RequestView(item);
     };
 })();
 

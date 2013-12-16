@@ -12,3 +12,53 @@
     <div class="<%- jsonfield %> error"></div>
   </div>
 </script>
+
+
+
+<script type="text/javascript" id="expdate_view">
+ (function(){
+    var DateTimePickerWidget = window.ahr.BaseView.extend({
+        el: '#itemform',
+        getval: function(){ 
+            return $('#'+this.jsonfield).val();
+        },
+        
+        setDateTimePicker: function(item,preval){
+            if(preval){
+                $('#'+this.jsonfield).val(preval.slice(8,10)+'/'+
+                    preval.slice(5,7)+'/'+
+                    preval.slice(0,4)+' '+
+                    preval.slice(11,13)+':'+
+                    preval.slice(14,16)
+                );
+            }
+        },
+
+        afterDateTimePicker: function(item){
+            $('#'+item.type+'-'+this.jsonfield).datetimepicker({format:'D/M/YYYY HH:mm'});
+        },
+        
+        initialize: function(data){
+            var that = this;
+            this.container = data.cont;
+            this.item = data.itm;
+            this.jsonfield = data.itm.jsonfield;
+            var tmpl = _.template($('#datetimepicker_template').html());
+            var html = tmpl({
+                title:this.item.title,
+                jsonfield: this.item.jsonfield,
+                placeholder: this.item.placeholder
+                });
+            $(this.container).html(html);                        
+            if(data.prvl){
+                 $('#'+this.jsonfield).val(data.prvl);
+            }
+        }
+    });
+    window.ahr.datetimepicker_widget = window.ahr.datetimepicker_widget || {};
+    window.ahr.datetimepicker_widget.initWidget= function(container,item,preval){
+        var widget = new DateTimePickerWidget({'cont':container,'itm':item,'prvl':preval});
+        return widget;        
+    };
+})();
+</script>

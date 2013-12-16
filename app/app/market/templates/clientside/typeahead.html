@@ -93,7 +93,7 @@
         genTagWidget: function (item, preval){
             var that = this;
             $(this.container).html(that.generateTypeAhead(item.title, item.jsonfield));
-            this.makeTagWidget(item.jsonfield,window.ahr.app_urls['get'+item.jsonfield], preval);                      
+            this.makeTagWidget(item.jsonfield,window.ahr.app_urls['get'+item.jsonfield], preval[item.jsonfield]);                      
         },
         
         initialize: function(initobj){  
@@ -108,8 +108,7 @@
     window.ahr.typeahead_widget = window.typeahead_widget|| {};
     window.ahr.typeahead_widget.initWidget= function(container,item,preval){        
         var widget = new TypeaheadWidget({'cont':container,'itm':item,'prvl':preval});
-        return widget;
-        
+        return widget;        
     };
 })();
 </script>

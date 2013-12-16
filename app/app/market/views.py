@@ -3,6 +3,8 @@ from django.template import RequestContext
 from .api.utils import *
 from app.market.forms import commentForm
 from django.contrib.auth.decorators import login_required
+from app.market.models import MarketItem
+from app.market.api.views.market import getMarketjson
 
 
 def getUserTags(user):
@@ -45,30 +47,29 @@ def posts(request):
 
 
 @login_required
-def addItem_form(request,obj_type):
-    if obj_type=='offer':
-        return render_to_response('offer_form.html',
-                                  {
-                                      'item':'false',                                      
-                                      },
-                                  context_instance=RequestContext(request))
-        
-    return render_to_response('item_form.html',
+def addItem_form(request,obj_type):    
+    return render_to_response(obj_type+'_form.html',
                               {
-                                  'item':'false',
-                                  'obj_type':'"%s"'%obj_type
+                                  'item':'false',                                      
                                   },
                               context_instance=RequestContext(request))
-
+   
 
 @login_required
 def editItem_form(request,obj_id):
-    return render_to_response('item_form.html',
+    obj = MarketItem.objects.get(id=obj_id)
+   
+    return render_to_response(obj.item_type+'_form.html',
                               {
-                                  'item': {'id':str(obj_id)},
-                                  'obj_type':'false'
+                                  'item': getMarketjson([obj]),                                      
                                   },
-                              context_instance=RequestContext(request))
+                              context_instance=RequestContext(request))    
+    #return render_to_response('item_form.html',
+                              #{
+                                  #'item': {'id':str(obj_id)},
+                                  #'obj_type':'false'
+                                  #},
+                              #context_instance=RequestContext(request))
 
 
 @login_required
