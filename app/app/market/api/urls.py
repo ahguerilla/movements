@@ -93,6 +93,10 @@ urlpatterns = patterns('',
         'app.market.api.views.market.userMarketItems',
         name="user_marketitems"),
 
+    url(r'(?P<rtype>\S+)/item/set/rate/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.setRate',
+        name="market_set_rate"),
+
     url(r'(?P<rtype>\S+)/comment/add/(?P<obj_id>\d+)$',
         'app.market.api.views.comments.addComment',
         name="add_comment"),

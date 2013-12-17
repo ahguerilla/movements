@@ -26,10 +26,10 @@
         recommend: function(ev){
             var username = $(ev.currentTarget).attr('username');
             window.ahr.recommend_widget.initWidget(username);
-            $('#recsub').val('Recommeds user '+ username);
+            $('#recsub').val($('#currentusername').text()+ ' recommeds user '+ username);
             $('#recsub').attr('readonly',true);
             var href = '<a href="'+window.location.origin+'/uer/profile/'+username+'">'+username+'</a>';
-            $('#recmessage').val('Have a look at '+ username + ' profile.' + ' \r\n'+ href );
+            $('#recmessage').val($('#currentusername').text()+ ' recommends you have a look at '+ username + ' profile.' + ' \r\n'+ href );
             $('#touser').val('');
             $('#recommenddialog').modal('show');
         },

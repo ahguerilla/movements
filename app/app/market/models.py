@@ -1,6 +1,8 @@
 from datetime import datetime
 import app.users as users
 from django.db import models
+from django.db.models import Q
+
 from django.utils.translation import ugettext_lazy as _
 import tinymce
 
@@ -67,7 +69,15 @@ class ItemRate(models.Model):
 
     def save(self, *args, **kwargs):
         model = self.__class__
-        self.item.ratecount+=1
+        rates = ItemRate.objects.filter(item=self.item).filter(~Q(owner=self.owner))
+        if self.id == None:
+            self.item.ratecount+=1
+        if len(rates) == 0:
+            self.item.score = int(self.score)
+        else:
+            self.item.score = (int(self.score) + sum([rate.score for rate in rates]))/float(self.item.ratecount)
+
+        self.item.save_base()
         self.item.save()
 
 

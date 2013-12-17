@@ -94,31 +94,46 @@
         },
 
         showrate: function(ev){
+            this.evrate = ev;
             var username = ev.currentTarget.getAttribute('username');
             var image_src = ev.currentTarget.getAttribute('image_src');
             var score = ev.currentTarget.getAttribute('score');
             var ratecount = ev.currentTarget.getAttribute('ratecount');
-            $('#ratetitle').text(username);
-            $('#username').text(username);
+
             $('#ratecount').text(ratecount);
-            $('#numstars').html('<div class="stars'+parseInt(Math.round(score), 10)+'"></div>');
+            if ($(ev.currentTarget).attr('rateing')=='user'){
+                this.rateurl = window.ahr.app_urls.setuserrate+username;
+                $('#username').text(username);
+                $('#ratetitle').text(username);
+            }else{
+
+                this.rateurl = window.ahr.app_urls.marketsetrate+$("#item-single").attr("item-id");
+                $('#username').text($('#marketitem_title').text());
+                $('#ratetitle').text($('#marketitem_title').text());
+            }
+
+            $('#numstars').rateit();
+            $('#numstars').rateit('min',0);
+            $('#numstars').rateit('max',5);
+            $('#numstars').rateit('readonly',true);
+            $('#numstars').rateit('ispreset',true);
+            $('#numstars').rateit('value',score);
+
             $('#profileimage').attr('src',image_src);
             $('#ratedialog').modal('show');
         },
 
         setrate: function(ev){
             var that = this;
+            var event = ev;
             if($('input[name="stars"]:checked').val() == undefined){
                 this.alert('You have to select a rateing.','#rateerror');
                 return;
             }
             window.ahr.getcsrf(function(csrf){
-                if ($('.btn.rate').attr('rateing')=='user'){
-                    this.rateurl = window.ahr.app_urls.setuserrate+$('#username').text();
-                }else{
-                }
+
                 var dfrd = $.ajax({
-                    url: this.rateurl,
+                    url: that.rateurl,
                     type: 'POST',
                     dataType: 'json',
                     data: {
@@ -127,8 +142,8 @@
                         }
                 });
                 dfrd.done(function(data){
-                    $('.btn.rate').attr('ratecount',data.ratecount);
-                    $('.btn.rate').attr('score',data.score);
+                    $(that.evrate.currentTarget).attr('ratecount',data.ratecount);
+                    $(that.evrate.currentTarget).attr('score',data.score);
                     $('#ratedialog').modal('hide');
                     that.resetrate();
                 });
@@ -140,8 +155,7 @@
 
         resetrate: function(){
             $('input[name="stars"]:checked').prop('checked',false);
-        },
-
+        }
 
     });
 })();

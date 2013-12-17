@@ -67,6 +67,7 @@
 .rateit .rateit-selected-rtl
 {
     background-position: right -16px;
+    width: 20px;
 }
 
 .rateit .rateit-preset

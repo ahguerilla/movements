@@ -160,3 +160,24 @@ def getUserMarketItemFromTo(request,sfrom,to,rtype):
     obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     return returnItemList(obj, rtype)
 
+
+@login_required
+def setRate(request,obj_id,rtype):
+    if not request.POST.has_key('score'):
+        return HttpResponseError()
+    item = market.models.MarketItem.objects.filter(id=obj_id)[0]
+    owner = request.user
+    rate = market.models.ItemRate.objects.filter(owner=owner).filter(item=item)
+    if len(rate)==0:
+        rate = market.models.ItemRate(owner=owner,item=item)
+    else:
+        rate = rate[0]
+    rate.score =  int(request.POST['score'])
+    rate.save()
+    rate.save_base()
+    return HttpResponse(
+        json.dumps({'success': 'true',
+                    'score':item.score ,
+                    'ratecount':item.ratecount
+                    }),
+        mimetype="application/"+rtype)
