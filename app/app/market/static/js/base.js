@@ -141,6 +141,8 @@
         resetrate: function(){
             $('input[name="stars"]:checked').prop('checked',false);
         },
+
+
     });
 })();
 

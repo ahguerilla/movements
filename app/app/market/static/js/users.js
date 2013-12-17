@@ -22,6 +22,18 @@
 
     var UsersView = window.ahr.market.MarketBaseView.extend({
         types:{"Activist" : "activist", "Ready to help" : "readytohelp" },
+
+        recommend: function(ev){
+            var username = $(ev.currentTarget).attr('username');
+            window.ahr.recommend_widget.initWidget(username);
+            $('#recsub').val('Recommeds user '+ username);
+            $('#recsub').attr('readonly',true);
+            var href = '<a href="'+window.location.origin+'/uer/profile/'+username+'">'+username+'</a>';
+            $('#recmessage').val('Have a look at '+ username + ' profile.' + ' \r\n'+ href );
+            $('#touser').val('');
+            $('#recommenddialog').modal('show');
+        },
+
         initialize : function(filters){
             this.itemcount_url = window.ahr.app_urls.getusercount;
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
@@ -30,7 +42,9 @@
             filters.types=["activist", "readytohelp"];
             this.init(filters);
             window.ahr.expandTextarea('#newmessage');
-            //this.delegateEvents(_.extend(this.events,{}));
+            this.delegateEvents(_.extend(this.events,{
+                'click .recommend': 'recommend'
+            }));
             return this;
         },
     });

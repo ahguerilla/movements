@@ -4,8 +4,10 @@
         el: '#item-single',
 
         recommend: function(){
-            $('#recsub').val('');
-            $('#recmessage').val('');
+            $('#recsub').val('Re :'+ this.item.fields.title);
+            $('#recsub').attr('readonly',true);
+            var href = '<a href="'+window.location+'">'+this.item.fields.title+'</a>';
+            $('#recmessage').val('Have a look at this '+ this.item.fields.item_type+ ' by '+ this.item.fields.owner+' \r\n'+ href );
             $('#touser').val('');
             $('#recommenddialog').modal('show');
         },
@@ -123,6 +125,7 @@
                 'click #private_message': 'private_message',
                 'click #recommend': 'recommend',
                 'click #send_message': 'send_message',
+                'click #recommend': 'recommend',
                 'click #report_post': 'reportPostClicked'
             }));
 
