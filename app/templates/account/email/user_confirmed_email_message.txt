@@ -1,0 +1,9 @@
+{% load account %}
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans with current_site.name as site_name %}
+
+User {{ user }} at {{ site_name }} confirmed his/her email address.
+
+To activate this user, go to {{ activate_url }}
+{% endblocktrans %}{% endautoescape %}

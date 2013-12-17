@@ -7,6 +7,7 @@ django-assets==0.8
 django-tinymce==1.5.1
 jsmin==2.0.6
 sorl-thumbnail==11.12
+django-picklefield==0.3.1
 webassets==0.8
 Unipath==1.0
 PIL==1.1.7
@@ -26,4 +27,5 @@ lxml==3.2.4
 pysolr==3.1.0
 django-haystack==2.1.0
 cssselect==0.9.1
+django-constance==0.6
 newrelic==2.6.0.5

@@ -5,10 +5,13 @@ from django.contrib.auth.models import User
 from models import UserProfile
 from forms import SettingsForm, UserForm
 from allauth.account.views import SignupView
+from allauth.account.adapter import DefaultAccountAdapter
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-
+from django.contrib.sites.models import Site
+from allauth.account.models import EmailConfirmation
+from constance import config
 
 def render_settings(request, initial=False):
     template = 'users/user_settings.html'
@@ -35,22 +38,22 @@ def render_settings(request, initial=False):
             settings = settings_form.save(commit=False)
             settings.user_id = request.user.id
             settings.notperm = perms
-            settings.save()        
+            settings.save()
             settings_form.save_m2m()
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
             if initial:
                 template = 'users/welcome.html'
     else:
         user_form = UserForm(instance=request.user)
-        settings_form = SettingsForm(instance=settings)        
+        settings_form = SettingsForm(instance=settings)
 
-    return render_to_response(template, 
+    return render_to_response(template,
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
                                 'notperm': str(perms).replace("u'","'"),
                                 'initial': initial,
-                              }, 
+                              },
                               context_instance=RequestContext(request))
 
 
@@ -88,14 +91,18 @@ def profile(request, user_name=None):
     if user.id == request.user.id:
         is_self = True
 
-    return render_to_response('users/user_profile.html', 
+    return render_to_response('users/user_profile.html',
                                 {
                                     'user_details': user,
                                     'user_profile': user_profile,
                                     'is_self': is_self,
-
-                                }, 
+                                },
                                 context_instance=RequestContext(request))
+
+def waitforactivation(request):
+    return render_to_response('users/waitforactivation.html',
+                              {},
+                              context_instance=RequestContext(request))
 
 
 class AccountSignupView(SignupView):
@@ -107,6 +114,25 @@ class AccountSignupView(SignupView):
         kwargs['form'] = form
         context = self.get_context_data(**kwargs)
         context['form'].fields['email'].initial = self.request.GET.get('email', '')
-        return self.render_to_response(context)      
+        return self.render_to_response(context)
 
 accountsignup = AccountSignupView.as_view()
+
+
+class AccAdapter(DefaultAccountAdapter):
+    def new_user(self, *args, **kwargs):
+        user = super(AccAdapter,self).new_user(*args,**kwargs)
+        user.is_active = False
+        return user
+
+    def get_email_confirmation_redirect_url(self, request):
+        redir = super(AccAdapter,self).get_email_confirmation_redirect_url(request)
+        key = request.path.split('/')[3]
+        conf = EmailConfirmation.objects.filter(key=key)[0]
+        ctx = {
+            "user": str(conf.email_address),
+            "activate_url": 'http://'+Site.objects.get_current().domain+"/admin/auth/user/"+str(conf.email_address.user_id),
+            "current_site": Site.objects.get_current().domain,
+        }
+        self.send_mail('account/email/user_confirmed_email', config.ACTIVATE_USER_EMAIL , ctx)
+        return 'http://'+Site.objects.get_current().domain+'/user/waitforactivation'
