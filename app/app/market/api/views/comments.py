@@ -14,7 +14,8 @@ def createCommentDict(comment):
     adict['fields']['contents'] = comment.contents
     adict['pk'] = comment.pk
     adict['fields']['owner'] = comment.owner.id
-    adict['fields']['avatar'] = reverse('avatar_render_primary', args=[comment.owner.username,80])
+    adict['fields']['avatar'] = '/static/images/male200.png'
+    #reverse('avatar_render_primary', args=[comment.owner.username,80])
     adict['fields']['username'] = comment.owner.username
     adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[comment.owner.username])
     return adict

@@ -37,7 +37,8 @@ def getMarketjson(objs):
         adict['fields']['userratecount']= obj.owner.userprofile.ratecount
         adict['fields']['ratecount']= obj.ratecount
         adict['fields']['score']= obj.score
-        adict['fields']['avatar'] = reverse('avatar_render_primary', args=[obj.owner.username,80])
+        adict['fields']['avatar'] = '/static/images/male200.png'
+        #reverse('avatar_render_primary', args=[obj.owner.username,80])
 
         alist.append(adict)
     return json.dumps(alist)

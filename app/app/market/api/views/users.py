@@ -17,7 +17,8 @@ from postman.api import pm_write
 def getUserDict(userprofile):
     adict= {'fields':{}}
     adict['pk'] = userprofile.user.id
-    adict['fields']['avatar'] = reverse('avatar_render_primary', args=[userprofile.user.username,80])
+    adict['fields']['avatar'] = '/static/images/male200.png'
+    #reverse('avatar_render_primary', args=[userprofile.user.username,80])
     adict['fields']['bio'] = userprofile.bio
     adict['fields']['tag_line'] = userprofile.tag_ling
     adict['fields']['username'] = userprofile.user.username
@@ -72,8 +73,8 @@ def createQuery(request):
 def getAvatar(request,obj_id, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     obj = user.avatar_set.all()
-    if obj != []:
-        return HttpResponse(value(rtype,obj),mimetype="application"+rtype)
+    #if obj != []:
+        #return HttpResponse(value(rtype,obj),mimetype="application"+rtype)
     return HttpResponse(value(rtype, [{'pk': 0, 'avatar': '/static/images/male200.png' },]),mimetype="application"+rtype)
 
 

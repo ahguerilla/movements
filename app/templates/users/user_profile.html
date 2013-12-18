@@ -19,23 +19,24 @@
         </h4>
       </div>
       <div class="col-md-12 col-spacing-bottom">
-        {% avatar user_details %}
+        {# avatar user_details #}
+        <img src="/static/images/male200.png"/>
       </div>
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Rating:</strong> 
+            <strong>Rating:</strong>
           </div>
           <div class="col-md-9">
             {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
           </div>
-        </div>        
+        </div>
       </div>
       {% if user_profile.notperm.name != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Name:</strong> 
+            <strong>Name:</strong>
           </div>
           <div class="col-md-9">
             {{ user_details.first_name }}&nbsp;{{ user_details.last_name }} <em>({{ user_details.username }})</em>
@@ -47,7 +48,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Email:</strong> 
+            <strong>Email:</strong>
           </div>
           <div class="col-md-9">
             {{ user_details.email }}
@@ -60,7 +61,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Nationality:</strong> 
+            <strong>Nationality:</strong>
           </div>
           <div class="col-md-9">
             {{ user_profile.nationality }}
@@ -72,7 +73,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Occupation:</strong> 
+            <strong>Occupation:</strong>
           </div>
           <div class="col-md-9">
             {{ user_profile.occupation }}
@@ -84,7 +85,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Area of expertise:</strong> 
+            <strong>Area of expertise:</strong>
           </div>
           <div class="col-md-9">
             {{ user_profile.expertise }}
@@ -97,7 +98,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Website:</strong> 
+            <strong>Website:</strong>
           </div>
           <div class="col-md-9">
             <a target="_blank" href="{{ user_profile.web_url }}">{{ user_profile.web_url }}</a>
@@ -111,7 +112,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Facebook:</strong> 
+            <strong>Facebook:</strong>
           </div>
           <div class="col-md-9">
             <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.fb_url }}</a>
@@ -120,13 +121,13 @@
       </div>
       {% endif %}
       {% endif %}
-  
+
       {% if user_profile.linkedin_url %}
       {% if user_profile.notperm.linkedin_url != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>LinkedIn:</strong> 
+            <strong>LinkedIn:</strong>
           </div>
           <div class="col-md-9">
             <a target="_blank" href="{{ user_profile.linkedin_url }}">{{ user_profile.linkedin_url }}</a>
@@ -134,14 +135,14 @@
         </div>
       </div>
       {% endif %}
-      {% endif %}      
-      
+      {% endif %}
+
       {% if user_profile.tweet_url %}
       {% if user_profile.notperm.tweet_url != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Twitter:</strong> 
+            <strong>Twitter:</strong>
           </div>
           <div class="col-md-9">
             <a target="_blank" href="{{ user_profile.get_twitter_url }}">{{ user_profile.tweet_url }}</a>
@@ -154,7 +155,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Tag:</strong> 
+            <strong>Tag:</strong>
           </div>
           <div class="col-md-9">
             {{ user_profile.tag_ling }}
@@ -166,7 +167,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Bio:</strong> 
+            <strong>Bio:</strong>
           </div>
           <div class="col-md-9">
             {{ user_profile.bio }}
@@ -177,7 +178,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Issues:</strong> 
+            <strong>Issues:</strong>
           </div>
           <div class="col-md-9">
             {% for issue in user_profile.issues.all %}
@@ -191,7 +192,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Countries:</strong> 
+            <strong>Countries:</strong>
           </div>
           <div class="col-md-9">
             {% for country in user_profile.countries.all %}
@@ -205,7 +206,7 @@
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
-            <strong>Skills:</strong> 
+            <strong>Skills:</strong>
           </div>
           <div class="col-md-9">
             {% for skill in user_profile.skills.all %}
