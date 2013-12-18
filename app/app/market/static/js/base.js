@@ -110,17 +110,19 @@
                 this.rateurl = window.ahr.app_urls.marketsetrate+$("#item-single").attr("item-id");
                 $('#username').text($('#marketitem_title').text());
                 $('#ratetitle').text($('#marketitem_title').text());
+
             }
+            $('#ratedialog').modal('show');
 
             $('#numstars').rateit();
             $('#numstars').rateit('min',0);
             $('#numstars').rateit('max',5);
             $('#numstars').rateit('readonly',true);
-            $('#numstars').rateit('ispreset',true);
+            //$('#numstars').rateit('ispreset',true);
             $('#numstars').rateit('value',score);
 
             $('#profileimage').attr('src',image_src);
-            $('#ratedialog').modal('show');
+
         },
 
         setrate: function(ev){
