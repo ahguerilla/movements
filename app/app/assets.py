@@ -35,7 +35,7 @@ js = Bundle(
     output='./js/packed.js'
 )
 
-if settings.PRODUCTION:
+if settings.PRODUCTION or settings.STAGING:
 
     css = Bundle(
         './css/bootstrap.css',
