@@ -5,9 +5,9 @@
 {% load pagination_tags %}
 {% load avatar_tags %}
 
-{% comment %}  
+{% comment %}
   WARNING: 'pagination_tags' is a name from the django-pagination application.
-  For convenience, the design of this template is done with the use of that application.  
+  For convenience, the design of this template is done with the use of that application.
   Django-postman will still be working, even if that application is not installed, by providing a mock
   for the template tag library.
   If the real implementation is to be used, just make sure that 'pagination' is declared before 'postman'
@@ -84,7 +84,8 @@
                     <div class="row message-well">
                       <div class="col-md-2">
                         <input type="checkbox" {% if by_conversation and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %} />
-                        {% avatar message.sender 30 %}
+                        {# avatar message.sender 30 #}
+                        <img src='/static/images/male200.png' width="30" height="30"/>
                       </div>
                       <div class="col-md-2">
                         {% block pm_sender_cell %}
@@ -138,7 +139,7 @@
         {% block pm_footer_info %}
         {% endblock %}
       </div>
-    </div>  
+    </div>
   </div>
 </div>
 {% endblock content %}
