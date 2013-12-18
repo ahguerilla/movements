@@ -25,8 +25,8 @@ def getMarketjson(objs):
         adict['fields']['issues']= [ob.id for ob in obj.issues.all()]
         adict['fields']['countries']= [ob.id for ob in obj.countries.all()]
         adict['fields']['skills']= [ob.id for ob in obj.skills.all()]
-        adict['fields']['title']= escape(obj.title)
-        adict['fields']['details']= escape(obj.details)
+        adict['fields']['title']= obj.title
+        adict['fields']['details']= obj.details
         adict['fields']['pub_date']= str(obj.pub_date)
         adict['fields']['exp_date']= str(obj.exp_date)
         adict['fields']['owner']= [obj.owner.username]
