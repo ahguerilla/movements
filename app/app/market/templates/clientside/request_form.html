@@ -10,7 +10,6 @@
       <div class="modal-body">
         <form class="form-horizontal" role="form" enctype="multipart/form-data" id="requestform">
           <div id="itemformerror"></div>
-          {% csrf_token %}
           <div class="form-group" id="request_issues_place"></div>
           <div class="form-group" id="request_countries_place"></div>
           <div class="form-group" id="request_title_place"></div>
@@ -45,7 +44,7 @@
             retdict['exp_date'] = this.expdate_widget.getExpDate();
             retdict['title'] = this.title_widget.getval();
             retdict['details'] = this.details_widget.getval();
-            retdict.csrfmiddlewaretoken=$('input[name="csrfmiddlewaretoken"]').val();
+            retdict.csrfmiddlewaretoken=this.csrf;
             return retdict;
         },
 
@@ -78,11 +77,21 @@
         },
 
         showModal:function(){
+          var that = this;
+          $('#'+that.el.id+' #itemformerror').empty();
           $('#requestdialog').modal('show');
+          window.ahr.getcsrf(function(csrf){
+              if(csrf==false){
+                  that.alert('Unable to send report. please try again','#reporterror');
+                  return;
+              }
+              that.csrf = csrf.csrfmiddlewaretoken;
+            });
         },
 
         aftersubmit:function(){
           $('#requestdialog').modal('hide');
+          $('input',$('#requestdialog')).val('');
         }
     });
 

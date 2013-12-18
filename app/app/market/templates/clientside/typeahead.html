@@ -79,6 +79,10 @@
             });
         },
 
+        empty:function(){
+            $('#'+this.item.jsonfield,$(this.container)).tagsManager('empty');
+        },
+
         getTagIds: function(){
             var that = this;
             var val_ids=[],

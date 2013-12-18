@@ -9,7 +9,8 @@
         submit: function(e){
             e.preventDefault();
             var that = this;
-            $('.error').empty();
+            $('#'+that.el.id+' #itemformerror').empty();
+            $('#'+that.el.id+' .error').empty();
 
             var dfrd = $.ajax({
                 type: 'POST',
