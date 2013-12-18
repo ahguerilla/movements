@@ -7,7 +7,7 @@
         },
 
     getFormData: function(){
-        return {					
+        return {
             "contents": $('#id_contents').val(),
             "csrfmiddlewaretoken": $('input[name="csrfmiddlewaretoken"]').val()
         }
