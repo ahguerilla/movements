@@ -13,12 +13,17 @@
         },
 
         reportPostClicked: function(){
+            var that = this;
             this.showModalDialog('#report_template', {}, '#reportdialog', function(){
                 $('#reportdialog .send').click(function(){
                     window.ahr.getcsrf(function(csrf){
+                        if(csrf==false){
+                            that.alert('Unable to send report. please try again','#reporterror');
+                            return;
+                        }
                         $.ajax({
                             type: "POST",
-                            url: window.ahr.app_urls.reportpost + '1',
+                            url: window.ahr.app_urls.reportpost + $('#item-single').attr('item-id'),
                             dataType: 'json',
                             data: {
                                 "csrfmiddlewaretoken": csrf.csrfmiddlewaretoken,
@@ -26,14 +31,18 @@
                             },
                             success: function(data) {
                                 console.log(data);
+                                that.info('Report sent succesfuly','#infobar');
+                                $('#reportdialog').modal('hide');
                             },
                             statusCode: {
-                                400: function(data) { console.log(data); },
+                                400: function(data) {
+                                    console.log(data);
+                                    that.alert('Unable to send report. please try again','#reporterror');
+                                },
                             }
                         });
                     });
                 });
-
                 $('#reportdialog .cancel').click(function(){
                 });
             });
@@ -102,7 +111,7 @@
             fields = this.item.fields;
             $('#marketitem_type').text(fields.item_type.toUpperCase());
             $('#marketitem_title').text(fields.title);
-            // TODO: should get returned by api
+            // TODO: should be returned by api
             $('#marketitem_owner').html("<a href='/user/profile/" + fields.owner[0] + "'>" + fields.owner[0] + "</a>");
             $('#marketitem_date').text(moment(fields.pub_date).format("D MMM YYYY"));
             $('#marketitem_details').html($('<div/>').text(fields.details).html().replace(/\n/g, '<br />'));

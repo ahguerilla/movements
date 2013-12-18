@@ -1,5 +1,5 @@
 (function(){
-  
+
   function getpkname(data, item){
     var ar=[];
     _.each(data, function(i){
@@ -41,7 +41,11 @@
   }
 
   function getcsrf(callback){
-    $.getJSON(window.ahr.app_urls.getcsrf, function(data){callback(data);});
+    var dfrd = $.getJSON(window.ahr.app_urls.getcsrf, function(data){callback(data);});
+    dfrd.fail(function(data){
+      callback(false);
+    });
+
   }
 
   function clone(obj){

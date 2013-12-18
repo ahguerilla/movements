@@ -67,7 +67,7 @@ class ResourceAdmin(admin.ModelAdmin):
     exclude=('item_type',)
     inlines = (fileAdmin,)
     def get_readonly_fields(self, request, obj=None):
-        if obj: # editing an existing object            
+        if obj: # editing an existing object
             return self.readonly_fields + ('owner','pub_date')
         return self.readonly_fields
 
@@ -85,7 +85,6 @@ admin.site.register(models.Comment,CommentAdmin)
 
 
 class MarketItemPostReportAdmin(admin.ModelAdmin):
-    list_display = ('item', 'contents', 'owner', )
-    pass
+    list_display = ('item', 'contents', 'owner','resolved' )
 
 admin.site.register(models.MarketItemPostReport, MarketItemPostReportAdmin)
