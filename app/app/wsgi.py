@@ -25,7 +25,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings.staging")
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
-if settings.SETTINGS_TYPE == 'STAGING':
+if settings.STAGING:
     import newrelic.agent
     newrelic.agent.initialize('/opt/ahr/ahr/app/newrelic.ini')
     application = newrelic.agent.wsgi_application()(application)
