@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 {% include "clientside/marketitem.html" %}
@@ -9,9 +10,18 @@
 <div class="row">
   <div id="market" class="col-md-offset-1 col-md-10">
     <div id="infobar"></div>
+
+    {% include "clientside/expdate.html"%}
+    {% include "clientside/datetimepicker.html"%}
+    {% include "clientside/typeahead.html" %}
+    {% include "clientside/input.html" %}
+    {% include "clientside/textarea.html" %}
+
     {% include "clientside/messagedialog.html" %}
     {% include "clientside/recommenddialog.html" %}
     {% include "clientside/rate.html" %}
+    {% include "clientside/offer_form.html"%}
+    {% include "clientside/request_form.html"%}
 
     <!-- Search -->
     <div class="row">

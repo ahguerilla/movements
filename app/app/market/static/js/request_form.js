@@ -3,7 +3,7 @@
     var RequestView = window.ahr.item_form_base.extend({
         item:'',
         init:function(){
-            this.url = window.ahr.app_urls.addmarketitem+'offer';
+            this.url = window.ahr.app_urls.addmarketitem+'request';
         },
         getFormData: function(){
             var that = this;
@@ -15,6 +15,10 @@
             retdict['details'] = this.details_widget.getval();
             retdict.csrfmiddlewaretoken=$('input[name="csrfmiddlewaretoken"]').val();
             return retdict;
+        },
+
+        aftersubmit:function(){
+            window.location = '/market';
         },
 
         makeWidget: function(){

@@ -4,17 +4,17 @@
   </div>
   <div class="col-md-12">
     <textarea class="form-control" name="<%- jsonfield %>" id="<%- jsonfield %>" rows="6" placeholder="<%- placeholder %>"></textarea>
-  </div>  
+  </div>
 </script>
 
-<script type="text/javascript" id="expdate_view">
+<script type="text/javascript" id="textarea_view">
  (function(){
     var TextareaWidget = window.ahr.BaseView.extend({
         el: '#itemform',
-        getval: function(){ 
-            return $('#'+this.jsonfield).val();
+        getval: function(){
+            return $('#'+this.jsonfield,$(this.container)).val();
         },
-        
+
         initialize: function(data){
             var that = this;
             this.container = data.cont;
@@ -26,16 +26,16 @@
                 jsonfield: this.item.jsonfield,
                 placeholder: this.item.placeholder
                 });
-            $(this.container).html(html);                        
+            $(this.container).html(html);
             if(data.prvl){
-                 $('#'+this.jsonfield).val(data.prvl);
+                 $('#'+this.jsonfield,$(this.container)).val(data.prvl);
             }
         }
     });
     window.ahr.textarea_widget = window.ahr.textarea_widget || {};
     window.ahr.textarea_widget.initWidget= function(container,item,preval){
         var widget = new TextareaWidget({'cont':container,'itm':item,'prvl':preval});
-        return widget;        
+        return widget;
     };
 })();
 </script>

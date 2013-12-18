@@ -5,10 +5,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     el: '#market',
 
     create_request: function(){
-        window.location = window.ahr.app_urls.getitemform.replace('offer','request');
+
+        this.requestdialog.showModal();
     },
     create_offer: function(){
-        window.location = window.ahr.app_urls.getitemform;
+        this.offerdialog.showModal();
     },
 
     changeFilterType: function(ev){
@@ -185,6 +186,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     init: function(filters){
         this.default_filters = window.ahr.clone(filters);
+
+        this.requestdialog = window.ahr.request_form_dialog.initItem(false);
+        this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
+
         this.filters = filters;
         this.initTemplates(filters);
         this.filters.search=$('#q').val();

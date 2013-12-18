@@ -15,14 +15,14 @@
 
 
 
-<script type="text/javascript" id="expdate_view">
+<script type="text/javascript" id="datetimepicker_view">
  (function(){
     var DateTimePickerWidget = window.ahr.BaseView.extend({
         el: '#itemform',
-        getval: function(){ 
+        getval: function(){
             return $('#'+this.jsonfield).val();
         },
-        
+
         setDateTimePicker: function(item,preval){
             if(preval){
                 $('#'+this.jsonfield).val(preval.slice(8,10)+'/'+
@@ -37,7 +37,7 @@
         afterDateTimePicker: function(item){
             $('#'+item.type+'-'+this.jsonfield).datetimepicker({format:'D/M/YYYY HH:mm'});
         },
-        
+
         initialize: function(data){
             var that = this;
             this.container = data.cont;
@@ -49,7 +49,7 @@
                 jsonfield: this.item.jsonfield,
                 placeholder: this.item.placeholder
                 });
-            $(this.container).html(html);                        
+            $(this.container).html(html);
             if(data.prvl){
                  $('#'+this.jsonfield).val(data.prvl);
             }
@@ -58,7 +58,7 @@
     window.ahr.datetimepicker_widget = window.ahr.datetimepicker_widget || {};
     window.ahr.datetimepicker_widget.initWidget= function(container,item,preval){
         var widget = new DateTimePickerWidget({'cont':container,'itm':item,'prvl':preval});
-        return widget;        
+        return widget;
     };
 })();
 </script>

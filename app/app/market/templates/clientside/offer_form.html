@@ -1,7 +1,39 @@
-(function(){
+{% load i18n %}
 
-    var OfferView = window.ahr.item_form_base.extend({
+<div id="offerdialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">OFFER A SERVICE</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" enctype="multipart/form-data" id="offerform">
+          <div id="itemformerror"></div>
+          {% csrf_token %}
+          <div class="form-group" id="issues_place"></div>
+          <div class="form-group" id="countries_place"></div>
+          <div class="form-group" id="skills_place"></div>
+          <div class="form-group" id="title_place"></div>
+          <div class="form-group" id="exp_date_place"></div>
+          <div class="form-group"  id="details_place"></div>
+          <div class="modal-footer">
+            <span class="col-xs-offset-6 col-xs-6 pull-right">
+              <button type="submit" class="btn btn-success full-width pull-right">{% trans "Save" %}</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+(function(){
+    var OfferDialogView = window.ahr.item_form_base.extend({
         item:'',
+        el: '#offerform',
         init:function(){
             this.url = window.ahr.app_urls.addmarketitem+'offer';
         },
@@ -16,10 +48,6 @@
             retdict['details'] = this.details_widget.getval();
             retdict.csrfmiddlewaretoken=$('input[name="csrfmiddlewaretoken"]').val();
             return retdict;
-        },
-
-        aftersubmit:function(){
-            window.location = '/market';
         },
 
         makeWidget: function(){
@@ -53,13 +81,21 @@
                         '#details_place',
                         {title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'},
                         this.item_obj? this.item_obj.details : null);
-        }
+        },
+
+        showModal:function(){
+          $('#offerdialog').modal('show');
+        },
+
+        aftersubmit:function(){
+          $('#offerdialog').modal('hide');
+        },
     });
 
-    window.ahr.offer_form = window.ahr.offer_form|| {};
-    window.ahr.offer_form.initItem= function(item){
-        var offer_form = new OfferView(item);
+    window.ahr.offer_form_dialog = window.ahr.offer_form_dialog|| {};
+    window.ahr.offer_form_dialog.initItem= function(item){
+        var offer_form = new OfferDialogView(item);
+        return offer_form;
     };
 })();
-
-
+</script>

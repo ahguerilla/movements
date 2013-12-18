@@ -1,66 +1,71 @@
+{% load compress %}
 <script type="text/template" id="expdate_template">
   <div class="col-md-12 ">
     <div class="<%- jsonfield %> error"></div>
   </div>
-  <div class="col-md-12">  
-    <label for="<%- jsonfield %>"><%- title %></label>        
+  <div class="col-md-12">
+    <label for="<%- jsonfield %>"><%- title %></label>
   </div>
   <div class="col-md-6">
-    <input type='text' id="<%- jsonfield %>"  name="<%- jsonfield %>" class="form-control input-sm" />    
+    <input type='text' id="<%- jsonfield %>"  name="<%- jsonfield %>" class="form-control input-sm" />
   </div>
   <div class="col-md-6">
     <label for="expdate-neverexpire"><input type="checkbox" id="expdate-neverexpire" name="expdate-neverexpire"/>Never expire</label>
   </div>
-  
+
 </script>
 
+{% compress js %}
 <script type="text/javascript" id="expdate_view">
  (function(){
 
     var ExpdateWidget = window.ahr.BaseView.extend({
-        el: '#itemform',
         neverexp: function(ev){
             if($(ev.currentTarget).prop('checked') === false){
-                $('#'+this.jsonfield).attr('readonly',false);
-                $('#'+this.jsonfield).show();
+                $('#'+this.jsonfield,$(this.container)).attr('readonly',false);
+                $('#'+this.jsonfield,$(this.container)).show();
             }else{
-                $('#'+this.jsonfield).attr('readonly',true);
-                $('#'+this.jsonfield).hide();
+                $('#'+this.jsonfield,$(this.container)).attr('readonly',true);
+                $('#'+this.jsonfield,$(this.container)).hide();
             }
         },
-        
-        setExpDate: function(obj){           
+
+        setExpDate: function(obj){
             days = moment(obj.exp_date).diff(moment(),'days');
-            $('#'+this.jsonfield).val(days);
+            $('#'+this.jsonfield,$(this.container)).val(days);
             if (moment(obj.pub_date).diff(moment(obj.exp_date),'days') <= -36500){
-                $('#'+this.jsonfield).attr('readonly',true);   
-                $('#'+this.jsonfield).hide();
-                $('#expdate-neverexpire').prop('checked',true);
+                $('#'+this.jsonfield,$(this.container)).attr('readonly',true);
+                $('#'+this.jsonfield,$(this.container)).hide();
+                $('#expdate-neverexpire',$(this.container)).prop('checked',true);
             }
         },
-        
+
         getExpDate: function(){
             var val;
-            if($('#expdate-neverexpire').prop('checked') === true){
+            if($('#expdate-neverexpire',$(this.container)).prop('checked') === true){
                 val = 36500;
             } else {
-                val = $('#'+this.item.jsonfield).val();
+                val = $('#'+this.item.jsonfield,$(this.container)).val();
             }
-        
+
             if(val===""){return "";}
             var date = moment().add('days', parseInt(val, 10) + 1).format("D/M/YYYY HH:m");
             return date;
         },
-        
+
         initialize: function(data){
+
             var that = this;
             this.container = data.cont;
             this.item = data.itm;
             this.jsonfield = data.itm.jsonfield;
+            this.el = $(this.container);
             var tmpl = _.template($('#expdate_template').html());
             var html = tmpl({title:this.item.title,jsonfield: this.item.jsonfield});
-            $(this.container).html(html);            
-            this.delegateEvents(_.extend(this.events,{'click #expdate-neverexpire' : 'neverexp'}));
+            $(this.container).html(html);
+            var evnt = {}
+            evnt['click #expdate-neverexpire '+that.container]= 'neverexp';
+            this.delegateEvents(_.extend(this.events,evnt));
             if(data.prvl){
                 this.setExpDate(data.prvl);
             }
@@ -68,9 +73,10 @@
     });
     window.ahr.expdate_widget = window.ahr.expdate_widget || {};
     window.ahr.expdate_widget.initWidget= function(container,item,preval){
-        var widget = new ExpdateWidget({'cont':container,'itm':item,'prvl':preval});
+        var widget = new ExpdateWidget({el: container, 'cont':container,'itm':item,'prvl':preval});
         return widget;
-        
+
     };
 })();
 </script>
+{% endcompress %}

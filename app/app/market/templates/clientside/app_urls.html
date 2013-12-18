@@ -1,4 +1,7 @@
+{% load compress %}
+
 {% if user.is_authenticated %}
+{% compress js %}
 <script type="text/javascript" id="api_urls">
     window.ahr = window.ahr || {};
     window.ahr.app_urls = {
@@ -59,4 +62,5 @@
         window.ahr.user_id = 0;
     }
 </script>
+{% endcompress %}
 {% endif %}

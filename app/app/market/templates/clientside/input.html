@@ -6,17 +6,17 @@
     <label for="<%- jsonfield %>"><%- title %></label>
     <input id="<%- jsonfield %>" name="<%- jsonfield %>" class="form-control input-sm" type="text" placeholder="<%- placeholder %>" />
   </div>
-  
+
 </script>
 
-<script type="text/javascript" id="expdate_view">
+<script type="text/javascript" id="input_view">
  (function(){
     var inputWidget = window.ahr.BaseView.extend({
         el: '#itemform',
-        getval: function(){ 
-            return $('#'+this.jsonfield).val();
+        getval: function(){
+            return $('#'+this.jsonfield,$(this.container)).val();
         },
-        
+
         initialize: function(data){
             var that = this;
             this.container = data.cont;
@@ -28,7 +28,7 @@
                 jsonfield: this.item.jsonfield,
                 placeholder: this.item.placeholder
                 });
-            $(this.container).html(html);                        
+            $(this.container).html(html);
             if(data.prvl){
                  $('#'+this.jsonfield).val(data.prvl);
             }
@@ -37,7 +37,7 @@
     window.ahr.input_widget = window.ahr.input_widget || {};
     window.ahr.input_widget.initWidget= function(container,item,preval){
         var widget = new inputWidget({'cont':container,'itm':item,'prvl':preval});
-        return widget;        
+        return widget;
     };
 })();
 </script>

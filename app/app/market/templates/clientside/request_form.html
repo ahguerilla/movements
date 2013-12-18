@@ -1,0 +1,96 @@
+{% load i18n %}
+
+<div id="requestdialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">REQUEST A SERVICE</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" enctype="multipart/form-data" id="requestform">
+          <div id="itemformerror"></div>
+          {% csrf_token %}
+          <div class="form-group" id="request_issues_place"></div>
+          <div class="form-group" id="request_countries_place"></div>
+          <div class="form-group" id="request_title_place"></div>
+          <div class="form-group" id="request_exp_date_place"></div>
+          <div class="form-group"  id="request_details_place"></div>
+          <div class="modal-footer">
+            <span class="col-xs-offset-6 col-xs-6 pull-right">
+              <button type="submit" class="btn btn-success full-width pull-right">{% trans "Save" %}</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+(function(){
+    var RequestDialogView = window.ahr.item_form_base.extend({
+        item:'',
+        el: '#requestform',
+        init:function(){
+            this.url = window.ahr.app_urls.addmarketitem+'request';
+            //this.delegateEvents(_.extend(this.events,{'submit' : 'submit'}));
+        },
+        getFormData: function(){
+            debugger;
+            var that = this;
+            var retdict={};
+            retdict['issues'] = this.issues_widget.getTagIds();
+            retdict['countries'] = this.countries_widget.getTagIds();
+            retdict['exp_date'] = this.expdate_widget.getExpDate();
+            retdict['title'] = this.title_widget.getval();
+            retdict['details'] = this.details_widget.getval();
+            retdict.csrfmiddlewaretoken=$('input[name="csrfmiddlewaretoken"]').val();
+            return retdict;
+        },
+
+        makeWidget: function(){
+            var that = this;
+            this.issues_widget = window.ahr.typeahead_widget.initWidget(
+                        '#request_issues_place',
+                        {title:'I need help to advance freedom of:', jsonfield:'issues'},
+                        this.item_obj);
+
+            this.countries_widget = window.ahr.typeahead_widget.initWidget(
+                        '#request_countries_place',
+                        {title:'Please select the countries where you need help',  jsonfield:'countries'},
+                        this.item_obj);
+
+            this.expdate_widget = window.ahr.expdate_widget.initWidget(
+                        '#request_exp_date_place',
+                        {title:'Expires in days', jsonfield:'exp_date'},
+                        this.item_obj);
+
+            this.title_widget = window.ahr.input_widget.initWidget(
+                        '#request_title_place',
+                        {title:'Title of post', jsonfield:'title', placeholder:''},
+                        this.item_obj? this.item_obj.title : null);
+
+            this.details_widget = window.ahr.textarea_widget.initWidget(
+                        '#request_details_place',
+                        {title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'},
+                        this.item_obj? this.item_obj.details : null);
+        },
+
+        showModal:function(){
+          $('#requestdialog').modal('show');
+        },
+
+        aftersubmit:function(){
+          $('#requestdialog').modal('hide');
+        }
+    });
+
+    window.ahr.request_form_dialog = window.ahr.request_form_dialog|| {};
+    window.ahr.request_form_dialog.initItem= function(item){
+        var request_form = new RequestDialogView(item);
+        return request_form;
+    };
+})();
+</script>
