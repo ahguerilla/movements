@@ -81,7 +81,7 @@ def createQuery(request):
         query = query & Q(item_type__in=request.GET.getlist('types'))
 
     if request.GET.has_key('search') and request.GET['search']!='':
-        objs = SearchQuerySet().filter(text=request.GET['search'])
+        objs = SearchQuerySet().models(market.models.MarketItem).filter(text=request.GET['search'])
         ids= [int(obj.pk) for obj in objs]
         query = query & Q(id__in = ids)
     query = query & Q(published=True)

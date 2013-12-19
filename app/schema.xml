@@ -152,6 +152,8 @@
 
     <field name="details" type="text_en" indexed="true" stored="true" multiValued="false" />
 
+    <field name="occupation" type="text_en" indexed="true" stored="true" multiValued="false" />
+
   </fields>
 
   <!-- field to use to determine and enforce document uniqueness. -->

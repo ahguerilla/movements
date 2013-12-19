@@ -9,6 +9,7 @@ from django.db.models import Q,Count,Avg
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404,render_to_response, RequestContext
 from django.core.urlresolvers import reverse
+from haystack.query import SearchQuerySet
 import avatar
 from django.contrib.auth.decorators import login_required
 from postman.api import pm_write
@@ -61,10 +62,12 @@ def createQuery(request):
     if request.GET.has_key('issues'):
         query = query | Q(issues__in=request.GET.getlist('issues'))
 
-    # if request.GET.has_key('search') and request.GET['search']!='':
-        # objs = SearchQuerySet().filter(text=request.GET['search'])
-        # ids= [int(obj.pk) for obj in objs]
-        # query = query & Q(id__in = ids)
+    if request.GET.has_key('search') and request.GET['search']!='':
+        objs = SearchQuerySet().models(users.models.UserProfile).filter(text=request.GET['search'])
+        #ids= [int(obj.pk) for obj in objs]
+        ids= [int(obj.pk) if not obj.object.notperm.has_key('bio') else None for obj in objs]
+        ids.remove(None)
+        query = query & Q(id__in = ids)
 
     return query
 

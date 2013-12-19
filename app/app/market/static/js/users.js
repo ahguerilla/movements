@@ -34,6 +34,11 @@
             $('#recommenddialog').modal('show');
         },
 
+        search: function(){
+            this.filters.search = $('#q').val();
+            this.resetMarket();
+        },
+
         initialize : function(filters){
             this.itemcount_url = window.ahr.app_urls.getusercount;
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
@@ -43,7 +48,8 @@
             this.init(filters);
             window.ahr.expandTextarea('#newmessage');
             this.delegateEvents(_.extend(this.events,{
-                'click .recommend': 'recommend'
+                'click .recommend': 'recommend',
+                'click #searchbtn': 'search'
             }));
             return this;
         },
