@@ -34,7 +34,17 @@
         item:'',
         el: '#offerform',
         init:function(){
+            var that=this;
             this.url = window.ahr.app_urls.addmarketitem+'offer';
+            $('#offerdialog').on('hidden.bs.modal',function(){
+              if(that.changing==true){
+              $('input,textarea',$('#offerdialog')).val('');
+              that.issues_widget.empty();
+              that.countries_widget.empty();
+              that.skills_widget.empty();
+              that.changing=false;
+            }
+          });
         },
 
         getFormData: function(){
@@ -51,6 +61,7 @@
         },
 
         edit: function(item){
+          this.changing=true;
           this.url = window.ahr.app_urls.editmarketitem+item[0].pk;
           this.issues_widget.change(item[0].fields.issues);
           this.countries_widget.change(item[0].fields.countries);

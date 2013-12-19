@@ -23,15 +23,10 @@
         tagdict: {},
         change:function(values){
             var that = this;
-            //this.empty();
-            $('#'+this.settings.jsonfield,$(this.container)).tagsManager('empty');
-            var pref=[];
-            inv = this.invert(this.tagdict);
-            _.each(values,function(id){
-                pref.push(inv[id]);
-            });
-            for(i in pref){
-                $('#'+that.settings.jsonfield,$(this.container)).tagsManager('pushTag',pref[i]);
+            this.empty();
+            this.setPrefilledVals(values);
+            for(i in this.pref){
+                $('#'+that.settings.jsonfield,$(this.container)).tagsManager('pushTag',this.pref[i]);
             }
 
         },
@@ -56,14 +51,13 @@
             func(this.values);
         },
 
-        setPrefilledVals:function(prefilled,func){
+        setPrefilledVals:function(prefilled){
             var pref=[];
             inv = this.invert(this.tagdict);
             _.each(prefilled,function(id){
                 pref.push(inv[id]);
             });
             this.pref = pref;
-            func(pref);
         },
 
         makeWidget: function (name, prefilled){
