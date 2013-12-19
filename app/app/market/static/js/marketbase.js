@@ -5,10 +5,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     el: '#market',
 
     create_request: function(){
-        this.requestdialog.showModal();
+        this.requestdialog.showModal(true);
     },
     create_offer: function(){
-        this.offerdialog.showModal();
+        this.offerdialog.showModal(true);
     },
 
     changeFilterType: function(ev){

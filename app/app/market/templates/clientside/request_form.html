@@ -32,41 +32,51 @@
     var RequestDialogView = window.ahr.item_form_base.extend({
         el: '#requestform',
         init:function(){
+            var that=this;
             this.url = window.ahr.app_urls.addmarketitem+'request';
+            $('#requestdialog').on('hidden.bs.modal',function(){
+              console.log('here');
+              if(that.changing==true){
+              $('input,textarea',$('#requestdialog')).val('');
+              that.issues_widget.empty();
+              that.countries_widget.empty();
+              that.changing=false;
+            }
+          });
         },
         getFormData: function(){
-            var that = this;
             var retdict={};
-            retdict['issues'] = this.issues_widget.getval();
+            retdict['issues']    = this.issues_widget.getval();
             retdict['countries'] = this.countries_widget.getval();
-            retdict['exp_date'] = this.expdate_widget.getExpDate();
-            retdict['title'] = this.title_widget.getval();
+            retdict['exp_date']  = this.expdate_widget.getExpDate();
+            retdict['title']     = this.title_widget.getval();
             retdict['details'] = this.details_widget.getval();
             retdict.csrfmiddlewaretoken=this.csrf;
             return retdict;
         },
 
-        change: function(item){
-          var that = this;
-          that.url = window.ahr.app_urls.editmarketitem+item[0].pk;
-          this.issues_widget.change(item);
-          this.countries_widget.change(item);
-          this.expdate_widget.change(item);
+        edit: function(item){
+          this.changing=true;
+          $('#'+this.el.id+' #itemformerror').empty();
+          $('#'+this.el.id+' .error').empty();
+          this.url = window.ahr.app_urls.editmarketitem+item[0].pk;
+          this.issues_widget.change(item[0].fields.issues);
+          this.countries_widget.change(item[0].fields.countries);
+          this.expdate_widget.change(item[0].fields);
           this.title_widget.change(item[0].fields.title);
           this.details_widget.change(item[0].fields.details);
         },
 
         makeWidget: function(){
-            var that = this;
             this.issues_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_issues_place',
                         {title:'I need help to advance freedom of:', jsonfield:'issues'},
-                        this.item_obj);
+                        this.item_obj? this.item_obj.issues: null);
 
             this.countries_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_countries_place',
                         {title:'Please select the countries where you need help',  jsonfield:'countries'},
-                        this.item_obj);
+                        this.item_obj? this.item_obj.countries: null);
 
             this.expdate_widget = window.ahr.expdate_widget.initWidget(
                         '#request_exp_date_place',
@@ -84,10 +94,14 @@
                         this.item_obj? this.item_obj.details : null);
         },
 
-        showModal:function(){
+        showModal:function(newitem){
+          if(newitem){
+            this.url = window.ahr.app_urls.addmarketitem+'request';
+          }
           var that = this;
           $('#'+that.el.id+' #itemformerror').empty();
           $('#requestdialog').modal('show');
+
           window.ahr.getcsrf(function(csrf){
               if(csrf==false){
                   that.alert('Unable to send report. please try again','#reporterror');

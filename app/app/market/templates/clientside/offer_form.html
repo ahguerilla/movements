@@ -36,25 +36,26 @@
         init:function(){
             this.url = window.ahr.app_urls.addmarketitem+'offer';
         },
+
         getFormData: function(){
             var that = this;
             var retdict={};
-            retdict['skills'] = that.skills_widget.getTagIds();
-            retdict['countries'] = that.countries_widget.getTagIds();
-            retdict['issues'] = that.issues_widget.getTagIds();
+            retdict['skills'] = that.skills_widget.getval();
+            retdict['countries'] = that.countries_widget.getval();
+            retdict['issues'] = that.issues_widget.getval();
             retdict['exp_date'] = that.expdate_widget.getExpDate();
             retdict['title'] = that.title_widget.getval();
             retdict['details'] = that.details_widget.getval();
             retdict.csrfmiddlewaretoken=that.csrf;
             return retdict;
         },
-        change: function(item){
-          var that = this;
-          that.url = window.ahr.app_urls.editmarketitem+item[0].pk;
-          this.issues_widget.change(item);
-          this.countries_widget.change(item);
-          this.skills_widget.change(item);
-          this.expdate_widget.change(item);
+
+        edit: function(item){
+          this.url = window.ahr.app_urls.editmarketitem+item[0].pk;
+          this.issues_widget.change(item[0].fields.issues);
+          this.countries_widget.change(item[0].fields.countries);
+          this.skills_widget.change(item[0].fields.skills);
+          this.expdate_widget.change(item[0].fields);
           this.title_widget.change(item[0].fields.title);
           this.details_widget.change(item[0].fields.details);
         },
@@ -64,17 +65,17 @@
             this.issues_widget = window.ahr.typeahead_widget.initWidget(
                         '#issues_place',
                         {title:'I can help to advance freedom of:', jsonfield:'issues'},
-                        this.item_obj);
+                        this.item_obj? this.item_obj.issues: null);
 
             this.countries_widget = window.ahr.typeahead_widget.initWidget(
                         '#countries_place',
                         {title:'Please select the countries where you can help',  jsonfield:'countries'},
-                        this.item_obj);
+                        this.item_obj? this.item_obj.countries: null);
 
             this.skills_widget = window.ahr.typeahead_widget.initWidget(
                         '#skills_place',
                         {title:'Skills',  jsonfield:'skills'},
-                        this.item_obj);
+                        this.item_obj? this.item_obj.skills: null);
 
             this.expdate_widget = window.ahr.expdate_widget.initWidget(
                         '#exp_date_place',
@@ -92,7 +93,10 @@
                         this.item_obj? this.item_obj.details : null);
         },
 
-        showModal:function(){
+        showModal:function(newitem){
+          if(newitem){
+            this.url = window.ahr.app_urls.addmarketitem+'offer';
+          }
           var that = this;
           $('#'+that.el.id+' #itemformerror').empty();
           $('#offerdialog').modal('show');

@@ -36,6 +36,8 @@
 
         initialize : function(item){
             var that= this;
+            this.changing=false;
+            this.widgets=[];
             this.item_obj = null;
             this.delegateEvents(_.extend(this.events,{'submit' : 'submit'}));
             this.init();

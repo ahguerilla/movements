@@ -20,29 +20,30 @@
  (function(){
 
     var ExpdateWidget = window.ahr.BaseView.extend({
-        change: function(item){
-            this.setExpDate(item[0].fields);
+        change: function(obj){
+            this.setExpDate(obj);
         },
         neverexp: function(ev){
             if($(ev.currentTarget).prop('checked') === false){
-                $('#'+this.jsonfield,$(this.container)).attr('readonly',false);
-                $('#'+this.jsonfield,$(this.container)).show();
+                $('#'+this.name,$(this.container)).attr('readonly',false);
+                $('#'+this.name,$(this.container)).show();
             }else{
-                $('#'+this.jsonfield,$(this.container)).attr('readonly',true);
-                $('#'+this.jsonfield,$(this.container)).hide();
+                $('#'+this.name,$(this.container)).attr('readonly',true);
+                $('#'+this.name,$(this.container)).hide();
             }
         },
 
+
         setExpDate: function(obj){
             days = moment(obj.exp_date).diff(moment(),'days');
-            $('#'+this.jsonfield,$(this.container)).val(days);
+            $('#'+this.name,$(this.container)).val(days);
             if (moment(obj.pub_date).diff(moment(obj.exp_date),'days') <= -36500){
-                $('#'+this.jsonfield,$(this.container)).attr('readonly',true);
-                $('#'+this.jsonfield,$(this.container)).hide();
+                $('#'+this.name,$(this.container)).attr('readonly',true);
+                $('#'+this.name,$(this.container)).hide();
                 $('#expdate-neverexpire',$(this.container)).prop('checked',true);
             }else{
-                $('#'+this.jsonfield,$(this.container)).attr('readonly',false);
-                $('#'+this.jsonfield,$(this.container)).show();
+                $('#'+this.name,$(this.container)).attr('readonly',false);
+                $('#'+this.name,$(this.container)).show();
                 $('#expdate-neverexpire',$(this.container)).prop('checked',false);
             }
         },
@@ -52,7 +53,7 @@
             if($('#expdate-neverexpire',$(this.container)).prop('checked') === true){
                 val = 36500;
             } else {
-                val = $('#'+this.item.jsonfield,$(this.container)).val();
+                val = $('#'+this.name,$(this.container)).val();
             }
 
             if(val===""){return "";}
@@ -62,24 +63,24 @@
 
         initialize: function(data){
             var that = this;
-            this.container = data.cont;
-            this.item = data.itm;
-            this.jsonfield = data.itm.jsonfield;
+            this.container = data.container;
+            this.settings = data.settings
+            this.name = this.settings.jsonfield;
             this.el = $(this.container);
             var tmpl = _.template($('#expdate_template').html());
-            var html = tmpl({title:this.item.title,jsonfield: this.item.jsonfield});
+            var html = tmpl({title:this.settings.title,jsonfield: this.settings.jsonfield});
             $(this.container).html(html);
             var evnt = {}
-            evnt['click #expdate-neverexpire '+that.container]= 'neverexp';
+            evnt['click #expdate-neverexpire '+this.container]= 'neverexp';
             this.delegateEvents(_.extend(this.events,evnt));
             if(data.prvl){
-                this.setExpDate(data.prvl);
+                this.setExpDate(data.preset);
             }
         }
     });
     window.ahr.expdate_widget = window.ahr.expdate_widget || {};
     window.ahr.expdate_widget.initWidget= function(container,item,preval){
-        var widget = new ExpdateWidget({el: container, 'cont':container,'itm':item,'prvl':preval});
+        var widget = new ExpdateWidget({el: container, 'container':container,'settings':item,'preset':preval});
         return widget;
 
     };

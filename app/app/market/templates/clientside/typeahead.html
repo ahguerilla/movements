@@ -21,11 +21,17 @@
 
     var TypeaheadWidget = window.ahr.BaseView.extend({
         tagdict: {},
-        change:function(item){
-            this.empty();
-            this.setPrefilledVals(item[0].fields[this.item.jsonfield]);
-            for(i in this.pref){
-                $('#'+this.item.jsonfield,$(this.container)).tagsManager('pushTag',this.pref[i]);
+        change:function(values){
+            var that = this;
+            //this.empty();
+            $('#'+this.settings.jsonfield,$(this.container)).tagsManager('empty');
+            var pref=[];
+            inv = this.invert(this.tagdict);
+            _.each(values,function(id){
+                pref.push(inv[id]);
+            });
+            for(i in pref){
+                $('#'+that.settings.jsonfield,$(this.container)).tagsManager('pushTag',pref[i]);
             }
 
         },
@@ -37,31 +43,32 @@
             return this.typeAheadTag({'title':title,'item':item});
         },
 
-        makeTypeAhead: function(jsonfield, func){
+        makeTypeAhead: function(name, func){
             var that = this;
-            $('#'+jsonfield,$(this.container)).typeahead({
+            $('#'+name,$(this.container)).typeahead({
                 limit: 5,
                 local: that.typeaheadval
                 }).on('typeahead:selected', function (e, d) {
-                    $('#'+jsonfield,$(that.container)).tagsManager("pushTag", d.value);
+                    $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
             }).blur(function(){
-                $('#'+jsonfield,$(that.container)).val('');
+                $('#'+name,$(that.container)).val('');
             });
             func(this.values);
         },
 
-        setPrefilledVals:function(prefilled){
+        setPrefilledVals:function(prefilled,func){
             var pref=[];
             inv = this.invert(this.tagdict);
             _.each(prefilled,function(id){
                 pref.push(inv[id]);
             });
             this.pref = pref;
+            func(pref);
         },
 
-        makeWidget: function (jsonfield, prefilled){
+        makeWidget: function (name, prefilled){
             var that = this;
-            this.makeTypeAhead(jsonfield, function(data){
+            this.makeTypeAhead(name, function(data){
                 var pref=[];
                 that.values = data;
                 if (prefilled){
@@ -71,12 +78,12 @@
                     });
                 }
 
-                $('#'+jsonfield,$(that.container)).tagsManager({
-                    tagsContainer: that.container+' #'+jsonfield+'Tags',
+                $('#'+name,$(that.container)).tagsManager({
+                    tagsContainer: that.container+' #'+name+'Tags',
                     deleteTagsOnBackspace: false,
                     blinkBGColor_1: '#FFFF9C',
                     blinkBGColor_2: '#CDE69C',
-                    hiddenTagListName: 'hidden-'+jsonfield+'_'+that.container,
+                    hiddenTagListName: 'hidden-'+name+'_'+that.container,
                     prefilled: pref,
                     validator:function(tag){
                         if (that.values.indexOf(tag)!=-1){
@@ -91,7 +98,7 @@
         },
 
         empty:function(){
-            $('#'+this.item.jsonfield,$(this.container)).tagsManager('empty');
+            $('#'+this.settings.jsonfield,$(this.container)).tagsManager('empty');
         },
 
         getval:function(){
@@ -101,25 +108,21 @@
         getTagIds: function(){
             var that = this;
             var val_ids=[],
-                val_names = $('input[name="hidden-'+this.item.jsonfield+'_'+this.container+'"]',$(this.container)).val().split(',');
+                val_names = $('input[name="hidden-'+this.settings.jsonfield+'_'+this.container+'"]',$(this.container)).val().split(',');
             _.each(val_names,function(val){
                 val_ids.push(that.tagdict[val]);
             });
             return val_ids;
         },
 
-        genWidgetHTML: function (item, preval){
-            var that = this;
-            $(this.container).html(that.typeAheadTemplate(item.title, item.jsonfield));
-        },
-
         initialize: function(initobj){
-            this.container = initobj.cont;
-            this.item = initobj.itm;
+            this.container = initobj.container;
+            this.settings = initobj.settings;
+            this.preset = initobj.preset;
             this.typeaheadval = [];
             this.values=[];
             this.tagdict={};
-            var data = window.ahr[initobj.itm.jsonfield];
+            var data = window.ahr[initobj.settings.jsonfield];
             for (var i = 0; i < data.length; i++){
                 this.typeaheadval.push({
                     tokens: [data[i].value,],
@@ -128,15 +131,15 @@
                 this.values.push(data[i].value);
                 this.tagdict[data[i].value]=data[i].pk;
             }
-            this.genWidgetHTML(initobj.itm, initobj.prvl);
-            this.makeWidget(initobj.itm.jsonfield, initobj.prvl? initobj.prvl[initobj.itm.jsonfield]: null);
+            $(this.container).html(this.typeAheadTemplate(this.settings.title, this.settings.jsonfield));
+            this.makeWidget(this.settings.jsonfield, this.preset? this.preset: null);
         }
 
     });
 
     window.ahr.typeahead_widget = window.typeahead_widget|| {};
-    window.ahr.typeahead_widget.initWidget= function(container,item,preval){
-        var widget = new TypeaheadWidget({'cont':container,'itm':item,'prvl':preval});
+    window.ahr.typeahead_widget.initWidget= function(container,settings,preval){
+        var widget = new TypeaheadWidget({'container':container,'settings':settings,'preset':preval});
         return widget;
     };
 })();
