@@ -34,12 +34,8 @@
             $('#recommenddialog').modal('show');
         },
 
-        search: function(){
-            this.filters.search = $('#q').val();
-            this.resetMarket();
-        },
-
         initialize : function(filters){
+            var that = this;
             this.itemcount_url = window.ahr.app_urls.getusercount;
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
             this.viewurl = window.ahr.app_urls.viewuserprofile;
@@ -47,9 +43,14 @@
             filters.types=["activist", "readytohelp"];
             this.init(filters);
             window.ahr.expandTextarea('#newmessage');
+            $('#q').typeahead({
+               limit: 5,
+               remote: window.ahr.app_urls['getusernames']+'?username='+$('#touser').val()
+               }).on('typeahead:selected', function (e, d) {
+                 that.search();
+            });
             this.delegateEvents(_.extend(this.events,{
                 'click .recommend': 'recommend',
-                'click #searchbtn': 'search'
             }));
             return this;
         },

@@ -173,6 +173,15 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.resetMarket();
     },
 
+    filterKeySearch: function(ev){
+        if(ev.keyCode==13){
+            if(ev.currentTarget.value !=""){
+                this.search();
+            }
+        }
+
+    },
+
     itemTypesfilter: function(ev){
         this.updateTypefilter(this,ev);
         this.resetMarket();
@@ -202,6 +211,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'click .item-type': 'itemTypesfilter',
             'click #create_offer': 'create_offer',
             'click #create_request': 'create_request',
+            'keydown #q': 'filterKeySearch'
         }));
     }
 

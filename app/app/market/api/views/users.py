@@ -66,7 +66,10 @@ def createQuery(request):
         objs = SearchQuerySet().models(users.models.UserProfile).filter(text=request.GET['search'])
         #ids= [int(obj.pk) for obj in objs]
         ids= [int(obj.pk) if not obj.object.notperm.has_key('bio') else None for obj in objs]
-        ids.remove(None)
+        try:
+            ids.remove(None)
+        except:
+            pass
         query = query & Q(id__in = ids)
 
     return query
@@ -149,7 +152,7 @@ def setRate(request,username,rtype):
 
 @login_required
 def getUsernames(request,rtype):
-    usernames = users.models.User.objects.filter(username__contains=request.GET['username']).only('username')[:10]
+    usernames = users.models.User.objects.filter(username__contains=request.GET['username']).filter(~Q(username='admin')).only('username')[:10]
     return HttpResponse(
         json.dumps(
             [user.username for user in usernames]
