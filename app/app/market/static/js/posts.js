@@ -22,6 +22,21 @@
     var PostsView = window.ahr.market.MarketBaseView.extend({
         types:{"Resources":"resource","Offers":"offer","Request":"request"},
 
+        showItem: function(ev){
+            var that = this;
+            var id = ev.currentTarget.getAttribute('item_id');
+            $.getJSON(window.ahr.app_urls.getmarketitem+id,function(item){
+                if(item[0].fields.item_type == "request"){
+                    that.requestdialog.change(item);
+                    that.requestdialog.showModal();
+                }else{
+                    that.offerdialog.change(item);
+                    that.offerdialog.showModal();
+                }
+            });
+        },
+
+
         initialize : function(filters){
             var that = this;
             this.item_tmp = _.template($('#item_template').html());

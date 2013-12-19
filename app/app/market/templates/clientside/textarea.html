@@ -11,6 +11,11 @@
  (function(){
     var TextareaWidget = window.ahr.BaseView.extend({
         el: '#itemform',
+
+        change: function(value){
+            $('#'+this.jsonfield,$(this.container)).val(value);
+        },
+
         getval: function(){
             return $('#'+this.jsonfield,$(this.container)).val();
         },

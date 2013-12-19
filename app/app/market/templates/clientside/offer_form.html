@@ -48,6 +48,16 @@
             retdict.csrfmiddlewaretoken=that.csrf;
             return retdict;
         },
+        change: function(item){
+          var that = this;
+          that.url = window.ahr.app_urls.editmarketitem+item[0].pk;
+          this.issues_widget.change(item);
+          this.countries_widget.change(item);
+          this.skills_widget.change(item);
+          this.expdate_widget.change(item);
+          this.title_widget.change(item[0].fields.title);
+          this.details_widget.change(item[0].fields.details);
+        },
 
         makeWidget: function(){
             var that = this;

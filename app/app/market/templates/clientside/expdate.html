@@ -20,6 +20,9 @@
  (function(){
 
     var ExpdateWidget = window.ahr.BaseView.extend({
+        change: function(item){
+            this.setExpDate(item[0].fields);
+        },
         neverexp: function(ev){
             if($(ev.currentTarget).prop('checked') === false){
                 $('#'+this.jsonfield,$(this.container)).attr('readonly',false);
@@ -37,6 +40,10 @@
                 $('#'+this.jsonfield,$(this.container)).attr('readonly',true);
                 $('#'+this.jsonfield,$(this.container)).hide();
                 $('#expdate-neverexpire',$(this.container)).prop('checked',true);
+            }else{
+                $('#'+this.jsonfield,$(this.container)).attr('readonly',false);
+                $('#'+this.jsonfield,$(this.container)).show();
+                $('#expdate-neverexpire',$(this.container)).prop('checked',false);
             }
         },
 
@@ -54,7 +61,6 @@
         },
 
         initialize: function(data){
-
             var that = this;
             this.container = data.cont;
             this.item = data.itm;

@@ -20,7 +20,17 @@
   (function(){
 
     var TypeaheadWidget = window.ahr.BaseView.extend({
-        generateTypeAhead: function(title,  item){
+        tagdict: {},
+        change:function(item){
+            this.empty();
+            this.setPrefilledVals(item[0].fields[this.item.jsonfield]);
+            for(i in this.pref){
+                $('#'+this.item.jsonfield,$(this.container)).tagsManager('pushTag',this.pref[i]);
+            }
+
+        },
+
+        typeAheadTemplate: function(title,  item){
             if (this.typeAheadTag  === undefined){
                 this.typeAheadTag = _.template($('#typeahead_template').html());
             }
@@ -29,31 +39,31 @@
 
         makeTypeAhead: function(jsonfield, func){
             var that = this;
-            var typeaheadval = [],values=[];
-            var data = window.ahr[jsonfield];
-            for (var i = 0; i < data.length; i++){
-                typeaheadval.push({
-                    tokens: [data[i].value,],
-                    value: data[i].value
-                });
-                values.push(data[i].value);
-                that.tagdict[data[i].value]=data[i].pk;
-            }
             $('#'+jsonfield,$(this.container)).typeahead({
                 limit: 5,
-                local: typeaheadval
+                local: that.typeaheadval
                 }).on('typeahead:selected', function (e, d) {
                     $('#'+jsonfield,$(that.container)).tagsManager("pushTag", d.value);
             }).blur(function(){
                 $('#'+jsonfield,$(that.container)).val('');
             });
-            func(values);
+            func(this.values);
         },
 
-        makeTagWidget: function (jsonfield, prefilled){
+        setPrefilledVals:function(prefilled){
+            var pref=[];
+            inv = this.invert(this.tagdict);
+            _.each(prefilled,function(id){
+                pref.push(inv[id]);
+            });
+            this.pref = pref;
+        },
+
+        makeWidget: function (jsonfield, prefilled){
             var that = this;
             this.makeTypeAhead(jsonfield, function(data){
-                var pref=[],values = data;
+                var pref=[];
+                that.values = data;
                 if (prefilled){
                     inv = that.invert(that.tagdict);
                     _.each(prefilled,function(id){
@@ -69,18 +79,23 @@
                     hiddenTagListName: 'hidden-'+jsonfield+'_'+that.container,
                     prefilled: pref,
                     validator:function(tag){
-                        if (values.indexOf(tag)!=-1){
+                        if (that.values.indexOf(tag)!=-1){
                             return true;
                         }else{
                             return false;
                         }
                     }
                 });
+
             });
         },
 
         empty:function(){
             $('#'+this.item.jsonfield,$(this.container)).tagsManager('empty');
+        },
+
+        getval:function(){
+            return this.getTagIds();
         },
 
         getTagIds: function(){
@@ -93,17 +108,28 @@
             return val_ids;
         },
 
-        genTagWidget: function (item, preval){
+        genWidgetHTML: function (item, preval){
             var that = this;
-            $(this.container).html(that.generateTypeAhead(item.title, item.jsonfield));
-            this.makeTagWidget(item.jsonfield, preval? preval[item.jsonfield]: null);
+            $(this.container).html(that.typeAheadTemplate(item.title, item.jsonfield));
         },
 
         initialize: function(initobj){
             this.container = initobj.cont;
             this.item = initobj.itm;
-            this.genTagWidget(initobj.itm, initobj.prvl);
-            return this;
+            this.typeaheadval = [];
+            this.values=[];
+            this.tagdict={};
+            var data = window.ahr[initobj.itm.jsonfield];
+            for (var i = 0; i < data.length; i++){
+                this.typeaheadval.push({
+                    tokens: [data[i].value,],
+                    value: data[i].value
+                });
+                this.values.push(data[i].value);
+                this.tagdict[data[i].value]=data[i].pk;
+            }
+            this.genWidgetHTML(initobj.itm, initobj.prvl);
+            this.makeWidget(initobj.itm.jsonfield, initobj.prvl? initobj.prvl[initobj.itm.jsonfield]: null);
         }
 
     });

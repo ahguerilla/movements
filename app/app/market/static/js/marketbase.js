@@ -5,7 +5,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     el: '#market',
 
     create_request: function(){
-
         this.requestdialog.showModal();
     },
     create_offer: function(){
