@@ -128,6 +128,7 @@
             $('#marketitem_comment_form').html(this.comment_form_tmp());
             window.ahr.expandTextarea('#newcomment');
             this.comment_tmp = _.template($('#comment_view_template').html());
+            this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id);
 
             this.delegateEvents(_.extend(this.events,{
                 'click .comment-btn': 'comment',

@@ -40,6 +40,7 @@
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
             this.viewurl = window.ahr.app_urls.viewuserprofile;
             this.item_tmp = _.template($('#user-template').html());
+            this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id)
             filters.types=["activist", "readytohelp"];
             this.init(filters);
             window.ahr.expandTextarea('#newmessage');

@@ -20,9 +20,11 @@
  (function(){
 
     var ExpdateWidget = window.ahr.BaseView.extend({
+
         change: function(obj){
             this.setExpDate(obj);
         },
+
         neverexp: function(ev){
             if($(ev.currentTarget).prop('checked') === false){
                 $('#'+this.name,$(this.container)).attr('readonly',false);
@@ -66,13 +68,11 @@
             this.container = data.container;
             this.settings = data.settings
             this.name = this.settings.jsonfield;
-            this.el = $(this.container);
             var tmpl = _.template($('#expdate_template').html());
             var html = tmpl({title:this.settings.title,jsonfield: this.settings.jsonfield});
             $(this.container).html(html);
             var evnt = {}
-            evnt['click #expdate-neverexpire '+this.container]= 'neverexp';
-            this.delegateEvents(_.extend(this.events,evnt));
+            this.delegateEvents(_.extend(this.events,{'click #expdate-neverexpire':'neverexp'}));
             if(data.prvl){
                 this.setExpDate(data.preset);
             }
