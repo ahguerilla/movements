@@ -11,6 +11,36 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.offerdialog.showModal(true);
     },
 
+    setFilterNone:function(){
+        $('.item-type').addClass('btn-success');
+        this.filters = window.ahr.clone(this.default_filters);
+        var skillarr=[];
+        _.each(window.ahr.skills, function(item){
+            skillarr.push(parseInt(item.pk, 10));
+        });
+        this.filters.skills =  skillarr;
+
+        var countriesarr=[];
+        _.each(window.ahr.countries, function(item){
+            countriesarr.push(parseInt(item.pk, 10));
+        });
+        this.filters.countries =  countriesarr;
+
+        var isssuesarr=[];
+        _.each(window.ahr.issues, function(item){
+            isssuesarr.push(parseInt(item.pk, 10));
+        });
+        this.filters.issues =  isssuesarr;
+    },
+
+    setFilterKeys:function(){
+        var that = this;
+        for(var key in this.filters){
+            $('.row.'+key).empty();
+            this.initFilters(that, key, that.tagtemp);
+        }
+    },
+
     changeFilterType: function(ev){
         var that = this;
         $('.filter-type').removeClass('btn-success');
@@ -20,31 +50,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             this.filters = window.ahr.clone(this.default_filters);
             $('.item-type').addClass('btn-success');
         }else if(ev.currentTarget.textContent=="All"){
-            $('.item-type').addClass('btn-success');
-            this.filters = window.ahr.clone(this.default_filters);
-            var skillarr=[];
-            _.each(window.ahr.skills, function(item){
-                skillarr.push(parseInt(item.pk, 10));
-            });
-            this.filters.skills =  skillarr;
-
-            var countriesarr=[];
-            _.each(window.ahr.countries, function(item){
-                countriesarr.push(parseInt(item.pk, 10));
-            });
-            this.filters.countries =  countriesarr;
-
-            var isssuesarr=[];
-            _.each(window.ahr.issues, function(item){
-                isssuesarr.push(parseInt(item.pk, 10));
-            });
-            this.filters.issues =  isssuesarr;
+            this.setFilterNone();
         }
-        for(var key in this.filters){
-            $('.row.'+key).empty();
-            this.initFilters(that, key, that.tagtemp);
-        }
-        console.log(this.filters.types);
+        this.setFilterKeys();
         this.resetMarket();
     },
 
@@ -174,6 +182,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     search: function(){
         this.filters.search = $('#q').val();
+        this.setFilterNone();
+        this.setFilterKeys();
         this.resetMarket();
     },
 
