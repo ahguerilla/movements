@@ -56,6 +56,7 @@
                remote: window.ahr.app_urls['getusernames']+'?username='+$('#touser').val()
                }).on('typeahead:selected', function (e, d) {
                  that.search();
+                 console.log(e.keydown);
             });
 
             this.delegateEvents(_.extend(this.events,{
