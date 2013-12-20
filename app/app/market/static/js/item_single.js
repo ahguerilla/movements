@@ -50,11 +50,9 @@
 
         private_message: function(ev){
             var username = ev.currentTarget.getAttribute('username');
-            $('#usernameh').text(username);
-            $('#msgsub').val('Re: '+$('#marketitem_title').text());
-            $('#msgsub').attr('readonly',true);
-            $('#newmessage').val('');
-            $('#messagedialog').modal('show');
+            var msgsub = 'Re: '+$('#marketitem_title').text();
+            this.message_widget.show(username,msgsub,'',true);
+
         },
 
         getCommentData: function(){
@@ -128,13 +126,13 @@
             $('#marketitem_comment_form').html(this.comment_form_tmp());
             window.ahr.expandTextarea('#newcomment');
             this.comment_tmp = _.template($('#comment_view_template').html());
+
             this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id);
+            this.message_widget = window.ahr.messagedialog_widget.initWidget('#'+this.el.id,'#infobar');
 
             this.delegateEvents(_.extend(this.events,{
                 'click .comment-btn': 'comment',
                 'click #private_message': 'private_message',
-                'click #recommend': 'recommend',
-                'click #send_message': 'send_message',
                 'click #recommend': 'recommend',
                 'click #report_post': 'reportPostClicked'
             }));

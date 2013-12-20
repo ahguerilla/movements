@@ -1,3 +1,4 @@
+{% load compress %}
 <div id="messagedialog" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -7,7 +8,7 @@
         <div id="pmerror"></div>
       </div>
       <div class="modal-body">
-       <div>Subject</div>
+        <div>Subject</div>
           <div style="margin-bottom:5px;">
             <input  class="form-control" id="msgsub" type="text" name="subject" required="true"/>
           </div>
@@ -24,18 +25,79 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-{# compress js #}
-<!--<script type="text/javascript" id="expdate_view">-->
- <!--(function(){-->
+{% compress js %}
+<script type="text/javascript" id="expdate_view">
+(function(){
 
-    <!--var ExpdateWidget = window.ahr.BaseView.extend({-->
-  <!--});-->
-    <!--window.ahr.expdate_widget = window.ahr.expdate_widget || {};-->
-    <!--window.ahr.expdate_widget.initWidget= function(container,item,preval){-->
-        <!--var widget = new ExpdateWidget({el: container, 'container':container,'settings':item,'preset':preval});-->
-        <!--return widget;-->
+  var MessageDialogWidget = window.ahr.BaseView.extend({
+    events:{
+      //'click .sendprivatemessageuser': 'showpMessage',
+      'click .sendpm': 'sendpm',
+      'click .cancelpm': 'cancelpm'
+    },
 
-    <!--};-->
-<!--})();-->
-<!--</script>-->
-{# endcompress #}
+    getval:function(){
+      this.subject = $('#msgsub').val();
+      this.message = $('#newmessage').val();
+      return([this.subject,this.message]);
+    },
+
+    sendpm: function(ev){
+      var that = this;
+      this.getval();
+      if( this.subject !== '' &&  this.message !== ''){
+        $('#messagedialog').modal('hide');
+        window.ahr.getcsrf(function(csrf){
+          var dfrd = $.ajax({
+            url:window.ahr.app_urls.sendmessage+that.username,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+              csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+              subject: that.subject,
+              message: that.message
+            }
+          });
+          dfrd.done(function(){
+            that.info('Your message was sent successfuly.',that.alert_place);
+          });
+          dfrd.fail(function(){
+            $('#messagedialog').modal('show');
+            that.alert('Please try again.',that.alert_place);
+          });
+        });
+      }else{
+        this.alert('Please provide a subject and message.',that.alert_place);
+      }
+    },
+
+    cancelpm: function(ev){
+    },
+
+    show: function(username,subject,message,readonlysub){
+      this.username = username;
+      this.subject = subject;
+      this.message = message;
+      $('#usernameh').text(this.username);
+      $('#msgsub').val(this.subject);
+      $('#newmessage').val(this.message);
+      if(readonlysub==true){
+        $('#msgsub').attr('readonly',true);
+      }
+      $('#messagedialog').modal('show');
+    },
+
+    initialize:function(settings){
+      this.alert_place = settings.alert_place;
+      return this;
+    }
+});
+
+window.ahr.messagedialog_widget = window.ahr.messagedialog_widget || {};
+window.ahr.messagedialog_widget.initWidget= function(container,alert_place){
+  var widget = new MessageDialogWidget({el: container,alert_place:alert_place});
+  return widget;
+};
+})();
+</script>
+{% endcompress %}
