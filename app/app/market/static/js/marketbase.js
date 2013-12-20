@@ -14,10 +14,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     changeFilterType: function(ev){
         var that = this;
         $('.filter-type').removeClass('btn-success');
+
         $(ev.currentTarget).addClass('btn-success');
         if(ev.currentTarget.textContent=="Default"){
             this.filters = window.ahr.clone(this.default_filters);
+            $('.item-type').addClass('btn-success');
         }else if(ev.currentTarget.textContent=="All"){
+            $('.item-type').addClass('btn-success');
+            this.filters = window.ahr.clone(this.default_filters);
             var skillarr=[];
             _.each(window.ahr.skills, function(item){
                 skillarr.push(parseInt(item.pk, 10));
@@ -40,6 +44,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             $('.row.'+key).empty();
             this.initFilters(that, key, that.tagtemp);
         }
+        console.log(this.filters.types);
         this.resetMarket();
     },
 
