@@ -44,14 +44,14 @@
           });
         },
         getFormData: function(){
-            var retdict={};
-            retdict['issues']    = this.issues_widget.getval();
-            retdict['countries'] = this.countries_widget.getval();
-            retdict['exp_date']  = this.expdate_widget.getExpDate();
-            retdict['title']     = this.title_widget.getval();
-            retdict['details'] = this.details_widget.getval();
-            retdict.csrfmiddlewaretoken=this.csrf;
-            return retdict;
+          var retdict={};
+          retdict['issues']    = this.issues_widget.getval();
+          retdict['countries'] = this.countries_widget.getval();
+          retdict['exp_date']  = this.expdate_widget.getExpDate();
+          retdict['title']     = this.title_widget.getval();
+          retdict['details'] = this.details_widget.getval();
+          retdict.csrfmiddlewaretoken=this.csrf;
+          return retdict;
         },
 
         edit: function(item){

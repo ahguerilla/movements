@@ -16,10 +16,7 @@
         events:{
             'click .sendprivatemessageuser': 'showpMessage',
             'click .sendpm': 'sendpm',
-            'click .cancelpm': 'cancelpm',
-            'click .btn.rate': 'showrate',
-            'click .sendrate': 'setrate',
-            'click .cancelrate': 'resetrate',
+            'click .cancelpm': 'cancelpm'
         },
 
         showModalDialog: function(templateId, templateData, dialogId, callback) {
