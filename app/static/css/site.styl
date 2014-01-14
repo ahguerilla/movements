@@ -1,8 +1,9 @@
-$nav-bg-color = #f4f4f4
+$bg-color = #f4f4f4
 $text-color = #596066
 $header-text = #a3a3a3
 $border-color = #e7e7e7
 $warn-color = #ff0000
+$filter-background = #585F65
 $dialog-bg-color = rgba(255, 255, 255, 0.69)
 $std-border-radius = 10px
 
@@ -24,10 +25,14 @@ box-shadow()
  */
 
 .navbar-default
-  background-color $nav-bg-color
+  background-color $bg-color
 
 .navbar
   margin-bottom 0
+
+body
+  background-color $bg-color
+
 
 .btn
   border-radius $std-border-radius  
@@ -103,8 +108,8 @@ select.input-extra-height
   border-radius $std-border-radius
 
 .exchange-banner
-  width: 100%
   background: url('../images/header-image-518x284.png') no-repeat
+  background-color: #FFF
 
 .message-text
   margin-bottom: 10px
@@ -115,3 +120,7 @@ select.input-extra-height
     padding-bottom: 10px
   .market-action:hover
     cursor: pointer
+
+
+.exchange-filter
+  background-color: $filter-background
