@@ -27,7 +27,6 @@
     <div class="row">
       <div class="col-md-12 exchange-banner">
         <div class="row">
-          
           <div class="col-md-offset-6 col-md-4">
             <h1>My Exchange</h1>
             <hr class="hr-no-margin" />
@@ -35,11 +34,11 @@
           </div>
           <div class="col-md-2">
             <div class="market-action-wrap">
-              <div class="market-action">
+              <div id="create_offer" class="market-action">
                 <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Create an offer" />
                 <span>Create an offer</span>
               </div>
-              <div class="market-action">
+              <div id="create_request" class="market-action">
                 <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Create a request" />
                 <span>Create a request</span>
               </div>
@@ -47,6 +46,10 @@
           </div>
         </div>
       </div>
+    </div>
+    <!-- Filters -->
+    <div class="row">
+
     </div>
     <!-- Search -->
     <div class="row">
@@ -141,6 +144,8 @@
               {% endblock %}
           </div>
         </div>
+        
+        <!--
         <div class="row">
           <div class="col-md-12 small">
             <button id="create_offer" type="button" class="btn btn-default btn-sm btn-block">
@@ -151,6 +156,8 @@
             </button>
           </div>
         </div>
+        -->
+
         <!--
         <div class="row"> &nbsp;</div>
         <div class="row">
