@@ -58,6 +58,8 @@ else:
         Bundle(
             './css/site.styl',
             './css/market.styl',
+            './css/site-sm.styl',
+            './css/site-xs.styl',
             filters='stylus',
             output ='./css/site.css'
             ),
