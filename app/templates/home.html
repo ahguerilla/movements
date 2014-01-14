@@ -5,12 +5,12 @@
 {% block head_title %}{% trans "Exchangivist" %}{% endblock %}
 
 {% block content %}
-<div>
-    <h2>{% blocktrans %}Exchangivist is an online portal giving activists the tools they need to advance human rights in closed societies around the world.{% endblocktrans %}</h2>
+<div class="hero-text">
+    {% blocktrans %}Exchangivist is an online portal giving activists the tools they need to advance human rights in closed societies around the world.{% endblocktrans %}
 </div>
 
 <div class="row">
-  <div class="col-md-4 in-container">
+  <div class="col-sm-6 in-container dialog">
     <div><h4>{% trans "Sign Up" %}</h4></div>
       <form id="signup_form" action="/home-page-sign" method="GET" class="form-horizontal" role="form">
       <div class="form-group">
@@ -36,7 +36,7 @@
       </div>
     </form>
   </div>
-  <div class="col-md-offset-4 col-md-4">
+  <div class="col-sm-offset-2 col-sm-4 dialog">
     <div><h4>{% trans "Social Sign In" %}</h4></div>
     <div><a href="{% provider_login_url "google" %}">Google</a></div>
     <div><a href="{% provider_login_url "twitter" %}">Twitter</a></div>
@@ -45,7 +45,15 @@
   </div>
 </div>
 
-<div>
-    <h2>{% blocktrans %}Activists and experts can connect to exchange their expertise in support of basic freedoms like speech, press, association, religion and movement.{% endblocktrans %}</h2>
+<div class="hero-text">
+  {% blocktrans %}Activists and experts can connect to exchange their expertise in support of basic freedoms like speech, press, association, religion and movement.{% endblocktrans %}
 </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    $.backstretch("{{ STATIC_URL }}images/landing-bg-1020x1300-blended.jpg");
+  </script>
 {% endblock %}
