@@ -31,49 +31,48 @@
   <body>
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Exchangivist</a>
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/">Exchange</a></li>
-          <li><a href="#">Contact Us</a></li>
-          {% if user.is_authenticated %}
-          <li><a href="{% url 'show_users' %}">Users</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown"> My Messages  <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){%endif%} </span> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li><a class="message-counter" href="{% url 'postman_inbox' %}">Inbox <span id="msgcntr"> {% if unread_count %} ({{ unread_count }}){%endif%}</span> </a></li>
-                <li><a href="{% url 'postman_sent' %}">Sent</a></li>
-                <li><a href="{% url 'postman_archives' %}">Archive</a></li>
-                <li><a href="{% url 'postman_trash' %}">Trash</a></li>
-            </ul>
-          </li>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Exchangivist</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Exchange</a></li>
+            <li><a href="#">Contact Us</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'show_users' %}">Users</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown"> My Messages  <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){%endif%} </span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a class="message-counter" href="{% url 'postman_inbox' %}">Inbox <span id="msgcntr"> {% if unread_count %} ({{ unread_count }}){%endif%}</span> </a></li>
+                  <li><a href="{% url 'postman_sent' %}">Sent</a></li>
+                  <li><a href="{% url 'postman_archives' %}">Archive</a></li>
+                  <li><a href="{% url 'postman_trash' %}">Trash</a></li>
+              </ul>
+            </li>
 
-          <li><a href="#" onclick="window.location = window.ahr.app_urls.getposts;">My Posts</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% user_display user %} <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="{% url 'user_profile' %}">My Profile</a></li>
-              <li><a href="{% url 'user_settings' %}">Settings</a></li>
-              <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
-            </ul>
-          </li>
-          {% else %}
-          <li><a href="{% url 'account_login' %}">Sign In</a></li>
-          <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-          {% endif %}
-        </ul>
-      </div>
+            <li><a href="#" onclick="window.location = window.ahr.app_urls.getposts;">My Posts</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% user_display user %} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'user_profile' %}">My Profile</a></li>
+                <li><a href="{% url 'user_settings' %}">Settings</a></li>
+                <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+              </ul>
+            </li>
+            {% else %}
+            <li><a href="{% url 'account_login' %}">Sign In</a></li>
+            <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
     </nav>
-
     <div class="container">
     {% block body %}
     {% endblock %}
