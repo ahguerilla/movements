@@ -2,26 +2,26 @@
 {% load i18n %}
 
 {% block content %}
-{% include "clientside/marketitem.html" %}
-{% include "clientside/marketuser.html" %}
-{% include "clientside/filtertag.html" %}
-{% include "clientside/typetag.html" %}
+{% include "market/clientside/marketitem.html" %}
+{% include "market/clientside/marketuser.html" %}
+{% include "market/clientside/filtertag.html" %}
+{% include "market/clientside/typetag.html" %}
 
 <div class="row">
   <div id="market" class="col-md-12">
     <div id="infobar"></div>
 
-    {% include "clientside/expdate.html"%}
-    {% include "clientside/datetimepicker.html"%}
-    {% include "clientside/typeahead.html" %}
-    {% include "clientside/input.html" %}
-    {% include "clientside/textarea.html" %}
+    {% include "market/clientside/expdate.html"%}
+    {% include "market/clientside/datetimepicker.html"%}
+    {% include "market/clientside/typeahead.html" %}
+    {% include "market/clientside/input.html" %}
+    {% include "market/clientside/textarea.html" %}
 
-    {% include "clientside/messagedialog.html" %}
-    {% include "clientside/recommenddialog.html" %}
-    {% include "clientside/rate.html" %}
-    {% include "clientside/offer_form.html"%}
-    {% include "clientside/request_form.html"%}
+    {% include "market/clientside/messagedialog.html" %}
+    {% include "market/clientside/recommenddialog.html" %}
+    {% include "market/clientside/rate.html" %}
+    {% include "market/clientside/offer_form.html"%}
+    {% include "market/clientside/request_form.html"%}
 
     <!-- Banner -->
     <div class="row">

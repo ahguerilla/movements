@@ -15,7 +15,7 @@ def getUserTags(user):
 
 @login_required
 def index(request):
-    return render_to_response('market.html',
+    return render_to_response('market/market.html',
                               {
                                   'title':'My Exchange',
                                   'init': 'market',
@@ -26,7 +26,7 @@ def index(request):
 
 @login_required
 def users(request):
-    return render_to_response('market.html',
+    return render_to_response('market/market.html',
                               {
                                   'title':'Users',
                                   'init': 'users',
@@ -37,7 +37,7 @@ def users(request):
 
 @login_required
 def posts(request):
-    return render_to_response('market.html',
+    return render_to_response('market/market.html',
                               {
                                   'title':'My Posts',
                                   'init': 'posts',
@@ -47,8 +47,8 @@ def posts(request):
 
 
 @login_required
-def addItem_form(request,obj_type):    
-    return render_to_response(obj_type+'_form.html',
+def addItem_form(request, obj_type):    
+    return render_to_response('market/%s_form.html' % obj_type,
                               {
                                   'item':'false',                                      
                                   },
@@ -59,7 +59,7 @@ def addItem_form(request,obj_type):
 def editItem_form(request,obj_id):
     obj = MarketItem.objects.get(id=obj_id)
    
-    return render_to_response(obj.item_type+'_form.html',
+    return render_to_response('market/%s_form.html' % obj.item_type,
                               {
                                   'item': getMarketjson([obj]),                                      
                                   },
@@ -67,7 +67,7 @@ def editItem_form(request,obj_id):
  
 @login_required
 def viewItem(request,obj_type,obj_id):
-    return render_to_response('item_single.html',
+    return render_to_response('market/item_single.html',
                               {
                                   'item': {'id':str(obj_id)},
                                   'obj_type': '"%s"'%obj_type
@@ -78,7 +78,7 @@ def viewItem(request,obj_type,obj_id):
 @login_required
 def addComment_form(request,obj_id):
     form = commentForm()
-    return render_to_response('comment_form.html',
+    return render_to_response('market/comment_form.html',
                               {
                                   'obj_id': str(obj_id),
                                   'form': form,
@@ -90,7 +90,7 @@ def addComment_form(request,obj_id):
 @login_required
 def editComment_form(request,obj_id):
     form = commentForm()
-    return render_to_response('comment_form.html',
+    return render_to_response('market/comment_form.html',
                               {
                                   'obj_type' : '',
                                   'obj_id': '""',
