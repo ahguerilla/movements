@@ -1,5 +1,6 @@
 $nav-bg-color = #f4f4f4
-$heading-text = #a3a3a3
+$text-color = #596066
+$header-text = #a3a3a3
 $border-color = #e7e7e7
 $warn-color = #ff0000
 $dialog-bg-color = rgba(255, 255, 255, 0.69)
@@ -28,9 +29,19 @@ box-shadow()
 .navbar
   margin-bottom 0
 
+.btn
+  border-radius $std-border-radius  
+  color $text-color
+
 /******************************************************************************
  * Site styles
  */
+
+body
+  color $text-color
+
+h1, h2, h3, h4
+  color $header-text
 
 .hr-no-margin
   margin-bottom: 0
@@ -68,7 +79,7 @@ select.input-extra-height
   overflow: hidden
 
 .message-well
-  background-color #f5f5f5
+  background-color 
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05)
   padding: 9px
   height: 53px
@@ -83,6 +94,10 @@ select.input-extra-height
   background-color rgba(0, 0, 0, 0.63)
 
 .dialog
+  h1
+    margin-top 0
+    font-size 2em
+    color #59606A
   padding 15px
   background-color $dialog-bg-color
   border-radius $std-border-radius
