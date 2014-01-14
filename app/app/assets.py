@@ -1,6 +1,5 @@
 from django.conf import settings
 from django_assets import register,Bundle
-from unipath import Path
 
 
 js = Bundle(
@@ -36,7 +35,6 @@ js = Bundle(
 )
 
 if settings.PRODUCTION or settings.STAGING:
-
     css = Bundle(
         './css/bootstrap.css',
         './css/bootstrap-datetimepicker.min.css',
@@ -47,9 +45,7 @@ if settings.PRODUCTION or settings.STAGING:
         filters='cssmin',
         output='./css/packed.css'
     )
-
 else:
-
     css = Bundle(
         Bundle(
             './css/bootstrap.css',
@@ -70,5 +66,3 @@ else:
 
 register('js_all', js)
 register('css_all', css)
-
-
