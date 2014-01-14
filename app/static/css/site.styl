@@ -1,5 +1,9 @@
-$border-color = #e7e7e7;
-$warn-color = #FF0000;
+$nav-bg-color = #f4f4f4
+$heading-text = #a3a3a3
+$border-color = #e7e7e7
+$warn-color = #ff0000
+$dialog-bg-color = rgba(255, 255, 255, 0.69)
+$std-border-radius = 10px
 
 vendor(prop, args)
   -webkit-{prop} args
@@ -14,6 +18,20 @@ border-radius()
 box-shadow()
   vendor('box-shadow', arguments)
 
+/******************************************************************************
+ * Bootstrap overloads
+ */
+
+.navbar-default
+  background-color $nav-bg-color
+
+.navbar
+  margin-bottom 0
+
+/******************************************************************************
+ * Site styles
+ */
+
 .hr-no-margin
   margin-bottom: 0
   margin-top: 0
@@ -26,11 +44,6 @@ box-shadow()
 
 .filter-fixed-width
   width: 70px
-
-.in-container
-  border: 1px solid $border-color
-  padding: 15px
-  border-radius: 5px
 
 .align-right
   text-align: right  
@@ -50,7 +63,6 @@ select.input-extra-height
 .item_container:hover
   cursor: pointer
 
-
 .item-contents
   max-height: 101px
   overflow: hidden
@@ -62,10 +74,18 @@ select.input-extra-height
   height: 53px
   overflow: hidden
 
+.hero-text
+  color #fff
+  font-size 2em
+  margin 20px 0
 
+.backstretch
+  background-color rgba(0, 0, 0, 0.63)
 
-.navbar
-  margin-bottom: 0
+.dialog
+  padding 15px
+  background-color $dialog-bg-color
+  border-radius $std-border-radius
 
 .exchange-banner
   width: 100%

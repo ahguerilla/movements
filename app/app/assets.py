@@ -16,6 +16,7 @@ js = Bundle(
         './js/lib/typeahead.min.js',
         './js/lib/jquery.blockUI.js',
         './js/lib/jstz.js',
+        './js/lib/jquery.backstretch.min.js',
         './js/app_common.js',
         './js/base.js',
         './js/item_form_base.js',
