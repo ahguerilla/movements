@@ -76,5 +76,7 @@ def editComment(request,obj_id, rtype):
 def deleteComment(request, obj_id, rtype):
     obj = request.obj
     obj.deleted = True
-    obj.save()
+    obj.item.commentcount -= 1
+    obj.item.save()
+    obj.save_base()
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)

@@ -104,6 +104,19 @@
                 });
             }
         },
+        deleteComment:function(ev){
+            var that = this;
+            if(confirm('Are you sure you want yo delete your comment?')){
+                var comment_id =  ev.currentTarget.getAttribute('comment-id');
+                var aurl = $('a',$(ev.currentTarget))[0];
+                var dfrd = $.ajax({url:aurl.href});
+                dfrd.success(function(data){
+                    that.alert('Your comment was deleted.','#infobar');
+                    $('.comment[comment-id="'+comment_id+'"]').remove();
+                });
+            }
+            return false;
+        },
 
         setPage: function(){
             fields = this.item.fields;
@@ -134,7 +147,8 @@
                 'click .comment-btn': 'comment',
                 'click #private_message': 'private_message',
                 'click #recommend': 'recommend',
-                'click #report_post': 'reportPostClicked'
+                'click #report_post': 'reportPostClicked',
+                'click .comment-delete': 'deleteComment'
             }));
 
             $.getJSON(
