@@ -3,6 +3,8 @@ $text-color = #596066
 $header-text = #a3a3a3
 $border-color = #e7e7e7
 $warn-color = #ff0000
+$offer-color = #BBEEFF
+$request-color = #89DDDD
 $filter-background = #585F65
 $filter-item-selected = #444D54
 $dialog-bg-color = rgba(255, 255, 255, 0.69)
@@ -209,8 +211,51 @@ select.input-extra-height
 
 .market-search-box
   margin-top: 10px
-  margin-bottom: 10px
+  margin-bottom: 20px
   .input-group
     .form-control 
       border-radius 10px 0 0 10px !important 
       
+.market-item-card
+  border-radius 5px
+  background-color: #FFF
+  margin-bottom: 15px
+  box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.5);
+  padding: 3px
+  .item-header
+    font-weight: bold
+    padding: 5px 3px 3px 5px
+    border-radius 10px
+    margin-bottom: 5px
+    span 
+      font-size: 10px
+    a
+      color: $text-color
+  .request
+    background-color: $request-color
+  .offer
+    background-color: $offer-color
+  .item-title
+    padding: 5px
+    .item-icon
+      float: left
+      width: 50px
+      height: 50px
+      margin-right: 5px
+    .request
+      background: url('../images/request-button-50x50.png') no-repeat
+    .offer
+      background: url('../images/offer-button-50x50.png') no-repeat
+  .item-body
+    padding: 5px
+  .item-tags
+    font-size: 10px
+    padding: 5px
+    .item-comment-count
+      margin-bottom: 5px
+    .btn-xs
+      font-size: 10px
+      color: #000
+      background-color: #eeeeee
+      border-color: #cccccc
+
