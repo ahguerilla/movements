@@ -39,7 +39,7 @@
         <div class="form-group">
           <div class="col-md-12 text-center">
             <input type="checkbox" name="tnccheckbox" id="tnccheckbox" />
-            <label for="tnccheckbox">I agree to the Terms &amp; Conditions</label>
+            <label for="tnccheckbox">I agree to the </label> <a href="{% url 'terms_and_conditions' %}" target="_blank" alt="terms and conditions">Terms &amp; Conditions</a>
           </div>
         </div>
         <div class="form-group">
@@ -53,7 +53,7 @@
       </form>
     </div>
   </div>
-  <div class="col-lg-5 col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
+  <div class="col-lg-4 col-lg-offset-3 col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
     <div class="dialog">
       <a href="{% provider_login_url "twitter" %}">
         <img src="{{ STATIC_URL }}images/twitter-24x18.png" alt="Google+"/>

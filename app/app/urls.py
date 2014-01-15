@@ -8,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
+    url(r'^terms_and_conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
     url(r'^', include('app.market.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^user/', include('app.users.urls')),

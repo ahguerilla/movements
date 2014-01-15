@@ -76,29 +76,28 @@
       </div>
     </nav>
     <div class="container">
-
-    {% if messages %}
-    <div class="row">
-      <div class="col-md-offset-2 col-md-8">
-        <div class="alert alert-success alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          {% for message in messages %}
-          <div>{{message}}</div>
-          {% endfor %}
+      {% if messages %}
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {% for message in messages %}
+            <div>{{message}}</div>
+            {% endfor %}
+          </div>
         </div>
       </div>
-    </div>
-    {% endif %}
+      {% endif %}
 
-    <div id="currentusername" class="hidden">{{user.username}}</div>
+      <div id="currentusername" class="hidden">{{user.username}}</div>
 
-    {% block content %}
-    {% endblock %}
+      {% block content %}
+      {% endblock %}
 
-    {% include "market/clientside/app_urls.html" %}
+      {% include "market/clientside/app_urls.html" %}
 
-    {% block extra_body %}
-    {% endblock %}
+      {% block extra_body %}
+      {% endblock %}
     </div>
     <div id="modal-placeholder"></div>
 
