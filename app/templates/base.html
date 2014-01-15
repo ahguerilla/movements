@@ -1,25 +1,110 @@
-{% extends "base_site.html" %}
+{% load assets %}
+{% load url from future %}
+{% load account %}
+{% load postman_tags %}
+{% postman_unread as unread_count %}
 
-{% block body %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block head_title %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% if messages %}
-<div class="row">
-  <div class="col-md-offset-2 col-md-8">
-    <div class="alert alert-success alert-dismissable">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      {% for message in messages %}
-      <div>{{message}}</div>
-      {% endfor %}
+    {% assets "css_all"  %}
+      <LINK href="{{ STATIC_URL }}{{ ASSET_URL }}" rel="stylesheet" type="text/css">
+    {% endassets %}
+
+    {% assets "js_all" %}
+      <script type="text/javascript" src="{{ STATIC_URL }}{{ ASSET_URL }}"></script>
+    {% endassets %}
+
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Exchangivist</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <li><a href="/">Exchange</a></li>
+            {% endif %}
+            <li><a href="#">Contact Us</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'show_users' %}">Users</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown"> My Messages  <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){%endif%} </span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a class="message-counter" href="{% url 'postman_inbox' %}">Inbox <span id="msgcntr"> {% if unread_count %} ({{ unread_count }}){%endif%}</span> </a></li>
+                  <li><a href="{% url 'postman_sent' %}">Sent</a></li>
+                  <li><a href="{% url 'postman_archives' %}">Archive</a></li>
+                  <li><a href="{% url 'postman_trash' %}">Trash</a></li>
+              </ul>
+            </li>
+
+            <li><a href="#" onclick="window.location = window.ahr.app_urls.getposts;">My Posts</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% user_display user %} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'user_profile' %}">My Profile</a></li>
+                <li><a href="{% url 'user_settings' %}">Settings</a></li>
+                <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+              </ul>
+            </li>
+            {% else %}
+            <li><a href="{% url 'account_login' %}">Sign In</a></li>
+            <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      {% if messages %}
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {% for message in messages %}
+            <div>{{message}}</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <div id="currentusername" class="hidden">{{user.username}}</div>
+
+      {% block content %}
+      {% endblock %}
+
+      {% include "market/clientside/app_urls.html" %}
+
+      {% block extra_body %}
+      {% endblock %}
     </div>
-  </div>
-</div>
-{% endif %}
+    <div id="modal-placeholder"></div>
 
-<div id="currentusername" class="hidden">{{user.username}}</div>
+    {% block javascript %}
+    {% endblock %}
 
-{% block content %}
-{% endblock %}
-
-{% include "clientside/app_urls.html" %}{% endblock %}
-
-
+    {% block endjavascript %}
+    {% endblock %}
+  </body>
+</html>

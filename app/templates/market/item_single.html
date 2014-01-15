@@ -4,16 +4,16 @@
 {% block head_title %}{% trans "Marketplace Item" %}{% endblock %}
 
 {% block content %}
-{% include "clientside/commentview.html" %}
-{% include "clientside/commentadd.html" %}
-{% include "clientside/report.html" %}
+{% include "market/clientside/commentview.html" %}
+{% include "market/clientside/commentadd.html" %}
+{% include "market/clientside/report.html" %}
 
 <div id="item-single" item-id="{{item.id}}" class="row">
   <div id="market" class="col-md-offset-2 col-md-8">
     <div id="infobar"></div>
-    {% include "clientside/messagedialog.html" %}
-    {% include "clientside/recommenddialog.html" %}
-    {% include "clientside/rate.html" %}
+    {% include "market/clientside/messagedialog.html" %}
+    {% include "market/clientside/recommenddialog.html" %}
+    {% include "market/clientside/rate.html" %}
     <!-- detail -->
     <div class="row">
       <!-- Back -->

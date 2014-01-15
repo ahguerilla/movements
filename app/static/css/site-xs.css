@@ -1,0 +1,16 @@
+@media (max-width: 767px) {
+  .home-logos .left {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .home-logos .middle {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .home-logos .right {
+    text-align: center;
+  }
+  .sign-up-initial {
+    margin-bottom: 10px;
+  }
+}

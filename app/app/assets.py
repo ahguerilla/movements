@@ -1,6 +1,5 @@
 from django.conf import settings
 from django_assets import register,Bundle
-from unipath import Path
 
 
 js = Bundle(
@@ -17,6 +16,7 @@ js = Bundle(
         './js/lib/typeahead.min.js',
         './js/lib/jquery.blockUI.js',
         './js/lib/jstz.js',
+        './js/lib/jquery.backstretch.min.js',
         './js/app_common.js',
         './js/base.js',
         './js/item_form_base.js',
@@ -36,7 +36,6 @@ js = Bundle(
 )
 
 if settings.PRODUCTION or settings.STAGING:
-
     css = Bundle(
         './css/bootstrap.css',
         './css/bootstrap-datetimepicker.min.css',
@@ -47,9 +46,7 @@ if settings.PRODUCTION or settings.STAGING:
         filters='cssmin',
         output='./css/packed.css'
     )
-
 else:
-
     css = Bundle(
         Bundle(
             './css/bootstrap.css',
@@ -61,6 +58,8 @@ else:
         Bundle(
             './css/site.styl',
             './css/market.styl',
+            './css/site-sm.styl',
+            './css/site-xs.styl',
             filters='stylus',
             output ='./css/site.css'
             ),
@@ -70,5 +69,3 @@ else:
 
 register('js_all', js)
 register('css_all', css)
-
-

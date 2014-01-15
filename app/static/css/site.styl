@@ -1,5 +1,11 @@
-$border-color = #e7e7e7;
-$warn-color = #FF0000;
+$bg-color = #f4f4f4
+$text-color = #596066
+$header-text = #a3a3a3
+$border-color = #e7e7e7
+$warn-color = #ff0000
+$filter-background = #585F65
+$dialog-bg-color = rgba(255, 255, 255, 0.69)
+$std-border-radius = 10px
 
 vendor(prop, args)
   -webkit-{prop} args
@@ -14,9 +20,51 @@ border-radius()
 box-shadow()
   vendor('box-shadow', arguments)
 
-.container-liquid
-  padding: 0 15px
-  margin: 0 auto
+::-webkit-input-placeholder
+  font-style italic
+
+::-moz-placeholder
+  font-style italic
+
+:-ms-input-placeholder
+  font-style italic  
+
+/******************************************************************************
+ * Bootstrap overloads
+ */
+
+.navbar-default
+  background-color $bg-color
+
+.navbar
+  margin-bottom 0
+
+body
+  background-color $bg-color
+
+label
+  font-weight normal
+
+.form-group
+  margin-bottom 5px
+
+.btn
+  border-radius $std-border-radius  
+  color $text-color
+
+/******************************************************************************
+ * Site styles
+ */
+
+body
+  color $text-color
+
+h1, h2, h3, h4
+  color $header-text
+
+.hr-no-margin
+  margin-bottom: 0
+  margin-top: 0
 
 .center-content
   text-align: center
@@ -26,11 +74,6 @@ box-shadow()
 
 .filter-fixed-width
   width: 70px
-
-.in-container
-  border: 1px solid $border-color
-  padding: 15px
-  border-radius: 5px
 
 .align-right
   text-align: right  
@@ -50,14 +93,100 @@ select.input-extra-height
 .item_container:hover
   cursor: pointer
 
-
 .item-contents
   max-height: 101px
   overflow: hidden
 
 .message-well
-  background-color #f5f5f5
+  background-color 
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05)
   padding: 9px
   height: 53px
   overflow: hidden
+
+.hero-text
+  color #fff
+  font-size 2em
+  margin 20px 0
+
+.backstretch
+  background-color rgba(0, 0, 0, 0.63)
+
+.dialog
+  h1
+    margin-top 0
+    font-size 2em
+    color #59606A
+  a
+    color $text-color
+    text-decoration underline
+  padding 15px
+  background-color $dialog-bg-color
+  border-radius $std-border-radius
+
+.home-logos
+  .middle
+    text-align center
+  .right
+    text-align right
+
+.sign-up-initial
+  input
+    border-radius $std-border-radius
+    padding 20px
+
+.social-sign-up .dialog
+  margin-bottom 10px
+  a
+    position relative
+    img
+      vertical-align text-bottom
+      position absolute
+      left 0
+    color $text-color
+    padding-left 30px
+
+.exchange-banner
+  background: url('../images/header-image-518x284.png') no-repeat
+  background-color: #FFF
+
+.message-text
+  margin-bottom: 10px
+
+.market-action-wrap
+  margin-top: 30%
+  .market-action
+    padding-bottom: 10px
+  .market-action:hover
+    cursor: pointer
+
+.filter-banner-spacer
+  background-color: #FFF
+  height: 2px
+
+.exchange-filter
+  color: #FFF
+  background-color: $filter-background
+  padding-bottom: 10px
+  .market-filter-main
+    margin-left: 20px
+    position: relative
+    .market-filter-border
+      border-right: 1px solid #FFF
+      position: absolute
+      //margin-top: 10%
+      height: 100%
+      right: 0
+    .market-action
+      margin-bottom: 10px
+    .first
+      margin-top: 35px
+    .market-action:hover
+      cursor: pointer
+  .filter-title
+    text-align: center
+    margin-bottom: 10px
+    margin-top: 10px
+  .filter-show
+    margin-top:10px
+    text-align: right

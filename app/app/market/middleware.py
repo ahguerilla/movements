@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 
 class NoUserProfile(object):
     def process_request(self, request):
-        if not request.user.is_anonymous() and not hasattr(request.user,'userprofile') and (
+        if not request.user.is_anonymous() and not request.user.is_superuser and not hasattr(request.user,'userprofile') and (
             request.path != reverse('getting_started') and
             request.path != reverse('account_logout')
             ):

@@ -55,6 +55,8 @@ To configure social app, goto admin>social account>socialapps and create entries
 
 Client ID and Secret can be found in settings>local.py
 
+On dev mode you can just use `make dev-social`
+
 ## Widget Tweaks Reference
 https://pypi.python.org/pypi/django-widget-tweaks
 

@@ -2,27 +2,101 @@
 {% load i18n %}
 
 {% block content %}
-{% include "clientside/marketitem.html" %}
-{% include "clientside/marketuser.html" %}
-{% include "clientside/filtertag.html" %}
-{% include "clientside/typetag.html" %}
+{% include "market/clientside/marketitem.html" %}
+{% include "market/clientside/marketuser.html" %}
+{% include "market/clientside/filtertag.html" %}
+{% include "market/clientside/typetag.html" %}
 
 <div class="row">
-  <div id="market" class="col-md-offset-1 col-md-10">
+  <div id="market" class="col-md-12">
     <div id="infobar"></div>
 
-    {% include "clientside/expdate.html"%}
-    {% include "clientside/datetimepicker.html"%}
-    {% include "clientside/typeahead.html" %}
-    {% include "clientside/input.html" %}
-    {% include "clientside/textarea.html" %}
+    {% include "market/clientside/expdate.html"%}
+    {% include "market/clientside/datetimepicker.html"%}
+    {% include "market/clientside/typeahead.html" %}
+    {% include "market/clientside/input.html" %}
+    {% include "market/clientside/textarea.html" %}
 
-    {% include "clientside/messagedialog.html" %}
-    {% include "clientside/recommenddialog.html" %}
-    {% include "clientside/rate.html" %}
-    {% include "clientside/offer_form.html"%}
-    {% include "clientside/request_form.html"%}
+    {% include "market/clientside/messagedialog.html" %}
+    {% include "market/clientside/recommenddialog.html" %}
+    {% include "market/clientside/rate.html" %}
+    {% include "market/clientside/offer_form.html"%}
+    {% include "market/clientside/request_form.html"%}
 
+    <!-- Banner -->
+    <div class="row">
+      <div class="col-md-12 exchange-banner">
+        <div class="row">
+          <div class="col-md-offset-6 col-md-4">
+            <h1>My Exchange</h1>
+            <hr class="hr-no-margin" />
+            <div class="message-text">By allowing anyone in the world to offer their skills to those who are working to make a difference in the darkest places on earth, the Exchangivist platform has the potential to change the work of human rights forever. Whether you're a reporter on the ground, an activist working from the diaspora, or a professional with skills to contribute, you can sign up to be an Exchangivist now.</div>
+          </div>
+          <div class="col-md-2">
+            <div class="market-action-wrap">
+              <div id="create_offer" class="market-action">
+                <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Create an offer" />
+                <span>Create an offer</span>
+              </div>
+              <div id="create_request" class="market-action">
+                <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Create a request" />
+                <span>Create a request</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Filters -->
+    <div class="row">
+      <div class="col-sm-12 filter-banner-spacer"></div>
+    </div>
+    <!-- Filters -->
+    <div class="row">
+      <div class="col-sm-12 exchange-filter"> 
+        <div class="row">
+          <div id="market-filters" class="collapse">
+            <div class="col-sm-3"> 
+              <div class="market-filter-main">
+                <div class="market-filter-border"></div>
+                <div class="market-action first">
+                  <img src="{{ STATIC_URL }}images/all-button-50x50.png" alt="Filter by all" />
+                  <span>ALL</span>
+                </div>
+                <div class="market-action">
+                  <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Filter by offers" />
+                  <span>OFFERS</span>
+                </div>
+                <div class="market-action">
+                  <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
+                  <span>REQUESTS</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="filter-title">Issues</div>
+              <div class="row issues btn-group-sm pull-left" item_title="issues"></div>
+            </div>
+            <div class="col-sm-3">
+              <div class="filter-title">Countries</div>
+              <div class="row countries btn-group-sm pull-left" item_title="countries"></div>
+            </div>
+            <div class="col-sm-3">
+              <div class="filter-title">Skills</div>
+              <div class="row skills btn-group-sm pull-left" item_title="skills"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 filter-show">
+            <button type="button"class="btn btn-xs" data-toggle="collapse" data-target="#market-filters">
+              Toggle Filters
+              <span class="caret"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Search -->
     <div class="row">
       <div class="input-group col-md-offset-3 col-md-7">
@@ -116,6 +190,8 @@
               {% endblock %}
           </div>
         </div>
+        
+        <!--
         <div class="row">
           <div class="col-md-12 small">
             <button id="create_offer" type="button" class="btn btn-default btn-sm btn-block">
@@ -126,6 +202,8 @@
             </button>
           </div>
         </div>
+        -->
+
         <!--
         <div class="row"> &nbsp;</div>
         <div class="row">
