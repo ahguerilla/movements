@@ -4,6 +4,7 @@ $header-text = #a3a3a3
 $border-color = #e7e7e7
 $warn-color = #ff0000
 $filter-background = #585F65
+$filter-item-selected = #444D54
 $dialog-bg-color = rgba(255, 255, 255, 0.69)
 $std-border-radius = 10px
 
@@ -194,6 +195,17 @@ select.input-extra-height
   .filter-show
     margin-top:10px
     text-align: right
+  .filter-tag
+    .btn-success
+      color: #FFF
+      background-color: $filter-item-selected
+      border-color: $filter-item-selected
+    .btn-success:hover,
+    .btn-success:focus,
+    .btn-success:active,
+    .btn-success.active,
+    .open .dropdown-toggle.btn-success
+      border-color: #3a3a3a;
 
 .market-search-box
   margin-top: 10px
