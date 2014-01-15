@@ -3,13 +3,10 @@
     <div class="market-item-card">
       <div class="item-header <%- item_type.toLowerCase() %>">
         <%- item_type.toUpperCase() %>&nbsp;<span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a> <%-usercore%></span>
-        <div class="pull-right" style="position:relative;">
+        <div class="pull-right item-menu" style="position:relative;">
           <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
           <div class="dropdown">
-            <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu<%- pk %>" data-toggle="dropdown">
-              Dropdown
-              <span class="caret"></span>
-            </button>
+            <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu<%- pk %>" data-toggle="dropdown" />
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
               <% if (ownerid != window.ahr.user_id){ %>
                 <li role="presentation"></li>
