@@ -64,6 +64,7 @@
             this.delegateEvents(_.extend(this.events,{
                 'click .delete-item': 'deleteItem',
             }));
+            $(".delete-item").css('display','block');
             return this;
         },
 });
