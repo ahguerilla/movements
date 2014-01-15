@@ -20,6 +20,15 @@ border-radius()
 box-shadow()
   vendor('box-shadow', arguments)
 
+::-webkit-input-placeholder
+  font-style italic
+
+::-moz-placeholder
+  font-style italic
+
+:-ms-input-placeholder
+  font-style italic  
+
 /******************************************************************************
  * Bootstrap overloads
  */
@@ -112,6 +121,22 @@ select.input-extra-height
     text-align center
   .right
     text-align right
+
+.sign-up-initial
+  input
+    border-radius $std-border-radius
+    padding 20px
+
+.social-sign-up .dialog
+  margin-bottom 10px
+  a
+    position relative
+    img
+      vertical-align text-bottom
+      position absolute
+      left 0
+    color $text-color
+    padding-left 30px
 
 .exchange-banner
   background: url('../images/header-image-518x284.png') no-repeat
