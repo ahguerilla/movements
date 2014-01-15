@@ -22,6 +22,22 @@
     var PostsView = window.ahr.market.MarketBaseView.extend({
         types:{"Resources":"resource","Offers":"offer","Request":"request"},
 
+        deleteItem: function(ev){
+            var that = this;
+            if(confirm('Are you sure you want to delete this item?')){
+                var item_id = ev.currentTarget.getAttribute('item_id');
+                var dfrd = $.ajax({
+                    url:window.ahr.app_urls.deletemarketitem+item_id,
+                });
+                dfrd.done(function(data){
+                    that.alert('Item deleted','#infobar');
+                    $(".row.item_container[item_id='"+ item_id + "']").remove();
+                });
+            }
+
+            return(false);
+        },
+
         showItem: function(ev){
             var that = this;
             var id = ev.currentTarget.getAttribute('item_id');
@@ -45,6 +61,9 @@
             this.viewurl = window.ahr.app_urls.edititem;
             filters.types=["resource", "offer", "request"];
             this.init(filters);
+            this.delegateEvents(_.extend(this.events,{
+                'click .delete-item': 'deleteItem',
+            }));
             return this;
         },
 });
