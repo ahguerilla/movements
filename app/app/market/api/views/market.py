@@ -19,48 +19,11 @@ from django.utils.html import escape
 def getMarketjson(objs):
     alist=[]
     for obj in objs:
-        adict = {'fields':{}}
-        adict['pk'] = obj.id
-        adict['fields']['item_type'] = obj.item_type
-        adict['fields']['issues']= [ob.id for ob in obj.issues.all()]
-        adict['fields']['countries']= [ob.id for ob in obj.countries.all()]
-        adict['fields']['skills']= [ob.id for ob in obj.skills.all()]
-        adict['fields']['title']= obj.title
-        adict['fields']['details']= obj.details
-        adict['fields']['pub_date']= str(obj.pub_date)
-        adict['fields']['exp_date']= str(obj.exp_date)
-        adict['fields']['owner']= [obj.owner.username]
-        adict['fields']['url']= obj.url
-        adict['fields']['files']= [afile.url for afile in obj.files.all()]
-        adict['fields']['commentcount']= obj.commentcount
-        adict['fields']['usercore']= obj.owner.userprofile.score
-        adict['fields']['userratecount']= obj.owner.userprofile.ratecount
-        adict['fields']['ratecount']= obj.ratecount
-        adict['fields']['score']= obj.score
-        adict['fields']['avatar'] = '/static/images/male200.png'
-        #reverse('avatar_render_primary', args=[obj.owner.username,80])
-
-        alist.append(adict)
+        alist.append(obj.getdict())
     return json.dumps(alist)
 
 
 def returnItemList(obj, rtype):
-    #value(rtype,
-          #obj,
-          #use_natural_keys=True,
-          #fields=('item_type',
-                  #'issues',
-                  #'countries',
-                  #'skills',
-                  #'title',
-                  #'details',
-                  #'pub_date',
-                  #'exp_date',
-                  #'owner',
-                  #'url',
-                  #'files',
-                  #'commentcount')
-          #)
     return HttpResponse(
         getMarketjson(obj),
         mimetype="application/"+rtype)
@@ -125,10 +88,9 @@ def getMarketItemCount(request,rtype):
 
 
 @login_required
+@check_perms_and_get(market.models.MarketItem)
 def editMarketItem(request,obj_id,rtype):
-    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),pk=obj_id)
-    if request.user != obj.owner:
-        return HttpResponseRedirect('/')
+    obj = request.obj
     form = item_forms[obj.item_type](request.POST, instance=obj)
     if form.is_valid():
         saveMarketItem(form, obj.item_type, obj.owner)
@@ -138,7 +100,9 @@ def editMarketItem(request,obj_id,rtype):
 
 
 @login_required
+@check_perms_and_get(market.models.MarketItem)
 def deleteMarketItem(request,obj_id,rtype):
+    obj=request.obj
     pass
 
 

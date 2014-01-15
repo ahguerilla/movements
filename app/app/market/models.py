@@ -9,6 +9,8 @@ import tinymce
 import django.contrib.auth as auth
 import uuid
 
+from django.core.urlresolvers import reverse
+
 
 def resouse_upload_path_handler(instance, filename):
     return 'resource_files/{file}'.format(file=str(uuid.uuid1())+filename[-4:])
@@ -37,6 +39,29 @@ class MarketItem(models.Model):
     #class Meta:
         #ordering = ['-pub_date']
 
+    def getdict(self):
+        adict = {'fields':{}}
+        adict['pk'] = self.id
+        adict['fields']['item_type'] = self.item_type
+        adict['fields']['issues']= [ob.id for ob in self.issues.all()]
+        adict['fields']['countries']= [ob.id for ob in self.countries.all()]
+        adict['fields']['skills']= [ob.id for ob in self.skills.all()]
+        adict['fields']['title']= self.title
+        adict['fields']['details']= self.details
+        adict['fields']['pub_date']= str(self.pub_date)
+        adict['fields']['exp_date']= str(self.exp_date)
+        adict['fields']['owner']= [self.owner.username]
+        adict['fields']['url']= self.url
+        adict['fields']['files']= [afile.url for afile in self.files.all()]
+        adict['fields']['commentcount']= self.commentcount
+        adict['fields']['usercore']= self.owner.userprofile.score
+        adict['fields']['userratecount']= self.owner.userprofile.ratecount
+        adict['fields']['ratecount']= self.ratecount
+        adict['fields']['score']= self.score
+        adict['fields']['avatar'] = '/static/images/male200.png'
+        #reverse('avatar_render_primary', args=[obj.owner.username,80])
+        return adict
+
 
 class Comment(models.Model):
     owner = models.ForeignKey(auth.models.User, blank=True)
@@ -52,6 +77,19 @@ class Comment(models.Model):
         model = self.__class__
         self.item.commentcount+=1
         self.item.save()
+
+    def getdict(self):
+        adict={'fields':{}}
+        adict['fields']['pub_date'] = str(self.pub_date)
+        adict['fields']['contents'] = self.contents
+        adict['pk'] = self.id
+        adict['fields']['owner'] = self.owner.id
+        adict['fields']['avatar'] = '/static/images/male200.png'
+        #reverse('avatar_render_primary', args=[self.owner.username,80])
+        adict['fields']['username'] = self.owner.username
+        adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[self.owner.username])
+        return adict
+
 
 
 class File(models.Model):

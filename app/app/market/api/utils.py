@@ -1,10 +1,15 @@
 from django.core import serializers
-
+from functools import wraps
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
 
 class HttpResponseError(HttpResponse):
     status_code=500
+
+class HttpResponseForbiden(HttpResponse):
+    status_code=403
+
 
 
 def get_client_ip(request):
@@ -14,6 +19,7 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
 
 def get_validation_errors(form):
     return { 'success' : False,
@@ -34,3 +40,16 @@ def get_val_errors(form):
 
 def value(atype,objs,**kwargs):
     return serializers.serialize(atype,objs,**kwargs)
+
+def check_perms_and_get(object_class):
+    def __decorator(view_func):
+        def _decorator(request, *args, **kwargs):
+            obj = get_object_or_404(object_class.objects,pk=kwargs['obj_id'])
+            if request.user != obj.owner:
+                request.obj = None
+                return HttpResponseForbiden()
+            request.obj=obj
+            response = view_func(request, *args, **kwargs)
+            return response
+        return wraps(view_func)(_decorator)
+    return __decorator
