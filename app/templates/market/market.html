@@ -98,35 +98,25 @@
       </div>
     </div>
     <!-- Search -->
-    <div class="row market-search-box">
-      <div class="col-md-offset-2 col-md-8">
-        <form class="form-inline">
-          <div class="row">
-            <div class="form-group col-sm-10">
-              <label class="sr-only" for="q">Search by keyword for offers and requests</label>
-              <input type="text" class="form-control" id="q" name="q" placeholder="Search by keyword for offers and requests"/>
-            </div>
-            <div class="col-sm-1">
-              <button class="btn" id="searchbtn">Search</button>
-              <input type="submit" style="visibility:hidden; position: fixed;"/>
-            </div>
-          </div>
+    <div class="row  market-search-box">
+      <div class="input-group col-md-offset-2 col-md-8">
+        <form>
+          <label class="sr-only" for="q">Search by keyword for offers and requests</label>
+          <input type="text" class="form-control" id="q" name="q" placeholder="Search by keyword for offers and requests" />
+          <input type="submit" style="visibility:hidden;position: fixed;"/>
         </form>
+        <span class="input-group-addon btn" id="searchbtn">Search</span>
       </div>
     </div>
     <!-- Market Items -->
     <div class="row">
       <div class="col-md-12">
-        <div class="row">
-          <div id="marketitems"></div>
-        </div>
+        <div id="marketitems"></div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <div class="row">
-          <ul class="marketitems pagination"></ul>
-        </div>
+        <ul class="marketitems pagination"></ul>
       </div>
     </div>
 
