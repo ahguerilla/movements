@@ -32,6 +32,7 @@ class MarketItem(models.Model):
     ratecount = models.IntegerField(_('ratecount'), default=0)
     reportcount = models.IntegerField(_('reportcount'), default=0)
     score = models.FloatField(_('score'),default=0)
+    deleted = models.BooleanField(_('deleted'), default=False)
 
     def __unicode__(self):
         return self.details
@@ -69,6 +70,8 @@ class Comment(models.Model):
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
     item = models.ForeignKey(MarketItem, null=True, blank=True, related_name='comments')
     published = models.BooleanField(_('is published?'), default=True)
+    deleted = models.BooleanField(_('deleted'), default=False)
+
 
     class Meta:
         ordering = ['-pub_date']
