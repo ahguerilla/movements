@@ -46,6 +46,7 @@ class MarketItem(models.Model):
         adict['fields']['pub_date']= str(self.pub_date)
         adict['fields']['exp_date']= str(self.exp_date)
         adict['fields']['owner']= [self.owner.username]
+        adict['fields']['ownerid']= [self.owner.id]
         adict['fields']['url']= self.url
         adict['fields']['files']= [afile.url for afile in self.files.all()]
         adict['fields']['commentcount']= self.commentcount

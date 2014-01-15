@@ -203,6 +203,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.setFilterType("custom");
         this.resetMarket();
     },
+    show_dropdown:function(ev){
+        var item_id = ev.currentTarget.getAttribute('item_id');
+        $('#dropdownMenu'+item_id).trigger('click');
+        return(false);
+    },
 
     init: function(filters){
         this.default_filters = window.ahr.clone(filters);
@@ -222,6 +227,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'click .item-type': 'itemTypesfilter',
             'click #create_offer': 'create_offer',
             'click #create_request': 'create_request',
+            'click .itemactions' : 'show_dropdown',
             'submit': 'filterKeySearch'
         }));
     }
