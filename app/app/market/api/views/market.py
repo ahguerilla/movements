@@ -77,14 +77,14 @@ def getMarketItemLast(request,count,rtype):
 @login_required
 def getMarketItemFromTo(request,sfrom,to,rtype):
     query = createQuery(request)
-    obj = market.models.MarketItem.objects.filter(exp_date__gte=datetime.now()).filter(deleted=False).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
+    obj = market.models.MarketItem.objects.filter(exp_date__gte=datetime.now()).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     return returnItemList(obj, rtype)
 
 
 @login_required
 def getMarketItemCount(request,rtype):
     query = createQuery(request)
-    obj = market.models.MarketItem.objects.filter(exp_date__gte=datetime.now()).filter(deleted=False).filter(query).distinct('id').order_by('-id').count()
+    obj = market.models.MarketItem.objects.filter(exp_date__gte=datetime.now()).filter(query).distinct('id').order_by('-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
 
 
@@ -124,14 +124,14 @@ def userMarketItems(request, rtype):
 @login_required
 def userMarketItemsCount(request,rtype):
     query = createQuery(request)
-    obj = market.models.MarketItem.objects.filter(deleted=False).filter(owner=request.user).filter(query).distinct('id').order_by('-id').count()
+    obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
 
 
 @login_required
 def getUserMarketItemFromTo(request,sfrom,to,rtype):
     query = createQuery(request)
-    obj = market.models.MarketItem.objects.filter(deleted=False).filter(owner=request.user).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
+    obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     return returnItemList(obj, rtype)
 
 
