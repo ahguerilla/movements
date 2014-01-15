@@ -98,19 +98,33 @@
       </div>
     </div>
     <!-- Search -->
-    <div class="row">
-      <div class="input-group col-md-offset-3 col-md-7">
+    <div class="row  market-search-box">
+      <div class="input-group col-md-offset-2 col-md-8">
         <form>
-          <input type="text" class="form-control" id="q" name="q"/>
+          <label class="sr-only" for="q">Search by keyword for offers and requests</label>
+          <input type="text" class="form-control" id="q" name="q" placeholder="Search by keyword for offers and requests" />
           <input type="submit" style="visibility:hidden;position: fixed;"/>
         </form>
         <span class="input-group-addon btn" id="searchbtn">Search</span>
       </div>
     </div>
+    <!-- Market Items -->
+    <div class="row">
+      <div class="col-md-12">
+        <div id="marketitems"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="marketitems pagination"></ul>
+      </div>
+    </div>
+
+
     <!-- Title -->
     <div class="row">
       <div class="col-md-offset-3 col-md-7">
-        <h3>{{title}}</h3>
+        <h3>{{ title }}</h3>
       </div>
     </div>
     <!-- Market -->
@@ -167,6 +181,7 @@
       </div>
       <!-- Items -->
       <div class="col-md-7">
+        <!-- 
         <div class="row">
           <div class="col-md-12">
             <div id="marketitems"></div>
@@ -176,7 +191,7 @@
           <div class="col-md-12">
             <ul class="marketitems pagination"></ul>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- Actions -->
       <div class="col-md-2">
