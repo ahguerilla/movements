@@ -41,7 +41,7 @@
         showItem: function(ev){
             var that = this;
             var id = ev.currentTarget.getAttribute('item_id');
-            $.getJSON(window.ahr.app_urls.getmarketitem+id,function(item){
+            $.getJSON(window.ahr.app_urls.getuseritem+id,function(item){
                 if(item[0].fields.item_type == "request"){
                     that.requestdialog.edit(item);
                     that.requestdialog.showModal();

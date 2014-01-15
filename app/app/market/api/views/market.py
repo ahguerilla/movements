@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 import avatar
 from django.utils.html import escape
+from datetime import datetime
 
 
 def getMarketjson(objs):
@@ -63,27 +64,27 @@ def addMarketItem(request, obj_type, rtype):
 
 @login_required
 def getMarketItem(request,obj_id,rtype):
-    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'), pk=obj_id, deleted=False)
+    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'), pk=obj_id, deleted=False, exp_date__gte=datetime.now())
     return returnItemList([obj], rtype)
 
 
 @login_required
 def getMarketItemLast(request,count,rtype):
-    obj = market.models.MarketItem.objects.filter(deleted=False).order_by('-pub_date').defer('comments')[:count]
+    obj = market.models.MarketItem.objects.filter(exp_date__gte=datetime.now()).filter(deleted=False).order_by('-pub_date').defer('comments')[:count]
     return returnItemList(obj, rtype)
 
 
 @login_required
 def getMarketItemFromTo(request,sfrom,to,rtype):
     query = createQuery(request)
-    obj = market.models.MarketItem.objects.filter(deleted=False).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
+    obj = market.models.MarketItem.objects.filter(exp_date__gte=datetime.now()).filter(deleted=False).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     return returnItemList(obj, rtype)
 
 
 @login_required
 def getMarketItemCount(request,rtype):
     query = createQuery(request)
-    obj = market.models.MarketItem.objects.filter(deleted=False).filter(query).distinct('id').order_by('-id').count()
+    obj = market.models.MarketItem.objects.filter(exp_date__gte=datetime.now()).filter(deleted=False).filter(query).distinct('id').order_by('-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
 
 
@@ -106,6 +107,13 @@ def deleteMarketItem(request,obj_id,rtype):
     obj.deleted = True
     obj.save()
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
+
+
+@login_required
+@check_perms_and_get(market.models.MarketItem)
+def userGetMarketItem(request,obj_id,rtype):
+    return returnItemList([request.obj], rtype)
+
 
 @login_required
 def userMarketItems(request, rtype):
@@ -131,7 +139,7 @@ def getUserMarketItemFromTo(request,sfrom,to,rtype):
 def setRate(request,obj_id,rtype):
     if not request.POST.has_key('score'):
         return HttpResponseError()
-    item = market.models.MarketItem.objects.filter(id=obj_id)[0]
+    item = market.models.MarketItem.filter(exp_date__gte=datetime.now()).objects.filter(id=obj_id)[0]
     owner = request.user
     rate = market.models.ItemRate.objects.filter(owner=owner).filter(item=item)
     if len(rate)==0:

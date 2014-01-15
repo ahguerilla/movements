@@ -44,7 +44,7 @@ def value(atype,objs,**kwargs):
 def check_perms_and_get(object_class):
     def __decorator(view_func):
         def _decorator(request, *args, **kwargs):
-            obj = get_object_or_404(object_class.objects,pk=kwargs['obj_id'])
+            obj = get_object_or_404(object_class.objects, pk=kwargs['obj_id'], deleted=False)
             if request.user != obj.owner:
                 request.obj = None
                 return HttpResponseForbiden()
@@ -53,3 +53,4 @@ def check_perms_and_get(object_class):
             return response
         return wraps(view_func)(_decorator)
     return __decorator
+
