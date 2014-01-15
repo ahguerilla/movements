@@ -118,7 +118,7 @@ urlpatterns = patterns('',
         name="edit_comment"),
 
     url(r'(?P<rtype>\S+)/comment/delete/(?P<obj_id>\d+)$',
-        'app.market.api.views.comments.getComment',
+        'app.market.api.views.comments.deleteComment',
         name="delete_comment"),
 
     url(r'(?P<rtype>\S+)/report/(?P<obj_id>\d+)$',
