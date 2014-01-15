@@ -5,26 +5,41 @@
 {% block head_title %}{% trans "Exchangivist" %}{% endblock %}
 
 {% block content %}
-<div class="hero-text">
-    {% blocktrans %}Exchangivist is an online portal giving activists the tools they need to advance human rights in closed societies around the world.{% endblocktrans %}
-</div>
+
+<div class="row"><div class="col-lg-offset-1 col-lg-10 col-md-12 col-sm-12">
+
+  <div class="hero-text">
+      {% blocktrans %}Exchangivist is an online portal giving activists the tools they need to advance human rights in closed societies around the world.{% endblocktrans %}
+  </div>
+
 
 <div class="row">
-  <div class="col-md-6 col-sm-7 ">
+  <div class="col-lg-5 col-md-6 col-sm-7 ">
     <div class="dialog sign-up-initial">
       <div><h1>{% trans "Sign Up" %}</h1></div>
         <form id="signup_form" action="/home-page-sign" method="GET" class="form-horizontal" role="form">
         <div class="form-group">
           <div class="col-xs-6">
-            <input type="text" class="form-control" name="first_name" placeholder="Firstname">
+            <input type="text" class="form-control" name="first_name" placeholder="First Name">
           </div>
           <div class="col-xs-6">
-            <input type="text" class="form-control" name="last_name" placeholder="Lastname">
+            <input type="text" class="form-control" name="last_name" placeholder="Last Name">
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-12">
-            <input type="email" class="form-control" name="email" placeholder="Email">
+            <input type="email" class="form-control" name="email" placeholder="myname@email.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <input type="password" class="form-control" name="password" placeholder="Password">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12 text-center">
+            <input type="checkbox" name="tnccheckbox" id="tnccheckbox" />
+            <label for="tnccheckbox">I agree to the </label> <a href="{% url 'terms_and_conditions' %}" target="_blank" alt="terms and conditions">Terms &amp; Conditions</a>
           </div>
         </div>
         <div class="form-group">
@@ -38,7 +53,7 @@
       </form>
     </div>
   </div>
-  <div class="col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
+  <div class="col-lg-4 col-lg-offset-3 col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
     <div class="dialog">
       <a href="{% provider_login_url "twitter" %}">
         <img src="{{ STATIC_URL }}images/twitter-24x18.png" alt="Google+"/>
@@ -76,6 +91,8 @@
   </div>
 </div>
 
+
+</div></div>
 {% endblock %}
 
 {% block javascript %}
