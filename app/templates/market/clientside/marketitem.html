@@ -1,8 +1,8 @@
 <script type="text/template" id="item_template">
-  <div class="col-sm-6 col-md-4"  item_id="<%- pk %>" owner_id="<%- ownerid %>">
-    <div class="market-item-card">
+  <div class="col-sm-6 col-md-4">
+    <div class="market-item-card" item_id="<%- pk %>" owner_id="<%- ownerid %>">
       <div class="item-header <%- item_type.toLowerCase() %>">
-        <%- item_type.toUpperCase() %>&nbsp;<span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a> <%-usercore%></span>
+        <%- item_type.toUpperCase() %>&nbsp;<span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a> <span item_id="<%- pk %>"  score="<%-usercore%>" class="numstars"></span> </span>
         <div class="pull-right item-menu" style="position:relative;">
           <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
           <div class="dropdown">
@@ -10,10 +10,10 @@
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
               <% if (ownerid != window.ahr.user_id){ %>
                 <li role="presentation"></li>
-                <li role="presentation"><a item_id="<%- pk %>" owner_id="<%- ownerid %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
-                <li role="presentation"><a item_id="<%- pk %>" owner_id="<%- ownerid %>" class="report_post" role="menuitem" tabindex="-1" href="#">Report post</a></li>
-                <li role="presentation"><a item_id="<%- pk %>" owner_id="<%- ownerid %>" class="rate_user" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
-                <li role="presentation"><a item_id="<%- pk %>" owner_id="<%- ownerid %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
+                <li role="presentation"><a item_id="<%- pk %>" owner="<%- owner %>" owner_id="<%- ownerid %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
+                <li role="presentation"><a item_id="<%- pk %>" class="report_post" role="menuitem" tabindex="-1" href="#">Report post</a></li>
+                <li role="presentation"><a item_id="<%- pk %>" rateing="user" username="<%- owner %>"  score="<%- usercore %>" ratecount="<%- ratecount %>" class="btn rate rate_user" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
+                <li role="presentation"><a item_id="<%- pk %>" owner="<%- owner %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
               <%}%>
               <% if (ownerid == window.ahr.user_id){ %>
                 <li role="presentation"></li>
@@ -25,7 +25,7 @@
       </div>
       <div class="item-title item_container"  item_id="<%- pk %>" owner_id="<%- ownerid %>">
         <div class="item-icon <%- item_type.toLowerCase() %>"></div>
-        <div><%- title %></div>
+        <div class="marketitem_title"><%- title %></div>
       </div>
       <div class="clearfix"></div>
       <div class="item-body"><%- details %></div>

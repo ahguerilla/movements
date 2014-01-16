@@ -132,6 +132,10 @@
         dfrd.done(function(data){
           $(that.evrate.currentTarget).attr('ratecount',data.ratecount);
           $(that.evrate.currentTarget).attr('score',data.score);
+          if(typeof that.callback == 'function'){
+            that.callback(that.evrate.currentTarget.getAttribute('item_id'), data.score);
+          }
+
           $('#ratedialog').modal('hide');
           that.resetrate();
         });
@@ -145,14 +149,15 @@
     },
 
     initialize:function(data){
+      this.callback = data.callback;
       return this;
     }
 
    });
 
     window.ahr.rate_form_dialog = window.ahr.rate_form_dialog|| {};
-    window.ahr.rate_form_dialog.initWidget= function(element){
-        var rate_form_dialog = new RateDialogView({el:element});
+    window.ahr.rate_form_dialog.initWidget= function(element,callback){
+        var rate_form_dialog = new RateDialogView({el:element, callback:callback});
         return rate_form_dialog;
     };
 })();

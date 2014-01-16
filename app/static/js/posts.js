@@ -52,6 +52,10 @@
             });
         },
 
+        afterset: function(){
+            $.noop();
+        },
+
 
         initialize : function(filters){
             var that = this;
