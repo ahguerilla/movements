@@ -47,7 +47,7 @@
                     {% block pm_undelete_button %}
                       <button type="submit" class="btn default-btn btn-xs" onclick="this.form.action='{% url 'postman_undelete' %}'">{% trans "Undelete" %}</button>
                     {% endblock %}
-                  </div> 
+                  </div>
                   {% endblock %}
                   <div class="col-md-12" style="margin-top:10px;">
                     Order By:
@@ -83,32 +83,34 @@
                   <div class="col-md-12">
                     <div class="container-fixed">
                       <div class="message-well">
-                        <div class="col-xs-1">
+                        <div class="col-xs-2 messageavatar">
                           <!-- <input type="checkbox" {% if by_conversation and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %} /> -->
-                          {% avatar message.sender 35 %}
-                          <!-- <img src='/static/images/male200.png' width="30" height="30"/> -->
+                          {% avatar message.sender 70 %}
                         </div>
-                        <div class="col-xs-3">
-                          {% block pm_sender_cell %}
-                            {{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}
-                          {% endblock %}
-                          {% block pm_recipient_cell %}
-                            {{ message.obfuscated_recipient|or_me:user }}
-                            {% if message.count %}
-                              ({{ message.count }})
-                             {% endif %}
-                          {% endblock %}
-                        </div>
-                        <div class="col-xs-5">
-                          {% if message.is_new %}<strong>{% endif %}{% if message.is_replied %}<em>{% endif %}
+                        <div class="col-xs-7">
+                          <div style="margin-left:10px;">
+                            <strong>
+                            {% block pm_sender_cell %}
+                              {{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}
+                            {% endblock %}
+                            {% block pm_recipient_cell %}
+                              {{ message.obfuscated_recipient|or_me:user }}
+                              {% if message.count %}
+                                ({{ message.count }})
+                               {% endif %}
+                            {% endblock %}
+                            </strong><br/>
 
-                          {% block pm_subject %}
-                          <a class="conv_link" href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
-                              {% include "postman/inc_subject_ex.html" %}
-                          </a>
-                          {% endblock %}
+                            {% if message.is_new %}<strong>{% endif %}{% if message.is_replied %}<em>{% endif %}
 
-                          {% if message.is_replied %}</em>{% endif %}{% if message.is_new %}</strong>{% endif %}
+                            {% block pm_subject %}
+                            <a class="conv_link" href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
+                                {% include "postman/inc_subject_ex.html" %}
+                            </a>
+                            {% endblock %}
+
+                            {% if message.is_replied %}</em>{% endif %}{% if message.is_new %}</strong>{% endif %}
+                          </div>
                         </div>
                         <div class="col-xs-3 pull-right">
                           {{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}

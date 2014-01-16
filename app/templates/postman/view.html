@@ -17,7 +17,7 @@
       <hr/>
       {% for message in pm_messages %}
       <div class="row">
-        <div class="col-md-2 pull-left">
+        <div class="col-md-2 pull-left messageavatar">
           {% avatar message.obfuscated_sender %}
         </div>
         <div class="col-md-10 pull-right">
@@ -26,11 +26,11 @@
               <div class="row pm_header">
                 <div class="col-md-12">
                   <!-- <span class="pm_sender">{{ message.obfuscated_sender|or_me:user }}</span> &raquo; -->
-                  <span class="pm_sender"><strong>{{ message.obfuscated_sender }}</strong></span> -
+                  <strong><span class="pm_sender">{{ message.obfuscated_sender }}</span> -
                   <!-- <span class="pm_recipient">{{ message.obfuscated_recipient|or_me:user }}</span> | -->
                   <!-- <span class="pm_recipient">{{ message.obfuscated_recipient }}</span> | -->
                   <!-- <span class="pm_date">{{ message.sent_at|date:"DATETIME_FORMAT"}}</span> -->
-                  <span class="pm_date">{{ message.sent_at|date:"H:m"}}</span>
+                  <span class="pm_date">{{ message.sent_at|date:"H:m"}}</span><span class="pm_date pull-right">{{ message.sent_at|date:"d/m/y"}}</span></strong>
                   {% if message.is_rejected %}
                   <div class="pm_status">{% trans "Rejected" %}{% if message.moderation_reason %}{% trans ":" %} {{ message.moderation_reason }}{% endif %}</div>
                   {% endif %}
