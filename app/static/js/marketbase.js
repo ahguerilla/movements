@@ -96,12 +96,12 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                 var item_html = that.item_tmp(item.fields);
                 $('#marketitems').append(item_html);
             });
-	    
+
             var $container = $('#marketitems');
             $container.masonry({
                 itemSelector: '.market-place-item'
             });
-	    that.afterset();
+            that.afterset();
 
         });
 
