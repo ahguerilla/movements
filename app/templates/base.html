@@ -28,7 +28,7 @@
     {% block extra_head %}
     {% endblock %}
   </head>
-  <body>
+  <body class="{{ body_class }}">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -69,7 +69,9 @@
             </li>
             {% else %}
             <li><a href="{% url 'account_login' %}">Sign In</a></li>
-            <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+              {% if not sign_up %}
+                <li><a href="{% url 'home' %}">Sign Up</a></li>
+              {% endif %}
             {% endif %}
           </ul>
         </div>

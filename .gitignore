@@ -14,3 +14,6 @@ env_*
 *.wpu
 
 test.lite
+
+# PyCharm project files
+.idea

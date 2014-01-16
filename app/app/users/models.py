@@ -79,6 +79,7 @@ class UserProfile(models.Model):
     is_individual = models.BooleanField(_('individual'), default=True)
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
+    vetted_by_ahr = models.BooleanField(_('vetted_by_ahr'), default=False)
     firstlogin = models.BooleanField(_('first_login'), default=True)
     ratecount = models.IntegerField(_('ratecount'),default=0)
     score = models.FloatField(_('score'),default=0)

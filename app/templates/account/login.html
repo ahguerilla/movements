@@ -37,7 +37,10 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-xs-offset-6 col-xs-6">
+          <div class="col-xs-6">
+            Or, <a href="{% url 'home' %}" alt="sign up">sign up</a> for an account.
+          </div>
+          <div class="col-xs-6">
             <button type="submit" class="btn btn-success full-width">{% trans "Sign In" %}</button>
           </div>
         </div>
@@ -51,14 +54,9 @@
   </div>
   <div class="col-md-2">
     {% if socialaccount.providers  %}
-    <div><h4>{% trans "Social Sign In" %}</h4></div>
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+      <div><h4>{% trans "Social Sign In" %}</h4></div>
+      {% include "socialaccount/snippets/provider_list.html" with process="login" %}
     {% endif %}
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-offset-4 col-md-4">
-    <div><p>{% blocktrans with site.name as site_name %}Or, <a href="{{ signup_url }}">sign up</a> for a {{site_name}} account{% endblocktrans %}</p></div>
   </div>
 </div>
 {% endblock %}

@@ -5,6 +5,7 @@ $border-color = #e7e7e7
 $warn-color = #ff0000
 $filter-background = #585F65
 $dialog-bg-color = rgba(255, 255, 255, 0.69)
+$warning-bg-color = rgba(185, 74, 72, 0.69)
 $std-border-radius = 10px
 
 vendor(prop, args)
@@ -42,15 +43,18 @@ box-shadow()
 body
   background-color $bg-color
 
-label
-  font-weight normal
-
 .form-group
   margin-bottom 5px
 
 .btn
   border-radius $std-border-radius  
   color $text-color
+
+.narrow .container
+  max-width 970px
+
+.alert
+  border-radius 15px
 
 /******************************************************************************
  * Site styles
@@ -130,10 +134,20 @@ select.input-extra-height
   .right
     text-align right
 
-.sign-up-initial
+.sign-up-form
   input
     border-radius $std-border-radius
     padding 20px
+  label
+    font-weight normal
+
+.sign-up
+  margin-top 20px
+  .warning
+    padding 15px
+    margin-bottom 20px
+    background-color $warning-bg-color
+    border-radius $std-border-radius
 
 .social-sign-up .dialog
   margin-bottom 10px

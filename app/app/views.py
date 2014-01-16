@@ -7,7 +7,8 @@ from django.shortcuts import render_to_response
 def home(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('exchange'))
-    return render_to_response('ahr/home.html', {}, context_instance=RequestContext(request))
+    view_dict = {'body_class': 'narrow', 'sign_up': True}
+    return render_to_response('ahr/home.html', view_dict, context_instance=RequestContext(request))
 
 
 def terms_and_conditions(request):
