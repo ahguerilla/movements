@@ -12,13 +12,13 @@
 
 {% block endjavascript %}
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    var dfrd = window.ahr.getStatics();
-    dfrd.done(function(){
-      window.ahr.messages.initInbox();
-    });
-  });
-</script>
+	<script type="text/javascript">
+	  $(document).ready(function(){
+	    var dfrd = window.ahr.getStatics();
+	    dfrd.done(function(){
+	      window.ahr.messages.initInbox();
+	    });
+	  });
+	</script>
 
 {% endblock %}
