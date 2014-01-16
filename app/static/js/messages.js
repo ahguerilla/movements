@@ -85,8 +85,13 @@
             if($(window).width()<992 && $('#conversation').css('display') != 'none' && $("#message-col").css('display') != 'none'){
                 $('#conversation').hide();
             }else if ($(window).width()>=992){
+                if($('#conversation').css('display') == 'none'){
+                    $('#conversation').show();
+                    $($('.conv_link')[0]).trigger('click');
+                }
                 $('#conversation').show();
                 $("#message-col").show();
+
             }
 
         },
@@ -96,6 +101,7 @@
             var more = $('.next')[0];
             $(more).html('<button class="btn btn-primary">more...</button>');
             $('#paginationblock').html(more);
+            this.resize();
         }
     });
 
