@@ -1,7 +1,23 @@
 <script type="text/template" id="user-template">
   <div class="market-place-item" item_id="<%- pk %>" >
     <div class="market-item-card user-card" >
-      <div class="item-header user"><%- username %></div>
+      <div class="item-header user">
+        <%- username %>
+
+        <div class="pull-right item-menu" style="position:relative;">
+          <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
+          <div class="dropdown">
+            <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu<%- pk %>" data-toggle="dropdown" />
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
+              <li role="presentation"></li>
+              <li role="presentation"><a username="<%- username %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
+              <li role="presentation"><a username="<%- username %>" class="sendprivatemessageuser" role="menuitem" tabindex="-1" href="#">Private message</a></li>
+              <li role="presentation"><a username="<%- username %>" class="rate" rateing="user" image_src="<%- avatar %>" score="<%- score %>" ratecount="<%- ratecount %>" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
       <div class="item-title item_container">
         <a href="<%- profile_url %>"><img src="<%- avatar %>" alt="<%- username %>" /></a>
         <div>&nbsp;</div>
@@ -10,11 +26,9 @@
       </div>
       <div class="clearfix"></div>
       <div class="item-body"><%- bio %></div>
-
       <div class="item-title">
         <div>Specialities</div>
       </div>
-
       <div class="item-tags">
         <div>
           <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
