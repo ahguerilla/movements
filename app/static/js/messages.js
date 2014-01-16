@@ -69,9 +69,9 @@
         },
 
         resize:function(ev){
-            if($(window).width()<992){
+            if($(window).width()<992 && $('#conversation').css('display') != 'none' && $("#message-col").css('display') != 'none'){
                 $('#conversation').hide();
-            }else{
+            }else if ($(window).width()>=992){
                 $('#conversation').show();
                 $("#message-col").show();
             }
