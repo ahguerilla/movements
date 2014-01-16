@@ -25,6 +25,9 @@ def getUserDict(userprofile):
     adict['fields']['ratecount'] = userprofile.ratecount
     adict['fields']['score'] = userprofile.score
     adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[userprofile.user.username])
+    adict['fields']['issues']= [ob.id for ob in userprofile.issues.all()]
+    adict['fields']['countries']= [ob.id for ob in userprofile.countries.all()]
+    adict['fields']['skills']= [ob.id for ob in userprofile.skills.all()]
     return adict
 
 

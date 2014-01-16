@@ -1,4 +1,33 @@
 <script type="text/template" id="user-template">
+  <div class="market-place-item" item_id="<%- pk %>" >
+    <div class="market-item-card user-card" >
+      <div class="item-header user"><%- username %></div>
+      <div class="item-title item_container">
+        <a href="<%- profile_url %>"><img src="<%- avatar %>" alt="<%- username %>" /></a>
+        <div>&nbsp;</div>
+        <div item_id="<%- pk %>"  score="<%- score %>" class="numstars"></div>
+        <div class="marketitem_title"><%- tag_line %></div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="item-body"><%- bio %></div>
+
+      <div class="item-title">
+        <div>Specialities</div>
+      </div>
+
+      <div class="item-tags">
+        <div>
+          <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
+          <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
+          <% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+
+<script type="text/template" id="user-template-prev">
 
   <div class="row" item_id="<%- pk %>">
     <div class="col-md-12">
