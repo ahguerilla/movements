@@ -7,7 +7,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     itemCount: 0,
     currentItem: 0,
     allItemsLoaded: false,
-    itemsPerCall: 6,
+    itemsPerCall: 15,
 
 
     create_request: function(){
