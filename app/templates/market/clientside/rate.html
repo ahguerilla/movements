@@ -1,3 +1,5 @@
+{% load avatar_tags %}
+
 <div id="ratedialog" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -10,7 +12,8 @@
         <div class="row">
 
           <div class="pull-left col-lg-offset-1">
-            <img id="profileimage" src="/static/images/male200.png"/>
+            <!-- <img id="profileimage" src="/static/images/male200.png"/> -->
+            {% avatar message.sender 100 %}
           </div>
 
           <div class="pull-left col-lg-offset-1">

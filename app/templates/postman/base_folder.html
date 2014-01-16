@@ -16,7 +16,7 @@
 
 {% block content %}
 <div class="row" id="postman">
-  <div class="col-md-offset-1 col-md-10">
+  <div class="col-md-12">
     <div class="row">
       <div class="col-md-12">
         <h3>{% block pm_folder_title %}{% endblock %}</h3>
@@ -30,12 +30,12 @@
       {% if pm_messages %}
       <form action="{% block pm_form_action %}{% endblock %}" method="post">{% csrf_token %}
         <div id="pm_messages">
-          <div class="col-md-5">
+          <div class="col-md-5" id="message-col">
             <div class="panel panel-default panel-sm">
 
-              <div class="panel-heading">
+              <!-- <div class="panel-heading">
                 {% block pm_form_buttons %}
-                <div class="row">
+                 <div class="row">
                   <div class="col-md-12" id="pm_buttons">
                     Actions:
                     {% block pm_delete_button %}
@@ -47,7 +47,7 @@
                     {% block pm_undelete_button %}
                       <button type="submit" class="btn default-btn btn-xs" onclick="this.form.action='{% url 'postman_undelete' %}'">{% trans "Undelete" %}</button>
                     {% endblock %}
-                  </div>
+                  </div> 
                   {% endblock %}
                   <div class="col-md-12" style="margin-top:10px;">
                     Order By:
@@ -61,7 +61,7 @@
                     <div class="btn btn-xs default-btn"><a href="{% postman_order_by date %}">{% block pm_date %}{% trans "Date" %}{% endblock %}</a></div>
                   </div>
                   {% block pm_by_modes %}
-                  <div id="pm_by_modes" style="margin-top:10px;">
+                   <div id="pm_by_modes" style="margin-top:10px;">
                     <div class="col-md-12 pm_by_mode">
                     List by:
                     {% if by_message %}
@@ -76,41 +76,43 @@
                   </div>
                   {% endblock pm_by_modes %}
                 </div>
-              </div>
-              <div class="panel-body">
+              </div> -->
+              <div _class="panel-body">
                 <div class="row">
                   {% for message in pm_messages %}
                   <div class="col-md-12">
-                    <div class="row message-well">
-                      <div class="col-md-2">
-                        <input type="checkbox" {% if by_conversation and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %} />
-                        {# avatar message.sender 30 #}
-                        <img src='/static/images/male200.png' width="30" height="30"/>
-                      </div>
-                      <div class="col-md-2">
-                        {% block pm_sender_cell %}
-                          {{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}
-                        {% endblock %}
-                        {% block pm_recipient_cell %}
-                          {{ message.obfuscated_recipient|or_me:user }}
-                          {% if message.count %}
-                            ({{ message.count }})
-                           {% endif %}
-                        {% endblock %}
-                      </div>
-                      <div class="col-md-6">
-                        {% if message.is_new %}<strong>{% endif %}{% if message.is_replied %}<em>{% endif %}
+                    <div class="container-fixed">
+                      <div class="message-well">
+                        <div class="col-xs-1">
+                          <!-- <input type="checkbox" {% if by_conversation and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %} /> -->
+                          {% avatar message.sender 35 %}
+                          <!-- <img src='/static/images/male200.png' width="30" height="30"/> -->
+                        </div>
+                        <div class="col-xs-3">
+                          {% block pm_sender_cell %}
+                            {{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}
+                          {% endblock %}
+                          {% block pm_recipient_cell %}
+                            {{ message.obfuscated_recipient|or_me:user }}
+                            {% if message.count %}
+                              ({{ message.count }})
+                             {% endif %}
+                          {% endblock %}
+                        </div>
+                        <div class="col-xs-5">
+                          {% if message.is_new %}<strong>{% endif %}{% if message.is_replied %}<em>{% endif %}
 
-                        {% block pm_subject %}
-                        <a class="conv_link" href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
-                            {% include "postman/inc_subject_ex.html" %}
-                        </a>
-                        {% endblock %}
+                          {% block pm_subject %}
+                          <a class="conv_link" href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
+                              {% include "postman/inc_subject_ex.html" %}
+                          </a>
+                          {% endblock %}
 
-                        {% if message.is_replied %}</em>{% endif %}{% if message.is_new %}</strong>{% endif %}
-                      </div>
-                      <div class="col-md-2 pull-right align-right">
-                        {{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}
+                          {% if message.is_replied %}</em>{% endif %}{% if message.is_new %}</strong>{% endif %}
+                        </div>
+                        <div class="col-xs-3 pull-right">
+                          {{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -118,15 +120,17 @@
                 </div>
               </div>
             </div>
+            {% paginate %}
           </div>
           <div class="col-md-7">
-            <div class="row">
+            <div class="row" style="border: 1px solid #D8DCDD;">
+              <a id="convst"></a>
               <div class="col-md-12" id="conversation"></div>
             </div>
           </div>
         </div>
       </form>
-      {% paginate %}
+
       {% else %}
         <div class="col-md-12">
           <p>{% trans "No messages." %}</p>

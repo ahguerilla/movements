@@ -7,6 +7,8 @@
         $('.message-counter').each(function(tmp,item){
           if(data>0){
              $('#msgcntr',$(item)).text('('+data+')');
+          }else{
+            $('#msgcntr',$(item)).text('');
           }
         });
       });

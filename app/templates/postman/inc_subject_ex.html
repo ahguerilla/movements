@@ -25,9 +25,9 @@ With subject: "a great interest":
 {% with message.subject|truncatewords:5 as truncated_subject %}
 	{{ truncated_subject }}
 	{% with truncated_subject|wordcount as subject_wc %}
-		{% with 12|sub:subject_wc as wc %}
+		{% with 2|sub:subject_wc as wc %}
 		{% if message.body and wc > 0 %}
-		 	- <span style="color: grey">{{ message.body|truncatewords:wc }}</span>
+		 	<!-- - <span style="color: grey">{{ message.body|truncatewords:wc }}</span> -->
 		{% endif %}
 	{% endwith %}
 	{% endwith %}
