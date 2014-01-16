@@ -16,8 +16,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary send">Send</button>
+        <button type="button" class="btn btn-default cancel cancelreport" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary send sendreport">Send</button>
       </div>
     </div>
   </div>
@@ -29,12 +29,12 @@
  (function(){
     var reportWidget = window.ahr.BaseView.extend({
         events:{
-          '#reportdialog .send' : 'sendreport',
-          '#reportdialog .cancel' : 'cancelreport',
+          'click .sendreport' : 'sendreport',
+          'click .cancelreport' : 'cancelreport',
           'click .report_post' : 'showreport'
         },
 
-        showreport: function(){
+        showreport: function(ev){
           var that = this;
           var item_id = ev.currentTarget.getAttribute('item_id');
           this.showModalDialog('#report_template', {}, '#reportdialog', function(){
@@ -42,7 +42,7 @@
           });
         },
 
-        sendreport: function(item_id){
+        sendreport: function(){
           var that = this;
           window.ahr.getcsrf(function(csrf){
             if(csrf==false){
@@ -70,12 +70,10 @@
                 }
               });
             });
-          });
         },
 
         initialize: function(data){
             var that = this;
-            that.item_id = data.item_id;
         }
     });
     window.ahr.report_dialog = window.ahr.report_dialog || {};

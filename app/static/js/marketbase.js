@@ -232,6 +232,16 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $(".numstars[item_id="+item_id+"]").rateit('value',rate);
     },
 
+    recommend: function(ev){
+        var title = ev.currentTarget.getAttribute('title');
+        $('#recsub').val($('#currentusername').text()+' recommends :'+ title);
+        $('#recsub').attr('readonly',true);
+        var href = '<a href="'+window.location+'">'+ title +'</a>';
+        $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at this post by '+ ev.currentTarget.getAttribute('owner')+' \r\n'+ href );
+        $('#touser').val('');
+        $('#recommenddialog').modal('show');
+    },
+
 
     init: function(filters){
         this.default_filters = window.ahr.clone(filters);
@@ -240,7 +250,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
         this.message_widget = window.ahr.messagedialog_widget.initWidget('#'+this.el.id, '#infobar');
         this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id, this.resetitemrate);
-        this.report_dialog = window.ahr.report_dialog.initWidget('#'+this.el.id )
+        this.report_dialog = window.ahr.report_dialog.initWidget('body');
+        this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
 
         this.filters = filters;
         this.initTemplates(filters);
@@ -256,6 +267,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'click #create_request': 'create_request',
             'click .itemactions' : 'show_dropdown',
             'click .private_message' : 'private_message',
+            'click .recommend': 'recommend',
             'submit': 'filterKeySearch'
         }));
     }
