@@ -78,7 +78,7 @@
                 </div>
               </div> -->
               <div _class="panel-body">
-                <div class="row">
+                <div class="row messagelist">
                   {% for message in pm_messages %}
                   <div class="col-md-12">
                     <div class="container-fixed">
@@ -122,7 +122,9 @@
                 </div>
               </div>
             </div>
+            <div id="paginationblock">
             {% paginate %}
+            </div>
           </div>
           <div class="col-md-7">
             <div class="row" style="border: 1px solid #D8DCDD;">

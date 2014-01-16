@@ -16,11 +16,24 @@
         el: '#pm_messages',
         events:{
             'click .conv_link': 'openConv',
-            'click #back': 'back'
+            'click #back': 'back',
+            'click .next': 'addNext'
+        },
+
+        addNext:function(ev){
+            ev.preventDefault();
+            var dfrd = $.ajax({url: ev.currentTarget.href});
+            dfrd.done(function(data){
+                if(  $('.next',$(data)).hasClass('disabled') ){
+                    $('#paginationblock').remove();
+                }
+                $('.messagelist').append($('.messagelist',$(data)));
+            });
         },
 
         reply: function(ev){
-            ev.reventDefault()
+            ev.reventDefault();
+            return false;
         },
 
         openConv: function(ev){
@@ -72,15 +85,23 @@
             if($(window).width()<992 && $('#conversation').css('display') != 'none' && $("#message-col").css('display') != 'none'){
                 $('#conversation').hide();
             }else if ($(window).width()>=992){
+                if($('#conversation').css('display') == 'none'){
+                    $('#conversation').show();
+                    $($('.conv_link')[0]).trigger('click');
+                }
                 $('#conversation').show();
                 $("#message-col").show();
+
             }
 
         },
 
         initialize: function(){
             $(window).resize(this.resize);
-            $.noop();
+            var more = $('.next')[0];
+            $(more).html('<button class="btn btn-primary">more...</button>');
+            $('#paginationblock').html(more);
+            this.resize();
         }
     });
 
