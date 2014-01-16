@@ -94,7 +94,7 @@
         initialize: function(){
             $(window).resize(this.resize);
             var more = $('.next')[0];
-            $(more).text('more...')
+            $(more).html('<button class="btn btn-primary">more...</button>');
             $('#paginationblock').html(more);
         }
     });
