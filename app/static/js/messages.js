@@ -16,11 +16,24 @@
         el: '#pm_messages',
         events:{
             'click .conv_link': 'openConv',
-            'click #back': 'back'
+            'click #back': 'back',
+            'click .next': 'addNext'
+        },
+
+        addNext:function(ev){
+            ev.preventDefault();
+            var dfrd = $.ajax({url: ev.currentTarget.href});
+            dfrd.done(function(data){
+                if(  $('.next',$(data)).hasClass('disabled') ){
+                    $('#paginationblock').remove();
+                }
+                $('.messagelist').append($('.messagelist',$(data)));
+            });
         },
 
         reply: function(ev){
-            ev.reventDefault()
+            ev.reventDefault();
+            return false;
         },
 
         openConv: function(ev){
@@ -80,7 +93,9 @@
 
         initialize: function(){
             $(window).resize(this.resize);
-            $.noop();
+            var more = $('.next')[0];
+            $(more).text('more...')
+            $('#paginationblock').html(more);
         }
     });
 
