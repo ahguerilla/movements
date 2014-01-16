@@ -1,21 +1,15 @@
 (function(){
     var PosttRoute = Backbone.Router.extend({
         routes:{
-            "": "page",
-            "p:page": "page"
+            "": "page"
         },
 
         page: function(page){
-            if(page){
-                $('#marketitems').empty();
-                this.posts.setItems(parseInt(page)-1);
-            }else{
-                this.posts.setItems(0);
-            }
+            this.posts.initInfiniteScroll();
         },
 
         initialize: function(posts){
-            this.posts=posts;
+            this.posts = posts;
         }
     });
 
@@ -25,7 +19,7 @@
         showItem: function(ev){
             var that = this;
             var id = ev.currentTarget.getAttribute('item_id');
-            $.getJSON(window.ahr.app_urls.getmarketitem+id,function(item){
+            $.getJSON(window.ahr.app_urls.getuseritem+id,function(item){
                 if(item[0].fields.item_type == "request"){
                     that.requestdialog.edit(item);
                     that.requestdialog.showModal();
@@ -34,6 +28,10 @@
                     that.offerdialog.showModal();
                 }
             });
+        },
+
+        afterset: function(){
+            $.noop();
         },
 
 

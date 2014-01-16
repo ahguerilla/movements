@@ -8,7 +8,7 @@
 {% include "market/clientside/typetag.html" %}
 
 <div class="row">
-  <div id="market" class="col-md-12">
+  <div id="market" class="col-md-12 {{init}}">
     <div id="infobar"></div>
 
     {% include "market/clientside/expdate.html"%}
@@ -20,6 +20,7 @@
     {% include "market/clientside/messagedialog.html" %}
     {% include "market/clientside/recommenddialog.html" %}
     {% include "market/clientside/rate.html" %}
+    {% include "market/clientside/report.html" %}
     {% include "market/clientside/offer_form.html"%}
     {% include "market/clientside/request_form.html"%}
 
@@ -28,9 +29,9 @@
       <div class="col-md-12 exchange-banner">
         <div class="row">
           <div class="col-md-offset-6 col-md-4">
-            <h1>My Exchange</h1>
+            <h1>{{ title }}</h1>
             <hr class="hr-no-margin" />
-            <div class="message-text">By allowing anyone in the world to offer their skills to those who are working to make a difference in the darkest places on earth, the Exchangivist platform has the potential to change the work of human rights forever. Whether you're a reporter on the ground, an activist working from the diaspora, or a professional with skills to contribute, you can sign up to be an Exchangivist now.</div>
+            <div class="message-text">{% include help_text_template %}</div>
           </div>
           <div class="col-md-2">
             <div class="market-action-wrap">
@@ -98,25 +99,27 @@
       </div>
     </div>
     <!-- Search -->
-    <div class="row">
-      <div class="input-group col-md-offset-3 col-md-7">
+    <div class="row  market-search-box">
+      <div class="input-group col-md-offset-2 col-md-8">
         <form>
-          <input type="text" class="form-control" id="q" name="q"/>
+          <label class="sr-only" for="q">Search by keyword for offers and requests</label>
+          <input type="text" class="form-control" id="q" name="q" placeholder="Search by keyword for offers and requests" />
           <input type="submit" style="visibility:hidden;position: fixed;"/>
         </form>
         <span class="input-group-addon btn" id="searchbtn">Search</span>
       </div>
     </div>
-    <!-- Title -->
+    <!-- Market Items -->
     <div class="row">
-      <div class="col-md-offset-3 col-md-7">
-        <h3>{{title}}</h3>
+      <div class="col-md-12">
+        <div id="marketitems"></div>
       </div>
     </div>
+
     <!-- Market -->
-    <div class="row">
+<!--     <div class="row"> -->
       <!-- Filters -->
-      <div class="col-md-3">
+<!--       <div class="col-md-3">
         <div class="panel panel-default center-content">
           <div class="panel-heading">
             <h3 class="panel-title">FILTER BY</h3>
@@ -164,58 +167,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- Items -->
-      <div class="col-md-7">
-        <div class="row">
-          <div class="col-md-12">
-            <div id="marketitems"></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <ul class="marketitems pagination"></ul>
-          </div>
-        </div>
-      </div>
-      <!-- Actions -->
-      <div class="col-md-2">
-        <div class="row">
-          <div class="col-md-12 small">
-              <h4> How it works</h4>
-              {% block how_it_works %}
-              <p>Nulla pretium tempus ante in pharetra. Maecenas eleifend rhoncus congue.
-              Sed eu massa eros. Suspendisse potenti. Quisque elementum nibh ligula, sed varius magna mollis pulvinar.
-              Aliquam ipsum sapien, vehicula ac nunc nec, volutpat elementum arcu. Duis at pellentesque sapien.</p>
-              {% endblock %}
-          </div>
-        </div>
-        
-        <!--
-        <div class="row">
-          <div class="col-md-12 small">
-            <button id="create_offer" type="button" class="btn btn-default btn-sm btn-block">
-                <a href="#" >Create an offer</a>
-            </button>
-            <button id="create_request" type="button" class="btn btn-default btn-sm btn-block">
-                <a href="#"  >Create an request</a>
-            </button>
-          </div>
-        </div>
-        -->
-
-        <!--
-        <div class="row"> &nbsp;</div>
-        <div class="row">
-          <div class="col-md-12 small">
-            <button type="button" class="btn btn-default btn-sm btn-block">
-                <a href="#" onclick="window.location = window.ahr.app_urls.getitemform.replace('offer','resource');">Share a resource</a>
-            </button>
-          </div>
-        </div>
-        -->
-      </div>
-    </div>
+      </div> -->
+<!--     </div> -->
   </div>
 </div>
 {% endblock %}
@@ -236,6 +189,7 @@
             }
         });
     });
+
 
     </script>
 

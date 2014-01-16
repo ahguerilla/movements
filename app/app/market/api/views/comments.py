@@ -4,21 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 import json
 from app.market.api.utils import *
-from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-
-
-def createCommentDict(comment):
-    adict={'fields':{}}
-    adict['fields']['pub_date'] = str(comment.pub_date)
-    adict['fields']['contents'] = comment.contents
-    adict['pk'] = comment.pk
-    adict['fields']['owner'] = comment.owner.id
-    adict['fields']['avatar'] = '/static/images/male200.png'
-    #reverse('avatar_render_primary', args=[comment.owner.username,80])
-    adict['fields']['username'] = comment.owner.username
-    adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[comment.owner.username])
-    return adict
 
 
 def saveComment(form, owner,item):
@@ -39,7 +25,7 @@ def addComment(request, obj_id, rtype):
     form = commentForm(request.POST)
     if form.is_valid():
         obj = saveComment(form,request.user,obj)
-        return HttpResponse(json.dumps({ 'success' : True, 'obj': createCommentDict(obj) }), mimetype="application"+rtype)
+        return HttpResponse(json.dumps({ 'success' : True, 'obj': obj.getdict() }), mimetype="application"+rtype)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
 
@@ -61,21 +47,21 @@ def getCommentIdsRange(request, obj_id,st_date, end_date, rtype):
 
 @login_required
 def getComment(request, obj_id, rtype):
-    obj = get_object_or_404(market.models.Comment, pk=obj_id)
+    obj = get_object_or_404(market.models.Comment, pk=obj_id, deleted=False)
     return HttpResponse(value(rtype,[obj]), mimetype="application"+rtype)
 
 
 @login_required
 def getComments(request,obj_id,count,rtype):
     obj = get_object_or_404(market.models.MarketItem, pk=obj_id)
-    comments = obj.comments.filter(published=True).order_by('-pub_date').all()[:count]
-    return HttpResponse(json.dumps([createCommentDict(c) for c in comments]),
+    comments = obj.comments.filter(deleted=False).filter(published=True).order_by('-pub_date').all()[:count]
+    return HttpResponse(json.dumps([c.getdict() for c in comments]),
                         mimetype="application"+rtype)
 
 
 @login_required
 def editComment(request,obj_id, rtype):
-    obj = get_object_or_404(market.models.Comment, pk=obj_id)
+    obj = get_object_or_404(market.models.Comment, pk=obj_id, deleted=False)
     form = commentForm(request.POST, instance=obj)
     if form.is_valid():
         saveComment(form,request.user,None)
@@ -86,5 +72,11 @@ def editComment(request,obj_id, rtype):
 
 
 @login_required
+@check_perms_and_get(market.models.Comment)
 def deleteComment(request, obj_id, rtype):
-    pass
+    obj = request.obj
+    obj.deleted = True
+    obj.item.commentcount -= 1
+    obj.item.save()
+    obj.save_base()
+    return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)

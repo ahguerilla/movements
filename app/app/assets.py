@@ -17,6 +17,7 @@ js = Bundle(
         './js/lib/jquery.blockUI.js',
         './js/lib/jstz.js',
         './js/lib/jquery.backstretch.min.js',
+        './js/lib/masonry.pkgd.js',
         './js/app_common.js',
         './js/base.js',
         './js/item_form_base.js',

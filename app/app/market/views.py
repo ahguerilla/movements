@@ -18,6 +18,7 @@ def index(request):
     return render_to_response('market/market.html',
                               {
                                   'title':'My Exchange',
+                                  'help_text_template': 'market/copy/market_help.html',
                                   'init': 'market',
                                   'tags': getUserTags(request.user)
                                   },
@@ -28,7 +29,8 @@ def index(request):
 def users(request):
     return render_to_response('market/market.html',
                               {
-                                  'title':'Users',
+                                  'title':'Exchangivists',
+                                  'help_text_template': 'market/copy/user_help.html',
                                   'init': 'users',
                                   'tags': getUserTags(request.user)
                                   },
@@ -40,6 +42,7 @@ def posts(request):
     return render_to_response('market/market.html',
                               {
                                   'title':'My Posts',
+                                  'help_text_template': 'market/copy/myposts_help.html',
                                   'init': 'posts',
                                   'tags': getUserTags(request.user)
                                   },

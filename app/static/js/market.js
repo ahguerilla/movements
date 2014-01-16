@@ -2,17 +2,11 @@
 
     var MarketRoute = Backbone.Router.extend({
         routes:{
-            "": "page",
-            "p:page": "page"
+            "": "page"
         },
 
-        page: function(page){
-            if(page){
-                $('#marketitems').empty();
-                this.market.setItems(parseInt(page, 10)-1);
-            }else{
-                this.market.setItems(0);
-            }
+        page: function(){
+            this.market.initInfiniteScroll();
         },
 
         initialize: function(market){

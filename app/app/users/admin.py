@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from app.users.models import UserProfile
+from app.users.models import UserProfile, Countries, Skills, Issues
+
 
 
 class UserProfileInline(admin.StackedInline):
@@ -16,3 +17,6 @@ class UserAdmin(UserAdmin):
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+admin.site.register(Countries, admin.ModelAdmin)
+admin.site.register(Skills, admin.ModelAdmin)
+admin.site.register(Issues, admin.ModelAdmin)

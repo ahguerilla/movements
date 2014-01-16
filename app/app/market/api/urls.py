@@ -73,6 +73,10 @@ urlpatterns = patterns('',
         'app.market.api.views.market.userMarketItemsCount',
         name="user_items_count"),
 
+    url(r'(?P<rtype>\S+)/useritem/get/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.userGetMarketItem',
+        name="user_get_marketitem"),
+
     url(r'(?P<rtype>\S+)/item/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
         'app.market.api.views.market.getMarketItemFromTo',
         name="get_marketitems_fromto"),
@@ -118,7 +122,7 @@ urlpatterns = patterns('',
         name="edit_comment"),
 
     url(r'(?P<rtype>\S+)/comment/delete/(?P<obj_id>\d+)$',
-        'app.market.api.views.comments.getComment',
+        'app.market.api.views.comments.deleteComment',
         name="delete_comment"),
 
     url(r'(?P<rtype>\S+)/report/(?P<obj_id>\d+)$',
