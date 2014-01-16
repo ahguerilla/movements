@@ -1,5 +1,5 @@
 <script type="text/template" id="item_template">
-  <div class="col-sm-6 col-md-4">
+  <div class="col-sm-6 col-md-4 item-wrap" item_id="<%- pk %>" owner_id="<%- ownerid %>">
     <div class="market-item-card" item_id="<%- pk %>" owner_id="<%- ownerid %>">
       <div class="item-header <%- item_type.toLowerCase() %>">
         <%- item_type.toUpperCase() %>&nbsp;<span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a> <span item_id="<%- pk %>"  score="<%-usercore%>" class="numstars"></span> </span>
@@ -10,20 +10,20 @@
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
               <% if (ownerid != window.ahr.user_id){ %>
                 <li role="presentation"></li>
-                <li role="presentation"><a item_id="<%- pk %>" owner="<%- owner %>" owner_id="<%- ownerid %>" title="<%- title %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
+                <li role="presentation"><a owner="<%- owner %>" title="<%- title %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" class="report_post" role="menuitem" tabindex="-1" href="#">Report post</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" rateing="user" username="<%- owner %>"  score="<%- usercore %>" ratecount="<%- ratecount %>" class="btn rate rate_user" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" owner="<%- owner %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
               <%}%>
               <% if (ownerid == window.ahr.user_id){ %>
                 <li role="presentation"></li>
-                <li role="presentation"><a item_id="<%- pk %>" owner_id="<%- ownerid %>" class="delete" role="menuitem" tabindex="-1" href="#">Delete</a></li>
+                <li role="presentation"><a item_id="<%- pk %>" class="delete" role="menuitem" tabindex="-1" href="#">Delete</a></li>
               <%}%>
             </ul>
           </div>
         </div>
       </div>
-      <div class="item-title item_container"  item_id="<%- pk %>" owner_id="<%- ownerid %>">
+      <div class="item-title item_container" item_id="<%- pk %>" owner_id="<%- ownerid %>">
         <div class="item-icon <%- item_type.toLowerCase() %>"></div>
         <div class="marketitem_title"><%- title %></div>
       </div>
@@ -39,41 +39,4 @@
       </div>
     </div>
   </div>
-</script>
-
-
-<script type="text/template" id="item_template_prev">
-
-  <div class="row item_container" item_id="<%- pk %>">
-    <div class="col-md-12">
-      <div class="well well-sm">
-        <div class="row">
-          <div class="col-md-12">
-            <div item_id="<%- pk %>" class="delete-item  pull-left"><strong>X</strong></div>
-            <div class="pull-right"><strong><%- item_type.toUpperCase() %></strong></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12"><h4><%- title %></h4></div>
-        </div>
-        <div class="row" style="margin-bottom: 10px;">
-          <div class="item-header" style="margin-left:15px;margin-bottom:10px;">
-            <!-- TODO: Remove hardcoded path -->
-            <div class="item-user">By <strong><a href="/user/profile/<%- owner %>"><%- owner %></a></strong></div>
-            <div class="item-pub-date"><%- moment(pub_date).format("D MMM YYYY") %></div>
-          </div>
-          <div class="item-contents col-md-12"><%- details %></div>
-        </div>
-        <div class="row">
-          <div class="col-md-2"><%- commentcount %> Comments</div>
-          <div class="col-md-10">Tags:
-            <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
-            <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
-            <% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </script>

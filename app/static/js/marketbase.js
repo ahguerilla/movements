@@ -218,7 +218,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         ev.preventDefault();
         var item_id = ev.currentTarget.getAttribute('item_id');
         $('#dropdownMenu'+item_id).trigger('click');
-        return(false);
+        return false;
     },
 
     private_message: function(ev){
@@ -242,6 +242,20 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('#recommenddialog').modal('show');
     },
 
+    deleteItem: function(ev){
+        var that = this;
+        if(confirm('Are you sure you want to delete this item?')){
+            var item_id = ev.currentTarget.getAttribute('item_id');
+            var dfrd = $.ajax({
+                url:window.ahr.app_urls.deletemarketitem+item_id,
+            });
+            dfrd.done(function(data){
+                that.alert('Item deleted','#infobar');
+                $(".item-wrap[item_id='"+ item_id + "']").remove();
+            });
+        }
+        return(false);
+    },
 
     init: function(filters){
         this.default_filters = window.ahr.clone(filters);
@@ -268,6 +282,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'click .itemactions' : 'show_dropdown',
             'click .private_message' : 'private_message',
             'click .recommend': 'recommend',
+            'click .delete' : 'deleteItem',
             'submit': 'filterKeySearch'
         }));
     }
