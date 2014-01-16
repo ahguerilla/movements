@@ -2,17 +2,11 @@
 
     var UserRoute = Backbone.Router.extend({
         routes:{
-            "": "page",
-            "p:page": "page"
+            "": "page"
         },
 
         page: function(page){
-            if(page){
-                $('#marketitems').empty();
-                this.users.setItems(parseInt(page, 10)-1);
-            }else{
-                this.users.setItems(0);
-            }
+            this.users.initInfiniteScroll();
         },
 
         initialize: function(users){
@@ -45,7 +39,7 @@
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
             this.viewurl = window.ahr.app_urls.viewuserprofile;
             this.item_tmp = _.template($('#user-template').html());
-            this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id)
+            this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id);
             this.message_widget = window.ahr.messagedialog_widget.initWidget('#'+this.el.id,'#infobar');
 
             filters.types=["activist", "readytohelp"];

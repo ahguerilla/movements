@@ -1,21 +1,15 @@
 (function(){
     var PosttRoute = Backbone.Router.extend({
         routes:{
-            "": "page",
-            "p:page": "page"
+            "": "page"
         },
 
         page: function(page){
-            if(page){
-                $('#marketitems').empty();
-                this.posts.setItems(parseInt(page)-1);
-            }else{
-                this.posts.setItems(0);
-            }
+            this.posts.initInfiniteScroll();
         },
 
         initialize: function(posts){
-            this.posts=posts;
+            this.posts = posts;
         }
     });
 
