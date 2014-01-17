@@ -1,0 +1,77 @@
+<script type="text/template" id="datepicker_template">
+    <label for="<%- field %>"><%- title %></label>
+    <div class='input-group date' id='datepicker-<%- field %>'>
+      <input type='text' id="<%- field%>"  name="<%- field %>" class="form-control input-sm" required="true" />
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+  </div>
+ <div class="<%- field %> error"></div>
+</script>
+
+
+<script type="text/javascript" id="datepicker_view">
+ (function(){
+    var DatePickerWidget = window.ahr.BaseView.extend({
+        getval: function(){
+            return this.widget.val()+ ' 23:59';
+        },
+
+        setDatePicker: function(preval){
+            if(preval){
+                this.widget.val(preval.slice(8,10)+'/'+
+                    preval.slice(5,7)+'/'+
+                    preval.slice(0,4)
+                );
+            }
+        },
+
+        disable:function(){
+            this.widget.attr('readonly',true);
+            try{
+                this.picker.destroy();
+            }catch(err){$.noop();}
+        },
+
+        enable: function(){
+            this.widget.attr('readonly',false);
+            this.widget.datetimepicker({format:'D/M/YYYY',startDate: Date(), pickTime:false,maskInput:false});
+            this.setPicker();
+        },
+
+        change: function(value){
+            this.setDatePicker(value);
+        },
+
+        setPicker: function(){
+            this.picker = this.widget.data('DateTimePicker');
+        },
+
+        initialize: function(data){
+            var that = this;
+            that.container = data.el;
+            that.options = data.options;
+            that.field = data.options.jsonfield;
+            var tmpl = _.template($('#datepicker_template').html());
+            var html = tmpl({
+                title: that.options.title,
+                field: that.options.jsonfield,
+                placeholder: that.options.placeholder
+                });
+            $(that.container).html(html);
+            that.widget = $('#'+that.field,$(that.container));
+            if(data.preval){
+                 that.widget.val(data.preval);
+            }
+            this.widget.datetimepicker({format:'D/M/YYYY',startDate: Date(), pickTime:false,maskInput:false});
+            this.setPicker();
+        }
+    });
+    window.ahr.datepicker_widget = window.ahr.datepicker_widget || {};
+    window.ahr.datepicker_widget.initWidget= function(container,options,preval){
+        var widget = new DatePickerWidget({el:container,'options':options,'preval':preval});
+        return widget;
+    };
+})();
+</script>

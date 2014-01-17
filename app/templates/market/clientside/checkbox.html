@@ -1,0 +1,59 @@
+<script type="text/template" id="checkbox_template">
+    <label for="<%- field %>"> <input type="checkbox"  id="<%- field %>" name="<%- field %>"/> <%- title %> </label>
+</script>
+
+<script type="text/javascript" id="checkbox_view">
+ (function(){
+    var checkboxWidget = window.ahr.BaseView.extend({
+        events:{},
+
+        empty: function(){
+            this.change(false);
+        },
+
+        change: function(value){
+            this.widget.prop('checked',value);
+        },
+
+        getval: function(){
+            return this.widget.prop('checked');
+        },
+
+        callback: function(){
+            func = _.bind(this.options.callback, this.options.context);
+            func();
+        },
+
+        initialize: function(data){
+            var that = this;
+            that.container = data.el;
+            that.options = data.options;
+            that.field = data.options.field;
+            var tmpl = _.template($('#checkbox_template').html());
+
+            var html = tmpl({
+                title:that.options.title,
+                field: that.field,
+                });
+            $(that.container).html(html);
+
+            if(that.options.preval != ''){
+                 that.change(that.options.preval);
+            }
+
+            if(typeof that.options.callback == 'function'){
+                var ev = {};
+                ev['click #'+ that.field] = 'callback';
+                that.delegateEvents(_.extend(this.events,ev));
+            }
+
+            that.widget = $('#'+this.field,$(this.container));
+        }
+    });
+    window.ahr.checkbox_widget = window.ahr.checkbox_widget || {};
+    window.ahr.checkbox_widget.initWidget= function(container,options){
+        var widget = new checkboxWidget({el:container, options: options});
+        return widget;
+    };
+})();
+</script>

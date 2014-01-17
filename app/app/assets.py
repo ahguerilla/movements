@@ -18,6 +18,7 @@ js = Bundle(
         './js/lib/jstz.js',
         './js/lib/jquery.backstretch.min.js',
         './js/lib/masonry.pkgd.js',
+        './js/lib/jquery.cookie.js',
         './js/app_common.js',
         './js/base.js',
         './js/item_form_base.js',

@@ -27,7 +27,7 @@
                 if(  $('.next',$(data)).hasClass('disabled') ){
                     $('#paginationblock').remove();
                 }
-                $('.messagelist').append($('.messagelist',$(data)));
+                $('.messagelist').append($('.messagelist',$(data)).children());
             });
         },
 
@@ -70,9 +70,8 @@
                 $("#message-col").hide();
                 $('#conversation').show();
                 $('#conversation')[0].scrollIntoView(true);
-
             }else{
-                $.noop();
+                $('#conversation')[0].scrollIntoView(true);
             }
         },
 

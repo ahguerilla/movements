@@ -27,6 +27,7 @@ class MarketItem(models.Model):
     reportcount = models.IntegerField(_('reportcount'), default=0)
     score = models.FloatField(_('score'),default=0)
     deleted = models.BooleanField(_('deleted'), default=False)
+    never_exp = models.BooleanField(_('never expires'), default=False)
 
     def __unicode__(self):
         return self.details
@@ -45,6 +46,7 @@ class MarketItem(models.Model):
         adict['fields']['details']= self.details
         adict['fields']['pub_date']= str(self.pub_date)
         adict['fields']['exp_date']= str(self.exp_date)
+        adict['fields']['never_exp']= self.never_exp
         adict['fields']['owner']= [self.owner.username]
         adict['fields']['ownerid']= [self.owner.id]
         adict['fields']['url']= self.url

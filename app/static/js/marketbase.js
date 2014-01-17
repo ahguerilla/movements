@@ -158,11 +158,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
                 if(itemsToAppend.length > 0){
                     var container = document.querySelector('#marketitems');
-                    var msnry = new Masonry( container );
+                    that.msnry = new Masonry( container );
                     _.each(itemsToAppend, function(elem){
-                        msnry.appended( elem );
+                        that.msnry.appended( elem );
                     });
-                    msnry.layout();
+                    that.msnry.layout();
                 }
                 that.afterset();
                 that.currentItem = that.currentItem + that.itemsPerCall;
@@ -202,6 +202,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     initFilters: function(that, items, templ){
+        var cookie = $.cookie('tagfilters');
+        if(typeof cookie != 'undefined'){
+            that.filters = cookie;
+        }
         _.each(window.ahr[items], function(item){
             var activeFlag = ' ';
             if(_.contains(that.filters[items], item.pk)){
@@ -229,13 +233,12 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                 $(ev.currentTarget).addClass('btn-success');
             }
         }
+        $.cookie('tagfilters',that.filters);
     },
 
     updateTypefilter: function(that, ev){
         that.filters.types.length = 0;
         var item_type = ev.currentTarget.getAttribute('item_type');
-        
-
         if(that.types[item_type]) {
             that.filters.types.push(that.types[item_type]);
         }
@@ -310,12 +313,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                 that.refreshScrollElements();
             });
         }
+        that.msnry.layout();
         return(false);
     },
-    
-    init: function(filters){
-        this.default_filters = window.ahr.clone(filters);
 
+    init: function(filters){
+        $.cookie.json = true;
+
+        this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
         this.message_widget = window.ahr.messagedialog_widget.initWidget('#'+this.el.id, '#infobar');
