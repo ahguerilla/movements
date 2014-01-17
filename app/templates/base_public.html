@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Up" %}{% endblock %}
+
+{% block body_class %}narrow{% endblock %}
+
+{% block content %}
+<div class="public">
+  {% block public-content %}
+  {% endblock %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    $.backstretch("{{ STATIC_URL }}images/landing-bg-1920x1202-blended.jpg");
+  </script>
+{% endblock %}

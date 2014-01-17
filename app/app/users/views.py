@@ -3,8 +3,9 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from models import UserProfile
-from forms import SettingsForm, UserForm
+from forms import SettingsForm, UserForm, SignupForm
 from allauth.account.views import SignupView
+from allauth.socialaccount.views import SignupView as SocialSignupView
 from allauth.account.adapter import DefaultAccountAdapter
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -12,6 +13,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from allauth.account.models import EmailConfirmation
 from constance import config
+
 
 def render_settings(request, initial=False):
     template = 'users/user_settings.html'
@@ -21,10 +23,9 @@ def render_settings(request, initial=False):
     except UserProfile.DoesNotExist:
         settings = None
     try:
-        perms= request.user.userprofile.notperm
+        perms = request.user.userprofile.notperm
     except:
-        perms={}
-
+        perms = {}
 
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=user)
@@ -76,17 +77,14 @@ def profile_for_user(request, user_name):
 
 @login_required
 def profile(request, user_name=None):
-    print "user_name " + str(user_name)
     if not user_name:
         user = User.objects.get(pk=request.user.id)
     else:
         user = get_object_or_404(User, username=user_name)
-
     try:
         user_profile = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
         user_profile = None
-
     is_self = False
     if user.id == request.user.id:
         is_self = True
@@ -105,24 +103,58 @@ def waitforactivation(request):
                               context_instance=RequestContext(request))
 
 
-class AccountSignupView(SignupView):
-    def get(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        form.fields['first_name'].initial = self.request.GET.get('first_name', '')
-        form.fields['last_name'].initial = self.request.GET.get('last_name', '')
-        kwargs['form'] = form
-        context = self.get_context_data(**kwargs)
-        context['form'].fields['email'].initial = self.request.GET.get('email', '')
-        return self.render_to_response(context)
+class AhrSocialSignupView(SocialSignupView):
+    def get_context_data(self, **kwargs):
+        ret = super(AhrSocialSignupView, self).get_context_data(**kwargs)
+        context_data = {
+            'body_class': 'narrow',
+            'sign_up': True,
+            'post_url': ''
+        }
+        ret.update(context_data)
+        return ret
+    template_name = SignupView.template_name
+    
+ahr_social_signup = AhrSocialSignupView.as_view()
 
-accountsignup = AccountSignupView.as_view()
+def signup_from_home(request):
+    form = SignupView.form_class()
+    if request.method == 'POST':
+        form.fields['first_name'].initial = request.POST.get('first_name', '')
+        form.fields['last_name'].initial = request.POST.get('last_name', '')
+        form.fields['email'].initial = request.POST.get('email', '')
+    view_dict = {
+        'form': form,
+        'body_class': 'narrow',
+        'post_url': reverse(process_signup),
+        'sign_up': True,
+    }
+    return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))
+
+
+def process_signup(request):
+    form = SignupView.form_class()
+    if request.method == 'POST':
+        form.fields['first_name'].initial = request.POST.get('first_name', '')
+        form.fields['last_name'].initial = request.POST.get('last_name', '')
+        form.fields['email'].initial = request.POST.get('email', '')
+    view_dict = {
+        'form': form,
+        'body_class': 'narrow',
+        'sign_up': True,
+        'post_url': ''
+    }
+    return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))    
 
 
 class AccAdapter(DefaultAccountAdapter):
     def new_user(self, *args, **kwargs):
         user = super(AccAdapter,self).new_user(*args,**kwargs)
         user.is_active = False
+        return user
+
+    def save_user(self, *args,**kwargs):
+        user = super(AccAdapter,self).save_user(*args,**kwargs)
         return user
 
     def get_email_confirmation_redirect_url(self, request):
@@ -137,5 +169,5 @@ class AccAdapter(DefaultAccountAdapter):
             "activate_url": 'http://'+Site.objects.get_current().domain+"/admin/auth/user/"+str(conf.email_address.user_id),
             "current_site": Site.objects.get_current().domain,
         }
-        self.send_mail('account/email/user_confirmed_email', config.ACTIVATE_USER_EMAIL , ctx)
+        self.send_mail('account/email/user_confirmed_email', config.ACTIVATE_USER_EMAIL, ctx)
         return 'http://'+Site.objects.get_current().domain+'/user/waitforactivation'

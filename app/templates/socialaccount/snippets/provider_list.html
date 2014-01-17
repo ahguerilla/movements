@@ -1,21 +1,23 @@
 {% load socialaccount %}
 
-<ul class="list-unstyled">
-{% for provider in socialaccount.providers %}
-{% if provider.id == "openid" %}
-{% for brand in provider.get_brands %}
-<li>
-  <a title="{{brand.name}}" 
-     class="socialaccount_provider {{provider.id}} {{brand.id}}" 
-     href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
-     >{{brand.name}}</a>
-</li>
-{% endfor %}
-{% endif %}
-<li>
-  <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}" 
-     href="{% provider_login_url provider.id process=process %}">{{provider.name}}</a>
-</li>
-{% endfor %}
-</ul>
-
+<div class="social-sign-up">
+  <div class="dialog">
+    <a href="{% provider_login_url "twitter" %}">
+      <img src="{{ STATIC_URL }}images/twitter-24x18.png" alt="Google+"/>
+      SIGN IN WITH TWITTER
+    </a>
+  </div>
+  <div class="dialog">
+    <a href="{% provider_login_url "facebook" method="oauth2" %}">
+      <img src="{{ STATIC_URL }}images/facebook-12x23.png" alt="Facebook"/>
+      SIGN IN WITH FACEBOOK
+    </a>
+  </div>
+  <div class="dialog">
+    <a href="{% provider_login_url "google" %}">
+      <img src="{{ STATIC_URL }}images/google-plus-23x20.png" alt="Google+"/>
+      SIGN IN WITH GOOGLE PLUS
+    </a>
+  </div>
+</div>
+  
