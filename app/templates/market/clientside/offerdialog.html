@@ -14,6 +14,16 @@
           <div class="form-group" id="countries_place"></div>
           <div class="form-group" id="skills_place"></div>
           <div class="form-group" id="title_place"></div>
+          <div class="form-group">
+            <div class="col-md-5">
+              <div id="date_place"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12">
+              <div id="never_exp_place"></div>
+            </div>
+          </div>
           <div class="form-group" id="exp_date_place"></div>
           <div class="form-group"  id="details_place"></div>
           <div class="modal-footer">
@@ -53,7 +63,8 @@
             retdict['skills'] = that.skills_widget.getval();
             retdict['countries'] = that.countries_widget.getval();
             retdict['issues'] = that.issues_widget.getval();
-            retdict['exp_date'] = that.expdate_widget.getExpDate();
+            retdict['exp_date'] = that.expdate_widget.getval();
+            retdict['never_exp'] = that.never_exp_widget.getval();
             retdict['title'] = that.title_widget.getval();
             retdict['details'] = that.details_widget.getval();
             retdict.csrfmiddlewaretoken=that.csrf;
@@ -66,7 +77,13 @@
           this.issues_widget.change(item[0].fields.issues);
           this.countries_widget.change(item[0].fields.countries);
           this.skills_widget.change(item[0].fields.skills);
-          this.expdate_widget.change(item[0].fields);
+          this.expdate_widget.change(item[0].fields.exp_date);
+          this.never_exp_widget.change(item[0].fields.never_exp);
+          if(item[0].fields.never_exp==true){
+            this.expdate_widget.disable();
+          }else{
+            this.expdate_widget.enable();
+          }
           this.title_widget.change(item[0].fields.title);
           this.details_widget.change(item[0].fields.details);
         },
@@ -88,10 +105,20 @@
                         {title:'Skills',  jsonfield:'skills'},
                         this.item_obj? this.item_obj.skills: null);
 
-            this.expdate_widget = window.ahr.expdate_widget.initWidget(
-                        '#exp_date_place',
-                        {title:'Expires in days', jsonfield:'exp_date'},
+            this.expdate_widget = window.ahr.datepicker_widget.initWidget(
+                        '#date_place',
+                        {title:'Expiry date', jsonfield:'exp_date'},
                         this.item_obj);
+
+            this.never_exp_widget = window.ahr.checkbox_widget.initWidget(
+                        '#never_exp_place',
+                        {
+                          title:'Never expires',
+                          field:'never_exp',
+                          preval: this.item_obj? this.item_obj.never_exp : '',
+                          callback: that.onNeverexpClick,
+                          context: that
+                        });
 
             this.title_widget = window.ahr.input_widget.initWidget(
                         '#title_place',
@@ -113,7 +140,7 @@
           $('#offerdialog').modal('show');
           window.ahr.getcsrf(function(csrf){
               if(csrf==false){
-                  that.alert('Unable to send report. please try again','#reporterror');
+                  that.alert('Unable to connect to the server. please try again in a few minutes','#infobar');
                   return;
               }
               that.csrf = csrf.csrfmiddlewaretoken;

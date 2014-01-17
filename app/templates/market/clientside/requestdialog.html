@@ -13,7 +13,16 @@
           <div class="form-group" id="request_issues_place"></div>
           <div class="form-group" id="request_countries_place"></div>
           <div class="form-group" id="request_title_place"></div>
-          <div class="form-group" id="request_exp_date_place"></div>
+          <div class="form-group">
+            <div class="col-md-5">
+              <div id="request_exp_date_place"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12">
+              <div id="request_never_exp_place"></div>
+            </div>
+          </div>
           <div class="form-group"  id="request_details_place"></div>
           <div class="modal-footer">
             <span class="col-xs-offset-6 col-xs-6 pull-right">
@@ -47,7 +56,8 @@
           var retdict={};
           retdict['issues']    = this.issues_widget.getval();
           retdict['countries'] = this.countries_widget.getval();
-          retdict['exp_date']  = this.expdate_widget.getExpDate();
+          retdict['exp_date']  = this.expdate_widget.getval();
+          retdict['never_exp'] = this.never_exp_widget.getval();
           retdict['title']     = this.title_widget.getval();
           retdict['details'] = this.details_widget.getval();
           retdict.csrfmiddlewaretoken=this.csrf;
@@ -61,12 +71,19 @@
           this.url = window.ahr.app_urls.editmarketitem+item[0].pk;
           this.issues_widget.change(item[0].fields.issues);
           this.countries_widget.change(item[0].fields.countries);
-          this.expdate_widget.change(item[0].fields);
+          this.expdate_widget.change(item[0].fields.exp_date);
+          this.never_exp_widget.change(item[0].fields.never_exp);
+          if(item[0].fields.never_exp==true){
+            this.expdate_widget.disable();
+          }else{
+            this.expdate_widget.enable();
+          }
           this.title_widget.change(item[0].fields.title);
           this.details_widget.change(item[0].fields.details);
         },
 
         makeWidget: function(){
+            var that = this;
             this.issues_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_issues_place',
                         {title:'I need help to advance freedom of:', jsonfield:'issues'},
@@ -77,10 +94,20 @@
                         {title:'Please select the countries where you need help',  jsonfield:'countries'},
                         this.item_obj? this.item_obj.countries: null);
 
-            this.expdate_widget = window.ahr.expdate_widget.initWidget(
+            this.expdate_widget = window.ahr.datepicker_widget.initWidget(
                         '#request_exp_date_place',
-                        {title:'Expires in days', jsonfield:'exp_date'},
+                        {title:'Expiry date', jsonfield:'exp_date'},
                         this.item_obj);
+
+            this.never_exp_widget = window.ahr.checkbox_widget.initWidget(
+                      '#request_never_exp_place',
+                      {
+                        title:'Never expires',
+                        field:'never_exp',
+                        preval: this.item_obj? this.item_obj.never_exp : '',
+                        callback: that.onNeverexpClick,
+                        context: that
+                      });
 
             this.title_widget = window.ahr.input_widget.initWidget(
                         '#request_title_place',
@@ -103,7 +130,7 @@
 
           window.ahr.getcsrf(function(csrf){
               if(csrf==false){
-                  that.alert('Unable to send report. please try again','#reporterror');
+                  that.alert('Unable to connect to the server. please try again in a few minutes','#infobar');
                   return;
               }
               that.csrf = csrf.csrfmiddlewaretoken;

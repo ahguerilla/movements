@@ -17,6 +17,7 @@ js = Bundle(
         './js/lib/jquery.blockUI.js',
         './js/lib/jstz.js',
         './js/lib/jquery.backstretch.min.js',
+        './js/lib/bootstrap-datepicker.js',
         './js/lib/masonry.pkgd.js',
         './js/app_common.js',
         './js/base.js',
@@ -42,6 +43,7 @@ if settings.PRODUCTION or settings.STAGING:
         './css/bootstrap-datetimepicker.min.css',
         './css/tagmanager.css',
         './css/typeahead.css',
+        './css/datepicker.css',
         './css/rateit.css',
         './css/site.css',
         filters='cssmin',
@@ -54,7 +56,8 @@ else:
             './css/bootstrap-datetimepicker.min.css',
             './css/tagmanager.css',
             './css/typeahead.css',
-            './css/rateit.css'
+            './css/rateit.css',
+            './css/datepicker.css'
             ),
         Bundle(
             './css/site.styl',

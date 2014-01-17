@@ -6,6 +6,15 @@
             this.url = window.ahr.app_urls.addmarketitem+'';
         },
 
+        onNeverexpClick: function(){
+          var that = this;
+          if (that.never_exp_widget.getval()===true){
+            that.expdate_widget.disable();
+          }else{
+            that.expdate_widget.enable();
+          }
+        },
+
         submit: function(e){
             e.preventDefault();
             var that = this;

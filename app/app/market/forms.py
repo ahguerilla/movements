@@ -31,7 +31,7 @@ class offerForm(forms.ModelForm):
     exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',])
     class Meta:
         model = market.models.MarketItem
-        fields = ['issues','skills','countries','title','details','exp_date']
+        fields = ['issues','skills','countries','title','details','exp_date','never_exp']
 
     def save(self, commit=False, *args, **kwargs):
         instance = super(offerForm, self).save(commit=commit, *args, **kwargs)
@@ -44,7 +44,7 @@ class requestForm(forms.ModelForm):
     exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',])
     class Meta:
         model = market.models.MarketItem
-        fields = ['issues','countries','title','details','exp_date']
+        fields = ['issues','countries','title','details','exp_date','never_exp']
 
     def save(self, commit=False, *args, **kwargs):
         instance = super(requestForm, self).save(commit=commit, *args, **kwargs)
