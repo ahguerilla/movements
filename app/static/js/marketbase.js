@@ -313,7 +313,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                 that.refreshScrollElements();
             });
         }
-        that.msnry.layout();
+        //that.msnry.layout();
         return(false);
     },
 
