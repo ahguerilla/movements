@@ -80,6 +80,7 @@ class UserProfile(models.Model):
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
     vetted_by_ahr = models.BooleanField(_('vetted_by_ahr'), default=False)
+    rated_by_ahr = models.IntegerField(_('rated_by_ahr'), default=0)
     firstlogin = models.BooleanField(_('first_login'), default=True)
     ratecount = models.IntegerField(_('ratecount'),default=0)
     score = models.FloatField(_('score'),default=0)
@@ -122,5 +123,3 @@ class UserRate(models.Model):
             self.user.userprofile.score = (int(self.score) + sum([rate.score for rate in rates]))/float(self.user.userprofile.ratecount)
         self.user.userprofile.save_base()
         super(UserRate,self).save(*args,**kwargs)
-        #test
-

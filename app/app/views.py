@@ -12,7 +12,11 @@ def home(request):
 
 
 def terms_and_conditions(request):
-    return render_to_response('ahr/terms_and_conditions.html', {}, context_instance=RequestContext(request))
+    return render_to_response('ahr/terms_and_conditions.html', context_instance=RequestContext(request))
+
+
+def contact_us(request):
+    return render_to_response('ahr/contact_us.html', context_instance=RequestContext(request))
 
 
 def exchange(request):

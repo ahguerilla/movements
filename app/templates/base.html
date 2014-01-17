@@ -28,7 +28,7 @@
     {% block extra_head %}
     {% endblock %}
   </head>
-  <body class="{{ body_class }}">
+  <body  class="{% block body_class %}{{ body_class }}{% endblock %}">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -45,7 +45,7 @@
             {% if user.is_authenticated %}
             <li><a href="/">Exchange</a></li>
             {% endif %}
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'show_users' %}">Users</a></li>
             <li class="dropdown">
@@ -64,11 +64,16 @@
               <ul class="dropdown-menu">
                 <li><a href="{% url 'user_profile' %}">My Profile</a></li>
                 <li><a href="{% url 'user_settings' %}">Settings</a></li>
-                <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+                <li>
+                  <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-link" type="submit">Sign Out</button>
+                  </form>
+                </li>
               </ul>
             </li>
             {% else %}
-            <li><a href="{% url 'account_login' %}">Sign In</a></li>
+              {% block sign_in %}<li><a href="{% url 'account_login' %}">Sign In</a></li>{% endblock %}
               {% if not sign_up %}
                 <li><a href="{% url 'home' %}">Sign Up</a></li>
               {% endif %}
@@ -78,18 +83,6 @@
       </div>
     </nav>
     <div class="container">
-      {% if messages %}
-      <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {% for message in messages %}
-            <div>{{message}}</div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      {% endif %}
 
       <div id="currentusername" class="hidden">{{user.username}}</div>
 

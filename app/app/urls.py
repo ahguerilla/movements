@@ -8,7 +8,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
-    url(r'^terms_and_conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
+    url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
+    url(r'^contact-us$', 'app.views.contact_us', name='contact_us'),
     url(r'^sign-up', 'app.users.views.signup_from_home', name="sign_up"),
     url(r'^accounts/social/signup', 'app.users.views.ahr_social_signup', name="social_sign_up"),
     url(r'^sign-up/process', 'app.users.views.process_signup', name="process_signup"),

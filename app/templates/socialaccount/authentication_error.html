@@ -1,15 +1,12 @@
-{% extends "socialaccount/base.html" %}
+{% extends "account/signup_base.html" %}
 
 {% load i18n %}
 
 {% block head_title %}{% trans "Social Network Login Failure" %}{% endblock %}
 
-{% block content %}
-<div class="row">
-  <div class="col-md-offset-2 col-md-8 center-content">
+{% block public-content %}
+<div class="row dialog sign-up-form">
     <h1>{% trans "Social Network Login Failure" %}</h1>
-
     <p>{% trans "An error occurred while attempting to login via your social network account." %}</p>
-  </div>
 </div>
 {% endblock %}

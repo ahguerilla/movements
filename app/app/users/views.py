@@ -169,5 +169,5 @@ class AccAdapter(DefaultAccountAdapter):
             "activate_url": 'http://'+Site.objects.get_current().domain+"/admin/auth/user/"+str(conf.email_address.user_id),
             "current_site": Site.objects.get_current().domain,
         }
-        self.send_mail('account/email/user_confirmed_email', config.ACTIVATE_USER_EMAIL , ctx)
+        self.send_mail('account/email/user_confirmed_email', config.ACTIVATE_USER_EMAIL, ctx)
         return 'http://'+Site.objects.get_current().domain+'/user/waitforactivation'
