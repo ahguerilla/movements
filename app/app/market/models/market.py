@@ -54,7 +54,6 @@ class MarketItem(models.Model):
         adict['fields']['userratecount']= self.owner.userprofile.ratecount
         adict['fields']['ratecount']= self.ratecount
         adict['fields']['score']= self.score
-        adict['fields']['avatar'] = '/static/images/male200.png'
-        #reverse('avatar_render_primary', args=[obj.owner.username,80])
+        adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username,80])
         return adict
 
