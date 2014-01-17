@@ -4,7 +4,8 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from models import UserProfile
 from forms import SettingsForm, UserForm, SignupForm
-from allauth.account.views import SignupView
+from form_overrides import ResetPasswordFormSilent
+from allauth.account.views import SignupView, PasswordResetView
 from allauth.socialaccount.views import SignupView as SocialSignupView
 from allauth.account.adapter import DefaultAccountAdapter
 from django.contrib.auth.decorators import login_required
@@ -101,6 +102,17 @@ def waitforactivation(request):
     return render_to_response('users/waitforactivation.html',
                               {},
                               context_instance=RequestContext(request))
+
+
+
+class SilentPasswordResetView(PasswordResetView):
+    form_class = ResetPasswordFormSilent
+    def form_valid(self, form):
+        if form.cleaned_data['email'] == 'silentreject@exchangivist.org':
+            return super(PasswordResetView, self).form_valid(form)
+        return super(SilentPasswordResetView, self).form_valid(form)
+
+password_reset = SilentPasswordResetView.as_view()
 
 
 class AhrSocialSignupView(SocialSignupView):
