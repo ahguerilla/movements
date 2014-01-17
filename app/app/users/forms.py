@@ -13,12 +13,8 @@ class SignupForm(forms.Form):
     web_url = forms.CharField(max_length=100, label='Website', required=False)
 
     def save(self, user):
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.linkedin_url = self.cleaned_data['linkedin_url']
-        user.tweet_url = self.cleaned_data['tweet_url']
-        user.fb_url = self.cleaned_data['fb_url']
-        user.web_url = self.cleaned_data['web_url']
+        user.first_name = ''
+        user.last_name = ''
         user.save()
 
 

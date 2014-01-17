@@ -89,7 +89,6 @@ def profile(request, user_name=None):
     is_self = False
     if user.id == request.user.id:
         is_self = True
-
     return render_to_response('users/user_profile.html',
                                 {
                                     'user_details': user,
@@ -97,6 +96,7 @@ def profile(request, user_name=None):
                                     'is_self': is_self,
                                 },
                                 context_instance=RequestContext(request))
+
 
 def waitforactivation(request):
     return render_to_response('users/waitforactivation.html',
@@ -165,8 +165,19 @@ class AccAdapter(DefaultAccountAdapter):
         user.is_active = False
         return user
 
-    def save_user(self, *args,**kwargs):
-        user = super(AccAdapter,self).save_user(*args,**kwargs)
+    def send_vetting_email(self, user, form):
+        ctx = {
+            "user": user,
+            "form": form,
+            "current_site": Site.objects.get_current().domain,
+        }        
+        self.send_mail('account/email/user_vetting_email', config.ACTIVATE_USER_EMAIL, ctx)
+
+    def save_user(self, request, user, form, commit=True):
+        self.send_vetting_email(user, form)
+        user.first_name = ''
+        user.last_name = ''
+        user = super(AccAdapter,self).save_user(request, user, form, commit=True)
         return user
 
     def get_email_confirmation_redirect_url(self, request):

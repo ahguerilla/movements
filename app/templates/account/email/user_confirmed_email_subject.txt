@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}Acitvate User{% endblocktrans %}
+{% blocktrans %}Activate User{% endblocktrans %}
 {% endautoescape %}
