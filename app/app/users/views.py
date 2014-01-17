@@ -170,7 +170,7 @@ class AccAdapter(DefaultAccountAdapter):
         return user
 
     def get_email_confirmation_redirect_url(self, request):
-        redir = super(AccAdapter,self).get_email_confirmation_redirect_url(request)
+        super(AccAdapter,self).get_email_confirmation_redirect_url(request)
         key = request.path.split('/')[3]
         conf = EmailConfirmation.objects.filter(key=key)[0]
         if conf.email_address.user.is_active:
