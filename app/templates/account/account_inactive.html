@@ -1,11 +1,12 @@
-{% extends "account/base.html" %}
+{% extends "account/signup_base.html" %}
 
 {% load i18n %}
 
 {% block head_title %}{% trans "Account Inactive" %}{% endblock %}
 
-{% block content %}
-<h1>{% trans "Account Inactive" %}</h1>
-
-<p>{% trans "This account is inactive." %}</p>
+{% block public-content %}
+  <div class="row dialog sign-up-form">
+    <h1>{% trans "Account Inactive" %}</h1>
+    <p>{% trans "This account is inactive. Accounts have to be individually vetted, you will be contacted by a member of Advancing Human Rights as part of this vetting process." %}</p>
+  </div>
 {% endblock %}

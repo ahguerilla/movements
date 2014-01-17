@@ -8,13 +8,26 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     currentItem: 0,
     allItemsLoaded: false,
     itemsPerCall: 15,
+    requiresResetOnNewOfferRequest: false,
 
 
     create_request: function(){
         this.requestdialog.showModal(true);
+        if(this.requiresResetOnNewOfferRequest && !this.requestdialog.oncomplete){
+            var self = this;
+            this.requestdialog.oncomplete = function(){
+                self.resetMarket();
+            };
+        }
     },
     create_offer: function(){
         this.offerdialog.showModal(true);
+        if(this.requiresResetOnNewOfferRequest && !this.offerdialog.oncomplete){
+            var self = this;
+            this.offerdialog.oncomplete = function(){
+                self.resetMarket();
+            };
+        }
     },
 
     setFilterNone:function(){
@@ -158,28 +171,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
     },
 
-/*    setItems: function(page){
-        var that = this;
-        var dfrd = that.getItems(0+(10*page),
-                    10+(10*page),
-                    this.filters,
-                    this.getitemfromto);
-
-        dfrd.done(function(data){
-            _.each(data, function(item){
-                item.fields.pk = item.pk;
-                var item_html = that.item_tmp(item.fields);
-                $('#marketitems').append(item_html);
-            });
-
-            var $container = $('#marketitems');
-            $container.masonry({
-                itemSelector: '.market-place-item'
-            });
-            that.afterset();
-        });
-
-    },*/
+    refreshScrollElements: function(){
+        var container = document.querySelector('#marketitems');
+        var msnry = new Masonry( container );
+        msnry.layout();
+    },
 
     afterset: function(){
         $('.numstars').rateit();
@@ -203,7 +199,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                 this.initFilters(this, key, this.tagtemp);
             }
         }
-        this.initTypeTags(this.types, this.typetag_tmp);
     },
 
     initFilters: function(that, items, templ){
@@ -236,20 +231,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
     },
 
-    updateTypefilter: function(that,ev){
-        var ind = that.filters.types.indexOf(that.types[ev.currentTarget.textContent]);
-        if(ind<0){
-            that.filters.types.push(that.types[ev.currentTarget.textContent]);
-            $(ev.currentTarget).addClass('btn-success');
-        }else{
-            that.filters.types.splice(ind,1);
-            $(ev.currentTarget).removeClass('btn-success');
-        }
-    },
+    updateTypefilter: function(that, ev){
+        that.filters.types.length = 0;
+        var item_type = ev.currentTarget.getAttribute('item_type');
+        
 
-    initTypeTags: function(types,tmp){
-        for(var item in types){
-            $('.typetags').append(tmp({typetag:item}));
+        if(that.types[item_type]) {
+            that.filters.types.push(that.types[item_type]);
         }
     },
 
@@ -319,6 +307,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             dfrd.done(function(data){
                 that.alert('Item deleted','#infobar');
                 $(".item-wrap[item_id='"+ item_id + "']").remove();
+                that.refreshScrollElements();
             });
         }
         that.msnry.layout();

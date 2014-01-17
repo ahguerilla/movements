@@ -8,6 +8,7 @@ $request-color = #89DDDD
 $filter-background = #585F65
 $filter-item-selected = #444D54
 $dialog-bg-color = rgba(255, 255, 255, 0.69)
+$warning-bg-color = rgba(185, 74, 72, 0.69)
 $std-border-radius = 10px
 
 vendor(prop, args)
@@ -45,15 +46,33 @@ box-shadow()
 body
   background-color $bg-color
 
-label
-  font-weight normal
-
 .form-group
   margin-bottom 5px
 
 .btn
   border-radius $std-border-radius  
   color $text-color
+
+.narrow .container
+  max-width 970px
+
+.alert
+  border-radius 15px
+
+.dropdown-menu
+  .btn-link
+    color #333
+    padding 3px 20px
+    display block
+    border-radius 0
+    text-align left
+    width 100%
+  .btn-link:focus, .btn-link:hover
+    color #262626
+    text-decoration none
+    background-color #f5f5f5
+
+
 
 .btn:focus
   outline: none
@@ -134,16 +153,27 @@ select.input-extra-height
   background-color $dialog-bg-color
   border-radius $std-border-radius
 
-.home-logos
+.footer-logos
   .middle
     text-align center
   .right
     text-align right
 
-.sign-up-initial
+.sign-up-form, .public
   input
     border-radius $std-border-radius
     padding 20px
+  label
+    font-weight normal
+
+.public
+  margin-top 20px
+  margin-bottom 20px
+  .warning
+    padding 15px
+    margin-bottom 20px
+    background-color $warning-bg-color
+    border-radius $std-border-radius
 
 .social-sign-up .dialog
   margin-bottom 10px
@@ -159,6 +189,10 @@ select.input-extra-height
 .exchange-banner
   background: url('../images/header-image-518x284.png') no-repeat
   background-color: #FFF
+  h1
+    color: $text-color
+  .exchange-opacity
+    background-color: rgba(255, 255, 255, 0.8)
 
 .message-text
   margin-bottom: 10px
@@ -237,10 +271,15 @@ select.input-extra-height
     padding: 5px 3px 3px 5px
     border-radius 10px
     margin-bottom: 5px
+    height: 30px
     span 
       font-size: 10px
     a
       color: $text-color
+    .item-header-clickable
+      float:left
+      width:85%
+      height: 30px
   .request
     background-color: $request-color
   .offer
