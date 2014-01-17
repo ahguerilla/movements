@@ -115,6 +115,11 @@ class SilentPasswordResetView(PasswordResetView):
 password_reset = SilentPasswordResetView.as_view()
 
 
+class AhrSignupView(SignupView):
+    pass
+
+ahr_signup_view = SignupView
+
 class AhrSocialSignupView(SocialSignupView):
     def get_context_data(self, **kwargs):
         ret = super(AhrSocialSignupView, self).get_context_data(**kwargs)
@@ -144,19 +149,19 @@ def signup_from_home(request):
     return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))
 
 
-def process_signup(request):
-    form = SignupView.form_class()
-    if request.method == 'POST':
-        form.fields['first_name'].initial = request.POST.get('first_name', '')
-        form.fields['last_name'].initial = request.POST.get('last_name', '')
-        form.fields['email'].initial = request.POST.get('email', '')
-    view_dict = {
-        'form': form,
-        'body_class': 'narrow',
-        'sign_up': True,
-        'post_url': ''
-    }
-    return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))    
+class AhrSignupView(SignupView):
+    def get_context_data(self, **kwargs):
+        print 'HUR I AM'
+        ret = super(AhrSignupView, self).get_context_data(**kwargs)
+        context_data = {
+            'body_class': 'narrow',
+            'sign_up': True,
+            'post_url': ''
+        }
+        ret.update(context_data)
+        return ret
+
+process_signup = AhrSignupView.as_view()
 
 
 class AccAdapter(DefaultAccountAdapter):
