@@ -188,6 +188,10 @@ select.input-extra-height
 .exchange-banner
   background: url('../images/header-image-518x284.png') no-repeat
   background-color: #FFF
+  h1
+    color: $text-color
+  .exchange-opacity
+    background-color: rgba(255, 255, 255, 0.8)
 
 .message-text
   margin-bottom: 10px
@@ -266,10 +270,15 @@ select.input-extra-height
     padding: 5px 3px 3px 5px
     border-radius 10px
     margin-bottom: 5px
+    height: 30px
     span 
       font-size: 10px
     a
       color: $text-color
+    .item-header-clickable
+      float:left
+      width:85%
+      height: 30px
   .request
     background-color: $request-color
   .offer

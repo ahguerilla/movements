@@ -34,7 +34,6 @@
             var that=this;
             this.url = window.ahr.app_urls.addmarketitem+'request';
             $('#requestdialog').on('hidden.bs.modal',function(){
-              console.log('here');
               if(that.changing==true){
               $('input,textarea',$('#requestdialog')).val('');
               that.issues_widget.empty();

@@ -22,6 +22,7 @@
             this.getitemfromto = window.ahr.app_urls.getmarketitemfromto;
             this.viewurl = window.ahr.app_urls.viewitem;
             this.item_tmp = _.template($('#item_template').html());
+            this.requiresResetOnNewOfferRequest = true;
             filters.types=["offer", "request"];
             this.init(filters);
             return this;

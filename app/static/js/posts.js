@@ -41,6 +41,7 @@
             this.itemcount_url = window.ahr.app_urls.getuseritemscount;
             this.getitemfromto = window.ahr.app_urls.getusermarketitemsfromto;
             this.viewurl = window.ahr.app_urls.edititem;
+            this.requiresResetOnNewOfferRequest = true;
             filters.types=["offer", "request"];
             this.init(filters);
             return this;
