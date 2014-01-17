@@ -1,0 +1,125 @@
+{% load i18n %}
+
+<div id="requestdialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">REQUEST A SERVICE</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" enctype="multipart/form-data" id="requestform">
+          <div id="itemformerror"></div>
+          <div class="form-group" id="request_issues_place"></div>
+          <div class="form-group" id="request_countries_place"></div>
+          <div class="form-group" id="request_title_place"></div>
+          <div class="form-group" id="request_exp_date_place"></div>
+          <div class="form-group"  id="request_details_place"></div>
+          <div class="modal-footer">
+            <span class="col-xs-offset-6 col-xs-6 pull-right">
+              <button type="submit" class="btn btn-success full-width pull-right">{% trans "Save" %}</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+(function(){
+    var RequestDialogView = window.ahr.item_form_base.extend({
+        el: '#requestform',
+        init:function(){
+            var that=this;
+            this.url = window.ahr.app_urls.addmarketitem+'request';
+            $('#requestdialog').on('hidden.bs.modal',function(){
+              console.log('here');
+              if(that.changing==true){
+              $('input,textarea',$('#requestdialog')).val('');
+              that.issues_widget.empty();
+              that.countries_widget.empty();
+              that.changing=false;
+            }
+          });
+        },
+        getFormData: function(){
+          var retdict={};
+          retdict['issues']    = this.issues_widget.getval();
+          retdict['countries'] = this.countries_widget.getval();
+          retdict['exp_date']  = this.expdate_widget.getExpDate();
+          retdict['title']     = this.title_widget.getval();
+          retdict['details'] = this.details_widget.getval();
+          retdict.csrfmiddlewaretoken=this.csrf;
+          return retdict;
+        },
+
+        edit: function(item){
+          this.changing=true;
+          $('#'+this.el.id+' #itemformerror').empty();
+          $('#'+this.el.id+' .error').empty();
+          this.url = window.ahr.app_urls.editmarketitem+item[0].pk;
+          this.issues_widget.change(item[0].fields.issues);
+          this.countries_widget.change(item[0].fields.countries);
+          this.expdate_widget.change(item[0].fields);
+          this.title_widget.change(item[0].fields.title);
+          this.details_widget.change(item[0].fields.details);
+        },
+
+        makeWidget: function(){
+            this.issues_widget = window.ahr.typeahead_widget.initWidget(
+                        '#request_issues_place',
+                        {title:'I need help to advance freedom of:', jsonfield:'issues'},
+                        this.item_obj? this.item_obj.issues: null);
+
+            this.countries_widget = window.ahr.typeahead_widget.initWidget(
+                        '#request_countries_place',
+                        {title:'Please select the countries where you need help',  jsonfield:'countries'},
+                        this.item_obj? this.item_obj.countries: null);
+
+            this.expdate_widget = window.ahr.expdate_widget.initWidget(
+                        '#request_exp_date_place',
+                        {title:'Expires in days', jsonfield:'exp_date'},
+                        this.item_obj);
+
+            this.title_widget = window.ahr.input_widget.initWidget(
+                        '#request_title_place',
+                        {title:'Title of post', jsonfield:'title', placeholder:''},
+                        this.item_obj? this.item_obj.title : null);
+
+            this.details_widget = window.ahr.textarea_widget.initWidget(
+                        '#request_details_place',
+                        {title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'},
+                        this.item_obj? this.item_obj.details : null);
+        },
+
+        showModal:function(newitem){
+          if(newitem){
+            this.url = window.ahr.app_urls.addmarketitem+'request';
+          }
+          var that = this;
+          $('#'+that.el.id+' #itemformerror').empty();
+          $('#requestdialog').modal('show');
+
+          window.ahr.getcsrf(function(csrf){
+              if(csrf==false){
+                  that.alert('Unable to send report. please try again','#reporterror');
+                  return;
+              }
+              that.csrf = csrf.csrfmiddlewaretoken;
+            });
+        },
+
+        aftersubmit:function(){
+          $('#requestdialog').modal('hide');
+          $('input',$('#requestdialog')).val('');
+        }
+    });
+
+    window.ahr.request_form_dialog = window.ahr.request_form_dialog|| {};
+    window.ahr.request_form_dialog.initItem= function(item){
+        var request_form = new RequestDialogView(item);
+        return request_form;
+    };
+})();
+</script>
