@@ -14,7 +14,7 @@
     });
 
     var PostsView = window.ahr.market.MarketBaseView.extend({
-        types:{"Resources":"resource","Offers":"offer","Request":"request"},
+        types:{"Offers":"offer","Request":"request"},
 
         showItem: function(ev){
             var that = this;
@@ -41,7 +41,7 @@
             this.itemcount_url = window.ahr.app_urls.getuseritemscount;
             this.getitemfromto = window.ahr.app_urls.getusermarketitemsfromto;
             this.viewurl = window.ahr.app_urls.edititem;
-            filters.types=["resource", "offer", "request"];
+            filters.types=["offer", "request"];
             this.init(filters);
             return this;
         },

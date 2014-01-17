@@ -10,20 +10,6 @@
 <div class="row">
   <div id="market" class="col-md-12 {{init}}">
     <div id="infobar"></div>
-
-    {% include "market/clientside/expdate.html"%}
-    {% include "market/clientside/datetimepicker.html"%}
-    {% include "market/clientside/typeahead.html" %}
-    {% include "market/clientside/input.html" %}
-    {% include "market/clientside/textarea.html" %}
-
-    {% include "market/clientside/messagedialog.html" %}
-    {% include "market/clientside/recommenddialog.html" %}
-    {% include "market/clientside/ratedialog.html" %}
-    {% include "market/clientside/reportdialog.html" %}
-    {% include "market/clientside/offerdialog.html"%}
-    {% include "market/clientside/requestdialog.html"%}
-
     <!-- Banner -->
     <div class="row">
       <div class="col-md-12 exchange-banner">
@@ -60,15 +46,15 @@
             <div class="col-sm-3"> 
               <div class="market-filter-main">
                 <div class="market-filter-border"></div>
-                <div class="market-action first">
+                <div class="market-action first item-type" item_type="all">
                   <img src="{{ STATIC_URL }}images/all-button-50x50.png" alt="Filter by all" />
                   <span>ALL</span>
                 </div>
-                <div class="market-action">
+                <div class="market-action item-type" item_type="Offers">
                   <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Filter by offers" />
                   <span>OFFERS</span>
                 </div>
-                <div class="market-action">
+                <div class="market-action item-type" item_type="Request">
                   <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
                   <span>REQUESTS</span>
                 </div>
@@ -116,64 +102,25 @@
       </div>
     </div>
 
-    <!-- Market -->
-<!--     <div class="row"> -->
-      <!-- Filters -->
-<!--       <div class="col-md-3">
-        <div class="panel panel-default center-content">
-          <div class="panel-heading">
-            <h3 class="panel-title">FILTER BY</h3>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default filter-type all filter-fixed-width">All</button>
-                <button type="button" class="btn btn-default btn-success filter-type default filter-fixed-width">Default</button>
-                <button type="button" class="btn btn-default filter-type custom filter-fixed-width">Custom</button>
-              </div>
-            </div>
-            <div class="row"> &nbsp;</div>
-            <div class="row">
-              <div class="col-md-12 typetags"></div>
-            </div>
-            <div class="row"> &nbsp;</div>
-            <div class="row">
-              <div class="col-md-12"><strong>Issues:</strong></div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="row issues btn-group-sm pull-left" item_title="issues"></div>
-              </div>
-            </div>
-            <div class="row"> &nbsp;</div>
-            <div class="row"> &nbsp;</div>
-            <div class="row">
-              <div class="col-md-12"><strong>Countries:</strong></div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="row countries btn-group-sm pull-left" item_title="countries"></div>
-              </div>
-            </div>
-            <div class="row"> &nbsp;</div>
-            <div class="row"> &nbsp;</div>
-            <div class="row">
-              <div class="col-md-12"><strong>Skills:</strong></div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="row skills btn-group-sm pull-left" item_title="skills"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-<!--     </div> -->
   </div>
 </div>
 {% endblock %}
 
 {% block endjavascript %}
+
+    {% include "market/clientside/expdate.html"%}
+    {% include "market/clientside/datetimepicker.html"%}
+    {% include "market/clientside/typeahead.html" %}
+    {% include "market/clientside/input.html" %}
+    {% include "market/clientside/textarea.html" %}
+
+    {% include "market/clientside/messagedialog.html" %}
+    {% include "market/clientside/recommenddialog.html" %}
+    {% include "market/clientside/ratedialog.html" %}
+    {% include "market/clientside/reportdialog.html" %}
+    {% include "market/clientside/offerdialog.html"%}
+    {% include "market/clientside/requestdialog.html"%}
+
 
     <script type="text/javascript">
 
