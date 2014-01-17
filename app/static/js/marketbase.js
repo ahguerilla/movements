@@ -8,13 +8,26 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     currentItem: 0,
     allItemsLoaded: false,
     itemsPerCall: 15,
+    requiresResetOnNewOfferRequest: false,
 
 
     create_request: function(){
         this.requestdialog.showModal(true);
+        if(this.requiresResetOnNewOfferRequest && !this.requestdialog.oncomplete){
+            var self = this;
+            this.requestdialog.oncomplete = function(){
+                self.resetMarket();
+            };
+        }
     },
     create_offer: function(){
         this.offerdialog.showModal(true);
+        if(this.requiresResetOnNewOfferRequest && !this.offerdialog.oncomplete){
+            var self = this;
+            this.offerdialog.oncomplete = function(){
+                self.resetMarket();
+            };
+        }
     },
 
     setFilterNone:function(){
@@ -158,6 +171,12 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
     },
 
+    refreshScrollElements: function(){
+        var container = document.querySelector('#marketitems');
+        var msnry = new Masonry( container );
+        msnry.layout();
+    },
+
     afterset: function(){
         $('.numstars').rateit();
         $('.numstars').rateit('min',0);
@@ -288,6 +307,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             dfrd.done(function(data){
                 that.alert('Item deleted','#infobar');
                 $(".item-wrap[item_id='"+ item_id + "']").remove();
+                that.refreshScrollElements();
             });
         }
         return(false);

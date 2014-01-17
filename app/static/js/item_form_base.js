@@ -2,6 +2,7 @@
     window.ahr = window.ahr || {};
     window.ahr.item_form_base = window.ahr.BaseView.extend({
         el: '#itemform',
+        oncomplete: null,
         init:function(){
             this.url = window.ahr.app_urls.addmarketitem+'';
         },
@@ -21,6 +22,9 @@
             });
             dfrd.done(function(){
                 if(that.aftersubmit){that.aftersubmit();}
+                if(that.oncomplete){
+                    that.oncomplete();
+                }
                 return true;
             });
 

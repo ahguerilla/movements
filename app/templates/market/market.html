@@ -2,11 +2,6 @@
 {% load i18n %}
 
 {% block content %}
-{% include "market/clientside/marketitem.html" %}
-{% include "market/clientside/marketuser.html" %}
-{% include "market/clientside/filtertag.html" %}
-{% include "market/clientside/typetag.html" %}
-
 <div class="row">
   <div id="market" class="col-md-12 {{init}}">
     <div id="infobar"></div>
@@ -107,7 +102,11 @@
 {% endblock %}
 
 {% block endjavascript %}
-
+    {% include "market/clientside/marketitem.html" %}
+    {% include "market/clientside/marketuser.html" %}
+    {% include "market/clientside/filtertag.html" %}
+    {% include "market/clientside/typetag.html" %}
+    
     {% include "market/clientside/expdate.html"%}
     {% include "market/clientside/datetimepicker.html"%}
     {% include "market/clientside/typeahead.html" %}
