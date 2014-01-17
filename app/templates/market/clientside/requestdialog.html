@@ -60,6 +60,10 @@
           retdict['title']     = this.title_widget.getval();
           retdict['details'] = this.details_widget.getval();
           retdict.csrfmiddlewaretoken=this.csrf;
+          if(retdict['never_exp']==true && retdict['exp_date']==' 23:59'){
+            retdict['exp_date'] = "1/1/2000  23:59";
+          }
+
           return retdict;
         },
 

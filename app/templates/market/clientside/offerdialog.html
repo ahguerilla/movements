@@ -68,6 +68,9 @@
             retdict['title'] = that.title_widget.getval();
             retdict['details'] = that.details_widget.getval();
             retdict.csrfmiddlewaretoken=that.csrf;
+            if(retdict['never_exp']==true && retdict['exp_date']==' 23:59'){
+              retdict['exp_date'] = "1/1/2000  23:59";
+            }
             return retdict;
         },
 

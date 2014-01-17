@@ -40,14 +40,26 @@
 
         makeTypeAhead: function(name, func){
             var that = this;
-            $('#'+name,$(this.container)).typeahead({
-                limit: 5,
-                local: that.typeaheadval
-                }).on('typeahead:selected', function (e, d) {
+            that.typeahead = $('#'+name,$(this.container)).typeahead({
+                minLength: 0,
+                limit: 10,
+                local: that.typeaheadval});
+
+            that.typeahead.on('typeahead:selected', function (e, d) {
                     $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
-            }).blur(function(){
+                    $('#'+name,$(that.container)).val('');
+            });
+
+            that.typeahead.on('typeahead:autocompleted',function(e,d){
+                $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
+                $('#'+name,$(that.container)).trigger('blur');
+
+            });
+
+            that.typeahead.blur(function(){
                 $('#'+name,$(that.container)).val('');
             });
+
             func(this.values);
         },
 
