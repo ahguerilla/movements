@@ -234,8 +234,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     updateTypefilter: function(that, ev){
         that.filters.types.length = 0;
         var item_type = ev.currentTarget.getAttribute('item_type');
-        
-
         if(that.types[item_type]) {
             that.filters.types.push(that.types[item_type]);
         }
