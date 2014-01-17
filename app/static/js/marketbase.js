@@ -202,6 +202,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     initFilters: function(that, items, templ){
+        var cookie = $.cookie('tagfilters');
+        if(typeof cookie != 'undefined'){
+            that.filters = cookie;
+        }
         _.each(window.ahr[items], function(item){
             var activeFlag = ' ';
             if(_.contains(that.filters[items], item.pk)){
@@ -229,6 +233,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                 $(ev.currentTarget).addClass('btn-success');
             }
         }
+        $.cookie('tagfilters',that.filters);
     },
 
     updateTypefilter: function(that, ev){
@@ -313,8 +318,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     init: function(filters){
-        this.default_filters = window.ahr.clone(filters);
+        $.cookie.json = true;
 
+        this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
         this.message_widget = window.ahr.messagedialog_widget.initWidget('#'+this.el.id, '#infobar');
