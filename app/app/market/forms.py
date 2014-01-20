@@ -28,7 +28,7 @@ class MarketWriteForm(WriteForm):
 
 
 class offerForm(forms.ModelForm):
-    exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',])
+    exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',], required=False)
     class Meta:
         model = market.models.MarketItem
         fields = ['issues','skills','countries','title','details','exp_date','never_exp']
@@ -41,7 +41,7 @@ class offerForm(forms.ModelForm):
 
 
 class requestForm(forms.ModelForm):
-    exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',])
+    exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M',], required=False)
     class Meta:
         model = market.models.MarketItem
         fields = ['issues','countries','title','details','exp_date','never_exp']

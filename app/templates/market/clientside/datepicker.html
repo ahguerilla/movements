@@ -14,7 +14,10 @@
  (function(){
     var DatePickerWidget = window.ahr.BaseView.extend({
         getval: function(){
-            return this.widget.val()+ ' 23:59';
+            if(this.widget.val()!= ''){
+                return this.widget.val()+ ' 23:59';
+            }
+            return '';
         },
 
         setDatePicker: function(preval){
