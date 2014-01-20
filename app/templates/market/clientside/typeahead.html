@@ -45,15 +45,18 @@
                 limit: 10,
                 local: that.typeaheadval});
 
+            function afterselect(d){
+                $('#'+name,$(that.container)).data().ttView.setQuery('');
+                $('#'+name,$(that.container)).trigger('blur');
+                $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
+            }
+
             that.typeahead.on('typeahead:selected', function (e, d) {
-                    $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
-                    $('#'+name,$(that.container)).val('');
+                afterselect(d);
             });
 
             that.typeahead.on('typeahead:autocompleted',function(e,d){
-                $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
-                $('#'+name,$(that.container)).trigger('blur');
-
+                afterselect(d);
             });
 
             that.typeahead.blur(function(){
