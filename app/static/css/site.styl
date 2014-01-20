@@ -7,7 +7,7 @@ $offer-color = #BBEEFF
 $request-color = #89DDDD
 $filter-background = #585F65
 $filter-item-selected = #444D54
-$dialog-bg-color = rgba(255, 255, 255, 0.69)
+$dialog-bg-color = rgba(255, 255, 255, 0.75)
 $warning-bg-color = rgba(185, 74, 72, 0.69)
 $std-border-radius = 10px
 
@@ -160,9 +160,9 @@ select.input-extra-height
     text-align right
 
 .sign-up-form, .public
-  input
+  input[type=text], input[type=email], input[type=number], input[type=password]
     border-radius $std-border-radius
-    padding 20px
+    height 45px
   label
     font-weight normal
 

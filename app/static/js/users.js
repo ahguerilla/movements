@@ -20,7 +20,7 @@
         recommend: function(ev){
             var username = $(ev.currentTarget).attr('username');
             window.ahr.recommend_widget.initWidget(username);
-            $('#recsub').val($('#currentusername').text()+ ' recommeds user '+ username);
+            $('#recsub').val($('#currentusername').text()+ ' recommends user '+ username);
             $('#recsub').attr('readonly',true);
             var href = '<a href="'+window.location.origin+'/uer/profile/'+username+'">'+username+'</a>';
             $('#recmessage').val($('#currentusername').text()+ ' recommends you have a look at '+ username + ' profile.' + ' \r\n'+ href );
