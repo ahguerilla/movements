@@ -3,6 +3,7 @@
 
 {% block outsidecontainer %}
 <div id="market" >
+  {% include "market/clientside/marketitemdialog.html" %}
   <!-- Banner -->
   <div class="exchange-banner">
     <div class="exchange-opacity">
@@ -128,6 +129,8 @@
     {% include "market/clientside/input.html" %}
     {% include "market/clientside/textarea.html" %}
 
+    {% include "market/clientside/commentview.html" %}
+    {% include "market/clientside/commentadd.html" %}
     {% include "market/clientside/messagedialog.html" %}
     {% include "market/clientside/recommenddialog.html" %}
     {% include "market/clientside/ratedialog.html" %}

@@ -1,0 +1,130 @@
+<div id="marketitemdialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="itemdialogerror"></div>
+        <div id="marketitem_place"></div>
+        <div id="marketitem_comment_form"></div>
+        <div id="marketitem_comments"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+(function(){
+    var MarketItemDialogView =  window.ahr.BaseView.extend({
+      item:'',
+      el: '#marketitemdialog',
+      getCommentData: function(){
+        var dfrd = $.Deferred();
+        window.ahr.getcsrf(function(csrf){
+          dfrd.resolve(csrf);
+        });
+        return dfrd;
+      },
+
+      comment: function(){
+        var comment = $('#newcomment').val();
+        var that = this;
+        if(comment){
+          var dfrd = this.getCommentData();
+          dfrd.done(function(csrf){
+            $.ajax({
+              type: 'POST',
+              url: window.ahr.app_urls.addcomment+that.id,
+              dataType:'json',
+              data: {
+                "csrfmiddlewaretoken":csrf.csrfmiddlewaretoken,
+                "contents": comment
+              },
+              success: function(item){
+                $('#newcomment').val("");
+                $('#newcomment').height(100);
+                that.addCommentToCommentList(item.obj, true);
+              }
+            });
+          });
+        }
+      },
+
+      deleteComment:function(ev){
+        var that = this;
+        if(confirm('Are you sure you want yo delete your comment?')){
+          var comment_id =  ev.currentTarget.getAttribute('comment-id');
+          var aurl = $('a',$(ev.currentTarget))[0];
+          var dfrd = $.ajax({url:aurl.href});
+          dfrd.success(function(data){
+            that.alert('Your comment was deleted.','#itemdialogerror');
+            $('.comment[comment-id="'+comment_id+'"]').remove();
+          });
+        }
+        return false;
+      },
+
+      addCommentToCommentList: function(comment_item, front){
+        front = front === true ? front : false;
+        var comment_html = this.comment_tmp({pk:comment_item.pk,
+          userpic: comment_item.fields.avatar,
+          user: comment_item.fields.username,
+          owner: comment_item.fields.owner,
+          owner_url: comment_item.fields.profile_url,
+          pub_date: moment(comment_item.fields.pub_date).format("HH:mm on D/MM/YY"),
+          content: comment_item.fields.contents//.replace(/\n/g, '<br />')
+        });
+
+        if(front){
+          $('#marketitem_comments').prepend(comment_html);
+        } else {
+          $('#marketitem_comments').append(comment_html);
+        }
+      },
+
+      show: function(id){
+        var that = this;
+        that.id =  id;
+
+        $('#marketitem_comments').empty();
+        $.getJSON(
+          window.ahr.app_urls.getmarketitem+id,
+          function(data){
+            var html = that.item_tmp(data[0].fields);
+            $('#marketitem_place').html(html);
+            $('.delete',$('#marketitemdialog')).hide();
+            $.getJSON(window.ahr.app_urls.getcommentslast.replace('0',id)+'100',function(data){
+            _.each(data, function(comment){
+              that.addCommentToCommentList(comment);
+            });
+          });
+          $('#marketitemdialog').modal('show');
+        });
+      },
+
+      initialize: function(){
+        this.item_tmp = _.template($('#item_template').html());
+        this.comment_form_tmp = _.template($('#comment_add_template').html());
+        $('#marketitem_comment_form').html(this.comment_form_tmp());
+        window.ahr.expandTextarea('#newcomment');
+        this.comment_tmp = _.template($('#comment_view_template').html());
+        $('#marketitemdialog').on('hidden.bs.modal', function () {
+          $('#marketitem_comments').empty();
+          $('#marketitem_place').empty();
+          $('#newcomment').val('');
+        });
+
+        this.delegateEvents(_.extend(this.events,{
+          'click .comment-btn': 'comment',
+          'click .comment-delete': 'deleteComment',
+        }));
+      }
+    });
+
+    window.ahr.marketitem_dialog = window.ahr.marketitem_dialog|| {};
+    window.ahr.marketitem_dialog.initWidget= function(){
+        var marketitem_dialog = new MarketItemDialogView();
+        return marketitem_dialog;
+    };
+
+  })();
+</script>

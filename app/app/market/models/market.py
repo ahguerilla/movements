@@ -38,6 +38,7 @@ class MarketItem(models.Model):
     def getdict(self):
         adict = {'fields':{}}
         adict['pk'] = self.id
+        adict['fields']['pk'] = self.id
         adict['fields']['item_type'] = self.item_type
         adict['fields']['issues']= [ob.id for ob in self.issues.all()]
         adict['fields']['countries']= [ob.id for ob in self.countries.all()]

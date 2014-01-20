@@ -76,8 +76,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     showItem: function(ev){
+        var that = this;
         var id = ev.currentTarget.getAttribute('item_id');
-        window.location = this.viewurl+id;
+        this.marketitemdialog.show(id,that);
     },
 
     getItems: function(from,to,filters,aurl){
@@ -172,9 +173,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     refreshScrollElements: function(){
-        var container = document.querySelector('#marketitems');
-        var msnry = new Masonry( container );
-        msnry.layout();
+        // var container = document.querySelector('#marketitems');
+        // var msnry = new Masonry( container );
+        this.msnry.layout();
     },
 
     afterset: function(){
@@ -287,7 +288,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         },
 
     resetitemrate:function(item_id, rate){
-        $(".numstars[item_id="+item_id+"]").rateit('value',rate);
+        try{
+            $(".numstars[item_id="+item_id+"]").rateit('value',rate);
+        }catch(err){
+            $.noop();
+        }
     },
 
     recommend: function(ev){
@@ -317,16 +322,32 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         return(false);
     },
 
+    editItem: function(ev){
+        var that = this;
+        var id = ev.currentTarget.getAttribute('item_id');
+        $.getJSON(window.ahr.app_urls.getuseritem+id,function(item){
+            if(item[0].fields.item_type == "request"){
+                that.requestdialog.edit(item);
+                that.requestdialog.showModal();
+            }else{
+                that.offerdialog.edit(item);
+                that.offerdialog.showModal();
+            }
+        });
+    },
+
     init: function(filters){
         $.cookie.json = true;
 
         this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
-        this.message_widget = window.ahr.messagedialog_widget.initWidget('#'+this.el.id, '#infobar');
-        this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id, this.resetitemrate);
+        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
         this.report_dialog = window.ahr.report_dialog.initWidget('body');
         this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
+        this.marketitemdialog = window.ahr.marketitem_dialog.initWidget();
+        this.item_tmp = _.template($('#item_template').html());
 
         this.filters = filters;
         this.initTemplates(filters);
@@ -343,6 +364,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'click .private_message' : 'private_message',
             'click .recommend': 'recommend',
             'click .delete' : 'deleteItem',
+            'click .edit' : 'editItem',
             'submit': 'filterKeySearch'
         }));
     }
