@@ -89,7 +89,6 @@ class UserProfile(models.Model):
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
     firstlogin = models.BooleanField(_('first_login'), default=True)
-    rated_by_ahr = models.IntegerField(_('Rated by AHR'), default=0, choices=ahr_rating)
     ratecount = models.IntegerField(_('ratecount'), default=0)
     score = models.FloatField(_('score'), default=0)
     notperm = JSONField(blank=True)
@@ -111,6 +110,11 @@ class UserProfile(models.Model):
         start=kwargs.get('start', None)
         finish=kwargs.get('finish', None)
         return cls.objects.filter(query).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
+
+
+class OrganisationalRating(models.Model):
+    user = models.ForeignKey(auth.models.User, null=False, blank=False)
+    rated_by_ahr = models.IntegerField(_('Rated by AHR'), default=0, choices=ahr_rating)
 
 
 class UserRate(models.Model):

@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
-from models import UserProfile
+from models import UserProfile, OrganisationalRating
 from forms import SettingsForm, UserForm, SignupForm, VettingForm
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.models import EmailAddress
@@ -174,6 +174,7 @@ class AccAdapter(DefaultAccountAdapter):
 
     def send_vetting_email(self, user, form):
         vet_url = reverse('vet_user', args=(user.id,))
+        vet_url = 'http://' + Site.objects.get_current().domain + vet_url
         ctx = {
             "user": user,
             "form": form,
@@ -208,18 +209,27 @@ class AccAdapter(DefaultAccountAdapter):
 @staff_member_required
 def vet_user(request, user_id):
     user = User.objects.get(pk=user_id)
+    try:
+        rating = OrganisationalRating.objects.get(user=user)
+    except OrganisationalRating.DoesNotExist:
+        rating = None
     msg = ''
     if request.method == 'POST':
-        form = VettingForm(request.POST, instance=user.userprofile)
+        form = VettingForm(request.POST, instance=rating)
         msg = None
         if form.is_valid():
-            form.save()
-            user.is_active = user.userprofile.rated_by_ahr != 0
+            if not rating:
+                rating = form.save(commit=False)
+                rating.user_id = user.id
+                rating.save()
+            else:
+                form.save()
+            user.is_active = rating.rated_by_ahr != 0
             user.save()
             msg = 'User updated'
     else:
-        form = VettingForm(instance=user.userprofile)
-    email_verified = EmailAddress.objects.filter(user=request.user, verified=True).exists()
+        form = VettingForm(instance=rating)
+    email_verified = EmailAddress.objects.filter(user=user, verified=True).exists()
     ctx = {
         'email_verified': email_verified,
         'original': user,

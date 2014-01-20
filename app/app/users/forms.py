@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from models import UserProfile
+from models import UserProfile, OrganisationalRating
 
 
 
@@ -59,5 +59,5 @@ class SettingsForm(forms.ModelForm):
 
 class VettingForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = OrganisationalRating
         fields = ['rated_by_ahr']
