@@ -12,6 +12,7 @@ js = Bundle(
         './js/lib/moment-timezone.min.js',
         './js/lib/bootstrap.js',
         './js/lib/bootstrap-datetimepicker.min.js',
+        #'./js/lib/bootstrap-datetimepicker.js',
         './js/lib/tagmanager.js',
         './js/lib/typeahead.min.js',
         './js/lib/jquery.blockUI.js',

@@ -138,6 +138,10 @@
               }
               that.csrf = csrf.csrfmiddlewaretoken;
             });
+          $('#requestdialog').on('scroll',function(){
+            var top = $('.glyphicon.glyphicon-calendar',$('#requestdialog')).offset().top-$(window).scrollTop();
+            $('.bootstrap-datetimepicker-widget.dropdown-menu.pull-right').css('top',top+20);
+          });
         },
 
         aftersubmit:function(){
