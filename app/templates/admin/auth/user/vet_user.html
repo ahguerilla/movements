@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label='auth' %}">Auth</a>
+&rsaquo; <a href="/admin/auth/user">{{ 'Users'|capfirst }}</a>
+&rsaquo; <a href="/admin/auth/user/{{ original.pk }}">{{ original|truncatewords:"18" }}</a>
+&rsaquo; {% trans 'Vet User' %}
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <form action="" method="post">
+    {% csrf_token %}{% block form_top %}{% endblock %}
+    <div>
+      {% if form.errors %}
+        <p class="errornote">
+        {% blocktrans count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+        </p>
+      {% endif %}
+      <p>This is where you can mark a user as vetted by AHR, the star ratings mean this:</p>
+      <ul>
+        <li>1 Star - Lowest ranking, we are able to verify email address</li>
+        <li>2 Stars - We are able to verify email address, facebook account</li>
+        <li>3 Stars - We are able to verify email address, facebook account, as well as some history of public engagement and skills </li>
+        <li>4 Stars - We know this person or there is significant public information about them and their work</li>
+        <li>5 Stars - We know this person personally and can verify that they’re awesome, public, engaged, etc.</li>
+      </ul>
+      <p>You are vetting <strong>{{original}}</strong>, who provided the email <strong>{{original.email}}</strong> which they <strong>have {% if not email_verified %}not{% endif %} verified</strong> through the system.</p>
+      <div>
+        <p>Rate User: {{ form.rated_by_ahr }}</p>
+      </div>
+      {% if msg %}
+      <div style="border: 1px solid teal; padding: 10px; font-size: 1.2em; color: teal; margin-bottom: 5px;">
+        {{ msg }}
+      </div>
+      {% endif %}
+      <div>
+        <input type="submit" value="{% trans 'Submit' %}"  />
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

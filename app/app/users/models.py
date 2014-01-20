@@ -58,6 +58,15 @@ class Residence(models.Model):
         ordering = ['residence']
 
 
+ahr_rating = [
+    (0, '0 star'),
+    (1, '1 star'),
+    (2, '2 stars'),
+    (3, '3 stars'),
+    (4, '4 stars'),
+    (5, '5 stars'),
+]
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     bio = models.TextField(_('bio'), null=True, blank=True)
@@ -79,11 +88,10 @@ class UserProfile(models.Model):
     is_individual = models.BooleanField(_('individual'), default=True)
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=False)
-    vetted_by_ahr = models.BooleanField(_('vetted_by_ahr'), default=False)
-    rated_by_ahr = models.IntegerField(_('rated_by_ahr'), default=0)
     firstlogin = models.BooleanField(_('first_login'), default=True)
-    ratecount = models.IntegerField(_('ratecount'),default=0)
-    score = models.FloatField(_('score'),default=0)
+    rated_by_ahr = models.IntegerField(_('Rated by AHR'), default=0, choices=ahr_rating)
+    ratecount = models.IntegerField(_('ratecount'), default=0)
+    score = models.FloatField(_('score'), default=0)
     notperm = JSONField(blank=True)
 
     def get_twitter_url(self):

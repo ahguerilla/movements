@@ -1,8 +1,8 @@
+from django.core.urlresolvers import reverse
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from app.users.models import UserProfile, Countries, Skills, Issues
-
 
 
 class UserProfileInline(admin.StackedInline):
@@ -13,6 +13,17 @@ class UserProfileInline(admin.StackedInline):
 
 class UserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
+    list_display = ('username', 'email', 'first_name', 'last_name', 'vetting')
+
+    def vetting(self, obj):
+        if obj.is_staff:
+            return 'Staff'
+        result = 'Vetted' if obj.is_active else 'Not Vetted'
+        vet_url = reverse('vet_user', args=(obj.id,))
+        return u'<a href="{0}" target="_blank" alt="vet user">Vet User</a> ({1})'.format(vet_url, result)
+    vetting.process = 'Process'
+    vetting.allow_tags = True
+
 
 # Re-register UserAdmin
 admin.site.unregister(User)

@@ -55,3 +55,9 @@ class SettingsForm(forms.ModelForm):
         if commit:
             m.save()
         return m
+
+
+class VettingForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['rated_by_ahr']

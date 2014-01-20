@@ -3,11 +3,13 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from models import UserProfile
-from forms import SettingsForm, UserForm, SignupForm
+from forms import SettingsForm, UserForm, SignupForm, VettingForm
 from form_overrides import ResetPasswordFormSilent
+from allauth.account.models import EmailAddress
 from allauth.account.views import SignupView, PasswordResetView
 from allauth.socialaccount.views import SignupView as SocialSignupView
 from allauth.account.adapter import DefaultAccountAdapter
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -171,9 +173,11 @@ class AccAdapter(DefaultAccountAdapter):
         return user
 
     def send_vetting_email(self, user, form):
+        vet_url = reverse('vet_user', args=(user.id,))
         ctx = {
             "user": user,
             "form": form,
+            "vet_url": vet_url,
             "current_site": Site.objects.get_current().domain,
         }        
         self.send_mail('account/email/user_vetting_email', config.ACTIVATE_USER_EMAIL, ctx)
@@ -199,3 +203,28 @@ class AccAdapter(DefaultAccountAdapter):
         }
         self.send_mail('account/email/user_confirmed_email', config.ACTIVATE_USER_EMAIL, ctx)
         return 'http://'+Site.objects.get_current().domain+'/user/waitforactivation'
+
+
+@staff_member_required
+def vet_user(request, user_id):
+    user = User.objects.get(pk=user_id)
+    msg = ''
+    if request.method == 'POST':
+        form = VettingForm(request.POST, instance=user.userprofile)
+        msg = None
+        if form.is_valid():
+            form.save()
+            user.is_active = user.userprofile.rated_by_ahr != 0
+            user.save()
+            msg = 'User updated'
+    else:
+        form = VettingForm(instance=user.userprofile)
+    email_verified = EmailAddress.objects.filter(user=request.user, verified=True).exists()
+    ctx = {
+        'email_verified': email_verified,
+        'original': user,
+        'user': user,
+        'form': form,
+        'msg': msg,
+    }
+    return render_to_response('admin/auth/user/vet_user.html', ctx, context_instance=RequestContext(request))
