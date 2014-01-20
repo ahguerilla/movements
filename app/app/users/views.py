@@ -183,10 +183,10 @@ class AccAdapter(DefaultAccountAdapter):
         self.send_mail('account/email/user_vetting_email', config.ACTIVATE_USER_EMAIL, ctx)
 
     def save_user(self, request, user, form, commit=True):
-        self.send_vetting_email(user, form)
         user.first_name = ''
         user.last_name = ''
         user = super(AccAdapter,self).save_user(request, user, form, commit=True)
+        self.send_vetting_email(user, form)
         return user
 
     def get_email_confirmation_redirect_url(self, request):
