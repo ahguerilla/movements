@@ -215,9 +215,17 @@
 <script type="text/javascript">
   (function(){
     $.backstretch("{{ STATIC_URL }}images/landing-bg-1920x1202-blended.jpg");
+    {% if not perms|length %}
+    var perms = null;
+    {% else %}
     var perms = {{notperm|safe}};
-    for(item in perms){
-      $('input[name=notperm-'+item+']').attr('checked',true);
+    {% endif %}
+    if (perms) {
+      for(item in perms){
+        $('input[name=notperm-'+item+']').attr('checked', true);
+      }
+    } else {
+      $('input[name^=notperm-]').attr('checked', true);
     }
     $('.submitsetting').on('click',function(e){
       e.preventDefault();
