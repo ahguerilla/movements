@@ -89,7 +89,6 @@ def profile(request, user_name=None):
     is_self = False
     if user.id == request.user.id:
         is_self = True
-
     return render_to_response('users/user_profile.html',
                                 {
                                     'user_details': user,
@@ -97,6 +96,7 @@ def profile(request, user_name=None):
                                     'is_self': is_self,
                                 },
                                 context_instance=RequestContext(request))
+
 
 def waitforactivation(request):
     return render_to_response('users/waitforactivation.html',
@@ -114,6 +114,11 @@ class SilentPasswordResetView(PasswordResetView):
 
 password_reset = SilentPasswordResetView.as_view()
 
+
+class AhrSignupView(SignupView):
+    pass
+
+ahr_signup_view = SignupView
 
 class AhrSocialSignupView(SocialSignupView):
     def get_context_data(self, **kwargs):
@@ -144,19 +149,19 @@ def signup_from_home(request):
     return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))
 
 
-def process_signup(request):
-    form = SignupView.form_class()
-    if request.method == 'POST':
-        form.fields['first_name'].initial = request.POST.get('first_name', '')
-        form.fields['last_name'].initial = request.POST.get('last_name', '')
-        form.fields['email'].initial = request.POST.get('email', '')
-    view_dict = {
-        'form': form,
-        'body_class': 'narrow',
-        'sign_up': True,
-        'post_url': ''
-    }
-    return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))    
+class AhrSignupView(SignupView):
+    def get_context_data(self, **kwargs):
+        print 'HUR I AM'
+        ret = super(AhrSignupView, self).get_context_data(**kwargs)
+        context_data = {
+            'body_class': 'narrow',
+            'sign_up': True,
+            'post_url': ''
+        }
+        ret.update(context_data)
+        return ret
+
+process_signup = AhrSignupView.as_view()
 
 
 class AccAdapter(DefaultAccountAdapter):
@@ -165,8 +170,19 @@ class AccAdapter(DefaultAccountAdapter):
         user.is_active = False
         return user
 
-    def save_user(self, *args,**kwargs):
-        user = super(AccAdapter,self).save_user(*args,**kwargs)
+    def send_vetting_email(self, user, form):
+        ctx = {
+            "user": user,
+            "form": form,
+            "current_site": Site.objects.get_current().domain,
+        }        
+        self.send_mail('account/email/user_vetting_email', config.ACTIVATE_USER_EMAIL, ctx)
+
+    def save_user(self, request, user, form, commit=True):
+        self.send_vetting_email(user, form)
+        user.first_name = ''
+        user.last_name = ''
+        user = super(AccAdapter,self).save_user(request, user, form, commit=True)
         return user
 
     def get_email_confirmation_redirect_url(self, request):
