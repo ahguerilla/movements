@@ -16,12 +16,13 @@
                 <li role="presentation"></li>
                 <li role="presentation"><a owner="<%- owner %>" title="<%- title %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" class="report_post" role="menuitem" tabindex="-1" href="#">Report post</a></li>
-                <li role="presentation"><a item_id="<%- pk %>" rateing="user" username="<%- owner %>"  score="<%- usercore %>" ratecount="<%- ratecount %>" class="btn rate rate_user" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
+                <li role="presentation"><a item_id="<%- pk %>" rateing="user" username="<%- owner %>"  score="<%- usercore %>" ratecount="<%- ratecount %>" class="rate rate_user" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" owner="<%- owner %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
               <%}%>
               <% if (ownerid == window.ahr.user_id){ %>
                 <li role="presentation"></li>
                 <li role="presentation"><a item_id="<%- pk %>" class="delete" role="menuitem" tabindex="-1" href="#">Delete</a></li>
+                <li role="presentation"><a item_id="<%- pk %>" class="edit" role="menuitem" tabindex="-1" href="#">Edit</a></li>
               <%}%>
             </ul>
           </div>
