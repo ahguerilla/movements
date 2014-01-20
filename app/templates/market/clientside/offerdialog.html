@@ -145,6 +145,10 @@
               }
               that.csrf = csrf.csrfmiddlewaretoken;
             });
+          $('#offerdialog').on('scroll',function(){
+            var top = $('.glyphicon.glyphicon-calendar',$('#offerdialog')).offset().top-$(window).scrollTop();
+            $('.bootstrap-datetimepicker-widget.dropdown-menu.pull-right').css('top',top+20);
+          });
         },
 
         aftersubmit:function(){

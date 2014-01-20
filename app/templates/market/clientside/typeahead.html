@@ -40,14 +40,29 @@
 
         makeTypeAhead: function(name, func){
             var that = this;
-            $('#'+name,$(this.container)).typeahead({
-                limit: 5,
-                local: that.typeaheadval
-                }).on('typeahead:selected', function (e, d) {
-                    $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
-            }).blur(function(){
+            that.typeahead = $('#'+name,$(this.container)).typeahead({
+                minLength: 0,
+                limit: 10,
+                local: that.typeaheadval});
+
+            function afterselect(d){
+                $('#'+name,$(that.container)).data().ttView.setQuery('');
+                $('#'+name,$(that.container)).trigger('blur');
+                $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
+            }
+
+            that.typeahead.on('typeahead:selected', function (e, d) {
+                afterselect(d);
+            });
+
+            that.typeahead.on('typeahead:autocompleted',function(e,d){
+                afterselect(d);
+            });
+
+            that.typeahead.blur(function(){
                 $('#'+name,$(that.container)).val('');
             });
+
             func(this.values);
         },
 

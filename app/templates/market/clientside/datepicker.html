@@ -1,13 +1,12 @@
 <script type="text/template" id="datepicker_template">
     <label for="<%- field %>"><%- title %></label>
     <div class='input-group date' id='datepicker-<%- field %>'>
-      <input type='text' id="<%- field%>"  name="<%- field %>" class="form-control input-sm" required="true" />
+      <input type='text' id="<%- field%>"  name="<%- field %>" class="form-control input-sm" readonly="true" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
     </div>
-  </div>
- <div class="<%- field %> error"></div>
+    <div class="<%- field %> error"></div>
 </script>
 
 
@@ -15,7 +14,10 @@
  (function(){
     var DatePickerWidget = window.ahr.BaseView.extend({
         getval: function(){
-            return this.widget.val()+ ' 23:59';
+            if(this.widget.val()!= ''){
+                return this.widget.val()+ ' 23:59';
+            }
+            return '';
         },
 
         setDatePicker: function(preval){
@@ -35,7 +37,7 @@
         },
 
         enable: function(){
-            this.widget.attr('readonly',false);
+            // this.widget.attr('readonly',false);
             this.widget.datetimepicker({format:'D/M/YYYY',startDate: Date(), pickTime:false,maskInput:false});
             this.setPicker();
         },
@@ -60,12 +62,14 @@
                 placeholder: that.options.placeholder
                 });
             $(that.container).html(html);
-            that.widget = $('#'+that.field,$(that.container));
+            that.widget = $('#datepicker-'+that.field,$(that.container));
             if(data.preval){
                  that.widget.val(data.preval);
             }
             this.widget.datetimepicker({format:'D/M/YYYY',startDate: Date(), pickTime:false,maskInput:false});
+
             this.setPicker();
+
         }
     });
     window.ahr.datepicker_widget = window.ahr.datepicker_widget || {};

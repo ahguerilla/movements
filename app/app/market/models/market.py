@@ -21,7 +21,7 @@ class MarketItem(models.Model):
     url = models.CharField(_('URL Link'), max_length=500, blank=True)
     published = models.BooleanField(_('is published?'), default=True)
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
-    exp_date = models.DateTimeField(_('expiry date'))
+    exp_date = models.DateTimeField(_('expiry date'),blank=True, null=True)
     commentcount = models.IntegerField(_('commentcount'), default=0)
     ratecount = models.IntegerField(_('ratecount'), default=0)
     reportcount = models.IntegerField(_('reportcount'), default=0)
