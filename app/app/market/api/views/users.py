@@ -1,19 +1,14 @@
 import json
-
-from app.market.api.utils import *
-import app.market as market
-from app.market.forms import item_forms,saveMarketItem
-import app.users as users
-from django.core import serializers
-from django.db.models import Q,Count,Avg
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404,render_to_response, RequestContext
+from django.db.models import Q
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from haystack.query import SearchQuerySet
-import avatar
 from django.contrib.auth.decorators import login_required
 from postman.api import pm_write
 
+from app.market.api.utils import *
+import app.users as users
 
 def getUserDict(userprofile):
     adict= {'fields':{}}
@@ -28,6 +23,12 @@ def getUserDict(userprofile):
     adict['fields']['issues']= [ob.id for ob in userprofile.issues.all()]
     adict['fields']['countries']= [ob.id for ob in userprofile.countries.all()]
     adict['fields']['skills']= [ob.id for ob in userprofile.skills.all()]
+    # AB - I added these to make the user page render, but it's rendering kinda funny
+    adict['fields']['ownerid'] = userprofile.user.id
+    adict['fields']['item_type'] = 'user'
+    adict['fields']['owner'] = userprofile.user.username
+    adict['fields']['usercore'] = userprofile.score
+    adict['fields']['commentcount'] = 0
     return adict
 
 
