@@ -10,7 +10,7 @@
         <div class="pull-right item-menu" style="position:relative;">
           <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
           <div class="dropdown">
-            <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu<%- pk %>" data-toggle="dropdown" />
+            <button class="btn dropdown-toggle sr-only dropdownMenu<%- pk %>" type="button" data-toggle="dropdown" />
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
               <% if (ownerid != window.ahr.user_id){ %>
                 <li role="presentation"></li>
@@ -28,22 +28,24 @@
           </div>
         </div>
       </div>
-      <div class="item_container" item_id="<%- pk %>">
-        <div class="item-title" owner_id="<%- ownerid %>">
-          <div class="item-icon <%- item_type.toLowerCase() %>"></div>
-          <div class="marketitem_title"><%- title %></div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="item-body"><%- details %></div>
-        <div class="item-tags">
-          <div class="item-comment-count"><%- commentcount %> Comment<% if (commentcount != 1){ %>s<%}%></div>
-          <div>
-            <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
-            <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
-            <% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
+      <a href="#item/<%- pk %>" >
+        <div class="" item_id="<%- pk %>">
+          <div class="item-title" owner_id="<%- ownerid %>">
+            <div class="item-icon <%- item_type.toLowerCase() %>"></div>
+            <div class="marketitem_title"><%- title %></div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="item-body"><%- details %></div>
+          <div class="item-tags">
+            <div class="item-comment-count"><%- commentcount %> Comment<% if (commentcount != 1){ %>s<%}%></div>
+            <div>
+              <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
+              <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
+              <% _.each(skills, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
+            </div>
           </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </script>
@@ -60,7 +62,9 @@
         return dfrd;
       },
 
-      comment: function(){
+      comment: function(ev){
+        ev.preventDefault();
+        var id = $(ev.currentTarget).data().id;
         var comment = $('#newcomment').val();
         var that = this;
         if(comment){
@@ -68,7 +72,7 @@
           dfrd.done(function(csrf){
             $.ajax({
               type: 'POST',
-              url: window.ahr.app_urls.addcomment+that.id,
+              url: window.ahr.app_urls.addcomment+id,
               dataType:'json',
               data: {
                 "csrfmiddlewaretoken":csrf.csrfmiddlewaretoken,
@@ -82,16 +86,17 @@
             });
           });
         }
+        return(false);
       },
 
       deleteComment:function(ev){
+        ev.preventDefault();
         var that = this;
         if(confirm('Are you sure you want yo delete your comment?')){
           var comment_id =  ev.currentTarget.getAttribute('comment-id');
-          var aurl = $('a',$(ev.currentTarget))[0];
-          var dfrd = $.ajax({url:aurl.href});
+          var href = ev.currentTarget.href;
+          var dfrd = $.ajax({url:href});
           dfrd.success(function(data){
-            that.alert('Your comment was deleted.','#itemdialogerror');
             $('.comment[comment-id="'+comment_id+'"]').remove();
           });
         }
@@ -116,88 +121,83 @@
         }
       },
 
-      show: function(id){
-        var that = this;
-        that.id =  id;
-
-        $('#marketitem_comments').empty();
-        $.getJSON(
-          window.ahr.app_urls.getmarketitem+id,
-          function(data){
-            var html = that.item_tmp(data[0].fields);
-            $('#marketitem_place').html(html);
-            $('.delete',$('#marketitemdialog')).hide();
-            $.getJSON(window.ahr.app_urls.getcommentslast.replace('0',id)+'100',function(data){
-            _.each(data, function(comment){
-              that.addCommentToCommentList(comment);
-            });
-          });
-          $('#newcomment').height(100);
-          $('#marketitemdialog').modal('show');
-        });
-      },
-
       show_dropdown:function(ev){
         ev.preventDefault();
         var item_id = ev.currentTarget.getAttribute('item_id');
-        $('#dropdownMenu'+item_id).trigger('click');
+        $('.dropdownMenu'+item_id).trigger('click');
         return false;
       },
 
       private_message: function(ev){
+        ev.preventDefault();
         var username = ev.currentTarget.getAttribute('owner');
         var item_id = ev.currentTarget.getAttribute('item_id');
         var msgsub = 'Re: '+$('.marketitem_title',$('.market-item-card[item_id='+item_id+']')).text();
-        this.message_widget.show(username,msgsub,'',true);
+        this.message_widget.show(username, msgsub, '', true);
+        return(false);
       },
 
       resetitemrate:function(item_id, rate){
-          try{
-              $(".numstars[item_id="+item_id+"]").rateit('value',rate);
-          }catch(err){
-              $.noop();
-          }
+        try{
+          $(".numstars[item_id="+item_id+"]").rateit('value',rate);
+        }catch(err){
+          $.noop();
+        }
       },
 
       recommend: function(ev){
-          var title = ev.currentTarget.getAttribute('title');
-          $('#recsub').val($('#currentusername').text()+' recommends :'+ title);
-          $('#recsub').attr('readonly',true);
-          var href = '<a href="'+window.location+'">'+ title +'</a>';
-          $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at this post by '+ ev.currentTarget.getAttribute('owner')+' \r\n'+ href );
-          $('#touser').val('');
-          $('#recommenddialog').modal('show');
+        ev.preventDefault();
+        var title = ev.currentTarget.getAttribute('title');
+        $('#recsub').val($('#currentusername').text()+' recommends :'+ title);
+        $('#recsub').attr('readonly',true);
+        var href = '<a href="'+window.location+'">'+ title +'</a>';
+        $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at this post by '+ ev.currentTarget.getAttribute('owner')+' \r\n'+ href );
+        $('#touser').val('');
+        $('#recommenddialog').modal('show');
+        return(false);
       },
 
       deleteItem: function(ev){
-          var that = this;
-          if(confirm('Are you sure you want to delete this item?')){
-              var item_id = ev.currentTarget.getAttribute('item_id');
-              var dfrd = $.ajax({
-                  url:window.ahr.app_urls.deletemarketitem+item_id,
-              });
-              dfrd.done(function(data){
-                  that.alert('Item deleted','#infobar');
-                  $(".item-wrap[item_id='"+ item_id + "']").remove();
-                  that.refreshScrollElements();
-              });
-          }
-          //that.msnry.layout();
-          return(false);
+        ev.preventDefault();
+        var that = this;
+        if(confirm('Are you sure you want to delete this item?')){
+          var item_id = ev.currentTarget.getAttribute('item_id');
+          var dfrd = $.ajax({
+            url:window.ahr.app_urls.deletemarketitem+item_id,
+          });
+          dfrd.done(function(data){
+            that.alert('Item deleted','#infobar');
+            $(".item-wrap[item_id='"+ item_id + "']").remove();
+            that.refreshScrollElements();
+          });
+        }
+        return(false);
       },
 
       editItem: function(ev){
-          var that = this;
-          var id = ev.currentTarget.getAttribute('item_id');
-          $.getJSON(window.ahr.app_urls.getuseritem+id,function(item){
-              if(item[0].fields.item_type == "request"){
-                  that.market.requestdialog.edit(item);
-                  that.market.requestdialog.showModal();
-              }else{
-                  that.market.offerdialog.edit(item);
-                  that.market.offerdialog.showModal();
-              }
-          });
+        ev.preventDefault();
+        var that = this;
+        var id = ev.currentTarget.getAttribute('item_id');
+        $.getJSON(window.ahr.app_urls.getuseritem+id,function(item){
+          if(item[0].fields.item_type == "request"){
+            that.market.requestdialog.edit(item);
+            that.market.requestdialog.showModal();
+          }else{
+            that.market.offerdialog.edit(item);
+            that.market.offerdialog.showModal();
+          }
+        });
+        return(false);
+      },
+
+      afterset: function(){
+        $('.numstars').rateit();
+        $('.numstars').rateit('min',0);
+        $('.numstars').rateit('max',5);
+        $('.numstars').rateit('readonly',true);
+        $('.numstars').each(function(){
+            $(this).rateit('value',this.getAttribute('score'));
+        });
       },
 
       initialize: function(options){
@@ -206,16 +206,10 @@
         this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
         this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
         this.report_dialog = window.ahr.report_dialog.initWidget('body');
-
-        // this.comment_form_tmp = _.template($('#comment_add_template').html());
-        // $('#marketitem_comment_form').html(this.comment_form_tmp());
-        // window.ahr.expandTextarea('#newcomment');
-        // this.comment_tmp = _.template($('#comment_view_template').html());
-        // $('#marketitemdialog').on('hidden.bs.modal', function () {
-        //   $('#marketitem_comments').empty();
-        //   $('#marketitem_place').empty();
-        //   $('#newcomment').val('');
-        // });
+        this.comment_tmp = _.template($('#comment_view_template').html());
+        this.comment_form_tmp = _.template($('#comment_add_template').html());
+        $('#marketitem_comment_form').html(this.comment_form_tmp());
+        window.ahr.expandTextarea('#newcomment');
 
         this.delegateEvents(_.extend(this.events,{
           'click .comment-btn': 'comment',

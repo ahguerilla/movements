@@ -1,17 +1,15 @@
 <script type="text/template" id="comment_view_template">
 
-<div class="comment" comment-owner="<%- owner %>" comment-id="<%- pk %>">
-  <div comment-id="<%- pk %>" class="comment-delete pull-left">
-    <% if(owner===window.ahr.user_id){ %><strong> <a class="pull-left"  href="<%- window.ahr.app_urls.deletecomment+pk %>">X</a></strong> <% } %>
-    <a href="<%- owner_url %>" class="pull-left"><img style="border-radius:50%;" src="<%- userpic %>" /></a>
-  </div>
-  <div style="margin-left:10px;">
-    <div style="padding-left:88px;"><strong>By <%- user %> at <%- pub_date %></strong> </div>
-    <div class="comment-content">
-      <div class="col-xs-offset-2"><pre><%- content %></pre>
-      </div>
+<div class="comment row" comment-owner="<%- owner %>" comment-id="<%- pk %>"  >  
+  <div class="col-lg-12">
+    <div>
+      <a href="<%- owner_url %>"><img width="30" style="border-radius:50%;" src="<%- userpic %>" /></a>
+      <strong>By <%- user %> at <%- pub_date %></strong>
+      <% if(owner===window.ahr.user_id){ %><a class="pull-right comment-delete" comment-id="<%- pk %>" href="<%- window.ahr.app_urls.deletecomment+pk %>">Delete</a> <% } %>
     </div>
-  <div>
+    <div class="comment-content row">
+      <div class="col-lg-12"><pre><%- content %></pre></div>
+    </div>
+  </div>
 </div>
-
 </script>

@@ -35,11 +35,13 @@
         },
 
         showreport: function(ev){
+          ev.preventDefault();
           var that = this;
           var item_id = ev.currentTarget.getAttribute('item_id');
           this.showModalDialog('#report_template', {}, '#reportdialog', function(){
             that.item_id = item_id;
           });
+          return(false);
         },
 
         sendreport: function(){
@@ -59,7 +61,7 @@
                 },
                 success: function(data) {
                   console.log(data);
-                  that.info('Report sent succesfuly','#infobar');
+                  // that.info('Report sent succesfuly','#infobar');
                   $('#reportdialog').modal('hide');
                 },
                 statusCode: {

@@ -36,62 +36,15 @@
   </div>
   <!-- Filter Spacer -->
   <div class="filter-banner-spacer"></div>
-  <!-- Filters -->
-  <div class="exchange-filter">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12"> 
-          <div class="row">
-            <div id="market-filters" class="collapse">
-              <div class="col-sm-3"> 
-                <div class="market-filter-main">
-                  <div class="market-filter-border"></div>
-                  <div class="market-action first item-type" item_type="all">
-                    <img src="{{ STATIC_URL }}images/all-button-50x50.png" alt="Filter by all" />
-                    <span>ALL</span>
-                  </div>
-                  <div class="market-action item-type" item_type="Offers">
-                    <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Filter by offers" />
-                    <span>OFFERS</span>
-                  </div>
-                  <div class="market-action item-type" item_type="Request">
-                    <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
-                    <span>REQUESTS</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="filter-title">Issues</div>
-                <div class="row issues btn-group-sm pull-left" item_title="issues"></div>
-              </div>
-              <div class="col-sm-3">
-                <div class="filter-title">Countries</div>
-                <div class="row countries btn-group-sm pull-left" item_title="countries"></div>
-              </div>
-              <div class="col-sm-3">
-                <div class="filter-title">Skills</div>
-                <div class="row skills btn-group-sm pull-left" item_title="skills"></div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12 filter-show">
-              <button type="button"class="btn btn-xs" data-toggle="collapse" data-target="#market-filters">
-                Toggle Filters
-                <span class="caret"></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  {% include "market/clientside/filters.html"%}
 
 {% endblock %}
 
 {% block content %}
+
   <div class="row">
     <div class="col-md-12">
+    <div id="itemandsearchwrap">
       <!-- Search -->
       <div class="row  market-search-box">
         <div class="input-group col-md-offset-2 col-md-8">
@@ -110,8 +63,14 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-offset-1 col-lg-10">
+      <div id="singleItem"></div>
+      <div id="marketitem_comment_form"></div>
+      <div id="marketitem_comments"></div>
+    </div>
   </div>
 </div>
+
 {% endblock %}
 
 {% block endjavascript %}

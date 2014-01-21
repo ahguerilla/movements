@@ -10,26 +10,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     itemsPerCall: 15,
     requiresResetOnNewOfferRequest: false,
 
-    create_request: function(){
-        this.requestdialog.showModal(true);
-        if(this.requiresResetOnNewOfferRequest && !this.requestdialog.oncomplete){
-            var self = this;
-            this.requestdialog.oncomplete = function(){
-                self.resetMarket();
-            };
-        }
-    },
-
-    create_offer: function(){
-        this.offerdialog.showModal(true);
-        if(this.requiresResetOnNewOfferRequest && !this.offerdialog.oncomplete){
-            var self = this;
-            this.offerdialog.oncomplete = function(){
-                self.resetMarket();
-            };
-        }
-    },
-
     setFilterNone:function(){
         $('.item-type').addClass('btn-success');
         this.filters = window.ahr.clone(this.default_filters);
@@ -73,133 +53,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
         this.setFilterKeys();
         this.resetMarket();
-    },
-
-    showItem: function(ev){
-        var that = this;
-        var id = ev.currentTarget.getAttribute('item_id');
-        // this.marketitemdialog.show(id,that);
-    },
-
-    getItems: function(from,to){
-        var that = this;
-        that.filters.search=$('#q').val();
-        return $.ajax({
-            url: that.getitemfromto.replace('0',from)+to,
-            dataType: 'json',
-            contentType:"application/json; charset=utf-8",
-            data: that.filters,
-            traditional: true
-        });
-    },
-
-    getItemsCount: function(){
-        var that = this;
-        return $.ajax({
-            url: that.itemcount_url,
-            dataType: 'json',
-            contentType:"application/json; charset=utf-8",
-            data: that.filters,
-            traditional: true
-        });
-    },
-
-    levelReached: function(){
-      // is it low enough to add elements to bottom?
-      var pageHeight = Math.max(document.body.scrollHeight ||
-        document.body.offsetHeight);
-      var viewportHeight = window.innerHeight  ||
-        document.documentElement.clientHeight  ||
-        document.body.clientHeight || 0;
-      var scrollHeight = window.pageYOffset ||
-        document.documentElement.scrollTop  ||
-        document.body.scrollTop || 0;
-      // Trigger for scrolls within 30 pixels from page bottom
-      return pageHeight - viewportHeight - scrollHeight < 30;
-    },
-
-    initInfiniteScroll: function(){
-        $('#marketitems').empty();
-        this.allItemsLoaded = false;
-        this.currentItem = 0;
-        this.itemCount = this.getItemsCount();
-
-        var $container = $('#marketitems');
-        $container.masonry({
-            itemSelector: '.market-place-item'
-        });
-
-        this.loadScrollElements(this);
-        var that = this;
-        $(window).scroll(function() {
-            that.loadScrollElements(that);
-        });
-    },
-
-    loadScrollElements: function(self){
-        var that = self;
-        if(!that.loadingScrollElemets && that.levelReached() && !that.allItemsLoaded) {
-            that.loadingScrollElemets = true;
-            var dfrd = that.getItems(
-                            that.currentItem,
-                            that.currentItem + that.itemsPerCall
-                            );
-
-            var itemsToAppend = [];
-            dfrd.done(function(data){
-                if(data.length === 0){
-                    that.allItemsLoaded = true;
-                }
-                _.each(data, function(item){
-                    item.fields.pk = item.pk;
-                    var item_html = that.item_tmp(item.fields);
-                    itemsToAppend.push(item_html);
-                    $('#marketitems').append(item_html);
-                });
-
-                if(itemsToAppend.length > 0){
-                    var container = document.querySelector('#marketitems');
-                    that.msnry = new Masonry( container );
-                    _.each(itemsToAppend, function(elem){
-                        that.msnry.appended( elem );
-                    });
-                    that.msnry.layout();
-                }
-                that.afterset();
-                that.currentItem = that.currentItem + that.itemsPerCall;
-                that.loadingScrollElemets = false;
-            });
-        }
-    },
-
-    refreshScrollElements: function(){
-        // var container = document.querySelector('#marketitems');
-        // var msnry = new Masonry( container );
-        this.msnry.layout();
-    },
-
-    afterset: function(){
-        $('.numstars').rateit();
-        $('.numstars').rateit('min',0);
-        $('.numstars').rateit('max',5);
-        $('.numstars').rateit('readonly',true);
-        $('.numstars').each(function(){
-            $(this).rateit('value',this.getAttribute('score'));
-        });
-    },
-
-    resetMarket: function(){
-        this.initInfiniteScroll();
-    },
-
-    initTemplates: function(){
-        this.typetag_tmp = _.template($('#type-tag').html());
-        this.tagtemp = _.template($('#filter-tag').html());
-        for(var key in this.filters){
-            if(["skills","countries","issues"].indexOf(key)>-1){
-                this.initFilters(this, key, this.tagtemp);
-            }
-        }
     },
 
     initFilters: function(that, items, templ){
@@ -274,6 +127,138 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.resetMarket();
     },
 
+    initTemplates: function(){
+        this.typetag_tmp = _.template($('#type-tag').html());
+        this.tagtemp = _.template($('#filter-tag').html());
+        for(var key in this.filters){
+            if(["skills","countries","issues"].indexOf(key)>-1){
+                this.initFilters(this, key, this.tagtemp);
+            }
+        }
+    },
+
+    levelReached: function(){
+      // is it low enough to add elements to bottom?
+      var pageHeight = Math.max(document.body.scrollHeight ||
+        document.body.offsetHeight);
+      var viewportHeight = window.innerHeight  ||
+        document.documentElement.clientHeight  ||
+        document.body.clientHeight || 0;
+      var scrollHeight = window.pageYOffset ||
+        document.documentElement.scrollTop  ||
+        document.body.scrollTop || 0;
+      // Trigger for scrolls within 30 pixels from page bottom
+      return pageHeight - viewportHeight - scrollHeight < 30;
+    },
+
+    initInfiniteScroll: function(){
+        $('#marketitems').empty();
+        this.allItemsLoaded = false;
+        this.currentItem = 0;
+        this.itemCount = this.getItemsCount();
+
+        var $container = $('#marketitems');
+        $container.masonry({
+            itemSelector: '.market-place-item'
+        });
+
+        this.loadScrollElements(this);
+        var that = this;
+        $(window).scroll(function() {
+            that.loadScrollElements(that);
+        });
+    },
+
+    loadScrollElements: function(self){
+        var that = self;
+        if(!that.loadingScrollElemets && that.levelReached() && !that.allItemsLoaded) {
+            that.loadingScrollElemets = true;
+            var dfrd = that.getItems(
+                            that.currentItem,
+                            that.currentItem + that.itemsPerCall
+                            );
+
+            var itemsToAppend = [];
+            dfrd.done(function(data){
+                if(data.length === 0){
+                    that.allItemsLoaded = true;
+                }
+                _.each(data, function(item){
+                    item.fields.pk = item.pk;
+                    var item_html = that.item_tmp(item.fields);
+                    itemsToAppend.push(item_html);
+                    $('#marketitems').append(item_html);
+                });
+
+                if(itemsToAppend.length > 0){
+                    var container = document.querySelector('#marketitems');
+                    that.msnry = new Masonry( container );
+                    _.each(itemsToAppend, function(elem){
+                        that.msnry.appended( elem );
+                    });
+                    that.msnry.layout();
+                }
+                that.item_widget.afterset();
+                that.currentItem = that.currentItem + that.itemsPerCall;
+                that.loadingScrollElemets = false;
+            });
+        }
+    },
+
+    refreshScrollElements: function(){
+        // var container = document.querySelector('#marketitems');
+        // var msnry = new Masonry( container );
+        this.msnry.layout();
+    },
+
+
+    resetMarket: function(){
+        this.initInfiniteScroll();
+    },
+
+    create_request: function(){
+        this.requestdialog.showModal(true);
+        if(this.requiresResetOnNewOfferRequest && !this.requestdialog.oncomplete){
+            var self = this;
+            this.requestdialog.oncomplete = function(){
+                self.resetMarket();
+            };
+        }
+    },
+
+    create_offer: function(){
+        this.offerdialog.showModal(true);
+        if(this.requiresResetOnNewOfferRequest && !this.offerdialog.oncomplete){
+            var self = this;
+            this.offerdialog.oncomplete = function(){
+                self.resetMarket();
+            };
+        }
+    },
+
+    getItems: function(from,to){
+        var that = this;
+        that.filters.search=$('#q').val();
+        return $.ajax({
+            url: that.getitemfromto.replace('0',from)+to,
+            dataType: 'json',
+            contentType:"application/json; charset=utf-8",
+            data: that.filters,
+            traditional: true
+        });
+    },
+
+    getItemsCount: function(){
+        var that = this;
+        return $.ajax({
+            url: that.itemcount_url,
+            dataType: 'json',
+            contentType:"application/json; charset=utf-8",
+            data: that.filters,
+            traditional: true
+        });
+    },
+
     init: function(filters){
         $.cookie.json = true;
 
@@ -287,7 +272,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.initTemplates(filters);
         this.filters.search=$('#q').val();
         this.delegateEvents(_.extend(this.events,{
-            'click .item_container': 'showItem',
             'click .tagbutton': 'tagsfilter',
             'click #searchbtn': 'search',
             'click .filter-type': 'changeFilterType',
