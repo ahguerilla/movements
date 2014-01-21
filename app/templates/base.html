@@ -45,9 +45,6 @@
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
             <li><a href="/">Exchange</a></li>
-            {% endif %}
-            <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
-            {% if user.is_authenticated %}
             <li><a href="{% url 'show_users' %}">Users</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown"> My Messages  <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){%endif%} </span> <b class="caret"></b></a>
@@ -98,7 +95,12 @@
       {% block extra_body %}
       {% endblock %}
     </div>
-    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div style="height: 70px"></div>
+    <nav class="navbar navbar-default navbar-fixed-bottom footer-nav" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+        <li><a href="{% url 'terms_and_conditions' %}">Terms and Conditions</a></li>
+      </ul>
     </nav>    
     <div id="modal-placeholder"></div>
 
