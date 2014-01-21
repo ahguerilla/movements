@@ -259,13 +259,79 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         });
     },
 
+    showItem: function(item_id){
+        var that = this;
+        this.scroll = $(window).scrollTop();
+        that.hideMarket();
+        var dfrd = $.ajax({url:that.getItem+item_id});
+        dfrd.done(function(item){
+            var html = that.item_tmp(item[0].fields);
+            $('.comment-btn').data({id:item[0].pk});
+            $('#singleItem').append(html);
+            that.item_widget.afterset();
+            $.getJSON(window.ahr.app_urls.getcommentslast.replace('0',item_id)+'100',function(data){
+                that.ShowComments(data);
+            });
+
+        });
+    },
+
+    resetSingle: function(){
+        $('#singleItem').empty();
+    },
+
+    hideMarket:function(){
+        $('#itemandsearchwrap').hide();
+        $('#marketitem_comment_form').show();
+        $('#marketitem_comments').show();
+        $('#market-filters').collapse({toggle:false});
+        $('#market-filters').collapse('hide');
+        $('#togglefilter').hide();
+    },
+
+    showMarket:function(){
+        $('#singleItem').empty();
+        $('#itemandsearchwrap').show();
+        $('#marketitem_comment_form').hide();
+        $('#marketitem_comments').hide();
+        $('#marketitem_comments').empty();
+        $('#newcomment').val('');
+        $('#togglefilter').show();
+    },
+
+    isSingle:function(){
+        if($('#marketitem_comments').is(":visible")){
+            return(true);
+        }
+        return(false);
+    },
+
+    scrollBack:function(){
+        $(window).scrollTop(this.scroll);
+    },
+
+    ShowComments: function(comments){
+        var that = this;
+        _.each(comments, function(comment){
+            that.item_widget.addCommentToCommentList(comment);
+        });
+    },
+
+    del_callback:function(item_id){
+        if(this.isSingle()){
+            window.location.hash="";
+        }
+        $(".item-wrap[item_id='"+ item_id + "']").remove();
+        this.refreshScrollElements();
+
+    },
+
     init: function(filters){
         $.cookie.json = true;
 
         this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
-        this.item_widget = window.ahr.marketitem_widget.initWidget('body',this);
         this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
 
         this.filters = filters;

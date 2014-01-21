@@ -168,9 +168,9 @@
             url:window.ahr.app_urls.deletemarketitem+item_id,
           });
           dfrd.done(function(data){
-            that.alert('Item deleted','#infobar');
-            $(".item-wrap[item_id='"+ item_id + "']").remove();
-            that.refreshScrollElements();
+            if(typeof that.del_callback == "function"){
+              that.del_callback(item_id);
+            }
           });
         }
         return(false);
@@ -182,6 +182,7 @@
         var id = ev.currentTarget.getAttribute('item_id');
         $.getJSON(window.ahr.app_urls.getuseritem+id,function(item){
           if(item[0].fields.item_type == "request"){
+            //TODO: define a callback for this , not this view responsibility to know about these dialogs
             that.market.requestdialog.edit(item);
             that.market.requestdialog.showModal();
           }else{
@@ -204,6 +205,7 @@
 
       initialize: function(options){
         this.market = options.market;
+        this.del_callback = options.del_callback;
         this.item_tmp = _.template($('#item_template').html());
         this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
         this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
@@ -211,6 +213,7 @@
         this.comment_tmp = _.template($('#comment_view_template').html());
         this.comment_form_tmp = _.template($('#comment_add_template').html());
         $('#marketitem_comment_form').html(this.comment_form_tmp());
+
         window.ahr.expandTextarea('#newcomment');
 
         this.delegateEvents(_.extend(this.events,{
@@ -226,8 +229,8 @@
     });
 
     window.ahr.marketitem_widget = window.ahr.marketitem_widget || {};
-    window.ahr.marketitem_widget.initWidget= function(element,market){
-        var marketitem_widget = new MarketItemWidget({el:element,market:market});
+    window.ahr.marketitem_widget.initWidget= function(element,market,del_callback){
+        var marketitem_widget = new MarketItemWidget({el:element, market:market, del_callback:del_callback});
         return marketitem_widget;
     };
 
