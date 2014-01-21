@@ -10,55 +10,54 @@
 {% block sign_in %}{% endblock %}
 
 {% block public-content %}
+
 <div class="row">
-  <div class="col-md-12">
-  <div class="dialog col-md-6 col-lg-5 col-sm-7">
-    <h1>{% trans "Sign In" %}</h1>
-    <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form"> 
-      {% csrf_token %}
-      <div class="form-group">
-        <div class="col-md-12">
-          {{ form.login.errors }}
-          {% render_field form.login class="form-control input-sm" required="true" autofocus="autofocus" placeholder="Email or Username" %}
+  <div class="col-lg-5 col-md-6 col-sm-7">
+    <div class="dialog">
+      <h1>{% trans "Sign In" %}</h1>
+      <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form"> 
+        {% csrf_token %}
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ form.login.errors }}
+            {% render_field form.login class="form-control input-sm" required="true" autofocus="autofocus" placeholder="Email or Username" %}
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-12">
-          {{ form.password.errors }}
-          {% render_field form.password class="form-control input-sm" required="true" placeholder="Password" %}
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ form.password.errors }}
+            {% render_field form.password class="form-control input-sm" required="true" placeholder="Password" %}
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-6">
-          {{ form.remember_me.errors }}
-          Remember Me {{ form.remember }}
+        <div class="form-group">
+          <div class="col-md-6">
+            {{ form.remember_me.errors }}
+            Remember Me {{ form.remember }}
+          </div>
+          <div class="col-md-6 align-right">
+            <a class="button secondaryAction btn btn-link btn-xs" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+          </div>
         </div>
-        <div class="col-md-6 align-right">
-          <a class="button secondaryAction btn btn-link btn-xs" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <div class="form-group">
+          <div class="col-xs-7">
+            Or, <a href="{% url 'home' %}" alt="sign up">sign up</a> for an account.
+          </div>
+          <div class="col-xs-5">
+            <button type="submit" class="btn full-width">{% trans "Sign In" %}</button>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-7">
-          Or, <a href="{% url 'home' %}" alt="sign up">sign up</a> for an account.
+        <div>
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
         </div>
-        <div class="col-xs-5">
-          <button type="submit" class="btn full-width">{% trans "Sign In" %}</button>
-        </div>
-      </div>
-      <div>
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}          
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
   <div class="col-lg-4 col-lg-offset-3 col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
-    <div class="row">
     {% if socialaccount.providers  %}
       {% include "socialaccount/snippets/provider_list.html" with process="login" %}
     {% endif %}
-    </div>
-  </div>
   </div>
 </div>
 {% endblock %}

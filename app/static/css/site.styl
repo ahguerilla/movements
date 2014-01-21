@@ -43,10 +43,6 @@ box-shadow()
 .navbar
   margin-bottom 0
 
-.navavatar
-  img
-    border-radius 50%
-
 body
   background-color $bg-color
 
@@ -162,6 +158,39 @@ select.input-extra-height
     text-align center
   .right
     text-align right
+
+.navavatar
+  margin-top: 5px
+  img
+    width: 40px
+    height: 40px
+    border-radius 50%
+  a 
+    margin: 0 !important
+    padding: 0 !important
+
+.footer-nav
+  z-index: 5000
+  background: rgba(20,20,20,0.95)
+  color: #fff
+  text-align: center
+  margin-left: -10px
+  padding-right: 10px
+  border-color: #596066
+  text-align: center
+  .navbar-nav
+    float: none
+  ul 
+    display: inline-block
+  .footer-nav-content
+    height: 45px
+    a 
+      line-height: 45px
+      color: #fff
+      text-decoration: none
+    a:hover
+      color: $text-color
+
 
 .sign-up-form, .public
   input[type=text], input[type=email], input[type=number], input[type=password]
