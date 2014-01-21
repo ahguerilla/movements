@@ -2,7 +2,11 @@
 
     var MarketRoute = Backbone.Router.extend({
         routes:{
-            "": "page"
+            "": "page",
+            "/:item": "gotoItem"
+        },
+        gotoItem: function(){
+            alert('ok');
         },
 
         page: function(){

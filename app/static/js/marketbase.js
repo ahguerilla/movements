@@ -10,7 +10,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     itemsPerCall: 15,
     requiresResetOnNewOfferRequest: false,
 
-
     create_request: function(){
         this.requestdialog.showModal(true);
         if(this.requiresResetOnNewOfferRequest && !this.requestdialog.oncomplete){
@@ -20,6 +19,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             };
         }
     },
+
     create_offer: function(){
         this.offerdialog.showModal(true);
         if(this.requiresResetOnNewOfferRequest && !this.offerdialog.oncomplete){
@@ -78,26 +78,28 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     showItem: function(ev){
         var that = this;
         var id = ev.currentTarget.getAttribute('item_id');
-        this.marketitemdialog.show(id,that);
+        // this.marketitemdialog.show(id,that);
     },
 
-    getItems: function(from,to,filters,aurl){
-        filters.search=$('#q').val();
+    getItems: function(from,to){
+        var that = this;
+        that.filters.search=$('#q').val();
         return $.ajax({
-            url: aurl.replace('0',from)+to,
+            url: that.getitemfromto.replace('0',from)+to,
             dataType: 'json',
             contentType:"application/json; charset=utf-8",
-            data: filters,
+            data: that.filters,
             traditional: true
         });
     },
 
-    getItemsCount: function(filters,aurl){
+    getItemsCount: function(){
+        var that = this;
         return $.ajax({
-            url: aurl,
+            url: that.itemcount_url,
             dataType: 'json',
             contentType:"application/json; charset=utf-8",
-            data: filters,
+            data: that.filters,
             traditional: true
         });
     },
@@ -120,7 +122,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('#marketitems').empty();
         this.allItemsLoaded = false;
         this.currentItem = 0;
-        this.itemCount = this.getItemsCount(this.filters, this.itemcount_url);
+        this.itemCount = this.getItemsCount();
 
         var $container = $('#marketitems');
         $container.masonry({
@@ -139,11 +141,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         if(!that.loadingScrollElemets && that.levelReached() && !that.allItemsLoaded) {
             that.loadingScrollElemets = true;
             var dfrd = that.getItems(
-                                    that.currentItem,
-                                    that.currentItem + that.itemsPerCall,
-                                    that.filters,
-                                    that.getitemfromto
-                                );
+                            that.currentItem,
+                            that.currentItem + that.itemsPerCall
+                            );
 
             var itemsToAppend = [];
             dfrd.done(function(data){
@@ -273,68 +273,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.setFilterType("custom");
         this.resetMarket();
     },
-    show_dropdown:function(ev){
-        ev.preventDefault();
-        var item_id = ev.currentTarget.getAttribute('item_id');
-        $('#dropdownMenu'+item_id).trigger('click');
-        return false;
-    },
-
-    private_message: function(ev){
-        var username = ev.currentTarget.getAttribute('owner');
-        var item_id = ev.currentTarget.getAttribute('item_id');
-        var msgsub = 'Re: '+$('.marketitem_title',$('.market-item-card[item_id='+item_id+']')).text();
-        this.message_widget.show(username,msgsub,'',true);
-        },
-
-    resetitemrate:function(item_id, rate){
-        try{
-            $(".numstars[item_id="+item_id+"]").rateit('value',rate);
-        }catch(err){
-            $.noop();
-        }
-    },
-
-    recommend: function(ev){
-        var title = ev.currentTarget.getAttribute('title');
-        $('#recsub').val($('#currentusername').text()+' recommends :'+ title);
-        $('#recsub').attr('readonly',true);
-        var href = '<a href="'+window.location+'">'+ title +'</a>';
-        $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at this post by '+ ev.currentTarget.getAttribute('owner')+' \r\n'+ href );
-        $('#touser').val('');
-        $('#recommenddialog').modal('show');
-    },
-
-    deleteItem: function(ev){
-        var that = this;
-        if(confirm('Are you sure you want to delete this item?')){
-            var item_id = ev.currentTarget.getAttribute('item_id');
-            var dfrd = $.ajax({
-                url:window.ahr.app_urls.deletemarketitem+item_id,
-            });
-            dfrd.done(function(data){
-                that.alert('Item deleted','#infobar');
-                $(".item-wrap[item_id='"+ item_id + "']").remove();
-                that.refreshScrollElements();
-            });
-        }
-        //that.msnry.layout();
-        return(false);
-    },
-
-    editItem: function(ev){
-        var that = this;
-        var id = ev.currentTarget.getAttribute('item_id');
-        $.getJSON(window.ahr.app_urls.getuseritem+id,function(item){
-            if(item[0].fields.item_type == "request"){
-                that.requestdialog.edit(item);
-                that.requestdialog.showModal();
-            }else{
-                that.offerdialog.edit(item);
-                that.offerdialog.showModal();
-            }
-        });
-    },
 
     init: function(filters){
         $.cookie.json = true;
@@ -342,12 +280,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
-        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
-        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
-        this.report_dialog = window.ahr.report_dialog.initWidget('body');
+        this.item_widget = window.ahr.marketitem_widget.initWidget('body',this);
         this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
-        this.marketitemdialog = window.ahr.marketitem_dialog.initWidget();
-        this.item_tmp = _.template($('#item_template').html());
 
         this.filters = filters;
         this.initTemplates(filters);
@@ -360,11 +294,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'click .item-type': 'itemTypesfilter',
             'click #create_offer': 'create_offer',
             'click #create_request': 'create_request',
-            'click .itemactions' : 'show_dropdown',
-            'click .private_message' : 'private_message',
-            'click .recommend': 'recommend',
-            'click .delete' : 'deleteItem',
-            'click .edit' : 'editItem',
             'submit': 'filterKeySearch'
         }));
     }
