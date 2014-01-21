@@ -43,6 +43,7 @@
     var OfferDialogView = window.ahr.item_form_base.extend({
         item:'',
         el: '#offerform',
+
         init:function(){
             var that=this;
             this.url = window.ahr.app_urls.addmarketitem+'offer';
@@ -149,6 +150,7 @@
             var top = $('.glyphicon.glyphicon-calendar',$('#offerdialog')).offset().top-$(window).scrollTop();
             $('.bootstrap-datetimepicker-widget.dropdown-menu.pull-right').css('top',top+20);
           });
+          window.ahr.expandTextarea($('#details',$("#offerdialog")));
         },
 
         aftersubmit:function(){
