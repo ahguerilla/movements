@@ -19,5 +19,14 @@ def contact_us(request):
     return render_to_response('ahr/contact_us.html', context_instance=RequestContext(request))
 
 
+def privacy(request):
+    return render_to_response('ahr/privacy.html', context_instance=RequestContext(request))
+
+def how_it_works_pub(request):
+    return render_to_response('ahr/how_it_works_public.html', context_instance=RequestContext(request))
+
+def how_it_works_priv(request):
+    return render_to_response('ahr/how_it_works_private.html', context_instance=RequestContext(request))
+
 def exchange(request):
     return HttpResponseRedirect(reverse('show_market'))

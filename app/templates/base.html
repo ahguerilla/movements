@@ -42,12 +42,15 @@
           <a ـclass="navbar-brand" href="/"><img src="{{ STATIC_URL}}images/logos/Logo.png"/></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            {% if user.is_authenticated %}
+          <ul class="nav navbar-nav">
+            {% if not user.is_authenticated %}
+            <li><a href="{% url 'how_it_works_pub' %}">How It Works</a></li>
+            {% else %}
+            <li><a href="{% url 'how_it_works_priv' %}">How It Works</a></li>
             <li><a href="/">Exchange</a></li>
-            <li><a href="{% url 'show_users' %}">Users</a></li>
+            <li><a href="{% url 'show_users' %}">Exchangivists</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown"> My Messages  <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){%endif%} </span> <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown">My Messages  <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){%endif%} </span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a class="message-counter" href="{% url 'postman_inbox' %}">Inbox <span id="msgcntr"> {% if unread_count %} ({{ unread_count }}){%endif%}</span> </a></li>
                   <li><a href="{% url 'postman_sent' %}">Sent</a></li>
@@ -55,12 +58,16 @@
                   <li><a href="{% url 'postman_trash' %}">Trash</a></li>
               </ul>
             </li>
+            {% endif %}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
 
-            <li><a href="#" onclick="window.location = window.ahr.app_urls.getposts;">My Posts</a></li>
-            <li class="navavatar">{% avatar user 50 %}</li>
+            <li class="navavatar"><a href="{% url 'user_profile' %}">{% avatar user 50 %}</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% user_display user %} <b class="caret"></b></a>
               <ul class="dropdown-menu">
+                <li><a href="#" onclick="window.location = window.ahr.app_urls.getposts;">My Posts</a></li>
                 <li><a href="{% url 'user_profile' %}">My Profile</a></li>
                 <li><a href="{% url 'user_settings' %}">Settings</a></li>
                 <li>
@@ -97,10 +104,11 @@
     </div>
     <div style="height: 70px"></div>
     <nav class="navbar navbar-default navbar-fixed-bottom footer-nav" role="navigation">
-      <ul class="nav navbar-nav">
-        <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
-        <li><a href="{% url 'terms_and_conditions' %}">Terms and Conditions</a></li>
-      </ul>
+      <div class="footer-nav-content">
+        <a href="{% url 'contact_us' %}">Contact Us</a>&nbsp;&nbsp;
+        <a href="{% url 'terms_and_conditions' %}">Terms and Conditions</a>&nbsp;&nbsp;
+        <a href="{% url 'privacy' %}">Privicy</a>
+      </div>
     </nav>    
     <div id="modal-placeholder"></div>
 
