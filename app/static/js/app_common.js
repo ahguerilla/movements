@@ -89,7 +89,7 @@
       if(sh < 100){
         sh = 100;
       }
-      this.style.height = sh+10 + 'px';
+      this.style.height = sh+30 + 'px';
     }, false);
   }
 

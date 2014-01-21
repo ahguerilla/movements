@@ -51,6 +51,7 @@
             }
           });
         },
+
         getFormData: function(){
           var retdict={};
           retdict['issues']    = this.issues_widget.getval();
@@ -138,6 +139,7 @@
             var top = $('.glyphicon.glyphicon-calendar',$('#requestdialog')).offset().top-$(window).scrollTop();
             $('.bootstrap-datetimepicker-widget.dropdown-menu.pull-right').css('top',top+20);
           });
+          window.ahr.expandTextarea($('#details',$("#requestdialog")));
         },
 
         aftersubmit:function(){

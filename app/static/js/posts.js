@@ -1,39 +1,89 @@
 (function(){
     var PosttRoute = Backbone.Router.extend({
         routes:{
-            "": "page"
+            "": "page",
+            "item/:item_id": "gotoItem"
+        },
+        firstTime: true,
+        emptyPage: true,
+
+        gotoItem: function(item){
+            this.market.showItem(item);
         },
 
-        page: function(page){
-            this.posts.initInfiniteScroll();
+        page: function(){
+            if(this.firstTime){
+                this.market.showMarket();
+                this.market.initInfiniteScroll();
+                this.market.scrollBack();
+
+                this.firstTime = false;
+            }else{
+                this.market.resetSingle();
+                this.market.showMarket();
+                this.market.refreshScrollElements();
+                this.market.scrollBack();
+            }
         },
 
-        initialize: function(posts){
-            this.posts = posts;
+        initialize: function(market){
+            this.market = market;
         }
     });
 
     var PostsView = window.ahr.market.MarketBaseView.extend({
         types:{"Offers":"offer","Request":"request"},
 
-        showItem: function(ev){
+        showItem: function(item_id){
             var that = this;
-            var id = ev.currentTarget.getAttribute('item_id');
-            $.getJSON(window.ahr.app_urls.getuseritem+id,function(item){
-                if(item[0].fields.item_type == "request"){
-                    that.requestdialog.edit(item);
-                    that.requestdialog.showModal();
-                }else{
-                    that.offerdialog.edit(item);
-                    that.offerdialog.showModal();
-                }
+            this.scroll = $(window).scrollTop();
+            that.hideMarket();
+            var dfrd = $.ajax({url:window.ahr.app_urls.getmarketitem+item_id});
+            dfrd.done(function(item){
+                var html = that.item_tmp(item[0].fields);
+                $('.comment-btn').data({id:item[0].pk});
+                $('#singleItem').append(html);
+                that.item_widget.afterset();
+                $.getJSON(window.ahr.app_urls.getcommentslast.replace('0',item_id)+'100',function(data){
+                    that.ShowComments(data);
+                });
+
             });
         },
 
-        afterset: function(){
-            $.noop();
+        resetSingle: function(){
+            $('#singleItem').empty();
         },
 
+        hideMarket:function(){
+            $('#itemandsearchwrap').hide();
+            $('#marketitem_comment_form').show();
+            $('#marketitem_comments').show();
+            $('#market-filters').collapse({toggle:false});
+            $('#market-filters').collapse('hide');
+            $('#togglefilter').hide();
+        },
+
+        showMarket:function(){
+            $('#singleItem').empty();
+            $('#itemandsearchwrap').show();
+            $('#marketitem_comment_form').hide();
+            $('#marketitem_comments').hide();
+            $('#marketitem_comments').empty();
+            $('#newcomment').val('');
+            $('#togglefilter').show();
+        },
+
+        scrollBack:function(){
+            $(window).scrollTop(this.scroll);
+        },
+
+        ShowComments: function(comments){
+            var that = this;
+            _.each(comments, function(comment){
+                that.item_widget.addCommentToCommentList(comment);
+            });
+        },
 
         initialize : function(filters){
             var that = this;

@@ -2,11 +2,13 @@
   <div class="market-place-item item-wrap" item_id="<%- pk %>" owner_id="<%- ownerid %>">
     <div class="market-item-card" item_id="<%- pk %>" owner_id="<%- ownerid %>">
       <div class="item-header <%- item_type.toLowerCase() %>">
+        <a class="routehref" href="#item/<%- pk %>" >
         <div class="item-header-clickable item_container" item_id="<%- pk %>">
           <%- item_type.toUpperCase() %>&nbsp;
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span> 
           <span item_id="<%- pk %>"  score="<%-usercore%>" class="numstars"></span>
         </div>
+        </a>
         <div class="pull-right item-menu" style="position:relative;">
           <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
           <div class="dropdown">
@@ -28,7 +30,7 @@
           </div>
         </div>
       </div>
-      <a href="#item/<%- pk %>" >
+      <a href="#item/<%- pk %>" class="routehref" >
         <div class="" item_id="<%- pk %>">
           <div class="item-title" owner_id="<%- ownerid %>">
             <div class="item-icon <%- item_type.toLowerCase() %>"></div>
