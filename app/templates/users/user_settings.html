@@ -25,155 +25,191 @@
       {% endif %}
       <form method="post" class="form-horizontal" id="settingform" role="form">
         {% csrf_token %}
+
         <div class="form-group">
-          <div class="col-xs-5">
+          <div class="col-sm-12">
+            <label for="{{settings_form.first_name.auto_id}}">Name:</label>
+          </div>
+          <div class="col-sm-5">
             {{ user_form.first_name.errors }}
             {% render_field user_form.first_name class="form-control input-sm" placeholder="First Name" required="true" %}
-            
           </div>
-          <div class="col-xs-5">
+          <div class="col-sm-5">
             {{ user_form.last_name.errors }}
             {% render_field user_form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}            
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-name"/> Hide</label>
           </div>
         </div>
+
         <div class="form-group">
-          <div class="col-md-10">
+          <div class="col-sm-12">
+            <label for="{{ settings_form.username.auto_id }}">Username:</label>
+          </div>
+          <div class="col-sm-10">
             {{ user_form.username.errors }}            
             {% render_field user_form.username class="form-control input-sm" placeholder="Username" required="true" %}                        
           </div>
         </div>
+
         <div class="form-group">
-          <div class="col-md-10">
-            <label>Nationality:</label>
+          <div class="col-sm-12">
+            <label for="{{settings_form.nationality.auto_id}}">Nationality:</label>
+          </div>
+          <div class="col-sm-10">
             {{ settings_form.nationality.errors }}
             {% render_field settings_form.nationality class="form-control input-sm" placeholder="Nationality" required="true" %}
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-nationality"/> Hide</label>
           </div>
         </div>
+        
         <div class="form-group">
-          <div class="col-md-10">
+          <div class="col-sm-12">
+            <label for="{{settings_form.occupation.auto_id}}">Occupation:</label>
+          </div>
+          <div class="col-sm-10">
             {{ settings_form.occupation.errors }}
             {% render_field settings_form.occupation class="form-control input-sm" placeholder="Occupation" %}
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-occupation"/> Hide</label>
           </div>
         </div>
+
         <div class="form-group">
-          <div class="col-md-10">
-            <label>Resident Country:</label>
+          <div class="col-sm-12">
+            <label for="{{settings_form.resident_country.auto_id}}">Country of Residence:</label>
+          </div>
+          <div class="col-sm-10">
             {{ settings_form.resident_country.errors }}
             {% render_field settings_form.resident_country class="form-control input-sm" placeholder="Country of Residence" required="true" %}            
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-resident_country"/> Hide</label>
           </div>
         </div>
+
+
         <div class="form-group">
-          <div class="col-md-10">
+          <div class="col-sm-12">
+            <label for="{{settings_form.expertise.auto_id}}">Expertise:</label>
+          </div>
+          <div class="col-sm-10">
             {{ settings_form.expertise.errors }}
             {% render_field settings_form.expertise class="form-control input-sm" placeholder="Area of expertise if any" %}
-            
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-experties"/> Hide</label>
           </div>
         </div>
+
         <div class="form-group">
-          <div class="col-md-10">
-            {{ settings_form.web_url.errors }}
-            {% render_field settings_form.web_url class="form-control input-sm" placeholder="Website/Blog URL" %}
-            
+          <div class="col-sm-12">
+            <label for="{{settings_form.web_url.auto_id}}">Website/Blog:</label>
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-10">
+            {{ settings_form.web_url.errors }}
+            {% render_field settings_form.web_url class="form-control input-sm" placeholder="Website/Blog URL" %}    
+          </div>
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-web_url"/> Hide</label>
           </div>
         </div>
         
         <div class="form-group">
-          <div class="col-md-10">
+          <div class="col-sm-12">
+            <label for="{{settings_form.fb_url.auto_id}}">Facebook:</label>
+          </div>
+          <div class="col-sm-10">
             {{ settings_form.fb_url.errors }}
             {% render_field settings_form.fb_url class="form-control input-sm" placeholder="Facebook Page" %}
-            
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-fb_url"/> Hide</label>
           </div>                  
         </div>
         
         <div class="form-group">
-          <div class="col-md-10">
+          <div class="col-sm-12">
+            <label for="{{settings_form.linkedin_url.auto_id}}">LinkedIn:</label>
+          </div>
+          <div class="col-sm-10">
             {{ settings_form.linkedin_url.errors }}
             {% render_field settings_form.linkedin_url class="form-control input-sm" placeholder="LinkedIn Page" %}
-            
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-linkedin_url"/> Hide</label>
           </div>                  
         </div>
         
         <div class="form-group">
-          <div class="col-md-10">
+          <div class="col-sm-12">
+            <label for="{{settings_form.tweet_url.auto_id}}">Twitter:</label>
+          </div>
+          <div class="col-sm-10">
             {{ settings_form.tweet_url.errors }}
             {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Twitter Handle" %}            
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-tweet_url"/> Hide</label>
           </div>
-
         </div>
+
         <div class="form-group">
-          <div class="col-md-10">
+          <div class="col-sm-12">
+            <label for="{{settings_form.tag_ling.auto_id}}">Tag Line:</label>
+          </div>
+          <div class="col-sm-10">
             {{ settings_form.tag_ling.errors }}
             {% render_field settings_form.tag_ling class="form-control input-sm" placeholder="Tag Line" %}
-            
           </div>
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <label><input type="checkbox" name="notperm-tag_ling"/> Hide</label>
           </div>
-
         </div>
+
         <div class="form-group">
-          <div class="col-md-10">
+          <div class="col-sm-12">
+            <label for="{{settings_form.tag_ling.auto_id}}">Bio:</label>
+          </div>
+          <div class="col-sm-10">
             {{ settings_form.bio.errors }}
             {% render_field settings_form.bio class="form-control input-sm" placeholder="Bio" %}
-            
           </div>
-          <div class="col-md-2" style="vertical-align:bottom;">
+          <div class="col-sm-2" style="vertical-align:bottom;">
             <label><input type="checkbox" name="notperm-bio"/> Hide</label>
           </div>
         </div>
+        <br /><br />
         <div class="form-group">
-          <div class="col-md-12">
-            <p>I'd like to advance the freedom of:</p>
+          <div class="col-sm-12">
+            <label>I'd like to advance the freedom of:</label>
           </div>
-          <div class="col-md-12">
-            <label>Issues:</label>
+          <div class="col-sm-12">
+            <label for="{{settings_form.issues.auto_id}}">Issues:</label>
           </div>
-          <div class="col-md-12">
+          <div class="col-sm-12">
             {{ settings_form.issues.errors }}
             {% render_field settings_form.issues class="form-control input-sm input-extra-height" %}
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12">
-            <label>Countries:</label>
+          <div class="col-sm-12">
+            <label for="{{settings_form.countries.auto_id}}">Countries:</label>
           </div>
-          <div class="col-md-12">
+          <div class="col-sm-12">
             {{ settings_form.countries.errors }}
             {% render_field settings_form.countries class="form-control input-sm input-extra-height" %}
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12">
-            <label>Skills:</label>
+          <div class="col-sm-12">
+            <label for="{{settings_form.skills.auto_id}}">Skills:</label>
           </div>
-          <div class="col-md-12">
+          <div class="col-sm-12">
             {{ settings_form.skills.errors }}
             {% render_field settings_form.skills class="form-control input-sm input-extra-height" %}
           </div>
@@ -181,19 +217,22 @@
         <div class="form-group">
           <div class="col-sm-12">
             {{ settings_form.is_organisation.errors }}
-            {{ settings_form.is_organisation }} <small>I am an organisation</small>
+            {{ settings_form.is_organisation }}
+            <label for="{{settings_form.is_organisation.auto_id}}">I am an organisation</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-12">
             {{ settings_form.is_journalist.errors }}
-            {{ settings_form.is_journalist }} <small>I am a journalist</small>
+            {{ settings_form.is_journalist }}
+            <label for="{{settings_form.is_journalist.auto_id}}">I am a journalist</label>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-12">
             {{ settings_form.get_newsletter.errors }}
-            {{ settings_form.get_newsletter }} <small>I would like to recieve a weekly newsletter</small>
+            {{ settings_form.get_newsletter }}
+            <label for="{{settings_form.get_newsletter.auto_id}}">I would like to recieve a weekly newsletter</label>
           </div>
         </div>
         <div class="form-group">
