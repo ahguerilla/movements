@@ -280,9 +280,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
-        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
-        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
-        this.report_dialog = window.ahr.report_dialog.initWidget('body');
         this.item_widget = window.ahr.marketitem_widget.initWidget('body',this);
         this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
 

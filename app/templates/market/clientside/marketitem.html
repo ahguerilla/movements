@@ -203,6 +203,10 @@
       initialize: function(options){
         this.market = options.market;
         this.item_tmp = _.template($('#item_template').html());
+        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
+        this.report_dialog = window.ahr.report_dialog.initWidget('body');
+
         // this.comment_form_tmp = _.template($('#comment_add_template').html());
         // $('#marketitem_comment_form').html(this.comment_form_tmp());
         // window.ahr.expandTextarea('#newcomment');

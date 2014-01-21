@@ -14,15 +14,15 @@
  (function(){
     var DatePickerWidget = window.ahr.BaseView.extend({
         getval: function(){
-            if(this.widget.val()!= ''){
-                return this.widget.val()+ ' 23:59';
+            if($('input',this.widget).val()!= ''){
+                return $('input',$(this.widget)).val()+ ' 23:59';
             }
             return '';
         },
 
         setDatePicker: function(preval){
             if(preval){
-                this.widget.val(preval.slice(8,10)+'/'+
+                $('input',this.widget).val(preval.slice(8,10)+'/'+
                     preval.slice(5,7)+'/'+
                     preval.slice(0,4)
                 );
@@ -30,7 +30,7 @@
         },
 
         disable:function(){
-            this.widget.attr('readonly',true);
+            $('input',this.widget).attr('readonly',true);
             try{
                 this.picker.destroy();
             }catch(err){$.noop();}
