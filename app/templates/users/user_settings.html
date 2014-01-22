@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_private_settings.html" %}
 
 {% load avatar_tags %}
 {% load i18n %}
@@ -303,7 +303,6 @@
 
 
   (function(){
-    $.backstretch("{{ STATIC_URL }}images/landing-bg-1920x1202-blended.jpg");
     {% if notperms|length %}
     var perms = null;
     {% else %}

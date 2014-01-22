@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_private_settings.html" %}
 {% load avatar_tags %}
 {% load account %}
 {% load i18n %}
@@ -44,18 +44,6 @@
         </div>
       </div>
       {% endif %}
-<!--       {% if user_profile.notperm.email != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Email:</strong>
-          </div>
-          <div class="col-md-9">
-            {{ user_details.email }}
-          </div>
-        </div>
-      </div>
-      {% endif %} -->
       {% if user_profile %}
       {% if user_profile.notperm.nationality != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
@@ -221,15 +209,4 @@
     </div>
   </div>
 </div>
-{% endblock %}
-
-
-{%block endjavascript%}
-
-  <script type="text/javascript">
-    $(function(){
-      $.backstretch("{{ STATIC_URL }}images/landing-bg-1920x1202-blended.jpg");
-    });
-  </script>
-
 {% endblock %}
