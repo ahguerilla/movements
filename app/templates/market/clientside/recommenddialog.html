@@ -39,8 +39,8 @@
 
         send: function(){
           var that = this;
+          $('.sendrec').prop('disabled',true);
           if( $('#touser').val() !== '' && $('#recsub').val()!== '' &&  $('#recmessage').val() !== ''){
-                $.blockUI({theme: true,baseZ: 200});
                 window.ahr.getcsrf(function(csrf){
                     var dfrd = $.ajax({
                         url:window.ahr.app_urls.sendmessage+$('#touser').val(),
@@ -53,12 +53,11 @@
                         }
                     });
                     dfrd.done(function(){
-                      $.unblockUI();
                       $('#recommenddialog').modal('hide');
-                      // that.info('Your message was sent successfuly.','#infobar');
+                      $('.sendrec').prop('disabled',false);
                     });
                     dfrd.fail(function(){
-                      $.unblockUI();
+                      $('.sendrec').prop('disabled',false);
                       that.alert('Faild to send message','#recerror');
                     });
                 });

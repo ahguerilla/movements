@@ -17,22 +17,6 @@
     var UsersView = window.ahr.market.MarketBaseView.extend({
         types:{"Activist" : "activist", "Ready to help" : "readytohelp" },
 
-        recommend: function(ev){
-            var username = $(ev.currentTarget).attr('username');
-            window.ahr.recommend_widget.initWidget(username);
-            $('#recsub').val($('#currentusername').text()+ ' recommends user '+ username);
-            $('#recsub').attr('readonly',true);
-            var href = '<a href="'+window.location.origin+'/uer/profile/'+username+'">'+username+'</a>';
-            $('#recmessage').val($('#currentusername').text()+ ' recommends you have a look at '+ username + ' profile.' + ' \r\n'+ href );
-            $('#touser').val('');
-            $('#recommenddialog').modal('show');
-        },
-
-        Message: function(ev){
-            var username = ev.currentTarget.getAttribute('username');
-            this.message_widget.show(username,'','',false);
-        },
-
         showItem: function(ev){
             window.location = $('a.linktoprofile',$(ev.currentTarget)).attr('href');
         },
@@ -43,9 +27,7 @@
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
             this.viewurl = window.ahr.app_urls.viewuserprofile;
             this.item_tmp = _.template($('#user-template').html());
-            this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id);
-            this.message_widget = window.ahr.messagedialog_widget.initWidget('#'+this.el.id,'#infobar');
-            this.item_widget = {afterset:function(){$.noop();}};
+            this.item_widget = window.ahr.marketuser_widget.initWidget('body',that)
 
             filters.types=["activist", "readytohelp"];
             this.init(filters);
@@ -58,11 +40,6 @@
                  console.log(e.keydown);
             });
 
-            this.delegateEvents(_.extend(this.events,{
-                'click .recommend': 'recommend',
-                'click .sendprivatemessageuser': 'Message',
-                'click .item_container': 'showItem'
-            }));
             return this;
         },
     });

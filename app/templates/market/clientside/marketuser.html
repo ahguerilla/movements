@@ -8,11 +8,11 @@
         <div class="pull-right item-menu" style="position:relative;">
           <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
           <div class="dropdown">
-            <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu<%- pk %>" data-toggle="dropdown" />
+            <button class="btn dropdown-toggle sr-only dropdownMenu<%- pk %>" type="button" id="dropdownMenu<%- pk %>" data-toggle="dropdown" />
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
               <li role="presentation"></li>
               <li role="presentation"><a username="<%- username %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
-              <li role="presentation"><a username="<%- username %>" class="sendprivatemessageuser" role="menuitem" tabindex="-1" href="#">Private message</a></li>
+              <li role="presentation"><a username="<%- username %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
               <li role="presentation"><a username="<%- username %>" class="rate" rateing="user" image_src="<%- avatar %>" score="<%- score %>" ratecount="<%- ratecount %>" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
             </ul>
           </div>
@@ -71,5 +71,79 @@
       </div>
     </div>
   </div>
+
+</script>
+
+<script type="text/javascript">
+(function(){
+    var MarketUserWidget =  window.ahr.BaseView.extend({
+
+      show_dropdown:function(ev){
+        ev.preventDefault();
+        var item_id = ev.currentTarget.getAttribute('item_id');
+        $('.dropdownMenu'+item_id).trigger('click');
+        return false;
+      },
+
+      private_message: function(ev){
+        ev.preventDefault();
+        var username = ev.currentTarget.getAttribute('username');
+        var item_id = ev.currentTarget.getAttribute('item_id');
+        var msgsub = 'Re: '+$('.marketitem_title',$('.market-item-card[item_id='+item_id+']')).text();
+        this.message_widget.show(username, msgsub, '', false);
+        return(false);
+      },
+
+      resetitemrate:function(item_id, rate){
+        try{
+          $(".numstars[item_id="+item_id+"]").rateit('value',rate);
+        }catch(err){
+          $.noop();
+        }
+      },
+
+      recommend: function(ev){
+        ev.preventDefault();
+        var title = ev.currentTarget.getAttribute('title');
+        $('#recsub').val($('#currentusername').text()+' recommends :'+ title);
+        $('#recsub').attr('readonly',true);
+        var href = '<a href="'+window.location+'">'+ title +'</a>';
+        $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at this post by '+ ev.currentTarget.getAttribute('owner')+' \r\n'+ href );
+        $('#touser').val('');
+        $('#recommenddialog').modal('show');
+        return(false);
+      },
+
+      afterset: function(){
+        $('.numstars').rateit();
+        $('.numstars').rateit('min',0);
+        $('.numstars').rateit('max',5);
+        $('.numstars').rateit('readonly',true);
+        $('.numstars').each(function(){
+            $(this).rateit('value',this.getAttribute('score'));
+        });
+      },
+
+      initialize: function(options){
+        this.market = options.market;
+        this.item_tmp = _.template($('#user-template').html());
+        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
+
+        this.delegateEvents(_.extend(this.events,{
+          'click .itemactions' : 'show_dropdown',
+          'click .private_message' : 'private_message',
+          'click .recommend': 'recommend',
+        }));
+      }
+    });
+
+    window.ahr.marketuser_widget = window.ahr.marketuser_widget || {};
+    window.ahr.marketuser_widget.initWidget= function(element,market){
+        var marketuser_widget = new MarketUserWidget({el:element, market:market});
+        return marketuser_widget;
+    };
+
+  })();
 
 </script>

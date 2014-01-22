@@ -44,10 +44,10 @@
 
     sendpm: function(ev){
       ev.preventDefault();
+      $('.sendpm').prop('disabled',true);
       var that = this;
       this.getval();
       if( this.subject !== '' &&  this.message !== ''){
-        $('#messagedialog').modal('hide');
         window.ahr.getcsrf(function(csrf){
           var dfrd = $.ajax({
             url:window.ahr.app_urls.sendmessage+that.username,
@@ -60,12 +60,12 @@
             }
           });
           dfrd.done(function(){
-            // that.info('Your message was sent successfuly.',that.alert_place);
-            $.noop();
+            $('#messagedialog').modal('hide');
+            $('.sendpm').prop('disabled',false);
           });
           dfrd.fail(function(){
-            $('#messagedialog').modal('show');
             that.alert('Please try again.',that.alert_place);
+            $('.sendpm').prop('disabled',false);
           });
         });
       }else{
@@ -93,7 +93,7 @@
     },
 
     initialize:function(settings){
-      this.alert_place = settings.alert_place;
+      this.alert_place = '#pmerror'//settings.alert_place;
       return this;
     }
 });
