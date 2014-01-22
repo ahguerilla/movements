@@ -40,6 +40,9 @@
                  console.log(e.keydown);
             });
 
+            this.delegateEvents(_.extend(this.events,{
+                'click .item_container': 'showItem'
+            }));
             return this;
         },
     });

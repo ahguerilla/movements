@@ -2,8 +2,8 @@
   <div class="market-place-item" item_id="<%- pk %>" >
     <div class="market-item-card user-card" >
       <div class="item-header user">
-        <div class="item-header-clickable item_container" item_id="<%- username %>">
-          <%- username %>
+        <div class="item-header-clickable" item_id="<%- username %>">
+          <a href="<%- profile_url %>"><%- username %></a>
         </div>
         <div class="pull-right item-menu" style="position:relative;">
           <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
@@ -104,11 +104,11 @@
 
       recommend: function(ev){
         ev.preventDefault();
-        var title = ev.currentTarget.getAttribute('title');
-        $('#recsub').val($('#currentusername').text()+' recommends :'+ title);
+        var username = ev.currentTarget.getAttribute('username');
+        $('#recsub').val($('#currentusername').text()+' recommends this user : '+ username);
         $('#recsub').attr('readonly',true);
-        var href = '<a href="'+window.location+'">'+ title +'</a>';
-        $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at this post by '+ ev.currentTarget.getAttribute('owner')+' \r\n'+ href );
+        var href = '<a href="'+window.location.host+window.ahr.app_urls.viewuserprofile+username+'">'+ username +'</a>';
+        $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at user '+ username +' \r\n'+ href );
         $('#touser').val('');
         $('#recommenddialog').modal('show');
         return(false);
