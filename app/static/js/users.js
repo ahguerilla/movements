@@ -41,6 +41,8 @@
             this.item_tmp = _.template($('#user-template').html());
             this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id);
             this.message_widget = window.ahr.messagedialog_widget.initWidget('#'+this.el.id,'#infobar');
+            this.item_widget = window.ahr.marketitem_widget.initWidget('body',this);
+
 
             filters.types=["activist", "readytohelp"];
             this.init(filters);

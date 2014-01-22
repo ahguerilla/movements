@@ -5,6 +5,7 @@ from json_field import JSONField
 import django.contrib.auth as auth
 from datetime import datetime
 from django.db.models import Q
+from django.core.urlresolvers import reverse
 
 
 
@@ -101,6 +102,27 @@ class UserProfile(models.Model):
             else:
                 return base_twitter + self.tweet_url
         return None
+
+    def getDict(self):
+        adict= {'fields':{}}
+        adict['pk'] = self.user.id
+        adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.user.username,80])
+        adict['fields']['bio'] = self.bio if not self.notperm.has_key('bio') else ''
+        adict['fields']['tag_line'] = self.tag_ling if not self.notperm.has_key('tag_ling') else ''
+        adict['fields']['username'] = self.user.username
+        adict['fields']['ratecount'] = self.ratecount
+        adict['fields']['score'] = self.score
+        adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[self.user.username])
+        adict['fields']['issues']= [ob.id for ob in self.issues.all()] if not self.notperm.has_key('issues') else ''
+        adict['fields']['countries']= [ob.id for ob in self.countries.all()] if not self.notperm.has_key('countries') else ''
+        adict['fields']['skills']= [ob.id for ob in self.skills.all()] if not self.notperm.has_key('skills') else ''
+        # AB - I added these to make the user page render, but it's rendering kinda funny
+        adict['fields']['ownerid'] = self.user.id
+        adict['fields']['item_type'] = 'user'
+        adict['fields']['owner'] = self.user.username
+        adict['fields']['usercore'] = self.score
+        adict['fields']['commentcount'] = 0
+        return adict
 
     @classmethod
     def get_application_users(cls, **kwargs):

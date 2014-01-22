@@ -10,49 +10,6 @@ from postman.api import pm_write
 from app.market.api.utils import *
 import app.users as users
 
-def getUserDict(userprofile):
-    adict= {'fields':{}}
-    adict['pk'] = userprofile.user.id
-    adict['fields']['avatar'] = reverse('avatar_render_primary', args=[userprofile.user.username,80])
-    adict['fields']['bio'] = userprofile.bio
-    adict['fields']['tag_line'] = userprofile.tag_ling
-    adict['fields']['username'] = userprofile.user.username
-    adict['fields']['ratecount'] = userprofile.ratecount
-    adict['fields']['score'] = userprofile.score
-    adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[userprofile.user.username])
-    adict['fields']['issues']= [ob.id for ob in userprofile.issues.all()]
-    adict['fields']['countries']= [ob.id for ob in userprofile.countries.all()]
-    adict['fields']['skills']= [ob.id for ob in userprofile.skills.all()]
-    # AB - I added these to make the user page render, but it's rendering kinda funny
-    adict['fields']['ownerid'] = userprofile.user.id
-    adict['fields']['item_type'] = 'user'
-    adict['fields']['owner'] = userprofile.user.username
-    adict['fields']['usercore'] = userprofile.score
-    adict['fields']['commentcount'] = 0
-    return adict
-
-
-def returnItemList(obj, rtype):
-    return HttpResponse(
-        value(rtype,
-              obj,
-              use_natural_keys=True,
-              fields=('user',
-                      'issues',
-                      'countries',
-                      'skills',
-                      'bio',
-                      'tag_ling',
-                      'is_organisation',
-                      'is_individual',
-                      'is_journalist',
-                      'occupation',
-                      'expertise',
-                      'resident_country',
-                      'nationality')
-              ),
-        mimetype="application/"+rtype)
-
 
 def createQuery(request):
     query = Q()
@@ -103,7 +60,7 @@ def getUsersFromto(request,sfrom,to,rtype):
     query = createQuery(request)
     obj = users.models.UserProfile.get_application_users(query=query, distinct='id', order='-id', start=sfrom, finish=to)
     return HttpResponse(
-        json.dumps([getUserDict(user) for user in obj]),
+        json.dumps([user.getDict() for user in obj]),
         mimetype="application/"+rtype)
 
 
