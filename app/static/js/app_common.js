@@ -95,7 +95,7 @@
 
   function AssignFrameHeight(id) {
     var theFrame = $('#'+id, parent.document.body);
-    theFrame.height(getIframeHeight(id)-300);
+    theFrame.height(getIframeHeight(id)-150);
   }
 
   function getIframeHeight(iframeName) {

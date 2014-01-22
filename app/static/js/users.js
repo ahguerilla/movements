@@ -33,6 +33,10 @@
             this.message_widget.show(username,'','',false);
         },
 
+        showItem: function(ev){
+            window.location = $('a.linktoprofile',$(ev.currentTarget)).attr('href');
+        },
+
         initialize : function(filters){
             var that = this;
             this.itemcount_url = window.ahr.app_urls.getusercount;
@@ -41,6 +45,7 @@
             this.item_tmp = _.template($('#user-template').html());
             this.rate_widget = window.ahr.rate_form_dialog.initWidget('#'+this.el.id);
             this.message_widget = window.ahr.messagedialog_widget.initWidget('#'+this.el.id,'#infobar');
+            this.item_widget = {afterset:function(){$.noop();}};
 
             filters.types=["activist", "readytohelp"];
             this.init(filters);
@@ -55,7 +60,8 @@
 
             this.delegateEvents(_.extend(this.events,{
                 'click .recommend': 'recommend',
-                'click .sendprivatemessageuser': 'Message'
+                'click .sendprivatemessageuser': 'Message',
+                'click .item_container': 'showItem'
             }));
             return this;
         },
