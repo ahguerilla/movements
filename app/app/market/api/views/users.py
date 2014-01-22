@@ -36,12 +36,12 @@ def createQuery(request):
 
 
 @login_required
-def getAvatar(request,obj_id, rtype):
+def getAvatar(request,obj_id,size, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     obj = user.avatar_set.all()
     #if obj != []:
         #return HttpResponse(value(rtype,obj),mimetype="application"+rtype)
-    return HttpResponse(value(rtype, [{'pk': 0, 'avatar': reverse('avatar_render_primary', args=[userprofile.user.username,80])},]),mimetype="application"+rtype)
+    return HttpResponse( json.dumps({'pk': 0, 'avatar': reverse('avatar_render_primary', args=[user.username,80])}),mimetype="application"+rtype)
 
 
 @login_required
