@@ -5,10 +5,10 @@
 
 {% block head_title %}{% trans "Profile" %}{% endblock %}
 
-{% block content %}
+{% block private-content %}
 <div class="row">
-  <div class="col-md-offset-4 col-md-4">
-    <div class="row in-container dialog" style="margin-top: 20px; margin-bottom: 20px;">
+  <div class="col-md-offset-3 col-md-6">
+    <div class="in-container dialog">
       <div class="col-md-12">
         <h4>
         {% if is_self %}
@@ -19,8 +19,9 @@
         </h4>
       </div>
       <div class="col-md-12 col-spacing-bottom">
+        <div class="profile-avatar">
         {% avatar user_details 100 %}
-
+        </div>
       </div>
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
@@ -169,11 +170,13 @@
             <strong>Issues:</strong>
           </div>
           <div class="col-md-9">
-            {% for issue in user_profile.issues.all %}
-            <span class="tm-tag">
-              <span>{{ issue }}</span>
-            </span>
-            {% endfor %}
+            <div class="item-tags">
+              <div>
+                {% for issue in user_profile.issues.all %}
+                <div class="btn btn-default disabled btn-xs"> {{ issue }} </div>
+                {% endfor %}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -183,11 +186,13 @@
             <strong>Countries:</strong>
           </div>
           <div class="col-md-9">
-            {% for country in user_profile.countries.all %}
-            <span class="tm-tag">
-              <span>{{ country }}</span>
-            </span>
-            {% endfor %}
+            <div class="item-tags">
+              <div>
+                {% for country in user_profile.countries.all %}
+                <div class="btn btn-default disabled btn-xs"> {{ country }} </div>
+                {% endfor %}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -197,11 +202,13 @@
             <strong>Skills:</strong>
           </div>
           <div class="col-md-9">
-            {% for skill in user_profile.skills.all %}
-            <span class="tm-tag">
-              <span>{{ skill }}</span>
-            </span>
-            {% endfor %}
+            <div class="item-tags">
+              <div>
+                {% for skill in user_profile.skills.all %}
+                <div class="btn btn-default disabled btn-xs"> {{ skill }} </div>
+                {% endfor %}
+              </div>
+            </div>
           </div>
         </div>
       </div>

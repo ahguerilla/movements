@@ -5,6 +5,13 @@
 
 {% block head_title %}{% trans "Sign Up" %}{% endblock %}
 
+{% block content %}
+<div class="public">
+  {% block private-content %}
+  {% endblock %}
+</div>
+{% endblock %}
+
 {% block javascript %}
   <script type="text/javascript">
     $.backstretch("{{ STATIC_URL }}images/landing-bg-1920x1202-blended.jpg");
