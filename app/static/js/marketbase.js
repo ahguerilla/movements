@@ -190,9 +190,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     refreshScrollElements: function(){
-        // var container = document.querySelector('#marketitems');
-        // var msnry = new Masonry( container );
-        this.msnry.layout();
+        var container = document.querySelector('#marketitems');
+        var msnry = new Masonry( container );
+        // this.msnry.layout();
     },
 
 
