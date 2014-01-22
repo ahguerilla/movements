@@ -1,43 +1,36 @@
-{% extends "base.html" %}
-
-{% load avatar_tags %}
+{% extends "base_public.html" %}
+{% load socialaccount %}
 {% load i18n %}
-{% load account %}
 
 {% block head_title %}{% trans "Welcome" %}{% endblock %}
 
-
-{% block content %}
-<div class="row">
-  <div class="col-md-offset-2 col-md-8 center-content">
+{% block public-content %}
+  <div class="dialog">
     <h1>{% trans "Thank You!" %}</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-offset-2 col-md-8 center-content">
-    <h4>You've successfully activated you account</h4>
-    <p>&nbsp;</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <p>&nbsp;</p>
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-offset-2 col-md-8 center-content">
+    <div>
+      <h4>You've successfully activated you account</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet posuere nisl, non pellentesque lorem. Donec non cursus nisi. Suspendisse vel urna mauris. Nulla orci odio, pellentesque et venenatis in, tincidunt quis massa. Nulla ut auctor quam, vel semper augue. Sed nulla nisi, varius ac sapien sed, vestibulum sollicitudin augue. Integer porttitor libero a libero molestie scelerisque. Curabitur iaculis imperdiet lobortis. Sed at sapien iaculis, faucibus magna in, blandit tortor. Aenean vel sapien ut enim ullamcorper feugiat. In vitae libero consequat, imperdiet turpis nec, pretium diam.
+      </p>
+      <p>
+        Cras condimentum leo quis risus porta rutrum. Curabitur sollicitudin turpis nec sem bibendum, sit amet vulputate velit consectetur. Sed non lacus metus. Phasellus quis vulputate ante. Etiam commodo magna ac nunc placerat blandit. Nullam ut nibh nec neque porttitor condimentum. Suspendisse scelerisque orci non ante semper ullamcorper. Maecenas urna justo, auctor gravida lorem eget, elementum tempus erat. In porttitor sollicitudin sapien et porta.
+      </p>
+      <p>
+        Cras molestie eros erat. Pellentesque hendrerit interdum justo, sed aliquam dui tempus vitae. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer eget vehicula massa, nec bibendum libero. Vivamus elementum tortor sodales erat dictum ullamcorper. Proin non egestas velit. Nullam dapibus ac ante in posuere. Sed cursus, arcu et auctor molestie, nulla ligula pulvinar magna, condimentum dapibus nulla magna non turpis. Mauris aliquet eros metus. Morbi et lacus aliquam, tempus lorem quis, dignissim enim. Nulla at ultricies quam. Donec non lobortis eros, ut vulputate lacus.
+      </p>
+    </div>
     <div class="row">
-      <div class="col-md-offset-1 col-md-4">
+      <div class="col-xs-6 col-sm-offset-1 col-sm-4 col-md-offset-2 col-md-3">
         <a href="{% url 'user_settings' %}">
-          <div class="btn btn-success full-width">View Settings</div>
+          <button class="btn full-width">View Settings</button>
         </a>
       </div>
-      <div class="col-md-offset-2 col-md-4">
+      <div class="col-xs-6 col-sm-offset-2 col-sm-4 col-md-offset-2 col-md-3">
         <a href="{% url 'show_market' %}">
-          <div class="btn btn-success full-width">Continue To Exchange</div>
+          <button class="btn full-width">Continue</button>
         </a>
       </div>
     </div>
   </div>
-</div>
 {% endblock %}
-
 

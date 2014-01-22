@@ -11,7 +11,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     requiresResetOnNewOfferRequest: false,
 
     setFilterNone:function(){
-        $('.item-type').addClass('btn-success');
         this.filters = window.ahr.clone(this.default_filters);
         var skillarr=[];
         _.each(window.ahr.skills, function(item){
@@ -38,21 +37,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             $('.row.'+key).empty();
             this.initFilters(that, key, that.tagtemp);
         }
-    },
-
-    changeFilterType: function(ev){
-        var that = this;
-        $('.filter-type').removeClass('btn-success');
-
-        $(ev.currentTarget).addClass('btn-success');
-        if(ev.currentTarget.textContent=="Default"){
-            this.filters = window.ahr.clone(this.default_filters);
-            $('.item-type').addClass('btn-success');
-        }else if(ev.currentTarget.textContent=="All"){
-            this.setFilterNone();
-        }
-        this.setFilterKeys();
-        this.resetMarket();
     },
 
     initFilters: function(that, items, templ){
@@ -340,7 +324,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.delegateEvents(_.extend(this.events,{
             'click .tagbutton': 'tagsfilter',
             'click #searchbtn': 'search',
-            'click .filter-type': 'changeFilterType',
             'click .item-type': 'itemTypesfilter',
             'click #create_offer': 'create_offer',
             'click #create_request': 'create_request',
