@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>{% block title %}django-avatar{% endblock %}</title>
+        <LINK href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+  		<style>
+  			body{
+  				font-family: Helvetica, Arial, sans-serif;
+  				color: gray;
+  			}
+  			ul{
+    			list-style-type: none;
+    		}
+
+			li{
+	    		display: inline-block;
+    		}
+  		</style>
+    </head>
+    <body style="height:auto;">
+        {% block content %}{% endblock %}
+    </body>
+</html>
