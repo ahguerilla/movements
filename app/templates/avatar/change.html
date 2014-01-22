@@ -1,0 +1,28 @@
+{% extends "avatar/base.html" %}
+{% load i18n avatar_tags %}
+{% load url from future %}
+
+{% block content %}
+    <div style="height:auto;">
+        <div style="text-align:center;">
+        <h4>{% trans "Your current avatar: " %}</h4>
+        {% avatar user %}
+        {% if not avatars %}
+            <p>{% trans "You haven't uploaded an avatar yet. Please upload one now." %}</p>
+            </div>
+            <hr/>
+        {% else %}
+            </div>
+            <hr/>
+            <form method="POST" action="{% url 'avatar_change' %}">
+                {{ primary_avatar_form.as_ul }}
+                <div  style="text-align: center;"><p>{% csrf_token %}<input class="btn btn-default" type="submit" value="{% trans "Choose new Default" %}" /></p></div>
+            </form>
+            <hr/>
+        {% endif %}
+        <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+            {{ upload_avatar_form.as_p }}
+            <p>{% csrf_token %}<input class="btn btn-default"  type="submit" value="{% trans "Upload New Image" %}" /></p>
+        </form>
+    </div>
+{% endblock %}

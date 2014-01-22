@@ -11,6 +11,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     requiresResetOnNewOfferRequest: false,
 
     setFilterNone:function(){
+        $('.item-type').addClass('btn-success');
         this.filters = window.ahr.clone(this.default_filters);
         var skillarr=[];
         _.each(window.ahr.skills, function(item){

@@ -93,10 +93,21 @@
     }, false);
   }
 
+  function AssignFrameHeight(id) {
+    var theFrame = $('#'+id, parent.document.body);
+    theFrame.height(getIframeHeight(id)-300);
+  }
+
+  function getIframeHeight(iframeName) {
+    return $('body',$('#'+iframeName).contents()).height();
+  }
+
   window.ahr = window.ahr || {};
   window.ahr.getcsrf = getcsrf;
   window.ahr.getStatics = getStatics;
   window.ahr.clone = clone;
   window.ahr.expandTextarea = expandTextarea;
+  window.ahr.getIframeHeight = getIframeHeight;
+  window.ahr.assignFrameHeight = AssignFrameHeight
 
 })();
