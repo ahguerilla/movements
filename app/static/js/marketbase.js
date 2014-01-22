@@ -265,22 +265,25 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     hideMarket:function(){
-        $('#itemandsearchwrap').hide();
+        $('#backtothemarket').show();
         $('#marketitem_comment_form').show();
         $('#marketitem_comments').show();
         $('#market-filters').collapse({toggle:false});
         $('#market-filters').collapse('hide');
         $('#togglefilter').hide();
+        $('#itemandsearchwrap').hide();
     },
 
     showMarket:function(){
-        $('#singleItem').empty();
+        $('#backtothemarket').hide();
         $('#itemandsearchwrap').show();
         $('#marketitem_comment_form').hide();
         $('#marketitem_comments').hide();
         $('#marketitem_comments').empty();
-        $('#newcomment').val('');
+        $('#singleItem').empty();
         $('#togglefilter').show();
+        $('#newcomment').val('');
+        
     },
 
     isSingle:function(){
