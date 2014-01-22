@@ -106,7 +106,7 @@
         ev.preventDefault();
         var username = ev.currentTarget.getAttribute('username');
         $('#recsub').val($('#currentusername').text()+' recommends this user : '+ username);
-        $('#recsub').attr('readonly',true);
+        $('#recsub').attr('readonly',false);
         var href = '<a href="'+window.location.host+window.ahr.app_urls.viewuserprofile+username+'">'+ username +'</a>';
         $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at user '+ username +' \r\n'+ href );
         $('#touser').val('');

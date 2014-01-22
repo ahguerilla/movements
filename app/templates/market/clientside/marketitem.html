@@ -151,7 +151,7 @@
         ev.preventDefault();
         var title = ev.currentTarget.getAttribute('title');
         $('#recsub').val($('#currentusername').text()+' recommends :'+ title);
-        $('#recsub').attr('readonly',true);
+        $('#recsub').attr('readonly',false);
         var href = '<a href="'+window.location+'">'+ title +'</a>';
         $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at this post by '+ ev.currentTarget.getAttribute('owner')+' \r\n'+ href );
         $('#touser').val('');
