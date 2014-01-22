@@ -173,6 +173,8 @@ class AccAdapter(DefaultAccountAdapter):
         return user
 
     def send_vetting_email(self, user, form):
+        if not config.ACTIVATE_USER_EMAIL:
+            raise Exception("Configuration Error: Check that ACTIVATE_USER_EMAIL is set")
         vet_url = reverse('vet_user', args=(user.id,))
         vet_url = 'http://' + Site.objects.get_current().domain + vet_url
         ctx = {
@@ -202,6 +204,10 @@ class AccAdapter(DefaultAccountAdapter):
             "activate_url": 'http://'+Site.objects.get_current().domain+"/admin/auth/user/"+str(conf.email_address.user_id),
             "current_site": Site.objects.get_current().domain,
         }
+
+        if not config.ACTIVATE_USER_EMAIL:
+            raise Exception("Configuration Error: Check that ACTIVATE_USER_EMAIL is set")
+        
         self.send_mail('account/email/user_confirmed_email', config.ACTIVATE_USER_EMAIL, ctx)
         return 'http://'+Site.objects.get_current().domain+'/user/waitforactivation'
 
