@@ -7,15 +7,15 @@
 {% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="col-md-offset-2 col-md-8 center-content">
+<div class="col-md-offset-2 col-md-8 center-content">
+  <div class="row dialog sign-up-form">
     <h1>{% trans "Confirm E-mail Address" %}</h1>
     {% if confirmation %}
     <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
     <form class="form-horizontal" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
       {% csrf_token %}
       <div class="form-group">
-        <button class="btn btn-success" type="submit">{% trans 'Confirm' %}</button>
+        <button class="btn" type="submit">{% trans 'Confirm' %}</button>
       </div>
     </form>    
     {% else %}

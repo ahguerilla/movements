@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -25,6 +26,7 @@ def privacy(request):
 def how_it_works_pub(request):
     return render_to_response('ahr/how_it_works_public.html', context_instance=RequestContext(request))
 
+@login_required
 def how_it_works_priv(request):
     return render_to_response('ahr/how_it_works_private.html', context_instance=RequestContext(request))
 
