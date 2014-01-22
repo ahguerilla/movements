@@ -34,7 +34,6 @@
     var PostsView = window.ahr.market.MarketBaseView.extend({
         types:{"Offers":"offer","Request":"request"},
 
-
         initialize : function(filters){
             var that = this;
             this.item_tmp = _.template($('#item_template').html());
