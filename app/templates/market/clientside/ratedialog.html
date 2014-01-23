@@ -137,7 +137,7 @@
           $(that.evrate.currentTarget).attr('ratecount',data.ratecount);
           $(that.evrate.currentTarget).attr('score',data.score);
           if(typeof that.callback == 'function'){
-            that.callback(that.evrate.currentTarget.getAttribute('item_id'), data.score);
+            that.callback(that.evrate.currentTarget.getAttribute('username'), data.score);
           }
 
           $('#ratedialog').modal('hide');

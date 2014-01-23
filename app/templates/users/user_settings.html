@@ -279,7 +279,8 @@
 
     ShowAvChange: function(ev){
       ev.preventDefault();
-      window.ahr.assignFrameHeight('profile_change_stuff');
+      // window.ahr.assignFrameHeight('profile_change_stuff');
+      $('#profile_change_stuff').height(500);
       $('#changeavatardialog').modal('show');
       return(false);
     },

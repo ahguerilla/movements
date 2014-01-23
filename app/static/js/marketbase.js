@@ -283,7 +283,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('#singleItem').empty();
         $('#togglefilter').show();
         $('#newcomment').val('');
-        
     },
 
     isSingle:function(){
