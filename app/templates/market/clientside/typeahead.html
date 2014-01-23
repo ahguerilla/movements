@@ -49,6 +49,7 @@
                 $('#'+name,$(that.container)).data().ttView.setQuery('');
                 $('#'+name,$(that.container)).trigger('blur');
                 $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
+                // $('#'+name,$(that.container)).trigger('focus');
             }
 
             that.typeahead.on('typeahead:selected', function (e, d) {
@@ -59,9 +60,9 @@
                 afterselect(d);
             });
 
-            that.typeahead.blur(function(){
-                $('#'+name,$(that.container)).val('');
-            });
+            // that.typeahead.blur(function(){
+                // $('#'+name,$(that.container)).val('');
+            // });
 
             func(this.values);
         },

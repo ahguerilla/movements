@@ -36,8 +36,7 @@
                limit: 5,
                remote: window.ahr.app_urls['getusernames']+'?username='+$('#touser').val()
                }).on('typeahead:selected', function (e, d) {
-                 that.search();
-                 console.log(e.keydown);
+                 window.location = window.ahr.app_urls.viewuserprofile+d.value;
             });
 
             this.delegateEvents(_.extend(this.events,{
