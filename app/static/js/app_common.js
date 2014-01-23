@@ -23,7 +23,6 @@
     var dfrd = $.Deferred();
     var dfrd1=$.ajax({url:window.ahr.app_urls.getissues,dataType:'json'});
     dfrd1.done(function(data){
-      debugger;
       window.ahr.issues = window.ahr.getpkname(data,'issues');
       window.ahr.issues_lookup =  window.ahr.getpklookup(window.ahr.issues);
       var dfrd2 = $.ajax({url:window.ahr.app_urls.getskills,dataType:'json'});
