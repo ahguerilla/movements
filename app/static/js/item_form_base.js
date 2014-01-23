@@ -19,6 +19,7 @@
         submit: function(e){
             e.preventDefault();
             var that = this;
+            $('.itemdialogsave').attr('disabled','disabled');
             $('#'+that.el.id+' #itemformerror').empty();
             $('#'+that.el.id+' .error').empty();
 
@@ -34,14 +35,18 @@
                 if(that.oncomplete){
                     that.oncomplete();
                 }
+                $('.itemdialogsave').removeAttr('disabled');
                 return true;
             });
 
             dfrd.fail(function(data){
                 for(var item in data.responseJSON.errors){
                     $('.'+data.responseJSON.errors[item][0]+'.error',$(that.el)).html(data.responseJSON.errors[item][1]);
+                    if(data.responseJSON.errors[item][0]=="__all__"){
+                        that.alert(data.responseJSON.errors[item][1],'#'+that.el.id+' #itemformerror');
+                    }
                 }
-                that.alert('Correct the errors (you have to select items from drop down menu)','#'+that.el.id+' #itemformerror');
+                $('.itemdialogsave').removeAttr('disabled');
             });
 
             return false;

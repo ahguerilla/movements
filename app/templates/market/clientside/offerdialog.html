@@ -28,7 +28,7 @@
           <div class="form-group"  id="details_place"></div>
           <div class="modal-footer">
             <span class="col-xs-offset-6 col-xs-6 pull-right">
-              <button type="submit" class="btn btn-success full-width pull-right">{% trans "Save" %}</button>
+              <button type="submit" class="btn btn-success full-width pull-right itemdialogsave">{% trans "Save" %}</button>
             </span>
           </div>
         </form>
@@ -74,6 +74,7 @@
 
         edit: function(item, edit_calback){
           this.changing=true;
+          $('#'+this.el.id+' .error').empty();
           this.url = window.ahr.app_urls.editmarketitem+item[0].pk;
           this.issues_widget.change(item[0].fields.issues);
           this.countries_widget.change(item[0].fields.countries);
@@ -151,7 +152,6 @@
           $('#offerdialog').on('scroll',function(){
             var top = $('.glyphicon.glyphicon-calendar',$('#offerdialog')).offset().top-$(window).scrollTop();
             $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function(){$(this).css('top',top+20);})
-
           });
           window.ahr.expandTextarea($('#details',$("#offerdialog")));
         },
