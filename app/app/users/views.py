@@ -17,6 +17,8 @@ from django.contrib.sites.models import Site
 from allauth.account.models import EmailConfirmation
 from constance import config
 from django.core.urlresolvers import reverse, reverse_lazy
+from app.market.api.utils import value
+import app.users as users
 
 
 def render_settings(request, initial=False):
@@ -58,6 +60,9 @@ def render_settings(request, initial=False):
                                 'user_form': user_form,
                                 'notperm': str(perms).replace("u'","'"),
                                 'initial': initial,
+                                'skills': value('json',users.models.Skills.objects.all()),
+                                'issues': value('json',users.models.Issues.objects.all()),
+                                'countries': value('json',users.models.Countries.objects.all()),
                               },
                               context_instance=RequestContext(request))
 

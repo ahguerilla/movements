@@ -217,7 +217,7 @@
           </div>
           <div class="col-sm-12">
             <div id="skills_place"></div>
-            <span id="skills"> 
+            <span id="skills">
               {{ settings_form.skills.errors }}
               {% render_field settings_form.skills class="form-control input-sm input-extra-height" %}
             </span>
@@ -288,7 +288,6 @@
 
     ShowAvChange: function(ev){
       ev.preventDefault();
-      // window.ahr.assignFrameHeight('profile_change_stuff');
       $('#profile_change_stuff').height(500);
       $('#changeavatardialog').modal('show');
       return(false);
@@ -299,6 +298,7 @@
     },
 
     initialize : function(){
+      try{
       var href = document.getElementById('changeavatar').href;
       $('#profile_change_stuff').attr('src', href);
       $('#changeavatardialog').on('hidden.bs.modal', function () {
@@ -318,6 +318,7 @@
           $('.navavatar img').attr('src',data.avatar+'?' + new Date().getTime());
         });
       });
+    }catch(err){$.noop();}
       return this;
     }
 
@@ -325,6 +326,15 @@
 
 
   (function(){
+    window.ahr.issues=  window.ahr.getpkname({{issues|safe}},'issues');
+    window.ahr.issues_lookup =  window.ahr.getpklookup(window.ahr.issues);
+
+    window.ahr.countries=  window.ahr.getpkname({{countries|safe}},'countries');
+    window.ahr.countries_lookup =  window.ahr.getpklookup(window.ahr.countries);
+
+    window.ahr.skills=  window.ahr.getpkname({{skills|safe}},'skills');
+    window.ahr.skills_lookup =  window.ahr.getpklookup(window.ahr.skills);
+
     {% if notperms|length %}
     var perms = null;
     {% else %}
@@ -346,25 +356,23 @@
       issues.push(parseInt(this.value));
     });
 
-    var dfrd = window.ahr.getStatics();
+
     var issues_widget,countries_widget,skills_widget;
-    dfrd.done(function(){
-      issues_widget = window.ahr.typeahead_widget.initWidget(
-                          '#issues_place',
-                          {title:'', jsonfield:'issues'},
-                          issues);
 
-      countries_widget = window.ahr.typeahead_widget.initWidget(
-                  '#countries_place',
-                  {title:'',  jsonfield:'countries'},
-                  countries);
+    issues_widget = window.ahr.typeahead_widget.initWidget(
+                        '#issues_place',
+                        {title:'', jsonfield:'issues'},
+                        issues);
 
-      skills_widget = window.ahr.typeahead_widget.initWidget(
-                  '#skills_place',
-                  {title:'',  jsonfield:'skills'},
-                  skills);
-      // this.item_obj? this.item_obj.skills: null);
-    });
+    countries_widget = window.ahr.typeahead_widget.initWidget(
+                '#countries_place',
+                {title:'',  jsonfield:'countries'},
+                countries);
+
+    skills_widget = window.ahr.typeahead_widget.initWidget(
+                '#skills_place',
+                {title:'',  jsonfield:'skills'},
+                skills);
 
     if (perms) {
       for(item in perms){
@@ -380,7 +388,7 @@
         $("#skills select option").each(function(){$(this).prop("selected", false);});
         $("#issues select option").each(function(){$(this).prop("selected", false);});
         $("#countries select option").each(function(){$(this).prop("selected", false);});
-        
+
         _.each(skills_widget.getval(),function(id){
           $("#skills select option[value='" + id + "']").prop("selected", true);
         });

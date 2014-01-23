@@ -1,6 +1,6 @@
 (function(){
-
-  function getpkname(data, item){
+  window.ahr = window.ahr || {};
+  window.ahr.getpkname=function(data, item){
     var ar=[];
     _.each(data, function(i){
       ar.push({
@@ -9,30 +9,31 @@
       });
     });
     return ar;
-  }
+  };
 
-  function getpklookup(data){
+ window.ahr.getpklookup = function(data){
     var ar = {};
     _.each(data, function(item){
       ar[item.pk] = item.value;
     });
     return ar;
-  }
+  };
 
   function getStatics(){
     var dfrd = $.Deferred();
     var dfrd1=$.ajax({url:window.ahr.app_urls.getissues,dataType:'json'});
     dfrd1.done(function(data){
-      window.ahr.issues = getpkname(data,'issues');
-      window.ahr.issues_lookup = getpklookup(window.ahr.issues);
+      debugger;
+      window.ahr.issues = window.ahr.getpkname(data,'issues');
+      window.ahr.issues_lookup =  window.ahr.getpklookup(window.ahr.issues);
       var dfrd2 = $.ajax({url:window.ahr.app_urls.getskills,dataType:'json'});
       dfrd2.done(function(data){
-        window.ahr.skills = getpkname(data,'skills');
-        window.ahr.skills_lookup = getpklookup(window.ahr.skills);
+        window.ahr.skills = window.ahr.getpkname(data,'skills');
+        window.ahr.skills_lookup = window.ahr.getpklookup(window.ahr.skills);
         var dfrd3 = $.ajax({url:window.ahr.app_urls.getcountries,dataType:'json'});
         dfrd3.done(function(data){
-          window.ahr.countries = getpkname(data,'countries');
-          window.ahr.countries_lookup = getpklookup(window.ahr.countries);
+          window.ahr.countries = window.ahr.getpkname(data,'countries');
+          window.ahr.countries_lookup = window.ahr.getpklookup(window.ahr.countries);
           dfrd.resolve();
         });
       });
