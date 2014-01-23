@@ -7,6 +7,7 @@
 
         page: function(page){
             this.users.initInfiniteScroll();
+            $(window).scrollTop('100');
         },
 
         initialize: function(users){
@@ -27,7 +28,7 @@
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
             this.viewurl = window.ahr.app_urls.viewuserprofile;
             this.item_tmp = _.template($('#user-template').html());
-            this.item_widget = window.ahr.marketuser_widget.initWidget('body',that)
+            this.item_widget = window.ahr.marketuser_widget.initWidget('body',that);
 
             filters.types=["activist", "readytohelp"];
             this.init(filters);
@@ -49,9 +50,11 @@
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
     window.ahr.users.initUsers = function(filters){
-        var users = new UsersView(filters);
-        var user_route = new UserRoute(users);
+        window.ahr.usersview = new UsersView(filters);
+        var user_route = new UserRoute(window.ahr.usersview);
         Backbone.history.start();
+        var func = _.bind(window.window.ahr.usersview.fancyref,window.window.ahr.usersview);
+        window.setTimeout(func,700);
     };
 
 })();

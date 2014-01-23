@@ -180,19 +180,23 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                     _.each(itemsToAppend, function(elem){
                         that.msnry.appended( elem );
                     });
-                    that.msnry.layout();
                 }
                 that.item_widget.afterset();
                 that.currentItem = that.currentItem + that.itemsPerCall;
                 that.loadingScrollElemets = false;
+                that.msnry.layout();
             });
         }
     },
 
     refreshScrollElements: function(){
         var container = document.querySelector('#marketitems');
-        var msnry = new Masonry( container );
-        // this.msnry.layout();
+        that.msnry = new Masonry( container );
+        
+    },
+    
+    fancyref:function(){
+        this.msnry.layout();
     },
 
 
