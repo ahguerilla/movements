@@ -25,14 +25,14 @@ def createQuery(request):
     if request.GET.has_key('search') and request.GET['search']!='':
         objs = SearchQuerySet().models(users.models.UserProfile).filter(text=request.GET['search'])
         #ids= [int(obj.pk) for obj in objs]
-        ids= [int(obj.pk) if not obj.object.notperm.has_key('bio') else None for obj in objs]
+        ids= [int(obj.pk) if not obj.object.notperm.has_key('bio') and obj.object.id != request.user.id else None for obj in objs]
         try:
             ids.remove(None)
         except:
             pass
         query = query & Q(id__in = ids)
 
-    return query
+    return query & ~Q(user__id=request.user.id)
 
 
 @login_required
@@ -58,7 +58,11 @@ def getDetails(request,obj_id, rtype):
 @login_required
 def getUsersFromto(request,sfrom,to,rtype):
     query = createQuery(request)
-    obj = users.models.UserProfile.get_application_users(query=query, distinct='id', order='-id', start=sfrom, finish=to)
+    obj = users.models.UserProfile.get_application_users(query=query,
+                                                         distinct='id',
+                                                         order='-id',
+                                                         start=sfrom,
+                                                         finish=to)
     return HttpResponse(
         json.dumps([user.getDict() for user in obj]),
         mimetype="application/"+rtype)

@@ -23,7 +23,7 @@
         <div class="item-title" >
           <a class="linktoprofile" href="<%- profile_url %>"><img src="<%- avatar %>" alt="<%- username %>" /></a>
           <div>&nbsp;</div>
-          <div item_id="<%- pk %>"  score="<%- score %>" class="numstars"></div>
+          <div item_id="<%- pk %>" username="<%- username %>" score="<%- score %>" class="numstars"></div>
           <div class="marketitem_title"><%- tag_line %></div>
         </div>
         <div class="clearfix"></div>
@@ -94,9 +94,9 @@
         return(false);
       },
 
-      resetitemrate:function(item_id, rate){
+      resetitemrate:function(username, rate){
         try{
-          $(".numstars[item_id="+item_id+"]").rateit('value',rate);
+          $(".numstars[username="+username+"]").rateit('value',rate);
         }catch(err){
           $.noop();
         }

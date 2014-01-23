@@ -265,7 +265,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     hideMarket:function(){
-        $('#backtothemarket').show();
+        $('#backtothemarket').css('visibility','visible');
         $('#marketitem_comment_form').show();
         $('#marketitem_comments').show();
         $('#market-filters').collapse({toggle:false});
@@ -275,7 +275,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     showMarket:function(){
-        $('#backtothemarket').hide();
+        $('#backtothemarket').css('visibility','hidden');
         $('#itemandsearchwrap').show();
         $('#marketitem_comment_form').hide();
         $('#marketitem_comments').hide();
