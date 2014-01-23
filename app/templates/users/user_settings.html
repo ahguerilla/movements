@@ -8,7 +8,7 @@
 {% block head_title %}{% trans "User Settings" %}{% endblock %}
 
 {% block private-content %}
-<div class="row">
+<div class="row" id="usersettingpage">
   <div class="col-md-offset-3 col-md-6">
     <div class="in-container dialog">
       {% if initial %}
@@ -192,8 +192,11 @@
             <label for="{{settings_form.issues.auto_id}}">Issues:</label>
           </div>
           <div class="col-sm-12">
-            {{ settings_form.issues.errors }}
-            {% render_field settings_form.issues class="form-control input-sm input-extra-height" %}
+            <div id="issues_place"></div>
+            <span id="issues">
+              {{ settings_form.issues.errors }}
+              {% render_field settings_form.issues class="form-control input-sm input-extra-height" %}
+            </span>
           </div>
         </div>
         <div class="form-group">
@@ -201,8 +204,11 @@
             <label for="{{settings_form.countries.auto_id}}">Countries:</label>
           </div>
           <div class="col-sm-12">
-            {{ settings_form.countries.errors }}
-            {% render_field settings_form.countries class="form-control input-sm input-extra-height" %}
+            <div id="countries_place"></div>
+            <span id="countries">
+              {{ settings_form.countries.errors }}
+              {% render_field settings_form.countries class="form-control input-sm input-extra-height" %}
+            </span>
           </div>
         </div>
         <div class="form-group">
@@ -210,8 +216,11 @@
             <label for="{{settings_form.skills.auto_id}}">Skills:</label>
           </div>
           <div class="col-sm-12">
-            {{ settings_form.skills.errors }}
-            {% render_field settings_form.skills class="form-control input-sm input-extra-height" %}
+            <div id="skills_place"></div>
+            <span id="skills"> 
+              {{ settings_form.skills.errors }}
+              {% render_field settings_form.skills class="form-control input-sm input-extra-height" %}
+            </span>
           </div>
         </div>
         <div class="form-group">
@@ -265,7 +274,7 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
+{% include "market/clientside/typeahead.html" %}
 {% endblock %}
 
 {%block endjavascript%}
@@ -301,7 +310,6 @@
         });
         dfrd.done(function(data){
           $('#settingavatar>img').attr('src',data.avatar+'?' + new Date().getTime());
-          // debugger;
         });
         var dfrd2 = $.ajax({
           url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'50'
@@ -322,6 +330,42 @@
     {% else %}
     var perms = {{notperm|safe}};
     {% endif %}
+
+    $('#countries').hide();
+    $('#issues').hide();
+    $('#skills').hide();
+    var countries=[],issues=[],skills=[];
+
+    $('#countries select option:selected').each(function(){
+      countries.push(parseInt(this.value));
+    });
+    $('#skills select option:selected').each(function(){
+      skills.push(parseInt(this.value));
+    });
+    $('#issues select option:selected').each(function(){
+      issues.push(parseInt(this.value));
+    });
+
+    var dfrd = window.ahr.getStatics();
+    var issues_widget,countries_widget,skills_widget;
+    dfrd.done(function(){
+      issues_widget = window.ahr.typeahead_widget.initWidget(
+                          '#issues_place',
+                          {title:'', jsonfield:'issues'},
+                          issues);
+
+      countries_widget = window.ahr.typeahead_widget.initWidget(
+                  '#countries_place',
+                  {title:'',  jsonfield:'countries'},
+                  countries);
+
+      skills_widget = window.ahr.typeahead_widget.initWidget(
+                  '#skills_place',
+                  {title:'',  jsonfield:'skills'},
+                  skills);
+      // this.item_obj? this.item_obj.skills: null);
+    });
+
     if (perms) {
       for(item in perms){
         $('input[name=notperm-'+item+']').attr('checked', true);
@@ -329,11 +373,28 @@
     } else {
       $('input[name^=notperm-]').attr('checked', true);
     }
+
     $('.submitsetting').on('click',function(e){
-      e.preventDefault();
-      $('#settingform').serialize();
-      $('#settingform').submit();
+        e.preventDefault();
+
+        $("#skills select option").each(function(){$(this).prop("selected", false);});
+        $("#issues select option").each(function(){$(this).prop("selected", false);});
+        $("#countries select option").each(function(){$(this).prop("selected", false);});
+        
+        _.each(skills_widget.getval(),function(id){
+          $("#skills select option[value='" + id + "']").prop("selected", true);
+        });
+        _.each(issues_widget.getval(),function(id){
+          $("#issues select option[value='" + id + "']").prop("selected", true);
+        });
+        _.each(countries_widget.getval(),function(id){
+          $("#countries select option[value='" + id + "']").prop("selected", true);
+        });
+
+        $('#settingform').serialize();
+        $('#settingform').submit();
     });
+
     var us = new UserSettingView();
   })();
 
