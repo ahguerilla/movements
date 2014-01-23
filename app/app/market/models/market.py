@@ -46,7 +46,7 @@ class MarketItem(models.Model):
         adict['fields']['title']= self.title
         adict['fields']['details']= self.details
         adict['fields']['pub_date']= str(self.pub_date)
-        adict['fields']['exp_date']= str(self.exp_date)
+        adict['fields']['exp_date']= str(self.exp_date) if self.exp_date != None else ''
         adict['fields']['never_exp']= self.never_exp
         adict['fields']['owner']= [self.owner.username]
         adict['fields']['ownerid']= [self.owner.id]

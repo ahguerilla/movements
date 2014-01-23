@@ -116,7 +116,7 @@ def setRate(request,username,rtype):
 
 @login_required
 def getUsernames(request,rtype):
-    usernames = users.models.User.objects.filter(username__contains=request.GET['username']).filter(~Q(username='admin')).only('username')[:10]
+    usernames = users.models.User.objects.filter(username__contains=request.GET['username']).filter(~Q(pk=request.user.id)&~Q(username='admin')).only('username')[:10]
     return HttpResponse(
         json.dumps(
             [user.username for user in usernames]
