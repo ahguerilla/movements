@@ -17,7 +17,7 @@
       {% else %}
       <div><h4>{% trans "User Settings" %}</h4></div>
 
-      {% avatar user %}
+      <span id="settingavatar">{% primary_avatar user %}</span>
       <a id="changeavatar" href="{% url 'avatar_change' %}">Change</a>
       <div>&nbsp;</div>
       <div><a href="{% url 'account_change_password' %}">Change Password</a></div>
@@ -279,7 +279,8 @@
 
     ShowAvChange: function(ev){
       ev.preventDefault();
-      window.ahr.assignFrameHeight('profile_change_stuff');
+      // window.ahr.assignFrameHeight('profile_change_stuff');
+      $('#profile_change_stuff').height(500);
       $('#changeavatardialog').modal('show');
       return(false);
     },
@@ -291,10 +292,23 @@
     initialize : function(){
       var href = document.getElementById('changeavatar').href;
       $('#profile_change_stuff').attr('src', href);
-       $('#changeavatardialog').on('hidden.bs.modal', function () {
+      $('#changeavatardialog').on('hidden.bs.modal', function () {
         $('#profile_change_stuff').empty();
         var href = document.getElementById('changeavatar').href;
         $('#profile_change_stuff').attr('src', href);
+        var dfrd = $.ajax({
+          url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'80'
+        });
+        dfrd.done(function(data){
+          $('#settingavatar>img').attr('src',data.avatar+'?' + new Date().getTime());
+          // debugger;
+        });
+        var dfrd2 = $.ajax({
+          url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'50'
+        });
+        dfrd2.done(function(data){
+          $('.navavatar img').attr('src',data.avatar+'?' + new Date().getTime());
+        });
       });
       return this;
     }

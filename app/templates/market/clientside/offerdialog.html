@@ -72,7 +72,7 @@
             return retdict;
         },
 
-        edit: function(item){
+        edit: function(item, edit_calback){
           this.changing=true;
           this.url = window.ahr.app_urls.editmarketitem+item[0].pk;
           this.issues_widget.change(item[0].fields.issues);
@@ -87,6 +87,8 @@
           }
           this.title_widget.change(item[0].fields.title);
           this.details_widget.change(item[0].fields.details);
+          this.edit_calback = edit_calback;
+          this.item_id = item[0].pk;
         },
 
         makeWidget: function(){
@@ -139,6 +141,7 @@
           var that = this;
           $('#'+that.el.id+' #itemformerror').empty();
           $('#offerdialog').modal('show');
+          
           window.ahr.getcsrf(function(csrf){
               if(csrf==false){
                   that.alert('Unable to connect to the server. please try again in a few minutes','#infobar');
@@ -159,7 +162,9 @@
           this.countries_widget.empty();
           this.issues_widget.empty();
           $('input,textarea',$('#offerdialog')).val('');
-
+          if(typeof this.edit_calback == "function"){
+            this.edit_calback(this.item_id);
+          }
         },
     });
 

@@ -64,7 +64,7 @@
           return retdict;
         },
 
-        edit: function(item){
+        edit: function(item,  edit_calback){
           this.changing=true;
           $('#'+this.el.id+' #itemformerror').empty();
           $('#'+this.el.id+' .error').empty();
@@ -80,6 +80,8 @@
           }
           this.title_widget.change(item[0].fields.title);
           this.details_widget.change(item[0].fields.details);
+          this.edit_calback = edit_calback;
+          this.item_id = item[0].pk;
         },
 
         makeWidget: function(){
@@ -144,7 +146,12 @@
 
         aftersubmit:function(){
           $('#requestdialog').modal('hide');
+          this.countries_widget.empty();
+          this.issues_widget.empty();
           $('input',$('#requestdialog')).val('');
+          if(typeof this.edit_calback == "function"){
+            this.edit_calback(this.item_id);
+          }
         }
     });
 

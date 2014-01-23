@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
-    url(r'(?P<rtype>\S+)/avatar/get/(?P<obj_id>\d+)$',
+    url(r'(?P<rtype>\S+)/avatar/get/(?P<obj_id>\d+)/(?P<size>\d+)$',
         'app.market.api.views.users.getAvatar',
         name="get_avatar"),
 

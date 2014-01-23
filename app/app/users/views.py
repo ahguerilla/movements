@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
@@ -6,7 +6,7 @@ from models import UserProfile, OrganisationalRating
 from forms import SettingsForm, UserForm, SignupForm, VettingForm
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.models import EmailAddress
-from allauth.account.views import SignupView, PasswordResetView
+from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
 from allauth.socialaccount.views import SignupView as SocialSignupView
 from allauth.account.adapter import DefaultAccountAdapter
 from django.contrib.admin.views.decorators import staff_member_required
@@ -16,6 +16,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from allauth.account.models import EmailConfirmation
 from constance import config
+from django.core.urlresolvers import reverse, reverse_lazy
 
 
 def render_settings(request, initial=False):
@@ -70,6 +71,8 @@ def initial_settings(request):
 
 @login_required
 def settings(request):
+    from avatar.util import invalidate_cache
+    invalidate_cache(request.user)
     return render_settings(request)
 
 
@@ -117,6 +120,16 @@ class SilentPasswordResetView(PasswordResetView):
 password_reset = SilentPasswordResetView.as_view()
 
 
+class PasswordChangeViewConf(PasswordChangeView):
+    success_url = reverse_lazy("account_change_password_success")
+
+password_change = login_required(PasswordChangeViewConf.as_view())
+
+def password_change_done(request):
+    return render_to_response('account/password_change.html',
+                              {'message':True},
+                              context_instance=RequestContext(request))
+
 class AhrSignupView(SignupView):
     pass
 
@@ -133,7 +146,7 @@ class AhrSocialSignupView(SocialSignupView):
         ret.update(context_data)
         return ret
     template_name = SignupView.template_name
-    
+
 ahr_social_signup = AhrSocialSignupView.as_view()
 
 def signup_from_home(request):
@@ -182,7 +195,7 @@ class AccAdapter(DefaultAccountAdapter):
             "form": form,
             "vet_url": vet_url,
             "current_site": Site.objects.get_current().domain,
-        }        
+        }
         self.send_mail('account/email/user_vetting_email', config.ACTIVATE_USER_EMAIL, ctx)
 
     def save_user(self, request, user, form, commit=True):
@@ -207,7 +220,7 @@ class AccAdapter(DefaultAccountAdapter):
 
         if not config.ACTIVATE_USER_EMAIL:
             raise Exception("Configuration Error: Check that ACTIVATE_USER_EMAIL is set")
-        
+
         self.send_mail('account/email/user_confirmed_email', config.ACTIVATE_USER_EMAIL, ctx)
         return 'http://'+Site.objects.get_current().domain+'/user/waitforactivation'
 

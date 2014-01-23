@@ -6,7 +6,7 @@
         <div class="item-header-clickable item_container" item_id="<%- pk %>">
           <%- item_type.toUpperCase() %>&nbsp;
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span> 
-          <span item_id="<%- pk %>"  score="<%-usercore%>" class="numstars"></span>
+          <span item_id="<%- pk %>" username="<%- owner %>"  score="<%-usercore%>" class="numstars"></span>
         </div>
         </a>
         <div class="pull-right item-menu" style="position:relative;">
@@ -135,13 +135,17 @@
         var username = ev.currentTarget.getAttribute('username');
         var item_id = ev.currentTarget.getAttribute('item_id');
         var msgsub = 'Re: '+$('.marketitem_title',$('.market-item-card[item_id='+item_id+']')).text();
-        this.message_widget.show(username, msgsub, '', true);
+        this.message_widget.show(username, msgsub, '', false);
         return(false);
       },
 
-      resetitemrate:function(item_id, rate){
+      resetitemrate:function(username, rate){
         try{
-          $(".numstars[item_id="+item_id+"]").rateit('value',rate);
+          $(".numstars[username="+username+"]").each(function(){
+            $(this).rateit('value',rate);
+            $(this).attr('score',rate);
+          });
+          this.afterset(".numstars[username="+username+"]");
         }catch(err){
           $.noop();
         }
@@ -151,7 +155,7 @@
         ev.preventDefault();
         var title = ev.currentTarget.getAttribute('title');
         $('#recsub').val($('#currentusername').text()+' recommends :'+ title);
-        $('#recsub').attr('readonly',true);
+        $('#recsub').attr('readonly',false);
         var href = '<a href="'+window.location+'">'+ title +'</a>';
         $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at this post by '+ ev.currentTarget.getAttribute('owner')+' \r\n'+ href );
         $('#touser').val('');
@@ -183,22 +187,32 @@
         $.getJSON(window.ahr.app_urls.getuseritem+id,function(item){
           if(item[0].fields.item_type == "request"){
             //TODO: define a callback for this , not this view responsibility to know about these dialogs
-            that.market.requestdialog.edit(item);
+            that.market.requestdialog.edit(item, that.edit_callback);
             that.market.requestdialog.showModal();
           }else{
-            that.market.offerdialog.edit(item);
+            that.market.offerdialog.edit(item, that.edit_callback);
             that.market.offerdialog.showModal();
           }
         });
         return(false);
       },
 
-      afterset: function(){
-        $('.numstars').rateit();
-        $('.numstars').rateit('min',0);
-        $('.numstars').rateit('max',5);
-        $('.numstars').rateit('readonly',true);
-        $('.numstars').each(function(){
+      reloadItem:function(item){
+        return(this.item_tmp(item[0].fields));
+      },
+
+      afterset: function(item_container){
+        var selector;
+        if(typeof item_container != 'undefined'){
+          selector = $('.numstars',$(item_container));
+        }else{
+          selector = $('.numstars')
+        }
+        selector.rateit();
+        selector.rateit('min',0);
+        selector.rateit('max',5);
+        selector.rateit('readonly',true);
+        selector.each(function(){
             $(this).rateit('value',this.getAttribute('score'));
         });
       },
@@ -206,6 +220,7 @@
       initialize: function(options){
         this.market = options.market;
         this.del_callback = options.del_callback;
+        this.edit_callback = options.edit_callback;
         this.item_tmp = _.template($('#item_template').html());
         this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
         this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
@@ -229,8 +244,13 @@
     });
 
     window.ahr.marketitem_widget = window.ahr.marketitem_widget || {};
-    window.ahr.marketitem_widget.initWidget= function(element,market,del_callback){
-        var marketitem_widget = new MarketItemWidget({el:element, market:market, del_callback:del_callback});
+    window.ahr.marketitem_widget.initWidget= function(element,market,del_callback,edit_callback){
+        var marketitem_widget = new MarketItemWidget({
+            el:element,
+            market:market,
+            del_callback:del_callback,
+            edit_callback:edit_callback
+          });
         return marketitem_widget;
     };
 

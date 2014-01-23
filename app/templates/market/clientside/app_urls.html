@@ -11,7 +11,7 @@
 
     getcsrf: "{% url 'get_csrftoken' 'json' %}",
     getuserdetail: "{% url 'get_userdetail' 'json' 0 %}".slice(0,-1),
-    getavatar: "{% url 'get_avatar' 'json' 0 %}".slice(0,-1),
+    getavatar: "{% url 'get_avatar' 'json' 0 0 %}".slice(0,-1),
     getusercount: "{% url 'get_usercount' 'json' %}",
     getuserfromto: "{% url 'get_user_fromto' 'json' 0 0 %}".slice(0,-1),
     viewuserprofile: "{% url 'user_profile_for_user' 'a' %}".slice(0,-1),

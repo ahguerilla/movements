@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     # Account View Overrides
     url(r'^accounts/social/signup/+$', 'app.users.views.ahr_social_signup', name="social_sign_up"),
     url(r'^accounts/password/reset/+$', 'app.users.views.password_reset', name="password_reset"),
+    url(r"^accounts/password/change/$", 'app.users.views.password_change', name="account_change_password"),
+    url(r"^accounts/password/change_done$", 'app.users.views.password_change_done', name="account_change_password_success"),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/auth/user/(?P<user_id>\d+)/vet$', 'app.users.views.vet_user', name='vet_user'),
     url(r'^admin/', include(admin.site.urls)),
