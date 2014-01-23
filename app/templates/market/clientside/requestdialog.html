@@ -139,7 +139,7 @@
             });
           $('#requestdialog').on('scroll',function(){
             var top = $('.glyphicon.glyphicon-calendar',$('#requestdialog')).offset().top-$(window).scrollTop();
-            $('.bootstrap-datetimepicker-widget.dropdown-menu.pull-right').css('top',top+20);
+            $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function(){$(this).css('top',top+20);})
           });
           window.ahr.expandTextarea($('#details',$("#requestdialog")));
         },

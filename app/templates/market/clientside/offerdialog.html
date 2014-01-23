@@ -141,7 +141,6 @@
           var that = this;
           $('#'+that.el.id+' #itemformerror').empty();
           $('#offerdialog').modal('show');
-          
           window.ahr.getcsrf(function(csrf){
               if(csrf==false){
                   that.alert('Unable to connect to the server. please try again in a few minutes','#infobar');
@@ -151,7 +150,8 @@
             });
           $('#offerdialog').on('scroll',function(){
             var top = $('.glyphicon.glyphicon-calendar',$('#offerdialog')).offset().top-$(window).scrollTop();
-            $('.bootstrap-datetimepicker-widget.dropdown-menu.pull-right').css('top',top+20);
+            $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function(){$(this).css('top',top+20);})
+
           });
           window.ahr.expandTextarea($('#details',$("#offerdialog")));
         },
