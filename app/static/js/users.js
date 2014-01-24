@@ -53,8 +53,6 @@
         window.ahr.usersview = new UsersView(filters);
         var user_route = new UserRoute(window.ahr.usersview);
         Backbone.history.start();
-        var func = _.bind(window.window.ahr.usersview.fancyref,window.window.ahr.usersview);
-        window.setTimeout(func,700);
     };
 
 })();

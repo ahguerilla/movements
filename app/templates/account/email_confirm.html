@@ -1,8 +1,9 @@
 {% extends "account/signup_base.html" %}
-
+{% load account %}
+{% user_display user as user_display %}
 {% load url from future %}
 {% load i18n %}
-{% load account %}
+
 
 {% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
 
@@ -17,7 +18,7 @@
       <div class="form-group">
         <button class="btn" type="submit">{% trans 'Confirm' %}</button>
       </div>
-    </form>    
+    </form>
     {% else %}
     <p>{% blocktrans %}This e-mail confirmation link expired or is invalid.{% endblocktrans %}</p>
     {% endif %}
