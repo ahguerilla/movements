@@ -109,6 +109,10 @@ urlpatterns = patterns('',
         'app.market.api.views.comments.getComment',
         name="get_comment"),
 
+    url(r'(?P<rtype>\S+)/comment/get/count/(?P<obj_id>\d+)$',
+        'app.market.api.views.comments.getCommentCount',
+        name="get_comment_count"),
+
     url(r'(?P<rtype>\S+)/comments/get/(?P<obj_id>\d+)/last/(?P<count>\d+)$',
         'app.market.api.views.comments.getComments',
         name="get_comments_last"),

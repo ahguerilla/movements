@@ -39,7 +39,7 @@
           <div class="clearfix"></div>
           <div class="item-body"><%- details %></div>
           <div class="item-tags">
-            <div class="item-comment-count"><%- commentcount %> Comment<% if (commentcount != 1){ %>s<%}%></div>
+            <div class="item-comment-count"><span class="commentcount"><%- commentcount %></span> Comment<% if (commentcount != 1){ %>s<%}%></div>
             <div>
               <% _.each(issues, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
               <% _.each(countries, function(ind) { %> <div class="btn btn-default disabled btn-xs"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
@@ -84,11 +84,23 @@
                 $('#newcomment').val("");
                 $('#newcomment').height(100);
                 that.addCommentToCommentList(item.obj, true);
+                that.setCommentCount(id);
+                debugger;
               }
             });
           });
         }
         return(false);
+      },
+
+      setCommentCount: function(id){
+        debugger;
+        $.getJSON(
+          window.ahr.app_urls.getcommentcount+id,
+          function(data){
+            debugger;
+            $('.market-item-card[item_id="'+id+'"] .item-comment-count .commentcount').text(data);
+          });
       },
 
       deleteComment:function(ev){

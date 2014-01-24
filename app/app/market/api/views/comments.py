@@ -31,8 +31,9 @@ def addComment(request, obj_id, rtype):
 
 
 @login_required
-def getlenComments(request, obj_id, rtype):
-    pass
+def getCommentCount(request, obj_id, rtype):
+    obj = get_object_or_404(market.models.MarketItem.objects.only('commentcount'),pk=obj_id)
+    return HttpResponse(json.dumps(obj.commentcount), mimetype="application"+rtype)
 
 
 @login_required
