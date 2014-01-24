@@ -21,6 +21,16 @@
     outline: none;
 }
 
+.rateit.redstars .rateit-range
+{
+    position: relative;
+    display: -moz-inline-box;
+    display: inline-block;
+    background: url('../images/star2.gif');
+    height: 16px;
+    outline: none;
+}
+
 .rateit .rateit-range * {
     display:block;
 }
@@ -53,6 +63,10 @@
 {
     background: url('../images/star.gif') left -32px;
 }
+.rateit.redstars .rateit-hover
+{
+    background: url('../images/star2.gif') left -32px;
+}
 
 .rateit .rateit-hover-rtl
 {
@@ -63,6 +77,11 @@
 {
     background: url('../images/star.gif') left -32px;
 }
+.rateit.redstars .rateit-selected
+{
+    background: url('../images/star2.gif') left -32px;
+}
+
 
 .rateit .rateit-selected-rtl
 {
@@ -74,10 +93,18 @@
 {
     background: url('../images/star.gif') left -48px;
 }
+.rateit.redstars .rateit-preset
+{
+    background: url('../images/star2.gif') left -48px;
+}
 
 .rateit .rateit-preset-rtl
 {
     background: url('../images/star.gif') left -48px;
+}
+.rateit.redstars .rateit-preset-rtl
+{
+    background: url('../images/star2.gif') left -48px;
 }
 
 .rateit button.rateit-reset

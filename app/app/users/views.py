@@ -99,11 +99,17 @@ def profile(request, user_name=None):
     is_self = False
     if user.id == request.user.id:
         is_self = True
+    orate = users.models.OrganisationalRating.objects.filter(user=user).all()
+    if len(orate)>0:
+        orate = orate[0].rated_by_ahr
+    else:
+        orate = 0
     return render_to_response('users/user_profile.html',
                                 {
                                     'user_details': user,
                                     'user_profile': user_profile,
                                     'is_self': is_self,
+                                    'OrganisationalRating': orate
                                 },
                                 context_instance=RequestContext(request))
 

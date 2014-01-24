@@ -29,7 +29,17 @@
             <strong>Rating:</strong>
           </div>
           <div class="col-md-9">
-            {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
+            <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>AHR Rating:</strong>
+          </div>
+          <div class="col-md-9">
+            <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} stars <em>
           </div>
         </div>
       </div>
@@ -214,4 +224,21 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{%block endjavascript %}
+  <script type="text/javascript">
+  $(function(){
+      $('.rateit').rateit();
+      $('.rateit').rateit('min',0);
+      $('.rateit').rateit('max',5);
+      $('.rateit').rateit('readonly',true);
+      $('.rateit').each(function(){
+        $(this).rateit('value',$(this).attr('rate'));
+    });
+
+  });
+
+
+  </script>
 {% endblock %}
