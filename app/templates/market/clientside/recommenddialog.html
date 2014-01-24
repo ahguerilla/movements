@@ -38,6 +38,11 @@
         },
 
         setup: function(rec_type,obj_id,subject,message){
+          $('#touser').typeahead({
+              // limit: 10,
+              remote: window.ahr.app_urls['getusernames']+'?username=%QUERY'
+              // +$('#touser').val()
+            });
           $('.sendrec').prop('disabled',false);
           this.rec_type=rec_type;
           this.obj_id = obj_id;
@@ -71,6 +76,7 @@
               dfrd.done(function(){
                 $('#recommenddialog').modal('hide');
                 $('.sendrec').prop('disabled',false);
+                $('#touser').typeahead('destroy');
               });
               dfrd.fail(function(){
                 $('.sendrec').prop('disabled',false);
@@ -86,12 +92,6 @@
             var that = this;
             this.item = data.item;
             this.url =  data.url;
-            $('#touser').typeahead({
-                limit: 10,
-                remote: window.ahr.app_urls['getusernames']+'?username='+$('#touser').val()
-                }).on('typeahead:selected', function (e, d){
-                  $.noop();
-            });
         }
     });
     window.ahr.recommend_widget = window.ahr.recommend_widget || {};
