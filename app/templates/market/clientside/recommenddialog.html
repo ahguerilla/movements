@@ -37,30 +37,46 @@
           'click .sendrec': 'send'
         },
 
+        setup: function(rec_type,obj_id,subject,message){
+          $('.sendrec').prop('disabled',false);
+          this.rec_type=rec_type;
+          this.obj_id = obj_id;
+          $('#recsub').val(subject);
+          $('#recsub').attr('readonly',false);
+          $('#recmessage').val(message);
+          $('#touser').val('');
+          $('#recommenddialog').modal('show');
+        },
+
         send: function(){
           var that = this;
           $('.sendrec').prop('disabled',true);
           if( $('#touser').val() !== '' && $('#recsub').val()!== '' &&  $('#recmessage').val() !== ''){
-                window.ahr.getcsrf(function(csrf){
-                    var dfrd = $.ajax({
-                        url:window.ahr.app_urls.sendmessage+$('#touser').val(),
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {
-                            csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
-                            subject: $('#recsub').val(),
-                            message: $('#recmessage').val()
-                        }
-                    });
-                    dfrd.done(function(){
-                      $('#recommenddialog').modal('hide');
-                      $('.sendrec').prop('disabled',false);
-                    });
-                    dfrd.fail(function(){
-                      $('.sendrec').prop('disabled',false);
-                      that.alert('Faild to send message','#recerror');
-                    });
-                });
+            if(this.rec_type=='user'){
+             this.url = window.ahr.app_urls.senduserrecommendation.replace('0',$('#touser').val())+this.obj_id;
+            }else{
+              this.url = window.ahr.app_urls.senditemrecommendation.replace('0',$('#touser').val())+this.obj_id;
+            }
+            window.ahr.getcsrf(function(csrf){
+              var dfrd = $.ajax({
+                  url:that.url,
+                  type: 'POST',
+                  dataType: 'json',
+                  data: {
+                      csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+                      subject: $('#recsub').val(),
+                      message: $('#recmessage').val()
+                  }
+              });
+              dfrd.done(function(){
+                $('#recommenddialog').modal('hide');
+                $('.sendrec').prop('disabled',false);
+              });
+              dfrd.fail(function(){
+                $('.sendrec').prop('disabled',false);
+                that.alert('Faild to send message','#recerror');
+              });
+            });
             }else{
                 this.alert('Please provide a recipient subject and message.','#recerror');
             }
@@ -69,6 +85,7 @@
         initialize: function(data){
             var that = this;
             this.item = data.item;
+            this.url =  data.url;
             $('#touser').typeahead({
                 limit: 10,
                 remote: window.ahr.app_urls['getusernames']+'?username='+$('#touser').val()
@@ -78,8 +95,8 @@
         }
     });
     window.ahr.recommend_widget = window.ahr.recommend_widget || {};
-    window.ahr.recommend_widget.initWidget= function(fromuser,item){
-        var widget = new RecommendDialog({'fromuser':fromuser,'item':item});
+    window.ahr.recommend_widget.initWidget= function(fromuser,item, url){
+        var widget = new RecommendDialog({'fromuser':fromuser,'item':item,url: url});
         return widget;
     };
 })();
