@@ -69,7 +69,7 @@
                 statusCode: {
                   400: function(data) {
                   console.log(data);
-                  that.alert('Unable to send report. please try again','#reporterror');
+                  that.alert(data.responseJSON.errors[0].errors[0],'#reporterror');
                   $('.sendreport').removeAttr('disabled');
                   },
                 }
