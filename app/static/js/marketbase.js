@@ -316,6 +316,17 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     },
 
+    filterButtonHide: function(ev){
+        $('#filterbuttontext').html('Hide Filters');
+        $('#togglefilter').addClass('dropup');
+    },
+
+    filterButtonShow: function(ev){
+        $('#filterbuttontext').html('Show Filters');
+        $('#togglefilter').removeClass('dropup');
+    },
+    
+
     init: function(filters){
         $.cookie.json = true;
 
@@ -323,6 +334,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
         this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
+        $('#market-filters').on('shown.bs.collapse',this.filterButtonHide);
+        $('#market-filters').on('hidden.bs.collapse',this.filterButtonShow);
 
         this.filters = filters;
         this.initTemplates(filters);
