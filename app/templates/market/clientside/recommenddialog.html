@@ -39,9 +39,7 @@
 
         setup: function(rec_type,obj_id,subject,message){
           $('#touser').typeahead({
-              // limit: 10,
               remote: window.ahr.app_urls['getusernames']+'?username=%QUERY'
-              // +$('#touser').val()
             });
           $('.sendrec').prop('disabled',false);
           this.rec_type=rec_type;
