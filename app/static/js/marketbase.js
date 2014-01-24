@@ -192,9 +192,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     refreshScrollElements: function(){
         var container = document.querySelector('#marketitems');
         that.msnry = new Masonry( container );
-        
     },
-    
+
     fancyref:function(){
         this.msnry.layout();
     },
