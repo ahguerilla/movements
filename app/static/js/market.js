@@ -50,7 +50,6 @@
 
 
         initialize : function(filters){
-            this.itemcount_url = window.ahr.app_urls.getmarketcount;
             this.getitemfromto = window.ahr.app_urls.getmarketitemfromto;
             this.viewurl = window.ahr.app_urls.viewitem;
             this.item_tmp = _.template($('#item_template').html());

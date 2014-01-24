@@ -21,7 +21,9 @@
       </div>
       <div class="item_container" item_id="<%- username %>">
         <div class="item-title" >
-          <a class="linktoprofile" href="<%- profile_url %>"><img src="<%- avatar %>" alt="<%- username %>" /></a>
+          <div style="height:80px;">
+            <a class="linktoprofile" href="<%- profile_url %>"><img src="<%- avatar %>" alt="<%- username %>" /></a>
+          </div>
           <div>&nbsp;</div>
           <div item_id="<%- pk %>" username="<%- username %>" score="<%- score %>" class="numstars"></div>
           <div class="marketitem_title"><%- tag_line %></div>

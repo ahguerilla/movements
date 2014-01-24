@@ -38,7 +38,6 @@
             var that = this;
             $('#backtothemarket').attr('href',window.ahr.app_urls.getposts+'/#');
             this.item_tmp = _.template($('#item_template').html());
-            this.itemcount_url = window.ahr.app_urls.getuseritemscount;
             this.getitemfromto = window.ahr.app_urls.getusermarketitemsfromto;
             this.viewurl = window.ahr.app_urls.edititem;
             this.requiresResetOnNewOfferRequest = true;

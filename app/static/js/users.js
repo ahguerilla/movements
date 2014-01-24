@@ -24,7 +24,6 @@
 
         initialize : function(filters){
             var that = this;
-            this.itemcount_url = window.ahr.app_urls.getusercount;
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
             this.viewurl = window.ahr.app_urls.viewuserprofile;
             this.item_tmp = _.template($('#user-template').html());

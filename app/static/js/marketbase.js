@@ -4,7 +4,6 @@ window.ahr.market = window.ahr.market || {};
 window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     el: '#market',
     loadingScrollElemets: false,
-    itemCount: 0,
     currentItem: 0,
     allItemsLoaded: false,
     itemsPerCall: 15,
@@ -139,7 +138,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('#marketitems').empty();
         this.allItemsLoaded = false;
         this.currentItem = 0;
-        this.itemCount = this.getItemsCount();
 
         var $container = $('#marketitems');
         $container.masonry({
@@ -188,12 +186,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             });
         }
     },
-
-    refreshScrollElements: function(){
-        var container = document.querySelector('#marketitems');
-        that.msnry = new Masonry( container );
-        
-    },
     
     fancyref:function(){
         this.msnry.layout();
@@ -229,17 +221,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         that.filters.search=$('#q').val();
         return $.ajax({
             url: that.getitemfromto.replace('0',from)+to,
-            dataType: 'json',
-            contentType:"application/json; charset=utf-8",
-            data: that.filters,
-            traditional: true
-        });
-    },
-
-    getItemsCount: function(){
-        var that = this;
-        return $.ajax({
-            url: that.itemcount_url,
             dataType: 'json',
             contentType:"application/json; charset=utf-8",
             data: that.filters,
@@ -312,7 +293,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             window.location.hash="";
         }
         $(".item-wrap[item_id='"+ item_id + "']").remove();
-        this.refreshScrollElements();
 
     },
 
