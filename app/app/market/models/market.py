@@ -53,8 +53,8 @@ class MarketItem(models.Model):
         adict['fields']['url']= self.url
         adict['fields']['files']= [afile.url for afile in self.files.all()]
         adict['fields']['commentcount']= self.commentcount
-        adict['fields']['usercore']= self.owner.userprofile.score
-        adict['fields']['userratecount']= self.owner.userprofile.ratecount
+        adict['fields']['usercore']= self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
+        adict['fields']['userratecount']= self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['ratecount']= self.ratecount
         adict['fields']['score']= self.score
         adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username,80])

@@ -8,9 +8,17 @@ from app.market.api.views.market import getMarketjson
 
 
 def getUserTags(user):
-    return {'skills': [up.pk for up in user.userprofile.skills.all()],
-            'countries': [up.pk for up in user.userprofile.countries.all()],
-            'issues': [up.pk for up in user.userprofile.issues.all()]}
+    all_skills = []
+    all_countris = []
+    all_issues = []
+    if hasattr (user, 'userprofile'):
+      all_skills = user.userprofile.skills.all()
+      all_countris = user.userprofile.countries.all()
+      all_issues = user.userprofile.issues.all()
+
+    return {'skills': [up.pk for up in all_skills],
+            'countries': [up.pk for up in all_countris],
+            'issues': [up.pk for up in all_issues]}
 
 
 @login_required
