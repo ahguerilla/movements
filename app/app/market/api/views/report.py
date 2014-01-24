@@ -5,6 +5,9 @@ from app.market.api.utils import get_val_errors
 import json
 import app.market as market
 from app.market.forms import reportMarketItemForm
+from django.core.mail import send_mail
+import constance
+
 
 
 def createMarketItemJson(item):
@@ -25,6 +28,10 @@ def reportMarketItem(request, obj_id, rtype):
                 f.owner = request.user
                 f.item = market_item
                 f.save_base()
+                send_mail('User '+request.user.username+' reported the '+market_item.item_type+' "'+ market_item.title +'" by '+ market_item.owner.username,
+                          f.contents,
+                          constance.config.NO_REPLY_EMAIL,[constance.config.REPORT_POST_EMAIL],
+                          fail_silently=False)
                 return HttpResponse(json.dumps({'success': True, 'data': createMarketItemJson(f)}), mimetype="application"+rtype)
             else:
                 return HttpResponseBadRequest(json.dumps(get_val_errors(form)), mimetype="application"+rtype)
