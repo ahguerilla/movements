@@ -325,7 +325,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('#filterbuttontext').html('Show Filters');
         $('#togglefilter').removeClass('dropup');
     },
-    
 
     init: function(filters){
         $.cookie.json = true;
