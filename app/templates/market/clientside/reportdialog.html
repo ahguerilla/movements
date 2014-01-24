@@ -51,6 +51,7 @@
               that.alert('Unable to send report. please try again','#reporterror');
               return;
               }
+            $('.sendreport').attr('disabled','disabled');
             $.ajax({
                 type: "POST",
                 url: window.ahr.app_urls.reportpost + that.item_id,
@@ -63,11 +64,13 @@
                   console.log(data);
                   // that.info('Report sent succesfuly','#infobar');
                   $('#reportdialog').modal('hide');
+                  $('.sendreport').removeAttr('disabled');
                 },
                 statusCode: {
                   400: function(data) {
                   console.log(data);
-                  that.alert('Unable to send report. please try again','#reporterror');
+                  that.alert(data.responseJSON.errors[0].errors[0],'#reporterror');
+                  $('.sendreport').removeAttr('disabled');
                   },
                 }
               });

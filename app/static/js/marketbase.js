@@ -186,7 +186,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             });
         }
     },
-    
+
     fancyref:function(){
         this.msnry.layout();
     },
