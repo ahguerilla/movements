@@ -178,11 +178,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                     _.each(itemsToAppend, function(elem){
                         that.msnry.appended( elem );
                     });
+
+                    that.item_widget.afterset();
+                    that.msnry.layout();
                 }
-                that.item_widget.afterset();
+                
                 that.currentItem = that.currentItem + that.itemsPerCall;
                 that.loadingScrollElemets = false;
-                that.msnry.layout();
             });
         }
     },
