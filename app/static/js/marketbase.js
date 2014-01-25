@@ -40,8 +40,12 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     initFilters: function(that, items, templ){
         var cookie = $.cookie('tagfilters');
+        /* this seems to get called a lot!! */
         if(typeof cookie != 'undefined'){
-            that.filters = cookie;
+            //that.filters = cookie;
+            that.filters.skills = cookie.skills;
+            that.filters.issues = cookie.issues;
+            that.filters.countries = cookie.countries;
         }
         _.each(window.ahr[items], function(item){
             var activeFlag = ' ';
