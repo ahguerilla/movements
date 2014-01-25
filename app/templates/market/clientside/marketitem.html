@@ -16,7 +16,7 @@
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
               <% if (ownerid != window.ahr.user_id){ %>
                 <li role="presentation"></li>
-                <li role="presentation"><a owner="<%- owner %>" title="<%- title %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
+                <li role="presentation"><a owner="<%- owner %>" item_id="<%- pk %>" title="<%- title %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" class="report_post" role="menuitem" tabindex="-1" href="#">Report post</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" rateing="user" username="<%- owner %>"  score="<%- usercore %>" ratecount="<%- userratecount %>" class="rate rate_user" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" username="<%- owner %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
@@ -166,12 +166,11 @@
       recommend: function(ev){
         ev.preventDefault();
         var title = ev.currentTarget.getAttribute('title');
-        $('#recsub').val($('#currentusername').text()+' recommends :'+ title);
-        $('#recsub').attr('readonly',false);
-        var href = '<a href="'+window.location+'">'+ title +'</a>';
-        $('#recmessage').val($('#currentusername').text()+ ' recommend you have a look at this post by '+ ev.currentTarget.getAttribute('owner')+' \r\n'+ href );
-        $('#touser').val('');
-        $('#recommenddialog').modal('show');
+        var item_id = ev.currentTarget.getAttribute('item_id');
+        this.market.recommend_dialog.setup('item',
+           item_id,
+           $('#currentusername').text()+' recommends :'+ title,
+           $('#currentusername').text()+ ' recommend you have a look at a post by '+ ev.currentTarget.getAttribute('owner') );
         return(false);
       },
 

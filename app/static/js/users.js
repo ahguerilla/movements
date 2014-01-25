@@ -34,7 +34,7 @@
             window.ahr.expandTextarea('#newmessage');
             $('#q').typeahead({
                limit: 5,
-               remote: window.ahr.app_urls['getusernames']+'?username='+$('#touser').val()
+               remote: window.ahr.app_urls['getusernames']+'?username=%QUERY'
                }).on('typeahead:selected', function (e, d) {
                  window.location = window.ahr.app_urls.viewuserprofile+d.value;
             });

@@ -93,6 +93,27 @@ def sendMessage(request,to_user,rtype):
 
 
 @login_required
+def sendRecommendation(request,rec_type,to_user,obj_id,rtype):
+    if rec_type == 'item':
+        href = '<!--item="'+obj_id+'"-->'
+    else:
+        href = '<!--user="'+obj_id+'"-->'
+    try:
+        pm_write(sender=request.user,
+                 recipient=users.models.User.objects.filter(username=to_user)[0],
+                 subject=request.POST['subject'],
+                 body=request.POST['message']+'\r\n'+href)
+    except:
+        return HttpResponseError(
+            json.dumps({'success': 'false'}),
+            mimetype="application/"+rtype)
+
+    return HttpResponse(
+        json.dumps({'success': 'true'}),
+        mimetype="application/"+rtype)
+
+
+@login_required
 def setRate(request,username,rtype):
     if not request.POST.has_key('score'):
         return HttpResponseError()

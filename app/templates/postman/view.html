@@ -31,7 +31,7 @@
                   <!-- <span class="pm_recipient">{{ message.obfuscated_recipient|or_me:user }}</span> | -->
                   <!-- <span class="pm_recipient">{{ message.obfuscated_recipient }}</span> | -->
                   <!-- <span class="pm_date">{{ message.sent_at|date:"DATETIME_FORMAT"}}</span> -->
-                  <span class="pm_date">{{ message.sent_at|date:"H:m"}}</span><span class="pm_date pull-right">{{ message.sent_at|date:"d/m/y"}}</span></strong>
+                  <span class="pm_date">{{ message.sent_at|compact_date:_("g:i A,M j,n/j/y")}}</span><span class="pm_date pull-right">{{ message.sent_at|date:"d/m/y"}}</span></strong>
                   {% if message.is_rejected %}
                   <div class="pm_status">{% trans "Rejected" %}{% if message.moderation_reason %}{% trans ":" %} {{ message.moderation_reason }}{% endif %}</div>
                   {% endif %}

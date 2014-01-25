@@ -50,7 +50,14 @@
             });
 
             dfrd.done(function(data){
-               $('#conversation').html(data);
+                data1 = data.replace(that.itemre, function(match,item_id, offset,string){
+                    return  "<a href='/market/#item/"+item_id+"'>Click here to view the recommendation</a>";
+                });
+                data2 = data1.replace(that.userre, function(match,username, offset,string){
+                    return  "<a href='"+window.ahr.app_urls.viewuserprofile+username+"'>Click here to view the recommendation</a>";
+                });
+
+               $('#conversation').html(data2);
                that.showconv();
                $.getJSON(window.ahr.app_urls.getmessagecount,function(data){
                     $('.message-counter').each(function(tmp,item){
@@ -61,6 +68,7 @@
                         }
                     });
                 });
+
             });
             return false;
         },
@@ -98,6 +106,8 @@
         initialize: function(){
             $(window).resize(this.resize);
             var more = $('.next')[0];
+            this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
+            this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
             $(more).html('<button class="btn btn-primary">more...</button>');
             $('#paginationblock').html(more);
             this.resize();
