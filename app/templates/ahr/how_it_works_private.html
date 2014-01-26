@@ -1,28 +1,42 @@
-{% extends "base_private_settings.html" %}
+{% extends "base.html" %}
 {% load socialaccount %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Exchangivist - How It Works" %}{% endblock %}
 
-{% block private-content %}
-  <div class="dialog">
-    <h1>How It Works</h1>
-    <div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet posuere nisl, non pellentesque lorem. Donec non cursus nisi. Suspendisse vel urna mauris. Nulla orci odio, pellentesque et venenatis in, tincidunt quis massa. Nulla ut auctor quam, vel semper augue. Sed nulla nisi, varius ac sapien sed, vestibulum sollicitudin augue. Integer porttitor libero a libero molestie scelerisque. Curabitur iaculis imperdiet lobortis. Sed at sapien iaculis, faucibus magna in, blandit tortor. Aenean vel sapien ut enim ullamcorper feugiat. In vitae libero consequat, imperdiet turpis nec, pretium diam.
-      </p>
-      <p>
-        Cras condimentum leo quis risus porta rutrum. Curabitur sollicitudin turpis nec sem bibendum, sit amet vulputate velit consectetur. Sed non lacus metus. Phasellus quis vulputate ante. Etiam commodo magna ac nunc placerat blandit. Nullam ut nibh nec neque porttitor condimentum. Suspendisse scelerisque orci non ante semper ullamcorper. Maecenas urna justo, auctor gravida lorem eget, elementum tempus erat. In porttitor sollicitudin sapien et porta.
-      </p>
-      <p>
-        Cras molestie eros erat. Pellentesque hendrerit interdum justo, sed aliquam dui tempus vitae. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer eget vehicula massa, nec bibendum libero. Vivamus elementum tortor sodales erat dictum ullamcorper. Proin non egestas velit. Nullam dapibus ac ante in posuere. Sed cursus, arcu et auctor molestie, nulla ligula pulvinar magna, condimentum dapibus nulla magna non turpis. Mauris aliquet eros metus. Morbi et lacus aliquam, tempus lorem quis, dignissim enim. Nulla at ultricies quam. Donec non lobortis eros, ut vulputate lacus.
-      </p>
-      <p>
-        Cras a enim suscipit, mattis leo et, laoreet mi. In hac habitasse platea dictumst. Duis eget ante est. Phasellus malesuada, nibh ut pretium eleifend, velit orci fermentum nisl, a luctus ante ante vitae quam. Donec ultrices dui ac porttitor mollis. Ut tempus risus mauris, vitae lobortis felis mattis non. Nulla felis mi, rutrum id libero a, pellentesque consequat erat. Nunc aliquam eros quis nulla molestie dictum porta ut erat. Donec nec auctor metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum turpis erat, consequat et ullamcorper quis, venenatis consectetur metus. Phasellus eu mauris et risus egestas eleifend sit amet et lorem. Aliquam a dapibus metus. Ut venenatis felis suscipit tempus facilisis. Quisque feugiat ac elit sed vehicula. Sed rhoncus tellus sit amet sem dictum, sit amet convallis lectus pulvinar.
-      </p>
-      <p>
-        Nulla ullamcorper, nisi et semper lobortis, tortor est ultricies nunc, ac molestie mi nibh pulvinar metus. In ullamcorper justo ut diam rutrum congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet ac sapien vitae accumsan. Nulla arcu dolor, pharetra vel auctor sit amet, adipiscing sed nisl. Sed ultricies suscipit facilisis. Morbi ac nisl scelerisque, tincidunt neque eu, mollis quam. In ultrices hendrerit erat, id gravida tortor scelerisque non. Sed dolor odio, dapibus et est aliquam, euismod laoreet nisi. Duis fringilla purus nisl, egestas imperdiet diam sagittis nec. Maecenas elementum magna quis aliquam ornare. Maecenas eu risus ac odio auctor aliquet. Quisque metus tellus, rhoncus non lorem sit amet, posuere vulputate nisl. Maecenas non tincidunt purus. Aenean cursus rhoncus nulla, sit amet porttitor sem. Sed aliquam sagittis sapien eget tincidunt.
-      </p>
+{% block outsidecontainer %}
+<div class="filter-banner-spacer"></div>
+<div class="exchange-filter">
+  <div class="container">
+  </div>
+</div>
+<div class="header-spacer"></div>
+{% endblock %}
+
+
+{% block content %}
+<div class="dialog">
+  <div class="row">
+    <div class="col-md-12">
+      <legend>How It Works</legend>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+
     </div>
   </div>
+</div>
 {% endblock %}
