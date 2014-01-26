@@ -30,7 +30,7 @@
     {% endblock %}
   </head>
   <body  class="{% block body_class %}{{ body_class }}{% endblock %}">
-    <nav class="navbar navbar-default {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -88,6 +88,7 @@
         </div>
       </div>
     </nav>
+    <div style="height:50px;"></div>
     {% block outsidecontainer %}
     {% endblock %}
     <div class="container" id="main-content-container">

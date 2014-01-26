@@ -56,6 +56,8 @@ def render_settings(request, initial=False):
 
     return render_to_response(template,
                               {
+                                'title': 'Settings',
+                                'help_text_template': 'ahr/copy/settings_help.html',
                                 'settings_form': settings_form,
                                 'user_form': user_form,
                                 'notperm': str(perms).replace("u'","'"),

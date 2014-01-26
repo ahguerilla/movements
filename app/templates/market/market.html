@@ -4,38 +4,25 @@
 {% block outsidecontainer %}
 <div id="market" >
   <!-- Banner -->
-  <div class="exchange-banner">
-    <div class="exchange-opacity">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 {{init}}">
-            <div id="infobar"></div>
-            <div class="row">
-              <div class="col-sm-offset-0 col-sm-8 col-md-offset-5 col-md-4 col-lg-offset-6 col-lg-4">
-                <h1>{{ title }}</h1>
-                <hr class="hr-no-margin" />
-                <div class="message-text">{% include help_text_template %}</div>
-              </div>
-              <div class="col-sm-4 col-md-3 col-lg-2">
-                <div class="market-action-wrap">
-                  <div id="create_offer" class="market-action">
-                    <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Create an offer" />
-                    <span>Create an offer</span>
-                  </div>
-                  <div id="create_request" class="market-action">
-                    <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Create a request" />
-                    <span>Create a request</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  {% include "ahr/market_banner.html"%}
+
+  <!-- Filter Spacer -->
+  <div class="filter-banner-spacer"></div>
+  <div class="exchange-filter">
+    <div class="container">
+      <div class="row" style="margin-top:10px;">
+        <div id="create_offer" class="market-action col-md-2">
+          <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Create an offer" />
+          <span>Create an offer</span>
+        </div>
+        <div id="create_request" class="market-action col-md-3">
+          <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Create a request" />
+          <span>Create a request</span>
         </div>
       </div>
     </div>
   </div>
-  <!-- Filter Spacer -->
-  <div class="filter-banner-spacer"></div>
+  <div class="filter-banner-spacer-black"></div>
   {% include "market/clientside/filters.html"%}
 
 {% endblock %}

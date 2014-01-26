@@ -4,96 +4,102 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block public-content %}
-
-<div class="row">
-  <div class="alert alert-danger">
-    <p>Exchangivist is currently in <strong>beta</strong> and has not undergone a full risk threat assessment.</p>
-    <p>Although we have done our best to ensure any information stored in Exchangivist is secure, we can not guarantee this until the first full version of the system is release later this year. Before you can sign up to Exchanivist you will need to go through a vetting system so Advancing Human Rights can confirm your identity. The same process is used for activists and people offering help.</p>
-    <p>No information other than you're username, email and either a hash of your password or data needed to authenticate your social login will be stored on the system until the vetting process is complete. The information you provide below will be sent to Advancing Human Rights in an email via a secure email service. This email will be deleted once the vetting process is complete.</p>
-  </div>
-</div>
-
+{% block public-content-message %}
 <div class="row dialog sign-up-form">
-  <div><h1>{% trans "Sign Up" %}</h1></div>
-  <p>
-    {% if account.get_provider %}
-      {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login. We first need a few more details for vetting.{% endblocktrans %}
-    {% endif %}
-    {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
-  </p>
-  <form class="form-horizontal" class="signup" id="signup_form" method="post" action="{{ post_url }}">
-  {% csrf_token %}
-    <div class="form-group">
-      <div class="col-md-12">
-        {{ form.username.errors }}
-        {% render_field form.username class="form-control input-sm" placeholder="Username" required="true" autofocus="autofocus" %}
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-xs-6">
-        {{ form.first_name.errors }}
-        {% render_field form.first_name class="form-control input-sm" placeholder="First Name" required="true" %}
-      </div>
-      <div class="col-xs-6">
-        {{ form.last_name.errors }}
-        {% render_field form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}
-      </div> 
-    </div>
-    <div class="form-group">
-      <div class="col-md-12">
-        {{ form.email.errors }}
-        {% render_field form.email class="form-control input-sm" placeholder="Email" required="true" %}
-      </div>
-    </div>
-    {% if form.password1 %}
-      <div class="form-group">
-        <div class="col-md-12">
-          {{ form.password1.errors }}
-          {% render_field form.password1 class="form-control input-sm" placeholder="Password" required="true" %}
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-12">
-          {{ form.password2.errors }}
-          {% render_field form.password2 class="form-control input-sm" placeholder="Password (again)" required="true" %}
-        </div>
-      </div>
-    {% endif %}
-    <div class="form-group">
-      <div class="col-md-12">
-        {{ form.linkedin_url.errors }}
-        {% render_field form.linkedin_url class="form-control input-sm" placeholder="Linked In Profile Link" %}
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-md-12">
-        {{ form.tweet_url.errors }}
-        {% render_field form.tweet_url class="form-control input-sm" placeholder="Twitter Profile Link" %}
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-md-12">
-        {{ form.fb_url.errors }}
-        {% render_field form.fb_url class="form-control input-sm" placeholder="Facebook Profile Link" %}
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-md-12">
-        {{ form.web_url.errors }}
-        {% render_field form.web_url class="form-control input-sm" placeholder="Website Link" %}
-      </div>
-    </div>
-    {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <div class="form-group">
-      <div class="col-xs-offset-6 col-xs-6">
-        <button type="submit" class="btn full-width">{% trans "Sign Up" %} &raquo;</button>
-      </div>
-    </div>
-  </form>
-</div>
 
+  <div class="col-md-6">
+    <div><h1>{% trans "Exchangivist BETA" %}</h1></div>
+    <p>Exchangivist is currently in <strong>beta</strong></p>
+    <div class="alert alert-danger">
+      <p>Exchangivist is currently in <strong>beta</strong> and has not undergone a full risk threat assessment.</p>
+      <p>Although we have done our best to ensure any information stored in Exchangivist is secure, we can not guarantee this until the first full version of the system is release later this year. Before you can sign up to Exchanivist you will need to go through a vetting system so Advancing Human Rights can confirm your identity. The same process is used for activists and people offering help.</p>
+      <p>No information other than you're username, email and either a hash of your password or data needed to authenticate your social login will be stored on the system until the vetting process is complete. The information you provide below will be sent to Advancing Human Rights in an email via a secure email service. This email will be deleted once the vetting process is complete.</p>
+    </div>
+  </div>
+
+
+  <div class="col-md-6">
+    <div><h1>{% trans "Sign Up" %}</h1></div>
+    <p>
+      {% if account.get_provider %}
+        {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login. We first need a few more details for vetting.{% endblocktrans %}
+      {% endif %}
+      {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in here</a>.{% endblocktrans %}
+    </p>
+    <form class="form-horizontal" class="signup" id="signup_form" method="post" action="{{ post_url }}">
+    {% csrf_token %}
+      <div class="form-group">
+        <div class="col-md-12">
+          {{ form.username.errors }}
+          {% render_field form.username class="form-control input-sm" placeholder="Username" required="true" autofocus="autofocus" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-6">
+          {{ form.first_name.errors }}
+          {% render_field form.first_name class="form-control input-sm" placeholder="First Name" required="true" %}
+        </div>
+        <div class="col-xs-6">
+          {{ form.last_name.errors }}
+          {% render_field form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}
+        </div> 
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          {{ form.email.errors }}
+          {% render_field form.email class="form-control input-sm" placeholder="Email" required="true" %}
+        </div>
+      </div>
+      {% if form.password1 %}
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ form.password1.errors }}
+            {% render_field form.password1 class="form-control input-sm" placeholder="Password" required="true" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            {{ form.password2.errors }}
+            {% render_field form.password2 class="form-control input-sm" placeholder="Password (again)" required="true" %}
+          </div>
+        </div>
+      {% endif %}
+      <div class="form-group">
+        <div class="col-md-12">
+          {{ form.linkedin_url.errors }}
+          {% render_field form.linkedin_url class="form-control input-sm" placeholder="Linked In Profile Link" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          {{ form.tweet_url.errors }}
+          {% render_field form.tweet_url class="form-control input-sm" placeholder="Twitter Profile Link" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          {{ form.fb_url.errors }}
+          {% render_field form.fb_url class="form-control input-sm" placeholder="Facebook Profile Link" %}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          {{ form.web_url.errors }}
+          {% render_field form.web_url class="form-control input-sm" placeholder="Website Link" %}
+        </div>
+      </div>
+      {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <div class="form-group">
+        <div class="col-xs-offset-6 col-xs-6">
+          <button type="submit" class="btn full-width">{% trans "Sign Up" %} &raquo;</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
 {% endblock %}
+
 

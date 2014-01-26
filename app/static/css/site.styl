@@ -239,25 +239,32 @@ select.input-extra-height
     padding-left 30px
 
 .exchange-banner
-  background: url('../images/header-image-518x284.png') no-repeat
+  background: url('../images/backgrounds/background_1.jpg') no-repeat
+  background-size: 100%;
   background-color: #FFF
   h1
     color: $text-color
   .exchange-opacity
-    background-color: rgba(255, 255, 255, 0.8)
-
+    //background-color: rgba(255, 255, 255, 0.3)
+    height: 300px
+/*    .dialog
+      border-radius 0
+*/
 .message-text
   margin-bottom: 10px
 
-.market-action-wrap
-  margin-top: 20%
-  .market-action
-    padding-bottom: 10px
-  .market-action:hover
-    cursor: pointer
+.market-action:hover
+  cursor: pointer
 
 .filter-banner-spacer
   background-color: #FFF
+  height: 2px
+
+.grey-spacer
+  height: 32px
+
+.filter-banner-spacer-black
+  background-color: #444d54
   height: 2px
 
 .exchange-filter
@@ -265,7 +272,6 @@ select.input-extra-height
   background-color: $filter-background
   padding-bottom: 10px
   .market-filter-main
-    margin-left: 20px
     position: relative
     .market-filter-border
       border-right: 1px solid #FFF
