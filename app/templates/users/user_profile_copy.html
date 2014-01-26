@@ -1,0 +1,244 @@
+{% extends "base_private_settings.html" %}
+{% load avatar_tags %}
+{% load account %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Profile" %}{% endblock %}
+
+{% block private-content %}
+<div class="row">
+  <div class="col-md-offset-3 col-md-6">
+    <div class="in-container dialog">
+      <div class="col-md-12">
+        <h4>
+        {% if is_self %}
+        My Public Profile <a href="{% url 'user_settings' %}">edit</a>
+        {% else %}
+        Profile for {{ user_details.username }}
+        {% endif %}
+        </h4>
+      </div>
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="profile-avatar">
+        {% primary_avatar user_details 100 %}
+        </div>
+      </div>
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Rating:</strong>
+          </div>
+          <div class="col-md-9">
+            <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>AHR Rating:</strong>
+          </div>
+          <div class="col-md-9">
+            <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} stars
+          </div>
+        </div>
+      </div>
+      {% if user_profile.notperm.name != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Name:</strong>
+          </div>
+          <div class="col-md-9">
+            {{ user_details.first_name }}&nbsp;{{ user_details.last_name }} <em>({{ user_details.username }})</em>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if user_profile %}
+      {% if user_profile.notperm.nationality != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Nationality:</strong>
+          </div>
+          <div class="col-md-9">
+            {{ user_profile.nationality }}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if user_profile.notperm.occupation != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Occupation:</strong>
+          </div>
+          <div class="col-md-9">
+            {{ user_profile.occupation }}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if user_profile.notperm.expertise != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Area of expertise:</strong>
+          </div>
+          <div class="col-md-9">
+            {{ user_profile.expertise }}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if user_profile.web_url %}
+      {% if user_profile.notperm.web_url != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Website:</strong>
+          </div>
+          <div class="col-md-9">
+            <a target="_blank" href="{{ user_profile.web_url }}">{{ user_profile.web_url }}</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+      {% if user_profile.fb_url %}
+      {% if user_profile.notperm.fb_url != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Facebook:</strong>
+          </div>
+          <div class="col-md-9">
+            <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.fb_url }}</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+
+      {% if user_profile.linkedin_url %}
+      {% if user_profile.notperm.linkedin_url != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>LinkedIn:</strong>
+          </div>
+          <div class="col-md-9">
+            <a target="_blank" href="{{ user_profile.linkedin_url }}">{{ user_profile.linkedin_url }}</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+
+      {% if user_profile.tweet_url %}
+      {% if user_profile.notperm.tweet_url != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Twitter:</strong>
+          </div>
+          <div class="col-md-9">
+            <a target="_blank" href="{{ user_profile.get_twitter_url }}">{{ user_profile.tweet_url }}</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+      {% if user_profile.notperm.tag_ling != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Tag:</strong>
+          </div>
+          <div class="col-md-9">
+            {{ user_profile.tag_ling }}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if user_profile.notperm.bio != 'on' %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Bio:</strong>
+          </div>
+          <div class="col-md-9 multi-line-text">{{ user_profile.bio }}</div>
+        </div>
+      </div>
+      {% endif %}
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Issues:</strong>
+          </div>
+          <div class="col-md-9">
+            <div class="item-tags">
+              <div>
+                {% for issue in user_profile.issues.all %}
+                <div class="btn btn-default disabled btn-xs"> {{ issue }} </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Countries:</strong>
+          </div>
+          <div class="col-md-9">
+            <div class="item-tags">
+              <div>
+                {% for country in user_profile.countries.all %}
+                <div class="btn btn-default disabled btn-xs"> {{ country }} </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-spacing-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Skills:</strong>
+          </div>
+          <div class="col-md-9">
+            <div class="item-tags">
+              <div>
+                {% for skill in user_profile.skills.all %}
+                <div class="btn btn-default disabled btn-xs"> {{ skill }} </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{%block endjavascript %}
+  <script type="text/javascript">
+  $(function(){
+      $('.rateit').rateit();
+      $('.rateit').rateit('min',0);
+      $('.rateit').rateit('max',5);
+      $('.rateit').rateit('readonly',true);
+      $('.rateit').each(function(){
+        $(this).rateit('value',$(this).attr('rate'));
+    });
+
+  });
+
+
+  </script>
+{% endblock %}

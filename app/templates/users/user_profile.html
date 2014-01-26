@@ -1,28 +1,53 @@
-{% extends "base_private_settings.html" %}
+{% extends "base.html" %}
 {% load avatar_tags %}
 {% load account %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Profile" %}{% endblock %}
 
-{% block private-content %}
-<div class="row">
-  <div class="col-md-offset-3 col-md-6">
-    <div class="in-container dialog">
-      <div class="col-md-12">
-        <h4>
-        {% if is_self %}
-        My Public Profile <a href="{% url 'user_settings' %}">edit</a>
-        {% else %}
-        Profile for {{ user_details.username }}
-        {% endif %}
-        </h4>
-      </div>
+      {% if user_profile.notperm.tag_ling != 'on' %}
       <div class="col-md-12 col-spacing-bottom">
-        <div class="profile-avatar">
-        {% primary_avatar user_details 100 %}
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Tag:</strong>
+          </div>
+          <div class="col-md-9">
+            {{ user_profile.tag_ling }}
+          </div>
         </div>
       </div>
+      {% endif %}
+
+
+{% block outsidecontainer %}
+<div class="filter-banner-spacer"></div>
+<div class="exchange-filter">
+  <div class="container">
+    <div class="settings-change-avatar">
+      <div id="settingavatar">{% primary_avatar user_details 120 %}</div>
+      <h2>{{ user_details.username }}</h2>
+
+      {% if user_profile.notperm.tag_ling != 'on' %}
+      <div class="tag-line"><em>{{ user_profile.tag_ling }}</em></div>
+      {% endif %}
+
+      {% if user_profile.notperm.bio != 'on' %}
+      <div class="item-body multi-line-text">{{ user_profile.bio }}</div>
+      {% endif %}
+
+      {% if is_self %}
+      <br />
+      <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'user_settings' %}">Update Profile</a>      
+      {% endif %}
+  
+
+    </div>
+  </div>
+</div>
+<div class="header-spacer"></div>
+{% endblock %}
+
+
       <div class="col-md-12 col-spacing-bottom">
         <div class="row">
           <div class="col-md-3">
@@ -43,141 +68,154 @@
           </div>
         </div>
       </div>
-      {% if user_profile.notperm.name != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Name:</strong>
-          </div>
-          <div class="col-md-9">
-            {{ user_details.first_name }}&nbsp;{{ user_details.last_name }} <em>({{ user_details.username }})</em>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% if user_profile %}
-      {% if user_profile.notperm.nationality != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Nationality:</strong>
-          </div>
-          <div class="col-md-9">
-            {{ user_profile.nationality }}
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% if user_profile.notperm.occupation != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Occupation:</strong>
-          </div>
-          <div class="col-md-9">
-            {{ user_profile.occupation }}
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% if user_profile.notperm.expertise != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Area of expertise:</strong>
-          </div>
-          <div class="col-md-9">
-            {{ user_profile.expertise }}
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% if user_profile.web_url %}
-      {% if user_profile.notperm.web_url != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Website:</strong>
-          </div>
-          <div class="col-md-9">
-            <a target="_blank" href="{{ user_profile.web_url }}">{{ user_profile.web_url }}</a>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% endif %}
-      {% if user_profile.fb_url %}
-      {% if user_profile.notperm.fb_url != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Facebook:</strong>
-          </div>
-          <div class="col-md-9">
-            <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.fb_url }}</a>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% endif %}
 
-      {% if user_profile.linkedin_url %}
-      {% if user_profile.notperm.linkedin_url != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>LinkedIn:</strong>
-          </div>
-          <div class="col-md-9">
-            <a target="_blank" href="{{ user_profile.linkedin_url }}">{{ user_profile.linkedin_url }}</a>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      {% endif %}
 
-      {% if user_profile.tweet_url %}
-      {% if user_profile.notperm.tweet_url != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Twitter:</strong>
+{% block content %}
+<div class="in-container dialog">
+
+  <div class"col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <legend>Profile</legend>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+      <div class="col-md-9">
+        <legend>Rating</legend>
+
+        <div class="row profile-item">
+          <div class="col-md-2">
+            <strong>Rating:</strong>
           </div>
-          <div class="col-md-9">
-            <a target="_blank" href="{{ user_profile.get_twitter_url }}">{{ user_profile.tweet_url }}</a>
+          <div class="col-md-10">
+            <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
           </div>
         </div>
-      </div>
-      {% endif %}
-      {% endif %}
-      {% if user_profile.notperm.tag_ling != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Tag:</strong>
+
+        <div class="row profile-item">
+          <div class="col-md-2">
+            <strong>AHR Rating:</strong>
           </div>
-          <div class="col-md-9">
-            {{ user_profile.tag_ling }}
+          <div class="col-md-10">
+            <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} stars
           </div>
         </div>
+
       </div>
-      {% endif %}
-      {% if user_profile.notperm.bio != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Bio:</strong>
+    </div>
+    
+    <br /><br />
+
+    <div class="row">
+      <div class="col-md-6">
+        <legend>About</legend>
+        <div class="row profile-item">
+          <div class="col-md-4 profile-label"><strong>Name:</strong></div>
+          <div class="col-md-8">
+          {% if user_profile.notperm.name != 'on' %}
+          {{ user_details.first_name }}&nbsp;{{ user_details.last_name }}
+          {% else %}
+          hidden
+          {% endif %}
           </div>
-          <div class="col-md-9 multi-line-text">{{ user_profile.bio }}</div>
         </div>
-      </div>
-      {% endif %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Issues:</strong>
+
+        <div class="row profile-item">
+          <div class="col-md-4 profile-label">Nationality:</div>
+          <div class="col-md-8">
+          {% if user_profile.notperm.nationality != 'on' %}
+          {{ user_profile.nationality }}
+          {% else %}
+          hidden
+          {% endif %}
           </div>
-          <div class="col-md-9">
+        </div>
+
+        <div class="row profile-item">
+          <div class="col-md-4 profile-label">Occupation:</div>
+          <div class="col-md-8">
+          {% if user_profile.notperm.occupation != 'on' %}
+          {{ user_profile.occupation }}
+          {% else %}
+          hidden
+          {% endif %}
+          </div>
+        </div>
+
+        <div class="row profile-item">
+          <div class="col-md-4 profile-label">Area of expertise:</div>
+          <div class="col-md-8">
+          {% if user_profile.notperm.expertise != 'on' %}
+          {{ user_profile.expertise }}
+          {% else %}
+          hidden
+          {% endif %}
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+        <legend>Social</legend>
+
+        <div class="row profile-item">
+          <div class="col-md-4 profile-label">Website:</div>
+          <div class="col-md-8">
+          {% if user_profile.notperm.web_url != 'on' %}
+          <a target="_blank" href="{{ user_profile.web_url }}">{{ user_profile.web_url }}</a>
+          {% else %}
+          hidden
+          {% endif %}
+          </div>
+        </div>
+
+        <div class="row profile-item">
+          <div class="col-md-4 profile-label">Facebook:</div>
+          <div class="col-md-8">
+          {% if user_profile.notperm.fb_url != 'on' %}
+          <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.fb_url }}</a>
+          {% else %}
+          hidden
+          {% endif %}
+          </div>
+        </div>
+
+        <div class="row profile-item">
+          <div class="col-md-4 profile-label">LinkedIn:</div>
+          <div class="col-md-8">
+          {% if user_profile.notperm.linkedin_url != 'on' %}
+          <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.linkedin_url }}</a>
+          {% else %}
+          hidden
+          {% endif %}
+          </div>
+        </div>
+
+        <div class="row profile-item">
+          <div class="col-md-4 profile-label">Twitter:</div>
+          <div class="col-md-8">
+          {% if user_profile.notperm.get_twitter_url != 'on' %}
+          <a target="_blank" href="{{ user_profile.get_twitter_url }}">{{ user_profile.tweet_url }}</a>
+          {% else %}
+          hidden
+          {% endif %}
+          </div>
+        </div>
+
+      </div>  
+    </div>
+
+    <br /><br />
+
+    <div class="row">
+      <div class="col-md-9">
+        <legend>Areas of Interest</legend>
+        <div class="row profile-item">
+          <div class="col-md-2 profile-label">Issues:</div>
+          <div class="col-md-10">
             <div class="item-tags">
               <div>
                 {% for issue in user_profile.issues.all %}
@@ -187,13 +225,10 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Countries:</strong>
-          </div>
-          <div class="col-md-9">
+
+        <div class="row profile-item">
+          <div class="col-md-2 profile-label">Countries:</div>
+          <div class="col-md-10">
             <div class="item-tags">
               <div>
                 {% for country in user_profile.countries.all %}
@@ -203,13 +238,10 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Skills:</strong>
-          </div>
-          <div class="col-md-9">
+
+        <div class="row profile-item">
+          <div class="col-md-2 profile-label">Skills:</div>
+          <div class="col-md-10">
             <div class="item-tags">
               <div>
                 {% for skill in user_profile.skills.all %}
@@ -219,10 +251,12 @@
             </div>
           </div>
         </div>
+
       </div>
-      {% endif %}
     </div>
+
   </div>
+
 </div>
 {% endblock %}
 
