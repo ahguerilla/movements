@@ -14,262 +14,321 @@
   {% include "ahr/market_banner.html"%}
   <div class="filter-banner-spacer"></div>
   <div class="exchange-filter">
-    <div class="grey-spacer"></div>
+    <div class="container">
+      <div class="settings-change-avatar">
+        <div id="settingavatar">{% primary_avatar user 120 %}</div>
+        <br />
+        <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'avatar_change' %}">Set Picture</a>
+      </div>
+    </div>
+    <!-- <div class="grey-spacer"></div> -->
   </div>
 
 {% endblock %}
+
+        {% if initial %}
+        <h1>{% trans "Welcome To Exchangivist" %}</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        {% else %}
+        
+        <div>&nbsp;</div>
+        {% endif %}
 
 
 {% block content %}
 
   <div class="row" id="usersettingpage">
-    <div class="col-md-offset-3 col-md-6">
+    
       <div class="in-container dialog">
-        {% if initial %}
-        <h1>{% trans "Welcome To Exchangivist" %}</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        {% else %}
-        <div><h4>{% trans "User Settings" %}</h4></div>
-
-        <span id="settingavatar">{% primary_avatar user %}</span>
-        <a id="changeavatar" href="{% url 'avatar_change' %}">Change</a>
-        <div>&nbsp;</div>
-        <div><a href="{% url 'account_change_password' %}">Change Password</a></div>
-        <div>&nbsp;</div>
-        {% endif %}
         <form method="post" class="form-horizontal" id="settingform" role="form">
           {% csrf_token %}
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.first_name.auto_id}}">Name:</label>
-            </div>
-            <div class="col-sm-5">
-              {{ user_form.first_name.errors }}
-              {% render_field user_form.first_name class="form-control input-sm" placeholder="First Name" required="true" %}
-            </div>
-            <div class="col-sm-5">
-              {{ user_form.last_name.errors }}
-              {% render_field user_form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-name"/> Hide</label>
-            </div>
-          </div>
+          <!-- personal info -->
+          <div class"col-md-12">
+            <div class="row">
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{ settings_form.username.auto_id }}">Username:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ user_form.username.errors }}
-              {% render_field user_form.username class="form-control input-sm" placeholder="Username" required="true" %}
-            </div>
-          </div>
+              <div class="col-md-6">
+                <legend>General</legend>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.first_name.auto_id}}">Name:</label>
+                  </div>
+                  <div class="col-sm-5">
+                    {{ user_form.first_name.errors }}
+                    {% render_field user_form.first_name class="form-control input-sm" placeholder="First Name" required="true" %}
+                  </div>
+                  <div class="col-sm-5">
+                    {{ user_form.last_name.errors }}
+                    {% render_field user_form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-name"/> Hide</label>
+                  </div>
+                </div>
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.nationality.auto_id}}">Nationality:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ settings_form.nationality.errors }}
-              {% render_field settings_form.nationality class="form-control input-sm" placeholder="Nationality" required="true" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-nationality"/> Hide</label>
-            </div>
-          </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{ settings_form.username.auto_id }}">Username:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ user_form.username.errors }}
+                    {% render_field user_form.username class="form-control input-sm" placeholder="Username" required="true" %}
+                  </div>
+                </div>
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.occupation.auto_id}}">Occupation:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ settings_form.occupation.errors }}
-              {% render_field settings_form.occupation class="form-control input-sm" placeholder="Occupation" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-occupation"/> Hide</label>
-            </div>
-          </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.tag_ling.auto_id}}">Tag Line:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.tag_ling.errors }}
+                    {% render_field settings_form.tag_ling class="form-control input-sm" placeholder="Tag Line" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-tag_ling"/> Hide</label>
+                  </div>
+                </div>
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.resident_country.auto_id}}">Country of Residence:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ settings_form.resident_country.errors }}
-              {% render_field settings_form.resident_country class="form-control input-sm" placeholder="Country of Residence" required="true" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-resident_country"/> Hide</label>
-            </div>
-          </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.tag_ling.auto_id}}">Bio:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.bio.errors }}
+                    {% render_field settings_form.bio class="form-control input-sm" placeholder="Bio" %}
+                  </div>
+                  <div class="col-sm-2" style="vertical-align:bottom;">
+                    <label><input type="checkbox" name="notperm-bio"/> Hide</label>
+                  </div>
+                </div>
 
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.expertise.auto_id}}">Expertise:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ settings_form.expertise.errors }}
-              {% render_field settings_form.expertise class="form-control input-sm" placeholder="Area of expertise if any" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-experties"/> Hide</label>
-            </div>
-          </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.expertise.auto_id}}">Expertise:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.expertise.errors }}
+                    {% render_field settings_form.expertise class="form-control input-sm" placeholder="Area of expertise if any" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-experties"/> Hide</label>
+                  </div>
+                </div>
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.web_url.auto_id}}">Website/Blog:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ settings_form.web_url.errors }}
-              {% render_field settings_form.web_url class="form-control input-sm" placeholder="Website/Blog URL" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-web_url"/> Hide</label>
-            </div>
-          </div>
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.fb_url.auto_id}}">Facebook:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ settings_form.fb_url.errors }}
-              {% render_field settings_form.fb_url class="form-control input-sm" placeholder="Facebook Page" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-fb_url"/> Hide</label>
-            </div>
-          </div>
+              </div>
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.linkedin_url.auto_id}}">LinkedIn:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ settings_form.linkedin_url.errors }}
-              {% render_field settings_form.linkedin_url class="form-control input-sm" placeholder="LinkedIn Page" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-linkedin_url"/> Hide</label>
-            </div>
-          </div>
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.tweet_url.auto_id}}">Twitter:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ settings_form.tweet_url.errors }}
-              {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Twitter Handle" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-tweet_url"/> Hide</label>
-            </div>
-          </div>
+              <!-- social info -->
+              <div class="col-md-6">
+                <legend>More About You</legend>
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.tag_ling.auto_id}}">Tag Line:</label>
-            </div>
-            <div class="col-sm-10">
-              {{ settings_form.tag_ling.errors }}
-              {% render_field settings_form.tag_ling class="form-control input-sm" placeholder="Tag Line" %}
-            </div>
-            <div class="col-sm-2">
-              <label><input type="checkbox" name="notperm-tag_ling"/> Hide</label>
-            </div>
-          </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.nationality.auto_id}}">Nationality:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.nationality.errors }}
+                    {% render_field settings_form.nationality class="form-control input-sm" placeholder="Nationality" required="true" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-nationality"/> Hide</label>
+                  </div>
+                </div>
 
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.tag_ling.auto_id}}">Bio:</label>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.occupation.auto_id}}">Occupation:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.occupation.errors }}
+                    {% render_field settings_form.occupation class="form-control input-sm" placeholder="Occupation" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-occupation"/> Hide</label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.resident_country.auto_id}}">Country of Residence:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.resident_country.errors }}
+                    {% render_field settings_form.resident_country class="form-control input-sm" placeholder="Country of Residence" required="true" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-resident_country"/> Hide</label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    {{ settings_form.is_organisation.errors }}
+                    {{ settings_form.is_organisation }}
+                    <label for="{{settings_form.is_organisation.auto_id}}">I am an organisation</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    {{ settings_form.is_journalist.errors }}
+                    {{ settings_form.is_journalist }}
+                    <label for="{{settings_form.is_journalist.auto_id}}">I am a journalist</label>
+                  </div>
+                </div>
+
+                <legend>Update Password</legend>
+                <div><a class="btn btn-default" href="{% url 'account_change_password' %}">Change Password</a></div>
+
+              </div>
+
             </div>
-            <div class="col-sm-10">
-              {{ settings_form.bio.errors }}
-              {% render_field settings_form.bio class="form-control input-sm" placeholder="Bio" %}
+          
+            <!-- Social -->
+            <br /><br />
+            <div class="row">
+              <div class="col-md-10">
+
+                <legend>Social</legend>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.web_url.auto_id}}">Website/Blog:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.web_url.errors }}
+                    {% render_field settings_form.web_url class="form-control input-sm" placeholder="Website/Blog URL" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-web_url"/> Hide</label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.fb_url.auto_id}}">Facebook:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.fb_url.errors }}
+                    {% render_field settings_form.fb_url class="form-control input-sm" placeholder="Facebook Page" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-fb_url"/> Hide</label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.linkedin_url.auto_id}}">LinkedIn:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.linkedin_url.errors }}
+                    {% render_field settings_form.linkedin_url class="form-control input-sm" placeholder="LinkedIn Page" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-linkedin_url"/> Hide</label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="{{settings_form.tweet_url.auto_id}}">Twitter:</label>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ settings_form.tweet_url.errors }}
+                    {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Twitter Handle" %}
+                  </div>
+                  <div class="col-sm-2">
+                    <label><input type="checkbox" name="notperm-tweet_url"/> Hide</label>
+                  </div>
+                </div>
+
+              </div>
             </div>
-            <div class="col-sm-2" style="vertical-align:bottom;">
-              <label><input type="checkbox" name="notperm-bio"/> Hide</label>
+
+
+            <br /><br />
+
+            <div class="row">
+              <div class="col-md-10">
+                <legend>Areas of Interest</legend>
+                
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <div class="row">
+                      <div id="issues_place"></div>
+                      <span id="issues">
+                        {{ settings_form.issues.errors }}
+                        {% render_field settings_form.issues class="form-control input-sm input-extra-height" %}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <div class="row">
+                      <div id="countries_place"></div>
+                      <span id="countries">
+                        {{ settings_form.countries.errors }}
+                        {% render_field settings_form.countries class="form-control input-sm input-extra-height" %}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <div class="row">
+                      <div id="skills_place"></div>
+                      <span id="skills">
+                        {{ settings_form.skills.errors }}
+                        {% render_field settings_form.skills class="form-control input-sm input-extra-height" %}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
-          </div>
-          <br /><br />
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label>I'd like to advance the freedom of:</label>
+
+            <br /><br />
+
+            <div class="row">
+              <div class="col-md-10">
+                <legend>Stay In Touch</legend>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    {{ settings_form.get_newsletter.errors }}
+                    {{ settings_form.get_newsletter }}
+                    <label for="{{settings_form.get_newsletter.auto_id}}">I would like to recieve a weekly newsletter</label>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-sm-12">
-              <label for="{{settings_form.issues.auto_id}}">Issues:</label>
+
+            <br />
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="col-md-offset-9 col-md-3">
+                    {% if initial %}
+                    <button type="submit" class="submitsetting btn full-width">{% trans "Continue" %}</button>
+                    {% else %}
+                    <button type="submit" class="submitsetting btn full-width">{% trans "Save" %}</button>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-sm-12">
-              <div id="issues_place"></div>
-              <span id="issues">
-                {{ settings_form.issues.errors }}
-                {% render_field settings_form.issues class="form-control input-sm input-extra-height" %}
-              </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.countries.auto_id}}">Countries:</label>
-            </div>
-            <div class="col-sm-12">
-              <div id="countries_place"></div>
-              <span id="countries">
-                {{ settings_form.countries.errors }}
-                {% render_field settings_form.countries class="form-control input-sm input-extra-height" %}
-              </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              <label for="{{settings_form.skills.auto_id}}">Skills:</label>
-            </div>
-            <div class="col-sm-12">
-              <div id="skills_place"></div>
-              <span id="skills">
-                {{ settings_form.skills.errors }}
-                {% render_field settings_form.skills class="form-control input-sm input-extra-height" %}
-              </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              {{ settings_form.is_organisation.errors }}
-              {{ settings_form.is_organisation }}
-              <label for="{{settings_form.is_organisation.auto_id}}">I am an organisation</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              {{ settings_form.is_journalist.errors }}
-              {{ settings_form.is_journalist }}
-              <label for="{{settings_form.is_journalist.auto_id}}">I am a journalist</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              {{ settings_form.get_newsletter.errors }}
-              {{ settings_form.get_newsletter }}
-              <label for="{{settings_form.get_newsletter.auto_id}}">I would like to recieve a weekly newsletter</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-xs-offset-6 col-xs-6">
-              {% if initial %}
-              <button type="submit" class="submitsetting btn full-width">{% trans "Continue" %}</button>
-              {% else %}
-              <button type="submit" class="submitsetting btn full-width">{% trans "Save" %}</button>
-              {% endif %}
-            </div>
+
           </div>
         </form>
       </div>
-    </div>
+
+
   </div>
 
   <div id="changeavatardialog" class="modal fade">
@@ -377,17 +436,17 @@
 
     issues_widget = window.ahr.typeahead_widget.initWidget(
                         '#issues_place',
-                        {title:'', jsonfield:'issues'},
+                        {title:'Add issues that interest you:', jsonfield:'issues'},
                         issues);
 
     countries_widget = window.ahr.typeahead_widget.initWidget(
                 '#countries_place',
-                {title:'',  jsonfield:'countries'},
+                {title:'Add countries that interest you:',  jsonfield:'countries'},
                 countries);
 
     skills_widget = window.ahr.typeahead_widget.initWidget(
                 '#skills_place',
-                {title:'',  jsonfield:'skills'},
+                {title:'Add skills that interest you:',  jsonfield:'skills'},
                 skills);
 
     if (perms) {
