@@ -151,6 +151,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $(window).scroll(function() {
             that.loadScrollElements(that);
         });
+
+        // For ipad
+        document.addEventListener('touchmove', function(e) {
+            that.loadScrollElements(that);
+        }, false);
     },
 
     loadScrollElements: function(self){
@@ -261,6 +266,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     hideMarket:function(){
+        $('.exchange-banner').hide();
         $('#backtothemarket').css('visibility','visible');
         $('#marketitem_comment_form').show();
         $('#marketitem_comments').show();
@@ -271,6 +277,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     showMarket:function(){
+        $('.exchange-banner').show();
         $('#backtothemarket').css('visibility','hidden');
         $('#itemandsearchwrap').show();
         $('#marketitem_comment_form').hide();
@@ -319,14 +326,15 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     init: function(filters){
         $.cookie.json = true;
-
-        $(window).scroll(function() {
+        var checkMargin = function(){
             if($('#fixed-filters').hasClass('affix')){
                 $('#main-content-container').css("margin-top", "114px");
             } else {
                 $('#main-content-container').css("margin-top", "0");
             }
-        });
+        };
+
+        $(window).scroll(checkMargin);
 
         this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
