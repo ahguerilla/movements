@@ -49,8 +49,8 @@
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
     window.ahr.users.initUsers = function(filters){
-        $('#filter-offer-text').text('Exchangivists offering');
-        $('#filter-request-text').text('Exchangivists requesting');
+        $('#filter-offer-text').text('Exchangivists Offering');
+        $('#filter-request-text').text('Exchangivists Requesting');
         window.ahr.usersview = new UsersView(filters);
         var user_route = new UserRoute(window.ahr.usersview);
         Backbone.history.start();
