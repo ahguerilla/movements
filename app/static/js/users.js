@@ -29,7 +29,7 @@
             this.item_tmp = _.template($('#user-template').html());
             this.item_widget = window.ahr.marketuser_widget.initWidget('body',that);
 
-            filters.types=["request", "offer"];
+            filters.types=[];
             this.init(filters);
             window.ahr.expandTextarea('#newmessage');
             $('#q').typeahead({
@@ -49,8 +49,8 @@
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
     window.ahr.users.initUsers = function(filters){
-        $('#filter-offer-text').text('Exchangivists offering');
-        $('#filter-request-text').text('Exchangivists requesting');
+        $('#filter-offer-text').text('Exchangivists Offering');
+        $('#filter-request-text').text('Exchangivists Requesting');
         window.ahr.usersview = new UsersView(filters);
         var user_route = new UserRoute(window.ahr.usersview);
         Backbone.history.start();
