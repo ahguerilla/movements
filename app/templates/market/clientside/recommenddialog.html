@@ -54,6 +54,7 @@
           $('#recsub').attr('readonly',false);
           $('#recmessage').val(message);
           $('#touser').val('');
+          $('#recmessage').height(100);
           $('#recommenddialog').modal('show');
         },
 
@@ -96,6 +97,7 @@
             var that = this;
             this.item = data.item;
             this.url =  data.url;
+            window.ahr.expandTextarea('#recmessage');
         }
     });
     window.ahr.recommend_widget = window.ahr.recommend_widget || {};
