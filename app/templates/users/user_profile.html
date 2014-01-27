@@ -37,9 +37,9 @@
 
       {% if is_self %}
       <br />
-      <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'user_settings' %}">Update Profile</a>      
+      <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'user_settings' %}">Update Profile</a>
       {% endif %}
-  
+
 
     </div>
   </div>
@@ -107,7 +107,7 @@
 
       </div>
     </div>
-    
+
     <br /><br />
 
     <div class="row">
@@ -149,7 +149,7 @@
         <div class="row profile-item">
           <div class="col-md-4 profile-label">Area of expertise:</div>
           <div class="col-md-8">
-          {% if user_profile.notperm.expertise != 'on' %}
+          {% if user_profile.notperm.experties != 'on' %}
           {{ user_profile.expertise }}
           {% else %}
           hidden
@@ -197,7 +197,7 @@
         <div class="row profile-item">
           <div class="col-md-4 profile-label">Twitter:</div>
           <div class="col-md-8">
-          {% if user_profile.notperm.get_twitter_url != 'on' %}
+          {% if user_profile.notperm.tweet_url != 'on' %}
           <a target="_blank" href="{{ user_profile.get_twitter_url }}">{{ user_profile.tweet_url }}</a>
           {% else %}
           hidden
@@ -205,7 +205,7 @@
           </div>
         </div>
 
-      </div>  
+      </div>
     </div>
 
     <br /><br />
