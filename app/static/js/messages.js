@@ -57,7 +57,13 @@
                     return  "<a href='"+window.ahr.app_urls.viewuserprofile+username+"'>Click here to view the recommendation</a>";
                 });
 
-               $('#conversation').html(data2);
+                data3 = data2.replace(that.itemre, function(match,item_id, offset,string){
+                    return  " ";
+                });
+                data4 = data3.replace(that.userre, function(match,item_id, offset,string){
+                    return  " ";
+                });
+               $('#conversation').html(data4);
                that.showconv();
                $.getJSON(window.ahr.app_urls.getmessagecount,function(data){
                     $('.message-counter').each(function(tmp,item){
@@ -68,6 +74,7 @@
                         }
                     });
                 });
+
 
             });
             return false;
