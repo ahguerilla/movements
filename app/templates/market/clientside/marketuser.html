@@ -61,7 +61,7 @@
         ev.preventDefault();
         var username = ev.currentTarget.getAttribute('username');
         var item_id = ev.currentTarget.getAttribute('item_id');
-        var msgsub = 'Re: '+$('.marketitem_title',$('.market-item-card[item_id='+item_id+']')).text();
+        var msgsub = '';
         this.message_widget.show(username, msgsub, '', false);
         return(false);
       },
