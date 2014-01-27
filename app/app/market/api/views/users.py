@@ -28,6 +28,9 @@ def createQuery(request):
         objs = SearchQuerySet().models(users.models.UserProfile).filter(text__contains=request.GET['search'])
         ids= [int(obj.pk) if not obj.object.notperm.has_key('name') and obj.object.id != request.user.id else None for obj in objs]
 
+        objs = SearchQuerySet().models(users.models.UserProfile).filter(username__contains=request.GET['search'])
+        ids.extend([int(obj.pk) if obj.object.id != request.user.id else None for obj in objs])
+
         objs = SearchQuerySet().models(users.models.UserProfile).filter(bio__contains=request.GET['search'])
         ids.extend([int(obj.pk) if not obj.object.notperm.has_key('bio') and obj.object.id != request.user.id else None for obj in objs])
 
