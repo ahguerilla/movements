@@ -70,4 +70,8 @@ Do a "pip install -r requirements/base.txt" too.
 Make a backup of /etc/solr/conf/schema.xml and copy ahr/app/schema.xml over it.
 You may need to copy ahr/app/stopwords_en.txt /etc/solr/conf/stopwords_en.txt 
 
+to restart tomcat
+sudo service tomcat6 restart
 
+to rebuild index
+python manage.py rebuild_index --setting=app.settings.local

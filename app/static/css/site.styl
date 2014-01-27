@@ -10,6 +10,7 @@ $filter-item-selected = #444D54
 $dialog-bg-color = rgba(255, 255, 255, 0.75)
 $warning-bg-color = rgba(185, 74, 72, 0.69)
 $std-border-radius = 10px
+$modal-dialog-bg = #EAEAEA
 
 vendor(prop, args)
   -webkit-{prop} args
@@ -308,6 +309,8 @@ select.input-extra-height
   padding-bottom: 10px
   .market-filter-main
     position: relative
+    .market-action
+      margin-bottom: 10px
     .market-filter-border
       border-right: 1px solid #FFF
       position: absolute
@@ -485,3 +488,13 @@ pre
     height 35px
     padding 10px 12px
     font-size 14px
+
+
+.modal-content
+  background-color $modal-dialog-bg
+  .modal-title
+    color $text-color
+  .modal-title
+    margin-left 5px
+  .modal-footer
+    padding 0

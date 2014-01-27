@@ -28,7 +28,9 @@
           <div class="form-group"  id="details_place"></div>
           <div class="modal-footer">
             <span class="col-xs-offset-6 col-xs-6 pull-right">
-              <button type="submit" class="btn btn-success full-width pull-right itemdialogsave">{% trans "Save" %}</button>
+              <div class="row">
+                <button type="submit" class="btn btn-default full-width pull-right itemdialogsave">{% trans "Save" %}</button>
+              </div>
             </span>
           </div>
         </form>
@@ -106,7 +108,7 @@
 
             this.skills_widget = window.ahr.typeahead_widget.initWidget(
                         '#skills_place',
-                        {title:'Skills',  jsonfield:'skills'},
+                        {title:'Please select the skills you have to offer',  jsonfield:'skills'},
                         this.item_obj? this.item_obj.skills: null);
 
             this.expdate_widget = window.ahr.datepicker_widget.initWidget(
