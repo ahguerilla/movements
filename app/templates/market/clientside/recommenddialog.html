@@ -7,22 +7,28 @@
         <div id="recerror"></div>
       </div>
       <div class="modal-body">
-        <div>To</div>
+        <label for="touser">To</label>
         <div style="margin-bottom:5px;">
           <input  class="form-control" id="touser" type="text" name="subject" required="true"/>
         </div>
-        <div>Subject</div>
+        <label for="recsub">Subject</label>
         <div style="margin-bottom:5px;">
           <input  class="form-control" id="recsub" type="text" name="subject" required="true"/>
         </div>
-        <div>Message</div>
+        <label for="recmessage">Message</label>
         <div>
           <textarea class="form-control" name="recmessage" id="recmessage" rows="4" placeholder="" required="true"></textarea>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary sendrec">Send</button>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-xs-6 col-md-offset-6 col-md-3">
+              <button type="button" class="btn full-width cancelrec" data-dismiss="modal">Cancel</button>
+            </div>
+            <div class="col-xs-6 col-md-3">
+              <button type="button" class="btn full-width btn-default sendrec">Send</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
