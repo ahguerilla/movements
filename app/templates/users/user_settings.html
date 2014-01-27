@@ -175,7 +175,7 @@
               </div>
 
               <legend>Update Password</legend>
-              <div><a class="btn btn-default" href="{% url 'account_change_password' %}">Change Password</a></div>
+              <div><a class="btn btn-default" id="changepassword" href="{% url 'account_change_password' %}">Change Password</a></div>
 
             </div>
 
@@ -343,6 +343,22 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div id="changepassworddialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Upload Avatar</h4>
+      </div>
+      <div class="modal-body">
+          <iframe id="profile_change_password" frameborder='0' scrolling='no' allowtransparency='true' style="height:auto;width:100%;"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {% include "market/clientside/typeahead.html" %}
 
 {% endblock %}
@@ -354,6 +370,15 @@
     el: 'body',
     events:{
       'click #changeavatar': 'ShowAvChange',
+      'click #changepassword' : 'ShowChangePass',
+    },
+
+    ShowChangePass:function(ev){
+      ev.preventDefault();
+      $('#profile_change_password').attr('src',window.ahr.app_urls.changepassword);
+      $('#profile_change_password').height(250);
+      $('#changepassworddialog').modal('show');
+      return false;
     },
 
     ShowAvChange: function(ev){
