@@ -8,23 +8,24 @@
 
   <!-- Filter Spacer -->
   <div class="filter-banner-spacer"></div>
-  <div class="exchange-filter">
-    <div class="container">
-      <div class="row" style="margin-top:10px;">
-        <div id="create_offer" class="market-action col-md-2">
-          <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Create an offer" />
-          <span>Create an offer</span>
-        </div>
-        <div id="create_request" class="market-action col-md-3">
-          <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Create a request" />
-          <span>Create a request</span>
+  <div data-spy="affix" data-offset-top="300">
+    <div class="exchange-filter" >
+      <div class="container">
+        <div class="row" style="margin-top:10px;">
+          <div id="create_offer" class="market-action col-md-2">
+            <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Create an offer" />
+            <span>Create an offer</span>
+          </div>
+          <div id="create_request" class="market-action col-md-3">
+            <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Create a request" />
+            <span>Create a request</span>
+          </div>
         </div>
       </div>
     </div>
+    <div class="filter-banner-spacer-black"></div>
+    {% include "market/clientside/filters.html"%}
   </div>
-  <div class="filter-banner-spacer-black"></div>
-  {% include "market/clientside/filters.html"%}
-
 {% endblock %}
 
 {% block content %}
