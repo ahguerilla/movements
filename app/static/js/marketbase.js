@@ -320,6 +320,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     init: function(filters){
         $.cookie.json = true;
 
+        $(window).scroll(function() {
+            if($('#fixed-filters').hasClass('affix')){
+                $('#main-content-container').css("margin-top", "114px");
+            } else {
+                $('#main-content-container').css("margin-top", "0");
+            }
+        });
+
         this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
