@@ -356,8 +356,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
         this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
-        $('#market-filters').on('shown.bs.collapse',this.filterButtonHide);
-        $('#market-filters').on('hidden.bs.collapse',this.filterButtonShow);
+        $('#market-filters').on('show.bs.collapse',this.filterButtonHide);
+        $('#market-filters').on('hide.bs.collapse',this.filterButtonShow);
 
         this.filters = filters;
         this.initTemplates(filters);
