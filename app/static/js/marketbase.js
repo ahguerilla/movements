@@ -88,7 +88,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     search: function(){
-        debugger;
         this.filters.search = $('#q').val();
         this.resetMarket();
     },
@@ -335,7 +334,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             this.setFiltersDefault(tags);
         }
         if(action=='cus'){
-            //this.setFiltersDefault(tags);
             this.setFiltersFromCookie(this,tags);
         }
         this.setFilterKeys(tags);
