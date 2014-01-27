@@ -31,7 +31,17 @@ def render_settings(request, initial=False):
     try:
         perms = request.user.userprofile.notperm
     except:
-        perms = {}
+        perms = {u'experties': u'on',
+                 u'bio': u'on',
+                 u'resident_country': u'on',
+                 u'fb_url': u'on',
+                 u'name': u'on',
+                 u'linkedin_url': u'on',
+                 u'web_url': u'on',
+                 u'tweet_url': u'on',
+                 u'nationality': u'on',
+                 u'occupation': u'on',
+                 u'tag_ling': u'on'}
 
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=user)
