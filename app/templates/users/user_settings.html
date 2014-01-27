@@ -335,10 +335,14 @@
         <h4 class="modal-title">Upload Avatar</h4>
       </div>
       <div class="modal-body">
-          <iframe id="profile_change_stuff" frameborder='0' scrolling='no' allowtransparency='true' style="height:auto;width:100%;"></iframe>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Close</button>
+        <iframe id="profile_change_stuff" frameborder='0' scrolling='no' allowtransparency='true' style="width:100%;"></iframe>
+        <div class="modal-footer">
+          <span class="col-xs-offset-6 col-xs-6 pull-right">
+            <div class="row">
+              <button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Close</button>
+            </div>
+          </span>
+        </div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -353,17 +357,23 @@
         <h4 class="modal-title">Change Password</h4>
       </div>
       <div class="modal-body">
-          <iframe id="profile_change_password" frameborder='0' scrolling='no' allowtransparency='true' style="height:auto;width:100%;"></iframe>
+        <iframe id="profile_change_password" frameborder='0' scrolling='no' allowtransparency='true' style="width:100%;"></iframe>
+        <div class="modal-footer">
+          <span class="col-xs-offset-6 col-xs-6 pull-right">
+            <div class="row">
+              <button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Close</button>
+            </div>
+          </span>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Close</button>
-      </div>
+
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 {% include "market/clientside/typeahead.html" %}
 
 {% endblock %}
+
 
 {%block endjavascript%}
 <script type="text/javascript">
