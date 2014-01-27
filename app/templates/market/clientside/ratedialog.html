@@ -5,73 +5,75 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title"> Rate <span id="ratetitle"></span></h4>
+        <h4 class="modal-title">Rate <span id="ratetitle"></span></h4>
         <div id="rateerror"></div>
       </div>
       <div class="modal-body">
         <div class="row">
 
-          <div class="pull-left col-lg-offset-1">
+          <div class="round-image" style="text-align:center; font-size:160%;">
             {% primary_avatar user 100 %}
-          </div>
-
-          <div class="pull-left col-lg-offset-1">
-            <div class="row" id="username">test test</div>
-            <div class="row">
-                <div id="avgstars">
-                  <div id="numstars"></div>
-                  <span id="ratecount">12</span>Rating(s)
-                </div>
-
+          
+            <div style="margin-top:10px;">
+              <span id="username"></span>
+              <span id="numstars"></span>
+              <span id="ratecount"></span>Rating(s)
             </div>
           </div>
-
+          
         </div>
+
+
         <div style="margin-bottom:10px;"></div>
 
-        <div class="row" id="rateradios" >
-          <div class="col-lg-offset-1">
+        <div class="row" id="rateradios" style="text-align:center;" >
+          <div>
             <div>
               <label>
-                <div style="display: inline-block;width:150px;"> <input type="radio" name="stars" value="1">One star </div>
+                <div style="display: inline-block;width:150px;text-align:left;"> <input type="radio" name="stars" value="1">One star </div>
                 <div class="stars1"></div>
               </label>
             </div>
 
             <div>
               <label class="">
-                <div style="display: inline-block;width:150px;"><input type="radio" name="stars" value="2">Two stars</div>
+                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="2">Two stars</div>
                 <div class="stars2"></div>
               </label>
             </div>
 
             <div>
               <label class="">
-                <div style="display: inline-block;width:150px;"><input type="radio" name="stars" value="3">Three stars</div>
+                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="3">Three stars</div>
                 <div class="stars3"></div>
               </label>
             </div>
 
             <div>
               <label class="">
-                <div style="display: inline-block;width:150px;"><input type="radio" name="stars" value="4">Four stars</div>
+                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="4">Four stars</div>
                 <div class="stars4"></div>
               </label>
             </div>
 
             <div>
               <label class="">
-                <div style="display: inline-block;width:150px;"><input type="radio" name="stars" value="5">Five stars</div>
+                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="5">Five stars</div>
                 <div class="stars5"></div>
               </label>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default cancelrate" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary sendrate">Submit</button>
+        <div class="modal-footer">
+          <div class="row">  
+            <div class="col-xs-6 col-md-offset-6 col-md-3">            
+              <button type="button" class="btn full-width btn-default cancelrate" data-dismiss="modal">Cancel</button>
+            </div>
+            <div class="col-xs-6 col-md-3">            
+              <button type="button" class="btn full-width btn-primary sendrate">Submit</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
