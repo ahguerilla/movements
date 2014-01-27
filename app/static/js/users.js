@@ -29,7 +29,7 @@
             this.item_tmp = _.template($('#user-template').html());
             this.item_widget = window.ahr.marketuser_widget.initWidget('body',that);
 
-            filters.types=["request", "offer"];
+            filters.types=[];
             this.init(filters);
             window.ahr.expandTextarea('#newmessage');
             $('#q').typeahead({
