@@ -13,6 +13,7 @@ import app.users as users
 
 def createQuery(request):
     query = Q()
+
     if request.GET.has_key('skills'):
         query = Q(skills__in= request.GET.getlist('skills'))
 
@@ -23,14 +24,33 @@ def createQuery(request):
         query = query | Q(issues__in=request.GET.getlist('issues'))
 
     if request.GET.has_key('search') and request.GET['search']!='':
-        objs = SearchQuerySet().models(users.models.UserProfile).filter(text=request.GET['search'])
         #ids= [int(obj.pk) for obj in objs]
-        ids= [int(obj.pk) if not obj.object.notperm.has_key('bio') and obj.object.id != request.user.id else None for obj in objs]
+        objs = SearchQuerySet().models(users.models.UserProfile).filter(text__contains=request.GET['search'])
+        ids= [int(obj.pk) if not obj.object.notperm.has_key('name') and obj.object.id != request.user.id else None for obj in objs]
+
+        objs = SearchQuerySet().models(users.models.UserProfile).filter(bio__contains=request.GET['search'])
+        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('bio') and obj.object.id != request.user.id else None for obj in objs])
+
+        objs = SearchQuerySet().models(users.models.UserProfile).filter(expertise__contains=request.GET['search'])
+        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('experties') and obj.object.id != request.user.id else None for obj in objs])
+
+        objs = SearchQuerySet().models(users.models.UserProfile).filter(tag_ling__contains=request.GET['search'])
+        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('tag_ling') and obj.object.id != request.user.id else None for obj in objs])
+
+        objs = SearchQuerySet().models(users.models.UserProfile).filter(nationality__contains=request.GET['search'])
+        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('nationality') and obj.object.id != request.user.id else None for obj in objs])
+
+        objs = SearchQuerySet().models(users.models.UserProfile).filter(resident_country__contains=request.GET['search'])
+        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('resident_country') and obj.object.id != request.user.id else None for obj in objs])
         try:
+            ids=set(ids)
             ids.remove(None)
         except:
             pass
         query = query & Q(id__in = ids)
+
+    if request.GET.has_key('types'):
+        query = query & Q(user__marketitem__item_type__in=request.GET.getlist('types'))
 
     return query & ~Q(user__id=request.user.id)
 

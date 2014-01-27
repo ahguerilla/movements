@@ -1,2 +1,2 @@
-{{object.user.username}}
-{{object.bio}}
+{{object.user.first_name}}
+{{object.user.last_name}}

@@ -16,7 +16,7 @@
     });
 
     var UsersView = window.ahr.market.MarketBaseView.extend({
-        types:{"Activist" : "activist", "Ready to help" : "readytohelp" },
+        types:{"Offers":"offer","Request":"request"},
 
         showItem: function(ev){
             window.location = $('a.linktoprofile',$(ev.currentTarget)).attr('href');
@@ -29,7 +29,7 @@
             this.item_tmp = _.template($('#user-template').html());
             this.item_widget = window.ahr.marketuser_widget.initWidget('body',that);
 
-            filters.types=["activist", "readytohelp"];
+            filters.types=["request", "offer"];
             this.init(filters);
             window.ahr.expandTextarea('#newmessage');
             $('#q').typeahead({
@@ -49,6 +49,8 @@
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
     window.ahr.users.initUsers = function(filters){
+        $('#filter-offer-text').text('Exchangivists offering');
+        $('#filter-request-text').text('Exchangivists requesting');
         window.ahr.usersview = new UsersView(filters);
         var user_route = new UserRoute(window.ahr.usersview);
         Backbone.history.start();
