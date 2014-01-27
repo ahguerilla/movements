@@ -36,7 +36,7 @@ class offerForm(forms.ModelForm):
 
     def clean(self):
         check = [self.cleaned_data['exp_date'], self.cleaned_data['never_exp']]
-        if any(check) and not all(check):
+        if any(check):
             return self.cleaned_data
         raise ValidationError('Your should enter an expiry date for your offer or check never expires')
 
@@ -55,7 +55,7 @@ class requestForm(forms.ModelForm):
 
     def clean(self):
         check = [self.cleaned_data['exp_date'], self.cleaned_data['never_exp']]
-        if any(check) and not all(check):
+        if any(check):
             return self.cleaned_data
         raise ValidationError('Your should enter an expiry date for your request or check never expires')
 
