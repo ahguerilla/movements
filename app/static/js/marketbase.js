@@ -8,42 +8,41 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     allItemsLoaded: false,
     itemsPerCall: 15,
     requiresResetOnNewOfferRequest: false,
+    cookieread: false,
 
-    setFilterNone:function(){
+    setFiltersDefault:function(tags){
+        this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
+    },
+
+    setFilterNone:function(tags){
         this.filters = window.ahr.clone(this.default_filters);
-        var skillarr=[];
-        _.each(window.ahr.skills, function(item){
-            skillarr.push(parseInt(item.pk, 10));
+        var tagsarr=[];
+        _.each(window.ahr[tags], function(item){
+            tagsarr.push(parseInt(item.pk, 10));
         });
-        this.filters.skills =  skillarr;
-
-        var countriesarr=[];
-        _.each(window.ahr.countries, function(item){
-            countriesarr.push(parseInt(item.pk, 10));
-        });
-        this.filters.countries =  countriesarr;
-
-        var isssuesarr=[];
-        _.each(window.ahr.issues, function(item){
-            isssuesarr.push(parseInt(item.pk, 10));
-        });
-        this.filters.issues =  isssuesarr;
+        this.filters[tags] =  tagsarr;
     },
 
-    setFilterKeys:function(){
+    setFilterKeys:function(taghead){
         var that = this;
-        for(var key in this.filters){
-            $('.row.'+key).empty();
-            this.initFilters(that, key, that.tagtemp);
-        }
+        $('.row.'+taghead).empty();
+        this.initFilters(that, taghead, that.tagtemp);
+
     },
 
-    initFilters: function(that, items, templ){
+
+    setFiltersFromCookie:function(that,items){
         var cookie = $.cookie('tagfilters');
         if(typeof cookie != 'undefined'){
             if (items != "types"){
                 that.filters[items] = cookie[items];
             }
+        }
+    },
+
+    initFilters: function(that, items, templ){
+        if(this.cookieread==false){
+            this.setFiltersFromCookie(that,items);
         }
         _.each(window.ahr[items], function(item){
             var activeFlag = ' ';
@@ -83,15 +82,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
     },
 
-    setFilterType: function(ftype){
-        $('.filter-type').removeClass('btn-success');
-        $('.filter-type.'+ftype).addClass('btn-success');
+    setFilterType: function(tags,ftype){
+        $('input[name$="-'+tags+'"]').parent().removeClass('active');
+        $('input[name="'+ftype+'-'+tags+'"]').parent().addClass('active');
     },
 
     search: function(){
+        debugger;
         this.filters.search = $('#q').val();
-        this.setFilterNone();
-        this.setFilterKeys();
         this.resetMarket();
     },
 
@@ -108,7 +106,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     tagsfilter: function(ev){
         this.updateTagsfilter(this,ev);
-        this.setFilterType("custom");
+        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title')
+        this.setFilterType(tags, "cus");
         this.resetMarket();
     },
 
@@ -120,6 +119,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                 this.initFilters(this, key, this.tagtemp);
             }
         }
+        this.cookieread = true;
     },
 
     levelReached: function(){
@@ -189,7 +189,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
                     that.item_widget.afterset();
                     that.msnry.layout();
                 }
-                
+
                 that.currentItem = that.currentItem + that.itemsPerCall;
                 that.loadingScrollElemets = false;
             });
@@ -324,6 +324,24 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('#togglefilter').removeClass('dropup');
     },
 
+    customizefilters:function(ve){
+        var val = $('input',$(ve.currentTarget)).attr('name').split('-');
+        action = val[0];
+        tags = val[1];
+        if(action=='all'){
+            this.setFilterNone(tags);
+        }
+        if(action=='def'){
+            this.setFiltersDefault(tags);
+        }
+        if(action=='cus'){
+            //this.setFiltersDefault(tags);
+            this.setFiltersFromCookie(this,tags);
+        }
+        this.setFilterKeys(tags);
+        this.resetMarket();
+    },
+
     init: function(filters){
         $.cookie.json = true;
         var checkMargin = function(){
@@ -346,12 +364,16 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.filters = filters;
         this.initTemplates(filters);
         this.filters.search=$('#q').val();
+        this.setFilterType('skills','cus');
+        this.setFilterType('issues','cus');
+        this.setFilterType('countries','cus');
         this.delegateEvents(_.extend(this.events,{
             'click .tagbutton': 'tagsfilter',
             'click #searchbtn': 'search',
             'click .item-type': 'itemTypesfilter',
             'click #create_offer': 'create_offer',
             'click #create_request': 'create_request',
+            'click .filterselector': 'customizefilters',
             'submit': 'filterKeySearch'
         }));
     }
