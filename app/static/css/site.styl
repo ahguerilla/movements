@@ -10,6 +10,7 @@ $filter-item-selected = #444D54
 $dialog-bg-color = rgba(255, 255, 255, 0.75)
 $warning-bg-color = rgba(185, 74, 72, 0.69)
 $std-border-radius = 10px
+$modal-dialog-bg = #EAEAEA
 
 vendor(prop, args)
   -webkit-{prop} args
@@ -187,7 +188,7 @@ select.input-extra-height
     width: 40px
     height: 40px
     border-radius 50%
-  a
+  a 
     margin: 0 !important
     padding: 0 !important
 
@@ -202,11 +203,11 @@ select.input-extra-height
   text-align: center
   .navbar-nav
     float: none
-  ul
+  ul 
     display: inline-block
   .footer-nav-content
     height: 45px
-    a
+    a 
       line-height: 45px
       color: #fff
       text-decoration: none
@@ -259,7 +260,7 @@ select.input-extra-height
 
 
 #settingform
-  label
+  label 
     margin-top 5px
     margin-bottom 9px
 
@@ -271,7 +272,7 @@ select.input-extra-height
   h2
     margin-top 0
   .tag-line
-    margin-bottom: 10px
+    margin-bottom: 10px    
 
 
 .profile-item
@@ -308,6 +309,8 @@ select.input-extra-height
   padding-bottom: 10px
   .market-filter-main
     position: relative
+    .market-action
+      margin-bottom: 10px
     .market-filter-border
       border-right: 1px solid #FFF
       position: absolute
@@ -476,7 +479,17 @@ pre
   img
     border-radius: 50%
 
-#backtothemarket
+.modal-content
+  background-color $modal-dialog-bg
+  .modal-title
+    color $text-color
+  .modal-title
+    margin-left 5px
+  .modal-footer
+    padding 0
+
+
+#backtothemarket 
   visibility hidden
 
 
