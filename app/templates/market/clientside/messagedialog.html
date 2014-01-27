@@ -80,6 +80,7 @@
     },
 
     show: function(username,subject,message,readonlysub){
+      $('#newmessage').height(100);
       this.username = username;
       this.subject = subject;
       this.message = message;
@@ -94,6 +95,7 @@
 
     initialize:function(settings){
       this.alert_place = '#pmerror'//settings.alert_place;
+      window.ahr.expandTextarea('#newmessage');
       return this;
     }
 });

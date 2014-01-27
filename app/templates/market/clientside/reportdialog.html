@@ -40,6 +40,7 @@
           var item_id = ev.currentTarget.getAttribute('item_id');
           this.showModalDialog('#report_template', {}, '#reportdialog', function(){
             that.item_id = item_id;
+            window.ahr.expandTextarea($("#reportdialog #content"));
           });
           return(false);
         },
