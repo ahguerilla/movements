@@ -41,9 +41,10 @@
             dfrd.done(function(item){
                 var html = that.item_widget.reloadItem(item);
                 $('.market-place-item[item_id='+item_id+']').replaceWith(html);
+                that.msnry.reloadItems();
                 that.item_widget.afterset('.market-place-item[item_id='+item_id+']');
                 if(that.isSingle()===false){
-                   that.refreshScrollElements();
+                   that.fancyref(html);
                 }
             });
         },
