@@ -41,7 +41,7 @@
             ev.preventDefault();
             if(ev.currentTarget.parentElement.tagName=="STRONG"){
                 a = ev.currentTarget;
-                $(ev.currentTarget.parentElement.parentElement).html(a);
+                $(ev.currentTarget.parentElement).html(a);
             }
 
             var dfrd = $.ajax({
