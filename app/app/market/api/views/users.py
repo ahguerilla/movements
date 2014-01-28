@@ -162,7 +162,7 @@ def setRate(request,username,rtype):
 def getUsernames(request,rtype):
     usernames = users.models.User.objects \
                         .filter(is_active=True) \
-                        .filter(username__contains=request.GET['username']) \
+                        .filter(username__icontains=request.GET['username']) \
                         .filter(~Q(pk=request.user.id)&~Q(username='admin')).only('username')[:10]
     return HttpResponse(
         json.dumps(
