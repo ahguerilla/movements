@@ -102,8 +102,17 @@
     return $('body',$('#'+iframeName).contents()).height();
   }
 
+  function alert(message,selector){
+    $(selector).empty();
+    $(selector).prepend('<div class="alert alert-warning alert-dismissable">'+
+    '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+    message+'</div>');
+  }
+
+
   window.ahr = window.ahr || {};
   window.ahr.getcsrf = getcsrf;
+  window.ahr.alert = alert;
   window.ahr.getStatics = getStatics;
   window.ahr.clone = clone;
   window.ahr.expandTextarea = expandTextarea;

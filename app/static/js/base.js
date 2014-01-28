@@ -38,10 +38,7 @@
     },
 
     alert: function(message,selector){
-      $(selector).empty();
-      $(selector).prepend('<div class="alert alert-warning alert-dismissable">'+
-      '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
-      message+'</div>');
+      window.ahr.alert(message,selector);
     },
 
     info: function (message,selector){
