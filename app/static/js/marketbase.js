@@ -105,7 +105,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     tagsfilter: function(ev){
         this.updateTagsfilter(this,ev);
-        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title')
+        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
         this.setFilterType(tags, "cus");
         this.resetMarket();
     },
@@ -121,7 +121,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.cookieread = true;
     },
 
-    levelReached: function(){
+    levelReached: function(pixelTestValue){
       // is it low enough to add elements to bottom?
       var pageHeight = Math.max(document.body.scrollHeight ||
         document.body.offsetHeight);
@@ -132,7 +132,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         document.documentElement.scrollTop  ||
         document.body.scrollTop || 0;
       // Trigger for scrolls within 30 pixels from page bottom
-      return pageHeight - viewportHeight - scrollHeight < 30;
+      return pageHeight - viewportHeight - scrollHeight < pixelTestValue;
     },
 
     initInfiniteScroll: function(){
@@ -159,7 +159,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     loadScrollElements: function(self){
         var that = self;
-        if(!that.loadingScrollElemets && that.levelReached() && !that.allItemsLoaded) {
+        if(!that.loadingScrollElemets && that.levelReached(30) && !that.allItemsLoaded) {
             that.loadingScrollElemets = true;
             var dfrd = that.getItems(
                             that.currentItem,
@@ -340,17 +340,20 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.resetMarket();
     },
 
+    checkMargin: function(){
+        if($('#fixed-filters').hasClass('affix')){
+            if(!this.levelReached(114)){
+                var marginToAdd = "114";
+                $('#main-content-container').css("margin-top", marginToAdd + "px");
+            }
+        } else {
+            $('#main-content-container').css("margin-top", "0");
+        }
+    },
+
     init: function(filters){
         $.cookie.json = true;
-        var checkMargin = function(){
-            if($('#fixed-filters').hasClass('affix')){
-                $('#main-content-container').css("margin-top", "114px");
-            } else {
-                $('#main-content-container').css("margin-top", "0");
-            }
-        };
-
-        $(window).scroll(checkMargin);
+        $(window).scroll(this.checkMargin.bind(this));
 
         this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
