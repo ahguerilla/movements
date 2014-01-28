@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
@@ -102,6 +102,11 @@ def profile(request, user_name=None):
         user = User.objects.get(pk=request.user.id)
     else:
         user = get_object_or_404(User, username=user_name)
+
+    # if the user isn't active, return a 404
+    if not user.is_active:
+        raise Http404
+
     try:
         user_profile = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:

@@ -131,7 +131,7 @@ class UserProfile(models.Model):
         order=kwargs.get('order', None)
         start=kwargs.get('start', None)
         finish=kwargs.get('finish', None)
-        return cls.objects.filter(query).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
+        return cls.objects.filter(query).filter(user__is_active=True).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
 
 
 class OrganisationalRating(models.Model):
