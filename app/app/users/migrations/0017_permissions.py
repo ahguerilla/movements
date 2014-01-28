@@ -24,9 +24,11 @@ class Migration(DataMigration):
                  u'tag_ling': u'on'}
         for profile in orm.UserProfile.objects.all():
             if profile.notperm == u'':
+                print 'here'
                 profile.notperm = perms
                 profile.save()
             if profile.linkedin_url == 'None':
+                print 'there'
                 profile.linkedin_url =''
                 profile.save()
 
