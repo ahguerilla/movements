@@ -335,14 +335,15 @@
         <h4 class="modal-title">Upload Avatar</h4>
       </div>
       <div class="modal-body">
-        <iframe id="profile_change_stuff" frameborder='0' scrolling='no' allowtransparency='true' style="width:100%;"></iframe>
-        <div class="modal-footer">
-          <span class="col-xs-offset-6 col-xs-6 pull-right">
-            <div class="row">
-              <button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Close</button>
-            </div>
-          </span>
-        </div>
+        <div id="avataralert"></div>
+        <div id="profile_change_stuff" style="width:100%;"></div>
+        <!--<div class="modal-footer">-->
+          <!--<span class="col-xs-offset-6 col-xs-6 pull-right">-->
+            <!--<div class="row">-->
+              <!--<button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Close</button>-->
+            <!--</div>-->
+          <!--</span>-->
+        <!--</div>-->
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -400,13 +401,68 @@
 
     ShowAvChange: function(ev){
       ev.preventDefault();
-      $('#profile_change_stuff').height(500);
-      $('#changeavatardialog').modal('show');
+      $('#avataralert').empty();
+      var that = this;
+      var href = document.getElementById('changeavatar').href;
+      var dfrd = $.ajax({url:href});
+      dfrd.done(function(data){
+        $('#profile_change_stuff').html($('form',data).parent().parent().html());
+        if($('#avatarchangeimage').length>0){
+          var func = _.bind(that.changeavatar,that);
+          $('#avatarchangeimage').on('click',func);
+        }
+        var func = _.bind(that.uploadnewimage,that);
+        $('#avatarnewimageupload').on('click',func);
+        $('#changeavatardialog').modal('show');
+      });
       return(false);
     },
 
-    ChangeAv: function(ev){
-      $.noop();
+    changeavatar:function(ev){
+      ev.preventDefault();
+      var href = $('form','#profile_change_stuff')[0].action;
+      var dfrd = $.ajax({
+        url:href,
+        type: 'post',
+        data:$($('form','#profile_change_stuff')[0]).serialize()
+      });
+      dfrd.done(function(data){
+        $('#changeavatardialog').modal('hide');
+      });
+      return false;
+    },
+
+    uploadnewimage:function(ev){
+      ev.preventDefault();
+      formdata = new FormData();
+      var fileinp = $('input[type=file]', $('#changeavatardialog'));
+      if(fileinp[0].value==""){
+        return false;
+      }
+
+
+      var file = fileinp[0].files[0];
+      if (!file.type.match(/image.*/)){
+        window.ahr.alert('The file you selected is not an image','#avataralert');
+        return false;
+      }
+      var reader = new window.FileReader();
+      reader.readAsDataURL(file);
+      formdata.append('avatar', file);
+      var token = $('input[name="csrfmiddlewaretoken"]',$(ev.currentTarget).closest('form')).val()
+      formdata.append('csrfmiddlewaretoken',token);
+      var dfrd = $.ajax({
+        url:$(ev.currentTarget).closest('form').attr('action'),
+        data: formdata,
+        processData: false,
+        contentType: false,
+        type: 'post'
+      });
+      dfrd.done(function(data){
+        $('#changeavatardialog').modal('hide');
+      });
+
+      return false;
     },
 
     changepassword:function(ev){
@@ -432,29 +488,23 @@
     },
 
     initialize : function(){
-      try{
+      $('#changeavatardialog').on('hidden.bs.modal', function () {
+        $('#profile_change_stuff').empty();
         var href = document.getElementById('changeavatar').href;
         $('#profile_change_stuff').attr('src', href);
-        $('#changeavatardialog').on('hidden.bs.modal', function () {
-          $('#profile_change_stuff').empty();
-          var href = document.getElementById('changeavatar').href;
-          $('#profile_change_stuff').attr('src', href);
-          var dfrd = $.ajax({
-            url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'80'
-          });
-          dfrd.done(function(data){
-            $('#settingavatar>img').attr('src',data.avatar+'?' + new Date().getTime());
-          });
-          var dfrd2 = $.ajax({
-            url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'50'
-          });
-          dfrd2.done(function(data){
-            $('.navavatar img').attr('src',data.avatar+'?' + new Date().getTime());
-          });
+        var dfrd = $.ajax({
+          url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'80'
         });
-      } catch(err){
-        $.noop();
-      }
+        dfrd.done(function(data){
+          $('#settingavatar>img').attr('src',data.avatar+'?' + new Date().getTime());
+        });
+        var dfrd2 = $.ajax({
+          url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'50'
+        });
+        dfrd2.done(function(data){
+          $('.navavatar img').attr('src',data.avatar+'?' + new Date().getTime());
+        });
+      });
       return this;
     }
 
