@@ -8,8 +8,9 @@
 
   <!-- Filter Spacer -->
   <div class="filter-banner-spacer"></div>
-  <!-- <div id="fixed-filters" data-spy="affix" data-offset-top="300"> -->
+  <div id="filter-wrapper">
   <div id="fixed-filters">
+  <!-- <div id="fixed-filters"> -->
     <div class="exchange-filter" >
       <div class="container">
         <div class="row" style="margin-top:10px;">
@@ -25,7 +26,9 @@
       </div>
     </div>
     <div class="filter-banner-spacer-black"></div>
+    
     {% include "market/clientside/filters.html"%}
+    </div>
   </div>
 {% endblock %}
 

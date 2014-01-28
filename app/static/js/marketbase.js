@@ -9,6 +9,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     itemsPerCall: 15,
     requiresResetOnNewOfferRequest: false,
     cookieread: false,
+    filterheight: 0,
 
     setFiltersDefault:function(tags){
         this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
@@ -314,13 +315,15 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     filterButtonHide: function(ev){
-        $('#filterbuttontext').html('Hide Filters');
-        $('#togglefilter').addClass('dropup');
+        $('#filterbuttontext').html('Show Filters');
+        $('#togglefilter').removeClass('dropup');
+        this.checkMargin(114,0);
     },
 
     filterButtonShow: function(ev){
-        $('#filterbuttontext').html('Show Filters');
-        $('#togglefilter').removeClass('dropup');
+        $('#filterbuttontext').html('Hide Filters');
+        $('#togglefilter').addClass('dropup');
+        this.checkMargin(this.filterheight,300);
     },
 
     customizefilters:function(ve){
@@ -340,29 +343,25 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.resetMarket();
     },
 
-    checkMargin: function(){
-        if($('#fixed-filters').hasClass('affix')){
-            if(!this.levelReached(114)){
-                //var marginToAdd = "114";
-/*                var marginToAdd = $('#fixed-filters').height();
-                marginToAdd = "114";
-                $('#main-content-container').css("margin-top", marginToAdd + "px");*/
-            }
-        } else {
-            $('#main-content-container').css("margin-top", "0");
-        }
+    checkMargin: function(height,speed){
+        var marginToAdd = $('#fixed-filters').height();
+        $('#filter-wrapper').animate({height:height},speed);
     },
 
     init: function(filters){
         $.cookie.json = true;
-        $(window).scroll(this.checkMargin.bind(this));
+        $('#fixed-filters').affix({
+             // offset: { top: $('#fixed-filters').offset().top }
+             offset: { top: 300 }
+        });
+
 
         this.default_filters = window.ahr.clone(filters);
         this.requestdialog = window.ahr.request_form_dialog.initItem(false);
         this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
         this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
-        $('#market-filters').on('show.bs.collapse',this.filterButtonHide);
-        $('#market-filters').on('hide.bs.collapse',this.filterButtonShow);
+        $('#market-filters').on('show.bs.collapse',this.filterButtonShow.bind(this));
+        $('#market-filters').on('hide.bs.collapse',this.filterButtonHide.bind(this));
 
         this.filters = filters;
         this.initTemplates(filters);
@@ -379,6 +378,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'click .filterselector': 'customizefilters',
             'submit': 'filterKeySearch'
         }));
+        $('#market-filters').removeClass('collapse');
+        this.filterheight = $('#filter-wrapper').height();
+        console.log(this.filterheight);
+        $('#market-filters').addClass('collapse');
+        
     }
 
 });
