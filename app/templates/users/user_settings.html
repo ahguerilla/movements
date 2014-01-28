@@ -357,14 +357,14 @@
         <h4 class="modal-title">Change Password</h4>
       </div>
       <div class="modal-body">
-        <iframe id="profile_change_password" frameborder='0' scrolling='no' allowtransparency='true' style="width:100%;"></iframe>
-        <div class="modal-footer">
-          <span class="col-xs-offset-6 col-xs-6 pull-right">
-            <div class="row">
-              <button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Close</button>
-            </div>
-          </span>
-        </div>
+        <div id="profile_change_password" style="width:100%;"></div>
+        <!--<div class="modal-footer">-->
+          <!--<span class="col-xs-offset-6 col-xs-6 pull-right">-->
+            <!--<div class="row">-->
+              <!--<button type="button" class="btn btn-default cancelrec" data-dismiss="modal">Close</button>-->
+            <!--</div>-->
+          <!--</span>-->
+        <!--</div>-->
       </div>
 
     </div><!-- /.modal-content -->
@@ -387,8 +387,13 @@
 
     ShowChangePass:function(ev){
       ev.preventDefault();
-      $('#profile_change_password').attr('src',window.ahr.app_urls.changepassword);
-      $('#profile_change_password').height(250);
+      var that = this;
+      var dfrd = $.ajax({url:window.ahr.app_urls.changepassword});
+      dfrd.done(function(data){
+        $('#profile_change_password').html($('form',data).parent().html());
+        var func = _.bind(that.changepassword,that);
+        $('#changepasswordbutton').on('click',func);
+      });
       $('#changepassworddialog').modal('show');
       return false;
     },
@@ -402,6 +407,28 @@
 
     ChangeAv: function(ev){
       $.noop();
+    },
+
+    changepassword:function(ev){
+      ev.preventDefault();
+      var that = this;
+      var form = $(ev.currentTarget).closest('form');
+      var dfrd = $.ajax({
+        url:window.ahr.app_urls.changepassword,
+        type: 'post',
+        data: form.serialize()
+        });
+      dfrd.done(function(data){
+        $('#changepasswordbutton').off('click');
+        if($('form',data).length==0){
+          $('#changepassworddialog').modal('hide');
+          return false;
+        }
+        $('#profile_change_password').html($('form',data).parent().html());
+        var func = _.bind(that.changepassword, that);
+        $('#changepasswordbutton').on('click',func);
+      });
+      return false;
     },
 
     initialize : function(){
