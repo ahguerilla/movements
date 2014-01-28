@@ -48,7 +48,7 @@ def createQuery(request):
         objs = SearchQuerySet().models(market.models.MarketItem).filter(text=request.GET['search'])
         ids= [int(obj.pk) for obj in objs]
         query = query & Q(id__in = ids)
-    query = query & Q(published=True)  & Q(deleted=False)
+    query = query & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True)
     return query
 
 
@@ -67,14 +67,9 @@ def getMarketItem(request,obj_id,rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
                             Q(exp_date__gte=datetime.now())|Q(never_exp=True),
                             pk=obj_id,
-                            deleted=False)
+                            deleted=False,
+                            owner__is_active=True)
     return returnItemList([obj], rtype)
-
-
-@login_required
-def getMarketItemLast(request,count,rtype):
-    obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(deleted=False).order_by('-pub_date').defer('comments')[:count]
-    return returnItemList(obj, rtype)
 
 
 @login_required
