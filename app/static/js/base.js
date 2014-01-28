@@ -1,19 +1,20 @@
 (function(){
-
-  if (ahr.user_id) {
-    setInterval(function(){
-      var text;
-      $.getJSON(window.ahr.app_urls.getmessagecount,function(data){
-        $('.message-counter').each(function(tmp,item){
-          if(data>0){
-             $('#msgcntr',$(item)).text('('+data+')');
-          }else{
-            $('#msgcntr',$(item)).text('');
-          }
+  window.ahr.messageCounterWatch = function(){
+    if (window.ahr.user_id>0) {
+      setInterval(function(){
+        var text;
+        $.getJSON(window.ahr.app_urls.getmessagecount,function(data){
+          $('.message-counter').each(function(tmp,item){
+            if(data>0){
+               $('#msgcntr',$(item)).text('('+data+')');
+            }else{
+              $('#msgcntr',$(item)).text('');
+            }
+          });
         });
-      });
-    },30000);
-  }
+      },30000);
+    }
+  };
 
   window.ahr.BaseView = Backbone.View.extend({
     events:{},

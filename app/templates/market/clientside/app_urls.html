@@ -61,6 +61,7 @@
 
   {% if user and user.id %}
     window.ahr.user_id = {{ user.id }};
+    window.ahr.messageCounterWatch();
   {% else %}
     window.ahr.user_id = 0;
   {% endif %}
