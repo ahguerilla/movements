@@ -146,11 +146,11 @@
     <dynamicField name="*_coordinate"  type="tdouble" indexed="true"  stored="false"/>
 
 
-    <field name="text" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="text" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 
     <field name="pub_date" type="date" indexed="true" stored="true" multiValued="false" />
 
-    <field name="details" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="details" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 
     <field name="username" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 

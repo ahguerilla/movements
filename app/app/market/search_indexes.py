@@ -5,9 +5,9 @@ from app.users.models import UserProfile
 from django.db.models import Q
 
 
-class NoteIndex(indexes.SearchIndex, indexes.Indexable):
-    text = indexes.CharField(document=True, use_template=True)
-    details = indexes.CharField(model_attr='details')
+class MarketItemIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.EdgeNgramField(document=True, use_template=True)
+    details = indexes.EdgeNgramField(model_attr='details')
     pub_date = indexes.DateTimeField(model_attr='pub_date')
 
     def get_model(self):
