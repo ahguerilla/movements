@@ -343,8 +343,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     checkMargin: function(){
         if($('#fixed-filters').hasClass('affix')){
             if(!this.levelReached(114)){
-                var marginToAdd = "114";
-                $('#main-content-container').css("margin-top", marginToAdd + "px");
+                //var marginToAdd = "114";
+/*                var marginToAdd = $('#fixed-filters').height();
+                marginToAdd = "114";
+                $('#main-content-container').css("margin-top", marginToAdd + "px");*/
             }
         } else {
             $('#main-content-container').css("margin-top", "0");
