@@ -152,19 +152,19 @@
 
     <field name="details" type="text_en" indexed="true" stored="true" multiValued="false" />
 
-    <field name="username" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="username" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 
-    <field name="bio" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="bio" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 
-    <field name="resident_country" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="resident_country" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 
-    <field name="expertise" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="expertise" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 
-    <field name="nationality" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="nationality" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 
-    <field name="tag_ling" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="tag_ling" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 
-    <field name="occupation" type="text_en" indexed="true" stored="true" multiValued="false" />
+    <field name="occupation" type="edge_ngram" indexed="true" stored="true" multiValued="false" />
 
   </fields>
 
