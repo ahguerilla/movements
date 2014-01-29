@@ -69,8 +69,9 @@
             $('#messagedialog').modal('hide');
             $('.sendpm').prop('disabled',false);
           });
-          dfrd.fail(function(){
-            that.alert('Please try again.',that.alert_place);
+          dfrd.fail(function(data){
+            debugger;
+            that.alert(data.responseJSON.message+'. Please try again.',that.alert_place);
             $('.sendpm').prop('disabled',false);
           });
         });

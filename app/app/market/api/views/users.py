@@ -105,9 +105,11 @@ def sendMessage(request,to_user,rtype):
                  recipient=users.models.User.objects.filter(username=to_user)[0],
                  subject=request.POST['subject'],
                  body=request.POST['message'])
-    except:
+    except Exception,err:
+        if err.message== 'value too long for type character varying(120)\n':
+            message= "subject it too long (maximum 120 characters)"
         return HttpResponseError(
-            json.dumps({'success': 'false'}),
+            json.dumps({'success': 'false','message':message}),
             mimetype="application/"+rtype)
 
     return HttpResponse(
