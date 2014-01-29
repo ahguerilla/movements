@@ -108,7 +108,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     tagsfilter: function(ev){
         this.updateTagsfilter(this,ev);
-        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');        
+        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
         this.resetMarket();
     },
 
@@ -137,7 +137,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       return pageHeight - viewportHeight - scrollHeight < pixelTestValue;
     },
 
-    initInfiniteScroll: function(){
+    initInfiniteScroll: function(callback){
         $('#marketitems').empty();
         this.allItemsLoaded = false;
         this.currentItem = 0;
@@ -147,7 +147,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             itemSelector: '.market-place-item'
         });
 
-        this.loadScrollElements(this);
+        this.loadScrollElements(this, callback);
         var that = this;
         $(window).scroll(function() {
             that.loadScrollElements(that);
@@ -159,7 +159,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }, false);
     },
 
-    loadScrollElements: function(self){
+    loadScrollElements: function(self, callback){
         var that = self;
         if(!that.loadingScrollElemets && that.levelReached(30) && !that.allItemsLoaded) {
             that.loadingScrollElemets = true;
@@ -193,6 +193,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
                 that.currentItem = that.currentItem + that.itemsPerCall;
                 that.loadingScrollElemets = false;
+                if(callback){
+                    callback();
+                    return;
+                }
             });
         }
     },
@@ -203,7 +207,26 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
 
     resetMarket: function(){
-        this.initInfiniteScroll();
+        var that = this;
+        var updateMarketScrollPosition = $('#fixed-filters').hasClass('affix');
+        
+        if(updateMarketScrollPosition) {
+            $(".exchange-banner").hide();
+        }
+        
+        this.initInfiniteScroll(function(){
+            $(".exchange-banner").show();
+            if(updateMarketScrollPosition){
+                var heightOfBanner = $('.exchange-banner').height();
+                that.setScrollPostion(heightOfBanner+2);
+            } else {
+                that.setScrollPostion(0);
+            }
+        });
+    },
+
+    setScrollPostion: function(height){
+        $(window).scrollTop(height);
     },
 
     create_request: function(){
