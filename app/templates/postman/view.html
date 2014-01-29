@@ -7,9 +7,7 @@
 {% load avatar_tags %}
 
 {% block content %}
-
 <div id="postman_message">
-  <div class="btn btn-primary" id="back">Back</div>
   <div _class="panel panel-default panel-sm">
     <div _class="panel-heading">
       <div class="pull-right">
@@ -58,8 +56,8 @@
               <div class="row pm_header">
                 <a  data-toggle="collapse"  href="#message-{{forloop.counter}}">
                   <div class="col-md-12" style="line-height:2.5em;">
-                    <strong><span class="pm_sender">{{ message.obfuscated_sender }}</span> -
-                    <span class="pm_date">{{ message.sent_at|date:"DATETIME_FORMAT"}}</span><span class="pm_date pull-right">{{ message.sent_at|date:"d/m/y"}}</span></strong>
+                    <strong><span class="pm_sender">{{ message.obfuscated_sender }}</span>
+                    <span class="pm_date pull-right">{{ message.sent_at|date:"M d Y H:i"}}</span></strong>
                     {% if message.is_rejected %}
                       <div class="pm_status">{% trans "Rejected" %}{% if message.moderation_reason %}{% trans ":" %} {{ message.moderation_reason }}{% endif %}</div>
                     {% endif %}
@@ -89,7 +87,7 @@
           {% if reply_to_pk %}
 
           <a id="showreply" class="pull-right" data-toggle="collapse" href="#replyarea"><button class="btn btn-default">{% trans 'Reply' %}</button></a>
-          <br/><br/><br/>
+
           <div id="replyarea" class="collapse">
             <form id="replyform" action="{% url 'postman_reply' reply_to_pk %}?next={{ next_url|urlencode }}" method="post">{% csrf_token %}
               <div id="pm_reply">{{ form.body }}</div>
@@ -97,7 +95,6 @@
               <div class="pull-right">
                 <br/>
                 <button type="submit" id="reply-btn" class="btn btn-default">{% trans 'Reply' %}</button>
-                <br/><br/>
               </div>
 
             </form>
@@ -110,7 +107,7 @@
                   if ($('#id_body').val()!=""){
                     $('#replyform').submit();
                   }else{
-                    alert('Please provide a content!');
+                    alert('You cant send an empty message.');
                   }
                   return false;
                 });

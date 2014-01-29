@@ -13,7 +13,7 @@
     });
 
     var InboxView = Backbone.View.extend({
-        el: '#pm_messages',
+        el: '#postman',
         events:{
             'click .conv_link': 'openConv',
             'click #back': 'back',
@@ -86,6 +86,7 @@
             if($(window).width()<992){
                 $("#message-col").hide();
                 $('#conversation').show();
+                $('#back').show();
                 $('#conversation')[0].scrollIntoView(true);
             }else{
                 $('#conversation')[0].scrollIntoView(true);
@@ -95,6 +96,7 @@
         back:function(ev){
             $('#conversation').hide();
             $("#message-col").show();
+            $('#back').hide();
         },
 
         resize:function(ev){
@@ -106,6 +108,7 @@
                     $($('.conv_link')[0]).trigger('click');
                 }
                 $('#conversation').show();
+                $('#back').hide();
                 $("#message-col").show();
             }
         },
