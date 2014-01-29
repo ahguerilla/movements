@@ -338,6 +338,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             this.setFiltersFromCookie(this,tag);
         }
         var tmp =$.cookie('bulkfilters');
+        if (typeof tmp === "undefined"){
+            tmp = {countries:"cus", issues: "def", skills:"def"};
+        }
         tmp[tag]=action;
         $.cookie('bulkfilters',tmp);
         this.setFilterKeys(tag);
