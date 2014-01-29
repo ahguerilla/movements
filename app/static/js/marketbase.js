@@ -46,7 +46,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
     },
 
-    initFilters: function(that, items, templ){       
+    initFilters: function(that, items, templ){
         _.each(window.ahr[items], function(item){
             var activeFlag = ' ';
             if(_.contains(that.filters[items], item.pk)){
