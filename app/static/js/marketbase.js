@@ -46,7 +46,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
     },
 
-    initFilters: function(that, items, templ){       
+    initFilters: function(that, items, templ){
         _.each(window.ahr[items], function(item){
             var activeFlag = ' ';
             if(_.contains(that.filters[items], item.pk)){
@@ -108,7 +108,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     tagsfilter: function(ev){
         this.updateTagsfilter(this,ev);
-        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');        
+        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
         this.resetMarket();
     },
 
@@ -386,7 +386,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
         this.filters = filters;
         this.initTemplates(filters);
-        this.filters.search=$('#q').val();        
+        this.filters.search=$('#q').val();
         this.delegateEvents(_.extend(this.events,{
             'click .tagbutton': 'tagsfilter',
             'click #searchbtn': 'search',

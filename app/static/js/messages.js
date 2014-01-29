@@ -33,6 +33,7 @@
 
         reply: function(ev){
             ev.reventDefault();
+            debugger;
             return false;
         },
 
@@ -64,6 +65,7 @@
                     return  " ";
                 });
                $('#conversation').html(data4);
+               $('#id_body').empty();
                that.showconv();
                $.getJSON(window.ahr.app_urls.getmessagecount,function(data){
                     $('.message-counter').each(function(tmp,item){
@@ -105,9 +107,7 @@
                 }
                 $('#conversation').show();
                 $("#message-col").show();
-
             }
-
         },
 
         initialize: function(){
