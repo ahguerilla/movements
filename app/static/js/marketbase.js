@@ -16,7 +16,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     setFilterNone:function(tags){
-        this.filters = window.ahr.clone(this.default_filters);
+        if (typeof tags == 'string'){
+            this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
+        }else{
+            this.filters = window.ahr.clone(this.default_filters);
+        }
         var tagsarr=[];
         _.each(window.ahr[tags], function(item){
             tagsarr.push(parseInt(item.pk, 10));
@@ -326,7 +330,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.checkMargin(this.filterheight,300);
     },
 
-    customizefilters:function(ve){
+    bulkCustomizeFilters:function(ve){
         var val = $('input',$(ve.currentTarget)).attr('name').split('-');
         action = val[0];
         tags = val[1];
@@ -375,14 +379,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'click .item-type': 'itemTypesfilter',
             'click #create_offer': 'create_offer',
             'click #create_request': 'create_request',
-            'click .filterselector': 'customizefilters',
+            'click .filter-bulk-selector': 'bulkCustomizeFilters',
             'submit': 'filterKeySearch'
         }));
         $('#market-filters').removeClass('collapse');
         this.filterheight = $('#filter-wrapper').height();
         console.log(this.filterheight);
         $('#market-filters').addClass('collapse');
-        
     }
 
 });
