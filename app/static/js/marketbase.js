@@ -46,9 +46,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     initFilters: function(that, items, templ){
-        if(this.cookieread==false){
-            this.setFiltersFromCookie(that,items);
-        }
         _.each(window.ahr[items], function(item){
             var activeFlag = ' ';
             if(_.contains(that.filters[items], item.pk)){
@@ -111,7 +108,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     tagsfilter: function(ev){
         this.updateTagsfilter(this,ev);
         var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
-        this.setFilterType(tags, "cus");
         this.resetMarket();
     },
 
@@ -330,21 +326,38 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.checkMargin(this.filterheight,300);
     },
 
-    bulkCustomizeFilters:function(ve){
-        var val = $('input',$(ve.currentTarget)).attr('name').split('-');
-        action = val[0];
-        tags = val[1];
+    bulkCustomizeFilters:function(tag,action){
         if(action=='all'){
-            this.setFilterNone(tags);
+            this.setFilterNone(tag);
         }
         if(action=='def'){
-            this.setFiltersDefault(tags);
+            this.setFiltersDefault(tag);
         }
         if(action=='cus'){
-            this.setFiltersFromCookie(this,tags);
+            this.setFiltersFromCookie(this,tag);
         }
-        this.setFilterKeys(tags);
+        var tmp =$.cookie('bulkfilters');
+        tmp[tag]=action;
+        $.cookie('bulkfilters',tmp);
+        this.setFilterKeys(tag);
         this.resetMarket();
+    },
+
+
+    bulkCustomizeFiltersEV:function(ev){
+        var val = $('input',$(ev.currentTarget)).attr('name').split('-');
+        action = val[0];
+        tag = val[1];
+        this.bulkCustomizeFilters(tag,action);
+    },
+
+    initBulkFilters: function(){
+        var bulks = $.cookie('bulkfilters');
+        var that = this;
+        _.each(bulks,function(selection,tag){
+            that.bulkCustomizeFilters(tag,selection);
+            $('.filter-bulk-selector.'+selection+'-'+tag).addClass('active');
+        });
     },
 
     checkMargin: function(height,speed){
@@ -355,7 +368,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     init: function(filters){
         $.cookie.json = true;
         $('#fixed-filters').affix({
-             // offset: { top: $('#fixed-filters').offset().top }
              offset: { top: 300 }
         });
 
@@ -370,22 +382,19 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         this.filters = filters;
         this.initTemplates(filters);
         this.filters.search=$('#q').val();
-        this.setFilterType('skills','cus');
-        this.setFilterType('issues','cus');
-        this.setFilterType('countries','cus');
         this.delegateEvents(_.extend(this.events,{
             'click .tagbutton': 'tagsfilter',
             'click #searchbtn': 'search',
             'click .item-type': 'itemTypesfilter',
             'click #create_offer': 'create_offer',
             'click #create_request': 'create_request',
-            'click .filter-bulk-selector': 'bulkCustomizeFilters',
+            'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
             'submit': 'filterKeySearch'
         }));
         $('#market-filters').removeClass('collapse');
         this.filterheight = $('#filter-wrapper').height();
-        console.log(this.filterheight);
         $('#market-filters').addClass('collapse');
+        this.initBulkFilters();
     }
 
 });
