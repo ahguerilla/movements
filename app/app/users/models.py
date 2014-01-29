@@ -111,7 +111,7 @@ class UserProfile(models.Model):
         adict['fields']['tag_line'] = self.tag_ling if not self.notperm.has_key('tag_ling') else ''
         adict['fields']['username'] = self.user.username
         adict['fields']['ratecount'] = self.ratecount
-        adict['fields']['score'] = self.score
+        adict['fields']['score'] = round(self.score,1)
         adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[self.user.username])
         adict['fields']['issues']= [ob.id for ob in self.issues.all()] if not self.notperm.has_key('issues') else ''
         adict['fields']['countries']= [ob.id for ob in self.countries.all()] if not self.notperm.has_key('countries') else ''
