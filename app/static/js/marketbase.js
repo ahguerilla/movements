@@ -9,7 +9,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     itemsPerCall: 15,
     requiresResetOnNewOfferRequest: false,
     cookieread: false,
-    filterheight: 0,
+    filterheightOpen: 0,
+    filterheightClosed: 0,
 
     setFiltersDefault:function(tags){
         this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
@@ -317,13 +318,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     filterButtonHide: function(ev){
         $('#filterbuttontext').html('Show Filters');
         $('#togglefilter').removeClass('dropup');
-        this.checkMargin(114,0);
+        this.checkMargin(this.filterheightClosed,0);
     },
 
     filterButtonShow: function(ev){
         $('#filterbuttontext').html('Hide Filters');
         $('#togglefilter').addClass('dropup');
-        this.checkMargin(this.filterheight,300);
+        this.checkMargin(this.filterheightOpen,300);
     },
 
     customizefilters:function(ve){
@@ -344,7 +345,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     },
 
     checkMargin: function(height,speed){
-        var marginToAdd = $('#fixed-filters').height();
         $('#filter-wrapper').animate({height:height},speed);
     },
 
@@ -378,10 +378,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'click .filterselector': 'customizefilters',
             'submit': 'filterKeySearch'
         }));
+
+        // calculate height of the market-filters when opened so we can set
+        // the height of the market-filter correctly when we fix it to the top 
+        this.filterheightClosed = $('#filter-wrapper').height();
         $('#market-filters').removeClass('collapse');
-        this.filterheight = $('#filter-wrapper').height();
-        console.log(this.filterheight);
+        this.filterheightOpen = $('#filter-wrapper').height();
         $('#market-filters').addClass('collapse');
+        $('#filter-wrapper').height(this.filterheightClosed + "px");
         
     }
 
