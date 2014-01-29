@@ -379,7 +379,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             'submit': 'filterKeySearch'
         }));
 
-        // calculate height of the market-filters when opened so we can set
+        // calculate height of the market-filters when opened and closed so we can set
         // the height of the market-filter correctly when we fix it to the top 
         this.filterheightClosed = $('#filter-wrapper').height();
         $('#market-filters').removeClass('collapse');
