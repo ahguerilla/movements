@@ -15,15 +15,29 @@
       },30000);
     }
   };
-  $(window).on("orientationchange",function(event){
-    try{
-      if($('#bs-example-navbar-collapse-1').hasClass('in')){
-      $(".navbar-toggle").click();
-      }
-    }catch(err){
-      $.noop();
+  function toggleNav(){
+    if($('#bs-example-navbar-collapse-1').hasClass('in')){
+     $(".navbar-toggle").click();
     }
-  });
+  };
+
+  lastsize=$(window).width();;
+  $(window).on(
+    {
+      "orientationchange": function(event){
+        toggleNav();
+      },
+      "resize":function(event){
+        var thissize = $(window).width();
+
+        if(lastsize<992 && thissize>=992 )
+        {
+          toggleNav();
+        }
+        lastsize = thissize;
+      }
+    }
+  );
 
   window.ahr.BaseView = Backbone.View.extend({
     events:{},
