@@ -15,6 +15,15 @@
       },30000);
     }
   };
+  $(window).on("orientationchange",function(event){
+    try{
+      if($('#bs-example-navbar-collapse-1').hasClass('in')){
+      $(".navbar-toggle").click();
+      }
+    }catch(err){
+      $.noop();
+    }
+  });
 
   window.ahr.BaseView = Backbone.View.extend({
     events:{},

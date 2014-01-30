@@ -10,7 +10,7 @@ js = Bundle(
         './js/lib/jquery.ui.position.js',
         './js/lib/moment-with-langs.min.js',
         './js/lib/moment-timezone.min.js',
-        './js/lib/bootstrap.js',
+        './js/lib/bootstrap.min.js',
         './js/lib/bootstrap-datetimepicker.min.js',
         #'./js/lib/bootstrap-datetimepicker.js',
         './js/lib/tagmanager.js',
