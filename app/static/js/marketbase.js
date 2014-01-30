@@ -341,16 +341,22 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     filterButtonHide: function(ev){
         $('#filterbuttontext').html('Show Filters');
         $('#togglefilter').removeClass('dropup');
-        this.checkMargin(this.filterheightClosed,0);
+        this.setFilterWrapperMargin(this.filterheightClosed,0);
     },
 
     filterButtonShow: function(ev){
         $('#filterbuttontext').html('Hide Filters');
         $('#togglefilter').addClass('dropup');
-        this.checkMargin(this.filterheightOpen,300);
+        this.setFilterWrapperMargin(this.filterheightOpen,300);
     },
 
-     bulkCustomizeFilters:function(tag,action){
+    setFilterOpenHeight: function(){
+        $('#market-filters').removeClass('collapse');
+        this.filterheightOpen = $('#fixed-filters').height();
+        $('#market-filters').addClass('collapse');
+    },
+
+    bulkCustomizeFilters:function(tag,action){
         if(action=='all'){
             this.setFilterNone(tag);
         }
@@ -388,15 +394,21 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         });
     },
 
-    checkMargin: function(height,speed){
+    setFilterWrapperMargin: function(height,speed){
         $('#filter-wrapper').animate({height:height},speed);
     },
 
     init: function(filters){
         $.cookie.json = true;
         $('#fixed-filters').affix({
-             // offset: { top: $('#fixed-filters').offset().top }
              offset: { top: 300 }
+        });
+
+        var self = this;
+        $(window).resize(function (){
+            self.setFilterOpenHeight();
+            var newHight = $('#fixed-filters').height();
+            $('#filter-wrapper').height(newHight + "px");
         });
 
 
@@ -423,9 +435,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         // calculate height of the market-filters when opened and closed so we can set
         // the height of the market-filter correctly when we fix it to the top 
         this.filterheightClosed = $('#filter-wrapper').height();
-        $('#market-filters').removeClass('collapse');
-        this.filterheightOpen = $('#filter-wrapper').height();
-        $('#market-filters').addClass('collapse');
+        this.setFilterOpenHeight();
         $('#filter-wrapper').height(this.filterheightClosed + "px");
         this.initBulkFilters();
     }
