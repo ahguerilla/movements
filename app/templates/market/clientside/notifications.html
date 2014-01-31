@@ -2,7 +2,9 @@
     <li class="notif-seen <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
         <a href="/market/#item/<%- notif.item_id %>">
             <img src="<%- notif.avatar %>"/>
+            <% if(notif.seen==false){ %><strong><%}%>
             <%- notif.owner %> posted this <%- notif.item_type %> that you might be interested in.
+            <% if(notif.seen){ %></strong><%}%>
         <a>
     </li>
 </script>
@@ -13,7 +15,12 @@
     var notificationsWidget = Backbone.View.extend({
         el: 'body',          
         events:{
-            'click #notifdropdown-click': 'populateNotifications'
+            'show.bs.dropdown #notifdropdown-click': 'populateNotifications',
+            'hide.bs.dropdown #notifdropdown-click': 'checkNotif'
+        },
+        
+        checkNotif:function(){
+            window.setTimeout(this.newNotifExists.bind(this),2000);
         },
         
         populateNotifications: function(ev){   
