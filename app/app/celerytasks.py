@@ -45,8 +45,7 @@ def findPeopleInterestedIn(obj):
 @shared_task
 @_app.task(name="createNotification",bind=True)
 def createNotification(self,obj):
-    notifications =[ notif.user for notif in Notification.objects.filter(item=obj.id).only('user').all()]
-    print 'notifications',notifications
+    notifications =[ notif.user for notif in Notification.objects.filter(item=obj.id).only('user').all()]    
     profiles = findPeopleInterestedIn(obj)
     for profile in profiles:
         if profile.user.id in notifications:
@@ -105,7 +104,6 @@ def createMail(notifications):
 @shared_task
 @_app.task(name="sendNotification")
 def sendNotification():
-    print 'here'
     profiles = UserProfile.objects.filter(get_newsletter=True).all()
     for profile in profiles:
         notifications = Notification.objects.filter(user=profile.user.id).filter(seen=False).all()
