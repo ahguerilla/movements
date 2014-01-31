@@ -64,7 +64,7 @@ def getAvatar(request,obj_id,size, rtype):
     obj = user.avatar_set.all()
     #if obj != []:
         #return HttpResponse(value(rtype,obj),mimetype="application"+rtype)
-    return HttpResponse( json.dumps({'pk': 0, 'avatar': reverse('avatar_render_primary', args=[user.username,80])}),mimetype="application"+rtype)
+    return HttpResponse( json.dumps({'pk': 0, 'avatar': reverse('avatar_render_primary', args=[user.username,size])}),mimetype="application"+rtype)
 
 
 @login_required

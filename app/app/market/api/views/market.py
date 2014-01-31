@@ -12,9 +12,9 @@ from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-import avatar
 from django.utils.html import escape
 from datetime import datetime
+from celerytasks import createNotification, updateNotifications, markeSeenNotifications
 
 
 def getMarketjson(objs):
@@ -57,6 +57,7 @@ def addMarketItem(request, obj_type, rtype):
     form = item_forms[obj_type](request.POST)
     if form.is_valid():
         obj = saveMarketItem(form, obj_type, request.user)
+        createNotification.delay(obj)
     else:
         return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
     return HttpResponse(json.dumps({ 'success' : True, 'pk':obj.id}),mimetype="application"+rtype)
@@ -69,6 +70,7 @@ def getMarketItem(request,obj_id,rtype):
                             pk=obj_id,
                             deleted=False,
                             owner__is_active=True)
+    markeSeenNotifications.delay((obj,),request.user.id)
     return returnItemList([obj], rtype)
 
 
@@ -93,6 +95,7 @@ def editMarketItem(request,obj_id,rtype):
     form = item_forms[obj.item_type](request.POST, instance=obj)
     if form.is_valid():
         saveMarketItem(form, obj.item_type, obj.owner)
+        updateNotifications.delay(obj)
     else:
         return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
     return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
@@ -147,9 +150,28 @@ def setRate(request,obj_id,rtype):
     rate.score =  int(request.POST['score'])
     rate.save()
     rate.save_base()
+    markeSeenNotifications.delay((item,),request.user.id)
     return HttpResponse(
         json.dumps({'success': 'true',
                     'score':item.score ,
                     'ratecount':item.ratecount
                     }),
         mimetype="application/"+rtype)
+
+
+@login_required
+def getNotificationsFromTo(request,sfrom,to,rtype):
+    notifications = market.models.Notification.objects.filter(user=request.user.id)[sfrom:to]
+    alist=[]
+    for notification in notifications:
+        alist.append(notification.getDict())
+        
+    return  HttpResponse(json.dumps({'notifications':alist}),mimetype="application"+rtype)
+
+
+@login_required
+def getNotSeenNotif(request,sfrom,to,rtype):
+    notifications = market.models.Notification.objects.filter(user=request.user.id).filter(seen=False).only('seen')[sfrom:to]
+    if len(notifications)>0:
+        return  HttpResponse(json.dumps({'result':True}),mimetype="application"+rtype)
+    return  HttpResponse(json.dumps({'result':False}),mimetype="application"+rtype)

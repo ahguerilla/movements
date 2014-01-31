@@ -133,4 +133,11 @@ urlpatterns = patterns('',
         'app.market.api.views.report.reportMarketItem',
         name="report_post"),
 
+    url(r'(?P<rtype>\S+)/notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$',
+        'app.market.api.views.market.getNotificationsFromTo',
+        name="get_notifications_fromto"),    
+    
+    url(r'(?P<rtype>\S+)/notifications/get/notseen/(?P<sfrom>\d+)/(?P<to>\d+)$',
+        'app.market.api.views.market.getNotSeenNotif',
+        name="get_notseen_notif"),        
 )

@@ -1,0 +1,63 @@
+<script type="text/template" id="notifications_template">
+    <li class="notif-seen <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
+        <a href="/market/#item/<%- notif.item_id %>">
+            <img src="<%- notif.avatar %>"/>
+            <%- notif.owner %> posted this <%- notif.item_type %> that you might be interested in.
+        <a>
+    </li>
+</script>
+
+
+<script type="text/javascript" id="notifications_view">
+ (function(){
+    var notificationsWidget = Backbone.View.extend({
+        el: 'body',          
+        events:{
+            'click #notifdropdown-click': 'populateNotifications'
+        },
+        
+        populateNotifications: function(ev){   
+            var that = this;
+            this.newNotifExists();
+            $('#notification-drop-down').empty();
+            var dfrd = $.ajax({
+                url:this.notif_url+'15'
+            });
+            dfrd.done(function(data){
+                _.each(data.notifications,function(notif){
+                    $('#notification-drop-down').append(that.tmpl({'notif':notif}));
+                });
+            });
+            return ev;
+        },
+        
+        newNotifExists: function(){
+            var that=this;
+            $.getJSON(that.notseen_url,function(data){               
+             if(data.result == true){
+                 $('#notifbell').removeClass('nonotif');
+                 $('#notifbell').addClass('notif');
+             }else{
+                 $('#notifbell').addClass('nonotif');
+                 $('#notifbell').removeClass('notif');
+             }
+            });             
+        },
+        
+        initialize: function(data){
+            this.notif_url = window.ahr.app_urls.getmarketnotificationsfromto;
+            this.avat_url = window.ahr.app_urls.getavatar;  
+            this.notseen_url = window.ahr.app_urls.getnotseennotif+'15';
+            this.tmpl = _.template($('#notifications_template').html());
+            var that = this            
+            that.newNotifExists();
+            window.setInterval(that.newNotifExists.bind(this),60000);
+        }
+    });
+    window.ahr.notifications_widget = window.ahr.notifications_widget || {};
+    window.ahr.notifications_widget.initWidget= function(){
+        var widget = new notificationsWidget();
+        return widget;
+    };
+})();
+</script>

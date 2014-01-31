@@ -3,7 +3,7 @@ from django.template import RequestContext
 from .api.utils import *
 from app.market.forms import commentForm
 from django.contrib.auth.decorators import login_required
-from app.market.models import MarketItem
+from app.market.models import MarketItem, Notification
 from app.market.api.views.market import getMarketjson
 
 
@@ -58,24 +58,24 @@ def posts(request):
 
 
 @login_required
-def addItem_form(request, obj_type):    
+def addItem_form(request, obj_type):
     return render_to_response('market/%s_form.html' % obj_type,
                               {
-                                  'item':'false',                                      
+                                  'item':'false',
                                   },
                               context_instance=RequestContext(request))
-   
+
 
 @login_required
 def editItem_form(request,obj_id):
     obj = MarketItem.objects.get(id=obj_id)
-   
+
     return render_to_response('market/%s_form.html' % obj.item_type,
                               {
-                                  'item': getMarketjson([obj]),                                      
+                                  'item': getMarketjson([obj]),
                                   },
-                              context_instance=RequestContext(request))    
- 
+                              context_instance=RequestContext(request))
+
 @login_required
 def viewItem(request,obj_type,obj_id):
     return render_to_response('market/item_single.html',

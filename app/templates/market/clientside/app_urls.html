@@ -56,7 +56,9 @@
     getcommentsrange: "{% url 'get_comments_range' 'json' 0 'stdate' 'enddate' %}",
     getcommentslast: "{% url 'get_comments_last' 'json' 0 0 %}".slice(0,-1),
     editcomment: "{% url 'edit_comment' 'json' 0 %}".slice(0,-1),
-    deletecomment: "{% url 'delete_comment' 'json' 0 %}".slice(0,-1)
+    deletecomment: "{% url 'delete_comment' 'json' 0 %}".slice(0,-1),
+    getmarketnotificationsfromto: "{% url 'get_notifications_fromto' 'json' 0 0 %}".slice(0,-1),
+    getnotseennotif: "{% url 'get_notseen_notif' 'json' 0 0 %}".slice(0,-1)
   };
 
   {% if user and user.id %}

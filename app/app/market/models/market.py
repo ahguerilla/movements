@@ -3,7 +3,7 @@ import app.users as users
 from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
-import tinymce
+from tinymce import models as tinymodels
 
 import django.contrib.auth as auth
 
@@ -14,7 +14,7 @@ class MarketItem(models.Model):
     item_type = models.CharField(_('item_type'), max_length=200, blank=False)
     owner = models.ForeignKey(auth.models.User, blank=True)
     title = models.CharField(_('title'), max_length=200, blank=False)
-    details = tinymce.models.HTMLField(_('details'), blank=False)
+    details = tinymodels.HTMLField(_('details'), blank=False)
     countries = models.ManyToManyField(users.models.Countries)
     issues = models.ManyToManyField(users.models.Issues)
     skills = models.ManyToManyField(users.models.Skills)
