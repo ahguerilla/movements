@@ -32,8 +32,7 @@
         },
 
         reply: function(ev){
-            ev.reventDefault();
-            debugger;
+            ev.reventDefault();            
             return false;
         },
 

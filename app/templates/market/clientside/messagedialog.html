@@ -70,7 +70,6 @@
             $('.sendpm').prop('disabled',false);
           });
           dfrd.fail(function(data){
-            debugger;
             that.alert(data.responseJSON.message+'. Please try again.',that.alert_place);
             $('.sendpm').prop('disabled',false);
           });
