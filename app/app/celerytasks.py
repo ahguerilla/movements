@@ -28,7 +28,10 @@ from datetime import timedelta
 
 
 def getNotifText(obj):
-    return 'You might be interested in '+obj.title
+    return obj.owner.username +' created a '+obj.owner.item_type+ ' that you might be interested in'
+
+def getNotifCommentText(obj):
+    return obj.owner.username +' commented on your '+obj.owner.item_type
 
 
 def findPeopleInterestedIn(obj):
@@ -55,6 +58,17 @@ def createNotification(self,obj):
         notification.item = obj
         notification.text = getNotifText(obj)
         notification.save()
+    return
+
+
+@shared_task
+@_app.task(name="createCommentNotification",bind=True)
+def createCommentNotification(self,obj):
+    notification = Notification()
+    notification.user = profile.user
+    notification.item = obj
+    notification.text = getNotifCommentText(obj)
+    notification.save()
     return
 
 

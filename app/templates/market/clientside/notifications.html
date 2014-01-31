@@ -3,7 +3,7 @@
         <a href="/market/#item/<%- notif.item_id %>">
             <img src="<%- notif.avatar %>"/>
             <% if(notif.seen==false){ %><strong><%}%>
-            <%- notif.owner %> posted this <%- notif.item_type %> that you might be interested in.
+            <%- notif.text %>
             <% if(notif.seen){ %></strong><%}%>
         <a>
     </li>
