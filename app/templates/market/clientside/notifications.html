@@ -31,9 +31,10 @@
                 url:this.notif_url+'15'
             });
             dfrd.done(function(data){
-                _.each(data.notifications,function(notif){
+                _.each(data.notifications,function(notif){                    
                     $('#notification-drop-down').append(that.tmpl({'notif':notif}));
                 });
+                $('#notification-drop-down').append('<li><a style="text-align:center;" href="'+window.ahr.app_urls.shownotifications+'">See All</a></li>');
             });
             return ev;
         },

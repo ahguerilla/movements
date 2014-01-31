@@ -109,3 +109,12 @@ def editComment_form(request,obj_id):
                                   'coment': {'id':str(obj_id)}
                                   },
                               context_instance=RequestContext(request))
+
+
+@login_required
+def notifications(request):    
+    return render_to_response('market/notifications.html',
+                              {},
+                              context_instance=RequestContext(request))
+
+

@@ -31,6 +31,6 @@ class Notification(models.Model):
         adict['owner_id'] = self.item.owner.id
         adict['seen'] = self.seen
         adict['text']= self.text
-        adict['pub_date'] = str(self.pub_date)
+        adict['pub_date'] = str(self.pub_date)[0:16]
         adict['avatar'] = reverse('avatar_render_primary', args=[self.avatar_user if self.avatar_user!=None else self.item.owner.username,30])
         return adict

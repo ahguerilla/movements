@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block outsidecontainer %}
+<div id="market" >
+  <!-- Banner -->
+  
+
+  <!-- Filter Spacer -->
+  <div class="filter-banner-spacer"></div>
+  <div id="filter-wrapper">
+    <div id="fixed-filters">
+      <div class="exchange-filter" >
+        <div class="container">
+          
+        </div>
+      </div>
+      <div class="filter-banner-spacer-black"></div>
+      
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div>
+  <ul class="list-group" id="notificatoins">
+  </ul>
+</div>
+<div class="btn btn-default" id="more">More</div>
+
+<script type="text/template" id="notifications_template">
+    <li class="notif-seen list-group-item <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
+        <a href="/market/#item/<%- notif.item_id %>">
+            <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>
+            <% if(notif.seen==false){ %><strong><%}%>
+            <%- notif.text %> at <%- notif.pub_date %>
+            <% if(notif.seen){ %></strong><%}%>
+        <a>
+    </li>
+</script>
+
+{% endblock %}
+
+{% block endjavascript %} 
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+      var notificationsPage = Backbone.View.extend({
+        el: 'body',          
+        events:{
+            'click #more': 'showmore'
+        },
+        
+        showmore:function(ev){
+          var that = this;          
+          var dfrd = $.ajax({
+            url:window.ahr.app_urls.getmarketnotificationsfromto+'15'
+          });
+          dfrd.done(function(data){
+            _.each(data.notifications,function(notif){              
+              $('#notificatoins').append(that.tmpl({'notif':notif}));
+            });
+          });
+        },
+        
+        initialize:function(){
+          this.tmpl = _.template($('#notifications_template').html());
+          this.showmore()
+        }
+      });
+      var np = new notificationsPage();
+    });
+
+
+    </script>
+
+{% endblock %}
+
+

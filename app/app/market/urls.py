@@ -4,6 +4,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     url(r'market/api/', include('app.market.api.urls')),
     url(r'^market/$', 'app.market.views.index', name="show_market"),
+    url(r'^market/notifications$', 'app.market.views.notifications', name="show_notifications"),    
     url(r'^market/users$', 'app.market.views.users', name="show_users"),
     url(r'^market/add/(?P<obj_type>offer|request|resource)', 'app.market.views.addItem_form', name="form_add_item"),
     url(r'^market/view/(?P<obj_type>offer|request|resource|item)/(?P<obj_id>\d+)$','app.market.views.viewItem', name="view_item"),
