@@ -28,10 +28,10 @@ from datetime import timedelta
 
 
 def getNotifText(obj):
-    return obj.owner.username +' created a '+obj.owner.item_type+ ' that you might be interested in'
+    return obj.owner.username +' created a '+obj.item_type+ ' that you might be interested in'
 
 def getNotifCommentText(obj):
-    return obj.owner.username +' commented on your '+obj.owner.item_type
+    return obj.owner.username +' commented on your '+obj.item_type
 
 
 def findPeopleInterestedIn(obj):
