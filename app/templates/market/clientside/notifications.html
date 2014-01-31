@@ -1,7 +1,7 @@
 <script type="text/template" id="notifications_template">
     <li class="notif-seen <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
         <a href="/market/#item/<%- notif.item_id %>">
-            <img src="<%- notif.avatar %>"/>
+            <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>
             <% if(notif.seen==false){ %><strong><%}%>
             <%- notif.text %>
             <% if(notif.seen){ %></strong><%}%>
