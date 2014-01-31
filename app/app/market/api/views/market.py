@@ -171,7 +171,7 @@ def getNotificationsFromTo(request,sfrom,to,rtype):
 
 @login_required
 def getNotSeenNotif(request,sfrom,to,rtype):
-    notifications = market.models.Notification.objects.filter(user=request.user.id).filter(seen=False).only('seen')[sfrom:to]
+    notifications = market.models.Notification.objects.filter(user=request.user.id).filter(seen=False).only('seen')
     if len(notifications)>0:
         return  HttpResponse(json.dumps({'result':True}),mimetype="application"+rtype)
     return  HttpResponse(json.dumps({'result':False}),mimetype="application"+rtype)
