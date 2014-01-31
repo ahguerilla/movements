@@ -30,10 +30,16 @@ from datetime import timedelta
 def getNotifText(obj):
     return obj.owner.username +' created a '+obj.item_type+ ' that you might be interested in'
 
+
 def getNotifCommentText(obj,username):
     return username +' commented on your '+obj.item_type
 
 
+def geSomeoneCommentUrCommentText(obj,username):
+    var = 'a request' if obj.item_type=='request' else 'an offer'
+    return username +' commented on '+ var +' that you commented on'
+
+    
 def findPeopleInterestedIn(obj):
     skills= [skill.id for skill in obj.skills.all()]
     countries = [country.id for country in obj.countries.all()]
@@ -42,7 +48,6 @@ def findPeopleInterestedIn(obj):
     query = query & (~Q(user=obj.owner) & Q(get_newsletter=True))
     profiles = UserProfile.objects.filter(query).distinct('id').only('user').all()
     return profiles
-
 
 
 @shared_task
@@ -64,11 +69,21 @@ def createNotification(self,obj):
 @shared_task
 @_app.task(name="createCommentNotification",bind=True)
 def createCommentNotification(self,obj,username):
-    notification = Notification()
-    notification.user = obj.owner
-    notification.item = obj
-    notification.text = getNotifCommentText(obj,username)
-    notification.save()
+    if obj.owner.username != username:
+        notification = Notification()
+        notification.user = obj.owner
+        notification.item = obj
+        notification.text = getNotifCommentText(obj,username)    
+        notification.save()
+    notified = []
+    for comment in obj.comments.all():        
+        if comment.owner.username != username and comment.owner.id not in notified:            
+            notification = Notification()
+            notification.user = comment.owner
+            notification.item = obj
+            notification.text = geSomeoneCommentUrCommentText(obj,username)    
+            notification.save()
+            notified.append(comment.owner.id)
     return
 
 

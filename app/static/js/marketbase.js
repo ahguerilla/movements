@@ -270,6 +270,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             var html = that.item_tmp(item[0].fields);
             $('.comment-btn').data({id:item[0].pk});
             $('#singleItem').html(html);
+            $('#marketitem_comments').empty();
             that.item_widget.afterset();
             $.getJSON(window.ahr.app_urls.getcommentslast.replace('0',item_id)+'100',function(data){
                 that.ShowComments(data);
