@@ -108,9 +108,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     tagsfilter: function(ev){
         this.updateTagsfilter(this,ev);
-        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');        
-        $('label[class*=-'+tags+']').removeClass('active');
-        $('label[class*=cus-'+tags+']').addClass('active');
+        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');     
+        this.setFilterType(tags,'cus');
         this.resetMarket();
     },
 

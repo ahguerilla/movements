@@ -138,6 +138,7 @@
         },
 
         showModal:function(newitem){
+          this.closing=false;
           if(newitem){
             this.url = window.ahr.app_urls.addmarketitem+'offer';
           }
@@ -155,10 +156,17 @@
             var top = $('.glyphicon.glyphicon-calendar',$('#offerdialog')).offset().top-$(window).scrollTop();
             $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function(){$(this).css('top',top+20);})
           });
-          window.ahr.expandTextarea($('#details',$("#offerdialog")));
+          window.ahr.expandTextarea($('#details',$("#offerdialog")));          
+          $('#offerdialog').on('hide.bs.modal',function(ev){            
+            ev.stopImmediatePropagation();
+            if(!that.closing && !confirm('Are you sure you want to close this dialog?')){
+              return false;
+            }            
+          });
         },
 
         aftersubmit:function(){
+          this.closing=true;
           $('#offerdialog').modal('hide');
           this.skills_widget.empty();
           this.countries_widget.empty();

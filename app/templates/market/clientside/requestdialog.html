@@ -124,7 +124,8 @@
                         this.item_obj? this.item_obj.details : null);
         },
 
-        showModal:function(newitem){
+        showModal:function(newitem){          
+          this.closing=false;
           if(newitem){
             this.url = window.ahr.app_urls.addmarketitem+'request';
           }
@@ -144,9 +145,16 @@
             $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function(){$(this).css('top',top+20);})
           });
           window.ahr.expandTextarea($('#details',$("#requestdialog")));
+           $('#requestdialog').on('hide.bs.modal',function(ev){            
+            ev.stopImmediatePropagation();            
+            if(!that.closing && !confirm('Are you sure you want to close this dialog?')){
+              return false;
+            }            
+          });
         },
 
         aftersubmit:function(){
+          this.closing= true;
           $('#requestdialog').modal('hide');
           this.countries_widget.empty();
           this.issues_widget.empty();
