@@ -80,3 +80,34 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript" id="filters_view">
+ (function(){
+    var filterWidget = Backbone.View.extend({
+        el: 'body',
+
+        initialize: function(data){
+            var that = this;
+            this.container = data.cont;
+            this.item = data.itm;
+            this.jsonfield = data.itm.jsonfield;
+            var tmpl = _.template($('#input_template').html());
+            var html = tmpl({
+                title:this.item.title,
+                jsonfield: this.item.jsonfield,
+                placeholder: this.item.placeholder
+                });
+            $(this.container).html(html);
+            if(data.prvl){
+                 $('#'+this.jsonfield).val(data.prvl);
+            }
+        }
+    });
+    window.widgets = window.widgets || {};
+    window.widgets.filter_widget = window.widgets.filter_widget || {};
+    window.widgets.filter_widget.initWidget= function(container,item,preval){
+        var widget = new inputWidget({'cont':container,'itm':item,'prvl':preval});
+        return widget;
+    };
+})();
+</script>
