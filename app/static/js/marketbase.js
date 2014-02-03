@@ -108,7 +108,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     tagsfilter: function(ev){
         this.updateTagsfilter(this,ev);
-        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
+        var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');        
+        $('label[class*=-'+tags+']').removeClass('active');
+        $('label[class*=cus-'+tags+']').addClass('active');
         this.resetMarket();
     },
 
@@ -401,6 +403,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     init: function(filters){
         $.cookie.json = true;
+        this.filter_widget = window.widgets.filter_widget.initWidget('filter-container');
         $('#fixed-filters').affix({
              offset: { top: 300 }
         });

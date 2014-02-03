@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="filter-banner-spacer-black"></div>
-      {% include "market/clientside/filters.html"%}
+      <div id="filter-container"></div>      
     </div>
   </div>
 {% endblock %}
@@ -70,6 +70,7 @@
     {% include "market/clientside/filtertag.html" %}
     {% include "market/clientside/checkbox.html" %}
     {% include "market/clientside/typetag.html" %}
+    {% include "market/clientside/filters.html"%}
 
     {% include "market/clientside/expdate.html"%}
     {% include "market/clientside/datetimepicker.html"%}
@@ -85,7 +86,7 @@
     {% include "market/clientside/ratedialog.html" %}
     {% include "market/clientside/reportdialog.html" %}
     {% include "market/clientside/offerdialog.html"%}
-    {% include "market/clientside/requestdialog.html"%}
+    {% include "market/clientside/requestdialog.html"%}    
 
     <script type="text/javascript">
 
