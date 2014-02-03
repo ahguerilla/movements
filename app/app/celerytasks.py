@@ -45,7 +45,7 @@ def findPeopleInterestedIn(obj):
     countries = [country.id for country in obj.countries.all()]
     issues = [issue.id for issue in obj.issues.all()]
     query = Q(skills__in=skills) | Q(issues__in=issues) | Q(countries__in=countries)
-    query = query & (~Q(user=obj.owner) & Q(get_newsletter=True))
+    query = query & ~Q(user=obj.owner) 
     profiles = UserProfile.objects.filter(query).distinct('id').only('user').all()
     return profiles
 
