@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
-from celerytasks import createNotification, updateNotifications, markeSeenNotifications
+from celerytasks import createNotification, updateNotifications, markReadNotifications, markSeenNotifications
 
 
 def getMarketjson(objs):
@@ -70,7 +70,7 @@ def getMarketItem(request,obj_id,rtype):
                             pk=obj_id,
                             deleted=False,
                             owner__is_active=True)
-    markeSeenNotifications.delay((obj,),request.user.id)
+    markReadNotifications.delay((obj,),request.user.id)
     return returnItemList([obj], rtype)
 
 
@@ -150,7 +150,7 @@ def setRate(request,obj_id,rtype):
     rate.score =  int(request.POST['score'])
     rate.save()
     rate.save_base()
-    markeSeenNotifications.delay((item,),request.user.id)
+    markReadNotifications.delay((item,),request.user.id)
     return HttpResponse(
         json.dumps({'success': 'true',
                     'score':item.score ,
@@ -164,8 +164,8 @@ def getNotificationsFromTo(request,sfrom,to,rtype):
     notifications = market.models.Notification.objects.filter(user=request.user.id)[sfrom:to]
     alist=[]
     for notification in notifications:
-        alist.append(notification.getDict())
-        
+        alist.append(notification.getDict()) 
+    markSeenNotifications.delay(notifications)
     return  HttpResponse(json.dumps({'notifications':alist}),mimetype="application"+rtype)
 
 

@@ -93,7 +93,7 @@ def createCommentNotification(self,obj,username):
 @shared_task
 @_app.task(name="updateNotifications",bind=True)
 def updateNotifications(self,obj):
-    notif_objs = Notification.objects.filter(item=obj.id).only('user','seen').all()
+    notif_objs = Notification.objects.filter(item=obj.id).only('user','read').all()
     notif_userids =set([ notif.user.id for notif in notif_objs ])
     profiles = findPeopleInterestedIn(obj)
     user_ids = set([profile.user.id for profile in profiles])
@@ -121,30 +121,22 @@ def updateNotifications(self,obj):
 
 
 @shared_task
-@_app.task(name="markeSeenNotifications",bind=True)
-def markeSeenNotifications(self,objs,user_id):
+@_app.task(name="markReadNotifications",bind=True)
+def markReadNotifications(self,objs,user_id):
     obj_ids=[obj.id for obj in objs]
-    notifications = Notification.objects.filter(user=user_id).filter(item__in=obj_ids).filter(seen=False).all()
+    notifications = Notification.objects.filter(user=user_id).filter(item__in=obj_ids).filter(read=False).all()
     for notification in notifications:
-        notification.seen=True
+        notification.read=True
         notification.save()
     return
 
 
-def createMail(notifications):
-    return 'You might be interested in this stuff'
-
 @shared_task
-@_app.task(name="sendNotification")
-def sendNotification():
-    profiles = UserProfile.objects.filter(get_newsletter=True).all()
-    for profile in profiles:
-        notifications = Notification.objects.filter(user=profile.user.id).filter(seen=False).all()
-        msg = createMessage(notifications)
-        send_mail('Subject',msg , constance.config.NO_REPLY_EMAIL ,profile.user.email, fail_silently=False)
-        for notification in notifications:
-            notification.seen=True
-            notification.save()
-
+@_app.task(name="markSeenNotifications",bind=True)
+def markSeenNotifications(self,objs):    
+    for notification in objs:
+        notification.seen=True
+        notification.save()
     return
+
 

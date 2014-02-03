@@ -2,9 +2,9 @@
     <li class="notif-seen <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
         <a href="/market/#item/<%- notif.item_id %>">
             <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>
-            <% if(notif.seen==false){ %><strong><%}%>
+            <% if(notif.read==false){ %><strong><%}%>
             <%- notif.text %>
-            <% if(notif.seen){ %></strong><%}%>
+            <% if(notif.read){ %></strong><%}%>
         <a>
     </li>
 </script>
