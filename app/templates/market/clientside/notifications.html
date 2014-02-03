@@ -1,11 +1,16 @@
 <script type="text/template" id="notifications_template">
-    <li class="notif-seen <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
-        <a href="/market/#item/<%- notif.item_id %>">
-            <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>
-            <% if(notif.read==false){ %><strong><%}%>
-            <%- notif.text %>
-            <% if(notif.read){ %></strong><%}%>
-        <a>
+    <li class="list-item notif-seen <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
+        <a href="/market/#item/<%- notif.item_id %>" style="display:inline-block;">
+            <div class="pull-left">
+             <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>                                                                        
+            </div>
+            <div style="width:220px;white-space:normal;float:right;margin-left:8px;">
+                <% if(notif.read==false){ %><strong><%}%>
+                <%- notif.text %> 
+                <% if(notif.read==false){ %></strong><%}%><br/>
+                <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
+            </div>
+        </a>        
     </li>
 </script>
 
@@ -28,7 +33,7 @@
             this.newNotifExists();
             $('#notification-drop-down').empty();
             var dfrd = $.ajax({
-                url:this.notif_url+'15'
+                url:this.notif_url+'10'
             });
             dfrd.done(function(data){
                 _.each(data.notifications,function(notif){                    
@@ -59,7 +64,7 @@
         initialize: function(data){
             this.notif_url = window.ahr.app_urls.getmarketnotificationsfromto;
             this.avat_url = window.ahr.app_urls.getavatar;  
-            this.notseen_url = window.ahr.app_urls.getnotseennotif+'15';
+            this.notseen_url = window.ahr.app_urls.getnotseennotif+'10';
             this.tmpl = _.template($('#notifications_template').html());
             var that = this            
             that.newNotifExists();
