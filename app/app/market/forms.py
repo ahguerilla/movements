@@ -9,14 +9,14 @@ from django.core.validators import ValidationError
 class MarketQuickReplyForm(QuickReplyForm):
     class Meta(QuickReplyForm.Meta):
         widgets = {
-            'body': forms.Textarea(attrs={'cols': 55, 'rows': 12, 'class':"form-control"}),
+            'body': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class':"form-control"}),
         }
 
 
 class MarketFullReplyForm(FullReplyForm):
     class Meta(FullReplyForm.Meta):
         widgets = {
-            'body': forms.Textarea(attrs={'cols': 55, 'rows': 12, 'class':"form-control"}),
+            'body': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class':"form-control"}),
         }
 
 
@@ -24,7 +24,7 @@ class MarketFullReplyForm(FullReplyForm):
 class MarketWriteForm(WriteForm):
     class Meta(WriteForm.Meta):
         widgets = {
-            'body': forms.Textarea(attrs={'cols': 55, 'rows': 12, 'class':"form-control"}),
+            'body': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class':"form-control"}),
         }
 
 

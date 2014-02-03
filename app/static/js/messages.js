@@ -65,6 +65,7 @@
                 });
                $('#conversation').html(data4);
                $('#id_body').empty();
+               window.ahr.expandTextarea('#id_body');
                that.showconv();
                $.getJSON(window.ahr.app_urls.getmessagecount,function(data){
                     $('.message-counter').each(function(tmp,item){
@@ -86,9 +87,9 @@
                 $("#message-col").hide();
                 $('#conversation').show();
                 $('#back').show();
-                $('#conversation')[0].scrollIntoView(true);
+                $('body').scrollTop(0);
             }else{
-                $('#conversation')[0].scrollIntoView(true);
+                $('body').scrollTop(0);
             }
         },
 

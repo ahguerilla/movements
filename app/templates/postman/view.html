@@ -14,9 +14,9 @@
         <form action="" method="post">{% csrf_token %}
             <input type="hidden" {% if pm_messages|length > 1 and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %} />
             <span id="pm_buttons">
-              <button type="submit" class="btn btn-default" onclick="this.form.action='{% url 'postman_delete' %}?next={{ next_url|urlencode }}'">{% trans "Delete" %}</button>
+              <button style="margin-bottom:10px;margin-top:10px;" type="submit" class="btn btn-default" onclick="this.form.action='{% url 'postman_delete' %}?next={{ next_url|urlencode }}'">{% trans "Delete" %}</button>
               {% if not archived %}
-                <button type="submit" class="btn btn-default" onclick="this.form.action='{% url 'postman_archive' %}?next={{ next_url|urlencode }}'">{% trans "Archive" %}</button>
+                <button style="margin-bottom:10px;margin-top:10px;" type="submit" class="btn btn-default" onclick="this.form.action='{% url 'postman_archive' %}?next={{ next_url|urlencode }}'">{% trans "Archive" %}</button>
               {% endif %}
             </span>
             {% if reply_to_pk %}
@@ -24,7 +24,7 @@
             {% endif %}
         </form>
       </div>
-      <div class="pull-left">
+      <div style="margin-top:10px;" class="pull-left">
         <h4>{% if pm_messages|length > 0 %}{{ pm_messages.0.subject }}{% endif %}</h4>
       </div>
     </div>
@@ -68,7 +68,7 @@
           </div>
         </div>
          <div class="row">
-            <div class="col-md-offset-1 col-md-11 pm_body collapse{% if forloop.last %} in{%endif%}" id="message-{{forloop.counter}}">
+            <div class="col-md-offset-1 col-md-11 pm_body collapse{% if forloop.last %} in{%endif%}"  id="message-{{forloop.counter}}">
              <div style="margin-left:10px;">{{ message.body|linebreaksbr }}</div>
             </div>
          </div>
@@ -86,15 +86,16 @@
         <div class="col-md-12">
           {% if reply_to_pk %}
 
-          <a id="showreply" class="pull-right" data-toggle="collapse" href="#replyarea"><button class="btn btn-default">{% trans 'Reply' %}</button></a>
+          <a id="showreply" class="pull-right" data-toggle="collapse" href="#replyarea">
+            <button style="margin-bottom:10px;margin-top:10px;" class="btn btn-default">{% trans 'Reply' %}</button>
+          </a>
 
           <div id="replyarea" class="collapse">
             <form id="replyform" action="{% url 'postman_reply' reply_to_pk %}?next={{ next_url|urlencode }}" method="post">{% csrf_token %}
               <div id="pm_reply">{{ form.body }}</div>
 
-              <div class="pull-right">
-                <br/>
-                <button type="submit" id="reply-btn" class="btn btn-default">{% trans 'Reply' %}</button>
+              <div class="pull-right">                
+                <button  style="margin-bottom:10px;margin-top:10px;"type="submit" id="reply-btn" class="btn btn-default">{% trans 'Reply' %}</button>               
               </div>
 
             </form>
