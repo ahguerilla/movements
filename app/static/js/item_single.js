@@ -4,7 +4,7 @@
         el: '#item-single',
 
         recommend: function(){
-            $('#recsub').val($('#currentusername').text()+' recommends :'+ this.item.fields.title);
+            $('#recsub').val($('#currentusername').text()+' recommends: '+ this.item.fields.title);
             $('#recsub').attr('readonly',true);
             var href = '<a href="'+window.location+'">'+this.item.fields.title+'</a>';
             $('#recmessage').val($('#currentusername').text()+ ' recommends you have a look at this '+ this.item.fields.item_type+ ' by '+ this.item.fields.owner+' \r\n'+ href );
