@@ -30,12 +30,19 @@
 
 <script type="text/template" id="notificationspage_template">
     <li class="notif-seen list-group-item <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
-        <a href="/market/#item/<%- notif.item_id %>">
-            <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>
-            <% if(notif.seen==false){ %><strong><%}%>
-            <%- notif.text %> at <%- notif.pub_date %>
-            <% if(notif.seen){ %></strong><%}%>
-        <a>
+         <a href="/market/#item/<%- notif.item_id %>" style="display:inline-block;">
+            <div class="pull-left">
+             <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>                                                                        
+            </div>
+            <div style="white-space:normal;float:right;margin-left:8px;">
+                <% if(notif.read==false){ %><strong><%}%>
+                <%- notif.text %> 
+                <% if(notif.read==false){ %></strong><%}%><br/>            
+            </div>            
+        </a>      
+         <div style="float:right;">
+            <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
+            </div>
     </li>
 </script>
 
@@ -46,20 +53,22 @@
 
     $(document).ready(function(){
       var notificationsPage = Backbone.View.extend({
-        el: 'body',          
+        el: 'body',   
+        counter: 0,
         events:{
             'click #more': 'showmore'
         },
         
         showmore:function(ev){
-          var that = this;          
+          var that = this;            
           var dfrd = $.ajax({
-            url:window.ahr.app_urls.getmarketnotificationsfromto+'15'
+            url:window.ahr.app_urls.getmarketnotificationsfromto.replace(0,that.counter)+(that.counter+15)
           });
           dfrd.done(function(data){
             _.each(data.notifications,function(notif){              
               $('#notificatoins').append(that.tmpl({'notif':notif}));
             });
+            that.counter=that.counter+15;
           });
         },
         
