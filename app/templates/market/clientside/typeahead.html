@@ -42,7 +42,7 @@
             var that = this;
             that.typeahead = $('#'+name,$(this.container)).typeahead({
                 minLength: 0,
-                limit: 10,
+                limit: 100,
                 local: that.typeaheadval});
 
             function afterselect(d){
