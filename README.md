@@ -78,6 +78,6 @@ django-admin.py runserver --settings=app.settings.production
 
 
 ##Config notifications
- pip install celery
+ pip install celery (already in the requirements)
  sudo apt-get install rabbitmq-server
  celery -A celerytasks worker
