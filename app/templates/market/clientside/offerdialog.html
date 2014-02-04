@@ -103,12 +103,12 @@
 
             this.countries_widget = window.ahr.typeahead_widget.initWidget(
                         '#countries_place',
-                        {title:'Please select the countries where you can help',  jsonfield:'countries'},
+                        {title:'Please enter the name of the countries where you can help',  jsonfield:'countries'},
                         this.item_obj? this.item_obj.countries: null);
 
             this.skills_widget = window.ahr.typeahead_widget.initWidget(
                         '#skills_place',
-                        {title:'Please select the skills you have to offer',  jsonfield:'skills'},
+                        {title:'Please enter the skills you have to offer',  jsonfield:'skills'},
                         this.item_obj? this.item_obj.skills: null);
 
             this.expdate_widget = window.ahr.datepicker_widget.initWidget(
