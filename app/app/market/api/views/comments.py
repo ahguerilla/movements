@@ -26,7 +26,7 @@ def addComment(request, obj_id, rtype):
     form = commentForm(request.POST)
     if form.is_valid():
         obj = saveComment(form,request.user,m_obj)
-        createCommentNotification.delay(m_obj,request.user.username)
+        createCommentNotification.delay(m_obj,obj,request.user.username)
         return HttpResponse(json.dumps({ 'success' : True, 'obj': obj.getdict() }), mimetype="application"+rtype)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)

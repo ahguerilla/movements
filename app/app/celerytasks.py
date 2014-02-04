@@ -70,7 +70,7 @@ def createNotification(self,obj):
 
 @shared_task
 @_app.task(name="createCommentNotification",bind=True)
-def createCommentNotification(self,obj,username):
+def createCommentNotification(self,obj,comment,username):
     if obj.owner.username != username:
         notification = Notification()
         notification.user = obj.owner
