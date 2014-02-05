@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^market/add/comment/(?P<obj_id>\d+)$','app.market.views.addComment_form', name="form_add_comment"),
     url(r'^market/edit/comment/(?P<obj_id>\d+)$','app.market.views.editComment_form', name="form_edit_comment"),
     url(r'^market/search/', include('haystack.urls')),
+    url('^/messages/inbox/m/$','app.market.views.index'),
     url(r'^messages/', include('postman.urls')),
 )
 

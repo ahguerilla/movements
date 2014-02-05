@@ -29,6 +29,7 @@ class Notification(models.Model):
         adict['user_id'] = self.user.id
         adict['item'] = self.item.title
         adict['item_type'] = self.item.item_type if self.item else None
+        adict['item_title'] = self.item.title if self.item else None
         adict['item_id'] = self.item.id if self.item else None
         adict['owner'] = self.item.owner.username if self.item else None
         adict['owner_id'] = self.item.owner.id if self.item else None

@@ -5,10 +5,17 @@
              <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>                                                                        
             </div>
             <div style="width:220px;white-space:normal;float:right;margin-left:8px;">
+                <div style="max-height:36px;overflow:hidden;">
                 <% if(notif.read==false){ %><strong><%}%>
-                <%- notif.text %> 
+                <% if(notif.comment===null){ %>
+                    <%- notif.user %> posted the
+                    <%- notif.item_type %> "<%- notif.item_title %>"                    
+                <% }else{ %>
+                    <%- notif.comment_user %> commented on <% if(notif.owner_id==window.ahr.user_id){ %>your<%}%> <%- notif.item_type %> "<%- notif.item_title %>"
+                <% } %>
                 <% if(notif.read==false){ %></strong><%}%><br/>
-                <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
+                </div>
+                <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>                
             </div>
         </a>        
     </li>
@@ -40,7 +47,7 @@
                     $('#notification-drop-down').append(that.tmpl({'notif':notif}));
                 });
                 if(data.notifications.length>0){
-                    $('#notification-drop-down').append('<li><a style="text-align:center;" href="'+window.ahr.app_urls.shownotifications+'">See All</a></li>');
+                    $('#notification-drop-down').prepend('<li><a style="text-align:center;" href="'+window.ahr.app_urls.shownotifications+'">See All</a><hr style="margin-top:0px;margin-bottom:10px;"/></li>');
                 }else{
                     $('#notification-drop-down').append('<li><a style="text-align:center;" href="#">No Notifications currently available</a></li>');
                 }

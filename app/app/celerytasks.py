@@ -76,6 +76,7 @@ def createCommentNotification(self,obj,comment,username):
         notification.user = obj.owner
         notification.item = obj
         notification.avatar_user = username
+        notification.comment = comment
         notification.text = getNotifCommentText(obj,username)    
         notification.save()
     notified = []
@@ -85,6 +86,7 @@ def createCommentNotification(self,obj,comment,username):
             notification.user = comment.owner
             notification.item = obj
             notification.avatar_user = username
+            notification.comment = comment
             notification.text = geSomeoneCommentUrCommentText(obj,username)    
             notification.save()
             notified.append(comment.owner.id)
