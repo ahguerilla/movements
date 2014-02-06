@@ -30,17 +30,18 @@
 
 <script type="text/template" id="notificationspage_template">
     <li class="notif-seen list-group-item <% if(notif.seen){ %>true<% }else{ %>false<%}%>">         
-        <div style="display:inline-block;">
-            <div class="pull-left">
+        <div class="row" >
+            <div class="col-xs-9">
+            <div style="display:inline-block;">
             <% if(notif.comment===null){ %>
               <a href="<%- window.ahr.app_urls.viewuserprofile+notif.user%>">
             <% }else{ %>
               <a href="<%- window.ahr.app_urls.viewuserprofile+notif.comment_user %>">
             <% } %>
-             <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>                                                                        
+             <img style="border-radius:50%;margin-bottom:5px;" width="30" height="30" src="<%- notif.avatar %>"/>
              </a>
             </div>
-            <div style="white-space:normal;float:right;margin-left:8px;">
+            <div style="white-space:normal;display:inline-block;">
                 <% if(notif.read==false){ %><strong><%}%>
                 <% if(notif.comment===null){ %>
                     <a href="<%- window.ahr.app_urls.viewuserprofile+notif.user%>">
@@ -60,10 +61,13 @@
                 <% } %>
                 <% if(notif.read==false){ %></strong><%}%><br/>                    
             </div>            
-          </div>
-         <div style="float:right;">
-            <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
             </div>
+            <div class="col-xs-3">
+                <div class="pull-left">
+                    <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
+                </div>
+            </div>
+         </div>
     </li>
 </script>
 

@@ -161,7 +161,7 @@ def setRate(request,obj_id,rtype):
 
 @login_required
 def getNotificationsFromTo(request,sfrom,to,rtype):
-    notifications = market.models.Notification.objects.filter(user=request.user.id)[sfrom:to]
+    notifications = market.models.Notification.objects.filter(user=request.user.id,item__deleted=False)[sfrom:to]
     alist=[]
     for notification in notifications:
         alist.append(notification.getDict()) 
@@ -171,7 +171,7 @@ def getNotificationsFromTo(request,sfrom,to,rtype):
 
 @login_required
 def getNotSeenNotif(request,sfrom,to,rtype):
-    notifications = market.models.Notification.objects.filter(user=request.user.id).filter(seen=False).only('seen')
+    notifications = market.models.Notification.objects.filter(user=request.user.id,item__deleted=False).filter(seen=False).only('seen')
     if len(notifications)>0:
         return  HttpResponse(json.dumps({'result':True}),mimetype="application"+rtype)
     return  HttpResponse(json.dumps({'result':False}),mimetype="application"+rtype)

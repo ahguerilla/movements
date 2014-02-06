@@ -9,15 +9,15 @@
                 <% if(notif.read==false){ %><strong><%}%>
                 <% if(notif.comment===null){ %>
                     <%- notif.user %> posted the
-                    <%- notif.item_type %> "<%- notif.item_title %>"                    
+                    <%- notif.item_type %> "<%- notif.item_title %>"
                 <% }else{ %>
                     <%- notif.comment_user %> commented on <% if(notif.owner_id==window.ahr.user_id){ %>your<%}%> <%- notif.item_type %> "<%- notif.item_title %>"
                 <% } %>
                 <% if(notif.read==false){ %></strong><%}%><br/>
                 </div>
-                <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>                
+                <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
             </div>
-        </a>        
+        </a>
     </li>
 </script>
 
@@ -25,17 +25,18 @@
 <script type="text/javascript" id="notifications_view">
  (function(){
     var notificationsWidget = Backbone.View.extend({
-        el: 'body',          
+        el: 'body',
         events:{
             'show.bs.dropdown #notifdropdown-click': 'populateNotifications',
             'hide.bs.dropdown #notifdropdown-click': 'checkNotif'
         },
-        
+
+
         checkNotif:function(){
             window.setTimeout(this.newNotifExists.bind(this),2000);
         },
         
-        populateNotifications: function(ev){   
+        populateNotifications: function(ev){
             var that = this;
             this.newNotifExists();
             $('#notification-drop-down').empty();
@@ -59,16 +60,17 @@
             var that=this;
             $.getJSON(that.notseen_url,function(data){               
              if(data.result == true){
-                 $('#notifbell').removeClass('nonotif');
-                 $('#notifbell').addClass('notif');
+                 $('.notifbell').removeClass('nonotif');
+                 $('.notifbell').addClass('notif');
              }else{
-                 $('#notifbell').addClass('nonotif');
-                 $('#notifbell').removeClass('notif');
+                 $('.notifbell').addClass('nonotif');
+                 $('.notifbell').removeClass('notif');
              }
             });             
         },
         
         initialize: function(data){
+            var that =this;
             this.notif_url = window.ahr.app_urls.getmarketnotificationsfromto;
             this.avat_url = window.ahr.app_urls.getavatar;  
             this.notseen_url = window.ahr.app_urls.getnotseennotif+'10';

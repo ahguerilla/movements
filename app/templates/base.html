@@ -37,8 +37,10 @@
   {%endif%}
     <nav class="navbar navbar-default navbar-fixed-top {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
       <div class="container">
+       <div class="row">
+       <div class="col-xs-11">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <button id="shownavbarbutton" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -55,7 +57,9 @@
             <li><a href="/">Exchange</a></li>
             <li><a href="{% url 'show_users' %}">Exchangivists</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown">My Messages  <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){%endif%} </span> <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle message-counter" data-toggle="dropdown">
+                  My Messages  <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){%endif%} </span> <b class="caret"></b>
+              </a>
               <ul class="dropdown-menu">
                   <li><a class="message-counter" href="{% url 'postman_inbox' %}">Inbox <span id="msgcntr"> {% if unread_count %} ({{ unread_count }}){%endif%}</span> </a></li>
                   <li><a href="{% url 'postman_sent' %}">Sent</a></li>
@@ -83,10 +87,8 @@
                 </li>
               </ul>
             </li>
-            <li id="notifdropdown-click"  class="dropdown" role="menu" >
-              <a  data-toggle="dropdown" class="dropdown-toggle" style="padding-bottom:10px;padding-top: 10px;" href="#"><div id="notifbell" class="nonotif"></div></a>
-              <ul id="notification-drop-down" class="dropdown-menu" style="width:300px;"></ul>              
-            </li>
+
+
             {% else %}
               {% block sign_in %}<li><a href="{% url 'account_login' %}">Sign In</a></li>{% endblock %}
               {% if not sign_up %}
@@ -94,6 +96,20 @@
               {% endif %}
             {% endif %}            
           </ul>
+        </div>
+       </div>
+       <div class="col-xs-1">
+        <div class="navbar-collapse" id="notif-navbar">
+          <ul class="nav pull-right">
+              <li id="notifdropdown-click">
+                <a  data-toggle="dropdown" class="dropdown-toggle" style="padding-bottom:10px;padding-top: 10px;" href="#">
+                  <div id="bellonlarge" class="notifbell" class="nonotif"></div>
+                </a>
+                <ul id="notification-drop-down" class="dropdown-menu pull-right" style="width:300px;"></ul>
+            </li>
+          </ul>
+         </div>
+         </div>
         </div>
       </div>
     </nav>
