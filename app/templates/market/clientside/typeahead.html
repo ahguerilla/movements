@@ -17,8 +17,8 @@
 </script>
 
 <script type="text/javascript" id="typeahead_view">
-  (function(){
-
+  (function(){   
+  
     var TypeaheadWidget = window.ahr.BaseView.extend({
         tagdict: {},
         change:function(values){
@@ -39,24 +39,60 @@
         },
 
         makeTypeAhead: function(name, func){
-            var that = this;
+            var that = this;            
+            var engine = {
+                compile: function(template) {
+                      var compiled = _.template(template);
+                  
+                      return {
+                        render: function(context) { 
+                            context.that = that;
+                            return compiled(context); 
+                            }
+                    }
+                }
+            }
+         
             that.typeahead = $('#'+name,$(this.container)).typeahead({
                 minLength: 0,
-                limit: 17,
-                local: that.typeaheadval});
+                limit: 100,
+                local: that.typeaheadval,
+                engine:engine,                    
+                template:['<% if(that.getValNames().indexOf(value)>-1){ %>',
+                '<div style="background-color:#529bda;padding:0px;padding-left:3px;color:white;">',
+                '<%- value %>',
+                '</div>',
+                '<% }else{ %><%-value %><% } %>'].join('')
+            });
 
-            function afterselect(d){
-                $('#'+name,$(that.container)).data().ttView.setQuery('');
+            function afterselect(d){                       
+                $('#'+name,$(that.container)).data().ttView.setQuery('');                            
+                if(that.getValNames().indexOf(d.value)>-1){
+                     $('.tm-tag>span:contains('+d.value+')').next().trigger('click');                    
+                }else{
+                    $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
+                }
                 $('#'+name,$(that.container)).trigger('blur');
-                $('#'+name,$(that.container)).tagsManager("pushTag", d.value);                
             }
+                                   
+            that.typeahead.on('typeahead:select',function(e,d){                
+                var scrollTo = $('.tt-suggestion:contains('+d.value+')',$(that.container));
+                that.scroll = scrollTo.parent().parent().parent().scrollTop();
 
-            that.typeahead.on('typeahead:selected', function (e, d) {
-                afterselect(d);
+            });          
+            
+            that.typeahead.on('typeahead:selected', function (e, d) {                                                                
+                afterselect(d);                
+                $('#'+name,$(that.container)).trigger('focus');                
+                var scrollTo = $('.tt-suggestion:contains('+d.value+')',$(that.container));
+                scrollTo.parent().parent().parent().scrollTop(that.scroll);               
+                scrollTo.addClass('tt-is-under-cursor');
+                
             });
 
             that.typeahead.on('typeahead:autocompleted',function(e,d){
-                afterselect(d);
+                afterselect(d);                   
+                $('#'+name,$(that.container)).trigger('focus');                    
             });          
 
             func(this.values);
@@ -109,11 +145,15 @@
         getval:function(){
             return this.getTagIds();
         },
+        
+        getValNames:function(){            
+            return $('input[name="hidden-'+this.settings.jsonfield+'_'+this.container+'"]',$(this.container)).val().split(',');
+        },
 
         getTagIds: function(){
             var that = this;
             var val_ids=[],
-                val_names = $('input[name="hidden-'+this.settings.jsonfield+'_'+this.container+'"]',$(this.container)).val().split(',');
+                val_names = this.getValNames();
             _.each(val_names,function(val){
                 val_ids.push(that.tagdict[val]);
             });

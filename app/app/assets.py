@@ -14,7 +14,7 @@ js = Bundle(
         './js/lib/bootstrap-datetimepicker.min.js',
         #'./js/lib/bootstrap-datetimepicker.js',
         './js/lib/tagmanager.js',
-        './js/lib/typeahead.min.js',
+        './js/lib/typeahead.js',
         './js/lib/jquery.blockUI.js',
         './js/lib/jstz.js',
         './js/lib/jquery.backstretch.min.js',
