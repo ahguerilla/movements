@@ -72,7 +72,7 @@
                 }else{
                     $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
                 }
-                $('#'+name,$(that.container)).trigger('blur');
+                $('#'+name,$(that.container)).trigger('blur');                                
             }
                                    
             that.typeahead.on('typeahead:select',function(e,d){                
@@ -87,17 +87,23 @@
                 var scrollTo = $('.tt-suggestion:contains('+d.value+')',$(that.container));
                 scrollTo.parent().parent().parent().scrollTop(that.scroll);               
                 scrollTo.addClass('tt-is-under-cursor');
+                that.clicked=false;        
+                that.closed = false;
                 
             });
 
             that.typeahead.on('typeahead:autocompleted',function(e,d){
                 afterselect(d);                   
                 $('#'+name,$(that.container)).trigger('focus');                    
+                that.clicked=false;        
+                that.closed = false;
             });          
+            
             that.closed= false;
             $('#'+name, $(that.container)).on('click',function(){
                 if(that.clicked === true){
-                    that.clicked=false;                    
+                    that.clicked=false;        
+                    that.closed = false;
                 }else{
                     if(that.closed === true){                        
                         $('#'+name,$(that.container)).data().ttView.getSuggestions();  
@@ -110,7 +116,7 @@
             });
             
             that.typeahead.on('typeahead:opened',function(e,d){
-                that.clicked= true;                
+                that.clicked= true;                                
             });          
 
 
