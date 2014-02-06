@@ -94,6 +94,26 @@
                 afterselect(d);                   
                 $('#'+name,$(that.container)).trigger('focus');                    
             });          
+            that.closed= false;
+            $('#'+name, $(that.container)).on('click',function(){
+                if(that.clicked === true){
+                    that.clicked=false;                    
+                }else{
+                    if(that.closed === true){                        
+                        $('#'+name,$(that.container)).data().ttView.getSuggestions();  
+                        that.closed = false;
+                    }else{
+                        $('#'+name,$(that.container)).data().ttView.closeDropDown();  
+                        that.closed = true;
+                    }                    
+                }
+            });
+            
+            that.typeahead.on('typeahead:opened',function(e,d){
+                that.clicked= true;                
+            });          
+
+
 
             func(this.values);
         },
@@ -177,7 +197,7 @@
                 this.tagdict[data[i].value]=data[i].pk;
             }
             $(this.container).html(this.typeAheadTemplate(this.settings.title, this.settings.jsonfield));
-            this.makeWidget(this.settings.jsonfield, this.preset? this.preset: null);
+            this.makeWidget(this.settings.jsonfield, this.preset? this.preset: null);            
         }
 
     });

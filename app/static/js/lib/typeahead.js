@@ -760,7 +760,14 @@
                 },
                 setQuery: function (a) {
                     this.inputView.setQuery(a), this.inputView.setInputValue(a), this._clearHint(), this._clearSuggestions(), this._getSuggestions()
+                },
+                closeDropDown:function(){
+                    this._clearHint(), this._clearSuggestions()
+                },
+                getSuggestions:function(){
+                    this._getSuggestions();
                 }
+                 
             }), b
         }();
     ! function () {
