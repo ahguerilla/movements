@@ -162,19 +162,25 @@
             if(!that.closing && !confirm('Are you sure you want to close this dialog?')){
               return false;
             }            
+            that.emptyTheForm();
           });
+        },
+        
+        emptyTheForm:function(){
+          this.skills_widget.empty();
+          this.countries_widget.empty();
+          this.issues_widget.empty();
+          this.never_exp_widget.empty();
+          $('input,textarea',$('#offerdialog')).val('');
+          if(typeof this.edit_calback == "function"){
+            this.edit_calback(this.item_id);
+          }
         },
 
         aftersubmit:function(){
           this.closing=true;
           $('#offerdialog').modal('hide');
-          this.skills_widget.empty();
-          this.countries_widget.empty();
-          this.issues_widget.empty();
-          $('input,textarea',$('#offerdialog')).val('');
-          if(typeof this.edit_calback == "function"){
-            this.edit_calback(this.item_id);
-          }
+          this.emptyTheForm();  
         },
     });
 

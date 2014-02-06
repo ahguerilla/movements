@@ -13,19 +13,26 @@
       <div class="exchange-filter" >
         <div class="container">
           <div class="row" style="margin-top:10px;">
-            <div id="create_offer" class="market-action col-xs-6 col-md-3">
+            <div id="create_offer" class="market-action col-xs-4 col-md-3">
               <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Create an offer" />
               <span>Create an offer</span>
             </div>
-            <div id="create_request" class="market-action col-xs-6 col-md-3">
+            <div id="create_request" class="market-action col-xs-5 col-md-3">
               <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Create a request" />
               <span>Create a request</span>
             </div>
+            <div class="market-action col-xs-3 col-md-2 pull-right">
+              <button style="margin-top:16px;" type="button"class="btn btn-default btn-xs" id="togglefilter" data-toggle="collapse" data-target="#market-filters">
+                <span id="filterbuttontext">Show Filters</span>
+                <span class="caret"></span>
+              </button>
+            </div>                              
           </div>
+          <div id="filter-container"></div>    
         </div>
       </div>
-      <div class="filter-banner-spacer-black"></div>
-      <div id="filter-container"></div>      
+      
+      
     </div>
   </div>
 {% endblock %}

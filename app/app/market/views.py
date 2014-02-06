@@ -25,7 +25,7 @@ def getUserTags(user):
 def index(request):
     return render_to_response('market/market.html',
                               {
-                                  'title':'My Exchange',
+                                  'title':'Exchange',
                                   'help_text_template': 'market/copy/market_help.html',
                                   'init': 'market',
                                   'tags': getUserTags(request.user)

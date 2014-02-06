@@ -1,6 +1,15 @@
 {% extends "postman/base_folder.html" %}
 {% load i18n %}
 
+{% block headerinfo %}
+    <div style="margin-top:10px;">
+    <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {% trans "Please note that items moved to the deleted items box, will be removed, and cannot be re instated. Only move messages that you are sure you do not want to keep to your deleted items folder." %}
+    </div>
+    </div>
+{% endblock %}
+
 {% block head_title %}{% trans "Deleted Messages" %}{% endblock %}
 
 {% block pm_folder_title %}{% trans "Deleted Messages" %}{% endblock %}

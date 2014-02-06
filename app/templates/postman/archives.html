@@ -1,17 +1,21 @@
 {% extends "postman/base_folder.html" %}
 {% load i18n %}
 
+{% block headerinfo %}
+    <div style="margin-top:10px;">
+    <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {% trans "Welcome to your archived messages. Messages that you move to this folder will never be removed, which means you can use the archive functionality to store messages making them easy to re visit." %}
+    </div>
+    </div>
+{% endblock %}
+
 {% block head_title %}{% trans "Archived Messages" %}{% endblock %}
 
 {% block pm_folder_title %}{% trans "Archived Messages" %}{% endblock %}
 {% block pm_archive_button %}{% endblock %}
 {% block pm_undelete_button %}{% endblock %}
-{% block pm_footer_info %}
-<div class="alert alert-info alert-dismissable">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  {% trans "Messages in this folder will never be removed. You can use this folder for long term storage." %}
-</div>
-{% endblock %}
+{% block pm_footer_info %}{% endblock %}
 
 {% block endjavascript %}
 
