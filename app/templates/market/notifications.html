@@ -2,69 +2,73 @@
 {% load i18n %}
 
 {% block outsidecontainer %}
-<div id="market" >
+  <div id="market">
   <!-- Banner -->
-  
+
 
   <!-- Filter Spacer -->
   <div class="filter-banner-spacer"></div>
   <div id="filter-wrapper">
     <div id="fixed-filters">
-      <div class="exchange-filter" >
+      <div class="exchange-filter">
         <div class="container">
-          
+
         </div>
       </div>
       <div class="filter-banner-spacer-black"></div>
-      
+
     </div>
   </div>
 {% endblock %}
 
 {% block content %}
-<div>
-  <ul class="list-group" id="notificatoins">
-  </ul>
-</div>
-<div class="btn btn-default" id="more">More</div>
+  <div style="margin-top:20px;">
+    <ul class="list-group" id="notificatoins">
+    </ul>
+  </div>
+  <div class="btn btn-default" id="more">More</div>
 
-<script type="text/template" id="notificationspage_template">
+  <script type="text/template" id="notificationspage_template">
     <li class="notif-seen list-group-item <% if(notif.seen){ %>true<% }else{ %>false<%}%>">         
         <div class="row" >
-            <div class="col-xs-9">
-            <div style="display:inline-block;">
-            <% if(notif.comment===null){ %>
-              <a href="<%- window.ahr.app_urls.viewuserprofile+notif.user%>">
-            <% }else{ %>
-              <a href="<%- window.ahr.app_urls.viewuserprofile+notif.comment_user %>">
-            <% } %>
-             <img style="border-radius:50%;margin-bottom:5px;" width="30" height="30" src="<%- notif.avatar %>"/>
-             </a>
-            </div>
-            <div style="white-space:normal;display:inline-block;">
-                <% if(notif.read==false){ %><strong><%}%>
-                <% if(notif.comment===null){ %>
+            <div class="col-xs-8">
+              <div class="row">
+                <div class="col-md-1 col-xs-2">
+                  <% if(notif.comment===null){ %>
                     <a href="<%- window.ahr.app_urls.viewuserprofile+notif.user%>">
-                      <%- notif.user %>
-                    </a> 
-                    <a href="/market/#item/<%- notif.item_id %>">
-                    posted  the 
-                    <%- notif.item_type %> "<%- notif.item_title %>"                    
-                    </a>      
-                <% }else{ %>                    
-                    <a href="<%- window.ahr.app_urls.viewuserprofile+notif.comment_user%>">
-                      <%- notif.comment_user %>
+                  <% }else{ %>
+                    <a href="<%- window.ahr.app_urls.viewuserprofile+notif.comment_user %>">
+                  <% } %>
+                      <img style="border-radius:50%;margin-bottom:10px;" width="30" height="30" src="<%- notif.avatar %>"/>
                     </a>
-                    <a href="/market/#item/<%- notif.item_id %>" style="display:inline-block;">
-                      commented on <% if(notif.owner_id==window.ahr.user_id){ %>your<%}%> <%- notif.item_type %> "<%- notif.item_title %>"
-                    </a>      
-                <% } %>
-                <% if(notif.read==false){ %></strong><%}%><br/>                    
-            </div>            
+                </div>
+                <div class="col-md-11 col-xs-10">
+                  <% if(notif.read==false){ %><strong><%}%>
+                  <% if(notif.comment===null){ %>
+                      <a href="<%- window.ahr.app_urls.viewuserprofile+notif.user%>">
+                        <%- notif.user %>
+                      </a>
+                      posted  the <%- notif.item_type %>
+                      <a href="/market/#item/<%- notif.item_id %>">
+                        "<%- notif.item_title %>"
+                      </a>
+                  <% }else{ %>
+                      <a href="<%- window.ahr.app_urls.viewuserprofile+notif.comment_user%>">
+                        <%- notif.comment_user %>
+                      </a>
+                      <a href="/market/#item/<%- notif.item_id %>" style="display:inline-block;">
+                        commented on <% if(notif.owner_id==window.ahr.user_id){ %>your<%}%> <%- notif.item_type %> "<%- notif.item_title %>"
+                      </a>
+                  <% } %>
+                  <% if(notif.read==false){ %></strong><%}%><br/>
+                </div>
+              </div>
             </div>
-            <div class="col-xs-3">
-                <div class="pull-left">
+            <div class="col-xs-4">
+                <div class="row">
+                  <div class="col-md-offset-8 col-md-4">
                     <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
+                  </div>
                 </div>
             </div>
          </div>
@@ -73,31 +77,31 @@
 
 {% endblock %}
 
-{% block endjavascript %} 
-    <script type="text/javascript">
+{% block endjavascript %}
+  <script type="text/javascript">
 
-    $(document).ready(function(){
+    $(document).ready(function () {
       var notificationsPage = Backbone.View.extend({
-        el: 'body',   
+        el: 'body',
         counter: 0,
-        events:{
-            'click #more': 'showmore'
+        events: {
+          'click #more': 'showmore'
         },
-        
-        showmore:function(ev){
-          var that = this;            
+
+        showmore: function (ev) {
+          var that = this;
           var dfrd = $.ajax({
-            url:window.ahr.app_urls.getmarketnotificationsfromto.replace(0,that.counter)+(that.counter+15)
+            url: window.ahr.app_urls.getmarketnotificationsfromto.replace(0, that.counter) + (that.counter + 15)
           });
-          dfrd.done(function(data){
-            _.each(data.notifications,function(notif){              
-              $('#notificatoins').append(that.tmpl({'notif':notif}));
+          dfrd.done(function (data) {
+            _.each(data.notifications, function (notif) {
+              $('#notificatoins').append(that.tmpl({'notif': notif}));
             });
-            that.counter=that.counter+15;
+            that.counter = that.counter + 15;
           });
         },
-        
-        initialize:function(){
+
+        initialize: function () {
           this.tmpl = _.template($('#notificationspage_template').html());
           this.showmore()
         }
@@ -106,7 +110,7 @@
     });
 
 
-    </script>
+  </script>
 
 {% endblock %}
 
