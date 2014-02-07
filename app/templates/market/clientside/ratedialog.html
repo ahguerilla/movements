@@ -83,14 +83,14 @@
 
 {% compress js %}
 <script type="text/javascript">
-(function(){
-   var RateDialogView = window.ahr.BaseView.extend({
-    events:{
+(function () {
+  var RateDialogView = window.ahr.BaseView.extend({
+    events: {
       'click .rate': 'showrate',
       'click .sendrate': 'setrate',
       'click .cancelrate': 'resetrate',
     },
-    showrate: function(ev){
+    showrate: function (ev) {
       ev.preventDefault();
       this.evrate = ev;
       var username = ev.currentTarget.getAttribute('username');
@@ -99,78 +99,81 @@
       var ratecount = ev.currentTarget.getAttribute('ratecount');
 
       $('#ratecount').text(ratecount);
-      if ($(ev.currentTarget).attr('rateing')=='user'){
-        this.rateurl = window.ahr.app_urls.setuserrate+username;
+      if ($(ev.currentTarget).attr('rateing') == 'user') {
+        this.rateurl = window.ahr.app_urls.setuserrate + username;
         $('#username').text(username);
         $('#ratetitle').text(username);
-      }else{
-        this.rateurl = window.ahr.app_urls.marketsetrate+$("#item-single").attr("item-id");
+      } else {
+        this.rateurl = window.ahr.app_urls.marketsetrate + $("#item-single").attr("item-id");
         $('#username').text($('#marketitem_title').text());
         $('#ratetitle').text($('#marketitem_title').text());
       }
       $('#ratedialog').modal('show');
 
       $('#numstars').rateit();
-      $('#numstars').rateit('min',0);
-      $('#numstars').rateit('max',5);
-      $('#numstars').rateit('readonly',true);
-      $('#numstars').rateit('value',score);
+      $('#numstars').rateit('min', 0);
+      $('#numstars').rateit('max', 5);
+      $('#numstars').rateit('readonly', true);
+      $('#numstars').rateit('value', score);
 
-      $('#profileimage').attr('src',image_src);
-      return(false);
+      $('#profileimage').attr('src', image_src);
+      return (false);
     },
 
-    setrate: function(ev){
+    setrate: function (ev) {
       ev.preventDefault();
       var that = this;
       var event = ev;
-      if($('input[name="stars"]:checked').val() == undefined){
-        this.alert('You have to select a rateing.','#rateerror');
-        return(false);
+      if ($('input[name="stars"]:checked').val() == undefined) {
+        this.alert('You have to select a rateing.', '#rateerror');
+        return (false);
       }
-      window.ahr.getcsrf(function(csrf){
+      window.ahr.getcsrf(function (csrf) {
         var dfrd = $.ajax({
           url: that.rateurl,
           type: 'POST',
           dataType: 'json',
           data: {
-            score:$('input[name="stars"]:checked').val(),
-            csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
-            }
+            score: $('input[name="stars"]:checked').val(),
+            csrfmiddlewaretoken: csrf.csrfmiddlewaretoken,
+          }
         });
-        dfrd.done(function(data){
-          $(that.evrate.currentTarget).attr('ratecount',data.ratecount);
-          $(that.evrate.currentTarget).attr('score',data.score);
-          if(typeof that.callback == 'function'){
+        dfrd.done(function (data) {
+          $(that.evrate.currentTarget).attr('ratecount', data.ratecount);
+          $(that.evrate.currentTarget).attr('score', data.score);
+          if (typeof that.callback == 'function') {
             that.callback(that.evrate.currentTarget.getAttribute('username'), data.score);
           }
 
           $('#ratedialog').modal('hide');
           that.resetrate();
         });
-        dfrd.fail(function(data){
-          that.alert('Rating failed.','#rateerror');
+        dfrd.fail(function (data) {
+          that.alert('Rating failed.', '#rateerror');
         });
       });
-      return(false);
+      return (false);
     },
 
-    resetrate: function(){
-      $('input[name="stars"]:checked').prop('checked',false);
+    resetrate: function () {
+      $('input[name="stars"]:checked').prop('checked', false);
     },
 
-    initialize:function(data){
+    initialize: function (data) {
       this.callback = data.callback;
       return this;
     }
 
-   });
+  });
 
-    window.ahr.rate_form_dialog = window.ahr.rate_form_dialog|| {};
-    window.ahr.rate_form_dialog.initWidget= function(element,callback){
-        var rate_form_dialog = new RateDialogView({el:element, callback:callback});
-        return rate_form_dialog;
-    };
+  window.ahr.rate_form_dialog = window.ahr.rate_form_dialog || {};
+  window.ahr.rate_form_dialog.initWidget = function (element, callback) {
+    var rate_form_dialog = new RateDialogView({
+      el: element,
+      callback: callback
+    });
+    return rate_form_dialog;
+  };
 })();
 </script>
 {% endcompress %}

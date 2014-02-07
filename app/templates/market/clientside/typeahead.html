@@ -21,202 +21,208 @@
 {% compress js %}
 
 <script type="text/javascript" id="typeahead_view">
-  (function(){   
-  
+  (function () {
+
     var TypeaheadWidget = window.ahr.BaseView.extend({
-        tagdict: {},
-        change:function(values){
-            var that = this;
-            this.empty();
-            this.setPrefilledVals(values);
-            for(i in this.pref){
-                $('#'+that.settings.jsonfield,$(this.container)).tagsManager('pushTag',this.pref[i]);
-            }
-
-        },
-
-        typeAheadTemplate: function(title,  item){
-            if (this.typeAheadTag  === undefined){
-                this.typeAheadTag = _.template($('#typeahead_template').html());
-            }
-            return this.typeAheadTag({'title':title,'item':item});
-        },
-
-        makeTypeAhead: function(name, func){
-            var that = this;            
-            var engine = {
-                compile: function(template) {
-                      var compiled = _.template(template);
-                  
-                      return {
-                        render: function(context) { 
-                            context.that = that;
-                            return compiled(context); 
-                            }
-                    }
-                }
-            }
-         
-            that.typeahead = $('#'+name,$(this.container)).typeahead({
-                minLength: 0,
-                limit: 100,
-                local: that.typeaheadval,
-                engine:engine,                    
-                template:['<% if(that.getValNames().indexOf(value)>-1){ %>',
-                '<div style="background-color:#529bda;padding:0px;padding-left:3px;color:white;">',
-                '<%- value %>',
-                '</div>',
-                '<% }else{ %><%-value %><% } %>'].join('')
-            });
-
-            function afterselect(d){                       
-                $('#'+name,$(that.container)).data().ttView.setQuery('');                            
-                if(that.getValNames().indexOf(d.value)>-1){
-                     $('.tm-tag>span:contains('+d.value+')').next().trigger('click');                    
-                }else{
-                    $('#'+name,$(that.container)).tagsManager("pushTag", d.value);
-                }
-                $('#'+name,$(that.container)).trigger('blur');                                
-            }
-                                   
-            that.typeahead.on('typeahead:select',function(e,d){                
-                var scrollTo = $('.tt-suggestion:contains('+d.value+')',$(that.container));
-                that.scroll = scrollTo.parent().parent().parent().scrollTop();
-
-            });          
-            
-            that.typeahead.on('typeahead:selected', function (e, d) {                                                                
-                afterselect(d);                
-                $('#'+name,$(that.container)).trigger('focus');                
-                var scrollTo = $('.tt-suggestion:contains('+d.value+')',$(that.container));
-                scrollTo.parent().parent().parent().scrollTop(that.scroll);               
-                scrollTo.addClass('tt-is-under-cursor');
-                that.clicked=false;        
-                that.closed = false;
-                
-            });
-
-            that.typeahead.on('typeahead:autocompleted',function(e,d){
-                afterselect(d);                   
-                $('#'+name,$(that.container)).trigger('focus');                    
-                that.clicked=false;        
-                that.closed = false;
-            });          
-            
-            that.closed= false;
-            $('#'+name, $(that.container)).on('click',function(){
-                if(that.clicked === true){
-                    that.clicked=false;        
-                    that.closed = false;
-                }else{
-                    if(that.closed === true){                        
-                        $('#'+name,$(that.container)).data().ttView.getSuggestions();  
-                        that.closed = false;
-                    }else{
-                        $('#'+name,$(that.container)).data().ttView.closeDropDown();  
-                        that.closed = true;
-                    }                    
-                }
-            });
-            
-            that.typeahead.on('typeahead:opened',function(e,d){
-                that.clicked= true;                                
-            });          
-
-
-
-            func(this.values);
-        },
-
-        setPrefilledVals:function(prefilled){
-            var pref=[];
-            inv = this.invert(this.tagdict);
-            _.each(prefilled,function(id){
-                pref.push(inv[id]);
-            });
-            this.pref = pref;
-        },
-
-        makeWidget: function (name, prefilled){
-            var that = this;
-            this.makeTypeAhead(name, function(data){
-                var pref=[];
-                that.values = data;
-                if (prefilled){
-                    inv = that.invert(that.tagdict);
-                    _.each(prefilled,function(id){
-                        pref.push(inv[id]);
-                    });
-                }
-
-                $('#'+name,$(that.container)).tagsManager({
-                    tagsContainer: that.container+' #'+name+'Tags',
-                    deleteTagsOnBackspace: false,
-                    blinkBGColor_1: '#FFFF9C',
-                    blinkBGColor_2: '#CDE69C',
-                    hiddenTagListName: 'hidden-'+name+'_'+that.container,
-                    prefilled: pref,
-                    validator:function(tag){
-                        if (that.values.indexOf(tag)!=-1){
-                            return true;
-                        }else{
-                            return false;
-                        }
-                    }
-                });
-
-            });
-        },
-
-        empty:function(){
-            $('#'+this.settings.jsonfield,$(this.container)).tagsManager('empty');
-        },
-
-        getval:function(){
-            return this.getTagIds();
-        },
-        
-        getValNames:function(){            
-            return $('input[name="hidden-'+this.settings.jsonfield+'_'+this.container+'"]',$(this.container)).val().split(',');
-        },
-
-        getTagIds: function(){
-            var that = this;
-            var val_ids=[],
-                val_names = this.getValNames();
-            _.each(val_names,function(val){
-                val_ids.push(that.tagdict[val]);
-            });
-            return val_ids;
-        },
-
-        initialize: function(initobj){
-            this.container = initobj.container;
-            this.settings = initobj.settings;
-            this.preset = initobj.preset;
-            this.typeaheadval = [];
-            this.values=[];
-            this.tagdict={};
-            var data = window.ahr[initobj.settings.jsonfield];
-            for (var i = 0; i < data.length; i++){
-                this.typeaheadval.push({
-                    tokens: [data[i].value,],
-                    value: data[i].value
-                });
-                this.values.push(data[i].value);
-                this.tagdict[data[i].value]=data[i].pk;
-            }
-            $(this.container).html(this.typeAheadTemplate(this.settings.title, this.settings.jsonfield));
-            this.makeWidget(this.settings.jsonfield, this.preset? this.preset: null);            
+      tagdict: {},
+      change: function (values) {
+        var that = this;
+        this.empty();
+        this.setPrefilledVals(values);
+        for (i in this.pref) {
+          $('#' + that.settings.jsonfield, $(this.container)).tagsManager('pushTag', this.pref[i]);
         }
+
+      },
+
+      typeAheadTemplate: function (title, item) {
+        if (this.typeAheadTag === undefined) {
+          this.typeAheadTag = _.template($('#typeahead_template').html());
+        }
+        return this.typeAheadTag({
+          'title': title,
+          'item': item
+        });
+      },
+
+      makeTypeAhead: function (name, func) {
+        var that = this;
+        var engine = {
+          compile: function (template) {
+            var compiled = _.template(template);
+
+            return {
+              render: function (context) {
+                context.that = that;
+                return compiled(context);
+              }
+            }
+          }
+        }
+
+        that.typeahead = $('#' + name, $(this.container)).typeahead({
+          minLength: 0,
+          limit: 100,
+          local: that.typeaheadval,
+          engine: engine,
+          template: ['<% if(that.getValNames().indexOf(value)>-1){ %>',
+            '<div style="background-color:#529bda;padding:0px;padding-left:3px;color:white;">',
+            '<%- value %>',
+            '</div>',
+            '<% }else{ %><%-value %><% } %>'
+          ].join('')
+        });
+
+        function afterselect(d) {
+          $('#' + name, $(that.container)).data().ttView.setQuery('');
+          if (that.getValNames().indexOf(d.value) > -1) {
+            $('.tm-tag>span:contains(' + d.value + ')').next().trigger('click');
+          } else {
+            $('#' + name, $(that.container)).tagsManager("pushTag", d.value);
+          }
+          $('#' + name, $(that.container)).trigger('blur');
+        }
+
+        that.typeahead.on('typeahead:select', function (e, d) {
+          var scrollTo = $('.tt-suggestion:contains(' + d.value + ')', $(that.container));
+          that.scroll = scrollTo.parent().parent().parent().scrollTop();
+
+        });
+
+        that.typeahead.on('typeahead:selected', function (e, d) {
+          afterselect(d);
+          $('#' + name, $(that.container)).trigger('focus');
+          var scrollTo = $('.tt-suggestion:contains(' + d.value + ')', $(that.container));
+          scrollTo.parent().parent().parent().scrollTop(that.scroll);
+          scrollTo.addClass('tt-is-under-cursor');
+          that.clicked = false;
+          that.closed = false;
+
+        });
+
+        that.typeahead.on('typeahead:autocompleted', function (e, d) {
+          afterselect(d);
+          $('#' + name, $(that.container)).trigger('focus');
+          that.clicked = false;
+          that.closed = false;
+        });
+
+        that.closed = false;
+        $('#' + name, $(that.container)).on('click', function () {
+          if (that.clicked === true) {
+            that.clicked = false;
+            that.closed = false;
+          } else {
+            if (that.closed === true) {
+              $('#' + name, $(that.container)).data().ttView.getSuggestions();
+              that.closed = false;
+            } else {
+              $('#' + name, $(that.container)).data().ttView.closeDropDown();
+              that.closed = true;
+            }
+          }
+        });
+
+        that.typeahead.on('typeahead:opened', function (e, d) {
+          that.clicked = true;
+        });
+
+        func(this.values);
+      },
+
+      setPrefilledVals: function (prefilled) {
+        var pref = [];
+        inv = this.invert(this.tagdict);
+        _.each(prefilled, function (id) {
+          pref.push(inv[id]);
+        });
+        this.pref = pref;
+      },
+
+      makeWidget: function (name, prefilled) {
+        var that = this;
+        this.makeTypeAhead(name, function (data) {
+          var pref = [];
+          that.values = data;
+          if (prefilled) {
+            inv = that.invert(that.tagdict);
+            _.each(prefilled, function (id) {
+              pref.push(inv[id]);
+            });
+          }
+
+          $('#' + name, $(that.container)).tagsManager({
+            tagsContainer: that.container + ' #' + name + 'Tags',
+            deleteTagsOnBackspace: false,
+            blinkBGColor_1: '#FFFF9C',
+            blinkBGColor_2: '#CDE69C',
+            hiddenTagListName: 'hidden-' + name + '_' + that.container,
+            prefilled: pref,
+            validator: function (tag) {
+              if (that.values.indexOf(tag) != -1) {
+                return true;
+              } else {
+                return false;
+              }
+            }
+          });
+
+        });
+      },
+
+      empty: function () {
+        $('#' + this.settings.jsonfield, $(this.container)).tagsManager('empty');
+      },
+
+      getval: function () {
+        return this.getTagIds();
+      },
+
+      getValNames: function () {
+        return $('input[name="hidden-' + this.settings.jsonfield + '_' + this.container + '"]', $(this.container)).val().split(',');
+      },
+
+      getTagIds: function () {
+        var that = this;
+        var val_ids = [],
+          val_names = this.getValNames();
+        _.each(val_names, function (val) {
+          val_ids.push(that.tagdict[val]);
+        });
+        return val_ids;
+      },
+
+      initialize: function (initobj) {
+        this.container = initobj.container;
+        this.settings = initobj.settings;
+        this.preset = initobj.preset;
+        this.typeaheadval = [];
+        this.values = [];
+        this.tagdict = {};
+        var data = window.ahr[initobj.settings.jsonfield];
+        for (var i = 0; i < data.length; i++) {
+          this.typeaheadval.push({
+            tokens: [data[i].value, ],
+            value: data[i].value
+          });
+          this.values.push(data[i].value);
+          this.tagdict[data[i].value] = data[i].pk;
+        }
+        $(this.container).html(this.typeAheadTemplate(this.settings.title, this.settings.jsonfield));
+        this.makeWidget(this.settings.jsonfield, this.preset ? this.preset : null);
+      }
 
     });
 
-    window.ahr.typeahead_widget = window.typeahead_widget|| {};
-    window.ahr.typeahead_widget.initWidget= function(container,settings,preval){
-        var widget = new TypeaheadWidget({'container':container,'settings':settings,'preset':preval});
-        return widget;
+    window.ahr.typeahead_widget = window.typeahead_widget || {};
+    window.ahr.typeahead_widget.initWidget = function (container, settings, preval) {
+      var widget = new TypeaheadWidget({
+        'container': container,
+        'settings': settings,
+        'preset': preval
+      });
+      return widget;
     };
-})();
+  })();
 </script>
 {% endcompress %}

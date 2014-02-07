@@ -25,68 +25,70 @@
 
 {% compress js %}
 <script type="text/javascript" id="notifications_view">
- (function(){
-    var notificationsWidget = Backbone.View.extend({
-        el: 'body',
-        events:{
-            'show.bs.dropdown #notifdropdown-click': 'populateNotifications',
-            'hide.bs.dropdown #notifdropdown-click': 'checkNotif'
-        },
+(function () {
+  var notificationsWidget = Backbone.View.extend({
+    el: 'body',
+    events: {
+      'show.bs.dropdown #notifdropdown-click': 'populateNotifications',
+      'hide.bs.dropdown #notifdropdown-click': 'checkNotif'
+    },
 
 
-        checkNotif:function(){
-            window.setTimeout(this.newNotifExists.bind(this),2000);
-        },
-        
-        populateNotifications: function(ev){
-            var that = this;
-            this.newNotifExists();
-            $('#notification-drop-down').empty();
-            var dfrd = $.ajax({
-                url:this.notif_url+'10'
-            });
-            dfrd.done(function(data){
-                _.each(data.notifications,function(notif){                    
-                    $('#notification-drop-down').append(that.tmpl({'notif':notif}));
-                });
-                if(data.notifications.length>0){
-                    $('#notification-drop-down').prepend('<li><a style="text-align:center;" href="'+window.ahr.app_urls.shownotifications+'">See All</a><hr style="margin-top:0px;margin-bottom:10px;"/></li>');
-                }else{
-                    $('#notification-drop-down').append('<li><a style="text-align:center;" href="#">No Notifications currently available</a></li>');
-                }
-            });
-            return ev;
-        },
-        
-        newNotifExists: function(){
-            var that=this;
-            $.getJSON(that.notseen_url,function(data){               
-             if(data.result == true){
-                 $('.notifbell').removeClass('nonotif');
-                 $('.notifbell').addClass('notif');
-             }else{
-                 $('.notifbell').addClass('nonotif');
-                 $('.notifbell').removeClass('notif');
-             }
-            });             
-        },
-        
-        initialize: function(data){
-            var that =this;
-            this.notif_url = window.ahr.app_urls.getmarketnotificationsfromto;
-            this.avat_url = window.ahr.app_urls.getavatar;  
-            this.notseen_url = window.ahr.app_urls.getnotseennotif+'10';
-            this.tmpl = _.template($('#notifications_template').html());
-            var that = this            
-            that.newNotifExists();
-            window.setInterval(that.newNotifExists.bind(this),60000);
+    checkNotif: function () {
+      window.setTimeout(this.newNotifExists.bind(this), 2000);
+    },
+
+    populateNotifications: function (ev) {
+      var that = this;
+      this.newNotifExists();
+      $('#notification-drop-down').empty();
+      var dfrd = $.ajax({
+        url: this.notif_url + '10'
+      });
+      dfrd.done(function (data) {
+        _.each(data.notifications, function (notif) {
+          $('#notification-drop-down').append(that.tmpl({
+            'notif': notif
+          }));
+        });
+        if (data.notifications.length > 0) {
+          $('#notification-drop-down').prepend('<li><a style="text-align:center;" href="' + window.ahr.app_urls.shownotifications + '">See All</a><hr style="margin-top:0px;margin-bottom:10px;"/></li>');
+        } else {
+          $('#notification-drop-down').append('<li><a style="text-align:center;" href="#">No Notifications currently available</a></li>');
         }
-    });
-    window.ahr.notifications_widget = window.ahr.notifications_widget || {};
-    window.ahr.notifications_widget.initWidget= function(){
-        var widget = new notificationsWidget();
-        return widget;
-    };
+      });
+      return ev;
+    },
+
+    newNotifExists: function () {
+      var that = this;
+      $.getJSON(that.notseen_url, function (data) {
+        if (data.result == true) {
+          $('.notifbell').removeClass('nonotif');
+          $('.notifbell').addClass('notif');
+        } else {
+          $('.notifbell').addClass('nonotif');
+          $('.notifbell').removeClass('notif');
+        }
+      });
+    },
+
+    initialize: function (data) {
+      var that = this;
+      this.notif_url = window.ahr.app_urls.getmarketnotificationsfromto;
+      this.avat_url = window.ahr.app_urls.getavatar;
+      this.notseen_url = window.ahr.app_urls.getnotseennotif + '10';
+      this.tmpl = _.template($('#notifications_template').html());
+      var that = this
+      that.newNotifExists();
+      window.setInterval(that.newNotifExists.bind(this), 60000);
+    }
+  });
+  window.ahr.notifications_widget = window.ahr.notifications_widget || {};
+  window.ahr.notifications_widget.initWidget = function () {
+    var widget = new notificationsWidget();
+    return widget;
+  };
 })();
 </script>
 {% endcompress %}

@@ -12,40 +12,44 @@
 {% compress js %}
 
 <script type="text/javascript" id="textarea_view">
- (function(){
-    var TextareaWidget = window.ahr.BaseView.extend({
-        el: '#itemform',
+ (function () {
+   var TextareaWidget = window.ahr.BaseView.extend({
+     el: '#itemform',
 
-        change: function(value){
-            $('#'+this.jsonfield,$(this.container)).val(value);
-        },
+     change: function (value) {
+       $('#' + this.jsonfield, $(this.container)).val(value);
+     },
 
-        getval: function(){
-            return $('#'+this.jsonfield,$(this.container)).val();
-        },
+     getval: function () {
+       return $('#' + this.jsonfield, $(this.container)).val();
+     },
 
-        initialize: function(data){
-            var that = this;
-            this.container = data.cont;
-            this.item = data.itm;
-            this.jsonfield = data.itm.jsonfield;
-            var tmpl = _.template($('#textarea_template').html());
-            var html = tmpl({
-                title:this.item.title,
-                jsonfield: this.item.jsonfield,
-                placeholder: this.item.placeholder
-                });
-            $(this.container).html(html);
-            if(data.prvl){
-                 $('#'+this.jsonfield,$(this.container)).val(data.prvl);
-            }
-        }
-    });
-    window.ahr.textarea_widget = window.ahr.textarea_widget || {};
-    window.ahr.textarea_widget.initWidget= function(container,item,preval){
-        var widget = new TextareaWidget({'cont':container,'itm':item,'prvl':preval});
-        return widget;
-    };
-})();
+     initialize: function (data) {
+       var that = this;
+       this.container = data.cont;
+       this.item = data.itm;
+       this.jsonfield = data.itm.jsonfield;
+       var tmpl = _.template($('#textarea_template').html());
+       var html = tmpl({
+         title: this.item.title,
+         jsonfield: this.item.jsonfield,
+         placeholder: this.item.placeholder
+       });
+       $(this.container).html(html);
+       if (data.prvl) {
+         $('#' + this.jsonfield, $(this.container)).val(data.prvl);
+       }
+     }
+   });
+   window.ahr.textarea_widget = window.ahr.textarea_widget || {};
+   window.ahr.textarea_widget.initWidget = function (container, item, preval) {
+     var widget = new TextareaWidget({
+       'cont': container,
+       'itm': item,
+       'prvl': preval
+     });
+     return widget;
+   };
+ })();
 </script>
 {% endcompress %}

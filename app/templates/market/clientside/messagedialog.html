@@ -33,59 +33,59 @@
 
 {% compress js %}
 <script type="text/javascript" id="expdate_view">
-(function(){
+(function () {
 
   var MessageDialogWidget = window.ahr.BaseView.extend({
-    events:{
+    events: {
       //'click .sendprivatemessageuser': 'showpMessage',
       'click .sendpm': 'sendpm',
       'click .cancelpm': 'cancelpm'
     },
 
-    getval:function(){
+    getval: function () {
       this.subject = $('#msgsub').val();
       this.message = $('#newmessage').val();
-      return([this.subject,this.message]);
+      return ([this.subject, this.message]);
     },
 
-    sendpm: function(ev){
+    sendpm: function (ev) {
       ev.preventDefault();
-      $('.sendpm').prop('disabled',true);
+      $('.sendpm').prop('disabled', true);
       var that = this;
       this.getval();
-      if( this.subject !== '' &&  this.message !== ''){
-        window.ahr.getcsrf(function(csrf){
+      if (this.subject !== '' && this.message !== '') {
+        window.ahr.getcsrf(function (csrf) {
           var dfrd = $.ajax({
-            url:window.ahr.app_urls.sendmessage+that.username,
+            url: window.ahr.app_urls.sendmessage + that.username,
             type: 'POST',
             dataType: 'json',
             data: {
-              csrfmiddlewaretoken :csrf.csrfmiddlewaretoken,
+              csrfmiddlewaretoken: csrf.csrfmiddlewaretoken,
               subject: that.subject,
               message: that.message
             }
           });
-          dfrd.done(function(){
+          dfrd.done(function () {
             $('#messagedialog').modal('hide');
-            $('.sendpm').prop('disabled',false);
+            $('.sendpm').prop('disabled', false);
           });
-          dfrd.fail(function(data){
-            that.alert(data.responseJSON.message+'. Please try again.',that.alert_place);
-            $('.sendpm').prop('disabled',false);
+          dfrd.fail(function (data) {
+            that.alert(data.responseJSON.message + '. Please try again.', that.alert_place);
+            $('.sendpm').prop('disabled', false);
           });
         });
-      }else{
-        this.alert('Please provide a subject and message.',that.alert_place);
+      } else {
+        this.alert('Please provide a subject and message.', that.alert_place);
       }
-      return(false);
+      return (false);
     },
 
-    cancelpm: function(ev){
+    cancelpm: function (ev) {
       ev.preventDefault();
-      return(false);
+      return (false);
     },
 
-    show: function(username,subject,message,readonlysub){
+    show: function (username, subject, message, readonlysub) {
       $('#newmessage').height(100);
       this.username = username;
       this.subject = subject;
@@ -93,24 +93,27 @@
       $('#usernameh').text(this.username);
       $('#msgsub').val(this.subject);
       $('#newmessage').val(this.message);
-      if(readonlysub==true){
-        $('#msgsub').attr('readonly',true);
+      if (readonlysub == true) {
+        $('#msgsub').attr('readonly', true);
       }
       $('#messagedialog').modal('show');
     },
 
-    initialize:function(settings){
-      this.alert_place = '#pmerror'//settings.alert_place;
+    initialize: function (settings) {
+      this.alert_place = '#pmerror' //settings.alert_place;
       window.ahr.expandTextarea('#newmessage');
       return this;
     }
-});
+  });
 
-window.ahr.messagedialog_widget = window.ahr.messagedialog_widget || {};
-window.ahr.messagedialog_widget.initWidget= function(container,alert_place){
-  var widget = new MessageDialogWidget({el: container,alert_place:alert_place});
-  return widget;
-};
+  window.ahr.messagedialog_widget = window.ahr.messagedialog_widget || {};
+  window.ahr.messagedialog_widget.initWidget = function (container, alert_place) {
+    var widget = new MessageDialogWidget({
+      el: container,
+      alert_place: alert_place
+    });
+    return widget;
+  };
 })();
 </script>
 {% endcompress %}

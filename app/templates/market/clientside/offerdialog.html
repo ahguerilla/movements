@@ -43,154 +43,169 @@
 {% compress js %}
 
 <script type="text/javascript">
-(function(){
-    var OfferDialogView = window.ahr.item_form_base.extend({
-        item:'',
-        el: '#offerform',
+(function () {
+  var OfferDialogView = window.ahr.item_form_base.extend({
+    item: '',
+    el: '#offerform',
 
-        init:function(){
-            var that=this;
-            this.url = window.ahr.app_urls.addmarketitem+'offer';
-            $('#offerdialog').on('hidden.bs.modal',function(){
-              if(that.changing==true){
-              $('input,textarea',$('#offerdialog')).val('');
-              that.issues_widget.empty();
-              that.countries_widget.empty();
-              that.skills_widget.empty();
-              that.changing=false;
-            }
-          });
+    init: function () {
+      var that = this;
+      this.url = window.ahr.app_urls.addmarketitem + 'offer';
+      $('#offerdialog').on('hidden.bs.modal', function () {
+        if (that.changing == true) {
+          $('input,textarea', $('#offerdialog')).val('');
+          that.issues_widget.empty();
+          that.countries_widget.empty();
+          that.skills_widget.empty();
+          that.changing = false;
+        }
+      });
+    },
+
+    getFormData: function () {
+      var that = this;
+      var retdict = {};
+      retdict['skills'] = that.skills_widget.getval();
+      retdict['countries'] = that.countries_widget.getval();
+      retdict['issues'] = that.issues_widget.getval();
+      retdict['exp_date'] = that.expdate_widget.getval();
+      retdict['never_exp'] = that.never_exp_widget.getval();
+      retdict['title'] = that.title_widget.getval();
+      retdict['details'] = that.details_widget.getval();
+      retdict.csrfmiddlewaretoken = that.csrf;
+      return retdict;
+    },
+
+    edit: function (item, edit_calback) {
+      this.changing = true;
+      $('#' + this.el.id + ' .error').empty();
+      this.url = window.ahr.app_urls.editmarketitem + item[0].pk;
+      this.issues_widget.change(item[0].fields.issues);
+      this.countries_widget.change(item[0].fields.countries);
+      this.skills_widget.change(item[0].fields.skills);
+      this.expdate_widget.change(item[0].fields.exp_date);
+      this.never_exp_widget.change(item[0].fields.never_exp);
+      if (item[0].fields.never_exp == true) {
+        this.expdate_widget.disable();
+      } else {
+        this.expdate_widget.enable();
+      }
+      this.title_widget.change(item[0].fields.title);
+      this.details_widget.change(item[0].fields.details);
+      this.edit_calback = edit_calback;
+      this.item_id = item[0].pk;
+    },
+
+    makeWidget: function () {
+      var that = this;
+      this.issues_widget = window.ahr.typeahead_widget.initWidget(
+        '#issues_place', {
+          title: 'I can help to advance freedom of:',
+          jsonfield: 'issues'
         },
+        this.item_obj ? this.item_obj.issues : null);
 
-        getFormData: function(){
-            var that = this;
-            var retdict={};
-            retdict['skills'] = that.skills_widget.getval();
-            retdict['countries'] = that.countries_widget.getval();
-            retdict['issues'] = that.issues_widget.getval();
-            retdict['exp_date'] = that.expdate_widget.getval();
-            retdict['never_exp'] = that.never_exp_widget.getval();
-            retdict['title'] = that.title_widget.getval();
-            retdict['details'] = that.details_widget.getval();
-            retdict.csrfmiddlewaretoken=that.csrf;
-            return retdict;
+      this.countries_widget = window.ahr.typeahead_widget.initWidget(
+        '#countries_place', {
+          title: 'Please enter the name of the countries where you can help',
+          jsonfield: 'countries'
         },
+        this.item_obj ? this.item_obj.countries : null);
 
-        edit: function(item, edit_calback){
-          this.changing=true;
-          $('#'+this.el.id+' .error').empty();
-          this.url = window.ahr.app_urls.editmarketitem+item[0].pk;
-          this.issues_widget.change(item[0].fields.issues);
-          this.countries_widget.change(item[0].fields.countries);
-          this.skills_widget.change(item[0].fields.skills);
-          this.expdate_widget.change(item[0].fields.exp_date);
-          this.never_exp_widget.change(item[0].fields.never_exp);
-          if(item[0].fields.never_exp==true){
-            this.expdate_widget.disable();
-          }else{
-            this.expdate_widget.enable();
-          }
-          this.title_widget.change(item[0].fields.title);
-          this.details_widget.change(item[0].fields.details);
-          this.edit_calback = edit_calback;
-          this.item_id = item[0].pk;
+      this.skills_widget = window.ahr.typeahead_widget.initWidget(
+        '#skills_place', {
+          title: 'Please enter the skills you have to offer',
+          jsonfield: 'skills'
         },
+        this.item_obj ? this.item_obj.skills : null);
 
-        makeWidget: function(){
-            var that = this;
-            this.issues_widget = window.ahr.typeahead_widget.initWidget(
-                        '#issues_place',
-                        {title:'I can help to advance freedom of:', jsonfield:'issues'},
-                        this.item_obj? this.item_obj.issues: null);
-
-            this.countries_widget = window.ahr.typeahead_widget.initWidget(
-                        '#countries_place',
-                        {title:'Please enter the name of the countries where you can help',  jsonfield:'countries'},
-                        this.item_obj? this.item_obj.countries: null);
-
-            this.skills_widget = window.ahr.typeahead_widget.initWidget(
-                        '#skills_place',
-                        {title:'Please enter the skills you have to offer',  jsonfield:'skills'},
-                        this.item_obj? this.item_obj.skills: null);
-
-            this.expdate_widget = window.ahr.datepicker_widget.initWidget(
-                        '#date_place',
-                        {title:'Expiry date', jsonfield:'exp_date'},
-                        this.item_obj);
-
-            this.never_exp_widget = window.ahr.checkbox_widget.initWidget(
-                        '#never_exp_place',
-                        {
-                          title:'Never expires',
-                          field:'never_exp',
-                          preval: this.item_obj? this.item_obj.never_exp : '',
-                          callback: that.onNeverexpClick,
-                          context: that
-                        });
-
-            this.title_widget = window.ahr.input_widget.initWidget(
-                        '#title_place',
-                        {title:'Title of post', jsonfield:'title', placeholder:''},
-                        this.item_obj? this.item_obj.title : null);
-
-            this.details_widget = window.ahr.textarea_widget.initWidget(
-                        '#details_place',
-                        {title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'},
-                        this.item_obj? this.item_obj.details : null);
+      this.expdate_widget = window.ahr.datepicker_widget.initWidget(
+        '#date_place', {
+          title: 'Expiry date',
+          jsonfield: 'exp_date'
         },
+        this.item_obj);
 
-        showModal:function(newitem){
-          this.closing=false;
-          if(newitem){
-            this.url = window.ahr.app_urls.addmarketitem+'offer';
-          }
-          var that = this;
-          $('#'+that.el.id+' #itemformerror').empty();
-          $('#offerdialog').modal('show');
-          window.ahr.getcsrf(function(csrf){
-              if(csrf==false){
-                  that.alert('Unable to connect to the server. please try again in a few minutes','#infobar');
-                  return;
-              }
-              that.csrf = csrf.csrfmiddlewaretoken;
-            });
-          $('#offerdialog').on('scroll',function(){
-            var top = $('.glyphicon.glyphicon-calendar',$('#offerdialog')).offset().top-$(window).scrollTop();
-            $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function(){$(this).css('top',top+20);})
-          });
-          window.ahr.expandTextarea($('#details',$("#offerdialog")));          
-          $('#offerdialog').on('hide.bs.modal',function(ev){            
-            ev.stopImmediatePropagation();
-            if(!that.closing && !confirm('Are you sure you want to close this dialog?')){
-              return false;
-            }            
-            that.emptyTheForm();
-          });
-        },
-        
-        emptyTheForm:function(){
-          this.skills_widget.empty();
-          this.countries_widget.empty();
-          this.issues_widget.empty();
-          this.never_exp_widget.empty();
-          $('input,textarea',$('#offerdialog')).val('');
-          if(typeof this.edit_calback == "function"){
-            this.edit_calback(this.item_id);
-          }
-        },
+      this.never_exp_widget = window.ahr.checkbox_widget.initWidget(
+        '#never_exp_place', {
+          title: 'Never expires',
+          field: 'never_exp',
+          preval: this.item_obj ? this.item_obj.never_exp : '',
+          callback: that.onNeverexpClick,
+          context: that
+        });
 
-        aftersubmit:function(){
-          this.closing=true;
-          $('#offerdialog').modal('hide');
-          this.emptyTheForm();  
+      this.title_widget = window.ahr.input_widget.initWidget(
+        '#title_place', {
+          title: 'Title of post',
+          jsonfield: 'title',
+          placeholder: ''
         },
-    });
+        this.item_obj ? this.item_obj.title : null);
 
-    window.ahr.offer_form_dialog = window.ahr.offer_form_dialog|| {};
-    window.ahr.offer_form_dialog.initItem= function(item){
-        var offer_form = new OfferDialogView(item);
-        return offer_form;
-    };
+      this.details_widget = window.ahr.textarea_widget.initWidget(
+        '#details_place', {
+          title: '',
+          jsonfield: 'details',
+          placeholder: 'Please give details of what you can help with?'
+        },
+        this.item_obj ? this.item_obj.details : null);
+    },
+
+    showModal: function (newitem) {
+      this.closing = false;
+      if (newitem) {
+        this.url = window.ahr.app_urls.addmarketitem + 'offer';
+      }
+      var that = this;
+      $('#' + that.el.id + ' #itemformerror').empty();
+      $('#offerdialog').modal('show');
+      window.ahr.getcsrf(function (csrf) {
+        if (csrf == false) {
+          that.alert('Unable to connect to the server. please try again in a few minutes', '#infobar');
+          return;
+        }
+        that.csrf = csrf.csrfmiddlewaretoken;
+      });
+      $('#offerdialog').on('scroll', function () {
+        var top = $('.glyphicon.glyphicon-calendar', $('#offerdialog')).offset().top - $(window).scrollTop();
+        $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function () {
+          $(this).css('top', top + 20);
+        })
+      });
+      window.ahr.expandTextarea($('#details', $("#offerdialog")));
+      $('#offerdialog').on('hide.bs.modal', function (ev) {
+        ev.stopImmediatePropagation();
+        if (!that.closing && !confirm('Are you sure you want to close this dialog?')) {
+          return false;
+        }
+        that.emptyTheForm();
+      });
+    },
+
+    emptyTheForm: function () {
+      this.skills_widget.empty();
+      this.countries_widget.empty();
+      this.issues_widget.empty();
+      this.never_exp_widget.empty();
+      $('input,textarea', $('#offerdialog')).val('');
+      if (typeof this.edit_calback == "function") {
+        this.edit_calback(this.item_id);
+      }
+    },
+
+    aftersubmit: function () {
+      this.closing = true;
+      $('#offerdialog').modal('hide');
+      this.emptyTheForm();
+    },
+  });
+
+  window.ahr.offer_form_dialog = window.ahr.offer_form_dialog || {};
+  window.ahr.offer_form_dialog.initItem = function (item) {
+    var offer_form = new OfferDialogView(item);
+    return offer_form;
+  };
 })();
 </script>
 {% endcompress %}
