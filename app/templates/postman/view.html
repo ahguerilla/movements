@@ -9,21 +9,7 @@
 {% block content %}
 <div id="postman_message">
   <div _class="panel panel-default panel-sm">
-    <div _class="panel-heading">
-      <div class="pull-right">
-        <form action="" method="post">{% csrf_token %}
-            <input type="hidden" {% if pm_messages|length > 1 and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %} />
-            <span id="pm_buttons">
-              <button style="margin-bottom:10px;margin-top:10px;" type="submit" class="btn btn-default" onclick="this.form.action='{% url 'postman_delete' %}?next={{ next_url|urlencode }}'">{% trans "Delete" %}</button>
-              {% if not archived %}
-                <button style="margin-bottom:10px;margin-top:10px;" type="submit" class="btn btn-default" onclick="this.form.action='{% url 'postman_archive' %}?next={{ next_url|urlencode }}'">{% trans "Archive" %}</button>
-              {% endif %}
-            </span>
-            {% if reply_to_pk %}
-              <!-- <a href="{% url 'postman_reply' reply_to_pk %}?next={{ next_url|urlencode }}">{% trans "Reply" %}</a> -->
-            {% endif %}
-        </form>
-      </div>
+    <div _class="panel-heading">      
       <div style="margin-top:10px;" class="pull-left">
         <h4>{% if pm_messages|length > 0 %}{{ pm_messages.0.subject }}{% endif %}</h4>
       </div>
@@ -32,9 +18,9 @@
       <hr/>
       {% for message in pm_messages %}
       {% if  pm_messages|length > 4 and forloop.counter == 2%}
-        <div id="more-wrap">
+        <div id="more-wrap">       
         <div class="row">
-         <div class="col-md-offset-5 col-md-7">
+         <div class="col-md-offset-5 col-md-7">         
           <a id="showmoremessages">{{pm_messages|length|add:-2}} More....</a>
           </div>
         </div>

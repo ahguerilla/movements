@@ -1,4 +1,4 @@
-(function(){
+(function(){    
     var InboxRoute = Backbone.Router.extend({
         routes:{
             "": "page",
@@ -113,7 +113,7 @@
             }
         },
 
-        initialize: function(){
+        initialize: function(){            
             $(window).resize(this.resize);
             var more = $('.next')[0];
             this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
@@ -123,7 +123,7 @@
             this.resize();
         }
     });
-
+    
     window.ahr= window.ahr || {};
     window.ahr.messages = window.ahr.messages || {};
     window.ahr.messages.initInbox = function(){
@@ -131,8 +131,9 @@
     var messages_route = new InboxRoute(messages);
     if($(window).width()>992){
         $($('.conv_link')[0]).trigger('click');
+        
     }
-
-    Backbone.history.start();
+    $('#back').hide();
+    Backbone.history.start();    
 };
 })();
