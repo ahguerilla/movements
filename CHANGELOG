@@ -1,0 +1,71 @@
+Added notifications
+
+
+- notifications
+    Users will get notifications based on their "Area of interest" about new offers
+    and request.
+    they also will receive notification when someone comments on their post or comment
+    on a post that they commented before
+    
+    Notifications are shown as a drop down menu from the upper right corner of
+    the screen. In case of arival of new notificaton the Bell icon will turn red. 
+    Access to all notifications are also possible from the same menu.
+    
+    Unread notifications are shown with strong font and remain like that until the
+    user reads the post.    
+
+
+- "Areas of interest" in User settings page now use the same widget as Offer/Request dialogs.
+
+
+- Selecting Skills/Countries/Issues 
+    Drop down menu now shows all the available items with a scroll functionality
+    Users can add/remove items by clicking the items or pressing the Enter key.
+    The dropdown opens and closes on mouse click over the input.
+    Areas effected: Request dialog, Offer dialog, Settings page
+
+    
+- Text Area expands (As in replying to messages,Request text, Offer text, Comment     
+    Report, Private message)
+    
+    
+- Market Filters are preserved while surfing the site until the user closes the 
+    browser
+
+
+- Messeges in the inbox will collapse together in case of long conversation. 
+    
+
+- Market and User search now support partial queries 
+
+- Offer/Request dialog will show a confirmation dialog on close and will empty 
+    their content after closing.
+
+
+- Copy text was added to the relative pages.
+
+
+- Bug Fix: Sending private messages with too long of a subject shows a proper 
+    error message.
+
+- Fixed a bug causing the menus not working correctly on phone and tablet after
+    orientation change.
+    
+    
+- Fixed a bug for Mac and IOS not showing some buttons
+
+
+- Fixed a bug in market filters preventing the user from seeing all the market items
+
+
+- Fixed a bug in the ratings showing more that neccessary decimal points.
+     
+
+- Fixed a bug that resulted in case sensitive search
+
+- Fixed a bug resulting the market page to jump up and down when there were too 
+    few items to full the screen (affix)
+
+
+- Fixed a bug resulting the screen to jump to top and losing the position after 
+    pressing back button from a market item page

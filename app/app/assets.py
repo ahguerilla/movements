@@ -45,9 +45,9 @@ if settings.PRODUCTION or settings.STAGING:
         './css/tagmanager.css',
         './css/typeahead.css',
         './css/rateit.css',
-        './css/site.css',
+        './css/packed.css',
         filters='cssmin',
-        output='./css/packed.css'
+        output='./css/spacked.css'
     )
 else:
     css = Bundle(
