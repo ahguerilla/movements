@@ -1,3 +1,4 @@
+{% load compress %}
 <script type="text/template" id="filters_template">
 <div class="exchange-filter">
   <div class="container">
@@ -82,6 +83,8 @@
 </div>
 </script>
 
+
+{% compress js %}
 <script type="text/javascript">
  $(document).ready(function(){    
     var filterWidget = Backbone.View.extend({        
@@ -102,3 +105,4 @@
     };
 });
 </script>
+{% endcompress %}

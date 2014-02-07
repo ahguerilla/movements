@@ -5,6 +5,7 @@ STAGING= True
 MEDIA_ROOT = PROJECT_DIR.child("media")
 STATIC_ROOT = PROJECT_DIR.child("static")
 
+COMPRESS_ENABLED = True
 DEBUG = False
 ASSETS_DEBUG = False
 

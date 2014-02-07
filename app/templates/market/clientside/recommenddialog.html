@@ -1,3 +1,5 @@
+{% load compress %}
+
 <div id="recommenddialog" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -34,6 +36,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+{% compress js %}
 
 <script type="text/javascript" id="recommend_view">
  (function(){
@@ -107,3 +110,4 @@
     };
 })();
 </script>
+{% endcompress %}

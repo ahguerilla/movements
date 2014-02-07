@@ -1,3 +1,4 @@
+{% load compress %}
 <script type="text/template" id="datetimepicker_template">
   <div class="col-md-12">
     <label for="<%- jsonfield %>"><%- title %></label>
@@ -15,6 +16,7 @@
 
 
 
+{% compress js %}
 <script type="text/javascript" id="datetimepicker_view">
  (function(){
     var DateTimePickerWidget = window.ahr.BaseView.extend({
@@ -62,3 +64,4 @@
     };
 })();
 </script>
+{% endcompress %}

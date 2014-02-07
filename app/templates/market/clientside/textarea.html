@@ -1,3 +1,5 @@
+{% load compress %}
+
 <script type="text/template" id="textarea_template">
   <div class="col-md-12">
     <div class="<%- jsonfield %> error"></div>
@@ -6,6 +8,8 @@
     <textarea class="form-control" name="<%- jsonfield %>" id="<%- jsonfield %>" rows="6" placeholder="<%- placeholder %>"></textarea>
   </div>
 </script>
+
+{% compress js %}
 
 <script type="text/javascript" id="textarea_view">
  (function(){
@@ -44,3 +48,4 @@
     };
 })();
 </script>
+{% endcompress %}

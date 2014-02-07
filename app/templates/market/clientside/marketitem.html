@@ -1,3 +1,4 @@
+{% load compress %}
 <script type="text/template" id="item_template">
   <div class="market-place-item item-wrap" item_id="<%- pk %>" owner_id="<%- ownerid %>">
     <div class="market-item-card" item_id="<%- pk %>" owner_id="<%- ownerid %>">
@@ -52,6 +53,8 @@
   </div>
 </script>
 
+
+{% compress js %}
 <script type="text/javascript">
 (function(){
     var MarketItemWidget =  window.ahr.BaseView.extend({
@@ -264,3 +267,4 @@
 
   })();
 </script>
+{% endcompress %}

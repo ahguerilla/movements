@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load compress %}
 
 {% block outsidecontainer %}
   <div id="market">
@@ -78,6 +79,7 @@
 {% endblock %}
 
 {% block endjavascript %}
+  {% compress js %}
   <script type="text/javascript">
 
     $(document).ready(function () {
@@ -111,6 +113,7 @@
 
 
   </script>
+  {% endcompress %}
 
 {% endblock %}
 

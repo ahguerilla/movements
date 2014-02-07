@@ -1,3 +1,5 @@
+{% load compress %}
+
 <script type="text/template" id="typeahead_template">
   <div class="col-md-12">
     <div class="<%- item %> error"></div>
@@ -15,6 +17,8 @@
     <div class="input-group" id="<%- item %>Tags"></div>
   </div>
 </script>
+
+{% compress js %}
 
 <script type="text/javascript" id="typeahead_view">
   (function(){   
@@ -215,3 +219,4 @@
     };
 })();
 </script>
+{% endcompress %}

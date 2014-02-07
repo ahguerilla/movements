@@ -1,3 +1,4 @@
+{% load compress %}
 <script type="text/template" id="user-template">
   <div class="market-place-item item-wrap" item_id="<%- pk %>" >
     <div class="market-item-card user-card" >
@@ -45,6 +46,7 @@
   </div>
 </script>
 
+{% compress js %}
 
 <script type="text/javascript">
 (function(){
@@ -117,3 +119,4 @@
   })();
 
 </script>
+{% endcompress %}

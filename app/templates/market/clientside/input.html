@@ -1,3 +1,4 @@
+{% load compress %}
 <script type="text/template" id="input_template">
   <div class="col-md-12">
     <div class="<%- jsonfield %> error"></div>
@@ -9,6 +10,8 @@
 
 </script>
 
+
+{% compress js %}
 <script type="text/javascript" id="input_view">
  (function(){
     var inputWidget = window.ahr.BaseView.extend({
@@ -46,3 +49,4 @@
     };
 })();
 </script>
+{% endcompress %}

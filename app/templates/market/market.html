@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load compress %}
+
 
 {% block outsidecontainer %}
 <div id="market" >
@@ -88,6 +90,7 @@
     {% include "market/clientside/offerdialog.html"%}
     {% include "market/clientside/requestdialog.html"%}
 
+    {% compress js %}
     <script type="text/javascript">
 
     $(document).ready(function(){
@@ -103,8 +106,8 @@
         });
     });
 
-
     </script>
+    {% endcompress %}
 
 {% endblock %}
 
