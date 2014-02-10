@@ -1,0 +1,46 @@
+v0.12 Release notes 07 Feb 2014
+
+Features
+- Search for username is now case insensitive
+- Allow partial text search on user profiles
+- Add affix banner, so filters are fixes to top of page when scrolling down
+- Save filter selection in cookie. Market Filters are now preserved while surfing the site until the user closes the browser
+- Remove fixed bottom nav on mobile devices
+- Add confirm close alert to dialogs
+- Multi select control enhanced to show all available items with scroll. Now it allows multiple selection in dropdown by mouse click or enter. Areas effected: Request dialog, Offer dialog, Settings page.
+
+- Notifications:
+    - Add notification dropdown which displays latest 15 notifications
+    - Add notification page which displays all notification history
+    - Check for new notifications in client side timer
+    - Notification received when market item added which matches user attribute (skill, issue or country)
+    - Notification received when user comments on an owned post
+    - Notification received when user comments on a post that contains owned comment
+    - Add celery for notifications message queue
+
+- Improve messaging:
+    - Collapse conversations over 5 messages long
+    - Remove reply text from messages to make more conversation like
+    - Add error message when message subject too long
+    - Improve styling of messages
+
+
+UX/UI Enhancements
+- Make skills, issues and countries tags in user profile consistent with the market tags
+- Reduce shadow in market item cards to make them fit with the flatter styles of the page
+- Update labels in create offer/request
+
+
+Bug Fixes
+- Round user ratings
+- Fixed filters in market and exchanivists page
+- Remove double slash (//) from static urls
+- Fixed nav dropdown when switching between responsive widths
+- Fix subject in recommends messages
+- Remove delete/archive from messaging as they weren't doing anything
+- Text area expands when replying to messages, creating requests, creating offer text, comment, report, private message
+- Empty contents of request/offer after closing dialog
+- Fixed a bug causing the menus to not work correctly on phone and tablet after orientation change
+- Fixed a bug on Mac and iOS not showing some buttons correctly
+- Fixed a bug in market filters preventing users from seeing all market items despite filter selection
+- Fixed a bug resulting causing the screen to jump to top and losing the scroll position after pressing the back button from a market item page
