@@ -218,8 +218,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       $(".exchange-banner").hide();
     }
 
-    this.initInfiniteScroll(function () {
-      //debugger;
+    this.initInfiniteScroll(function () {      
       //$(".exchange-banner").show();
       if (updateMarketScrollPosition) {
         var heightOfBanner = $('.exchange-banner').height();
@@ -299,8 +298,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $('#singleItem').empty();
   },
 
-  hideMarket: function () {
-    //debugger;
+  hideMarket: function () {    
     $('.exchange-banner').hide();
     $('#backtothemarket').css('visibility', 'visible');
     $('#marketitem_comment_form').show();
@@ -313,8 +311,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $('#itemandsearchwrap').hide();
   },
 
-  showMarket: function () {
-    //debugger;
+  showMarket: function () {    
     $('.exchange-banner').show();
     $('#backtothemarket').css('visibility', 'hidden');
     $('#itemandsearchwrap').show();
