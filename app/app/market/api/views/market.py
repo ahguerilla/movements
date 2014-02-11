@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
-from celerytasks import createNotification, updateNotifications, markReadNotifications, markSeenNotifications
+from tasks.celerytasks import createNotification, updateNotifications, markReadNotifications, markSeenNotifications
 
 
 def getMarketjson(objs):

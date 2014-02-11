@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 import json
 from app.market.api.utils import *
 from django.contrib.auth.decorators import login_required
-from celerytasks import createCommentNotification
+from tasks.celerytasks import createCommentNotification
 
 
 def saveComment(form, owner,item):

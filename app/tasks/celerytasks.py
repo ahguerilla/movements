@@ -1,31 +1,16 @@
-from __future__ import absolute_import
-import os
-import sys
-sys.path.append(os.path.join(os.path.expanduser('~'),'.virtualenvs/ahr/lib/python2.7/site-packages'))
-sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','../')))
-sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../')))
-sys.path.append(os.path.abspath(os.path.abspath(__file__)))
-
-from celery import Celery, shared_task, task
-from threading import Thread
-from django.conf import settings
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings.staging')
-_app = Celery('celerytasks',broker='amqp://guest@localhost//')
-_app.config_from_object('django.conf:settings')
-_app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
-
-
+from celery import shared_task, task
 from app.users.models import UserProfile
 from app.market.models import MarketItem,Notification
 from django.db.models import Q
 from django.core.mail import send_mail
 import constance
 
-#import rpdb2; rpdb2.start_embedded_debugger_interactive_password()
 from datetime import timedelta
-#from celery.schedules import crontab
 
+
+if not '_app' in dir():
+    from celery import Celery
+    _app = Celery('celerytasks',broker='amqp://guest@localhost//')
 
 def getNotifText(obj):
     var = 'a request' if obj.item_type=='request' else 'an offer'
