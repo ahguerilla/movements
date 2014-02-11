@@ -736,8 +736,8 @@
                 _handleSelection: function (a) {
                     var b = "suggestionSelected" === a.type,
                         d = b ? a.data : this.dropdownView.getSuggestionUnderCursor();
-                    this.eventBus.trigger("select", d.datum, d.dataset);                    
-                    d && (this.inputView.setInputValue(d.value), b ? this.inputView.focus() : a.data.preventDefault(), b && c.isMsie() ? c.defer(this.dropdownView.close) : this.dropdownView.close(), this.eventBus.trigger("selected", d.datum, d.dataset))
+                    d && this.eventBus.trigger("select", d.datum, d.dataset);                    
+                    d && (this.inputView.setInputValue(d.value), b ? this.inputView.focus() : a.data.preventDefault(), b && c.isMsie() ? c.defer(this.dropdownView.close) : this.dropdownView.close(), this.eventBus.trigger("selected", d.datum, d.dataset) )
                 },
                 _getSuggestions: function () {
                     var a = this,
