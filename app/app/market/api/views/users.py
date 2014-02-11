@@ -107,7 +107,7 @@ def sendMessage(request,to_user,rtype):
                  body=request.POST['message'])
     except Exception,err:
         if err.message== 'value too long for type character varying(120)\n':
-            message= "subject it too long (maximum 120 characters)"
+            message= "subject is too long (maximum 120 characters)"
         return HttpResponseError(
             json.dumps({'success': 'false','message':message}),
             mimetype="application/"+rtype)
