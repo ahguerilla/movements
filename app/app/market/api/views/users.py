@@ -23,33 +23,28 @@ def createQuery(request):
     if request.GET.has_key('issues'):
         query = query | Q(issues__in=request.GET.getlist('issues'))
 
-    if request.GET.has_key('search') and request.GET['search']!='':
-        #ids= [int(obj.pk) for obj in objs]
-        objs = SearchQuerySet().models(users.models.UserProfile).filter(text__contains=request.GET['search'])
-        ids= [int(obj.pk) if not obj.object.notperm.has_key('name') and obj.object.id != request.user.id else None for obj in objs]
-
-        objs = SearchQuerySet().models(users.models.UserProfile).filter(username__contains=request.GET['search'])
-        ids.extend([int(obj.pk) if obj.object.id != request.user.id else None for obj in objs])
-
-        objs = SearchQuerySet().models(users.models.UserProfile).filter(bio__contains=request.GET['search'])
-        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('bio') and obj.object.id != request.user.id else None for obj in objs])
-
-        objs = SearchQuerySet().models(users.models.UserProfile).filter(expertise__contains=request.GET['search'])
-        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('experties') and obj.object.id != request.user.id else None for obj in objs])
-
-        objs = SearchQuerySet().models(users.models.UserProfile).filter(tag_ling__contains=request.GET['search'])
-        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('tag_ling') and obj.object.id != request.user.id else None for obj in objs])
-
-        objs = SearchQuerySet().models(users.models.UserProfile).filter(nationality__contains=request.GET['search'])
-        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('nationality') and obj.object.id != request.user.id else None for obj in objs])
-
-        objs = SearchQuerySet().models(users.models.UserProfile).filter(resident_country__contains=request.GET['search'])
-        ids.extend([int(obj.pk) if not obj.object.notperm.has_key('resident_country') and obj.object.id != request.user.id else None for obj in objs])
-        try:
-            ids=set(ids)
+    if request.GET.has_key('search') and request.GET['search']!='':        
+        search_q = request.GET['search']
+        
+        ids = SearchQuerySet().models(users.models.UserProfile).\
+            filter(Q(nationality__contains=search_q)|
+                   Q(resident_country__contains=search_q)|
+                   Q(tag_ling__contains=search_q)|
+                   Q(expertise__contains=search_q)|
+                   Q(bio__contains=search_q)|
+                   Q(username__contains=search_q)|
+                   Q(text__contains=search_q)|
+                   Q(occupation__contains=search_q)                                                                        
+                   ).values_list('pk',flat=True)                                
+        
+        if None in ids:
             ids.remove(None)
-        except:
-            pass
+        
+        ids = [int(id) for id in ids]
+        
+        if request.user.userprofile.id in ids:
+            ids.remove(request.user.userprofile.id)
+        
         query = query & Q(id__in = ids)
 
     if request.GET.has_key('types'):
