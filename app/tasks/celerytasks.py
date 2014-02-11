@@ -2,15 +2,11 @@ from celery import shared_task, task
 from app.users.models import UserProfile
 from app.market.models import MarketItem,Notification
 from django.db.models import Q
-from django.core.mail import send_mail
-import constance
-
-from datetime import timedelta
-
 
 if not '_app' in dir():
     from celery import Celery
     _app = Celery('celerytasks',broker='amqp://guest@localhost//')
+
 
 def getNotifText(obj):
     var = 'a request' if obj.item_type=='request' else 'an offer'
