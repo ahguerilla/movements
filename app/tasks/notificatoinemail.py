@@ -7,8 +7,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','..
 sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../')))
 sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','app')))
 
-from celery import Celery
-from threading import Thread
 from django.conf import settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings.local')
 
