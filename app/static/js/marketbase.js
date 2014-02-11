@@ -167,6 +167,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     var that = self;
     if (!that.loadingScrollElemets && that.levelReached(30) && !that.allItemsLoaded) {
       that.loadingScrollElemets = true;
+      console.log('loaging');
+      $('#ajaxloader').show();
       var dfrd = that.getItems(
         that.currentItem,
         that.currentItem + that.itemsPerCall
@@ -176,6 +178,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       dfrd.done(function (data) {
         if (data.length === 0) {
           that.allItemsLoaded = true;
+          $('#ajaxloader').hide();
         }
         _.each(data, function (item) {
           item.fields.pk = item.pk;
@@ -193,6 +196,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
           that.item_widget.afterset();
           that.msnry.layout();
+          $('#ajaxloader').hide();
         }
 
         that.currentItem = that.currentItem + that.itemsPerCall;
