@@ -135,6 +135,11 @@ def waitforactivation(request):
                               context_instance=RequestContext(request))
 
 
+def thanksforactivation(request):
+    return render_to_response('users/thanksforactivation.html',
+                              {},
+                              context_instance=RequestContext(request))
+    
 
 class SilentPasswordResetView(PasswordResetView):
     form_class = ResetPasswordFormSilent
@@ -236,7 +241,7 @@ class AccAdapter(DefaultAccountAdapter):
         key = request.path.split('/')[3]
         conf = EmailConfirmation.objects.filter(key=key)[0]
         if conf.email_address.user.is_active:
-            return 'http://'+Site.objects.get_current().domain
+            return 'http://'+Site.objects.get_current().domain+'/user/thanksforactivation';
 
         ctx = {
             "user": str(conf.email_address),
