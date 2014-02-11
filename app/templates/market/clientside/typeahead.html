@@ -192,10 +192,8 @@
         return val_ids;
       },
       
-      addPressed: function(ev){         
-        debugger;
-        if (this.closed === true) {
-          
+      addPressed: function(ev){                 
+        if (this.closed === true) {          
           $('#' +this.settings.jsonfield , $(this.container)).trigger('focus');        
           this.closed = false;
           this.clicked = false;
