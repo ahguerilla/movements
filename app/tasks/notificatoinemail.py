@@ -24,16 +24,16 @@ import constance
 def createNotifMessage(notifications):
     string = '<h4>Hello dear Exchangivist</h4>'
     string += '<h5>Here are your last week notifications:</h5><p>'
-    for notication in notifications:
-        if notication.comment:
-            string += notication.comment.owner.username+ ' commented on '
-            string += notication.item.title+ ' at '+ str(notication.pub_date)[0:16]
-            string += ' <a href ="http://ahr.guerillasoftware.net/market/#item/'+str(notication.item.id)+'"> click here to view this '+notication.item.item_type+'</a>'
+    for notification in notifications:
+        if notification.comment:
+            string += notification.comment.owner.username+ ' commented on '
+            string += notification.item.title+ ' at '+ str(notification.pub_date)[0:16]
+            string += ' <a href ="http://ahr.guerillasoftware.net/market/#item/'+str(notification.item.id)+'"> click here to view this '+notification.item.item_type+'</a>'
             string += '<br/><br/>'
         else:
-            string += notication.item.owner.username+ ' created '
-            string += notication.item.title+ ' at '+ str(notication.pub_date)[0:16]
-            string += ' <a href ="http://ahr.guerillasoftware.net/market/#item/'+str(notication.item.id)+'"> click here to view this '+notication.item.item_type+'</a>'
+            string += notification.item.owner.username+ ' created '
+            string += notification.item.title+ ' at '+ str(notification.pub_date)[0:16]
+            string += ' <a href ="http://ahr.guerillasoftware.net/market/#item/'+str(notification.item.id)+'"> click here to view this '+notification.item.item_type+'</a>'
             string += '<br/><br/>'
             
     string += '</p> <p>Regards <br/>AHR team</p>'
@@ -54,12 +54,12 @@ if __name__ == '__main__':
         order_by('user','-pub_date')        
     alist=[]
     lastid=None
-    for notication in notifications:
-        if not lastid or notication.user.id == lastid:
-            alist.append(notication)
-            lastid = notication.user.id
+    for notification in notifications:
+        if not lastid or notification.user.id == lastid:
+            alist.append(notification)
+            lastid = notification.user.id
         else:
-            lastid = notication.user.id
+            lastid = notification.user.id
             sendNotification(alist)
             alist=[]
             
