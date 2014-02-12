@@ -186,6 +186,7 @@ def signup_from_home(request):
         form.fields['first_name'].initial = request.POST.get('first_name', '')
         form.fields['last_name'].initial = request.POST.get('last_name', '')
         form.fields['email'].initial = request.POST.get('email', '')
+        form.fields['tnccheckbox'].initial = request.POST.get('tnccheckbox', '')
     view_dict = {
         'form': form,
         'body_class': 'narrow',

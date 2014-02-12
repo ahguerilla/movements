@@ -115,6 +115,13 @@
           {% render_field form.web_url class="form-control input-sm" placeholder="Website Link" %}
         </div>
       </div>
+      <div class="form-group">
+        <div class="col-md-12">      
+          {{ form.tnccheckbox.errors }}
+          {% render_field form.tnccheckbox required="true" %}
+          <label for="id_tnccheckbox">I agree to the </label> <a href="{% url 'terms_and_conditions' %}" target="_blank" alt="terms and conditions">Terms &amp; Conditions</a>
+        </div>
+      </div>
       {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
