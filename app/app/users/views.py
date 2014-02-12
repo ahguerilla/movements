@@ -19,6 +19,8 @@ from constance import config
 from django.core.urlresolvers import reverse, reverse_lazy
 from app.market.api.utils import value
 import app.users as users
+from django.contrib.admin.models import LogEntry,CHANGE
+from django.contrib.contenttypes.models import ContentType
 
 
 def render_settings(request, initial=False):
@@ -276,7 +278,15 @@ def vet_user(request, user_id):
             else:
                 form.save()
             user.is_active = rating.rated_by_ahr != 0
-            user.save()
+            user.save()            
+            typeuser = ContentType.objects.filter(name='user').all()[0]           
+            log = LogEntry(user_id=request.user.id,
+                           content_type= typeuser,
+                           object_id=user.id,
+                           object_repr=user.username,
+                           action_flag=2,
+                           change_message="vetted")
+            log.save()
             msg = 'User updated'
     else:
         form = VettingForm(instance=rating)

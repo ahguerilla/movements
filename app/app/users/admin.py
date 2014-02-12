@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from app.users.models import UserProfile, Countries, Skills, Issues
-
+from django.contrib.admin.models import LogEntry
 
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
@@ -13,7 +13,7 @@ class UserProfileInline(admin.StackedInline):
 
 class UserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
-    list_display = ('username', 'email', 'first_name', 'last_name', 'vetting')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'vetting' ,'vetted_by')
 
     def vetting(self, obj):
         if obj.is_staff:
@@ -21,6 +21,14 @@ class UserAdmin(UserAdmin):
         result = 'Vetted' if obj.is_active else 'Not Vetted'
         vet_url = reverse('vet_user', args=(obj.id,))
         return u'<a href="{0}" target="_blank" alt="vet user">Vet User</a> ({1})'.format(vet_url, result)
+    
+    def vetted_by(self,obj):
+        log = LogEntry.objects.filter(object_id = obj.id).all()
+        if len(log)>0:
+            return log[0].user.username
+        else:
+            return ''
+        
     vetting.process = 'Process'
     vetting.allow_tags = True
 
