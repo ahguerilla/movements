@@ -13,10 +13,7 @@ class UserProfileInline(admin.StackedInline):
 
 class UserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
-    list_display = ('username', 'email', 'first_name', 'last_name', 'vetting' ,'vetted_by')
-    
-    #class Media:
-        #js = ('/static/js/lib/jquery-1.10.2.min.js','/static/js/useradmin.js',)
+    list_display = ('username', 'email', 'first_name', 'last_name', 'vetting' ,'vetted_by')   
             
     def vetting(self, obj):
         if obj.is_staff:
@@ -32,16 +29,7 @@ class UserAdmin(UserAdmin):
         if len(log)>0:
             return log[0].user.username
         else:
-            return ''
-        
-    def send_user_vetted_email(self,obj):
-        email_vet_url = reverse('email_vet_user', args=(obj.id,))
-        return '<a class="sendvettedemail" target="_blank" href="{0}">Send vetted email</a>'.format(email_vet_url)
-    send_user_vetted_email.process = 'Process'
-    send_user_vetted_email.allow_tags = True
-        
-    
-
+            return ''        
 
 # Re-register UserAdmin
 admin.site.unregister(User)
