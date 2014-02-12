@@ -14,13 +14,18 @@ class UserProfileInline(admin.StackedInline):
 class UserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
     list_display = ('username', 'email', 'first_name', 'last_name', 'vetting' ,'vetted_by')
-
+    
+    #class Media:
+        #js = ('/static/js/lib/jquery-1.10.2.min.js','/static/js/useradmin.js',)
+            
     def vetting(self, obj):
         if obj.is_staff:
             return 'Staff'
         result = 'Vetted' if obj.is_active else 'Not Vetted'
         vet_url = reverse('vet_user', args=(obj.id,))
         return u'<a href="{0}" target="_blank" alt="vet user">Vet User</a> ({1})'.format(vet_url, result)
+    vetting.process = 'Process'
+    vetting.allow_tags = True    
     
     def vetted_by(self,obj):
         log = LogEntry.objects.filter(object_id = obj.id).all()
@@ -29,8 +34,13 @@ class UserAdmin(UserAdmin):
         else:
             return ''
         
-    vetting.process = 'Process'
-    vetting.allow_tags = True
+    def send_user_vetted_email(self,obj):
+        email_vet_url = reverse('email_vet_user', args=(obj.id,))
+        return '<a class="sendvettedemail" target="_blank" href="{0}">Send vetted email</a>'.format(email_vet_url)
+    send_user_vetted_email.process = 'Process'
+    send_user_vetted_email.allow_tags = True
+        
+    
 
 
 # Re-register UserAdmin

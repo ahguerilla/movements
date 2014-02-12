@@ -21,6 +21,10 @@ from app.market.api.utils import value
 import app.users as users
 from django.contrib.admin.models import LogEntry,CHANGE
 from django.contrib.contenttypes.models import ContentType
+import json
+from django.core.mail import EmailMessage
+import constance
+
 
 
 def render_settings(request, initial=False):
@@ -296,6 +300,22 @@ def vet_user(request, user_id):
         'original': user,
         'user': user,
         'form': form,
-        'msg': msg,
+        'msg': msg,        
+        'vetted': user.is_active
     }
     return render_to_response('admin/auth/user/vet_user.html', ctx, context_instance=RequestContext(request))
+
+
+@staff_member_required
+def email_vet_user(request, user_id):
+    user = User.objects.get(pk=user_id)
+    if not user.is_active:
+        return  HttpResponse(json.dumps({ 'success' : False, 'message': 'User is not vetted.'}),mimetype="application/json")    
+    email = EmailMessage('You have been vetted by AHR ',
+                        'Dear %s \r\n\r\n You have been vetted by our staff and you can use Exchangivist. \r\n \r\n Kind regards\r\n AHR team'%user.username,
+                        constance.config.NO_REPLY_EMAIL,
+                        [user.email])
+    email.send()
+    return  HttpResponse(json.dumps({ 'success' : True, 'message': 'An email has been sent to the user.'}),mimetype="application/json")
+    
+    
