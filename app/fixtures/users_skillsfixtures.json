@@ -1,128 +1,113 @@
-[
+[	
 	{
-		"pk": 1,
+		"pk": 1 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Public Relations"
+		"skills": "Advocacy"
 		}
 	},
+	
 	{
-		"pk": 2,
+		"pk": 2 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Advertising"
+		"skills": "Fundraising"
 		}
 	},
+	
 	{
-		"pk": 3,
+		"pk": 3 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Image Consulting"
+		"skills": "Hardware"
 		}
 	},
+	
 	{
-		"pk": 4,
+		"pk": 4 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Branding"
+		"skills": "Legal"
 		}
 	},
+	
 	{
-		"pk": 5,
+		"pk": 5 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Policy"
+		"skills": "Mobile"
 		}
 	},
+	
 	{
-		"pk": 6,
+		"pk": 6 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Advocacy"
+		"skills": "Multimedia"
 		}
 	},
+	
 	{
-		"pk": 7,
+		"pk": 7 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Analysis"
+		"skills": "Policy"
 		}
 	},
+	
 	{
-		"pk": 8,
+		"pk": 8 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Legislative Relations"
+		"skills": "Press"
 		}
 	},
+	
 	{
-		"pk": 9,
+		"pk": 9 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Hardware"
+		"skills": "Public Relations"
 		}
 	},
+	
 	{
-		"pk": 10,
+		"pk": 10 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Servers"
+		"skills": "Security"
 		}
 	},
+	
 	{
-		"pk": 11,
+		"pk": 11 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Sat Phones"
+		"skills": "Social Media"
 		}
 	},
+	
 	{
-		"pk": 12,
+		"pk": 12 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Mesh Networks"
+		"skills": "Technology"
 		}
 	},
+	
 	{
-		"pk": 13,
+		"pk": 13 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "Mac"
+		"skills": "Translation"
 		}
 	},
+	
 	{
-		"pk": 14,
+		"pk": 14 ,
 		"model": "users.skills",
 		"fields": {
-			"skills": "PC"
-		}
-	},
-	{
-		"pk": 15,
-		"model": "users.skills",
-		"fields": {
-			"skills": "Mobile"
-		}
-	},
-	{
-		"pk": 16,
-		"model": "users.skills",
-		"fields": {
-			"skills": "Security"
-		}
-	},
-	{
-		"pk": 17,
-		"model": "users.skills",
-		"fields": {
-			"skills": "Applications"
-		}
-	},
-	{
-		"pk": 18,
-		"model": "users.skills",
-		"fields": {
-			"skills": "Fundraising"
+		"skills": "Web"
 		}
 	}
 ]
