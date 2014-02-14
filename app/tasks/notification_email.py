@@ -33,18 +33,7 @@ def sendNotification(notifications):
     mail.content_subtype = 'html'
     mail.send()
 
-if __name__ == '__main__':
-    #afile = open('/home/mani/Desktop/skills.txt','r')
-    #items=afile.readlines()
-    #it=[]
-    #for item in items:
-        #it.append(item.strip())
-    #afile.close()
-    #string = render_to_string('emails/crap.txt',{'items':it})    
-    #bfile = open('/home/mani/Desktop/skills.fix.txt','w')
-    #bfile.writelines(string)
-    #bfile.close()
-    
+if __name__ == '__main__':   
     notifications = Notification.objects.filter(user__userprofile__get_newsletter=True,
         pub_date__gte=datetime.now()-timedelta(int(constance.config.EMAIL_NOTIFICATION_INTERVAL))).\
         order_by('user','pub_date')        
