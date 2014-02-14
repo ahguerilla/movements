@@ -24,6 +24,7 @@ from django.contrib.contenttypes.models import ContentType
 import json
 from django.core.mail import EmailMessage
 import constance
+from app.users.utils import get_client_ip
 
 
 
@@ -204,18 +205,40 @@ def signup_from_home(request):
 
 class AhrSignupView(SignupView):
     def get_context_data(self, **kwargs):
-        print 'HUR I AM'
+        
         ret = super(AhrSignupView, self).get_context_data(**kwargs)
         context_data = {
             'body_class': 'narrow',
             'sign_up': True,
             'post_url': ''
         }
-        ret.update(context_data)
+        ret.update(context_data)            
+        if (ret.has_key('form') and
+            ret['form'].errors.has_key('email') and
+            ret['form'].errors['email'][0] == u'A user is already registered with this e-mail address.'):
+            if len(ret['form'].errors)==1:        
+                self.template_name = "account/verification_sent.html"
+            else:
+                ret['form'].errors['email'].remove(u'A user is already registered with this e-mail address.')               
+                if len(ret['form'].errors['email'])==0:
+                    ret['form'].errors.pop('email')                                    
+            email = EmailMessage('Security Alert from AHR, Some one is trying to register as you!',
+                                 "Some one is trying to register with your email address for ip address: "+ get_client_ip(self.request)+
+                                 " \r\nIf its not you then may be he/she is trying to find out if you are registered with us or not "+
+                                 "We didn't reveal that you are registered with us and the registration proccess for he/she/them went through as normal. "+
+                                 "But if you were arrested and were denyng being involved with us and by some means (torture or ...) "+
+                                 "you gave up the access credentials to your email then we kindly ask the guy who is reading this to " + 
+                                 " send our regards to the poor soul and deny ever knowing him/her and sending this email! \r\n\r\n Regards\r\n AHR Team",
+                                 constance.config.NO_REPLY_EMAIL,
+                                 [ret['form'].data['email']])      
+            email.send()            
         return ret
 
 process_signup = AhrSignupView.as_view()
 
+#return render(request,
+              #"account/verification_sent.html",
+              #{"email": user_email(user)})
 
 class AccAdapter(DefaultAccountAdapter):
     def new_user(self, *args, **kwargs):

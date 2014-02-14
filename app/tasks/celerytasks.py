@@ -2,26 +2,29 @@ from celery import shared_task, task
 from app.users.models import UserProfile
 from app.market.models import MarketItem,Notification
 from django.db.models import Q
+import json
 
 if not '_app' in dir():
     from celery import Celery
     _app = Celery('celerytasks',broker='amqp://guest@localhost//')
 
 
-def getNotifText(obj):
-    var = 'a request' if obj.item_type=='request' else 'an offer'
-    return obj.owner.username +' created '+ var + ' that you might be interested in'
+def get_notification_text(obj,update=False):    
+    return json.dumps({
+        'update':update,
+        'title': obj.title
+    })
 
 
-def getNotifCommentText(obj,username):
-    return username +' commented on your '+obj.item_type
+def get_notification_comment_text(obj,username,comment, not_yours=False):
+    return json.dumps({
+        'username': username,
+        'title': obj.title,
+        'comment':comment.id,
+        'not_yours': not_yours
+    })
 
-
-def geSomeoneCommentUrCommentText(obj,username):
-    var = 'a request' if obj.item_type=='request' else 'an offer'
-    return username +' commented on '+ var +' that you commented on'
-
-    
+   
 def findPeopleInterestedIn(obj):
     skills= [skill.id for skill in obj.skills.all()]
     countries = [country.id for country in obj.countries.all()]
@@ -44,7 +47,7 @@ def createNotification(self,obj):
         notification.user = profile.user
         notification.item = obj
         notification.avatar_user = obj.owner.username
-        notification.text = getNotifText(obj)
+        notification.text = get_notification_text(obj)
         notification.save()
     return
 
@@ -58,9 +61,8 @@ def createCommentNotification(self,obj,comment,username):
         notification.item = obj
         notification.avatar_user = username
         notification.comment = comment
-        notification.text = getNotifCommentText(obj,username)    
-        notification.save()
-    notified = []
+        notification.text = get_notification_comment_text(obj,username,comment)    
+        notification.save()    
     for comment in obj.comments.all():        
         if comment.owner.username != username and comment.owner.id not in notified:            
             notification = Notification()
@@ -68,39 +70,37 @@ def createCommentNotification(self,obj,comment,username):
             notification.item = obj
             notification.avatar_user = username
             notification.comment = comment
-            notification.text = geSomeoneCommentUrCommentText(obj,username)    
-            notification.save()
-            notified.append(comment.owner.id)
+            notification.text = get_notification_comment_text(obj,username,comment,True)    
+            notification.save()            
     return
 
 
 @shared_task
 @_app.task(name="updateNotifications",bind=True)
 def updateNotifications(self,obj):
-    notif_objs = Notification.objects.filter(item=obj.id).only('user','read').all()
-    notif_userids =set([ notif.user.id for notif in notif_objs ])
+    notification_objs = Notification.objects.filter(item=obj.id).only('user','read').all()
+    notification_userids =set(notification.user.id for notification in notification_objs )
     profiles = findPeopleInterestedIn(obj)
-    user_ids = set([profile.user.id for profile in profiles])
+    user_ids = set(profile.user.id for profile in profiles)    
 
-    notifs_todelete = notif_userids.difference(user_ids)
-    for notif in notif_objs:
-        if notif.user.id in notifs_todelete:
-            notif.delete()
-
-    notifs_tocereate=user_ids.difference(notif_userids)
-    for user_id in notifs_tocereate:
+    notifications_tocereate=user_ids.difference(notification_userids)
+    for user_id in notifications:
         notification = Notification()
         notification.user_id = user_id
         notification.item = obj
         notification.avatar_user = obj.owner.username
-        notification.text = getNotifText(obj)
+        notification.text = get_notification_text(obj)
         notification.save()
 
-    notifs_toupdate = user_ids.intersection(notif_userids)
-    for notif in notif_objs:
-        if notif.user.id in notifs_toupdate and notif.text != obj.title:
-            notif.text = getNotifText(obj)
-            notif.save()
+    notifications_toupdate = user_ids.intersection(notification_userids)
+    for notification in notification_objs:
+        if notification.user.id in notifications_toupdate:
+            notification = Notification()
+            notification.user_id = user_id
+            notification.item = obj
+            notification.avatar_user = obj.owner.username
+            notification.text = get_notification_text(obj,update=True)
+            notification.save()                        
     return
 
 
@@ -108,19 +108,5 @@ def updateNotifications(self,obj):
 @_app.task(name="markReadNotifications",bind=True)
 def markReadNotifications(self,objs,user_id):
     obj_ids=[obj.id for obj in objs]
-    notifications = Notification.objects.filter(user=user_id).filter(item__in=obj_ids).filter(read=False).all()
-    for notification in notifications:
-        notification.read=True
-        notification.save()
+    notifications = Notification.objects.filter(user=user_id).filter(item__in=obj_ids).filter(read=False).update(read=True)    
     return
-
-
-@shared_task
-@_app.task(name="markSeenNotifications",bind=True)
-def markSeenNotifications(self,objs):    
-    for notification in objs:
-        notification.seen=True
-        notification.save()
-    return
-
-

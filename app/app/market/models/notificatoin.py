@@ -5,6 +5,7 @@ from .comment import Comment
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.core.urlresolvers import reverse
+from json_field import JSONField
 
 
 
@@ -15,7 +16,7 @@ class Notification(models.Model):
     seen = models.BooleanField()
     read = models.BooleanField()
     avatar_user = models.CharField(_('avatar user'),max_length=255, null=True, blank=True)
-    text = models.CharField(_('text'),max_length=500)
+    text = JSONField()
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
 
     class Meta:

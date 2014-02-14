@@ -166,8 +166,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   loadScrollElements: function (self, callback) {
     var that = self;
     if (!that.loadingScrollElemets && that.levelReached(30) && !that.allItemsLoaded) {
-      that.loadingScrollElemets = true;
-      console.log('loaging');
+      that.loadingScrollElemets = true;      
       $('#ajaxloader').show();
       var dfrd = that.getItems(
         that.currentItem,
