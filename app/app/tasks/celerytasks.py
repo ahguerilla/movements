@@ -87,8 +87,8 @@ def updateNotifications(self,obj):
     profiles = findPeopleInterestedIn(obj)
     user_ids = set(profile.user.id for profile in profiles)    
 
-    notifications_tocereate=user_ids.difference(notification_userids)
-    for user_id in notifications:
+    notifications_tocereate=user_ids.difference(notification_userids)    
+    for user_id in notifications_tocereate:        
         notification = Notification()
         notification.user_id = user_id
         notification.item = obj
@@ -96,15 +96,14 @@ def updateNotifications(self,obj):
         notification.text = get_notification_text(obj)
         notification.save()
 
-    notifications_toupdate = user_ids.intersection(notification_userids)
-    for notification in notification_objs:
-        if notification.user.id in notifications_toupdate:
-            notification = Notification()
-            notification.user_id = user_id
-            notification.item = obj
-            notification.avatar_user = obj.owner.username
-            notification.text = get_notification_text(obj,update=True)
-            notification.save()                        
+    notifications_toupdate = user_ids.intersection(notification_userids)    
+    for user_id in notifications_toupdate:        
+        notification = Notification()
+        notification.user_id = user_id
+        notification.item = obj
+        notification.avatar_user = obj.owner.username
+        notification.text = get_notification_text(obj,update=True)
+        notification.save()                        
     return
 
 

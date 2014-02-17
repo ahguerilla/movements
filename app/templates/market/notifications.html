@@ -49,16 +49,16 @@
                       <a href="<%- window.ahr.app_urls.viewuserprofile+notif.user%>">
                         <%- notif.owner %>
                       </a>
-                      posted  the <%- notif.item_type %>
+                      <% if(notif.text.update==true ){ %>updated<%}else { %> posted <%}%> the <%- notif.item_type %>
                       <a href="/market/#item/<%- notif.item_id %>">
-                        "<%- notif.item_title %>"
+                        "<%- notif.text.title %>"
                       </a>
                   <% }else{ %>
                       <a href="<%- window.ahr.app_urls.viewuserprofile+notif.comment_user%>">
                         <%- notif.comment_user %>
                       </a>
                       <a href="/market/#item/<%- notif.item_id %>" style="display:inline-block;">
-                        commented on <% if(notif.owner_id==window.ahr.user_id){ %>your<%}%> <%- notif.item_type %> "<%- notif.item_title %>"
+                        commented on <% if(notif.owner_id==window.ahr.user_id){ %>your<%}%> <%- notif.item_type %> "<%- notif.text.title %>"
                       </a>
                   <% } %>
                   <% if(notif.read==false){ %></strong><%}%><br/>
