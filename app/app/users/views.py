@@ -19,6 +19,14 @@ from constance import config
 from django.core.urlresolvers import reverse, reverse_lazy
 from app.market.api.utils import value
 import app.users as users
+from django.contrib.admin.models import LogEntry,CHANGE
+from django.contrib.contenttypes.models import ContentType
+import json
+from django.core.mail import EmailMessage
+import constance
+from app.users.utils import get_client_ip
+from django.template.loader import render_to_string
+
 
 
 def render_settings(request, initial=False):
@@ -135,6 +143,11 @@ def waitforactivation(request):
                               context_instance=RequestContext(request))
 
 
+def thanksforactivation(request):
+    return render_to_response('users/thanksforactivation.html',
+                              {},
+                              context_instance=RequestContext(request))
+    
 
 class SilentPasswordResetView(PasswordResetView):
     form_class = ResetPasswordFormSilent
@@ -181,6 +194,7 @@ def signup_from_home(request):
         form.fields['first_name'].initial = request.POST.get('first_name', '')
         form.fields['last_name'].initial = request.POST.get('last_name', '')
         form.fields['email'].initial = request.POST.get('email', '')
+        form.fields['tnccheckbox'].initial = request.POST.get('tnccheckbox', '')
     view_dict = {
         'form': form,
         'body_class': 'narrow',
@@ -190,16 +204,40 @@ def signup_from_home(request):
     return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))
 
 
+def email_doublesignup_upret(self, ret):
+    if (ret.has_key('form') and
+        ret['form'].errors.has_key('email') and
+        ret['form'].errors['email'][0] == u'A user is already registered with this e-mail address.'):
+        if len(ret['form'].errors)==1:        
+            self.template_name = "account/verification_sent.html"
+        else:
+            ret['form'].errors['email'].remove(u'A user is already registered with this e-mail address.')               
+            if len(ret['form'].errors['email'])==0:
+                ret['form'].errors.pop('email')                                    
+        email = EmailMessage('Security Alert from AHR, Someone is trying to register as you!',
+                             "Some one is trying to register with your email address for ip address: "+ get_client_ip(self.request)+
+                             " \r\nIf its not you then may be he/she is trying to find out if you are registered with us or not "+
+                             "We didn't reveal that you are registered with us and the registration process for he/she/them went through as normal. "+
+                             "But if you were arrested and were denying being involved with us and by some means (torture or ...) "+
+                             "you gave up the access credentials to your email then we kindly ask the guy who is reading this to " + 
+                             " send our regards to the poor soul and deny ever knowing him/her and sending this email! \r\n\r\n Regards\r\n AHR Team",
+                             constance.config.NO_REPLY_EMAIL,
+                             [ret['form'].data['email']])      
+        email.send()                
+    return ret
+    
+
 class AhrSignupView(SignupView):
     def get_context_data(self, **kwargs):
-        print 'HUR I AM'
+        
         ret = super(AhrSignupView, self).get_context_data(**kwargs)
         context_data = {
             'body_class': 'narrow',
             'sign_up': True,
             'post_url': ''
         }
-        ret.update(context_data)
+        ret.update(context_data)            
+        ret = email_doublesignup_upret(self, ret)
         return ret
 
 process_signup = AhrSignupView.as_view()
@@ -236,7 +274,7 @@ class AccAdapter(DefaultAccountAdapter):
         key = request.path.split('/')[3]
         conf = EmailConfirmation.objects.filter(key=key)[0]
         if conf.email_address.user.is_active:
-            return 'http://'+Site.objects.get_current().domain
+            return 'http://'+Site.objects.get_current().domain+'/user/thanksforactivation';
 
         ctx = {
             "user": str(conf.email_address),
@@ -270,7 +308,15 @@ def vet_user(request, user_id):
             else:
                 form.save()
             user.is_active = rating.rated_by_ahr != 0
-            user.save()
+            user.save()            
+            typeuser = ContentType.objects.filter(name='user').all()[0]           
+            log = LogEntry(user_id=request.user.id,
+                           content_type= typeuser,
+                           object_id=user.id,
+                           object_repr=user.username,
+                           action_flag=2,
+                           change_message="vetted")
+            log.save()
             msg = 'User updated'
     else:
         form = VettingForm(instance=rating)
@@ -280,6 +326,26 @@ def vet_user(request, user_id):
         'original': user,
         'user': user,
         'form': form,
-        'msg': msg,
+        'msg': msg,        
+        'vetted': user.is_active
     }
     return render_to_response('admin/auth/user/vet_user.html', ctx, context_instance=RequestContext(request))
+
+
+@staff_member_required
+def email_vet_user(request, user_id):
+    user = User.objects.get(pk=user_id)
+    if not user.is_active:
+        return  HttpResponse(json.dumps({ 'success' : False, 'message': 'User is not vetted.'}),mimetype="application/json")    
+    text = render_to_string('You can now get started on Exchangivist. Your Username and Password is now active.',
+                            'email/getstarted.html',
+                            {'user':user,
+                             'login_url':'http://'+Site.objects.get_current().domain+'/accounts/login'}
+                            )
+    email = EmailMessage(text,
+                         constance.config.NO_REPLY_EMAIL,
+                         [user.email])
+    email.send()
+    return  HttpResponse(json.dumps({ 'success' : True, 'message': 'An email has been sent to the user.'}),mimetype="application/json")
+    
+    

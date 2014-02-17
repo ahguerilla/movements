@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
-from celerytasks import createNotification, updateNotifications, markReadNotifications, markSeenNotifications
+from app.tasks.celerytasks import createNotification, updateNotifications, markReadNotifications
 
 
 def getMarketjson(objs):
@@ -165,7 +165,8 @@ def getNotificationsFromTo(request,sfrom,to,rtype):
     alist=[]
     for notification in notifications:
         alist.append(notification.getDict()) 
-    markSeenNotifications.delay(notifications)
+        notification.seen=True        
+        notification.save()    
     return  HttpResponse(json.dumps({'notifications':alist}),mimetype="application"+rtype)
 
 

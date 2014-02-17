@@ -11,6 +11,8 @@ class SignupForm(forms.Form):
     tweet_url = forms.CharField(max_length=100, label='Twitter', required=False)
     fb_url = forms.CharField(max_length=100, label='Facebook', required=False)
     web_url = forms.CharField(max_length=100, label='Website', required=False)
+    tnccheckbox = forms.BooleanField()
+    
 
     def save(self, user):
         user.first_name = ''

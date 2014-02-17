@@ -3,72 +3,44 @@
 		"pk": 1,
 		"model": "users.issues",
 		"fields": {
-			"issues": "Speech"
+			"issues": "Free Speech"
 		}
 	},
 	{
 		"pk": 2,
 		"model": "users.issues",
 		"fields": {
-			"issues": "Press"
+			"issues": "Free Press"
 		}
 	},
 	{
 		"pk": 3,
 		"model": "users.issues",
 		"fields": {
-			"issues": "Conscience"
+			"issues": "Refugees"
 		}
-	},
-	{
-		"pk": 4,
-		"model": "users.issues",
-		"fields": {
-			"issues": "Association"
-		}
-	},
+	},	
 	{
 		"pk": 5,
 		"model": "users.issues",
 		"fields": {
-			"issues": "Minorities"
+			"issues": "Minorities Rights"
 		}
 	},
 	{
 		"pk": 6,
 		"model": "users.issues",
 		"fields": {
-			"issues": "Women"
+			"issues": "Women's Rights"
 		}
 	},
 	{
 		"pk": 7,
 		"model": "users.issues",
 		"fields": {
-			"issues": "Religion"
+			"issues": "Religious Freedom"
 		}
-	},
-	{
-		"pk": 8,
-		"model": "users.issues",
-		"fields": {
-			"issues": "Sexuality"
-		}
-	},
-	{
-		"pk": 9,
-		"model": "users.issues",
-		"fields": {
-			"issues": "Comedy"
-		}
-	},
-	{
-		"pk": 10,
-		"model": "users.issues",
-		"fields": {
-			"issues": "Art"
-		}
-	},
+	},			
 	{
 		"pk": 11,
 		"model": "users.issues",
@@ -80,14 +52,14 @@
 		"pk": 12,
 		"model": "users.issues",
 		"fields": {
-			"issues": "Movement"
+			"issues": "LGBT Rights"
 		}
 	},
 	{
 		"pk": 13,
 		"model": "users.issues",
 		"fields": {
-			"issues": "Internet"
+			"issues": "Internet Freedom"
 		}
 	}
 ]

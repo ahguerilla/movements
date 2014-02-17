@@ -1,0 +1,16 @@
+{% extends "account/signup_base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load account %}
+
+{% block head_title %}{% trans "Email Confirmed" %}{% endblock %}
+
+{% block content %}
+<div class="col-md-offset-2 col-md-8 center-content">
+  <div class="row dialog sign-up-form">
+    <h1>{% trans "Email Confirmed" %}</h1>
+    <p>{% blocktrans %}Your account is now activated.{% endblocktrans %}</p>
+  </div>
+</div>
+{% endblock %}
