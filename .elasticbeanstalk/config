@@ -1,0 +1,6 @@
+[global]
+ApplicationName=Exchangivist
+AwsCredentialFile=~/.elasticbeanstalk/exchangivist_aws_credential_file
+DevToolsEndpoint=git.elasticbeanstalk.us-east-1.amazonaws.com
+EnvironmentName=exchangivistTesting-env
+Region=us-east-1
