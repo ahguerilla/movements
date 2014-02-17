@@ -54,24 +54,28 @@ def createNotification(self,obj):
 
 @shared_task
 @_app.task(name="createCommentNotification",bind=True)
-def createCommentNotification(self,obj,comment,username):
+def createCommentNotification(self,obj,comment,username):    
+    created = []
     if obj.owner.username != username:
         notification = Notification()
         notification.user = obj.owner
         notification.item = obj
         notification.avatar_user = username
-        notification.comment = comment
+        notification.comment_id = comment.id
         notification.text = get_notification_comment_text(obj,username,comment)    
         notification.save()    
-    for comment in obj.comments.all():        
-        if comment.owner.username != username and comment.owner.id not in notified:            
+        created.append(obj.owner.id)
+    for cmnt in obj.comments.all():        
+        if cmnt.owner.username != username and cmnt.owner.id not in created and cmnt.deleted==False:
             notification = Notification()
-            notification.user = comment.owner
+            notification.user = cmnt.owner
             notification.item = obj
             notification.avatar_user = username
-            notification.comment = comment
+            notification.comment_id = comment.id
             notification.text = get_notification_comment_text(obj,username,comment,True)    
             notification.save()            
+            created.append(cmnt.owner.id)
+    print 'created'
     return
 
 

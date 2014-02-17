@@ -4,17 +4,27 @@
 
 {% block head_title %}{% trans "Exchangivist - Contact Us" %}{% endblock %}
 
-{% block public-content %}
-  <div class="dialog">
-    <h1>Contact Us</h1>
-    <div>
-      <p>You can contact Exchangivist by using the information below:</p>
-      <p>Advancing Human Rights</p>
-      <p>PO box 85</p>
-      <p>New York, NY 10116</p>
-      <p>Tel: +1-646-678-5626</p>
-      <p>Fax: +1-212-207-5047</p>
-      <p>info@advancinghumanrights.org</p>
+{% block ext_container %}
+<div class="container" style="margin-top:0px;">
+  <div id="currentusername" class="hidden">{{ user.username }}</div>
+  <div class="public">
+    <div class="dialog">
+      <h1>Contact Us</h1>
+      <div>
+        <p>You can contact Exchangivist by using the information below:</p>
+        <p>Advancing Human Rights</p>
+        <p>PO box 85</p>
+        <p>New York, NY 10116</p>
+        <p>Tel: +1-646-678-5626</p>
+        <p>Fax: +1-212-207-5047</p>
+        <p>info@advancinghumanrights.org</p>
+      </div>
     </div>
   </div>
+  <div class="row">
+  <div class="col-md-12">
+    {% include 'ahr/_footer_logos.html' %}
+  </div>
+</div>
+</div>
 {% endblock %}
