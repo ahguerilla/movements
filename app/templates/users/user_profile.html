@@ -134,6 +134,17 @@
           {% endif %}
           </div>
         </div>
+        
+        <div class="row profile-item">
+          <div class="col-md-4 profile-label">Country of residence:</div>
+          <div class="col-md-8">
+          {% if user_profile.notperm.resident_country != 'on' %}
+          {{ user_profile.resident_country }}
+          {% else %}
+          hidden
+          {% endif %}
+          </div>
+        </div>
 
         <div class="row profile-item">
           <div class="col-md-4 profile-label">Occupation:</div>

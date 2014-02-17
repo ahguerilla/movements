@@ -1,23 +1,1521 @@
-[
+[		
 	{
-		"pk": 1,
+		"pk": 1 ,
 		"model": "users.residence",
 		"fields": {
-			"residence": "Afghanistan"
+		"residence": "Afghanistan"
 		}
 	},
+	
 	{
-		"pk": 2,
+		"pk": 2 ,
 		"model": "users.residence",
 		"fields": {
-			"residence": "Great Britain"
+		"residence": "Albania"
 		}
 	},
+	
 	{
-		"pk": 3,
+		"pk": 3 ,
 		"model": "users.residence",
 		"fields": {
-			"residence": "Canada"
+		"residence": "Algeria"
+		}
+	},
+	
+	{
+		"pk": 4 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Andorra"
+		}
+	},
+	
+	{
+		"pk": 5 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Angola"
+		}
+	},
+	
+	{
+		"pk": 6 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Antigua"
+		}
+	},
+	
+	{
+		"pk": 7 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Argentina"
+		}
+	},
+	
+	{
+		"pk": 8 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Armenia"
+		}
+	},
+	
+	{
+		"pk": 9 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Australia"
+		}
+	},
+	
+	{
+		"pk": 10 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Austria"
+		}
+	},
+	
+	{
+		"pk": 11 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Azerbaijan"
+		}
+	},
+	
+	{
+		"pk": 12 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Bahamas"
+		}
+	},
+	
+	{
+		"pk": 13 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Bahrain"
+		}
+	},
+	
+	{
+		"pk": 14 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Bangladesh"
+		}
+	},
+	
+	{
+		"pk": 15 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Barbados"
+		}
+	},
+	
+	{
+		"pk": 16 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Belarus"
+		}
+	},
+	
+	{
+		"pk": 17 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Belgium"
+		}
+	},
+	
+	{
+		"pk": 18 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Belize"
+		}
+	},
+	
+	{
+		"pk": 19 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Benin"
+		}
+	},
+	
+	{
+		"pk": 20 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Bhutan"
+		}
+	},
+	
+	{
+		"pk": 21 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Bolivia"
+		}
+	},
+	
+	{
+		"pk": 22 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Bosnia and Herzegovina"
+		}
+	},
+	
+	{
+		"pk": 23 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Botswana"
+		}
+	},
+	
+	{
+		"pk": 24 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Brazil"
+		}
+	},
+	
+	{
+		"pk": 25 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Brunei"
+		}
+	},
+	
+	{
+		"pk": 26 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Bulgaria"
+		}
+	},
+	
+	{
+		"pk": 27 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Burkina Faso"
+		}
+	},
+	
+	{
+		"pk": 28 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Burundi"
+		}
+	},
+	
+	{
+		"pk": 29 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Cambodia"
+		}
+	},
+	
+	{
+		"pk": 30 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Cameroon"
+		}
+	},
+	
+	{
+		"pk": 31 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Canada"
+		}
+	},
+	
+	{
+		"pk": 32 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Cape Verde"
+		}
+	},
+	
+	{
+		"pk": 33 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Central African Republic"
+		}
+	},
+	
+	{
+		"pk": 34 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Chad"
+		}
+	},
+	
+	{
+		"pk": 35 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Chile"
+		}
+	},
+	
+	{
+		"pk": 36 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "China"
+		}
+	},
+	
+	{
+		"pk": 37 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Colombia"
+		}
+	},
+	
+	{
+		"pk": 38 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Comoros"
+		}
+	},
+	
+	{
+		"pk": 39 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Congo, Democratic Republic of the"
+		}
+	},
+	
+	{
+		"pk": 40 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Congo, Republic of the"
+		}
+	},
+	
+	{
+		"pk": 41 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Costa Rica"
+		}
+	},
+	
+	{
+		"pk": 42 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Cote d&#39;Ivoire"
+		}
+	},
+	
+	{
+		"pk": 43 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Croatia"
+		}
+	},
+	
+	{
+		"pk": 44 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Cuba"
+		}
+	},
+	
+	{
+		"pk": 45 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Cyprus"
+		}
+	},
+	
+	{
+		"pk": 46 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Czech Republic"
+		}
+	},
+	
+	{
+		"pk": 47 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Denmark"
+		}
+	},
+	
+	{
+		"pk": 48 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Djibouti"
+		}
+	},
+	
+	{
+		"pk": 49 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Dominica"
+		}
+	},
+	
+	{
+		"pk": 50 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Dominican Republic"
+		}
+	},
+	
+	{
+		"pk": 51 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "East Timor"
+		}
+	},
+	
+	{
+		"pk": 52 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Ecuador"
+		}
+	},
+	
+	{
+		"pk": 53 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Egypt"
+		}
+	},
+	
+	{
+		"pk": 54 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "El Salvador"
+		}
+	},
+	
+	{
+		"pk": 55 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Equatorial Guinea"
+		}
+	},
+	
+	{
+		"pk": 56 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Eritrea"
+		}
+	},
+	
+	{
+		"pk": 57 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Estonia"
+		}
+	},
+	
+	{
+		"pk": 58 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Ethiopia"
+		}
+	},
+	
+	{
+		"pk": 59 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Fiji"
+		}
+	},
+	
+	{
+		"pk": 60 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Finland"
+		}
+	},
+	
+	{
+		"pk": 61 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "France"
+		}
+	},
+	
+	{
+		"pk": 62 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Gabon"
+		}
+	},
+	
+	{
+		"pk": 63 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Gambia"
+		}
+	},
+	
+	{
+		"pk": 64 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Georgia"
+		}
+	},
+	
+	{
+		"pk": 65 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Germany"
+		}
+	},
+	
+	{
+		"pk": 66 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Ghana"
+		}
+	},
+	
+	{
+		"pk": 67 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Greece"
+		}
+	},
+	
+	{
+		"pk": 68 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Grenada"
+		}
+	},
+	
+	{
+		"pk": 69 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Guatemala"
+		}
+	},
+	
+	{
+		"pk": 70 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Guinea"
+		}
+	},
+	
+	{
+		"pk": 71 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Guinea-Bissau"
+		}
+	},
+	
+	{
+		"pk": 72 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Guyana"
+		}
+	},
+	
+	{
+		"pk": 73 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Haiti"
+		}
+	},
+	
+	{
+		"pk": 74 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Honduras"
+		}
+	},
+	
+	{
+		"pk": 75 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Hungary"
+		}
+	},
+	
+	{
+		"pk": 76 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Iceland"
+		}
+	},
+	
+	{
+		"pk": 77 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "India"
+		}
+	},
+	
+	{
+		"pk": 78 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Indonesia"
+		}
+	},
+	
+	{
+		"pk": 79 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Iran"
+		}
+	},
+	
+	{
+		"pk": 80 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Iraq"
+		}
+	},
+	
+	{
+		"pk": 81 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Ireland"
+		}
+	},
+	
+	{
+		"pk": 82 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Israel"
+		}
+	},
+	
+	{
+		"pk": 83 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Italy"
+		}
+	},
+	
+	{
+		"pk": 84 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Jamaica"
+		}
+	},
+	
+	{
+		"pk": 85 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Japan"
+		}
+	},
+	
+	{
+		"pk": 86 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Jordan"
+		}
+	},
+	
+	{
+		"pk": 87 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Kazakhstan"
+		}
+	},
+	
+	{
+		"pk": 88 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Kenya"
+		}
+	},
+	
+	{
+		"pk": 89 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Korea, North"
+		}
+	},
+	
+	{
+		"pk": 90 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Korea, South"
+		}
+	},
+	
+	{
+		"pk": 91 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Kosovo"
+		}
+	},
+	
+	{
+		"pk": 92 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Kuwait"
+		}
+	},
+	
+	{
+		"pk": 93 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Laos"
+		}
+	},
+	
+	{
+		"pk": 94 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Latvia"
+		}
+	},
+	
+	{
+		"pk": 95 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Lebanon"
+		}
+	},
+	
+	{
+		"pk": 96 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Lesotho"
+		}
+	},
+	
+	{
+		"pk": 97 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Liberia"
+		}
+	},
+	
+	{
+		"pk": 98 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Libya"
+		}
+	},
+	
+	{
+		"pk": 99 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Liechtenstein"
+		}
+	},
+	
+	{
+		"pk": 100 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Lithuania"
+		}
+	},
+	
+	{
+		"pk": 101 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Luxembourg"
+		}
+	},
+	
+	{
+		"pk": 102 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Macedonia"
+		}
+	},
+	
+	{
+		"pk": 103 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Madagascar"
+		}
+	},
+	
+	{
+		"pk": 104 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Malawi"
+		}
+	},
+	
+	{
+		"pk": 105 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Malaysia"
+		}
+	},
+	
+	{
+		"pk": 106 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Maldives"
+		}
+	},
+	
+	{
+		"pk": 107 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Mali"
+		}
+	},
+	
+	{
+		"pk": 108 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Malta"
+		}
+	},
+	
+	{
+		"pk": 109 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Marshall Islands"
+		}
+	},
+	
+	{
+		"pk": 110 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Mauritania"
+		}
+	},
+	
+	{
+		"pk": 111 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Mauritius"
+		}
+	},
+	
+	{
+		"pk": 112 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Mexico"
+		}
+	},
+	
+	{
+		"pk": 113 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Micronesia"
+		}
+	},
+	
+	{
+		"pk": 114 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Moldova"
+		}
+	},
+	
+	{
+		"pk": 115 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Monaco"
+		}
+	},
+	
+	{
+		"pk": 116 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Mongolia"
+		}
+	},
+	
+	{
+		"pk": 117 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Montenegro"
+		}
+	},
+	
+	{
+		"pk": 118 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Morocco"
+		}
+	},
+	
+	{
+		"pk": 119 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Mozambique"
+		}
+	},
+	
+	{
+		"pk": 120 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Myanmar (Burma)"
+		}
+	},
+	
+	{
+		"pk": 121 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Namibia"
+		}
+	},
+	
+	{
+		"pk": 122 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Nauru"
+		}
+	},
+	
+	{
+		"pk": 123 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Nepal"
+		}
+	},
+	
+	{
+		"pk": 124 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Netherlands"
+		}
+	},
+	
+	{
+		"pk": 125 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "New Zealand"
+		}
+	},
+	
+	{
+		"pk": 126 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Nicaragua"
+		}
+	},
+	
+	{
+		"pk": 127 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Niger"
+		}
+	},
+	
+	{
+		"pk": 128 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Nigeria"
+		}
+	},
+	
+	{
+		"pk": 129 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Norway"
+		}
+	},
+	
+	{
+		"pk": 130 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Oman"
+		}
+	},
+	
+	{
+		"pk": 131 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Pakistan"
+		}
+	},
+	
+	{
+		"pk": 132 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Palau"
+		}
+	},
+	
+	{
+		"pk": 133 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Panama"
+		}
+	},
+	
+	{
+		"pk": 134 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Papua New Guinea"
+		}
+	},
+	
+	{
+		"pk": 135 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Paraguay"
+		}
+	},
+	
+	{
+		"pk": 136 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Peru"
+		}
+	},
+	
+	{
+		"pk": 137 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Philippines"
+		}
+	},
+	
+	{
+		"pk": 138 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Poland"
+		}
+	},
+	
+	{
+		"pk": 139 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Portugal"
+		}
+	},
+	
+	{
+		"pk": 140 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Qatar"
+		}
+	},
+	
+	{
+		"pk": 141 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Romania"
+		}
+	},
+	
+	{
+		"pk": 142 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Russia"
+		}
+	},
+	
+	{
+		"pk": 143 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Rwanda"
+		}
+	},
+	
+	{
+		"pk": 144 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Saint Lucia"
+		}
+	},
+	
+	{
+		"pk": 145 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Samoa"
+		}
+	},
+	
+	{
+		"pk": 146 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "San Marino"
+		}
+	},
+	
+	{
+		"pk": 147 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Sao Tome and Principe"
+		}
+	},
+	
+	{
+		"pk": 148 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Saudi Arabia"
+		}
+	},
+	
+	{
+		"pk": 149 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Scotland"
+		}
+	},
+	
+	{
+		"pk": 150 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Senegal"
+		}
+	},
+	
+	{
+		"pk": 151 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Serbia"
+		}
+	},
+	
+	{
+		"pk": 152 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Seychelles"
+		}
+	},
+	
+	{
+		"pk": 153 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Sierra Leone"
+		}
+	},
+	
+	{
+		"pk": 154 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Singapore"
+		}
+	},
+	
+	{
+		"pk": 155 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Slovakia"
+		}
+	},
+	
+	{
+		"pk": 156 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Slovenia"
+		}
+	},
+	
+	{
+		"pk": 157 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Solomon Islands"
+		}
+	},
+	
+	{
+		"pk": 158 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Somalia"
+		}
+	},
+	
+	{
+		"pk": 159 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "South Africa"
+		}
+	},
+	
+	{
+		"pk": 160 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Spain"
+		}
+	},
+	
+	{
+		"pk": 161 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Sri Lanka"
+		}
+	},
+	
+	{
+		"pk": 162 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Sudan"
+		}
+	},
+	
+	{
+		"pk": 163 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Suriname"
+		}
+	},
+	
+	{
+		"pk": 164 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Swaziland"
+		}
+	},
+	
+	{
+		"pk": 165 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Sweden"
+		}
+	},
+	
+	{
+		"pk": 166 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Switzerland"
+		}
+	},
+	
+	{
+		"pk": 167 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Syria"
+		}
+	},
+	
+	{
+		"pk": 168 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Taiwan"
+		}
+	},
+	
+	{
+		"pk": 169 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Tajikistan"
+		}
+	},
+	
+	{
+		"pk": 170 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Tanzania"
+		}
+	},
+	
+	{
+		"pk": 171 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Thailand"
+		}
+	},
+	
+	{
+		"pk": 172 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Togo"
+		}
+	},
+	
+	{
+		"pk": 173 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Tonga"
+		}
+	},
+	
+	{
+		"pk": 174 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Trinidad and Tobago"
+		}
+	},
+	
+	{
+		"pk": 175 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Tunisia"
+		}
+	},
+	
+	{
+		"pk": 176 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Turkey"
+		}
+	},
+	
+	{
+		"pk": 177 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Turkmenistan"
+		}
+	},
+	
+	{
+		"pk": 178 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Tuvalu"
+		}
+	},
+	
+	{
+		"pk": 179 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Uganda"
+		}
+	},
+	
+	{
+		"pk": 180 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Ukraine"
+		}
+	},
+	
+	{
+		"pk": 181 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "United Arab Emirates"
+		}
+	},
+	
+	{
+		"pk": 182 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "United Kingdom"
+		}
+	},
+	
+	{
+		"pk": 183 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "United States"
+		}
+	},
+	
+	{
+		"pk": 184 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Uruguay"
+		}
+	},
+	
+	{
+		"pk": 185 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Uzbekistan"
+		}
+	},
+	
+	{
+		"pk": 186 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Venezuela"
+		}
+	},
+	
+	{
+		"pk": 187 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Vietnam"
+		}
+	},
+	
+	{
+		"pk": 188 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Yemen"
+		}
+	},
+	
+	{
+		"pk": 189 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Zambia"
+		}
+	},
+	
+	{
+		"pk": 190 ,
+		"model": "users.residence",
+		"fields": {
+		"residence": "Zimbabwe"
 		}
 	}
 ]

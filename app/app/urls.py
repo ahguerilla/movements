@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     url(r"^accounts/password/change_done$", 'app.users.views.password_change_done', name="account_change_password_success"),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/auth/user/(?P<user_id>\d+)/vet$', 'app.users.views.vet_user', name='vet_user'),
+    url(r'^admin/auth/user/(?P<user_id>\d+)/emailvetted$', 'app.users.views.email_vet_user', name='email_vet_user'),
     url(r'^admin/', include(admin.site.urls)),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

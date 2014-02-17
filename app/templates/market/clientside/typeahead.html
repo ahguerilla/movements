@@ -8,7 +8,7 @@
     <label for="<%- item %>"><%- title %></label>
     <div class="input-group">
       <input id="<%- item %>" class="form-control input-sm typeaheadtag_input" type="text"/>
-      <span class="input-group-addon">
+      <span class="input-group-addon <%- item %>">
         <span class="glyphicon <%- item %>">Add</span>
       </span>
     </div>
@@ -25,6 +25,7 @@
 
     var TypeaheadWidget = window.ahr.BaseView.extend({
       tagdict: {},
+      events:{},
       change: function (values) {
         var that = this;
         this.empty();
@@ -106,8 +107,7 @@
           that.clicked = false;
           that.closed = false;
         });
-
-        that.closed = false;
+        
         $('#' + name, $(that.container)).on('click', function () {
           if (that.clicked === true) {
             that.clicked = false;
@@ -191,6 +191,19 @@
         });
         return val_ids;
       },
+      
+      addPressed: function(ev){                 
+        if (this.closed === true) {          
+          $('#' +this.settings.jsonfield , $(this.container)).trigger('focus');        
+          this.closed = false;
+          this.clicked = false;
+          
+        }else{
+          $('#' +this.settings.jsonfield , $(this.container)).trigger('blur');        
+          this.closed = true;
+          this.clicked = false;
+        }
+      },
 
       initialize: function (initobj) {
         this.container = initobj.container;
@@ -199,6 +212,7 @@
         this.typeaheadval = [];
         this.values = [];
         this.tagdict = {};
+        this.closed = true;
         var data = window.ahr[initobj.settings.jsonfield];
         for (var i = 0; i < data.length; i++) {
           this.typeaheadval.push({
@@ -210,13 +224,17 @@
         }
         $(this.container).html(this.typeAheadTemplate(this.settings.title, this.settings.jsonfield));
         this.makeWidget(this.settings.jsonfield, this.preset ? this.preset : null);
+        events ={}
+        events['click .input-group-addon.'+ this.settings.jsonfield ] = 'addPressed';        
+        this.delegateEvents(_.extend(this.events,events));
       }
 
     });
 
-    window.ahr.typeahead_widget = window.typeahead_widget || {};
+    window.ahr.typeahead_widget = window.ahr.typeahead_widget || {};
     window.ahr.typeahead_widget.initWidget = function (container, settings, preval) {
       var widget = new TypeaheadWidget({
+        el: container,
         'container': container,
         'settings': settings,
         'preset': preval

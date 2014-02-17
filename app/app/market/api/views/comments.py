@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 import json
 from app.market.api.utils import *
 from django.contrib.auth.decorators import login_required
-from celerytasks import createCommentNotification
+from app.tasks.celerytasks import createCommentNotification
 
 
 def saveComment(form, owner,item):
@@ -22,11 +22,11 @@ def saveComment(form, owner,item):
 
 @login_required
 def addComment(request, obj_id, rtype):
-    m_obj = get_object_or_404(market.models.MarketItem.objects.only('pk'),pk=obj_id)
+    m_obj = get_object_or_404(market.models.MarketItem.objects.only('pk'), pk=obj_id)
     form = commentForm(request.POST)
-    if form.is_valid():
-        obj = saveComment(form,request.user,m_obj)
-        createCommentNotification.delay(m_obj,obj,request.user.username)
+    if form.is_valid():        
+        obj = saveComment(form,  request.user ,m_obj)
+        createCommentNotification.delay(m_obj, obj, request.user.username)
         return HttpResponse(json.dumps({ 'success' : True, 'obj': obj.getdict() }), mimetype="application"+rtype)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)

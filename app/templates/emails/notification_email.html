@@ -1,0 +1,39 @@
+<h4>Dear Exchangivist,</h4>
+
+<p>
+We hope that you are enjoying using the site. To keep you up to date and to help you continue to connect, please find below a list of the last week’s notifications.
+</p>
+
+<p>
+Your Notifications:
+</p>
+
+<p>
+    {% for notification in notifications %}
+        {%if notification.comment %}
+            {{ notification.comment.owner.username}} commented on {{ notification.item.title}} at {{ notification.pub_date }}
+            <a href ="http://ahr.guerillasoftware.net/market/#item/{{notification.item.id}}">
+                click here to view this {{notification.item.item_type}}
+            </a>
+            <br/><br/>
+        {% else %}
+            {{ notification.item.owner.username }} created {{ notification.item.title }} at {{ notification.pub_date }}
+            <a href ="http://ahr.guerillasoftware.net/market/#item/{{notification.item.id}}">
+                click here to view this {{notification.item.item_type}}
+            </a>
+            <br/><br/>
+        {% endif %}
+    {% endfor %}
+</p>
+
+<p>
+If you would like to stop receiving weekly notifications please visit your 
+settings and unselect "I would like to recieve a weekly newsletter"
+</p>
+
+<p>Thanks very much for using Exchangivist</p>
+
+<p>
+Kind Regards<br/>
+The Exchangivist Team
+</p>

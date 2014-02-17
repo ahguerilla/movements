@@ -9,10 +9,10 @@
                 <div style="max-height:36px;overflow:hidden;">
                 <% if(notif.read==false){ %><strong><%}%>
                 <% if(notif.comment===null){ %>
-                    <%- notif.user %> posted the
-                    <%- notif.item_type %> "<%- notif.item_title %>"
+                    <%- notif.owner %> <% if(notif.text.update==true ){ %>updated<%}else { %> posted <%}%> the
+                    <%- notif.item_type %> "<%- notif.text.title %>"
                 <% }else{ %>
-                    <%- notif.comment_user %> commented on <% if(notif.owner_id==window.ahr.user_id){ %>your<%}%> <%- notif.item_type %> "<%- notif.item_title %>"
+                    <%- notif.comment_user %> commented on <% if(notif.owner_id==window.ahr.user_id){ %>your<%}%> <%- notif.item_type %> "<%- notif.text.title %>"
                 <% } %>
                 <% if(notif.read==false){ %></strong><%}%><br/>
                 </div>

@@ -136,6 +136,8 @@
 <div style="height:50px;"></div>
 {% block outsidecontainer %}
 {% endblock %}
+
+{% block ext_container %}
 <div class="container" id="main-content-container">
 
   <div id="currentusername" class="hidden">{{ user.username }}</div>
@@ -146,8 +148,10 @@
   {% include "market/clientside/app_urls.html" %}
 
   {% block extra_body %}
-  {% endblock %}
+  {% endblock %}  
 </div>
+{% endblock %}
+
 <div style="height: 70px"></div>
 <nav class="navbar navbar-default navbar-fixed-bottom footer-nav" role="navigation">
   <div class="footer-nav-content">
