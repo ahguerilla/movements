@@ -67,10 +67,10 @@ def add_market_item(request, obj_type, rtype):
 
 
 @login_required
-def get_market_item(request,obj_id,rtype):
-    retval = cache.get('item-'+obj_id )
-    if retval: 
-        return retval        
+def get_market_item(request, obj_id, rtype):
+    # retval = cache.get('item-' + obj_id)
+    # if retval: 
+    #     return retval
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
                             Q(exp_date__gte=datetime.now())|Q(never_exp=True),
                             pk=obj_id,
@@ -78,7 +78,7 @@ def get_market_item(request,obj_id,rtype):
                             owner__is_active=True)
     mark_read_notifications.delay((obj,),request.user.id)
     retval = return_item_list([obj], rtype)
-    cache.add('item-'+obj_id, retval )
+    # cache.add('item-'+obj_id, retval )
     return retval 
 
 
