@@ -15,10 +15,13 @@ from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
 from app.tasks.celerytasks import createNotification, updateNotifications, markReadNotifications
-
+from django.views.decorators.cache import cache_page
+from django.utils.cache import get_cache_key, get_cache
+cache = get_cache('default')
+items_cache = get_cache('items')
 
 def getMarketjson(objs):
-    alist=[]
+    alist = []
     for obj in objs:
         alist.append(obj.getdict())
     return json.dumps(alist)
@@ -33,10 +36,10 @@ def returnItemList(obj, rtype):
 def createQuery(request):
     query = Q()
     if request.GET.has_key('skills'):
-        query = query | Q(skills__in= request.GET.getlist('skills'))
+        query = query | Q(skills__in=request.GET.getlist('skills'))
 
     if request.GET.has_key('countries'):
-        query = query | Q(countries__in = request.GET.getlist('countries'))
+        query = query | Q(countries__in=request.GET.getlist('countries'))
 
     if request.GET.has_key('issues'):
         query = query | Q(issues__in=request.GET.getlist('issues'))
@@ -47,7 +50,7 @@ def createQuery(request):
     if request.GET.has_key('search') and request.GET['search']!='':
         objs = SearchQuerySet().models(market.models.MarketItem).filter(text=request.GET['search'])
         ids= [int(obj.pk) for obj in objs]
-        query = query & Q(id__in = ids)
+        query = query & Q(id__in=ids)
     query = query & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True)
     return query
 
@@ -65,20 +68,30 @@ def addMarketItem(request, obj_type, rtype):
 
 @login_required
 def getMarketItem(request,obj_id,rtype):
+    retval = cache.get('item-'+obj_id )
+    if retval: 
+        return retval        
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
                             Q(exp_date__gte=datetime.now())|Q(never_exp=True),
                             pk=obj_id,
                             deleted=False,
                             owner__is_active=True)
     markReadNotifications.delay((obj,),request.user.id)
-    return returnItemList([obj], rtype)
+    reval = returnItemList([obj], rtype)
+    cache.add('item-'+obj_id, retval )
+    return retval 
 
 
 @login_required
 def getMarketItemFromTo(request,sfrom,to,rtype):
+    retval = items_cache.get(request.path)
+    if retval: 
+        return retval            
     query = createQuery(request)
     obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
-    return returnItemList(obj, rtype)
+    retval = returnItemList(obj, rtype)
+    items_cache.add(request.path, retval)    
+    return retval
 
 
 @login_required
@@ -91,6 +104,8 @@ def getMarketItemCount(request,rtype):
 @login_required
 @check_perms_and_get(market.models.MarketItem)
 def editMarketItem(request,obj_id,rtype):
+    cache.delete('item-'+obj_id)
+    items_cache.clear()
     obj = request.obj
     form = item_forms[obj.item_type](request.POST, instance=obj)
     if form.is_valid():
@@ -98,16 +113,20 @@ def editMarketItem(request,obj_id,rtype):
         updateNotifications.delay(obj)
     else:
         return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
-    return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
+    return HttpResponse(json.dumps({ 'success' : True}),
+                        mimetype="application"+rtype)
 
 
 @login_required
 @check_perms_and_get(market.models.MarketItem)
 def deleteMarketItem(request,obj_id,rtype):
+    cache.delete('item-'+obj_id)
+    items_cache.clear()
     obj=request.obj
     obj.deleted = True
     obj.save()
-    return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
+    return HttpResponse(json.dumps({ 'success' : True}),
+                        mimetype="application"+rtype)
 
 
 @login_required
@@ -126,7 +145,8 @@ def userMarketItems(request, rtype):
 def userMarketItemsCount(request,rtype):
     query = createQuery(request)
     obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').count()
-    return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
+    return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),
+                         mimetype="application"+rtype)
 
 
 @login_required
@@ -144,7 +164,7 @@ def setRate(request,obj_id,rtype):
     owner = request.user
     rate = market.models.ItemRate.objects.filter(owner=owner).filter(item=item)
     if len(rate)==0:
-        rate = market.models.ItemRate(owner=owner,item=item)
+        rate = market.models.ItemRate(owner=owner, item=item)
     else:
         rate = rate[0]
     rate.score =  int(request.POST['score'])
@@ -165,14 +185,18 @@ def getNotificationsFromTo(request,sfrom,to,rtype):
     alist=[]
     for notification in notifications:
         alist.append(notification.getDict()) 
-        notification.seen=True        
-        notification.save()    
-    return  HttpResponse(json.dumps({'notifications':alist}),mimetype="application"+rtype)
+        if not notification.seen:
+            notification.seen = True        
+            notification.save()    
+    return  HttpResponse(json.dumps({'notifications':alist}),
+                         mimetype="application"+rtype)
 
 
 @login_required
 def getNotSeenNotif(request,sfrom,to,rtype):
     notifications = market.models.Notification.objects.filter(user=request.user.id,item__deleted=False).filter(seen=False).only('seen')
     if len(notifications)>0:
-        return  HttpResponse(json.dumps({'result':True}),mimetype="application"+rtype)
-    return  HttpResponse(json.dumps({'result':False}),mimetype="application"+rtype)
+        return  HttpResponse(json.dumps({'result':True}),
+                             mimetype="application"+rtype)
+    return  HttpResponse(json.dumps({'result':False}),
+                         mimetype="application"+rtype)

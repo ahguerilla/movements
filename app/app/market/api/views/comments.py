@@ -27,15 +27,18 @@ def addComment(request, obj_id, rtype):
     if form.is_valid():        
         obj = saveComment(form,  request.user ,m_obj)
         createCommentNotification.delay(m_obj, obj, request.user.username)
-        return HttpResponse(json.dumps({ 'success' : True, 'obj': obj.getdict() }), mimetype="application"+rtype)
+        return HttpResponse(json.dumps({ 'success' : True, 'obj': obj.getdict() }),
+                            mimetype="application"+rtype)
     else:
-        return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
+        return HttpResponse(json.dumps(get_validation_errors(form)),
+                            mimetype="application"+rtype)
 
 
 @login_required
 def getCommentCount(request, obj_id, rtype):
     obj = get_object_or_404(market.models.MarketItem.objects.only('commentcount'),pk=obj_id)
-    return HttpResponse(json.dumps(obj.commentcount), mimetype="application"+rtype)
+    return HttpResponse(json.dumps(obj.commentcount),
+                        mimetype="application"+rtype)
 
 
 @login_required
@@ -51,7 +54,8 @@ def getCommentIdsRange(request, obj_id,st_date, end_date, rtype):
 @login_required
 def getComment(request, obj_id, rtype):
     obj = get_object_or_404(market.models.Comment, pk=obj_id, deleted=False)
-    return HttpResponse(value(rtype,[obj]), mimetype="application"+rtype)
+    return HttpResponse(value(rtype,[obj]),
+                        mimetype="application"+rtype)
 
 
 @login_required
@@ -70,7 +74,8 @@ def editComment(request,obj_id, rtype):
         saveComment(form,request.user,None)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
-    return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
+    return HttpResponse(json.dumps({ 'success' : True}),
+                        mimetype="application"+rtype)
 
 
 
@@ -82,4 +87,5 @@ def deleteComment(request, obj_id, rtype):
     obj.item.commentcount -= 1
     obj.item.save()
     obj.save_base()
-    return HttpResponse(json.dumps({ 'success' : True}),mimetype="application"+rtype)
+    return HttpResponse(json.dumps({ 'success' : True}),
+                        mimetype="application"+rtype)

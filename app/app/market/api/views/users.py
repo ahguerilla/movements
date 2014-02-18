@@ -15,10 +15,10 @@ def createQuery(request):
     query = Q()
 
     if request.GET.has_key('skills'):
-        query = Q(skills__in= request.GET.getlist('skills'))
+        query = Q(skills__in=request.GET.getlist('skills'))
 
     if request.GET.has_key('countries'):
-        query = query | Q(countries__in = request.GET.getlist('countries'))
+        query = query | Q(countries__in=request.GET.getlist('countries'))
 
     if request.GET.has_key('issues'):
         query = query | Q(issues__in=request.GET.getlist('issues'))
@@ -35,7 +35,7 @@ def createQuery(request):
                    Q(username__contains=search_q)|
                    Q(text__contains=search_q)|
                    Q(occupation__contains=search_q)                                                                        
-                   ).values_list('pk',flat=True)                                
+                   ).values_list('pk', flat=True)                                
         
         if None in ids:
             ids.remove(None)
@@ -140,11 +140,11 @@ def setRate(request,username,rtype):
     user = users.models.User.objects.filter(username=username)[0]
     owner = request.user
     rate = users.models.UserRate.objects.filter(owner=owner).filter(user=user)
-    if len(rate)==0:
+    if len(rate) == 0:
         rate = users.models.UserRate(owner=owner,user=user)
     else:
         rate = rate[0]
-    rate.score =  int(request.POST['score'])
+    rate.score = int(request.POST['score'])
     rate.save()
     rate.save_base()
     return HttpResponse(
