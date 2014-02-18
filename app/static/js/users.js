@@ -42,15 +42,15 @@
             this.delegateEvents(_.extend(this.events,{
                 'click .item_container': 'showItem'
             }));
+            $('#filter-offer-text').text('Exchangivists Offering');
+            $('#filter-request-text').text('Exchangivists Requesting');        
             return this;
         },
     });
 
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
-    window.ahr.users.initUsers = function(filters){
-        $('#filter-offer-text').text('Exchangivists Offering');
-        $('#filter-request-text').text('Exchangivists Requesting');
+    window.ahr.users.initUsers = function(filters){        
         $('#q').attr('placeholder','Search by keyword or username for Exchangivists');
         window.ahr.usersview = new UsersView(filters);
         var user_route = new UserRoute(window.ahr.usersview);
