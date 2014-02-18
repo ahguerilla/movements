@@ -341,14 +341,15 @@ def email_vet_user(request, user_id):
     user = User.objects.get(pk=user_id)
     if not user.is_active:
         return  HttpResponse(json.dumps({ 'success' : False, 'message': 'User is not vetted.'}),mimetype="application/json")    
-    text = render_to_string('You can now get started on Exchangivist. Your Username and Password is now active.',
-                            'email/getstarted.html',
+    text = render_to_string('emails/getstarted.html',
                             {'user':user,
                              'login_url':'http://'+Site.objects.get_current().domain+'/accounts/login'}
                             )
-    email = EmailMessage(text,
+    email = EmailMessage('You can now get started on Exchangivist. Your Username and Password is now active.',
+                         text,
                          constance.config.NO_REPLY_EMAIL,
                          [user.email])
+    email.content_subtype = "html"
     email.send()
     return  HttpResponse(json.dumps({ 'success' : True, 'message': 'An email has been sent to the user.'}),mimetype="application/json")
     

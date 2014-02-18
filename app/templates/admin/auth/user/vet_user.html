@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="content-main">
+<div id="content-main">  
   <form action="" method="post">
     {% csrf_token %}{% block form_top %}{% endblock %}
     <div>
@@ -38,12 +38,15 @@
       <div style="border: 1px solid teal; padding: 10px; font-size: 1.2em; color: teal; margin-bottom: 5px;">
         {{ msg }}
       </div>
-      {% endif %}
+      {% endif %}      
       <div>
         <input type="submit" value="{% trans 'Update' %}"  />
       </div>
       {% if vetted %}
       <div style="margin-top:50px;">
+      <div id="emailvetmsg" style="border: 1px solid teal; padding: 10px; font-size: 1.2em; color: teal; margin-bottom: 5px;display:none;">
+        
+      </div>
         <a class="sendvettedemail" target="_blank" href="{% url 'email_vet_user' user.id %}"><button>Send vetted email</button></a>
       </div>
       {% endif %}
@@ -57,7 +60,8 @@ $(document).ready(function(){
         ev.preventDefault();
         if(confirm('Send a vetted email to this user?')){
             $.getJSON(ev.currentTarget.href,function(data){
-                alert(data.message);
+              $('#emailvetmsg').show();
+              $('#emailvetmsg').text(data.message);
             });
         }
         return false;
