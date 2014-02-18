@@ -463,7 +463,9 @@
       reader.readAsDataURL(file);
       formdata.append('avatar', file);
       var token = $('input[name="csrfmiddlewaretoken"]',$(ev.currentTarget).closest('form')).val()
-      formdata.append('csrfmiddlewaretoken',token);
+      formdata.append('csrfmiddlewaretoken',token);  
+      $('label[for="id_avatar"]').text('Uploading  ');
+      $('input[type=file]', $('#changeavatardialog')).replaceWith('<img style="border-radius:0%;" src="{{ STATIC_URL}}images/download.gif" />');          
       var dfrd = $.ajax({
         url:$(ev.currentTarget).closest('form').attr('action'),
         data: formdata,
