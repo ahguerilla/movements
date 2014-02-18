@@ -15,7 +15,6 @@ from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
 from app.tasks.celerytasks import create_notification, update_notifications, mark_read_notifications 
-from django.views.decorators.cache import cache_page
 from django.utils.cache import get_cache_key, get_cache
 cache = get_cache('default')
 items_cache = get_cache('items')
@@ -61,6 +60,7 @@ def addMarketItem(request, obj_type, rtype):
     if form.is_valid():
         obj = saveMarketItem(form, obj_type, request.user)
         create_notification.delay(obj)
+        items_cache.clear()
     else:
         return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
     return HttpResponse(json.dumps({ 'success' : True, 'pk':obj.id}),mimetype="application"+rtype)
@@ -77,20 +77,21 @@ def getMarketItem(request,obj_id,rtype):
                             deleted=False,
                             owner__is_active=True)
     mark_read_notifications.delay((obj,),request.user.id)
-    reval = returnItemList([obj], rtype)
+    retval = returnItemList([obj], rtype)
     cache.add('item-'+obj_id, retval )
     return retval 
 
 
 @login_required
 def getMarketItemFromTo(request,sfrom,to,rtype):
-    retval = items_cache.get(request.path)
+    reqhash = hash(request.path+str(request.GET))
+    retval = items_cache.get(reqhash)
     if retval: 
         return retval            
     query = createQuery(request)
     obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     retval = returnItemList(obj, rtype)
-    items_cache.add(request.path, retval)    
+    items_cache.add(reqhash, retval)
     return retval
 
 
