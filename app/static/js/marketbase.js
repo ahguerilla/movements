@@ -353,13 +353,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   },
 
   filterButtonHide: function (ev) {
-    $('#filterbuttontext').html('Show Filters');
+    $('#filterbuttontext').html('&nbsp; Show Filters &nbsp;');
     $('#togglefilter').removeClass('dropup');
     this.setFilterWrapperMargin(this.filterheightClosed, 0);
   },
 
   filterButtonShow: function (ev) {
-    $('#filterbuttontext').html('Hide Filters');
+    $('#filterbuttontext').html('&nbsp; Hide Filters &nbsp;');
     $('#togglefilter').addClass('dropup');
     this.setFilterWrapperMargin(this.filterheightOpen, 300);
   },

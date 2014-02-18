@@ -67,7 +67,7 @@ def render_settings(request, initial=False):
             settings_form.save_m2m()
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
             if initial:
-                template = 'users/welcome.html'
+                template = 'users/welcome.html'        
     else:
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)
@@ -273,12 +273,16 @@ class AccAdapter(DefaultAccountAdapter):
         super(AccAdapter,self).get_email_confirmation_redirect_url(request)
         key = request.path.split('/')[3]
         conf = EmailConfirmation.objects.filter(key=key)[0]
-        if conf.email_address.user.is_active:
+        user = conf.email_address.user
+        if user.is_active:
             return 'http://'+Site.objects.get_current().domain+'/user/thanksforactivation';
 
+        vet_url = reverse('vet_user', args=(user.id,))
+        vet_url = 'http://' + Site.objects.get_current().domain + vet_url        
         ctx = {
             "user": str(conf.email_address),
-            "activate_url": 'http://'+Site.objects.get_current().domain+"/admin/auth/user/"+str(conf.email_address.user_id),
+            "activate_url": vet_url,
+            "vetted": user.is_active,
             "current_site": Site.objects.get_current().domain,
         }
 
@@ -337,14 +341,15 @@ def email_vet_user(request, user_id):
     user = User.objects.get(pk=user_id)
     if not user.is_active:
         return  HttpResponse(json.dumps({ 'success' : False, 'message': 'User is not vetted.'}),mimetype="application/json")    
-    text = render_to_string('You can now get started on Exchangivist. Your Username and Password is now active.',
-                            'email/getstarted.html',
+    text = render_to_string('emails/getstarted.html',
                             {'user':user,
                              'login_url':'http://'+Site.objects.get_current().domain+'/accounts/login'}
                             )
-    email = EmailMessage(text,
+    email = EmailMessage('You can now get started on Exchangivist. Your Username and Password is now active.',
+                         text,
                          constance.config.NO_REPLY_EMAIL,
                          [user.email])
+    email.content_subtype = "html"
     email.send()
     return  HttpResponse(json.dumps({ 'success' : True, 'message': 'An email has been sent to the user.'}),mimetype="application/json")
     

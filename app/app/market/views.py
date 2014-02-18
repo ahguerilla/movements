@@ -4,7 +4,7 @@ from .api.utils import *
 from app.market.forms import commentForm
 from django.contrib.auth.decorators import login_required
 from app.market.models import MarketItem, Notification
-from app.market.api.views.market import getMarketjson
+from app.market.api.views.market import get_market_json
 
 
 def getUserTags(user):
@@ -72,7 +72,7 @@ def editItem_form(request,obj_id):
 
     return render_to_response('market/%s_form.html' % obj.item_type,
                               {
-                                  'item': getMarketjson([obj]),
+                                  'item': get_market_json([obj]),
                                   },
                               context_instance=RequestContext(request))
 
