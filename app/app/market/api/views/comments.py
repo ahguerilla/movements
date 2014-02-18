@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 import json
 from app.market.api.utils import *
 from django.contrib.auth.decorators import login_required
-from app.tasks.celerytasks import createCommentNotification
+from app.tasks.celerytasks import create_comment_notification
 
 
 def saveComment(form, owner,item):
@@ -26,7 +26,7 @@ def addComment(request, obj_id, rtype):
     form = commentForm(request.POST)
     if form.is_valid():        
         obj = saveComment(form,  request.user ,m_obj)
-        createCommentNotification.delay(m_obj, obj, request.user.username)
+        create_comment_notification.delay(m_obj, obj, request.user.username)
         return HttpResponse(json.dumps({ 'success' : True, 'obj': obj.getdict() }),
                             mimetype="application"+rtype)
     else:

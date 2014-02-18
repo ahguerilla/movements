@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
-from app.tasks.celerytasks import createNotification, updateNotifications, markReadNotifications
+from app.tasks.celerytasks import create_notification, update_notifications, mark_read_notifications 
 from django.views.decorators.cache import cache_page
 from django.utils.cache import get_cache_key, get_cache
 cache = get_cache('default')
@@ -60,7 +60,7 @@ def addMarketItem(request, obj_type, rtype):
     form = item_forms[obj_type](request.POST)
     if form.is_valid():
         obj = saveMarketItem(form, obj_type, request.user)
-        createNotification.delay(obj)
+        create_notification.delay(obj)
     else:
         return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
     return HttpResponse(json.dumps({ 'success' : True, 'pk':obj.id}),mimetype="application"+rtype)
@@ -76,7 +76,7 @@ def getMarketItem(request,obj_id,rtype):
                             pk=obj_id,
                             deleted=False,
                             owner__is_active=True)
-    markReadNotifications.delay((obj,),request.user.id)
+    mark_read_notifications.delay((obj,),request.user.id)
     reval = returnItemList([obj], rtype)
     cache.add('item-'+obj_id, retval )
     return retval 
@@ -110,7 +110,7 @@ def editMarketItem(request,obj_id,rtype):
     form = item_forms[obj.item_type](request.POST, instance=obj)
     if form.is_valid():
         saveMarketItem(form, obj.item_type, obj.owner)
-        updateNotifications.delay(obj)
+        update_notifications.delay(obj)
     else:
         return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
     return HttpResponse(json.dumps({ 'success' : True}),
@@ -170,7 +170,7 @@ def setRate(request,obj_id,rtype):
     rate.score =  int(request.POST['score'])
     rate.save()
     rate.save_base()
-    markReadNotifications.delay((item,),request.user.id)
+    mark_read_notifications.delay((item,),request.user.id)
     return HttpResponse(
         json.dumps({'success': 'true',
                     'score':item.score ,
