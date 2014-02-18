@@ -55,6 +55,7 @@
         window.ahr.usersview = new UsersView(filters);
         var user_route = new UserRoute(window.ahr.usersview);
         Backbone.history.start();
+        document.title = "Exchangivists";
     };
 
 })();
