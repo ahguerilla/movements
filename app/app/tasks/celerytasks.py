@@ -2,11 +2,12 @@ from celery import shared_task, task
 from app.users.models import UserProfile
 from app.market.models import MarketItem,Notification
 from django.db.models import Q
+from django.conf import settings
 import json
 
 if not '_app' in dir():
     from celery import Celery
-    _app = Celery('celerytasks',broker='amqp://guest@localhost//')
+    _app = Celery('celerytasks', broker=settings.CELERY_BROKER)
 
 
 def get_notification_text(obj,update=False):    
