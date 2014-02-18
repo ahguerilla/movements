@@ -273,12 +273,16 @@ class AccAdapter(DefaultAccountAdapter):
         super(AccAdapter,self).get_email_confirmation_redirect_url(request)
         key = request.path.split('/')[3]
         conf = EmailConfirmation.objects.filter(key=key)[0]
-        if conf.email_address.user.is_active:
+        user = conf.email_address.user
+        if user.is_active:
             return 'http://'+Site.objects.get_current().domain+'/user/thanksforactivation';
 
+        vet_url = reverse('vet_user', args=(user.id,))
+        vet_url = 'http://' + Site.objects.get_current().domain + vet_url        
         ctx = {
             "user": str(conf.email_address),
-            "activate_url": 'http://'+Site.objects.get_current().domain+"/admin/auth/user/"+str(conf.email_address.user_id),
+            "activate_url": vet_url,
+            "vetted": user.is_active,
             "current_site": Site.objects.get_current().domain,
         }
 
