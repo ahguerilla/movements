@@ -66,8 +66,10 @@
           return " ";
         });
         $('#conversation').html(data4);
-        $('#id_body').empty();
-        window.ahr.expandTextarea('#id_body');
+        if($('#id_body').length >0){
+          $('#id_body').empty();         
+          window.ahr.expandTextarea('#id_body');
+        }
         that.showconv();
         $.getJSON(window.ahr.app_urls.getmessagecount, function (data) {
           $('.message-counter').each(function (tmp, item) {
