@@ -67,7 +67,7 @@ def render_settings(request, initial=False):
             settings_form.save_m2m()
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
             if initial:
-                template = 'users/welcome.html'
+                template = 'users/welcome.html'        
     else:
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)

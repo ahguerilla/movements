@@ -264,9 +264,9 @@
               <div class="form-group">
                 <div class="col-sm-12">
                   <div class="row">
-                    <div id="issues_place"></div>
-                    <span id="issues">
-                      {{ settings_form.issues.errors }}
+                    <div class="settings-page-error">{{ settings_form.issues.errors }}</div>
+                    <div id="issues_place"></div>                    
+                    <span id="issues">                    
                       {% render_field settings_form.issues class="form-control input-sm input-extra-height" %}
                     </span>
                   </div>
@@ -275,11 +275,11 @@
 
 
               <div class="form-group">
-                <div class="col-sm-12">
-                  <div class="row">
-                    <div id="countries_place"></div>
-                    <span id="countries">
-                      {{ settings_form.countries.errors }}
+                <div class="col-sm-12">                  
+                  <div class="row">                    
+                    <div class="settings-page-error">{{ settings_form.countries.errors }}</div>
+                    <div id="countries_place"></div>                                        
+                    <span id="countries">                      
                       {% render_field settings_form.countries class="form-control input-sm input-extra-height" %}
                     </span>
                   </div>
@@ -289,9 +289,10 @@
               <div class="form-group">
                 <div class="col-sm-12">
                   <div class="row">
-                    <div id="skills_place"></div>
+                    <div class="settings-page-error">{{ settings_form.skills.errors }}</div>
+                    <div id="skills_place"></div>                    
                     <span id="skills">
-                      {{ settings_form.skills.errors }}
+                    
                       {% render_field settings_form.skills class="form-control input-sm input-extra-height" %}
                     </span>
                   </div>
