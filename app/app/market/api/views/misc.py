@@ -12,38 +12,38 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def getSCRFToken(request,rtype):
+def get_SCRF_token(request,rtype):
     c={}
     c.update(csrf(request))
     return HttpResponse( json.dumps({'csrfmiddlewaretoken': c['csrf_token'].decode()}), mimetype="application/"+rtype)
 
 
 @login_required
-def getIssues(request,rtype):
+def get_issues(request,rtype):
     issues = users.models.Issues.objects.all()
     return HttpResponse( value(rtype,issues), mimetype="application/"+rtype)
 
 
 @login_required
-def getCountries(request,rtype):
+def get_countries(request,rtype):
     cntrs = users.models.Countries.objects.all()
     return HttpResponse( value(rtype,cntrs), mimetype="application/"+rtype)
 
 
 @login_required
-def getNationalities(request,rtype):
+def get_nationalities(request,rtype):
     ntnlts = users.models.Nationality.objects.all()
     return HttpResponse( value(rtype,ntnlts), mimetype="application/"+rtype)
 
 
 @login_required
-def getSkills(request,rtype):
+def get_skills(request,rtype):
     sklls = users.models.Skills.objects.all()
     return HttpResponse( value(rtype,sklls), mimetype="application/"+rtype)
 
 
 @login_required
-def getUnreadCount(request,rtype):
+def get_unreadCount(request,rtype):
     try:
         count=Message.objects.inbox_unread_count(request.user)
     except:

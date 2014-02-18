@@ -11,7 +11,7 @@ from app.market.api.utils import *
 import app.users as users
 
 
-def createQuery(request):
+def create_query(request):
     query = Q()
 
     if request.GET.has_key('skills'):
@@ -54,7 +54,7 @@ def createQuery(request):
 
 
 @login_required
-def getAvatar(request,obj_id,size, rtype):
+def get_avatar(request,obj_id,size, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     obj = user.avatar_set.all()
     #if obj != []:
@@ -63,7 +63,7 @@ def getAvatar(request,obj_id,size, rtype):
 
 
 @login_required
-def getDetails(request,obj_id, rtype):
+def get_details(request,obj_id, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     return HttpResponse(
         value(rtype,
@@ -74,8 +74,8 @@ def getDetails(request,obj_id, rtype):
 
 
 @login_required
-def getUsersFromto(request,sfrom,to,rtype):
-    query = createQuery(request)
+def get_users_fromto(request,sfrom,to,rtype):
+    query = create_query(request)
     obj = users.models.UserProfile.get_application_users(query=query,
                                                          distinct='id',
                                                          order='-id',
@@ -87,14 +87,14 @@ def getUsersFromto(request,sfrom,to,rtype):
 
 
 @login_required
-def getUserCount(request,rtype):
-    query = createQuery(request)
+def get_user_count(request,rtype):
+    query = create_query(request)
     obj = users.models.UserProfile.get_application_users(query=query, distinct='id', order='-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
 
 
 @login_required
-def sendMessage(request,to_user,rtype):
+def send_message(request,to_user,rtype):
     try:
         pm_write(sender=request.user,
                  recipient=users.models.User.objects.filter(username=to_user)[0],
@@ -113,7 +113,7 @@ def sendMessage(request,to_user,rtype):
 
 
 @login_required
-def sendRecommendation(request,rec_type,to_user,obj_id,rtype):
+def send_recommendation(request,rec_type,to_user,obj_id,rtype):
     if rec_type == 'item':
         href = '<!--item="'+obj_id+'"-->'
     else:
@@ -134,7 +134,7 @@ def sendRecommendation(request,rec_type,to_user,obj_id,rtype):
 
 
 @login_required
-def setRate(request,username,rtype):
+def set_rate(request,username,rtype):
     if not request.POST.has_key('score'):
         return HttpResponseError()
     user = users.models.User.objects.filter(username=username)[0]
@@ -156,7 +156,7 @@ def setRate(request,username,rtype):
 
 
 @login_required
-def getUsernames(request,rtype):
+def get_usernames(request,rtype):
     usernames = users.models.User.objects \
                         .filter(is_active=True)\
                         .filter(username__icontains=request.GET['username']) \
