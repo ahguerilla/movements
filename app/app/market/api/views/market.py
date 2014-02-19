@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
-from app.tasks.celerytasks import create_notification, update_notifications, mark_read_notifications 
+from tasks.celerytasks import create_notification, update_notifications, mark_read_notifications 
 from django.utils.cache import get_cache_key, get_cache
 cache = get_cache('default')
 items_cache = get_cache('items')
@@ -69,14 +69,15 @@ def add_market_item(request, obj_type, rtype):
 @login_required
 def get_market_item(request,obj_id,rtype):
     retval = cache.get('item-'+obj_id )
-    if retval: 
+    if retval:
+        mark_read_notifications.delay((obj_id,),request.user.id)
         return retval        
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
                             Q(exp_date__gte=datetime.now())|Q(never_exp=True),
                             pk=obj_id,
                             deleted=False,
                             owner__is_active=True)
-    mark_read_notifications.delay((obj,),request.user.id)
+    mark_read_notifications.delay((obj.id,),request.user.id)
     retval = return_item_list([obj], rtype)
     cache.add('item-'+obj_id, retval )
     return retval 
@@ -171,7 +172,7 @@ def set_rate(request,obj_id,rtype):
     rate.score =  int(request.POST['score'])
     rate.save()
     rate.save_base()
-    mark_read_notifications.delay((item,),request.user.id)
+    mark_read_notifications.delay((item.id,),request.user.id)
     return HttpResponse(
         json.dumps({'success': 'true',
                     'score':item.score ,
