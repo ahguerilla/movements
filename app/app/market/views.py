@@ -58,60 +58,6 @@ def posts(request):
 
 
 @login_required
-def addItem_form(request, obj_type):
-    return render_to_response('market/%s_form.html' % obj_type,
-                              {
-                                  'item':'false',
-                                  },
-                              context_instance=RequestContext(request))
-
-
-@login_required
-def editItem_form(request,obj_id):
-    obj = MarketItem.objects.get(id=obj_id)
-
-    return render_to_response('market/%s_form.html' % obj.item_type,
-                              {
-                                  'item': get_market_json([obj]),
-                                  },
-                              context_instance=RequestContext(request))
-
-@login_required
-def viewItem(request,obj_type,obj_id):
-    return render_to_response('market/item_single.html',
-                              {
-                                  'item': {'id':str(obj_id)},
-                                  'obj_type': '"%s"'%obj_type
-                                  },
-                              context_instance=RequestContext(request))
-
-
-@login_required
-def addComment_form(request,obj_id):
-    form = commentForm()
-    return render_to_response('market/comment_form.html',
-                              {
-                                  'obj_id': str(obj_id),
-                                  'form': form,
-                                  'coment': 'false'
-                                  },
-                              context_instance=RequestContext(request))
-
-
-@login_required
-def editComment_form(request,obj_id):
-    form = commentForm()
-    return render_to_response('market/comment_form.html',
-                              {
-                                  'obj_type' : '',
-                                  'obj_id': '""',
-                                  'form': form,
-                                  'coment': {'id':str(obj_id)}
-                                  },
-                              context_instance=RequestContext(request))
-
-
-@login_required
 def notifications(request):    
     return render_to_response('market/notifications.html',
                               {},

@@ -29,7 +29,8 @@ def add_comment(request, obj_id, rtype):
     if form.is_valid():        
         obj = save_comment(form,  request.user ,m_obj)
         create_comment_notification.delay(m_obj, obj, request.user.username)
-        cache.delete('allcomment-'+obj_id )        
+        cache.delete('allcomment-'+obj_id )
+        cache.delete('commentcount-'+obj_id )  
         return HttpResponse(json.dumps({ 'success' : True, 'obj': obj.getdict() }),
                             mimetype="application"+rtype)
     else:
@@ -39,9 +40,15 @@ def add_comment(request, obj_id, rtype):
 
 @login_required
 def get_comment_count(request, obj_id, rtype):
+    retval = cache.get('commentcount-'+obj_id )  
+    if retval:
+        return retval
+    
     obj = get_object_or_404(market.models.MarketItem.objects.only('commentcount'),pk=obj_id)
-    return HttpResponse(json.dumps(obj.commentcount),
+    retval = HttpResponse(json.dumps(obj.commentcount),
                         mimetype="application"+rtype)
+    cache.add('commentcount-'+obj_id, retval)
+    return retval
 
 
 @login_required
@@ -55,7 +62,7 @@ def get_commentids_range(request, obj_id, st_date, end_date, rtype):
 
 
 @login_required
-def getComment(request, obj_id, rtype):
+def get_comment(request, obj_id, rtype):
     retval = cache.get('comment-'+obj_id )
     if retval: 
         return retval         
@@ -102,6 +109,7 @@ def delete_comment(request, obj_id, rtype):
     obj.item.save()
     obj.save_base()
     cache.delete('allcomment-'+obj_id )    
-    cache.delete('comment-'+obj.id )    
+    cache.delete('comment-'+obj.id )
+    cache.delete('commentcount-'+obj_id )
     return HttpResponse(json.dumps({ 'success' : True}),
                         mimetype="application"+rtype)

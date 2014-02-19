@@ -86,7 +86,7 @@ def update_notifications(self, obj):
     profiles = find_people_interested_in(obj)
     user_ids = set(profile.user.id for profile in profiles)    
 
-    notifications_tocereate=user_ids.difference(notification_userids)    
+    notifications_tocereate = user_ids.difference(notification_userids)    
     for user_id in notifications_tocereate:        
         notification = Notification()
         notification.user_id = user_id

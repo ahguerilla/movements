@@ -18,6 +18,7 @@ from tasks.celerytasks import create_notification, update_notifications, mark_re
 from django.utils.cache import get_cache_key, get_cache
 cache = get_cache('default')
 items_cache = get_cache('items')
+user_items_cache = get_cache('user_items')
 
 def get_market_json(objs):
     alist = []
@@ -61,6 +62,7 @@ def add_market_item(request, obj_type, rtype):
         obj = saveMarketItem(form, obj_type, request.user)
         create_notification.delay(obj)
         items_cache.clear()
+        user_items_cache.clear()
     else:
         return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application"+rtype)
     return HttpResponse(json.dumps({ 'success' : True, 'pk':obj.id}),mimetype="application"+rtype)
@@ -97,17 +99,11 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
 
 
 @login_required
-def get_marketitem_count(request, rtype):
-    query = create_query(request)
-    obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').count()
-    return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
-
-
-@login_required
 @check_perms_and_get(market.models.MarketItem)
 def edit_market_item(request,obj_id,rtype):
     cache.delete('item-'+obj_id)
     items_cache.clear()
+    user_items_cache.clear()
     obj = request.obj
     form = item_forms[obj.item_type](request.POST, instance=obj)
     if form.is_valid():
@@ -123,6 +119,7 @@ def edit_market_item(request,obj_id,rtype):
 @check_perms_and_get(market.models.MarketItem)
 def delete_market_item(request,obj_id,rtype):
     cache.delete('item-'+obj_id)
+    user_items_cache.clear()
     items_cache.clear()
     obj=request.obj
     obj.deleted = True
@@ -137,25 +134,18 @@ def user_get_marketitem(request, obj_id, rtype):
     return return_item_list([request.obj], rtype)
 
 
-@login_required
-def user_marketitems(request, rtype):
-    obj = market.models.MarketItem.objects.filter(deleted=False).defer('comments').filter(owner=request.user).all()
-    return return_item_list(obj, rtype)
-
-
-@login_required
-def user_marketitems_count(request, rtype):
-    query = create_query(request)
-    obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').count()
-    return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),
-                         mimetype="application"+rtype)
-
 
 @login_required
 def get_user_marketitem_fromto(request, sfrom, to, rtype):
+    reqhash = hash(request.path+str(request.GET))
+    retval = user_items_cache.get(reqhash)
+    if retval: 
+        return retval           
     query = create_query(request)
     obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
-    return return_item_list(obj, rtype)
+    retval = return_item_list(obj, rtype)
+    user_items_cache.add(reqhash, retval)
+    return retval
 
 
 @login_required
@@ -182,7 +172,7 @@ def set_rate(request, obj_id, rtype):
 
 
 @login_required
-def get_notifications_fromto(request, sfrom, to, rtype):
+def get_notifications_fromto(request, sfrom, to, rtype):    
     notifications = market.models.Notification.objects.filter(user=request.user.id, item__deleted=False)[sfrom:to]
     alist=[]
     notification_ids=[]
@@ -190,15 +180,16 @@ def get_notifications_fromto(request, sfrom, to, rtype):
         alist.append(notification.getDict()) 
         notification_ids.append(notification.id)
     market.models.Notification.objects.filter(id__in=notification_ids).update(seen=True)
-    return  HttpResponse(json.dumps({'notifications':alist}),
-                         mimetype="application"+rtype)
+    return HttpResponse(json.dumps({'notifications':alist}),
+                          mimetype="application"+rtype)    
+    
 
 
 @login_required
-def get_notseen_notifications(request, sfrom, to, rtype):
+def get_notseen_notifications(request, sfrom, to, rtype):          
     notifications = market.models.Notification.objects.filter(user=request.user.id,item__deleted=False).filter(seen=False).only('seen')
-    if len(notifications)>0:
-        return  HttpResponse(json.dumps({'result':True}),
-                             mimetype="application"+rtype)
+    if len(notifications)>0:        
+        return HttpResponse(json.dumps({'result':True}),
+                             mimetype="application"+rtype)                 
     return  HttpResponse(json.dumps({'result':False}),
                          mimetype="application"+rtype)
