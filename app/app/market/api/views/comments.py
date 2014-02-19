@@ -10,7 +10,7 @@ from django.utils.cache import get_cache_key, get_cache
 cache = get_cache('default')
 
 
-def save_comment(form, owner,item):
+def save_comment(form, owner, item):
     import datetime
     if form.is_valid() and form.instance.pk == None:
         form.cleaned_data['owner'] = owner
@@ -50,7 +50,7 @@ def get_comment_ids(request, obj_id, rtype):
 
 
 @login_required
-def get_commentids_range(request, obj_id,st_date, end_date, rtype):
+def get_commentids_range(request, obj_id, st_date, end_date, rtype):
     pass
 
 
@@ -67,7 +67,7 @@ def getComment(request, obj_id, rtype):
 
 
 @login_required
-def get_comments(request,obj_id,count,rtype):
+def get_comments(request, obj_id, count,rtype):
     retval = cache.get('allcomment-'+obj_id )
     if retval: 
         return retval             
@@ -80,7 +80,7 @@ def get_comments(request,obj_id,count,rtype):
     
 
 @login_required
-def edit_comment(request,obj_id, rtype):
+def edit_comment(request, obj_id, rtype):
     obj = get_object_or_404(market.models.Comment, pk=obj_id, deleted=False)
     form = commentForm(request.POST, instance=obj)
     if form.is_valid():

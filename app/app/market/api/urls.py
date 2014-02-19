@@ -34,7 +34,7 @@ urlpatterns = patterns('',
         name="user_get_usernames"),
 
     url(r'(?P<rtype>\S+)/csrftoken/get$',
-        'app.market.api.views.misc.get_SCRF_token',
+        'app.market.api.views.misc.get_CSRF_token',
         name="get_csrftoken"),
 
     url(r'(?P<rtype>\S+)/issues/get$',

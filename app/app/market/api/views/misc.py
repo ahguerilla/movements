@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def get_SCRF_token(request,rtype):
+def get_CSRF_token(request,rtype):
     c={}
     c.update(csrf(request))
     return HttpResponse( json.dumps({'csrfmiddlewaretoken': c['csrf_token'].decode()}), mimetype="application/"+rtype)

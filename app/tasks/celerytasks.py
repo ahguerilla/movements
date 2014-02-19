@@ -6,7 +6,7 @@ import json
 
 if not '_app' in dir():
     from celery import Celery
-    _app = Celery('celerytasks',broker='amqp://guest@localhost//')
+    _app = Celery('celerytasks', broker='amqp://guest@localhost//')
 
 
 def get_notification_text(obj, update=False):    
@@ -20,7 +20,7 @@ def get_notification_comment_text(obj, username, comment, not_yours=False):
     return json.dumps({
         'username': username,
         'title': obj.title,
-        'comment':comment.id,
+        'comment': comment.id,
         'not_yours': not_yours
     })
 
@@ -37,7 +37,7 @@ def find_people_interested_in(obj):
 
 @shared_task
 @_app.task(name="createNotification", bind=True)
-def create_notification(self,obj):
+def create_notification(self, obj):
     notifications = [ notif.user for notif in Notification.objects.filter(item=obj.id).only('user').all()]    
     profiles = find_people_interested_in(obj)
     for profile in profiles:
@@ -54,7 +54,7 @@ def create_notification(self,obj):
 
 @shared_task
 @_app.task(name="createCommentNotification", bind=True)
-def create_comment_notification(self,obj,comment,username):    
+def create_comment_notification(self, obj, comment, username):    
     created = []
     if obj.owner.username != username:
         notification = Notification()
@@ -80,7 +80,7 @@ def create_comment_notification(self,obj,comment,username):
 
 @shared_task
 @_app.task(name="updateNotifications", bind=True)
-def update_notifications(self,obj):
+def update_notifications(self, obj):
     notification_objs = Notification.objects.filter(item=obj.id).only('user','read').all()
     notification_userids =set(notification.user.id for notification in notification_objs )
     profiles = find_people_interested_in(obj)

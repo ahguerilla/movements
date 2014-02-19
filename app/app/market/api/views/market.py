@@ -67,7 +67,7 @@ def add_market_item(request, obj_type, rtype):
 
 
 @login_required
-def get_market_item(request,obj_id,rtype):
+def get_market_item(request, obj_id, rtype):
     retval = cache.get('item-'+obj_id )
     if retval:
         mark_read_notifications.delay((obj_id,),request.user.id)
@@ -84,7 +84,7 @@ def get_market_item(request,obj_id,rtype):
 
 
 @login_required
-def get_marketItem_fromto(request,sfrom,to,rtype):
+def get_marketItem_fromto(request, sfrom, to, rtype):
     reqhash = hash(request.path+str(request.GET))
     retval = items_cache.get(reqhash)
     if retval: 
@@ -97,7 +97,7 @@ def get_marketItem_fromto(request,sfrom,to,rtype):
 
 
 @login_required
-def get_marketitem_count(request,rtype):
+def get_marketitem_count(request, rtype):
     query = create_query(request)
     obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),mimetype="application"+rtype)
@@ -133,7 +133,7 @@ def delete_market_item(request,obj_id,rtype):
 
 @login_required
 @check_perms_and_get(market.models.MarketItem)
-def user_get_marketitem(request,obj_id,rtype):
+def user_get_marketitem(request, obj_id, rtype):
     return return_item_list([request.obj], rtype)
 
 
@@ -144,7 +144,7 @@ def user_marketitems(request, rtype):
 
 
 @login_required
-def user_marketitems_count(request,rtype):
+def user_marketitems_count(request, rtype):
     query = create_query(request)
     obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').count()
     return  HttpResponse(json.dumps({ 'success' : True, 'count': obj}),
@@ -152,14 +152,14 @@ def user_marketitems_count(request,rtype):
 
 
 @login_required
-def get_user_marketitem_fromto(request,sfrom,to,rtype):
+def get_user_marketitem_fromto(request, sfrom, to, rtype):
     query = create_query(request)
     obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     return return_item_list(obj, rtype)
 
 
 @login_required
-def set_rate(request,obj_id,rtype):
+def set_rate(request, obj_id, rtype):
     if not request.POST.has_key('score'):
         return HttpResponseError()
     item = market.models.MarketItem.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).objects.filter(id=obj_id)[0]
@@ -182,20 +182,20 @@ def set_rate(request,obj_id,rtype):
 
 
 @login_required
-def get_notifications_fromto(request,sfrom,to,rtype):
-    notifications = market.models.Notification.objects.filter(user=request.user.id,item__deleted=False)[sfrom:to]
+def get_notifications_fromto(request, sfrom, to, rtype):
+    notifications = market.models.Notification.objects.filter(user=request.user.id, item__deleted=False)[sfrom:to]
     alist=[]
+    notification_ids=[]
     for notification in notifications:
         alist.append(notification.getDict()) 
-        if not notification.seen:
-            notification.seen = True        
-            notification.save()    
+        notification_ids.append(notification.id)
+    market.models.Notification.objects.filter(id__in=notification_ids).update(seen=True)
     return  HttpResponse(json.dumps({'notifications':alist}),
                          mimetype="application"+rtype)
 
 
 @login_required
-def get_notseen_notifications(request,sfrom,to,rtype):
+def get_notseen_notifications(request, sfrom, to, rtype):
     notifications = market.models.Notification.objects.filter(user=request.user.id,item__deleted=False).filter(seen=False).only('seen')
     if len(notifications)>0:
         return  HttpResponse(json.dumps({'result':True}),
