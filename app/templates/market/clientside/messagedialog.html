@@ -96,12 +96,15 @@
       if (readonlysub == true) {
         $('#msgsub').attr('readonly', true);
       }
-      $('#messagedialog').modal('show');
+      $('#messagedialog').modal('show');      
     },
 
     initialize: function (settings) {
       this.alert_place = '#pmerror' //settings.alert_place;
       window.ahr.expandTextarea('#newmessage');
+      $('#messagedialog').on('shown.bs.modal',function(){
+        $('#newmessage').trigger('focus');
+      });      
       return this;
     }
   });

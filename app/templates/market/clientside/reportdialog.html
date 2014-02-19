@@ -47,6 +47,7 @@
           this.showModalDialog('#report_template', {}, '#reportdialog', function(){
             that.item_id = item_id;
             window.ahr.expandTextarea($("#reportdialog #content"));
+            $("#reportdialog #content").trigger('focus');
           });
           return(false);
         },

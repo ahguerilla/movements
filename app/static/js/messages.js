@@ -94,7 +94,7 @@
         $('body').scrollTop(0);
       } else {
         $('body').scrollTop(0);
-      }
+      }      
     },
 
     back: function (ev) {
