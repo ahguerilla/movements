@@ -54,7 +54,7 @@ def create_query(request):
 
 
 @login_required
-def get_avatar(request,obj_id,size, rtype):
+def get_avatar(request, obj_id, size, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     obj = user.avatar_set.all()
     #if obj != []:
@@ -62,19 +62,9 @@ def get_avatar(request,obj_id,size, rtype):
     return HttpResponse( json.dumps({'pk': 0, 'avatar': reverse('avatar_render_primary', args=[user.username,size])}),mimetype="application"+rtype)
 
 
-@login_required
-def get_details(request,obj_id, rtype):
-    user = get_object_or_404(users.models.User, pk=obj_id)
-    return HttpResponse(
-        value(rtype,
-              [user],
-              fields=('username',)
-              ),
-        mimetype="application"+rtype)
-
 
 @login_required
-def get_users_fromto(request,sfrom,to,rtype):
+def get_users_fromto(request, sfrom, to, rtype):
     query = create_query(request)
     obj = users.models.UserProfile.get_application_users(query=query,
                                                          distinct='id',
@@ -94,7 +84,7 @@ def get_user_count(request,rtype):
 
 
 @login_required
-def send_message(request,to_user,rtype):
+def send_message(request, to_user, rtype):
     try:
         pm_write(sender=request.user,
                  recipient=users.models.User.objects.filter(username=to_user)[0],
@@ -113,7 +103,7 @@ def send_message(request,to_user,rtype):
 
 
 @login_required
-def send_recommendation(request,rec_type,to_user,obj_id,rtype):
+def send_recommendation(request, rec_type, to_user, obj_id, rtype):
     if rec_type == 'item':
         href = '<!--item="'+obj_id+'"-->'
     else:
@@ -134,7 +124,7 @@ def send_recommendation(request,rec_type,to_user,obj_id,rtype):
 
 
 @login_required
-def set_rate(request,username,rtype):
+def set_rate(request, username, rtype):
     if not request.POST.has_key('score'):
         return HttpResponseError()
     user = users.models.User.objects.filter(username=username)[0]
@@ -156,7 +146,7 @@ def set_rate(request,username,rtype):
 
 
 @login_required
-def get_usernames(request,rtype):
+def get_usernames(request, rtype):
     usernames = users.models.User.objects \
                         .filter(is_active=True)\
                         .filter(username__icontains=request.GET['username']) \
@@ -165,4 +155,29 @@ def get_usernames(request,rtype):
         json.dumps(
             [user.username for user in usernames if hasattr(user, 'userprofile')]
         ),
+        mimetype="application/"+rtype)
+
+
+@login_required
+def get_profile(request, username, rtype):
+    user = get_object_or_404(users.models.User, username=username)    
+    if not user.is_active:
+        raise Http404
+    try:
+        user_profile = users.models.UserProfile.objects.get(user=user)    
+    except:
+        raise Http404
+    orate = users.models.OrganisationalRating.objects.filter(user=user).all()
+    perms = user_profile.notperm
+    return HttpResponse(
+        json.dumps(
+            {
+                'username': user.username,
+                'avatar': reverse('avatar_render_primary', args=[user.username,60]),
+                'nationality': user_profile.nationality if not perms.has_key('nationality') else 'hidden',
+                'resident_country': user_profile.resident_country  if not perms.has_key('resident_country') else 'hidden',
+                'score': user_profile.score,
+                'orate': orate[0].rated_by_ahr if len(orate)>0 else False
+            }
+            ),
         mimetype="application/"+rtype)

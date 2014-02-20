@@ -5,9 +5,9 @@ urlpatterns = patterns('',
         'app.market.api.views.users.get_avatar',
         name="get_avatar"),
 
-    url(r'(?P<rtype>\S+)/userdetail/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.users.get_details',
-        name="get_userdetail"),
+    url(r'(?P<rtype>\S+)/userprofile/get/(?P<username>\S+)$',
+        'app.market.api.views.users.get_profile',
+        name="get_userprofile"),
 
     url(r'(?P<rtype>\S+)/users/get/count$',
         'app.market.api.views.users.get_user_count',
@@ -34,7 +34,7 @@ urlpatterns = patterns('',
         name="user_get_usernames"),
 
     url(r'(?P<rtype>\S+)/csrftoken/get$',
-        'app.market.api.views.misc.get_SCRF_token',
+        'app.market.api.views.misc.get_CSRF_token',
         name="get_csrftoken"),
 
     url(r'(?P<rtype>\S+)/issues/get$',
@@ -63,16 +63,8 @@ urlpatterns = patterns('',
 
     url(r'(?P<rtype>\S+)/item/get/(?P<obj_id>\d+)$',
         'app.market.api.views.market.get_market_item',
-        name="get_marketitem"),
-
-    url(r'(?P<rtype>\S+)/item/get/count$',
-        'app.market.api.views.market.get_marketitem_count',
-        name="get_marketitem_count"),
-
-    url(r'(?P<rtype>\S+)/useritem/get/count$',
-        'app.market.api.views.market.user_marketitems_count',
-        name="user_items_count"),
-
+        name="get_marketitem"), 
+   
     url(r'(?P<rtype>\S+)/useritem/get/(?P<obj_id>\d+)$',
         'app.market.api.views.market.user_get_marketitem',
         name="user_get_marketitem"),
@@ -93,10 +85,6 @@ urlpatterns = patterns('',
         'app.market.api.views.market.delete_market_item',
         name="delete_marketitem"),
 
-    url(r'(?P<rtype>\S+)/item/userposts$',
-        'app.market.api.views.market.user_marketitems',
-        name="user_marketitems"),
-
     url(r'(?P<rtype>\S+)/item/set/rate/(?P<obj_id>\d+)$',
         'app.market.api.views.market.set_rate',
         name="market_set_rate"),
@@ -106,7 +94,7 @@ urlpatterns = patterns('',
         name="add_comment"),
 
     url(r'(?P<rtype>\S+)/comment/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.comments.getComment',
+        'app.market.api.views.comments.get_comment',
         name="get_comment"),
 
     url(r'(?P<rtype>\S+)/comment/get/count/(?P<obj_id>\d+)$',

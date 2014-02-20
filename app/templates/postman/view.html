@@ -86,9 +86,12 @@
 
             </form>
             <script type="text/javascript">
-            (function(){
+            (function(){              
+              $('#replyarea').on('shown.bs.collapse', function () {
+                $('#id_body').trigger('focus');
+              });
               $('#replyarea').on('show.bs.collapse', function () {
-                $('#showreply').hide();
+                $('#showreply').hide();                
                 $('#reply-btn').on('click',function(ev){
                   ev.preventDefault();
                   if ($('#id_body').val()!=""){
@@ -101,7 +104,7 @@
               });
               $('#showmoremessages').on('click',function(){
                 $('#hiddenmessages').show(400);
-                $('#more-wrap').hide(400);
+                $('#more-wrap').hide(400);                
               });
             })();
             </script>
