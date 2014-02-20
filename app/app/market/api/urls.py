@@ -5,9 +5,9 @@ urlpatterns = patterns('',
         'app.market.api.views.users.get_avatar',
         name="get_avatar"),
 
-    url(r'(?P<rtype>\S+)/userdetail/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.users.get_details',
-        name="get_userdetail"),
+    url(r'(?P<rtype>\S+)/userprofile/get/(?P<username>\S+)$',
+        'app.market.api.views.users.get_profile',
+        name="get_userprofile"),
 
     url(r'(?P<rtype>\S+)/users/get/count$',
         'app.market.api.views.users.get_user_count',

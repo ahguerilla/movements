@@ -43,7 +43,7 @@
       ev.preventDefault();
       if (ev.currentTarget.parentElement.tagName == "STRONG") {
         a = ev.currentTarget;
-        $(ev.currentTarget.parentElement).html(a);
+        $(ev.currentTarget.parentElement).html(a);        
       }
 
       var dfrd = $.ajax({
@@ -65,6 +65,19 @@
         data4 = data3.replace(that.userre, function (match, item_id, offset, string) {
           return " ";
         });
+        
+        var user;
+        $('.messageavatar img', data4).each(function(item,index){
+          user = $(this).attr('alt');
+          if(user != window.ahr.username)return;          
+        });
+        
+        $.getJSON(window.ahr.app_urls.getprofile+user,function(data){
+          var tmpl = $('#message-profile').html();
+          var prof = _.template(tmpl);
+          $('.profilecontainer').html(prof(data));
+        });
+                
         $('#conversation').html(data4);
         if($('#id_body').length >0){
           $('#id_body').empty();         
@@ -87,33 +100,35 @@
     },
 
     showconv: function () {
-      if ($(window).width() < 992) {
-        $("#message-col").hide();
-        $('#conversation').show();
-        $('#back').show();
-        $('body').scrollTop(0);
-      } else {
-        $('body').scrollTop(0);
-      }      
+      if ($(window).width() < 992 ) {
+        $('.nanamorde-mobile').show();
+      } else if ($(window).width() >= 992) {
+        $('.nanamorde').show(); 
+      }
+      $("#message-col").hide();            
+      $('#conversation-cont').show();
+      $('#back').show();
+      $('body').scrollTop(0);      
     },
 
     back: function (ev) {
-      $('#conversation').hide();
+      $('.nanamorde').hide();
+      $('.nanamorde-mobile').hide();
+      $('#conversation-cont').hide();
       $("#message-col").show();
       $('#back').hide();
     },
 
     resize: function (ev) {
-      if ($(window).width() < 992 && $('#conversation').css('display') != 'none' && $("#message-col").css('display') != 'none') {
-        $('#conversation').hide();
-      } else if ($(window).width() >= 992) {
-        if ($('#conversation').css('display') == 'none') {
-          $('#conversation').show();
-          $($('.conv_link')[0]).trigger('click');
-        }
-        $('#conversation').show();
-        $('#back').hide();
-        $("#message-col").show();
+      if ($(window).width() < 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {        
+        $('.nanamorde-mobile').show();
+        $('.nanamorde').hide();
+      } else if ($(window).width() >= 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {
+        $('.nanamorde-mobile').hide();
+        $('.nanamorde').show();
+      }else{
+        $('.nanamorde-mobile').hide();
+        $('#conversation-cont').hide();
       }
     },
 
@@ -122,8 +137,11 @@
       var more = $('.next')[0];
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
       this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
-      $(more).html('<button class="btn btn-primary">more...</button>');
+      $(more).html('<button class="btn btn-default">more...</button>');
       $('#paginationblock').html(more);
+      $('#conversation-cont').hide();
+      $('.nanamorde').hide();
+      $('.nanamorde-mobile').hide();
       this.resize();
     }
   });
@@ -132,11 +150,7 @@
   window.ahr.messages = window.ahr.messages || {};
   window.ahr.messages.initInbox = function () {
     var messages = new InboxView();
-    var messages_route = new InboxRoute(messages);
-    if ($(window).width() > 992) {
-      $($('.conv_link')[0]).trigger('click');
-
-    }
+    var messages_route = new InboxRoute(messages);   
     $('#back').hide();
     Backbone.history.start();
   };
