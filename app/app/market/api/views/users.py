@@ -174,10 +174,12 @@ def get_profile(request, username, rtype):
             {
                 'username': user.username,
                 'avatar': reverse('avatar_render_primary', args=[user.username,60]),
-                'nationality': user_profile.nationality if not perms.has_key('nationality') else 'hidden',
-                'resident_country': user_profile.resident_country  if not perms.has_key('resident_country') else 'hidden',
+                'nationality': user_profile.nationality.nationality if not perms.has_key('nationality') else 'hidden',
+                'resident_country': user_profile.resident_country.residence if not perms.has_key('resident_country') else 'hidden',
                 'score': user_profile.score,
-                'orate': orate[0].rated_by_ahr if len(orate)>0 else False
+                'ratecount': user_profile.ratecount,
+                'orate': orate[0].rated_by_ahr if len(orate)>0 else 0
             }
             ),
         mimetype="application/"+rtype)
+

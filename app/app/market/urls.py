@@ -13,13 +13,11 @@ urlpatterns = patterns('',
     url(r'^messages/', include('postman.urls')),
 )
 
-
-from postman.views import WriteView,ReplyView,MessageView,ConversationView
-from app.market.forms import MarketWriteForm,MarketFullReplyForm,MarketQuickReplyForm
+from cust_postman import MarketQuickReplyForm, MyConv, MessageView
 
 urlpatterns += patterns('postman.views',
                         #url(r'^write/(?:(?P<recipients>[\w.@+-:]+)/)?$', WriteView.as_view(form_classes=(MarketWriteForm,)), name='postman_write'),
                         #url(r'^reply/(?P<message_id>[\d]+)/$', ReplyView.as_view(form_class=MarketFullReplyForm), name='postman_reply'),
-                        url(r'^view/t/(?P<thread_id>[\d]+)/$', ConversationView.as_view(form_class=MarketQuickReplyForm), name='postman_view_conversation'),
+                        url(r'^view/t/(?P<thread_id>[\d]+)/$', MyConv.as_view(form_class=MarketQuickReplyForm), name='postman_view_conversation'),
                         url(r'^view/(?P<message_id>[\d]+)/$', MessageView.as_view(form_class=MarketQuickReplyForm), name='postman_view'),
 )

@@ -63,7 +63,7 @@
           return " ";
         });
         data4 = data3.replace(that.userre, function (match, item_id, offset, string) {
-          return " ";
+          return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
         });
         
         var user;
@@ -76,6 +76,14 @@
           var tmpl = $('#message-profile').html();
           var prof = _.template(tmpl);
           $('.profilecontainer').html(prof(data));
+          $('.rateit').rateit();
+          $('.rateit').rateit('min', 0);
+          $('.rateit').rateit('max', 5);
+          $('.rateit').rateit('readonly', true);
+          $('.rateit').each(function(){
+            $(this).rateit('value', this.getAttribute('rate'));
+          });
+          $('#id_body').trigger('focus');                            
         });
                 
         $('#conversation').html(data4);
