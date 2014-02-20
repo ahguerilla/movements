@@ -10,7 +10,7 @@
     // postman_delete
 
     getcsrf: "{% url 'get_csrftoken' 'json' %}",
-    getuserdetail: "{% url 'get_userdetail' 'json' 0 %}".slice(0,-1),
+    getprofile: "{% url 'get_userprofile' 'json' 0 %}".slice(0,-1),
     getavatar: "{% url 'get_avatar' 'json' 0 0 %}".slice(0,-1),
     getusercount: "{% url 'get_usercount' 'json' %}",
     getuserfromto: "{% url 'get_user_fromto' 'json' 0 0 %}".slice(0,-1),
@@ -24,22 +24,15 @@
     getcountries: "{% url 'get_countries' 'json' %}",
     getNationalities: "{% url 'get_nationalities' 'json' %}",
     getmessagecount: "{% url 'get_messagecount' 'json' %}",
-
-    viewitem: "{% url 'view_item' 'offer' 0 %}".slice(0,-1),
-    edititem: "{% url 'form_edit_item' 0 %}".slice(0,-1),
-    getitemform: "{% url 'form_add_item' 'offer' %}",
-
+  
     market: "{% url 'show_market' %}",
     getposts:  "{% url 'posts'  %}",
     getmarketitem: "{% url 'get_marketitem' 'json' 0 %}".slice(0,-1),
     getmarketitemfromto: "{% url 'get_marketitems_fromto' 'json' 0 0 %}".slice(0,-1),
-    getmarketcount: "{% url 'get_marketitem_count' 'json' %}",
     addmarketitem: "{% url 'add_marketitem' 'json' 'offer' %}".slice(0,-5),
     editmarketitem: "{% url 'edit_marketitem' 'json' 0 %}".slice(0,-1),
-    deletemarketitem: "{% url 'delete_marketitem' 'json' 0 %}".slice(0,-1),
-    getuseritems: "{% url 'user_marketitems' 'json' %}",
-    getuseritem: "{% url 'user_get_marketitem' 'json' 0 %}".slice(0,-1),
-    getuseritemscount: "{% url 'user_items_count' 'json' %}",
+    deletemarketitem: "{% url 'delete_marketitem' 'json' 0 %}".slice(0,-1),    
+    getuseritem: "{% url 'user_get_marketitem' 'json' 0 %}".slice(0,-1),    
     getusermarketitemsfromto : "{% url 'get_usermarketitems_fromto' 'json' 0 0 %}".slice(0,-1),
     sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
     senditemrecommendation: "{% url 'send_recommendation' 'json' 'item' 0 0 %}".slice(0,-1),
@@ -47,8 +40,6 @@
     marketsetrate : "{% url 'market_set_rate' 'json' 0 %}".slice(0,-1),
 
     reportpost: "{% url 'report_post' 'json' 0 %}".slice(0,-1),
-
-    formeditcomment: "{% url 'form_edit_comment' 0 %}".slice(0,-1),
 
     addcomment: "{% url 'add_comment' 'json' 0 %}".slice(0,-1),
     getcomment: "{% url 'get_comment' 'json' 0 %}".slice(0,-1),
@@ -64,6 +55,7 @@
 
   {% if user and user.id %}
     window.ahr.user_id = {{ user.id }};
+    window.ahr.username = "{{ user.username }}";
     window.ahr.messageCounterWatch();
   {% else %}
     window.ahr.user_id = 0;

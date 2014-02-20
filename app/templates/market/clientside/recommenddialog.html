@@ -101,6 +101,9 @@
        this.item = data.item;
        this.url = data.url;
        window.ahr.expandTextarea('#recmessage');
+       $('#recommenddialog').on('shown.bs.modal',function(){
+        $('#recmessage').trigger('focus');
+      });  
      }
    });
    window.ahr.recommend_widget = window.ahr.recommend_widget || {};

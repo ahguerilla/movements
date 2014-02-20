@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% load url from future %}
 {% load i18n postman_tags %}
 {% load pagination_tags %}
@@ -16,13 +15,13 @@
 
 {% block content %}
 
-{% block headerinfo %}
-{% endblock %}
+{% block headerinfo %}{% endblock %}
+
 <div class="row" id="postman">
   <div class="col-md-12">
     <div class="row">
-      <div class="col-md-2 pull-right">
-        <div class="btn btn-primary" style="margin-top:15px;" id="back">Back</div>
+      <div class="col-md-1 pull-right">
+        <div class="btn btn-default" style="margin-top:15px;" id="back">Back</div>
       </div>
       <div class="col-md-5 pull-left">
         <h3>{% block pm_folder_title %}{% endblock %}</h3>
@@ -37,7 +36,7 @@
       {% if pm_messages %}
       <form action="{% block pm_form_action %}{% endblock %}" method="post">{% csrf_token %}
         <div id="pm_messages">
-          <div class="col-md-5" id="message-col">
+          <div class="col-md-12" id="message-col">
             <div class="panel panel-default panel-sm">
 
               <!-- <div class="panel-heading">
@@ -133,12 +132,22 @@
             {% paginate %}
             </div>
           </div>
-          <div class="col-md-7">
-            <div class="row" style="border: 1px solid #D8DCDD;">
+          
+          <div class="col-md-offset-1 col-md-4 nanamorde-mobile">            
+              <div class="profilecontainer"></div>            
+          </div>
+          
+          <div class="col-md-7" id="conversation-cont">
+            <div class="panel">
               <a id="convst"></a>
               <div class="col-md-12" id="conversation"></div>
             </div>
           </div>
+          
+          <div class="panel col-md-offset-1 col-md-4 nanamorde">
+              <div class="profilecontainer"></div>
+          </div>
+          
         </div>
       </form>
 
@@ -157,8 +166,30 @@
     </div>
   </div>
 </div>
-{% endblock content %}
 
+<script type="text/template" id="message-profile">
+  <div>    
+    <div style="text-align: center;margin:10px;">
+      <img style="border-radius:50%;" src="<%= avatar %>"/>
+      <%- username %>
+    </div>
+    <div class="well well-sm">
+      <div>
+        Rating: <%-score %>
+      </div>
+      <div>
+        Nationality: <%- nationality %>
+      </div>
+      <div>
+        Country of residence: <%- resident_country %>
+      </div>
+      <div>
+        AHR rating: <%- orate %>
+      </div>    
+    </div>    
+  </div>
+</script>
+{% endblock content %}
 
 
 

@@ -10,18 +10,18 @@ if not '_app' in dir():
     _app = Celery('celerytasks', broker=settings.CELERY_BROKER)
 
 
-def get_notification_text(obj,update=False):    
+def get_notification_text(obj, update=False):    
     return json.dumps({
         'update':update,
         'title': obj.title
     })
 
 
-def get_notification_comment_text(obj,username,comment, not_yours=False):
+def get_notification_comment_text(obj, username, comment, not_yours=False):
     return json.dumps({
         'username': username,
         'title': obj.title,
-        'comment':comment.id,
+        'comment': comment.id,
         'not_yours': not_yours
     })
 
@@ -38,7 +38,7 @@ def find_people_interested_in(obj):
 
 @shared_task
 @_app.task(name="createNotification", bind=True)
-def create_notification(self,obj):
+def create_notification(self, obj):
     notifications = [ notif.user for notif in Notification.objects.filter(item=obj.id).only('user').all()]    
     profiles = find_people_interested_in(obj)
     for profile in profiles:
@@ -54,8 +54,8 @@ def create_notification(self,obj):
 
 
 @shared_task
-@_app.task(name="createCommentNotification",bind=True)
-def create_comment_notification(self,obj,comment,username):    
+@_app.task(name="createCommentNotification", bind=True)
+def create_comment_notification(self, obj, comment, username):    
     created = []
     if obj.owner.username != username:
         notification = Notification()
@@ -75,20 +75,19 @@ def create_comment_notification(self,obj,comment,username):
             notification.comment_id = comment.id
             notification.text = get_notification_comment_text(obj,username,comment,True)    
             notification.save()            
-            created.append(cmnt.owner.id)
-    print 'created'
+            created.append(cmnt.owner.id)    
     return
 
 
 @shared_task
 @_app.task(name="updateNotifications", bind=True)
-def update_notifications(self,obj):
+def update_notifications(self, obj):
     notification_objs = Notification.objects.filter(item=obj.id).only('user','read').all()
     notification_userids =set(notification.user.id for notification in notification_objs )
     profiles = find_people_interested_in(obj)
     user_ids = set(profile.user.id for profile in profiles)    
 
-    notifications_tocereate=user_ids.difference(notification_userids)    
+    notifications_tocereate = user_ids.difference(notification_userids)    
     for user_id in notifications_tocereate:        
         notification = Notification()
         notification.user_id = user_id
@@ -110,7 +109,6 @@ def update_notifications(self,obj):
 
 @shared_task
 @_app.task(name="markReadNotifications", bind=True)
-def mark_read_notifications(self,objs,user_id):
-    obj_ids = [obj.id for obj in objs]
+def mark_read_notifications(self, obj_ids, user_id):    
     notifications = Notification.objects.filter(user=user_id).filter(item__in=obj_ids).filter(read=False).update(read=True)    
     return
