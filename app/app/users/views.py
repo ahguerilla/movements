@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
-from allauth.account.models import EmailConfirmation
+from allauth.account.models import EmailConfirmation, EmailAddress
 from constance import config
 from django.core.urlresolvers import reverse, reverse_lazy
 from app.market.api.utils import value
@@ -204,10 +204,14 @@ def signup_from_home(request):
     return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))
 
 
-def email_doublesignup_upret(self, ret):
+def email_doublesignup_upret(self, ret):    
     if (ret.has_key('form') and
         ret['form'].errors.has_key('email') and
         ret['form'].errors['email'][0] == u'A user is already registered with this e-mail address.'):
+        confem = EmailAddress.objects.filter(email=ret['form'].data['email']).all()
+        if not confem[0].user.is_active:
+            self.template_name = "account/account_inactive.html"
+            return ret
         if len(ret['form'].errors)==1:        
             self.template_name = "account/verification_sent.html"
         else:
