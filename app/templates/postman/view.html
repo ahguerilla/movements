@@ -11,7 +11,7 @@
   <div>
     <div>      
       <div style="margin-top:10px;" class="pull-left">
-        <h4>{% if pm_messages|length > 0 %}{{ pm_messages.0.subject }}{% endif %}</h4>
+        <h4 style="display:none;" id="messagesubjectheader">{% if pm_messages|length > 0 %}{{ pm_messages.0.subject }}{% endif %}</h4>
       </div>
     </div>
     <div style="clear:both;">

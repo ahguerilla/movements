@@ -1,18 +1,10 @@
 {% extends "postman/base_folder.html" %}
 {% load i18n %}
 
-{% block headerinfo %}
-    <div style="margin-top:10px;">
-    <div class="alert alert-info alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {% trans "Welcome to your sent items. All messages that you have sent can be found in your sent items box." %}
-    </div>
-    </div>
-{% endblock %}
+{% block headerinfo %}{% endblock %}
 
 {% block head_title %}{% trans "Sent Messages" %}{% endblock %}
 
-{% block pm_folder_title %}{% trans "Sent Messages" %}{% endblock %}
 {% block pm_undelete_button %}{% endblock %}
 {% block pm_sender_header %}{% endblock %}
 {% block pm_date %}{% trans "Sent" %}{% endblock %}

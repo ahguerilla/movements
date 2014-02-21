@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Report User</h4>
+        <h4 class="modal-title">Report User <span id="reportuserusername"></span></h4>
         <div id="modal-message"></div>
       </div>
       <div class="modal-body">
@@ -45,6 +45,7 @@
           var that = this;
           var username = ev.currentTarget.getAttribute('username');
           this.showModalDialog('#report_user_template', {}, '#reportdialog', function(){
+            $('#reportuserusername').text(username);
             that.username = username;
             window.ahr.expandTextarea($("#reportdialog #content"));
             $("#reportdialog #content").trigger('focus');

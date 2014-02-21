@@ -14,17 +14,23 @@
 {% endcomment %}
 
 {% block content %}
-
 {% block headerinfo %}{% endblock %}
+{% url 'postman_inbox' as inbox %}
+{% url 'postman_sent' as sent %}
+{% url 'postman_archives' as archive %}
+{% url 'postman_trash' as trash%}
+{% with request.get_full_path as path %}
 
 <div class="row" id="postman">
   <div class="col-md-12">
-    <div class="row">
-      <div class="col-md-1 pull-right">
-        <div class="btn btn-default" style="margin-top:15px;" id="back">Back</div>
-      </div>
-      <div class="col-md-5 pull-left">
-        <h3>{% block pm_folder_title %}{% endblock %}</h3>
+    <div class="row">         
+      <div class="col-md-12 pull-left">        
+        <div class="btn-group btn-group-justified btn-group-md" id="messagenav" style="padding:10px;padding-top:10px;">                  
+          <a type="button" class="btn btn-default {%if path == inbox %} selected {% endif %}" href="{{inbox}}">Inbox</a>          
+          <a type="button" class="btn btn-default {%if path == sent %} selected {% endif %}" href="{{sent}}">Sent</a>
+          <a type="button" class="btn btn-default {%if path == archive %} selected {% endif %}" href="{{archive}}">Archive</a>
+          <a type="button" class="btn btn-default {%if path == trash %} selected {% endif %}" href="{{trash}}">Trash</a>          
+        </div>       
       </div>
     </div>
     <div class="row">
@@ -135,14 +141,30 @@
               <div class="profilecontainer"></div>            
           </div>
           
-          <div class="col-md-7" id="conversation-cont">
+          <div class="col-md-9" id="conversation-cont">
+            <div class="panel" id="back" style="margin-top:10px;">             
+                <ol class="breadcrumb" style="margin-bottom: 0px;">                        
+                  <li id="backtofolder" style="cursor:pointer;" class="">
+                  {%if path == inbox %}
+                    Inbox
+                  {% elif path == sent %}
+                    Sent
+                  {% elif path == trash %}
+                    Trash
+                  {% else %}            
+                    Archive
+                  {%endif%}
+                  </li>
+                  <li class="active" id="breadsubject"></li>
+                </ol>             
+            </div>
             <div class="panel">
               <a id="convst"></a>
               <div class="col-md-12" id="conversation"></div>
             </div>
           </div>
           
-          <div class="panel col-md-offset-1 col-md-4 nanamorde">
+          <div class="panel col-md-3 nanamorde" style="margin-top:10px;">
               <div class="profilecontainer"></div>
           </div>
           
@@ -189,11 +211,12 @@
     For your own safety and security, do not share personal contact information 
     (such as your phone number, address, email address, etc.) with other users. 
     Exchangivist also prohibits abusive language or harassment. 
-    To report an abusive user, <span class="report_user" username="<%- username %>"> click here</span>.
+    To report an abusive user,<span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>click here</strong></span>.
     </div>
   </div>
 </script>
 {% include 'market/clientside/reportuserdialog.html' %}
+{% endwith %}
 {% endblock content %}
 
 

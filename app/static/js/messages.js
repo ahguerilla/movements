@@ -16,7 +16,7 @@
     el: '#postman',
     events: {
       'click .conv_link': 'openConv',
-      'click #back': 'back',
+      'click #backtofolder': 'back',
       'click .next': 'addNext'
     },
 
@@ -60,10 +60,10 @@
         });
 
         data3 = data2.replace(that.itemre, function (match, item_id, offset, string) {
-          return " ";
-        });
-        data4 = data3.replace(that.userre, function (match, item_id, offset, string) {
           return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
+        });
+        data4 = data3.replace(that.userre, function (match, username, offset, string) {
+          return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
         });
         
         var user;
@@ -115,7 +115,9 @@
       }
       $("#message-col").hide();            
       $('#conversation-cont').show();
+      $('#messagenav').hide();
       $('#back').show();
+      $('#breadsubject').text($('#messagesubjectheader').text());
       $('body').scrollTop(0);      
     },
 
@@ -125,6 +127,7 @@
       $('#conversation-cont').hide();
       $("#message-col").show();
       $('#back').hide();
+      $('#messagenav').show();
     },
 
     resize: function (ev) {
