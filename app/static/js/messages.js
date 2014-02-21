@@ -70,7 +70,7 @@
         $('.messageavatar img', data4).each(function(item,index){
           user = $(this).attr('alt');
           if(user != window.ahr.username)return;          
-        });
+        });        
         
         $.getJSON(window.ahr.app_urls.getprofile+user,function(data){
           var tmpl = $('#message-profile').html();
@@ -142,10 +142,11 @@
 
     initialize: function () {
       $(window).resize(this.resize);
+      this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
       var more = $('.next')[0];
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
       this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
-      $(more).html('<button class="btn btn-default">more...</button>');
+      $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
       $('#paginationblock').html(more);
       $('#conversation-cont').hide();
       $('.nanamorde').hide();

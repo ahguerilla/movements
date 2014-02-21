@@ -40,6 +40,7 @@
     marketsetrate : "{% url 'market_set_rate' 'json' 0 %}".slice(0,-1),
 
     reportpost: "{% url 'report_post' 'json' 0 %}".slice(0,-1),
+    reportuser: "{% url 'report_user' 'json' 0 %}".slice(0,-1),    
 
     addcomment: "{% url 'add_comment' 'json' 0 %}".slice(0,-1),
     getcomment: "{% url 'get_comment' 'json' 0 %}".slice(0,-1),
@@ -62,3 +63,4 @@
   {% endif %}
 </script>
 {% endcompress %}
+

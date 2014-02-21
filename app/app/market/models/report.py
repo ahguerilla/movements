@@ -24,3 +24,15 @@ class MarketItemPostReport(models.Model):
     def save(self, *args, **kwargs):
         self.item.reportcount += 1
         self.item.save()
+        
+        
+class UserReport(models.Model):
+    owner = models.ForeignKey(auth.models.User, blank=False)
+    user = models.ForeignKey(auth.models.User, related_name='user_repots')
+    contents = tinymce.models.HTMLField(_('contents'), blank=False)
+    resolved = models.BooleanField(_('is resolved'), default=False)
+    pub_date = models.DateTimeField(_('publish date'), default=datetime.now)    
+
+    class Meta:
+        ordering = ['-resolved', '-pub_date']
+        app_label="market"

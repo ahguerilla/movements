@@ -1,11 +1,11 @@
 {% load compress %}
-<script type="text/template" id="report_template">
+<script type="text/template" id="report_user_template">
 <div id="reportdialog" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Report Post</h4>
+        <h4 class="modal-title">Report User</h4>
         <div id="modal-message"></div>
       </div>
       <div class="modal-body">
@@ -31,21 +31,21 @@
 </script>
 
 {% compress js %}
-<script type="text/javascript" id="reportdialog_view">
+<script type="text/javascript" id="reportuser_dialog">
  (function(){
-    var reportWidget = window.ahr.BaseView.extend({
+    var reportUserWidget = window.ahr.BaseView.extend({
         events:{
           'click .sendreport' : 'sendreport',
           'click .cancelreport' : 'cancelreport',
-          'click .report_post' : 'showreport'
+          'click .report_user' : 'showreport'
         },
 
         showreport: function(ev){
           ev.preventDefault();
           var that = this;
-          var item_id = ev.currentTarget.getAttribute('item_id');
-          this.showModalDialog('#report_template', {}, '#reportdialog', function(){
-            that.item_id = item_id;
+          var username = ev.currentTarget.getAttribute('username');
+          this.showModalDialog('#report_user_template', {}, '#reportdialog', function(){
+            that.username = username;
             window.ahr.expandTextarea($("#reportdialog #content"));
             $("#reportdialog #content").trigger('focus');
           });
@@ -62,7 +62,7 @@
             $('.sendreport').attr('disabled','disabled');
             $.ajax({
                 type: "POST",
-                url: window.ahr.app_urls.reportpost + that.item_id,
+                url: window.ahr.app_urls.reportuser + that.username,
                 dataType: 'json',
                 data: {
                   "csrfmiddlewaretoken": csrf.csrfmiddlewaretoken,
@@ -89,9 +89,9 @@
             var that = this;
         }
     });
-    window.ahr.report_dialog = window.ahr.report_dialog || {};
-    window.ahr.report_dialog.initWidget= function(element){
-        var widget = new reportWidget({'el':element});
+    window.ahr.reportUserDialog = window.ahr.reportUserDialog || {};
+    window.ahr.reportUserDialog.initWidget = function(element){
+        var widget = new reportUserWidget({'el':element});
         return widget;
     };
 })();

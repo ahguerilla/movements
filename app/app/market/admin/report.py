@@ -12,3 +12,12 @@ class MarketItemPostReportAdmin(admin.ModelAdmin):
         return obj.owner.username
 
 admin.site.register(models.MarketItemPostReport, MarketItemPostReportAdmin)
+
+class UserReportAdmin(admin.ModelAdmin):
+    list_display = ('user', 'reportedby', 'pub_date', 'resolved' )
+    readonly_fields = ('owner', 'user')    
+
+    def reportedby(self,obj):
+        return obj.owner.username
+
+admin.site.register(models.UserReport, UserReportAdmin)

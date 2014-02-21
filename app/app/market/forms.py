@@ -134,3 +134,9 @@ class reportMarketItemForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItemPostReport
         fields = ['contents',]
+
+
+class reportUserForm(forms.ModelForm):
+    class Meta:
+        model = market.models.UserReport
+        fields = ['contents',]

@@ -1,5 +1,5 @@
-from postman.views import WriteView,ReplyView,MessageView,ConversationView
-from app.market.forms import MarketWriteForm,MarketFullReplyForm,MarketQuickReplyForm
+from postman.views import WriteView, ReplyView, MessageView, ConversationView
+from app.market.forms import MarketWriteForm, MarketFullReplyForm, MarketQuickReplyForm
 from postman.models import Message
 from django.db.models import Q
 

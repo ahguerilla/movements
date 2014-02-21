@@ -118,9 +118,13 @@ urlpatterns = patterns('',
         name="delete_comment"),
 
     url(r'(?P<rtype>\S+)/report/(?P<obj_id>\d+)$',
-        'app.market.api.views.report.reportMarketItem',
+        'app.market.api.views.report.report_marketitem',
         name="report_post"),
-
+    
+    url(r'(?P<rtype>\S+)/report/user/(?P<username>\S+)$',
+        'app.market.api.views.report.report_user',
+        name="report_user"),
+    
     url(r'(?P<rtype>\S+)/notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$',
         'app.market.api.views.market.get_notifications_fromto',
         name="get_notifications_fromto"),    
