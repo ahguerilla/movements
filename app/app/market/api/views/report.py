@@ -4,10 +4,13 @@ from django.contrib.auth.decorators import login_required
 from app.market.api.utils import get_val_errors
 import json
 import app.market as market
+from django.core.urlresolvers import reverse
 from app.market.forms import reportMarketItemForm, reportUserForm
 from django.core.mail import send_mail
 import constance
 import django.contrib.auth as auth
+from django.contrib.sites.models import get_current_site
+
 
 
 
@@ -29,10 +32,13 @@ def report_marketitem(request, obj_id, rtype):
                 f.owner = request.user
                 f.item = market_item
                 f.save_base()
-                send_mail('User '+request.user.username+' reported the '+market_item.item_type+' "'+ market_item.title +'" by '+ market_item.owner.username,
-                          f.contents,
-                          constance.config.NO_REPLY_EMAIL,[constance.config.REPORT_POST_EMAIL],
-                          fail_silently=False)
+                site = get_current_site(request)
+                send_mail(
+                    'User '+request.user.username+' reported the '+market_item.item_type+' "'+ market_item.title +'" by '+ market_item.owner.username,
+                     'User message:\r\n'+f.contents+
+                     '\r\n Link to post:\r\n'+site.domain+ reverse('show_market')+'#item/'+str(market_item.id),
+                     constance.config.NO_REPLY_EMAIL,[constance.config.REPORT_POST_EMAIL]                    
+                )
                 return HttpResponse(json.dumps({'success': True, 'data': create_marketitem_json(f)}), mimetype="application"+rtype)
             else:
                 return HttpResponseBadRequest(json.dumps(get_val_errors(form)), mimetype="application"+rtype)
@@ -52,14 +58,13 @@ def report_user(request, username, rtype):
                 f.owner = request.user
                 f.user = user
                 f.save_base()
-                send_mail('User '+request.user.username+' reported user '+user.username+' "',
-                          f.contents+'\r\n to view this user in admin :'+
-                          ''+
-                          'to view this user profile click: '+
-                          ''
-                          ,
-                          constance.config.NO_REPLY_EMAIL,[constance.config.REPORT_POST_EMAIL],
-                          fail_silently=False)
+                site = get_current_site(request)                
+                send_mail(
+                    'User '+request.user.username+' reported user '+user.username+' "',
+                     'User message:\r\n'+f.contents+'\r\n Link to user:\r\n'+site.domain+ '/admin/auth/user/'+str(user.id),
+                     constance.config.NO_REPLY_EMAIL,
+                     [constance.config.REPORT_POST_EMAIL]
+                )
                 return HttpResponse(json.dumps({'success': True, 'data': create_marketitem_json(f)}), mimetype="application"+rtype)
             else:
                 return HttpResponseBadRequest(json.dumps(get_val_errors(form)), mimetype="application"+rtype)

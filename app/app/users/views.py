@@ -22,7 +22,7 @@ import app.users as users
 from django.contrib.admin.models import LogEntry,CHANGE
 from django.contrib.contenttypes.models import ContentType
 import json
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mass_mail
 import constance
 from app.users.utils import get_client_ip
 from django.template.loader import render_to_string

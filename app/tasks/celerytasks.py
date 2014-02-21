@@ -35,7 +35,6 @@ def find_people_interested_in(obj):
     return profiles
 
 
-@shared_task
 @_app.task(name="createNotification", bind=True)
 def create_notification(self, obj):
     notifications = [ notif.user for notif in Notification.objects.filter(item=obj.id).only('user').all()]    
@@ -52,7 +51,6 @@ def create_notification(self, obj):
     return
 
 
-@shared_task
 @_app.task(name="createCommentNotification", bind=True)
 def create_comment_notification(self, obj, comment, username):    
     created = []
@@ -78,7 +76,6 @@ def create_comment_notification(self, obj, comment, username):
     return
 
 
-@shared_task
 @_app.task(name="updateNotifications", bind=True)
 def update_notifications(self, obj):
     notification_objs = Notification.objects.filter(item=obj.id).only('user','read').all()
@@ -106,8 +103,8 @@ def update_notifications(self, obj):
     return
 
 
-@shared_task
 @_app.task(name="markReadNotifications", bind=True)
 def mark_read_notifications(self, obj_ids, user_id):    
     notifications = Notification.objects.filter(user=user_id).filter(item__in=obj_ids).filter(read=False).update(read=True)    
     return
+
