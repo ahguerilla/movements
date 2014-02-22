@@ -7,6 +7,6 @@
 {% block public-content %}
 <div class="row dialog sign-up-form">
   <h1>{% trans "Verify Your E-mail Address" %}</h1>
-  <p>{% blocktrans %}We have sent an e-mail to the address that you provided at sign-up for verification. Follow the link provided in the e-mail to finalize the signup process. Please contact us if you do not receive an email within a few minutes.{% endblocktrans %}</p>
+  <p>We have sent an e-mail to the address that you provided at sign-up for verification. Follow the link provided in the e-mail to finalize the signup process. Please <a href="{% url 'contact_us' %}">contact us</a> if you do not receive an email within a few minutes.</p>
 </div>
 {% endblock %}
