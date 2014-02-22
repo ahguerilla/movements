@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
-from allauth.account.models import EmailConfirmation
+from allauth.account.models import EmailConfirmation, EmailAddress
 from constance import config
 from django.core.urlresolvers import reverse, reverse_lazy
 from app.market.api.utils import value
@@ -22,7 +22,7 @@ import app.users as users
 from django.contrib.admin.models import LogEntry,CHANGE
 from django.contrib.contenttypes.models import ContentType
 import json
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mass_mail
 import constance
 from app.users.utils import get_client_ip
 from django.template.loader import render_to_string
@@ -78,6 +78,7 @@ def render_settings(request, initial=False):
                                 'user_form': user_form,
                                 'notperm': str(perms).replace("u'","'"),
                                 'initial': initial,
+                                'has_password': user.has_usable_password(),
                                 'skills': value('json',users.models.Skills.objects.all()),
                                 'issues': value('json',users.models.Issues.objects.all()),
                                 'countries': value('json',users.models.Countries.objects.all()),
@@ -174,6 +175,40 @@ class AhrSignupView(SignupView):
 
 ahr_signup_view = SignupView
 
+
+def email_doublesignup_upret(self, ret):    
+    if (ret.has_key('form') and
+        ret['form'].errors.has_key('email') and
+        ret['form'].errors['email'][0] == u'A user is already registered with this e-mail address.'):
+        confem = EmailAddress.objects.filter(email=ret['form'].data['email']).all()
+        
+        if len(ret['form'].errors)==1:        
+            self.template_name = "account/verification_sent.html"
+        else:
+            ret['form'].errors['email'].remove(u'A user is already registered with this e-mail address.')               
+            if len(ret['form'].errors['email'])==0:
+                ret['form'].errors.pop('email')
+        if not confem[0].user.is_active:            
+            email = EmailMessage('You are not vetted yet.',
+                                 "Some one is trying to register with your email address for ip address: "+ get_client_ip(self.request)+
+                                 " \r\nIf its not you then may be he/she is trying to register with us with this email account "+
+                                 "We didn't reveal that you are registered with us and the registration process for he/she/them went through as normal. ",
+                                 constance.config.NO_REPLY_EMAIL,
+                                 [ret['form'].data['email']])      
+        else:
+            email = EmailMessage('Security Alert from AHR, Someone is trying to register as you!',
+                                 "Some one is trying to register with your email address for ip address: "+ get_client_ip(self.request)+
+                                 " \r\nIf its not you then may be he/she is trying to find out if you are registered with us or not "+
+                                 "We didn't reveal that you are registered with us and the registration process for he/she/them went through as normal. "+
+                                 "But if you were arrested and were denying being involved with us and by some means (torture or ...) "+
+                                 "you gave up the access credentials to your email then we kindly ask the guy who is reading this to " + 
+                                 " send our regards to the poor soul and deny ever knowing him/her and sending this email! \r\n\r\n Regards\r\n AHR Team",
+                                 constance.config.NO_REPLY_EMAIL,
+                                 [ret['form'].data['email']])      
+        email.send()                
+    return ret
+
+
 class AhrSocialSignupView(SocialSignupView):
     def get_context_data(self, **kwargs):
         ret = super(AhrSocialSignupView, self).get_context_data(**kwargs)
@@ -183,6 +218,7 @@ class AhrSocialSignupView(SocialSignupView):
             'post_url': ''
         }
         ret.update(context_data)
+        ret = email_doublesignup_upret(self, ret)
         return ret
     template_name = SignupView.template_name
 
@@ -202,29 +238,6 @@ def signup_from_home(request):
         'sign_up': True,
     }
     return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))
-
-
-def email_doublesignup_upret(self, ret):
-    if (ret.has_key('form') and
-        ret['form'].errors.has_key('email') and
-        ret['form'].errors['email'][0] == u'A user is already registered with this e-mail address.'):
-        if len(ret['form'].errors)==1:        
-            self.template_name = "account/verification_sent.html"
-        else:
-            ret['form'].errors['email'].remove(u'A user is already registered with this e-mail address.')               
-            if len(ret['form'].errors['email'])==0:
-                ret['form'].errors.pop('email')                                    
-        email = EmailMessage('Security Alert from AHR, Someone is trying to register as you!',
-                             "Some one is trying to register with your email address for ip address: "+ get_client_ip(self.request)+
-                             " \r\nIf its not you then may be he/she is trying to find out if you are registered with us or not "+
-                             "We didn't reveal that you are registered with us and the registration process for he/she/them went through as normal. "+
-                             "But if you were arrested and were denying being involved with us and by some means (torture or ...) "+
-                             "you gave up the access credentials to your email then we kindly ask the guy who is reading this to " + 
-                             " send our regards to the poor soul and deny ever knowing him/her and sending this email! \r\n\r\n Regards\r\n AHR Team",
-                             constance.config.NO_REPLY_EMAIL,
-                             [ret['form'].data['email']])      
-        email.send()                
-    return ret
     
 
 class AhrSignupView(SignupView):

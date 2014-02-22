@@ -1,20 +1,9 @@
 {% extends "postman/base_folder.html" %}
 {% load i18n %}
-{% block headerinfo %}
-    <div style="margin-top:10px;">
-    <div class="alert alert-info alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {% trans "Welcome to your inbox. Your inbox is organised around your current conversations." %}		
-    </div>
-	<p>
-	For your own safety and security, do not share personal contact information (such as your phone number, address, email address, etc.) with other users.  Exchangivist also prohibits abusive language or harassment. To report an abusive user, click here.
-	</p>
-    </div>
-{% endblock %}
+{% block headerinfo %}{% endblock %}
 
 {% block head_title %}{% trans "Inbox" %}{% endblock %}
 
-{% block pm_folder_title %}{% trans "Inbox" %}{% endblock %}
 {% block pm_undelete_button %}{% endblock %}
 {% block pm_recipient_header %}{% endblock %}
 {% block pm_date %}{% trans "Received" %}{% endblock %}

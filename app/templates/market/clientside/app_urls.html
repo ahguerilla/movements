@@ -18,6 +18,7 @@
     setuserrate: "{% url 'user_set_rate' 'json' 'a' %}".slice(0,-1),
     getusernames: "{% url 'user_get_usernames' 'json' %}",
     changepassword : "{% url 'account_change_password' %}",
+    setpassword: "{% url 'account_set_password' %}",
 
     getissues: "{% url 'get_issues' 'json' %}",
     getskills: "{% url 'get_skills' 'json' %}",
@@ -40,6 +41,7 @@
     marketsetrate : "{% url 'market_set_rate' 'json' 0 %}".slice(0,-1),
 
     reportpost: "{% url 'report_post' 'json' 0 %}".slice(0,-1),
+    reportuser: "{% url 'report_user' 'json' 0 %}".slice(0,-1),    
 
     addcomment: "{% url 'add_comment' 'json' 0 %}".slice(0,-1),
     getcomment: "{% url 'get_comment' 'json' 0 %}".slice(0,-1),
@@ -62,3 +64,4 @@
   {% endif %}
 </script>
 {% endcompress %}
+

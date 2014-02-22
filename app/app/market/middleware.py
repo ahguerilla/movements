@@ -14,7 +14,8 @@ class NoUserProfile(object):
             request.path != reverse('avatar_add') and
             not request.path.startswith(settings.MEDIA_URL+'avatars/'+request.user.username) and
             request.path != reverse('account_change_password') and
-            request.path != reverse('account_change_password_success')
+            request.path != reverse('account_change_password_success') and
+            request.path != reverse('account_set_password')            
             ):
             return HttpResponseRedirect(reverse('getting_started'))
         return None

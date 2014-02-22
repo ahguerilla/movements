@@ -8,13 +8,46 @@
 
 {% block content %}
 <div id="postman_message">
-  <div _class="panel panel-default panel-sm">
-    <div _class="panel-heading">      
+  <div>
+    <div>      
       <div style="margin-top:10px;" class="pull-left">
-        <h4>{% if pm_messages|length > 0 %}{{ pm_messages.0.subject }}{% endif %}</h4>
+        <h4 style="display:none;" id="messagesubjectheader">{% if pm_messages|length > 0 %}{{ pm_messages.0.subject }}{% endif %}</h4>
       </div>
     </div>
-    <div _class="panel-body" style="clear:both;">
+    <div style="clear:both;">
+      <div class="row">
+        <div class="col-md-12">
+          {% if reply_to_pk %}
+          <div id="replyarea">
+            <form id="replyform" action="{% url 'postman_reply' reply_to_pk %}?next={{ next_url|urlencode }}" method="post">{% csrf_token %}
+              <div id="pm_reply">{{ form.body }}</div>
+              <div class="pull-right">                
+                <button  style="margin-bottom:10px;margin-top:10px;"type="submit" id="reply-btn" class="btn btn-default">{% trans 'Reply' %}</button>               
+              </div>
+            </form>
+            <script type="text/javascript">
+            (function(){                                          
+              $('#reply-btn').on('click',function(ev){
+                ev.preventDefault();
+                if ($('#id_body').val()!=""){
+                  $('#replyform').submit();
+                }else{
+                  alert('You cant send an empty message.');
+                }
+                return false;
+              });              
+              $('#showmoremessages').on('click',function(){
+                $('#hiddenmessages').show(400);
+                $('#more-wrap').hide(400);                
+              });
+            })();
+            </script>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div style="clear:both;">
       <hr/>
       {% for message in pm_messages %}
       {% if  pm_messages|length > 4 and forloop.counter == 2%}
@@ -54,7 +87,7 @@
           </div>
         </div>
          <div class="row">
-            <div class="col-md-offset-1 col-md-11 pm_body collapse{% if forloop.last %} in{%endif%}"  id="message-{{forloop.counter}}">
+            <div class="col-md-offset-1 col-md-11 pm_body collapse{% if forloop.first %} in{%endif%}"  id="message-{{forloop.counter}}">
              <div style="margin-left:10px;">{{ message.body|linebreaksbr }}</div>
             </div>
          </div>
@@ -67,52 +100,7 @@
       {% endwith %}
       {% if forloop.last %}
     </div>
-    <div _class="panel-footer">
-      <div class="row">
-        <div class="col-md-12">
-          {% if reply_to_pk %}
-
-          <a id="showreply" class="pull-right" data-toggle="collapse" href="#replyarea">
-            <button style="margin-bottom:10px;margin-top:10px;" class="btn btn-default">{% trans 'Reply' %}</button>
-          </a>
-
-          <div id="replyarea" class="collapse">
-            <form id="replyform" action="{% url 'postman_reply' reply_to_pk %}?next={{ next_url|urlencode }}" method="post">{% csrf_token %}
-              <div id="pm_reply">{{ form.body }}</div>
-
-              <div class="pull-right">                
-                <button  style="margin-bottom:10px;margin-top:10px;"type="submit" id="reply-btn" class="btn btn-default">{% trans 'Reply' %}</button>               
-              </div>
-
-            </form>
-            <script type="text/javascript">
-            (function(){              
-              $('#replyarea').on('shown.bs.collapse', function () {
-                $('#id_body').trigger('focus');
-              });
-              $('#replyarea').on('show.bs.collapse', function () {
-                $('#showreply').hide();                
-                $('#reply-btn').on('click',function(ev){
-                  ev.preventDefault();
-                  if ($('#id_body').val()!=""){
-                    $('#replyform').submit();
-                  }else{
-                    alert('You cant send an empty message.');
-                  }
-                  return false;
-                });
-              });
-              $('#showmoremessages').on('click',function(){
-                $('#hiddenmessages').show(400);
-                $('#more-wrap').hide(400);                
-              });
-            })();
-            </script>
-          </div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
+    
       {% endif %}
       {% endfor %}
 

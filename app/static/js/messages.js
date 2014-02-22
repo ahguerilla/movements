@@ -16,7 +16,7 @@
     el: '#postman',
     events: {
       'click .conv_link': 'openConv',
-      'click #back': 'back',
+      'click #backtofolder': 'back',
       'click .next': 'addNext'
     },
 
@@ -60,22 +60,30 @@
         });
 
         data3 = data2.replace(that.itemre, function (match, item_id, offset, string) {
-          return " ";
+          return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
         });
-        data4 = data3.replace(that.userre, function (match, item_id, offset, string) {
-          return " ";
+        data4 = data3.replace(that.userre, function (match, username, offset, string) {
+          return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
         });
         
         var user;
         $('.messageavatar img', data4).each(function(item,index){
           user = $(this).attr('alt');
           if(user != window.ahr.username)return;          
-        });
+        });        
         
         $.getJSON(window.ahr.app_urls.getprofile+user,function(data){
           var tmpl = $('#message-profile').html();
           var prof = _.template(tmpl);
           $('.profilecontainer').html(prof(data));
+          $('.rateit').rateit();
+          $('.rateit').rateit('min', 0);
+          $('.rateit').rateit('max', 5);
+          $('.rateit').rateit('readonly', true);
+          $('.rateit').each(function(){
+            $(this).rateit('value', this.getAttribute('rate'));
+          });
+          $('#id_body').trigger('focus');                            
         });
                 
         $('#conversation').html(data4);
@@ -107,7 +115,9 @@
       }
       $("#message-col").hide();            
       $('#conversation-cont').show();
+      $('#messagenav').hide();
       $('#back').show();
+      $('#breadsubject').text($('#messagesubjectheader').text());
       $('body').scrollTop(0);      
     },
 
@@ -117,6 +127,7 @@
       $('#conversation-cont').hide();
       $("#message-col").show();
       $('#back').hide();
+      $('#messagenav').show();
     },
 
     resize: function (ev) {
@@ -134,10 +145,11 @@
 
     initialize: function () {
       $(window).resize(this.resize);
+      this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
       var more = $('.next')[0];
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
       this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
-      $(more).html('<button class="btn btn-default">more...</button>');
+      $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
       $('#paginationblock').html(more);
       $('#conversation-cont').hide();
       $('.nanamorde').hide();
