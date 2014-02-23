@@ -133,20 +133,30 @@ select.input-extra-height
 .multi-line-text
   white-space: pre-wrap
 
-.message-well
-  background-color
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05)
-  padding: 0px
-  height: 45px
-  overflow: hidden
-
-.senderandsubject
-  width 270px
-  white-space: nowrap;
-  overflow: hidden;
-  height 45px
-  line-height 2.5em;
-  text-overflow ellipsis
+.messagelist
+  a
+    text-decoration none
+  .messageavatar
+    width: 60px
+    float: left
+    input
+      vertical-align: middle
+  .message-well
+    background-color
+    padding: 0px
+    height: 47px
+    overflow: hidden
+    border-top: 1px solid $border-color
+  .message:last-child
+    .message-well
+      border-bottom: 1px solid $border-color
+  .sender
+    line-height 47px    
+  .subject
+    white-space: nowrap;
+    overflow: hidden;
+    line-height 47px
+    text-overflow ellipsis
 
 .hero-text
   color #fff
@@ -163,7 +173,7 @@ select.input-extra-height
     margin-bottom 20px
   h4
     margin 0
-    color #596066
+    color $text-color
   p
     margin-bottom 20px
 
@@ -228,7 +238,7 @@ select.input-extra-height
   text-align: center
   margin-left: -10px
   padding-right: 10px
-  border-color: #596066
+  border-color: $text-color
   text-align: center
   .navbar-nav
     float: none
@@ -472,6 +482,14 @@ select.input-extra-height
   background white
   .panel-footer
     background white
+  a
+    color $text-color
+  a:hover
+    text-decoration none
+
+#conversation-cont
+  .breadcrumb
+    background-color #fff
 
 .market-place-item
   width: 32.4%
@@ -602,3 +620,6 @@ li.list-group-item
 .selected
   background-color $filter-item-selected 
   color white
+.selected:hover
+  background-color $filter-item-selected 
+  color white  
