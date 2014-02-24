@@ -5,7 +5,7 @@
 User {{ user }} at {{ site_name }} confirmed his/her email address.
 
 {% if vetted %}
-This user is allready activated , to review the user score go to
+This user is allready activated, to review the users score go to
 {% else %}
 To vet this user, go to 
 {% endif %}

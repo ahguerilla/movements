@@ -189,20 +189,20 @@ def email_doublesignup_upret(self, ret):
             if len(ret['form'].errors['email'])==0:
                 ret['form'].errors.pop('email')
         if not confem[0].user.is_active:            
-            email = EmailMessage('You are not vetted yet.',
-                                 "Some one is trying to register with your email address for ip address: "+ get_client_ip(self.request)+
-                                 " \r\nIf its not you then may be he/she is trying to register with us with this email account "+
-                                 "We didn't reveal that you are registered with us and the registration process for he/she/them went through as normal. ",
+            email = EmailMessage('Not quite ready yet',
+                                 "You or someone recently tried to register on Exchangivist using your email address. "+
+                                 "This account is currently being vetted for approval. Please be patient, and contact us "+
+                                 "if you have any concerns. \r\n\r\n Thanks\r\n The Exchangivist Team",   
                                  constance.config.NO_REPLY_EMAIL,
                                  [ret['form'].data['email']])      
         else:
-            email = EmailMessage('Security Alert from AHR, Someone is trying to register as you!',
-                                 "Some one is trying to register with your email address for ip address: "+ get_client_ip(self.request)+
-                                 " \r\nIf its not you then may be he/she is trying to find out if you are registered with us or not "+
-                                 "We didn't reveal that you are registered with us and the registration process for he/she/them went through as normal. "+
-                                 "But if you were arrested and were denying being involved with us and by some means (torture or ...) "+
-                                 "you gave up the access credentials to your email then we kindly ask the guy who is reading this to " + 
-                                 " send our regards to the poor soul and deny ever knowing him/her and sending this email! \r\n\r\n Regards\r\n AHR Team",
+            email = EmailMessage('Security Alert from Exchangivist',
+                                 "You or someone recently tried to register on Exchangivist using your email address. "+
+                                 "If this was not you and you did not make this request, it's likely that another user entered "+
+                                 "your email address by mistake. If you believe an unauthorised person has accessed your account "+
+                                 "we advise that you change your password for both your email account and Exchangivist. "+
+                                 "Exchangivist did not reveal that you are registerd with the site or any of your personal "+
+                                 "Information. We are sending this email as a precautionary measure only. \r\n\r\n Thanks\r\n The Exchangivist Team",
                                  constance.config.NO_REPLY_EMAIL,
                                  [ret['form'].data['email']])      
         email.send()                
