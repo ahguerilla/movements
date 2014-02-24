@@ -152,6 +152,9 @@ def get_user_marketitem_fromto(request, sfrom, to, rtype):
 def set_rate(request, obj_id, rtype):
     if not request.POST.has_key('score'):
         return HttpResponseError()
+    cache.delete('item-'+obj_id)
+    items_cache.clear()
+    user_items_cache.clear()    
     item = market.models.MarketItem.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).objects.filter(id=obj_id)[0]
     owner = request.user
     rate = market.models.ItemRate.objects.filter(owner=owner).filter(item=item)
