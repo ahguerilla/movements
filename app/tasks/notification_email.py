@@ -2,10 +2,9 @@ from __future__ import absolute_import
 import os
 import sys
 
-sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../')))
-sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','../')))
 sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','../','../')))
-sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','app')))
+sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','../','app')))
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings.local')
 
