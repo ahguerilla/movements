@@ -8,7 +8,8 @@ from django.contrib.auth.decorators import login_required
 from tasks.celerytasks import create_comment_notification
 from django.utils.cache import get_cache
 cache = get_cache('default')
-
+items_cache = get_cache('items')
+user_items_cache = get_cache('user_items')
 
 def save_comment(form, owner, item):
     import datetime
@@ -31,6 +32,9 @@ def add_comment(request, obj_id, rtype):
         create_comment_notification.delay(m_obj, obj, request.user.username)
         cache.delete('allcomment-' + obj_id)
         cache.delete('commentcount-' + obj_id)  
+        cache.delete('item-'+obj_id)
+        items_cache.clear()
+        user_items_cache.clear()            
         return HttpResponse(json.dumps({ 'success' : True, 'obj': obj.getdict() }),
                             mimetype="application"+rtype)
     else:
@@ -111,5 +115,8 @@ def delete_comment(request, obj_id, rtype):
     cache.delete('allcomment-' + obj_id)    
     cache.delete('comment-' + obj_id)
     cache.delete('commentcount-' + obj_id)
+    cache.delete('item-'+obj.item.id)
+    items_cache.clear()
+    user_items_cache.clear()        
     return HttpResponse(json.dumps({ 'success' : True}),
                         mimetype="application"+rtype)
