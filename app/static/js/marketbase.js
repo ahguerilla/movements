@@ -221,8 +221,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       $(".exchange-banner").hide();
     }
 
-    this.initInfiniteScroll(function () {      
-      //$(".exchange-banner").show();
+    this.initInfiniteScroll(function () {
       if (updateMarketScrollPosition) {
         var heightOfBanner = $('.exchange-banner').height();
         that.setScrollPostion(heightOfBanner + 2);
