@@ -38,7 +38,7 @@
     <div class="col-md-12">
     <div id="itemandsearchwrap">
       <!-- Search -->
-      <div class="row  market-search-box">
+      <div class="row market-search-box">
         <div class="input-group col-md-offset-2 col-md-8">
           <form>
             <label class="sr-only" for="q">Search by keyword for offers and requests</label>
@@ -59,7 +59,7 @@
 	  <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
     </div>
     <div class="col-lg-offset-1 col-lg-10">
-      <a style="margin-top:10px;" id="backtothemarket" class="btn btn-default" href="{% url 'show_market' %}#">Back</a>
+      <a id="backtothemarket" class="btn btn-default" href="{% url 'show_market' %}#">Back</a>
       <div id="singleItem"></div>
       <div id="marketitem_comment_form"></div>
       <div id="marketitem_comments"></div>
