@@ -70,7 +70,11 @@
           {% primary_avatar message.obfuscated_sender 40 %}
         </div>
         <div class="col-md-10">
-          <div class="pm_message{% if message.is_pending %} pm_pending{% endif %}{% if message.is_rejected %} pm_rejected{% endif %}{% if message.sender == user and message.sender_archived or message.recipient == user and message.recipient_archived %} pm_archived{% endif %}{% if message.sender == user and message.sender_deleted_at or message.recipient == user and message.recipient_deleted_at %} pm_deleted{% endif %}{% if message.recipient == user and not message.read_at %} pm_unread{% endif %}">
+          <div class="pm_message{% if message.is_pending %} pm_pending{% endif %}
+            {% if message.is_rejected %} pm_rejected{% endif %}
+            {% if message.sender == user and message.sender_archived or message.recipient == user and message.recipient_archived %} pm_archived{% endif %}
+            {% if message.sender == user and message.sender_deleted_at or message.recipient == user and message.recipient_deleted_at %} pm_deleted{% endif %}
+            {% if message.recipient == user and not message.read_at %} pm_unread{% endif %}">
             <div _class="well">
               <div class="row pm_header">
                 <a  data-toggle="collapse"  href="#message-{{forloop.counter}}">
