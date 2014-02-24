@@ -41,7 +41,11 @@
       return false;
     },
 
-    openConv: function (ev) {
+    openConv: function (ev) {      
+      var subject = $('.subject',$(ev.currentTarget)).children();
+      if(subject.is('strong')){
+        subject.replaceWith(subject.text());
+      }
       var that = this;
       ev.preventDefault();
       if (ev.currentTarget.parentElement.tagName == "STRONG") {
