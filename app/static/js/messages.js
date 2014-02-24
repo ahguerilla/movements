@@ -32,8 +32,7 @@
         var more = $('.next',$(data))[0];
         $('.next').replaceWith(more);
         $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
-        $('.messagelist').append($('.messagelist', $(data)).children());
-        debugger;
+        $('.messagelist').append($('.messagelist', $(data)).children());        
       });
     },
 
