@@ -115,7 +115,7 @@ def delete_comment(request, obj_id, rtype):
     cache.delete('allcomment-' + obj_id)    
     cache.delete('comment-' + obj_id)
     cache.delete('commentcount-' + obj_id)
-    cache.delete('item-'+obj.item.id)
+    cache.delete('item-%d' % obj.item.id)
     items_cache.clear()
     user_items_cache.clear()        
     return HttpResponse(json.dumps({ 'success' : True}),
