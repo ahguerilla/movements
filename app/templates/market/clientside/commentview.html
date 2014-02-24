@@ -7,7 +7,7 @@
         <a href="<%- owner_url %>">
           <img width="30" style="margin-bottom:5px;border-radius:50%;" src="<%- userpic %>" />
         </a>
-        <strong>By <%- user %> at <%- pub_date %></strong>
+        <strong>By <%- user %> at <%- moment(pub_date,"hh:mm on DD/MM/YY").format('MMMM Do YYYY, h:mm a') %></strong>
         <% if(owner===window.ahr.user_id){ %>
           <a class="pull-right comment-delete" comment-id="<%- pk %>" href="<%- window.ahr.app_urls.deletecomment+pk %>">Delete</a>
         <% } %>
