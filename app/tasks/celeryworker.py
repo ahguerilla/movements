@@ -15,4 +15,6 @@ _app = Celery('celerytasks', broker='amqp://guest@localhost//')
 _app.config_from_object('django.conf:settings')
 _app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
+from djcelery_email.tasks import send_email
+
 from tasks.celerytasks import *
