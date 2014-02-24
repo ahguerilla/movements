@@ -29,7 +29,10 @@
         if ($('.next', $(data)).hasClass('disabled')) {
           $('#paginationblock').remove();
         }
-        $('.messagelist').append($('.messagelist', $(data)).children());
+        var more = $('.next',$(data))[0];
+        $('.next').replaceWith(more);
+        $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
+        $('.messagelist').append($('.messagelist', $(data)).children());        
       });
     },
 
@@ -68,8 +71,8 @@
         
         var user;
         $('.messageavatar img', data4).each(function(item,index){
-          user = $(this).attr('alt');
-          if(user != window.ahr.username)return;          
+          user = $(this).attr('alt');          
+          if(user != window.ahr.username)return false;          
         });        
         
         $.getJSON(window.ahr.app_urls.getprofile+user,function(data){
@@ -145,10 +148,10 @@
 
     initialize: function () {
       $(window).resize(this.resize);
-      this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
-      var more = $('.next')[0];
+      this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');      
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
       this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
+      var more = $('.next')[0];
       $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
       $('#paginationblock').html(more);
       $('#conversation-cont').hide();

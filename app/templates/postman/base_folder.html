@@ -118,15 +118,15 @@
                           </strong>
                         </div>
                         <div class="col-xs-6 col-sm-7 col-md-7 subject">
-                            {% if message.is_new %}<strong>{% endif %}{% if message.is_replied %}<em>{% endif %}
+                            {%if path != sent %}{% if message.is_new %}<strong>{% endif %}{% endif %}
+                            {% if message.is_replied %}<em>{% endif %}
 
-                            {% block pm_subject %}
-                            
-                                {% include "postman/inc_subject_ex.html" %}
-                            
+                            {% block pm_subject %}                            
+                                {% include "postman/inc_subject_ex.html" %}                            
                             {% endblock %}
 
-                            {% if message.is_replied %}</em>{% endif %}{% if message.is_new %}</strong>{% endif %}
+                            {% if message.is_replied %}</em>{% endif %}
+                            {%if path != sent %}{% if message.is_new %}</strong>{% endif %}{% endif %}
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-2" style="text-align:right;line-height:45px;">
                           {{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}
