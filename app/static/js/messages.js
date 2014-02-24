@@ -77,7 +77,10 @@
         $('.messageavatar img', data4).each(function(item,index){
           user = $(this).attr('alt');          
           if(user != window.ahr.username)return false;          
-        });        
+        });  
+        if(user == window.ahr.username){
+          user = $('.pm_recipient',data4).text();          
+        }        
         
         $.getJSON(window.ahr.app_urls.getprofile+user,function(data){
           var tmpl = $('#message-profile').html();
