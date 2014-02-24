@@ -589,15 +589,14 @@ pre
     -o-border-radius: 50%;
     border-radius: 50%;
 
-.notifbell.nonotif
-  width 30px
-  height 30px  
-  background url('/static/images/bell_30x30.png') no-repeat;
+.nonotif
+  display inherit
+  color #777!important
+  
 
-.notifbell.notif
-  width 30px
-  height 30px
-  background url('/static/images/bell_blue_30x30.png') no-repeat;
+.notif
+  display inherit
+  color #428BCA!important
   
   
 .notif-seen.false
@@ -623,3 +622,7 @@ li.list-group-item
 .selected:hover
   background-color $filter-item-selected 
   color white  
+
+
+.hidelarge
+  display none
