@@ -36,8 +36,7 @@
     <div style="display:none;">{{ message }}</div>
   {% endfor %}
 {% endif %}
-<nav
-    class="navbar navbar-default navbar-fixed-top {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}"
+<nav class="navbar navbar-default navbar-fixed-top {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}"
     role="navigation">
   <div class="container" style="position:relative;">
     <div class="row">
