@@ -29,8 +29,8 @@
   var notificationsWidget = Backbone.View.extend({
     el: 'body',
     events: {
-      'show.bs.dropdown #notifdropdown-click': 'populateNotifications',
-      'hide.bs.dropdown #notifdropdown-click': 'checkNotif'
+      'show.bs.dropdown .notifdropdown-click': 'populateNotifications',
+      'hide.bs.dropdown .notifdropdown-click': 'checkNotif'
     },
 
 
@@ -41,20 +41,20 @@
     populateNotifications: function (ev) {
       var that = this;
       this.newNotifExists();
-      $('#notification-drop-down').empty();
+      $('.notification-drop-down').empty();
       var dfrd = $.ajax({
         url: this.notif_url + '10'
       });
       dfrd.done(function (data) {
         _.each(data.notifications, function (notif) {
-          $('#notification-drop-down').append(that.tmpl({
+          $('.notification-drop-down').append(that.tmpl({
             'notif': notif
           }));
         });
         if (data.notifications.length > 0) {
-          $('#notification-drop-down').prepend('<li><a style="text-align:center;" href="' + window.ahr.app_urls.shownotifications + '">See All</a><hr style="margin-top:0px;margin-bottom:10px;"/></li>');
+          $('.notification-drop-down').prepend('<li><a style="text-align:center;" href="' + window.ahr.app_urls.shownotifications + '">See All</a><hr style="margin-top:0px;margin-bottom:10px;"/></li>');
         } else {
-          $('#notification-drop-down').append('<li><a style="text-align:center;" href="#">No Notifications currently available</a></li>');
+          $('.notification-drop-down').append('<li><a style="text-align:center;" href="#">No Notifications currently available</a></li>');
         }
       });
       return ev;
