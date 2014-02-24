@@ -50,8 +50,7 @@ class MarketItem(models.Model):
         adict['fields']['never_exp']= self.never_exp
         adict['fields']['owner']= [self.owner.username]
         adict['fields']['ownerid']= [self.owner.id]
-        adict['fields']['url']= self.url
-        #adict['fields']['files']= [afile.url for afile in self.files.all()]
+        adict['fields']['url']= self.url        
         adict['fields']['commentcount']= self.commentcount
         adict['fields']['usercore']= self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['userratecount']= self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
