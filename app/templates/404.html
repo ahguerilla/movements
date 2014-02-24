@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+
+{% block head_title %}{% trans "The page you are trying to visit does not exist" %}{% endblock %}
+
+{% block content %}
+<div class="dialog">
+  The page you are trying to visit does not exist.
+</div>
+{% endblock %}
