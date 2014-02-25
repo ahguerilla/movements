@@ -23,14 +23,14 @@
 
 <div class="row" id="postman">
   <div class="col-md-12">
-    <div class="row">         
-      <div class="col-md-12 pull-left">        
+    <div class="row">
+      <div class="col-md-12 pull-left">
         <div class="btn-group btn-group-justified btn-group-md" id="messagenav" style="padding:0 10px 10px 10px">
-          <a type="button" class="btn btn-default {%if path == inbox %} selected {% endif %}" href="{{inbox}}">Inbox</a>          
+          <a type="button" class="btn btn-default {%if path == inbox %} selected {% endif %}" href="{{inbox}}">Inbox</a>
           <a type="button" class="btn btn-default {%if path == sent %} selected {% endif %}" href="{{sent}}">Sent</a>
           <a type="button" class="btn btn-default {%if path == archive %} selected {% endif %}" href="{{archive}}">Archive</a>
-          <a type="button" class="btn btn-default {%if path == trash %} selected {% endif %}" href="{{trash}}">Trash</a>          
-        </div>       
+          <a type="button" class="btn btn-default {%if path == trash %} selected {% endif %}" href="{{trash}}">Trash</a>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -121,8 +121,8 @@
                             {%if path != sent %}{% if message.is_new %}<strong>{% endif %}{% endif %}
                             {% if message.is_replied %}<em>{% endif %}
 
-                            {% block pm_subject %}                            
-                                {% include "postman/inc_subject_ex.html" %}                            
+                            {% block pm_subject %}
+                                {% include "postman/inc_subject_ex.html" %}
                             {% endblock %}
 
                             {% if message.is_replied %}</em>{% endif %}
@@ -143,14 +143,14 @@
             {% paginate %}
             </div>
           </div>
-          
-          <div class="col-md-offset-1 col-md-4 nanamorde-mobile">            
-              <div class="profilecontainer"></div>            
+
+          <div class="col-md-3 nanamorde-mobile">
+              <div class="profilecontainer"></div>
           </div>
-          
+
           <div class="col-md-9" id="conversation-cont">
-            <div class="panel" id="back" style="margin-top:10px;">             
-                <ol class="breadcrumb" style="margin-bottom: 0px;">                        
+            <div class="panel" id="back" style="margin-top:10px;">
+                <ol class="breadcrumb" style="margin-bottom: 0px;">
                   <li id="backtofolder" style="cursor:pointer;" class="">
                   {%if path == inbox %}
                     Inbox
@@ -158,23 +158,23 @@
                     Sent
                   {% elif path == trash %}
                     Trash
-                  {% else %}            
+                  {% else %}
                     Archive
                   {%endif%}
                   </li>
                   <li class="active" id="breadsubject"></li>
-                </ol>             
+                </ol>
             </div>
             <div class="panel">
               <a id="convst"></a>
               <div class="col-md-12" id="conversation"></div>
             </div>
           </div>
-          
+
           <div class="panel col-md-3 nanamorde" style="margin-top:10px;">
-              <div class="profilecontainer"></div>
+            <div class="profilecontainer"></div>
           </div>
-          
+
         </div>
       </form>
 
@@ -196,37 +196,7 @@
   </div>
 </div>
 
-<script type="text/template" id="message-profile">
-  <div>    
-    <div style="text-align: center;margin:10px;">
-      <img style="border-radius:50%;" src="<%= avatar %>"/>
-    </div>
-    <div style="text-align: center;margin:10px;">
-      <%- username %>
-    </div>
-    <div class="well well-sm">
-      <div>
-        Rating: <span class="rateit" rate="<%- score %>"></span> <%-score %> Stars (<%-score %> votes)
-      </div>
-      <div>
-        Nationality: <%- nationality %>
-      </div>
-      <div>
-        Country of residence: <%- resident_country %>
-      </div>
-      <div>
-        AHR rating: <span class="rateit redstars" rate="<%- orate %>"></span> <%- orate %> Stars
-      </div>    
-    </div>
-    <h4>Safety First</h4>
-    <div style="margin-bottom: 20px;">
-    For your own safety and security, do not share personal contact information 
-    (such as your phone number, address, email address, etc.) with other users. 
-    Exchangivist also prohibits abusive language or harassment. 
-    To report an abusive user,<span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>click here</strong></span>.
-    </div>
-  </div>
-</script>
+{% include 'market/clientside/userprofile.html' %}
 {% include 'market/clientside/reportuserdialog.html' %}
 {% endwith %}
 {% endblock content %}

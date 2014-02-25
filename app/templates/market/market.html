@@ -58,12 +58,18 @@
 	<div class="col-lg-10" id="ajaxloader" style="text-align:center;display:none;">
 	  <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
     </div>
-    <div class="col-lg-offset-1 col-lg-10">
+	<div style="padding-top:10px;"class="nanamorde-mobile col-md-4">
+	  <div class="userprofile"></div>
+	</div>
+    <div class="col-md-8">
       <a id="backtothemarket" class="btn btn-default" href="{% url 'show_market' %}#">Back</a>
       <div id="singleItem"></div>
       <div id="marketitem_comment_form"></div>
       <div id="marketitem_comments"></div>
     </div>
+	<div style="margin-top:43px;"class="dialog col-md-4 nanamorde">
+	  <div class="userprofile"></div>
+	</div>
   </div>
 </div>
 
@@ -92,6 +98,10 @@
     {% include "market/clientside/reportdialog.html" %}
     {% include "market/clientside/offerdialog.html"%}
     {% include "market/clientside/requestdialog.html"%}
+	{% include 'market/clientside/userprofile.html' %}
+	{% include 'market/clientside/reportuserdialog.html' %}
+
+
 
     {% compress js inline %}
     <script type="text/javascript">
