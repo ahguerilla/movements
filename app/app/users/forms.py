@@ -59,7 +59,7 @@ class SettingsForm(forms.ModelForm):
         return m
 
     def check_https(self, data):
-        if not data.startswith('https://'):
+        if not data.startswith('https://') and data != '':
             if data.startswith('http://'):
                 data = 'https://'+data[7:]
             else:
@@ -68,21 +68,21 @@ class SettingsForm(forms.ModelForm):
 
     def clean_fb_url(self):
         data = self.cleaned_data['fb_url']
-        self.check_https(data)
+        data = self.check_https(data)
         if not data.startswith('https://www.facebook.com/') and data !='':
             raise forms.ValidationError("You must provide a link to your facebook profile")
         return data
 
     def clean_linkedin_url(self):
         data = self.cleaned_data['linkedin_url']
-        self.check_https(data)
+        data = self.check_https(data)
         if not data.startswith('https://www.linkedin.com/') and data !='':
             raise forms.ValidationError("You must provide a link to your linked in profile")
         return data
 
     def clean_tweet_url(self):
         data = self.cleaned_data['tweet_url']
-        self.check_https(data)
+        data = self.check_https(data)
         if not data.startswith('https://www.twitter.com/') and data !='':
             raise forms.ValidationError("You must provide a link to your twitter in page")
         return data
