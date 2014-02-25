@@ -124,7 +124,7 @@
           {% endif %}
           </div>
         </div>
-        
+
         <div class="row profile-item">
           <div class="col-md-4 profile-label">Country of residence:</div>
           <div class="col-md-8">
@@ -188,7 +188,7 @@
           <div class="col-md-4 profile-label">LinkedIn:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.linkedin_url != 'on' %}
-          <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.linkedin_url }}</a>
+          <a target="_blank" href="{{ user_profile.linkedin_url }}">{{ user_profile.linkedin_url }}</a>
           {% else %}
           hidden
           {% endif %}
