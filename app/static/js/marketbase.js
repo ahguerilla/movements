@@ -154,13 +154,17 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     var that = this;
     $(window).scroll(function () {
       that.loadScrollElements(that);
-
     });
-
     // For ipad
     document.addEventListener('touchmove', function (e) {
       that.loadScrollElements(that);
     }, false);
+  },
+
+  noSearchResult:function(){
+    if($('.market-place-item').length==0){
+        $('#marketitems').append('<p style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
+    }
   },
 
   loadScrollElements: function (self, callback) {
@@ -179,7 +183,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         if (data.length === 0) {
           that.allItemsLoaded = true;
           $('#ajaxloader').hide();
-          //$('#marketitems').append('<p  style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
+          that.noSearchResult();
         }
         _.each(data, function (item) {
           item.fields.pk = item.pk;
@@ -454,7 +458,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   },
 
   searchWithNoFilters: function  (){
-    alert('ok');
+    $('.tagbutton', $('.row')).removeClass('btn-success');
+    $('.tagbutton', $('.row')).addClass('btn-success');
+    this.filters.types = values(this.types);
+    this.filters.skills = this.keys(window.ahr.skills_lookup);
+    this.filters.issues = this.keys(window.ahr.issues_lookup);
+    this.filters.countries = this.keys(window.ahr.countries_lookup);
+    this.resetMarket();
   },
 
   init: function (filters) {

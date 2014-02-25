@@ -77,14 +77,14 @@ class SettingsForm(forms.ModelForm):
         data = self.cleaned_data['linkedin_url']
         data = self.check_https(data)
         if not data.startswith('https://www.linkedin.com/') and data !='':
-            raise forms.ValidationError("You must provide a link to your linked in profile")
+            raise forms.ValidationError("You must provide a link to your linkedin profile")
         return data
 
-    def clean_linkedin_url(self):
+    def clean_tweet_url(self):
         data = self.cleaned_data['tweet_url']
         data = self.check_https(data)
         if not data.startswith('https://www.twitter.com/') and data !='':
-            raise forms.ValidationError("You must provide a link to your twitter in page")
+            raise forms.ValidationError("You must provide a link to your twitter page")
         return data
 
 
