@@ -6,8 +6,6 @@
   window.ahr.app_urls = {
     postmanwrite: "{% url 'postman_write' 'a' %}".slice(0,-1),
     postmanreply: "{% url 'postman_reply' 0 %}".slice(0,-1),
-    // postman_view_conversation
-    // postman_delete
 
     getcsrf: "{% url 'get_csrftoken' 'json' %}",
     getprofile: "{% url 'get_userprofile' 'json' 0 %}".slice(0,-1),
@@ -25,15 +23,15 @@
     getcountries: "{% url 'get_countries' 'json' %}",
     getNationalities: "{% url 'get_nationalities' 'json' %}",
     getmessagecount: "{% url 'get_messagecount' 'json' %}",
-  
+
     market: "{% url 'show_market' %}",
     getposts:  "{% url 'posts'  %}",
     getmarketitem: "{% url 'get_marketitem' 'json' 0 %}".slice(0,-1),
     getmarketitemfromto: "{% url 'get_marketitems_fromto' 'json' 0 0 %}".slice(0,-1),
     addmarketitem: "{% url 'add_marketitem' 'json' 'offer' %}".slice(0,-5),
     editmarketitem: "{% url 'edit_marketitem' 'json' 0 %}".slice(0,-1),
-    deletemarketitem: "{% url 'delete_marketitem' 'json' 0 %}".slice(0,-1),    
-    getuseritem: "{% url 'user_get_marketitem' 'json' 0 %}".slice(0,-1),    
+    deletemarketitem: "{% url 'delete_marketitem' 'json' 0 %}".slice(0,-1),
+    getuseritem: "{% url 'user_get_marketitem' 'json' 0 %}".slice(0,-1),
     getusermarketitemsfromto : "{% url 'get_usermarketitems_fromto' 'json' 0 0 %}".slice(0,-1),
     sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
     senditemrecommendation: "{% url 'send_recommendation' 'json' 'item' 0 0 %}".slice(0,-1),
@@ -41,7 +39,7 @@
     marketsetrate : "{% url 'market_set_rate' 'json' 0 %}".slice(0,-1),
 
     reportpost: "{% url 'report_post' 'json' 0 %}".slice(0,-1),
-    reportuser: "{% url 'report_user' 'json' 0 %}".slice(0,-1),    
+    reportuser: "{% url 'report_user' 'json' 0 %}".slice(0,-1),
 
     addcomment: "{% url 'add_comment' 'json' 0 %}".slice(0,-1),
     getcomment: "{% url 'get_comment' 'json' 0 %}".slice(0,-1),

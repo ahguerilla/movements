@@ -279,7 +279,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       $('.comment-btn').data({
         id: item[0].pk
       });
-      $('.nanamorde').show();
+      if ($(window).width() >= 992){
+       $('.nanamorde').show();
+      }
+
       $('#singleItem').html(html);
       $('#marketitem_comments').empty();
       that.item_widget.afterset();
