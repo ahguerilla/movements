@@ -32,6 +32,7 @@ from django.template.loader import render_to_string
 def render_settings(request, initial=False):
     template = 'users/user_settings.html'
     user = User.objects.get(pk=request.user.id)
+    default_notification = False
     try:
         settings = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
@@ -67,7 +68,7 @@ def render_settings(request, initial=False):
             settings_form.save_m2m()
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
             if initial:
-                template = 'users/welcome.html'        
+                template = 'users/welcome.html'
     else:
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)
@@ -148,7 +149,7 @@ def thanksforactivation(request):
     return render_to_response('users/thanksforactivation.html',
                               {},
                               context_instance=RequestContext(request))
-    
+
 
 class SilentPasswordResetView(PasswordResetView):
     form_class = ResetPasswordFormSilent
@@ -176,36 +177,36 @@ class AhrSignupView(SignupView):
 ahr_signup_view = SignupView
 
 
-def email_doublesignup_upret(self, ret):    
+def email_doublesignup_upret(self, ret):
     if (ret.has_key('form') and
         ret['form'].errors.has_key('email') and
         ret['form'].errors['email'][0] == u'A user is already registered with this e-mail address.'):
         confem = EmailAddress.objects.filter(email=ret['form'].data['email']).all()
-        
-        if len(ret['form'].errors)==1:        
+
+        if len(ret['form'].errors)==1:
             self.template_name = "account/verification_sent.html"
         else:
-            ret['form'].errors['email'].remove(u'A user is already registered with this e-mail address.')               
+            ret['form'].errors['email'].remove(u'A user is already registered with this e-mail address.')
             if len(ret['form'].errors['email'])==0:
                 ret['form'].errors.pop('email')
-        if not confem[0].user.is_active:            
-            email = EmailMessage('You are not vetted yet.',
-                                 "Some one is trying to register with your email address for ip address: "+ get_client_ip(self.request)+
-                                 " \r\nIf its not you then may be he/she is trying to register with us with this email account "+
-                                 "We didn't reveal that you are registered with us and the registration process for he/she/them went through as normal. ",
+        if not confem[0].user.is_active:
+            email = EmailMessage('Not quite ready yet',
+                                 "You or someone recently tried to register on Exchangivist using your email address. "+
+                                 "This account is currently being vetted for approval. Please be patient, and contact us "+
+                                 "if you have any concerns. \r\n\r\n Thanks\r\n The Exchangivist Team",
                                  constance.config.NO_REPLY_EMAIL,
-                                 [ret['form'].data['email']])      
+                                 [ret['form'].data['email']])
         else:
-            email = EmailMessage('Security Alert from AHR, Someone is trying to register as you!',
-                                 "Some one is trying to register with your email address for ip address: "+ get_client_ip(self.request)+
-                                 " \r\nIf its not you then may be he/she is trying to find out if you are registered with us or not "+
-                                 "We didn't reveal that you are registered with us and the registration process for he/she/them went through as normal. "+
-                                 "But if you were arrested and were denying being involved with us and by some means (torture or ...) "+
-                                 "you gave up the access credentials to your email then we kindly ask the guy who is reading this to " + 
-                                 " send our regards to the poor soul and deny ever knowing him/her and sending this email! \r\n\r\n Regards\r\n AHR Team",
+            email = EmailMessage('Security Alert from Exchangivist',
+                                 "You or someone recently tried to register on Exchangivist using your email address. "+
+                                 "If this was not you and you did not make this request, it's likely that another user entered "+
+                                 "your email address by mistake. If you believe an unauthorised person has accessed your account "+
+                                 "we advise that you change your password for both your email account and Exchangivist. "+
+                                 "Exchangivist did not reveal that you are registerd with the site or any of your personal "+
+                                 "Information. We are sending this email as a precautionary measure only. \r\n\r\n Thanks\r\n The Exchangivist Team",
                                  constance.config.NO_REPLY_EMAIL,
-                                 [ret['form'].data['email']])      
-        email.send()                
+                                 [ret['form'].data['email']])
+        email.send()
     return ret
 
 
@@ -238,18 +239,18 @@ def signup_from_home(request):
         'sign_up': True,
     }
     return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))
-    
+
 
 class AhrSignupView(SignupView):
     def get_context_data(self, **kwargs):
-        
+
         ret = super(AhrSignupView, self).get_context_data(**kwargs)
         context_data = {
             'body_class': 'narrow',
             'sign_up': True,
             'post_url': ''
         }
-        ret.update(context_data)            
+        ret.update(context_data)
         ret = email_doublesignup_upret(self, ret)
         return ret
 
@@ -291,7 +292,7 @@ class AccAdapter(DefaultAccountAdapter):
             return 'http://'+Site.objects.get_current().domain+'/user/thanksforactivation';
 
         vet_url = reverse('vet_user', args=(user.id,))
-        vet_url = 'http://' + Site.objects.get_current().domain + vet_url        
+        vet_url = 'http://' + Site.objects.get_current().domain + vet_url
         ctx = {
             "user": str(conf.email_address),
             "activate_url": vet_url,
@@ -325,8 +326,8 @@ def vet_user(request, user_id):
             else:
                 form.save()
             user.is_active = rating.rated_by_ahr != 0
-            user.save()            
-            typeuser = ContentType.objects.filter(name='user').all()[0]           
+            user.save()
+            typeuser = ContentType.objects.filter(name='user').all()[0]
             log = LogEntry(user_id=request.user.id,
                            content_type= typeuser,
                            object_id=user.id,
@@ -343,7 +344,7 @@ def vet_user(request, user_id):
         'original': user,
         'user': user,
         'form': form,
-        'msg': msg,        
+        'msg': msg,
         'vetted': user.is_active
     }
     return render_to_response('admin/auth/user/vet_user.html', ctx, context_instance=RequestContext(request))
@@ -353,7 +354,7 @@ def vet_user(request, user_id):
 def email_vet_user(request, user_id):
     user = User.objects.get(pk=user_id)
     if not user.is_active:
-        return  HttpResponse(json.dumps({ 'success' : False, 'message': 'User is not vetted.'}),mimetype="application/json")    
+        return  HttpResponse(json.dumps({ 'success' : False, 'message': 'User is not vetted.'}),mimetype="application/json")
     text = render_to_string('emails/getstarted.html',
                             {'user':user,
                              'login_url':'http://'+Site.objects.get_current().domain+'/accounts/login'}
@@ -365,5 +366,4 @@ def email_vet_user(request, user_id):
     email.content_subtype = "html"
     email.send()
     return  HttpResponse(json.dumps({ 'success' : True, 'message': 'An email has been sent to the user.'}),mimetype="application/json")
-    
-    
+

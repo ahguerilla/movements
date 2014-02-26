@@ -36,13 +36,12 @@
     <div style="display:none;">{{ message }}</div>
   {% endfor %}
 {% endif %}
-<nav
-    class="navbar navbar-default navbar-fixed-top {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}"
+<nav class="navbar navbar-default navbar-fixed-top {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}"
     role="navigation">
   <div class="container" style="position:relative;">
     <div class="row">
       <div class="col-xs-12">
-      <div class="navbar-header" style="padding-right:30px;">
+      <div class="navbar-header" {% if user.is_authenticated %}style="padding-right:12px;" {%endif%}>
         <button id="shownavbarbutton" type="button" class="navbar-toggle" data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
@@ -60,21 +59,37 @@
           {% else %}
             <li><a href="{% url 'how_it_works_priv' %}">How It Works</a></li>
             <li><a href="/">Exchange</a></li>
-            <li><a href="{% url 'show_users' %}">Exchangivists</a></li>
-            <li><a href="{% url 'postman_inbox' %}"> My Messages <span id="msgcntr">{% if unread_count %} ({{ unread_count }}){% endif %} </span></a></li>            
+            <li><a href="{% url 'show_users' %}">Exchangivists</a></li>            
           {% endif %}
         </ul>
-        <ul class="nav navbar-nav navbar-right" style="padding-right:30px;">
+        <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
-
-            <li class="navavatar"><a href="{% url 'user_profile' %}">{% primary_avatar user 50 %}</a>
+            <li>
+              <a class="glyphicon glyphicon-envelope {% if unread_count %}notif{% endif %}" href="{% url 'postman_inbox' %}">
+                <span class="hidelarge">
+                  Messages<span id="msgcntr">{% if unread_count %}({{ unread_count }}){% endif %} </span>
+                </span>
+              </a>
             </li>
+            <li class="notifdropdown-click">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding-top:19px;height:50px;">
+                <div id="bellonlarge" class="notifbell glyphicon glyphicon-bell nonotif">
+                <span class="hidelarge">Notifications</span>
+                </div>                
+              </a>
+              <ul id="" class="notification-drop-down dropdown-menu pull-right"
+                style="width:300px;"></ul>
+            </li>            
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% user_display user %} <b
-                  class="caret"></b></a>
+              <a href="#" class="navavatar dropdown-toggle" data-toggle="dropdown">
+                {% primary_avatar user 50 %}
+              </a>
               <ul class="dropdown-menu">
-                <li><a href="#" onclick="window.location = window.ahr.app_urls.getposts;">My
-                  Posts</a></li>
+                <li>
+                  <a href="#" onclick="window.location = window.ahr.app_urls.getposts;">
+                    My Posts
+                  </a>
+                </li>
                 <li><a href="{% url 'user_profile' %}">My Profile</a></li>
                 <li><a href="{% url 'user_settings' %}">Settings</a></li>
                 <li>
@@ -84,9 +99,8 @@
                   </form>
                 </li>
               </ul>
-            </li>
-
-
+            </li>            
+            
           {% else %}
             {% block sign_in %}
               <li><a href="{% url 'account_login' %}">Sign In</a></li>{% endblock %}
@@ -100,15 +114,15 @@
       
     </div>
     {% if user.is_authenticated %}
-      <div style="position:absolute;right:13px;top:0;" class="">
+      <div style="position:absolute;right:13px;top:0;" class="hidelarge">
         <div class="row">
          <ul class="nav pull-right">
-          <li id="notifdropdown-click">
+          <li class="notifdropdown-click">
             <a data-toggle="dropdown" class="dropdown-toggle"
-               style="padding-bottom:10px;padding-top: 10px;" href="#">
-              <div id="bellonlarge" class="notifbell nonotif"></div>
+              style="margin-top:7px;" href="#">
+              <div id="bellonlarge" class="notifbell glyphicon glyphicon-bell nonotif"></div>
             </a>
-            <ul id="notification-drop-down" class="dropdown-menu pull-right"
+            <ul id="" class="notification-drop-down dropdown-menu pull-right"
                 style="width:300px;"></ul>
           </li>
         </ul>

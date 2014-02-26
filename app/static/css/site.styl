@@ -7,7 +7,7 @@ $offer-color = #BBEEFF
 $request-color = #89DDDD
 $filter-background = #585F65
 $filter-item-selected = #444D54
-$dialog-bg-color = rgba(255, 255, 255, 0.75)
+$dialog-bg-color = rgba(255, 255, 255, 0.85)
 $warning-bg-color = rgba(185, 74, 72, 0.69)
 $std-border-radius = 10px
 $modal-dialog-bg = #EAEAEA
@@ -44,6 +44,9 @@ box-shadow()
 .navbar
   margin-bottom 0
 
+.navbar-fixed-top
+  z-index 1031
+
 body
   background-color $bg-color
 
@@ -56,6 +59,9 @@ body
 
 .narrow .container
   max-width 970px
+
+#main-content-container
+  margin-top 10px
 
 .alert
   border-radius 15px
@@ -133,25 +139,50 @@ select.input-extra-height
 .multi-line-text
   white-space: pre-wrap
 
-.message-well
-  background-color
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05)
-  padding: 0px
-  height: 45px
-  overflow: hidden
-
-.senderandsubject
-  width 270px
-  white-space: nowrap;
-  overflow: hidden;
-  height 45px
-  line-height 2.5em;
-  text-overflow ellipsis
+.messagelist
+  a
+    text-decoration none
+  .messageavatar
+    width: 60px
+    float: left
+    input
+      vertical-align: middle
+  .message-well
+    background-color
+    padding: 0px
+    height: 47px
+    overflow: hidden
+    border-top: 1px solid $border-color
+  .message:last-child
+    .message-well
+      border-bottom: 1px solid $border-color
+  .sender
+    line-height 47px
+  .subject
+    white-space: nowrap;
+    overflow: hidden;
+    line-height 47px
+    text-overflow ellipsis
 
 .hero-text
   color #fff
   font-size 2em
   margin 20px 0
+  a
+    color #fff
+    text-decoration underline
+  a:hover
+    color #262626
+
+.content-page
+  h1
+    margin-bottom 20px
+  h4
+    margin 0
+    color $text-color
+  p
+    margin-bottom 20px
+
 
 .backstretch
   background-color rgba(0, 0, 0, 0.63)
@@ -196,24 +227,23 @@ select.input-extra-height
 .navbar-admin
   background-color: red
 
-.navavatar
-  margin-top: 5px
+a.navavatar
+  margin: 0 !important
+  padding: 0 !important
   img
+    margin 5px 10px
     width: 40px
     height: 40px
     border-radius 50%
-  a
-    margin: 0 !important
-    padding: 0 !important
 
 .footer-nav
-  z-index: 5000
+  // z-index: 5000
   background: rgba(20,20,20,0.95)
   color: #fff
   text-align: center
   margin-left: -10px
   padding-right: 10px
-  border-color: #596066
+  border-color: $text-color
   text-align: center
   .navbar-nav
     float: none
@@ -261,15 +291,14 @@ select.input-extra-height
     padding-left 30px
 
 #market
-  .users
-    background-position: center bottom
-  .market
-    background-position: center top
-  .posts
-    background-position: center
+  .exchange-banner.users
+    background-image: url('../images/exchangivists-banner.jpg')
+  .exchange-banner.posts
+    background-image: url('../images/homepage-banner.jpg')
 
 .exchange-banner
-  background: url('../images/backgrounds/background_5.jpg') no-repeat
+  background: url('../images/myexchange-banner.jpg') no-repeat
+  background-position: center
   background-size: cover
   background-color: #FFF
   h1
@@ -367,8 +396,7 @@ select.input-extra-height
     border-color #444d54
 
 .market-search-box
-  margin-top: 10px
-  margin-bottom: 10px
+  margin-bottom 10px
   .input-group
     .form-control
       border-radius 10px 0 0 10px !important
@@ -458,6 +486,15 @@ select.input-extra-height
   background white
   .panel-footer
     background white
+  a
+    color $text-color
+  a:hover
+    text-decoration none
+
+#conversation-cont
+  display none
+  .breadcrumb
+    background-color #fff
 
 .market-place-item
   width: 32.4%
@@ -472,8 +509,19 @@ select.input-extra-height
   border-radius 50%
   margin-top 3px
 
+
 .comment
-  min-height 100px
+  margin-bottom 10px
+  .comment-inner
+    padding 10px
+    background-color #fff
+    border 1px solid #ccc
+    border-radius 5px
+  .comment-content pre
+    margin-top 10px
+    background-color inherit
+    border none
+    padding 0
 
 pre
   font-family Helvetica, Arial, sans-serif;
@@ -557,20 +605,19 @@ pre
     -o-border-radius: 50%;
     border-radius: 50%;
 
-.notifbell.nonotif
-  width 30px
-  height 30px  
-  background url('/static/images/bell_30x30.png') no-repeat;
+.nonotif
+  display inherit
+  color #777!important
 
-.notifbell.notif
-  width 30px
-  height 30px
-  background url('/static/images/bell_blue_30x30.png') no-repeat;
-  
-  
+
+.notif
+  display inherit
+  color #428BCA!important
+
+
 .notif-seen.false
   background-color #f4f6f9
-  
+
 
 li.list-group-item
   line-height: 30px
@@ -578,13 +625,24 @@ li.list-group-item
 
 .put-in-nav
    display inline-block
-   
+
 .settings-page-error
   margin-bottom -17px
-  margin-left 15px 
+  margin-left 15px
   margin-top 10px
-  
-  
+
+
 .selected
-  background-color $filter-item-selected 
+  background-color $filter-item-selected
   color white
+.selected:hover
+  background-color $filter-item-selected
+  color white
+
+
+.hidelarge
+  display none
+
+
+.nanamorde-mobile
+  display none

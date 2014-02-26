@@ -20,7 +20,7 @@
               <button type="button" class="btn btn-default full-width cancel cancelreport" data-dismiss="modal">Cancel</button>
             </div>
             <div class="col-xs-6 col-md-3">
-              <button type="button" class="btn btn-default full-width send sendreport">Send</button>
+              <button type="button" class="btn btn-default full-width send senduserreport">Send</button>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
  (function(){
     var reportUserWidget = window.ahr.BaseView.extend({
         events:{
-          'click .sendreport' : 'sendreport',
+          'click .senduserreport' : 'sendreport',
           'click .cancelreport' : 'cancelreport',
           'click .report_user' : 'showreport'
         },
@@ -60,7 +60,7 @@
               that.alert('Unable to send report. please try again','#reporterror');
               return;
               }
-            $('.sendreport').attr('disabled','disabled');
+            $('.senduserreport').attr('disabled','disabled');
             $.ajax({
                 type: "POST",
                 url: window.ahr.app_urls.reportuser + that.username,
@@ -70,16 +70,14 @@
                   "contents": $("#reportdialog #content").val()
                 },
                 success: function(data) {
-                  console.log(data);
-                  // that.info('Report sent succesfuly','#infobar');
                   $('#reportdialog').modal('hide');
-                  $('.sendreport').removeAttr('disabled');
+                  $('.senduserreport').removeAttr('disabled');
                 },
                 statusCode: {
                   400: function(data) {
                   console.log(data);
                   that.alert(data.responseJSON.errors[0].errors[0],'#reporterror');
-                  $('.sendreport').removeAttr('disabled');
+                  $('.senduserreport').removeAttr('disabled');
                   },
                 }
               });

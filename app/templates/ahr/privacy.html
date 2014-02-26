@@ -1,6 +1,7 @@
 {% extends "base_public.html" %}
 {% load socialaccount %}
 {% load i18n %}
+{% load url from future %}
 
 {% block head_title %}{% trans "Exchangivist - Privacy" %}{% endblock %}
 
@@ -117,7 +118,7 @@
       If you continue to use this Site after the announcement of the revised Privacy Policy, 
       you will be deemed to have agreed to the changed terms and practices. Questions, 
       comments, or complaints about our Privacy Policy should be submitted to us by contacting us 
-      <a href="#">here</a>. 
+      <a href="{% url 'contact_us' %}">here</a>. 
       <p>
 
 

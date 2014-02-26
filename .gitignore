@@ -17,3 +17,4 @@ test.lite
 
 # PyCharm project files
 .idea
+.elasticbeanstalk/aws_credential_file

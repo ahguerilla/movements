@@ -4,21 +4,18 @@
 {% load i18n %}
 
 {% block head_title %}{% trans "Profile" %}{% endblock %}
-
-      {% if user_profile.notperm.tag_ling != 'on' %}
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Tag:</strong>
-          </div>
-          <div class="col-md-9">
-            {{ user_profile.tag_ling }}
-          </div>
-        </div>
+  {% if user_profile.notperm.tag_ling != 'on' %}
+  <div class="col-md-12 col-spacing-bottom">
+    <div class="row">
+      <div class="col-md-3">
+        <strong>Tag:</strong>
       </div>
-      {% endif %}
-
-
+      <div class="col-md-9">
+        {{ user_profile.tag_ling }}
+      </div>
+    </div>
+  </div>
+  {% endif %}
 {% block outsidecontainer %}
 <div class="filter-banner-spacer"></div>
 <div class="exchange-filter">
@@ -44,45 +41,30 @@
     </div>
   </div>
 </div>
-<div class="header-spacer"></div>
 {% endblock %}
-
-
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>Rating:</strong>
-          </div>
-          <div class="col-md-9">
-            <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
-          </div>
+    <div class="col-md-12 col-spacing-bottom">
+      <div class="row">
+        <div class="col-md-3">
+          <strong>Rating:</strong>
         </div>
-      </div>
-      <div class="col-md-12 col-spacing-bottom">
-        <div class="row">
-          <div class="col-md-3">
-            <strong>AHR Rating:</strong>
-          </div>
-          <div class="col-md-9">
-            <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} stars
-          </div>
+        <div class="col-md-9">
+          <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
         </div>
-      </div>
-
-
-{% block content %}
-<div class="in-container dialog">
-
-  <div class"col-md-12">
-    <div class="row">
-      <div class="col-md-12">
-        <legend>Profile</legend>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
     </div>
-
-    <br />
-
+    <div class="col-md-12 col-spacing-bottom">
+      <div class="row">
+        <div class="col-md-3">
+          <strong>AHR Rating:</strong>
+        </div>
+        <div class="col-md-9">
+          <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} stars
+        </div>
+      </div>
+    </div>
+{% block content %}
+<div class="in-container dialog">
+  <div class"col-md-12">
     <div class="row">
       <div class="col-md-9">
         <legend>Rating</legend>
@@ -134,7 +116,7 @@
           {% endif %}
           </div>
         </div>
-        
+
         <div class="row profile-item">
           <div class="col-md-4 profile-label">Country of residence:</div>
           <div class="col-md-8">
@@ -198,7 +180,7 @@
           <div class="col-md-4 profile-label">LinkedIn:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.linkedin_url != 'on' %}
-          <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.linkedin_url }}</a>
+          <a target="_blank" href="{{ user_profile.linkedin_url }}">{{ user_profile.linkedin_url }}</a>
           {% else %}
           hidden
           {% endif %}
