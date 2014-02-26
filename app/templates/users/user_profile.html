@@ -63,12 +63,14 @@
 {% block content %}
 <div class="in-container dialog">
   <div class"col-md-12">
+    {% if request.user.username != user_details.username %}
     <div class="row">
       <div class="col-md-3 pull-right">
         <div  style="display:inline;margin-right:5px;" class="btn btn-xs btn-default pm-message" username="{{ user_details.username }}">&nbsp; Send message &nbsp;</div>
         <div  style="display:inline;" class="btn btn-xs btn-default report_user" username="{{ user_details.username }}">&nbsp; Report this user &nbsp;</div>
       </div>
     </div>
+    {% endif %}
     <div class="row">
       <div class="col-md-9">
         <legend>Rating</legend>
