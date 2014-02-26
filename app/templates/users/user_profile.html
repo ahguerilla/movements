@@ -36,8 +36,6 @@
       <br />
       <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'user_settings' %}">Update Profile</a>
       {% endif %}
-
-
     </div>
   </div>
 </div>
@@ -65,6 +63,12 @@
 {% block content %}
 <div class="in-container dialog">
   <div class"col-md-12">
+    <div class="row">
+      <div class="col-md-3 pull-right">
+        <div  style="display:inline;margin-right:5px;" class="btn btn-xs btn-default pm-message" username="{{ user_details.username }}">&nbsp; Send message &nbsp;</div>
+        <div  style="display:inline;" class="btn btn-xs btn-default report_user" username="{{ user_details.username }}">&nbsp; Report this user &nbsp;</div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-9">
         <legend>Rating</legend>
@@ -159,7 +163,7 @@
           <div class="col-md-8">
           {% if user_profile.notperm.web_url != 'on' %}
           <a target="_blank" href="{{ user_profile.web_url }}">{{ user_profile.web_url }}</a>
-          {% else %}
+          {% else %}pm-message
           hidden
           {% endif %}
           </div>
@@ -254,18 +258,34 @@
 {% endblock %}
 
 {%block endjavascript %}
+  {% include "market/clientside/messagedialog.html" %}
+  {% include 'market/clientside/reportuserdialog.html' %}
   <script type="text/javascript">
   $(function(){
-      $('.rateit').rateit();
-      $('.rateit').rateit('min',0);
-      $('.rateit').rateit('max',5);
-      $('.rateit').rateit('readonly',true);
-      $('.rateit').each(function(){
-        $(this).rateit('value',$(this).attr('rate'));
-    });
-
+    var ProfileView = Backbone.View.extend({
+      el: 'body',
+      events: {
+        'click .pm-message': 'showPMDialog'
+      },
+      showPMDialog:function(ev){
+        ev.preventDefault();
+        var username = $(ev.currentTarget).attr('username');
+        this.message_widget.show(username, '', '', false);
+        return false;
+      },
+      initialize: function(){
+        $('.rateit').rateit();
+        $('.rateit').rateit('min',0);
+        $('.rateit').rateit('max',5);
+        $('.rateit').rateit('readonly',true);
+        $('.rateit').each(function(){
+          $(this).rateit('value',$(this).attr('rate'));
+        });
+        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+        this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
+        }
+      });
+      var profileView = new ProfileView();
   });
-
-
   </script>
 {% endblock %}
