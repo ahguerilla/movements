@@ -5822,7 +5822,7 @@
     "fields": {
         "web_url": "", 
         "is_journalist": false, 
-        "notperm": null, 
+        "notperm": "{}", 
         "privacy_settings": null, 
         "is_organisation": false, 
         "firstlogin": true, 
@@ -5854,7 +5854,7 @@
     "fields": {
         "web_url": "", 
         "is_journalist": false, 
-        "notperm": null, 
+        "notperm": "{}", 
         "privacy_settings": null, 
         "is_organisation": false, 
         "firstlogin": true, 
@@ -5886,7 +5886,7 @@
     "fields": {
         "web_url": "", 
         "is_journalist": false, 
-        "notperm": null, 
+        "notperm": "{}", 
         "privacy_settings": null, 
         "is_organisation": false, 
         "firstlogin": true, 
