@@ -91,3 +91,7 @@ django-admin.py runserver --settings=app.settings.production
  ALTER USER ahr CREATEDB;
  quit
  \q
+
+ #How to generate test data from the database
+  ./manage.py dumpdata --natural --indent=4 -e sessions -e admin -e contenttypes -e auth.Permission > test_data.json --setting=app.settings.local
+  ./manage.py test market --liveserver=localhost:8082,8090-8100,9000-9200,7041 --setting=app.settings.local
