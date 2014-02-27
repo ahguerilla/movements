@@ -6,9 +6,10 @@ import json
 from app.market.api.utils import *
 from django.contrib.auth.decorators import login_required
 from tasks.celerytasks import create_comment_notification
-from django.utils.cache import get_cache_key, get_cache
+from django.utils.cache import get_cache
 cache = get_cache('default')
-
+items_cache = get_cache('items')
+user_items_cache = get_cache('user_items')
 
 def save_comment(form, owner, item):
     import datetime
@@ -29,8 +30,11 @@ def add_comment(request, obj_id, rtype):
     if form.is_valid():        
         obj = save_comment(form,  request.user ,m_obj)
         create_comment_notification.delay(m_obj, obj, request.user.username)
-        cache.delete('allcomment-'+obj_id )
-        cache.delete('commentcount-'+obj_id )  
+        cache.delete('allcomment-' + obj_id)
+        cache.delete('commentcount-' + obj_id)  
+        cache.delete('item-'+obj_id)
+        items_cache.clear()
+        user_items_cache.clear()            
         return HttpResponse(json.dumps({ 'success' : True, 'obj': obj.getdict() }),
                             mimetype="application"+rtype)
     else:
@@ -44,9 +48,9 @@ def get_comment_count(request, obj_id, rtype):
     if retval:
         return retval
     
-    obj = get_object_or_404(market.models.MarketItem.objects.only('commentcount'),pk=obj_id)
+    obj = get_object_or_404(market.models.MarketItem.objects.only('commentcount'), pk=obj_id)
     retval = HttpResponse(json.dumps(obj.commentcount),
-                        mimetype="application"+rtype)
+                          mimetype="application"+rtype)
     cache.add('commentcount-'+obj_id, retval)
     return retval
 
@@ -63,13 +67,13 @@ def get_commentids_range(request, obj_id, st_date, end_date, rtype):
 
 @login_required
 def get_comment(request, obj_id, rtype):
-    retval = cache.get('comment-'+obj_id )
+    retval = cache.get('comment-' + obj_id)
     if retval: 
         return retval         
     obj = get_object_or_404(market.models.Comment, pk=obj_id, deleted=False)
     retval = HttpResponse(value(rtype,[obj]),
-                        mimetype="application"+rtype)
-    cache.add('comment-'+obj_id,retval)
+                          mimetype="application" + rtype)
+    cache.add('comment-' + obj_id, retval)
     return retval
 
 
@@ -92,8 +96,8 @@ def edit_comment(request, obj_id, rtype):
     form = commentForm(request.POST, instance=obj)
     if form.is_valid():
         comment = save_comment(form,request.user,None)
-        cache.delete('allcomment-'+obj_id )
-        cache.delete('comment-'+comment.id )
+        cache.delete('allcomment-' + obj_id)
+        cache.delete('comment-%d' % comment.id)
     else:
         return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
     return HttpResponse(json.dumps({ 'success' : True}),
@@ -108,8 +112,11 @@ def delete_comment(request, obj_id, rtype):
     obj.item.commentcount -= 1
     obj.item.save()
     obj.save_base()
-    cache.delete('allcomment-'+obj_id )    
-    cache.delete('comment-'+obj.id )
-    cache.delete('commentcount-'+obj_id )
+    cache.delete('allcomment-' + obj_id)    
+    cache.delete('comment-' + obj_id)
+    cache.delete('commentcount-' + obj_id)
+    cache.delete('item-%d' % obj.item.id)
+    items_cache.clear()
+    user_items_cache.clear()        
     return HttpResponse(json.dumps({ 'success' : True}),
                         mimetype="application"+rtype)

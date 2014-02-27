@@ -7,7 +7,6 @@
         <div class="item-header-clickable item_container" item_id="<%- pk %>">
           <%- item_type.toUpperCase() %>&nbsp;
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span>
-          <span item_id="<%- pk %>" username="<%- owner %>"  score="<%-usercore%>" class="numstars"></span>
         </div>
         </a>
         <div class="pull-right item-menu" style="position:relative;">
@@ -54,7 +53,7 @@
 </script>
 
 
-{% compress js %}
+{% compress js inline %}
 <script type="text/javascript">
 (function () {
   var MarketItemWidget = window.ahr.BaseView.extend({
@@ -155,6 +154,7 @@
     },
 
     resetitemrate: function (username, rate) {
+      return
       try {
         $(".numstars[username=" + username + "]").each(function () {
           $(this).rateit('value', rate);

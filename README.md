@@ -81,3 +81,13 @@ django-admin.py runserver --settings=app.settings.production
  pip install celery (already in the requirements)
  sudo apt-get install rabbitmq-server
  celery -A celerytasks worker
+
+## Running test cases
+ You need to let the database user create a new database for testing
+ The user is the same as the user which is defined in django settings
+ For local development testing do the following
+
+ sudo -u postgres psql
+ ALTER USER ahr CREATEDB;
+ quit
+ \q

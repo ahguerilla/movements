@@ -166,7 +166,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   loadScrollElements: function (self, callback) {
     var that = self;
     if (!that.loadingScrollElemets && that.levelReached(30) && !that.allItemsLoaded) {
-      that.loadingScrollElemets = true;      
+      that.loadingScrollElemets = true;
       $('#ajaxloader').show();
       var dfrd = that.getItems(
         that.currentItem,
@@ -221,8 +221,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       $(".exchange-banner").hide();
     }
 
-    this.initInfiniteScroll(function () {      
-      //$(".exchange-banner").show();
+    this.initInfiniteScroll(function () {
       if (updateMarketScrollPosition) {
         var heightOfBanner = $('.exchange-banner').height();
         that.setScrollPostion(heightOfBanner + 2);
@@ -280,14 +279,31 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       $('.comment-btn').data({
         id: item[0].pk
       });
+      if ($(window).width() >= 992){
+       $('.nanamorde').show();
+      }
+
       $('#singleItem').html(html);
       $('#marketitem_comments').empty();
       that.item_widget.afterset();
       $.getJSON(window.ahr.app_urls.getcommentslast.replace('0', item_id) + '10000', function (data) {
         that.ShowComments(data);
       });
+      $.getJSON(window.ahr.app_urls.getprofile+item[0].fields.owner[0],function(data){
+        var tmpl = $('#message-profile').html();
+        var prof = _.template(tmpl);
+        $('.userprofile').html(prof(data));
+        $('.rateit').rateit();
+        $('.rateit').rateit('min', 0);
+        $('.rateit').rateit('max', 5);
+        $('.rateit').rateit('readonly', true);
+        $('.rateit').each(function(){
+          $(this).rateit('value', this.getAttribute('rate'));
+        });
+    });
 
     });
+
   },
 
   refreshScrollElements: function () {
@@ -301,7 +317,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $('#singleItem').empty();
   },
 
-  hideMarket: function () {    
+  hideMarket: function () {
     $('.exchange-banner').hide();
     $('#backtothemarket').css('visibility', 'visible');
     $('#marketitem_comment_form').show();
@@ -312,9 +328,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $('#market-filters').collapse('hide');
     $('#togglefilter').hide();
     $('#itemandsearchwrap').hide();
+    $.publish('filters.resize');
   },
 
-  showMarket: function () {    
+  showMarket: function () {
     $('.exchange-banner').show();
     $('#backtothemarket').css('visibility', 'hidden');
     $('#itemandsearchwrap').show();
@@ -324,6 +341,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $('#singleItem').empty();
     $('#togglefilter').show();
     $('#newcomment').val('');
+    $('.nanamorde').hide();
+    $.publish('filters.resize');
+
   },
 
   isSingle: function () {
@@ -428,17 +448,22 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     });
 
     var self = this;
-    $(window).resize(function () {
+
+    var resizeFilters = function() {
       self.setFilterOpenHeight();
       var newHight = $('#fixed-filters').height();
       $('#filter-wrapper').height(newHight + "px");
-    });
+    };
+
+    $.subscribe("filters.resize", resizeFilters);
+    $(window).resize(resizeFilters);
 
 
     this.default_filters = window.ahr.clone(filters);
     this.requestdialog = window.ahr.request_form_dialog.initItem(false);
     this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
     this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
+    this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
     $('#market-filters').on('show.bs.collapse', this.filterButtonShow.bind(this));
     $('#market-filters').on('hide.bs.collapse', this.filterButtonHide.bind(this));
     
@@ -460,7 +485,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     }));  
 		
     // calculate height of the market-filters when opened and closed so we can set
-    // the height of the market-filter correctly when we fix it to the top 
+    // the height of the market-filter correctly when we fix it to the top
     this.filterheightClosed = $('#filter-wrapper').height();
     this.setFilterOpenHeight();
     $('#filter-wrapper').height(this.filterheightClosed + "px");

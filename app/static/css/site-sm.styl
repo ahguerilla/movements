@@ -4,6 +4,9 @@
   .hero-text
     font-size 1.3em
 
+  .hidelarge
+    display inline
+
   #postman_message
     #back
       visibility visible;
@@ -12,9 +15,6 @@
 
   .affix
     position: inherit
-
-  #main-content-container
-    margin-top: 0!important
 
   /* Reduce collapse point of nav bar */
   .navbar-header
@@ -53,15 +53,16 @@
 
   .nanamorde
     display none
-    
+
   .nanamorde-mobile
     margin-bottom 10px
+    display block
+
+  #messages-title
+    display inline
 
 
 /* catch iPad in landscape */
 @media only screen and (max-device-width : 1024px)
   .affix
     position: inherit
-
-  #main-content-container
-    margin-top: 0!important

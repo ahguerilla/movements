@@ -38,7 +38,7 @@
     <div class="col-md-12">
     <div id="itemandsearchwrap">
       <!-- Search -->
-      <div class="row  market-search-box">
+      <div class="row market-search-box">
         <div class="input-group col-md-offset-2 col-md-8">
           <form>
             <label class="sr-only" for="q">Search by keyword for offers and requests</label>
@@ -58,12 +58,20 @@
 	<div class="col-lg-10" id="ajaxloader" style="text-align:center;display:none;">
 	  <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
     </div>
-    <div class="col-lg-offset-1 col-lg-10">
-      <a style="margin-top:10px;" id="backtothemarket" class="btn btn-default" href="{% url 'show_market' %}#">Back</a>
+	<div class="col-lg-10" style="height:30px;" >
+	  <a id="backtothemarket" class="btn btn-default pull-left" href="{% url 'show_market' %}#">Back</a>
+	</div>
+	<div style="padding-top:10px;"class="nanamorde-mobile col-md-4">
+	  <div class="userprofile"></div>
+	</div>
+    <div class="col-md-8">
       <div id="singleItem"></div>
       <div id="marketitem_comment_form"></div>
       <div id="marketitem_comments"></div>
     </div>
+	<div style="margin-top:12px;"class="dialog col-md-4 nanamorde">
+	  <div class="userprofile"></div>
+	</div>
   </div>
 </div>
 
@@ -92,8 +100,12 @@
     {% include "market/clientside/reportdialog.html" %}
     {% include "market/clientside/offerdialog.html"%}
     {% include "market/clientside/requestdialog.html"%}
+	{% include 'market/clientside/userprofile.html' %}
+	{% include 'market/clientside/reportuserdialog.html' %}
 
-    {% compress js %}
+
+
+    {% compress js inline %}
     <script type="text/javascript">
 
     $(document).ready(function(){

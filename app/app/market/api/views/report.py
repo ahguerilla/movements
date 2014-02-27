@@ -35,9 +35,9 @@ def report_marketitem(request, obj_id, rtype):
                 site = get_current_site(request)
                 send_mail(
                     'User '+request.user.username+' reported the '+market_item.item_type+' "'+ market_item.title +'" by '+ market_item.owner.username,
-                     'User message:\r\n'+f.contents+
-                     '\r\n Link to post:\r\n'+site.domain+ reverse('show_market')+'#item/'+str(market_item.id),
-                     constance.config.NO_REPLY_EMAIL,[constance.config.REPORT_POST_EMAIL]                    
+                    'User message:\r\n'+f.contents+
+                    '\r\n Link to post:\r\n'+site.domain+ reverse('show_market')+'#item/'+str(market_item.id),
+                    constance.config.NO_REPLY_EMAIL,[constance.config.REPORT_POST_EMAIL]                    
                 )
                 return HttpResponse(json.dumps({'success': True, 'data': create_marketitem_json(f)}), mimetype="application"+rtype)
             else:
@@ -61,9 +61,9 @@ def report_user(request, username, rtype):
                 site = get_current_site(request)                
                 send_mail(
                     'User '+request.user.username+' reported user '+user.username+' "',
-                     'User message:\r\n'+f.contents+'\r\n Link to user:\r\n'+site.domain+ '/admin/auth/user/'+str(user.id),
-                     constance.config.NO_REPLY_EMAIL,
-                     [constance.config.REPORT_POST_EMAIL]
+                    'User message:\r\n'+f.contents+'\r\n Link to user:\r\n'+site.domain+ '/admin/auth/user/'+str(user.id),
+                    constance.config.NO_REPLY_EMAIL,
+                    [constance.config.REPORT_POST_EMAIL]
                 )
                 return HttpResponse(json.dumps({'success': True, 'data': create_marketitem_json(f)}), mimetype="application"+rtype)
             else:

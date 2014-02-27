@@ -7,17 +7,13 @@
 {% block content %}
 
 <div class="hero-text">
-    {% blocktrans %}
-        <p>
-        Exchangivist is a new innovative platform which is crowdsourcing the fight for human rights.
-        It is an online portal that connects people and communities around the World  with the tools and expertise they need to advance human rights in closed societies. 
-        </p>
-
-    {% endblocktrans %}
+  <p>
+    {% blocktrans %}Exchangivist is a new innovative platform which is crowdsourcing the fight for human rights. It is an online portal that connects people and communities around the World  with the tools and expertise they need to advance human rights in closed societies.{% endblocktrans %}
+  </p>  
 </div>
 
 <div class="row">
-  <div class="col-lg-5 col-md-6 col-sm-7 ">
+  <div class="col-md-6 col-sm-7 ">
     <div class="dialog sign-up-form">
       <div><h1>{% trans "Sign Up" %}</h1></div>
       <form id="signup_form" action="{% url 'sign_up' %}" method="POST" class="form-horizontal" role="form">
@@ -51,8 +47,11 @@
         </div>
       </form>
     </div>
+    <div class="row" style="margin-top:10px;">
+      {% include 'ahr/_footer_logos.html' %}
+    </div>    
   </div>
-  <div class="col-lg-4 col-lg-offset-3 col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
+  <div class="col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
     <div class="dialog">
       <a href="{% provider_login_url "twitter" %}">
         <img src="{{ STATIC_URL }}images/twitter-24x18.png" alt="Google+"/>
@@ -74,23 +73,13 @@
   </div>
 </div>
 
-<div class="hero-text">
-  <!--{% blocktrans %}-->
-    <!--<p>-->
-        <!--Whether you're in media, technology, PR or other fields, you can contribute your skills to activists-->
-        <!--in closed societies today or ask for help on the platform. Exchangivists connects those who want to help with-->
-        <!--those who need help. Sign up to be an Exchangivist today.-->
-    <!--</p>-->
-  <!--{% endblocktrans %}-->
-</div>
 
-{% include 'ahr/_footer_logos.html' %}
 
 {% endblock %}
 
 {% block javascript %}
   <script type="text/javascript">
-    $.backstretch("{{ STATIC_URL }}images/landing-bg-1920x1202-blended.jpg");
+    $.backstretch("{{ STATIC_URL }}images/homepage-banner.jpg");
   </script>
   {% include 'ahr/_center_content.html' %}
 {% endblock %}

@@ -70,10 +70,10 @@ def add_market_item(request, obj_type, rtype):
 
 @login_required
 def get_market_item(request, obj_id, rtype):
-    retval = cache.get('item-'+obj_id )
+    retval = cache.get('item-' + obj_id)
     if retval:
         mark_read_notifications.delay((obj_id,),request.user.id)
-        return retval        
+        return retval
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
                             Q(exp_date__gte=datetime.now())|Q(never_exp=True),
                             pk=obj_id,
@@ -81,7 +81,7 @@ def get_market_item(request, obj_id, rtype):
                             owner__is_active=True)
     mark_read_notifications.delay((obj.id,),request.user.id)
     retval = return_item_list([obj], rtype)
-    cache.add('item-'+obj_id, retval )
+    cache.add('item-' + obj_id, retval)
     return retval 
 
 
@@ -152,6 +152,9 @@ def get_user_marketitem_fromto(request, sfrom, to, rtype):
 def set_rate(request, obj_id, rtype):
     if not request.POST.has_key('score'):
         return HttpResponseError()
+    cache.delete('item-'+obj_id)
+    items_cache.clear()
+    user_items_cache.clear()    
     item = market.models.MarketItem.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).objects.filter(id=obj_id)[0]
     owner = request.user
     rate = market.models.ItemRate.objects.filter(owner=owner).filter(item=item)

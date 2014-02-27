@@ -2,62 +2,58 @@ from __future__ import absolute_import
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.expanduser('~'),'.virtualenvs/mani.ahr/lib/python2.7/sitepackages'))
-sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','../')))
 sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','../','../')))
-sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../')))
-sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','app')))
+sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.abspath(__file__),'../','../','app')))
 
-from django.conf import settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings.local')
 
-from datetime import timedelta,datetime
-from app.users.models import UserProfile
-from app.market.models import MarketItem,Notification
-from django.db.models import Q
-from django.core.mail import send_mail,EmailMessage
-from django.core.urlresolvers import reverse
+from datetime import datetime
+from app.market.models import Notification
+from django.core.mail import EmailMessage
 import constance
 from django.template.loader import render_to_string
 from dateutil.relativedelta import *
+from django.contrib.sites.models import Site
 
 
-def create_notification_message(notifications):
-    string = render_to_string('emails/notification_email.html',{'notifications':notifications})    
-    return string
+def create_notification_message(notifications, base_url):
+    template_args = {
+        'notifications': notifications,
+        'base_url': base_url
+    }
+    return render_to_string('emails/notification_email.html', template_args)
 
 
-def send_notification(notifications):
-    messagebody = create_notification_message(notifications)
-    mail = EmailMessage('AHR Notification Email',
+def send_notification(notifications, base_url):
+    messagebody = create_notification_message(notifications, base_url)
+    mail = EmailMessage('Exchangivist Notification Email',
                         messagebody,
                         constance.config.NO_REPLY_EMAIL,
                         [notifications[0].user.email])
     mail.content_subtype = 'html'
     mail.send()
 
+
 if __name__ == '__main__': 
-    from_date = datetime.now() + relativedelta(weekday=SU(-int(constance.config.EMAIL_NOTIFICATION_INTERVAL)),
-                                               hour=0,
-                                               minute=0,
-                                               second=0,
-                                               microsecond=0)
+    base_url = 'https://%s' % Site.objects.all()[0]
+    from_date = datetime.now() + relativedelta(weekday=SU(-2), hour=0, minute=0, second=0, microsecond=0)
+    to_date = datetime.now() + relativedelta(weekday=SU(-1), hour=0, minute=0, second=0, microsecond=0)
     
     notifications = Notification.objects.\
         filter(user__userprofile__get_newsletter=True,
-               pub_date__gte=from_date).\
+               pub_date__gte=from_date,
+               pub_date__lt=to_date).\
         order_by('user','pub_date')
-    alist = []
+    user_notifications = []
     lastid = None
     for notification in notifications:
         if not lastid or notification.user.id == lastid:
-            alist.append(notification)
-            lastid = notification.user.id
+            user_notifications.append(notification)
         else:
-            lastid = notification.user.id
-            send_notification(alist)
-            alist = []
+            send_notification(user_notifications, base_url)
+            user_notifications = [notification]
+        lastid = notification.user.id
             
-    if len(alist)>0:
-        send_notification(alist)
-    
+    if len(user_notifications) > 0:
+        send_notification(user_notifications, base_url)

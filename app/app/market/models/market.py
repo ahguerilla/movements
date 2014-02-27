@@ -1,5 +1,5 @@
 from datetime import datetime
-import app.users as users
+import app.users.models as user_models
 from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
@@ -15,9 +15,9 @@ class MarketItem(models.Model):
     owner = models.ForeignKey(auth.models.User, blank=True)
     title = models.CharField(_('title'), max_length=200, blank=False)
     details = tinymodels.HTMLField(_('details'), blank=False)
-    countries = models.ManyToManyField(users.models.Countries)
-    issues = models.ManyToManyField(users.models.Issues)
-    skills = models.ManyToManyField(users.models.Skills)
+    countries = models.ManyToManyField(user_models.Countries)
+    issues = models.ManyToManyField(user_models.Issues)
+    skills = models.ManyToManyField(user_models.Skills)
     url = models.CharField(_('URL Link'), max_length=500, blank=True)
     published = models.BooleanField(_('is published?'), default=True)
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
@@ -50,8 +50,7 @@ class MarketItem(models.Model):
         adict['fields']['never_exp']= self.never_exp
         adict['fields']['owner']= [self.owner.username]
         adict['fields']['ownerid']= [self.owner.id]
-        adict['fields']['url']= self.url
-        #adict['fields']['files']= [afile.url for afile in self.files.all()]
+        adict['fields']['url']= self.url        
         adict['fields']['commentcount']= self.commentcount
         adict['fields']['usercore']= self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['userratecount']= self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
