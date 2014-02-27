@@ -36,7 +36,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   },
 
-
   setFiltersFromCookie: function (that, items) {
     var cookie = $.cookie('tagfilters');
     if (typeof cookie != 'undefined') {
@@ -104,14 +103,15 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     return false;
   },
 
-  itemTypesfilter: function (ev) {
+  itemTypesfilter: function (ev) {    
     this.updateTypefilter(this, ev);
     this.resetMarket();
   },
 
   tagsfilter: function (ev) {
+    debugger;
     this.updateTagsfilter(this, ev);
-    var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
+    var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');    
     this.setFilterType(tags, 'cus');
     this.resetMarket();
   },
@@ -195,7 +195,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
           that.item_widget.afterset();
           that.msnry.layout();
-          $('#ajaxloader').hide();
+          $('#ajaxloader').hide();          
         }
 
         that.currentItem = that.currentItem + that.itemsPerCall;
@@ -417,7 +417,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       height: height
     }, speed);
   },
-
+   
   init: function (filters) {
     $.cookie.json = true;
     this.filter_widget = window.widgets.filter_widget.initWidget('filter-container');
@@ -441,7 +441,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
     $('#market-filters').on('show.bs.collapse', this.filterButtonShow.bind(this));
     $('#market-filters').on('hide.bs.collapse', this.filterButtonHide.bind(this));
-
+    
+    $(document).on('click', '.btn.countries_button', function(ev){
+      debugger;
+    });
+    
     this.filters = filters;
     this.initTemplates(filters);
     this.filters.search = $('#q').val();
@@ -452,9 +456,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       'click #create_offer': 'create_offer',
       'click #create_request': 'create_request',
       'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
-      'submit': 'filterKeySearch'
-    }));
-
+      'submit': 'filterKeySearch'	  
+    }));  
+		
     // calculate height of the market-filters when opened and closed so we can set
     // the height of the market-filter correctly when we fix it to the top 
     this.filterheightClosed = $('#filter-wrapper').height();
