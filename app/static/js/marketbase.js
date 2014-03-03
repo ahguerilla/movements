@@ -491,7 +491,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $('#market-filters').on('hide.bs.collapse', this.filterButtonHide.bind(this));
 
     $(document).on('click', '.btn.countries_button', function(ev){
-      debugger;
+      //debugger;
     });
 
     this.filters = filters;
