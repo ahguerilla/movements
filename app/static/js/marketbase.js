@@ -180,7 +180,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         if (data.length === 0) {
           that.allItemsLoaded = true;
           $('#ajaxloader').hide();
-          $('#marketitems').append('<p  style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
+          //$('#marketitems').append('<p  style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
         }
         _.each(data, function (item) {
           item.fields.pk = item.pk;
@@ -284,6 +284,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       });
       if ($(window).width() >= 992){
        $('.nanamorde').show();
+      }else{
+        $('.nanamorde-mobile').show();
       }
 
       $('#singleItem').html(html);
@@ -345,8 +347,19 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $('#togglefilter').show();
     $('#newcomment').val('');
     $('.nanamorde').hide();
+    $('.nanamorde-mobile').hide();
     $.publish('filters.resize');
 
+  },
+
+  showHideNanamorde: function(){
+    if($('.nanamorde-mobile').css('display')!== 'none' && $(window).width() >= 992 ){
+      $('.nanamorde').css('display','block');
+      $('.nanamorde-mobile').css('display','none');
+    }else if ($('.nanamorde').css('display') === 'block' && $(window).width() < 992 ){
+      $('.nanamorde').css('display','none');
+      $('.nanamorde-mobile').css('display','block');
+    }
   },
 
   isSingle: function () {
@@ -450,6 +463,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         top: 300
       }
     });
+
+    $.subscribe("nanamorde.resize", this.showHideNanamorde);
+    $(window).resize(this.showHideNanamorde);
 
     var self = this;
 

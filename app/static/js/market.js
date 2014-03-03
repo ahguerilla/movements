@@ -63,7 +63,7 @@
       edit_func = _.bind(this.edit_callback, this);
       this.item_widget = window.ahr.marketitem_widget.initWidget('body', this, del_func, edit_func);
       filters.types = ["offer", "request"];
-      this.getItem = window.ahr.app_urls.getmarketitem;      
+      this.getItem = window.ahr.app_urls.getmarketitem;
       this.init(filters);
       return this;
     },
