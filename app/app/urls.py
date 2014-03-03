@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^user/', include('app.users.urls')),
     url(r'^exchange', 'app.views.exchange', name='exchange'),
-    url(r'^avatar/render_primary/(?P<user>[\w\@\d\.\-_]{3,30})/(?P<size>[\d]+)/$', 'avatar.views.render_primary', name='avatar_render_primary'),
+    url(r'^avatar/render_primary/(?P<user>[\w\@\d\.\-_]{1,30})/(?P<size>[\d]+)/$', 'avatar.views.render_primary', name='avatar_render_primary'),
     url(r'^avatar/', include('avatar.urls')),
     # Account View Overrides
     url(r'^accounts/social/signup/+$', 'app.users.views.ahr_social_signup', name="social_sign_up"),
