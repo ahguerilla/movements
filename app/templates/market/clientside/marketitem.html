@@ -42,12 +42,12 @@
           <div class="item-tags">
             <div class="item-comment-count"><span class="commentcount"><%- commentcount %></span> Comment<% if (commentcount != 1){ %>s<%}%></div>
             <div>
-              <% _.each(issues, function(ind) { %> <div class="btn btn-default btn-xs issue_btn"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
-              <% _.each(countries, function(ind) { %> <div class="btn btn-default btn-xs countries_button"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
-              <% _.each(skills, function(ind) { %> <div class="btn btn-default btn-xs skills_button"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
+              <% _.each(issues, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
+              <% _.each(countries, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
+              <% _.each(skills, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
             </div>
           </div>
-        </div>      
+        </div>
     </div>
   </div>
 </script>
