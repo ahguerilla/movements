@@ -12,7 +12,7 @@ class SignupForm(forms.Form):
     fb_url = forms.CharField(max_length=100, label='Facebook', required=False)
     web_url = forms.CharField(max_length=100, label='Website', required=False)
     tnccheckbox = forms.BooleanField()
-    
+
 
     def save(self, user):
         user.first_name = ''
@@ -34,7 +34,7 @@ class UserForm(forms.ModelForm):
 
 class SettingsForm(forms.ModelForm):
     class Meta:
-        model = UserProfile  
+        model = UserProfile
         fields = ['nationality',
                   'occupation',
                   'resident_country',
@@ -42,7 +42,7 @@ class SettingsForm(forms.ModelForm):
                   'web_url',
                   'fb_url',
                   'linkedin_url',
-                  'tweet_url',                  
+                  'tweet_url',
                   'tag_ling',
                   'bio',
                   'issues',
@@ -57,6 +57,35 @@ class SettingsForm(forms.ModelForm):
         if commit:
             m.save()
         return m
+
+    def check_https(data):
+        if not data.startswith('https://'):
+            if data.startswith('http://'):
+                data = 'https://'+data[7:]
+            else:
+                data = 'https://'+data
+        return data
+
+    def clean_fb_url(self):
+        data = self.cleaned_data['fb_url']
+        self.check_https(data)
+        if not data.startswith('https://www.facebook.com/'):
+            raise forms.ValidationError("You must provide a link to your facebook profile")
+        return data
+
+    def clean_linkedin_url(self):
+        data = self.cleaned_data['linkedin_url']
+        self.check_https(data)
+        if not data.startswith('https://www.linkedin.com/'):
+            raise forms.ValidationError("You must provide a link to your linked in profile")
+        return data
+
+    def clean_linkedin_url(self):
+        data = self.cleaned_data['tweet_url']
+        self.check_https(data)
+        if not data.startswith('https://www.twitter.com/'):
+            raise forms.ValidationError("You must provide a link to your twitter in page")
+        return data
 
 
 class VettingForm(forms.ModelForm):
