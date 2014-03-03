@@ -26,57 +26,57 @@
             <div class="col-sm-3 pull-left">
               <div class="filter-title">Issues</div>
               <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
-                  <label class="btn filter-bulk-selector btn-default btn-xs all-issues">
-                      <input type="radio" name="all-issues"> All
-                  </label>
-                  <label class="btn filter-bulk-selector btn-default btn-xs cus-issues">
-                      <input type="radio" name="cus-issues"> Custom
-                  </label>
-                  <label class="btn filter-bulk-selector btn-default btn-xs def-issues def">
-                      <input type="radio" name="def-issues"> Default
-                  </label>
+                <label class="btn filter-bulk-selector btn-default btn-xs all-issues">
+                  <input type="radio" name="all-issues"> All
+                </label>
+                <label class="btn filter-bulk-selector btn-default btn-xs cus-issues">
+                  <input type="radio" name="cus-issues"> Custom
+                </label>
+                <label class="btn filter-bulk-selector btn-default btn-xs def-issues def">
+                  <input type="radio" name="def-issues"> Default
+                </label>
               </div>
               <div class="row issues btn-group-sm pull-left" item_title="issues"></div>
             </div>
             <div class="col-sm-3 pull-left">
               <div class="filter-title">Countries</div>
               <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
-                  <label class="btn filter-bulk-selector btn-default btn-xs all-countries">
-                      <input type="radio" name="all-countries"> All
-                  </label>
-                  <label class="btn filter-bulk-selector btn-default btn-xs cus-countries">
-                      <input type="radio" name="cus-countries"> Custom
-                  </label>
-                  <label class="btn filter-bulk-selector btn-default btn-xs def-countries def">
-                      <input type="radio" name="def-countries"> Default
-                  </label>
+                <label class="btn filter-bulk-selector btn-default btn-xs all-countries">
+                  <input type="radio" name="all-countries"> All
+                </label>
+                <label class="btn filter-bulk-selector btn-default btn-xs cus-countries">
+                  <input type="radio" name="cus-countries"> Custom
+                </label>
+                <label class="btn filter-bulk-selector btn-default btn-xs def-countries def">
+                  <input type="radio" name="def-countries"> Default
+                </label>
               </div>
               <div class="row countries btn-group-sm pull-left" item_title="countries"></div>
             </div>
             <div class="col-sm-3 pull-left">
               <div class="filter-title">Skills</div>
               <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
-                  <label class="btn filter-bulk-selector btn-default btn-xs all-skills">
-                      <input type="radio" name="all-skills"> All
-                  </label>
-                  <label class="btn filter-bulk-selector btn-default btn-xs cus-skills">
-                      <input type="radio" name="cus-skills"> Custom
-                  </label>
-                  <label class="btn filter-bulk-selector btn-default btn-xs def-skills def">
-                      <input type="radio" name="def-skills"> Default
-                  </label>
+                <label class="btn filter-bulk-selector btn-default btn-xs all-skills">
+                  <input type="radio" name="all-skills"> All
+                </label>
+                <label class="btn filter-bulk-selector btn-default btn-xs cus-skills">
+                  <input type="radio" name="cus-skills"> Custom
+                </label>
+                <label class="btn filter-bulk-selector btn-default btn-xs def-skills def">
+                  <input type="radio" name="def-skills"> Default
+                </label>
               </div>
               <div class="row skills btn-group-sm pull-left" item_title="skills"></div>
             </div>
           </div>
-        </div>        
+        </div>
         <div class="row">
           <div class="col-sm-12 filter-show">
-            <button type="button"class="btn btn-xs" id="togglefilter" data-toggle="collapse" data-target="#market-filters">
+            <button type="button"class="btn btn-default btn-xs" id="togglefilter" data-toggle="collapse" data-target="#market-filters">
               <span id="filterbuttontext">&nbsp; Show Filters &nbsp;</span>
               <span class="caret"></span>
             </button>
-		  </div>
+          </div>
       </div>
     </div>
   </div>
@@ -86,23 +86,23 @@
 
 {% compress js inline %}
 <script type="text/javascript">
- $(document).ready(function(){    
-    var filterWidget = Backbone.View.extend({		
-        initialize: function(data){
-            var that = this;
-            this.container = data.container;
-            var tmpl = _.template($('#filters_template').html());
-            var html = tmpl({});
-            $('#'+this.container).html(html);            
-        }
+  $(document).ready(function(){
+    var filterWidget = Backbone.View.extend({
+      initialize: function(data){
+        var that = this;
+        this.container = data.container;
+        var tmpl = _.template($('#filters_template').html());
+        var html = tmpl({});
+        $('#'+this.container).html(html);
+      }
     });
-        
-    window.widgets = window.widgets || {};
-    window.widgets.filter_widget = window.widgets.filter_widget || {};
-    window.widgets.filter_widget.initWidget= function(container,preval){
-        var widget = new filterWidget({'el': container, 'container':container,'preval':preval});
-        return widget;
-    };
+
+  window.widgets = window.widgets || {};
+  window.widgets.filter_widget = window.widgets.filter_widget || {};
+  window.widgets.filter_widget.initWidget= function(container,preval){
+    var widget = new filterWidget({'el': container, 'container':container,'preval':preval});
+    return widget;
+  };
 });
 </script>
 {% endcompress %}
