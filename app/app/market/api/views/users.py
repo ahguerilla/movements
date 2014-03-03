@@ -23,9 +23,9 @@ def create_query(request):
     if request.GET.has_key('issues'):
         query = query | Q(issues__in=request.GET.getlist('issues'))
 
-    if request.GET.has_key('search') and request.GET['search']!='':        
+    if request.GET.has_key('search') and request.GET['search']!='':
         search_q = request.GET['search']
-        
+
         ids = SearchQuerySet().models(users.models.UserProfile).\
             filter(Q(nationality__contains=search_q)|
                    Q(resident_country__contains=search_q)|
@@ -34,17 +34,17 @@ def create_query(request):
                    Q(bio__contains=search_q)|
                    Q(username__contains=search_q)|
                    Q(text__contains=search_q)|
-                   Q(occupation__contains=search_q)                                                                        
-                   ).values_list('pk', flat=True)                                
-        
+                   Q(occupation__contains=search_q)
+                   ).values_list('pk', flat=True)
+
         if None in ids:
             ids.remove(None)
-        
+
         ids = [int(id) for id in ids]
-        
+
         if request.user.userprofile.id in ids:
             ids.remove(request.user.userprofile.id)
-        
+
         query = query & Q(id__in = ids)
 
     if request.GET.has_key('types'):
@@ -160,11 +160,11 @@ def get_usernames(request, rtype):
 
 @login_required
 def get_profile(request, username, rtype):
-    user = get_object_or_404(users.models.User, username=username)    
+    user = get_object_or_404(users.models.User, username=username)
     if not user.is_active:
         raise Http404
     try:
-        user_profile = users.models.UserProfile.objects.get(user=user)    
+        user_profile = users.models.UserProfile.objects.get(user=user)
     except:
         raise Http404
     orate = users.models.OrganisationalRating.objects.filter(user=user).all()
@@ -176,7 +176,7 @@ def get_profile(request, username, rtype):
                 'avatar': reverse('avatar_render_primary', args=[user.username,60]),
                 'nationality': user_profile.nationality.nationality if not perms.has_key('nationality') else 'hidden',
                 'resident_country': user_profile.resident_country.residence if not perms.has_key('resident_country') else 'hidden',
-                'score': user_profile.score,
+                'score': round(user_profile.score,1),
                 'ratecount': user_profile.ratecount,
                 'orate': orate[0].rated_by_ahr if len(orate)>0 else 0
             }
