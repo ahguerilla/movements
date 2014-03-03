@@ -443,6 +443,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   init: function (filters) {
     $.cookie.json = true;
+    $('.nanamorde').hide();
     this.filter_widget = window.widgets.filter_widget.initWidget('filter-container');
     $('#fixed-filters').affix({
       offset: {
