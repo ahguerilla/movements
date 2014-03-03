@@ -80,7 +80,7 @@
             <strong>Rating:</strong>
           </div>
           <div class="col-md-10">
-            <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score|floatformat }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
+            <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score|floatformat:1 }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
           </div>
         </div>
 
