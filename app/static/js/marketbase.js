@@ -155,6 +155,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     var that = this;
     $(window).scroll(function () {
       that.loadScrollElements(that);
+
     });
 
     // For ipad
@@ -175,9 +176,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
       var itemsToAppend = [];
       dfrd.done(function (data) {
+        $('#no-search-result').remove();
         if (data.length === 0) {
           that.allItemsLoaded = true;
           $('#ajaxloader').hide();
+          $('#marketitems').append('<p  style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
         }
         _.each(data, function (item) {
           item.fields.pk = item.pk;
@@ -457,7 +460,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     $.subscribe("filters.resize", resizeFilters);
     $(window).resize(resizeFilters);
-
 
     this.default_filters = window.ahr.clone(filters);
     this.requestdialog = window.ahr.request_form_dialog.initItem(false);
