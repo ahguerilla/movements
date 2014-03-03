@@ -109,7 +109,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   },
 
   tagsfilter: function (ev) {
-    debugger;
     this.updateTagsfilter(this, ev);
     var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
     this.setFilterType(tags, 'cus');
