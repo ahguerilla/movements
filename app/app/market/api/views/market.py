@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
-from tasks.celerytasks import create_notification, update_notifications, mark_read_notifications 
+from tasks.celerytasks import create_notification, update_notifications, mark_read_notifications
 from django.utils.cache import get_cache_key, get_cache
 cache = get_cache('default')
 items_cache = get_cache('items')
@@ -82,15 +82,15 @@ def get_market_item(request, obj_id, rtype):
     mark_read_notifications.delay((obj.id,),request.user.id)
     retval = return_item_list([obj], rtype)
     cache.add('item-' + obj_id, retval)
-    return retval 
+    return retval
 
 
 @login_required
 def get_marketItem_fromto(request, sfrom, to, rtype):
     reqhash = hash(request.path+str(request.GET))
     retval = items_cache.get(reqhash)
-    if retval: 
-        return retval            
+    if retval:
+        return retval
     query = create_query(request)
     obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     retval = return_item_list(obj, rtype)
@@ -139,8 +139,8 @@ def user_get_marketitem(request, obj_id, rtype):
 def get_user_marketitem_fromto(request, sfrom, to, rtype):
     reqhash = hash(request.path+str(request.GET))
     retval = user_items_cache.get(reqhash)
-    if retval: 
-        return retval           
+    if retval:
+        return retval
     query = create_query(request)
     obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     retval = return_item_list(obj, rtype)
@@ -154,7 +154,7 @@ def set_rate(request, obj_id, rtype):
         return HttpResponseError()
     cache.delete('item-'+obj_id)
     items_cache.clear()
-    user_items_cache.clear()    
+    user_items_cache.clear()
     item = market.models.MarketItem.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).objects.filter(id=obj_id)[0]
     owner = request.user
     rate = market.models.ItemRate.objects.filter(owner=owner).filter(item=item)
@@ -175,24 +175,24 @@ def set_rate(request, obj_id, rtype):
 
 
 @login_required
-def get_notifications_fromto(request, sfrom, to, rtype):    
+def get_notifications_fromto(request, sfrom, to, rtype):
     notifications = market.models.Notification.objects.filter(user=request.user.id, item__deleted=False)[sfrom:to]
     alist=[]
     notification_ids=[]
     for notification in notifications:
-        alist.append(notification.getDict()) 
+        alist.append(notification.getDict())
         notification_ids.append(notification.id)
     market.models.Notification.objects.filter(id__in=notification_ids).update(seen=True)
     return HttpResponse(json.dumps({'notifications':alist}),
-                          mimetype="application"+rtype)    
-    
+                          mimetype="application"+rtype)
+
 
 
 @login_required
-def get_notseen_notifications(request, sfrom, to, rtype):          
+def get_notseen_notifications(request, sfrom, to, rtype):
     notifications = market.models.Notification.objects.filter(user=request.user.id,item__deleted=False).filter(seen=False).only('seen')
-    if len(notifications)>0:        
+    if len(notifications)>0:
         return HttpResponse(json.dumps({'result':True}),
-                             mimetype="application"+rtype)                 
+                             mimetype="application"+rtype)
     return  HttpResponse(json.dumps({'result':False}),
                          mimetype="application"+rtype)
