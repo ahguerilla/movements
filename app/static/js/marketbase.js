@@ -435,19 +435,25 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   },
 
   initBulkFilters: function (bulksArg) {
-    var bulks = $.cookie('bulkfilters');
-    if (typeof bulks === "undefined" && typeof bulksArg === 'undefined') {
+    var bulks;
+    if (typeof bulksArg === 'undefined'){
+         bulks = $.cookie('bulkfilters');
+    }else{
+        bulks = bulksArg;
+    }
+    if (typeof bulks === "undefined") {
       bulks = {
-        countries: "def",
-        issues: "def",
-        skills: "def"
+        countries: "all",
+        issues: "all",
+        skills: "all"
       };
       $.cookie('bulkfilters', bulks);
-      $('.filter-bulk-selector.def').addClass('active');
+      $('.filter-bulk-selector.all').addClass('active');
     }
     var that = this;
     _.each(bulks, function (selection, tag) {
       that.bulkCustomizeFilters(tag, selection);
+      debugger;
       $('.filter-bulk-selector.' + selection + '-' + tag).addClass('active');
     });
   },
@@ -472,7 +478,12 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   searchWithDefaultFilters:function(){
     $('.btn.filter-bulk-selector').removeClass('active');
-    this.initBulkFilters();
+    var bulks = {
+        countries: "def",
+        issues: "def",
+        skills: "def"
+      };
+    this.initBulkFilters(bulks);
   },
 
   init: function (filters) {
