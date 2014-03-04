@@ -434,9 +434,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.bulkCustomizeFilters(tag, action);
   },
 
-  initBulkFilters: function () {
+  initBulkFilters: function (bulksArg) {
     var bulks = $.cookie('bulkfilters');
-    if (typeof bulks === "undefined") {
+    if (typeof bulks === "undefined" && typeof bulksArg === 'undefined') {
       bulks = {
         countries: "def",
         issues: "def",
@@ -461,11 +461,18 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   searchWithNoFilters: function  (){
     $('.tagbutton', $('.row')).removeClass('btn-success');
     $('.tagbutton', $('.row')).addClass('btn-success');
-    this.filters.types = values(this.types);
-    this.filters.skills = this.keys(window.ahr.skills_lookup);
-    this.filters.issues = this.keys(window.ahr.issues_lookup);
-    this.filters.countries = this.keys(window.ahr.countries_lookup);
+    this.filters.types = _.values(this.types);
+    this.filters.skills = _.keys(window.ahr.skills_lookup);
+    this.filters.issues = _.keys(window.ahr.issues_lookup);
+    this.filters.countries = _.keys(window.ahr.countries_lookup);
+    $('.btn.filter-bulk-selector').removeClass('active');
+    $('.btn.filter-bulk-selector.all').addClass('active');
     this.resetMarket();
+  },
+
+  searchWithDefaultFilters:function(){
+    $('.btn.filter-bulk-selector').removeClass('active');
+    this.initBulkFilters();
   },
 
   init: function (filters) {
@@ -530,6 +537,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       'click #create_request': 'create_request',
       'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
       'click #searchagainall': 'searchWithNoFilters',
+      'click #searchwithdefaults' : 'searchWithDefaultFilters',
       'submit': 'filterKeySearch'
     }));
 
