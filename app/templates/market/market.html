@@ -27,9 +27,9 @@
       </div>
     </div>
     <div class="filter-banner-spacer-black"></div>
- 	<div id="filter-container"></div>
+      <div id="filter-container"></div>
 </div>
- </div>
+  </div>
 {% endblock %}
 
 {% block content %}
@@ -55,74 +55,76 @@
         </div>
       </div>
     </div>
-	<div class="col-lg-10" id="ajaxloader" style="text-align:center;display:none;">
-	  <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
+    <div class="col-lg-10" id="ajaxloader" style="text-align:center;display:none;">
+      <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
     </div>
-	<div class="col-lg-10" style="height:30px;" >
-	  <a id="backtothemarket" class="btn btn-default pull-left" href="{% url 'show_market' %}#">Back</a>
-	</div>
-	<div style="padding-top:10px;"class="nanamorde-mobile col-md-4">
-	  <div class="userprofile"></div>
-	</div>
-    <div class="col-md-8">
-      <div id="singleItem"></div>
-      <div id="marketitem_comment_form"></div>
-      <div id="marketitem_comments"></div>
+    <div _class="col-lg-10" style="height:30px;" >
+      <a id="backtothemarket" class="btn btn-default pull-left" href="{% url 'show_market' %}#">Back</a>
     </div>
-	<div style="margin-top:12px;"class="dialog col-md-4 nanamorde">
-	  <div class="userprofile"></div>
-	</div>
+    <div class="nanamorde-mobile col-md-4">
+      <div class="userprofile"></div>
+    </div>
+    <div class="row left-on-big">
+      <div class="col-md-8">
+        <div id="singleItem"></div>
+        <div id="marketitem_comment_form"></div>
+        <div id="marketitem_comments"></div>
+      </div>
+      <div class="dialog col-md-4 nanamorde">
+        <div class="userprofile"></div>
+      </div>
+    </div>
   </div>
 </div>
 
 {% endblock %}
 
 {% block endjavascript %}
-    {% include "market/clientside/marketitem.html" %}
-    {% include "market/clientside/marketuser.html" %}
-    {% include "market/clientside/filtertag.html" %}
-    {% include "market/clientside/checkbox.html" %}
-    {% include "market/clientside/typetag.html" %}
-    {% include "market/clientside/filters.html"%}
+  {% include "market/clientside/marketitem.html" %}
+  {% include "market/clientside/marketuser.html" %}
+  {% include "market/clientside/filtertag.html" %}
+  {% include "market/clientside/checkbox.html" %}
+  {% include "market/clientside/typetag.html" %}
+  {% include "market/clientside/filters.html"%}
 
-    {% include "market/clientside/expdate.html"%}
-    {% include "market/clientside/datetimepicker.html"%}
-    {% include "market/clientside/datepicker.html"%}
-    {% include "market/clientside/typeahead.html" %}
-    {% include "market/clientside/input.html" %}
-    {% include "market/clientside/textarea.html" %}
+  {% include "market/clientside/expdate.html"%}
+  {% include "market/clientside/datetimepicker.html"%}
+  {% include "market/clientside/datepicker.html"%}
+  {% include "market/clientside/typeahead.html" %}
+  {% include "market/clientside/input.html" %}
+  {% include "market/clientside/textarea.html" %}
 
-    {% include "market/clientside/commentview.html" %}
-    {% include "market/clientside/commentadd.html" %}
-    {% include "market/clientside/messagedialog.html" %}
-    {% include "market/clientside/recommenddialog.html" %}
-    {% include "market/clientside/ratedialog.html" %}
-    {% include "market/clientside/reportdialog.html" %}
-    {% include "market/clientside/offerdialog.html"%}
-    {% include "market/clientside/requestdialog.html"%}
-	{% include 'market/clientside/userprofile.html' %}
-	{% include 'market/clientside/reportuserdialog.html' %}
+  {% include "market/clientside/commentview.html" %}
+  {% include "market/clientside/commentadd.html" %}
+  {% include "market/clientside/messagedialog.html" %}
+  {% include "market/clientside/recommenddialog.html" %}
+  {% include "market/clientside/ratedialog.html" %}
+  {% include "market/clientside/reportdialog.html" %}
+  {% include "market/clientside/offerdialog.html"%}
+  {% include "market/clientside/requestdialog.html"%}
+  {% include 'market/clientside/userprofile.html' %}
+  {% include 'market/clientside/reportuserdialog.html' %}
 
 
 
-    {% compress js inline %}
-    <script type="text/javascript">
+  {% compress js inline %}
+  <script type="text/javascript">
 
-    $(document).ready(function(){
-        var dfrd = window.ahr.getStatics();
-        dfrd.done(function(){
-            if("{{init}}"=="market"){
-                window.ahr.market.initMarket({{tags|safe}});
-            }else if("{{init}}"=="posts"){
-                window.ahr.posts.initPosts({{tags|safe}});
-            }else if ("{{init}}"=="users"){
-                window.ahr.users.initUsers({{tags|safe}});
-            }
-        });
+  $(document).ready(function(){
+    var dfrd = window.ahr.getStatics();
+    dfrd.done(function(){
+      if("{{init}}"=="market"){
+        window.ahr.market.initMarket({{tags|safe}});
+      }else if("{{init}}"=="posts"){
+        window.ahr.posts.initPosts({{tags|safe}});
+      }else if ("{{init}}"=="users"){
+        window.ahr.users.initUsers({{tags|safe}});
+      }
     });
+  });
 
-    </script>
-    {% endcompress %}
+  </script>
+  {% endcompress %}
 
 {% endblock %}
 
