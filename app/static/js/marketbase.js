@@ -154,6 +154,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     var that = this;
     $(window).scroll(function () {
       that.loadScrollElements(that);
+
     });
     // For ipad
     document.addEventListener('touchmove', function (e) {
@@ -481,6 +482,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $.subscribe("nanamorde.resize", this.showHideNanamorde);
     $(window).resize(this.showHideNanamorde);
 
+    $.subscribe("nanamorde.resize", this.showHideNanamorde);
+    $(window).resize(this.showHideNanamorde);
+
     var resizeFilters = function() {
       that.setFilterOpenHeight();
       var newHight = $('#fixed-filters').height();
@@ -489,7 +493,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     $.subscribe("filters.resize", resizeFilters);
     $(window).resize(resizeFilters);
-
     this.default_filters = window.ahr.clone(filters);
     this.requestdialog = window.ahr.request_form_dialog.initItem(false);
     this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
