@@ -23,7 +23,6 @@ def getUserTags(user):
 
 @login_required
 def index(request):
-    raise Exception('Errrorr','ohooohoohooh')
     return render_to_response('market/market.html',
                               {
                                   'title':'Exchange',
