@@ -189,24 +189,25 @@ def email_doublesignup_upret(self, ret):
             ret['form'].errors['email'].remove(u'A user is already registered with this e-mail address.')
             if len(ret['form'].errors['email'])==0:
                 ret['form'].errors.pop('email')
+
+
         if not confem[0].user.is_active:
-            email = EmailMessage('Not quite ready yet',
-                                 "You or someone recently tried to register on Exchangivist using your email address. "+
-                                 "This account is currently being vetted for approval. Please be patient, and contact us "+
-                                 "if you have any concerns. \r\n\r\n Thanks\r\n The Exchangivist Team",
+            text = render_to_string('emails/notready.html',{})
+            subject = render_to_string('emails/notready_subject.html',{})
+            email = EmailMessage(subject,
+                                 text,
                                  constance.config.NO_REPLY_EMAIL,
                                  [ret['form'].data['email']])
+            email.content_subtype = "html"
+            email.send()
         else:
+            text = render_to_string('emails/securityalert.html',{})
             email = EmailMessage('Security Alert from Exchangivist',
-                                 "You or someone recently tried to register on Exchangivist using your email address. "+
-                                 "If this was not you and you did not make this request, it's likely that another user entered "+
-                                 "your email address by mistake. If you believe an unauthorised person has accessed your account "+
-                                 "we advise that you change your password for both your email account and Exchangivist. "+
-                                 "Exchangivist did not reveal that you are registerd with the site or any of your personal "+
-                                 "Information. We are sending this email as a precautionary measure only. \r\n\r\n Thanks\r\n The Exchangivist Team",
+                                 text,
                                  constance.config.NO_REPLY_EMAIL,
                                  [ret['form'].data['email']])
-        email.send()
+            email.content_subtype = "html"
+            email.send()
     return ret
 
 
@@ -356,10 +357,14 @@ def email_vet_user(request, user_id):
     if not user.is_active:
         return  HttpResponse(json.dumps({ 'success' : False, 'message': 'User is not vetted.'}),mimetype="application/json")
     text = render_to_string('emails/getstarted.html',
-                            {'user':user,
-                             'login_url':'http://'+Site.objects.get_current().domain+'/accounts/login'}
-                            )
-    email = EmailMessage('You can now get started on Exchangivist. Your Username and Password is now active.',
+                            {
+                                'user':user,
+                                'login_url':'http://'+Site.objects.get_current().domain+'/accounts/login'
+                            }
+                        )
+    subject = render_to_string('emails/getstarted_subject.html',{})
+
+    email = EmailMessage(subject,
                          text,
                          constance.config.NO_REPLY_EMAIL,
                          [user.email])
