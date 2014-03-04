@@ -93,5 +93,8 @@ django-admin.py runserver --settings=app.settings.production
  \q
 
  #How to generate test data from the database
+ Test data is already created but in case anyone needs to use different data that is how you do it:
   ./manage.py dumpdata --natural --indent=4 -e sessions -e admin -e contenttypes -e auth.Permission > test_data.json --setting=app.settings.local
   ./manage.py test market --liveserver=localhost:8082,8090-8100,9000-9200,7041 --setting=app.settings.local
+
+After you created test_data.json you need to copy it over the same file in fixutures directories that it is present
