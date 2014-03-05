@@ -453,7 +453,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     var that = this;
     _.each(bulks, function (selection, tag) {
       that.bulkCustomizeFilters(tag, selection);
-      debugger;
       $('.filter-bulk-selector.' + selection + '-' + tag).addClass('active');
     });
   },

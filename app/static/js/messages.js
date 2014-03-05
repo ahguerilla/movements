@@ -1,16 +1,16 @@
 (function () {
-  var InboxRoute = Backbone.Router.extend({
-    routes: {
-      "": "page",
-      "p:page": "page"
-    },
-    page: function (page) {
-      $.noop();
-    },
-    initialize: function (market) {
-      $.noop();
-    }
-  });
+  //var InboxRoute = Backbone.Router.extend({
+    //routes: {
+      //"": "page",
+      //"p:page": "page"
+    //},
+    //page: function (page) {
+      //$.noop();
+    //},
+    //initialize: function (market) {
+      //$.noop();
+    //}
+  //});
 
   var InboxView = Backbone.View.extend({
     el: '#postman',
@@ -32,7 +32,7 @@
         var more = $('.next',$(data))[0];
         $('.next').replaceWith(more);
         $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
-        $('.messagelist').append($('.messagelist', $(data)).children());        
+        $('.messagelist').append($('.messagelist', $(data)).children());
       });
     },
 
@@ -41,20 +41,21 @@
       return false;
     },
 
-    openConv: function (ev) {      
+    openConv: function (ev) {
+      ev.preventDefault();
+      var that = this;
       var subject = $('.subject',$(ev.currentTarget)).children();
       if(subject.is('strong')){
         subject.replaceWith(subject.text());
       }
-      var that = this;
-      ev.preventDefault();
+
       if (ev.currentTarget.parentElement.tagName == "STRONG") {
         a = ev.currentTarget;
-        $(ev.currentTarget.parentElement).html(a);        
+        $(ev.currentTarget.parentElement).html(a);
       }
 
       var dfrd = $.ajax({
-        url: ev.currentTarget.href,
+        url: ev.currentTarget.getAttribute('href'),
         dataType: 'html'
       });
 
@@ -72,16 +73,16 @@
         data4 = data3.replace(that.userre, function (match, username, offset, string) {
           return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
         });
-        
+
         var user;
         $('.messageavatar img', data4).each(function(item,index){
-          user = $(this).attr('alt');          
-          if(user != window.ahr.username)return false;          
-        });  
+          user = $(this).attr('alt');
+          if(user != window.ahr.username)return false;
+        });
         if(user == window.ahr.username){
-          user = $('.pm_recipient',data4).text();          
-        }        
-        
+          user = $('.pm_recipient',data4).text();
+        }
+
         $.getJSON(window.ahr.app_urls.getprofile+user,function(data){
           var tmpl = $('#message-profile').html();
           var prof = _.template(tmpl);
@@ -93,12 +94,12 @@
           $('.rateit').each(function(){
             $(this).rateit('value', this.getAttribute('rate'));
           });
-          $('#id_body').trigger('focus');                            
+          $('#id_body').trigger('focus');
         });
-                
+
         $('#conversation').html(data4);
         if($('#id_body').length >0){
-          $('#id_body').empty();         
+          $('#id_body').empty();
           window.ahr.expandTextarea('#id_body');
         }
         that.showconv();
@@ -121,14 +122,14 @@
       if ($(window).width() < 992 ) {
         $('.nanamorde-mobile').show();
       } else if ($(window).width() >= 992) {
-        $('.nanamorde').show(); 
+        $('.nanamorde').show();
       }
-      $("#message-col").hide();            
+      $("#message-col").hide();
       $('#conversation-cont').show();
       $('#messagenav').hide();
       $('#back').show();
       $('#breadsubject').text($('#messagesubjectheader').text());
-      $('body').scrollTop(0);      
+      $('body').scrollTop(0);
     },
 
     back: function (ev) {
@@ -141,7 +142,7 @@
     },
 
     resize: function (ev) {
-      if ($(window).width() < 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {        
+      if ($(window).width() < 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {
         $('.nanamorde-mobile').show();
         $('.nanamorde').hide();
       } else if ($(window).width() >= 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {
@@ -155,7 +156,7 @@
 
     initialize: function () {
       $(window).resize(this.resize);
-      this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');      
+      this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
       this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
       var more = $('.next')[0];
@@ -172,7 +173,7 @@
   window.ahr.messages = window.ahr.messages || {};
   window.ahr.messages.initInbox = function () {
     var messages = new InboxView();
-    var messages_route = new InboxRoute(messages);   
+    var messages_route = new InboxRoute(messages);
     $('#back').hide();
     Backbone.history.start();
   };
