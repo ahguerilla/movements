@@ -9,14 +9,15 @@
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span>
         </div>
         </a>
-        <div class="pull-right item-menu" style="position:relative;">
+        <div class="pull-right item-menu" style="position:relative;display:none;">
           <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
           <div class="dropdown">
             <button class="btn dropdown-toggle sr-only dropdownMenu<%- pk %>" type="button" data-toggle="dropdown" />
+            <% if (ownerid != window.ahr.user_id){ %>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
-              <% if (ownerid != window.ahr.user_id){ %>
+
                 <li role="presentation"></li>
-                <li role="presentation"><a owner="<%- owner %>" item_id="<%- pk %>" title="<%- title %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
+                <li role="presentation"><a owner="<%- owner %>" item_id="<%- pk %>" recommend_title="<%- title %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" class="report_post" role="menuitem" tabindex="-1" href="#">Report post</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" rateing="user" username="<%- owner %>"  score="<%- usercore %>" ratecount="<%- userratecount %>" class="rate rate_user" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" username="<%- owner %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
@@ -25,8 +26,8 @@
                 <li role="presentation"></li>
                 <li role="presentation"><a item_id="<%- pk %>" class="delete" role="menuitem" tabindex="-1" href="#">Delete</a></li>
                 <li role="presentation"><a item_id="<%- pk %>" class="edit" role="menuitem" tabindex="-1" href="#">Edit</a></li>
-              <%}%>
             </ul>
+            <%}%>
           </div>
         </div>
       </div>
@@ -39,7 +40,7 @@
           <div class="clearfix"></div>
           <div class="item-body multi-line-text"><%- details %></div>
           </a>
-          <div class="item-tags">
+          <div class="item-tags" style="clear:both;">
             <div class="item-comment-count"><span class="commentcount"><%- commentcount %></span> Comment<% if (commentcount != 1){ %>s<%}%></div>
             <div>
               <% _.each(issues, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
@@ -47,6 +48,59 @@
               <% _.each(skills, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
             </div>
           </div>
+          <div class="actions">
+            <% if (ownerid != window.ahr.user_id){ %>
+            <div owner="<%- owner %>" item_id="<%- pk %>" title="Recommend" recommend_title="<%- title %>" class="recommend dialog">
+              <div class="item-glyph glyphicon glyphicon-thumbs-up"></div>
+              <div class="item-glyph-text">
+                Recommend
+              </div>
+            </div>
+
+            <a href="#item/<%- pk %>" class="routehref dialog" title="Comment">
+              <div class="item-glyph glyphicon glyphicon-comment"></div>
+              <div class="item-glyph-text">
+                Comment
+              </div>
+            </a>
+
+            <div item_id="<%- pk %>" title="Rate" rateing="user" username="<%- owner %>" score="<%- usercore %>" ratecount="<%- userratecount %>" class="rate rate_user dialog">
+              <div class="item-glyph glyphicon glyphicon-star-empty"></div>
+              <div class="item-glyph-text">
+                Rate
+              </div>
+            </div>
+
+            <div item_id="<%- pk %>" username="<%- owner %>" title="Send private message" class="private_message dialog">
+              <div class="item-glyph glyphicon glyphicon-envelope"></div>
+              <div class="item-glyph-text">
+                Private Message
+              </div>
+            </div>
+
+            <div style="float:right;" item_id="<%- pk %>" class="report_post dialog">
+                <div style="font-size:80%;padding-top:3px;">
+                  Report
+                </div>
+            </div>
+            <%}%>
+            <% if (ownerid == window.ahr.user_id){ %>
+            <div item_id="<%- pk %>" class="edit dialog" >
+              <div class="item-glyph glyphicon glyphicon-edit"></div>
+              <div class="item-glyph-text">
+                Edit
+              </div>
+            </div>
+
+            <div item_id="<%- pk %>" class="dialog delete" >
+              <div class="item-glyph glyphicon glyphicon-remove-circle"></div>
+              <div class="item-glyph-text">
+                Delete
+              </div>
+            </div>
+            <%}%>
+          </div>
+          <div style="clear:both;"></div>
         </div>
     </div>
   </div>
@@ -168,7 +222,7 @@
 
     recommend: function (ev) {
       ev.preventDefault();
-      var title = ev.currentTarget.getAttribute('title');
+      var title = ev.currentTarget.getAttribute('recommend_title');
       var item_id = ev.currentTarget.getAttribute('item_id');
       this.market.recommend_dialog.setup('item',
         item_id,
