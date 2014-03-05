@@ -1,0 +1,52 @@
+<div class="actions">
+  <% if (ownerid != window.ahr.user_id){ %>
+  <div owner="<%- owner %>" item_id="<%- pk %>" title="Recommend" recommend_title="<%- title %>" class="recommend dialog">
+    <div class="item-glyph glyphicon glyphicon-thumbs-up"></div>
+    <div class="item-glyph-text">
+      Recommend
+    </div>
+  </div>
+
+  <a href="#item/<%- pk %>" class="routehref dialog" title="Comment">
+    <div class="item-glyph glyphicon glyphicon-comment"></div>
+    <div class="item-glyph-text">
+      Comment
+    </div>
+  </a>
+
+  <div item_id="<%- pk %>" title="Rate" rateing="user" username="<%- owner %>" score="<%- usercore %>" ratecount="<%- userratecount %>" class="rate rate_user dialog">
+    <div class="item-glyph glyphicon glyphicon-star-empty"></div>
+    <div class="item-glyph-text">
+      Rate
+    </div>
+  </div>
+
+  <div item_id="<%- pk %>" username="<%- owner %>" title="Send private message" class="private_message dialog">
+    <div class="item-glyph glyphicon glyphicon-envelope"></div>
+    <div class="item-glyph-text">
+      Private Message
+    </div>
+  </div>
+
+  <div style="float:right;" item_id="<%- pk %>" class="report_post dialog">
+      <div>
+        Report
+      </div>
+  </div>
+  <%}%>
+  <% if (ownerid == window.ahr.user_id){ %>
+  <div item_id="<%- pk %>" class="edit dialog" >
+    <div class="item-glyph glyphicon glyphicon-edit"></div>
+    <div class="item-glyph-text">
+      Edit
+    </div>
+  </div>
+
+  <div item_id="<%- pk %>" class="dialog delete" >
+    <div class="item-glyph glyphicon glyphicon-remove-circle"></div>
+    <div class="item-glyph-text">
+      Delete
+    </div>
+  </div>
+  <%}%>
+</div>

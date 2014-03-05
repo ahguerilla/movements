@@ -656,25 +656,36 @@ li.list-group-item
 .conv_link
   cursor pointer
 
-.item-glyph
-  font-size 100%
-
-.item-glyph-text
-  font-size 80%
-  display none
+.action-container
+  margin-bottom 10px;
 
 .actions
+  .item-glyph
+    font-size 100%
+
+  .item-glyph-text
+    font-size 80%
+    display none
+
   background-color $bg-color
   clear both
   margin-top 5px
-  border 1px solid #ddd
-  border-radius 3px
   padding-left 5px
   padding-right 5px
-  //float right
+
   .dialog
     background-color $bg-color
     padding 5px!important
     cursor pointer
     text-align center
     display inline-block
+    &.report_post>div , &.report_user>div
+      font-size 80%
+      padding-top 3px
+      &:hover
+        text-decoration underline
+  &.user-profile
+    width 190px
+    margin-right 5px
+    float right
+    margin-top -10px
