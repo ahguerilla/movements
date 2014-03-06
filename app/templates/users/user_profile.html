@@ -65,32 +65,29 @@
   {% if request.user.username != user_details.username %}
   <div class="row">
     <div class="actions user-profile">
-      <div username="{{ user_details.username }}" title="Send private message" class="pm-message dialog">
-        <div class="item-glyph glyphicon glyphicon-envelope"></div>
-        <div class="item-glyph-text">
-          Private Message
-        </div>
-      </div>
-
-      <div username="{{ user_details.username }}" title="Recommend this user"  class="recommend dialog">
-        <div class="item-glyph glyphicon glyphicon-thumbs-up"></div>
-        <div class="item-glyph-text">
+      <div username="{{ user_details.username }}" title="Recommend this user"  class="recommend actionitem">
+        <div class="text">
           Recommend
         </div>
       </div>
 
-      <div title="Rate" rateing="user" username="{{ user_details.username }}" score="{{ user_details.score }}" ratecount="{{ user_details.userratecount }}" class="rate rate_user dialog">
-        <div class="item-glyph glyphicon glyphicon-star-empty"></div>
-        <div class="item-glyph-text">
-          Rate
+      <div username="{{ user_details.username }}" title="Send private message" class="pm-message actionitem">
+        <div class="text">
+          Private Message
         </div>
       </div>
 
-      <div username="{{ user_details.username }}" class="report_user dialog pull-right">
-          <div class="">
-            Report user
-          </div>
+      <div username="{{ user_details.username }}" class="report_user actionitem">
+        <div class="text">
+          Report user
+        </div>
       </div>
+
+      <div  class="rate rate_user actionitem right-on-big" title="Rate" rateing="user" username="{{ user_details.username }}" score="{{ user_details.score }}" ratecount="{{ user_details.userratecount }}">
+        <div class="item-glyph glyphicon glyphicon-star-empty"></div>
+      </div>
+
+
     </div>
   </div>
   {% endif %}
@@ -277,9 +274,7 @@
 
       </div>
     </div>
-
   </div>
-
 </div>
 {% endblock %}
 

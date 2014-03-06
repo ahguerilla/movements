@@ -309,6 +309,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('.rateit').each(function(){
           $(this).rateit('value', this.getAttribute('rate'));
         });
+        var ac_tmp = _.template($('#useraction-template').html());
+        var actions = ac_tmp({'username':data.username,
+          'usercore':data.score,
+          'ratecount':data.ratecount,
+          'avatar': data.avatar
+          });
+        $('.action-container').html(actions);
+        $('.actionitem.routehref',$('#singleItem')).empty();
     });
 
     });
@@ -463,7 +471,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     }, speed);
   },
 
-  searchWithNoFilters: function  (){
+  markAll:function(){
     $('.tagbutton', $('.row')).removeClass('btn-success');
     $('.tagbutton', $('.row')).addClass('btn-success');
     this.filters.types = _.values(this.types);
@@ -472,6 +480,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.filters.countries = _.keys(window.ahr.countries_lookup);
     $('.btn.filter-bulk-selector').removeClass('active');
     $('.btn.filter-bulk-selector.all').addClass('active');
+  },
+
+  searchWithNoFilters: function  (){
+    this.markAll();
     this.resetMarket();
   },
 
@@ -520,6 +532,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
     $(document).on('click', '.btn.tag-button', function(ev){
       if(that.isSingle()===true)return;
+      that.markAll();
       var tagType = ev.currentTarget.getAttribute('tagtype');
       var len = ev.currentTarget.textContent.length;
       var tag = ev.currentTarget.textContent.slice(1,len-1)
@@ -536,6 +549,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
       });
       that.filters[tagType] = [tagData.pk];
+      that.filters.types = _.values(that.types);
       that.resetMarket();
     });
 

@@ -67,7 +67,11 @@
           var tmpl = $('#message-profile').html();
           var prof = _.template(tmpl);
           var ac_tmp = _.template($('#useraction-template').html());
-          var actions = ac_tmp({'username':data.username, 'usercore':data.score, 'ratecount':data.ratecount});
+          var actions = ac_tmp({'username':data.username,
+            'usercore':data.score,
+            'ratecount':data.ratecount,
+            'avatar': data.avatar
+            });
           $('.action-container').html(actions);
 
           $('.profilecontainer').html(prof(data));

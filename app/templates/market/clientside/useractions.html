@@ -1,28 +1,39 @@
 <div class="actions">
-  <div username="<%- username %>" title="Recommend" class="recommend dialog">
-    <div class="item-glyph glyphicon glyphicon-thumbs-up"></div>
-    <div class="item-glyph-text">
+  <div username="<%- username %>" rec_type="user" title="Recommend" class="recommend actionitem">
+    <div class="text">
       Recommend
     </div>
   </div>
+  <div class="actionitem">-</div>
 
-  <div title="Rate" rateing="user" username="<%- username %>" score="<%- usercore %>" ratecount="<%- ratecount %>" class="rate rate_user dialog">
-    <div class="item-glyph glyphicon glyphicon-star-empty"></div>
-    <div class="item-glyph-text">
-      Rate
-    </div>
-  </div>
 
-  <div username="<%- username %>" title="Send private message" class="private_message dialog">
-    <div class="item-glyph glyphicon glyphicon-envelope"></div>
-    <div class="item-glyph-text">
+  <div username="<%- username %>" title="Send private message" class="private_message actionitem">
+    <div class="text">
       Private Message
     </div>
   </div>
+  <div class="actionitem">-</div>
 
-  <div style="float:right;"  username="<%- username %>"  class="report_user dialog">
-      <div>
+
+  <div username="<%- username %>"  class="report_user actionitem">
+      <div class="text">
         Report
       </div>
+  </div>
+
+  <div class="rate rate_user actionitem right-on-big"
+    title="Rate"
+    rateing="user"
+    username="<%- username %>"
+    score="<%- usercore %>"
+    image_src = "<%- avatar %>"
+    ratecount="<%- ratecount %>" >
+    <div class="rate rate_user  item-glyph glyphicon glyphicon-star-empty"
+    rateing="user"
+    username="<%- username %>"
+    score="<%- usercore %>"
+    image_src = "<%- avatar %>"
+    ratecount="<%- ratecount %>"
+    ></div>
   </div>
 </div>

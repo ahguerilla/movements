@@ -1,0 +1,36 @@
+<div class="actions">
+  <% if (ownerid !== window.ahr.user_id){ %>
+  <!--<div username="<%- username %>" rec_type="user" title="Recommend" class="recommend actionitem">-->
+    <!--<div class="text">-->
+      <!--Recommend-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="actionitem">-</div>-->
+
+
+  <div username="<%- username %>" title="Send private message" class="private_message actionitem">
+    <div class="text">
+      Private Message
+    </div>
+  </div>
+  <div class="actionitem">-</div>
+
+
+  <div username="<%- username %>"  class="report_user actionitem">
+      <div class="text">
+        Report
+      </div>
+  </div>
+
+
+  <div class="rate rate_user actionitem right-on-large" title="Rate" image_src = "<%- avatar %>" rateing="user" username="<%- username %>" score="<%- score %>" ratecount="<%- ratecount %>" >
+    <div class="item-glyph glyphicon glyphicon-star-empty" image_src = "<%- avatar %>" rateing="user" username="<%- username %>" score="<%- score %>" ratecount="<%- ratecount %>"></div>
+  </div>
+  <div class="clearfix"></div>
+  <%}%>
+  <% if (ownerid == window.ahr.user_id){ %>
+    <div  class="comment-delete right-on-large" comment-id="<%- pk %>" href="<%- window.ahr.app_urls.deletecomment+pk %>">
+      <div class="item-glyph glyphicon glyphicon-remove-circle"></div>
+    </div>
+  <%}%>
+</div>

@@ -9,27 +9,6 @@
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span>
         </div>
         </a>
-        <div class="pull-right item-menu" style="position:relative;display:none;">
-          <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
-          <div class="dropdown">
-            <button class="btn dropdown-toggle sr-only dropdownMenu<%- pk %>" type="button" data-toggle="dropdown" />
-            <% if (ownerid != window.ahr.user_id){ %>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
-
-                <li role="presentation"></li>
-                <li role="presentation"><a owner="<%- owner %>" item_id="<%- pk %>" recommend_title="<%- title %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
-                <li role="presentation"><a item_id="<%- pk %>" class="report_post" role="menuitem" tabindex="-1" href="#">Report post</a></li>
-                <li role="presentation"><a item_id="<%- pk %>" rateing="user" username="<%- owner %>"  score="<%- usercore %>" ratecount="<%- userratecount %>" class="rate rate_user" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
-                <li role="presentation"><a item_id="<%- pk %>" username="<%- owner %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
-              <%}%>
-              <% if (ownerid == window.ahr.user_id){ %>
-                <li role="presentation"></li>
-                <li role="presentation"><a item_id="<%- pk %>" class="delete" role="menuitem" tabindex="-1" href="#">Delete</a></li>
-                <li role="presentation"><a item_id="<%- pk %>" class="edit" role="menuitem" tabindex="-1" href="#">Edit</a></li>
-            </ul>
-            <%}%>
-          </div>
-        </div>
       </div>
       <a href="#item/<%- pk %>" class="routehref" >
         <div class="" item_id="<%- pk %>">
@@ -41,7 +20,6 @@
           <div class="item-body multi-line-text"><%- details %></div>
           </a>
           <div class="item-tags" style="clear:both;">
-            <div class="item-comment-count"><span class="commentcount"><%- commentcount %></span> Comment<% if (commentcount != 1){ %>s<%}%></div>
             <div>
               <% _.each(issues, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
               <% _.each(countries, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
@@ -130,7 +108,12 @@
         owner: comment_item.fields.owner,
         owner_url: comment_item.fields.profile_url,
         pub_date: moment(comment_item.fields.pub_date).format("HH:mm on D/MM/YY"),
-        content: comment_item.fields.contents //.replace(/\n/g, '<br />')
+        content: comment_item.fields.contents, //.replace(/\n/g, '<br />')
+        score: comment_item.score,
+        username: comment_item.fields.username,
+        ownerid : comment_item.fields.owner,
+        ratecount: comment_item.ratecount,
+        avatar: comment_item.fields.avatar
       });
 
       if (front) {
@@ -138,6 +121,7 @@
       } else {
         $('#marketitem_comments').append(comment_html);
       }
+      //this.resetitemrate(comment_item.fields.username, comment_item.score);
     },
 
     show_dropdown: function (ev) {
@@ -151,19 +135,21 @@
       ev.preventDefault();
       var username = ev.currentTarget.getAttribute('username');
       var item_id = ev.currentTarget.getAttribute('item_id');
-      var msgsub = 'Re: ' + $('.marketitem_title', $('.market-item-card[item_id=' + item_id + ']')).text();
+      var msgsub = '';
+      if( item_id !== null ){
+        msgsub = 'Re: ' + $('.marketitem_title', $('.market-item-card[item_id=' + item_id + ']')).text();
+      }
+
       this.message_widget.show(username, msgsub, '', false);
       return (false);
     },
 
     resetitemrate: function (username, rate) {
-      //return
       try {
         $(".numstars[username=" + username + "]").each(function () {
           $(this).rateit('value', rate);
-          $(this).attr('score', rate);
+          $(this).attr('rate', rate);
         });
-        this.afterset(".numstars[username=" + username + "]");
       } catch (err) {
         $.noop();
       }
@@ -171,12 +157,21 @@
 
     recommend: function (ev) {
       ev.preventDefault();
+      var rec_type = ev.currentTarget.getAttribute('rec_type');
+      if(rec_type=='item'){
       var title = ev.currentTarget.getAttribute('recommend_title');
       var item_id = ev.currentTarget.getAttribute('item_id');
       this.market.recommend_dialog.setup('item',
         item_id,
         $('#currentusername').text() + ' recommends: ' + title,
         $('#currentusername').text() + ' recommends you have a look at a post by ' + ev.currentTarget.getAttribute('owner'));
+      }else{
+        var username = ev.currentTarget.getAttribute('username');
+        this.market.recommend_dialog.setup('user',
+           username,
+           $('#currentusername').text()+' recommends this user : '+ username,
+           $('#currentusername').text()+' recommends you have a look at user '+ username );
+      }
       return (false);
     },
 
@@ -219,19 +214,7 @@
     },
 
     afterset: function (item_container) {
-      var selector;
-      if (typeof item_container != 'undefined') {
-        selector = $('.numstars', $(item_container));
-      } else {
-        selector = $('.numstars')
-      }
-      selector.rateit();
-      selector.rateit('min', 0);
-      selector.rateit('max', 5);
-      selector.rateit('readonly', true);
-      selector.each(function () {
-        $(this).rateit('value', this.getAttribute('score'));
-      });
+      return;
     },
 
     initialize: function (options) {
@@ -240,7 +223,7 @@
       this.edit_callback = options.edit_callback;
       this.item_tmp = _.template($('#item_template').html());
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
-      this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
+      this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate.bind(this));
       this.report_dialog = window.ahr.report_dialog.initWidget('body');
       this.comment_tmp = _.template($('#comment_view_template').html());
       this.comment_form_tmp = _.template($('#comment_add_template').html());
