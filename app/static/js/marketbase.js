@@ -318,9 +318,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('.action-container').html(actions);
         $('.actionitem.routehref',$('#singleItem')).empty();
     });
-
     });
-
   },
 
   refreshScrollElements: function () {
@@ -497,6 +495,30 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.initBulkFilters(bulks);
   },
 
+  itemTagCick: function(ev) {
+    var that = this;
+    if(that.isSingle()===true)return;
+    that.markAll();
+    var tagType = ev.currentTarget.getAttribute('tagtype');
+    var len = ev.currentTarget.textContent.length;
+    var tag = ev.currentTarget.textContent.slice(1,len-1)
+    data = window.ahr[tagType];
+    var tagData = _.find(data, function (test) {
+      return (test.value == tag);
+    });
+    $('.btn.filter-bulk-selector.'+tagType).removeClass('active');
+    $('.tagbutton', $('.row.'+tagType)).removeClass('btn-success');
+    $('.tagbutton', $('.row.'+tagType)).each(function(){
+      if($(this).text()==tag){
+        $(this).addClass('btn-success');
+        return false;
+      }
+    });
+    that.filters[tagType] = [tagData.pk];
+    that.filters.types = _.values(that.types);
+    that.resetMarket();
+  },
+
   init: function (filters) {
     var that = this;
     $.cookie.json = true;
@@ -530,33 +552,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $('#market-filters').on('show.bs.collapse', this.filterButtonShow.bind(this));
     $('#market-filters').on('hide.bs.collapse', this.filterButtonHide.bind(this));
 
-    $(document).on('click', '.btn.tag-button', function(ev){
-      if(that.isSingle()===true)return;
-      that.markAll();
-      var tagType = ev.currentTarget.getAttribute('tagtype');
-      var len = ev.currentTarget.textContent.length;
-      var tag = ev.currentTarget.textContent.slice(1,len-1)
-      data = window.ahr[tagType];
-      var tagData = _.find(data, function (test) {
-        return (test.value == tag);
-      });
-      $('.btn.filter-bulk-selector.'+tagType).removeClass('active');
-      $('.tagbutton', $('.row.'+tagType)).removeClass('btn-success');
-      $('.tagbutton', $('.row.'+tagType)).each(function(){
-        if($(this).text()==tag){
-          $(this).addClass('btn-success');
-          return false;
-        }
-      });
-      that.filters[tagType] = [tagData.pk];
-      that.filters.types = _.values(that.types);
-      that.resetMarket();
-    });
-
     this.filters = filters;
     this.initTemplates(filters);
     this.filters.search = $('#q').val();
-    this.delegateEvents(_.extend(this.events, {
+    this.events = _.extend(this.events, {
       'click .tagbutton': 'tagsfilter',
       'click #searchbtn': 'search',
       'click .item-type': 'itemTypesfilter',
@@ -565,8 +564,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
       'click #searchagainall': 'searchWithNoFilters',
       'click #searchwithdefaults' : 'searchWithDefaultFilters',
-      'submit': 'filterKeySearch'
-    }));
+      'submit': 'filterKeySearch',
+      'click .btn.tag-button': 'itemTagCick'
+    });
 
     // calculate height of the market-filters when opened and closed so we can set
     // the height of the market-filter correctly when we fix it to the top
