@@ -26,7 +26,7 @@
               <% _.each(skills, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
             </div>
           </div>
-          {% include "market/clientside/actions.html"%}
+          <div class="action-place"></div>
           <div style="clear:both;"></div>
         </div>
     </div>
@@ -215,6 +215,14 @@
 
     afterset: function (item_container) {
       return;
+    },
+
+    get: function(data){
+      var actionsHtml = this.actions_view.get('item',data);
+      var itemHtml = this.item_tmp(data);
+      var $itemHtml = $(itemHtml);
+      $itemHtml.find('.action-place').replaceWith(actionsHtml);
+      return  $itemHtml;
     },
 
     initialize: function (options) {

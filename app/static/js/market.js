@@ -55,6 +55,7 @@
 
 
     initialize: function (filters) {
+      this.item_type = 'item';
       this.getitemfromto = window.ahr.app_urls.getmarketitemfromto;
       this.viewurl = window.ahr.app_urls.viewitem;
       this.item_tmp = _.template($('#item_template').html());

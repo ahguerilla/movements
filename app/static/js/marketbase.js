@@ -188,7 +188,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
         _.each(data, function (item) {
           item.fields.pk = item.pk;
-          var item_html = that.item_tmp(item.fields);
+          //var item_html = that.item_tmp(item.fields);
+          var item_html = that.get(item.fields);
           itemsToAppend.push(item_html);
           $('#marketitems').append(item_html);
         });
@@ -282,7 +283,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       url: that.getItem + item_id
     });
     dfrd.done(function (item) {
-      var html = that.item_tmp(item[0].fields);
+      var html = that.get(item[0].fields);
       $('.comment-btn').data({
         id: item[0].pk
       });
@@ -309,13 +310,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('.rateit').each(function(){
           $(this).rateit('value', this.getAttribute('rate'));
         });
-        var ac_tmp = _.template($('#useraction-template').html());
-        var actions = ac_tmp({'username':data.username,
+        data ={'username':data.username,
           'usercore':data.score,
           'ratecount':data.ratecount,
           'avatar': data.avatar
-          });
-        $('.action-container').html(actions);
+          };
+        var actions = that.actions_view.get(this.item_type, data);
+        debugger;
+        //$('.action-container').html(actions);
         $('.actionitem.routehref',$('#singleItem')).empty();
     });
     });
@@ -519,11 +521,21 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     that.resetMarket();
   },
 
+  get: function(data){
+     var actionsHtml = this.actions_view.get(this.item_type, data);
+     var itemHtml = this.item_tmp(data);
+     var $itemHtml = $(itemHtml);
+     $itemHtml.find('.action-place').replaceWith(actionsHtml);
+     //debugger;
+     return  $itemHtml;
+   },
+
   init: function (filters) {
     var that = this;
     $.cookie.json = true;
     $('.nanamorde').hide();
     this.filter_widget = window.widgets.filter_widget.initWidget('filter-container');
+    this.actions_view = window.ahr.actions_view();
     $('#fixed-filters').affix({
       offset: {
         top: 300

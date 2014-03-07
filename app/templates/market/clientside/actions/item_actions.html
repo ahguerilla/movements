@@ -1,0 +1,60 @@
+<script type="text/template" id="item-actions">
+  <div class="actions">
+    <% if (ownerid != window.ahr.user_id){ %>
+    <div owner="<%- owner %>" rec_type="item" item_id="<%- pk %>" recommend_title="<%- title %>" class="recommend actionitem">
+      <div class="text">
+        Recommend
+      </div>
+    </div>
+    <div class="actionitem">-</div>
+
+    <div item_id="<%- pk %>" username="<%- owner %>" class="private_message actionitem">
+      <div class="text">
+        Private message
+      </div>
+    </div>
+    <div class="actionitem">-</div>
+
+    <div item_id="<%- pk %>" class="report_post actionitem">
+      <div class="text">
+        Report
+      </div>
+    </div>
+
+    <div class="routehref actionitem right-on-large" title="Comment">
+      <a href="#item/<%- pk %>">
+        <div class="item-glyph glyphicon glyphicon-comment">
+        </div>
+        <% if (commentcount != 0){ %><span class="item-comment-count"><span class="commentcount"><%-commentcount%></span></span><%}%>
+      </a>
+    </div>
+
+    <div  class="rate rate_user actionitem right-on-large"
+      item_id="<%- pk %>"
+      title="Rate"
+      rateing="user"
+      username="<%- owner %>"
+      score="<%- usercore %>"
+      image_src = "<%- avatar %>"
+      ratecount="<%- userratecount %>">
+      <div class="item-glyph glyphicon glyphicon-star-empty"></div>
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <%}%>
+    <% if (ownerid == window.ahr.user_id){ %>
+
+      <div item_id="<%- pk %>" class="edit actionitem" >
+        <div class="text">Edit</div>
+      </div>
+      <div class="actionitem">-</div>
+
+
+      <div item_id="<%- pk %>" class="delete actionitem" >
+        <div class="text">Delete</div>
+      </div>
+      <div style="clear:both;"></div>
+    <%}%>
+  </div>
+</script>

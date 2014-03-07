@@ -37,22 +37,35 @@
 
   var MessageDialogWidget = window.ahr.BaseView.extend({
     events: {
-      //'click .sendprivatemessageuser': 'showpMessage',
+      //'click .private-message': 'show',
       'click .sendpm': 'sendpm',
-      'click .cancelpm': 'cancelpm'
+      'click .cancelpm': 'cancelpm',
+      'shown.bs.modal #messagedialog': 'focus'
+    },
+
+    focus: function(){
+      this.$messageText.trigger('focus');
     },
 
     getval: function () {
-      this.subject = $('#msgsub').val();
-      this.message = $('#newmessage').val();
+      this.subject = this.$subject.val();
+      this.message = this.$messageText.val();
       return ([this.subject, this.message]);
+    },
+
+    disableSend:function(){
+      this.$sendkey .prop('disabled', true);
+    },
+
+    enableSend:function(){
+      this.$sendkey .prop('disabled', false);
     },
 
     sendpm: function (ev) {
       ev.preventDefault();
-      $('.sendpm').prop('disabled', true);
       var that = this;
-      this.getval();
+      this.disableSend();
+      this.getval(ev);
       if (this.subject !== '' && this.message !== '') {
         window.ahr.getcsrf(function (csrf) {
           var dfrd = $.ajax({
@@ -66,17 +79,17 @@
             }
           });
           dfrd.done(function () {
-            $('#messagedialog').modal('hide');
-            $('.sendpm').prop('disabled', false);
+            that.$dialog.modal('hide');
+            that.enableSend();
           });
           dfrd.fail(function (data) {
             that.alert(data.responseJSON.message + '. Please try again.', that.alert_place);
-            $('.sendpm').prop('disabled', false);
+            that.enableSend();
           });
         });
       } else {
         this.alert('Please provide a subject and message.', that.alert_place);
-        $('.sendpm').prop('disabled', false);
+        that.enableSend();
       }
       return (false);
     },
@@ -87,25 +100,44 @@
     },
 
     show: function (username, subject, message, readonlysub) {
-      $('#newmessage').height(100);
       this.username = username;
       this.subject = subject;
       this.message = message;
+      $('#newmessage').height(100);
       $('#usernameh').text(this.username);
       $('#msgsub').val(this.subject);
       $('#newmessage').val(this.message);
       if (readonlysub == true) {
         $('#msgsub').attr('readonly', true);
       }
-      $('#messagedialog').modal('show');
+      this.$dialog.modal('show');
     },
 
+    new_show: function (ev) {
+      this.username = ev.currentTarget.getAttribute('username');
+      this.subject = ev.currentTarget.getAttribute('subject');
+      this.message = ev.currentTarget.getAttribute('message');
+      readonlysub = ev.currentTarget.getAttribute('readonlysub');
+
+      this.$messageText.height(100);
+      $('#usernameh').text(this.username);
+      this.$subject.val(this.subject);
+      this.$messageText.val(this.message);
+      if (readonlysub == true) {
+        this.$subject.attr('readonly', true);
+      }
+      this.$dialog.modal('show');
+    },
+
+
     initialize: function (settings) {
-      this.alert_place = '#pmerror' //settings.alert_place;
+      this.alert_place = '#pmerror'
+      this.$messageText = $('#newmessage');
+      this.$username = $('#usernameh');
+      this.$subject = $('#msgsub');
+      this.$dialog = $('#messagedialog');
+      this.$sendkey = $('.sendpm')
       window.ahr.expandTextarea('#newmessage');
-      $('#messagedialog').on('shown.bs.modal',function(){
-        $('#newmessage').trigger('focus');
-      });
       return this;
     }
   });
