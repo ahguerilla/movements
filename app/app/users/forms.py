@@ -84,7 +84,7 @@ class SettingsForm(forms.ModelForm):
         data = self.cleaned_data['tweet_url']
         data = self.check_https(data)
         if not data.startswith('https://www.twitter.com/') and data !='':
-			raise forms.ValidationError("You must provide a link to your twitter page")
+            raise forms.ValidationError("You must provide a link to your twitter page")
         return data
 
 

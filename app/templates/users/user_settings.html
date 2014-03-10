@@ -240,7 +240,7 @@
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.tweet_url.errors }}
-                  {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Twitter Handle" %}
+                  {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Twitter page" %}
                 </div>
                 <div class="col-sm-2">
                   <label><input type="checkbox" name="notperm-tweet_url"/> Hide</label>
@@ -260,8 +260,8 @@
                 <div class="col-sm-12">
                   <div class="row">
                     <div class="settings-page-error">{{ settings_form.issues.errors }}</div>
-                    <div id="issues_place"></div>                    
-                    <span id="issues">                    
+                    <div id="issues_place"></div>
+                    <span id="issues">
                       {% render_field settings_form.issues class="form-control input-sm input-extra-height" %}
                     </span>
                   </div>
@@ -269,11 +269,11 @@
               </div>
 
               <div class="form-group">
-                <div class="col-sm-12">                  
-                  <div class="row">                    
+                <div class="col-sm-12">
+                  <div class="row">
                     <div class="settings-page-error">{{ settings_form.countries.errors }}</div>
-                    <div id="countries_place"></div>                                        
-                    <span id="countries">                      
+                    <div id="countries_place"></div>
+                    <span id="countries">
                       {% render_field settings_form.countries class="form-control input-sm input-extra-height" %}
                     </span>
                   </div>
@@ -284,8 +284,8 @@
                 <div class="col-sm-12">
                   <div class="row">
                     <div class="settings-page-error">{{ settings_form.skills.errors }}</div>
-                    <div id="skills_place"></div>                    
-                    <span id="skills">                    
+                    <div id="skills_place"></div>
+                    <span id="skills">
                       {% render_field settings_form.skills class="form-control input-sm input-extra-height" %}
                     </span>
                   </div>
@@ -339,7 +339,7 @@
       <div class="modal-body">
         <div id="avataralert"></div>
         <div id="profile_change_stuff" style="width:100%;"></div>
-       
+
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -354,7 +354,7 @@
         <h4 class="modal-title">Change Password</h4>
       </div>
       <div class="modal-body">
-        <div id="profile_change_password" style="width:100%;"></div>       
+        <div id="profile_change_password" style="width:100%;"></div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -439,9 +439,9 @@
       reader.readAsDataURL(file);
       formdata.append('avatar', file);
       var token = $('input[name="csrfmiddlewaretoken"]',$(ev.currentTarget).closest('form')).val()
-      formdata.append('csrfmiddlewaretoken',token);  
+      formdata.append('csrfmiddlewaretoken',token);
       $('label[for="id_avatar"]').text('Uploading  ');
-      $('input[type=file]', $('#changeavatardialog')).replaceWith('<img style="border-radius:0%;" src="{{ STATIC_URL}}images/download.gif" />');          
+      $('input[type=file]', $('#changeavatardialog')).replaceWith('<img style="border-radius:0%;" src="{{ STATIC_URL}}images/download.gif" />');
       var dfrd = $.ajax({
         url:$(ev.currentTarget).closest('form').attr('action'),
         data: formdata,
@@ -459,27 +459,27 @@
     changepassword:function(ev){
       ev.preventDefault();
       var that = this;
-      var form = $(ev.currentTarget).closest('form');      
-      
+      var form = $(ev.currentTarget).closest('form');
+
       var aurl = window.ahr.app_urls.changepassword,
         form_class= 'password_change';
-      
+
       if ($($(ev.currentTarget).closest('form')).hasClass('password_set')){
         aurl = window.ahr.app_urls.setpassword;
         form_class= 'password_set';
       }
-        
-      var dfrd = $.ajax({ 
+
+      var dfrd = $.ajax({
         url:aurl,
         type: 'post',
         data: form.serialize()
         });
-        
+
       dfrd.done(function(data){
         $('#changepasswordbutton').off('click');
         if($('form.'+form_class, data).length==0){
           $('#changepassworddialog').modal('hide');
-          if(form_class=='password_set'){            
+          if(form_class=='password_set'){
             $('#changepassword').attr('href', window.ahr.app_urls.changepassword);
             $('#changepassword').attr('form_class', 'password_change');
             $('#changepassword').text('Change password');
