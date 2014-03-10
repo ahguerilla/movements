@@ -8,123 +8,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   allItemsLoaded: false,
   itemsPerCall: 15,
   requiresResetOnNewOfferRequest: false,
-  cookieread: false,
-  filterheightOpen: 0,
-  filterheightClosed: 0,
 
-  setFiltersDefault: function (tags) {
-    this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
-  },
-
-  setFilterNone: function (tags) {
-    if (typeof tags == 'string') {
-      this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
-    } else {
-      this.filters = window.ahr.clone(this.default_filters);
-    }
-    var tagsarr = [];
-    _.each(window.ahr[tags], function (item) {
-      tagsarr.push(parseInt(item.pk, 10));
-    });
-    this.filters[tags] = tagsarr;
-  },
-
-  setFilterKeys: function (taghead) {
-    var that = this;
-    $('.row.' + taghead).empty();
-    this.initFilters(that, taghead, that.tagtemp);
-
-  },
-
-  setFiltersFromCookie: function (that, items) {
-    var cookie = $.cookie('tagfilters');
-    if (typeof cookie != 'undefined') {
-      if (items != "types") {
-        that.filters[items] = cookie[items];
-      }
-    }
-  },
-
-  initFilters: function (that, items, templ) {
-    _.each(window.ahr[items], function (item) {
-      var activeFlag = ' ';
-      if (_.contains(that.filters[items], item.pk)) {
-        activeFlag = 'btn-success';
-      }
-      $('.row.btn-group-sm.' + items).append(templ({
-        filtertag: item.value,
-        active: activeFlag
-      }));
-    });
-  },
-
-  updateTagsfilter: function (that, ev) {
-    a = $(ev.currentTarget.parentElement.parentElement).attr("item_title");
-    ar = that.filters[a];
-    data = window.ahr[a];
-    var tagData = _.find(data, function (test) {
-      return (test.value == ev.currentTarget.textContent);
-    });
-    if (tagData) {
-      if (_.contains(ar, tagData.pk)) {
-        that.filters[a] = _.filter(ar, function (item) {
-          return item != tagData.pk;
-        });
-        $(ev.currentTarget).removeClass('btn-success');
-      } else {
-        that.filters[a].push(tagData.pk);
-        $(ev.currentTarget).addClass('btn-success');
-      }
-    }
-    $.cookie('tagfilters', that.filters);
-  },
-
-  updateTypefilter: function (that, ev) {
-    that.filters.types.length = 0;
-    var item_type = ev.currentTarget.getAttribute('item_type');
-    if (that.types[item_type]) {
-      that.filters.types.push(that.types[item_type]);
-    }
-  },
-
-  setFilterType: function (tags, ftype) {
-    $('input[name$="-' + tags + '"]').parent().removeClass('active');
-    $('input[name="' + ftype + '-' + tags + '"]').parent().addClass('active');
-  },
-
-  search: function () {
-    this.filters.search = $('#q').val();
-    this.resetMarket();
-  },
-
-  filterKeySearch: function (ev) {
-    ev.preventDefault();
-    this.search();
-    return false;
-  },
-
-  itemTypesfilter: function (ev) {
-    this.updateTypefilter(this, ev);
-    this.resetMarket();
-  },
-
-  tagsfilter: function (ev) {
-    this.updateTagsfilter(this, ev);
-    var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
-    this.setFilterType(tags, 'cus');
-    this.resetMarket();
-  },
-
-  initTemplates: function () {
-    this.typetag_tmp = _.template($('#type-tag').html());
-    this.tagtemp = _.template($('#filter-tag').html());
-    for (var key in this.filters) {
-      if (["skills", "countries", "issues"].indexOf(key) > -1) {
-        this.initFilters(this, key, this.tagtemp);
-      }
-    }
-    this.cookieread = true;
-  },
 
   levelReached: function (pixelTestValue) {
     // is it low enough to add elements to bottom?
@@ -162,9 +46,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     }, false);
   },
 
-  noSearchResult:function(){
-    if($('.market-place-item').length==0){
-        $('#marketitems').append('<p style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
+  noSearchResult: function () {
+    if ($('.market-place-item').length == 0) {
+      $('#marketitems').append('<p style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
     }
   },
 
@@ -220,15 +104,12 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.msnry.layout();
   },
 
-
   resetMarket: function () {
     var that = this;
     var updateMarketScrollPosition = $('#fixed-filters').hasClass('affix');
-
     if (updateMarketScrollPosition) {
       $(".exchange-banner").hide();
     }
-
     this.initInfiniteScroll(function () {
       if (updateMarketScrollPosition) {
         var heightOfBanner = $('.exchange-banner').height();
@@ -256,7 +137,12 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   create_offer: function () {
     this.offerdialog.showModal(true);
     if (this.requiresResetOnNewOfferRequest && !this.offerdialog.oncomplete) {
-      var self = this;
+      var self = this; this.events = _.extend(this.events, {
+        'click .tagbutton': 'tagsfilter',
+        'click .item-type': 'itemTypesfilter',
+        'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
+        'click .btn.tag-button': 'itemTagCick'
+      });
       this.offerdialog.oncomplete = function () {
         self.resetMarket();
       };
@@ -265,12 +151,12 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   getItems: function (from, to) {
     var that = this;
-    that.filters.search = $('#q').val();
+    that.filter_widget.filters.search = $('#q').val();
     return $.ajax({
       url: that.getitemfromto.replace('0', from) + to,
       dataType: 'json',
       contentType: "application/json; charset=utf-8",
-      data: that.filters,
+      data: that.filter_widget.filters,
       traditional: true
     });
   },
@@ -287,9 +173,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       $('.comment-btn').data({
         id: item[0].pk
       });
-      if ($(window).width() >= 992){
-       $('.nanamorde').show();
-      }else{
+      if ($(window).width() >= 992) {
+        $('.nanamorde').show();
+      } else {
         $('.nanamorde-mobile').show();
       }
 
@@ -299,7 +185,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       $.getJSON(window.ahr.app_urls.getcommentslast.replace('0', item_id) + '10000', function (data) {
         that.ShowComments(data);
       });
-      $.getJSON(window.ahr.app_urls.getprofile+item[0].fields.owner[0],function(data){
+      $.getJSON(window.ahr.app_urls.getprofile + item[0].fields.owner[0], function (data) {
         var tmpl = $('#message-profile').html();
         var prof = _.template(tmpl);
         $('.userprofile').html(prof(data));
@@ -307,7 +193,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('.rateit').rateit('min', 0);
         $('.rateit').rateit('max', 5);
         $('.rateit').rateit('readonly', true);
-        $('.rateit').each(function(){
+        $('.rateit').each(function () {
           $(this).rateit('value', this.getAttribute('rate'));
         });
         data ={'username':data.username,
@@ -364,13 +250,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   },
 
-  showHideNanamorde: function(){
-    if($('.nanamorde-mobile').css('display')!== 'none' && $(window).width() >= 992 ){
-      $('.nanamorde').css('display','block');
-      $('.nanamorde-mobile').css('display','none');
-    }else if ($('.nanamorde').css('display') === 'block' && $(window).width() < 992 ){
-      $('.nanamorde').css('display','none');
-      $('.nanamorde-mobile').css('display','block');
+  showHideNanamorde: function () {
+    if ($('.nanamorde-mobile').css('display') !== 'none' && $(window).width() >= 992) {
+      $('.nanamorde').css('display', 'block');
+      $('.nanamorde-mobile').css('display', 'none');
+    } else if ($('.nanamorde').css('display') === 'block' && $(window).width() < 992) {
+      $('.nanamorde').css('display', 'none');
+      $('.nanamorde-mobile').css('display', 'block');
     }
   },
 
@@ -400,125 +286,18 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.refreshScrollElements();
   },
 
-  filterButtonHide: function (ev) {
-    $('#filterbuttontext').html('&nbsp; Show Filters &nbsp;');
-    $('#togglefilter').removeClass('dropup');
-    this.setFilterWrapperMargin(this.filterheightClosed, 0);
-  },
-
-  filterButtonShow: function (ev) {
-    $('#filterbuttontext').html('&nbsp; Hide Filters &nbsp;');
-    $('#togglefilter').addClass('dropup');
-    this.setFilterWrapperMargin(this.filterheightOpen, 300);
-  },
-
-  setFilterOpenHeight: function () {
-    $('#market-filters').removeClass('collapse');
-    this.filterheightOpen = $('#fixed-filters').height();
-    $('#market-filters').addClass('collapse');
-  },
-
-  bulkCustomizeFilters: function (tag, action) {
-    if (action == 'all') {
-      this.setFilterNone(tag);
-    }
-    if (action == 'def') {
-      this.setFiltersDefault(tag);
-    }
-    if (action == 'cus') {
-      this.setFiltersFromCookie(this, tag);
-    }
-    var tmp = $.cookie('bulkfilters');
-    tmp[tag] = action;
-    $.cookie('bulkfilters', tmp);
-    this.setFilterKeys(tag);
+  searchWithNoFilters: function () {
+    this.filter_widget.markAll();
     this.resetMarket();
   },
 
-  bulkCustomizeFiltersEV: function (ev) {
-    var val = $('input', $(ev.currentTarget)).attr('name').split('-');
-    action = val[0];
-    tag = val[1];
-    this.bulkCustomizeFilters(tag, action);
-  },
-
-  initBulkFilters: function (bulksArg) {
-    var bulks;
-    if (typeof bulksArg === 'undefined'){
-         bulks = $.cookie('bulkfilters');
-    }else{
-        bulks = bulksArg;
-    }
-    if (typeof bulks === "undefined") {
-      bulks = {
-        countries: "all",
-        issues: "all",
-        skills: "all"
-      };
-      $.cookie('bulkfilters', bulks);
-      $('.filter-bulk-selector.all').addClass('active');
-    }
-    var that = this;
-    _.each(bulks, function (selection, tag) {
-      that.bulkCustomizeFilters(tag, selection);
-      $('.filter-bulk-selector.' + selection + '-' + tag).addClass('active');
-    });
-  },
-
-  setFilterWrapperMargin: function (height, speed) {
-    $('#filter-wrapper').animate({
-      height: height
-    }, speed);
-  },
-
-  markAll:function(){
-    $('.tagbutton', $('.row')).removeClass('btn-success');
-    $('.tagbutton', $('.row')).addClass('btn-success');
-    this.filters.types = _.values(this.types);
-    this.filters.skills = _.keys(window.ahr.skills_lookup);
-    this.filters.issues = _.keys(window.ahr.issues_lookup);
-    this.filters.countries = _.keys(window.ahr.countries_lookup);
-    $('.btn.filter-bulk-selector').removeClass('active');
-    $('.btn.filter-bulk-selector.all').addClass('active');
-  },
-
-  searchWithNoFilters: function  (){
-    this.markAll();
-    this.resetMarket();
-  },
-
-  searchWithDefaultFilters:function(){
-    $('.btn.filter-bulk-selector').removeClass('active');
+  searchWithDefaultFilters: function () {
     var bulks = {
-        countries: "def",
-        issues: "def",
-        skills: "def"
-      };
-    this.initBulkFilters(bulks);
-  },
-
-  itemTagCick: function(ev) {
-    var that = this;
-    if(that.isSingle()===true)return;
-    that.markAll();
-    var tagType = ev.currentTarget.getAttribute('tagtype');
-    var len = ev.currentTarget.textContent.length;
-    var tag = ev.currentTarget.textContent.slice(1,len-1)
-    data = window.ahr[tagType];
-    var tagData = _.find(data, function (test) {
-      return (test.value == tag);
-    });
-    $('.btn.filter-bulk-selector.'+tagType).removeClass('active');
-    $('.tagbutton', $('.row.'+tagType)).removeClass('btn-success');
-    $('.tagbutton', $('.row.'+tagType)).each(function(){
-      if($(this).text()==tag){
-        $(this).addClass('btn-success');
-        return false;
-      }
-    });
-    that.filters[tagType] = [tagData.pk];
-    that.filters.types = _.values(that.types);
-    that.resetMarket();
+      countries: "def",
+      issues: "def",
+      skills: "def"
+    };
+    this.filter_widget.initBulkFilters(bulks);
   },
 
   get: function(data){
@@ -533,59 +312,36 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   init: function (filters) {
     var that = this;
     $.cookie.json = true;
+
     $('.nanamorde').hide();
-    this.filter_widget = window.widgets.filter_widget.initWidget('filter-container');
     this.actions_view = window.ahr.actions_view();
-    $('#fixed-filters').affix({
-      offset: {
-        top: 300
-      }
-    });
-
+    $.subscribe("nanamorde.resize", this.showHideNanamorde);
+    $(window).resize(this.showHideNanamorde);
     $.subscribe("nanamorde.resize", this.showHideNanamorde);
     $(window).resize(this.showHideNanamorde);
 
-    $.subscribe("nanamorde.resize", this.showHideNanamorde);
-    $(window).resize(this.showHideNanamorde);
-
-    var resizeFilters = function() {
-      that.setFilterOpenHeight();
-      var newHight = $('#fixed-filters').height();
-      $('#filter-wrapper').height(newHight + "px");
-    };
-
-    $.subscribe("filters.resize", resizeFilters);
-    $(window).resize(resizeFilters);
-    this.default_filters = window.ahr.clone(filters);
+    this.filter_widget = window.widgets.filter_widget.initWidget(
+      'filter-container',
+      '#market',
+      filters,
+      window.ahr.clone(filters),
+      this.resetMarket.bind(this),
+      this.isSingle.bind(this)
+      );
+    this.filter_widget.initBulkFilters();
     this.requestdialog = window.ahr.request_form_dialog.initItem(false);
     this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
     this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
     this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
-    $('#market-filters').on('show.bs.collapse', this.filterButtonShow.bind(this));
-    $('#market-filters').on('hide.bs.collapse', this.filterButtonHide.bind(this));
 
-    this.filters = filters;
-    this.initTemplates(filters);
-    this.filters.search = $('#q').val();
     this.events = _.extend(this.events, {
-      'click .tagbutton': 'tagsfilter',
-      'click #searchbtn': 'search',
-      'click .item-type': 'itemTypesfilter',
       'click #create_offer': 'create_offer',
       'click #create_request': 'create_request',
-      'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
       'click #searchagainall': 'searchWithNoFilters',
-      'click #searchwithdefaults' : 'searchWithDefaultFilters',
-      'submit': 'filterKeySearch',
-      'click .btn.tag-button': 'itemTagCick'
+      'click #searchwithdefaults': 'searchWithDefaultFilters',
     });
 
-    // calculate height of the market-filters when opened and closed so we can set
-    // the height of the market-filter correctly when we fix it to the top
-    this.filterheightClosed = $('#filter-wrapper').height();
-    this.setFilterOpenHeight();
-    $('#filter-wrapper').height(this.filterheightClosed + "px");
-    this.initBulkFilters();
+
   }
 
 });
