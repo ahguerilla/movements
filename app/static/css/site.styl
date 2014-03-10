@@ -224,6 +224,22 @@ select.input-extra-height
   z-index: 100
   position fixed
 
+.nonotif
+  display inherit
+  color #777!important
+
+
+.notif
+  display inherit
+  color #428BCA!important
+
+
+.notif-seen.false
+  background-color #f4f6f9
+
+#bellonlarge
+  padding-top 3px
+
 .navbar-admin
   background-color: red
 
@@ -402,6 +418,9 @@ a.navavatar
       border-radius 10px 0 0 10px !important
   .tt-hint
     border-radius 10px
+
+#no-search-result
+  text-align center
 
 .market-item-card
   border-radius 5px
@@ -605,19 +624,6 @@ pre
     -o-border-radius: 50%;
     border-radius: 50%;
 
-.nonotif
-  display inherit
-  color #777!important
-
-
-.notif
-  display inherit
-  color #428BCA!important
-
-
-.notif-seen.false
-  background-color #f4f6f9
-
 
 li.list-group-item
   line-height: 30px
@@ -653,5 +659,63 @@ li.list-group-item
 .left-on-big
   float left
 
-.dummy
-  display none
+.right-on-big
+  float right
+
+.conv_link
+  cursor pointer
+
+.action-container
+  margin-bottom 0px;
+
+#pm_messages
+  .action-container
+    margin-bottom 10px;
+    font-size 83%
+  .actionitem
+    padding 2px
+
+.actions
+  background-color $bg-color
+  margin-top 3px
+  padding-left 5px
+  padding-right 5px
+  .right-on-large
+    float right
+    margin-top 3px
+  a
+    text-decoration none
+    color $text-color
+
+  .commentcount
+    font-size 85%
+    //vertical-align super
+    margin-left -5px
+
+  .actionitem
+    background-color $bg-color
+    padding 5px!important
+    cursor pointer
+    text-align center
+    display inline-block
+    height 30px
+
+  .item-glyph
+    font-size 100%
+
+  .text
+    font-size 80%
+    padding-top 3px
+    &:hover
+      text-decoration underline
+
+  &.user-profile
+    width 350px
+    margin-right 5px
+    float right
+    margin-top -10px
+  .routehref.actionitem
+    width auto
+    .commentcount
+      margin-left 5px
+      vertical-align top

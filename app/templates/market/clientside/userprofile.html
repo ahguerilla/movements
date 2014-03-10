@@ -7,8 +7,17 @@
       <%- username %>
     </div>
     <div class="well well-sm">
-      <div>
-        Rating: <span class="rateit" rate="<%- score %>"></span> <%-score %> Stars (<%-ratecount %> votes)
+      <div class="userprofile-widget-rating">
+        Rating:
+        <span
+          class="rateit numstars"
+          username="<%- username %>"
+          score="<%- score %>"
+          rate="<%- score %>"
+          image_src = "<%- avatar %>"
+          ratecount="<%- ratecount %>"></span>
+          <span class="score"  username="<%- username %>"> <%- score %> Stars </span>
+          (<span class="ratecount"  username="<%- username %>"><%-ratecount %></span> votes)
       </div>
       <div>
         Nationality: <%- nationality %>

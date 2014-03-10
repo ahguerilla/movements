@@ -17,8 +17,8 @@
           <textarea class="form-control" name="newmessage" id="newmessage" rows="4" placeholder="" required="true"></textarea>
         </div>
         <div class="modal-footer">
-          <div class="row">  
-            <div class="col-xs-6 col-md-offset-6 col-md-3">      
+          <div class="row">
+            <div class="col-xs-6 col-md-offset-6 col-md-3">
               <button type="button" class="btn btn-default full-width cancelpm" data-dismiss="modal">Cancel</button>
             </div>
             <div class="col-xs-6 col-md-3">
@@ -76,6 +76,7 @@
         });
       } else {
         this.alert('Please provide a subject and message.', that.alert_place);
+        $('.sendpm').prop('disabled', false);
       }
       return (false);
     },
@@ -96,7 +97,7 @@
       if (readonlysub == true) {
         $('#msgsub').attr('readonly', true);
       }
-      $('#messagedialog').modal('show');      
+      $('#messagedialog').modal('show');
     },
 
     initialize: function (settings) {
@@ -104,7 +105,7 @@
       window.ahr.expandTextarea('#newmessage');
       $('#messagedialog').on('shown.bs.modal',function(){
         $('#newmessage').trigger('focus');
-      });      
+      });
       return this;
     }
   });

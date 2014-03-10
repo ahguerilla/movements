@@ -6,12 +6,11 @@ import json
 import app.market as market
 from django.core.urlresolvers import reverse
 from app.market.forms import reportMarketItemForm, reportUserForm
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 import constance
 import django.contrib.auth as auth
 from django.contrib.sites.models import get_current_site
-
-
+from django.template.loader import render_to_string
 
 
 def create_marketitem_json(item):
@@ -33,12 +32,27 @@ def report_marketitem(request, obj_id, rtype):
                 f.item = market_item
                 f.save_base()
                 site = get_current_site(request)
-                send_mail(
-                    'User '+request.user.username+' reported the '+market_item.item_type+' "'+ market_item.title +'" by '+ market_item.owner.username,
-                    'User message:\r\n'+f.contents+
-                    '\r\n Link to post:\r\n'+site.domain+ reverse('show_market')+'#item/'+str(market_item.id),
-                    constance.config.NO_REPLY_EMAIL,[constance.config.REPORT_POST_EMAIL]                    
+                subj_cntxt = {
+                    'user': request.user.username,
+                    'item_type': market_item.item_type,
+                    'item_title': market_item.title,
+                    'item_owner': market_item.owner.username
+                }
+                subject = render_to_string('emails/itemreport_subject.html', subj_cntxt)
+
+                text_cntxt = {
+                    'contents': f.contents,
+                    'link': site.domain + reverse('show_market') + '#item/' + str(market_item.id),
+                }
+                text = render_to_string('emails/itemreport.html', text_cntxt)
+
+                email = EmailMessage(
+                    subject,
+                    text,
+                    constance.config.NO_REPLY_EMAIL,[constance.config.REPORT_POST_EMAIL]
                 )
+                email.content_subtype = "html"
+                email.send()
                 return HttpResponse(json.dumps({'success': True, 'data': create_marketitem_json(f)}), mimetype="application"+rtype)
             else:
                 return HttpResponseBadRequest(json.dumps(get_val_errors(form)), mimetype="application"+rtype)
@@ -58,13 +72,28 @@ def report_user(request, username, rtype):
                 f.owner = request.user
                 f.user = user
                 f.save_base()
-                site = get_current_site(request)                
-                send_mail(
-                    'User '+request.user.username+' reported user '+user.username+' "',
-                    'User message:\r\n'+f.contents+'\r\n Link to user:\r\n'+site.domain+ '/admin/auth/user/'+str(user.id),
+                site = get_current_site(request)
+
+                subj_cntxt = {
+                    'user': request.user.username,
+                    'another_user': user.username
+                }
+                subject = render_to_string('emails/userreport_subject.html', subj_cntxt)
+
+                text_cntxt = {
+                    'contents': f.contents,
+                    'link': site.domain + '/admin/auth/user/' + str(user.id)
+                }
+                text = render_to_string('emails/userreport.html', text_cntxt)
+
+                email = EmailMessage(
+                    subject,
+                    text,
                     constance.config.NO_REPLY_EMAIL,
                     [constance.config.REPORT_POST_EMAIL]
                 )
+                email.content_subtype = "html"
+                email.send()
                 return HttpResponse(json.dumps({'success': True, 'data': create_marketitem_json(f)}), mimetype="application"+rtype)
             else:
                 return HttpResponseBadRequest(json.dumps(get_val_errors(form)), mimetype="application"+rtype)

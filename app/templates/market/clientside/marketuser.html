@@ -6,7 +6,7 @@
         <div class="item-header-clickable" item_id="<%- username %>">
           <a href="<%- profile_url %>"><%- username %></a>
         </div>
-        <div class="pull-right item-menu" style="position:relative;">
+        <div class="pull-right item-menu" style="position:relative;display:none;">
           <div item_id="<%- pk %>" class="pull-right glyphicon glyphicon-align-justify itemactions"></div>
           <div class="dropdown">
             <button class="btn dropdown-toggle sr-only dropdownMenu<%- pk %>" type="button" id="dropdownMenu<%- pk %>" data-toggle="dropdown" />
@@ -42,6 +42,8 @@
           </div>
         </div>
       </div>
+      {% include "market/clientside/useractions.html"%}
+      <div style="clear:both;"></div>
     </div>
   </div>
 </script>

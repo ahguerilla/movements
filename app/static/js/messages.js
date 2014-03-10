@@ -1,24 +1,45 @@
 (function () {
-  var InboxRoute = Backbone.Router.extend({
-    routes: {
-      "": "page",
-      "p:page": "page"
-    },
-    page: function (page) {
-      $.noop();
-    },
-    initialize: function (market) {
-      $.noop();
-    }
-  });
+  //var InboxRoute = Backbone.Router.extend({
+    //routes: {
+      //"": "page",
+      //"p:page": "page"
+    //},
+    //page: function (page) {
+      //$.noop();
+    //},
+    //initialize: function (market) {
+      //$.noop();
+    //}
+  //});
 
   var InboxView = Backbone.View.extend({
     el: '#postman',
     events: {
       'click .conv_link': 'openConv',
       'click #backtofolder': 'back',
-      'click .next': 'addNext'
+      'click .next': 'addNext',
+      'click .private_message': 'private_message',
+      'click .recommend': 'recommend',
     },
+
+    private_message: function (ev) {
+      ev.preventDefault();
+      var username = ev.currentTarget.getAttribute('username');
+      var item_id = ev.currentTarget.getAttribute('item_id');
+      this.message_widget.show(username, '', '', false);
+      return (false);
+    },
+
+    recommend: function(ev){
+      ev.preventDefault();
+      var username = ev.currentTarget.getAttribute('username');
+      this.recommend_dialog.setup('user',
+         username,
+         $('#currentusername').text()+' recommends this user : '+ username,
+         $('#currentusername').text()+' recommends you have a look at user '+ username );
+      return(false);
+    },
+
 
     addNext: function (ev) {
       ev.preventDefault();
@@ -32,7 +53,7 @@
         var more = $('.next',$(data))[0];
         $('.next').replaceWith(more);
         $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
-        $('.messagelist').append($('.messagelist', $(data)).children());        
+        $('.messagelist').append($('.messagelist', $(data)).children());
       });
     },
 
@@ -41,20 +62,45 @@
       return false;
     },
 
-    openConv: function (ev) {      
+    setProfile:function(user){
+      $.getJSON(window.ahr.app_urls.getprofile+user,function(data){
+          var tmpl = $('#message-profile').html();
+          var prof = _.template(tmpl);
+          var ac_tmp = _.template($('#useraction-template').html());
+          var actions = ac_tmp({'username':data.username,
+            'usercore':data.score,
+            'ratecount':data.ratecount,
+            'avatar': data.avatar
+            });
+          $('.action-container').html(actions);
+
+          $('.profilecontainer').html(prof(data));
+          $('.rateit').rateit();
+          $('.rateit').rateit('min', 0);
+          $('.rateit').rateit('max', 5);
+          $('.rateit').rateit('readonly', true);
+          $('.rateit').each(function(){
+            $(this).rateit('value', this.getAttribute('rate'));
+          });
+          $('#id_body').trigger('focus');
+        });
+    },
+
+    openConv: function (ev) {
+      ev.preventDefault();
+      var that = this;
       var subject = $('.subject',$(ev.currentTarget)).children();
       if(subject.is('strong')){
         subject.replaceWith(subject.text());
       }
-      var that = this;
-      ev.preventDefault();
+
       if (ev.currentTarget.parentElement.tagName == "STRONG") {
         a = ev.currentTarget;
-        $(ev.currentTarget.parentElement).html(a);        
+        $(ev.currentTarget.parentElement).html(a);
       }
 
       var dfrd = $.ajax({
-        url: ev.currentTarget.href,
+        url: ev.currentTarget.getAttribute('href'),
         dataType: 'html'
       });
 
@@ -72,33 +118,21 @@
         data4 = data3.replace(that.userre, function (match, username, offset, string) {
           return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
         });
-        
+
         var user;
         $('.messageavatar img', data4).each(function(item,index){
-          user = $(this).attr('alt');          
-          if(user != window.ahr.username)return false;          
-        });  
-        if(user == window.ahr.username){
-          user = $('.pm_recipient',data4).text();          
-        }        
-        
-        $.getJSON(window.ahr.app_urls.getprofile+user,function(data){
-          var tmpl = $('#message-profile').html();
-          var prof = _.template(tmpl);
-          $('.profilecontainer').html(prof(data));
-          $('.rateit').rateit();
-          $('.rateit').rateit('min', 0);
-          $('.rateit').rateit('max', 5);
-          $('.rateit').rateit('readonly', true);
-          $('.rateit').each(function(){
-            $(this).rateit('value', this.getAttribute('rate'));
-          });
-          $('#id_body').trigger('focus');                            
+          user = $(this).attr('alt');
+          if(user != window.ahr.username)return false;
         });
-                
+        if(user == window.ahr.username){
+          user = $('.pm_recipient',data4).text();
+        }
+
+        that.setProfile(user);
+
         $('#conversation').html(data4);
         if($('#id_body').length >0){
-          $('#id_body').empty();         
+          $('#id_body').empty();
           window.ahr.expandTextarea('#id_body');
         }
         that.showconv();
@@ -121,14 +155,14 @@
       if ($(window).width() < 992 ) {
         $('.nanamorde-mobile').show();
       } else if ($(window).width() >= 992) {
-        $('.nanamorde').show(); 
+        $('.nanamorde').show();
       }
-      $("#message-col").hide();            
+      $("#message-col").hide();
       $('#conversation-cont').show();
       $('#messagenav').hide();
       $('#back').show();
       $('#breadsubject').text($('#messagesubjectheader').text());
-      $('body').scrollTop(0);      
+      $('body').scrollTop(0);
     },
 
     back: function (ev) {
@@ -141,7 +175,7 @@
     },
 
     resize: function (ev) {
-      if ($(window).width() < 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {        
+      if ($(window).width() < 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {
         $('.nanamorde-mobile').show();
         $('.nanamorde').hide();
       } else if ($(window).width() >= 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {
@@ -152,10 +186,17 @@
         $('#conversation-cont').hide();
       }
     },
+    resetitemrate:function(username, rate){
+      this.setProfile(username);
+    },
+
 
     initialize: function () {
       $(window).resize(this.resize);
-      this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');      
+      this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
+      this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+      this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
+      this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate.bind(this));
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
       this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
       var more = $('.next')[0];
@@ -172,8 +213,8 @@
   window.ahr.messages = window.ahr.messages || {};
   window.ahr.messages.initInbox = function () {
     var messages = new InboxView();
-    var messages_route = new InboxRoute(messages);   
+    //var messages_route = new InboxRoute(messages);
     $('#back').hide();
-    Backbone.history.start();
+    //Backbone.history.start();
   };
 })();

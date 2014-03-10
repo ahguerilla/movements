@@ -13,15 +13,15 @@
         <div class="row">
 
           <div class="round-image" style="text-align:center; font-size:160%;">
-            {% primary_avatar user 100 %}
-          
+           <img id="profileimage"/>
+
             <div style="margin-top:10px;">
               <span id="username"></span>
               <span id="numstars"></span>
               <span id="ratecount"></span>Rating(s)
             </div>
           </div>
-          
+
         </div>
 
 
@@ -66,11 +66,11 @@
           </div>
         </div>
         <div class="modal-footer">
-          <div class="row">  
-            <div class="col-xs-6 col-md-offset-6 col-md-3">            
+          <div class="row">
+            <div class="col-xs-6 col-md-offset-6 col-md-3">
               <button type="button" class="btn full-width btn-default cancelrate" data-dismiss="modal">Cancel</button>
             </div>
-            <div class="col-xs-6 col-md-3">            
+            <div class="col-xs-6 col-md-3">
               <button type="button" class="btn btn-default full-width sendrate">Submit</button>
             </div>
           </div>
@@ -97,16 +97,15 @@
       var image_src = ev.currentTarget.getAttribute('image_src');
       var score = ev.currentTarget.getAttribute('score');
       var ratecount = ev.currentTarget.getAttribute('ratecount');
-
-      $('#ratecount').text(ratecount);
+      $('#ratecount', $('#ratedialog')).text(ratecount);
       if ($(ev.currentTarget).attr('rateing') == 'user') {
         this.rateurl = window.ahr.app_urls.setuserrate + username;
-        $('#username').text(username);
-        $('#ratetitle').text(username);
+        $('#username', $('#ratedialog')).text(username);
+        $('#ratetitle', $('#ratedialog')).text(username);
       } else {
         this.rateurl = window.ahr.app_urls.marketsetrate + $("#item-single").attr("item-id");
-        $('#username').text($('#marketitem_title').text());
-        $('#ratetitle').text($('#marketitem_title').text());
+        $('#username', $('#ratedialog')).text($('#marketitem_title').text());
+        $('#ratetitle', $('#ratedialog')).text($('#marketitem_title').text());
       }
       $('#ratedialog').modal('show');
 
@@ -116,7 +115,7 @@
       $('#numstars').rateit('readonly', true);
       $('#numstars').rateit('value', score);
 
-      $('#profileimage').attr('src', image_src);
+      $('#profileimage',$('#ratedialog')).attr('src', image_src);
       return (false);
     },
 
@@ -124,7 +123,7 @@
       ev.preventDefault();
       var that = this;
       var event = ev;
-      if ($('input[name="stars"]:checked').val() == undefined) {
+      if ($('input[name="stars"]:checked',$('#ratedialog')).val() == undefined) {
         this.alert('You have to select a rateing.', '#rateerror');
         return (false);
       }
@@ -143,10 +142,12 @@
           $(that.evrate.currentTarget).attr('score', data.score);
           if (typeof that.callback == 'function') {
             that.callback(that.evrate.currentTarget.getAttribute('username'), data.score);
+            $.noop();
           }
 
           $('#ratedialog').modal('hide');
-          that.resetrate();
+          var username = that.evrate.currentTarget.getAttribute('username')
+          that.resetrate(username , data.score, data.ratecount);
         });
         dfrd.fail(function (data) {
           that.alert('Rating failed.', '#rateerror');
@@ -155,8 +156,14 @@
       return (false);
     },
 
-    resetrate: function () {
-      $('input[name="stars"]:checked').prop('checked', false);
+    resetrate: function (username, score, ratecount) {
+      $('input[name="stars"]:checked',$('#ratedialog')).prop('checked', false);
+      $('.numstars[username="'+username+'"]').attr('score',score);
+      $('.numstars[username="'+username+'"]').attr('ratecount',ratecount);
+      $('.rate[username="'+username+'"]').attr('score',score);
+      $('.rate[username="'+username+'"]').attr('ratecount',ratecount);
+      $('.score[username="'+username+'"]').text(score);
+      $('.ratecount[username="'+username+'"]').text(ratecount)
     },
 
     initialize: function (data) {

@@ -63,6 +63,8 @@
     </div>
     <div class="nanamorde-mobile col-md-4">
       <div class="userprofile"></div>
+      <!--<div class="action-container"></div>-->
+      <!--<div style="clear:both;"></div>-->
     </div>
     <div class="row left-on-big">
       <div class="col-md-8">
@@ -72,6 +74,8 @@
       </div>
       <div class="dialog col-md-4 nanamorde">
         <div class="userprofile"></div>
+        <div class="action-container"></div>
+        <div style="clear:both;"></div>
       </div>
     </div>
   </div>
@@ -104,6 +108,9 @@
   {% include "market/clientside/requestdialog.html"%}
   {% include 'market/clientside/userprofile.html' %}
   {% include 'market/clientside/reportuserdialog.html' %}
+  <script type="text/template" id="useraction-template">
+    {% include "market/clientside/useractions.html"%}
+  </script>
 
 
 

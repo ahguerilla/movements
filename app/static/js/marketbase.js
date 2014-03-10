@@ -36,7 +36,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   },
 
-
   setFiltersFromCookie: function (that, items) {
     var cookie = $.cookie('tagfilters');
     if (typeof cookie != 'undefined') {
@@ -157,11 +156,16 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       that.loadScrollElements(that);
 
     });
-
     // For ipad
     document.addEventListener('touchmove', function (e) {
       that.loadScrollElements(that);
     }, false);
+  },
+
+  noSearchResult:function(){
+    if($('.market-place-item').length==0){
+        $('#marketitems').append('<p style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
+    }
   },
 
   loadScrollElements: function (self, callback) {
@@ -180,7 +184,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         if (data.length === 0) {
           that.allItemsLoaded = true;
           $('#ajaxloader').hide();
-          //$('#marketitems').append('<p  style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
+          that.noSearchResult();
         }
         _.each(data, function (item) {
           item.fields.pk = item.pk;
@@ -305,10 +309,16 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('.rateit').each(function(){
           $(this).rateit('value', this.getAttribute('rate'));
         });
+        var ac_tmp = _.template($('#useraction-template').html());
+        var actions = ac_tmp({'username':data.username,
+          'usercore':data.score,
+          'ratecount':data.ratecount,
+          'avatar': data.avatar
+          });
+        $('.action-container').html(actions);
+        $('.actionitem.routehref',$('#singleItem')).empty();
     });
-
     });
-
   },
 
   refreshScrollElements: function () {
@@ -430,16 +440,21 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.bulkCustomizeFilters(tag, action);
   },
 
-  initBulkFilters: function () {
-    var bulks = $.cookie('bulkfilters');
+  initBulkFilters: function (bulksArg) {
+    var bulks;
+    if (typeof bulksArg === 'undefined'){
+         bulks = $.cookie('bulkfilters');
+    }else{
+        bulks = bulksArg;
+    }
     if (typeof bulks === "undefined") {
       bulks = {
-        countries: "def",
-        issues: "def",
-        skills: "def"
+        countries: "all",
+        issues: "all",
+        skills: "all"
       };
       $.cookie('bulkfilters', bulks);
-      $('.filter-bulk-selector.def').addClass('active');
+      $('.filter-bulk-selector.all').addClass('active');
     }
     var that = this;
     _.each(bulks, function (selection, tag) {
@@ -454,7 +469,58 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     }, speed);
   },
 
+  markAll:function(){
+    $('.tagbutton', $('.row')).removeClass('btn-success');
+    $('.tagbutton', $('.row')).addClass('btn-success');
+    this.filters.types = _.values(this.types);
+    this.filters.skills = _.keys(window.ahr.skills_lookup);
+    this.filters.issues = _.keys(window.ahr.issues_lookup);
+    this.filters.countries = _.keys(window.ahr.countries_lookup);
+    $('.btn.filter-bulk-selector').removeClass('active');
+    $('.btn.filter-bulk-selector.all').addClass('active');
+  },
+
+  searchWithNoFilters: function  (){
+    this.markAll();
+    this.resetMarket();
+  },
+
+  searchWithDefaultFilters:function(){
+    $('.btn.filter-bulk-selector').removeClass('active');
+    var bulks = {
+        countries: "def",
+        issues: "def",
+        skills: "def"
+      };
+    this.initBulkFilters(bulks);
+  },
+
+  itemTagCick: function(ev) {
+    var that = this;
+    if(that.isSingle()===true)return;
+    that.markAll();
+    var tagType = ev.currentTarget.getAttribute('tagtype');
+    var len = ev.currentTarget.textContent.length;
+    var tag = ev.currentTarget.textContent.slice(1,len-1)
+    data = window.ahr[tagType];
+    var tagData = _.find(data, function (test) {
+      return (test.value == tag);
+    });
+    $('.btn.filter-bulk-selector.'+tagType).removeClass('active');
+    $('.tagbutton', $('.row.'+tagType)).removeClass('btn-success');
+    $('.tagbutton', $('.row.'+tagType)).each(function(){
+      if($(this).text()==tag){
+        $(this).addClass('btn-success');
+        return false;
+      }
+    });
+    that.filters[tagType] = [tagData.pk];
+    that.filters.types = _.values(that.types);
+    that.resetMarket();
+  },
+
   init: function (filters) {
+    var that = this;
     $.cookie.json = true;
     $('.nanamorde').hide();
     this.filter_widget = window.widgets.filter_widget.initWidget('filter-container');
@@ -467,17 +533,17 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $.subscribe("nanamorde.resize", this.showHideNanamorde);
     $(window).resize(this.showHideNanamorde);
 
-    var self = this;
+    $.subscribe("nanamorde.resize", this.showHideNanamorde);
+    $(window).resize(this.showHideNanamorde);
 
     var resizeFilters = function() {
-      self.setFilterOpenHeight();
+      that.setFilterOpenHeight();
       var newHight = $('#fixed-filters').height();
       $('#filter-wrapper').height(newHight + "px");
     };
 
     $.subscribe("filters.resize", resizeFilters);
     $(window).resize(resizeFilters);
-
     this.default_filters = window.ahr.clone(filters);
     this.requestdialog = window.ahr.request_form_dialog.initItem(false);
     this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
@@ -489,15 +555,18 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.filters = filters;
     this.initTemplates(filters);
     this.filters.search = $('#q').val();
-    this.delegateEvents(_.extend(this.events, {
+    this.events = _.extend(this.events, {
       'click .tagbutton': 'tagsfilter',
       'click #searchbtn': 'search',
       'click .item-type': 'itemTypesfilter',
       'click #create_offer': 'create_offer',
       'click #create_request': 'create_request',
       'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
-      'submit': 'filterKeySearch'
-    }));
+      'click #searchagainall': 'searchWithNoFilters',
+      'click #searchwithdefaults' : 'searchWithDefaultFilters',
+      'submit': 'filterKeySearch',
+      'click .btn.tag-button': 'itemTagCick'
+    });
 
     // calculate height of the market-filters when opened and closed so we can set
     // the height of the market-filter correctly when we fix it to the top

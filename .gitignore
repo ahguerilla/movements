@@ -1,6 +1,7 @@
 *.pyc
-
+*.log
 app/static/css/site.css
+app/static/css/site-xs.css
 app/static/css/packed.css
 app/static/js/packed.js
 app/media/

@@ -35,10 +35,12 @@ class offerForm(forms.ModelForm):
         fields = ['issues','skills','countries','title','details','exp_date','never_exp']
 
     def clean(self):
-        check = [self.cleaned_data['exp_date'], self.cleaned_data['never_exp']]
-        if any(check):
-            return self.cleaned_data
-        raise ValidationError('Your should enter an expiry date for your offer or check never expires')
+        err = 'Your should enter an expiry date for your offer or check never expires'
+        cleaned_data = super(offerForm, self).clean()
+        check = [cleaned_data['exp_date'], cleaned_data['never_exp']]
+        if not any(check):
+            self._errors['exp_date'] = self.error_class([err])
+        return cleaned_data
 
     def save(self, commit=False, *args, **kwargs):
         instance = super(offerForm, self).save(commit=commit, *args, **kwargs)
@@ -54,10 +56,13 @@ class requestForm(forms.ModelForm):
         fields = ['issues','countries','title','details','exp_date','never_exp']
 
     def clean(self):
-        check = [self.cleaned_data['exp_date'], self.cleaned_data['never_exp']]
-        if any(check):
-            return self.cleaned_data
-        raise ValidationError('Your should enter an expiry date for your request or check never expires')
+        err = 'Your should enter an expiry date for your request or check never expires'
+        cleaned_data = super(requestForm, self).clean()
+        check = [cleaned_data['exp_date'], cleaned_data['never_exp']]
+        if not any(check):
+            self._errors['exp_date'] = self.error_class([err])
+
+        return cleaned_data
 
     def save(self, commit=False, *args, **kwargs):
         instance = super(requestForm, self).save(commit=commit, *args, **kwargs)

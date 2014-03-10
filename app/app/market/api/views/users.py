@@ -9,6 +9,8 @@ from postman.api import pm_write
 
 from app.market.api.utils import *
 import app.users as users
+from django.utils.cache import get_cache
+cache = get_cache('default')
 
 
 def create_query(request):
@@ -125,6 +127,7 @@ def send_recommendation(request, rec_type, to_user, obj_id, rtype):
 
 @login_required
 def set_rate(request, username, rtype):
+    cache.clear()
     if not request.POST.has_key('score'):
         return HttpResponseError()
     user = users.models.User.objects.filter(username=username)[0]
@@ -139,7 +142,7 @@ def set_rate(request, username, rtype):
     rate.save_base()
     return HttpResponse(
         json.dumps({'success': 'true',
-                    'score':user.userprofile.score ,
+                    'score':round(user.userprofile.score,1) ,
                     'ratecount':user.userprofile.ratecount
                     }),
         mimetype="application/"+rtype)

@@ -36,8 +36,6 @@
       <br />
       <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'user_settings' %}">Update Profile</a>
       {% endif %}
-
-
     </div>
   </div>
 </div>
@@ -64,6 +62,36 @@
     </div>
 {% block content %}
 <div class="in-container dialog">
+  {% if request.user.username != user_details.username %}
+  <div class="row">
+    <div class="actions user-profile">
+      <div username="{{ user_details.username }}" title="Recommend this user"  class="recommend actionitem">
+        <div class="text">
+          Recommend
+        </div>
+      </div>
+      <div class="actionitem">-</div>
+
+      <div username="{{ user_details.username }}" title="Send private message" class="pm-message actionitem">
+        <div class="text">
+          Private Message
+        </div>
+      </div>
+      <div class="actionitem">-</div>
+
+      <div username="{{ user_details.username }}" class="report_user actionitem">
+        <div class="text">
+          Report user
+        </div>
+      </div>
+
+      <div  class="rate rate_user actionitem right-on-big" title="Rate" rateing="user" username="{{ user_details.username }}" score="{{ user_details.score }}" ratecount="{{ user_details.userratecount }}">
+        <div class="item-glyph glyphicon glyphicon-star-empty"></div>
+      </div>
+
+    </div>
+  </div>
+  {% endif %}
   <div class"col-md-12">
     <div class="row">
       <div class="col-md-9">
@@ -74,7 +102,7 @@
             <strong>Rating:</strong>
           </div>
           <div class="col-md-10">
-            <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score|floatformat:1 }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
+            <span class="rateit user" username="{{ user_details.username }}" rate="{{ user_profile.score }}"></span> {{ user_profile.score|floatformat:1 }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
           </div>
         </div>
 
@@ -247,25 +275,57 @@
 
       </div>
     </div>
-
   </div>
-
 </div>
 {% endblock %}
 
 {%block endjavascript %}
+  {% include "market/clientside/messagedialog.html" %}
+  {% include 'market/clientside/reportuserdialog.html' %}
+  {% include 'market/clientside/recommenddialog.html' %}
+  {% include "market/clientside/ratedialog.html" %}
   <script type="text/javascript">
   $(function(){
-      $('.rateit').rateit();
-      $('.rateit').rateit('min',0);
-      $('.rateit').rateit('max',5);
-      $('.rateit').rateit('readonly',true);
-      $('.rateit').each(function(){
-        $(this).rateit('value',$(this).attr('rate'));
-    });
+    var ProfileView = Backbone.View.extend({
+      el: 'body',
+      events: {
+        'click .pm-message': 'showPMDialog',
+        'click .recommend': 'showRecommendDialog'
+      },
+      showPMDialog:function(ev){
+        ev.preventDefault();
+        var username = $(ev.currentTarget).attr('username');
+        this.message_widget.show(username, '', '', false);
+        return false;
+      },
+      resetitemrate: function (username, rate) {
+        window.location.reload();
+      },
 
+      showRecommendDialog:function(ev){
+        ev.preventDefault();
+        var username = ev.currentTarget.getAttribute('username');
+        this.recommendDialog.setup('user',
+           username,
+           $('#currentusername').text()+' recommends this user : '+ username,
+           $('#currentusername').text()+' recommends you have a look at user '+ username );
+        return(false);
+      },
+      initialize: function(){
+        $('.rateit').rateit();
+        $('.rateit').rateit('min',0);
+        $('.rateit').rateit('max',5);
+        $('.rateit').rateit('readonly',true);
+        $('.rateit').each(function(){
+          $(this).rateit('value',$(this).attr('rate'));
+        });
+        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+        this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
+        this.recommendDialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
+        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
+        }
+      });
+      var profileView = new ProfileView();
   });
-
-
   </script>
 {% endblock %}
