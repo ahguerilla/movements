@@ -19,7 +19,7 @@
           <div class="clearfix"></div>
           <div class="item-body multi-line-text"><%- details %></div>
           </a>
-          <div class="item-tags" style="clear:both;">
+          <div class="item-tags clearfix">
             <div>
               <% _.each(issues, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
               <% _.each(countries, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
@@ -27,7 +27,6 @@
             </div>
           </div>
           <div class="action-place"></div>
-          <div style="clear:both;"></div>
         </div>
     </div>
   </div>

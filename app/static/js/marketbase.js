@@ -12,6 +12,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   levelReached: function (pixelTestValue) {
     // is it low enough to add elements to bottom?
+    debugger;
     var pageHeight = Math.max(document.body.scrollHeight ||
       document.body.offsetHeight);
     var viewportHeight = window.innerHeight ||
@@ -73,8 +74,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         _.each(data, function (item) {
           item.fields.pk = item.pk;
           var item_html = that.get(item.fields);
-          itemsToAppend.push(item_html);
-          $('#marketitems').append(item_html);
+          debugger;
+          itemsToAppend.push(item_html[0].outerHTML);
+          $('#marketitems').append(item_html[0].outerHTML);
         });
 
         if (itemsToAppend.length > 0) {
