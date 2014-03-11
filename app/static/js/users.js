@@ -6,8 +6,9 @@
         },
 
         page: function(page){
+            this.users.showMarket();
             this.users.initInfiniteScroll();
-            $(window).scrollTop('100');
+            this.users.scrollBack();
         },
 
         initialize: function(users){
@@ -29,9 +30,10 @@
             this.viewurl = window.ahr.app_urls.viewuserprofile;
             this.item_tmp = _.template($('#user-template').html());
             this.item_widget = window.ahr.marketuser_widget.initWidget('body',that);
-
-            filters.types=[];
             this.init(filters);
+            this.filter_widget.filters.types = [];
+            this.filter_widget.types = this.types;
+
             window.ahr.expandTextarea('#newmessage');
             $('#q').typeahead({
                limit: 5,
@@ -40,11 +42,13 @@
                  window.location = window.ahr.app_urls.viewuserprofile+d.value;
             });
 
-            this.delegateEvents(_.extend(this.events,{
-                'click .item_container': 'showItem'
-            }));
             $('#filter-offer-text').text('Exchangivists Offering');
             $('#filter-request-text').text('Exchangivists Requesting');
+            $('#singleItem').show();
+
+            this.events = _.extend(this.events,{
+                'click .item_container': 'showItem'
+            });
             return this;
         },
     });

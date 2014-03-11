@@ -98,6 +98,8 @@
         'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
         'click .btn.tag-button': 'itemTagCick',
         'submit': 'filterKeySearch',
+        'show.bs.collapse #market-filters': 'filterButtonShow',
+        'hide.bs.collapse #market-filters': 'filterButtonHide'
     },
     search: function () {
       this.filters.search = $('#q').val();
@@ -338,8 +340,6 @@
       };
       $.subscribe("filters.resize", resizeFilters);
       $(window).resize(resizeFilters);
-      $('#market-filters').on('show.bs.collapse', this.filterButtonShow.bind(this));
-      $('#market-filters').on('hide.bs.collapse', this.filterButtonHide.bind(this));
 
       // calculate height of the market-filters when opened and closed so we can set
       // the height of the market-filter correctly when we fix it to the top

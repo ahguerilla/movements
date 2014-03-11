@@ -41,9 +41,7 @@ def create_query(request):
 
         if None in ids:
             ids.remove(None)
-
         ids = [int(id) for id in ids]
-
         if request.user.userprofile.id in ids:
             ids.remove(request.user.userprofile.id)
 
