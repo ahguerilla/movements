@@ -29,6 +29,7 @@
         AHR rating: <span class="rateit redstars" rate="<%- orate %>"></span> <%- orate %> Stars
       </div>
     </div>
+    <% if(username != window.ahr.username) {%>
     <h4>Safety First</h4>
     <div style="margin-bottom: 20px;">
     For your own safety and security, do not share personal contact information
@@ -36,5 +37,6 @@
     Exchangivist also prohibits abusive language or harassment.
     To report an abusive user,<span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>click here</strong></span>.
     </div>
+    <% }%>
   </div>
 </script>

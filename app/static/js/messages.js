@@ -46,13 +46,15 @@
       $.getJSON(window.ahr.app_urls.getprofile + user, function (data) {
         var tmpl = $('#message-profile').html();
         var prof = _.template(tmpl);
-        var actions = that.actions_view.get('user', {
-          'username': data.username,
-          'usercore': data.score,
-          'ratecount': data.ratecount,
-          'avatar': data.avatar
-        });
-        $('.action-container').html(actions);
+        if(user !== window.ahr.username){
+          var actions = that.actions_view.get('user', {
+            'username': data.username,
+            'usercore': data.score,
+            'ratecount': data.ratecount,
+            'avatar': data.avatar
+          });
+          $('.action-container').html(actions);
+        }
 
         $('.profilecontainer').html(prof(data));
         $('.rateit').rateit();
