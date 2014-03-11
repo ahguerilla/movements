@@ -185,11 +185,13 @@
       $('input[name$="-' + tags + '"]').parent().removeClass('active');
       $('input[name="' + ftype + '-' + tags + '"]').parent().addClass('active');
     },
+
     setFilterOpenHeight: function () {
       $('#market-filters').removeClass('collapse');
       this.filterheightOpen = $('#fixed-filters').height();
       $('#market-filters').addClass('collapse');
     },
+
     filterKeySearch: function (ev) {
       ev.preventDefault();
       this.search();
