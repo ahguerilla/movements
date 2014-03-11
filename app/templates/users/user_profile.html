@@ -64,32 +64,7 @@
 <div class="in-container dialog">
   {% if request.user.username != user_details.username %}
   <div class="row">
-    <div class="actions user-profile">
-      <div username="{{ user_details.username }}" title="Recommend this user"  class="recommend actionitem">
-        <div class="text">
-          Recommend
-        </div>
-      </div>
-      <div class="actionitem">-</div>
-
-      <div username="{{ user_details.username }}" title="Send private message" class="pm-message actionitem">
-        <div class="text">
-          Private Message
-        </div>
-      </div>
-      <div class="actionitem">-</div>
-
-      <div username="{{ user_details.username }}" class="report_user actionitem">
-        <div class="text">
-          Report user
-        </div>
-      </div>
-
-      <div  class="rate rate_user actionitem right-on-big" title="Rate" rateing="user" username="{{ user_details.username }}" score="{{ user_details.score }}" ratecount="{{ user_details.userratecount }}">
-        <div class="item-glyph glyphicon glyphicon-star-empty"></div>
-      </div>
-
-    </div>
+    <div class="actions-place user-profile"></div>
   </div>
   {% endif %}
   <div class"col-md-12">
@@ -280,6 +255,7 @@
 {% endblock %}
 
 {%block endjavascript %}
+  {% include "market/clientside/actions/actions.html" %}
   {% include "market/clientside/messagedialog.html" %}
   {% include 'market/clientside/reportuserdialog.html' %}
   {% include 'market/clientside/recommenddialog.html' %}
@@ -287,31 +263,20 @@
   <script type="text/javascript">
   $(function(){
     var ProfileView = Backbone.View.extend({
-      el: 'body',
-      events: {
-        'click .pm-message': 'showPMDialog',
-        'click .recommend': 'showRecommendDialog'
-      },
-      showPMDialog:function(ev){
-        ev.preventDefault();
-        var username = $(ev.currentTarget).attr('username');
-        this.message_widget.show(username, '', '', false);
-        return false;
-      },
       resetitemrate: function (username, rate) {
         window.location.reload();
       },
 
-      showRecommendDialog:function(ev){
-        ev.preventDefault();
-        var username = ev.currentTarget.getAttribute('username');
-        this.recommendDialog.setup('user',
-           username,
-           $('#currentusername').text()+' recommends this user : '+ username,
-           $('#currentusername').text()+' recommends you have a look at user '+ username );
-        return(false);
-      },
       initialize: function(){
+        this.item_type = 'user';
+        var data = {
+          'username':"{{ user_profile.user.username }}",
+          'avatar': $('#settingavatar>img').attr('src'),
+          'ratecount': {{ user_profile.ratecount }},
+          'score':{{ user_profile.score }},
+          'usercore':{{ user_profile.score }}
+        };
+
         $('.rateit').rateit();
         $('.rateit').rateit('min',0);
         $('.rateit').rateit('max',5);
@@ -323,6 +288,9 @@
         this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
         this.recommendDialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
         this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
+        this.actions_view = window.ahr.actions_view();
+        var actions = this.actions_view.get(this.item_type, data);
+        $('.actions-place').html(actions);
         }
       });
       var profileView = new ProfileView();

@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Recommed<span id="usernameh"></span></h4>
+        <h4 class="modal-title">Recommed this<span id="rec-thing"></span></h4>
         <div id="recerror"></div>
       </div>
       <div class="modal-body">
@@ -43,7 +43,26 @@
    var RecommendDialog = window.ahr.BaseView.extend({
      el: 'body',
      events: {
-       'click .sendrec': 'send'
+       'click .sendrec': 'send',
+       'click .recommend': 'show'
+     },
+
+     show: function(ev){
+      var subject = ev.currentTarget.getAttribute('subject'),
+        message = ev.currentTarget.getAttribute('message'),
+        obj_id = ev.currentTarget.getAttribute('obj_id'),
+        rec_type = ev.currentTarget.getAttribute('rec_type');
+      this.setup(rec_type, obj_id, subject, message);
+     },
+
+     setHeader: function(rec_type){
+      var dialog_header;
+      if(rec_type === "user"){
+        dialog_header = ' user';
+      }else{
+        dialog_header = ' post';
+      }
+      $('#rec-thing').text(dialog_header);
      },
 
      setup: function (rec_type, obj_id, subject, message) {
@@ -58,6 +77,7 @@
        $('#recmessage').val(message);
        $('#touser').val('');
        $('#recmessage').height(100);
+       this.setHeader(rec_type);
        $('#recommenddialog').modal('show');
      },
 
@@ -103,7 +123,7 @@
        window.ahr.expandTextarea('#recmessage');
        $('#recommenddialog').on('shown.bs.modal',function(){
         $('#recmessage').trigger('focus');
-      });  
+      });
      }
    });
    window.ahr.recommend_widget = window.ahr.recommend_widget || {};

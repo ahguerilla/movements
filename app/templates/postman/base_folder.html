@@ -146,8 +146,6 @@
 
           <div class="col-md-3 nanamorde-mobile">
             <div class="profilecontainer"></div>
-            <!--<div class="action-container"></div>-->
-            <!--<div style="clear:both;"></div>-->
           </div>
 
           <div class="col-md-9" id="conversation-cont">
@@ -205,9 +203,7 @@
 {% include "market/clientside/messagedialog.html" %}
 {% include "market/clientside/recommenddialog.html" %}
 {% include "market/clientside/ratedialog.html" %}
-<script type="text/template" id="useraction-template">
-  {% include "market/clientside/useractions.html"%}
-</script>
+{% include "market/clientside/actions/actions.html" %}
 {% endwith %}
 {% endblock content %}
 

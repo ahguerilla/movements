@@ -108,11 +108,7 @@
   {% include "market/clientside/requestdialog.html"%}
   {% include 'market/clientside/userprofile.html' %}
   {% include 'market/clientside/reportuserdialog.html' %}
-  <script type="text/template" id="useraction-template">
-    {% include "market/clientside/useractions.html"%}
-  </script>
-
-
+  {% include "market/clientside/actions/actions.html"%}
 
   {% compress js inline %}
   <script type="text/javascript">

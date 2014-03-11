@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      {% include "market/clientside/useractions.html"%}
+      <div class="action-place"></div>
       <div style="clear:both;"></div>
     </div>
   </div>
@@ -54,38 +54,12 @@
 (function(){
     var MarketUserWidget =  window.ahr.BaseView.extend({
 
-      show_dropdown:function(ev){
-        ev.preventDefault();
-        var item_id = ev.currentTarget.getAttribute('item_id');
-        $('.dropdownMenu'+item_id).trigger('click');
-        return false;
-      },
-
-      private_message: function(ev){
-        ev.preventDefault();
-        var username = ev.currentTarget.getAttribute('username');
-        var item_id = ev.currentTarget.getAttribute('item_id');
-        var msgsub = '';
-        this.message_widget.show(username, msgsub, '', false);
-        return(false);
-      },
-
       resetitemrate:function(username, rate){
         try{
           $(".numstars[username="+username+"]").rateit('value',rate);
         }catch(err){
           $.noop();
         }
-      },
-
-      recommend: function(ev){
-        ev.preventDefault();
-        var username = ev.currentTarget.getAttribute('username');
-        this.market.recommend_dialog.setup('user',
-           username,
-           $('#currentusername').text()+' recommends this user : '+ username,
-           $('#currentusername').text()+' recommends you have a look at user '+ username );
-        return(false);
       },
 
       afterset: function(){
@@ -103,12 +77,6 @@
         this.item_tmp = _.template($('#user-template').html());
         this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
         this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
-
-        this.delegateEvents(_.extend(this.events,{
-          'click .itemactions' : 'show_dropdown',
-          'click .private_message' : 'private_message',
-          'click .recommend': 'recommend',
-        }));
       }
     });
 

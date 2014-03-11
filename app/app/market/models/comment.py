@@ -32,7 +32,7 @@ class Comment(models.Model):
         adict['fields']['pub_date'] = str(self.pub_date)
         adict['fields']['contents'] = self.contents
         adict['pk'] = self.id
-        adict['fields']['owner'] = self.owner.id
+        adict['fields']['ownerid'] = self.owner.id
         adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username,80])
         adict['fields']['username'] = self.owner.username
         adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[self.owner.username])

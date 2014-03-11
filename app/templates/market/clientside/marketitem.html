@@ -19,15 +19,14 @@
           <div class="clearfix"></div>
           <div class="item-body multi-line-text"><%- details %></div>
           </a>
-          <div class="item-tags" style="clear:both;">
+          <div class="item-tags clearfix">
             <div>
               <% _.each(issues, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
               <% _.each(countries, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
               <% _.each(skills, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
             </div>
           </div>
-          {% include "market/clientside/actions.html"%}
-          <div style="clear:both;"></div>
+          <div class="action-place"></div>
         </div>
     </div>
   </div>
@@ -101,7 +100,7 @@
 
     addCommentToCommentList: function (comment_item, front) {
       front = front === true ? front : false;
-      var comment_html = this.comment_tmp({
+      var data = {
         pk: comment_item.pk,
         userpic: comment_item.fields.avatar,
         user: comment_item.fields.username,
@@ -111,37 +110,19 @@
         content: comment_item.fields.contents, //.replace(/\n/g, '<br />')
         score: comment_item.score,
         username: comment_item.fields.username,
-        ownerid : comment_item.fields.owner,
+        ownerid : comment_item.fields.ownerid,
         ratecount: comment_item.ratecount,
         avatar: comment_item.fields.avatar
-      });
-
+      };
+      var comment_html = this.comment_tmp(data);
+      var actions = this.market.actions_view.get('comment', data);
+      var $comment_html = $(comment_html);
+      $comment_html.find('.commentaction-place').replaceWith(actions);
       if (front) {
-        $('#marketitem_comments').prepend(comment_html);
+        $('#marketitem_comments').prepend($comment_html);
       } else {
-        $('#marketitem_comments').append(comment_html);
+        $('#marketitem_comments').append($comment_html);
       }
-      //this.resetitemrate(comment_item.fields.username, comment_item.score);
-    },
-
-    show_dropdown: function (ev) {
-      ev.preventDefault();
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      $('.dropdownMenu' + item_id).trigger('click');
-      return false;
-    },
-
-    private_message: function (ev) {
-      ev.preventDefault();
-      var username = ev.currentTarget.getAttribute('username');
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      var msgsub = '';
-      if( item_id !== null ){
-        msgsub = 'Re: ' + $('.marketitem_title', $('.market-item-card[item_id=' + item_id + ']')).text();
-      }
-
-      this.message_widget.show(username, msgsub, '', false);
-      return (false);
     },
 
     resetitemrate: function (username, rate) {
@@ -153,26 +134,6 @@
       } catch (err) {
         $.noop();
       }
-    },
-
-    recommend: function (ev) {
-      ev.preventDefault();
-      var rec_type = ev.currentTarget.getAttribute('rec_type');
-      if(rec_type=='item'){
-      var title = ev.currentTarget.getAttribute('recommend_title');
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      this.market.recommend_dialog.setup('item',
-        item_id,
-        $('#currentusername').text() + ' recommends: ' + title,
-        $('#currentusername').text() + ' recommends you have a look at a post by ' + ev.currentTarget.getAttribute('owner'));
-      }else{
-        var username = ev.currentTarget.getAttribute('username');
-        this.market.recommend_dialog.setup('user',
-           username,
-           $('#currentusername').text()+' recommends this user : '+ username,
-           $('#currentusername').text()+' recommends you have a look at user '+ username );
-      }
-      return (false);
     },
 
     deleteItem: function (ev) {
@@ -218,6 +179,7 @@
     },
 
     initialize: function (options) {
+      this.item_type = 'item';
       this.market = options.market;
       this.del_callback = options.del_callback;
       this.edit_callback = options.edit_callback;
@@ -234,9 +196,6 @@
       this.delegateEvents(_.extend(this.events, {
         'click .comment-btn': 'comment',
         'click .comment-delete': 'deleteComment',
-        'click .itemactions': 'show_dropdown',
-        'click .private_message': 'private_message',
-        'click .recommend': 'recommend',
         'click .delete': 'deleteItem',
         'click .edit': 'editItem',
       }));

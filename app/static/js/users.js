@@ -24,6 +24,7 @@
 
         initialize : function(filters){
             var that = this;
+            this.item_type = 'user';
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
             this.viewurl = window.ahr.app_urls.viewuserprofile;
             this.item_tmp = _.template($('#user-template').html());
@@ -43,14 +44,14 @@
                 'click .item_container': 'showItem'
             }));
             $('#filter-offer-text').text('Exchangivists Offering');
-            $('#filter-request-text').text('Exchangivists Requesting');        
+            $('#filter-request-text').text('Exchangivists Requesting');
             return this;
         },
     });
 
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
-    window.ahr.users.initUsers = function(filters){        
+    window.ahr.users.initUsers = function(filters){
         $('#q').attr('placeholder','Search by keyword or username for Exchangivists');
         window.ahr.usersview = new UsersView(filters);
         var user_route = new UserRoute(window.ahr.usersview);
