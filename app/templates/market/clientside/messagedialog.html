@@ -37,7 +37,7 @@
 
   var MessageDialogWidget = window.ahr.BaseView.extend({
     events: {
-      //'click .private-message': 'show',
+      'click .private-message': 'show',
       'click .sendpm': 'sendpm',
       'click .cancelpm': 'cancelpm',
       'shown.bs.modal #messagedialog': 'focus'
@@ -99,21 +99,7 @@
       return (false);
     },
 
-    show: function (username, subject, message, readonlysub) {
-      this.username = username;
-      this.subject = subject;
-      this.message = message;
-      $('#newmessage').height(100);
-      $('#usernameh').text(this.username);
-      $('#msgsub').val(this.subject);
-      $('#newmessage').val(this.message);
-      if (readonlysub == true) {
-        $('#msgsub').attr('readonly', true);
-      }
-      this.$dialog.modal('show');
-    },
-
-    new_show: function (ev) {
+    show: function (ev) {
       this.username = ev.currentTarget.getAttribute('username');
       this.subject = ev.currentTarget.getAttribute('subject');
       this.message = ev.currentTarget.getAttribute('message');
@@ -128,7 +114,6 @@
       }
       this.$dialog.modal('show');
     },
-
 
     initialize: function (settings) {
       this.alert_place = '#pmerror'

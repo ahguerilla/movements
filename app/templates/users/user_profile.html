@@ -265,15 +265,9 @@
     var ProfileView = Backbone.View.extend({
       el: 'body',
       events: {
-        'click .pm-message': 'showPMDialog',
         'click .recommend': 'showRecommendDialog'
       },
-      showPMDialog:function(ev){
-        ev.preventDefault();
-        var username = $(ev.currentTarget).attr('username');
-        this.message_widget.show(username, '', '', false);
-        return false;
-      },
+
       resetitemrate: function (username, rate) {
         window.location.reload();
       },

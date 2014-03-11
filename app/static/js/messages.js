@@ -18,16 +18,7 @@
       'click .conv_link': 'openConv',
       'click #backtofolder': 'back',
       'click .next': 'addNext',
-      'click .private_message': 'private_message',
       'click .recommend': 'recommend',
-    },
-
-    private_message: function (ev) {
-      ev.preventDefault();
-      var username = ev.currentTarget.getAttribute('username');
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      this.message_widget.show(username, '', '', false);
-      return (false);
     },
 
     recommend: function (ev) {

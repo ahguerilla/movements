@@ -125,25 +125,6 @@
       }
     },
 
-    show_dropdown: function (ev) {
-      ev.preventDefault();
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      $('.dropdownMenu' + item_id).trigger('click');
-      return false;
-    },
-
-    private_message: function (ev) {
-      ev.preventDefault();
-      var username = ev.currentTarget.getAttribute('username');
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      var msgsub = '';
-      if( item_id !== null ){
-        msgsub = 'Re: ' + $('.marketitem_title', $('.market-item-card[item_id=' + item_id + ']')).text();
-      }
-
-      this.message_widget.show(username, msgsub, '', false);
-      return (false);
-    },
 
     resetitemrate: function (username, rate) {
       try {
@@ -243,8 +224,6 @@
       this.delegateEvents(_.extend(this.events, {
         'click .comment-btn': 'comment',
         'click .comment-delete': 'deleteComment',
-        'click .itemactions': 'show_dropdown',
-        'click .private_message': 'private_message',
         'click .recommend': 'recommend',
         'click .delete': 'deleteItem',
         'click .edit': 'editItem',
