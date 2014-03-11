@@ -108,6 +108,7 @@
         });
         if (user == window.ahr.username) {
           user = $('.pm_recipient', data4).text();
+          if (user =="<me>") user = window.ahr.username;
         }
 
         that.setProfile(user);
