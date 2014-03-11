@@ -162,6 +162,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   showItem: function (item_id) {
     var that = this;
+    $('#singleItem').hide();
     this.scroll = $(window).scrollTop();
     that.hideMarket();
     var dfrd = $.ajax({url: that.getItem + item_id});
@@ -203,6 +204,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
           var actions = that.actions_view.get('user', ac_data);
           $('.action-container').html(actions);
           $('.actionitem.routehref',$('#singleItem')).empty();
+          $('#singleItem').show();
       });
     });
   },
