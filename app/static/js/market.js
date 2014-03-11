@@ -53,7 +53,6 @@
       });
     },
 
-
     initialize: function (filters) {
       this.item_type = 'item';
       this.getitemfromto = window.ahr.app_urls.getmarketitemfromto;

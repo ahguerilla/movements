@@ -101,7 +101,7 @@
 
     addCommentToCommentList: function (comment_item, front) {
       front = front === true ? front : false;
-      var comment_html = this.comment_tmp({
+      var data = {
         pk: comment_item.pk,
         userpic: comment_item.fields.avatar,
         user: comment_item.fields.username,
@@ -111,17 +111,19 @@
         content: comment_item.fields.contents, //.replace(/\n/g, '<br />')
         score: comment_item.score,
         username: comment_item.fields.username,
-        ownerid : comment_item.fields.owner,
+        ownerid : comment_item.fields.ownerid,
         ratecount: comment_item.ratecount,
         avatar: comment_item.fields.avatar
-      });
-
+      };
+      var comment_html = this.comment_tmp(data);
+      var actions = this.market.actions_view.get('comment', data);
+      var $comment_html = $(comment_html);
+      $comment_html.find('.commentaction-place').replaceWith(actions);
       if (front) {
-        $('#marketitem_comments').prepend(comment_html);
+        $('#marketitem_comments').prepend($comment_html);
       } else {
-        $('#marketitem_comments').append(comment_html);
+        $('#marketitem_comments').append($comment_html);
       }
-      //this.resetitemrate(comment_item.fields.username, comment_item.score);
     },
 
     show_dropdown: function (ev) {

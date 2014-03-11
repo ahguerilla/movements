@@ -72,7 +72,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
         _.each(data, function (item) {
           item.fields.pk = item.pk;
-          //var item_html = that.item_tmp(item.fields);
           var item_html = that.get(item.fields);
           itemsToAppend.push(item_html);
           $('#marketitems').append(item_html);
@@ -165,14 +164,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     var that = this;
     this.scroll = $(window).scrollTop();
     that.hideMarket();
-    var dfrd = $.ajax({
-      url: that.getItem + item_id
-    });
+    var dfrd = $.ajax({url: that.getItem + item_id});
     dfrd.done(function (item) {
       var html = that.get(item[0].fields);
-      $('.comment-btn').data({
-        id: item[0].pk
-      });
+      $('.comment-btn').data({id: item[0].pk});
       if ($(window).width() >= 992) {
         $('.nanamorde').show();
       } else {
@@ -182,30 +177,33 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       $('#singleItem').html(html);
       $('#marketitem_comments').empty();
       that.item_widget.afterset();
-      $.getJSON(window.ahr.app_urls.getcommentslast.replace('0', item_id) + '10000', function (data) {
-        that.ShowComments(data);
+
+      $.getJSON(window.ahr.app_urls.getcommentslast.replace('0', item_id) + '10000',
+        function (data) {
+          that.ShowComments(data);
       });
-      $.getJSON(window.ahr.app_urls.getprofile + item[0].fields.owner[0], function (data) {
-        var tmpl = $('#message-profile').html();
-        var prof = _.template(tmpl);
-        $('.userprofile').html(prof(data));
-        $('.rateit').rateit();
-        $('.rateit').rateit('min', 0);
-        $('.rateit').rateit('max', 5);
-        $('.rateit').rateit('readonly', true);
-        $('.rateit').each(function () {
-          $(this).rateit('value', this.getAttribute('rate'));
-        });
-        data ={'username':data.username,
-          'usercore':data.score,
-          'ratecount':data.ratecount,
-          'avatar': data.avatar
-          };
-        var actions = that.actions_view.get(this.item_type, data);
-        debugger;
-        //$('.action-container').html(actions);
-        $('.actionitem.routehref',$('#singleItem')).empty();
-    });
+
+      $.getJSON(window.ahr.app_urls.getprofile + item[0].fields.owner[0],
+        function (data) {
+          var tmpl = $('#message-profile').html();
+          var prof = _.template(tmpl);
+          $('.userprofile').html(prof(data));
+          $('.rateit').rateit();
+          $('.rateit').rateit('min', 0);
+          $('.rateit').rateit('max', 5);
+          $('.rateit').rateit('readonly', true);
+          $('.rateit').each(function () {
+            $(this).rateit('value', this.getAttribute('rate'));
+          });
+          var ac_data ={'username':data.username,
+            'usercore':data.score,
+            'ratecount':data.ratecount,
+            'avatar': data.avatar
+            };
+          var actions = that.actions_view.get('user', ac_data);
+          $('.action-container').html(actions);
+          $('.actionitem.routehref',$('#singleItem')).empty();
+      });
     });
   },
 
@@ -305,14 +303,11 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
      var itemHtml = this.item_tmp(data);
      var $itemHtml = $(itemHtml);
      $itemHtml.find('.action-place').replaceWith(actionsHtml);
-     //debugger;
      return  $itemHtml;
    },
 
   init: function (filters) {
     var that = this;
-    $.cookie.json = true;
-
     $('.nanamorde').hide();
     this.actions_view = window.ahr.actions_view();
     $.subscribe("nanamorde.resize", this.showHideNanamorde);

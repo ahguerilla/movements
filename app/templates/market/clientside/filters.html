@@ -320,6 +320,7 @@
 
     initialize: function (data) {
       var that = this;
+      $.cookie.json = true;
       this.container = data.container;
       this.filters = data.filters;
       this.initTemplates(data.filters);
