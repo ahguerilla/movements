@@ -59,8 +59,6 @@ def create_query(request):
 def get_avatar(request, obj_id, size, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     obj = user.avatar_set.all()
-    #if obj != []:
-        #return HttpResponse(value(rtype,obj),mimetype="application"+rtype)
     return HttpResponse( json.dumps({'pk': 0, 'avatar': reverse('avatar_render_primary', args=[user.username,size])}),mimetype="application"+rtype)
 
 
@@ -90,7 +88,7 @@ def send_message(request, to_user, rtype):
     try:
         pm_write(sender=request.user,
                  recipient=users.models.User.objects.filter(username=to_user)[0],
-                 subject=request.POST['subject'],
+                 subject=request.POST['subject'][:120] if len(request.POST['subject'])>120 else request.POST['subject'],
                  body=request.POST['message'])
     except Exception,err:
         if err.message== 'value too long for type character varying(120)\n':
@@ -113,7 +111,7 @@ def send_recommendation(request, rec_type, to_user, obj_id, rtype):
     try:
         pm_write(sender=request.user,
                  recipient=users.models.User.objects.filter(username=to_user)[0],
-                 subject=request.POST['subject'],
+                 subject=request.POST['subject'][:120] if len(request.POST['subject'])>120 else request.POST['subject'],
                  body=request.POST['message']+'\r\n'+href)
     except:
         return HttpResponseError(
