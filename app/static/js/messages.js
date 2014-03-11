@@ -62,12 +62,14 @@
         $('.rateit').each(function () {
           $(this).rateit('value', this.getAttribute('rate'));
         });
+        $('#conversation').show();
         $('#id_body').trigger('focus');
       });
     },
 
     openConv: function (ev) {
       ev.preventDefault();
+      $('#conversation').hide();
       var that = this;
       var subject = $('.subject', $(ev.currentTarget)).children();
       if (subject.is('strong')) {
@@ -125,8 +127,6 @@
             }
           });
         });
-
-
       });
       return false;
     },
@@ -166,10 +166,10 @@
         $('#conversation-cont').hide();
       }
     },
+
     resetitemrate: function (username, rate) {
       this.setProfile(username);
     },
-
 
     initialize: function () {
       $(window).resize(this.resize);
