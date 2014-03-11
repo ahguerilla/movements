@@ -37,6 +37,30 @@
     Exchangivist also prohibits abusive language or harassment.
     To report an abusive user,<span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>click here</strong></span>.
     </div>
+    <% } else {%>
+      <div style="margin-bottom: 20px;"></div>
     <% }%>
   </div>
+</script>
+
+
+<script type="text/javascript">
+  (function(){
+    var profileWidget = window.ahr.BaseView.extend({
+      set: function(profile, container, ac_type, ac_data){
+        var html = this.tmpl(profile);
+        $(container).html(html);
+        return 'afadf';
+      },
+      initialize: function(data){
+        this.actions_view = data.actions_view;
+        var tmpl = _.template($('#message-profile').html());
+      }
+    });
+    window.ahr.profile_widget = window.ahr.profile_widget || {};
+    window.ahr.profile_widget.initWidget = function(actions_view){
+      var widget = new profileWidget({'actions_view':actions_view});
+      return widget;
+    };
+  })();
 </script>
