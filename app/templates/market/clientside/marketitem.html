@@ -137,26 +137,6 @@
       }
     },
 
-    recommend: function (ev) {
-      ev.preventDefault();
-      var rec_type = ev.currentTarget.getAttribute('rec_type');
-      if(rec_type=='item'){
-      var title = ev.currentTarget.getAttribute('recommend_title');
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      this.market.recommend_dialog.setup('item',
-        item_id,
-        $('#currentusername').text() + ' recommends: ' + title,
-        $('#currentusername').text() + ' recommends you have a look at a post by ' + ev.currentTarget.getAttribute('owner'));
-      }else{
-        var username = ev.currentTarget.getAttribute('username');
-        this.market.recommend_dialog.setup('user',
-           username,
-           $('#currentusername').text()+' recommends this user : '+ username,
-           $('#currentusername').text()+' recommends you have a look at user '+ username );
-      }
-      return (false);
-    },
-
     deleteItem: function (ev) {
       ev.preventDefault();
       var that = this;
@@ -199,15 +179,8 @@
       return;
     },
 
-    get: function(data){
-      var actionsHtml = this.actions_view.get('item',data);
-      var itemHtml = this.item_tmp(data);
-      var $itemHtml = $(itemHtml);
-      $itemHtml.find('.action-place').replaceWith(actionsHtml);
-      return  $itemHtml;
-    },
-
     initialize: function (options) {
+      this.item_type = 'item';
       this.market = options.market;
       this.del_callback = options.del_callback;
       this.edit_callback = options.edit_callback;
@@ -224,7 +197,6 @@
       this.delegateEvents(_.extend(this.events, {
         'click .comment-btn': 'comment',
         'click .comment-delete': 'deleteComment',
-        'click .recommend': 'recommend',
         'click .delete': 'deleteItem',
         'click .edit': 'editItem',
       }));

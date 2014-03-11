@@ -1,6 +1,11 @@
 <script type="text/template" id="user-actions">
   <div class="actions">
-    <div username="<%- username %>" rec_type="user" title="Recommend" class="recommend actionitem">
+    <div username="<%- username %>"
+    rec_type="user"
+    title="Recommend"
+    subject = "<%- window.ahr.username %> recommends this user : <%- username %>"
+    message = "<%- window.ahr.username %> recommends you have a look at user: <%- username %>"
+    class="recommend actionitem">
       <div class="text">
         Recommend
       </div>

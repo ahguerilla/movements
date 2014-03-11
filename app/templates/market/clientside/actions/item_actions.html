@@ -1,7 +1,12 @@
 <script type="text/template" id="item-actions">
   <div class="actions">
     <% if (ownerid != window.ahr.user_id){ %>
-    <div owner="<%- owner %>" rec_type="item" item_id="<%- pk %>" recommend_title="<%- title %>" class="recommend actionitem">
+    <div owner="<%- owner %>"
+    rec_type="item"
+    item_id="<%- pk %>"
+    subject = "<%- window.ahr.username %> recommends : <%- title %>"
+    message = "<%- window.ahr.username %>recommends you have a look at a post "<%- title %>" by : <%- owner %>"
+    class="recommend actionitem">
       <div class="text">
         Recommend
       </div>

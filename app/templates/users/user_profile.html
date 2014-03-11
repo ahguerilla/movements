@@ -263,24 +263,10 @@
   <script type="text/javascript">
   $(function(){
     var ProfileView = Backbone.View.extend({
-      el: 'body',
-      events: {
-        'click .recommend': 'showRecommendDialog'
-      },
-
       resetitemrate: function (username, rate) {
         window.location.reload();
       },
 
-      showRecommendDialog:function(ev){
-        ev.preventDefault();
-        var username = ev.currentTarget.getAttribute('username');
-        this.recommendDialog.setup('user',
-           username,
-           $('#currentusername').text()+' recommends this user : '+ username,
-           $('#currentusername').text()+' recommends you have a look at user '+ username );
-        return(false);
-      },
       initialize: function(){
         this.item_type = 'user';
         var data = {

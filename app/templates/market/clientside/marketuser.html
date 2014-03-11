@@ -62,16 +62,6 @@
         }
       },
 
-      recommend: function(ev){
-        ev.preventDefault();
-        var username = ev.currentTarget.getAttribute('username');
-        this.market.recommend_dialog.setup('user',
-           username,
-           $('#currentusername').text()+' recommends this user : '+ username,
-           $('#currentusername').text()+' recommends you have a look at user '+ username );
-        return(false);
-      },
-
       afterset: function(){
         $('.numstars').rateit();
         $('.numstars').rateit('min',0);
@@ -87,10 +77,6 @@
         this.item_tmp = _.template($('#user-template').html());
         this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
         this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
-
-        this.delegateEvents(_.extend(this.events,{
-          'click .recommend': 'recommend',
-        }));
       }
     });
 

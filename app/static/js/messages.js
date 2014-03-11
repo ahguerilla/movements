@@ -17,20 +17,8 @@
     events: {
       'click .conv_link': 'openConv',
       'click #backtofolder': 'back',
-      'click .next': 'addNext',
-      'click .recommend': 'recommend',
+      'click .next': 'addNext'
     },
-
-    recommend: function (ev) {
-      ev.preventDefault();
-      var username = ev.currentTarget.getAttribute('username');
-      this.recommend_dialog.setup('user',
-        username,
-        $('#currentusername').text() + ' recommends this user : ' + username,
-        $('#currentusername').text() + ' recommends you have a look at user ' + username);
-      return (false);
-    },
-
 
     addNext: function (ev) {
       ev.preventDefault();
