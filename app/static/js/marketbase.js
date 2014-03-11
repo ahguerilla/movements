@@ -310,7 +310,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   init: function (filters) {
     var that = this;
-    $('.nanamorde').hide();
     this.actions_view = window.ahr.actions_view();
     $.subscribe("nanamorde.resize", this.showHideNanamorde);
     $(window).resize(this.showHideNanamorde);

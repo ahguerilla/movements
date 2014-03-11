@@ -1,5 +1,5 @@
 (function(){
-
+    $('.nanamorde').hide();
     var UserRoute = Backbone.Router.extend({
         routes:{
             "": "page"
@@ -52,7 +52,6 @@
             return this;
         },
     });
-
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
     window.ahr.users.initUsers = function(filters){

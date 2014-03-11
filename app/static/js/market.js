@@ -1,4 +1,5 @@
 (function () {
+  $('.nanamorde').hide();
   var MarketRoute = Backbone.Router.extend({
     routes: {
       "": "page",
