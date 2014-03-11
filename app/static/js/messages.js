@@ -54,6 +54,8 @@
             'avatar': data.avatar
           });
           $('.action-container').html(actions);
+        }else{
+          $('.action-container').empty();
         }
 
         $('.profilecontainer').html(prof(data));
