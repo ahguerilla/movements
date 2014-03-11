@@ -48,7 +48,8 @@ def create_query(request):
         query = query & Q(id__in = ids)
 
     if request.GET.has_key('types'):
-        query = query & Q(user__marketitem__item_type__in=request.GET.getlist('types'))
+        if len(request.GET.getlist('types'))<2:
+            query = query & Q(user__marketitem__item_type__in=request.GET.getlist('types'))
 
     return query & ~Q(user__id=request.user.id)
 

@@ -31,7 +31,7 @@
             this.item_tmp = _.template($('#user-template').html());
             this.item_widget = window.ahr.marketuser_widget.initWidget('body',that);
             this.init(filters);
-            this.filter_widget.filters.types = [];
+            this.filter_widget.filters.types = ['offer', 'request'];
             this.filter_widget.types = this.types;
 
             window.ahr.expandTextarea('#newmessage');
