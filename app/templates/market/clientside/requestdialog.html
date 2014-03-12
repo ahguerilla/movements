@@ -122,11 +122,11 @@
 
             this.details_widget = window.ahr.textarea_widget.initWidget(
                         '#request_details_place',
-                        {title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'},
+                        {title:'', jsonfield:'details', placeholder:'Please give details of what you need help with?'},
                         this.item_obj? this.item_obj.details : null);
         },
 
-        showModal:function(newitem){          
+        showModal:function(newitem){
           this.closing=false;
           if(newitem){
             this.url = window.ahr.app_urls.addmarketitem+'request';
@@ -147,16 +147,16 @@
             $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function(){$(this).css('top',top+20);})
           });
           window.ahr.expandTextarea($('#details',$("#requestdialog")));
-           $('#requestdialog').on('hide.bs.modal',function(ev){            
-            ev.stopImmediatePropagation();                        
+           $('#requestdialog').on('hide.bs.modal',function(ev){
+            ev.stopImmediatePropagation();
             if(!that.closing && !confirm('Are you sure you want to close this dialog?')){
               return false;
-            }            
+            }
             that.emptyTheForm();
           });
         },
-        
-        emptyTheForm:function(){          
+
+        emptyTheForm:function(){
           this.countries_widget.empty();
           this.issues_widget.empty();
           this.never_exp_widget.empty();
@@ -168,7 +168,7 @@
 
         aftersubmit:function(){
           this.closing= true;
-          $('#requestdialog').modal('hide');          
+          $('#requestdialog').modal('hide');
           this.emptyTheForm();
         }
     });
