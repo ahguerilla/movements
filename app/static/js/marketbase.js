@@ -73,8 +73,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         _.each(data, function (item) {
           item.fields.pk = item.pk;
           var item_html = that.get(item.fields);
-          itemsToAppend.push(item_html[0].outerHTML);
-          $('#marketitems').append(item_html[0].outerHTML);
+          $itemhtml = $(item_html);
+          var text = $itemhtml.find('.item-body').text();
+          if(text.length>200){
+            $itemhtml.find('.item-body').text(text.slice(0,200)+'...');
+          }
+          itemsToAppend.push(item_html);
+          $('#marketitems').append(item_html);
         });
 
         if (itemsToAppend.length > 0) {
