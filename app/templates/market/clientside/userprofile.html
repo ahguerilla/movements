@@ -32,13 +32,12 @@
     <% if(username != window.ahr.username) {%>
     <h4>Safety First</h4>
     <div style="margin-bottom: 20px;">
-    For your own safety and security, do not share personal contact information
-    (such as your phone number, address, email address, etc.) with other users.
-    Exchangivist also prohibits abusive language or harassment.
-    To report an abusive user,<span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>click here</strong></span>.
+      For your own safety and security, do not share personal contact information
+      (such as your phone number, address, email address, etc.) with other users.
+      Exchangivist also prohibits abusive language or harassment.
+      To report an abusive user,
+      <span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>click here</strong></span>.
     </div>
-    <% } else {%>
-      <div style="margin-bottom: 20px;"></div>
     <% }%>
   </div>
 </script>
@@ -47,19 +46,41 @@
 <script type="text/javascript">
   (function(){
     var profileWidget = window.ahr.BaseView.extend({
-      set: function(profile, container, ac_type, ac_data){
-        var html = this.tmpl(profile);
-        $(container).html(html);
-        return 'afadf';
+      set: function(username, container, ac_type, ac_data){
+        var that = this;
+        $('.action-container').empty();
+        $.getJSON(that.profile_url + username,
+          function (data) {
+            $(container).html(that.tmpl(data));
+            $('.rateit', $(container)).rateit();
+            $('.rateit', $(container)).rateit('min', 0);
+            $('.rateit', $(container)).rateit('max', 5);
+            $('.rateit', $(container)).rateit('readonly', true);
+            $('.rateit', $(container)).each(function () {
+              $(this).rateit('value', this.getAttribute('rate'));
+            });
+            if(username !== window.ahr.username){
+            var ac_data ={'username':data.username,
+              'usercore':data.score,
+              'ratecount':data.ratecount,
+              'avatar': data.avatar
+              };
+            var actions = that.actions_view.get(ac_type, ac_data);
+            $('.action-container').html(actions);
+            }
+            $('.actionitem.routehref',$('#singleItem')).empty();
+
+        });
       },
       initialize: function(data){
         this.actions_view = data.actions_view;
-        var tmpl = _.template($('#message-profile').html());
+        this.tmpl = _.template($('#message-profile').html());
+        this.profile_url = data.profile_url;
       }
     });
     window.ahr.profile_widget = window.ahr.profile_widget || {};
-    window.ahr.profile_widget.initWidget = function(actions_view){
-      var widget = new profileWidget({'actions_view':actions_view});
+    window.ahr.profile_widget.initWidget = function(actions_view, profile_url){
+      var widget = new profileWidget({'actions_view':actions_view, 'profile_url':profile_url});
       return widget;
     };
   })();

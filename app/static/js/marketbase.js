@@ -78,8 +78,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
           if(text.length>200){
             $itemhtml.find('.item-body').text(text.slice(0,200)+'...');
           }
-          itemsToAppend.push(item_html);
-          $('#marketitems').append(item_html);
+          itemsToAppend.push(item_html[0].outerHTML);
+          $('#marketitems').append(item_html[0].outerHTML);
         });
 
         if (itemsToAppend.length > 0) {
@@ -188,29 +188,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         function (data) {
           that.ShowComments(data);
       });
-
-      $.getJSON(window.ahr.app_urls.getprofile + item[0].fields.owner[0],
-        function (data) {
-          var tmpl = $('#message-profile').html();
-          var prof = _.template(tmpl);
-          $('.userprofile').html(prof(data));
-          $('.rateit').rateit();
-          $('.rateit').rateit('min', 0);
-          $('.rateit').rateit('max', 5);
-          $('.rateit').rateit('readonly', true);
-          $('.rateit').each(function () {
-            $(this).rateit('value', this.getAttribute('rate'));
-          });
-          var ac_data ={'username':data.username,
-            'usercore':data.score,
-            'ratecount':data.ratecount,
-            'avatar': data.avatar
-            };
-          var actions = that.actions_view.get('user', ac_data);
-          $('.action-container').html(actions);
-          $('.actionitem.routehref',$('#singleItem')).empty();
-          $('#singleItem').show();
-      });
+      that.profile_widget.set(item[0].fields.owner[0],'.userprofile', 'user');
+      $('#singleItem').show();
     });
   },
 
@@ -330,6 +309,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       this.isSingle.bind(this)
       );
     this.filter_widget.initBulkFilters();
+    this.profile_widget = window.ahr.profile_widget.initWidget(this.actions_view, window.ahr.app_urls.getprofile);
     this.requestdialog = window.ahr.request_form_dialog.initItem(false);
     this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
     this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
