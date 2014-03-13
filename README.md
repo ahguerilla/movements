@@ -88,6 +88,9 @@ django-admin.py runserver --settings=app.settings.production
  For local development testing do the following
 
  sudo -u postgres psql
+ su postgres
+
+ psql database -c "GRANT ALL ON ALL TABLES IN SCHEMA public to user;"
  ALTER USER ahr CREATEDB;
  quit
  \q
