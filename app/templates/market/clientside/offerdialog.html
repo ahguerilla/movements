@@ -103,21 +103,25 @@
           title: 'I can help to advance freedom of:',
           jsonfield: 'issues'
         },
-        this.item_obj ? this.item_obj.issues : null);
+        this.item_obj ? this.item_obj.issues : null,
+        window.GuerillaMarket.userDefaultTags['issues']
+        );
 
       this.countries_widget = window.ahr.typeahead_widget.initWidget(
         '#countries_place', {
           title: 'Please enter the name of the countries where you can help',
           jsonfield: 'countries'
         },
-        this.item_obj ? this.item_obj.countries : null);
+        this.item_obj ? this.item_obj.countries : null,
+        window.GuerillaMarket.userDefaultTags['countries']);
 
       this.skills_widget = window.ahr.typeahead_widget.initWidget(
         '#skills_place', {
           title: 'Please enter the skills you have to offer',
           jsonfield: 'skills'
         },
-        this.item_obj ? this.item_obj.skills : null);
+        this.item_obj ? this.item_obj.skills : null,
+        window.GuerillaMarket.userDefaultTags['skills']);
 
       this.expdate_widget = window.ahr.datepicker_widget.initWidget(
         '#date_place', {

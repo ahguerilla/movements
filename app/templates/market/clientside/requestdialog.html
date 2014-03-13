@@ -93,12 +93,14 @@
             this.issues_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_issues_place',
                         {title:'I need help to advance freedom of:', jsonfield:'issues'},
-                        this.item_obj? this.item_obj.issues: null);
+                        this.item_obj? this.item_obj.issues: null,
+                        window.GuerillaMarket.userDefaultTags['issues']);
 
             this.countries_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_countries_place',
                         {title:'Please enter the name of the countries where you can help',  jsonfield:'countries'},
-                        this.item_obj? this.item_obj.countries: null);
+                        this.item_obj? this.item_obj.countries: null,
+                        window.GuerillaMarket.userDefaultTags['countries']);
 
             this.expdate_widget = window.ahr.datepicker_widget.initWidget(
                         '#request_exp_date_place',
@@ -126,7 +128,7 @@
                         this.item_obj? this.item_obj.details : null);
         },
 
-        showModal:function(newitem){          
+        showModal:function(newitem){
           this.closing=false;
           if(newitem){
             this.url = window.ahr.app_urls.addmarketitem+'request';
@@ -147,16 +149,16 @@
             $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function(){$(this).css('top',top+20);})
           });
           window.ahr.expandTextarea($('#details',$("#requestdialog")));
-           $('#requestdialog').on('hide.bs.modal',function(ev){            
-            ev.stopImmediatePropagation();                        
+           $('#requestdialog').on('hide.bs.modal',function(ev){
+            ev.stopImmediatePropagation();
             if(!that.closing && !confirm('Are you sure you want to close this dialog?')){
               return false;
-            }            
+            }
             that.emptyTheForm();
           });
         },
-        
-        emptyTheForm:function(){          
+
+        emptyTheForm:function(){
           this.countries_widget.empty();
           this.issues_widget.empty();
           this.never_exp_widget.empty();
@@ -168,7 +170,7 @@
 
         aftersubmit:function(){
           this.closing= true;
-          $('#requestdialog').modal('hide');          
+          $('#requestdialog').modal('hide');
           this.emptyTheForm();
         }
     });
