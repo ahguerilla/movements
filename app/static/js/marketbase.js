@@ -406,12 +406,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   filterButtonHide: function (ev) {
     $('#filterbuttontext').html('&nbsp; Show Filters &nbsp;');
     $('#togglefilter').removeClass('dropup');
+    $('#filterscroll').removeClass('filterscroll');
     this.setFilterWrapperMargin(this.filterheightClosed, 0);
   },
 
   filterButtonShow: function (ev) {
     $('#filterbuttontext').html('&nbsp; Hide Filters &nbsp;');
     $('#togglefilter').addClass('dropup');
+    $('#filterscroll').addClass('filterscroll');
     this.setFilterWrapperMargin(this.filterheightOpen, 300);
   },
 
