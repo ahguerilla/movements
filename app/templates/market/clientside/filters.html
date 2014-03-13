@@ -33,8 +33,8 @@
               </div>
             </div>
 
-            <div id="filterscroll" class="filterscroll" style="max-height: 330px;">
-            <div class="col-sm-4 pull-left">
+
+            <div class="col-sm-3 pull-left">
               <div class="filter-title">Issues</div>
               <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
                 <label class="btn filter-bulk-selector btn-default btn-xs all all-issues issues">
@@ -47,10 +47,10 @@
                   <input type="radio" name="def-issues"> Default
                 </label>
               </div>
-              <div class="row issues btn-group-sm pull-left" item_title="issues"></div>
+              <div class="row issues btn-group-sm pull-left filterbuttons-cont" item_title="issues"></div>
             </div>
 
-            <div class="col-sm-4 pull-left">
+            <div class="col-sm-3 pull-left">
               <div class="filter-title">Countries</div>
               <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
                 <label class="btn filter-bulk-selector btn-default btn-xs all all-countries countries">
@@ -63,10 +63,10 @@
                   <input type="radio" name="def-countries"> Default
                 </label>
               </div>
-              <div class="row countries btn-group-sm pull-left" item_title="countries"></div>
+              <div class="row countries btn-group-sm pull-left filterbuttons-cont" item_title="countries"></div>
             </div>
 
-            <div class="col-sm-4 pull-left">
+            <div class="col-sm-3 pull-left">
               <div class="filter-title">Skills</div>
               <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
                 <label class="btn filter-bulk-selector btn-default btn-xs all all-skills skills">
@@ -79,8 +79,7 @@
                   <input type="radio" name="def-skills"> Default
                 </label>
               </div>
-              <div class="row skills btn-group-sm pull-left" item_title="skills"></div>
-            </div>
+              <div class="row skills btn-group-sm pull-left filterbuttons-cont" item_title="skills"></div>
             </div>
 
           </div>
@@ -100,6 +99,8 @@
     filterheightOpen: 0,
     filterheightClosed: 0,
     cookieread: false,
+    hasScroll: false,
+    justOpend: true,
     events:{
         'click #searchbtn': 'search',
         'click .tagbutton': 'tagsfilter',
@@ -159,6 +160,10 @@
           active: activeFlag
         }));
       });
+      if (this.justOpend === false){
+        this.destroyScrollbars();
+        this.createScrollbars();
+      }
     },
 
     updateTagsfilter: function (that, ev) {
@@ -219,18 +224,40 @@
       this.callback();
     },
 
+    createScrollbars: function(){
+      if(this.hasScroll === false){
+        $('.filterbuttons-cont').mCustomScrollbar({autoHideScrollbar: true});
+        this.hasScroll = true;
+      }
+    },
+
+    destroyScrollbars: function(){
+      if(this.hasScroll === true){
+        $('.filterbuttons-cont').mCustomScrollbar('destroy');
+        this.hasScroll = false;
+      }
+    },
+
     filterButtonHide: function (ev) {
+      var that = this;
       $('#filterbuttontext').html('&nbsp; Show Filters &nbsp;');
       $('#togglefilter').removeClass('dropup');
-      $('#filterscroll').removeClass('filterscroll');
-      this.setFilterWrapperMargin(this.filterheightClosed, 0);
+      this.setFilterWrapperMargin(this.filterheightClosed, 0, function(){
+        that.destroyScrollbars();
+      });
     },
 
     filterButtonShow: function (ev) {
+      var that = this;
+      that.justOpend = true;
       $('#filterbuttontext').html('&nbsp; Hide Filters &nbsp;');
       $('#togglefilter').addClass('dropup');
-      $('#filterscroll').addClass('filterscroll');
-      this.setFilterWrapperMargin(this.filterheightOpen, 300);
+      $('.filterbuttons-cont').css('visibility','hidden');
+      this.setFilterWrapperMargin(this.filterheightOpen, 300, function(){
+        $('.filterbuttons-cont').css('visibility','visible');
+        that.createScrollbars();
+        that.justOpend = false;
+      });
     },
 
     bulkCustomizeFilters: function (tag, action) {
@@ -274,10 +301,10 @@
       });
     },
 
-    setFilterWrapperMargin: function (height, speed) {
+    setFilterWrapperMargin: function (height, speed, callback) {
       $('#filter-wrapper').animate({
         height: height
-      }, speed);
+      }, speed, callback);
     },
 
     bulkCustomizeFiltersEV: function (ev) {
