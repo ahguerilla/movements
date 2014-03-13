@@ -40,26 +40,7 @@
   </div>
 </div>
 {% endblock %}
-    <div class="col-md-12 col-spacing-bottom">
-      <div class="row">
-        <div class="col-md-3">
-          <strong>Rating:</strong>
-        </div>
-        <div class="col-md-9">
-          <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12 col-spacing-bottom">
-      <div class="row">
-        <div class="col-md-3">
-          <strong>AHR Rating:</strong>
-        </div>
-        <div class="col-md-9">
-          <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} stars
-        </div>
-      </div>
-    </div>
+
 {% block content %}
 <div class="in-container dialog">
   {% if request.user.username != user_details.username %}
@@ -73,10 +54,10 @@
         <legend>Rating</legend>
 
         <div class="row profile-item">
-          <div class="col-md-2">
-            <strong>Rating:</strong>
+          <div class="col-md-3">
+            <strong>Community rating:</strong>
           </div>
-          <div class="col-md-10">
+          <div class="col-md-9">
             <span class="rateit user" username="{{ user_details.username }}" rate="{{ user_profile.score }}"></span> {{ user_profile.score|floatformat:1 }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
           </div>
         </div>

@@ -42,32 +42,48 @@
     },
 
     setProfile: function (user) {
-      var that = this;
-      $.getJSON(window.ahr.app_urls.getprofile + user, function (data) {
-        var tmpl = $('#message-profile').html();
-        var prof = _.template(tmpl);
-        if(user !== window.ahr.username){
-          var actions = that.actions_view.get('user', {
-            'username': data.username,
-            'usercore': data.score,
-            'ratecount': data.ratecount,
-            'avatar': data.avatar
-          });
-          $('.action-container').html(actions);
-        }else{
-          $('.action-container').empty();
-        }
+      this.profile_widget.set(user, '.profilecontainer', 'user');
+      $('#conversation').show();
+      $('#id_body').trigger('focus');
+    },
 
-        $('.profilecontainer').html(prof(data));
-        $('.rateit').rateit();
-        $('.rateit').rateit('min', 0);
-        $('.rateit').rateit('max', 5);
-        $('.rateit').rateit('readonly', true);
-        $('.rateit').each(function () {
-          $(this).rateit('value', this.getAttribute('rate'));
+    postProccessConv: function(data){
+      var that = this;
+      data1 = data.replace(that.itemre, function (match, item_id, offset, string) {
+        return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
+      });
+      data2 = data1.replace(that.userre, function (match, username, offset, string) {
+        return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
+      });
+
+      data3 = data2.replace(that.itemre, function (match, item_id, offset, string) {
+        return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
+      });
+      data4 = data3.replace(that.userre, function (match, username, offset, string) {
+        return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
+      });
+
+      var user;
+      $('.messageavatar img', data4).each(function (item, index) {
+        user = $(this).attr('alt');
+        if (user != window.ahr.username) return false;
+      });
+      if (user == window.ahr.username) {
+        user = $('.pm_recipient', data4).text();
+        if (user =="<me>") user = window.ahr.username;
+      }
+      return ({'user':user, 'html':data4});
+    },
+
+    setMessageCounter: function(){
+      $.getJSON(window.ahr.app_urls.getmessagecount, function (data) {
+        $('.message-counter').each(function (tmp, item) {
+          if (data > 0) {
+            $('#msgcntr', $(item)).text('(' + data + ')');
+          } else {
+            $('#msgcntr', $(item)).text('');
+          }
         });
-        $('#conversation').show();
-        $('#id_body').trigger('focus');
       });
     },
 
@@ -91,47 +107,16 @@
       });
 
       dfrd.done(function (data) {
-        data1 = data.replace(that.itemre, function (match, item_id, offset, string) {
-          return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
-        });
-        data2 = data1.replace(that.userre, function (match, username, offset, string) {
-          return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
-        });
+        var conv = that.postProccessConv(data)
+        that.setProfile(conv.user);
 
-        data3 = data2.replace(that.itemre, function (match, item_id, offset, string) {
-          return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
-        });
-        data4 = data3.replace(that.userre, function (match, username, offset, string) {
-          return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
-        });
-
-        var user;
-        $('.messageavatar img', data4).each(function (item, index) {
-          user = $(this).attr('alt');
-          if (user != window.ahr.username) return false;
-        });
-        if (user == window.ahr.username) {
-          user = $('.pm_recipient', data4).text();
-          if (user =="<me>") user = window.ahr.username;
-        }
-
-        that.setProfile(user);
-
-        $('#conversation').html(data4);
+        $('#conversation').html(conv.html);
         if ($('#id_body').length > 0) {
           $('#id_body').empty();
           window.ahr.expandTextarea('#id_body');
         }
         that.showconv();
-        $.getJSON(window.ahr.app_urls.getmessagecount, function (data) {
-          $('.message-counter').each(function (tmp, item) {
-            if (data > 0) {
-              $('#msgcntr', $(item)).text('(' + data + ')');
-            } else {
-              $('#msgcntr', $(item)).text('');
-            }
-          });
-        });
+        that.setMessageCounter();
       });
       return false;
     },
@@ -181,6 +166,7 @@
       this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
       this.actions_view = window.ahr.actions_view();
+      this.profile_widget = window.ahr.profile_widget.initWidget(this.actions_view, window.ahr.app_urls.getprofile);
       this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
       this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate.bind(this));
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
