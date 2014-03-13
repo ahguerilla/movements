@@ -5,7 +5,16 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="row">
+        <div class="row" style="overflow-y: scroll; max-height: 330px;">
+            <button type="button"class="btn btn-default btn-xs" id="togglefilter" data-toggle="collapse" data-target="#market-filters">
+              <span id="filterbuttontext">&nbsp; Show Filters &nbsp;</span>
+              <span class="caret"></span>
+            </button>
+          </div>
+        </div>
+        <div class="row">
           <div id="market-filters" class="collapse">
+
             <div class="col-sm-3">
               <div class="market-filter-main">
                 <div class="market-filter-border"></div>
@@ -23,7 +32,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-3 pull-left">
+
+            <div style="overflow-y: scroll; max-height: 330px;">
+            <div class="col-sm-4 pull-left">
               <div class="filter-title">Issues</div>
               <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
                 <label class="btn filter-bulk-selector btn-default btn-xs all all-issues issues">
@@ -38,7 +49,8 @@
               </div>
               <div class="row issues btn-group-sm pull-left" item_title="issues"></div>
             </div>
-            <div class="col-sm-3 pull-left">
+
+            <div class="col-sm-4 pull-left">
               <div class="filter-title">Countries</div>
               <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
                 <label class="btn filter-bulk-selector btn-default btn-xs all all-countries countries">
@@ -53,7 +65,8 @@
               </div>
               <div class="row countries btn-group-sm pull-left" item_title="countries"></div>
             </div>
-            <div class="col-sm-3 pull-left">
+
+            <div class="col-sm-4 pull-left">
               <div class="filter-title">Skills</div>
               <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
                 <label class="btn filter-bulk-selector btn-default btn-xs all all-skills skills">
@@ -68,15 +81,11 @@
               </div>
               <div class="row skills btn-group-sm pull-left" item_title="skills"></div>
             </div>
+            </div>
+
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12 filter-show">
-            <button type="button"class="btn btn-default btn-xs" id="togglefilter" data-toggle="collapse" data-target="#market-filters">
-              <span id="filterbuttontext">&nbsp; Show Filters &nbsp;</span>
-              <span class="caret"></span>
-            </button>
-          </div>
+
       </div>
     </div>
   </div>
