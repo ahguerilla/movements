@@ -20,8 +20,6 @@ except ImportError:
     now = datetime.datetime.now
 
 import logging
-
-
 logger = logging.getLogger(__name__)
 
 avatar_storage = get_storage_class(settings.AVATAR_STORAGE)()
@@ -138,6 +136,7 @@ def invalidate_avatar_cache(sender, instance, **kwargs):
     try:
         invalidate_cache(instance.user)
     except:
+        #logging.error('user does not exist')
         logger.error('Avatar: user does not exist.')
 
 
