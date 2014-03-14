@@ -4,14 +4,15 @@ from django_assets import register,Bundle
 
 js = Bundle(
     Bundle(
-        './js/lib/jquery-1.10.2.min.js',
+        #'./js/lib/jquery-1.10.2.min.js',
+        './js/lib/jquery-1.11.0.min.js',
         './js/lib/underscore-min.js',
         './js/lib/backbone-min.js',
         './js/lib/jquery.ui.position.js',
         './js/lib/moment-with-langs.min.js',
         './js/lib/moment-timezone.min.js',
         './js/lib/bootstrap.min.js',
-        './js/lib/bootstrap-datetimepicker.min.js',        
+        './js/lib/bootstrap-datetimepicker.min.js',
         './js/lib/tagmanager.js',
         './js/lib/typeahead.js',
         './js/lib/jquery.blockUI.js',
@@ -25,7 +26,7 @@ js = Bundle(
         './js/marketbase.js',
         './js/market.js',
         './js/users.js',
-        './js/messages.js',        
+        './js/messages.js',
         './js/posts.js',
         './js/lib/jquery.rateit.min.js',
         ),

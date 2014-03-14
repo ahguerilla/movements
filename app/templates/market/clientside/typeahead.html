@@ -30,7 +30,7 @@
         var that = this;
         this.empty();
         this.setPrefilledVals(values);
-        for (i in this.pref) {
+        for (var i in this.pref) {
           $('#' + that.settings.jsonfield, $(this.container)).tagsManager('pushTag', this.pref[i]);
         }
 
@@ -107,7 +107,7 @@
           that.clicked = false;
           that.closed = false;
         });
-        
+
         $('#' + name, $(that.container)).on('click', function () {
           if (that.clicked === true) {
             that.clicked = false;
@@ -191,15 +191,15 @@
         });
         return val_ids;
       },
-      
-      addPressed: function(ev){                 
-        if (this.closed === true) {          
-          $('#' +this.settings.jsonfield , $(this.container)).trigger('focus');        
+
+      addPressed: function(ev){
+        if (this.closed === true) {
+          $('#' +this.settings.jsonfield , $(this.container)).trigger('focus');
           this.closed = false;
           this.clicked = false;
-          
+
         }else{
-          $('#' +this.settings.jsonfield , $(this.container)).trigger('blur');        
+          $('#' +this.settings.jsonfield , $(this.container)).trigger('blur');
           this.closed = true;
           this.clicked = false;
         }
@@ -225,7 +225,7 @@
         $(this.container).html(this.typeAheadTemplate(this.settings.title, this.settings.jsonfield));
         this.makeWidget(this.settings.jsonfield, this.preset ? this.preset : null);
         events ={}
-        events['click .input-group-addon.'+ this.settings.jsonfield ] = 'addPressed';        
+        events['click .input-group-addon.'+ this.settings.jsonfield ] = 'addPressed';
         this.delegateEvents(_.extend(this.events,events));
       }
 
