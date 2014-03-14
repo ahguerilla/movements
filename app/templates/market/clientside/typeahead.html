@@ -65,7 +65,7 @@
         var that = this;
         this.empty();
         this.setPrefilledVals(values);
-        for (i in this.pref) {
+        for (var i in this.pref) {
           $('#' + that.settings.jsonfield, $(this.container)).tagsManager('pushTag', this.pref[i]);
         }
         $('.tag-buttons-fortypeahead', $(this.container)).mCustomScrollbar();

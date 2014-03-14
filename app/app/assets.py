@@ -4,7 +4,8 @@ from django_assets import register,Bundle
 
 js = Bundle(
     Bundle(
-        './js/lib/jquery-1.10.2.min.js',
+        #'./js/lib/jquery-1.10.2.min.js',
+        './js/lib/jquery-1.11.0.min.js',
         './js/lib/underscore-min.js',
         './js/lib/backbone-min.js',
         './js/lib/jquery.ui.position.js',
