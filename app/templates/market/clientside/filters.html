@@ -167,7 +167,8 @@
     },
 
     updateTagsfilter: function (that, ev) {
-      a = $(ev.currentTarget.parentElement.parentElement).attr("item_title");
+      var a = $(ev.currentTarget).closest('.row').attr("item_title");
+      //a = $(ev.currentTarget.parentElement.parentElement).attr("item_title");
       ar = that.filters[a];
       data = window.ahr[a];
       var tagData = _.find(data, function (test) {
@@ -226,7 +227,7 @@
 
     createScrollbars: function(){
       if(this.hasScroll === false){
-        $('.filterbuttons-cont').mCustomScrollbar({autoHideScrollbar: true});
+        $('.filterbuttons-cont').mCustomScrollbar({autoHideScrollbar: false});
         this.hasScroll = true;
       }
     },
