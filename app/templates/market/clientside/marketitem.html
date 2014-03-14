@@ -1,6 +1,29 @@
 {% load compress %}
+
+<style type="text/css">
+.showmoretags{
+  position: absolute;
+  bottom: 50px;
+  right: 0;
+  background: white;
+  opacity: 0.9;
+  padding: 5px;
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.tagbuttons-container{
+  position: relative;
+}
+
+.more-items-here{
+  height: 100px;
+  overflow: hidden;
+}
+</style>
+
 <script type="text/template" id="item_template">
-  <div class="market-place-item item-wrap" item_id="<%- pk %>" owner_id="<%- ownerid %>">
+  <div class="market-place-item item-wrap item-<%-pk%>" item_id="<%- pk %>" owner_id="<%- ownerid %>">
     <div class="market-item-card" item_id="<%- pk %>" owner_id="<%- ownerid %>">
       <div class="item-header <%- item_type.toLowerCase() %>">
         <a class="routehref" href="#item/<%- pk %>" >
@@ -19,12 +42,20 @@
           <div class="clearfix"></div>
           <div class="item-body multi-line-text"><%- details %></div>
           </a>
-          <div class="item-tags clearfix">
-            <div>
-              <% _.each(issues, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
-              <% _.each(countries, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
-              <% _.each(skills, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
+          <% var index=issues.length+countries.length+skills.length, top=15; %>
+          <div class="item-tags clearfix <% if(index>top && isSingle === false){ %> more-items-here <%}%>">
+            <div class="tagbuttons-container" >
+              <% _.each(issues, function(ind) { %>
+                <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div>
+              <% }); %>
+              <% _.each(countries, function(ind) { %>
+                <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div>
+              <% }); %>
+              <% _.each(skills, function(ind) { %>
+                <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div>
+              <% }); %>
             </div>
+            <% if(index>top && isSingle === false){ %> <div class="showmoretags">More ...</div> <%}%>
           </div>
           <div class="action-place"></div>
         </div>
@@ -171,7 +202,15 @@
     },
 
     reloadItem: function (item) {
-      return (this.item_tmp(item[0].fields));
+      var isSingle = this.market.isSingle();
+      return (this.item_tmp(_.extend(item[0].fields,{'isSingle': isSingle})));
+    },
+
+    showMoreTags: function(ev){
+      var item = $(ev.currentTarget).closest('.more-items-here');
+      item.removeClass('more-items-here');
+      this.market.fancyref();
+      $(ev.currentTarget).remove();
     },
 
     afterset: function (item_container) {
@@ -193,12 +232,13 @@
 
       window.ahr.expandTextarea('#newcomment');
 
-      this.delegateEvents(_.extend(this.events, {
+      _.extend(this.events, {
         'click .comment-btn': 'comment',
         'click .comment-delete': 'deleteComment',
         'click .delete': 'deleteItem',
         'click .edit': 'editItem',
-      }));
+        'click .showmoretags': 'showMoreTags'
+      });
     }
   });
 

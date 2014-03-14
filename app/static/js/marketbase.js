@@ -72,7 +72,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
         _.each(data, function (item) {
           item.fields.pk = item.pk;
-          var item_html = that.get(item.fields);
+          var item_html = that.get(_.extend(item.fields,{'isSingle': false}));
           $itemhtml = $(item_html);
           var text = $itemhtml.find('.item-body').text();
           if(text.length>200){
@@ -172,7 +172,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     that.hideMarket();
     var dfrd = $.ajax({url: that.getItem + item_id});
     dfrd.done(function (item) {
-      var html = that.get(item[0].fields);
+      var html = that.get(_.extend(item[0].fields,{'isSingle': true}));
       $('.comment-btn').data({id: item[0].pk});
       if ($(window).width() >= 992) {
         $('.nanamorde').show();
@@ -315,7 +315,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
     this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
 
-    this.events = _.extend(this.events, {
+    _.extend(this.events, {
       'click #create_offer': 'create_offer',
       'click #create_request': 'create_request',
       'click #searchagainall': 'searchWithNoFilters',

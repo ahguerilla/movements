@@ -44,7 +44,9 @@
         url: this.getItem + item_id
       });
       dfrd.done(function (item) {
+        //debugger;
         var html = that.item_widget.reloadItem(item);
+        html = that.get(item[0].fields);
         $('.market-place-item[item_id=' + item_id + ']').replaceWith(html);
         that.msnry.reloadItems();
         that.item_widget.afterset('.market-place-item[item_id=' + item_id + ']');

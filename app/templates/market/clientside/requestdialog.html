@@ -43,16 +43,29 @@
 (function(){
     var RequestDialogView = window.ahr.item_form_base.extend({
         el: '#requestform',
+
+        dialogShown: function(ev){
+          this.countries_widget.remakeScrollbar();
+          this.issues_widget.remakeScrollbar();
+          this.skills_widget.remakeScrollbar();
+        },
+
+        dialogHidden: function(ev){
+          var that=this;
+          if(that.changing==true){
+            $('input,textarea',$('#requestdialog')).val('');
+            that.issues_widget.empty();
+            that.countries_widget.empty();
+            that.changing=false;
+          }
+        },
+
         init:function(){
-            var that=this;
-            this.url = window.ahr.app_urls.addmarketitem+'request';
-            $('#requestdialog').on('hidden.bs.modal',function(){
-              if(that.changing==true){
-              $('input,textarea',$('#requestdialog')).val('');
-              that.issues_widget.empty();
-              that.countries_widget.empty();
-              that.changing=false;
-            }
+          var that=this;
+          this.url = window.ahr.app_urls.addmarketitem+'request';
+          _.extend(this.events,{
+          'shown.bs.modal': 'dialogShown',
+          'hidden.bs.modal': 'dialogHidden'
           });
         },
 
@@ -98,7 +111,7 @@
 
             this.countries_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_countries_place',
-                        {title:'Please enter the name of the countries where you can help',  jsonfield:'countries'},
+                        {title:'Please enter the name of the countries where you need help',  jsonfield:'countries'},
                         this.item_obj? this.item_obj.countries: null,
                         window.GuerillaMarket.userDefaultTags['countries']);
 
@@ -136,7 +149,6 @@
           var that = this;
           $('#'+that.el.id+' #itemformerror').empty();
           $('#requestdialog').modal('show');
-
           window.ahr.getcsrf(function(csrf){
               if(csrf==false){
                   that.alert('Unable to connect to the server. please try again in a few minutes','#infobar');

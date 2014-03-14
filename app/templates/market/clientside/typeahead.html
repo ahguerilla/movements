@@ -25,10 +25,14 @@
   <div class="col-md-12">
     <label for="<%- item %>"><%- title %></label>
     <div class="input-group">
-      <input id="<%- item %>" class="form-control input-sm typeaheadtag_input" type="text"/>
+      <input id="<%- item %>" class="form-control input-sm typeaheadtag_input" type="text" placeholder="Click here to see your choices"/>
       <div class="input-group-btn <%- item %>">
       <button class="btn btn-default all <%- item %>">All</button>
+      <% if(hasDefault.length > 0){%>
       <button class="btn typeahead-btn btn-default def <%- item %>">Defaults</button>
+      <% }else{ %>
+      <button class="btn typeahead-btn btn-default def <%- item %>">None</button>
+      <% } %>
       </div>
     </div>
   </div>
@@ -69,7 +73,11 @@
           $('#' + that.settings.jsonfield, $(this.container)).tagsManager('pushTag', this.pref[i]);
         }
         $('.tag-buttons-fortypeahead', $(this.container)).mCustomScrollbar();
+      },
 
+      remakeScrollbar:function(){
+        $('.tag-buttons-fortypeahead', $(this.container)).mCustomScrollbar('destroy');
+        $('.tag-buttons-fortypeahead', $(this.container)).mCustomScrollbar();
       },
 
       typeAheadTemplate: function (title, item) {
@@ -78,7 +86,8 @@
         }
         return this.typeAheadTag({
           'title': title,
-          'item': item
+          'item': item,
+          'hasDefault': this.defaults
         });
       },
 
@@ -162,7 +171,6 @@
         that.typeahead.on('typeahead:opened', function (e, d) {
           that.clicked = true;
         });
-
         func(this.values);
       },
 
@@ -202,7 +210,6 @@
               }
             }
           });
-
         });
       },
 
@@ -259,6 +266,7 @@
           this.values.push(data[i].value);
           this.tagdict[data[i].value] = data[i].pk;
         }
+
         $(this.container).html(this.typeAheadTemplate(this.settings.title, this.settings.jsonfield));
         this.makeWidget(this.settings.jsonfield, this.preset ? this.preset : null);
         events ={}

@@ -554,16 +554,19 @@
     issues_widget = window.ahr.typeahead_widget.initWidget(
                 '#issues_place',
                 {title:'Add issues that interest you:', jsonfield:'issues'},
+                issues,
                 issues);
 
     countries_widget = window.ahr.typeahead_widget.initWidget(
                 '#countries_place',
                 {title:'Add countries that interest you:',  jsonfield:'countries'},
+                countries,
                 countries);
 
     skills_widget = window.ahr.typeahead_widget.initWidget(
                 '#skills_place',
                 {title:'Add skills that interest you:',  jsonfield:'skills'},
+                skills,
                 skills);
 
     if (perms) {

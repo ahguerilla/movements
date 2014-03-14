@@ -46,19 +46,31 @@
 (function () {
   var OfferDialogView = window.ahr.item_form_base.extend({
     item: '',
-    el: '#offerform',
+    el: '#offerdialog',
+
+    dialogShown: function(ev){
+      this.countries_widget.remakeScrollbar();
+      this.issues_widget.remakeScrollbar();
+      this.skills_widget.remakeScrollbar();
+    },
+
+    dialogHidden:function(){
+      var that = this;
+      if (that.changing == true) {
+        $('input,textarea', $('#offerdialog')).val('');
+        that.issues_widget.empty();
+        that.countries_widget.empty();
+        that.skills_widget.empty();
+        that.changing = false;
+      }
+    },
 
     init: function () {
       var that = this;
       this.url = window.ahr.app_urls.addmarketitem + 'offer';
-      $('#offerdialog').on('hidden.bs.modal', function () {
-        if (that.changing == true) {
-          $('input,textarea', $('#offerdialog')).val('');
-          that.issues_widget.empty();
-          that.countries_widget.empty();
-          that.skills_widget.empty();
-          that.changing = false;
-        }
+       _.extend(this.events,{
+        'shown.bs.modal': 'dialogShown',
+        'hidden.bs.modal': 'dialogHidden'
       });
     },
 
@@ -202,7 +214,7 @@
       this.closing = true;
       $('#offerdialog').modal('hide');
       this.emptyTheForm();
-    },
+    }
   });
 
   window.ahr.offer_form_dialog = window.ahr.offer_form_dialog || {};
