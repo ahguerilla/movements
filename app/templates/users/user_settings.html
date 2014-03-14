@@ -567,11 +567,11 @@
                 skills);
 
     if (perms) {
-      for(item in perms){
+      for(var item in perms){
         $('input[name=notperm-'+item+']').attr('checked', true);
       }
     } else {
-        $('input[name^=notperm-]').attr('checked', true);
+        $('input[name^="notperm-"]').attr('checked', true);
     }
 
     $('.submitsetting').on('click',function(e){
