@@ -1,7 +1,7 @@
 {% load compress %}
 
 <style type="text/css">
-.showmoretags{
+.showmoretags,.showlesstags{
   position: absolute;
   bottom: 50px;
   right: 0;
@@ -210,7 +210,14 @@
       var item = $(ev.currentTarget).closest('.more-items-here');
       item.removeClass('more-items-here');
       this.market.fancyref();
-      $(ev.currentTarget).remove();
+      $(ev.currentTarget).replaceWith('<div class="showlesstags">Less ...</div>');
+    },
+
+    showLessTags: function(ev){
+      var item = $(ev.currentTarget).closest('.item-tags.clearfix');
+      item.addClass('more-items-here');
+      this.market.fancyref();
+      $(ev.currentTarget).replaceWith('<div class="showmoretags">More ...</div>');
     },
 
     afterset: function (item_container) {
@@ -237,7 +244,8 @@
         'click .comment-delete': 'deleteComment',
         'click .delete': 'deleteItem',
         'click .edit': 'editItem',
-        'click .showmoretags': 'showMoreTags'
+        'click .showmoretags': 'showMoreTags',
+        'click .showlesstags': 'showLessTags'
       });
     }
   });
