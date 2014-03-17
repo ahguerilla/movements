@@ -1,0 +1,2420 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-17 15:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: app/app/market/models/comment.py:14 app/app/market/models/report.py:15
+#: app/app/market/models/report.py:32
+msgid "contents"
+msgstr ""
+
+#: app/app/market/models/comment.py:15 app/app/market/models/market.py:23
+#: app/app/market/models/notificatoin.py:20 app/app/market/models/rate.py:13
+#: app/app/market/models/report.py:17 app/app/market/models/report.py:34
+#: app/app/users/models.py:144
+msgid "publish date"
+msgstr ""
+
+#: app/app/market/models/comment.py:17 app/app/market/models/market.py:22
+#: app/app/market/models/report.py:18
+msgid "is published?"
+msgstr ""
+
+#: app/app/market/models/comment.py:18 app/app/market/models/market.py:29
+msgid "deleted"
+msgstr ""
+
+#: app/app/market/models/market.py:14
+msgid "item_type"
+msgstr ""
+
+#: app/app/market/models/market.py:16 app/app/market/models/rate.py:14
+#: app/app/users/models.py:145
+msgid "title"
+msgstr ""
+
+#: app/app/market/models/market.py:17
+msgid "details"
+msgstr ""
+
+#: app/app/market/models/market.py:21
+msgid "URL Link"
+msgstr ""
+
+#: app/app/market/models/market.py:24
+msgid "expiry date"
+msgstr ""
+
+#: app/app/market/models/market.py:25
+msgid "commentcount"
+msgstr ""
+
+#: app/app/market/models/market.py:26 app/app/users/models.py:92
+msgid "ratecount"
+msgstr ""
+
+#: app/app/market/models/market.py:27
+msgid "reportcount"
+msgstr ""
+
+#: app/app/market/models/market.py:28 app/app/market/models/rate.py:15
+#: app/app/users/models.py:93 app/app/users/models.py:146
+msgid "score"
+msgstr ""
+
+#: app/app/market/models/market.py:30
+msgid "never expires"
+msgstr ""
+
+#: app/app/market/models/notificatoin.py:18
+msgid "avatar user"
+msgstr ""
+
+#: app/app/market/models/report.py:16 app/app/market/models/report.py:33
+msgid "is resolved"
+msgstr ""
+
+#: app/app/market/models/resourcefile.py:11
+msgid "file name"
+msgstr ""
+
+#: app/app/settings/base.py:72
+msgid "Norwegian"
+msgstr ""
+
+#: app/app/settings/base.py:73
+msgid "English"
+msgstr ""
+
+#: app/app/users/models.py:12
+msgid "skill set"
+msgstr ""
+
+#: app/app/users/models.py:22
+msgid "issues of interest"
+msgstr ""
+
+#: app/app/users/models.py:32
+msgid "countries of interest"
+msgstr ""
+
+#: app/app/users/models.py:42
+msgid "nationality"
+msgstr ""
+
+#: app/app/users/models.py:52
+msgid "country of residence"
+msgstr ""
+
+#: app/app/users/models.py:72
+msgid "bio"
+msgstr ""
+
+#: app/app/users/models.py:73
+msgid "tag line"
+msgstr ""
+
+#: app/app/users/models.py:74
+msgid "website url"
+msgstr ""
+
+#: app/app/users/models.py:75
+msgid "facebook page"
+msgstr ""
+
+#: app/app/users/models.py:76
+msgid "linkedin page"
+msgstr ""
+
+#: app/app/users/models.py:77
+msgid "twitter page"
+msgstr ""
+
+#: app/app/users/models.py:78
+msgid "occupation"
+msgstr ""
+
+#: app/app/users/models.py:79
+msgid "area of expertise"
+msgstr ""
+
+#: app/app/users/models.py:80
+msgid "notifications"
+msgstr ""
+
+#: app/app/users/models.py:81
+msgid "privacy settings"
+msgstr ""
+
+#: app/app/users/models.py:87
+msgid "organisation"
+msgstr ""
+
+#: app/app/users/models.py:88
+msgid "individual"
+msgstr ""
+
+#: app/app/users/models.py:89
+msgid "journalist"
+msgstr ""
+
+#: app/app/users/models.py:90
+msgid "recieves newsletter"
+msgstr ""
+
+#: app/app/users/models.py:91
+msgid "first_login"
+msgstr ""
+
+#: app/app/users/models.py:138
+msgid "Rated by AHR"
+msgstr ""
+
+#: app/avatar/admin.py:19
+msgid "Avatar"
+msgstr ""
+
+#: app/avatar/forms.py:24
+msgid "avatar"
+msgstr ""
+
+#: app/avatar/forms.py:37
+#, python-format
+msgid ""
+"%(ext)s is an invalid file extension. Authorized extensions are : "
+"%(valid_exts_list)s"
+msgstr ""
+
+#: app/avatar/forms.py:44
+#, python-format
+msgid ""
+"Your file is too big (%(size)s), the maximum allowed size is "
+"%(max_valid_size)s"
+msgstr ""
+
+#: app/avatar/forms.py:54
+#, python-format
+msgid ""
+"You already have %(nb_avatars)d avatars, and the maximum allowed is "
+"%(nb_max_avatars)d."
+msgstr ""
+
+#: app/avatar/forms.py:71 app/avatar/forms.py:84
+msgid "Choices"
+msgstr ""
+
+#: app/avatar/views.py:74
+msgid "Successfully uploaded a new avatar."
+msgstr ""
+
+#: app/avatar/views.py:110
+msgid "Successfully updated your avatar."
+msgstr ""
+
+#: app/avatar/views.py:148
+msgid "Successfully deleted the requested avatars."
+msgstr ""
+
+#: app/avatar/templates/avatar/add.html:6
+#: app/avatar/templates/avatar/change.html:6 app/templates/avatar/add.html:6
+#: app/templates/avatar/change.html:8
+msgid "Your current avatar: "
+msgstr ""
+
+#: app/avatar/templates/avatar/add.html:9
+#: app/avatar/templates/avatar/change.html:9 app/templates/avatar/add.html:9
+#: app/templates/avatar/change.html:11
+msgid "You haven't uploaded an avatar yet. Please upload one now."
+msgstr ""
+
+#: app/avatar/templates/avatar/add.html:13
+#: app/avatar/templates/avatar/change.html:20 app/templates/avatar/add.html:13
+#: app/templates/avatar/change.html:25
+msgid "Upload New Image"
+msgstr ""
+
+#: app/avatar/templates/avatar/change.html:15
+#: app/templates/avatar/change.html:19
+msgid "Choose new Default"
+msgstr ""
+
+#: app/avatar/templates/avatar/confirm_delete.html:6
+#: app/templates/avatar/confirm_delete.html:6
+msgid "Please select the avatars that you would like to delete."
+msgstr ""
+
+#: app/avatar/templates/avatar/confirm_delete.html:9
+#: app/templates/avatar/confirm_delete.html:9
+#, python-format
+msgid ""
+"You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
+"\">upload one</a> now."
+msgstr ""
+
+#: app/avatar/templates/avatar/confirm_delete.html:15
+#: app/templates/avatar/confirm_delete.html:15
+msgid "Delete These"
+msgstr ""
+
+#: app/avatar/templates/notification/avatar_friend_updated/full.txt:1
+#, python-format
+msgid ""
+"%(avatar_creator)s has updated their avatar %(avatar)s.\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s\n"
+msgstr ""
+
+#: app/avatar/templates/notification/avatar_friend_updated/notice.html:2
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
+"href=\"%(avatar_url)s\">%(avatar)s</a>."
+msgstr ""
+
+#: app/avatar/templates/notification/avatar_updated/full.txt:1
+#, python-format
+msgid ""
+"Your avatar has been updated.  %(avatar)s\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s\n"
+msgstr ""
+
+#: app/avatar/templates/notification/avatar_updated/notice.html:2
+#, python-format
+msgid "You have updated your avatar <a href=\"%(avatar_url)s\">%(avatar)s</a>."
+msgstr ""
+
+#: app/avatar/templatetags/avatar_tags.py:51
+msgid "Default Avatar"
+msgstr ""
+
+#: app/templates/404.html:6 app/templates/500.html:6
+msgid "The page you are trying to visit does not exist"
+msgstr ""
+
+#: app/templates/404.html:10
+msgid "The page you are trying to visit does not exist."
+msgstr ""
+
+#: app/templates/500.html:10
+msgid "There has been an unexpected error."
+msgstr ""
+
+#: app/templates/base.html:50
+msgid "Toggle navigation"
+msgstr ""
+
+#: app/templates/base.html:60 app/templates/base.html.py:62
+msgid "How It Works"
+msgstr ""
+
+#: app/templates/base.html:64
+msgid "Exchangivists"
+msgstr ""
+
+#: app/templates/base.html:73
+msgid "Messages"
+msgstr ""
+
+#: app/templates/base.html:80
+msgid "Notifications"
+msgstr ""
+
+#: app/templates/base.html:93
+msgid "My Posts"
+msgstr ""
+
+#: app/templates/base.html:96
+msgid "My Profile"
+msgstr ""
+
+#: app/templates/base.html:97
+msgid "Settings"
+msgstr ""
+
+#: app/templates/base.html:101 app/templates/account/logout.html:6
+#: app/templates/account/logout.html:11 app/templates/account/logout.html:19
+msgid "Sign Out"
+msgstr ""
+
+#: app/templates/base.html:108 app/templates/account/login.html:9
+#: app/templates/account/login.html:26 app/templates/account/login.html:57
+#: app/templates/openid/login.html:16
+msgid "Sign In"
+msgstr ""
+
+#: app/templates/base.html:110 app/templates/base_private_settings.html:6
+#: app/templates/base_public.html:6 app/templates/account/signup.html:32
+#: app/templates/account/signup.html:114 app/templates/ahr/home.html:22
+msgid "Sign Up"
+msgstr ""
+
+#: app/templates/base.html:158 app/templates/ahr/contact_us.html:10
+msgid "Contact Us"
+msgstr ""
+
+#: app/templates/base.html:159 app/templates/ahr/terms_and_conditions.html:10
+msgid "Terms and Conditions"
+msgstr ""
+
+#: app/templates/base.html:160 app/templates/ahr/privacy.html:11
+msgid "Privacy"
+msgstr ""
+
+#: app/templates/account/account_inactive.html:5
+#: app/templates/account/account_inactive.html:9
+msgid "Account Inactive"
+msgstr ""
+
+#: app/templates/account/account_inactive.html:10
+msgid ""
+"This account is inactive. Accounts have to be individually vetted, you will "
+"be contacted by a member of Advancing Human Rights as part of this vetting "
+"process."
+msgstr ""
+
+#: app/templates/account/email.html:6
+msgid "Account"
+msgstr ""
+
+#: app/templates/account/email.html:9
+msgid "E-mail Addresses"
+msgstr ""
+
+#: app/templates/account/email.html:11
+msgid "The following e-mail addresses are associated with your account:"
+msgstr ""
+
+#: app/templates/account/email.html:25
+msgid "Verified"
+msgstr ""
+
+#: app/templates/account/email.html:27
+msgid "Unverified"
+msgstr ""
+
+#: app/templates/account/email.html:29
+msgid "Primary"
+msgstr ""
+
+#: app/templates/account/email.html:35
+msgid "Make Primary"
+msgstr ""
+
+#: app/templates/account/email.html:36
+msgid "Re-send Verification"
+msgstr ""
+
+#: app/templates/account/email.html:37
+#: app/templates/socialaccount/connections.html:35
+msgid "Remove"
+msgstr ""
+
+#: app/templates/account/email.html:44
+msgid "Warning:"
+msgstr ""
+
+#: app/templates/account/email.html:44
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+
+#: app/templates/account/email.html:49
+msgid "Add E-mail Address"
+msgstr ""
+
+#: app/templates/account/email.html:54
+msgid "Add E-mail"
+msgstr ""
+
+#: app/templates/account/email.html:63
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: app/templates/account/email_confirm.html:8
+#: app/templates/account/email_confirm.html:13
+#: app/templates/account/email_confirmed.html:6
+#: app/templates/account/email_confirmed.html:11
+#: app/templates/account/email/email_confirmation_subject.txt:3
+msgid "Confirm E-mail Address"
+msgstr ""
+
+#: app/templates/account/email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is the e-mail "
+"address you provided for the user %(user_display)s."
+msgstr ""
+
+#: app/templates/account/email_confirm.html:20
+msgid "Confirm"
+msgstr ""
+
+#: app/templates/account/email_confirm.html:24
+msgid "This e-mail confirmation link expired or is invalid."
+msgstr ""
+
+#: app/templates/account/email_confirmed.html:15
+#, python-format
+msgid ""
+"You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-"
+"mail address for user %(user_display)s."
+msgstr ""
+
+#: app/templates/account/login.html:17
+#, python-format
+msgid ""
+"\n"
+"    Welcome to Exchangivist, please sign in below. If you don't have an "
+"account yet, please sign up <a href=\"%(home_url)s\" alt=\"sign up\">here</"
+"a>\n"
+"    "
+msgstr ""
+
+#: app/templates/account/login.html:44
+msgid "Remember Me"
+msgstr ""
+
+#: app/templates/account/login.html:47
+msgid "Forgot Password?"
+msgstr ""
+
+#: app/templates/account/login.html:52
+#, python-format
+msgid ""
+"\n"
+"            Or, <a href=\"%(home_url)s\" alt=\"sign up\">sign up</a> for an "
+"account.\n"
+"            "
+msgstr ""
+
+#: app/templates/account/logout.html:12
+msgid "Are you sure you want to sign out?"
+msgstr ""
+
+#: app/templates/account/password_change.html:12
+msgid "Password changed successfuly"
+msgstr ""
+
+#: app/templates/account/password_change.html:26
+#: app/templates/account/password_reset_from_key.html:7
+#: app/templates/account/password_reset_from_key.html:23
+#: app/templates/account/password_reset_from_key.html:38
+#: app/templates/account/password_reset_from_key_done.html:5
+msgid "Change Password"
+msgstr ""
+
+#: app/templates/account/password_delete.html:5
+#: app/templates/account/password_delete.html:8
+msgid "Delete Password"
+msgstr ""
+
+#: app/templates/account/password_delete.html:9
+msgid ""
+"You may delete your password since you are currently logged in using OpenID."
+msgstr ""
+
+#: app/templates/account/password_delete.html:12
+msgid "delete my password"
+msgstr ""
+
+#: app/templates/account/password_delete_done.html:5
+#: app/templates/account/password_delete_done.html:8
+msgid "Password Deleted"
+msgstr ""
+
+#: app/templates/account/password_delete_done.html:9
+msgid "Your password has been deleted."
+msgstr ""
+
+#: app/templates/account/password_reset.html:7
+#: app/templates/account/password_reset.html:13
+#: app/templates/account/password_reset_done.html:6
+#: app/templates/account/password_reset_done.html:12
+msgid "Password Reset"
+msgstr ""
+
+#: app/templates/account/password_reset.html:17
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: app/templates/account/password_reset.html:30
+#, python-format
+msgid ""
+"\n"
+"            Please <a href=\"%(contactus_url)s\">contact us</a> if you have "
+"any trouble resetting your password.\n"
+"            "
+msgstr ""
+
+#: app/templates/account/password_reset.html:38
+msgid "Reset My Password"
+msgstr ""
+
+#: app/templates/account/password_reset_done.html:20
+#, python-format
+msgid ""
+"\n"
+"      We have sent you an e-mail. Please <a href=\"%(contactus_url)s"
+"\">contact us</a> if you do not receive it within a few minutes.\n"
+"      "
+msgstr ""
+
+#: app/templates/account/password_reset_from_key.html:15
+msgid "Bad Token"
+msgstr ""
+
+#: app/templates/account/password_reset_from_key.html:17
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: app/templates/account/password_reset_from_key.html:44
+#: app/templates/account/password_reset_from_key_done.html:12
+msgid "Your password has been changed."
+msgstr ""
+
+#: app/templates/account/password_set.html:6
+#: app/templates/account/password_set.html:13
+#: app/templates/account/password_set.html:25
+msgid "Set Password"
+msgstr ""
+
+#: app/templates/account/signup.html:11
+msgid "Exchangivist BETA"
+msgstr ""
+
+#: app/templates/account/signup.html:12
+#, python-format
+msgid ""
+"\n"
+"    <p>Exchangivist is currently in <strong>beta</strong></p>\n"
+"    <div class=\"alert alert-danger\" style=\"font-size:85%%;\">\n"
+"      <p>\n"
+"          Exchangivist is currently in <strong>beta</strong> and has not "
+"undergone a full risk threat assessment.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"        Although we have done our best to ensure any information stored in "
+"Exchangivist is secure, we cannot guarantee this until the first full "
+"version of the system is released later this year. Before you can sign up to "
+"Exchanivist you will need to go through a vetting system so Advancing Human "
+"Rights/ Movements.org can confirm your identity. This process is used for "
+"anyone wanting to actively use the site.No information other than you're "
+"username, email and either a hash of your password or data needed to "
+"authenticate your social login will be stored on the system until the "
+"vetting process is complete. The information you provide below will be sent "
+"to Advancing Human Rights in an email via a secure email service. This email "
+"will be deleted once the vetting process is complete.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"        While Exchangivist, Movements.org and Advancing Human Rights have "
+"taken all possible steps to protect your privacy and security, there are "
+"still risks associated with your use of the Exchangivist platform. Your "
+"internet use may be tracked and traced back to you and AHR and its "
+"associated organizations cannot guarantee your safety. Additionally, "
+"Exchangivist is based on trust and we do our best to ensure that all "
+"community members are who they say they are and are participating with the "
+"best and most honest intentions. However we cannot guarantee the privacy, "
+"security, or anonymity of users.\n"
+"      </p>\n"
+"    </div>\n"
+"    "
+msgstr ""
+
+#: app/templates/account/signup.html:35
+#, python-format
+msgid ""
+"You are about to use your %(provider_name)s account to login. We first need "
+"a few more details for vetting."
+msgstr ""
+
+#: app/templates/account/signup.html:37
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in here</"
+"a>."
+msgstr ""
+
+#: app/templates/account/signup_closed.html:6
+#: app/templates/account/signup_closed.html:12
+msgid "Sign Up Closed"
+msgstr ""
+
+#: app/templates/account/signup_closed.html:14
+msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: app/templates/account/verification_sent.html:5
+#: app/templates/account/verification_sent.html:9
+#: app/templates/account/verified_email_required.html:7
+#: app/templates/account/verified_email_required.html:12
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: app/templates/account/verified_email_required.html:19
+msgid ""
+"This part of the site requires us to verify that\n"
+"    you are who you claim to be. For this purpose, we require that you\n"
+"    verify ownership of your e-mail address. "
+msgstr ""
+
+#: app/templates/account/verified_email_required.html:23
+msgid ""
+"We have sent an e-mail to you for\n"
+"    verification. Please click on the link inside this e-mail. Please\n"
+"    contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: app/templates/account/verified_email_required.html:27
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""
+
+#: app/templates/account/email/email_confirmation_message.txt:5
+#, python-format
+msgid ""
+"\n"
+"Dear Exchangivist,\n"
+"\n"
+"Thank you for signing up to Exchangivist. Please confirm your email address "
+"by clicking on the link below.\n"
+"\n"
+"%(activate_url)s\n"
+"\n"
+"The Exchangivist team\n"
+"\n"
+msgstr ""
+
+#: app/templates/account/email/password_reset_key_message.txt:2
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear Exchangivist,\n"
+"\n"
+"You are receiving this e-mail because you or someone else has requested a "
+"password reset for your user account: %(site_domain)s for Exchangivist.\n"
+"\n"
+"If you did not request a password reset you can safetly ignore this email.\n"
+"\n"
+"If you would like to reset your password please click the link below.\n"
+"\n"
+"%(password_reset_url)s\n"
+"\n"
+"In case you forgot, your username is %(username)s.\n"
+"\n"
+"Thanks for using our site!\n"
+"\n"
+"The Exchangivist team\n"
+msgstr ""
+
+#: app/templates/account/email/password_reset_key_subject.txt:3
+msgid "Password Reset E-mail"
+msgstr ""
+
+#: app/templates/account/email/user_confirmed_email_subject.txt:3
+msgid "Activate User"
+msgstr ""
+
+#: app/templates/account/messages/cannot_delete_primary_email.txt:2
+#, python-format
+msgid "You cannot remove your primary e-mail address (%(email)s)."
+msgstr ""
+
+#: app/templates/account/messages/email_confirmation_sent.txt:2
+#, python-format
+msgid "Confirmation e-mail sent to %(email)s."
+msgstr ""
+
+#: app/templates/account/messages/email_confirmed.txt:2
+#, python-format
+msgid "You have confirmed %(email)s."
+msgstr ""
+
+#: app/templates/account/messages/email_deleted.txt:2
+#, python-format
+msgid "Removed e-mail address %(email)s."
+msgstr ""
+
+#: app/templates/account/messages/logged_in.txt:4
+#, python-format
+msgid "Successfully signed in as %(name)s."
+msgstr ""
+
+#: app/templates/account/messages/logged_out.txt:2
+msgid "You have signed out."
+msgstr ""
+
+#: app/templates/account/messages/password_changed.txt:2
+msgid "Password successfully changed."
+msgstr ""
+
+#: app/templates/account/messages/password_set.txt:2
+msgid "Password successfully set."
+msgstr ""
+
+#: app/templates/account/messages/primary_email_set.txt:2
+msgid "Primary e-mail address set."
+msgstr ""
+
+#: app/templates/account/messages/unverified_primary_email.txt:2
+msgid "Your primary e-mail address must be verified."
+msgstr ""
+
+#: app/templates/account/snippets/already_logged_in.html:5
+msgid "Note"
+msgstr ""
+
+#: app/templates/account/snippets/already_logged_in.html:5
+#, python-format
+msgid "you are already logged in as %(user_display)s."
+msgstr ""
+
+#: app/templates/admin/auth/user/vet_user.html:7
+msgid "Home"
+msgstr ""
+
+#: app/templates/admin/auth/user/vet_user.html:11
+msgid "Vet User"
+msgstr ""
+
+#: app/templates/admin/auth/user/vet_user.html:22
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/templates/admin/auth/user/vet_user.html:43
+msgid "Update"
+msgstr ""
+
+#: app/templates/ahr/contact_us.html:5
+msgid "Exchangivist - Contact Us"
+msgstr ""
+
+#: app/templates/ahr/contact_us.html:11
+msgid ""
+"\n"
+"      <h4>Thanks for your interest in Exchangivist beta.</h4><br/>\n"
+"      <p>Exchangivist is a new innovative platform, which aims to create "
+"better in the world by crowdsourcing human rights. The site it currently in "
+"beta, so if you have any thoughts or comments on how we can make it better, "
+"we would love to hear from you, and can be contacted using the information "
+"below.</p>\n"
+"      "
+msgstr ""
+
+#: app/templates/ahr/contact_us.html:16
+msgid "Address"
+msgstr ""
+
+#: app/templates/ahr/contact_us.html:21
+msgid "Email"
+msgstr ""
+
+#: app/templates/ahr/home.html:5
+msgid "Exchangivist"
+msgstr ""
+
+#: app/templates/ahr/home.html:11
+msgid ""
+"\n"
+"    Exchangivist is a new innovative platform which is crowdsourcing the "
+"fight for human rights.\n"
+"    It is an online portal that connects people and communities around the "
+"World with the tools\n"
+"    and expertise they need to advance human rights in closed societies.\n"
+"    "
+msgstr ""
+
+#: app/templates/ahr/home.html:46
+msgid "I'M AN ACTIVIST"
+msgstr ""
+
+#: app/templates/ahr/home.html:49
+msgid "I'M READY TO HELP"
+msgstr ""
+
+#: app/templates/ahr/home.html:62
+msgid " SIGN UP WITH TWITTER"
+msgstr ""
+
+#: app/templates/ahr/home.html:68
+msgid "SIGN UP WITH FACEBOOK"
+msgstr ""
+
+#: app/templates/ahr/home.html:74
+msgid "SIGN UP WITH GOOGLE PLUS"
+msgstr ""
+
+#: app/templates/ahr/how_it_works_private.html:5
+#: app/templates/ahr/how_it_works_public.html:5
+msgid "Exchangivist - How It Works"
+msgstr ""
+
+#: app/templates/ahr/how_it_works_private.html:21
+msgid ""
+"\n"
+"      <h1>How It Works</h1>\n"
+"      <p>Welcome to Exchangivist, the online portal giving users the ability "
+"to connect with one another. Now that you’ve joined our community as an "
+"Exchangivist, it’s very easy to get started.</p>\n"
+"      <h4>Creating an offer to help:</h4>\n"
+"\n"
+"      <p>To offer your expertise, skills, or services, visit the ‘ Exchange’ "
+"page and then click on the ‘Create an Offer’ button. Make sure to add a "
+"title to your post that will tell users how you can help. Select as many "
+"options as you feel you need from the drop down menu to make it easier for "
+"other users to see what you are offering; the more detail you add the "
+"better. This also helps Exchangivist find matches for its users.</p>\n"
+"\n"
+"      <h4 >Requesting help:</h4>\n"
+"      <p>To ask for help with expertise, skills or services, visit the "
+"‘Exchange’ page, and then click on ‘Create a Request’ button. Make sure to "
+"add a title to your post that will help users understand what you need. "
+"Select as many options you feel you need from the drop down menu to make it "
+"easier for users to understand your post; the more detail you can add the "
+"better. This also helps Exchangivist find matches for its users.</p>\n"
+"\n"
+"      <h4>Searching for offers or requests:</h4>\n"
+"      <p>You can browse all ‘Offers’ and ‘Requests’ by visiting the "
+"Exchange. Use the search bar to search for key-words or click ‘Show Filters’ "
+"on the right-hand side of the page to filter posts based on country and "
+"skills.</p>\n"
+"\n"
+"      <h4>Replying to offers and requests:</h4>\n"
+"      <p>To respond to an Offer or Request, click on the post you would like "
+"to respond to and enter your comment below the post. To send a private "
+"message to the Exchangivist who created the post, click on the three "
+"horizontal bars at the top right of the post. The drop down menu also allows "
+"you to recommend the post to another user, rate the user, or report an "
+"abusive post.</p>\n"
+"\n"
+"      <h4>Keeping up to date:</h4>\n"
+"      <p>Exchangivist has been designed to make connecting easy, whenever "
+"someone else responds to, comments on or adds a post relevant to you, the "
+"notifications icon on the top of the page on the navigation bar will appear "
+"highlighted in red, simply click on the notifications button to see the "
+"latest notifications.</p>\n"
+"      "
+msgstr ""
+
+#: app/templates/ahr/how_it_works_public.html:11
+#, python-format
+msgid ""
+"\n"
+"        <h1>How It Works</h1>\n"
+"        <h4>What is it?</h4>\n"
+"        <p>Exchangivist is an online portal created to help make better in "
+"the world. By allowing users to offer and request, help and services, giving "
+"them the opportunity to connect with one another.</p>\n"
+"\n"
+"        <h4>Why use it?</h4>\n"
+"        <p>Exchangivist aims to make a difference in the darkest places on "
+"earth, by connecting people who both need and want to offer help. Together "
+"we can create better.</p>\n"
+"\n"
+"        <h4>Creating a profile</h4>\n"
+"        <p>To get started you will first need to sign up and create a "
+"profile. Then you you will be asked to confirm your email address. As "
+"Exchangivist is in closed beta, we will then confirm your information and "
+"assign a rating based on the information provided to us. By vetting each "
+"individual user, Exchangivist is able to protect our users and their "
+"information.</p>\n"
+"\n"
+"        <h4>Getting started & your privacy</h4>\n"
+"        <p>As soon as you have an account you will be able to login and "
+"finish creating your profile. Exchangivist users are able to choose what "
+"they make public to the community, and each user can hide any, or all "
+"information about themselves.</p>\n"
+"\n"
+"        <h4>Creating offers and requests</h4>\n"
+"        <p>Once you have completed your profile, you will be able to join "
+"the Exchange  and start posting by either creating offers or requests. You "
+"can create an offer or request using our tags and categories that make it "
+"easier to find a match for your needs or skills.</p>\n"
+"\n"
+"        <h4>Is this secure?</h4>\n"
+"        <p>First, you should remember that no computer platform is 100%% "
+"secure.  Please know that we have gone to great lengths to protect your "
+"privacy and security.  We are working with some of the best experts in the "
+"field who share and appreciate your concern for digital security.   However "
+"it is always incumbent on you to be prudent about what information you share "
+"on the Internet.</p>\n"
+"\n"
+"        <h4>Can I remain anonymous?</h4>\n"
+"        <p>Yes.  When you register you can create any screen name you like.  "
+"We will never willingly share your identifying information with anyone.  If "
+"you send a private message or post a comment only your screen name will be "
+"shared with the recipient. </p>\n"
+"\n"
+"        <h4>Are these people vetted?</h4>\n"
+"        <p>We endeavor to check each request to join Exchangivist.  During "
+"this limited beta test we know each member or a trusted colleague has "
+"vouched for them.  If a member has 3 or more “AHR Stars” you can feel "
+"confident that they can be trusted.  As the user base grows other members "
+"will rate and vouch for other users.  You will be able to use this Community "
+"Rating Stars as an additional source of confidence.</p>\n"
+"\n"
+"        <h4>About the Star Ratings</h4>\n"
+"        <p>When a new Exchangivists joins the market we use the extent of "
+"their digital presence to indicate a degree of confidence in who they are "
+"and what they can do. If you sign up with just an email address you will be "
+"given one star. The more information you provide—and we can verify – the "
+"higher your AHR Star Rating.\n"
+"        The Community Rating comes from other Exchangivist. Just like on "
+"Amazon or Ebay as you interact with other users they will have the option of "
+"expressing their confidence rating. To rate a member click on the STAR icon "
+"in their Member card.\n"
+"        You can request that your Rating be reviewed by sending an email to "
+"Info@exchangivist.org</p>\n"
+"\n"
+"        <h4>The country I want to deal with isn’t on the list.  / How do you "
+"pick the countries on Exchangivist? </h4>\n"
+"        <p>Freedom House has created a list of the Not Free and Partially "
+"Free counties.  Of these we are currently supporting those with populations "
+"over 10 million.  As Exchangivist expands we look forward to helping in "
+"additional Not Free and Partially Free countries.  Given limited resources "
+"we have chosen to focus on the largest dictatorships.  We focus on closed "
+"societies because free and mostly free countries have alternates means of "
+"addressing their human rights short comings.</p>\n"
+"\n"
+"        <h4>What am I allowed to post?</h4>\n"
+"        <p>You may post anything that can reasonably be answered and "
+"addresses a human rights abuse or short coming.  However you should remember "
+"that Requests for advice, contacts, services, or knowledge are much more "
+"readily supported than requests for equipment and other hardware that would "
+"need to be shipped internationally or would involve import/export "
+"restrictions in the effected countries.</p>\n"
+"\n"
+"        <h4>Is anything off limits?</h4>\n"
+"        <p>Anything that incites violence, hatred, religious intolerance, or "
+"sectarian division.   At this time Exchangivist does not support requests "
+"for donations or monetary transfers. </p>\n"
+"\n"
+"        <h4>How can I improve the response I get to a request or offer?</"
+"h4>\n"
+"        <p>Be as specific as possible.  If you need a camera indicate "
+"whether you need a video or regular camera.  If you need a lawyer for an "
+"asylum request are you hoping to request political asylum?  The more "
+"specific you are the easier it will be for someone to know if and how they "
+"can help.</p>\n"
+"\n"
+"        <h4>Is the board moderated?</h4>\n"
+"        <p>The Exchangivist reserves the right to delete any offending or "
+"inappropriate posts.  In most cases we will attempt to contact the user "
+"before removing a post but that may not always be feasible.\n"
+"        In the event of duplicate posts we may merge or delete posts as "
+"necessary.</p>\n"
+"        "
+msgstr ""
+
+#: app/templates/ahr/privacy.html:6
+msgid "Exchangivist - Privacy"
+msgstr ""
+
+#: app/templates/ahr/privacy.html:14
+#, python-format
+msgid ""
+"\n"
+"      <p>Welcome to Exchangivist.org.</p>\n"
+"\n"
+"      <p>\n"
+"      Advancing Human Rights and Exchangivist.org is committed to protecting "
+"the privacy of visitors to our website.\n"
+"      When you visit Exchangivist.org the site automatically recognizes your "
+"domain name,\n"
+"      IP address and the type of web browser you are using. Exchangivist.org "
+"does not acquire your e-mail address or other\n"
+"      information without your knowledge. We use the information we collect "
+"as you browse our site to manage the site more\n"
+"      efficiently and improve its content and functionality.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"      <strong>Cookies.</strong> The Exchangivist.org web server may ask your "
+"browser to store a “cookie,” which is a small piece of information\n"
+"      that the web server uses to keep track of the use preferences.\n"
+"      Cookies are not used to save or retrieve any sensitive data about "
+"visitors to the site.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"      <strong>Access to Registration Information.</strong> Exchangivist.org "
+"will under no circumstances give access to your registration\n"
+"      information to any third party for any purpose, either commercial or "
+"otherwise.\n"
+"      Your information is maintained on a secure web server in what we "
+"believe to be a well-protected environment.\n"
+"      Neither Exchangivist.org nor any website operation, however, can "
+"guarantee that your information will\n"
+"      remain secure from unauthorized access.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"      <strong>Use of Public Information.</strong> By posting communications "
+"on or through the website,\n"
+"      you automatically grant Exchangivist.org a royalty-free, perpetual, "
+"irrevocable,\n"
+"      non-exclusive license to use, reproduce, modify, publish, edit, "
+"translate, distribute,\n"
+"      perform, and display the information alone or as part of other works "
+"in any form, media,\n"
+"      or technology whether now known or subsequently developed. The "
+"foregoing grants shall\n"
+"      include the right to exploit any proprietary rights in such "
+"communication, including but\n"
+"      not limited to rights upon copyright, trademark, service mark or "
+"patent laws under any relevant jurisdiction.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"      <strong>Links to Other Websites.</strong> Exchangivist.org website "
+"contains many links to other websites.\n"
+"      Exchangivist.org is not responsible for the privacy practices or the "
+"content of such websites.\n"
+"      No Exchangivist.org personal information resulting from user "
+"registration is shared with such websites,\n"
+"      although Exchangivist.org may share aggregate data with such websites "
+"(such as how many people use our site).\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"      Thank you for visiting our website and reviewing our Privacy Policy. "
+"This website,\n"
+"      Exchangivist.org (\"Site\"), is operated on behalf of Advancing Human "
+"Rights\n"
+"      (\"<strong>Exchangivist,</strong>\" \"<strong>we,</strong>\" "
+"\"<strong>us,</strong>\" and \"<strong>our</strong>\").\n"
+"      Exchangivist.org is an interactive\n"
+"      ite where people and communities can find the skills, expertise and "
+"tools\n"
+"      they need to advance human rights around the world.\n"
+"      By using or accessing this site, you agree to the terms and practices "
+"of our Privacy Policy.\n"
+"      Although being a part of Exchangivist.org means sharing information "
+"about\n"
+"      yourself and communicating with us, other Site members and groups, and "
+"the\n"
+"      public at large, your privacy is important to us.\n"
+"      The use of this Site and its services is subject to our terms and "
+"conditions,\n"
+"      which you may access at any time by clicking on the link at the bottom "
+"of any page on this Site.\n"
+"      As with any other site on the Internet, we collect certain information "
+"about\n"
+"      you that may identify you personally through your use of this Site and "
+"its services, such as:\n"
+"      Profile Information. If you choose to use certain features and "
+"functions of\n"
+"      the Site, we ask you to provide certain personally identifiable "
+"information about\n"
+"      yourself without which some of these features cannot work. By "
+"providing such information,\n"
+"      you consent to our collection and use of it, as described in this "
+"Privacy Policy\n"
+"      and in accordance with the Terms and Conditions.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"      The Profile Information that we collect includes:\n"
+"      Mandatory basic information that is provided during our profile "
+"creation process\n"
+"      Optional additional information for your personal profile\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"      We do not collect any of this information about you when you visit the "
+"Site\n"
+"      unless you give us that information.\n"
+"      Information From Other Members. We may collect information about you "
+"from\n"
+"      other Exchangivist.org members such as if you were referred by another "
+"Exchangivist.\n"
+"      We use personal information that you give us to provide services that "
+"you\n"
+"      request; respond to your questions or inquiries; identify areas of "
+"member\n"
+"      interest; consider potential improvements to our Site; and provide a "
+"forum\n"
+"      to connect people and organizations.\n"
+"      We do not sell or trade or provide your personal information to "
+"marketing\n"
+"      companies or information brokers or any other organization or "
+"individual for commercial or marketing purposes.\n"
+"      You may control the visibility of most of the information you share "
+"with\n"
+"      others on the Site and change or remove your profile information at "
+"any time through your settings.\n"
+"      There are links on this Site to other sites of interest. We do not "
+"endorse\n"
+"      the content of these sites or guarantee that they will abide by this "
+"Privacy\n"
+"      Policy. Your use of such linked sites is subject to the terms and "
+"conditions\n"
+"      and privacy policies of the providers of those sites. We encourage our "
+"members\n"
+"      to be aware when they leave our Site and to read the privacy policies "
+"of each\n"
+"      site that collects personal information.\n"
+"      We do our best to keep your information secure, but you must actively\n"
+"      participate in the process of keeping your information safe.\n"
+"      We keep your account information on a secured server behind a "
+"firewall.\n"
+"      When you enter sensitive information (like your password), the "
+"information\n"
+"      is encrypted using secure socket layer technology (SSL). We also "
+"reserve\n"
+"      the right to analyze accounts for fraudulent or irregular behavior and "
+"we\n"
+"      may limit use of site features in response to possible signs of "
+"abuse.\n"
+"      Although you can change your privacy options to limit outside access "
+"to\n"
+"      your account, please be aware that none of these security measures "
+"are\n"
+"      impermeable. We cannot control the actions of other Site members and "
+"third\n"
+"      party organizations. You can reduce the inherent risks associated "
+"with\n"
+"      social networking by exercising common sense and discretion: for "
+"example,\n"
+"      you should choose a strong password, use different passwords for "
+"different\n"
+"      websites and services, and use updated antivirus software. You should\n"
+"      report any security violations to us as outlined in the section "
+"below.\n"
+"      We may change this Privacy Policy from time to time. If we do make a "
+"change,\n"
+"      we will announce and post the revised Privacy Policy on this Site.\n"
+"      We encourage you to review this Privacy Policy periodically.\n"
+"      If you continue to use this Site after the announcement of the revised "
+"Privacy Policy,\n"
+"      you will be deemed to have agreed to the changed terms and practices. "
+"Questions,\n"
+"      comments, or complaints about our Privacy Policy should be submitted "
+"to us by contacting us\n"
+"      <a href=\"%(contactus_url)s\">here</a>.\n"
+"      <p>\n"
+"\n"
+"      "
+msgstr ""
+
+#: app/templates/ahr/terms_and_conditions.html:5
+msgid "Exchangivist - Terms and Conditions"
+msgstr ""
+
+#: app/templates/ahr/terms_and_conditions.html:12
+msgid ""
+"\n"
+"      <p>\n"
+"      By registering on Exchangivist.org to become a member or by accessing\n"
+"      the site or any of its Services, you agree not to engage in violence, "
+"illegal\n"
+"      activity, discrimination, or hate.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"      By accessing the site or any of its services, regardless of whether "
+"you\n"
+"      register on as an Exchangivist, you agree to enter into a legally "
+"binding\n"
+"      agreement with Exchangivist.org to comply with these Terms and "
+"Conditions\n"
+"      and our Privacy Policy. If you do not agree with these Terms and "
+"Conditions\n"
+"      or our Privacy Policy, you should not use, register for, access, or "
+"view\n"
+"      the site or any of its services.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"      Exchanivist.org offers a collection of services on or through this "
+"site to\n"
+"      help connect people and communities to the skills and expertise they "
+"need\n"
+"      to advance human rights around the world.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"       Exchangivist.org.org is an interactive site provided for the benefit "
+"of\n"
+"       the world-at-large, connecting people to turn good intentions into "
+"action.\n"
+"       However, as in most community forums, progress only occurs if "
+"everyone\n"
+"       cooperates and abides by the rules. These Terms and Conditions define "
+"the\n"
+"       obligations that you agree to adopt in exchange for the right to use "
+"our\n"
+"       site and services.\n"
+"      </p>\n"
+"\n"
+"      <p>\n"
+"        You agree to comply with all applicable laws, these Terms and "
+"Conditions,\n"
+"        and our Privacy Policy.\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        As a social network, the majority of the content made available by\n"
+"        Exchangivist.org is generated and posted by Users of the site.\n"
+"        Our mission is to provide a safe space on the web, however, we "
+"consider\n"
+"        it to be the responsibility of all Users of the site to help make "
+"the\n"
+"        web a safe and trusted place.<strong> Therefore, each User owns and "
+"is responsible\n"
+"        for the content that s/he posts on our site, including information\n"
+"        that s/he publishes and makes available for other Users to view.</"
+"strong>\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        <strong>Representations and Warranties.</strong> By posting content "
+"on our Site, you\n"
+"        represent and warrant that:\n"
+"        <ul>\n"
+"        <li>\n"
+"        You are entitled to submit the content;\n"
+"        </li>\n"
+"        <li>\n"
+"        The information is accurate;\n"
+"        </li>\n"
+"        <li>\n"
+"        The information is not confidential;\n"
+"        </li>\n"
+"        <li>\n"
+"        The posting of the information is not in violation of any "
+"applicable\n"
+"        laws, contractual restrictions or other third party rights.\n"
+"        </li>\n"
+"        </ul>\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        It is solely your responsibility to ensure the accuracy of your\n"
+"        profile and submitted content and to update that information as "
+"appropriate.\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        By posting communications on or through the website, you "
+"automatically\n"
+"        grant Exchangivist.org a royalty-free, perpetual, irrevocable,\n"
+"        non-exclusive license to use, reproduce, modify, publish, edit,\n"
+"        translate, distribute, perform, and display the information alone\n"
+"        or as part of other works in any form, media, or technology whether\n"
+"        now known or subsequently developed. The foregoing grants shall\n"
+"        include the right to exploit any proprietary rights in such "
+"communication,\n"
+"        including but not limited to rights upon copyright, trademark,\n"
+"        service mark or patent laws under any relevant jurisdiction.\n"
+"        The site includes various forums and blogs where you can post your\n"
+"        observations and comments on designated topics. Exchangivist.org\n"
+"        cannot guarantee that other Users will not use the ideas and\n"
+"        information that you share. Therefore, if you have an idea or\n"
+"        information that you would like to keep confidential and/or do\n"
+"        not want others to use, do not post it on the Site.\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        Exchangivist.org is not responsible for a User's misuse or\n"
+"        misappropriation of any content or information that you post\n"
+"        in any forums, blogs, and other sections of the Site.\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        Our reporting system allows registered users to report posted\n"
+"        content that is abusive. To ensure the quality and appropriateness\n"
+"        of our site content, Exchangivist reserves the right to remove\n"
+"        any content for any reason.\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        As a condition to access and use the Site and Services of "
+"Exchangivist,\n"
+"        you agree to undertake the following:\n"
+"        <ul>\n"
+"        <li>\n"
+"        comply with all applicable laws, including without limitation, "
+"privacy laws, employment laws, intellectual property laws, export control "
+"laws, tax laws, and regulatory requirements;\n"
+"        </li>\n"
+"        <li>\n"
+"        provide accurate information to us and update it as necessary;\n"
+"        </li>\n"
+"        <li>\n"
+"        review and comply with our Privacy Policy\n"
+"        </li>\n"
+"        <li>\n"
+"        review and comply with these Terms and Conditions;\n"
+"        </li>\n"
+"        <li>\n"
+"        use the Site and its Services in a professional manner; and\n"
+"        </li>\n"
+"        <li>\n"
+"        As a condition to access and use the Site and Services of "
+"Exchangivist, you agree not to do the following:\n"
+"        </li>\n"
+"        <li>\n"
+"        use the Site or Services for any purpose or in any manner that "
+"violates any local, state or federal law or regulation or that violates the "
+"law or regulation of any foreign government;\n"
+"        </li>\n"
+"        <li>\n"
+"        submit, upload, post, email, or otherwise transmit any content that "
+"is illegal, harmful, threatening, abusive, harassing, tortious, defamatory, "
+"vulgar, obscene, libelous, pornographic, sexually explicit, invasive of "
+"another's privacy, hateful, and/or racially, ethnically, or otherwise "
+"offensive;\n"
+"        </li>\n"
+"        <li>\n"
+"        submit, upload, post, email, or otherwise transmit any unsolicited "
+"or unauthorized advertising or promotional materials, including without "
+"limitation, initiation or perpetuation of any \"Spam,\" \"Junk Mail,\" or "
+"any other potentially objectionable form of unsolicited communication;\n"
+"        </li>\n"
+"        <li>\n"
+"        submit, upload, post, email, or otherwise transmit any content that "
+"infringes any patent, trademark, trade secret, copyright, or other "
+"intellectual property right, privacy right, or publicity right of any person "
+"or entity;\n"
+"        </li>\n"
+"        <li>\n"
+"        submit, upload, post, email, or otherwise transmit without "
+"authorization any material that contains personal or private information "
+"concerning any third party person or entity, including without limitation, "
+"phone number(s) or addresses, credit/debit cards, calling cards, account "
+"numbers, Social Security numbers, passwords, or other similar information;\n"
+"        </li>\n"
+"        <li>\n"
+"        submit, upload, post, email, or otherwise transmit any material that "
+"contains software viruses or any other code, files or programs designed or "
+"known to disable, interrupt or limit the functionality of any computer "
+"hardware, computer software or telecommunications equipment or facilities;\n"
+"        </li>\n"
+"        <li>\n"
+"        use any kind of automated tool, including but not limited to "
+"scripts, bots and other software, to try to collect information from the "
+"Site or to break into any of its servers; or\n"
+"        </li>\n"
+"        <li>\n"
+"        disrupt or interfere (either directly or indirectly, intentionally "
+"or unintentionally) with the Site or Services in any manner that may "
+"materially adversely affect Exchangivist, you or any third party;\n"
+"        </li>\n"
+"        <li>\n"
+"        impersonate another person or entity, including without limitation, "
+"a representative of Exchangivist or its officers, directors, employees or "
+"agents; falsely represent or misrepresent your affiliation with another "
+"person or entity; or forge headers or otherwise manipulate identifiers that "
+"would disguise the origin of any content transmitted through the Site or "
+"Services;\n"
+"        </li>\n"
+"        </ul>\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        To use certain services, you must register with the site and "
+"provide\n"
+"        certain personal information. You must also establish a password.\n"
+"        You agree that you will be responsible for maintaining your password "
+"as\n"
+"        confidential and for any activity that occurs as a result of your\n"
+"        enabling or permitting another person or entity to use your "
+"password.\n"
+"        It is your responsibility to notify Exchangivist in the event that "
+"(i)\n"
+"        your password is lost or stolen, or (ii) you become aware of any\n"
+"        unauthorized use of your password or of any other breach of "
+"security\n"
+"        that might affect the Site or its Services. Exchangivist.org is not\n"
+"        responsible for any loss or damage arising from your failure to "
+"comply\n"
+"        with the provisions of this section.\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        You should carefully review our full which is incorporated by "
+"reference\n"
+"        herein, before deciding whether to become a User.\n"
+"        The Privacy Policy lays out in detail our policy regarding the use "
+"and\n"
+"        storage of your information. By using the Site, you agree to the "
+"terms\n"
+"        and practices of the Privacy Policy. You also acknowledge that any "
+"submission\n"
+"        of personal information, data, photos, statements, or other content "
+"is done so voluntarily.\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        <strong>\n"
+"        The use of the Site and its Services is solely at your own risk.\n"
+"        The Site and its Services are provided on an \"as is\" and \"as "
+"available\"\n"
+"        basis. Exchangivist.org expressly disclaims all warranties of any "
+"kind\n"
+"        with respect to the Site and its Services, whether expressed or "
+"implied,\n"
+"        including implied warranties of merchantability, fitness for a "
+"particular purpose, and noninfringement.\n"
+"         Some states do not allow the exclusion of implied warranties, so "
+"the above exclusions may not apply to you.\n"
+"\n"
+"        <br/>\n"
+"\n"
+"\n"
+"        Exchangivist makes no warranty that the Site or Services will meet "
+"your\n"
+"        requirements; that they will be uninterrupted, timely, secure, "
+"current,\n"
+"        accurate, complete, or error-free; or that the results that may be "
+"obtained\n"
+"        by use of the Site or Services will be accurate or reliable. "
+"Exchangivist.org\n"
+"        is not responsible for disclosing or verifying the identity of any "
+"Users.\n"
+"        You understand and acknowledge that your sole and exclusive remedy "
+"with\n"
+"        respect to any defect in or dissatisfaction with the Site or "
+"Services is\n"
+"        to cease to use the Site or Services. You may have other rights, "
+"which may vary from state to state.\n"
+"        </strong>\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        <strong>\n"
+"        Additionally, since some information may not be appropriate or "
+"satisfactory\n"
+"        or your use, you should verify all information before relying on it. "
+"Any\n"
+"        decisions made based on information contained in the Site, "
+"including\n"
+"        information received through use of the Site or Services, should be "
+"used at your own discretion.\n"
+"        </strong>\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        Users who publish personal information or information regarding "
+"their\n"
+"        rganization on this site understand the risks they are exposing "
+"themselves\n"
+"        to by sharing their information and making it public. It is possible "
+"that\n"
+"        some people or organizations that are not affiliated with our site "
+"will\n"
+"        take this information from Exchangivist.org.org and contact you "
+"with\n"
+"        inappropriate messages. Exchangivist is not responsible for damages "
+"caused\n"
+"        by inappropriate use of the information published by Users.\n"
+"        As mentioned above, we can only remove information from the Site or\n"
+"        limit a User's privileges, but we are unable to take action beyond "
+"this Site.\n"
+"        </p>\n"
+"\n"
+"        <p>\n"
+"        You expressly understand and agree that Exchangivist shall not be "
+"liable\n"
+"        for any direct, indirect, incidental, special, consequential, or "
+"exemplary\n"
+"        damages, including without limitation, damages for loss of profits, "
+"goodwill,\n"
+"        use, data loss, or other losses  resulting from: (i) the use or "
+"inability\n"
+"        to use the Site or Services; (ii) any link provided in connection "
+"with the\n"
+"        Site or Services; (iii) your reliance on any portion of the Site or "
+"Services;\n"
+"        (iv) the interruption, suspension or termination of the Site or any\n"
+"        Services hereunder; (v) the timeliness, deletion, misdelivery, or "
+"failure\n"
+"        to post or store any information; and/or (vi) any matter otherwise\n"
+"        related to your use of the Site or Services.\n"
+"        </p>\n"
+"\n"
+"\n"
+"        <p>\n"
+"        You acknowledge that Exchangivist may establish limits concerning "
+"use\n"
+"        of the Service, including the maximum number of days that content "
+"will\n"
+"        be retained by the Service; the maximum number and size of "
+"postings,\n"
+"        email messages, or other content that may be transmitted or stored "
+"by\n"
+"        the Service; and the frequency with which you may access the "
+"Service\n"
+"        </p>\n"
+"        "
+msgstr ""
+
+#: app/templates/market/comment_form.html:9
+#: app/templates/market/clientside/messagedialog.html:27
+#: app/templates/market/clientside/recommenddialog.html:32
+#: app/templates/market/clientside/reportdialog.html:24
+#: app/templates/market/clientside/reportuserdialog.html:24
+msgid "Send"
+msgstr ""
+
+#: app/templates/market/market.html:19 app/templates/market/market.html:20
+msgid "Create an offer"
+msgstr ""
+
+#: app/templates/market/market.html:23 app/templates/market/market.html:24
+msgid "Create a request"
+msgstr ""
+
+#: app/templates/market/market.html:44 app/templates/market/market.html:45
+msgid "Search by keyword for offers and requests"
+msgstr ""
+
+#: app/templates/market/market.html:48
+msgid "Search"
+msgstr ""
+
+#: app/templates/market/market.html:62
+msgid "Back"
+msgstr ""
+
+#: app/templates/market/notifications.html:30
+msgid "More"
+msgstr ""
+
+#: app/templates/market/notifications.html:52
+#: app/templates/market/clientside/notifications.html:13
+msgid "updated"
+msgstr ""
+
+#: app/templates/market/notifications.html:52
+#: app/templates/market/clientside/notifications.html:13
+msgid "posted"
+msgstr ""
+
+#: app/templates/market/notifications.html:52
+msgid "the"
+msgstr ""
+
+#: app/templates/market/notifications.html:61
+msgid "commented on"
+msgstr ""
+
+#: app/templates/market/notifications.html:61
+#: app/templates/market/clientside/notifications.html:16
+msgid "your"
+msgstr ""
+
+#: app/templates/market/clientside/commentadd.html:7
+msgid "Post a comment"
+msgstr ""
+
+#: app/templates/market/clientside/commentadd.html:10
+msgid "Comment"
+msgstr ""
+
+#: app/templates/market/clientside/commentview.html:12
+msgid "By"
+msgstr ""
+
+#: app/templates/market/clientside/commentview.html:12
+msgid "at"
+msgstr ""
+
+#: app/templates/market/clientside/expdate.html:15
+msgid "Never expire"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:12
+#: app/templates/market/clientside/filters.html:245
+msgid "Show Filters"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:25
+#: app/templates/market/clientside/filters.html:43
+#: app/templates/market/clientside/filters.html:59
+#: app/templates/market/clientside/filters.html:75
+#: app/templates/market/clientside/typeahead.html:31
+msgid "All"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:29
+msgid "Offers"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:33
+msgid "Requests"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:40
+#: app/templates/users/user_profile.html:194
+msgid "Issues"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:46
+#: app/templates/market/clientside/filters.html:62
+#: app/templates/market/clientside/filters.html:78
+msgid "Custom"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:49
+#: app/templates/market/clientside/filters.html:65
+#: app/templates/market/clientside/filters.html:81
+msgid "Default"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:56
+#: app/templates/users/user_profile.html:207
+msgid "Countries"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:72
+#: app/templates/users/user_profile.html:220
+msgid "Skills"
+msgstr ""
+
+#: app/templates/market/clientside/filters.html:255
+msgid "Hide Filters"
+msgstr ""
+
+#: app/templates/market/clientside/marketitem.html:59
+#: app/templates/market/clientside/marketitem.html:221
+msgid "More ..."
+msgstr ""
+
+#: app/templates/market/clientside/marketitem.html:120
+msgid "Are you sure you want yo delete your comment?"
+msgstr ""
+
+#: app/templates/market/clientside/marketitem.html:174
+msgid "Are you sure you want to delete this item?"
+msgstr ""
+
+#: app/templates/market/clientside/marketitem.html:214
+msgid "Less ..."
+msgstr ""
+
+#: app/templates/market/clientside/marketuser.html:17
+#: app/templates/market/clientside/actions/item_actions.html:14
+#: app/templates/market/clientside/actions/user_actions.html:8
+#: app/templates/market/clientside/actions/user_actions.html:13
+msgid "Recommend"
+msgstr ""
+
+#: app/templates/market/clientside/marketuser.html:18
+#: app/templates/market/clientside/actions/item_actions.html:21
+msgid "Private message"
+msgstr ""
+
+#: app/templates/market/clientside/marketuser.html:19
+msgid "Rate user"
+msgstr ""
+
+#: app/templates/market/clientside/marketuser.html:37
+msgid "Areas Of Interest"
+msgstr ""
+
+#: app/templates/market/clientside/messagedialog.html:9
+msgid "New message to "
+msgstr ""
+
+#: app/templates/market/clientside/messagedialog.html:13
+#: app/templates/market/clientside/recommenddialog.html:18
+#: app/templates/postman/base_folder.html:76
+msgid "Subject"
+msgstr ""
+
+#: app/templates/market/clientside/messagedialog.html:17
+#: app/templates/market/clientside/recommenddialog.html:22
+#: app/templates/market/clientside/reportdialog.html:14
+#: app/templates/market/clientside/reportuserdialog.html:14
+msgid "Message"
+msgstr ""
+
+#: app/templates/market/clientside/messagedialog.html:24
+#: app/templates/market/clientside/ratedialog.html:70
+#: app/templates/market/clientside/recommenddialog.html:29
+#: app/templates/market/clientside/reportdialog.html:21
+#: app/templates/market/clientside/reportuserdialog.html:21
+msgid "Cancel"
+msgstr ""
+
+#: app/templates/market/clientside/messagedialog.html:88
+msgid ". Please try again."
+msgstr ""
+
+#: app/templates/market/clientside/messagedialog.html:93
+msgid "Please provide a subject and message."
+msgstr ""
+
+#: app/templates/market/clientside/notifications.html:16
+msgid "commented on "
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:9
+msgid "OFFER A SERVICE"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:33
+#: app/templates/market/clientside/requestdialog.html:31
+#: app/templates/users/user_settings.html:321
+msgid "Save"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:115
+msgid "I can help to advance freedom of:"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:124
+msgid "Please enter the name of the countries where you can help"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:132
+msgid "Please enter the skills you have to offer"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:140
+#: app/templates/market/clientside/requestdialog.html:120
+msgid "Expiry date"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:147
+#: app/templates/market/clientside/requestdialog.html:126
+msgid "Never expires"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:156
+#: app/templates/market/clientside/requestdialog.html:135
+msgid "Title of post"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:166
+msgid "Please give details of what you can help with?"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:181
+#: app/templates/market/clientside/requestdialog.html:154
+msgid "Unable to connect to the server. please try again in a few minutes"
+msgstr ""
+
+#: app/templates/market/clientside/offerdialog.html:195
+#: app/templates/market/clientside/requestdialog.html:166
+msgid "Are you sure you want to close this dialog?"
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:10
+#: app/templates/market/clientside/actions/item_actions.html:41
+#: app/templates/market/clientside/actions/user_actions.html:32
+msgid "Rate"
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:21
+msgid "Rating(s)"
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:33
+msgid "One star "
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:40
+msgid "Two stars"
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:47
+msgid "Three stars"
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:54
+msgid "Four stars"
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:61
+msgid "Five stars"
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:73
+msgid "Submit"
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:126
+msgid "You have to select a rateing."
+msgstr ""
+
+#: app/templates/market/clientside/ratedialog.html:152
+msgid "Rating failed."
+msgstr ""
+
+#: app/templates/market/clientside/recommenddialog.html:9
+msgid "Recommed this"
+msgstr ""
+
+#: app/templates/market/clientside/recommenddialog.html:13
+msgid "To registered user"
+msgstr ""
+
+#: app/templates/market/clientside/recommenddialog.html:113
+msgid "Failed to send message"
+msgstr ""
+
+#: app/templates/market/clientside/recommenddialog.html:117
+msgid "Please enter both a subject and a message."
+msgstr ""
+
+#: app/templates/market/clientside/reportdialog.html:9
+msgid "Report Post"
+msgstr ""
+
+#: app/templates/market/clientside/reportdialog.html:60
+#: app/templates/market/clientside/reportuserdialog.html:61
+msgid "Unable to send report. please try again"
+msgstr ""
+
+#: app/templates/market/clientside/reportuserdialog.html:9
+msgid "Report User "
+msgstr ""
+
+#: app/templates/market/clientside/requestdialog.html:9
+msgid "REQUEST A SERVICE"
+msgstr ""
+
+#: app/templates/market/clientside/requestdialog.html:108
+msgid "I need help to advance freedom of:"
+msgstr ""
+
+#: app/templates/market/clientside/requestdialog.html:114
+msgid "Please enter the name of the countries where you need help"
+msgstr ""
+
+#: app/templates/market/clientside/requestdialog.html:140
+msgid "Please give details of what you need help with?"
+msgstr ""
+
+#: app/templates/market/clientside/typeahead.html:29
+msgid "Click here to see your choices"
+msgstr ""
+
+#: app/templates/market/clientside/typeahead.html:33
+msgid "Defaults"
+msgstr ""
+
+#: app/templates/market/clientside/typeahead.html:35
+msgid "None"
+msgstr ""
+
+#: app/templates/market/clientside/userprofile.html:12
+msgid "Community rating:"
+msgstr ""
+
+#: app/templates/market/clientside/userprofile.html:20
+#: app/templates/market/clientside/userprofile.html:30
+msgid "Stars"
+msgstr ""
+
+#: app/templates/market/clientside/userprofile.html:21
+#: app/templates/users/user_profile.html:61
+msgid "votes"
+msgstr ""
+
+#: app/templates/market/clientside/userprofile.html:24
+#: app/templates/users/user_profile.html:94
+msgid "Nationality"
+msgstr ""
+
+#: app/templates/market/clientside/userprofile.html:27
+#: app/templates/users/user_profile.html:105
+msgid "Country of residence"
+msgstr ""
+
+#: app/templates/market/clientside/userprofile.html:30
+msgid "AHR rating"
+msgstr ""
+
+#: app/templates/market/clientside/userprofile.html:36
+msgid ""
+"\n"
+"      For your own safety and security, do not share personal contact "
+"information\n"
+"      (such as your phone number, address, email address, etc.) with other "
+"users.\n"
+"      Exchangivist also prohibits abusive language or harassment.\n"
+"      To report an abusive user,\n"
+"      "
+msgstr ""
+
+#: app/templates/market/clientside/userprofile.html:42
+msgid "click here"
+msgstr ""
+
+#: app/templates/market/clientside/actions/comment_actions.html:6
+msgid "Send private message"
+msgstr ""
+
+#: app/templates/market/clientside/actions/comment_actions.html:8
+#: app/templates/market/clientside/actions/user_actions.html:20
+msgid "Private Message"
+msgstr ""
+
+#: app/templates/market/clientside/actions/comment_actions.html:15
+#: app/templates/market/clientside/actions/item_actions.html:28
+#: app/templates/market/clientside/actions/user_actions.html:27
+msgid "Report"
+msgstr ""
+
+#: app/templates/market/clientside/actions/comment_actions.html:26
+#: app/templates/market/clientside/actions/item_actions.html:61
+msgid "Delete"
+msgstr ""
+
+#: app/templates/market/clientside/actions/item_actions.html:10
+msgid "recommends :"
+msgstr ""
+
+#: app/templates/market/clientside/actions/item_actions.html:11
+msgid "recommends you have a look at a post"
+msgstr ""
+
+#: app/templates/market/clientside/actions/item_actions.html:11
+msgid "by :"
+msgstr ""
+
+#: app/templates/market/clientside/actions/item_actions.html:56
+msgid "Edit"
+msgstr ""
+
+#: app/templates/market/clientside/actions/user_actions.html:9
+msgid "recommends this user :"
+msgstr ""
+
+#: app/templates/market/clientside/actions/user_actions.html:10
+msgid "recommends you have a look at user:"
+msgstr ""
+
+#: app/templates/market/copy/market_help.html:3
+msgid ""
+"\n"
+"   Welcome to the Exchange, the heart of the Exchangivist online tool. Here "
+"you\n"
+"   can browse or create offers and requests, connect with other users, "
+"comment\n"
+"   on posts and rate users. Use the search tool or filters to see all the "
+"offers and\n"
+"   requests.\n"
+msgstr ""
+
+#: app/templates/market/copy/myposts_help.html:3
+msgid ""
+"\n"
+"    Welcome to your posts, here you can easily manage your posts. \n"
+"    You can create new offers and requests, search your posts using the "
+"filters  \n"
+"    - make sure you select “Show Filters’ if you would like to use the "
+"filters. \n"
+"    You can also search your posts by typing key- words into the search "
+"bar.\n"
+msgstr ""
+
+#: app/templates/market/copy/user_help.html:3
+msgid ""
+"\n"
+"Welcome to Exchangivists, the easy way to find current users on the "
+"platform. Users choose within their own settings if they want their profile "
+"information visible. If you would like to search for an Exchangivist, simply "
+"use the search bar or filters, if you know their name type it into the "
+"search box.\n"
+msgstr ""
+
+#: app/templates/openid/login.html:6 app/templates/openid/login.html.py:10
+msgid "OpenID Sign In"
+msgstr ""
+
+#: app/templates/postman/archives.html:6
+msgid "Archived Messages"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:39
+msgid "Sorry, this page number is invalid."
+msgstr ""
+
+#: app/templates/postman/base_folder.html:52
+msgid "Trash"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:58
+msgid "Archive"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:63
+msgid "Undelete"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:71
+msgid "Sender"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:74
+msgid "Recipient"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:77
+msgid "Date"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:84
+#: app/templates/postman/base_folder.html:88
+msgid "conversation"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:85
+#: app/templates/postman/base_folder.html:89
+msgid "message"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:132
+msgid "g:i A,M j,n/j/y"
+msgstr ""
+
+#: app/templates/postman/base_folder.html:186
+msgid "No messages."
+msgstr ""
+
+#: app/templates/postman/email_user.txt:3
+msgid "Dear Exchangivist,"
+msgstr ""
+
+#: app/templates/postman/email_user.txt:5
+#, python-format
+msgid ""
+"\n"
+"    On %(date)s, you asked to send a message to the user '%(recipient)s'.\n"
+"    "
+msgstr ""
+
+#: app/templates/postman/email_user.txt:8
+#: app/templates/postman/email_visitor.txt:5
+msgid "Your message has been rejected by the moderator"
+msgstr ""
+
+#: app/templates/postman/email_user.txt:10
+#: app/templates/postman/email_visitor.txt:5
+msgid ", for the following reason:"
+msgstr ""
+
+#: app/templates/postman/email_user.txt:18
+#: app/templates/postman/email_user.txt:26
+#, python-format
+msgid ""
+"'%(sender)s' has sent you a message. To view your message please login to "
+"Exchangivsit."
+msgstr ""
+
+#: app/templates/postman/email_user.txt:19
+msgid "Your correspondent has given you an answer."
+msgstr ""
+
+#: app/templates/postman/email_user.txt:21
+#, python-format
+msgid ""
+"\n"
+"You have received a copy of a response from the user '%(sender)s'.\n"
+msgstr ""
+
+#: app/templates/postman/email_user.txt:29
+#: app/templates/postman/email_visitor.txt:14
+msgid "Note: This message is issued by an automated system. Do not reply."
+msgstr ""
+
+#: app/templates/postman/email_user_subject.txt:1
+#: app/templates/postman/email_visitor_subject.txt:1
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr ""
+
+#: app/templates/postman/email_visitor.txt:1
+msgid "Dear visitor,"
+msgstr ""
+
+#: app/templates/postman/email_visitor.txt:3
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr ""
+
+#: app/templates/postman/email_visitor.txt:8
+msgid "As a reminder, please find below the content of your message."
+msgstr ""
+
+#: app/templates/postman/email_visitor.txt:10
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender)s'."
+msgstr ""
+
+#: app/templates/postman/email_visitor.txt:11
+msgid "Please find below the answer from your correspondent."
+msgstr ""
+
+#: app/templates/postman/inbox.html:5
+msgid "Inbox"
+msgstr ""
+
+#: app/templates/postman/inbox.html:9
+msgid "Received"
+msgstr ""
+
+#: app/templates/postman/sent.html:6
+msgid "Sent Messages"
+msgstr ""
+
+#: app/templates/postman/sent.html:10
+msgid "Sent"
+msgstr ""
+
+#: app/templates/postman/trash.html:6
+msgid "Deleted Messages"
+msgstr ""
+
+#: app/templates/postman/view.html:25
+msgid "Reply"
+msgstr ""
+
+#: app/templates/postman/view.html:57
+msgid "More...."
+msgstr ""
+
+#: app/templates/postman/view.html:86
+msgid "Rejected"
+msgstr ""
+
+#: app/templates/postman/view.html:86
+msgid ":"
+msgstr ""
+
+#: app/templates/socialaccount/authentication_error.html:5
+#: app/templates/socialaccount/authentication_error.html:9
+msgid "Social Network Login Failure"
+msgstr ""
+
+#: app/templates/socialaccount/authentication_error.html:10
+msgid ""
+"An error occurred while attempting to login via your social network account."
+msgstr ""
+
+#: app/templates/socialaccount/connections.html:5
+#: app/templates/socialaccount/connections.html:8
+msgid "Account Connections"
+msgstr ""
+
+#: app/templates/socialaccount/connections.html:11
+msgid ""
+"You can sign in to your account using any of the following third party "
+"accounts:"
+msgstr ""
+
+#: app/templates/socialaccount/connections.html:43
+msgid ""
+"You currently have no social network accounts connected to this account."
+msgstr ""
+
+#: app/templates/socialaccount/connections.html:46
+msgid "Add a 3rd Party Account"
+msgstr ""
+
+#: app/templates/socialaccount/login_cancelled.html:6
+#: app/templates/socialaccount/login_cancelled.html:11
+msgid "Login Cancelled"
+msgstr ""
+
+#: app/templates/socialaccount/login_cancelled.html:13
+#, python-format
+msgid ""
+"You decided to cancel logging in to our site using one of your existing "
+"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
+"\">sign in</a>."
+msgstr ""
+
+#: app/templates/socialaccount/messages/account_connected.txt:2
+msgid "The social account has been connected."
+msgstr ""
+
+#: app/templates/socialaccount/messages/account_connected_other.txt:2
+msgid "The social account is already connected to a different account."
+msgstr ""
+
+#: app/templates/socialaccount/messages/account_disconnected.txt:2
+msgid "The social account has been disconnected."
+msgstr ""
+
+#: app/templates/users/thanksforactivation.html:7
+#: app/templates/users/thanksforactivation.html:12
+#: app/templates/users/waitforactivation.html:7
+#: app/templates/users/waitforactivation.html:12
+msgid "Email Confirmed"
+msgstr ""
+
+#: app/templates/users/thanksforactivation.html:13
+msgid "Your account is now activated."
+msgstr ""
+
+#: app/templates/users/user_profile.html:6
+msgid "Profile"
+msgstr ""
+
+#: app/templates/users/user_profile.html:11
+msgid "Tag"
+msgstr ""
+
+#: app/templates/users/user_profile.html:37
+msgid "Update Profile"
+msgstr ""
+
+#: app/templates/users/user_profile.html:54
+msgid "Rating"
+msgstr ""
+
+#: app/templates/users/user_profile.html:58
+msgid "Community rating"
+msgstr ""
+
+#: app/templates/users/user_profile.html:61
+#: app/templates/users/user_profile.html:70
+msgid "stars"
+msgstr ""
+
+#: app/templates/users/user_profile.html:67
+msgid "AHR Rating"
+msgstr ""
+
+#: app/templates/users/user_profile.html:81
+msgid "About"
+msgstr ""
+
+#: app/templates/users/user_profile.html:83
+msgid "Name"
+msgstr ""
+
+#: app/templates/users/user_profile.html:88
+#: app/templates/users/user_profile.html:99
+#: app/templates/users/user_profile.html:110
+#: app/templates/users/user_profile.html:121
+#: app/templates/users/user_profile.html:132
+#: app/templates/users/user_profile.html:147
+#: app/templates/users/user_profile.html:158
+#: app/templates/users/user_profile.html:169
+#: app/templates/users/user_profile.html:180
+msgid "hidden"
+msgstr ""
+
+#: app/templates/users/user_profile.html:116
+msgid "Occupation"
+msgstr ""
+
+#: app/templates/users/user_profile.html:127
+msgid "Area of expertise"
+msgstr ""
+
+#: app/templates/users/user_profile.html:139
+msgid "Social"
+msgstr ""
+
+#: app/templates/users/user_profile.html:142
+msgid "Website"
+msgstr ""
+
+#: app/templates/users/user_profile.html:153
+msgid "Facebook"
+msgstr ""
+
+#: app/templates/users/user_profile.html:164
+msgid "LinkedIn"
+msgstr ""
+
+#: app/templates/users/user_profile.html:175
+msgid "Twitter"
+msgstr ""
+
+#: app/templates/users/user_settings.html:9
+msgid "User Settings"
+msgstr ""
+
+#: app/templates/users/user_settings.html:319
+msgid "Continue"
+msgstr ""
+
+#: app/templates/users/waitforactivation.html:13
+msgid ""
+"Someone will be in contact with you shortly to help you activate your "
+"account."
+msgstr ""
+
+#: app/templates/users/welcome.html:5
+msgid "Welcome"
+msgstr ""
+
+#: app/templates/users/welcome.html:9
+msgid "Getting started"
+msgstr ""
+
+#: app/templates/users/welcome.html:10
+msgid ""
+"\n"
+"    <div>\n"
+"      <h4>Thank You for joining Exchangivist.</h4>\n"
+"      <p>You have now successfully activated your account and can get "
+"started on the Exchange by creating offers and requests.</p>\n"
+"\n"
+"      <h4>Settings</h4>\n"
+"      <p>You can change or update your information and settings at any point "
+"by selecting the setting menu item from the dropdown menu under your "
+"profile. Be sure to make sure any information that you not comfortable with "
+"sharing is hidden.</p>\n"
+"\n"
+"      <h4>Ratings</h4>\n"
+"      <p>Each Exchangivist (that's a user of the Exchangivist site) has two "
+"types of rating. Advancing Human Rights gives each Exchangivist a rating "
+"based on the information they provided during the vetting process. You can "
+"see a users AHR rating by checking out their profile page. In addition each "
+"Exchangivist on the site can be rated by other Exchangivists. You can also "
+"see these ratings on the profile page, and we encourage you to rate users "
+"after you connect with them to help build up a trust network.</p>\n"
+"\n"
+"      <h4>Staying Safe</h4>\n"
+"      <p>We Recommend that for your own safety and security, users should "
+"not share personal contact information (such as your phone number, address, "
+"email address, etc.) with other users.</p>\n"
+"\n"
+"      <h4>Get Started</h4>\n"
+"      <p>To get started on the Exchange, simply click on the Get Started "
+"button below. Let's create better together...</p>\n"
+"    </div>\n"
+"    "
+msgstr ""
+
+#: app/templates/users/welcome.html:36
+msgid "Get Started"
+msgstr ""
