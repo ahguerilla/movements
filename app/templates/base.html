@@ -15,6 +15,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="google-translate-customization" content="1aec5736369b2840-cb0c87897093f941-gc2bc934b95b52c2d-15"></meta>
   <title>{% block head_title %}{% endblock %}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,6 +39,7 @@
 {% endif %}
 <nav class="navbar navbar-default navbar-fixed-top {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}"
     role="navigation">
+
   <div class="container" style="position:relative;">
     <div class="row">
       <div class="col-xs-12">
@@ -50,7 +52,6 @@
           <span class="icon-bar"></span>
         </button>
         <a class_="navbar-brand" href="/"><img src="{{ STATIC_URL }}images/logos/Logo.png"/></a>
-
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
@@ -61,8 +62,10 @@
             <li><a href="/">Exchange</a></li>
             <li><a href="{% url 'show_users' %}">Exchangivists</a></li>
           {% endif %}
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
+          <li><div id="google_translate_element"></div></li>
           {% if user.is_authenticated %}
             <li>
               <a class="glyphicon glyphicon-envelope {% if unread_count %}notif{% endif %}" href="{% url 'postman_inbox' %}">
@@ -100,7 +103,6 @@
                 </li>
               </ul>
             </li>
-
           {% else %}
             {% block sign_in %}
               <li><a href="{% url 'account_login' %}">Sign In</a></li>{% endblock %}
@@ -110,7 +112,6 @@
           {% endif %}
         </ul>
       </div>
-
 
     </div>
     {% if user.is_authenticated %}
@@ -162,6 +163,12 @@
   </div>
 </nav>
 <div id="modal-placeholder"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');
+}
+  </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 {% block javascript %}
 {% endblock %}
