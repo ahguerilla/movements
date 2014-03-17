@@ -8,7 +8,6 @@ from django.db.models import Q
 from django.core.urlresolvers import reverse
 
 
-
 class Skills(models.Model):
     skills = models.CharField(_('skill set'), max_length=255, null=True)
 
