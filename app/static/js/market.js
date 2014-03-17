@@ -79,6 +79,6 @@
     var market = new MarketView(filters);
     var market_route = new MarketRoute(market);
     Backbone.history.start();
-    document.title = "Exchange";
+    document.title = gettext("Exchange");
   };
 })();

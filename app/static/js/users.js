@@ -42,8 +42,8 @@
                  window.location = window.ahr.app_urls.viewuserprofile+d.value;
             });
 
-            $('#filter-offer-text').text('Exchangivists Offering');
-            $('#filter-request-text').text('Exchangivists Requesting');
+            $('#filter-offer-text').text(gettext('Exchangivists Offering'));
+            $('#filter-request-text').text(gettext('Exchangivists Requesting'));
             $('#singleItem').show();
 
             this.events = _.extend(this.events,{
@@ -55,11 +55,11 @@
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
     window.ahr.users.initUsers = function(filters){
-        $('#q').attr('placeholder','Search by keyword or username for Exchangivists');
+        $('#q').attr('placeholder',gettext('Search by keyword or username for Exchangivists'));
         window.ahr.usersview = new UsersView(filters);
         var user_route = new UserRoute(window.ahr.usersview);
         Backbone.history.start();
-        document.title = "Exchangivists";
+        document.title = gettext("Exchangivists");
     };
 
 })();
