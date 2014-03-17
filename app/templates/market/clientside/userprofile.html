@@ -1,3 +1,4 @@
+{% load i18n %}
 <script type="text/template" id="message-profile">
   <div>
     <div style="text-align: center;margin:10px;">
@@ -8,7 +9,7 @@
     </div>
     <div class="well well-sm">
       <div class="userprofile-widget-rating">
-        Community rating:
+        {%trans "Community rating:"%}
         <span
           class="rateit numstars"
           username="<%- username %>"
@@ -16,27 +17,29 @@
           rate="<%- score %>"
           image_src = "<%- avatar %>"
           ratecount="<%- ratecount %>"></span>
-          <span class="score"  username="<%- username %>"> <%- score %> Stars </span>
-          (<span class="ratecount"  username="<%- username %>"><%-ratecount %></span> votes)
+          <span class="score"  username="<%- username %>"> <%- score %> {%trans "Stars"%} </span>
+          (<span class="ratecount"  username="<%- username %>"><%-ratecount %></span> {%trans "votes"%})
       </div>
       <div>
-        Nationality: <%- nationality %>
+        {%trans "Nationality"%}: <%- nationality %>
       </div>
       <div>
-        Country of residence: <%- resident_country %>
+        {%trans "Country of residence"%}: <%- resident_country %>
       </div>
       <div>
-        AHR rating: <span class="rateit redstars" rate="<%- orate %>"></span> <%- orate %> Stars
+        {%trans "AHR rating"%}: <span class="rateit redstars" rate="<%- orate %>"></span> <%- orate %> {%trans "Stars"%}
       </div>
     </div>
     <% if(username != window.ahr.username) {%>
     <h4>Safety First</h4>
     <div style="margin-bottom: 20px;">
+      {% blocktrans %}
       For your own safety and security, do not share personal contact information
       (such as your phone number, address, email address, etc.) with other users.
       Exchangivist also prohibits abusive language or harassment.
       To report an abusive user,
-      <span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>click here</strong></span>.
+      {% endblocktrans %}
+      <span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>{%trans "click here"%}</strong></span>.
     </div>
     <% }%>
   </div>

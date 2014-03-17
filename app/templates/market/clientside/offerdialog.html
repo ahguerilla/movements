@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">OFFER A SERVICE</h4>
+        <h4 class="modal-title">{%trans "OFFER A SERVICE"%}</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form" enctype="multipart/form-data" id="offerform">
@@ -112,7 +112,7 @@
       var that = this;
       this.issues_widget = window.ahr.typeahead_widget.initWidget(
         '#issues_place', {
-          title: 'I can help to advance freedom of:',
+          title: '{%trans "I can help to advance freedom of:"%}',
           jsonfield: 'issues'
         },
         this.item_obj ? this.item_obj.issues : null,
@@ -121,7 +121,7 @@
 
       this.countries_widget = window.ahr.typeahead_widget.initWidget(
         '#countries_place', {
-          title: 'Please enter the name of the countries where you can help',
+          title: '{%trans "Please enter the name of the countries where you can help"%}',
           jsonfield: 'countries'
         },
         this.item_obj ? this.item_obj.countries : null,
@@ -129,7 +129,7 @@
 
       this.skills_widget = window.ahr.typeahead_widget.initWidget(
         '#skills_place', {
-          title: 'Please enter the skills you have to offer',
+          title: '{%trans "Please enter the skills you have to offer"%}',
           jsonfield: 'skills'
         },
         this.item_obj ? this.item_obj.skills : null,
@@ -137,14 +137,14 @@
 
       this.expdate_widget = window.ahr.datepicker_widget.initWidget(
         '#date_place', {
-          title: 'Expiry date',
+          title: '{%trans "Expiry date"%}',
           jsonfield: 'exp_date'
         },
         this.item_obj);
 
       this.never_exp_widget = window.ahr.checkbox_widget.initWidget(
         '#never_exp_place', {
-          title: 'Never expires',
+          title: '{%trans "Never expires"%}',
           field: 'never_exp',
           preval: this.item_obj ? this.item_obj.never_exp : '',
           callback: that.onNeverexpClick,
@@ -153,7 +153,7 @@
 
       this.title_widget = window.ahr.input_widget.initWidget(
         '#title_place', {
-          title: 'Title of post',
+          title: '{%trans "Title of post"%}',
           jsonfield: 'title',
           placeholder: ''
         },
@@ -163,7 +163,7 @@
         '#details_place', {
           title: '',
           jsonfield: 'details',
-          placeholder: 'Please give details of what you can help with?'
+          placeholder: '{%trans "Please give details of what you can help with?"%}'
         },
         this.item_obj ? this.item_obj.details : null);
     },
@@ -178,7 +178,7 @@
       $('#offerdialog').modal('show');
       window.ahr.getcsrf(function (csrf) {
         if (csrf == false) {
-          that.alert('Unable to connect to the server. please try again in a few minutes', '#infobar');
+          that.alert('{%trans "Unable to connect to the server. please try again in a few minutes"%}', '#infobar');
           return;
         }
         that.csrf = csrf.csrfmiddlewaretoken;
@@ -192,7 +192,7 @@
       window.ahr.expandTextarea($('#details', $("#offerdialog")));
       $('#offerdialog').on('hide.bs.modal', function (ev) {
         ev.stopImmediatePropagation();
-        if (!that.closing && !confirm('Are you sure you want to close this dialog?')) {
+        if (!that.closing && !confirm('{%trans "Are you sure you want to close this dialog?"%}')) {
           return false;
         }
         that.emptyTheForm();

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load compress %}
 <script type="text/template" id="report_template">
 <div id="reportdialog" class="modal fade">
@@ -5,22 +6,22 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Report Post</h4>
+        <h4 class="modal-title">{%trans "Report Post"%}</h4>
         <div id="modal-message"></div>
       </div>
       <div class="modal-body">
         <div id="reporterror"></div>
-        <label for="content">Message</label>
+        <label for="content">{%trans "Message"%}</label>
         <div>
           <textarea class="form-control" id="content" name="content" rows="6" placeholder="" required="true"></textarea>
         </div>
         <div class="modal-footer">
           <div class="row">
             <div class="col-xs-6 col-md-offset-6 col-md-3">
-              <button type="button" class="btn btn-default full-width cancel cancelreport" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-default full-width cancel cancelreport" data-dismiss="modal">{%trans "Cancel"%}</button>
             </div>
             <div class="col-xs-6 col-md-3">
-              <button type="button" class="btn btn-default full-width send sendreport">Send</button>
+              <button type="button" class="btn btn-default full-width send sendreport">{%trans "Send"%}</button>
             </div>
           </div>
         </div>
@@ -56,7 +57,7 @@
           var that = this;
           window.ahr.getcsrf(function(csrf){
             if(csrf==false){
-              that.alert('Unable to send report. please try again','#reporterror');
+              that.alert('{%trans "Unable to send report. please try again"%}','#reporterror');
               return;
               }
             $('.sendreport').attr('disabled','disabled');

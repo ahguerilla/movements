@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <script type="text/template" id="item-actions">
   <div class="actions">
     <% if (ownerid != window.ahr.user_id){ %>
@@ -5,25 +7,25 @@
     rec_type="item"
     item_id="<%- pk %>"
     obj_id ="<%- pk %>"
-    subject = "<%- window.ahr.username %> recommends : <%- title %>"
-    message = "<%- window.ahr.username %>recommends you have a look at a post "<%- title %>" by : <%- owner %>"
+    subject = "<%- window.ahr.username %>  {% trans "recommends :" %} <%- title %>"
+    message = "<%- window.ahr.username %>  {% trans "recommends you have a look at a post" %}"<%- title %>"  {% trans "by :" %} <%- owner %>"
     class="recommend actionitem">
       <div class="text">
-        Recommend
+        {% trans "Recommend" %}
       </div>
     </div>
     <div class="actionitem">-</div>
 
     <div item_id="<%- pk %>" subject="Re: <%-title%>" username="<%- owner %>" class="private-message actionitem">
       <div class="text">
-        Private message
+         {% trans "Private message" %}
       </div>
     </div>
     <div class="actionitem">-</div>
 
     <div item_id="<%- pk %>" class="report_post actionitem">
       <div class="text">
-        Report
+         {% trans "Report" %}
       </div>
     </div>
 
@@ -36,7 +38,7 @@
 
     <div  class="rate rate_user actionitem right-on-large"
       item_id="<%- pk %>"
-      title="Rate"
+      title="{% trans "Rate"%}"
       rateing="user"
       username="<%- owner %>"
       score="<%- usercore %>"
@@ -51,12 +53,12 @@
     <% if (ownerid == window.ahr.user_id){ %>
 
     <div item_id="<%- pk %>" class="edit actionitem" >
-      <div class="text">Edit</div>
+      <div class="text">{% trans "Edit" %}</div>
     </div>
     <div class="actionitem">-</div>
 
     <div item_id="<%- pk %>" class="delete actionitem" >
-      <div class="text">Delete</div>
+      <div class="text"> {% trans "Delete" %}</div>
     </div>
     <!--<div class="clearfix"></div>-->
 

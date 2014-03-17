@@ -59,19 +59,19 @@
     <div class="dialog">
       <a href="{% provider_login_url "twitter" %}">
         <img src="{{ STATIC_URL }}images/twitter-24x18.png" alt="Google+"/>
-        SIGN UP WITH TWITTER
+       {%trans " SIGN UP WITH TWITTER"%}
       </a>
     </div>
     <div class="dialog">
       <a href="{% provider_login_url "facebook" method="oauth2" %}">
         <img src="{{ STATIC_URL }}images/facebook-12x23.png" alt="Facebook"/>
-        SIGN UP WITH FACEBOOK
+        {%trans "SIGN UP WITH FACEBOOK"%}
       </a>
     </div>
     <div class="dialog">
       <a href="{% provider_login_url "google" %}">
         <img src="{{ STATIC_URL }}images/google-plus-23x20.png" alt="Google+"/>
-        SIGN UP WITH GOOGLE PLUS
+        {%trans "SIGN UP WITH GOOGLE PLUS"%}
       </a>
     </div>
   </div>

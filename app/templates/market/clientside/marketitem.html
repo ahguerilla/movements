@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load compress %}
 
 <style type="text/css">
@@ -55,7 +56,7 @@
                 <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div>
               <% }); %>
             </div>
-            <% if(index>top && isSingle === false){ %> <div class="showmoretags">More ...</div> <%}%>
+            <% if(index>top && isSingle === false){ %> <div class="showmoretags">{% trans "More ..." %}</div> <%}%>
           </div>
           <div class="action-place"></div>
         </div>
@@ -116,7 +117,7 @@
     deleteComment: function (ev) {
       ev.preventDefault();
       var that = this;
-      if (confirm('Are you sure you want yo delete your comment?')) {
+      if (confirm('{% trans "Are you sure you want yo delete your comment?" %}')) {
         var comment_id = ev.currentTarget.getAttribute('comment-id');
         var href = ev.currentTarget.href;
         var dfrd = $.ajax({
@@ -170,7 +171,7 @@
     deleteItem: function (ev) {
       ev.preventDefault();
       var that = this;
-      if (confirm('Are you sure you want to delete this item?')) {
+      if (confirm('{% trans "Are you sure you want to delete this item?" %}')) {
         var item_id = ev.currentTarget.getAttribute('item_id');
         var dfrd = $.ajax({
           url: window.ahr.app_urls.deletemarketitem + item_id,
@@ -210,14 +211,14 @@
       var item = $(ev.currentTarget).closest('.more-items-here');
       item.removeClass('more-items-here');
       this.market.fancyref();
-      $(ev.currentTarget).replaceWith('<div class="showlesstags">Less ...</div>');
+      $(ev.currentTarget).replaceWith('<div class="showlesstags">{% trans "Less ..." %}</div>');
     },
 
     showLessTags: function(ev){
       var item = $(ev.currentTarget).closest('.item-tags.clearfix');
       item.addClass('more-items-here');
       this.market.fancyref();
-      $(ev.currentTarget).replaceWith('<div class="showmoretags">More ...</div>');
+      $(ev.currentTarget).replaceWith('<div class="showmoretags">{% trans "More ..." %}</div>');
     },
 
     afterset: function (item_container) {

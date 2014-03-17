@@ -1,33 +1,35 @@
+{% load i18n %}
+
 <script type="text/template" id="user-actions">
   <div class="actions">
     <div username="<%- username %>"
     rec_type="user"
     obj_id ="<%- username %>"
-    title="Recommend"
-    subject = "<%- window.ahr.username %> recommends this user : <%- username %>"
-    message = "<%- window.ahr.username %> recommends you have a look at user: <%- username %>"
+    title="{% trans "Recommend"%}"
+    subject = "<%- window.ahr.username %> {% trans  "recommends this user :" %} <%- username %>"
+    message = "<%- window.ahr.username %>  {% trans  "recommends you have a look at user:" %}<%- username %>"
     class="recommend actionitem">
       <div class="text">
-        Recommend
+        {% trans "Recommend" %}
       </div>
     </div>
     <div class="actionitem">-</div>
 
     <div username="<%- username %>" title="Send private message" class="private-message actionitem">
       <div class="text">
-        Private Message
+        {% trans "Private Message" %}
       </div>
     </div>
     <div class="actionitem">-</div>
 
     <div username="<%- username %>" class="report_user actionitem">
       <div class="text">
-        Report
+        {% trans "Report"%}
       </div>
     </div>
 
     <div class="rate rate_user actionitem right-on-big"
-    title="Rate"
+    title="{% trans "Rate"%}"
     rateing="user"
     username="<%- username %>"
     score="<%- usercore %>"

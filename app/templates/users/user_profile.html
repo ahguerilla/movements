@@ -8,7 +8,7 @@
   <div class="col-md-12 col-spacing-bottom">
     <div class="row">
       <div class="col-md-3">
-        <strong>Tag:</strong>
+        <strong>{%trans "Tag"%}:</strong>
       </div>
       <div class="col-md-9">
         {{ user_profile.tag_ling }}
@@ -34,7 +34,7 @@
 
       {% if is_self %}
       <br />
-      <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'user_settings' %}">Update Profile</a>
+      <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'user_settings' %}">{%trans "Update Profile"%}</a>
       {% endif %}
     </div>
   </div>
@@ -51,23 +51,23 @@
   <div class"col-md-12">
     <div class="row">
       <div class="col-md-9">
-        <legend>Rating</legend>
+        <legend>{%trans "Rating"%}</legend>
 
         <div class="row profile-item">
           <div class="col-md-3">
-            <strong>Community rating:</strong>
+            <strong>{%trans "Community rating"%}:</strong>
           </div>
           <div class="col-md-9">
-            <span class="rateit user" username="{{ user_details.username }}" rate="{{ user_profile.score }}"></span> {{ user_profile.score|floatformat:1 }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
+            <span class="rateit user" username="{{ user_details.username }}" rate="{{ user_profile.score }}"></span> {{ user_profile.score|floatformat:1 }} {%trans "stars"%} <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}{%trans "votes"%}{% endif %})</em>
           </div>
         </div>
 
         <div class="row profile-item">
           <div class="col-md-2">
-            <strong>AHR Rating:</strong>
+            <strong>{%trans "AHR Rating"%}:</strong>
           </div>
           <div class="col-md-10">
-            <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} stars
+            <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} {%trans "stars"%}
           </div>
         </div>
 
@@ -78,106 +78,106 @@
 
     <div class="row">
       <div class="col-md-6">
-        <legend>About</legend>
+        <legend>{%trans "About"%}</legend>
         <div class="row profile-item">
-          <div class="col-md-4 profile-label"><strong>Name:</strong></div>
+          <div class="col-md-4 profile-label"><strong>{%trans "Name"%}:</strong></div>
           <div class="col-md-8">
           {% if user_profile.notperm.name != 'on' %}
           {{ user_details.first_name }}&nbsp;{{ user_details.last_name }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Nationality:</div>
+          <div class="col-md-4 profile-label">{%trans "Nationality"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.nationality != 'on' %}
           {{ user_profile.nationality }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Country of residence:</div>
+          <div class="col-md-4 profile-label">{%trans "Country of residence"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.resident_country != 'on' %}
           {{ user_profile.resident_country }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Occupation:</div>
+          <div class="col-md-4 profile-label">{%trans "Occupation"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.occupation != 'on' %}
           {{ user_profile.occupation }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Area of expertise:</div>
+          <div class="col-md-4 profile-label">{%trans "Area of expertise"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.experties != 'on' %}
           {{ user_profile.expertise }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
       </div>
       <div class="col-md-6">
-        <legend>Social</legend>
+        <legend>{%trans "Social"%}</legend>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Website:</div>
+          <div class="col-md-4 profile-label">{%trans "Website"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.web_url != 'on' %}
           <a target="_blank" href="{{ user_profile.web_url }}">{{ user_profile.web_url }}</a>
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Facebook:</div>
+          <div class="col-md-4 profile-label">{%trans "Facebook"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.fb_url != 'on' %}
           <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.fb_url }}</a>
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">LinkedIn:</div>
+          <div class="col-md-4 profile-label">{%trans "LinkedIn"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.linkedin_url != 'on' %}
           <a target="_blank" href="{{ user_profile.linkedin_url }}">{{ user_profile.linkedin_url }}</a>
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Twitter:</div>
+          <div class="col-md-4 profile-label">{%trans "Twitter"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.tweet_url != 'on' %}
           <a target="_blank" href="{{ user_profile.get_twitter_url }}">{{ user_profile.tweet_url }}</a>
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
@@ -191,7 +191,7 @@
       <div class="col-md-9">
         <legend>Areas of Interest</legend>
         <div class="row profile-item">
-          <div class="col-md-2 profile-label">Issues:</div>
+          <div class="col-md-2 profile-label">{%trans "Issues"%}:</div>
           <div class="col-md-10">
             <div class="item-tags">
               <div>
@@ -204,7 +204,7 @@
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-2 profile-label">Countries:</div>
+          <div class="col-md-2 profile-label">{%trans "Countries"%}:</div>
           <div class="col-md-10">
             <div class="item-tags">
               <div>
@@ -217,7 +217,7 @@
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-2 profile-label">Skills:</div>
+          <div class="col-md-2 profile-label">{%trans "Skills"%}:</div>
           <div class="col-md-10">
             <div class="item-tags">
               <div>

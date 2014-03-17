@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">REQUEST A SERVICE</h4>
+        <h4 class="modal-title">{%trans "REQUEST A SERVICE"%}</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form" enctype="multipart/form-data" id="requestform">
@@ -105,25 +105,25 @@
             var that = this;
             this.issues_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_issues_place',
-                        {title:'I need help to advance freedom of:', jsonfield:'issues'},
+                        {title:'{%trans "I need help to advance freedom of:"%}', jsonfield:'issues'},
                         this.item_obj? this.item_obj.issues: null,
                         window.GuerillaMarket.userDefaultTags['issues']);
 
             this.countries_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_countries_place',
-                        {title:'Please enter the name of the countries where you need help',  jsonfield:'countries'},
+                        {title:'{%trans "Please enter the name of the countries where you need help"%}',  jsonfield:'countries'},
                         this.item_obj? this.item_obj.countries: null,
                         window.GuerillaMarket.userDefaultTags['countries']);
 
             this.expdate_widget = window.ahr.datepicker_widget.initWidget(
                         '#request_exp_date_place',
-                        {title:'Expiry date', jsonfield:'exp_date'},
+                        {title:'{%trans "Expiry date"%}', jsonfield:'exp_date'},
                         this.item_obj);
 
             this.never_exp_widget = window.ahr.checkbox_widget.initWidget(
                       '#request_never_exp_place',
                       {
-                        title:'Never expires',
+                        title:'{%trans "Never expires"%}',
                         field:'never_exp2',
                         preval: this.item_obj? this.item_obj.never_exp : '',
                         callback: that.onNeverexpClick,
@@ -132,12 +132,12 @@
 
             this.title_widget = window.ahr.input_widget.initWidget(
                         '#request_title_place',
-                        {title:'Title of post', jsonfield:'title', placeholder:''},
+                        {title:'{%trans "Title of post"%}', jsonfield:'title', placeholder:''},
                         this.item_obj? this.item_obj.title : null);
 
             this.details_widget = window.ahr.textarea_widget.initWidget(
                         '#request_details_place',
-                        {title:'', jsonfield:'details', placeholder:'Please give details of what you can help with?'},
+                        {title:'', jsonfield:'details', placeholder:'{%trans "Please give details of what you need help with?"%}'},
                         this.item_obj? this.item_obj.details : null);
         },
 
@@ -151,7 +151,7 @@
           $('#requestdialog').modal('show');
           window.ahr.getcsrf(function(csrf){
               if(csrf==false){
-                  that.alert('Unable to connect to the server. please try again in a few minutes','#infobar');
+                  that.alert('{%trans "Unable to connect to the server. please try again in a few minutes"%}','#infobar');
                   return;
               }
               that.csrf = csrf.csrfmiddlewaretoken;
@@ -163,7 +163,7 @@
           window.ahr.expandTextarea($('#details',$("#requestdialog")));
            $('#requestdialog').on('hide.bs.modal',function(ev){
             ev.stopImmediatePropagation();
-            if(!that.closing && !confirm('Are you sure you want to close this dialog?')){
+            if(!that.closing && !confirm('{%trans "Are you sure you want to close this dialog?"%}')){
               return false;
             }
             that.emptyTheForm();

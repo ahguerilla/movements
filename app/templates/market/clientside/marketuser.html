@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% load compress %}
 <script type="text/template" id="user-template">
   <div class="market-place-item item-wrap" item_id="<%- pk %>" >
@@ -12,9 +14,9 @@
             <button class="btn dropdown-toggle sr-only dropdownMenu<%- pk %>" type="button" id="dropdownMenu<%- pk %>" data-toggle="dropdown" />
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
               <li role="presentation"></li>
-              <li role="presentation"><a username="<%- username %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
-              <li role="presentation"><a username="<%- username %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
-              <li role="presentation"><a username="<%- username %>" class="rate" rateing="user" image_src="<%- avatar %>" score="<%- score %>" ratecount="<%- ratecount %>" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
+              <li role="presentation"><a username="<%- username %>" class="recommend" role="menuitem" tabindex="-1" href="#">{% trans "Recommend" %}</a></li>
+              <li role="presentation"><a username="<%- username %>" class="private_message" role="menuitem" tabindex="-1" href="#">{% trans "Private message" %}</a></li>
+              <li role="presentation"><a username="<%- username %>" class="rate" rateing="user" image_src="<%- avatar %>" score="<%- score %>" ratecount="<%- ratecount %>" role="menuitem" tabindex="-1" href="#">{%trans "Rate user"%}</a></li>
             </ul>
           </div>
         </div>
@@ -32,7 +34,7 @@
         <div class="clearfix"></div>
         <div class="item-body multi-line-text"><%- bio %></div>
         <div class="item-title">
-          <div>Areas Of Interest</div>
+          <div>{%trans "Areas Of Interest"%}</div>
         </div>
         <div class="item-tags">
           <div>

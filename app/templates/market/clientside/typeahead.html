@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load compress %}
 
 {% compress css %}
@@ -25,13 +26,13 @@
   <div class="col-md-12">
     <label for="<%- item %>"><%- title %></label>
     <div class="input-group">
-      <input id="<%- item %>" class="form-control input-sm typeaheadtag_input" type="text" placeholder="Click here to see your choices"/>
+      <input id="<%- item %>" class="form-control input-sm typeaheadtag_input" type="text" placeholder="{%trans "Click here to see your choices"%}"/>
       <div class="input-group-btn <%- item %>">
-      <button class="btn btn-default all <%- item %>">All</button>
+      <button class="btn btn-default all <%- item %>">{%trans "All"%}</button>
       <% if(hasDefault.length > 0){%>
-      <button class="btn typeahead-btn btn-default def <%- item %>">Defaults</button>
+      <button class="btn typeahead-btn btn-default def <%- item %>">{%trans "Defaults"%}</button>
       <% }else{ %>
-      <button class="btn typeahead-btn btn-default def <%- item %>">None</button>
+      <button class="btn typeahead-btn btn-default def <%- item %>">{%trans "None"%}</button>
       <% } %>
       </div>
     </div>

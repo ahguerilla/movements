@@ -1,4 +1,5 @@
 {% load assets %}
+{% load i18n %}
 {% load avatar_tags %}
 {% load url from future %}
 {% load account %}
@@ -15,7 +16,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="google-translate-customization" content="1aec5736369b2840-cb0c87897093f941-gc2bc934b95b52c2d-15"></meta>
+  <!--<meta name="google-translate-customization" content="1aec5736369b2840-cb0c87897093f941-gc2bc934b95b52c2d-15"></meta>-->
   <title>{% block head_title %}{% endblock %}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +47,7 @@
       <div class="navbar-header" {% if user.is_authenticated %}style="padding-right:12px;" {%endif%}>
         <button id="shownavbarbutton" type="button" class="navbar-toggle" data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
+          <span class="sr-only">{%trans "Toggle navigation"%}</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -56,28 +57,27 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           {% if not user.is_authenticated %}
-            <li><a href="{% url 'how_it_works_pub' %}">How It Works</a></li>
+            <li><a href="{% url 'how_it_works_pub' %}">{%trans "How It Works"%}</a></li>
           {% else %}
-            <li><a href="{% url 'how_it_works_priv' %}">How It Works</a></li>
+            <li><a href="{% url 'how_it_works_priv' %}">{%trans "How It Works"%}</a></li>
             <li><a href="/">Exchange</a></li>
-            <li><a href="{% url 'show_users' %}">Exchangivists</a></li>
+            <li><a href="{% url 'show_users' %}">{%trans "Exchangivists"%}</a></li>
           {% endif %}
-
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><div id="google_translate_element"></div></li>
+          <!--<li><div id="google_translate_element"></div></li>-->
           {% if user.is_authenticated %}
             <li>
               <a class="glyphicon glyphicon-envelope {% if unread_count %}notif{% endif %}" href="{% url 'postman_inbox' %}">
                 <span class="hidelarge">
-                  Messages<span id="msgcntr">{% if unread_count %}({{ unread_count }}){% endif %} </span>
+                  {%trans "Messages"%}<span id="msgcntr">{% if unread_count %}({{ unread_count }}){% endif %} </span>
                 </span>
               </a>
             </li>
             <li class="notifdropdown-click">
               <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="height:50px;">
                 <div id="bellonlarge" class="notifbell glyphicon glyphicon-bell nonotif">
-                <span class="hidelarge">Notifications</span>
+                <span class="hidelarge">{%trans "Notifications"%}</span>
                 </div>
               </a>
               <ul id="" class="notification-drop-down dropdown-menu pull-right"
@@ -90,29 +90,28 @@
               <ul class="dropdown-menu">
                 <li>
                   <a href="#" onclick="window.location = window.ahr.app_urls.getposts;">
-                    My Posts
+                    {%trans "My Posts"%}
                   </a>
                 </li>
-                <li><a href="{% url 'user_profile' %}">My Profile</a></li>
-                <li><a href="{% url 'user_settings' %}">Settings</a></li>
+                <li><a href="{% url 'user_profile' %}">{%trans "My Profile"%}</a></li>
+                <li><a href="{% url 'user_settings' %}">{%trans "Settings"%}</a></li>
                 <li>
                   <form method="post" action="{% url 'account_logout' %}">
                     {% csrf_token %}
-                    <button class="btn btn-link" type="submit">Sign Out</button>
+                    <button class="btn btn-link" type="submit">{%trans "Sign Out"%}</button>
                   </form>
                 </li>
               </ul>
             </li>
           {% else %}
             {% block sign_in %}
-              <li><a href="{% url 'account_login' %}">Sign In</a></li>{% endblock %}
+              <li><a href="{% url 'account_login' %}">{%trans "Sign In"%}</a></li>{% endblock %}
             {% if not sign_up %}
-              <li><a href="{% url 'home' %}">Sign Up</a></li>
+              <li><a href="{% url 'home' %}">{%trans "Sign Up"%}</a></li>
             {% endif %}
           {% endif %}
         </ul>
       </div>
-
     </div>
     {% if user.is_authenticated %}
       <div style="position:absolute;right:13px;top:0;" class="hidelarge">
@@ -131,6 +130,7 @@
         </div>
       </div>
     {% endif %}
+    </div>
   </div>
 </nav>
 <!--<div style="height:50px;"></div>-->
@@ -155,17 +155,17 @@
 <div style="height: 70px"></div>
 <nav class="navbar navbar-default navbar-fixed-bottom footer-nav" role="navigation">
   <div class="footer-nav-content">
-    <a href="{% url 'contact_us' %}">Contact Us</a>&nbsp;&nbsp;
-    <a href="{% url 'terms_and_conditions' %}">Terms and Conditions</a>&nbsp;&nbsp;
-    <a href="{% url 'privacy' %}">Privacy</a>
+    <a href="{% url 'contact_us' %}">{%trans "Contact Us"%}</a>&nbsp;&nbsp;
+    <a href="{% url 'terms_and_conditions' %}">{%trans "Terms and Conditions"%}</a>&nbsp;&nbsp;
+    <a href="{% url 'privacy' %}">{%trans "Privacy"%}</a>
   </div>
 </nav>
 <div id="modal-placeholder"></div>
-<script type="text/javascript">
-function googleTranslateElementInit() {
-new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');
-}
-  </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!--<script type="text/javascript">-->
+<!--function googleTranslateElementInit() {-->
+<!--new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');-->
+<!--}-->
+  <!--</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
 
 
 {% block javascript %}

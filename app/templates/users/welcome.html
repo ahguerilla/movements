@@ -7,10 +7,11 @@
 {% block public-content %}
   <div class="dialog content-page">
     <h1>{% trans "Getting started" %}</h1>
+    {% blocktrans %}
     <div>
       <h4>Thank You for joining Exchangivist.</h4>
       <p>You have now successfully activated your account and can get started on the Exchange by creating offers and requests.</p>
-      
+
       <h4>Settings</h4>
       <p>You can change or update your information and settings at any point by selecting the setting menu item from the dropdown menu under your profile. Be sure to make sure any information that you not comfortable with sharing is hidden.</p>
 
@@ -22,9 +23,8 @@
 
       <h4>Get Started</h4>
       <p>To get started on the Exchange, simply click on the Get Started button below. Let's create better together...</p>
- 
-
     </div>
+    {% endblocktrnas %}
     <div class="row">
       <div class="col-xs-6 col-sm-offset-1 col-sm-4 col-md-offset-2 col-md-3">
         <a href="{% url 'user_settings' %}">
@@ -33,7 +33,7 @@
       </div>
       <div class="col-xs-6 col-sm-offset-2 col-sm-4 col-md-offset-2 col-md-3">
         <a href="{% url 'show_market' %}">
-          <button class="btn btn-default full-width">Get Started</button>
+          <button class="btn btn-default full-width">{%trans "Get Started"%}</button>
         </a>
       </div>
     </div>

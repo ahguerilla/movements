@@ -5,8 +5,10 @@
 {% block head_title %}{% trans "Exchangivist - How It Works" %}{% endblock %}
 
 {% block public-content %}
+<div style="height:50px;"></div>
   <div class="dialog content-page">
     <div>
+        {% blocktrans %}
         <h1>How It Works</h1>
         <h4>What is it?</h4>
         <p>Exchangivist is an online portal created to help make better in the world. By allowing users to offer and request, help and services, giving them the opportunity to connect with one another.</p>
@@ -52,7 +54,7 @@
         <h4>Is the board moderated?</h4>
         <p>The Exchangivist reserves the right to delete any offending or inappropriate posts.  In most cases we will attempt to contact the user before removing a post but that may not always be feasible.
         In the event of duplicate posts we may merge or delete posts as necessary.</p>
-
+        {% endblocktrans %}
   </div>
 </div>
 
