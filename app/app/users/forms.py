@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from models import UserProfile, OrganisationalRating
-
+from django.utils.translation import ugettext_lazy as _
 
 
 class SignupForm(forms.Form):
@@ -70,21 +70,21 @@ class SettingsForm(forms.ModelForm):
         data = self.cleaned_data['fb_url']
         data = self.check_https(data)
         if not data.startswith('https://www.facebook.com/') and data !='':
-            raise forms.ValidationError("You must provide a link to your facebook profile")
+            raise forms.ValidationError(_("You must provide a link to your facebook profile"))
         return data
 
     def clean_linkedin_url(self):
         data = self.cleaned_data['linkedin_url']
         data = self.check_https(data)
         if not data.startswith('https://www.linkedin.com/') and data !='':
-            raise forms.ValidationError("You must provide a link to your linkedin profile")
+            raise forms.ValidationError(_("You must provide a link to your linkedin profile"))
         return data
 
     def clean_tweet_url(self):
         data = self.cleaned_data['tweet_url']
         data = self.check_https(data)
         if not data.startswith('https://www.twitter.com/') and data !='':
-            raise forms.ValidationError("You must provide a link to your twitter page")
+            raise forms.ValidationError(_("You must provide a link to your twitter page"))
         return data
 
 
