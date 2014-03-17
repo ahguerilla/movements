@@ -30,6 +30,8 @@ urlpatterns = patterns('',
     url(r'^admin/auth/user/(?P<user_id>\d+)/vet$', 'app.users.views.vet_user', name='vet_user'),
     url(r'^admin/auth/user/(?P<user_id>\d+)/emailvetted$', 'app.users.views.email_vet_user', name='email_vet_user'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^rosetta/', include('rosetta.urls')),
+    (r'^i18n/', include('django.conf.urls.i18n')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

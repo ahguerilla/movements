@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-17 15:33+0000\n"
+"POT-Creation-Date: 2014-03-17 15:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,260 +17,256 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: app/app/market/models/comment.py:14 app/app/market/models/report.py:15
-#: app/app/market/models/report.py:32
+#: app/market/models/comment.py:14 app/market/models/report.py:15
+#: app/market/models/report.py:32
 msgid "contents"
 msgstr ""
 
-#: app/app/market/models/comment.py:15 app/app/market/models/market.py:23
-#: app/app/market/models/notificatoin.py:20 app/app/market/models/rate.py:13
-#: app/app/market/models/report.py:17 app/app/market/models/report.py:34
-#: app/app/users/models.py:144
+#: app/market/models/comment.py:15 app/market/models/market.py:23
+#: app/market/models/notificatoin.py:20 app/market/models/rate.py:13
+#: app/market/models/report.py:17 app/market/models/report.py:34
+#: app/users/models.py:144
 msgid "publish date"
 msgstr ""
 
-#: app/app/market/models/comment.py:17 app/app/market/models/market.py:22
-#: app/app/market/models/report.py:18
+#: app/market/models/comment.py:17 app/market/models/market.py:22
+#: app/market/models/report.py:18
 msgid "is published?"
 msgstr ""
 
-#: app/app/market/models/comment.py:18 app/app/market/models/market.py:29
+#: app/market/models/comment.py:18 app/market/models/market.py:29
 msgid "deleted"
 msgstr ""
 
-#: app/app/market/models/market.py:14
+#: app/market/models/market.py:14
 msgid "item_type"
 msgstr ""
 
-#: app/app/market/models/market.py:16 app/app/market/models/rate.py:14
-#: app/app/users/models.py:145
+#: app/market/models/market.py:16 app/market/models/rate.py:14
+#: app/users/models.py:145
 msgid "title"
 msgstr ""
 
-#: app/app/market/models/market.py:17
+#: app/market/models/market.py:17
 msgid "details"
 msgstr ""
 
-#: app/app/market/models/market.py:21
+#: app/market/models/market.py:21
 msgid "URL Link"
 msgstr ""
 
-#: app/app/market/models/market.py:24
+#: app/market/models/market.py:24
 msgid "expiry date"
 msgstr ""
 
-#: app/app/market/models/market.py:25
+#: app/market/models/market.py:25
 msgid "commentcount"
 msgstr ""
 
-#: app/app/market/models/market.py:26 app/app/users/models.py:92
+#: app/market/models/market.py:26 app/users/models.py:92
 msgid "ratecount"
 msgstr ""
 
-#: app/app/market/models/market.py:27
+#: app/market/models/market.py:27
 msgid "reportcount"
 msgstr ""
 
-#: app/app/market/models/market.py:28 app/app/market/models/rate.py:15
-#: app/app/users/models.py:93 app/app/users/models.py:146
+#: app/market/models/market.py:28 app/market/models/rate.py:15
+#: app/users/models.py:93 app/users/models.py:146
 msgid "score"
 msgstr ""
 
-#: app/app/market/models/market.py:30
+#: app/market/models/market.py:30
 msgid "never expires"
 msgstr ""
 
-#: app/app/market/models/notificatoin.py:18
+#: app/market/models/notificatoin.py:18
 msgid "avatar user"
 msgstr ""
 
-#: app/app/market/models/report.py:16 app/app/market/models/report.py:33
+#: app/market/models/report.py:16 app/market/models/report.py:33
 msgid "is resolved"
 msgstr ""
 
-#: app/app/market/models/resourcefile.py:11
+#: app/market/models/resourcefile.py:11
 msgid "file name"
 msgstr ""
 
-#: app/app/settings/base.py:72
+#: app/settings/base.py:72
 msgid "Norwegian"
 msgstr ""
 
-#: app/app/settings/base.py:73
+#: app/settings/base.py:73
 msgid "English"
 msgstr ""
 
-#: app/app/users/models.py:12
+#: app/users/models.py:12
 msgid "skill set"
 msgstr ""
 
-#: app/app/users/models.py:22
+#: app/users/models.py:22
 msgid "issues of interest"
 msgstr ""
 
-#: app/app/users/models.py:32
+#: app/users/models.py:32
 msgid "countries of interest"
 msgstr ""
 
-#: app/app/users/models.py:42
+#: app/users/models.py:42
 msgid "nationality"
 msgstr ""
 
-#: app/app/users/models.py:52
+#: app/users/models.py:52
 msgid "country of residence"
 msgstr ""
 
-#: app/app/users/models.py:72
+#: app/users/models.py:72
 msgid "bio"
 msgstr ""
 
-#: app/app/users/models.py:73
+#: app/users/models.py:73
 msgid "tag line"
 msgstr ""
 
-#: app/app/users/models.py:74
+#: app/users/models.py:74
 msgid "website url"
 msgstr ""
 
-#: app/app/users/models.py:75
+#: app/users/models.py:75
 msgid "facebook page"
 msgstr ""
 
-#: app/app/users/models.py:76
+#: app/users/models.py:76
 msgid "linkedin page"
 msgstr ""
 
-#: app/app/users/models.py:77
+#: app/users/models.py:77
 msgid "twitter page"
 msgstr ""
 
-#: app/app/users/models.py:78
+#: app/users/models.py:78
 msgid "occupation"
 msgstr ""
 
-#: app/app/users/models.py:79
+#: app/users/models.py:79
 msgid "area of expertise"
 msgstr ""
 
-#: app/app/users/models.py:80
+#: app/users/models.py:80
 msgid "notifications"
 msgstr ""
 
-#: app/app/users/models.py:81
+#: app/users/models.py:81
 msgid "privacy settings"
 msgstr ""
 
-#: app/app/users/models.py:87
+#: app/users/models.py:87
 msgid "organisation"
 msgstr ""
 
-#: app/app/users/models.py:88
+#: app/users/models.py:88
 msgid "individual"
 msgstr ""
 
-#: app/app/users/models.py:89
+#: app/users/models.py:89
 msgid "journalist"
 msgstr ""
 
-#: app/app/users/models.py:90
+#: app/users/models.py:90
 msgid "recieves newsletter"
 msgstr ""
 
-#: app/app/users/models.py:91
+#: app/users/models.py:91
 msgid "first_login"
 msgstr ""
 
-#: app/app/users/models.py:138
+#: app/users/models.py:138
 msgid "Rated by AHR"
 msgstr ""
 
-#: app/avatar/admin.py:19
+#: avatar/admin.py:19
 msgid "Avatar"
 msgstr ""
 
-#: app/avatar/forms.py:24
+#: avatar/forms.py:24
 msgid "avatar"
 msgstr ""
 
-#: app/avatar/forms.py:37
+#: avatar/forms.py:37
 #, python-format
 msgid ""
 "%(ext)s is an invalid file extension. Authorized extensions are : "
 "%(valid_exts_list)s"
 msgstr ""
 
-#: app/avatar/forms.py:44
+#: avatar/forms.py:44
 #, python-format
 msgid ""
 "Your file is too big (%(size)s), the maximum allowed size is "
 "%(max_valid_size)s"
 msgstr ""
 
-#: app/avatar/forms.py:54
+#: avatar/forms.py:54
 #, python-format
 msgid ""
 "You already have %(nb_avatars)d avatars, and the maximum allowed is "
 "%(nb_max_avatars)d."
 msgstr ""
 
-#: app/avatar/forms.py:71 app/avatar/forms.py:84
+#: avatar/forms.py:71 avatar/forms.py:84
 msgid "Choices"
 msgstr ""
 
-#: app/avatar/views.py:74
+#: avatar/views.py:74
 msgid "Successfully uploaded a new avatar."
 msgstr ""
 
-#: app/avatar/views.py:110
+#: avatar/views.py:110
 msgid "Successfully updated your avatar."
 msgstr ""
 
-#: app/avatar/views.py:148
+#: avatar/views.py:148
 msgid "Successfully deleted the requested avatars."
 msgstr ""
 
-#: app/avatar/templates/avatar/add.html:6
-#: app/avatar/templates/avatar/change.html:6 app/templates/avatar/add.html:6
-#: app/templates/avatar/change.html:8
+#: avatar/templates/avatar/add.html:6 avatar/templates/avatar/change.html:6
+#: templates/avatar/add.html:6 templates/avatar/change.html:8
 msgid "Your current avatar: "
 msgstr ""
 
-#: app/avatar/templates/avatar/add.html:9
-#: app/avatar/templates/avatar/change.html:9 app/templates/avatar/add.html:9
-#: app/templates/avatar/change.html:11
+#: avatar/templates/avatar/add.html:9 avatar/templates/avatar/change.html:9
+#: templates/avatar/add.html:9 templates/avatar/change.html:11
 msgid "You haven't uploaded an avatar yet. Please upload one now."
 msgstr ""
 
-#: app/avatar/templates/avatar/add.html:13
-#: app/avatar/templates/avatar/change.html:20 app/templates/avatar/add.html:13
-#: app/templates/avatar/change.html:25
+#: avatar/templates/avatar/add.html:13 avatar/templates/avatar/change.html:20
+#: templates/avatar/add.html:13 templates/avatar/change.html:25
 msgid "Upload New Image"
 msgstr ""
 
-#: app/avatar/templates/avatar/change.html:15
-#: app/templates/avatar/change.html:19
+#: avatar/templates/avatar/change.html:15 templates/avatar/change.html:19
 msgid "Choose new Default"
 msgstr ""
 
-#: app/avatar/templates/avatar/confirm_delete.html:6
-#: app/templates/avatar/confirm_delete.html:6
+#: avatar/templates/avatar/confirm_delete.html:6
+#: templates/avatar/confirm_delete.html:6
 msgid "Please select the avatars that you would like to delete."
 msgstr ""
 
-#: app/avatar/templates/avatar/confirm_delete.html:9
-#: app/templates/avatar/confirm_delete.html:9
+#: avatar/templates/avatar/confirm_delete.html:9
+#: templates/avatar/confirm_delete.html:9
 #, python-format
 msgid ""
 "You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
 "\">upload one</a> now."
 msgstr ""
 
-#: app/avatar/templates/avatar/confirm_delete.html:15
-#: app/templates/avatar/confirm_delete.html:15
+#: avatar/templates/avatar/confirm_delete.html:15
+#: templates/avatar/confirm_delete.html:15
 msgid "Delete These"
 msgstr ""
 
-#: app/avatar/templates/notification/avatar_friend_updated/full.txt:1
+#: avatar/templates/notification/avatar_friend_updated/full.txt:1
 #, python-format
 msgid ""
 "%(avatar_creator)s has updated their avatar %(avatar)s.\n"
@@ -278,14 +274,14 @@ msgid ""
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
 
-#: app/avatar/templates/notification/avatar_friend_updated/notice.html:2
+#: avatar/templates/notification/avatar_friend_updated/notice.html:2
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
 "href=\"%(avatar_url)s\">%(avatar)s</a>."
 msgstr ""
 
-#: app/avatar/templates/notification/avatar_updated/full.txt:1
+#: avatar/templates/notification/avatar_updated/full.txt:1
 #, python-format
 msgid ""
 "Your avatar has been updated.  %(avatar)s\n"
@@ -293,190 +289,189 @@ msgid ""
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
 
-#: app/avatar/templates/notification/avatar_updated/notice.html:2
+#: avatar/templates/notification/avatar_updated/notice.html:2
 #, python-format
 msgid "You have updated your avatar <a href=\"%(avatar_url)s\">%(avatar)s</a>."
 msgstr ""
 
-#: app/avatar/templatetags/avatar_tags.py:51
+#: avatar/templatetags/avatar_tags.py:51
 msgid "Default Avatar"
 msgstr ""
 
-#: app/templates/404.html:6 app/templates/500.html:6
+#: templates/404.html:6 templates/500.html:6
 msgid "The page you are trying to visit does not exist"
 msgstr ""
 
-#: app/templates/404.html:10
+#: templates/404.html:10
 msgid "The page you are trying to visit does not exist."
 msgstr ""
 
-#: app/templates/500.html:10
+#: templates/500.html:10
 msgid "There has been an unexpected error."
 msgstr ""
 
-#: app/templates/base.html:50
+#: templates/base.html:50
 msgid "Toggle navigation"
 msgstr ""
 
-#: app/templates/base.html:60 app/templates/base.html.py:62
+#: templates/base.html:60 templates/base.html.py:62
 msgid "How It Works"
 msgstr ""
 
-#: app/templates/base.html:64
+#: templates/base.html:64
 msgid "Exchangivists"
 msgstr ""
 
-#: app/templates/base.html:73
+#: templates/base.html:73
 msgid "Messages"
 msgstr ""
 
-#: app/templates/base.html:80
+#: templates/base.html:80
 msgid "Notifications"
 msgstr ""
 
-#: app/templates/base.html:93
+#: templates/base.html:93
 msgid "My Posts"
 msgstr ""
 
-#: app/templates/base.html:96
+#: templates/base.html:96
 msgid "My Profile"
 msgstr ""
 
-#: app/templates/base.html:97
+#: templates/base.html:97
 msgid "Settings"
 msgstr ""
 
-#: app/templates/base.html:101 app/templates/account/logout.html:6
-#: app/templates/account/logout.html:11 app/templates/account/logout.html:19
+#: templates/base.html:101 templates/account/logout.html:6
+#: templates/account/logout.html.py:11 templates/account/logout.html:19
 msgid "Sign Out"
 msgstr ""
 
-#: app/templates/base.html:108 app/templates/account/login.html:9
-#: app/templates/account/login.html:26 app/templates/account/login.html:57
-#: app/templates/openid/login.html:16
+#: templates/base.html:108 templates/account/login.html:9
+#: templates/account/login.html.py:26 templates/account/login.html:57
+#: templates/openid/login.html:16
 msgid "Sign In"
 msgstr ""
 
-#: app/templates/base.html:110 app/templates/base_private_settings.html:6
-#: app/templates/base_public.html:6 app/templates/account/signup.html:32
-#: app/templates/account/signup.html:114 app/templates/ahr/home.html:22
+#: templates/base.html:110 templates/base_private_settings.html:6
+#: templates/base_public.html:6 templates/account/signup.html:32
+#: templates/account/signup.html.py:114 templates/ahr/home.html:22
 msgid "Sign Up"
 msgstr ""
 
-#: app/templates/base.html:158 app/templates/ahr/contact_us.html:10
+#: templates/base.html:158 templates/ahr/contact_us.html:10
 msgid "Contact Us"
 msgstr ""
 
-#: app/templates/base.html:159 app/templates/ahr/terms_and_conditions.html:10
+#: templates/base.html:159 templates/ahr/terms_and_conditions.html:10
 msgid "Terms and Conditions"
 msgstr ""
 
-#: app/templates/base.html:160 app/templates/ahr/privacy.html:11
+#: templates/base.html:160 templates/ahr/privacy.html:11
 msgid "Privacy"
 msgstr ""
 
-#: app/templates/account/account_inactive.html:5
-#: app/templates/account/account_inactive.html:9
+#: templates/account/account_inactive.html:5
+#: templates/account/account_inactive.html:9
 msgid "Account Inactive"
 msgstr ""
 
-#: app/templates/account/account_inactive.html:10
+#: templates/account/account_inactive.html:10
 msgid ""
 "This account is inactive. Accounts have to be individually vetted, you will "
 "be contacted by a member of Advancing Human Rights as part of this vetting "
 "process."
 msgstr ""
 
-#: app/templates/account/email.html:6
+#: templates/account/email.html:6
 msgid "Account"
 msgstr ""
 
-#: app/templates/account/email.html:9
+#: templates/account/email.html:9
 msgid "E-mail Addresses"
 msgstr ""
 
-#: app/templates/account/email.html:11
+#: templates/account/email.html:11
 msgid "The following e-mail addresses are associated with your account:"
 msgstr ""
 
-#: app/templates/account/email.html:25
+#: templates/account/email.html:25
 msgid "Verified"
 msgstr ""
 
-#: app/templates/account/email.html:27
+#: templates/account/email.html:27
 msgid "Unverified"
 msgstr ""
 
-#: app/templates/account/email.html:29
+#: templates/account/email.html:29
 msgid "Primary"
 msgstr ""
 
-#: app/templates/account/email.html:35
+#: templates/account/email.html:35
 msgid "Make Primary"
 msgstr ""
 
-#: app/templates/account/email.html:36
+#: templates/account/email.html:36
 msgid "Re-send Verification"
 msgstr ""
 
-#: app/templates/account/email.html:37
-#: app/templates/socialaccount/connections.html:35
+#: templates/account/email.html:37 templates/socialaccount/connections.html:35
 msgid "Remove"
 msgstr ""
 
-#: app/templates/account/email.html:44
+#: templates/account/email.html:44
 msgid "Warning:"
 msgstr ""
 
-#: app/templates/account/email.html:44
+#: templates/account/email.html:44
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
 "an e-mail address so you can receive notifications, reset your password, etc."
 msgstr ""
 
-#: app/templates/account/email.html:49
+#: templates/account/email.html:49
 msgid "Add E-mail Address"
 msgstr ""
 
-#: app/templates/account/email.html:54
+#: templates/account/email.html:54
 msgid "Add E-mail"
 msgstr ""
 
-#: app/templates/account/email.html:63
+#: templates/account/email.html:63
 msgid "Do you really want to remove the selected e-mail address?"
 msgstr ""
 
-#: app/templates/account/email_confirm.html:8
-#: app/templates/account/email_confirm.html:13
-#: app/templates/account/email_confirmed.html:6
-#: app/templates/account/email_confirmed.html:11
-#: app/templates/account/email/email_confirmation_subject.txt:3
+#: templates/account/email_confirm.html:8
+#: templates/account/email_confirm.html:13
+#: templates/account/email_confirmed.html:6
+#: templates/account/email_confirmed.html:11
+#: templates/account/email/email_confirmation_subject.txt:3
 msgid "Confirm E-mail Address"
 msgstr ""
 
-#: app/templates/account/email_confirm.html:16
+#: templates/account/email_confirm.html:16
 #, python-format
 msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is the e-mail "
 "address you provided for the user %(user_display)s."
 msgstr ""
 
-#: app/templates/account/email_confirm.html:20
+#: templates/account/email_confirm.html:20
 msgid "Confirm"
 msgstr ""
 
-#: app/templates/account/email_confirm.html:24
+#: templates/account/email_confirm.html:24
 msgid "This e-mail confirmation link expired or is invalid."
 msgstr ""
 
-#: app/templates/account/email_confirmed.html:15
+#: templates/account/email_confirmed.html:15
 #, python-format
 msgid ""
 "You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-"
 "mail address for user %(user_display)s."
 msgstr ""
 
-#: app/templates/account/login.html:17
+#: templates/account/login.html:17
 #, python-format
 msgid ""
 "\n"
@@ -486,15 +481,15 @@ msgid ""
 "    "
 msgstr ""
 
-#: app/templates/account/login.html:44
+#: templates/account/login.html:44
 msgid "Remember Me"
 msgstr ""
 
-#: app/templates/account/login.html:47
+#: templates/account/login.html:47
 msgid "Forgot Password?"
 msgstr ""
 
-#: app/templates/account/login.html:52
+#: templates/account/login.html:52
 #, python-format
 msgid ""
 "\n"
@@ -503,59 +498,59 @@ msgid ""
 "            "
 msgstr ""
 
-#: app/templates/account/logout.html:12
+#: templates/account/logout.html:12
 msgid "Are you sure you want to sign out?"
 msgstr ""
 
-#: app/templates/account/password_change.html:12
+#: templates/account/password_change.html:12
 msgid "Password changed successfuly"
 msgstr ""
 
-#: app/templates/account/password_change.html:26
-#: app/templates/account/password_reset_from_key.html:7
-#: app/templates/account/password_reset_from_key.html:23
-#: app/templates/account/password_reset_from_key.html:38
-#: app/templates/account/password_reset_from_key_done.html:5
+#: templates/account/password_change.html:26
+#: templates/account/password_reset_from_key.html:7
+#: templates/account/password_reset_from_key.html:23
+#: templates/account/password_reset_from_key.html:38
+#: templates/account/password_reset_from_key_done.html:5
 msgid "Change Password"
 msgstr ""
 
-#: app/templates/account/password_delete.html:5
-#: app/templates/account/password_delete.html:8
+#: templates/account/password_delete.html:5
+#: templates/account/password_delete.html:8
 msgid "Delete Password"
 msgstr ""
 
-#: app/templates/account/password_delete.html:9
+#: templates/account/password_delete.html:9
 msgid ""
 "You may delete your password since you are currently logged in using OpenID."
 msgstr ""
 
-#: app/templates/account/password_delete.html:12
+#: templates/account/password_delete.html:12
 msgid "delete my password"
 msgstr ""
 
-#: app/templates/account/password_delete_done.html:5
-#: app/templates/account/password_delete_done.html:8
+#: templates/account/password_delete_done.html:5
+#: templates/account/password_delete_done.html:8
 msgid "Password Deleted"
 msgstr ""
 
-#: app/templates/account/password_delete_done.html:9
+#: templates/account/password_delete_done.html:9
 msgid "Your password has been deleted."
 msgstr ""
 
-#: app/templates/account/password_reset.html:7
-#: app/templates/account/password_reset.html:13
-#: app/templates/account/password_reset_done.html:6
-#: app/templates/account/password_reset_done.html:12
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset.html:13
+#: templates/account/password_reset_done.html:6
+#: templates/account/password_reset_done.html:12
 msgid "Password Reset"
 msgstr ""
 
-#: app/templates/account/password_reset.html:17
+#: templates/account/password_reset.html:17
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
 msgstr ""
 
-#: app/templates/account/password_reset.html:30
+#: templates/account/password_reset.html:30
 #, python-format
 msgid ""
 "\n"
@@ -564,11 +559,11 @@ msgid ""
 "            "
 msgstr ""
 
-#: app/templates/account/password_reset.html:38
+#: templates/account/password_reset.html:38
 msgid "Reset My Password"
 msgstr ""
 
-#: app/templates/account/password_reset_done.html:20
+#: templates/account/password_reset_done.html:20
 #, python-format
 msgid ""
 "\n"
@@ -577,11 +572,11 @@ msgid ""
 "      "
 msgstr ""
 
-#: app/templates/account/password_reset_from_key.html:15
+#: templates/account/password_reset_from_key.html:15
 msgid "Bad Token"
 msgstr ""
 
-#: app/templates/account/password_reset_from_key.html:17
+#: templates/account/password_reset_from_key.html:17
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
@@ -589,22 +584,22 @@ msgid ""
 "a>."
 msgstr ""
 
-#: app/templates/account/password_reset_from_key.html:44
-#: app/templates/account/password_reset_from_key_done.html:12
+#: templates/account/password_reset_from_key.html:44
+#: templates/account/password_reset_from_key_done.html:12
 msgid "Your password has been changed."
 msgstr ""
 
-#: app/templates/account/password_set.html:6
-#: app/templates/account/password_set.html:13
-#: app/templates/account/password_set.html:25
+#: templates/account/password_set.html:6
+#: templates/account/password_set.html:13
+#: templates/account/password_set.html:25
 msgid "Set Password"
 msgstr ""
 
-#: app/templates/account/signup.html:11
+#: templates/account/signup.html:11
 msgid "Exchangivist BETA"
 msgstr ""
 
-#: app/templates/account/signup.html:12
+#: templates/account/signup.html:12
 #, python-format
 msgid ""
 "\n"
@@ -644,58 +639,58 @@ msgid ""
 "    "
 msgstr ""
 
-#: app/templates/account/signup.html:35
+#: templates/account/signup.html:35
 #, python-format
 msgid ""
 "You are about to use your %(provider_name)s account to login. We first need "
 "a few more details for vetting."
 msgstr ""
 
-#: app/templates/account/signup.html:37
+#: templates/account/signup.html:37
 #, python-format
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in here</"
 "a>."
 msgstr ""
 
-#: app/templates/account/signup_closed.html:6
-#: app/templates/account/signup_closed.html:12
+#: templates/account/signup_closed.html:6
+#: templates/account/signup_closed.html:12
 msgid "Sign Up Closed"
 msgstr ""
 
-#: app/templates/account/signup_closed.html:14
+#: templates/account/signup_closed.html:14
 msgid "We are sorry, but the sign up is currently closed."
 msgstr ""
 
-#: app/templates/account/verification_sent.html:5
-#: app/templates/account/verification_sent.html:9
-#: app/templates/account/verified_email_required.html:7
-#: app/templates/account/verified_email_required.html:12
+#: templates/account/verification_sent.html:5
+#: templates/account/verification_sent.html:9
+#: templates/account/verified_email_required.html:7
+#: templates/account/verified_email_required.html:12
 msgid "Verify Your E-mail Address"
 msgstr ""
 
-#: app/templates/account/verified_email_required.html:19
+#: templates/account/verified_email_required.html:19
 msgid ""
 "This part of the site requires us to verify that\n"
 "    you are who you claim to be. For this purpose, we require that you\n"
 "    verify ownership of your e-mail address. "
 msgstr ""
 
-#: app/templates/account/verified_email_required.html:23
+#: templates/account/verified_email_required.html:23
 msgid ""
 "We have sent an e-mail to you for\n"
 "    verification. Please click on the link inside this e-mail. Please\n"
 "    contact us if you do not receive it within a few minutes."
 msgstr ""
 
-#: app/templates/account/verified_email_required.html:27
+#: templates/account/verified_email_required.html:27
 #, python-format
 msgid ""
 "<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
 "mail address</a>."
 msgstr ""
 
-#: app/templates/account/email/email_confirmation_message.txt:5
+#: templates/account/email/email_confirmation_message.txt:5
 #, python-format
 msgid ""
 "\n"
@@ -710,7 +705,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: app/templates/account/email/password_reset_key_message.txt:2
+#: templates/account/email/password_reset_key_message.txt:2
 #, python-format
 msgid ""
 "\n"
@@ -733,91 +728,91 @@ msgid ""
 "The Exchangivist team\n"
 msgstr ""
 
-#: app/templates/account/email/password_reset_key_subject.txt:3
+#: templates/account/email/password_reset_key_subject.txt:3
 msgid "Password Reset E-mail"
 msgstr ""
 
-#: app/templates/account/email/user_confirmed_email_subject.txt:3
+#: templates/account/email/user_confirmed_email_subject.txt:3
 msgid "Activate User"
 msgstr ""
 
-#: app/templates/account/messages/cannot_delete_primary_email.txt:2
+#: templates/account/messages/cannot_delete_primary_email.txt:2
 #, python-format
 msgid "You cannot remove your primary e-mail address (%(email)s)."
 msgstr ""
 
-#: app/templates/account/messages/email_confirmation_sent.txt:2
+#: templates/account/messages/email_confirmation_sent.txt:2
 #, python-format
 msgid "Confirmation e-mail sent to %(email)s."
 msgstr ""
 
-#: app/templates/account/messages/email_confirmed.txt:2
+#: templates/account/messages/email_confirmed.txt:2
 #, python-format
 msgid "You have confirmed %(email)s."
 msgstr ""
 
-#: app/templates/account/messages/email_deleted.txt:2
+#: templates/account/messages/email_deleted.txt:2
 #, python-format
 msgid "Removed e-mail address %(email)s."
 msgstr ""
 
-#: app/templates/account/messages/logged_in.txt:4
+#: templates/account/messages/logged_in.txt:4
 #, python-format
 msgid "Successfully signed in as %(name)s."
 msgstr ""
 
-#: app/templates/account/messages/logged_out.txt:2
+#: templates/account/messages/logged_out.txt:2
 msgid "You have signed out."
 msgstr ""
 
-#: app/templates/account/messages/password_changed.txt:2
+#: templates/account/messages/password_changed.txt:2
 msgid "Password successfully changed."
 msgstr ""
 
-#: app/templates/account/messages/password_set.txt:2
+#: templates/account/messages/password_set.txt:2
 msgid "Password successfully set."
 msgstr ""
 
-#: app/templates/account/messages/primary_email_set.txt:2
+#: templates/account/messages/primary_email_set.txt:2
 msgid "Primary e-mail address set."
 msgstr ""
 
-#: app/templates/account/messages/unverified_primary_email.txt:2
+#: templates/account/messages/unverified_primary_email.txt:2
 msgid "Your primary e-mail address must be verified."
 msgstr ""
 
-#: app/templates/account/snippets/already_logged_in.html:5
+#: templates/account/snippets/already_logged_in.html:5
 msgid "Note"
 msgstr ""
 
-#: app/templates/account/snippets/already_logged_in.html:5
+#: templates/account/snippets/already_logged_in.html:5
 #, python-format
 msgid "you are already logged in as %(user_display)s."
 msgstr ""
 
-#: app/templates/admin/auth/user/vet_user.html:7
+#: templates/admin/auth/user/vet_user.html:7
 msgid "Home"
 msgstr ""
 
-#: app/templates/admin/auth/user/vet_user.html:11
+#: templates/admin/auth/user/vet_user.html:11
 msgid "Vet User"
 msgstr ""
 
-#: app/templates/admin/auth/user/vet_user.html:22
+#: templates/admin/auth/user/vet_user.html:22
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/templates/admin/auth/user/vet_user.html:43
+#: templates/admin/auth/user/vet_user.html:43
 msgid "Update"
 msgstr ""
 
-#: app/templates/ahr/contact_us.html:5
+#: templates/ahr/contact_us.html:5
 msgid "Exchangivist - Contact Us"
 msgstr ""
 
-#: app/templates/ahr/contact_us.html:11
+#: templates/ahr/contact_us.html:11
 msgid ""
 "\n"
 "      <h4>Thanks for your interest in Exchangivist beta.</h4><br/>\n"
@@ -829,19 +824,19 @@ msgid ""
 "      "
 msgstr ""
 
-#: app/templates/ahr/contact_us.html:16
+#: templates/ahr/contact_us.html:16
 msgid "Address"
 msgstr ""
 
-#: app/templates/ahr/contact_us.html:21
+#: templates/ahr/contact_us.html:21
 msgid "Email"
 msgstr ""
 
-#: app/templates/ahr/home.html:5
+#: templates/ahr/home.html:5
 msgid "Exchangivist"
 msgstr ""
 
-#: app/templates/ahr/home.html:11
+#: templates/ahr/home.html:11
 msgid ""
 "\n"
 "    Exchangivist is a new innovative platform which is crowdsourcing the "
@@ -852,32 +847,32 @@ msgid ""
 "    "
 msgstr ""
 
-#: app/templates/ahr/home.html:46
+#: templates/ahr/home.html:46
 msgid "I'M AN ACTIVIST"
 msgstr ""
 
-#: app/templates/ahr/home.html:49
+#: templates/ahr/home.html:49
 msgid "I'M READY TO HELP"
 msgstr ""
 
-#: app/templates/ahr/home.html:62
+#: templates/ahr/home.html:62
 msgid " SIGN UP WITH TWITTER"
 msgstr ""
 
-#: app/templates/ahr/home.html:68
+#: templates/ahr/home.html:68
 msgid "SIGN UP WITH FACEBOOK"
 msgstr ""
 
-#: app/templates/ahr/home.html:74
+#: templates/ahr/home.html:74
 msgid "SIGN UP WITH GOOGLE PLUS"
 msgstr ""
 
-#: app/templates/ahr/how_it_works_private.html:5
-#: app/templates/ahr/how_it_works_public.html:5
+#: templates/ahr/how_it_works_private.html:5
+#: templates/ahr/how_it_works_public.html:5
 msgid "Exchangivist - How It Works"
 msgstr ""
 
-#: app/templates/ahr/how_it_works_private.html:21
+#: templates/ahr/how_it_works_private.html:21
 msgid ""
 "\n"
 "      <h1>How It Works</h1>\n"
@@ -924,7 +919,7 @@ msgid ""
 "      "
 msgstr ""
 
-#: app/templates/ahr/how_it_works_public.html:11
+#: templates/ahr/how_it_works_public.html:11
 #, python-format
 msgid ""
 "\n"
@@ -1034,11 +1029,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: app/templates/ahr/privacy.html:6
+#: templates/ahr/privacy.html:6
 msgid "Exchangivist - Privacy"
 msgstr ""
 
-#: app/templates/ahr/privacy.html:14
+#: templates/ahr/privacy.html:14
 #, python-format
 msgid ""
 "\n"
@@ -1225,11 +1220,11 @@ msgid ""
 "      "
 msgstr ""
 
-#: app/templates/ahr/terms_and_conditions.html:5
+#: templates/ahr/terms_and_conditions.html:5
 msgid "Exchangivist - Terms and Conditions"
 msgstr ""
 
-#: app/templates/ahr/terms_and_conditions.html:12
+#: templates/ahr/terms_and_conditions.html:12
 msgid ""
 "\n"
 "      <p>\n"
@@ -1578,386 +1573,386 @@ msgid ""
 "        "
 msgstr ""
 
-#: app/templates/market/comment_form.html:9
-#: app/templates/market/clientside/messagedialog.html:27
-#: app/templates/market/clientside/recommenddialog.html:32
-#: app/templates/market/clientside/reportdialog.html:24
-#: app/templates/market/clientside/reportuserdialog.html:24
+#: templates/market/comment_form.html:9
+#: templates/market/clientside/messagedialog.html:27
+#: templates/market/clientside/recommenddialog.html:32
+#: templates/market/clientside/reportdialog.html:24
+#: templates/market/clientside/reportuserdialog.html:24
 msgid "Send"
 msgstr ""
 
-#: app/templates/market/market.html:19 app/templates/market/market.html:20
+#: templates/market/market.html:19 templates/market/market.html.py:20
 msgid "Create an offer"
 msgstr ""
 
-#: app/templates/market/market.html:23 app/templates/market/market.html:24
+#: templates/market/market.html:23 templates/market/market.html.py:24
 msgid "Create a request"
 msgstr ""
 
-#: app/templates/market/market.html:44 app/templates/market/market.html:45
+#: templates/market/market.html:44 templates/market/market.html.py:45
 msgid "Search by keyword for offers and requests"
 msgstr ""
 
-#: app/templates/market/market.html:48
+#: templates/market/market.html:48
 msgid "Search"
 msgstr ""
 
-#: app/templates/market/market.html:62
+#: templates/market/market.html:62
 msgid "Back"
 msgstr ""
 
-#: app/templates/market/notifications.html:30
+#: templates/market/notifications.html:30
 msgid "More"
 msgstr ""
 
-#: app/templates/market/notifications.html:52
-#: app/templates/market/clientside/notifications.html:13
+#: templates/market/notifications.html:52
+#: templates/market/clientside/notifications.html:13
 msgid "updated"
 msgstr ""
 
-#: app/templates/market/notifications.html:52
-#: app/templates/market/clientside/notifications.html:13
+#: templates/market/notifications.html:52
+#: templates/market/clientside/notifications.html:13
 msgid "posted"
 msgstr ""
 
-#: app/templates/market/notifications.html:52
+#: templates/market/notifications.html:52
 msgid "the"
 msgstr ""
 
-#: app/templates/market/notifications.html:61
+#: templates/market/notifications.html:61
 msgid "commented on"
 msgstr ""
 
-#: app/templates/market/notifications.html:61
-#: app/templates/market/clientside/notifications.html:16
+#: templates/market/notifications.html:61
+#: templates/market/clientside/notifications.html:16
 msgid "your"
 msgstr ""
 
-#: app/templates/market/clientside/commentadd.html:7
+#: templates/market/clientside/commentadd.html:7
 msgid "Post a comment"
 msgstr ""
 
-#: app/templates/market/clientside/commentadd.html:10
+#: templates/market/clientside/commentadd.html:10
 msgid "Comment"
 msgstr ""
 
-#: app/templates/market/clientside/commentview.html:12
+#: templates/market/clientside/commentview.html:12
 msgid "By"
 msgstr ""
 
-#: app/templates/market/clientside/commentview.html:12
+#: templates/market/clientside/commentview.html:12
 msgid "at"
 msgstr ""
 
-#: app/templates/market/clientside/expdate.html:15
+#: templates/market/clientside/expdate.html:15
 msgid "Never expire"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:12
-#: app/templates/market/clientside/filters.html:245
+#: templates/market/clientside/filters.html:12
+#: templates/market/clientside/filters.html:245
 msgid "Show Filters"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:25
-#: app/templates/market/clientside/filters.html:43
-#: app/templates/market/clientside/filters.html:59
-#: app/templates/market/clientside/filters.html:75
-#: app/templates/market/clientside/typeahead.html:31
+#: templates/market/clientside/filters.html:25
+#: templates/market/clientside/filters.html:43
+#: templates/market/clientside/filters.html:59
+#: templates/market/clientside/filters.html:75
+#: templates/market/clientside/typeahead.html:31
 msgid "All"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:29
+#: templates/market/clientside/filters.html:29
 msgid "Offers"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:33
+#: templates/market/clientside/filters.html:33
 msgid "Requests"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:40
-#: app/templates/users/user_profile.html:194
+#: templates/market/clientside/filters.html:40
+#: templates/users/user_profile.html:194
 msgid "Issues"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:46
-#: app/templates/market/clientside/filters.html:62
-#: app/templates/market/clientside/filters.html:78
+#: templates/market/clientside/filters.html:46
+#: templates/market/clientside/filters.html:62
+#: templates/market/clientside/filters.html:78
 msgid "Custom"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:49
-#: app/templates/market/clientside/filters.html:65
-#: app/templates/market/clientside/filters.html:81
+#: templates/market/clientside/filters.html:49
+#: templates/market/clientside/filters.html:65
+#: templates/market/clientside/filters.html:81
 msgid "Default"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:56
-#: app/templates/users/user_profile.html:207
+#: templates/market/clientside/filters.html:56
+#: templates/users/user_profile.html:207
 msgid "Countries"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:72
-#: app/templates/users/user_profile.html:220
+#: templates/market/clientside/filters.html:72
+#: templates/users/user_profile.html:220
 msgid "Skills"
 msgstr ""
 
-#: app/templates/market/clientside/filters.html:255
+#: templates/market/clientside/filters.html:255
 msgid "Hide Filters"
 msgstr ""
 
-#: app/templates/market/clientside/marketitem.html:59
-#: app/templates/market/clientside/marketitem.html:221
+#: templates/market/clientside/marketitem.html:59
+#: templates/market/clientside/marketitem.html:221
 msgid "More ..."
 msgstr ""
 
-#: app/templates/market/clientside/marketitem.html:120
+#: templates/market/clientside/marketitem.html:120
 msgid "Are you sure you want yo delete your comment?"
 msgstr ""
 
-#: app/templates/market/clientside/marketitem.html:174
+#: templates/market/clientside/marketitem.html:174
 msgid "Are you sure you want to delete this item?"
 msgstr ""
 
-#: app/templates/market/clientside/marketitem.html:214
+#: templates/market/clientside/marketitem.html:214
 msgid "Less ..."
 msgstr ""
 
-#: app/templates/market/clientside/marketuser.html:17
-#: app/templates/market/clientside/actions/item_actions.html:14
-#: app/templates/market/clientside/actions/user_actions.html:8
-#: app/templates/market/clientside/actions/user_actions.html:13
+#: templates/market/clientside/marketuser.html:17
+#: templates/market/clientside/actions/item_actions.html:14
+#: templates/market/clientside/actions/user_actions.html:8
+#: templates/market/clientside/actions/user_actions.html:13
 msgid "Recommend"
 msgstr ""
 
-#: app/templates/market/clientside/marketuser.html:18
-#: app/templates/market/clientside/actions/item_actions.html:21
+#: templates/market/clientside/marketuser.html:18
+#: templates/market/clientside/actions/item_actions.html:21
 msgid "Private message"
 msgstr ""
 
-#: app/templates/market/clientside/marketuser.html:19
+#: templates/market/clientside/marketuser.html:19
 msgid "Rate user"
 msgstr ""
 
-#: app/templates/market/clientside/marketuser.html:37
+#: templates/market/clientside/marketuser.html:37
 msgid "Areas Of Interest"
 msgstr ""
 
-#: app/templates/market/clientside/messagedialog.html:9
+#: templates/market/clientside/messagedialog.html:9
 msgid "New message to "
 msgstr ""
 
-#: app/templates/market/clientside/messagedialog.html:13
-#: app/templates/market/clientside/recommenddialog.html:18
-#: app/templates/postman/base_folder.html:76
+#: templates/market/clientside/messagedialog.html:13
+#: templates/market/clientside/recommenddialog.html:18
+#: templates/postman/base_folder.html:76
 msgid "Subject"
 msgstr ""
 
-#: app/templates/market/clientside/messagedialog.html:17
-#: app/templates/market/clientside/recommenddialog.html:22
-#: app/templates/market/clientside/reportdialog.html:14
-#: app/templates/market/clientside/reportuserdialog.html:14
+#: templates/market/clientside/messagedialog.html:17
+#: templates/market/clientside/recommenddialog.html:22
+#: templates/market/clientside/reportdialog.html:14
+#: templates/market/clientside/reportuserdialog.html:14
 msgid "Message"
 msgstr ""
 
-#: app/templates/market/clientside/messagedialog.html:24
-#: app/templates/market/clientside/ratedialog.html:70
-#: app/templates/market/clientside/recommenddialog.html:29
-#: app/templates/market/clientside/reportdialog.html:21
-#: app/templates/market/clientside/reportuserdialog.html:21
+#: templates/market/clientside/messagedialog.html:24
+#: templates/market/clientside/ratedialog.html:70
+#: templates/market/clientside/recommenddialog.html:29
+#: templates/market/clientside/reportdialog.html:21
+#: templates/market/clientside/reportuserdialog.html:21
 msgid "Cancel"
 msgstr ""
 
-#: app/templates/market/clientside/messagedialog.html:88
+#: templates/market/clientside/messagedialog.html:88
 msgid ". Please try again."
 msgstr ""
 
-#: app/templates/market/clientside/messagedialog.html:93
+#: templates/market/clientside/messagedialog.html:93
 msgid "Please provide a subject and message."
 msgstr ""
 
-#: app/templates/market/clientside/notifications.html:16
+#: templates/market/clientside/notifications.html:16
 msgid "commented on "
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:9
+#: templates/market/clientside/offerdialog.html:9
 msgid "OFFER A SERVICE"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:33
-#: app/templates/market/clientside/requestdialog.html:31
-#: app/templates/users/user_settings.html:321
+#: templates/market/clientside/offerdialog.html:33
+#: templates/market/clientside/requestdialog.html:31
+#: templates/users/user_settings.html:321
 msgid "Save"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:115
+#: templates/market/clientside/offerdialog.html:115
 msgid "I can help to advance freedom of:"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:124
+#: templates/market/clientside/offerdialog.html:124
 msgid "Please enter the name of the countries where you can help"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:132
+#: templates/market/clientside/offerdialog.html:132
 msgid "Please enter the skills you have to offer"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:140
-#: app/templates/market/clientside/requestdialog.html:120
+#: templates/market/clientside/offerdialog.html:140
+#: templates/market/clientside/requestdialog.html:120
 msgid "Expiry date"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:147
-#: app/templates/market/clientside/requestdialog.html:126
+#: templates/market/clientside/offerdialog.html:147
+#: templates/market/clientside/requestdialog.html:126
 msgid "Never expires"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:156
-#: app/templates/market/clientside/requestdialog.html:135
+#: templates/market/clientside/offerdialog.html:156
+#: templates/market/clientside/requestdialog.html:135
 msgid "Title of post"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:166
+#: templates/market/clientside/offerdialog.html:166
 msgid "Please give details of what you can help with?"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:181
-#: app/templates/market/clientside/requestdialog.html:154
+#: templates/market/clientside/offerdialog.html:181
+#: templates/market/clientside/requestdialog.html:154
 msgid "Unable to connect to the server. please try again in a few minutes"
 msgstr ""
 
-#: app/templates/market/clientside/offerdialog.html:195
-#: app/templates/market/clientside/requestdialog.html:166
+#: templates/market/clientside/offerdialog.html:195
+#: templates/market/clientside/requestdialog.html:166
 msgid "Are you sure you want to close this dialog?"
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:10
-#: app/templates/market/clientside/actions/item_actions.html:41
-#: app/templates/market/clientside/actions/user_actions.html:32
+#: templates/market/clientside/ratedialog.html:10
+#: templates/market/clientside/actions/item_actions.html:41
+#: templates/market/clientside/actions/user_actions.html:32
 msgid "Rate"
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:21
+#: templates/market/clientside/ratedialog.html:21
 msgid "Rating(s)"
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:33
+#: templates/market/clientside/ratedialog.html:33
 msgid "One star "
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:40
+#: templates/market/clientside/ratedialog.html:40
 msgid "Two stars"
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:47
+#: templates/market/clientside/ratedialog.html:47
 msgid "Three stars"
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:54
+#: templates/market/clientside/ratedialog.html:54
 msgid "Four stars"
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:61
+#: templates/market/clientside/ratedialog.html:61
 msgid "Five stars"
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:73
+#: templates/market/clientside/ratedialog.html:73
 msgid "Submit"
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:126
+#: templates/market/clientside/ratedialog.html:126
 msgid "You have to select a rateing."
 msgstr ""
 
-#: app/templates/market/clientside/ratedialog.html:152
+#: templates/market/clientside/ratedialog.html:152
 msgid "Rating failed."
 msgstr ""
 
-#: app/templates/market/clientside/recommenddialog.html:9
+#: templates/market/clientside/recommenddialog.html:9
 msgid "Recommed this"
 msgstr ""
 
-#: app/templates/market/clientside/recommenddialog.html:13
+#: templates/market/clientside/recommenddialog.html:13
 msgid "To registered user"
 msgstr ""
 
-#: app/templates/market/clientside/recommenddialog.html:113
+#: templates/market/clientside/recommenddialog.html:113
 msgid "Failed to send message"
 msgstr ""
 
-#: app/templates/market/clientside/recommenddialog.html:117
+#: templates/market/clientside/recommenddialog.html:117
 msgid "Please enter both a subject and a message."
 msgstr ""
 
-#: app/templates/market/clientside/reportdialog.html:9
+#: templates/market/clientside/reportdialog.html:9
 msgid "Report Post"
 msgstr ""
 
-#: app/templates/market/clientside/reportdialog.html:60
-#: app/templates/market/clientside/reportuserdialog.html:61
+#: templates/market/clientside/reportdialog.html:60
+#: templates/market/clientside/reportuserdialog.html:61
 msgid "Unable to send report. please try again"
 msgstr ""
 
-#: app/templates/market/clientside/reportuserdialog.html:9
+#: templates/market/clientside/reportuserdialog.html:9
 msgid "Report User "
 msgstr ""
 
-#: app/templates/market/clientside/requestdialog.html:9
+#: templates/market/clientside/requestdialog.html:9
 msgid "REQUEST A SERVICE"
 msgstr ""
 
-#: app/templates/market/clientside/requestdialog.html:108
+#: templates/market/clientside/requestdialog.html:108
 msgid "I need help to advance freedom of:"
 msgstr ""
 
-#: app/templates/market/clientside/requestdialog.html:114
+#: templates/market/clientside/requestdialog.html:114
 msgid "Please enter the name of the countries where you need help"
 msgstr ""
 
-#: app/templates/market/clientside/requestdialog.html:140
+#: templates/market/clientside/requestdialog.html:140
 msgid "Please give details of what you need help with?"
 msgstr ""
 
-#: app/templates/market/clientside/typeahead.html:29
+#: templates/market/clientside/typeahead.html:29
 msgid "Click here to see your choices"
 msgstr ""
 
-#: app/templates/market/clientside/typeahead.html:33
+#: templates/market/clientside/typeahead.html:33
 msgid "Defaults"
 msgstr ""
 
-#: app/templates/market/clientside/typeahead.html:35
+#: templates/market/clientside/typeahead.html:35
 msgid "None"
 msgstr ""
 
-#: app/templates/market/clientside/userprofile.html:12
+#: templates/market/clientside/userprofile.html:12
 msgid "Community rating:"
 msgstr ""
 
-#: app/templates/market/clientside/userprofile.html:20
-#: app/templates/market/clientside/userprofile.html:30
+#: templates/market/clientside/userprofile.html:20
+#: templates/market/clientside/userprofile.html:30
 msgid "Stars"
 msgstr ""
 
-#: app/templates/market/clientside/userprofile.html:21
-#: app/templates/users/user_profile.html:61
+#: templates/market/clientside/userprofile.html:21
+#: templates/users/user_profile.html:61
 msgid "votes"
 msgstr ""
 
-#: app/templates/market/clientside/userprofile.html:24
-#: app/templates/users/user_profile.html:94
+#: templates/market/clientside/userprofile.html:24
+#: templates/users/user_profile.html:94
 msgid "Nationality"
 msgstr ""
 
-#: app/templates/market/clientside/userprofile.html:27
-#: app/templates/users/user_profile.html:105
+#: templates/market/clientside/userprofile.html:27
+#: templates/users/user_profile.html:105
 msgid "Country of residence"
 msgstr ""
 
-#: app/templates/market/clientside/userprofile.html:30
+#: templates/market/clientside/userprofile.html:30
 msgid "AHR rating"
 msgstr ""
 
-#: app/templates/market/clientside/userprofile.html:36
+#: templates/market/clientside/userprofile.html:36
 msgid ""
 "\n"
 "      For your own safety and security, do not share personal contact "
@@ -1969,55 +1964,55 @@ msgid ""
 "      "
 msgstr ""
 
-#: app/templates/market/clientside/userprofile.html:42
+#: templates/market/clientside/userprofile.html:42
 msgid "click here"
 msgstr ""
 
-#: app/templates/market/clientside/actions/comment_actions.html:6
+#: templates/market/clientside/actions/comment_actions.html:6
 msgid "Send private message"
 msgstr ""
 
-#: app/templates/market/clientside/actions/comment_actions.html:8
-#: app/templates/market/clientside/actions/user_actions.html:20
+#: templates/market/clientside/actions/comment_actions.html:8
+#: templates/market/clientside/actions/user_actions.html:20
 msgid "Private Message"
 msgstr ""
 
-#: app/templates/market/clientside/actions/comment_actions.html:15
-#: app/templates/market/clientside/actions/item_actions.html:28
-#: app/templates/market/clientside/actions/user_actions.html:27
+#: templates/market/clientside/actions/comment_actions.html:15
+#: templates/market/clientside/actions/item_actions.html:28
+#: templates/market/clientside/actions/user_actions.html:27
 msgid "Report"
 msgstr ""
 
-#: app/templates/market/clientside/actions/comment_actions.html:26
-#: app/templates/market/clientside/actions/item_actions.html:61
+#: templates/market/clientside/actions/comment_actions.html:26
+#: templates/market/clientside/actions/item_actions.html:61
 msgid "Delete"
 msgstr ""
 
-#: app/templates/market/clientside/actions/item_actions.html:10
+#: templates/market/clientside/actions/item_actions.html:10
 msgid "recommends :"
 msgstr ""
 
-#: app/templates/market/clientside/actions/item_actions.html:11
+#: templates/market/clientside/actions/item_actions.html:11
 msgid "recommends you have a look at a post"
 msgstr ""
 
-#: app/templates/market/clientside/actions/item_actions.html:11
+#: templates/market/clientside/actions/item_actions.html:11
 msgid "by :"
 msgstr ""
 
-#: app/templates/market/clientside/actions/item_actions.html:56
+#: templates/market/clientside/actions/item_actions.html:56
 msgid "Edit"
 msgstr ""
 
-#: app/templates/market/clientside/actions/user_actions.html:9
+#: templates/market/clientside/actions/user_actions.html:9
 msgid "recommends this user :"
 msgstr ""
 
-#: app/templates/market/clientside/actions/user_actions.html:10
+#: templates/market/clientside/actions/user_actions.html:10
 msgid "recommends you have a look at user:"
 msgstr ""
 
-#: app/templates/market/copy/market_help.html:3
+#: templates/market/copy/market_help.html:3
 msgid ""
 "\n"
 "   Welcome to the Exchange, the heart of the Exchangivist online tool. Here "
@@ -2029,7 +2024,7 @@ msgid ""
 "   requests.\n"
 msgstr ""
 
-#: app/templates/market/copy/myposts_help.html:3
+#: templates/market/copy/myposts_help.html:3
 msgid ""
 "\n"
 "    Welcome to your posts, here you can easily manage your posts. \n"
@@ -2041,7 +2036,7 @@ msgid ""
 "bar.\n"
 msgstr ""
 
-#: app/templates/market/copy/user_help.html:3
+#: templates/market/copy/user_help.html:3
 msgid ""
 "\n"
 "Welcome to Exchangivists, the easy way to find current users on the "
@@ -2051,65 +2046,63 @@ msgid ""
 "search box.\n"
 msgstr ""
 
-#: app/templates/openid/login.html:6 app/templates/openid/login.html.py:10
+#: templates/openid/login.html:6 templates/openid/login.html.py:10
 msgid "OpenID Sign In"
 msgstr ""
 
-#: app/templates/postman/archives.html:6
+#: templates/postman/archives.html:6
 msgid "Archived Messages"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:39
+#: templates/postman/base_folder.html:39
 msgid "Sorry, this page number is invalid."
 msgstr ""
 
-#: app/templates/postman/base_folder.html:52
+#: templates/postman/base_folder.html:52
 msgid "Trash"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:58
+#: templates/postman/base_folder.html:58
 msgid "Archive"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:63
+#: templates/postman/base_folder.html:63
 msgid "Undelete"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:71
+#: templates/postman/base_folder.html:71
 msgid "Sender"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:74
+#: templates/postman/base_folder.html:74
 msgid "Recipient"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:77
+#: templates/postman/base_folder.html:77
 msgid "Date"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:84
-#: app/templates/postman/base_folder.html:88
+#: templates/postman/base_folder.html:84 templates/postman/base_folder.html:88
 msgid "conversation"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:85
-#: app/templates/postman/base_folder.html:89
+#: templates/postman/base_folder.html:85 templates/postman/base_folder.html:89
 msgid "message"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:132
+#: templates/postman/base_folder.html:132
 msgid "g:i A,M j,n/j/y"
 msgstr ""
 
-#: app/templates/postman/base_folder.html:186
+#: templates/postman/base_folder.html:186
 msgid "No messages."
 msgstr ""
 
-#: app/templates/postman/email_user.txt:3
+#: templates/postman/email_user.txt:3
 msgid "Dear Exchangivist,"
 msgstr ""
 
-#: app/templates/postman/email_user.txt:5
+#: templates/postman/email_user.txt:5
 #, python-format
 msgid ""
 "\n"
@@ -2117,140 +2110,136 @@ msgid ""
 "    "
 msgstr ""
 
-#: app/templates/postman/email_user.txt:8
-#: app/templates/postman/email_visitor.txt:5
+#: templates/postman/email_user.txt:8 templates/postman/email_visitor.txt:5
 msgid "Your message has been rejected by the moderator"
 msgstr ""
 
-#: app/templates/postman/email_user.txt:10
-#: app/templates/postman/email_visitor.txt:5
+#: templates/postman/email_user.txt:10 templates/postman/email_visitor.txt:5
 msgid ", for the following reason:"
 msgstr ""
 
-#: app/templates/postman/email_user.txt:18
-#: app/templates/postman/email_user.txt:26
+#: templates/postman/email_user.txt:18 templates/postman/email_user.txt:26
 #, python-format
 msgid ""
 "'%(sender)s' has sent you a message. To view your message please login to "
 "Exchangivsit."
 msgstr ""
 
-#: app/templates/postman/email_user.txt:19
+#: templates/postman/email_user.txt:19
 msgid "Your correspondent has given you an answer."
 msgstr ""
 
-#: app/templates/postman/email_user.txt:21
+#: templates/postman/email_user.txt:21
 #, python-format
 msgid ""
 "\n"
 "You have received a copy of a response from the user '%(sender)s'.\n"
 msgstr ""
 
-#: app/templates/postman/email_user.txt:29
-#: app/templates/postman/email_visitor.txt:14
+#: templates/postman/email_user.txt:29 templates/postman/email_visitor.txt:14
 msgid "Note: This message is issued by an automated system. Do not reply."
 msgstr ""
 
-#: app/templates/postman/email_user_subject.txt:1
-#: app/templates/postman/email_visitor_subject.txt:1
+#: templates/postman/email_user_subject.txt:1
+#: templates/postman/email_visitor_subject.txt:1
 #, python-format
 msgid "Message \"%(subject)s\" on the site %(sitename)s"
 msgstr ""
 
-#: app/templates/postman/email_visitor.txt:1
+#: templates/postman/email_visitor.txt:1
 msgid "Dear visitor,"
 msgstr ""
 
-#: app/templates/postman/email_visitor.txt:3
+#: templates/postman/email_visitor.txt:3
 #, python-format
 msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
 msgstr ""
 
-#: app/templates/postman/email_visitor.txt:8
+#: templates/postman/email_visitor.txt:8
 msgid "As a reminder, please find below the content of your message."
 msgstr ""
 
-#: app/templates/postman/email_visitor.txt:10
+#: templates/postman/email_visitor.txt:10
 #, python-format
 msgid "On %(date)s, you sent a message to the user '%(sender)s'."
 msgstr ""
 
-#: app/templates/postman/email_visitor.txt:11
+#: templates/postman/email_visitor.txt:11
 msgid "Please find below the answer from your correspondent."
 msgstr ""
 
-#: app/templates/postman/inbox.html:5
+#: templates/postman/inbox.html:5
 msgid "Inbox"
 msgstr ""
 
-#: app/templates/postman/inbox.html:9
+#: templates/postman/inbox.html:9
 msgid "Received"
 msgstr ""
 
-#: app/templates/postman/sent.html:6
+#: templates/postman/sent.html:6
 msgid "Sent Messages"
 msgstr ""
 
-#: app/templates/postman/sent.html:10
+#: templates/postman/sent.html:10
 msgid "Sent"
 msgstr ""
 
-#: app/templates/postman/trash.html:6
+#: templates/postman/trash.html:6
 msgid "Deleted Messages"
 msgstr ""
 
-#: app/templates/postman/view.html:25
+#: templates/postman/view.html:25
 msgid "Reply"
 msgstr ""
 
-#: app/templates/postman/view.html:57
+#: templates/postman/view.html:57
 msgid "More...."
 msgstr ""
 
-#: app/templates/postman/view.html:86
+#: templates/postman/view.html:86
 msgid "Rejected"
 msgstr ""
 
-#: app/templates/postman/view.html:86
+#: templates/postman/view.html:86
 msgid ":"
 msgstr ""
 
-#: app/templates/socialaccount/authentication_error.html:5
-#: app/templates/socialaccount/authentication_error.html:9
+#: templates/socialaccount/authentication_error.html:5
+#: templates/socialaccount/authentication_error.html:9
 msgid "Social Network Login Failure"
 msgstr ""
 
-#: app/templates/socialaccount/authentication_error.html:10
+#: templates/socialaccount/authentication_error.html:10
 msgid ""
 "An error occurred while attempting to login via your social network account."
 msgstr ""
 
-#: app/templates/socialaccount/connections.html:5
-#: app/templates/socialaccount/connections.html:8
+#: templates/socialaccount/connections.html:5
+#: templates/socialaccount/connections.html:8
 msgid "Account Connections"
 msgstr ""
 
-#: app/templates/socialaccount/connections.html:11
+#: templates/socialaccount/connections.html:11
 msgid ""
 "You can sign in to your account using any of the following third party "
 "accounts:"
 msgstr ""
 
-#: app/templates/socialaccount/connections.html:43
+#: templates/socialaccount/connections.html:43
 msgid ""
 "You currently have no social network accounts connected to this account."
 msgstr ""
 
-#: app/templates/socialaccount/connections.html:46
+#: templates/socialaccount/connections.html:46
 msgid "Add a 3rd Party Account"
 msgstr ""
 
-#: app/templates/socialaccount/login_cancelled.html:6
-#: app/templates/socialaccount/login_cancelled.html:11
+#: templates/socialaccount/login_cancelled.html:6
+#: templates/socialaccount/login_cancelled.html:11
 msgid "Login Cancelled"
 msgstr ""
 
-#: app/templates/socialaccount/login_cancelled.html:13
+#: templates/socialaccount/login_cancelled.html:13
 #, python-format
 msgid ""
 "You decided to cancel logging in to our site using one of your existing "
@@ -2258,129 +2247,124 @@ msgid ""
 "\">sign in</a>."
 msgstr ""
 
-#: app/templates/socialaccount/messages/account_connected.txt:2
+#: templates/socialaccount/messages/account_connected.txt:2
 msgid "The social account has been connected."
 msgstr ""
 
-#: app/templates/socialaccount/messages/account_connected_other.txt:2
+#: templates/socialaccount/messages/account_connected_other.txt:2
 msgid "The social account is already connected to a different account."
 msgstr ""
 
-#: app/templates/socialaccount/messages/account_disconnected.txt:2
+#: templates/socialaccount/messages/account_disconnected.txt:2
 msgid "The social account has been disconnected."
 msgstr ""
 
-#: app/templates/users/thanksforactivation.html:7
-#: app/templates/users/thanksforactivation.html:12
-#: app/templates/users/waitforactivation.html:7
-#: app/templates/users/waitforactivation.html:12
+#: templates/users/thanksforactivation.html:7
+#: templates/users/thanksforactivation.html:12
+#: templates/users/waitforactivation.html:7
+#: templates/users/waitforactivation.html:12
 msgid "Email Confirmed"
 msgstr ""
 
-#: app/templates/users/thanksforactivation.html:13
+#: templates/users/thanksforactivation.html:13
 msgid "Your account is now activated."
 msgstr ""
 
-#: app/templates/users/user_profile.html:6
+#: templates/users/user_profile.html:6
 msgid "Profile"
 msgstr ""
 
-#: app/templates/users/user_profile.html:11
+#: templates/users/user_profile.html:11
 msgid "Tag"
 msgstr ""
 
-#: app/templates/users/user_profile.html:37
+#: templates/users/user_profile.html:37
 msgid "Update Profile"
 msgstr ""
 
-#: app/templates/users/user_profile.html:54
+#: templates/users/user_profile.html:54
 msgid "Rating"
 msgstr ""
 
-#: app/templates/users/user_profile.html:58
+#: templates/users/user_profile.html:58
 msgid "Community rating"
 msgstr ""
 
-#: app/templates/users/user_profile.html:61
-#: app/templates/users/user_profile.html:70
+#: templates/users/user_profile.html:61 templates/users/user_profile.html:70
 msgid "stars"
 msgstr ""
 
-#: app/templates/users/user_profile.html:67
+#: templates/users/user_profile.html:67
 msgid "AHR Rating"
 msgstr ""
 
-#: app/templates/users/user_profile.html:81
+#: templates/users/user_profile.html:81
 msgid "About"
 msgstr ""
 
-#: app/templates/users/user_profile.html:83
+#: templates/users/user_profile.html:83
 msgid "Name"
 msgstr ""
 
-#: app/templates/users/user_profile.html:88
-#: app/templates/users/user_profile.html:99
-#: app/templates/users/user_profile.html:110
-#: app/templates/users/user_profile.html:121
-#: app/templates/users/user_profile.html:132
-#: app/templates/users/user_profile.html:147
-#: app/templates/users/user_profile.html:158
-#: app/templates/users/user_profile.html:169
-#: app/templates/users/user_profile.html:180
+#: templates/users/user_profile.html:88 templates/users/user_profile.html:99
+#: templates/users/user_profile.html:110 templates/users/user_profile.html:121
+#: templates/users/user_profile.html:132 templates/users/user_profile.html:147
+#: templates/users/user_profile.html:158 templates/users/user_profile.html:169
+#: templates/users/user_profile.html:180
 msgid "hidden"
 msgstr ""
 
-#: app/templates/users/user_profile.html:116
+#: templates/users/user_profile.html:116
 msgid "Occupation"
 msgstr ""
 
-#: app/templates/users/user_profile.html:127
+#: templates/users/user_profile.html:127
 msgid "Area of expertise"
 msgstr ""
 
-#: app/templates/users/user_profile.html:139
+#: templates/users/user_profile.html:139
 msgid "Social"
 msgstr ""
 
-#: app/templates/users/user_profile.html:142
+#: templates/users/user_profile.html:142
 msgid "Website"
 msgstr ""
 
-#: app/templates/users/user_profile.html:153
+#: templates/users/user_profile.html:153
 msgid "Facebook"
 msgstr ""
 
-#: app/templates/users/user_profile.html:164
+#: templates/users/user_profile.html:164
 msgid "LinkedIn"
 msgstr ""
 
-#: app/templates/users/user_profile.html:175
+#: templates/users/user_profile.html:175
 msgid "Twitter"
 msgstr ""
 
-#: app/templates/users/user_settings.html:9
+#: templates/users/user_settings.html:9
 msgid "User Settings"
 msgstr ""
 
-#: app/templates/users/user_settings.html:319
+#: templates/users/user_settings.html:319
 msgid "Continue"
 msgstr ""
 
-#: app/templates/users/waitforactivation.html:13
+#: templates/users/waitforactivation.html:13
 msgid ""
 "Someone will be in contact with you shortly to help you activate your "
 "account."
 msgstr ""
 
-#: app/templates/users/welcome.html:5
+#: templates/users/welcome.html:5
 msgid "Welcome"
 msgstr ""
 
-#: app/templates/users/welcome.html:9
+#: templates/users/welcome.html:9
 msgid "Getting started"
 msgstr ""
 
-#: app/templates/users/welcome.html:10
+#: templates/users/welcome.html:10
 msgid ""
 "\n"
 "    <div>\n"
@@ -2415,6 +2399,6 @@ msgid ""
 "    "
 msgstr ""
 
-#: app/templates/users/welcome.html:36
+#: templates/users/welcome.html:36
 msgid "Get Started"
 msgstr ""
