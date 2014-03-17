@@ -1,10 +1,14 @@
 {% load assets %}
 {% load i18n %}
+{% load l10n %}
 {% load avatar_tags %}
 {% load url from future %}
 {% load account %}
 {% load postman_tags %}
 {% postman_unread as unread_count %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -25,7 +29,7 @@
     <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
   {% endassets %}
 
-  <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+
   {% assets "js_all" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}
@@ -34,6 +38,8 @@
   {% endblock %}
 </head>
 <body class="{% block body_class %}{{ body_class }}{% endblock %}">
+
+
 {% if messages %}
   {% for message in messages %}
     <div style="display:none;">{{ message }}</div>
@@ -43,6 +49,17 @@
     role="navigation">
 
   <div class="container" style="position:relative;">
+  <form id='langForm' action="/i18n/setlang/" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}" />
+      <select name="language">
+      {% get_language_info_list for LANGUAGES as languages %}
+      {% for language in languages %}
+        <option value="{{ language.code }}" {%if LANGUAGE_CODE == language.code %}selected{%endif%}>{{ language.name_local }} ({{ language.code }}) {{LANGUAGE_CODE}}</option>
+      {% endfor %}
+      </select>
+    <input type="submit" value="Go" />
+   </form>
     <div class="row">
       <div class="col-xs-12">
       <div class="navbar-header" {% if user.is_authenticated %}style="padding-right:12px;" {%endif%}>
@@ -174,6 +191,7 @@
 
 {% block endjavascript %}
 {% endblock %}
+<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 {% if user.is_authenticated %}
 
   {% include "market/clientside/notifications.html" %}
@@ -181,6 +199,7 @@
   <script type="text/javascript" id="notifications_view">
     (function () {
       window.ahr.notifications_widget.initWidget()
+
     })();
   </script>
 {% endif %}
