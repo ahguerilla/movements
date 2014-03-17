@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-17 15:55+0000\n"
+"POT-Creation-Date: 2014-03-17 16:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -310,64 +310,64 @@ msgstr ""
 msgid "There has been an unexpected error."
 msgstr ""
 
-#: templates/base.html:50
+#: templates/base.html:51
 msgid "Toggle navigation"
 msgstr ""
 
-#: templates/base.html:60 templates/base.html.py:62
+#: templates/base.html:61 templates/base.html.py:63
 msgid "How It Works"
 msgstr ""
 
-#: templates/base.html:64
+#: templates/base.html:65
 msgid "Exchangivists"
 msgstr ""
 
-#: templates/base.html:73
+#: templates/base.html:74
 msgid "Messages"
 msgstr ""
 
-#: templates/base.html:80
+#: templates/base.html:81
 msgid "Notifications"
 msgstr ""
 
-#: templates/base.html:93
+#: templates/base.html:94
 msgid "My Posts"
 msgstr ""
 
-#: templates/base.html:96
+#: templates/base.html:97
 msgid "My Profile"
 msgstr ""
 
-#: templates/base.html:97
+#: templates/base.html:98
 msgid "Settings"
 msgstr ""
 
-#: templates/base.html:101 templates/account/logout.html:6
+#: templates/base.html:102 templates/account/logout.html:6
 #: templates/account/logout.html.py:11 templates/account/logout.html:19
 msgid "Sign Out"
 msgstr ""
 
-#: templates/base.html:108 templates/account/login.html:9
+#: templates/base.html:109 templates/account/login.html:9
 #: templates/account/login.html.py:26 templates/account/login.html:57
 #: templates/openid/login.html:16
 msgid "Sign In"
 msgstr ""
 
-#: templates/base.html:110 templates/base_private_settings.html:6
+#: templates/base.html:111 templates/base_private_settings.html:6
 #: templates/base_public.html:6 templates/account/signup.html:32
 #: templates/account/signup.html.py:114 templates/ahr/home.html:22
 msgid "Sign Up"
 msgstr ""
 
-#: templates/base.html:158 templates/ahr/contact_us.html:10
+#: templates/base.html:159 templates/ahr/contact_us.html:10
 msgid "Contact Us"
 msgstr ""
 
-#: templates/base.html:159 templates/ahr/terms_and_conditions.html:10
+#: templates/base.html:160 templates/ahr/terms_and_conditions.html:10
 msgid "Terms and Conditions"
 msgstr ""
 
-#: templates/base.html:160 templates/ahr/privacy.html:11
+#: templates/base.html:161 templates/ahr/privacy.html:11
 msgid "Privacy"
 msgstr ""
 

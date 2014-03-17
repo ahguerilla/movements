@@ -48,7 +48,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   noSearchResult: function () {
     if ($('.market-place-item').length == 0) {
-      $('#marketitems').append('<p style="margin-top:20px;" id="no-search-result">Your search did not match any market item. <a href="#" id="searchagainall">Search again without any filters</a> or <a href="#" id="searchwithdefaults">search again with your default filters</a></p>');
+      $('#marketitems').append('<p style="margin-top:20px;" id="no-search-result">'+
+        document.write(gettext('Your search did not match any market item.'))+
+        '<a href="#" id="searchagainall">'+
+        document.write(gettext('Search again without any filters')+'</a>'+document.write(gettext('or'))+
+        '<a href="#" id="searchwithdefaults">' +
+        document.write(gettext('search again with your default filters'))+
+        '</a></p>');
     }
   },
 

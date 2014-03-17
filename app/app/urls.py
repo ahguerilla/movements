@@ -6,6 +6,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
+js_info_dict = {
+    'packages': ('app',),
+}
 urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
@@ -31,7 +34,8 @@ urlpatterns = patterns('',
     url(r'^admin/auth/user/(?P<user_id>\d+)/emailvetted$', 'app.users.views.email_vet_user', name='email_vet_user'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^rosetta/', include('rosetta.urls')),
-    (r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

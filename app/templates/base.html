@@ -25,6 +25,7 @@
     <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
   {% endassets %}
 
+  <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
   {% assets "js_all" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}
