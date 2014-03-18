@@ -129,7 +129,7 @@
       }
       $("#message-col").hide();
       $('#conversation-cont').show();
-      $('#messagenav').hide();
+      //$('#messagenav').hide();
       $('#back').show();
       $('#breadsubject').text($('#messagesubjectheader').text());
       $('body').scrollTop(0);
