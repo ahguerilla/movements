@@ -9,6 +9,7 @@
 {% block head_title %}{% trans "User Settings" %}{% endblock %}
 
 {% block outsidecontainer %}
+<div style="height:50px;"></div>
 <div class="filter-banner-spacer"></div>
 <div class="exchange-filter">
   <div class="container">
@@ -24,7 +25,6 @@
 {% block content %}
 
 <div id="usersettingpage">
-
     <div class="in-container dialog">
       <form method="post" class="form-horizontal" id="settingform" role="form">
         {% csrf_token %}
