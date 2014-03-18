@@ -175,7 +175,7 @@
       $(more).html('<button style="margin-top:5px;" class="btn btn-default">'+gettext('more...')+'</button>');
       $('#paginationblock').html(more);
       $('#conversation-cont').hide();
-      $('.nanamorde').hide();
+      //$('.nanamorde').hide();
       $('.nanamorde-mobile').hide();
       this.resize();
     }
