@@ -7,8 +7,14 @@
     rec_type="item"
     item_id="<%- pk %>"
     obj_id ="<%- pk %>"
-    subject = "<%- window.ahr.username %>  {% trans "recommends :" %} <%- title %>"
-    message = "<%- window.ahr.username %>  {% trans "recommends you have a look at a post" %}"<%- title %>"  {% trans "by :" %} <%- owner %>"
+    subject = "<%- window.ahr.username %>  {% trans "recommends:" %} <%- title %>"
+    message =
+"{% blocktrans %}Hey,
+
+Have a look at this <%-item_type%> on Exchangivist, I think you might <% if(item_type == 'offer'){ %> find it helpful<% } else { %>be able to help<% } %>.
+
+Best,
+{% endblocktrans %}<%- window.ahr.username %>"
     class="recommend actionitem">
       <div class="text">
         {% trans "Recommend" %}

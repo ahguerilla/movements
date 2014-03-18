@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from postman.api import pm_write
 
 from app.market.api.utils import *
+from app.market.models import MarketItem
 import app.users as users
 from django.utils.cache import get_cache
 cache = get_cache('default')
@@ -103,15 +104,18 @@ def send_message(request, to_user, rtype):
 
 @login_required
 def send_recommendation(request, rec_type, to_user, obj_id, rtype):
+    additionals =''
     if rec_type == 'item':
         href = '<!--item="'+obj_id+'"-->'
+        additionals = MarketItem.objects.values('title').get(pk=obj_id)['title']
     else:
         href = '<!--user="'+obj_id+'"-->'
+        additionals = obj_id
     try:
         pm_write(sender=request.user,
                  recipient=users.models.User.objects.filter(username=to_user)[0],
                  subject=request.POST['subject'][:120] if len(request.POST['subject'])>120 else request.POST['subject'],
-                 body=request.POST['message']+'\r\n'+href)
+                 body=request.POST['message']+'\r\n----------------------------------------\r\n'+additionals+'\r\n'+href)
     except:
         return HttpResponseError(
             json.dumps({'success': 'false'}),
