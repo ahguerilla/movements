@@ -48,6 +48,18 @@
     item: '',
     el: '#offerdialog',
 
+    isDirty: function(){
+      data = this.getFormData();
+      if(typeof data.countries[0] === "undefined" &&
+        typeof data.skills[0] === "undefined" &&
+        typeof data.issues[0] === "undefined" &&
+        data.details=== "" &&
+        data.title === "" &&
+        data.never_exp === false &&
+        data.exp_date === "") return false;
+      return true;
+    },
+
     dialogShown: function(ev){
       this.countries_widget.remakeScrollbar();
       this.issues_widget.remakeScrollbar();
@@ -65,14 +77,25 @@
       }
     },
 
+    dialogClosing: function(ev){
+      ev.stopImmediatePropagation();
+      if( !this.isDirty()) return true;
+      if (!this.closing && !confirm('{%trans "Are you sure you want to close this dialog?"%}')) {
+        return false;
+      }
+      this.emptyTheForm();
+    },
+
     init: function () {
       var that = this;
       this.url = window.ahr.app_urls.addmarketitem + 'offer';
        _.extend(this.events,{
         'shown.bs.modal': 'dialogShown',
-        'hidden.bs.modal': 'dialogHidden'
+        'hidden.bs.modal': 'dialogHidden',
+        'hide.bs.modal': 'dialogClosing'
       });
     },
+
 
     getFormData: function () {
       var that = this;
@@ -190,13 +213,7 @@
         })
       });
       window.ahr.expandTextarea($('#details', $("#offerdialog")));
-      $('#offerdialog').on('hide.bs.modal', function (ev) {
-        ev.stopImmediatePropagation();
-        if (!that.closing && !confirm('{%trans "Are you sure you want to close this dialog?"%}')) {
-          return false;
-        }
-        that.emptyTheForm();
-      });
+
     },
 
     emptyTheForm: function () {
