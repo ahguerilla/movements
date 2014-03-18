@@ -31,7 +31,7 @@
         }
         var more = $('.next', $(data))[0];
         $('.next').replaceWith(more);
-        $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
+        $(more).html('<button style="margin-top:5px;" class="btn btn-default">'+gettext('more...')+'</button>');
         $('.messagelist').append($('.messagelist', $(data)).children());
       });
     },
@@ -50,17 +50,17 @@
     postProccessConv: function(data){
       var that = this;
       data1 = data.replace(that.itemre, function (match, item_id, offset, string) {
-        return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
+        return "<a href='/market/#item/" + item_id + "'>"+gettext('Click here to view the recommendation')+"</a>";
       });
       data2 = data1.replace(that.userre, function (match, username, offset, string) {
-        return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
+        return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>"+gettext('Click here to view the recommendation')+"</a>";
       });
 
       data3 = data2.replace(that.itemre, function (match, item_id, offset, string) {
-        return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
+        return "<a href='/market/#item/" + item_id + "'>"+gettext('Click here to view the recommendation')+"</a>";
       });
       data4 = data3.replace(that.userre, function (match, username, offset, string) {
-        return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
+        return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>"+gettext('Click here to view the recommendation')+"</a>";
       });
 
       var user;
@@ -172,7 +172,7 @@
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
       this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
       var more = $('.next')[0];
-      $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
+      $(more).html('<button style="margin-top:5px;" class="btn btn-default">'+gettext('more...')+'</button>');
       $('#paginationblock').html(more);
       $('#conversation-cont').hide();
       $('.nanamorde').hide();

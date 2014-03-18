@@ -101,3 +101,10 @@ django-admin.py runserver --settings=app.settings.production
   ./manage.py test market --liveserver=localhost:8082,8090-8100,9000-9200,7041 --setting=app.settings.local
 
 After you created test_data.json you need to copy it over the same file in fixutures directories that it is present
+
+##Translation
+Substitude -l no with -l <your language code>
+###Creating po files for javascripts
+./manage.py makemessages -d djangojs -e js -l no --setting=app.settings.local
+###Creating po files for templates and django apps
+manage.py makemessages -l no --setting=app.settings.local
