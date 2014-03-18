@@ -1,4 +1,13 @@
 {% load i18n %}
+<style>
+.miniprof-score{
+  display: none;
+}
+.rateit{
+  vertical-align: middle;
+}
+
+</style>
 <script type="text/template" id="message-profile">
   <div>
     <div style="text-align: center;margin:10px;">
@@ -8,6 +17,9 @@
       <%- username %>
     </div>
     <div class="well well-sm">
+      <div>
+        {%trans "AHR rating"%}: <span class="rateit redstars" rate="<%- orate %>"></span>
+      </div>
       <div class="userprofile-widget-rating">
         {%trans "Community rating:"%}
         <span
@@ -17,17 +29,16 @@
           rate="<%- score %>"
           image_src = "<%- avatar %>"
           ratecount="<%- ratecount %>"></span>
-          <span class="score"  username="<%- username %>"> <%- score %> {%trans "Stars"%} </span>
-          (<span class="ratecount"  username="<%- username %>"><%-ratecount %></span> {%trans "votes"%})
+          <span class="miniprof-score">
+            <span class="score"  username="<%- username %>"> <%- score %> {%trans "Stars"%} </span>
+            (<span class="ratecount"  username="<%- username %>"><%-ratecount %></span> {%trans "votes"%})
+          </span>
       </div>
       <div>
         {%trans "Nationality"%}: <%- nationality %>
       </div>
       <div>
         {%trans "Country of residence"%}: <%- resident_country %>
-      </div>
-      <div>
-        {%trans "AHR rating"%}: <span class="rateit redstars" rate="<%- orate %>"></span> <%- orate %> {%trans "Stars"%}
       </div>
     </div>
     <% if(username != window.ahr.username) {%>
