@@ -33,10 +33,12 @@
         <div class"col-md-12">
           <div class="row">
             <div class="col-md-12">
+            {% blocktrans %}
               <legend>Your Settings</legend>
               <p>Welcome to your settings page. Here you can fill out information about yourself that you feel comfortable sharing with other users on the system. If you do not want your information to be publically visible, please make sure you tick the ‘Hide’ option next to each area of information. To add skills, issues and countries that interest you, simple click on the box and either select from the drop down lists or type until your selection appears. Please keep in mind that the Exchangivist platform is in beta and we have based options on experience. If you cannot find the option you are looking for, please let us know by emailing: <a href="mailto:Info@exchangivist.org">Info@exchangivist.org</a></p>
 
               <p>We'll be sending you a weekly email to help keep you connected with all the activities on Exchangivist related to your skills, offers and requests. If you do not wish to receive these notifications then please uncheck the "keep connected" box at the bottom of this page.</p>
+              {% endblocktrans %}
             </div>
           </div>
 
@@ -48,7 +50,7 @@
               <legend>General</legend>
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.first_name.auto_id}}">Name:</label>
+                  <label for="{{settings_form.first_name.auto_id}}">{%trans "Name:"%}</label>
                 </div>
                 <div class="col-sm-5">
                   {{ user_form.first_name.errors }}
@@ -59,13 +61,13 @@
                   {% render_field user_form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}
                 </div>
                 <div class="col-sm-2">
-                  <label><input type="checkbox" name="notperm-name"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-name"/> {%trans "Hide"%}</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{ settings_form.username.auto_id }}">Username:</label>
+                  <label for="{{ settings_form.username.auto_id }}">{%trans "Username"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ user_form.username.errors }}
@@ -75,78 +77,78 @@
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.tag_ling.auto_id}}">Tag Line:</label>
+                  <label for="{{settings_form.tag_ling.auto_id}}">{%trans "Tag Line"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.tag_ling.errors }}
                   {% render_field settings_form.tag_ling class="form-control input-sm" placeholder="Tag Line" %}
                 </div>
                 <div class="col-sm-2">
-                  <label><input type="checkbox" name="notperm-tag_ling"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-tag_ling"/> {%trans "Hide"%}</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.tag_ling.auto_id}}">Bio:</label>
+                  <label for="{{settings_form.tag_ling.auto_id}}">{%trans "Bio"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.bio.errors }}
                   {% render_field settings_form.bio class="form-control input-sm" placeholder="Bio" %}
                 </div>
                 <div class="col-sm-2" style="vertical-align:bottom;">
-                  <label><input type="checkbox" name="notperm-bio"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-bio"/> {%trans "Hide"%}</label>
                 </div>
               </div>
 
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.expertise.auto_id}}">Expertise:</label>
+                  <label for="{{settings_form.expertise.auto_id}}">{%trans "Expertise"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.expertise.errors }}
                   {% render_field settings_form.expertise class="form-control input-sm" placeholder="Area of expertise if any" %}
                 </div>
                 <div class="col-sm-2">
-                  <label><input type="checkbox" name="notperm-experties"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-experties"/> {%trans "Hide"%}</label>
                 </div>
               </div>
             </div>
 
             <!-- social info -->
             <div class="col-md-6">
-              <legend>More About You</legend>
+              <legend>{%trans "More About You"%}</legend>
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.nationality.auto_id}}">Nationality:</label>
+                  <label for="{{settings_form.nationality.auto_id}}">{%trans "Nationality"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.nationality.errors }}
                   {% render_field settings_form.nationality class="form-control input-sm" placeholder="Nationality" required="true" %}
                 </div>
                 <div class="col-sm-2">
-                  <label><input type="checkbox" name="notperm-nationality"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-nationality"/> {%trans "Hide"%}</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.occupation.auto_id}}">Occupation:</label>
+                  <label for="{{settings_form.occupation.auto_id}}">{%trans "Occupation"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.occupation.errors }}
                   {% render_field settings_form.occupation class="form-control input-sm" placeholder="Occupation" %}
                 </div>
                 <div class="col-sm-2">
-                  <label><input type="checkbox" name="notperm-occupation"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-occupation"/> {%trans "Hide"%}</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.resident_country.auto_id}}">Country of Residence:</label>
+                  <label for="{{settings_form.resident_country.auto_id}}">{%trans "Country of Residence"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.resident_country.errors }}
@@ -161,32 +163,30 @@
                 <div class="col-sm-12">
                   {{ settings_form.is_organisation.errors }}
                   {{ settings_form.is_organisation }}
-                  <label for="{{settings_form.is_organisation.auto_id}}">I am an organisation</label>
+                  <label for="{{settings_form.is_organisation.auto_id}}">{%trans "I am an organisation"%}</label>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-12">
                   {{ settings_form.is_journalist.errors }}
                   {{ settings_form.is_journalist }}
-                  <label for="{{settings_form.is_journalist.auto_id}}">I am a journalist</label>
+                  <label for="{{settings_form.is_journalist.auto_id}}">{%trans "I am a journalist"%}</label>
                 </div>
               </div>
 
-              <legend>Update Password</legend>
+              <legend>{%trans "Update Password"%}</legend>
               <div>
                 {% if has_password %}
                 <a class="btn btn-default" form_class="password_change" id="changepassword" href="{% url 'account_change_password' %}">
-                  Change Password
+                  {%trans "Change Password"%}
                 </a>
                 {% else %}
                 <a class="btn btn-default" form_class="password_set" id="changepassword" href="{% url 'account_set_password' %}">
-                  Set Password
+                  {%trans "Set Password"%}
                 </a>
                 {% endif %}
               </div>
-
             </div>
-
           </div>
 
           <!-- Social -->
@@ -197,53 +197,53 @@
               <legend>Social</legend>
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.web_url.auto_id}}">Website/Blog:</label>
+                  <label for="{{settings_form.web_url.auto_id}}">{%trans "Website/Blog"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.web_url.errors }}
                   {% render_field settings_form.web_url class="form-control input-sm" placeholder="Website/Blog URL" %}
                 </div>
                 <div class="col-sm-2">
-                  <label><input type="checkbox" name="notperm-web_url"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-web_url"/> {%trans "Hide"%}</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.fb_url.auto_id}}">Facebook:</label>
+                  <label for="{{settings_form.fb_url.auto_id}}">{%trans "Facebook"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.fb_url.errors }}
                   {% render_field settings_form.fb_url class="form-control input-sm" placeholder="Example: https://www.facebook.com/yourname" %}
                 </div>
                 <div class="col-sm-2">
-                  <label><input type="checkbox" name="notperm-fb_url"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-fb_url"/> {%trans "Hide"%}</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.linkedin_url.auto_id}}">LinkedIn:</label>
+                  <label for="{{settings_form.linkedin_url.auto_id}}">{%trans "LinkedIn"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.linkedin_url.errors }}
                   {% render_field settings_form.linkedin_url class="form-control input-sm" placeholder="Example: https://www.linkedin.com/yourname" %}
                 </div>
                 <div class="col-sm-2">
-                  <label><input type="checkbox" name="notperm-linkedin_url"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-linkedin_url"/> {%trans "Hide"%}</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-sm-12">
-                  <label for="{{settings_form.tweet_url.auto_id}}">Twitter:</label>
+                  <label for="{{settings_form.tweet_url.auto_id}}">{%trans "Twitter"%}:</label>
                 </div>
                 <div class="col-sm-10">
                   {{ settings_form.tweet_url.errors }}
                   {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="Example: https://www.twitter.com/yourname" %}
                 </div>
                 <div class="col-sm-2">
-                  <label><input type="checkbox" name="notperm-tweet_url"/> Hide</label>
+                  <label><input type="checkbox" name="notperm-tweet_url"/> {%trans "Hide"%}</label>
                 </div>
               </div>
 
@@ -254,7 +254,7 @@
 
           <div class="row">
             <div class="col-md-10">
-              <legend>Areas of Interest</legend>
+              <legend>{%trans "Areas of Interest"%}</legend>
 
               <div class="form-group">
                 <div class="col-sm-12">
@@ -298,12 +298,25 @@
 
           <div class="row">
             <div class="col-md-10">
-              <legend>Keep Connected</legend>
+              <legend>{%trans "Settings"%}</legend>
+
+              <div class="form-group">
+                <div class="col-lg-12 col-xs-12">
+                  <label for="{{settings_form.interface_lang.auto_id}}">{%trans "Interface language"%}:</label>
+                </div>
+                <div class="col-lg-3 col-xs-12">
+                  {{ settings_form.interface_lang.errors }}
+                  {% render_field settings_form.interface_lang class="form-control input-sm" required="true" %}
+                </div>
+              </div>
+
+              <br />
+
               <div class="form-group">
                 <div class="col-sm-12">
                   {{ settings_form.get_newsletter.errors }}
                   {{ settings_form.get_newsletter }}
-                  <label for="{{settings_form.get_newsletter.auto_id}}">I would like to recieve weekly updates</label>
+                  <label for="{{settings_form.get_newsletter.auto_id}}">{%trans "I would like to recieve daily updates"%}</label>
                 </div>
               </div>
             </div>
@@ -326,17 +339,6 @@
           </div>
         </div>
       </form>
-      <form id='langForm' action="/i18n/setlang/" method="post">
-      {% csrf_token %}
-        <input name="next" type="hidden" value="{{ redirect_to }}" />
-        <select name="language">
-          {% get_language_info_list for LANGUAGES as languages %}
-          {% for language in languages %}
-          <option value="{{ language.code }}" {%if LANGUAGE_CODE == language.code %}selected{%endif%}>{{ language.name_local }} ({{ language.code }}) {{LANGUAGE_CODE}}</option>
-          {% endfor %}
-        </select>
-        <input type="submit" value="Go" />
-      </form>
     </div>
 </div>
 
@@ -345,7 +347,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Upload Avatar</h4>
+        <h4 class="modal-title">{%trans "Upload Avatar"%}</h4>
       </div>
       <div class="modal-body">
         <div id="avataralert"></div>
@@ -362,7 +364,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Change Password</h4>
+        <h4 class="modal-title">{%trans "Change Password"%}</h4>
       </div>
       <div class="modal-body">
         <div id="profile_change_password" style="width:100%;"></div>
@@ -443,7 +445,7 @@
 
       var file = fileinp[0].files[0];
       if (!file.type.match(/image.*/)){
-        window.ahr.alert('The file you selected is not an image','#avataralert');
+        window.ahr.alert('{%trans "The file you selected is not an image"%}','#avataralert');
         return false;
       }
       var reader = new window.FileReader();
@@ -493,7 +495,7 @@
           if(form_class=='password_set'){
             $('#changepassword').attr('href', window.ahr.app_urls.changepassword);
             $('#changepassword').attr('form_class', 'password_change');
-            $('#changepassword').text('Change password');
+            $('#changepassword').text('{%trans "Change password"%}');
           }
           return false;
         }
@@ -564,19 +566,19 @@
 
     issues_widget = window.ahr.typeahead_widget.initWidget(
                 '#issues_place',
-                {title:'Add issues that interest you:', jsonfield:'issues'},
+                {title:'{%trans "Add issues that interest you"%}:', jsonfield:'issues'},
                 issues,
                 issues);
 
     countries_widget = window.ahr.typeahead_widget.initWidget(
                 '#countries_place',
-                {title:'Add countries that interest you:',  jsonfield:'countries'},
+                {title:'{%trans "Add countries that interest you"%}:',  jsonfield:'countries'},
                 countries,
                 countries);
 
     skills_widget = window.ahr.typeahead_widget.initWidget(
                 '#skills_place',
-                {title:'Add skills that interest you:',  jsonfield:'skills'},
+                {title:'{%trans "Add skills that interest you"%}:',  jsonfield:'skills'},
                 skills,
                 skills);
 

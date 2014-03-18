@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from models import UserProfile, OrganisationalRating
 from django.utils.translation import ugettext_lazy as _
+import constance
+from django.conf.global_settings import LANGUAGES
 
 
 class SignupForm(forms.Form):
@@ -33,6 +35,20 @@ class UserForm(forms.ModelForm):
 
 
 class SettingsForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SettingsForm, self).__init__(*args, **kwargs)
+        user_profile = initial=kwargs['instance']
+        langs = constance.config.TRANSLATED_LANGUAGES.split(',')
+        translated = []
+        initial = None
+        for lang in LANGUAGES:
+            if lang[0] in langs:
+                translated.append(lang)
+            if not initial and lang[0] == user_profile.interface_lang:
+                initial = lang
+
+        self.fields['interface_lang'] = forms.ChoiceField(choices=translated, initial=initial[0])
+
     class Meta:
         model = UserProfile
         fields = ['nationality',

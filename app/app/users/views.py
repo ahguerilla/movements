@@ -26,7 +26,7 @@ from django.core.mail import EmailMessage, send_mass_mail
 import constance
 from app.users.utils import get_client_ip
 from django.template.loader import render_to_string
-
+from django.utils import translation
 
 
 def render_settings(request, initial=False):
@@ -64,8 +64,10 @@ def render_settings(request, initial=False):
             settings = settings_form.save(commit=False)
             settings.user_id = request.user.id
             settings.notperm = perms
+            settings.interface_lang = settings_form.data['interface_lang']
             settings.save()
             settings_form.save_m2m()
+            translation.activate(settings_form.data['interface_lang'])
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
             if initial:
                 template = 'users/welcome.html'
@@ -82,7 +84,7 @@ def render_settings(request, initial=False):
                                 'has_password': user.has_usable_password(),
                                 'skills': value('json',users.models.Skills.objects.all()),
                                 'issues': value('json',users.models.Issues.objects.all()),
-                                'countries': value('json',users.models.Countries.objects.all()),
+                                'countries': value('json',users.models.Countries.objects.all())
                               },
                               context_instance=RequestContext(request))
 

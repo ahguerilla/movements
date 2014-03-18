@@ -104,11 +104,11 @@ After you created test_data.json you need to copy it over the same file in fixut
 
 ##Translation
 
-After you applied south migration 0018 on user app run the below command to copy default values:
+After you applied south migration 0018 on user app run the below command to copy the existing values to the english column:
 ./manage.py  update_translation_fields --setting=app.settings.foo
 
 Substitude -l no with -l <your language code>
 ###Creating po files for javascripts
-./manage.py makemessages -d djangojs -e js -l no --setting=app.settings.local
+./manage.py makemessages -d djangojs -e js -l nn --setting=app.settings.local
 ###Creating po files for templates and django apps
-manage.py makemessages -l no --setting=app.settings.local
+manage.py makemessages -l nn --setting=app.settings.local

@@ -17,10 +17,6 @@
   position: relative;
 }
 
-.more-items-here{
-  height: 100px;
-  overflow: hidden;
-}
 </style>
 
 <script type="text/template" id="item_template">
@@ -43,20 +39,24 @@
           <div class="clearfix"></div>
           <div class="item-body multi-line-text"><%- details %></div>
           </a>
-          <% var index=issues.length+countries.length+skills.length, top=15; %>
+          <% var index=issues.length+countries.length+skills.length, top=10, counter=0; %>
           <div class="item-tags clearfix <% if(index>top && isSingle === false){ %> more-items-here <%}%>">
             <div class="tagbuttons-container" >
-              <% _.each(issues, function(ind) { %>
+              <% _.each(issues, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
                 <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div>
-              <% }); %>
-              <% _.each(countries, function(ind) { %>
+              <% }}); %>
+              <% _.each(countries, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
                 <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div>
-              <% }); %>
-              <% _.each(skills, function(ind) { %>
+              <% }}); %>
+              <% _.each(skills, function(ind) { counter+=1; if(counter<top || isSingle === true){ %>
                 <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div>
-              <% }); %>
+              <% }}); %>
+              <% if(counter>top && isSingle === false){ %>
+              <a class="routehref" href="#item/<%- pk %>" >
+                <div class="btn btn-default btn-xs ">&nbsp;...&nbsp;</div>
+              </a>
+              <%}%>
             </div>
-            <% if(index>top && isSingle === false){ %> <div class="showmoretags">{% trans "More ..." %}</div> <%}%>
           </div>
           <div class="action-place"></div>
         </div>

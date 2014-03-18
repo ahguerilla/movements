@@ -11,14 +11,11 @@ class CountriesTranslationOptions(TranslationOptions):
 class NationalityTranslationOptions(TranslationOptions):
     fields = ('nationality',)
 
-
 class SkillsTranslationOptions(TranslationOptions):
     fields = ('skills',)
 
-
 class IssuesTranslationOptions(TranslationOptions):
     fields = ('issues',)
-
 
 class PlaceholderTranslationOptions(TranslationOptions):
     fields = ('content',)
