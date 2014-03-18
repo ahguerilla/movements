@@ -20,7 +20,6 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <!--<meta name="google-translate-customization" content="1aec5736369b2840-cb0c87897093f941-gc2bc934b95b52c2d-15"></meta>-->
   <title>{% block head_title %}{% endblock %}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,17 +48,6 @@
     role="navigation">
 
   <div class="container" style="position:relative;">
-  <form id='langForm' action="/i18n/setlang/" method="post">
-    {% csrf_token %}
-    <input name="next" type="hidden" value="{{ redirect_to }}" />
-      <select name="language">
-      {% get_language_info_list for LANGUAGES as languages %}
-      {% for language in languages %}
-        <option value="{{ language.code }}" {%if LANGUAGE_CODE == language.code %}selected{%endif%}>{{ language.name_local }} ({{ language.code }}) {{LANGUAGE_CODE}}</option>
-      {% endfor %}
-      </select>
-    <input type="submit" value="Go" />
-   </form>
     <div class="row">
       <div class="col-xs-12">
       <div class="navbar-header" {% if user.is_authenticated %}style="padding-right:12px;" {%endif%}>
@@ -83,7 +71,6 @@
           {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <!--<li><div id="google_translate_element"></div></li>-->
           {% if user.is_authenticated %}
             <li>
               <a class="glyphicon glyphicon-envelope {% if unread_count %}notif{% endif %}" href="{% url 'postman_inbox' %}">
@@ -179,12 +166,6 @@
   </div>
 </nav>
 <div id="modal-placeholder"></div>
-<!--<script type="text/javascript">-->
-<!--function googleTranslateElementInit() {-->
-<!--new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');-->
-<!--}-->
-  <!--</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
-
 
 {% block javascript %}
 {% endblock %}

@@ -63,8 +63,12 @@ urlpatterns = patterns('',
 
     url(r'(?P<rtype>\S+)/item/get/(?P<obj_id>\d+)$',
         'app.market.api.views.market.get_market_item',
-        name="get_marketitem"), 
-   
+        name="get_marketitem"),
+
+    url(r'(?P<rtype>\S+)/item/get/translation/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.get_item_translation',
+        name="get_item_translation"),
+
     url(r'(?P<rtype>\S+)/useritem/get/(?P<obj_id>\d+)$',
         'app.market.api.views.market.user_get_marketitem',
         name="user_get_marketitem"),
@@ -120,16 +124,16 @@ urlpatterns = patterns('',
     url(r'(?P<rtype>\S+)/report/(?P<obj_id>\d+)$',
         'app.market.api.views.report.report_marketitem',
         name="report_post"),
-    
+
     url(r'(?P<rtype>\S+)/report/user/(?P<username>\S+)$',
         'app.market.api.views.report.report_user',
         name="report_user"),
-    
+
     url(r'(?P<rtype>\S+)/notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$',
         'app.market.api.views.market.get_notifications_fromto',
-        name="get_notifications_fromto"),    
-    
+        name="get_notifications_fromto"),
+
     url(r'(?P<rtype>\S+)/notifications/get/notseen/(?P<sfrom>\d+)/(?P<to>\d+)$',
         'app.market.api.views.market.get_notseen_notifications',
-        name="get_notseen_notif"),        
+        name="get_notseen_notif"),
 )

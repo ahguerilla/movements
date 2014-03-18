@@ -15,6 +15,9 @@ from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
 from tasks.celerytasks import create_notification, update_notifications, mark_read_notifications
+import constance
+import requests
+from django.conf import settings
 from django.utils.cache import get_cache_key, get_cache
 cache = get_cache('default')
 items_cache = get_cache('items')
@@ -102,6 +105,7 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
 @check_perms_and_get(market.models.MarketItem)
 def edit_market_item(request,obj_id,rtype):
     cache.delete('item-'+obj_id)
+    cache.delete('translation-'+obj_id)
     items_cache.clear()
     user_items_cache.clear()
     obj = request.obj
@@ -145,6 +149,22 @@ def get_user_marketitem_fromto(request, sfrom, to, rtype):
     obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
     retval = return_item_list(obj, rtype)
     user_items_cache.add(reqhash, retval)
+    return retval
+
+
+@login_required
+def get_item_translation(request, obj_id, rtype):
+    retval = cache.get('translation-' + obj_id)
+    if retval:
+        return retval
+    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
+                            Q(exp_date__gte=datetime.now())|Q(never_exp=True),
+                            pk=obj_id,
+                            deleted=False,
+                            owner__is_active=True)
+    resp = requests.get(settings.GOOGLE_TRANS_URL+'key='+constance.config.GOOGLE_API_KEY+'&source=ar&target='+'en'+'&q='+obj.details)
+    retval = return_item_list([obj], rtype)
+    cache.add('translation-' + obj_id, retval)
     return retval
 
 
@@ -196,3 +216,5 @@ def get_notseen_notifications(request, sfrom, to, rtype):
                              mimetype="application"+rtype)
     return  HttpResponse(json.dumps({'result':False}),
                          mimetype="application"+rtype)
+
+

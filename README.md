@@ -103,6 +103,10 @@ django-admin.py runserver --settings=app.settings.production
 After you created test_data.json you need to copy it over the same file in fixutures directories that it is present
 
 ##Translation
+
+After you applied south migration 0018 on user app run the below command to copy default values:
+./manage.py  update_translation_fields --setting=app.settings.foo
+
 Substitude -l no with -l <your language code>
 ###Creating po files for javascripts
 ./manage.py makemessages -d djangojs -e js -l no --setting=app.settings.local

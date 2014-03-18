@@ -1,10 +1,12 @@
 from modeltranslation.translator import translator, TranslationOptions
-from app.users.models import Countries, Skills, Issues, Nationality
+from app.users.models import Countries, Skills, Issues, Nationality, Residence
 from app.editable.models import Placeholder
+
+class ResidenceTranslationOptions(TranslationOptions):
+    fields = ('residence',)
 
 class CountriesTranslationOptions(TranslationOptions):
     fields = ('countries',)
-
 
 class NationalityTranslationOptions(TranslationOptions):
     fields = ('nationality',)
@@ -22,6 +24,7 @@ class PlaceholderTranslationOptions(TranslationOptions):
     fields = ('content',)
 
 
+translator.register(Residence, ResidenceTranslationOptions)
 translator.register(Countries, CountriesTranslationOptions)
 translator.register(Nationality, NationalityTranslationOptions)
 translator.register(Skills, SkillsTranslationOptions)
