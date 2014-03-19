@@ -29,7 +29,7 @@
           <a type="button" class="btn btn-default {%if path == inbox %} selected {% endif %}" href="{{inbox}}">Inbox</a>
           <a type="button" class="btn btn-default {%if path == sent %} selected {% endif %}" href="{{sent}}">Sent</a>
           <a type="button" class="btn btn-default {%if path == archive %} selected {% endif %}" href="{{archive}}">Archive</a>
-          <a type="button" class="btn btn-default {%if path == trash %} selected {% endif %}" href="{{trash}}">Trash</a>
+          <!--<a type="button" class="btn btn-default {%if path == trash %} selected {% endif %}" href="{{trash}}">Trash</a>-->
         </div>
       </div>
     </div>
@@ -48,10 +48,14 @@
                  <div style="margin-bottom:15px;" class="row">
                   <div class="col-md-12" id="pm_buttons">
                     {% block pm_delete_button %}
-                      <button style="width:100px;" type="submit" class="btn btn-default btn-sm" onclick="this.form.action='{% url 'postman_delete' %}'">
-                        <span class="glyphicon glyphicon-trash"></span> {% trans "Trash" %}
+                      <!--<button style="width:100px;" type="submit" class="btn btn-default btn-sm" onclick="this.form.action='{% url 'postman_delete' %}'">-->
+                        <!--<span class="glyphicon glyphicon-trash"></span> {% trans "Trash" %}-->
+                      <!--</button>-->
+                    {% endblock %}
+                    {% block pm_unarchive_button %}
+                      <button style="width:100px;" type="submit" class="btn btn-default btn-sm" onclick="this.form.action='{% url 'postman_unarchive' %}'">
+                        <span class="glyphicon glyphicon-open"></span> {% trans "Unarchive" %}
                       </button>
-
                     {% endblock %}
                     {% block pm_archive_button %}
                       <button style="width:100px;" type="submit" class="btn btn-default btn-sm" onclick="this.form.action='{% url 'postman_archive' %}'">
@@ -59,9 +63,12 @@
                       </button>
                     {% endblock %}
                     {% block pm_undelete_button %}
-                      <button style="width:100px;" type="submit" class="btn btn-default btn-sm" onclick="this.form.action='{% url 'postman_undelete' %}'">
-                        <span class="glyphicon glyphicon-open"></span> {% trans "Undelete" %}
-                      </button>
+                      <!--<button style="width:100px;" type="submit" class="btn btn-default btn-sm" onclick="this.form.action='{% url 'postman_undelete' %}'">-->
+                        <!--<span class="glyphicon glyphicon-open"></span> {% trans "Undelete" %}-->
+                      <!--</button>-->
+                      <!--<button style="width:150px;" type="submit" class="btn btn-default btn-sm" onclick="this.form.action='{% url 'permanent_delete_postman' %}'">-->
+                        <!--<span class="glyphicon glyphicon-fire"></span> {% trans "Permanently delete" %}-->
+                      <!--</button>-->
                     {% endblock %}
                   </div>
                   {% endblock %}
