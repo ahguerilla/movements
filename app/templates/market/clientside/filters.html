@@ -234,9 +234,8 @@
       var that = this;
       $('#filterbuttontext').html('&nbsp; {% trans "Hide Filters" %}&nbsp;');
       $('#togglefilter').addClass('dropup');
-      $('.filterbuttons-cont').css('visibility','hidden');
       this.setFilterWrapperMargin(this.filterheightOpen, 300, function(){
-        $('.filterbuttons-cont').css('visibility','visible');
+        $.noop();
       });
     },
 
