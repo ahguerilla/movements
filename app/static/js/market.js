@@ -37,6 +37,9 @@
       "Offers": "offer",
       "Request": "request"
     },
+    gotoItem: function(ev){
+      window.location = ev.currentTarget.getAttribute('href');
+    },
 
     edit_callback: function (item_id) {
       var that = this;
@@ -44,7 +47,6 @@
         url: this.getItem + item_id
       });
       dfrd.done(function (item) {
-        //debugger;
         var html = that.item_widget.reloadItem(item);
         html = that.get(item[0].fields);
         $('.market-place-item[item_id=' + item_id + ']').replaceWith(html);
@@ -69,6 +71,7 @@
       this.init(filters);
       this.filter_widget.filters.types = ["offer", "request"];
       this.filter_widget.types = this.types;
+      _.extend(this.events,{'click .routehref': 'gotoItem'} );
       return this;
     },
   });

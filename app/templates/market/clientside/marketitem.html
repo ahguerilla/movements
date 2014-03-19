@@ -30,7 +30,7 @@
         </div>
         </a>
       </div>
-      <a href="#item/<%- pk %>" class="routehref" >
+      <div href="#item/<%- pk %>" class="routehref" >
         <div class="" item_id="<%- pk %>">
           <div class="item-title" owner_id="<%- ownerid %>">
             <div class="item-icon <%- item_type.toLowerCase() %>"></div>
@@ -38,7 +38,7 @@
           </div>
           <div class="clearfix"></div>
           <div class="item-body multi-line-text"><%- details %></div>
-          </a>
+          </div>
           <% var index=issues.length+countries.length+skills.length, top=10, counter=0; %>
           <div class="item-tags clearfix <% if(index>top && isSingle === false){ %> more-items-here <%}%>">
             <div class="tagbuttons-container" >
