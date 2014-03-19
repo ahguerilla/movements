@@ -17,15 +17,6 @@ $modal-dialog-bg = #EAEAEA
 .goog-te-banner-frame
   top -100px!important
 
-#market-filters
-  .mCSB_container
-    margin-right: 12px;
-  .mCustomScrollBox.mCS-light
-    max-width 97%!important
-
-.filterbuttons-cont
-  max-height 200px
-
 vendor(prop, args)
   -webkit-{prop} args
   -moz-{prop} args
@@ -321,6 +312,8 @@ a.navavatar
     padding-left 30px
 
 #market
+  width 100%
+  overflow hidden
   .exchange-banner.users
     background-image: url('../images/exchangivists-banner.jpg')
   .exchange-banner.posts
@@ -368,7 +361,7 @@ a.navavatar
 .market-action:hover
   cursor: pointer
 
-.filter-banner-spacer
+.action-banner-spacer
   background-color: #FFF
   height: 2px
 
@@ -382,14 +375,28 @@ a.navavatar
   background-color: #444d54
   height: 2px
 
+.filter-toggle-button
+  margin-top 15px
+  margin-right 45px
+
+.exchange-actions
+  color: #FFF
+  background-color: $filter-background
+  padding-bottom: 10px
+
 .exchange-filter
   color: #FFF
   background-color: $filter-background
   //min-height: 40px
-  padding-bottom: 10px
+  //padding-bottom: 10px
+  .filterbuttons-cont
+    max-height 250px
+    overflow-y: scroll;
+    margin-top 5px
+    overflow-x hidden
   .market-filter-main
     position: relative
-    .market-action
+    .filter-action
       margin-bottom: 10px
     .market-filter-border
       border-right: 1px solid #FFF
@@ -398,13 +405,13 @@ a.navavatar
       height: 100%
       right: 0
     .first
-      margin-top: 35px
+      margin-top: 20px
     .market-action:hover
       cursor: pointer
   .filter-title
     text-align: center
-    margin-bottom: 10px
-    margin-top: 10px
+    margin-bottom: 2px
+    //margin-top: 2px
   .filter-show
     margin-top:10px
     text-align: right

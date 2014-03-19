@@ -3,90 +3,81 @@
 {% load compress %}
 <script type="text/template" id="filters_template">
 <div class="exchange-filter">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="row">
-          <div class="col-sm-12 filter-show">
-            <button type="button"class="btn btn-default btn-xs" id="togglefilter" data-toggle="collapse" data-target="#market-filters">
-              <span id="filterbuttontext">&nbsp; {% trans "Show Filters" %} &nbsp;</span>
-              <span class="caret"></span>
-            </button>
+  <div class="row">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div id="market-filters" class="collapse">
+              <div class="col-md-3">
+                <div class="market-filter-main">
+                  <div class="market-filter-border"></div>
+                  <div class="filter-action first item-type" item_type="all">
+                    <img src="{{ STATIC_URL }}images/all-button-50x50.png" alt="Filter by all" />
+                    <span>{% trans "All" %}</span>
+                  </div>
+                  <div class="filter-action item-type" item_type="Offers">
+                    <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Filter by offers" />
+                    <span id="filter-offer-text">{% trans "Offers" %}</span>
+                  </div>
+                  <div class="filter-action item-type" item_type="Request">
+                    <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
+                    <span id="filter-request-text">{% trans "Requests" %}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="filterbuttons-cont">
+                <div class="col-md-4 pull-left">
+                  <div class="filter-title">{% trans "Issues" %}</div>
+                  <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
+                    <label class="btn filter-bulk-selector btn-default btn-xs all all-issues issues">
+                      <input type="radio" name="all-issues"> {% trans "All" %}
+                    </label>
+                    <label class="btn filter-bulk-selector btn-default btn-xs cus cus-issues issues">
+                      <input type="radio" name="cus-issues"> {% trans "Custom" %}
+                    </label>
+                    <label class="btn filter-bulk-selector btn-default btn-xs def def-issues issues">
+                      <input type="radio" name="def-issues"> {% trans "Default" %}
+                    </label>
+                  </div>
+                  <div class="row issues btn-group-sm pull-left" item_title="issues"></div>
+                </div>
+
+                <div class="col-md-4 pull-left">
+                  <div class="filter-title">{% trans "Countries" %}</div>
+                  <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
+                    <label class="btn filter-bulk-selector btn-default btn-xs all all-countries countries">
+                      <input type="radio" name="all-countries"> {% trans "All" %}
+                    </label>
+                    <label class="btn filter-bulk-selector btn-default btn-xs  cus cus-countries countries">
+                      <input type="radio" name="cus-countries"> {% trans "Custom" %}
+                    </label>
+                    <label class="btn filter-bulk-selector btn-default btn-xs def def-countries countries">
+                      <input type="radio" name="def-countries"> {% trans "Default" %}
+                    </label>
+                  </div>
+                  <div class="row countries btn-group-sm pull-left" item_title="countries"></div>
+                </div>
+
+                <div class="col-md-4 pull-left">
+                  <div class="filter-title">{% trans "Skills" %}</div>
+                  <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
+                    <label class="btn filter-bulk-selector btn-default btn-xs all all-skills skills">
+                      <input type="radio" name="all-skills"> {% trans "All" %}
+                    </label>
+                    <label class="btn filter-bulk-selector btn-default btn-xs cus cus-skills skills">
+                      <input type="radio" name="cus-skills"> {% trans "Custom" %}
+                    </label>
+                    <label class="btn filter-bulk-selector btn-default btn-xs def def-skills skills">
+                      <input type="radio" name="def-skills"> {% trans "Default" %}
+                    </label>
+                  </div>
+                  <div class="row skills btn-group-sm pull-left" item_title="skills"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div id="market-filters" class="collapse">
-
-            <div class="col-sm-3">
-              <div class="market-filter-main">
-                <div class="market-filter-border"></div>
-                <div class="market-action first item-type" item_type="all">
-                  <img src="{{ STATIC_URL }}images/all-button-50x50.png" alt="Filter by all" />
-                  <span>{% trans "All" %}</span>
-                </div>
-                <div class="market-action item-type" item_type="Offers">
-                  <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Filter by offers" />
-                  <span id="filter-offer-text">{% trans "Offers" %}</span>
-                </div>
-                <div class="market-action item-type" item_type="Request">
-                  <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
-                  <span id="filter-request-text">{% trans "Requests" %}</span>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-sm-3 pull-left">
-              <div class="filter-title">{% trans "Issues" %}</div>
-              <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
-                <label class="btn filter-bulk-selector btn-default btn-xs all all-issues issues">
-                  <input type="radio" name="all-issues"> {% trans "All" %}
-                </label>
-                <label class="btn filter-bulk-selector btn-default btn-xs cus cus-issues issues">
-                  <input type="radio" name="cus-issues"> {% trans "Custom" %}
-                </label>
-                <label class="btn filter-bulk-selector btn-default btn-xs def def-issues issues">
-                  <input type="radio" name="def-issues"> {% trans "Default" %}
-                </label>
-              </div>
-              <div class="row issues btn-group-sm pull-left filterbuttons-cont" item_title="issues"></div>
-            </div>
-
-            <div class="col-sm-3 pull-left">
-              <div class="filter-title">{% trans "Countries" %}</div>
-              <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
-                <label class="btn filter-bulk-selector btn-default btn-xs all all-countries countries">
-                  <input type="radio" name="all-countries"> {% trans "All" %}
-                </label>
-                <label class="btn filter-bulk-selector btn-default btn-xs  cus cus-countries countries">
-                  <input type="radio" name="cus-countries"> {% trans "Custom" %}
-                </label>
-                <label class="btn filter-bulk-selector btn-default btn-xs def def-countries countries">
-                  <input type="radio" name="def-countries"> {% trans "Default" %}
-                </label>
-              </div>
-              <div class="row countries btn-group-sm pull-left filterbuttons-cont" item_title="countries"></div>
-            </div>
-
-            <div class="col-sm-3 pull-left">
-              <div class="filter-title">{% trans "Skills" %}</div>
-              <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
-                <label class="btn filter-bulk-selector btn-default btn-xs all all-skills skills">
-                  <input type="radio" name="all-skills"> {% trans "All" %}
-                </label>
-                <label class="btn filter-bulk-selector btn-default btn-xs cus cus-skills skills">
-                  <input type="radio" name="cus-skills"> {% trans "Custom" %}
-                </label>
-                <label class="btn filter-bulk-selector btn-default btn-xs def def-skills skills">
-                  <input type="radio" name="def-skills"> {% trans "Default" %}
-                </label>
-              </div>
-              <div class="row skills btn-group-sm pull-left filterbuttons-cont" item_title="skills"></div>
-            </div>
-
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -162,10 +153,6 @@
           active: activeFlag
         }));
       });
-      if (this.justOpend === false){
-        this.destroyScrollbars();
-        this.createScrollbars();
-      }
     },
 
     updateTagsfilter: function (that, ev) {
@@ -203,9 +190,16 @@
     },
 
     setFilterOpenHeight: function () {
+      var that = this,
+      oldViz = $('.filterbuttons-cont').css('visibility');
       $('#market-filters').removeClass('collapse');
-      this.filterheightOpen = $('#fixed-filters').height();
-      $('#market-filters').addClass('collapse');
+      $('.filterbuttons-cont').css('visibility','visible');
+      this.setFilterWrapperMargin(this.filterheightOpen, 0, function(){
+        that.filterheightOpen = $('.filterbuttons-cont').css('height')+114;
+        $('.filterbuttons-cont').css('visibility',oldViz);
+        $('#market-filters').addClass('collapse');
+      });
+
     },
 
     filterKeySearch: function (ev) {
@@ -226,39 +220,22 @@
       this.callback();
     },
 
-    createScrollbars: function(){
-      if(this.hasScroll === false){
-        $('.filterbuttons-cont').mCustomScrollbar({autoHideScrollbar: false});
-        this.hasScroll = true;
-      }
-    },
-
-    destroyScrollbars: function(){
-      if(this.hasScroll === true){
-        $('.filterbuttons-cont').mCustomScrollbar('destroy');
-        this.hasScroll = false;
-      }
-    },
-
     filterButtonHide: function (ev) {
       var that = this;
       $('#filterbuttontext').html('&nbsp; {% trans "Show Filters" %} &nbsp;');
       $('#togglefilter').removeClass('dropup');
-      this.setFilterWrapperMargin(this.filterheightClosed, 0, function(){
-        that.destroyScrollbars();
+      this.setFilterWrapperMargin(this.filterheightClosed, 300, function(){
+        $.noop();
       });
     },
 
     filterButtonShow: function (ev) {
       var that = this;
-      that.justOpend = true;
       $('#filterbuttontext').html('&nbsp; {% trans "Hide Filters" %}&nbsp;');
       $('#togglefilter').addClass('dropup');
       $('.filterbuttons-cont').css('visibility','hidden');
       this.setFilterWrapperMargin(this.filterheightOpen, 300, function(){
         $('.filterbuttons-cont').css('visibility','visible');
-        that.createScrollbars();
-        that.justOpend = false;
       });
     },
 
@@ -304,7 +281,7 @@
     },
 
     setFilterWrapperMargin: function (height, speed, callback) {
-      $('#filter-wrapper').animate({
+      $('#action-wrapper').animate({
         height: height
       }, speed, callback);
     },
@@ -364,6 +341,11 @@
 
     initialize: function (data) {
       var that = this;
+      // calculate height of the market-filters when opened and closed so we can set
+      // the height of the market-filter correctly when we fix it to the top
+      this.filterheightClosed = $('#fixed-actions').height();
+      $('#action-wrapper').height(this.filterheightClosed + "px");
+
       $.cookie.json = true;
       this.container = data.container;
       this.filters = data.filters;
@@ -377,19 +359,14 @@
       var html = tmpl({});
       $('#' + this.container).html(html);
       var resizeFilters = function () {
+        var newHight = $('#fixed-actions').height();
+        $('#action-wrapper').height(newHight + "px");
         that.setFilterOpenHeight();
-        var newHight = $('#fixed-filters').height();
-        $('#filter-wrapper').height(newHight + "px");
       };
+      this.setFilterOpenHeight();
       $.subscribe("filters.resize", resizeFilters);
       $(window).resize(resizeFilters);
-
-      // calculate height of the market-filters when opened and closed so we can set
-      // the height of the market-filter correctly when we fix it to the top
-      this.filterheightClosed = $('#filter-wrapper').height();
-      this.setFilterOpenHeight();
-      $('#filter-wrapper').height(this.filterheightClosed + "px");
-      $('#fixed-filters').affix({
+      $('#action-wrapper').affix({
         offset: {
           top: 300
         }

@@ -4,7 +4,16 @@
       clear left
     .right-on-large
       float left!important
+  .filter-toggle-button
+    #filterbuttontext
+      font-size 8px
+      margin-top 0px
 
+
+/* catch iPad in landscape */
+@media only screen and (max-device-width : 1024px)
+  .affix
+    position: inherit
 
 @media (max-width: 992px)
   #google_translate_element
@@ -37,6 +46,24 @@
 
   .navbar-toggle
     display: block
+
+  .exchange-filter
+    .filterbuttons-cont
+      max-height none
+      height auto
+      overflow auto
+      padding-left 20px
+      padding-right 10px
+    .market-filter-main
+      .market-filter-border
+        border: 0px
+
+  .filter-toggle-button
+    margin-top 15px
+    margin-right 10px
+    #filterbuttontext
+      font-size 8px
+
 
   .navbar-collapse
     border-top: 1px solid transparent;
