@@ -15,13 +15,13 @@
     <div id="fixed-actions">
       <div class="exchange-actions" >
         <div class="container">
-          <div class="row" style="margin-top:10px;">
+          <div class="row">
             <div id="create_offer" class="market-action pull-left">
-              <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="{%trans "Create an offer"%}" />
+              <img src="{{ STATIC_URL }}images/offer-button-30x30.png" alt="{%trans "Create an offer"%}" />
               <span>{%trans "Create an offer"%}</span>
             </div>
             <div id="create_request" class="market-action pull-left">
-              <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="{%trans "Create a request"%}" />
+              <img src="{{ STATIC_URL }}images/request-button-30x30.png" alt="{%trans "Create a request"%}" />
               <span>{%trans "Create a request"%}</span>
             </div>
             <div class="filter-toggle-button filter-show right-on-big">
@@ -67,7 +67,7 @@
       <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
     </div>
     <div _class="col-lg-10" style="height:30px;" >
-      <a id="backtothemarket" class="btn btn-default pull-left" href="{% url 'show_market' %}#">{%trans "Back"%}</a>
+      <a id="backtothemarket" class="btn btn-sm btn-default pull-left" href="{% url 'show_market' %}#">{%trans "Back"%}</a>
     </div>
     <div class="nanamorde-mobile col-md-4">
       <div class="userprofile"></div>

@@ -1,7 +1,10 @@
-@import 'site'
-@import 'site-sm'
-@import 'site-xs'
-
+#singleItem
+  margin-top 10px
+  .market-place-item
+    width 100%
+    margin 0 auto
+  .routehref
+    cursor default
 
 .market-place-item
   width: 32.4%
@@ -11,9 +14,12 @@
 .market-item-card
   border-radius 5px
   background-color: #FFF
-  margin-bottom: 15px
+  margin-bottom: 8px
   box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.5);
   padding: 3px
+  .tag-button
+    &:hover
+      font-weight bold
   .dropdown-menu
     left: auto
     right: 0
@@ -23,10 +29,11 @@
     cursor: pointer
   .item-header
     font-weight: bold
-    padding: 5px 3px 3px 5px
+    font-size 90%
+    padding: 3px 3px 3px 5px
     border-radius 5px
     margin-bottom: 5px
-    height: 30px
+    height: 25px
     span
       font-size: 10px
     a
@@ -44,33 +51,34 @@
   .item-title
     padding: 5px
     font-weight: bold
+    font-size: 90%
     .item-icon
       float: left
-      width: 50px
-      height: 50px
+      width: 30px
+      height: 30px
       margin-right: 5px
     .request
-      background: url('../images/request-button-50x50.png') no-repeat
+      background: url('../images/request-button-30x30.png') no-repeat
     .offer
-      background: url('../images/offer-button-50x50.png') no-repeat
+      background: url('../images/offer-button-30x30.png') no-repeat
   .item-body
-    padding: 5px
+    padding-top: 3px
+    padding-left: 3px
   .item-tags
-    padding: 5px
+    padding: 1px
   .readmore_marketitem
       font-size 80%
       cursor pointer
       margin-top 5px
       font-weight bold
       &:hover
-        color #427fed;
-        text-decoration underline
+        color #427fed!important
+        text-decoration underline!important
   .item_container:hover
     cursor: pointer
   .item-contents
     max-height: 101px
     overflow: hidden
-
   .showmoretags,.showlesstags
     position absolute
     bottom 50px
@@ -80,30 +88,23 @@
     padding 5px
     border-radius 5%
     cursor pointer;
-
   .tagbuttons-container
     position relative
-
   .item-body.multi-line-text
     font-weight normal
     white-space: pre-wrap
-
   .routehref:link
     text-decoration: none
     color $text-color
-
   .routehref:visited
     text-decoration: none
     color $text-color
-
   .routehref:active
     text-decoration: none
     color $text-color
-
   .routehref:hover
     text-decoration: none
     color $text-color
-
   .item-tags
     font-size: 10px
     .item-comment-count
@@ -114,5 +115,8 @@
       background-color: #eeeeee
       border-color: #cccccc
       margin-bottom: 3px
-
+  .dotdotdot
+    margin-bottom: -7px;
+    margin-top: -3px;
+    font-weight: bold;
 

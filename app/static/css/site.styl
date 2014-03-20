@@ -126,6 +126,7 @@ pre
   .modal-footer
     padding 0
     padding-top: 15px
+
 /******************************************************************************
  * Site styles
  */
@@ -190,7 +191,6 @@ h1, h2, h3, h4
 .col-spacing-bottom
   margin-bottom: 15px
 
-
 .affix
   width: 100%
   top: 51px
@@ -202,51 +202,28 @@ select.input-extra-height
   height: 90px
 
 
+.market-action:hover
+  cursor: pointer
+
+.action-banner-spacer
+  background-color: #FFF
+  height: 2px
+
+.exchange-actions
+  color: #FFF
+  background-color: $filter-background
+  padding-bottom: 5px
+  padding-top: 5px
+
+.rateit
+  vertical-align middle
+
+.action-container
+  margin-bottom 0px;
+
 #main-content-container
   margin-top 10px
 
-#market
-  width 100%
-  overflow hidden
-  .exchange-banner.users
-    background-image: url('../images/exchangivists-banner.jpg')
-  .exchange-banner.posts
-    background-image: url('../images/homepage-banner.jpg')
-
-#market.market
-  .delete-item
-    display none
-
-#marketitem_comments
-  margin-top 70px
-
-#marketitem_comment_form
-  display none
-
-.messagelist
-  a
-    text-decoration none
-  .messageavatar
-    width: 60px
-    float: left
-    input
-      vertical-align: middle
-  .message-well
-    background-color
-    padding: 0px
-    height: 47px
-    overflow: hidden
-    border-top: 1px solid $border-color
-  .message:last-child
-    .message-well
-      border-bottom: 1px solid $border-color
-  .sender
-    line-height 47px
-  .subject
-    white-space: nowrap;
-    overflow: hidden;
-    line-height 47px
-    text-overflow ellipsis
 
 .hero-text
   color #fff
@@ -298,21 +275,6 @@ select.input-extra-height
       left 0
     color $text-color
     padding-left 30px
-
-.exchange-banner
-  background: url('../images/myexchange-banner.jpg') no-repeat
-  background-position: center
-  background-size: cover
-  background-color: #FFF
-  h1
-    color: $text-color
-  .exchange-opacity
-    min-height: 300px
-    .dialog
-      border-radius 0
-
-  .message-text
-    margin-bottom: 10px
 
 #settingform
   label
@@ -366,28 +328,10 @@ select.input-extra-height
 .miniprof-score
   display none
 
-.rateit
-  vertical-align middle
-
 .profile-avatar
   text-align: center
   img
     border-radius: 50%
-
-.market-action:hover
-  cursor: pointer
-
-.action-banner-spacer
-  background-color: #FFF
-  height: 2px
-
-.exchange-actions
-  color: #FFF
-  background-color: $filter-background
-  padding-bottom: 10px
-
-.action-container
-  margin-bottom 0px;
 
 .market-search-box
   margin-bottom 10px
@@ -397,39 +341,11 @@ select.input-extra-height
   .tt-hint
     border-radius 10px
 
-#no-search-result
-  text-align center
-
 .user-card
   .item-title
     text-align: center
     img
       border-radius: 50%
-
-#create_offer
-  margin-right: 145px;
-  margin-left 15px
-
-#marketitemdialog
-  .market-place-item
-    width 100%
-
-#singleItem
-  margin-top 10px
-  .market-place-item
-    width 100%
-    margin 0 auto
-  .routehref
-    cursor default
-
-#backtothemarket
-  visibility hidden
-
-#issues_place, #countries_place, #skills_place, #request_issues_place ,#request_countries_place
-  .input-sm
-    height 34px
-    padding 10px 12px
-    font-size 14px
 
 li.list-group-item
   line-height: 30px
@@ -442,4 +358,17 @@ li.list-group-item
   .actionitem
     padding 2px
 
+/******************************************************************************
+ * Imports
+ */
+@import 'market/actions'
+@import 'market_common'
+@import 'marketitem'
+@import 'filter'
+@import 'navbar'
+@import 'postman'
+@import 'typeahead_widget'
+@import 'comment'
 
+.nothing_null_nada
+  padding 13px

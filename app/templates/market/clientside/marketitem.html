@@ -16,9 +16,7 @@
         <div class="item-title" owner_id="<%- ownerid %>">
           <div class="item-icon <%- item_type.toLowerCase() %>"></div>
           <div class="marketitem_title">
-            <div href="#item/<%- pk %>" class="routehref" >
-              <%- title %>
-            </div>
+            <%- title %>
         </div>
         <div class="clearfix"></div>
         <div class="item-body multi-line-text"><%- details %></div>
@@ -36,9 +34,7 @@
               <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div>
             <% }}); %>
             <% if(counter>top && isSingle === false){ %>
-            <a class="routehref" href="#item/<%- pk %>" >
-              <div class="btn btn-default btn-xs ">&nbsp;...&nbsp;</div>
-            </a>
+              <div class="dotdotdot">&nbsp;...&nbsp;</div>
             <%}%>
           </div>
         </div>

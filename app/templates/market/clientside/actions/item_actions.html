@@ -2,6 +2,12 @@
 
 <script type="text/template" id="item-actions">
   <div class="actions">
+    <div href="#item/<%- pk %>" class="routehref actionitem">
+      <div class="text">
+         {% trans "View" %}
+      </div>
+    </div>
+    <div class="actionitem">.</div>
     <% if (ownerid != window.ahr.user_id){ %>
     <div owner="<%- owner %>"
     rec_type="item"
@@ -20,14 +26,14 @@ Best,
         {% trans "Recommend" %}
       </div>
     </div>
-    <div class="actionitem">-</div>
+    <div class="actionitem">.</div>
 
     <div item_id="<%- pk %>" subject="Re: <%-title%>" username="<%- owner %>" class="private-message actionitem">
       <div class="text">
          {% trans "Private message" %}
       </div>
     </div>
-    <div class="actionitem">-</div>
+    <div class="actionitem">.</div>
 
     <div item_id="<%- pk %>" class="report_post actionitem">
       <div class="text">
@@ -35,14 +41,12 @@ Best,
       </div>
     </div>
 
-    <div class="routehref actionitem right-on-large" title="Comment">
-      <a href="#item/<%- pk %>">
-        <div class="item-glyph glyphicon glyphicon-comment"></div>
-        <% if (commentcount != 0){ %><span class="item-comment-count"><span class="commentcount"><%-commentcount%></span></span><%}%>
-      </a>
+    <div class="routehref actionitem pull-right" title="Comment" href="#item/<%- pk %>">
+      <div class="item-glyph glyphicon glyphicon-comment"></div>
+      <% if (commentcount != 0){ %><span class="item-comment-count"><span class="commentcount"><%-commentcount%></span></span><%}%>
     </div>
 
-    <div  class="rate rate_user actionitem right-on-large"
+    <div  class="rate rate_user actionitem pull-right"
       item_id="<%- pk %>"
       title="{% trans "Rate"%}"
       rateing="user"
@@ -61,7 +65,7 @@ Best,
     <div item_id="<%- pk %>" class="edit actionitem" >
       <div class="text">{% trans "Edit" %}</div>
     </div>
-    <div class="actionitem">-</div>
+    <div class="actionitem">.</div>
 
     <div item_id="<%- pk %>" class="delete actionitem" >
       <div class="text"> {% trans "Delete" %}</div>
