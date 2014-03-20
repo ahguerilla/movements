@@ -2,13 +2,14 @@
 
 <script type="text/template" id="item-actions">
   <div class="actions">
+    <% if (ownerid != window.ahr.user_id){ %>
     <div href="#item/<%- pk %>" class="routehref actionitem">
       <div class="text">
          {% trans "View" %}
       </div>
     </div>
-    <div class="actionitem">.</div>
-    <% if (ownerid != window.ahr.user_id){ %>
+    <div class="routehref actionitem">.</div>
+
     <div owner="<%- owner %>"
     rec_type="item"
     item_id="<%- pk %>"
@@ -61,6 +62,12 @@ Best,
 
     <%}%>
     <% if (ownerid == window.ahr.user_id){ %>
+    <div href="#item/<%- pk %>" class="routehref actionitem">
+      <div class="text">
+         {% trans "View" %}
+      </div>
+    </div>
+    <div class=" routehref actionitem">.</div>
 
     <div item_id="<%- pk %>" class="edit actionitem" >
       <div class="text">{% trans "Edit" %}</div>
