@@ -1,24 +1,6 @@
 {% load i18n %}
 {% load compress %}
 
-<style type="text/css">
-.showmoretags,.showlesstags{
-  position: absolute;
-  bottom: 50px;
-  right: 0;
-  background: white;
-  opacity: 0.9;
-  padding: 5px;
-  border-radius: 5%;
-  cursor: pointer;
-}
-
-.tagbuttons-container{
-  position: relative;
-}
-
-</style>
-
 <script type="text/template" id="item_template">
   <div class="market-place-item item-wrap item-<%-pk%>" item_id="<%- pk %>" owner_id="<%- ownerid %>">
     <div class="market-item-card" item_id="<%- pk %>" owner_id="<%- ownerid %>">
@@ -30,36 +12,37 @@
         </div>
         </a>
       </div>
-      <div href="#item/<%- pk %>" class="routehref" >
-        <div class="" item_id="<%- pk %>">
-          <div class="item-title" owner_id="<%- ownerid %>">
-            <div class="item-icon <%- item_type.toLowerCase() %>"></div>
-            <div class="marketitem_title"><%- title %></div>
-          </div>
-          <div class="clearfix"></div>
-          <div class="item-body multi-line-text"><%- details %></div>
-          </div>
-          <% var index=issues.length+countries.length+skills.length, top=10, counter=0; %>
-          <div class="item-tags clearfix <% if(index>top && isSingle === false){ %> more-items-here <%}%>">
-            <div class="tagbuttons-container" >
-              <% _.each(issues, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
-                <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div>
-              <% }}); %>
-              <% _.each(countries, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
-                <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div>
-              <% }}); %>
-              <% _.each(skills, function(ind) { counter+=1; if(counter<top || isSingle === true){ %>
-                <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div>
-              <% }}); %>
-              <% if(counter>top && isSingle === false){ %>
-              <a class="routehref" href="#item/<%- pk %>" >
-                <div class="btn btn-default btn-xs ">&nbsp;...&nbsp;</div>
-              </a>
-              <%}%>
+      <div class="" item_id="<%- pk %>">
+        <div class="item-title" owner_id="<%- ownerid %>">
+          <div class="item-icon <%- item_type.toLowerCase() %>"></div>
+          <div class="marketitem_title">
+            <div href="#item/<%- pk %>" class="routehref" >
+              <%- title %>
             </div>
-          </div>
-          <div class="action-place"></div>
         </div>
+        <div class="clearfix"></div>
+        <div class="item-body multi-line-text"><%- details %></div>
+        </div>
+        <% var index=issues.length+countries.length+skills.length, top=10, counter=0; %>
+        <div class="item-tags clearfix <% if(index>top && isSingle === false){ %> more-items-here <%}%>">
+          <div class="tagbuttons-container" >
+            <% _.each(issues, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
+              <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div>
+            <% }}); %>
+            <% _.each(countries, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
+              <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div>
+            <% }}); %>
+            <% _.each(skills, function(ind) { counter+=1; if(counter<top || isSingle === true){ %>
+              <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div>
+            <% }}); %>
+            <% if(counter>top && isSingle === false){ %>
+            <a class="routehref" href="#item/<%- pk %>" >
+              <div class="btn btn-default btn-xs ">&nbsp;...&nbsp;</div>
+            </a>
+            <%}%>
+          </div>
+        </div>
+      <div class="action-place"></div>
     </div>
   </div>
 </script>
@@ -191,7 +174,6 @@
       var id = ev.currentTarget.getAttribute('item_id');
       $.getJSON(window.ahr.app_urls.getuseritem + id, function (item) {
         if (item[0].fields.item_type == "request") {
-          //TODO: define a callback for this , not this view responsibility to know about these dialogs
           that.market.requestdialog.edit(item, that.edit_callback);
           that.market.requestdialog.showModal();
         } else {

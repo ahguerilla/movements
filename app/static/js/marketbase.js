@@ -82,7 +82,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
           $itemhtml = $(item_html);
           var text = $itemhtml.find('.item-body').text();
           if(text.length>200){
-            $itemhtml.find('.item-body').text(text.slice(0,200)+'...');
+            $itemhtml.find('.item-body').html(text.slice(0,200)+'<div class="readmore_marketitem">Read more</div>');
+
           }
           itemsToAppend.push(item_html[0].outerHTML);
           $('#marketitems').append(item_html[0].outerHTML);

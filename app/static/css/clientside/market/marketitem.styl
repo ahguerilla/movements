@@ -1,0 +1,118 @@
+@import 'site'
+@import 'site-sm'
+@import 'site-xs'
+
+
+.market-place-item
+  width: 32.4%
+  margin-left: 4px;
+  margin-right: 4px;
+
+.market-item-card
+  border-radius 5px
+  background-color: #FFF
+  margin-bottom: 15px
+  box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+  padding: 3px
+  .dropdown-menu
+    left: auto
+    right: 0
+    top: 15px
+  .item-menu
+    margin-right: 5px
+    cursor: pointer
+  .item-header
+    font-weight: bold
+    padding: 5px 3px 3px 5px
+    border-radius 5px
+    margin-bottom: 5px
+    height: 30px
+    span
+      font-size: 10px
+    a
+      color: $text-color
+    .item-header-clickable
+      float:left
+      width:85%
+      height: 30px
+  .request
+    background-color: $request-color
+  .offer
+    background-color: $offer-color
+  .user
+    background-color: $request-color
+  .item-title
+    padding: 5px
+    font-weight: bold
+    .item-icon
+      float: left
+      width: 50px
+      height: 50px
+      margin-right: 5px
+    .request
+      background: url('../images/request-button-50x50.png') no-repeat
+    .offer
+      background: url('../images/offer-button-50x50.png') no-repeat
+  .item-body
+    padding: 5px
+  .item-tags
+    padding: 5px
+  .readmore_marketitem
+      font-size 80%
+      cursor pointer
+      margin-top 5px
+      font-weight bold
+      &:hover
+        color #427fed;
+        text-decoration underline
+  .item_container:hover
+    cursor: pointer
+  .item-contents
+    max-height: 101px
+    overflow: hidden
+
+  .showmoretags,.showlesstags
+    position absolute
+    bottom 50px
+    right 0
+    background white
+    opacity 0.9
+    padding 5px
+    border-radius 5%
+    cursor pointer;
+
+  .tagbuttons-container
+    position relative
+
+  .item-body.multi-line-text
+    font-weight normal
+    white-space: pre-wrap
+
+  .routehref:link
+    text-decoration: none
+    color $text-color
+
+  .routehref:visited
+    text-decoration: none
+    color $text-color
+
+  .routehref:active
+    text-decoration: none
+    color $text-color
+
+  .routehref:hover
+    text-decoration: none
+    color $text-color
+
+  .item-tags
+    font-size: 10px
+    .item-comment-count
+      margin-bottom: 5px
+    .btn-xs
+      font-size: 10px
+      color: #000
+      background-color: #eeeeee
+      border-color: #cccccc
+      margin-bottom: 3px
+
+
