@@ -51,7 +51,7 @@
           <form id="searchform">
             <label class="sr-only" for="q">{%trans "Search by keyword for offers and requests"%}</label>
             <input type="text" class="form-control" id="q" name="q" placeholder="{%trans "Search by keyword for offers and requests"%}" />
-            <input type="submit" style="visibility:hidden;position: fixed;"/>
+            <input type="submit"/>
           </form>
           <span class="btn btn-default input-group-addon" id="searchbtn">{%trans "Search"%}</span>
         </div>
@@ -63,18 +63,18 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-10" id="ajaxloader" style="text-align:center;display:none;">
+    <div class="col-lg-10" id="ajaxloader">
       <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
     </div>
-    <div _class="col-lg-10" style="height:30px;" >
+    <div id="backtomarket-but-container" >
       <a id="backtothemarket" class="btn btn-sm btn-default pull-left" href="{% url 'show_market' %}#">{%trans "Back"%}</a>
     </div>
     <div class="nanamorde-mobile col-md-4">
       <div class="userprofile"></div>
     </div>
-    <div class="row" style="padding:4px;">
+    <div class="row singleiteem-container">
       <div class="col-md-8 left-on-big">
-        <div id="singleItem" class=""></div>
+        <div id="singleItem"></div>
         <div id="marketitem_comment_form"></div>
         <div id="marketitem_comments"></div>
       </div>
