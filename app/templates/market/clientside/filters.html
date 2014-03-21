@@ -107,9 +107,8 @@
   $(document).ready(function () {
   var filterWidget = Backbone.View.extend({
     filterheightOpen: 0,
+    filterheightClosed: 0,
     cookieread: false,
-    hasScroll: false,
-    justOpend: true,
     events:{
         'click #searchbtn': 'search',
         'click .tagbutton': 'tagsfilter',
@@ -147,7 +146,6 @@
       var that = this;
       $('.row.' + taghead).empty();
       this.initFilters(that, taghead, that.tagtemp);
-
     },
 
     setFiltersFromCookie: function (that, items) {
@@ -207,16 +205,7 @@
     },
 
     setFilterOpenHeight: function () {
-      var that = this,
-      oldViz = $('.filterbuttons-cont').css('visibility');
-      $('#market-filters').removeClass('collapse');
-      $('.filterbuttons-cont').css('visibility','visible');
-      this.setFilterWrapperMargin(this.filterheightOpen, 0, function(){
-        that.filterheightOpen = $('.filterbuttons-cont').css('height')+114;
-        $('.filterbuttons-cont').css('visibility',oldViz);
-        $('#market-filters').addClass('collapse');
-      });
-
+      this.filterheightOpen = '305';
     },
 
     filterKeySearch: function (ev) {
@@ -387,10 +376,6 @@
 
     initialize: function (data) {
       var that = this;
-      // calculate height of the market-filters when opened and closed so we can set
-      // the height of the market-filter correctly when we fix it to the top
-      this.filterClosedHeight = $('#fixed-actions').height();
-      $('#action-wrapper').height(this.filterheightClosed + "px");
 
       $.cookie.json = true;
       this.container = data.container;
@@ -407,14 +392,19 @@
       var resizeFilters = function () {
         var newHight = $('#fixed-actions').height();
         $('#action-wrapper').height(newHight + "px");
-        that.setFilterOpenHeight();
       };
+
+      // calculate height of the market-filters when opened and closed so we can set
+      // the height of the market-filter correctly when we fix it to the top
+      this.filterheightClosed = $('#fixed-actions').height();
       this.setFilterOpenHeight();
+      $('#action-wrapper').height(this.filterheightClosed + "px");
+
       $.subscribe("filters.resize", resizeFilters);
       $(window).resize(resizeFilters);
-      $('#action-wrapper').affix({
+      $('#fixed-actions').affix({
         offset: {
-          top: 300
+          top: 155
         }
       });
     }
