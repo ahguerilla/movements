@@ -25,13 +25,13 @@
         <div class="item-tags clearfix <% if(index>top && isSingle === false){ %> more-items-here <%}%>">
           <div class="tagbuttons-container" >
             <% _.each(issues, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
-              <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div>
+              <div class="btn btn-default btn-xs tag-button issues-tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div>
             <% }}); %>
             <% _.each(countries, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
-              <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div>
+              <div class="btn btn-default btn-xs tag-button countries-tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div>
             <% }}); %>
             <% _.each(skills, function(ind) { counter+=1; if(counter<top || isSingle === true){ %>
-              <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div>
+              <div class="btn btn-default btn-xs tag-button skills-tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div>
             <% }}); %>
             <% if(counter>top && isSingle === false){ %>
               <div class="dotdotdot">&nbsp;...&nbsp;</div>
