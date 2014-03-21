@@ -57,6 +57,17 @@
       return dfrd;
     },
 
+    confirmLeave:function(ev){
+      ev.preventDefault();
+      if(ev.currentTarget.href.slice(0,29) != window.ahr.current_site.slice(0,29)){
+        if(confirm(gettext('This link is going off this site and might not be secure! '))){
+          window.open(ev.currentTarget.href, '_blank');
+        }
+      }
+      return false;
+
+    },
+
     comment: function (ev) {
       ev.preventDefault();
       var id = $(ev.currentTarget).data().id;
@@ -224,7 +235,8 @@
         'click .delete': 'deleteItem',
         'click .edit': 'editItem',
         'click .showmoretags': 'showMoreTags',
-        'click .showlesstags': 'showLessTags'
+        'click .showlesstags': 'showLessTags',
+        'click .multi-line-text a': 'confirmLeave'
       });
     }
   });

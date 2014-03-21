@@ -61,6 +61,7 @@
   {% else %}
     window.ahr.user_id = 0;
   {% endif %}
+    window.ahr.current_site = "{{ request.build_absolute_uri }}"
 </script>
 {% endcompress %}
 

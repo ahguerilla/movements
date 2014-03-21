@@ -120,6 +120,15 @@
       message + '</div>');
   }
 
+  $.fn.clickUrl = function() {
+    var regexp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
+    this.each(function() {
+        $(this).html(
+          $(this).html().replace(regexp,'<a href="$1" target="_blank">$1</a>')
+        );
+    });
+    return $(this);
+  }
 
   window.ahr = window.ahr || {};
   window.ahr.getcsrf = getcsrf;
