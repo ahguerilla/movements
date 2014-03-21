@@ -2,6 +2,22 @@
 
 {% load compress %}
 <script type="text/template" id="filters_template">
+<div id="filter-info-panel">
+  <div class="container">
+      <span class="filt-inf-wrapper">
+       Filters:
+      </span>
+      <span class="filt-inf-wrapper">
+        Issues: <span id="activate-issues-filters"></span>
+      </span>
+      <span class="filt-inf-wrapper">
+        Countries: <span id="activate-countries-filters"></span>
+      </span>
+      <span class="filt-inf-wrapper">
+        Skills: <span id="activate-skills-filters"></span>
+      </span>
+  </div>
+</div>
 <div class="exchange-filter">
   <div class="row">
     <div class="container">
@@ -13,15 +29,15 @@
                 <div class="market-filter-main">
                   <div class="market-filter-border"></div>
                   <div class="filter-action first item-type" item_type="all">
-                    <img src="{{ STATIC_URL }}images/all-button-50x50.png" alt="Filter by all" />
+                    <img width="30" src="{{ STATIC_URL }}images/all-button-50x50.png" alt="Filter by all" />
                     <span>{% trans "All" %}</span>
                   </div>
                   <div class="filter-action item-type" item_type="Offers">
-                    <img src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Filter by offers" />
+                    <img width="30" src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Filter by offers" />
                     <span id="filter-offer-text">{% trans "Offers" %}</span>
                   </div>
                   <div class="filter-action item-type" item_type="Request">
-                    <img src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
+                    <img width="30" src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
                     <span id="filter-request-text">{% trans "Requests" %}</span>
                   </div>
                 </div>
@@ -91,7 +107,6 @@
   $(document).ready(function () {
   var filterWidget = Backbone.View.extend({
     filterheightOpen: 0,
-    filterheightClosed: 0,
     cookieread: false,
     hasScroll: false,
     justOpend: true,
@@ -222,20 +237,49 @@
       this.callback();
     },
 
+    updateFiltInfo:function(){
+      var a=[[$('.filter-bulk-selector.all-issues'),$('.filter-bulk-selector.def-issues'),'issues'],
+        [$('.filter-bulk-selector.all-skills'),$('.filter-bulk-selector.def-skills'),'skills'],
+        [$('.filter-bulk-selector.all-countries'),$('.filter-bulk-selector.def-countries'),'countries']]
+      _.each(a,function(item){
+        if(item[0].hasClass('active')){
+          $('#activate-'+item[2]+'-filters').text('All');
+        }
+        else if(item[1].hasClass('active')){
+          $('#activate-'+item[2]+'-filters').text('Defaults');
+        }else{
+          var a_list = ''
+          $('.btn.tagbutton',$('.row.'+item[2]+'.btn-group-sm')).each(function(){
+            a_list += $(this).text()+', ';
+          });
+          $('#activate-'+item[2]+'-filters').text(a_list);
+        }
+      });
+    },
+
+    toggleFiltInfo:function(h,speed){
+      this.updateFiltInfo();
+      $('#filter-info-panel').animate({
+        height: h
+      }, speed);
+    },
+
     filterButtonHide: function (ev) {
-      var that = this;
+      var that = this, speed=300;
       $('#filterbuttontext').html('&nbsp; {% trans "Show Filters" %} &nbsp;');
       $('#togglefilter').removeClass('dropup');
-      this.setFilterWrapperMargin(this.filterheightClosed, 300, function(){
+      this.toggleFiltInfo(20, speed);
+      this.setFilterWrapperMargin(this.filterheightClosed, speed, function(){
         $.noop();
       });
     },
 
     filterButtonShow: function (ev) {
-      var that = this;
+      var that = this, speed=300;
       $('#filterbuttontext').html('&nbsp; {% trans "Hide Filters" %}&nbsp;');
       $('#togglefilter').addClass('dropup');
-      this.setFilterWrapperMargin(this.filterheightOpen, 300, function(){
+      this.toggleFiltInfo(0, speed);
+      this.setFilterWrapperMargin(this.filterheightOpen, speed, function(){
         $.noop();
       });
     },
@@ -279,6 +323,7 @@
         that.bulkCustomizeFilters(tag, selection);
         $('.filter-bulk-selector.' + selection + '-' + tag).addClass('active');
       });
+      that.updateFiltInfo();
     },
 
     setFilterWrapperMargin: function (height, speed, callback) {
@@ -344,7 +389,7 @@
       var that = this;
       // calculate height of the market-filters when opened and closed so we can set
       // the height of the market-filter correctly when we fix it to the top
-      this.filterheightClosed = $('#fixed-actions').height();
+      this.filterClosedHeight = $('#fixed-actions').height();
       $('#action-wrapper').height(this.filterheightClosed + "px");
 
       $.cookie.json = true;
