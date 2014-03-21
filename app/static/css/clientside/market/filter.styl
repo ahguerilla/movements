@@ -7,16 +7,23 @@
   color #d7d7d7
   background-color #585f65
   .filt-inf-wrapper
-    margin-left 1%
-    float left
-    max-width 30%
+    white-space: nowrap;
     overflow hidden
+    text-overflow: ellipsis;
+    margin-left 1%
+    max-width 30%
+    float left
+    max-height 20px
+
 
 .exchange-filter
   color: #FFF
   background-color: $filter-background
   //min-height: 40px
   //padding-bottom: 10px
+  .filter-tag
+    display inline-block
+    margin 2px
   .filterbuttons-cont
     max-height 250px
     margin-bottom 5px;
@@ -70,4 +77,4 @@
   //margin-right 45px
 
 .filtergroup
-  margin-bottom 10px
+  margin-bottom 8px
