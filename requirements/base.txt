@@ -35,4 +35,5 @@ django-celery-email==1.0.4
 selenium==2.40.0
 django-rosetta==0.7.4
 django-modeltranslation==0.7.3
+webassets==0.9
 
