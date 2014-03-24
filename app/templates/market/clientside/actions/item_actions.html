@@ -42,12 +42,12 @@ Best,
       </div>
     </div>
 
-    <div class="routehref actionitem pull-right" title="Comment" href="#item/<%- pk %>">
+    <div class="routehref actionitem right-on-big" title="Comment" href="#item/<%- pk %>">
       <div class="item-glyph glyphicon glyphicon-comment"></div>
       <% if (commentcount != 0){ %><span class="item-comment-count"><span class="commentcount"><%-commentcount%></span></span><%}%>
     </div>
 
-    <div  class="rate rate_user actionitem pull-right"
+    <div  class="rate rate_user actionitem right-on-big"
       item_id="<%- pk %>"
       title="{% trans "Rate"%}"
       rateing="user"
