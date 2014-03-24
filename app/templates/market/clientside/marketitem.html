@@ -13,14 +13,16 @@
         </a>
       </div>
       <div class="" item_id="<%- pk %>">
-        <div class="item-title" owner_id="<%- ownerid %>">
-          <div class="item-icon <%- item_type.toLowerCase() %>"></div>
-          <div class="marketitem_title">
-            <%- title %>
+        <div class="item-title-table">
+          <div class="item-title" owner_id="<%- ownerid %>">
+            <div class="item-icon <%- item_type.toLowerCase() %>" ></div>
+            <div class="marketitem_title" >
+              <%- title %>
+            </div>
+          </div>
         </div>
         <div class="clearfix"></div>
-        <div class="item-body multi-line-text"><%- details %></div>
-        </div>
+        <div class="item-body multi-line-text"><%- details %></div>        
         <% var index=issues.length+countries.length+skills.length, top=10, counter=0; %>
         <div class="item-tags clearfix <% if(index>top && isSingle === false){ %> more-items-here <%}%>">
           <div class="tagbuttons-container" >
