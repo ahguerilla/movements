@@ -82,9 +82,9 @@ class MarketSeleniumTests(SolrTestCase):
     def login(self):
         self.selenium.get('%s%s' % (self.live_server_url, '/accounts/login/'))
         username_input = self.selenium.find_element_by_id("id_login")
-        username_input.send_keys('Changizkhaan')
+        username_input.send_keys('admin')
         password_input = self.selenium.find_element_by_id("id_password")
-        password_input.send_keys('123456')
+        password_input.send_keys('admin')
         password_input.submit()
         selenium = self.selenium
         self.wait.until(lambda selenium: selenium.find_element_by_id("q"))

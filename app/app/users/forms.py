@@ -37,15 +37,20 @@ class UserForm(forms.ModelForm):
 class SettingsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(SettingsForm, self).__init__(*args, **kwargs)
-        user_profile = initial=kwargs['instance']
+        if kwargs.has_key('instance'):
+            user_profile = initial=kwargs['instance']
+        else:
+            user_profile = None
         langs = constance.config.TRANSLATED_LANGUAGES.split(',')
         translated = []
         initial = None
         for lang in LANGUAGES:
             if lang[0] in langs:
                 translated.append(lang)
-            if not initial and lang[0] == user_profile.interface_lang:
+            if user_profile and not initial and lang[0] == user_profile.interface_lang:
                 initial = lang
+            else:
+                initial = 'en'
 
         self.fields['interface_lang'] = forms.ChoiceField(choices=translated, initial=initial[0])
 
