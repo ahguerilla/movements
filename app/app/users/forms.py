@@ -51,7 +51,6 @@ class SettingsForm(forms.ModelForm):
                 initial = lang
             else:
                 initial = 'en'
-
         self.fields['interface_lang'] = forms.ChoiceField(choices=translated, initial=initial[0])
 
     class Meta:

@@ -65,7 +65,6 @@
         }
       }
       return false;
-
     },
 
     comment: function (ev) {
@@ -120,8 +119,7 @@
       return false;
     },
 
-    addCommentToCommentList: function (comment_item, front) {
-      debugger;
+    addCommentToCommentList: function (comment_item, front) {      
       front = front === true ? front : false;
       var data = {
         pk: comment_item.pk,
@@ -212,6 +210,10 @@
     },
 
     afterset: function (item_container) {
+      if(this.market.isSingle()){        
+        var title = $('.marketitem_title',$('#singleItem')).text();
+        $('#marketitem_title_breadc').text(title);        
+      }
       return;
     },
 

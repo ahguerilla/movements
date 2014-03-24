@@ -66,14 +66,24 @@
     <div class="col-lg-10" id="ajaxloader">
       <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
     </div>
-    <div id="backtomarket-but-container" >
-      <a id="backtothemarket" class="btn btn-sm btn-default pull-left" href="{% url 'show_market' %}#">{%trans "Back"%}</a>
-    </div>
+    <!--<div id="backtomarket-but-container" >-->
+      <!--<a  class="btn btn-sm btn-default pull-left" href="{% url 'show_market' %}#">{%trans "Back"%}</a>-->
+    <!--</div>-->
     <div class="nanamorde-mobile col-md-4">
       <div class="userprofile"></div>
     </div>
     <div class="row singleiteem-container">
-      <div class="col-md-8 left-on-big">
+      <div class="col-md-8 left-on-big">      
+        <div class="panel" id="backtothemarket"  style="margin-top:10px;">
+          <ol class="breadcrumb" style="margin-bottom: 0px;">
+            <li style="cursor:pointer;" class="">
+              <a href="{% url 'show_market' %}#">{%trans "Exchange"%}</a>
+            </li>
+            <li>
+              <span id="marketitem_title_breadc"></span>
+            </li>
+          </ol>
+        </div>
         <div id="singleItem"></div>
         <div id="marketitem_comment_form"></div>
         <div id="marketitem_comments"></div>

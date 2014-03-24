@@ -38,7 +38,7 @@
       "Request": "request"
     },
     gotoItem: function(ev){
-      window.location = ev.currentTarget.getAttribute('href');
+      window.location = ev.currentTarget.getAttribute('href');      
     },
 
     edit_callback: function (item_id) {
