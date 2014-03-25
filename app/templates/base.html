@@ -35,6 +35,11 @@
 
   {% block extra_head %}
   {% endblock %}
+
+  {% if config.GOOGLE_ANALYTICS %}
+  {{ config.GOOGLE_ANALYTICS|safe }}
+  {% endif %}
+
 </head>
 <body class="{% block body_class %}{{ body_class }}{% endblock %}">
 

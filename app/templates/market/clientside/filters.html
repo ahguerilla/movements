@@ -382,7 +382,6 @@
 
     initialize: function (data) {
       var that = this;
-
       $.cookie.json = true;
       this.container = data.container;
       this.filters = data.filters;
@@ -399,7 +398,6 @@
         var newHight = $('#fixed-actions').height();
         $('#action-wrapper').height(newHight + "px");
       };
-
       // calculate height of the market-filters when opened and closed so we can set
       // the height of the market-filter correctly when we fix it to the top
       this.filterheightClosed = $('#fixed-actions').height();
