@@ -147,6 +147,7 @@
       var comment_html = this.comment_tmp(data);
       var actions = this.market.actions_view.get('comment', data);
       var $comment_html = $(comment_html);
+      $comment_html = $comment_html.clickUrl();
       $comment_html.find('.commentaction-place').replaceWith(actions);
       if (front) {
         $('#marketitem_comments').prepend($comment_html);
@@ -248,7 +249,8 @@
         'click .edit': 'editItem',
         'click .showmoretags': 'showMoreTags',
         'click .showlesstags': 'showLessTags',
-        'click .multi-line-text a': 'confirmLeave'
+        'click .multi-line-text a': 'confirmLeave',
+        'click .comment-content a': 'confirmLeave'
       });
     }
   });
