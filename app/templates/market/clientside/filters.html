@@ -43,7 +43,7 @@
                 </div>
               </div>
 
-              <div class="filterbuttons-cont">
+              <div class="filterbuttons-cont col-md-9">
                 <div class="col-md-4 pull-left">
                   <div class="filter-title">{% trans "Issues" %}</div>
                   <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
@@ -255,7 +255,7 @@
     },
 
     filterButtonHide: function (ev) {
-      var that = this, speed=300;
+      var that = this, speed=0;
       $('#filterbuttontext').html('&nbsp; {% trans "Show Filters" %} &nbsp;');
       $('#togglefilter').removeClass('dropup');
       this.toggleFiltInfo(20, speed);
@@ -264,7 +264,7 @@
       });
     },
 
-    filterButtonShow: function (ev) {    
+    filterButtonShow: function (ev) {
       var that = this, speed=300;
       $('#filterbuttontext').html('&nbsp; {% trans "Hide Filters" %}&nbsp;');
       $('#togglefilter').addClass('dropup');
@@ -273,7 +273,7 @@
         $.noop();
       });
     },
-    
+
     filterButtonShowAndTog: function(ev){
       $('#togglefilter').trigger('click');
     },
