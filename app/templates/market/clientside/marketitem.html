@@ -5,12 +5,12 @@
   <div class="market-place-item item-wrap item-<%-pk%>" item_id="<%- pk %>" owner_id="<%- ownerid %>">
     <div class="market-item-card" item_id="<%- pk %>" owner_id="<%- ownerid %>">
       <div class="item-header <%- item_type.toLowerCase() %>">
-        <a class="routehref" href="#item/<%- pk %>" >
         <div class="item-header-clickable item_container" item_id="<%- pk %>">
-          <%- item_type.toUpperCase() %>
+          <a class="routehref" href="#item/<%- pk %>" >
+            <%- item_type.toUpperCase() %>
+          </a>
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span>
         </div>
-        </a>
         <div class="clearfix"></div>
         <div class="pudate pull-left">
           <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>
