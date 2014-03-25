@@ -7,7 +7,7 @@
       <div class="item-header <%- item_type.toLowerCase() %>">
         <a class="routehref" href="#item/<%- pk %>" >
         <div class="item-header-clickable item_container" item_id="<%- pk %>">
-          <%- item_type.toUpperCase() %>&nbsp;
+          <%- item_type.toUpperCase() %>
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span>
         </div>
         </a>
@@ -69,7 +69,7 @@
     confirmLeave:function(ev){
       ev.preventDefault();
       if(ev.currentTarget.href.slice(0,29) != window.ahr.current_site.slice(0,29)){
-        if(confirm(gettext('This link is going off this site and might not be secure! '))){
+        if(confirm(gettext('This link will take you off the Exchangivist site.\r\nMake sure you trust the site that you are being redirected to.'))){
           window.open(ev.currentTarget.href, '_blank');
         }
       }
