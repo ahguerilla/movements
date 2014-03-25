@@ -116,6 +116,7 @@
         'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
         'click .btn.tag-button': 'itemTagCick',
         'submit #searchform': 'filterKeySearch',
+        'click #filter-info-panel': 'filterButtonShowAndTog',
         'show.bs.collapse #market-filters': 'filterButtonShow',
         'hide.bs.collapse #market-filters': 'filterButtonHide'
     },
@@ -263,7 +264,7 @@
       });
     },
 
-    filterButtonShow: function (ev) {
+    filterButtonShow: function (ev) {    
       var that = this, speed=300;
       $('#filterbuttontext').html('&nbsp; {% trans "Hide Filters" %}&nbsp;');
       $('#togglefilter').addClass('dropup');
@@ -271,6 +272,10 @@
       this.setFilterWrapperMargin(this.filterheightOpen, speed, function(){
         $.noop();
       });
+    },
+    
+    filterButtonShowAndTog: function(ev){
+      $('#togglefilter').trigger('click');
     },
 
     bulkCustomizeFilters: function (tag, action) {
@@ -350,6 +355,7 @@
       that.filters[tagType] = [tagData.pk];
       that.filters.types = _.values(that.types);
       that.callback();
+      this.updateFiltInfo();
     },
 
     markAll: function () {
