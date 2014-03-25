@@ -12,6 +12,15 @@
   margin-right: 4px;
 
 .market-item-card
+  &.user-card
+    .item-header
+      height 30px
+    .item-title
+      display inherit
+      text-align: center
+      img
+        border-radius: 50%
+
   border-radius 5px
   background-color: #FFF
   margin-bottom: 8px
@@ -124,16 +133,6 @@
   .routehref:hover
     text-decoration: none
     color $text-color
-  .item-tags
-    font-size: 10px
-    .item-comment-count
-      margin-bottom: 5px
-    .btn-xs
-      font-size: 10px
-      color: #000
-      //background-color: #eeeeee
-      //border-color: #cccccc
-      margin-bottom: 3px
   .dotdotdot
     margin-bottom: -2px;
     margin-top: -6px;
