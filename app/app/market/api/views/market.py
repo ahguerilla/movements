@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from datetime import datetime
-from tasks.celerytasks import create_notification, update_notifications, mark_read_notifications
+from tasks.celerytasks import create_notification, update_notifications, mark_read_notifications, add_view
 import constance
 import requests
 from django.conf import settings
@@ -82,6 +82,7 @@ def get_market_item(request, obj_id, rtype):
                             pk=obj_id,
                             deleted=False,
                             owner__is_active=True)
+    add_view.delay(obj_id, obj.owner.id, request.user.id)
     mark_read_notifications.delay((obj.id,),request.user.id)
     retval = return_item_list([obj], rtype)
     cache.add('item-' + obj_id, retval)
@@ -207,7 +208,6 @@ def get_notifications_fromto(request, sfrom, to, rtype):
                           mimetype="application"+rtype)
 
 
-
 @login_required
 def get_notseen_notifications(request, sfrom, to, rtype):
     notifications = market.models.Notification.objects.filter(user=request.user.id,item__deleted=False).filter(seen=False).only('seen')
@@ -218,3 +218,8 @@ def get_notseen_notifications(request, sfrom, to, rtype):
                          mimetype="application"+rtype)
 
 
+@login_required
+def get_views_count(request, obj_id, rtype):
+    views = market.models.MarketItemViewConter.objects.filter(item_id=obj_id).count()
+    return  HttpResponse(json.dumps({'result': views}),
+                         mimetype="application"+rtype)

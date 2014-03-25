@@ -3,10 +3,16 @@
   var MarketRoute = Backbone.Router.extend({
     routes: {
       "": "page",
+      ":itemid": "updateViews",
       "item/:item_id": "gotoItem"
     },
     firstTime: true,
     emptyPage: true,
+
+    updateViews: function(item){
+      this.market.setViewsCount(item);
+      this.page();
+    },
 
     gotoItem: function (item) {
       this.market.showItem(item);
@@ -37,8 +43,17 @@
       "Offers": "offer",
       "Request": "request"
     },
+
+    setViewsCount: function(id){
+      $.getJSON(
+        window.ahr.app_urls.getViewsCount + id,
+        function (data) {
+          $('.market-item-card[item_id="' + id + '"] .views-counter').text(data.result);
+      });
+    },
+
     gotoItem: function(ev){
-      window.location = ev.currentTarget.getAttribute('href');      
+      window.location = ev.currentTarget.getAttribute('href');
     },
 
     edit_callback: function (item_id) {

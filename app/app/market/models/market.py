@@ -40,22 +40,32 @@ class MarketItem(models.Model):
         adict['pk'] = self.id
         adict['fields']['pk'] = self.id
         adict['fields']['item_type'] = self.item_type
-        adict['fields']['issues']= [ob.id for ob in self.issues.all()]
-        adict['fields']['countries']= [ob.id for ob in self.countries.all()]
-        adict['fields']['skills']= [ob.id for ob in self.skills.all()]
-        adict['fields']['title']= self.title
-        adict['fields']['details']= self.details
-        adict['fields']['pub_date']= str(self.pub_date)
-        adict['fields']['exp_date']= str(self.exp_date) if self.exp_date != None else ''
-        adict['fields']['never_exp']= self.never_exp
-        adict['fields']['owner']= [self.owner.username]
-        adict['fields']['ownerid']= [self.owner.id]
-        adict['fields']['url']= self.url        
-        adict['fields']['commentcount']= self.commentcount
-        adict['fields']['usercore']= self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
-        adict['fields']['userratecount']= self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
-        adict['fields']['ratecount']= self.ratecount
-        adict['fields']['score']= self.score
+        adict['fields']['issues'] = [ob.id for ob in self.issues.all()]
+        adict['fields']['countries'] = [ob.id for ob in self.countries.all()]
+        adict['fields']['skills'] = [ob.id for ob in self.skills.all()]
+        adict['fields']['title'] = self.title
+        adict['fields']['details'] = self.details
+        adict['fields']['pub_date'] = str(self.pub_date)
+        adict['fields']['exp_date'] = str(self.exp_date) if self.exp_date != None else ''
+        adict['fields']['never_exp'] = self.never_exp
+        adict['fields']['owner'] = [self.owner.username]
+        adict['fields']['ownerid'] = [self.owner.id]
+        adict['fields']['url'] = self.url
+        adict['fields']['commentcount'] = self.commentcount
+        adict['fields']['usercore'] = self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
+        adict['fields']['userratecount'] = self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
+        adict['fields']['ratecount'] = self.ratecount
+        adict['fields']['score'] = self.score
+        adict['fields']['views'] = self.marketitemviewconter_set.count()
         adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username,80])
         return adict
+
+class MarketItemViewConter(models.Model):
+    item = models.ForeignKey(MarketItem)
+    viewer = models.ForeignKey(user_models.User)
+    counter = models.IntegerField(_('counter'), default=0)
+
+    class Meta:
+        app_label="market"
+
 

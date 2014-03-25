@@ -1,9 +1,12 @@
 from celery import shared_task, task
 from app.users.models import UserProfile
-from app.market.models import MarketItem,Notification
+from app.market.models import MarketItem,Notification, MarketItemViewConter
 from django.db.models import Q
 from django.conf import settings
 import json
+
+import logging
+logger= logging.getLogger(__name__)
 
 if not '_app' in dir():
     from celery import Celery
@@ -107,5 +110,15 @@ def update_notifications(self, obj):
 @_app.task(name="markReadNotifications", bind=True)
 def mark_read_notifications(self, obj_ids, user_id):
     notifications = Notification.objects.filter(user=user_id).filter(item__in=obj_ids).filter(read=False).update(read=True)
+    return
+
+
+@_app.task(name="add_view", bind=True)
+def add_view(self, obj_id, owner_id, user_id):
+    if obj_id == owner_id:
+        return
+    view = MarketItemViewConter.objects.get_or_create(viewer_id=user_id, item_id=obj_id)[0]
+    view.counter = view.counter + 1
+    view.save()
     return
 

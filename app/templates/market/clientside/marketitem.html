@@ -11,6 +11,13 @@
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span>
         </div>
         </a>
+        <div class="clearfix"></div>
+        <div class="pudate pull-left">
+          <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>
+        </div>
+        <div class="views pull-right">
+          Views: <span class="views-counter"><%- views %></span>
+        </div>
       </div>
       <div class="" item_id="<%- pk %>">
         <div class="item-title-table">
@@ -22,7 +29,7 @@
           </div>
         </div>
         <div class="clearfix"></div>
-        <div class="item-body multi-line-text"><%- details %></div>        
+        <div class="item-body multi-line-text"><%- details %></div>
         <% var index=issues.length+countries.length+skills.length, top=10, counter=0; %>
         <div class="item-tags clearfix <% if(index>top && isSingle === false){ %> more-items-here <%}%>">
           <div class="tagbuttons-container" >
@@ -121,7 +128,7 @@
       return false;
     },
 
-    addCommentToCommentList: function (comment_item, front) {      
+    addCommentToCommentList: function (comment_item, front) {
       front = front === true ? front : false;
       var data = {
         pk: comment_item.pk,
@@ -212,9 +219,9 @@
     },
 
     afterset: function (item_container) {
-      if(this.market.isSingle()){        
+      if(this.market.isSingle()){
         var title = $('.marketitem_title',$('#singleItem')).text();
-        $('#marketitem_title_breadc').text(title);        
+        $('#marketitem_title_breadc').text(title);
       }
       return;
     },

@@ -175,6 +175,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   showItem: function (item_id) {
     var that = this;
     $('#singleItem').hide();
+    $('#backtoexchange').attr('href', window.ahr.app_urls.market+'#'+item_id);
     this.scroll = $(window).scrollTop();
     that.hideMarket();
     var dfrd = $.ajax({url: that.getItem + item_id});
