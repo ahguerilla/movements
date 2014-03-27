@@ -239,7 +239,7 @@
           $('#activate-'+item[2]+'-filters').text('Defaults');
         }else{
           var a_list = ''
-          $('.btn.tagbutton',$('.row.'+item[2]+'.btn-group-sm')).each(function(){
+          $('.btn.tagbutton.btn-success',$('.row.'+item[2]+'.btn-group-sm')).each(function(){
             a_list += $(this).text()+', ';
           });
           $('#activate-'+item[2]+'-filters').text(a_list);
