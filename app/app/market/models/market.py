@@ -57,6 +57,7 @@ class MarketItem(models.Model):
         adict['fields']['ratecount'] = self.ratecount
         adict['fields']['score'] = self.score
         adict['fields']['views'] = self.marketitemviewconter_set.count()
+        adict['fields']['hidden'] = True if self.marketitemhidden_set.count()> 0 else False
         adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username,80])
         return adict
 
@@ -68,4 +69,12 @@ class MarketItemViewConter(models.Model):
     class Meta:
         app_label="market"
 
+
+
+class MarketItemHidden(models.Model):
+    item = models.ForeignKey(MarketItem)
+    viewer = models.ForeignKey(user_models.User)
+
+    class Meta:
+        app_label="market"
 

@@ -58,6 +58,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     }
   },
 
+  truncateLongText:function(item_html, pk){
+   $itemhtml = $(item_html);
+   var text = $itemhtml.find('.item-body').text();
+    if(text.length>200){
+      $itemhtml.find('.item-body').html(text.slice(0,200)+' ...<div href="#item/'+pk+'"  class="routehref readmore_marketitem">Read more</div>');
+    }
+  },
+
   loadScrollElements: function (self, callback) {
     var that = self;
     if (!that.loadingScrollElemets && that.levelReached(30) && !that.allItemsLoaded) {
@@ -79,12 +87,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         _.each(data, function (item) {
           item.fields.pk = item.pk;
           var item_html = that.get(_.extend(item.fields,{'isSingle': false}));
-          $itemhtml = $(item_html);
-          var text = $itemhtml.find('.item-body').text();
-          if(text.length>200){
-            $itemhtml.find('.item-body').html(text.slice(0,200)+' ...<div href="#item/'+item.pk+'"  class="routehref readmore_marketitem">Read more</div>');
-
-          }
+          that.truncateLongText(item_html,item.pk);
           itemsToAppend.push(item_html[0].outerHTML);
           $('#marketitems').append(item_html[0].outerHTML);
         });
@@ -112,6 +115,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   },
 
   fancyref: function () {
+    this.msnry.reloadItems();
     this.msnry.layout();
   },
 
@@ -277,7 +281,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       window.location.hash = "";
     }
     $(".item-wrap[item_id='" + item_id + "']").remove();
-    this.refreshScrollElements();
+    //this.refreshScrollElements();
+    this.fancyref();
   },
 
   searchWithNoFilters: function () {

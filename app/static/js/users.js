@@ -49,6 +49,7 @@
             this.events = _.extend(this.events,{
                 'click .item_container': 'showItem'
             });
+            this.filter_widget.HideShowHidden();
             return this;
         },
     });

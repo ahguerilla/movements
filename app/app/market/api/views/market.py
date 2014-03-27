@@ -37,6 +37,7 @@ def return_item_list(obj, rtype):
 
 
 def create_query(request):
+    hiddens = market.models.MarketItemHidden.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
     query = Q()
     if request.GET.has_key('skills'):
         query = query | Q(skills__in=request.GET.getlist('skills'))
@@ -54,6 +55,8 @@ def create_query(request):
         objs = SearchQuerySet().models(market.models.MarketItem).filter(text=request.GET['search'])
         ids= [int(obj.pk) for obj in objs]
         query = query & Q(id__in=ids)
+    if request.GET.get('showHidden') == 'false':
+        query = query & ~Q(id__in=hiddens)
     query = query & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True)
     return query
 
@@ -222,4 +225,23 @@ def get_notseen_notifications(request, sfrom, to, rtype):
 def get_views_count(request, obj_id, rtype):
     views = market.models.MarketItemViewConter.objects.filter(item_id=obj_id).count()
     return  HttpResponse(json.dumps({'result': views}),
+                         mimetype="application"+rtype)
+
+
+@login_required
+def hide_item(request, obj_id, rtype):
+    new_hidden = market.models.MarketItemHidden.objects.get_or_create(viewer_id=request.user.id, item_id=obj_id)[0]
+    new_hidden.save()
+    return  HttpResponse(json.dumps({'result': True}),
+                         mimetype="application"+rtype)
+
+
+@login_required
+def unhide_item(request, obj_id, rtype):
+    result = False
+    hidden = market.models.MarketItemHidden.objects.get(viewer_id=request.user.id, item_id=obj_id)
+    if hidden:
+        hidden.delete()
+        result = True
+    return  HttpResponse(json.dumps({'result': result}),
                          mimetype="application"+rtype)

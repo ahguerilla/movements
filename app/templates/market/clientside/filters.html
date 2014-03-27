@@ -40,6 +40,10 @@
                     <img width="30" src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
                     <span id="filter-request-text">{% trans "Requests" %}</span>
                   </div>
+                  <div id="showhide-hidden-container" class="filter-action show-hidden">
+                    <input type="checkbox" id="filter-show-hidden"/>
+                    <label for="filter-show-hidden">{% trans "Show hidden" %}</label>
+                  </div>
                 </div>
               </div>
 
@@ -109,16 +113,23 @@
     filterheightOpen: 0,
     filterheightClosed: 0,
     cookieread: false,
+
     events:{
         'click #searchbtn': 'search',
         'click .tagbutton': 'tagsfilter',
         'click .item-type': 'itemTypesfilter',
         'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
         'click .btn.tag-button': 'itemTagCick',
+        'click #filter-show-hidden': 'showHidden',
         'submit #searchform': 'filterKeySearch',
         'click #filter-info-panel': 'filterButtonShowAndTog',
         'show.bs.collapse #market-filters': 'filterButtonShow',
         'hide.bs.collapse #market-filters': 'filterButtonHide'
+    },
+
+    showHidden:function(ev){
+      this.filters.showHidden = ev.currentTarget.checked;
+      this.callback();
     },
 
     search: function () {
@@ -380,6 +391,10 @@
       this.cookieread = true;
     },
 
+    HideShowHidden: function(){
+      $('#showhide-hidden-container').hide();
+    },
+
     initialize: function (data) {
       var that = this;
       $.cookie.json = true;
@@ -391,6 +406,7 @@
       this.callback = data.callback;
       this.disable_item_click = data.disable_item_click;
       this.filters.search = $('#q').val();
+      this.filters.showHidden = false;
       var tmpl = _.template($('#filters_template').html());
       var html = tmpl({});
       $('#' + this.container).html(html);

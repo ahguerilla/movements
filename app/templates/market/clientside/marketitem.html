@@ -11,6 +11,11 @@
           </a>
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span>
         </div>
+        <% if(hidden===true){ %>
+          <a href="<%- window.ahr.app_urls.setMarketItemunHide+pk %>" item_id="<%- pk %>" class="unhide-item toggle-hidden">Unhide</a>
+        <% }else{ %>
+          <a href="<%- window.ahr.app_urls.setMarketItemHide+pk %>" item_id="<%- pk %>" class="hide-item toggle-hidden">Hide</a>
+        <%}%>
         <div class="clearfix"></div>
         <div class="pudate pull-left">
           <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>
@@ -227,6 +232,22 @@
       return;
     },
 
+    toggleHidden:  function(ev){
+      ev.preventDefault();
+      var that = this;
+      var id = ev.currentTarget.getAttribute('item_id');
+      $.getJSON(ev.currentTarget.href,function(data){
+        if(data.result===true){
+          if($(ev.currentTarget).hasClass('hide-item')){
+            that.del_callback(id);
+          }else{
+            that.edit_callback(id);
+          }
+        }
+      });
+      return false;
+    },
+
     initialize: function (options) {
       this.item_type = 'item';
       this.market = options.market;
@@ -243,6 +264,7 @@
       window.ahr.expandTextarea('#newcomment');
 
       _.extend(this.events, {
+        'click .toggle-hidden': 'toggleHidden',
         'click .comment-btn': 'comment',
         'click .comment-delete': 'deleteComment',
         'click .delete': 'deleteItem',

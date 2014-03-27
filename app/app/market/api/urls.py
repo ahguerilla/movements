@@ -97,6 +97,14 @@ urlpatterns = patterns('',
           'app.market.api.views.market.get_views_count',
           name="marketitem_views_count"),
 
+    url(r'(?P<rtype>\S+)/item/set/hide/(?P<obj_id>\d+)$',
+              'app.market.api.views.market.hide_item',
+              name="marketitem_hide"),
+
+    url(r'(?P<rtype>\S+)/item/set/unhide/(?P<obj_id>\d+)$',
+                  'app.market.api.views.market.unhide_item',
+                  name="marketitem_unhide"),
+
     url(r'(?P<rtype>\S+)/comment/add/(?P<obj_id>\d+)$',
         'app.market.api.views.comments.add_comment',
         name="add_comment"),
