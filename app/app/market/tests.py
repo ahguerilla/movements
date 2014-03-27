@@ -6,7 +6,6 @@ import selenium.webdriver.support.ui as ui
 import time
 
 
-
 class MarketSeleniumTests(LiveServerTestCase):
     fixtures = ['test_data.json']
 
@@ -41,6 +40,4 @@ class MarketSeleniumTests(LiveServerTestCase):
         self.selenium.find_element_by_id("searchbtn").click()
         selenium = self.selenium
         self.wait.until(lambda selenium: selenium.find_element_by_class_name('market-place-item'))
-
-
 
