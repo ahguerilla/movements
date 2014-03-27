@@ -3,9 +3,6 @@ from django.conf import settings
 from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 import selenium.webdriver.support.ui as ui
-import pysolr
-import haystack
-from django.core.management import call_command
 import time
 
 
@@ -21,7 +18,6 @@ class MarketSeleniumTests(LiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls):
-        #call_command('clear_index', using=('testing',), interactive=False, verbosity=0)
         cls.selenium.quit()
         super(MarketSeleniumTests, cls).tearDownClass()
 
@@ -41,31 +37,10 @@ class MarketSeleniumTests(LiveServerTestCase):
         self.login()
         time.sleep(2)
         search = self.selenium.find_element_by_id("q")
-        search.send_keys('shomboool')
+        search.send_keys('best')
         self.selenium.find_element_by_id("searchbtn").click()
         selenium = self.selenium
         self.wait.until(lambda selenium: selenium.find_element_by_class_name('market-place-item'))
 
-
-#class MarketTest(SolrTestCase):
-    #fixtures = ['test_data.json']
-
-    #@classmethod
-    #def setUpClass(cls):
-        #haystack.connections.reload('testing')
-        #haystack.management.commands.rebuild_index()
-        #super(TestCase, cls).setUpClass()
-
-    #def test_details(self):
-        #response = self.client.get('/market/item/#2')
-        #self.assertEqual(response.status_code, 200)
-
-    #def test_index(self):
-        #response = self.client.get('/market/item/#43')
-        #self.assertEqual(response.status_code, 200)
-
-    #@classmethod
-    #def tearDownClass(cls):
-        #pass
 
 
