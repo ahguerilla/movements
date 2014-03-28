@@ -28,10 +28,6 @@
   margin-bottom: 8px
   box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.5);
   padding: 3px
-  .tag-button
-    &:hover
-      background-color #cdcdcd
-      //font-weight bold
   .dropdown-menu
     left: auto
     right: 0
@@ -108,6 +104,7 @@
       color #428bca!important
       cursor pointer
       margin-top 5px
+      width 6em
       font-weight bold
       &:hover
         color #427fed!important
@@ -128,8 +125,10 @@
     cursor pointer;
   .tagbuttons-container
     position relative
-    margin-top 5px
+    margin-top 15px
     margin-left 3px
+    .tag-button:hover
+      background-color #cdcdcd!important
   .item-body.multi-line-text
     font-weight normal
     white-space: pre-wrap
@@ -155,4 +154,5 @@
     background-color $issues-color
   .skills-tag-button
     background-color $skills-color
+
 

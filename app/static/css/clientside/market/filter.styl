@@ -32,19 +32,19 @@
     display inline-block
     background-color #585f65
     padding-right 10px
+    margin-top -1px
+    #filter-show-hidden
+      margin-left 10px
+      &.btn-success
+        background-color #596066!important
+        border-color: $filter-item-selected
 
 #market-filters
   margin-right 25px
 
 .exchange-filter
   color: #FFF
-  #filter-show-hidden-label
-    font-weight normal
-  #filter-show-hidden
-    margin-left 10px
   background-color: $filter-background
-  //min-height: 40px
-  //padding-bottom: 10px
   .filter-tag
     display inline-block
     margin 2px
@@ -61,7 +61,6 @@
     .market-filter-border
       border-right: 1px solid #FFF
       position: absolute
-      //margin-top: 10%
       height: 100%
       right: 0
     .first
@@ -71,7 +70,6 @@
   .filter-title
     text-align: center
     margin-bottom: 2px
-    //margin-top: 2px
   .filter-show
     margin-top:10px
     text-align: right
