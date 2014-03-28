@@ -386,9 +386,15 @@
       $('.tagbutton', $('.row')).removeClass('btn-success');
       $('.tagbutton', $('.row')).addClass('btn-success');
       this.filters.types = _.values(this.types);
-      this.filters.skills = _.keys(window.ahr.skills_lookup);
-      this.filters.issues = _.keys(window.ahr.issues_lookup);
-      this.filters.countries = _.keys(window.ahr.countries_lookup);
+      this.filters.skills = _.keys(window.ahr.skills_lookup).map(function(item) {
+        return parseInt(item, 10);
+      });
+      this.filters.issues = _.keys(window.ahr.issues_lookup).map(function(item) {
+        return parseInt(item, 10);
+      });
+      this.filters.countries = _.keys(window.ahr.countries_lookup).map(function(item) {
+        return parseInt(item, 10);
+      });
       $('.btn.filter-bulk-selector').removeClass('active');
       $('.btn.filter-bulk-selector.all').addClass('active');
     },
