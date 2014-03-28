@@ -2,20 +2,29 @@
 
 {% load compress %}
 <script type="text/template" id="filters_template">
-<div id="filter-info-panel">
+<div class="row grayback">
   <div class="container">
-      <span class="filt-inf-wrapper first">
-       Filters:
-      </span>
-      <span class="filt-inf-wrapper">
-        Issues: <span id="activate-issues-filters"></span>
-      </span>
-      <span class="filt-inf-wrapper">
-        Countries: <span id="activate-countries-filters"></span>
-      </span>
-      <span class="filt-inf-wrapper">
-        Skills: <span id="activate-skills-filters"></span>
-      </span>
+    <div id="info-panel-container">
+      <div>
+        <div id="filter-info-panel">
+          <span class="filt-inf-wrapper first">
+           Filters:
+          </span>
+          <span class="filt-inf-wrapper">
+            Issues: <span id="activate-issues-filters"></span>
+          </span>
+          <span class="filt-inf-wrapper">
+            Countries: <span id="activate-countries-filters"></span>
+          </span>
+          <span class="filt-inf-wrapper">
+            Skills: <span id="activate-skills-filters"></span>
+          </span>
+        </div>
+      </div>
+      <div id="showhide-hidden-container" class="pull-right">
+        <button class="btn btn-default btn-xs" id="filter-show-hidden">Show hidden</button>
+      </div>
+    </div>
   </div>
 </div>
 <div class="exchange-filter">
@@ -39,10 +48,6 @@
                   <div class="filter-action item-type" item_type="Request">
                     <img width="30" src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
                     <span id="filter-request-text">{% trans "Requests" %}</span>
-                  </div>
-                  <div id="showhide-hidden-container" class="filter-action show-hidden">
-                    <input type="checkbox" id="filter-show-hidden"/>
-                    <label id="filter-show-hidden-label" for="filter-show-hidden">{% trans "Show hidden" %}</label>
                   </div>
                 </div>
               </div>
@@ -217,7 +222,16 @@
     },
 
     setFilterOpenHeight: function () {
-      this.filterheightOpen = '305';
+      $('#market-filters').removeClass('collapse');
+      if($('#market-filters').css('height')=='0px'){
+        $('#market-filters').css('height','auto');
+        this.filterheightOpen = $("#fixed-actions").height();
+        $('#market-filters').css('height','0px');
+        $('#market-filters').addClass('collapse');
+        return;
+      }
+      this.filterheightOpen = $("#fixed-actions").height();
+      $('#market-filters').addClass('collapse');
     },
 
     filterKeySearch: function (ev) {
@@ -236,6 +250,7 @@
       var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
       this.setFilterType(tags, 'cus');
       this.callback();
+      this.updateFiltInfo();
     },
 
     updateFiltInfo:function(){
@@ -260,9 +275,9 @@
 
     toggleFiltInfo:function(h,speed){
       this.updateFiltInfo();
-      $('#filter-info-panel').animate({
-        height: h
-      }, speed);
+      //$('#filter-info-panel').animate({
+//        height: h
+      //}, speed);
     },
 
     filterButtonHide: function (ev) {
@@ -411,8 +426,9 @@
       var html = tmpl({});
       $('#' + this.container).html(html);
       var resizeFilters = function () {
+        that.setFilterOpenHeight();
         var newHight = $('#fixed-actions').height();
-        $('#action-wrapper').height(newHight + "px");
+        $('#action-wrapper').height( newHight+ "px");
       };
       // calculate height of the market-filters when opened and closed so we can set
       // the height of the market-filter correctly when we fix it to the top

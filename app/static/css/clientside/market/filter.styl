@@ -1,23 +1,35 @@
-#filter-info-panel
-  height 20px
+.grayback
+  background-color $filter-background
+
+#info-panel-container
+  height 30px
   overflow hidden
-  color white
-  font-size 85%
-  cursor pointer
-  font-style italic
-  color #d7d7d7
+  padding-top 5px
   background-color #585f65
-  .filt-inf-wrapper
-    white-space: nowrap;
-    padding-top 1px
-    overflow hidden
-    text-overflow: ellipsis;
-    margin-left 1%
-    max-width 30%
+  #filter-info-panel
+    display inline-block
+    color white
+    font-size 85%
+    cursor pointer
+    font-style italic
+    color #d7d7d7
+    max-width 90%
     float left
-    max-height 20px
-    &.first
-      margin-left 0
+    .filt-inf-wrapper
+      white-space: nowrap;
+      overflow hidden
+      text-overflow: ellipsis;
+      margin-left 1%
+      max-width 30%
+      float left
+      max-height 30px
+      &.first
+        margin-left 0
+  #showhide-hidden-container
+    padding-top 0px
+    display inline-block
+    font-size 50%important
+    background-color #585f65
 
 #market-filters
   margin-right 25px

@@ -23,16 +23,16 @@ cache = get_cache('default')
 items_cache = get_cache('items')
 user_items_cache = get_cache('user_items')
 
-def get_market_json(objs):
+def get_market_json(objs, request=None):
     alist = []
     for obj in objs:
-        alist.append(obj.getdict())
+        alist.append(obj.getdict(request))
     return json.dumps(alist)
 
 
-def return_item_list(obj, rtype):
+def return_item_list(obj, rtype, request=None):
     return HttpResponse(
-        get_market_json(obj),
+        get_market_json(obj, request),
         mimetype="application/"+rtype)
 
 
@@ -100,7 +100,7 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
         return retval
     query = create_query(request)
     obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
-    retval = return_item_list(obj, rtype)
+    retval = return_item_list(obj, rtype, request)
     items_cache.add(reqhash, retval)
     return retval
 
@@ -242,6 +242,25 @@ def unhide_item(request, obj_id, rtype):
     hidden = market.models.MarketItemHidden.objects.get(viewer_id=request.user.id, item_id=obj_id)
     if hidden:
         hidden.delete()
+        result = True
+    return  HttpResponse(json.dumps({'result': result}),
+                         mimetype="application"+rtype)
+
+
+@login_required
+def stick_item(request, obj_id, rtype):
+    new_sticky = market.models.MarketItemStick.objects.get_or_create(viewer_id=request.user.id, item_id=obj_id)[0]
+    new_sticky.save()
+    return  HttpResponse(json.dumps({'result': True}),
+                         mimetype="application"+rtype)
+
+
+@login_required
+def unstick_item(request, obj_id, rtype):
+    result = False
+    sticky = market.models.MarketItemStick.objects.get(viewer_id=request.user.id, item_id=obj_id)
+    if hidden:
+        sticky.delete()
         result = True
     return  HttpResponse(json.dumps({'result': result}),
                          mimetype="application"+rtype)

@@ -35,7 +35,7 @@ class MarketItem(models.Model):
     class Meta:
         app_label="market"
 
-    def getdict(self):
+    def getdict(self, request=None):
         adict = {'fields':{}}
         adict['pk'] = self.id
         adict['fields']['pk'] = self.id
@@ -57,7 +57,7 @@ class MarketItem(models.Model):
         adict['fields']['ratecount'] = self.ratecount
         adict['fields']['score'] = self.score
         adict['fields']['views'] = self.marketitemviewconter_set.count()
-        adict['fields']['hidden'] = True if self.marketitemhidden_set.count()> 0 else False
+        adict['fields']['hidden'] = True if request!=None and self.marketitemhidden_set.filter(viewer_id=request.user.id).count()> 0 else False
         adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username,80])
         return adict
 
@@ -72,6 +72,14 @@ class MarketItemViewConter(models.Model):
 
 
 class MarketItemHidden(models.Model):
+    item = models.ForeignKey(MarketItem)
+    viewer = models.ForeignKey(user_models.User)
+
+    class Meta:
+        app_label="market"
+
+
+class MarketItemStick(models.Model):
     item = models.ForeignKey(MarketItem)
     viewer = models.ForeignKey(user_models.User)
 
