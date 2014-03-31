@@ -38,6 +38,7 @@ def return_item_list(obj, rtype, request=None):
 
 def create_query(request):
     hiddens = market.models.MarketItemHidden.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
+    stickys = market.models.MarketItemStick.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
     query = Q()
     if request.GET.has_key('skills'):
         query = query | Q(skills__in=request.GET.getlist('skills'))
@@ -57,7 +58,7 @@ def create_query(request):
         query = query & Q(id__in=ids)
     if request.GET.get('showHidden') == 'false':
         query = query & ~Q(id__in=hiddens)
-    query = query & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True)
+    query = query & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True) & ~Q(id__in=stickys)
     return query
 
 
@@ -99,7 +100,19 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
     if retval:
         return retval
     query = create_query(request)
-    obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
+    stickys = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id).count()
+    if stickys > int(to):
+        sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user_id).defer('comments')[sfrom:to]
+        obj = [i.item for i in stickys_objs]
+    elif stickys < int(sfrom):
+        obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
+    elif stickys > int(sfrom) and stickys < int(to):
+        stickys_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
+        sticky_objs = [i.item for i in stickys_objs]
+        market_objs = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[stickys:to]
+        obj = list(sticky_objs)
+        b = list(market_objs)
+        obj.extend(b)
     retval = return_item_list(obj, rtype, request)
     items_cache.add(reqhash, retval)
     return retval
@@ -259,7 +272,7 @@ def stick_item(request, obj_id, rtype):
 def unstick_item(request, obj_id, rtype):
     result = False
     sticky = market.models.MarketItemStick.objects.get(viewer_id=request.user.id, item_id=obj_id)
-    if hidden:
+    if sticky:
         sticky.delete()
         result = True
     return  HttpResponse(json.dumps({'result': result}),

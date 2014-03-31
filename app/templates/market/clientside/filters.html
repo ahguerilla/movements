@@ -133,8 +133,12 @@
     },
 
     showHidden:function(ev){
-      this.filters.showHidden = ev.currentTarget.checked;
       $(ev.currentTarget).toggleClass("btn-success");
+      if($(ev.currentTarget).hasClass('btn-success')){
+        this.filters.showHidden = true;
+      }else{
+        this.filters.showHidden = false;
+      }
       this.callback();
     },
 

@@ -97,16 +97,24 @@ market_item_patterns = patterns('',
         name="market_set_rate"),
 
     url(r'(?P<rtype>\S+)/item/get/count/(?P<obj_id>\d+)$',
-          'app.market.api.views.market.get_views_count',
-          name="marketitem_views_count"),
+        'app.market.api.views.market.get_views_count',
+        name="marketitem_views_count"),
 
     url(r'(?P<rtype>\S+)/item/set/hide/(?P<obj_id>\d+)$',
-              'app.market.api.views.market.hide_item',
-              name="marketitem_hide"),
+        'app.market.api.views.market.hide_item',
+        name="marketitem_hide"),
 
     url(r'(?P<rtype>\S+)/item/set/unhide/(?P<obj_id>\d+)$',
-                  'app.market.api.views.market.unhide_item',
-                  name="marketitem_unhide"),
+        'app.market.api.views.market.unhide_item',
+        name="marketitem_unhide"),
+
+    url(r'(?P<rtype>\S+)/item/set/stick/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.stick_item',
+        name="stick_item"),
+
+    url(r'(?P<rtype>\S+)/item/set/unstick/(?P<obj_id>\d+)$',
+            'app.market.api.views.market.unstick_item',
+            name="unstick_item"),
 )
 
 
