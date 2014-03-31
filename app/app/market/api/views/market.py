@@ -93,6 +93,15 @@ def get_market_item(request, obj_id, rtype):
     cache.add('item-' + obj_id, retval)
     return retval
 
+def getStikies(request, hiddens, sfrom, to):
+    sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
+    if request.GET.get('showHidden') == 'false':
+        sticky_objs  = sticky_objs .filter(~Q(item_id__in=hiddens))[sfrom:to]
+    else:
+        sticky_objs = sticky_objs [sfrom:to]
+    obj = [i.item for i in sticky_objs]
+    return obj
+
 
 @login_required
 def get_marketItem_fromto(request, sfrom, to, rtype):
@@ -102,14 +111,13 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
         return retval
     query = create_query(request)
     stickys = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id).count()
+    hiddens = market.models.MarketItemHidden.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
     if stickys >= int(to):
-        sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)[sfrom:to]
-        obj = [i.item for i in sticky_objs]
+        obj = getStikies(request, hiddens, sfrom, to)
     elif stickys <= int(sfrom):
         obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[int(sfrom)-stickys:int(to)-stickys]
     elif stickys >= int(sfrom) and stickys <= int(to):
-        stickys_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)[sfrom:stickys]
-        sticky_objs = [i.item for i in stickys_objs]
+        sticky_objs  = getStikies(request, hiddens, sfrom, stickys)
         market_objs = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[0:(int(to)-stickys)]
         obj = list(sticky_objs)
         b = list(market_objs)
