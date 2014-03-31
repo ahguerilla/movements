@@ -23,6 +23,7 @@ cache = get_cache('default')
 items_cache = get_cache('items')
 user_items_cache = get_cache('user_items')
 
+
 def get_market_json(objs, request=None):
     alist = []
     for obj in objs:
@@ -153,7 +154,6 @@ def delete_market_item(request,obj_id,rtype):
 @check_perms_and_get(market.models.MarketItem)
 def user_get_marketitem(request, obj_id, rtype):
     return return_item_list([request.obj], rtype)
-
 
 
 @login_required
