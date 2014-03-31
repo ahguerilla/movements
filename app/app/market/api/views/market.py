@@ -58,7 +58,7 @@ def create_query(request):
         query = query & Q(id__in=ids)
     if request.GET.get('showHidden') == 'false':
         query = query & ~Q(id__in=hiddens)
-    query = query & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True) & ~Q(id__in=stickys)
+    query = query & ~Q(id__in=stickys) & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True)
     return query
 
 
@@ -102,14 +102,14 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
     query = create_query(request)
     stickys = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id).count()
     if stickys >= int(to):
-        sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user_id).defer('comments')[sfrom:to]
-        obj = [i.item for i in stickys_objs]
+        sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)[sfrom:to]
+        obj = [i.item for i in sticky_objs]
     elif stickys <= int(sfrom):
-        obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:to]
+        obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[int(sfrom)-stickys:int(to)-stickys]
     elif stickys >= int(sfrom) and stickys <= int(to):
-        stickys_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
+        stickys_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)[sfrom:stickys]
         sticky_objs = [i.item for i in stickys_objs]
-        market_objs = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[stickys:to]
+        market_objs = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:(to-stickys)]
         obj = list(sticky_objs)
         b = list(market_objs)
         obj.extend(b)
