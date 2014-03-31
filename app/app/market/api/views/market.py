@@ -110,7 +110,7 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
     elif stickys >= int(sfrom) and stickys <= int(to):
         stickys_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)[sfrom:stickys]
         sticky_objs = [i.item for i in stickys_objs]
-        market_objs = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[sfrom:(to-stickys)]
+        market_objs = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[0:(int(to)-stickys)]
         obj = list(sticky_objs)
         b = list(market_objs)
         obj.extend(b)
