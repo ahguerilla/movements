@@ -187,6 +187,7 @@
     },
 
     itemTypesfilter: function (ev) {
+      $(ev.currentTarget).toggleClass('btn-success');
       this.updateTypefilter(this, ev);
       debugger;
       this.callback();
