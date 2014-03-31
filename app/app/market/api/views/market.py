@@ -96,9 +96,12 @@ def get_market_item(request, obj_id, rtype):
 def getStikies(request, hiddens, sfrom, to):
     sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
     if request.GET.get('showHidden') == 'false':
-        sticky_objs  = sticky_objs .filter(~Q(item_id__in=hiddens))[sfrom:to]
-    else:
-        sticky_objs = sticky_objs [sfrom:to]
+        sticky_objs  = sticky_objs .filter(~Q(item_id__in=hiddens))
+
+    if request.GET.has_key('types'):
+        sticky_objs  = sticky_objs.filter(Q(item__item_type__in=request.GET.getlist('types')))
+
+    sticky_objs = sticky_objs[sfrom:to]
     obj = [i.item for i in sticky_objs]
     return obj
 
