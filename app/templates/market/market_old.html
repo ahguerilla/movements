@@ -11,7 +11,32 @@
   <!-- Filter Spacer -->
   <div class="action-banner-spacer">
   </div>
-  <div id="filter-container"></div>
+  <div id="action-wrapper">
+    <div id="fixed-actions">
+      <div class="exchange-actions" >
+        <div class="container">
+          <div class="row">
+            <div id="create_offer" class="market-action pull-left">
+              <img src="{{ STATIC_URL }}images/offer-button-30x30.png" alt="{%trans "Create an offer"%}" />
+              <span>{%trans "Create an offer"%}</span>
+            </div>
+            <div id="create_request" class="market-action pull-left">
+              <img src="{{ STATIC_URL }}images/request-button-30x30.png" alt="{%trans "Create a request"%}" />
+              <span>{%trans "Create a request"%}</span>
+            </div>
+            <div class="filter-toggle-button filter-show right-on-big">
+              <button type="button"class="btn btn-default btn-xs" id="togglefilter" data-toggle="collapse" data-target="#market-filters">
+                <span id="filterbuttontext">&nbsp; {% trans "Show Filters" %} &nbsp;</span>
+                <span class="caret"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="filter-banner-spacer-black"></div>
+      <div id="filter-container"></div>
+    </div>
+  </div>
   <div class="clearfix"></div>
 {% endblock %}
 
