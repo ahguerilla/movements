@@ -34,15 +34,12 @@
         </div>
       </div>
       <div class="filter-banner-spacer-black"></div>
-      <div class="row grayback">
+      <div class="grayback">
         <div class="container">
           <div id="info-panel-container">
             <div>
               <div id="filter-info-panel">
                 <span class="filt-inf-wrapper first">
-                 Filters:
-                </span>
-                <span class="filt-inf-wrapper">
                   Issues: <span id="activate-issues-filters"></span>
                 </span>
                 <span class="filt-inf-wrapper">
@@ -199,31 +196,6 @@
       var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
       this.setFilterType(tags, 'cus');
       this.callback();
-      this.updateFiltInfo();
-    },
-
-    updateFiltInfo:function(){
-      var a=[[$('.filter-bulk-selector.all-issues'),$('.filter-bulk-selector.def-issues'),'issues'],
-        [$('.filter-bulk-selector.all-skills'),$('.filter-bulk-selector.def-skills'),'skills'],
-        [$('.filter-bulk-selector.all-countries'),$('.filter-bulk-selector.def-countries'),'countries']]
-      _.each(a,function(item){
-        if(item[0].hasClass('active')){
-          $('#activate-'+item[2]+'-filters').text('All');
-        }
-        else if(item[1].hasClass('active')){
-          $('#activate-'+item[2]+'-filters').text('Defaults');
-        }else{
-          var a_list = '';
-          $('.btn.tagbutton.btn-success',$('.row.'+item[2]+'.btn-group-sm')).each(function(){
-            a_list += $(this).text()+', ';
-          });
-          $('#activate-'+item[2]+'-filters').text(a_list);
-        }
-      });
-    },
-
-    toggleFiltInfo:function(h,speed){
-      this.updateFiltInfo();
     },
 
     filterButtonShowAndTog: function(ev){
@@ -241,11 +213,9 @@
       }, speed, callback);
     },
 
-
     itemTagCick: function (ev) {
       var that = this;
       if (that.disable_item_click() === true) return;
-      that.markAll();
       var tagType = ev.currentTarget.getAttribute('tagtype');
       var len = ev.currentTarget.textContent.length;
       var tag = ev.currentTarget.textContent.slice(1, len - 1)
@@ -253,18 +223,17 @@
       var tagData = _.find(data, function (test) {
         return (test.value == tag);
       });
-      $('.btn.filter-bulk-selector.' + tagType).removeClass('active');
-      $('.tagbutton', $('.row.' + tagType)).removeClass('btn-success');
-      $('.tagbutton', $('.row.' + tagType)).each(function () {
-        if ($(this).text() == tag) {
-          $(this).addClass('btn-success');
-          return false;
-        }
+      $('#activate-'+tagType+'-filters').tagsManager("pushTag", tag);
+      that.setFilterOpenHeight();
+      debugger;
+      $('#fixed-actions').affix({
+        offset: {
+            top: 400
+          }
       });
       that.filters[tagType] = [tagData.pk];
       that.filters.types = _.values(that.types);
       that.callback();
-      this.updateFiltInfo();
     },
 
     initTemplates: function () {
@@ -303,7 +272,9 @@
       this.filterheightClosed = $('#fixed-actions').height();
       this.setFilterOpenHeight();
       $('#action-wrapper').height(this.filterheightClosed + "px");
-
+      $("#activate-issues-filters").tagsManager();
+      $("#activate-countries-filters").tagsManager();
+      $("#activate-skills-filters").tagsManager();
       $.subscribe("filters.resize", resizeFilters);
       $(window).resize(resizeFilters);
       $('#fixed-actions').affix({

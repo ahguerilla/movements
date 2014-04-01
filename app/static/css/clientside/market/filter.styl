@@ -1,7 +1,7 @@
 .grayback
   background-color $filter-background
-  height 30px
-  overflow hidden
+  float left
+  width 100%
 
 #filter-actions
   margin-right 20px
@@ -23,28 +23,24 @@
     margin-top -1px
 
 #info-panel-container
-  height 30px
-  overflow hidden
+  height auto
   padding-top 5px
   background-color #585f65
   #filter-info-panel
     display inline-block
     color white
     font-size 85%
-    cursor pointer
+    //cursor pointer
     font-style italic
     color #d7d7d7
-    max-width 78%
-    width 78%
-    max-height 20px
+    min-width 100%
+    width 100%
+    height auto
     overflow hidden
     float left
     .filt-inf-wrapper
-      white-space: nowrap;
-      overflow hidden
-      text-overflow: ellipsis;
-      margin-left 1%
-      max-width 30%
+      max-width 33%
+      width 33%
       float left
       &.first
         margin-left 0
