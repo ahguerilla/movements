@@ -68,9 +68,8 @@
 
     events:{
         'click #searchbtn': 'search',
-        'click .tagbutton': 'tagsfilter',
         'click .item-type': 'itemTypesfilter',
-        'click .btn.tag-button': 'itemTagCick',
+        'click .btn.tag-button': 'itemTagClick',
         'click #filter-show-hidden': 'showHidden',
         'submit #searchform': 'filterKeySearch',
     },
@@ -90,10 +89,6 @@
       this.callback();
     },
 
-    setFiltersDefault: function (tags) {
-      this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
-    },
-
     setFilterNone: function (tags) {
       if (typeof tags == 'string') {
         this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
@@ -107,52 +102,14 @@
       this.filters[tags] = tagsarr;
     },
 
-    setFiltersFromCookie: function (that, items) {
+    setFiltersFromCookie: function (items) {
       var cookie = $.cookie('tagfilters');
+      debugger;
       if (typeof cookie != 'undefined') {
         if (items != "types") {
           that.filters[items] = cookie[items];
         }
       }
-    },
-
-    initFilters: function (that, items, templ) {
-      _.each(window.ahr[items], function (item) {
-        var activeFlag = ' ';
-        if (_.contains(that.filters[items], item.pk)) {
-          activeFlag = 'btn-success';
-        }
-        $('.row.btn-group-sm.' + items).append(templ({
-          filtertag: item.value,
-          active: activeFlag
-        }));
-      });
-    },
-
-    updateTagsfilter: function (that, ev) {
-      var a = $(ev.currentTarget).closest('.row').attr("item_title");
-      ar = that.filters[a];
-      data = window.ahr[a];
-      var tagData = _.find(data, function (test) {
-        return (test.value == ev.currentTarget.textContent);
-      });
-      if (tagData) {
-        if (_.contains(ar, tagData.pk)) {
-          that.filters[a] = _.filter(ar, function (item) {
-            return item != tagData.pk;
-          });
-          $(ev.currentTarget).removeClass('btn-success');
-        } else {
-          that.filters[a].push(tagData.pk);
-          $(ev.currentTarget).addClass('btn-success');
-        }
-      }
-      $.cookie('tagfilters', that.filters);
-    },
-
-    setFilterType: function (tags, ftype) {
-      console.log('setFilterType');
-      return;
     },
 
     setFilterOpenHeight: function () {
@@ -191,20 +148,16 @@
       this.callback();
     },
 
-    tagsfilter: function (ev) {
-      this.updateTagsfilter(this, ev);
-      var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
-      this.setFilterType(tags, 'cus');
-      this.callback();
-    },
 
     filterButtonShowAndTog: function(ev){
       $('#togglefilter').trigger('click');
     },
 
     initBulkFilters: function (bulksArg) {
-      console.log('initBulkFilters');
-      return;
+      var that = this;
+      _.each(['countries','issues','skills'],function(item){
+        that.setFiltersFromCookie(item).bind(that);
+      });
     },
 
     setFilterWrapperMargin: function (height, speed, callback) {
@@ -213,7 +166,7 @@
       }, speed, callback);
     },
 
-    itemTagCick: function (ev) {
+    itemTagClick: function (ev) {
       var that = this;
       if (that.disable_item_click() === true) return;
       var tagType = ev.currentTarget.getAttribute('tagtype');
@@ -225,25 +178,22 @@
       });
       $('#activate-'+tagType+'-filters').tagsManager("pushTag", tag);
       that.setFilterOpenHeight();
-      debugger;
-      $('#fixed-actions').affix({
-        offset: {
-            top: 400
-          }
-      });
-      that.filters[tagType] = [tagData.pk];
-      that.filters.types = _.values(that.types);
+      if (!tagData.pk in that.filters[tagType]){
+        that.filters[tagType].push(tagData.pk);
+      }else{
+        var ind = that.filters[tagType].indexOf(tagData.pk);
+        that.filters[tagType].splice(ind,1);
+        //debugger;
+        //$('#activate-'+tagType+'-filters').tagsManager("removeTag", tag);
+      }
+      //that.filters.types = _.values(that.types);
+      $.cookie('tagfilters', that.filters);
       that.callback();
     },
 
     initTemplates: function () {
       this.typetag_tmp = _.template($('#type-tag').html());
       this.tagtemp = _.template($('#filter-tag').html());
-      for (var key in this.filters) {
-        if (["skills", "countries", "issues"].indexOf(key) > -1) {
-          this.initFilters(this, key, this.tagtemp);
-        }
-      }
       this.cookieread = true;
     },
 
