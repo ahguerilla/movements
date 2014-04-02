@@ -19,6 +19,7 @@ import constance
 import requests
 from django.conf import settings
 from django.utils.cache import get_cache_key, get_cache
+from django.db import connection
 cache = get_cache('default')
 items_cache = get_cache('items')
 user_items_cache = get_cache('user_items')
@@ -42,13 +43,16 @@ def create_query(request):
     stickys = market.models.MarketItemStick.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
     query = Q()
     if request.GET.has_key('skills'):
-        query = query | Q(skills__in=request.GET.getlist('skills'))
+        #query = query | Q(skills__in=request.GET.getlist('skills'))
+        pass
 
     if request.GET.has_key('countries'):
-        query = query | Q(countries__in=request.GET.getlist('countries'))
+        #query = query | Q(countries__in=request.GET.getlist('countries'))
+        pass
 
     if request.GET.has_key('issues'):
-        query = query | Q(issues__in=request.GET.getlist('issues'))
+        #query = query | Q(issues__in=request.GET.getlist('issues'))
+        pass
 
     if request.GET.has_key('types'):
         query = query & Q(item_type__in=request.GET.getlist('types'))
@@ -60,7 +64,7 @@ def create_query(request):
 
     if request.GET.get('showHidden') == 'false':
         query = query & ~Q(id__in=hiddens)
-    query = query & ~Q(id__in=stickys) & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True)
+    query = query & (~Q(id__in=stickys) & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True))
     return query
 
 
@@ -94,10 +98,11 @@ def get_market_item(request, obj_id, rtype):
     cache.add('item-' + obj_id, retval)
     return retval
 
+
 def getStikies(request, hiddens, sfrom, to):
     sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
     if request.GET.get('showHidden') == 'false':
-        sticky_objs  = sticky_objs .filter(~Q(item_id__in=hiddens))
+        sticky_objs  = sticky_objs.filter(~Q(item_id__in=hiddens))
 
     if request.GET.has_key('types'):
         sticky_objs  = sticky_objs.filter(Q(item__item_type__in=request.GET.getlist('types')))
@@ -107,6 +112,42 @@ def getStikies(request, hiddens, sfrom, to):
     return obj
 
 
+def get_order(request, query):
+    ext = {}
+    order = ['id']
+    if request.GET.has_key('issues'):
+        issues = tuple(map(int,request.GET.getlist('issues')))
+        ext["match_issues"] = """
+        SELECT Count(market_marketitem_issues.issues_id)
+        FROM market_marketitem_issues
+        JOIN "market_marketitem" ON "market_marketitem"."id" = "market_marketitem_issues"."marketitem_id"
+        WHERE "market_marketitem_issues"."issues_id" IN %s
+        """%(issues,)
+        order.append('-match_issues')
+
+    if request.GET.has_key('skills'):
+        skills = tuple(map(int,request.GET.getlist('skills')))
+        ext["match_skills"] = """
+        SELECT Count(market_marketitem_skills.skills_id)
+        FROM market_marketitem_skills
+        JOIN "market_marketitem" ON "market_marketitem"."id" = "market_marketitem_skills"."marketitem_id"
+        WHERE "market_marketitem_skills"."skills_id" IN %s
+        """%(skills,)
+        order.append('-match_skills')
+
+    if request.GET.has_key('countries'):
+        countries = tuple(map(int,request.GET.getlist('countries')))
+        ext["match_countries"] = """
+        SELECT Count(market_marketitem_countries.countries_id)
+        FROM market_marketitem_countries
+        JOIN "market_marketitem" ON "market_marketitem"."id" = "market_marketitem_countries"."marketitem_id"
+        WHERE "market_marketitem_countries"."countries_id" IN %s
+        """%(countries,)
+        order.append('-match_countries')
+
+    return query.extra(select=ext).order_by(*order)
+
+
 @login_required
 def get_marketItem_fromto(request, sfrom, to, rtype):
     reqhash = hash(request.path+str(request.GET))
@@ -114,15 +155,18 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
     if retval:
         return retval
     query = create_query(request)
+    q = market.models.MarketItem.objects.filter(query).filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True))
     stickys = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id).count()
     hiddens = market.models.MarketItemHidden.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
     if stickys >= int(to):
         obj = getStikies(request, hiddens, sfrom, to)
     elif stickys <= int(sfrom):
-        obj = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[int(sfrom)-stickys:int(to)-stickys]
+        query = get_order(request, q)
+        obj = query.distinct('id').defer('comments')[int(sfrom)-stickys:int(to)-stickys]
     elif stickys >= int(sfrom) and stickys <= int(to):
-        sticky_objs  = getStikies(request, hiddens, sfrom, stickys)
-        market_objs = market.models.MarketItem.objects.filter(Q(exp_date__gte=datetime.now())|Q(never_exp=True)).filter(query).distinct('id').order_by('-id').defer('comments')[0:(int(to)-stickys)]
+        sticky_objs = getStikies(request, hiddens, sfrom, stickys)
+        query = get_order(request, q)
+        market_objs = query.distinct('id').defer('comments')[0:(int(to)-stickys)]
         obj = list(sticky_objs)
         b = list(market_objs)
         obj.extend(b)

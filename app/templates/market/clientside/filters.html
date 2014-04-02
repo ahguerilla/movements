@@ -37,6 +37,7 @@
       <div class="grayback">
         <div class="container">
           <div id="info-panel-container">
+            <div id="current-filters">Filters: <span id="filters-exp"></span></div>
             <div>
               <div id="filter-info-panel">
                 <span class="filt-inf-wrapper first">
@@ -87,6 +88,14 @@
 
     HideShowHidden: function(){
       $('#showhide-hidden-container').hide();
+    },
+
+    toggleAny: function(){
+      if(this.filters.issues.length>0 || this.filters.skills.length>0 || this.filters.countries.length>0){
+        $('#filters-exp').text('');
+      }else{
+        $('#filters-exp').text('Any');
+      }
     },
 
     search: function () {
@@ -141,6 +150,7 @@
       _.each(['countries','issues','skills'],function(item){
         that.setFiltersFromCookie.bind(that)(item);
         that.showinitFilters(item);
+        that.toggleAny();
       });
     },
 
@@ -164,6 +174,7 @@
       }
       $.cookie('tagfilters', that.filters);
       that.callback();
+      that.toggleAny();
     },
 
     itemTagClick: function (ev) {
@@ -181,6 +192,7 @@
       if (that.filters[tagType].indexOf(tagData.pk) < 0){
         that.filters[tagType].push(tagData.pk);
         $.cookie('tagfilters', that.filters);
+        that.toggleAny();
         that.callback();
       }else{
         $('.tm-tag-remove',$('#info-panel-container .tm-tag:contains('+tag+')')).trigger('click');
