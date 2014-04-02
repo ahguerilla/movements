@@ -57,6 +57,7 @@ def create_query(request):
         objs = SearchQuerySet().models(market.models.MarketItem).filter(text=request.GET['search'])
         ids= [int(obj.pk) for obj in objs]
         query = query & Q(id__in=ids)
+
     if request.GET.get('showHidden') == 'false':
         query = query & ~Q(id__in=hiddens)
     query = query & ~Q(id__in=stickys) & Q(published=True) & Q(deleted=False) & Q(owner__is_active=True)
