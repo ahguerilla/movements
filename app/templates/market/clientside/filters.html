@@ -89,19 +89,6 @@
       this.callback();
     },
 
-    setFilterNone: function (tags) {
-      if (typeof tags == 'string') {
-        this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
-      } else {
-        this.filters = window.ahr.clone(this.default_filters);
-      }
-      var tagsarr = [];
-      _.each(window.ahr[tags], function (item) {
-        tagsarr.push(parseInt(item.pk, 10));
-      });
-      this.filters[tags] = tagsarr;
-    },
-
     setFiltersFromCookie: function (items) {
       var cookie = $.cookie('tagfilters');
       debugger;
