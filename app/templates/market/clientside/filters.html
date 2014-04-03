@@ -2,104 +2,53 @@
 
 {% load compress %}
 <script type="text/template" id="filters_template">
-<div class="row grayback">
-  <div class="container">
-    <div id="info-panel-container">
-      <div>
-        <div id="filter-info-panel">
-          <span class="filt-inf-wrapper first">
-           Filters:
-          </span>
-          <span class="filt-inf-wrapper">
-            Issues: <span id="activate-issues-filters"></span>
-          </span>
-          <span class="filt-inf-wrapper">
-            Countries: <span id="activate-countries-filters"></span>
-          </span>
-          <span class="filt-inf-wrapper">
-            Skills: <span id="activate-skills-filters"></span>
-          </span>
+<div id="action-wrapper">
+    <div id="fixed-actions">
+      <div class="exchange-actions" >
+        <div class="container">
+          <div class="row">
+            <div id="create_offer" class="market-action pull-left">
+              <img src="{{ STATIC_URL }}images/offer-button-30x30.png" alt="{%trans "Create an offer"%}" />
+              <span>{%trans "Create an offer"%}</span>
+            </div>
+            <div id="create_request" class="market-action pull-left">
+              <img src="{{ STATIC_URL }}images/request-button-30x30.png" alt="{%trans "Create a request"%}" />
+              <span>{%trans "Create a request"%}</span>
+            </div>
+            <div id="filter-actions" class="right-on-big">
+              <div class="filter-posts">
+                <button type="button"class="btn btn-success btn-default btn-xs item-type" item_type="Request">
+                  <span>&nbsp; {% trans "Show Requests" %} &nbsp;</span>
+                </button>
+              </div>
+              <div class="filter-posts">
+                <button type="button" class="btn btn-success btn-default btn-xs item-type" item_type="Offers">
+                  <span>&nbsp; {% trans "Show Offers" %} &nbsp;</span>
+                </button>
+              </div>
+              <div class="filter-posts" id="showhide-hidden-container">
+                <button class="btn btn-default btn-xs" id="filter-show-hidden">Show hidden</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="showhide-hidden-container" class="pull-right">
-        <button class="btn btn-default btn-xs" id="filter-show-hidden">Show hidden</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="exchange-filter">
-  <div class="row">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="row">
-            <div id="market-filters" class="collapse">
-              <div class="col-md-3">
-                <div class="market-filter-main">
-                  <div class="market-filter-border"></div>
-                  <div class="filter-action first item-type" item_type="all">
-                    <img width="30" src="{{ STATIC_URL }}images/all-button-50x50.png" alt="Filter by all" />
-                    <span>{% trans "All" %}</span>
-                  </div>
-                  <div class="filter-action item-type" item_type="Offers">
-                    <img width="30" src="{{ STATIC_URL }}images/offer-button-50x50.png" alt="Filter by offers" />
-                    <span id="filter-offer-text">{% trans "Offers" %}</span>
-                  </div>
-                  <div class="filter-action item-type" item_type="Request">
-                    <img width="30" src="{{ STATIC_URL }}images/request-button-50x50.png" alt="Filter by requests" />
-                    <span id="filter-request-text">{% trans "Requests" %}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="filterbuttons-cont col-md-9">
-                <div class="col-md-4 pull-left">
-                  <div class="filter-title">{% trans "Issues" %}</div>
-                  <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
-                    <label class="btn filter-bulk-selector btn-default btn-xs all all-issues issues">
-                      <input type="radio" name="all-issues"> {% trans "All" %}
-                    </label>
-                    <label class="btn filter-bulk-selector btn-default btn-xs cus cus-issues issues">
-                      <input type="radio" name="cus-issues"> {% trans "Custom" %}
-                    </label>
-                    <label class="btn filter-bulk-selector btn-default btn-xs def def-issues issues">
-                      <input type="radio" name="def-issues"> {% trans "Default" %}
-                    </label>
-                  </div>
-                  <div class="row issues btn-group-sm pull-left" item_title="issues"></div>
-                </div>
-
-                <div class="col-md-4 pull-left">
-                  <div class="filter-title">{% trans "Countries" %}</div>
-                  <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
-                    <label class="btn filter-bulk-selector btn-default btn-xs all all-countries countries">
-                      <input type="radio" name="all-countries"> {% trans "All" %}
-                    </label>
-                    <label class="btn filter-bulk-selector btn-default btn-xs  cus cus-countries countries">
-                      <input type="radio" name="cus-countries"> {% trans "Custom" %}
-                    </label>
-                    <label class="btn filter-bulk-selector btn-default btn-xs def def-countries countries">
-                      <input type="radio" name="def-countries"> {% trans "Default" %}
-                    </label>
-                  </div>
-                  <div class="row countries btn-group-sm pull-left" item_title="countries"></div>
-                </div>
-
-                <div class="col-md-4 pull-left">
-                  <div class="filter-title">{% trans "Skills" %}</div>
-                  <div class="btn-group btn-group-justified filtergroup" data-toggle="buttons">
-                    <label class="btn filter-bulk-selector btn-default btn-xs all all-skills skills">
-                      <input type="radio" name="all-skills"> {% trans "All" %}
-                    </label>
-                    <label class="btn filter-bulk-selector btn-default btn-xs cus cus-skills skills">
-                      <input type="radio" name="cus-skills"> {% trans "Custom" %}
-                    </label>
-                    <label class="btn filter-bulk-selector btn-default btn-xs def def-skills skills">
-                      <input type="radio" name="def-skills"> {% trans "Default" %}
-                    </label>
-                  </div>
-                  <div class="row skills btn-group-sm pull-left" item_title="skills"></div>
-                </div>
+      <div class="filter-banner-spacer-black"></div>
+      <div class="grayback">
+        <div class="container">
+          <div id="info-panel-container">
+            <div id="current-filters">Filters: <span id="filters-exp"></span></div>
+            <div>
+              <div id="filter-info-panel">
+                <span class="filt-inf-wrapper first">
+                  <span id="activate-issues-filters"></span>
+                </span>
+                <span class="filt-inf-wrapper">
+                  <span id="activate-countries-filters"></span>
+                </span>
+                <span class="filt-inf-wrapper">
+                  <span id="activate-skills-filters"></span>
+                </span>
               </div>
             </div>
           </div>
@@ -107,7 +56,6 @@
       </div>
     </div>
   </div>
-</div>
 </script>
 
 
@@ -121,18 +69,14 @@
 
     events:{
         'click #searchbtn': 'search',
-        'click .tagbutton': 'tagsfilter',
         'click .item-type': 'itemTypesfilter',
-        'click .filter-bulk-selector': 'bulkCustomizeFiltersEV',
-        'click .btn.tag-button': 'itemTagCick',
+        'click .btn.tag-button': 'itemTagClick',
         'click #filter-show-hidden': 'showHidden',
         'submit #searchform': 'filterKeySearch',
-        'click #filter-info-panel': 'filterButtonShowAndTog',
-        'show.bs.collapse #market-filters': 'filterButtonShow',
-        'hide.bs.collapse #market-filters': 'filterButtonHide'
+        'tm:splicing' : 'removeFilterTag',
     },
 
-    showHidden:function(ev){
+    showHidden: function(ev){
       $(ev.currentTarget).toggleClass("btn-success");
       if($(ev.currentTarget).hasClass('btn-success')){
         this.filters.showHidden = true;
@@ -142,88 +86,118 @@
       this.callback();
     },
 
+    HideShowHidden: function(){
+      $('#showhide-hidden-container').hide();
+    },
+
+    toggleAny: function(){
+      if(this.filters.issues.length>0 || this.filters.skills.length>0 || this.filters.countries.length>0){
+        $('#filters-exp').text('');
+      }else{
+        $('#filters-exp').text('Any');
+      }
+    },
+
     search: function () {
       this.filters.search = $('#q').val();
       this.callback();
     },
 
-    setFiltersDefault: function (tags) {
-      this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
-    },
-
-    setFilterNone: function (tags) {
-      if (typeof tags == 'string') {
-        this.filters[tags] = window.ahr.clone(this.default_filters[tags]);
-      } else {
-        this.filters = window.ahr.clone(this.default_filters);
-      }
-      var tagsarr = [];
-      _.each(window.ahr[tags], function (item) {
-        tagsarr.push(parseInt(item.pk, 10));
-      });
-      this.filters[tags] = tagsarr;
-    },
-
-    setFilterKeys: function (taghead) {
-      var that = this;
-      $('.row.' + taghead).empty();
-      this.initFilters(that, taghead, that.tagtemp);
-    },
-
-    setFiltersFromCookie: function (that, items) {
+    setFiltersFromCookie: function (items) {
       var cookie = $.cookie('tagfilters');
       if (typeof cookie != 'undefined') {
         if (items != "types") {
-          that.filters[items] = cookie[items];
+          this.filters[items] = cookie[items];
         }
       }
     },
 
-    initFilters: function (that, items, templ) {
-      _.each(window.ahr[items], function (item) {
-        var activeFlag = ' ';
-        if (_.contains(that.filters[items], item.pk)) {
-          activeFlag = 'btn-success';
+    filterKeySearch: function (ev) {
+      ev.preventDefault();
+      this.search();
+      return false;
+    },
+
+    updateTypefilter: function () {
+      var that = this;
+      that.filters.types.length = 0;
+      $('.item-type').each(function(ind, item){
+        if($(item).hasClass('btn-success')){
+          var item_type = item.getAttribute('item_type');
+          that.filters.types.push(that.types[item_type]);
         }
-        $('.row.btn-group-sm.' + items).append(templ({
-          filtertag: item.value,
-          active: activeFlag
-        }));
       });
     },
 
-    updateTagsfilter: function (that, ev) {
-      var a = $(ev.currentTarget).closest('.row').attr("item_title");
-      ar = that.filters[a];
-      data = window.ahr[a];
-      var tagData = _.find(data, function (test) {
-        return (test.value == ev.currentTarget.textContent);
+    itemTypesfilter: function (ev) {
+      $(ev.currentTarget).toggleClass('btn-success');
+      this.updateTypefilter();
+      this.callback();
+    },
+
+    filterButtonShowAndTog: function(ev){
+      $('#togglefilter').trigger('click');
+    },
+
+    showinitFilters: function(item){
+      _.each(this.filters[item],function(id, index){
+        $("#activate-"+item+"-filters").tagsManager("pushTag", window.ahr[item+"_lookup"][id]);
       });
-      if (tagData) {
-        if (_.contains(ar, tagData.pk)) {
-          that.filters[a] = _.filter(ar, function (item) {
-            return item != tagData.pk;
-          });
-          $(ev.currentTarget).removeClass('btn-success');
-        } else {
-          that.filters[a].push(tagData.pk);
-          $(ev.currentTarget).addClass('btn-success');
-        }
+    },
+
+    initBulkFilters: function (bulksArg) {
+      var that = this;
+      _.each(['countries','issues','skills'],function(item){
+        that.setFiltersFromCookie.bind(that)(item);
+        that.showinitFilters(item);
+        that.toggleAny();
+      });
+    },
+
+    removeFilterTag:function(ev, tag){
+      var that = this;
+      var cind = _.values(window.ahr.countries_lookup).indexOf(tag),
+      iind = _.values(window.ahr.issues_lookup).indexOf(tag),
+      sind = _.values(window.ahr.skills_lookup).indexOf(tag);
+      if(cind > -1){
+        var id = window.ahr.countries_pk[tag];
+        var ind = that.filters.countries.indexOf(id);
+        that.filters.countries.splice(ind,1);
+      }else if(iind > -1){
+        var id = window.ahr.issues_pk[tag];
+        var ind = that.filters.issues.indexOf(id);
+        that.filters.issues.splice(ind,1);
+      }else if(sind > -1){
+        var id = window.ahr.skills_pk[tag];
+        var ind = that.filters.skills.indexOf(id);
+        that.filters.skills.splice(ind,1);
       }
       $.cookie('tagfilters', that.filters);
+      that.callback();
+      that.toggleAny();
     },
 
-    updateTypefilter: function (that, ev) {
-      that.filters.types.length = 0;
-      var item_type = ev.currentTarget.getAttribute('item_type');
-      if (that.types[item_type]) {
-        that.filters.types.push(that.types[item_type]);
+    itemTagClick: function (ev) {
+      var that = this;
+      if (that.disable_item_click() === true) return;
+      var tagType = ev.currentTarget.getAttribute('tagtype');
+      var len = ev.currentTarget.textContent.length;
+      var tag = ev.currentTarget.textContent.slice(1, len - 1)
+      data = window.ahr[tagType];
+      var tagData = _.find(data, function (test) {
+        return (test.value == tag);
+      });
+      $('#activate-'+tagType+'-filters').tagsManager("pushTag", tag);
+      that.setFilterOpenHeight();
+      if (that.filters[tagType].indexOf(tagData.pk) < 0){
+        that.filters[tagType].push(tagData.pk);
+        $.cookie('tagfilters', that.filters);
+        that.toggleAny();
+        that.callback();
+      }else{
+        $('.tm-tag-remove',$('#info-panel-container .tm-tag:contains('+tag+')')).trigger('click');
       }
-    },
 
-    setFilterType: function (tags, ftype) {
-      $('input[name$="-' + tags + '"]').parent().removeClass('active');
-      $('input[name="' + ftype + '-' + tags + '"]').parent().addClass('active');
     },
 
     setFilterOpenHeight: function () {
@@ -239,197 +213,33 @@
       }
     },
 
-    filterKeySearch: function (ev) {
-      ev.preventDefault();
-      this.search();
-      return false;
-    },
-
-    itemTypesfilter: function (ev) {
-      this.updateTypefilter(this, ev);
-      this.callback();
-    },
-
-    tagsfilter: function (ev) {
-      this.updateTagsfilter(this, ev);
-      var tags = $(ev.currentTarget).closest('.btn-group-sm').attr('item_title');
-      this.setFilterType(tags, 'cus');
-      this.callback();
-      this.updateFiltInfo();
-    },
-
-    updateFiltInfo:function(){
-      var a=[[$('.filter-bulk-selector.all-issues'),$('.filter-bulk-selector.def-issues'),'issues'],
-        [$('.filter-bulk-selector.all-skills'),$('.filter-bulk-selector.def-skills'),'skills'],
-        [$('.filter-bulk-selector.all-countries'),$('.filter-bulk-selector.def-countries'),'countries']]
-      _.each(a,function(item){
-        if(item[0].hasClass('active')){
-          $('#activate-'+item[2]+'-filters').text('All');
-        }
-        else if(item[1].hasClass('active')){
-          $('#activate-'+item[2]+'-filters').text('Defaults');
-        }else{
-          var a_list = '';
-          $('.btn.tagbutton.btn-success',$('.row.'+item[2]+'.btn-group-sm')).each(function(){
-            a_list += $(this).text()+', ';
-          });
-          $('#activate-'+item[2]+'-filters').text(a_list);
-        }
-      });
-    },
-
-    toggleFiltInfo:function(h,speed){
-      this.updateFiltInfo();
-    },
-
-    filterButtonHide: function (ev) {
-      var that = this, speed=0;
-      $('#filterbuttontext').html('&nbsp; {% trans "Show Filters" %} &nbsp;');
-      $('#togglefilter').removeClass('dropup');
-      this.toggleFiltInfo(20, speed);
-      this.setFilterWrapperMargin(this.filterheightClosed, speed, function(){
-        $.noop();
-      });
-    },
-
-    filterButtonShow: function (ev) {
-      var that = this, speed=300;
-      $('#filterbuttontext').html('&nbsp; {% trans "Hide Filters" %}&nbsp;');
-      $('#togglefilter').addClass('dropup');
-      this.toggleFiltInfo(0, speed);
-      this.setFilterWrapperMargin(this.filterheightOpen, speed, function(){
-        $.noop();
-      });
-    },
-
-    filterButtonShowAndTog: function(ev){
-      $('#togglefilter').trigger('click');
-    },
-
-    bulkCustomizeFilters: function (tag, action) {
-      if (action == 'all') {
-        this.setFilterNone(tag);
-      }
-      if (action == 'def') {
-        this.setFiltersDefault(tag);
-      }
-      if (action == 'cus') {
-        this.setFiltersFromCookie(this, tag);
-      }
-      var tmp = $.cookie('bulkfilters');
-      tmp[tag] = action;
-      $.cookie('bulkfilters', tmp);
-      this.setFilterKeys(tag);
-      this.callback();
-    },
-
-    initBulkFilters: function (bulksArg) {
-      $('.btn.filter-bulk-selector').removeClass('active');
-      var bulks;
-      if (typeof bulksArg === 'undefined') {
-        bulks = $.cookie('bulkfilters');
-      } else {
-        bulks = bulksArg;
-      }
-      if (typeof bulks === "undefined") {
-        bulks = {
-          countries: "all",
-          issues: "all",
-          skills: "all"
-        };
-        $.cookie('bulkfilters', bulks);
-        $('.filter-bulk-selector.all').addClass('active');
-      }
-      var that = this;
-      _.each(bulks, function (selection, tag) {
-        that.bulkCustomizeFilters(tag, selection);
-        $('.filter-bulk-selector.' + selection + '-' + tag).addClass('active');
-      });
-      that.updateFiltInfo();
-    },
-
     setFilterWrapperMargin: function (height, speed, callback) {
       $('#action-wrapper').animate({
         height: height
       }, speed, callback);
     },
 
-    bulkCustomizeFiltersEV: function (ev) {
-      var val = $('input', $(ev.currentTarget)).attr('name').split('-');
-      action = val[0];
-      tag = val[1];
-      this.bulkCustomizeFilters(tag, action);
-    },
-
-    itemTagCick: function (ev) {
-      var that = this;
-      if (that.disable_item_click() === true) return;
-      that.markAll();
-      var tagType = ev.currentTarget.getAttribute('tagtype');
-      var len = ev.currentTarget.textContent.length;
-      var tag = ev.currentTarget.textContent.slice(1, len - 1)
-      data = window.ahr[tagType];
-      var tagData = _.find(data, function (test) {
-        return (test.value == tag);
-      });
-      $('.btn.filter-bulk-selector.' + tagType).removeClass('active');
-      $('.tagbutton', $('.row.' + tagType)).removeClass('btn-success');
-      $('.tagbutton', $('.row.' + tagType)).each(function () {
-        if ($(this).text() == tag) {
-          $(this).addClass('btn-success');
-          return false;
-        }
-      });
-      that.filters[tagType] = [tagData.pk];
-      that.filters.types = _.values(that.types);
-      that.callback();
-      this.updateFiltInfo();
-    },
-
-    markAll: function () {
-      $('.tagbutton', $('.row')).removeClass('btn-success');
-      $('.tagbutton', $('.row')).addClass('btn-success');
-      this.filters.types = _.values(this.types);
-      this.filters.skills = _.keys(window.ahr.skills_lookup).map(function(item) {
-        return parseInt(item, 10);
-      });
-      this.filters.issues = _.keys(window.ahr.issues_lookup).map(function(item) {
-        return parseInt(item, 10);
-      });
-      this.filters.countries = _.keys(window.ahr.countries_lookup).map(function(item) {
-        return parseInt(item, 10);
-      });
-      $('.btn.filter-bulk-selector').removeClass('active');
-      $('.btn.filter-bulk-selector.all').addClass('active');
-    },
-
     initTemplates: function () {
       this.typetag_tmp = _.template($('#type-tag').html());
       this.tagtemp = _.template($('#filter-tag').html());
-      for (var key in this.filters) {
-        if (["skills", "countries", "issues"].indexOf(key) > -1) {
-          this.initFilters(this, key, this.tagtemp);
-        }
-      }
       this.cookieread = true;
     },
 
-    HideShowHidden: function(){
-      $('#showhide-hidden-container').hide();
+    initAll:function(){
+      this.all={};
+      this.all.skills = _.keys(window.ahr.skills_lookup).map(function(item) {
+        return parseInt(item, 10);
+      });
+      this.all.issues = _.keys(window.ahr.issues_lookup).map(function(item) {
+        return parseInt(item, 10);
+      });
+      this.all.countries = _.keys(window.ahr.countries_lookup).map(function(item) {
+        return parseInt(item, 10);
+      });
     },
 
-    initialize: function (data) {
+    initHeights: function(){
       var that = this;
-      $.cookie.json = true;
-      this.container = data.container;
-      this.filters = data.filters;
-      this.first_types = data.filters.types;
-      this.initTemplates(data.filters);
-      this.default_filters = data.default_filters;
-      this.callback = data.callback;
-      this.disable_item_click = data.disable_item_click;
-      this.filters.search = $('#q').val();
-      this.filters.showHidden = false;
       var tmpl = _.template($('#filters_template').html());
       var html = tmpl({});
       $('#' + this.container).html(html);
@@ -443,7 +253,6 @@
       this.filterheightClosed = $('#fixed-actions').height();
       this.setFilterOpenHeight();
       $('#action-wrapper').height(this.filterheightClosed + "px");
-
       $.subscribe("filters.resize", resizeFilters);
       $(window).resize(resizeFilters);
       $('#fixed-actions').affix({
@@ -451,6 +260,28 @@
           top: 155
         }
       });
+    },
+
+    initialize: function (data) {
+      var that = this;
+      $.cookie.json = true;
+      this.initAll();
+      this.container = data.container;
+      this.filters = data.filters;
+      this.filters.countries = [];
+      this.filters.issues = [];
+      this.filters.skills = [];
+      this.first_types = data.filters.types;
+      this.initTemplates(data.filters);
+      this.default_filters = data.default_filters;
+      this.callback = data.callback;
+      this.disable_item_click = data.disable_item_click;
+      this.filters.search = $('#q').val();
+      this.filters.showHidden = false;
+      this.initHeights();
+      $("#activate-issues-filters").tagsManager();
+      $("#activate-countries-filters").tagsManager();
+      $("#activate-skills-filters").tagsManager();
     }
   });
 
