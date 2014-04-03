@@ -90,6 +90,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
           that.truncateLongText(item_html,item.pk);
           itemsToAppend.push(item_html[0].outerHTML);
           $('#marketitems').append(item_html[0].outerHTML);
+          $('.tm-tag').each(function(){
+             var txt = $('span',$(this)).text();
+             $('.tag-button:contains('+txt+')').css('background-color','#cccccc');
+          });
         });
 
         if (itemsToAppend.length > 0) {
