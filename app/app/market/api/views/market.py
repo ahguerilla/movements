@@ -42,21 +42,6 @@ def create_query(request):
     hiddens = market.models.MarketItemHidden.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
     stickys = market.models.MarketItemStick.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
     query = Q()
-    if request.GET.has_key('skills'):
-        #query = query | Q(skills__in=request.GET.getlist('skills'))
-        pass
-
-    if request.GET.has_key('countries'):
-        #query = query | Q(countries__in=request.GET.getlist('countries'))
-        pass
-
-    if request.GET.has_key('issues'):
-        #query = query | Q(issues__in=request.GET.getlist('issues'))
-        pass
-
-    if request.GET.has_key('types'):
-        query = query & Q(item_type__in=request.GET.getlist('types'))
-
     if request.GET.has_key('search') and request.GET['search']!='':
         objs = SearchQuerySet().models(market.models.MarketItem).filter(text=request.GET['search'])
         ids= [int(obj.pk) for obj in objs]
@@ -114,15 +99,15 @@ def getStikies(request, hiddens, sfrom, to):
 
 def get_order(request, query):
     ext = {}
-    order = ['id']
+    order = ['-id']
     if request.GET.has_key('issues'):
         issues = tuple(map(int,request.GET.getlist('issues')))
         ext["match_issues"] = """
         SELECT Count(market_marketitem_issues.issues_id)
         FROM market_marketitem_issues
         JOIN "market_marketitem" ON "market_marketitem"."id" = "market_marketitem_issues"."marketitem_id"
-        WHERE "market_marketitem_issues"."issues_id" IN %s
-        """%(issues,)
+        WHERE "market_marketitem_issues"."issues_id" IN """ + ("%s"%(issues,)  if len(issues)>1 else "(%s)"%(issues))
+
         order.append('-match_issues')
 
     if request.GET.has_key('skills'):
@@ -131,18 +116,16 @@ def get_order(request, query):
         SELECT Count(market_marketitem_skills.skills_id)
         FROM market_marketitem_skills
         JOIN "market_marketitem" ON "market_marketitem"."id" = "market_marketitem_skills"."marketitem_id"
-        WHERE "market_marketitem_skills"."skills_id" IN %s
-        """%(skills,)
+        WHERE "market_marketitem_skills"."skills_id" IN """+ ("%s"%(skills,)  if len(skills)>1 else "(%s)"%(skills))
         order.append('-match_skills')
 
     if request.GET.has_key('countries'):
         countries = tuple(map(int,request.GET.getlist('countries')))
         ext["match_countries"] = """
-        SELECT Count(market_marketitem_countries.countries_id)
+        SELECT Count(market_marketitem_countries.marketitem_id)
         FROM market_marketitem_countries
         JOIN "market_marketitem" ON "market_marketitem"."id" = "market_marketitem_countries"."marketitem_id"
-        WHERE "market_marketitem_countries"."countries_id" IN %s
-        """%(countries,)
+        WHERE "market_marketitem_countries"."countries_id" IN """+ ("%s"%(countries,) if len(countries)>1 else "(%s)"%(countries))
         order.append('-match_countries')
 
     return query.extra(select=ext).order_by(*order)
