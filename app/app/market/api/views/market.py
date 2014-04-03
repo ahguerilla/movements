@@ -42,6 +42,18 @@ def create_query(request):
     hiddens = market.models.MarketItemHidden.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
     stickys = market.models.MarketItemStick.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
     query = Q()
+    if request.GET.has_key('skills'):
+        query = query & Q(skills__in=request.GET.getlist('skills'))
+
+    if request.GET.has_key('countries'):
+        query = query & Q(countries__in=request.GET.getlist('countries'))
+
+    if request.GET.has_key('issues'):
+        query = query & Q(issues__in=request.GET.getlist('issues'))
+
+    if request.GET.has_key('types'):
+        query = query & Q(item_type__in=request.GET.getlist('types'))
+
     if request.GET.has_key('search') and request.GET['search']!='':
         objs = SearchQuerySet().models(market.models.MarketItem).filter(text=request.GET['search'])
         ids= [int(obj.pk) for obj in objs]
@@ -141,11 +153,13 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
     if stickys >= int(to):
         obj = getStikies(request, hiddens, sfrom, to)
     elif stickys <= int(sfrom):
-        query = get_order(request, q)
+        #query = get_order(request, q)
+        query = q
         obj = query.distinct('id').defer('comments')[int(sfrom)-stickys:int(to)-stickys]
     elif stickys >= int(sfrom) and stickys <= int(to):
         sticky_objs = getStikies(request, hiddens, sfrom, stickys)
-        query = get_order(request, q)
+        #query = get_order(request, q)
+        query = q
         market_objs = query.distinct('id').defer('comments')[0:(int(to)-stickys)]
         obj = list(sticky_objs)
         b = list(market_objs)
