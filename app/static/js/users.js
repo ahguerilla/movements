@@ -44,6 +44,7 @@
 
             $('#filter-offer-text').text(gettext('Exchangivists Offering'));
             $('#filter-request-text').text(gettext('Exchangivists Requesting'));
+            $('#info-panel-container').remove();
             $('#singleItem').show();
 
             this.events = _.extend(this.events,{
