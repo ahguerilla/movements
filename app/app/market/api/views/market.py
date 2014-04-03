@@ -87,10 +87,10 @@ def get_market_item(request, obj_id, rtype):
 def getStikies(request, hiddens, sfrom, to):
     sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
     if request.GET.get('showHidden') == 'false':
-        sticky_objs  = sticky_objs .filter(~Q(item_id__in=hiddens))[sfrom:to]
-   	if request.GET.has_key('types'):
+        sticky_objs  = sticky_objs .filter(~Q(item_id__in=hiddens))
+    if request.GET.has_key('types'):
         sticky_objs  = sticky_objs.filter(Q(item__item_type__in=request.GET.getlist('types')))
-	sticky_objs = sticky_objs[sfrom:to]
+    sticky_objs = sticky_objs[sfrom:to]
     obj = [i.item for i in sticky_objs]
     return obj
 
@@ -258,7 +258,7 @@ def get_notifications_fromto(request, sfrom, to, rtype):
         notification_ids.append(notification.id)
     market.models.Notification.objects.filter(id__in=notification_ids).update(seen=True)
     return HttpResponse(json.dumps({'notifications':alist}),
-                          mimetype="application"+rtype)
+                        mimetype="application"+rtype)
 
 
 @login_required
@@ -266,7 +266,7 @@ def get_notseen_notifications(request, sfrom, to, rtype):
     notifications = market.models.Notification.objects.filter(user=request.user.id,item__deleted=False).filter(seen=False).only('seen')
     if len(notifications)>0:
         return HttpResponse(json.dumps({'result':True}),
-                             mimetype="application"+rtype)
+                            mimetype="application"+rtype)
     return  HttpResponse(json.dumps({'result':False}),
                          mimetype="application"+rtype)
 
