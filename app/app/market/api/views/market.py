@@ -105,8 +105,7 @@ def get_order(request, query):
         FROM market_marketitem_issues
         JOIN "market_marketitem" ON "market_marketitem"."id" = "market_marketitem_issues"."marketitem_id"
         WHERE "market_marketitem_issues"."issues_id" IN """ + ("%s"%(issues,)  if len(issues)>1 else "(%s)"%(issues))
-
-        order.append('-match_issues')
+        #order.append('-match_issues')
 
     if request.GET.has_key('skills'):
         skills = tuple(map(int,request.GET.getlist('skills')))
@@ -115,7 +114,7 @@ def get_order(request, query):
         FROM market_marketitem_skills
         JOIN "market_marketitem" ON "market_marketitem"."id" = "market_marketitem_skills"."marketitem_id"
         WHERE "market_marketitem_skills"."skills_id" IN """+ ("%s"%(skills,)  if len(skills)>1 else "(%s)"%(skills))
-        order.append('-match_skills')
+        #order.append('-match_skills')
 
     if request.GET.has_key('countries'):
         countries = tuple(map(int,request.GET.getlist('countries')))
@@ -124,7 +123,7 @@ def get_order(request, query):
         FROM market_marketitem_countries
         JOIN "market_marketitem" ON "market_marketitem"."id" = "market_marketitem_countries"."marketitem_id"
         WHERE "market_marketitem_countries"."countries_id" IN """+ ("%s"%(countries,) if len(countries)>1 else "(%s)"%(countries))
-        order.append('-match_countries')
+        #order.append('-match_countries')
 
     return query.extra(select=ext).order_by(*order)
 

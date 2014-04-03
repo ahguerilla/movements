@@ -1,0 +1,32 @@
+v0.13 Release notes 3 Apr 2014
+
+Major changes:
+
+- Changed the filter behaviour and look
+
+New Features:
+
+- Added view counter
+- Added post publish date
+- Added hide post feature
+- Added sticky post feature
+- Added select All tags or default tags while creating a new Offer/Request
+- Disabled confirmation dialog when closing new offer/request if the nothing is entered.
+- Removed the delete message and trash folder from messages
+- Added bread crumb on top of market items
+- Removed rating numbers from mini profile
+- Added translation capability to all texts and choose interface language feature in settings
+- Made the text on exchanivist posts selectable and added a view link to posts
+- Limited the number of lines shown in exchanivist for each post
+- Limited the number of tags shown in exchanivist for each post
+- Made the links clickable on posts
+- Freed up a lot of space by changing the height for the hero text and filters
+- Added google analytics
+- Added Test Framework and data
+- Changed some copies and interface messages
+- Added a custom scroll bar to create offer/request dialog
+- Improved logging support
+
+Bug fixes:
+
+- Fixed an IE bug resulting the profile save error
