@@ -4,7 +4,7 @@
 <script type="text/template" id="item_template">
   <div class="market-place-item item-wrap item-<%-pk%> <% if(stick===true){ %>stuck-item<%}%>" item_id="<%- pk %>" owner_id="<%- ownerid %>">
     <div class="market-item-card <% if(hidden===true){ %>hidden-item<% } %>" item_id="<%- pk %>" owner_id="<%- ownerid %>">
-      <div class="item-header <%- item_type.toLowerCase() %> <% if(hidden===true){ %>hidden-item<% } %>">
+      <div class="item-header <%- item_type.toLowerCase() %> <% if(hidden===true){ %>hidden-item<% } %> <% if(stick===true){ %>stuck-item<%}%>">
         <div class="item-header-clickable item_container" item_id="<%- pk %>">
           <a class="routehref" href="#item/<%- pk %>" >
             <%- item_type.toUpperCase() %>
