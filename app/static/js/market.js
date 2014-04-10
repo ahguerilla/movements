@@ -45,8 +45,7 @@
     },
 
     isShowingHidden:function(){
-      this.filter_widget.filters;
-      return true;
+      return this.filter_widget.filters.showHidden;
     },
 
     setViewsCount: function(id){
