@@ -44,6 +44,11 @@
       "Request": "request"
     },
 
+    isShowingHidden:function(){
+      this.filter_widget.filters;
+      return true;
+    },
+
     setViewsCount: function(id){
       $.getJSON(
         window.ahr.app_urls.getViewsCount + id,

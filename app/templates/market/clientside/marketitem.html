@@ -244,7 +244,14 @@
       $.getJSON(ev.currentTarget.href,function(data){
         if(data.result===true){
           if($(ev.currentTarget).hasClass('hide-item')){
-            that.del_callback(id);
+            if(that.market.isShowingHidden()){
+              $(ev.currentTarget).closest('.market-item-card').addClass('hidden-item');
+              $(ev.currentTarget).closest('.item-header').addClass('hidden-item');
+              $(ev.currentTarget).closest(".show-hidden-item-link");
+              $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemunHide+id+'" item_id="'+id+'" class="hidden-item toggle-hidden">Show</a>');
+            }else{
+              that.del_callback(id);
+            }
           }else{
             $(ev.currentTarget).closest('.market-item-card').removeClass('hidden-item');
             $(ev.currentTarget).closest('.item-header').removeClass('hidden-item');
