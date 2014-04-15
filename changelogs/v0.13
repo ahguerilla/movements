@@ -26,6 +26,7 @@ New Features:
 - Changed some copies and interface messages
 - Added a custom scroll bar to create offer/request dialog
 - Improved logging support
+- Remove "I'm an acitivist" and "I'm a journalist" and substituded them with "Sign up"
 
 Bug fixes:
 
