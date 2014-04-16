@@ -11,6 +11,7 @@ js_info_dict = {
 }
 urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
+    url(r'^pages', include('cms.urls')),
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
     url(r'^contact-us$', 'app.views.contact_us', name='contact_us'),
     url(r'^privacy$', 'app.views.privacy', name='privacy'),
