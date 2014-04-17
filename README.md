@@ -123,7 +123,7 @@ manage.py makemessages -l nn --setting=app.settings.local
 
 2- ssh root@162.243.119.212 and restart apache (ahr is not a sudoer)
 
-3- You can start celery from /opt/ahr/ahr/app/tasks by issueing "nohup celery -A celeryworker worker&". (dont forget it kill the previous celery if its running)
+3- You can start celery from /opt/ahr/ahr/app/tasks by issueing "nohup celery -A celeryworker worker&". (dont forget to kill the previous celery if its running)
 
 ##Gotchas
 
