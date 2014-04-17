@@ -120,6 +120,7 @@ manage.py makemessages -l nn --setting=app.settings.local
 
 2- ssh root@162.243.119.212 and restart apache (ahr is not a sudoer)
 
+
  ##Gotchas
  No stylus is setup on staging server (digital ocean). So you need to set:
   ASSETS_DEBUG = False
