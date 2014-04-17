@@ -77,8 +77,8 @@
             <li><a href="{% url 'how_it_works_priv' %}">{%trans "How It Works"%}</a></li>
             <li><a href="/">Exchange</a></li>
             <li><a href="{% url 'show_users' %}">{%trans "Exchangivists"%}</a></li>
-             {% show_menu 0 100 100 100 "cms/menu.html" %}
           {% endif %}
+          {% show_menu 0 100 100 100 "cms/menu.html" %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
