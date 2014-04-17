@@ -123,12 +123,12 @@ manage.py makemessages -l nn --setting=app.settings.local
 
 ##Gotchas
 
- No stylus is setup on staging server (digital ocean). So you need to set:
+ - No stylus is setup on staging server (digital ocean). So you need to set:
   ASSETS_DEBUG = False
  In your local settings on your dev mahine and restart django and visit the market so the packed.css file gets created. After that you need
  to overwrite the /opt/ahr/ahr/app/static/css/packed.css with your local file.
 
- In order to use Stylus @import and global variables I upgraded webassets to 0.9. But its ignorant of any changes in the imported
+ - In order to use Stylus @import and global variables I upgraded webassets to 0.9. But its ignorant of any changes in the imported
  files. You need to increase the dummy counter in site.styl file every time you change something on one of the other stylus files :(
  (Untill you find a way to tell the webassets to watch the other styl files.
  It might be possible with the extra argument parameter in the settings file that I commented out)
