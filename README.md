@@ -114,6 +114,8 @@ Substitude -l no with -l <your language code>
 ###Creating po files for templates and django apps
 manage.py makemessages -l nn --setting=app.settings.local
 
+Dont forget to create a new migration for user app to translate countries issues and skills (make sm app=users)
+
 
 #Staging release proccess
 
