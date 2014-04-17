@@ -117,6 +117,7 @@ manage.py makemessages -l nn --setting=app.settings.local
 #Staging release proccess
 
 1- ssh ahr@162.243.119.212 and do a git pull in  /opt/ahr/ahr
+
 2- ssh root@162.243.119.212 and restart apache (ahr is not a sudoer)
 
 #Gotchas
