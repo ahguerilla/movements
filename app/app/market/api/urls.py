@@ -1,6 +1,6 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 
-urlpatterns = patterns('',
+market_user_patterns = patterns('',
     url(r'(?P<rtype>\S+)/avatar/get/(?P<obj_id>\d+)/(?P<size>\d+)$',
         'app.market.api.views.users.get_avatar',
         name="get_avatar"),
@@ -56,15 +56,22 @@ urlpatterns = patterns('',
     url(r'(?P<rtype>\S+)/message/get/count$',
         'app.market.api.views.misc.get_unreadCount',
         name="get_messagecount"),
+)
 
+
+market_item_patterns = patterns('',
     url(r'(?P<rtype>\S+)/item/add/(?P<obj_type>offer|request|resource)$',
         'app.market.api.views.market.add_market_item',
         name="add_marketitem"),
 
     url(r'(?P<rtype>\S+)/item/get/(?P<obj_id>\d+)$',
         'app.market.api.views.market.get_market_item',
-        name="get_marketitem"), 
-   
+        name="get_marketitem"),
+
+    url(r'(?P<rtype>\S+)/item/get/translation/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.get_item_translation',
+        name="get_item_translation"),
+
     url(r'(?P<rtype>\S+)/useritem/get/(?P<obj_id>\d+)$',
         'app.market.api.views.market.user_get_marketitem',
         name="user_get_marketitem"),
@@ -89,6 +96,29 @@ urlpatterns = patterns('',
         'app.market.api.views.market.set_rate',
         name="market_set_rate"),
 
+    url(r'(?P<rtype>\S+)/item/get/count/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.get_views_count',
+        name="marketitem_views_count"),
+
+    url(r'(?P<rtype>\S+)/item/set/hide/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.hide_item',
+        name="marketitem_hide"),
+
+    url(r'(?P<rtype>\S+)/item/set/unhide/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.unhide_item',
+        name="marketitem_unhide"),
+
+    url(r'(?P<rtype>\S+)/item/set/stick/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.stick_item',
+        name="stick_item"),
+
+    url(r'(?P<rtype>\S+)/item/set/unstick/(?P<obj_id>\d+)$',
+            'app.market.api.views.market.unstick_item',
+            name="unstick_item"),
+)
+
+
+market_comment_patterns = patterns('',
     url(r'(?P<rtype>\S+)/comment/add/(?P<obj_id>\d+)$',
         'app.market.api.views.comments.add_comment',
         name="add_comment"),
@@ -116,20 +146,33 @@ urlpatterns = patterns('',
     url(r'(?P<rtype>\S+)/comment/delete/(?P<obj_id>\d+)$',
         'app.market.api.views.comments.delete_comment',
         name="delete_comment"),
+)
 
+report_patterns = patterns('',
     url(r'(?P<rtype>\S+)/report/(?P<obj_id>\d+)$',
         'app.market.api.views.report.report_marketitem',
         name="report_post"),
-    
+
     url(r'(?P<rtype>\S+)/report/user/(?P<username>\S+)$',
         'app.market.api.views.report.report_user',
         name="report_user"),
-    
+)
+
+market_notificatoin_patterns = patterns('',
     url(r'(?P<rtype>\S+)/notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$',
         'app.market.api.views.market.get_notifications_fromto',
-        name="get_notifications_fromto"),    
-    
+        name="get_notifications_fromto"),
+
     url(r'(?P<rtype>\S+)/notifications/get/notseen/(?P<sfrom>\d+)/(?P<to>\d+)$',
         'app.market.api.views.market.get_notseen_notifications',
-        name="get_notseen_notif"),        
+        name="get_notseen_notif"),
 )
+
+
+urlpatterns = patterns('',
+    url(r'', include(market_item_patterns)),
+    url(r'', include(market_comment_patterns)),
+    url(r'', include(market_user_patterns)),
+    url(r'', include(market_notificatoin_patterns)),
+    url(r'', include(report_patterns)),
+    )

@@ -1,7 +1,8 @@
 from django.contrib import admin
 from models import Placeholder
+from modeltranslation.admin import TranslationAdmin
 
-class PlaceholderAdmin(admin.ModelAdmin):
+class PlaceholderAdmin(TranslationAdmin):
     class Media:
         css = {
             'screen':('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css',)

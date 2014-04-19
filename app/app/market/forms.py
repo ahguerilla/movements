@@ -4,6 +4,8 @@ from django import forms
 from postman.forms import WriteForm,FullReplyForm,QuickReplyForm
 from postman.fields import CommaSeparatedUserField
 from django.core.validators import ValidationError
+from django.utils.translation import ugettext_lazy as _
+
 
 
 class MarketQuickReplyForm(QuickReplyForm):
@@ -35,7 +37,7 @@ class offerForm(forms.ModelForm):
         fields = ['issues','skills','countries','title','details','exp_date','never_exp']
 
     def clean(self):
-        err = 'Your should enter an expiry date for your offer or check never expires'
+        err = _('You should enter an expiry date for your offer or check never expires')
         cleaned_data = super(offerForm, self).clean()
         check = [cleaned_data['exp_date'], cleaned_data['never_exp']]
         if not any(check):
@@ -56,7 +58,7 @@ class requestForm(forms.ModelForm):
         fields = ['issues','countries','title','details','exp_date','never_exp']
 
     def clean(self):
-        err = 'Your should enter an expiry date for your request or check never expires'
+        err = _('You should enter an expiry date for your request or check never expires')
         cleaned_data = super(requestForm, self).clean()
         check = [cleaned_data['exp_date'], cleaned_data['never_exp']]
         if not any(check):

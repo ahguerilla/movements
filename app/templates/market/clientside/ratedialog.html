@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load avatar_tags %}
 {% load compress %}
 
@@ -6,7 +7,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Rate <span id="ratetitle"></span></h4>
+        <h4 class="modal-title">{%trans "Rate"%} <span id="ratetitle"></span></h4>
         <div id="rateerror"></div>
       </div>
       <div class="modal-body">
@@ -14,16 +15,14 @@
 
           <div class="round-image" style="text-align:center; font-size:160%;">
            <img id="profileimage"/>
-
             <div style="margin-top:10px;">
               <span id="username"></span>
               <span id="numstars"></span>
-              <span id="ratecount"></span>Rating(s)
+              <span id="ratecount"></span>{%trans "Rating(s)"%}
             </div>
           </div>
 
         </div>
-
 
         <div style="margin-bottom:10px;"></div>
 
@@ -31,35 +30,35 @@
           <div>
             <div>
               <label>
-                <div style="display: inline-block;width:150px;text-align:left;"> <input type="radio" name="stars" value="1">One star </div>
+                <div style="display: inline-block;width:150px;text-align:left;"> <input type="radio" name="stars" value="1">{%trans "One star "%}</div>
                 <div class="stars1"></div>
               </label>
             </div>
 
             <div>
               <label class="">
-                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="2">Two stars</div>
+                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="2">{%trans "Two stars"%}</div>
                 <div class="stars2"></div>
               </label>
             </div>
 
             <div>
               <label class="">
-                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="3">Three stars</div>
+                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="3">{%trans "Three stars"%}</div>
                 <div class="stars3"></div>
               </label>
             </div>
 
             <div>
               <label class="">
-                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="4">Four stars</div>
+                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="4">{%trans "Four stars"%}</div>
                 <div class="stars4"></div>
               </label>
             </div>
 
             <div>
               <label class="">
-                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="5">Five stars</div>
+                <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="5">{%trans "Five stars"%}</div>
                 <div class="stars5"></div>
               </label>
             </div>
@@ -68,10 +67,10 @@
         <div class="modal-footer">
           <div class="row">
             <div class="col-xs-6 col-md-offset-6 col-md-3">
-              <button type="button" class="btn full-width btn-default cancelrate" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn full-width btn-default cancelrate" data-dismiss="modal">{%trans "Cancel"%}</button>
             </div>
             <div class="col-xs-6 col-md-3">
-              <button type="button" class="btn btn-default full-width sendrate">Submit</button>
+              <button type="button" class="btn btn-default full-width sendrate">{%trans "Submit"%}</button>
             </div>
           </div>
         </div>
@@ -124,7 +123,7 @@
       var that = this;
       var event = ev;
       if ($('input[name="stars"]:checked',$('#ratedialog')).val() == undefined) {
-        this.alert('You have to select a rateing.', '#rateerror');
+        this.alert('{%trans "You have to select a rateing."%}', '#rateerror');
         return (false);
       }
       window.ahr.getcsrf(function (csrf) {
@@ -150,7 +149,7 @@
           that.resetrate(username , data.score, data.ratecount);
         });
         dfrd.fail(function (data) {
-          that.alert('Rating failed.', '#rateerror');
+          that.alert('{%trans "Rating failed."%}', '#rateerror');
         });
       });
       return (false);

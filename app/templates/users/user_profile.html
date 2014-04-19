@@ -8,7 +8,7 @@
   <div class="col-md-12 col-spacing-bottom">
     <div class="row">
       <div class="col-md-3">
-        <strong>Tag:</strong>
+        <strong>{%trans "Tag"%}:</strong>
       </div>
       <div class="col-md-9">
         {{ user_profile.tag_ling }}
@@ -17,8 +17,9 @@
   </div>
   {% endif %}
 {% block outsidecontainer %}
-<div class="filter-banner-spacer"></div>
-<div class="exchange-filter">
+<div style="height:50px;"></div>
+<div class="action-banner-spacer"></div>
+<div class="exchange-actions">
   <div class="container">
     <div class="settings-change-avatar">
       <div id="settingavatar">{% primary_avatar user_details 120 %}</div>
@@ -34,84 +35,40 @@
 
       {% if is_self %}
       <br />
-      <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'user_settings' %}">Update Profile</a>
+      <a class="btn btn-default btn-sm" id="changeavatar" href="{% url 'user_settings' %}">{%trans "Update Profile"%}</a>
       {% endif %}
     </div>
   </div>
 </div>
 {% endblock %}
-    <div class="col-md-12 col-spacing-bottom">
-      <div class="row">
-        <div class="col-md-3">
-          <strong>Rating:</strong>
-        </div>
-        <div class="col-md-9">
-          <span class="rateit" rate="{{ user_profile.score }}"></span> {{ user_profile.score }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12 col-spacing-bottom">
-      <div class="row">
-        <div class="col-md-3">
-          <strong>AHR Rating:</strong>
-        </div>
-        <div class="col-md-9">
-          <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} stars
-        </div>
-      </div>
-    </div>
+
 {% block content %}
 <div class="in-container dialog">
   {% if request.user.username != user_details.username %}
   <div class="row">
-    <div class="actions user-profile">
-      <div username="{{ user_details.username }}" title="Recommend this user"  class="recommend actionitem">
-        <div class="text">
-          Recommend
-        </div>
-      </div>
-      <div class="actionitem">-</div>
-
-      <div username="{{ user_details.username }}" title="Send private message" class="pm-message actionitem">
-        <div class="text">
-          Private Message
-        </div>
-      </div>
-      <div class="actionitem">-</div>
-
-      <div username="{{ user_details.username }}" class="report_user actionitem">
-        <div class="text">
-          Report user
-        </div>
-      </div>
-
-      <div  class="rate rate_user actionitem right-on-big" title="Rate" rateing="user" username="{{ user_details.username }}" score="{{ user_details.score }}" ratecount="{{ user_details.userratecount }}">
-        <div class="item-glyph glyphicon glyphicon-star-empty"></div>
-      </div>
-
-    </div>
+    <div class="actions-place user-profile"></div>
   </div>
   {% endif %}
   <div class"col-md-12">
     <div class="row">
       <div class="col-md-9">
-        <legend>Rating</legend>
+        <legend>{%trans "Rating"%}</legend>
 
         <div class="row profile-item">
-          <div class="col-md-2">
-            <strong>Rating:</strong>
+          <div class="col-md-3">
+            <strong>{%trans "Community rating"%}:</strong>
           </div>
-          <div class="col-md-10">
-            <span class="rateit user" username="{{ user_details.username }}" rate="{{ user_profile.score }}"></span> {{ user_profile.score|floatformat:1 }} stars <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}votes{% endif %})</em>
+          <div class="col-md-9">
+            <span class="rateit user" username="{{ user_details.username }}" rate="{{ user_profile.score }}"></span> {{ user_profile.score|floatformat:1 }} {%trans "stars"%} <em>({{ user_profile.ratecount }} {% if user_profile.ratecount == 1 %}vote{% else %}{%trans "votes"%}{% endif %})</em>
           </div>
         </div>
 
         <div class="row profile-item">
           <div class="col-md-2">
-            <strong>AHR Rating:</strong>
+            <strong>{%trans "AHR Rating"%}:</strong>
           </div>
           <div class="col-md-10">
-            <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} stars
+            <span class="rateit redstars" rate="{{ OrganisationalRating }}"></span> {{ OrganisationalRating }} {%trans "stars"%}
           </div>
         </div>
 
@@ -122,106 +79,106 @@
 
     <div class="row">
       <div class="col-md-6">
-        <legend>About</legend>
+        <legend>{%trans "About"%}</legend>
         <div class="row profile-item">
-          <div class="col-md-4 profile-label"><strong>Name:</strong></div>
+          <div class="col-md-4 profile-label"><strong>{%trans "Name"%}:</strong></div>
           <div class="col-md-8">
           {% if user_profile.notperm.name != 'on' %}
           {{ user_details.first_name }}&nbsp;{{ user_details.last_name }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Nationality:</div>
+          <div class="col-md-4 profile-label">{%trans "Nationality"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.nationality != 'on' %}
           {{ user_profile.nationality }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Country of residence:</div>
+          <div class="col-md-4 profile-label">{%trans "Country of residence"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.resident_country != 'on' %}
           {{ user_profile.resident_country }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Occupation:</div>
+          <div class="col-md-4 profile-label">{%trans "Occupation"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.occupation != 'on' %}
           {{ user_profile.occupation }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Area of expertise:</div>
+          <div class="col-md-4 profile-label">{%trans "Area of expertise"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.experties != 'on' %}
           {{ user_profile.expertise }}
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
       </div>
       <div class="col-md-6">
-        <legend>Social</legend>
+        <legend>{%trans "Social"%}</legend>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Website:</div>
+          <div class="col-md-4 profile-label">{%trans "Website"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.web_url != 'on' %}
           <a target="_blank" href="{{ user_profile.web_url }}">{{ user_profile.web_url }}</a>
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Facebook:</div>
+          <div class="col-md-4 profile-label">{%trans "Facebook"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.fb_url != 'on' %}
           <a target="_blank" href="{{ user_profile.fb_url }}">{{ user_profile.fb_url }}</a>
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">LinkedIn:</div>
+          <div class="col-md-4 profile-label">{%trans "LinkedIn"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.linkedin_url != 'on' %}
           <a target="_blank" href="{{ user_profile.linkedin_url }}">{{ user_profile.linkedin_url }}</a>
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-4 profile-label">Twitter:</div>
+          <div class="col-md-4 profile-label">{%trans "Twitter"%}:</div>
           <div class="col-md-8">
           {% if user_profile.notperm.tweet_url != 'on' %}
           <a target="_blank" href="{{ user_profile.get_twitter_url }}">{{ user_profile.tweet_url }}</a>
           {% else %}
-          hidden
+          {%trans "hidden"%}
           {% endif %}
           </div>
         </div>
@@ -235,7 +192,7 @@
       <div class="col-md-9">
         <legend>Areas of Interest</legend>
         <div class="row profile-item">
-          <div class="col-md-2 profile-label">Issues:</div>
+          <div class="col-md-2 profile-label">{%trans "Issues"%}:</div>
           <div class="col-md-10">
             <div class="item-tags">
               <div>
@@ -248,7 +205,7 @@
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-2 profile-label">Countries:</div>
+          <div class="col-md-2 profile-label">{%trans "Countries"%}:</div>
           <div class="col-md-10">
             <div class="item-tags">
               <div>
@@ -261,7 +218,7 @@
         </div>
 
         <div class="row profile-item">
-          <div class="col-md-2 profile-label">Skills:</div>
+          <div class="col-md-2 profile-label">{%trans "Skills"%}:</div>
           <div class="col-md-10">
             <div class="item-tags">
               <div>
@@ -280,6 +237,7 @@
 {% endblock %}
 
 {%block endjavascript %}
+  {% include "market/clientside/actions/actions.html" %}
   {% include "market/clientside/messagedialog.html" %}
   {% include 'market/clientside/reportuserdialog.html' %}
   {% include 'market/clientside/recommenddialog.html' %}
@@ -287,31 +245,20 @@
   <script type="text/javascript">
   $(function(){
     var ProfileView = Backbone.View.extend({
-      el: 'body',
-      events: {
-        'click .pm-message': 'showPMDialog',
-        'click .recommend': 'showRecommendDialog'
-      },
-      showPMDialog:function(ev){
-        ev.preventDefault();
-        var username = $(ev.currentTarget).attr('username');
-        this.message_widget.show(username, '', '', false);
-        return false;
-      },
       resetitemrate: function (username, rate) {
         window.location.reload();
       },
 
-      showRecommendDialog:function(ev){
-        ev.preventDefault();
-        var username = ev.currentTarget.getAttribute('username');
-        this.recommendDialog.setup('user',
-           username,
-           $('#currentusername').text()+' recommends this user : '+ username,
-           $('#currentusername').text()+' recommends you have a look at user '+ username );
-        return(false);
-      },
       initialize: function(){
+        this.item_type = 'user';
+        var data = {
+          'username':"{{ user_profile.user.username }}",
+          'avatar': $('#settingavatar>img').attr('src'),
+          'ratecount': {{ user_profile.ratecount }},
+          'score':{{ user_profile.score }},
+          'usercore':{{ user_profile.score }}
+        };
+
         $('.rateit').rateit();
         $('.rateit').rateit('min',0);
         $('.rateit').rateit('max',5);
@@ -323,6 +270,9 @@
         this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
         this.recommendDialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
         this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
+        this.actions_view = window.ahr.actions_view();
+        var actions = this.actions_view.get(this.item_type, data);
+        $('.actions-place').html(actions);
         }
       });
       var profileView = new ProfileView();

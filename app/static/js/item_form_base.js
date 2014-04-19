@@ -59,9 +59,9 @@
       this.changing = false;
       this.widgets = [];
       this.item_obj = null;
-      this.delegateEvents(_.extend(this.events, {
+      _.extend(this.events, {
         'submit': 'submit'
-      }));
+      });
       this.init();
       if (item !== false) {
         that.url = window.ahr.app_urls.editmarketitem + item[0].pk;

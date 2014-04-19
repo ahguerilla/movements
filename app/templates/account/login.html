@@ -13,15 +13,18 @@
 
 <div class="hero-text">
   <p>
-    Welcome to Exchangivist, please sign in below. If you don't have an account yet, please sign up <a href="{% url 'home' %}" alt="sign up">here</a>
-  </p>  
+    {% url 'home' as home_url %}
+    {% blocktrans %}
+    Welcome to Exchangivist, please sign in below. If you don't have an account yet, please sign up <a href="{{home_url}}" alt="sign up">here</a>
+    {% endblocktrans %}
+  </p>
 </div>
 
 <div class="row">
   <div class="col-md-6 col-sm-7">
     <div class="dialog">
       <h1>{% trans "Sign In" %}</h1>
-      <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form"> 
+      <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form">
         {% csrf_token %}
         <div class="form-group">
           <div class="col-md-12">
@@ -38,15 +41,17 @@
         <div class="form-group">
           <div class="col-md-6">
             {{ form.remember_me.errors }}
-            <label for="id_remember">Remember Me</label> {{ form.remember }}
+            <label for="id_remember">{%trans "Remember Me"%}</label> {{ form.remember }}
           </div>
           <div class="col-md-6 align-right">
-            <a class="button btn-xs" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+            <a class="button btn-xs" href="{% url 'account_reset_password' %}">"{% trans "Forgot Password?"%}"</a>
           </div>
         </div>
         <div class="form-group">
           <div class="col-xs-7">
-            Or, <a href="{% url 'home' %}" alt="sign up">sign up</a> for an account.
+            {% blocktrans %}
+            Or, <a href="{{home_url}}" alt="sign up">sign up</a> for an account.
+            {% endblocktrans %}
           </div>
           <div class="col-xs-5">
             <button type="submit" class="btn btn-default full-width">{% trans "Sign In" %}</button>
@@ -61,7 +66,7 @@
     </div>
     <div class="row" style="margin-top:10px;">
       {% include 'ahr/_footer_logos.html' %}
-    </div> 
+    </div>
   </div>
   <div class="col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
     {% if socialaccount.providers  %}

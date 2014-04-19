@@ -32,7 +32,7 @@
                 if ($('#id_body').val()!=""){
                   $('#replyform').submit();
                 }else{
-                  alert('You cant send an empty message.');
+                  alert('{%trans "You cant send an empty message."%}');
                 }
                 return false;
               });
@@ -54,7 +54,7 @@
         <div id="more-wrap">
         <div class="row">
          <div class="col-md-offset-5 col-md-7">
-          <a id="showmoremessages">{{pm_messages|length|add:-2}} More....</a>
+          <a id="showmoremessages">{{pm_messages|length|add:-2}} {%trans "More...."%}</a>
           </div>
         </div>
         <div class="row">
@@ -83,7 +83,7 @@
                     <span style="display:none;" class="pm_recipient">{{ message.obfuscated_recipient|or_me:user }}</span>
                     <span class="pm_date pull-right">{{ message.sent_at|date:"M d Y H:i"}}</span></strong>
                     {% if message.is_rejected %}
-                      <div class="pm_status">{% trans "Rejected" %}{% if message.moderation_reason %}{% trans ":" %} {{ message.moderation_reason }}{% endif %}</div>
+                      <div class="pm_status">{% trans "Rejected" %}{% if message.moderation_reason %}:{{ message.moderation_reason }}{% endif %}</div>
                     {% endif %}
                   </div>
                 </a>

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load cms_tags sekizai_tags placeholder_tags %}
+{% load socialaccount %}
+{% load i18n %}
+{% load url from future %}
+
+{% block body_class %}narrow{% endblock %}
+
+{% block ext_container %}
+<div class="container" id="main-content-container">
+  <div id="currentusername" class="hidden">{{ user.username }}</div>
+  {% block content %}
+  <div class="public">
+    {% block public-content %}
+      {% placeholder "contetns" %}
+    {% endblock %}
+  </div>
+  {% endblock %}
+  {% include "market/clientside/app_urls.html" %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    $.backstretch("{{ STATIC_URL }}images/homepage-banner.jpg");
+  </script>
+  {% include 'ahr/_center_content.html' %}
+{% endblock %}
+
+

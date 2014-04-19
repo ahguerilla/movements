@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% load compress %}
 <script type="text/template" id="expdate_template">
   <div class="col-md-12 ">
@@ -10,7 +12,7 @@
     <input type='text' id="<%- jsonfield %>"  name="<%- jsonfield %>" class="form-control input-sm" />
   </div>
   <div class="col-md-6">
-    <label for="expdate-neverexpire"><input type="checkbox" id="expdate-neverexpire" name="expdate-neverexpire"/>Never expire</label>
+    <label for="expdate-neverexpire"><input type="checkbox" id="expdate-neverexpire" name="expdate-neverexpire"/>{% trans "Never expire" %}</label>
   </div>
 
 </script>

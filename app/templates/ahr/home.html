@@ -8,8 +8,12 @@
 
 <div class="hero-text">
   <p>
-    {% blocktrans %}Exchangivist is a new innovative platform which is crowdsourcing the fight for human rights. It is an online portal that connects people and communities around the World  with the tools and expertise they need to advance human rights in closed societies.{% endblocktrans %}
-  </p>  
+    {% blocktrans %}
+    Exchangivist is a new innovative platform which is crowdsourcing the fight for human rights.
+    It is an online portal that connects people and communities around the World with the tools
+    and expertise they need to advance human rights in closed societies.
+    {% endblocktrans %}
+  </p>
 </div>
 
 <div class="row">
@@ -32,42 +36,39 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12 text-center">
+          <div class="col-md-12">
             <input type="checkbox" name="tnccheckbox" id="tnccheckbox" required/>
             <label for="tnccheckbox">I agree to the </label> <a href="{% url 'terms_and_conditions' %}" target="_blank" alt="terms and conditions">Terms &amp; Conditions</a>
           </div>
         </div>
         <div class="form-group">
-          <div class="col-xs-6">
-            <button type="submit" name="activist" class="btn btn-default full-width">{% trans "I'M AN ACTIVIST" %}</button>
-          </div>
-          <div class="col-xs-6">
-            <button type="submit" name="helper" class="btn btn-default full-width">{% trans "I'M READY TO HELP" %}</button>
+          <div class="col-xs-6 col-xs-offset-6">
+            <button type="submit" name="activist" class="btn btn-default full-width">{% trans "SIGN UP" %}</button>
           </div>
         </div>
       </form>
     </div>
     <div class="row" style="margin-top:10px;">
       {% include 'ahr/_footer_logos.html' %}
-    </div>    
+    </div>
   </div>
   <div class="col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
     <div class="dialog">
       <a href="{% provider_login_url "twitter" %}">
         <img src="{{ STATIC_URL }}images/twitter-24x18.png" alt="Google+"/>
-        SIGN UP WITH TWITTER
+       {%trans " SIGN UP WITH TWITTER"%}
       </a>
     </div>
     <div class="dialog">
       <a href="{% provider_login_url "facebook" method="oauth2" %}">
         <img src="{{ STATIC_URL }}images/facebook-12x23.png" alt="Facebook"/>
-        SIGN UP WITH FACEBOOK
+        {%trans "SIGN UP WITH FACEBOOK"%}
       </a>
     </div>
     <div class="dialog">
       <a href="{% provider_login_url "google" %}">
         <img src="{{ STATIC_URL }}images/google-plus-23x20.png" alt="Google+"/>
-        SIGN UP WITH GOOGLE PLUS
+        {%trans "SIGN UP WITH GOOGLE PLUS"%}
       </a>
     </div>
   </div>

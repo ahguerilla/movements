@@ -1,15 +1,15 @@
 (function () {
   //var InboxRoute = Backbone.Router.extend({
-    //routes: {
-      //"": "page",
-      //"p:page": "page"
-    //},
-    //page: function (page) {
-      //$.noop();
-    //},
-    //initialize: function (market) {
-      //$.noop();
-    //}
+  //routes: {
+  //"": "page",
+  //"p:page": "page"
+  //},
+  //page: function (page) {
+  //$.noop();
+  //},
+  //initialize: function (market) {
+  //$.noop();
+  //}
   //});
 
   var InboxView = Backbone.View.extend({
@@ -17,29 +17,8 @@
     events: {
       'click .conv_link': 'openConv',
       'click #backtofolder': 'back',
-      'click .next': 'addNext',
-      'click .private_message': 'private_message',
-      'click .recommend': 'recommend',
+      'click .next': 'addNext'
     },
-
-    private_message: function (ev) {
-      ev.preventDefault();
-      var username = ev.currentTarget.getAttribute('username');
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      this.message_widget.show(username, '', '', false);
-      return (false);
-    },
-
-    recommend: function(ev){
-      ev.preventDefault();
-      var username = ev.currentTarget.getAttribute('username');
-      this.recommend_dialog.setup('user',
-         username,
-         $('#currentusername').text()+' recommends this user : '+ username,
-         $('#currentusername').text()+' recommends you have a look at user '+ username );
-      return(false);
-    },
-
 
     addNext: function (ev) {
       ev.preventDefault();
@@ -50,9 +29,9 @@
         if ($('.next', $(data)).hasClass('disabled')) {
           $('#paginationblock').remove();
         }
-        var more = $('.next',$(data))[0];
+        var more = $('.next', $(data))[0];
         $('.next').replaceWith(more);
-        $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
+        $(more).html('<button style="margin-top:5px;" class="btn btn-default">'+gettext('more...')+'</button>');
         $('.messagelist').append($('.messagelist', $(data)).children());
       });
     },
@@ -62,35 +41,58 @@
       return false;
     },
 
-    setProfile:function(user){
-      $.getJSON(window.ahr.app_urls.getprofile+user,function(data){
-          var tmpl = $('#message-profile').html();
-          var prof = _.template(tmpl);
-          var ac_tmp = _.template($('#useraction-template').html());
-          var actions = ac_tmp({'username':data.username,
-            'usercore':data.score,
-            'ratecount':data.ratecount,
-            'avatar': data.avatar
-            });
-          $('.action-container').html(actions);
+    setProfile: function (user) {
+      this.profile_widget.set(user, '.profilecontainer', 'user');
+      $('#conversation').show();
+      $('#id_body').trigger('focus');
+    },
 
-          $('.profilecontainer').html(prof(data));
-          $('.rateit').rateit();
-          $('.rateit').rateit('min', 0);
-          $('.rateit').rateit('max', 5);
-          $('.rateit').rateit('readonly', true);
-          $('.rateit').each(function(){
-            $(this).rateit('value', this.getAttribute('rate'));
-          });
-          $('#id_body').trigger('focus');
+    postProccessConv: function(data){
+      var that = this;
+      data1 = data.replace(that.itemre, function (match, item_id, offset, string) {
+        return "<a href='/market/#item/" + item_id + "'>"+gettext('Click here to view the recommendation')+"</a>";
+      });
+      data2 = data1.replace(that.userre, function (match, username, offset, string) {
+        return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>"+gettext('Click here to view the recommendation')+"</a>";
+      });
+
+      data3 = data2.replace(that.itemre, function (match, item_id, offset, string) {
+        return "<a href='/market/#item/" + item_id + "'>"+gettext('Click here to view the recommendation')+"</a>";
+      });
+      data4 = data3.replace(that.userre, function (match, username, offset, string) {
+        return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>"+gettext('Click here to view the recommendation')+"</a>";
+      });
+
+      var user;
+      $('.messageavatar img', data4).each(function (item, index) {
+        user = $(this).attr('alt');
+        if (user != window.ahr.username) return false;
+      });
+      if (user == window.ahr.username) {
+        user = $('.pm_recipient', data4).text();
+        if (user =="<me>") user = window.ahr.username;
+      }
+      return ({'user':user, 'html':data4});
+    },
+
+    setMessageCounter: function(){
+      $.getJSON(window.ahr.app_urls.getmessagecount, function (data) {
+        $('.message-counter').each(function (tmp, item) {
+          if (data > 0) {
+            $('#msgcntr', $(item)).text('(' + data + ')');
+          } else {
+            $('#msgcntr', $(item)).text('');
+          }
         });
+      });
     },
 
     openConv: function (ev) {
       ev.preventDefault();
+      $('#conversation').hide();
       var that = this;
-      var subject = $('.subject',$(ev.currentTarget)).children();
-      if(subject.is('strong')){
+      var subject = $('.subject', $(ev.currentTarget)).children();
+      if (subject.is('strong')) {
         subject.replaceWith(subject.text());
       }
 
@@ -105,61 +107,29 @@
       });
 
       dfrd.done(function (data) {
-        data1 = data.replace(that.itemre, function (match, item_id, offset, string) {
-          return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
-        });
-        data2 = data1.replace(that.userre, function (match, username, offset, string) {
-          return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
-        });
+        var conv = that.postProccessConv(data)
+        that.setProfile(conv.user);
 
-        data3 = data2.replace(that.itemre, function (match, item_id, offset, string) {
-          return "<a href='/market/#item/" + item_id + "'>Click here to view the recommendation</a>";
-        });
-        data4 = data3.replace(that.userre, function (match, username, offset, string) {
-          return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>Click here to view the recommendation</a>";
-        });
-
-        var user;
-        $('.messageavatar img', data4).each(function(item,index){
-          user = $(this).attr('alt');
-          if(user != window.ahr.username)return false;
-        });
-        if(user == window.ahr.username){
-          user = $('.pm_recipient',data4).text();
-        }
-
-        that.setProfile(user);
-
-        $('#conversation').html(data4);
-        if($('#id_body').length >0){
+        $('#conversation').html(conv.html);
+        if ($('#id_body').length > 0) {
           $('#id_body').empty();
           window.ahr.expandTextarea('#id_body');
         }
         that.showconv();
-        $.getJSON(window.ahr.app_urls.getmessagecount, function (data) {
-          $('.message-counter').each(function (tmp, item) {
-            if (data > 0) {
-              $('#msgcntr', $(item)).text('(' + data + ')');
-            } else {
-              $('#msgcntr', $(item)).text('');
-            }
-          });
-        });
-
-
+        that.setMessageCounter();
       });
       return false;
     },
 
     showconv: function () {
-      if ($(window).width() < 992 ) {
+      if ($(window).width() < 992) {
         $('.nanamorde-mobile').show();
       } else if ($(window).width() >= 992) {
         $('.nanamorde').show();
       }
       $("#message-col").hide();
       $('#conversation-cont').show();
-      $('#messagenav').hide();
+      //$('#messagenav').hide();
       $('#back').show();
       $('#breadsubject').text($('#messagesubjectheader').text());
       $('body').scrollTop(0);
@@ -181,29 +151,31 @@
       } else if ($(window).width() >= 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {
         $('.nanamorde-mobile').hide();
         $('.nanamorde').show();
-      }else{
+      } else {
         $('.nanamorde-mobile').hide();
         $('#conversation-cont').hide();
       }
     },
-    resetitemrate:function(username, rate){
+
+    resetitemrate: function (username, rate) {
       this.setProfile(username);
     },
-
 
     initialize: function () {
       $(window).resize(this.resize);
       this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+      this.actions_view = window.ahr.actions_view();
+      this.profile_widget = window.ahr.profile_widget.initWidget(this.actions_view, window.ahr.app_urls.getprofile);
       this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
       this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate.bind(this));
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
       this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
       var more = $('.next')[0];
-      $(more).html('<button style="margin-top:5px;" class="btn btn-default">more...</button>');
+      $(more).html('<button style="margin-top:5px;" class="btn btn-default">'+gettext('more...')+'</button>');
       $('#paginationblock').html(more);
       $('#conversation-cont').hide();
-      $('.nanamorde').hide();
+      //$('.nanamorde').hide();
       $('.nanamorde-mobile').hide();
       this.resize();
     }

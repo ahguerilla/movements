@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <script type="text/template" id="comment_view_template">
 
 <div class="comment row" comment-owner="<%- owner %>" comment-id="<%- pk %>"  >
@@ -7,12 +9,12 @@
         <a href="<%- owner_url %>">
           <img width="30" style="margin-bottom:5px;border-radius:50%;" src="<%- userpic %>" />
         </a>
-        <strong>By <%- user %> at <%- moment(pub_date,"hh:mm on DD/MM/YY").format('MMMM Do YYYY, h:mm a') %></strong>
+        <strong>{% trans "By" %} <%- user %> {%trans "at"%} <%- moment(pub_date,"hh:mm on DD/MM/YY").format('MMMM Do YYYY, h:mm a') %></strong>
       </div>
       <div class="comment-content row">
         <div class="col-lg-12"><pre><%- content %></pre></div>
       </div>
-      {% include "market/clientside/commentactions.html"%}
+      <div class="commentaction-place"></div>
       <div style="clear:both;"></div>
     </div>
   </div>

@@ -5,8 +5,8 @@
 {% block head_title %}{% trans "Exchangivist - How It Works" %}{% endblock %}
 
 {% block outsidecontainer %}
-<div class="filter-banner-spacer"></div>
-<div class="exchange-filter">
+<div class="action-banner-spacer"></div>
+<div class="exchange-actions">
   <div class="container">
   </div>
 </div>
@@ -14,9 +14,11 @@
 
 
 {% block content %}
+<div style="height:50px;"></div>
 <div class="dialog content-page">
   <div class="row">
     <div class="col-md-12">
+      {% blocktrans %}
       <h1>How It Works</h1>
       <p>Welcome to Exchangivist, the online portal giving users the ability to connect with one another. Now that you’ve joined our community as an Exchangivist, it’s very easy to get started.</p>
       <h4>Creating an offer to help:</h4>
@@ -64,7 +66,7 @@
 
       <h4>Is the board moderated?</h4>
       <p>The Exchangivist admins reserves the right to delete any offending or inappropriate posts. In most cases we will attempt to contact the user before removing a post but that may not always be feasible. In the event of duplicate posts we may merge or delete posts as necessary.</p>
-
+      {% endblocktrans %}
     </div>
   </div>
 </div>

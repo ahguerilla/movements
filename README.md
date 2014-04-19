@@ -95,9 +95,46 @@ django-admin.py runserver --settings=app.settings.production
  quit
  \q
 
- #How to generate test data from the database
+#How to generate test data from the database
+
  Test data is already created but in case anyone needs to use different data that is how you do it:
   ./manage.py dumpdata --natural --indent=4 -e sessions -e admin -e contenttypes -e auth.Permission > test_data.json --setting=app.settings.local
   ./manage.py test market --liveserver=localhost:8082,8090-8100,9000-9200,7041 --setting=app.settings.local
 
 After you created test_data.json you need to copy it over the same file in fixutures directories that it is present
+
+##Translation
+
+After you applied south migration 0018 on user app run the below command to copy the existing values to the english column:
+./manage.py  update_translation_fields --setting=app.settings.foo
+
+Substitude -l no with -l <your language code>
+###Creating po files for javascripts
+./manage.py makemessages -d djangojs -e js -l nn --setting=app.settings.local
+###Creating po files for templates and django apps
+manage.py makemessages -l nn --setting=app.settings.local
+
+Dont forget to create a new migration for user app to translate countries issues and skills (make sm app=users)
+
+
+#Staging release proccess
+
+1- ssh ahr@162.243.119.212 and do a git pull in  /opt/ahr/ahr
+
+ 1.1 - You might need to add your remote to pull from your own repo
+
+2- ssh root@162.243.119.212 and restart apache (ahr is not a sudoer)
+
+3- You can start celery from /opt/ahr/ahr/app/tasks by issueing "nohup celery -A celeryworker worker&". (dont forget to kill the previous celery if its running)
+
+##Gotchas
+
+ - No stylus is setup on staging server (digital ocean). So you need to set:
+  ASSETS_DEBUG = False
+ In your local settings on your dev mahine and restart django and visit the market so the packed.css file gets created. After that you need
+ to overwrite the /opt/ahr/ahr/app/static/css/packed.css with your local file.
+
+ - In order to use Stylus @import and global variables I upgraded webassets to 0.9. But its ignorant of any changes in the imported
+ files. You need to increase the dummy counter in site.styl file every time you change something on one of the other stylus files :(
+ (Untill you find a way to tell the webassets to watch the other styl files.
+ It might be possible with the extra argument parameter in the settings file that I commented out)

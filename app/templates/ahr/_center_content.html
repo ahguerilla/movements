@@ -2,7 +2,7 @@
 $(document).ready(function(){
   marginContent = function(){
     var contentHeight = $("#main-content-container").height();
-    var pageHeight = $(window).height() - 300;
+    var pageHeight = $(window).height() - 150;
     var marginToAdd = (pageHeight - contentHeight)/2
     if(marginToAdd <= 0){ marginToAdd = 0; }
     $("#main-content-container").css("margin-top", marginToAdd+'px');

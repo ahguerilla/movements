@@ -1,0 +1,84 @@
+{% load i18n %}
+
+<script type="text/template" id="item-actions">
+  <div class="actions">
+    <% if (ownerid != window.ahr.user_id){ %>
+    <div href="#item/<%- pk %>" class="routehref actionitem">
+      <div class="text">
+         {% trans "View" %}
+      </div>
+    </div>
+    <div class="routehref actionitem dot">.</div>
+
+    <div owner="<%- owner %>"
+    rec_type="item"
+    item_id="<%- pk %>"
+    obj_id ="<%- pk %>"
+    subject = "<%- window.ahr.username %> {% trans "recommends:" %} <%- title %>"
+    message =
+"{% blocktrans %}Hey,
+
+Have a look at this <%-item_type%> on Exchangivist, I think you might <% if(item_type == 'offer'){ %> find it helpful<% } else { %>be able to help<% } %>.
+
+Best,
+{% endblocktrans %}<%- window.ahr.username %>"
+    class="recommend actionitem">
+      <div class="text">
+        {% trans "Recommend" %}
+      </div>
+    </div>
+    <div class="actionitem dot">.</div>
+
+    <div item_id="<%- pk %>" subject="Re: <%-title%>" username="<%- owner %>" class="private-message actionitem">
+      <div class="text">
+         {% trans "Private message" %}
+      </div>
+    </div>
+    <div class="actionitem dot">.</div>
+
+    <div item_id="<%- pk %>" class="report_post actionitem">
+      <div class="text">
+         {% trans "Report" %}
+      </div>
+    </div>
+
+    <div class="routehref actionitem right-on-big commentaction" title="Comment" href="#item/<%- pk %>">
+      <div class="item-glyph glyphicon glyphicon-comment"></div>
+      <% if (commentcount != 0){ %><span class="item-comment-count"><span class="commentcount"><%-commentcount%></span></span><%}%>
+    </div>
+
+    <div class="rate rate_user actionitem right-on-big"
+      item_id="<%- pk %>"
+      title="{% trans "Rate"%}"
+      rateing="user"
+      username="<%- owner %>"
+      score="<%- usercore %>"
+      image_src = "<%- avatar %>"
+      ratecount="<%- userratecount %>">
+      <div class="item-glyph glyphicon glyphicon-star-empty"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <%}%>
+    <% if (ownerid == window.ahr.user_id){ %>
+    <div href="#item/<%- pk %>" class="routehref actionitem">
+      <div class="text">
+         {% trans "View" %}
+      </div>
+    </div>
+    <div class="routehref actionitem dot">.</div>
+
+    <div item_id="<%- pk %>" class="edit actionitem" >
+      <div class="text">{% trans "Edit" %}</div>
+    </div>
+    <div class="actionitem dot">.</div>
+
+    <div item_id="<%- pk %>" class="delete actionitem" >
+      <div class="text"> {% trans "Delete" %}</div>
+    </div>
+    <div class="clearfix"></div>
+
+    <%}%>
+  </div>
+</script>

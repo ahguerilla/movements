@@ -20,6 +20,8 @@ except ImportError:
     now = datetime.datetime.now
 
 import logging
+
+
 logger = logging.getLogger(__name__)
 
 avatar_storage = get_storage_class(settings.AVATAR_STORAGE)()

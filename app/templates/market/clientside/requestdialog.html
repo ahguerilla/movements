@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">REQUEST A SERVICE</h4>
+        <h4 class="modal-title">{%trans "REQUEST A SERVICE"%}</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form" enctype="multipart/form-data" id="requestform">
@@ -42,17 +42,52 @@
 <script type="text/javascript">
 (function(){
     var RequestDialogView = window.ahr.item_form_base.extend({
-        el: '#requestform',
+        item: '',
+        el: '#requestdialog',
+
+        isDirty: function(){
+          data = this.getFormData();
+          if(typeof data.countries[0] === "undefined" &&
+            typeof data.issues[0] === "undefined" &&
+            data.details=== "" &&
+            data.title === "" &&
+            data.never_exp === false &&
+            data.exp_date === "") return false;
+          return true;
+        },
+
+        dialogShown: function(ev){
+          this.countries_widget.remakeScrollbar();
+          this.issues_widget.remakeScrollbar();
+        },
+
+        dialogHidden: function(ev){
+          var that=this;
+          if(that.changing==true){
+            $('input,textarea',$('#requestdialog')).val('');
+            that.issues_widget.empty();
+            that.countries_widget.empty();
+            that.changing=false;
+          }
+        },
+
+        dialogClosing: function(ev){
+          ev.stopImmediatePropagation();
+          if( !this.isDirty()) return true;
+          if (!this.closing && !confirm('{%trans "Are you sure you want to close this dialog?"%}')) {
+            return false;
+          }
+          this.emptyTheForm();
+        },
+
+
         init:function(){
-            var that=this;
-            this.url = window.ahr.app_urls.addmarketitem+'request';
-            $('#requestdialog').on('hidden.bs.modal',function(){
-              if(that.changing==true){
-              $('input,textarea',$('#requestdialog')).val('');
-              that.issues_widget.empty();
-              that.countries_widget.empty();
-              that.changing=false;
-            }
+          var that=this;
+          this.url = window.ahr.app_urls.addmarketitem+'request';
+          _.extend(this.events,{
+          'shown.bs.modal': 'dialogShown',
+          'hidden.bs.modal': 'dialogHidden',
+          'hide.bs.modal': 'dialogClosing'
           });
         },
 
@@ -92,23 +127,25 @@
             var that = this;
             this.issues_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_issues_place',
-                        {title:'I need help to advance freedom of:', jsonfield:'issues'},
-                        this.item_obj? this.item_obj.issues: null);
+                        {title:'{%trans "I need help to advance freedom of:"%}', jsonfield:'issues'},
+                        this.item_obj? this.item_obj.issues: null,
+                        window.GuerillaMarket.userDefaultTags['issues']);
 
             this.countries_widget = window.ahr.typeahead_widget.initWidget(
                         '#request_countries_place',
-                        {title:'Please enter the name of the countries where you can help',  jsonfield:'countries'},
-                        this.item_obj? this.item_obj.countries: null);
+                        {title:'{%trans "Please enter the name of the countries where you need help"%}',  jsonfield:'countries'},
+                        this.item_obj? this.item_obj.countries: null,
+                        window.GuerillaMarket.userDefaultTags['countries']);
 
             this.expdate_widget = window.ahr.datepicker_widget.initWidget(
                         '#request_exp_date_place',
-                        {title:'Expiry date', jsonfield:'exp_date'},
+                        {title:'{%trans "Expiry date"%}', jsonfield:'exp_date'},
                         this.item_obj);
 
             this.never_exp_widget = window.ahr.checkbox_widget.initWidget(
                       '#request_never_exp_place',
                       {
-                        title:'Never expires',
+                        title:'{%trans "Never expires"%}',
                         field:'never_exp2',
                         preval: this.item_obj? this.item_obj.never_exp : '',
                         callback: that.onNeverexpClick,
@@ -117,12 +154,12 @@
 
             this.title_widget = window.ahr.input_widget.initWidget(
                         '#request_title_place',
-                        {title:'Title of post', jsonfield:'title', placeholder:''},
+                        {title:'{%trans "Title of post"%}', jsonfield:'title', placeholder:''},
                         this.item_obj? this.item_obj.title : null);
 
             this.details_widget = window.ahr.textarea_widget.initWidget(
                         '#request_details_place',
-                        {title:'', jsonfield:'details', placeholder:'Please give details of what you need help with?'},
+                        {title:'', jsonfield:'details', placeholder:'{%trans "Please give details of what you need help with?"%}'},
                         this.item_obj? this.item_obj.details : null);
         },
 
@@ -134,10 +171,9 @@
           var that = this;
           $('#'+that.el.id+' #itemformerror').empty();
           $('#requestdialog').modal('show');
-
           window.ahr.getcsrf(function(csrf){
               if(csrf==false){
-                  that.alert('Unable to connect to the server. please try again in a few minutes','#infobar');
+                  that.alert('{%trans "Unable to connect to the server. please try again in a few minutes"%}','#infobar');
                   return;
               }
               that.csrf = csrf.csrfmiddlewaretoken;
@@ -147,13 +183,6 @@
             $('.bootstrap-datetimepicker-widget.dropdown-menu').each(function(){$(this).css('top',top+20);})
           });
           window.ahr.expandTextarea($('#details',$("#requestdialog")));
-           $('#requestdialog').on('hide.bs.modal',function(ev){
-            ev.stopImmediatePropagation();
-            if(!that.closing && !confirm('Are you sure you want to close this dialog?')){
-              return false;
-            }
-            that.emptyTheForm();
-          });
         },
 
         emptyTheForm:function(){

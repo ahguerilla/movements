@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load compress %}
+
+
+{% block outsidecontainer %}
+<div style="height:50px;"></div>
+<div id="market">
+  <!-- Banner -->
+  {% include "ahr/market_banner.html"%}
+  <!-- Filter Spacer -->
+  <div class="action-banner-spacer">
+  </div>
+  <div id="action-wrapper">
+    <div id="fixed-actions">
+      <div class="exchange-actions" >
+        <div class="container">
+          <div class="row">
+            <div id="create_offer" class="market-action pull-left">
+              <img src="{{ STATIC_URL }}images/offer-button-30x30.png" alt="{%trans "Create an offer"%}" />
+              <span>{%trans "Create an offer"%}</span>
+            </div>
+            <div id="create_request" class="market-action pull-left">
+              <img src="{{ STATIC_URL }}images/request-button-30x30.png" alt="{%trans "Create a request"%}" />
+              <span>{%trans "Create a request"%}</span>
+            </div>
+            <div class="filter-toggle-button filter-show right-on-big">
+              <button type="button"class="btn btn-default btn-xs" id="togglefilter" data-toggle="collapse" data-target="#market-filters">
+                <span id="filterbuttontext">&nbsp; {% trans "Show Filters" %} &nbsp;</span>
+                <span class="caret"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="filter-banner-spacer-black"></div>
+      <div id="filter-container"></div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-12">
+    <div id="itemandsearchwrap">
+      <!-- Search -->
+      <div class="row market-search-box">
+        <div class="input-group col-md-offset-2 col-md-8">
+          <form id="searchform">
+            <label class="sr-only" for="q">{%trans "Search by keyword for offers and requests"%}</label>
+            <input type="text" class="form-control" id="q" name="q" placeholder="{%trans "Search by keyword for offers and requests"%}" />
+            <input type="submit"/>
+          </form>
+          <span class="btn btn-default input-group-addon" id="searchbtn">{%trans "Search"%}</span>
+        </div>
+      </div>
+      <!-- Market Items -->
+      <div class="row">
+        <div class="col-md-12">
+          <div id="marketitems"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10" id="ajaxloader">
+      <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
+    </div>
+    <!--<div id="backtomarket-but-container" >-->
+      <!--<a  class="btn btn-sm btn-default pull-left" href="{% url 'show_market' %}#">{%trans "Back"%}</a>-->
+    <!--</div>-->
+    <div class="nanamorde-mobile col-md-4">
+      <div class="userprofile"></div>
+    </div>
+    <div class="row singleiteem-container">
+      <div class="col-md-8 left-on-big">
+        <div class="panel" id="backtothemarket"  style="margin-top:10px;">
+          <ol class="breadcrumb" style="margin-bottom: 0px;">
+            <li style="cursor:pointer;" class="">
+              <a id="backtoexchange" href="{% url 'show_market' %}#">{%trans "Exchange"%}</a>
+            </li>
+            <li class="active">
+              <span id="marketitem_title_breadc"></span>
+            </li>
+          </ol>
+        </div>
+        <div id="singleItem"></div>
+        <div id="marketitem_comment_form"></div>
+        <div id="marketitem_comments"></div>
+      </div>
+      <div class="col-md-4 dialog nanamorde">
+        <div class="userprofile"></div>
+        <div class="action-container"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block endjavascript %}
+  {% include "market/clientside/marketitem.html" %}
+  {% include "market/clientside/marketuser.html" %}
+  {% include "market/clientside/filtertag.html" %}
+  {% include "market/clientside/checkbox.html" %}
+  {% include "market/clientside/typetag.html" %}
+  {% include "market/clientside/filters.html"%}
+
+  {% include "market/clientside/expdate.html"%}
+  {% include "market/clientside/datetimepicker.html"%}
+  {% include "market/clientside/datepicker.html"%}
+  {% include "market/clientside/typeahead.html" %}
+  {% include "market/clientside/input.html" %}
+  {% include "market/clientside/textarea.html" %}
+
+  {% include "market/clientside/commentview.html" %}
+  {% include "market/clientside/commentadd.html" %}
+  {% include "market/clientside/messagedialog.html" %}
+  {% include "market/clientside/recommenddialog.html" %}
+  {% include "market/clientside/ratedialog.html" %}
+  {% include "market/clientside/reportdialog.html" %}
+  {% include "market/clientside/offerdialog.html"%}
+  {% include "market/clientside/requestdialog.html"%}
+  {% include 'market/clientside/userprofile.html' %}
+  {% include 'market/clientside/reportuserdialog.html' %}
+  {% include "market/clientside/actions/actions.html"%}
+
+  {% compress js inline %}
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+    window.GuerillaMarket = window.GuerillaMarket || {};
+    window.GuerillaMarket.userDefaultTags = {{tags|safe}};
+    var dfrd = window.ahr.getStatics();
+    dfrd.done(function(){
+      if("{{init}}"=="market"){
+        window.ahr.market.initMarket({{tags|safe}});
+      }else if("{{init}}"=="posts"){
+        window.ahr.posts.initPosts({{tags|safe}});
+      }else if ("{{init}}"=="users"){
+        window.ahr.users.initUsers({{tags|safe}});
+      }
+    });
+  });
+
+  </script>
+  {% endcompress %}
+
+{% endblock %}
+
+

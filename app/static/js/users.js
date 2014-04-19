@@ -1,13 +1,14 @@
 (function(){
-
+    $('.nanamorde').hide();
     var UserRoute = Backbone.Router.extend({
         routes:{
             "": "page"
         },
 
         page: function(page){
+            this.users.showMarket();
             this.users.initInfiniteScroll();
-            $(window).scrollTop('100');
+            this.users.scrollBack();
         },
 
         initialize: function(users){
@@ -24,13 +25,15 @@
 
         initialize : function(filters){
             var that = this;
+            this.item_type = 'user';
             this.getitemfromto = window.ahr.app_urls.getuserfromto;
             this.viewurl = window.ahr.app_urls.viewuserprofile;
             this.item_tmp = _.template($('#user-template').html());
             this.item_widget = window.ahr.marketuser_widget.initWidget('body',that);
-
-            filters.types=[];
             this.init(filters);
+            this.filter_widget.filters.types = ['offer', 'request'];
+            this.filter_widget.types = this.types;
+
             window.ahr.expandTextarea('#newmessage');
             $('#q').typeahead({
                limit: 5,
@@ -39,23 +42,26 @@
                  window.location = window.ahr.app_urls.viewuserprofile+d.value;
             });
 
-            this.delegateEvents(_.extend(this.events,{
+            $('#filter-offer-text').text(gettext('Exchangivists Offering'));
+            $('#filter-request-text').text(gettext('Exchangivists Requesting'));
+            $('#info-panel-container').remove();
+            $('#singleItem').show();
+
+            this.events = _.extend(this.events,{
                 'click .item_container': 'showItem'
-            }));
-            $('#filter-offer-text').text('Exchangivists Offering');
-            $('#filter-request-text').text('Exchangivists Requesting');        
+            });
+            this.filter_widget.HideShowHidden();
             return this;
         },
     });
-
     window.ahr= window.ahr || {};
     window.ahr.users = window.ahr.users || {};
-    window.ahr.users.initUsers = function(filters){        
-        $('#q').attr('placeholder','Search by keyword or username for Exchangivists');
+    window.ahr.users.initUsers = function(filters){
+        $('#q').attr('placeholder',gettext('Search by keyword or username for Exchangivists'));
         window.ahr.usersview = new UsersView(filters);
         var user_route = new UserRoute(window.ahr.usersview);
         Backbone.history.start();
-        document.title = "Exchangivists";
+        document.title = gettext("Exchangivists");
     };
 
 })();

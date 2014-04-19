@@ -16,6 +16,7 @@ js = Bundle(
         './js/lib/tagmanager.js',
         './js/lib/typeahead.js',
         './js/lib/jquery.blockUI.js',
+        './js/lib/jquery.mCustomScrollbar.min.js',
         './js/lib/jstz.js',
         './js/lib/jquery.backstretch.min.js',
         './js/lib/masonry.pkgd.js',
@@ -36,11 +37,12 @@ js = Bundle(
 
 if settings.PRODUCTION or settings.STAGING:
     css = Bundle(
-        './css/bootstrap.css',
-        './css/bootstrap-datetimepicker.min.css',
-        './css/tagmanager.css',
-        './css/typeahead.css',
-        './css/rateit.css',
+        './css/lib/bootstrap.css',
+        './css/lib/bootstrap-datetimepicker.min.css',
+        './css/lib/tagmanager.css',
+        './css/lib/typeahead.css',
+        './css/lib/jquery.mCustomScrollbar.css',
+        './css/lib/rateit.css',
         './css/packed.css',
         filters='cssmin',
         output='./css/spacked.css'
@@ -48,15 +50,15 @@ if settings.PRODUCTION or settings.STAGING:
 else:
     css = Bundle(
         Bundle(
-            './css/bootstrap.css',
-            './css/bootstrap-datetimepicker.min.css',
-            './css/tagmanager.css',
-            './css/typeahead.css',
-            './css/rateit.css'
+            './css/lib/bootstrap.css',
+            './css/lib/bootstrap-datetimepicker.min.css',
+            './css/lib/tagmanager.css',
+            './css/lib/typeahead.css',
+            './css/lib/jquery.mCustomScrollbar.css',
+            './css/lib/rateit.css'
             ),
         Bundle(
             './css/site.styl',
-            './css/market.styl',
             './css/site-sm.styl',
             './css/site-xs.styl',
             filters='stylus',

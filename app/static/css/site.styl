@@ -1,3 +1,4 @@
+$dummy-counter = 241
 $bg-color = #f4f4f4
 $text-color = #596066
 $header-text = #a3a3a3
@@ -12,8 +13,27 @@ $warning-bg-color = rgba(185, 74, 72, 0.69)
 $std-border-radius = 10px
 $modal-dialog-bg = #EAEAEA
 
-.filterscroll
-  overflow-y scroll
+//$issues-color = #FFF4D8
+//$countries-color = #DAF6FF
+//$skills-color = #FFDED8
+
+//$issues-color = #96D5E9
+//$countries-color = #CCF2FF
+//$skills-color = #DAF6FF
+
+//$issues-color = #cdcdcd
+//$countries-color = #e8e8e8
+//$skills-color = #fbfbfb
+
+$issues-color = #e8e8e8
+$countries-color = #e8e8e8
+$skills-color = #e8e8e8
+
+
+#google_translate_element
+  margin-top: 12px;
+.goog-te-banner-frame
+  top -100px!important
 
 vendor(prop, args)
   -webkit-{prop} args
@@ -63,8 +83,12 @@ body
 .narrow .container
   max-width 970px
 
-#main-content-container
-  margin-top 10px
+.backstretch
+  background-color rgba(0, 0, 0, 0.63)
+
+.round-image
+  img
+    border-radius 50%
 
 .alert
   border-radius 15px
@@ -82,13 +106,44 @@ body
     text-decoration none
     background-color #f5f5f5
 
-
-
 .btn:focus
   outline: none
 
+.dialog
+  h1
+    margin-top 0
+    font-size 2em
+    color #59606A
+  h2
+    color #59606A
+  h3
+    color #59606A
+  h4
+    color #59606A
+  a
+    color $text-color
+    text-decoration underline
+  a.btn
+    text-decoration none
+  padding 15px
+  background-color $dialog-bg-color
+  border-radius $std-border-radius
+
 pre
   word-break: normal
+  font-family Helvetica, Arial, sans-serif;
+  font-size 14px
+  background-color white
+
+.modal-content
+  background-color $modal-dialog-bg
+  .modal-title
+    color $text-color
+  .modal-title
+    margin-left 5px
+  .modal-footer
+    padding 0
+    padding-top: 15px
 
 /******************************************************************************
  * Site styles
@@ -99,10 +154,6 @@ body
 
 h1, h2, h3, h4
   color $header-text
-
-#market.market
-  .delete-item
-    display none
 
 .hr-no-margin
   margin-bottom: 0
@@ -126,46 +177,71 @@ h1, h2, h3, h4
     color $warn-color
     list-style none
 
+.selected
+  background-color $filter-item-selected
+  color white
+.selected:hover
+  background-color $filter-item-selected
+  color white
+
+.hidelarge
+  display none
+
+.nanamorde-mobile
+  display none
+
+.nanamorde
+  display none
+  margin-top 12px
+
+.left-on-big
+  float left
+
+.right-on-big
+  float right
+
+.grey-spacer
+  height: 32px
+
+.header-spacer
+  height: 10px
+
 .col-spacing-bottom
   margin-bottom: 15px
+
+.affix
+  width: 100%
+  top: 51px
+  z-index: 100
+  position fixed
+
 
 select.input-extra-height
   height: 90px
 
-.item_container:hover
+
+.market-action:hover
   cursor: pointer
 
-.item-contents
-  max-height: 101px
-  overflow: hidden
+.action-banner-spacer
+  background-color: #FFF
+  height: 2px
 
-.multi-line-text
-  white-space: pre-wrap
+.exchange-actions
+  color: #FFF
+  background-color: $filter-background
+  padding-bottom: 5px
+  padding-top: 5px
 
-.messagelist
-  a
-    text-decoration none
-  .messageavatar
-    width: 60px
-    float: left
-    input
-      vertical-align: middle
-  .message-well
-    background-color
-    padding: 0px
-    height: 47px
-    overflow: hidden
-    border-top: 1px solid $border-color
-  .message:last-child
-    .message-well
-      border-bottom: 1px solid $border-color
-  .sender
-    line-height 47px
-  .subject
-    white-space: nowrap;
-    overflow: hidden;
-    line-height 47px
-    text-overflow ellipsis
+.rateit
+  vertical-align middle
+
+.action-container
+  margin-bottom 0px;
+
+#main-content-container
+  margin-top 10px
+
 
 .hero-text
   color #fff
@@ -185,97 +261,6 @@ select.input-extra-height
     color $text-color
   p
     margin-bottom 20px
-
-
-.backstretch
-  background-color rgba(0, 0, 0, 0.63)
-
-.round-image
-  img
-    border-radius 50%
-
-.dialog
-  h1
-    margin-top 0
-    font-size 2em
-    color #59606A
-  h2
-    color #59606A
-  h3
-    color #59606A
-  h4
-    color #59606A
-  a
-    color $text-color
-    text-decoration underline
-  a.btn
-    text-decoration none
-  padding 15px
-  background-color $dialog-bg-color
-  border-radius $std-border-radius
-
-.footer-logos
-  margin-top: 20px
-  .middle
-    text-align center
-  .right
-    text-align right
-
-.affix
-  width: 100%
-  top: 51px
-  z-index: 100
-  position fixed
-
-.nonotif
-  display inherit
-  color #777!important
-
-
-.notif
-  display inherit
-  color #428BCA!important
-
-
-.notif-seen.false
-  background-color #f4f6f9
-
-#bellonlarge
-  padding-top 3px
-
-.navbar-admin
-  background-color: red
-
-a.navavatar
-  margin: 0 !important
-  padding: 0 !important
-  img
-    margin 5px 10px
-    width: 40px
-    height: 40px
-    border-radius 50%
-
-.footer-nav
-  // z-index: 5000
-  background: rgba(20,20,20,0.95)
-  color: #fff
-  text-align: center
-  margin-left: -10px
-  padding-right: 10px
-  border-color: $text-color
-  text-align: center
-  .navbar-nav
-    float: none
-  ul
-    display: inline-block
-  .footer-nav-content
-    height: 45px
-    a
-      line-height: 45px
-      color: #fff
-      text-decoration: none
-    a:hover
-      color: $text-color
 
 
 .sign-up-form, .public
@@ -309,307 +294,15 @@ a.navavatar
     color $text-color
     padding-left 30px
 
-#market
-  .exchange-banner.users
-    background-image: url('../images/exchangivists-banner.jpg')
-  .exchange-banner.posts
-    background-image: url('../images/homepage-banner.jpg')
-
-.exchange-banner
-  background: url('../images/myexchange-banner.jpg') no-repeat
-  background-position: center
-  background-size: cover
-  background-color: #FFF
-  h1
-    color: $text-color
-  .exchange-opacity
-    min-height: 300px
-    .dialog
-      border-radius 0
-
-
 #settingform
   label
     margin-top 5px
     margin-bottom 9px
 
-.settings-change-avatar
-  text-align: center
-  margin-top: 10px
-  img
-    border-radius 50%
-  h2
-    margin-top 0
-  .tag-line
-    margin-bottom: 10px
-
-
-.profile-item
-  margin-bottom: 10px
-
-.profile-label
-  font-weight: bold
-
-
-.message-text
-  margin-bottom: 10px
-
-.market-action:hover
-  cursor: pointer
-
-.filter-banner-spacer
-  background-color: #FFF
-  height: 2px
-
-.grey-spacer
-  height: 32px
-
-.header-spacer
-  height: 10px
-
-.filter-banner-spacer-black
-  background-color: #444d54
-  height: 2px
-
-.exchange-filter
-  color: #FFF
-  background-color: $filter-background
-  //min-height: 40px
-  padding-bottom: 10px
-  .market-filter-main
-    position: relative
-    .market-action
-      margin-bottom: 10px
-    .market-filter-border
-      border-right: 1px solid #FFF
-      position: absolute
-      //margin-top: 10%
-      height: 100%
-      right: 0
-    .first
-      margin-top: 35px
-    .market-action:hover
-      cursor: pointer
-  .filter-title
-    text-align: center
-    margin-bottom: 10px
-    margin-top: 10px
-  .filter-show
-    margin-top:10px
-    text-align: right
-  .filter-tag
-    .btn-success
-      color: #FFF
-      background-color: $filter-item-selected
-      border-color: $filter-item-selected
-    .btn-success:hover,
-    .btn-success:focus,
-    .btn-success:active,
-    .btn-success.active,
-    .open .dropdown-toggle.btn-success
-      border-color: #3a3a3a;
-
-.filter-bulk-selector.btn-default.active
-    background-color #444d54
-    color white
-    border-color #444d54
-
-.market-search-box
-  margin-bottom 10px
-  .input-group
-    .form-control
-      border-radius 10px 0 0 10px !important
-  .tt-hint
-    border-radius 10px
-
-#no-search-result
-  text-align center
-
-.market-item-card
-  border-radius 5px
-  background-color: #FFF
-  margin-bottom: 15px
-  box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.5);
-  padding: 3px
-  .dropdown-menu
-    left: auto
-    right: 0
-    top: 15px
-  .item-menu
-    margin-right: 5px
-    cursor: pointer
-  .item-header
-    font-weight: bold
-    padding: 5px 3px 3px 5px
-    border-radius 5px
-    margin-bottom: 5px
-    height: 30px
-    span
-      font-size: 10px
-    a
-      color: $text-color
-    .item-header-clickable
-      float:left
-      width:85%
-      height: 30px
-  .request
-    background-color: $request-color
-  .offer
-    background-color: $offer-color
-  .user
-    background-color: $request-color
-  .item-title
-    padding: 5px
-    font-weight: bold
-    .item-icon
-      float: left
-      width: 50px
-      height: 50px
-      margin-right: 5px
-    .request
-      background: url('../images/request-button-50x50.png') no-repeat
-    .offer
-      background: url('../images/offer-button-50x50.png') no-repeat
-  .item-body
-    padding: 5px
-  .item-tags
-    padding: 5px
-
-.item-tags
-  font-size: 10px
-  .item-comment-count
-    margin-bottom: 5px
-  .btn-xs
-    font-size: 10px
-    color: #000
-    background-color: #eeeeee
-    border-color: #cccccc
-    margin-bottom: 3px
-
-.user-card
-  .item-title
-    text-align: center
-    img
-      border-radius: 50%
-
-#postman_message
-  #back
-    visibility hidden;
-  hr
-    margin-top 5px
-    margin-bottom 5px
-
-#messagelist
- hr
-    margin-top 5px
-    margin-bottom 5px
-
-#conversation
-  background white
-  .panel-footer
-    background white
-  a
-    color $text-color
-  a:hover
-    text-decoration none
-
-#conversation-cont
-  display none
-  .breadcrumb
-    background-color #fff
-
-.market-place-item
-  width: 32.4%
-  margin-left: 4px;
-  margin-right: 4px;
-
-#marketitemdialog
-  .market-place-item
-    width 100%
-
-.messageavatar>img
-  border-radius 50%
-  margin-top 3px
-
-
-.comment
-  margin-bottom 10px
-  .comment-inner
-    padding 10px
-    background-color #fff
-    border 1px solid #ccc
-    border-radius 5px
-  .comment-content pre
-    margin-top 10px
-    background-color inherit
-    border none
-    padding 0
-
-pre
-  font-family Helvetica, Arial, sans-serif;
-  font-size 14px
-  background-color white
-
-#singleItem
+.settings-page-error
+  margin-bottom -17px
+  margin-left 15px
   margin-top 10px
-  .market-place-item
-    width 100%
-    margin 0 auto
-  .routehref
-    cursor default
-
-
-#marketitem_comments
-  margin-top 70px
-
-#marketitem_comment_form
-  display none
-
-
-.routehref:link
-  text-decoration: none
-  color $text-color
-
-
-.routehref:visited
-  text-decoration: none
-  color $text-color
-
-.routehref:active
-  text-decoration: none
-  color $text-color
-
-.routehref:hover
-  text-decoration: none
-  color $text-color
-
-.profile-avatar
-  text-align: center
-  img
-    border-radius: 50%
-
-.modal-content
-  background-color $modal-dialog-bg
-  .modal-title
-    color $text-color
-  .modal-title
-    margin-left 5px
-  .modal-footer
-    padding 0
-    padding-top: 15px
-
-#backtothemarket
-  visibility hidden
-
-
-#issues_place, #countries_place, #skills_place, #request_issues_place ,#request_countries_place
-  .input-sm
-    height 35px
-    padding 10px 12px
-    font-size 14px
-
-.filtergroup
-  margin-bottom 10px
 
 #changeavatardialog
   ul
@@ -627,49 +320,49 @@ pre
     -o-border-radius: 50%;
     border-radius: 50%;
 
+.settings-change-avatar
+  text-align: center
+  margin-top: 10px
+  img
+    border-radius 50%
+  h2
+    margin-top 0
+  .tag-line
+    margin-bottom: 10px
+
+.profile-item
+  margin-bottom: 10px
+
+.profile-label
+  font-weight: bold
+
+.user-profile
+  .actions
+    width 350px
+    margin-right 5px
+    float right
+    margin-top -10px
+
+.miniprof-score
+  display none
+
+.profile-avatar
+  text-align: center
+  img
+    border-radius: 50%
+
+.market-search-box
+  margin-bottom 10px
+  .input-group
+    .form-control
+      border-radius 10px 0 0 10px !important
+  .tt-hint
+    border-radius 10px
+
 
 li.list-group-item
   line-height: 30px
   padding-bottom: 0
-
-.put-in-nav
-   display inline-block
-
-.settings-page-error
-  margin-bottom -17px
-  margin-left 15px
-  margin-top 10px
-
-
-.selected
-  background-color $filter-item-selected
-  color white
-.selected:hover
-  background-color $filter-item-selected
-  color white
-
-
-.hidelarge
-  display none
-
-.nanamorde-mobile
-  display none
-
-.nanamorde
-  display block
-  margin-top 12px
-
-.left-on-big
-  float left
-
-.right-on-big
-  float right
-
-.conv_link
-  cursor pointer
-
-.action-container
-  margin-bottom 0px;
 
 #pm_messages
   .action-container
@@ -678,48 +371,14 @@ li.list-group-item
   .actionitem
     padding 2px
 
-.actions
-  background-color $bg-color
-  margin-top 3px
-  padding-left 5px
-  padding-right 5px
-  .right-on-large
-    float right
-    margin-top 3px
-  a
-    text-decoration none
-    color $text-color
-
-  .commentcount
-    font-size 85%
-    //vertical-align super
-    margin-left -5px
-
-  .actionitem
-    background-color $bg-color
-    padding 5px!important
-    cursor pointer
-    text-align center
-    display inline-block
-    height 30px
-
-  .item-glyph
-    font-size 100%
-
-  .text
-    font-size 80%
-    padding-top 3px
-    &:hover
-      text-decoration underline
-
-  &.user-profile
-    width 350px
-    margin-right 5px
-    float right
-    margin-top -10px
-  .routehref.actionitem
-    width auto
-    .commentcount
-      margin-left 0px
-      vertical-align top
-
+/******************************************************************************
+ * Imports
+ */
+@import 'market/actions'
+@import 'market_common'
+@import 'marketitem'
+@import 'filter'
+@import 'navbar'
+@import 'postman'
+@import 'typeahead_widget'
+@import 'comment'

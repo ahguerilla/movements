@@ -4,7 +4,7 @@
 {% autoescape off %}
 {% blocktrans with current_site.name as site_name %}
 Dear Exchangivist,
-    
+
 Thank you for signing up to Exchangivist. Please confirm your email address by clicking on the link below.
 
 {{ activate_url }}

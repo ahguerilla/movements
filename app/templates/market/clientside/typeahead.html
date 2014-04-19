@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load compress %}
 
 <script type="text/template" id="typeahead_template">
@@ -7,14 +8,19 @@
   <div class="col-md-12">
     <label for="<%- item %>"><%- title %></label>
     <div class="input-group">
-      <input id="<%- item %>" class="form-control input-sm typeaheadtag_input" type="text"/>
-      <span class="input-group-addon <%- item %>">
-        <span class="glyphicon <%- item %>">Add</span>
-      </span>
+      <input id="<%- item %>" class="form-control input-sm typeaheadtag_input" type="text" placeholder="{%trans "Click here to see your choices"%}"/>
+      <div class="input-group-btn <%- item %>">
+      <button class="btn btn-default all <%- item %>">{%trans "All"%}</button>
+      <% if(hasDefault.length > 0){%>
+      <button class="btn typeahead-btn btn-default def <%- item %>">{%trans "Defaults"%}</button>
+      <% }else{ %>
+      <button class="btn typeahead-btn btn-default def <%- item %>">{%trans "None"%}</button>
+      <% } %>
+      </div>
     </div>
   </div>
-  <div class="col-md-12" style="margin-top:5px">
-    <div class="input-group" id="<%- item %>Tags"></div>
+  <div class="col-md-12 tag-buttons-fortypeahead-container">
+    <div class="input-group tag-buttons-fortypeahead" id="<%- item %>Tags"></div>
   </div>
 </script>
 
@@ -25,7 +31,23 @@
 
     var TypeaheadWidget = window.ahr.BaseView.extend({
       tagdict: {},
-      events:{},
+      events:{
+        'click .btn.all': 'allClicked',
+        'click .btn.def': 'defClicked'
+      },
+
+      allClicked:function(ev){
+        $('.tag-buttons-fortypeahead', $(this.container)).mCustomScrollbar('destroy');
+        ev.preventDefault();
+        this.change(_.values(this.tagdict));
+      },
+
+      defClicked:function(ev){
+        $('.tag-buttons-fortypeahead', $(this.container)).mCustomScrollbar('destroy');
+        ev.preventDefault();
+        this.change(this.defaults);
+      },
+
       change: function (values) {
         var that = this;
         this.empty();
@@ -33,7 +55,12 @@
         for (var i in this.pref) {
           $('#' + that.settings.jsonfield, $(this.container)).tagsManager('pushTag', this.pref[i]);
         }
+        $('.tag-buttons-fortypeahead', $(this.container)).mCustomScrollbar();
+      },
 
+      remakeScrollbar:function(){
+        $('.tag-buttons-fortypeahead', $(this.container)).mCustomScrollbar('destroy');
+        $('.tag-buttons-fortypeahead', $(this.container)).mCustomScrollbar();
       },
 
       typeAheadTemplate: function (title, item) {
@@ -42,7 +69,8 @@
         }
         return this.typeAheadTag({
           'title': title,
-          'item': item
+          'item': item,
+          'hasDefault': this.defaults
         });
       },
 
@@ -126,7 +154,6 @@
         that.typeahead.on('typeahead:opened', function (e, d) {
           that.clicked = true;
         });
-
         func(this.values);
       },
 
@@ -166,7 +193,6 @@
               }
             }
           });
-
         });
       },
 
@@ -209,6 +235,7 @@
         this.container = initobj.container;
         this.settings = initobj.settings;
         this.preset = initobj.preset;
+        this.defaults = initobj.defaults;
         this.typeaheadval = [];
         this.values = [];
         this.tagdict = {};
@@ -222,22 +249,24 @@
           this.values.push(data[i].value);
           this.tagdict[data[i].value] = data[i].pk;
         }
+
         $(this.container).html(this.typeAheadTemplate(this.settings.title, this.settings.jsonfield));
         this.makeWidget(this.settings.jsonfield, this.preset ? this.preset : null);
         events ={}
         events['click .input-group-addon.'+ this.settings.jsonfield ] = 'addPressed';
-        this.delegateEvents(_.extend(this.events,events));
+        _.extend(this.events,events);
       }
 
     });
 
     window.ahr.typeahead_widget = window.ahr.typeahead_widget || {};
-    window.ahr.typeahead_widget.initWidget = function (container, settings, preval) {
+    window.ahr.typeahead_widget.initWidget = function (container, settings, preval, defaults) {
       var widget = new TypeaheadWidget({
         el: container,
         'container': container,
         'settings': settings,
-        'preset': preval
+        'preset': preval,
+        'defaults': defaults
       });
       return widget;
     };

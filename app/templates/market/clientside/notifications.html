@@ -1,18 +1,19 @@
+{% load i18n %}
 {% load compress %}
 <script type="text/template" id="notifications_template">
     <li class="list-item notif-seen <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
         <a href="/market/#item/<%- notif.item_id %>" style="display:inline-block;">
             <div class="pull-left">
-             <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>                                                                        
+             <img style="border-radius:50%;" width="30" height="30" src="<%- notif.avatar %>"/>
             </div>
             <div style="width:220px;white-space:normal;float:right;margin-left:8px;">
                 <div style="max-height:40px;overflow:hidden;">
                 <% if(notif.read==false){ %><strong><%}%>
                 <% if(notif.comment===null){ %>
-                    <%- notif.owner %> <% if(notif.text.update==true ){ %>updated<%}else { %> posted <%}%> the
+                    <%- notif.owner %> <% if(notif.text.update==true ){ %>{%trans "updated"%}<%}else { %> {%trans "posted"%} <%}%> the
                     <%- notif.item_type %> "<%- notif.text.title %>"
                 <% }else{ %>
-                    <%- notif.comment_user %> commented on <% if(notif.owner_id==window.ahr.user_id){ %>your<%}%> <%- notif.item_type %> "<%- notif.text.title %>"
+                    <%- notif.comment_user %> {%trans "commented on "%}<% if(notif.owner_id==window.ahr.user_id){ %>{%trans "your"%}<%}%> <%- notif.item_type %> "<%- notif.text.title %>"
                 <% } %>
                 <% if(notif.read==false){ %></strong><%}%><br/>
                 </div>

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load compress %}
 
 <div id="recommenddialog" class="modal fade">
@@ -5,29 +6,30 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Recommed<span id="usernameh"></span></h4>
+        <h4 class="modal-title">{%trans "Recommed this"%}<span id="rec-thing"></span></h4>
         <div id="recerror"></div>
       </div>
       <div class="modal-body">
-        <label for="touser">To</label>
+        <label for="touser">{%trans "To registered user"%}</label>
         <div style="margin-bottom:5px;">
-          <input  class="form-control" id="touser" type="text" name="subject" required="true"/>
+          <input  class="form-control" id="touser" type="text" name="subject" required="true" placeholder="{%trans "Start typing a username"%}"/>
         </div>
-        <label for="recsub">Subject</label>
+
+        <label for="recsub">{%trans "Subject"%}</label>
         <div style="margin-bottom:5px;">
           <input  class="form-control" id="recsub" type="text" name="subject" required="true"/>
         </div>
-        <label for="recmessage">Message</label>
+        <label for="recmessage">{%trans "Message"%}</label>
         <div>
           <textarea class="form-control" name="recmessage" id="recmessage" rows="4" placeholder="" required="true"></textarea>
         </div>
         <div class="modal-footer">
           <div class="row">
             <div class="col-xs-6 col-md-offset-6 col-md-3">
-              <button type="button" class="btn full-width cancelrec" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn full-width btn-default cancelrec" data-dismiss="modal">{%trans "Cancel"%}</button>
             </div>
             <div class="col-xs-6 col-md-3">
-              <button type="button" class="btn full-width btn-default sendrec">Send</button>
+              <button type="button" class="btn full-width btn-default sendrec">{%trans "Send"%}</button>
             </div>
           </div>
         </div>
@@ -43,7 +45,26 @@
    var RecommendDialog = window.ahr.BaseView.extend({
      el: 'body',
      events: {
-       'click .sendrec': 'send'
+       'click .sendrec': 'send',
+       'click .recommend': 'show'
+     },
+
+     show: function(ev){
+      var subject = ev.currentTarget.getAttribute('subject'),
+        message = ev.currentTarget.getAttribute('message'),
+        obj_id = ev.currentTarget.getAttribute('obj_id'),
+        rec_type = ev.currentTarget.getAttribute('rec_type');
+      this.setup(rec_type, obj_id, subject, message);
+     },
+
+     setHeader: function(rec_type){
+      var dialog_header;
+      if(rec_type === "user"){
+        dialog_header = ' user';
+      }else{
+        dialog_header = ' post';
+      }
+      $('#rec-thing').text(dialog_header);
      },
 
      setup: function (rec_type, obj_id, subject, message) {
@@ -57,7 +78,8 @@
        $('#recsub').attr('readonly', false);
        $('#recmessage').val(message);
        $('#touser').val('');
-       $('#recmessage').height(100);
+       $('#recmessage').height(130);
+       this.setHeader(rec_type);
        $('#recommenddialog').modal('show');
      },
 
@@ -88,11 +110,11 @@
            });
            dfrd.fail(function () {
              $('.sendrec').prop('disabled', false);
-             that.alert('Failed to send message', '#recerror');
+             that.alert('{%trans "Failed to send message"%}', '#recerror');
            });
          });
        } else {
-         this.alert('Please enter both a subject and a message.', '#recerror');
+         this.alert('{%trans "Please enter both a subject and a message."%}', '#recerror');
        }
      },
 
@@ -103,7 +125,7 @@
        window.ahr.expandTextarea('#recmessage');
        $('#recommenddialog').on('shown.bs.modal',function(){
         $('#recmessage').trigger('focus');
-      });  
+      });
      }
    });
    window.ahr.recommend_widget = window.ahr.recommend_widget || {};

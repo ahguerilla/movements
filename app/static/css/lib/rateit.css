@@ -16,7 +16,7 @@
     position: relative;
     display: -moz-inline-box;
     display: inline-block;
-    background: url('../images/star.gif');
+    background: url('/static/images/star.gif');
     height: 16px;
     outline: none;
 }
@@ -26,7 +26,7 @@
     position: relative;
     display: -moz-inline-box;
     display: inline-block;
-    background: url('../images/star2.gif');
+    background: url('/static/images/star2.gif');
     height: 16px;
     outline: none;
 }
@@ -61,11 +61,11 @@
 
 .rateit .rateit-hover
 {
-    background: url('../images/star.gif') left -32px;
+    background: url('/static/images/star.gif') left -32px;
 }
 .rateit.redstars .rateit-hover
 {
-    background: url('../images/star2.gif') left -32px;
+    background: url('/static/images/star2.gif') left -32px;
 }
 
 .rateit .rateit-hover-rtl
@@ -75,11 +75,11 @@
 
 .rateit .rateit-selected
 {
-    background: url('../images/star.gif') left -32px;
+    background: url('/static/images/star.gif') left -32px;
 }
 .rateit.redstars .rateit-selected
 {
-    background: url('../images/star2.gif') left -32px;
+    background: url('/static/images/star2.gif') left -32px;
 }
 
 
@@ -91,20 +91,20 @@
 
 .rateit .rateit-preset
 {
-    background: url('../images/star.gif') left -48px;
+    background: url('/static/images/star.gif') left -48px;
 }
 .rateit.redstars .rateit-preset
 {
-    background: url('../images/star2.gif') left -48px;
+    background: url('/static/images/star2.gif') left -48px;
 }
 
 .rateit .rateit-preset-rtl
 {
-    background: url('../images/star.gif') left -48px;
+    background: url('/static/images/star.gif') left -48px;
 }
 .rateit.redstars .rateit-preset-rtl
 {
-    background: url('../images/star2.gif') left -48px;
+    background: url('/static/images/star2.gif') left -48px;
 }
 
 .rateit button.rateit-reset

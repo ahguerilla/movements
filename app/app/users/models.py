@@ -8,7 +8,6 @@ from django.db.models import Q
 from django.core.urlresolvers import reverse
 
 
-
 class Skills(models.Model):
     skills = models.CharField(_('skill set'), max_length=255, null=True)
 
@@ -92,7 +91,9 @@ class UserProfile(models.Model):
     firstlogin = models.BooleanField(_('first_login'), default=True)
     ratecount = models.IntegerField(_('ratecount'), default=0)
     score = models.FloatField(_('score'), default=0)
+    interface_lang = models.CharField(_('Interface language'), max_length=3, default='en')
     notperm = JSONField(blank=True)
+
 
     def get_twitter_url(self):
         base_twitter = 'https://twitter.com/'

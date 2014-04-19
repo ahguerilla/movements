@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from postman.api import pm_write
 
 from app.market.api.utils import *
+from app.market.models import MarketItem
 import app.users as users
 from django.utils.cache import get_cache
 cache = get_cache('default')
@@ -41,16 +42,15 @@ def create_query(request):
 
         if None in ids:
             ids.remove(None)
-
         ids = [int(id) for id in ids]
-
         if request.user.userprofile.id in ids:
             ids.remove(request.user.userprofile.id)
 
         query = query & Q(id__in = ids)
 
     if request.GET.has_key('types'):
-        query = query & Q(user__marketitem__item_type__in=request.GET.getlist('types'))
+        if len(request.GET.getlist('types'))<2:
+            query = query & Q(user__marketitem__item_type__in=request.GET.getlist('types'))
 
     return query & ~Q(user__id=request.user.id)
 
@@ -59,8 +59,6 @@ def create_query(request):
 def get_avatar(request, obj_id, size, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     obj = user.avatar_set.all()
-    #if obj != []:
-        #return HttpResponse(value(rtype,obj),mimetype="application"+rtype)
     return HttpResponse( json.dumps({'pk': 0, 'avatar': reverse('avatar_render_primary', args=[user.username,size])}),mimetype="application"+rtype)
 
 
@@ -106,15 +104,18 @@ def send_message(request, to_user, rtype):
 
 @login_required
 def send_recommendation(request, rec_type, to_user, obj_id, rtype):
+    additionals =''
     if rec_type == 'item':
         href = '<!--item="'+obj_id+'"-->'
+        additionals = MarketItem.objects.values('title').get(pk=obj_id)['title']
     else:
         href = '<!--user="'+obj_id+'"-->'
+        additionals = obj_id
     try:
         pm_write(sender=request.user,
                  recipient=users.models.User.objects.filter(username=to_user)[0],
-                 subject=request.POST['subject'],
-                 body=request.POST['message']+'\r\n'+href)
+                 subject=request.POST['subject'][:120] if len(request.POST['subject'])>120 else request.POST['subject'],
+                 body=request.POST['message']+'\r\n----------------------------------------\r\n'+additionals+'\r\n'+href)
     except:
         return HttpResponseError(
             json.dumps({'success': 'false'}),

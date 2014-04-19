@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% load compress %}
 <script type="text/template" id="user-template">
   <div class="market-place-item item-wrap" item_id="<%- pk %>" >
@@ -12,9 +14,9 @@
             <button class="btn dropdown-toggle sr-only dropdownMenu<%- pk %>" type="button" id="dropdownMenu<%- pk %>" data-toggle="dropdown" />
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu<%- pk %>">
               <li role="presentation"></li>
-              <li role="presentation"><a username="<%- username %>" class="recommend" role="menuitem" tabindex="-1" href="#">Recommend</a></li>
-              <li role="presentation"><a username="<%- username %>" class="private_message" role="menuitem" tabindex="-1" href="#">Private message</a></li>
-              <li role="presentation"><a username="<%- username %>" class="rate" rateing="user" image_src="<%- avatar %>" score="<%- score %>" ratecount="<%- ratecount %>" role="menuitem" tabindex="-1" href="#">Rate user</a></li>
+              <li role="presentation"><a username="<%- username %>" class="recommend" role="menuitem" tabindex="-1" href="#">{% trans "Recommend" %}</a></li>
+              <li role="presentation"><a username="<%- username %>" class="private_message" role="menuitem" tabindex="-1" href="#">{% trans "Private message" %}</a></li>
+              <li role="presentation"><a username="<%- username %>" class="rate" rateing="user" image_src="<%- avatar %>" score="<%- score %>" ratecount="<%- ratecount %>" role="menuitem" tabindex="-1" href="#">{%trans "Rate user"%}</a></li>
             </ul>
           </div>
         </div>
@@ -32,7 +34,7 @@
         <div class="clearfix"></div>
         <div class="item-body multi-line-text"><%- bio %></div>
         <div class="item-title">
-          <div>Areas Of Interest</div>
+          <div>{%trans "Areas Of Interest"%}</div>
         </div>
         <div class="item-tags">
           <div>
@@ -42,7 +44,7 @@
           </div>
         </div>
       </div>
-      {% include "market/clientside/useractions.html"%}
+      <div class="action-place"></div>
       <div style="clear:both;"></div>
     </div>
   </div>
@@ -54,38 +56,12 @@
 (function(){
     var MarketUserWidget =  window.ahr.BaseView.extend({
 
-      show_dropdown:function(ev){
-        ev.preventDefault();
-        var item_id = ev.currentTarget.getAttribute('item_id');
-        $('.dropdownMenu'+item_id).trigger('click');
-        return false;
-      },
-
-      private_message: function(ev){
-        ev.preventDefault();
-        var username = ev.currentTarget.getAttribute('username');
-        var item_id = ev.currentTarget.getAttribute('item_id');
-        var msgsub = '';
-        this.message_widget.show(username, msgsub, '', false);
-        return(false);
-      },
-
       resetitemrate:function(username, rate){
         try{
           $(".numstars[username="+username+"]").rateit('value',rate);
         }catch(err){
           $.noop();
         }
-      },
-
-      recommend: function(ev){
-        ev.preventDefault();
-        var username = ev.currentTarget.getAttribute('username');
-        this.market.recommend_dialog.setup('user',
-           username,
-           $('#currentusername').text()+' recommends this user : '+ username,
-           $('#currentusername').text()+' recommends you have a look at user '+ username );
-        return(false);
       },
 
       afterset: function(){
@@ -103,12 +79,6 @@
         this.item_tmp = _.template($('#user-template').html());
         this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
         this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
-
-        this.delegateEvents(_.extend(this.events,{
-          'click .itemactions' : 'show_dropdown',
-          'click .private_message' : 'private_message',
-          'click .recommend': 'recommend',
-        }));
       }
     });
 

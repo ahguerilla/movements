@@ -1,0 +1,171 @@
+.stuck-item
+  .market-item-card
+    //box-shadow 2px 2px gray
+
+
+#singleItem
+  margin-top 10px
+  .market-place-item
+    width 100%
+    margin 0 auto
+  .routehref
+    cursor default
+
+.market-place-item
+  width: 32.4%
+  margin-left: 4px;
+  margin-right: 4px;
+  .hidden-item
+    opacity 0.5
+
+.market-item-card
+  &.user-card
+    .item-header
+      height 30px
+    .item-title
+      display inherit
+      text-align: center
+      img
+        border-radius: 50%
+
+  border-radius 5px
+  background-color: #FFF
+  margin-bottom: 8px
+  box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+  padding: 3px
+  .dropdown-menu
+    left: auto
+    right: 0
+    top: 15px
+  .item-menu
+    margin-right: 5px
+    cursor: pointer
+  .item-header
+    &.stuck-item
+      border gray solid 1px
+      border-radius 5px
+    font-weight: bold
+    font-size 90%
+    padding: 5px 3px 3px 5px
+    border-radius 5px
+    margin-bottom: 5px
+    height: 43px
+    span
+      font-size: 80%
+      a
+        font-size 130%
+    a
+      color: $text-color
+    .toggle-hidden
+      float right
+      font-weight normal
+      margin-right 10px
+      font-size 80%
+      cursor pointer
+    .toggle-stick
+      font-size 80%
+      font-weight normal
+      cursor pointer
+      margin-right 10px
+    .item-header-clickable
+      float:left
+      height: 20px
+    .pudate
+      font-size 90%
+      font-style:italic
+      font-weight: normal
+    .views
+      font-size 90%
+      font-style:italic
+      font-weight: normal
+      margin-right 10px
+  .request
+    background-color: $request-color
+  .offer
+    background-color: $offer-color
+  .user
+    background-color: $request-color
+  .hidden-item
+    background-color: #ECE8E8
+  .item-title-table
+    display: table;
+  .item-title
+    padding: 5px
+    font-weight: bold
+    display table-row
+    font-size: 90%
+    .item-icon
+      display table-cell
+      float: left
+      width: 30px
+      height: 30px
+      margin-right: 5px
+    .marketitem_title
+      display table-cell
+      vertical-align:middle;
+    .request
+      background: url('../images/request-button-30x30.png') no-repeat
+    .offer
+      background: url('../images/offer-button-30x30.png') no-repeat
+  .item-body
+    padding-top: 3px
+    padding-left: 3px
+  .item-tags
+    padding: 1px
+  .readmore_marketitem
+      font-size 80%
+      color #428bca!important
+      cursor pointer
+      margin-top 5px
+      width 6em
+      font-weight bold
+      &:hover
+        color #427fed!important
+        text-decoration underline!important
+  .item_container:hover
+    cursor: pointer
+  .item-contents
+    max-height: 101px
+    overflow: hidden
+  .showmoretags,.showlesstags
+    position absolute
+    bottom 50px
+    right 0
+    background white
+    opacity 0.9
+    padding 5px
+    border-radius 5%
+    cursor pointer;
+  .tagbuttons-container
+    position relative
+    margin-top 15px
+    margin-left 3px
+    .tag-button:hover
+      background-color #cdcdcd!important
+  .item-body.multi-line-text
+    font-weight normal
+    white-space: pre-wrap
+  .routehref:link
+    text-decoration: none
+    color $text-color
+  .routehref:visited
+    text-decoration: none
+    color $text-color
+  .routehref:active
+    text-decoration: none
+    color $text-color
+  .routehref:hover
+    text-decoration: none
+    color $text-color
+  .dotdotdot
+    margin-bottom: -2px;
+    margin-top: -6px;
+    font-weight: bold;
+  .countries-tag-button
+    background-color $countries-color
+  .issues-tag-button
+    background-color $issues-color
+  .skills-tag-button
+    background-color $skills-color
+
+

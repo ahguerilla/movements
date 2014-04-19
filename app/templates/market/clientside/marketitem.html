@@ -1,34 +1,63 @@
+{% load i18n %}
 {% load compress %}
+
 <script type="text/template" id="item_template">
-  <div class="market-place-item item-wrap" item_id="<%- pk %>" owner_id="<%- ownerid %>">
-    <div class="market-item-card" item_id="<%- pk %>" owner_id="<%- ownerid %>">
-      <div class="item-header <%- item_type.toLowerCase() %>">
-        <a class="routehref" href="#item/<%- pk %>" >
+  <div class="market-place-item item-wrap item-<%-pk%> <% if(stick===true){ %>stuck-item<%}%>" item_id="<%- pk %>" owner_id="<%- ownerid %>">
+    <div class="market-item-card <% if(hidden===true){ %>hidden-item<% } %>" item_id="<%- pk %>" owner_id="<%- ownerid %>">
+      <div class="item-header <%- item_type.toLowerCase() %> <% if(hidden===true){ %>hidden-item<% } %> <% if(stick===true){ %>stuck-item<%}%>">
         <div class="item-header-clickable item_container" item_id="<%- pk %>">
-          <%- item_type.toUpperCase() %>&nbsp;
+          <a class="routehref" href="#item/<%- pk %>" >
+            <%- item_type.toUpperCase() %>
+          </a>
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span>
         </div>
-        </a>
+        <% if(stick===true){ %>
+          <a href="<%- window.ahr.app_urls.setMarketItemunStick+pk %>" item_id="<%- pk %>" class="marketitem-unstick toggle-stick pull-right">Unstick</a>
+        <% }else{ %>
+          <a href="<%- window.ahr.app_urls.setMarketItemStick+pk %>" item_id="<%- pk %>" class="marketitem-stick toggle-stick pull-right">Stick</a>
+        <%}%>
+        <% if(hidden===true){ %>
+          <a clas href="<%- window.ahr.app_urls.setMarketItemunHide+pk %>" item_id="<%- pk %>" class="show-hidden-item-link unhide-item toggle-hidden">Show</a>
+        <% }else{ %>
+          <a href="<%- window.ahr.app_urls.setMarketItemHide+pk %>" item_id="<%- pk %>" class="hide-item toggle-hidden">Hide</a>
+        <%}%>
+        <div class="clearfix"></div>
+        <div class="pudate pull-left">
+          <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>
+        </div>
+        <div class="views pull-right">
+          Views: <span class="views-counter"><%- views %></span>
+        </div>
       </div>
-      <a href="#item/<%- pk %>" class="routehref" >
-        <div class="" item_id="<%- pk %>">
+      <div class="" item_id="<%- pk %>">
+        <div class="item-title-table">
           <div class="item-title" owner_id="<%- ownerid %>">
-            <div class="item-icon <%- item_type.toLowerCase() %>"></div>
-            <div class="marketitem_title"><%- title %></div>
-          </div>
-          <div class="clearfix"></div>
-          <div class="item-body multi-line-text"><%- details %></div>
-          </a>
-          <div class="item-tags" style="clear:both;">
-            <div>
-              <% _.each(issues, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div> <% }); %>
-              <% _.each(countries, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div> <% }); %>
-              <% _.each(skills, function(ind) { %> <div class="btn btn-default btn-xs tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div> <% }); %>
+            <div class="item-icon <%- item_type.toLowerCase() %>" ></div>
+            <div class="marketitem_title" >
+              <%- title %>
             </div>
           </div>
-          {% include "market/clientside/actions.html"%}
-          <div style="clear:both;"></div>
         </div>
+        <div class="clearfix"></div>
+        <div class="item-body multi-line-text"><%- details %></div>
+        <% var index=issues.length+countries.length+skills.length, top=10, counter=0; %>
+        <div class="item-tags clearfix <% if(index>top && isSingle === false){ %> more-items-here <%}%>">
+          <div class="tagbuttons-container" >
+            <% _.each(issues, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
+              <div class="btn btn-default btn-xs tag-button issues-tag-button" tagtype="issues"> <%- window.ahr.issues_lookup[ind] %> </div>
+            <% }}); %>
+            <% _.each(countries, function(ind) { counter+=1;if(counter<top || isSingle === true){ %>
+              <div class="btn btn-default btn-xs tag-button countries-tag-button" tagtype="countries"> <%- window.ahr.countries_lookup[ind] %> </div>
+            <% }}); %>
+            <% _.each(skills, function(ind) { counter+=1; if(counter<top || isSingle === true){ %>
+              <div class="btn btn-default btn-xs tag-button skills-tag-button" tagtype="skills"> <%- window.ahr.skills_lookup[ind] %> </div>
+            <% }}); %>
+            <% if(counter>top && isSingle === false){ %>
+              <div class="dotdotdot">&nbsp;...&nbsp;</div>
+            <%}%>
+          </div>
+        </div>
+      <div class="action-place"></div>
     </div>
   </div>
 </script>
@@ -45,6 +74,16 @@
         dfrd.resolve(csrf);
       });
       return dfrd;
+    },
+
+    confirmLeave:function(ev){
+      ev.preventDefault();
+      if(ev.currentTarget.href.slice(0,29) != window.ahr.current_site.slice(0,29)){
+        if(confirm(gettext('This link will take you off the Exchangivist site.\r\nMake sure you trust the site that you are being redirected to.'))){
+          window.open(ev.currentTarget.href, '_blank');
+        }
+      }
+      return false;
     },
 
     comment: function (ev) {
@@ -86,7 +125,7 @@
     deleteComment: function (ev) {
       ev.preventDefault();
       var that = this;
-      if (confirm('Are you sure you want yo delete your comment?')) {
+      if (confirm('{% trans "Are you sure you want yo delete your comment?" %}')) {
         var comment_id = ev.currentTarget.getAttribute('comment-id');
         var href = ev.currentTarget.href;
         var dfrd = $.ajax({
@@ -101,7 +140,7 @@
 
     addCommentToCommentList: function (comment_item, front) {
       front = front === true ? front : false;
-      var comment_html = this.comment_tmp({
+      var data = {
         pk: comment_item.pk,
         userpic: comment_item.fields.avatar,
         user: comment_item.fields.username,
@@ -111,37 +150,20 @@
         content: comment_item.fields.contents, //.replace(/\n/g, '<br />')
         score: comment_item.score,
         username: comment_item.fields.username,
-        ownerid : comment_item.fields.owner,
+        ownerid : comment_item.fields.ownerid,
         ratecount: comment_item.ratecount,
         avatar: comment_item.fields.avatar
-      });
-
+      };
+      var comment_html = this.comment_tmp(data);
+      var actions = this.market.actions_view.get('comment', data);
+      var $comment_html = $(comment_html);
+      $comment_html = $comment_html.clickUrl();
+      $comment_html.find('.commentaction-place').replaceWith(actions);
       if (front) {
-        $('#marketitem_comments').prepend(comment_html);
+        $('#marketitem_comments').prepend($comment_html);
       } else {
-        $('#marketitem_comments').append(comment_html);
+        $('#marketitem_comments').append($comment_html);
       }
-      //this.resetitemrate(comment_item.fields.username, comment_item.score);
-    },
-
-    show_dropdown: function (ev) {
-      ev.preventDefault();
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      $('.dropdownMenu' + item_id).trigger('click');
-      return false;
-    },
-
-    private_message: function (ev) {
-      ev.preventDefault();
-      var username = ev.currentTarget.getAttribute('username');
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      var msgsub = '';
-      if( item_id !== null ){
-        msgsub = 'Re: ' + $('.marketitem_title', $('.market-item-card[item_id=' + item_id + ']')).text();
-      }
-
-      this.message_widget.show(username, msgsub, '', false);
-      return (false);
     },
 
     resetitemrate: function (username, rate) {
@@ -155,30 +177,10 @@
       }
     },
 
-    recommend: function (ev) {
-      ev.preventDefault();
-      var rec_type = ev.currentTarget.getAttribute('rec_type');
-      if(rec_type=='item'){
-      var title = ev.currentTarget.getAttribute('recommend_title');
-      var item_id = ev.currentTarget.getAttribute('item_id');
-      this.market.recommend_dialog.setup('item',
-        item_id,
-        $('#currentusername').text() + ' recommends: ' + title,
-        $('#currentusername').text() + ' recommends you have a look at a post by ' + ev.currentTarget.getAttribute('owner'));
-      }else{
-        var username = ev.currentTarget.getAttribute('username');
-        this.market.recommend_dialog.setup('user',
-           username,
-           $('#currentusername').text()+' recommends this user : '+ username,
-           $('#currentusername').text()+' recommends you have a look at user '+ username );
-      }
-      return (false);
-    },
-
     deleteItem: function (ev) {
       ev.preventDefault();
       var that = this;
-      if (confirm('Are you sure you want to delete this item?')) {
+      if (confirm('{% trans "Are you sure you want to delete this item?" %}')) {
         var item_id = ev.currentTarget.getAttribute('item_id');
         var dfrd = $.ajax({
           url: window.ahr.app_urls.deletemarketitem + item_id,
@@ -198,7 +200,6 @@
       var id = ev.currentTarget.getAttribute('item_id');
       $.getJSON(window.ahr.app_urls.getuseritem + id, function (item) {
         if (item[0].fields.item_type == "request") {
-          //TODO: define a callback for this , not this view responsibility to know about these dialogs
           that.market.requestdialog.edit(item, that.edit_callback);
           that.market.requestdialog.showModal();
         } else {
@@ -210,14 +211,73 @@
     },
 
     reloadItem: function (item) {
-      return (this.item_tmp(item[0].fields));
+      var isSingle = this.market.isSingle();
+      return (this.item_tmp(_.extend(item[0].fields,{'isSingle': isSingle})));
+    },
+
+    showMoreTags: function(ev){
+      var item = $(ev.currentTarget).closest('.more-items-here');
+      item.removeClass('more-items-here');
+      this.market.fancyref();
+      $(ev.currentTarget).replaceWith('<div class="showlesstags">{% trans "Less ..." %}</div>');
+    },
+
+    showLessTags: function(ev){
+      var item = $(ev.currentTarget).closest('.item-tags.clearfix');
+      item.addClass('more-items-here');
+      this.market.fancyref();
+      $(ev.currentTarget).replaceWith('<div class="showmoretags">{% trans "More ..." %}</div>');
     },
 
     afterset: function (item_container) {
+      if(this.market.isSingle()){
+        var title = $('.marketitem_title',$('#singleItem')).text();
+        $('#marketitem_title_breadc').text(title);
+      }
       return;
     },
 
+    toggleHidden:  function(ev){
+      ev.preventDefault();
+      var that = this;
+      var id = ev.currentTarget.getAttribute('item_id');
+      $.getJSON(ev.currentTarget.href,function(data){
+        if(data.result===true){
+          if($(ev.currentTarget).hasClass('hide-item')){
+            if(that.market.isShowingHidden()){
+              $(ev.currentTarget).closest('.market-item-card').addClass('hidden-item');
+              $(ev.currentTarget).closest('.item-header').addClass('hidden-item');
+              $(ev.currentTarget).closest(".show-hidden-item-link");
+              $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemunHide+id+'" item_id="'+id+'" class="hidden-item toggle-hidden">Show</a>');
+            }else{
+              that.del_callback(id);
+            }
+          }else{
+            $(ev.currentTarget).closest('.market-item-card').removeClass('hidden-item');
+            $(ev.currentTarget).closest('.item-header').removeClass('hidden-item');
+            $(ev.currentTarget).closest(".show-hidden-item-link");
+            $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemHide+id+'" item_id="'+id+'" class="hide-item toggle-hidden">Hide</a>');
+          }
+        }
+      });
+      return false;
+    },
+
+    toggleStick: function(ev){
+      ev.preventDefault();
+      var that = this;
+      var id = ev.currentTarget.getAttribute('item_id');
+      $.getJSON(ev.currentTarget.href,function(data){
+        if($(ev.currentTarget).hasClass('marketitem-unstick')){
+          $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemStick+id+'" item_id="'+id+'" class="marketitem-stick toggle-stick pull-right">Stick</a>');
+        }else{
+          $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemunStick+id+'" item_id="'+id+'" class="marketitem-unstick toggle-stick pull-right">Unstick</a>');
+        }
+      });
+    },
+
     initialize: function (options) {
+      this.item_type = 'item';
       this.market = options.market;
       this.del_callback = options.del_callback;
       this.edit_callback = options.edit_callback;
@@ -231,15 +291,18 @@
 
       window.ahr.expandTextarea('#newcomment');
 
-      this.delegateEvents(_.extend(this.events, {
+      _.extend(this.events, {
+        'click .toggle-hidden': 'toggleHidden',
+        'click .toggle-stick': 'toggleStick',
         'click .comment-btn': 'comment',
         'click .comment-delete': 'deleteComment',
-        'click .itemactions': 'show_dropdown',
-        'click .private_message': 'private_message',
-        'click .recommend': 'recommend',
         'click .delete': 'deleteItem',
         'click .edit': 'editItem',
-      }));
+        'click .showmoretags': 'showMoreTags',
+        'click .showlesstags': 'showLessTags',
+        'click .multi-line-text a': 'confirmLeave',
+        'click .comment-content a': 'confirmLeave'
+      });
     }
   });
 

@@ -35,11 +35,14 @@ def send_notification(notifications, base_url):
     mail.send()
 
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     base_url = 'https://%s' % Site.objects.all()[0]
-    from_date = datetime.now() + relativedelta(weekday=SU(-2), hour=0, minute=0, second=0, microsecond=0)
-    to_date = datetime.now() + relativedelta(weekday=SU(-1), hour=0, minute=0, second=0, microsecond=0)
-    
+    #from_date = datetime.now() + relativedelta(weekday=SU(-2), hour=0, minute=0, second=0, microsecond=0)
+    #to_date = datetime.now() + relativedelta(weekday=SU(-1), hour=0, minute=0, second=0, microsecond=0)
+    from_date = datetime.now() + relativedelta(days=-2, hour=0, minute=0, second=0, microsecond=0)
+    to_date = datetime.now() + relativedelta(days=-1, hour=0, minute=0, second=0, microsecond=0)
+
+
     notifications = Notification.objects.\
         filter(user__userprofile__get_newsletter=True,
                pub_date__gte=from_date,
@@ -54,6 +57,6 @@ if __name__ == '__main__':
             send_notification(user_notifications, base_url)
             user_notifications = [notification]
         lastid = notification.user.id
-            
+
     if len(user_notifications) > 0:
         send_notification(user_notifications, base_url)

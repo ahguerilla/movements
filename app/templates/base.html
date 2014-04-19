@@ -1,9 +1,16 @@
+{% load cms_tags sekizai_tags%}
+{% load menu_tags %}
 {% load assets %}
+{% load i18n %}
+{% load l10n %}
 {% load avatar_tags %}
 {% load url from future %}
 {% load account %}
 {% load postman_tags %}
 {% postman_unread as unread_count %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -23,14 +30,24 @@
     <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
   {% endassets %}
 
+
   {% assets "js_all" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}
 
   {% block extra_head %}
   {% endblock %}
+
+  {% if config.GOOGLE_ANALYTICS %}
+  {{ config.GOOGLE_ANALYTICS|safe }}
+  {% endif %}
+
 </head>
 <body class="{% block body_class %}{{ body_class }}{% endblock %}">
+{% cms_toolbar %}
+{% render_block "css" %}
+{% render_block "js" %}
+
 {% if messages %}
   {% for message in messages %}
     <div style="display:none;">{{ message }}</div>
@@ -38,103 +55,97 @@
 {% endif %}
 <nav class="navbar navbar-default navbar-fixed-top {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}"
     role="navigation">
+
   <div class="container" style="position:relative;">
     <div class="row">
       <div class="col-xs-12">
-      <div class="navbar-header" {% if user.is_authenticated %}style="padding-right:12px;" {%endif%}>
+      <div class="navbar-header{% if user.is_authenticated %} authenticated{%endif%}">
         <button id="shownavbarbutton" type="button" class="navbar-toggle" data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
+          <span class="sr-only">{%trans "Toggle navigation"%}</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
         <a class_="navbar-brand" href="/"><img src="{{ STATIC_URL }}images/logos/Logo.png"/></a>
-
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           {% if not user.is_authenticated %}
-            <li><a href="{% url 'how_it_works_pub' %}">How It Works</a></li>
+            <li><a href="{% url 'how_it_works_pub' %}">{%trans "How It Works"%}</a></li>
           {% else %}
-            <li><a href="{% url 'how_it_works_priv' %}">How It Works</a></li>
+            <li><a href="{% url 'how_it_works_priv' %}">{%trans "How It Works"%}</a></li>
             <li><a href="/">Exchange</a></li>
-            <li><a href="{% url 'show_users' %}">Exchangivists</a></li>
+            <li><a href="{% url 'show_users' %}">{%trans "Exchangivists"%}</a></li>
           {% endif %}
+          {% show_menu 0 100 100 100 "cms/menu.html" %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
             <li>
-              <a class="glyphicon glyphicon-envelope {% if unread_count %}notif{% endif %}" href="{% url 'postman_inbox' %}">
+              <a class="postman-notification glyphicon glyphicon-envelope {% if unread_count %}notif{% endif %}" href="{% url 'postman_inbox' %}">
                 <span class="hidelarge">
-                  Messages<span id="msgcntr">{% if unread_count %}({{ unread_count }}){% endif %} </span>
+                  {%trans "Messages"%}<span id="msgcntr">{% if unread_count %}({{ unread_count }}){% endif %} </span>
                 </span>
               </a>
             </li>
             <li class="notifdropdown-click">
-              <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="height:50px;">
+              <a data-toggle="dropdown" class="dropdown-toggle title" href="#">
                 <div id="bellonlarge" class="notifbell glyphicon glyphicon-bell nonotif">
-                <span class="hidelarge">Notifications</span>
+                <span class="hidelarge">{%trans "Notifications"%}</span>
                 </div>
               </a>
-              <ul id="" class="notification-drop-down dropdown-menu pull-right"
-                style="width:300px;"></ul>
+              <ul id="" class="notification-drop-down dropdown-menu pull-right"></ul>
             </li>
             <li class="dropdown">
               <a href="#" class="navavatar dropdown-toggle" data-toggle="dropdown">
                 {% primary_avatar user 50 %}
+                 <span class="hidelarge">{%trans "Settings"%}</span>
               </a>
               <ul class="dropdown-menu">
                 <li>
                   <a href="#" onclick="window.location = window.ahr.app_urls.getposts;">
-                    My Posts
+                    {%trans "My Posts"%}
                   </a>
                 </li>
-                <li><a href="{% url 'user_profile' %}">My Profile</a></li>
-                <li><a href="{% url 'user_settings' %}">Settings</a></li>
+                <li><a href="{% url 'user_profile' %}">{%trans "My Profile"%}</a></li>
+                <li><a href="{% url 'user_settings' %}">{%trans "Settings"%}</a></li>
                 <li>
                   <form method="post" action="{% url 'account_logout' %}">
                     {% csrf_token %}
-                    <button class="btn btn-link" type="submit">Sign Out</button>
+                    <button class="btn btn-link" type="submit">{%trans "Sign Out"%}</button>
                   </form>
                 </li>
               </ul>
             </li>
-
           {% else %}
             {% block sign_in %}
-              <li><a href="{% url 'account_login' %}">Sign In</a></li>{% endblock %}
+              <li><a href="{% url 'account_login' %}">{%trans "Sign In"%}</a></li>{% endblock %}
             {% if not sign_up %}
-              <li><a href="{% url 'home' %}">Sign Up</a></li>
+              <li><a href="{% url 'home' %}">{%trans "Sign Up"%}</a></li>
             {% endif %}
           {% endif %}
         </ul>
       </div>
-
-
     </div>
     {% if user.is_authenticated %}
-      <div style="position:absolute;right:13px;top:0;" class="hidelarge">
+      <div class="mobilenofication-icon hidelarge">
         <div class="row">
-         <ul class="nav pull-right">
-          <li class="notifdropdown-click">
-            <a data-toggle="dropdown" class="dropdown-toggle"
-              style="margin-top:7px;" href="#">
-              <div id="bellonlarge" class="notifbell glyphicon glyphicon-bell nonotif"></div>
-            </a>
-            <ul id="" class="notification-drop-down dropdown-menu pull-right"
-                style="width:300px;"></ul>
-          </li>
-        </ul>
-
+          <ul class="nav pull-right">
+            <li class="notifdropdown-click">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <div id="bellonlarge" class="notifbell glyphicon glyphicon-bell nonotif"></div>
+              </a>
+              <ul id="" class="notification-drop-down dropdown-menu pull-right"></ul>
+            </li>
+          </ul>
         </div>
       </div>
-
     {% endif %}
-  </div>
+    </div>
   </div>
 </nav>
-<div style="height:50px;"></div>
+<!--<div style="height:50px;"></div>-->
 {% block outsidecontainer %}
 {% endblock %}
 
@@ -156,9 +167,9 @@
 <div style="height: 70px"></div>
 <nav class="navbar navbar-default navbar-fixed-bottom footer-nav" role="navigation">
   <div class="footer-nav-content">
-    <a href="{% url 'contact_us' %}">Contact Us</a>&nbsp;&nbsp;
-    <a href="{% url 'terms_and_conditions' %}">Terms and Conditions</a>&nbsp;&nbsp;
-    <a href="{% url 'privacy' %}">Privacy</a>
+    <a href="{% url 'contact_us' %}">{%trans "Contact Us"%}</a>&nbsp;&nbsp;
+    <a href="{% url 'terms_and_conditions' %}">{%trans "Terms and Conditions"%}</a>&nbsp;&nbsp;
+    <a href="{% url 'privacy' %}">{%trans "Privacy"%}</a>
   </div>
 </nav>
 <div id="modal-placeholder"></div>
@@ -168,6 +179,7 @@
 
 {% block endjavascript %}
 {% endblock %}
+<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 {% if user.is_authenticated %}
 
   {% include "market/clientside/notifications.html" %}
@@ -175,6 +187,7 @@
   <script type="text/javascript" id="notifications_view">
     (function () {
       window.ahr.notifications_widget.initWidget()
+
     })();
   </script>
 {% endif %}

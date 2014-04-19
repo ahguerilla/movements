@@ -1,11 +1,18 @@
 (function () {
+  $('.nanamorde').hide();
   var MarketRoute = Backbone.Router.extend({
     routes: {
       "": "page",
+      ":itemid": "updateViews",
       "item/:item_id": "gotoItem"
     },
     firstTime: true,
     emptyPage: true,
+
+    updateViews: function(item){
+      this.market.setViewsCount(item);
+      this.page();
+    },
 
     gotoItem: function (item) {
       this.market.showItem(item);
@@ -37,6 +44,22 @@
       "Request": "request"
     },
 
+    isShowingHidden:function(){
+      return this.filter_widget.filters.showHidden;
+    },
+
+    setViewsCount: function(id){
+      $.getJSON(
+        window.ahr.app_urls.getViewsCount + id,
+        function (data) {
+          $('.market-item-card[item_id="' + id + '"] .views-counter').text(data.result);
+      });
+    },
+
+    gotoItem: function(ev){
+      window.location = ev.currentTarget.getAttribute('href');
+    },
+
     edit_callback: function (item_id) {
       var that = this;
       var dfrd = $.ajax({
@@ -44,8 +67,9 @@
       });
       dfrd.done(function (item) {
         var html = that.item_widget.reloadItem(item);
+        html = that.get(item[0].fields);
+        that.truncateLongText(html, item.pk);
         $('.market-place-item[item_id=' + item_id + ']').replaceWith(html);
-        that.msnry.reloadItems();
         that.item_widget.afterset('.market-place-item[item_id=' + item_id + ']');
         if (that.isSingle() === false) {
           that.fancyref(html);
@@ -53,8 +77,8 @@
       });
     },
 
-
     initialize: function (filters) {
+      this.item_type = 'item';
       this.getitemfromto = window.ahr.app_urls.getmarketitemfromto;
       this.viewurl = window.ahr.app_urls.viewitem;
       this.item_tmp = _.template($('#item_template').html());
@@ -62,9 +86,11 @@
       del_func = _.bind(this.del_callback, this);
       edit_func = _.bind(this.edit_callback, this);
       this.item_widget = window.ahr.marketitem_widget.initWidget('body', this, del_func, edit_func);
-      filters.types = ["offer", "request"];
       this.getItem = window.ahr.app_urls.getmarketitem;
       this.init(filters);
+      this.filter_widget.filters.types = ["offer", "request"];
+      this.filter_widget.types = this.types;
+      _.extend(this.events,{'click .routehref': 'gotoItem'} );
       return this;
     },
   });
@@ -75,6 +101,6 @@
     var market = new MarketView(filters);
     var market_route = new MarketRoute(market);
     Backbone.history.start();
-    document.title = "Exchange";
+    document.title = gettext("Exchange");
   };
 })();
