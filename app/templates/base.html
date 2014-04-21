@@ -181,15 +181,17 @@
 {% endblock %}
 <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 {% if user.is_authenticated %}
-
   {% include "market/clientside/notifications.html" %}
-
   <script type="text/javascript" id="notifications_view">
     (function () {
       window.ahr.notifications_widget.initWidget()
-
     })();
   </script>
 {% endif %}
+<script type="text/javascript">
+  (function () {
+    window.ahr.string_constants = {{ string_constants|safe }};
+  })();
+</script>
 </body>
 </html>

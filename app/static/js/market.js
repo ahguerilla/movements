@@ -101,6 +101,6 @@
     var market = new MarketView(filters);
     var market_route = new MarketRoute(market);
     Backbone.history.start();
-    document.title = gettext("Exchange");
+    document.title = window.ahr.string_constants.exchange;
   };
 })();

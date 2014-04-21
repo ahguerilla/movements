@@ -47,13 +47,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   },
 
   noSearchResult: function () {
-    if ($('.market-place-item').length == 0) {
+    if ($('.market-place-item').length === 0) {
       $('#marketitems').append(['<p style="margin-top:20px;float:left;width:100%;text-align:center;" id="no-search-result">',
-        gettext('Your search did not match any market item.'),
+        window.ahr.string_constants.market_search_no_match_a,
         '<a href="#" id="searchagainall">',
-        gettext('Search again without any filters')+'</a>'+gettext('or'),
+        window.ahr.string_constants.market_search_no_match_b + '</a>' + window.ahr.string_constants.market_search_no_match_c,
         '<a href="#" id="searchwithdefaults">' ,
-        gettext('search again with your default filters'),
+        window.ahr.string_constants.market_search_no_match_d,
         '</a></p>'].join(' '));
     }
   },

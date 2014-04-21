@@ -79,7 +79,7 @@
     confirmLeave:function(ev){
       ev.preventDefault();
       if(ev.currentTarget.href.slice(0,29) != window.ahr.current_site.slice(0,29)){
-        if(confirm(gettext('This link will take you off the Exchangivist site.\r\nMake sure you trust the site that you are being redirected to.'))){
+        if(confirm(window.ahr.string_constants.redirect_off_site)){
           window.open(ev.currentTarget.href, '_blank');
         }
       }

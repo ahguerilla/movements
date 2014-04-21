@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-19 17:23+0000\n"
+"POT-Creation-Date: 2014-04-21 14:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: app/context_processors.py:7 templates/market/market.html:55
+#: templates/market/market_old.html:80
+msgid "Exchange"
+msgstr ""
+
+#: app/context_processors.py:8 templates/base.html:79
+msgid "Exchangivists"
+msgstr ""
+
+#: app/context_processors.py:9
+msgid "more..."
+msgstr ""
+
+#: app/context_processors.py:10
+msgid "Click here to view the recommendation"
+msgstr ""
+
+#: app/context_processors.py:11
+msgid "Offering"
+msgstr ""
+
+#: app/context_processors.py:12
+msgid "Requesting"
+msgstr ""
+
+#: app/context_processors.py:13
+msgid "Search by keyword or username for Exchangivists"
+msgstr ""
+
+#: app/context_processors.py:14
+msgid "Your search did not match any market item."
+msgstr ""
+
+#: app/context_processors.py:15
+msgid "Search again without any filters"
+msgstr ""
+
+#: app/context_processors.py:16
+msgid "or"
+msgstr ""
+
+#: app/context_processors.py:17
+msgid "search again with your default filters"
+msgstr ""
+
+#: app/context_processors.py:18
+msgid ""
+"This link will take you off the Exchangivist site.\n"
+"Make sure you trust the site that you are being redirected to."
+msgstr ""
 
 #: app/market/forms.py:40
 msgid "You should enter an expiry date for your offer or check never expires"
@@ -352,10 +403,6 @@ msgstr ""
 msgid "How It Works"
 msgstr ""
 
-#: templates/base.html:79
-msgid "Exchangivists"
-msgstr ""
-
 #: templates/base.html:88
 msgid "Messages"
 msgstr ""
@@ -638,11 +685,10 @@ msgid "Exchangivist BETA"
 msgstr ""
 
 #: templates/account/signup.html:12
-#, python-format
 msgid ""
 "\n"
 "    <p>Exchangivist is currently in <strong>beta</strong></p>\n"
-"    <div class=\"alert alert-danger\" style=\"font-size:85%%;\">\n"
+"    <div class=\"alert alert-danger\">\n"
 "      <p>\n"
 "        Exchangivist is currently in <strong>beta</strong> and has not "
 "undergone a full risk threat assessment.\n"
@@ -1692,10 +1738,6 @@ msgstr ""
 
 #: templates/market/market.html:45 templates/market/market_old.html:70
 msgid "Back"
-msgstr ""
-
-#: templates/market/market.html:55 templates/market/market_old.html:80
-msgid "Exchange"
 msgstr ""
 
 #: templates/market/market_old.html:20 templates/market/market_old.html:21
