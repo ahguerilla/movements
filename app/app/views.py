@@ -6,9 +6,9 @@ from django.contrib.auth.decorators import login_required
 
 
 def home(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated() and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('exchange'))
-    view_dict = {'body_class': 'narrow', 'sign_up': True}
+    view_dict = {'sign_up': True}
     return render_to_response('ahr/home.html', view_dict, context_instance=RequestContext(request))
 
 

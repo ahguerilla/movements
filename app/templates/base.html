@@ -43,7 +43,7 @@
   {% endif %}
 
 </head>
-<body class="{% block body_class %}{{ body_class }}{% endblock %}">
+<body>
 {% cms_toolbar %}
 {% render_block "css" %}
 {% render_block "js" %}
@@ -75,7 +75,7 @@
             <li><a href="{% url 'how_it_works_pub' %}">{%trans "How It Works"%}</a></li>
           {% else %}
             <li><a href="{% url 'how_it_works_priv' %}">{%trans "How It Works"%}</a></li>
-            <li><a href="/">Exchange</a></li>
+            <li><a href="{% url 'show_market' %}">Exchange</a></li>
             <li><a href="{% url 'show_users' %}">{%trans "Exchangivists"%}</a></li>
           {% endif %}
           {% show_menu 0 100 100 100 "cms/menu.html" %}

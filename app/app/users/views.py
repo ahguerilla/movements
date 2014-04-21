@@ -217,7 +217,6 @@ class AhrSocialSignupView(SocialSignupView):
     def get_context_data(self, **kwargs):
         ret = super(AhrSocialSignupView, self).get_context_data(**kwargs)
         context_data = {
-            'body_class': 'narrow',
             'sign_up': True,
             'post_url': ''
         }
@@ -237,7 +236,6 @@ def signup_from_home(request):
         form.fields['tnccheckbox'].initial = request.POST.get('tnccheckbox', '')
     view_dict = {
         'form': form,
-        'body_class': 'narrow',
         'post_url': reverse(process_signup),
         'sign_up': True,
     }
@@ -249,7 +247,6 @@ class AhrSignupView(SignupView):
 
         ret = super(AhrSignupView, self).get_context_data(**kwargs)
         context_data = {
-            'body_class': 'narrow',
             'sign_up': True,
             'post_url': ''
         }
