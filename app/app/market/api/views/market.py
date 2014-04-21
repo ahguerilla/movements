@@ -138,7 +138,7 @@ def get_raw(request):
        )) AND "market_marketitem"."published" = True  AND "market_marketitem"."deleted" = False  AND "auth_user"."is_active" = True AND ("market_marketitem"."exp_date" >=
        '"""+str(datetime.now())+"""'
        OR "market_marketitem"."never_exp" = True )  )
-       order by tag_matches desc
+       order by tag_matches desc, pub_date desc
        """
     return raw
 
