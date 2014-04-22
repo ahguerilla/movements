@@ -71,14 +71,14 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          {% show_menu 0 100 100 100 "cms/navs/top_nav.html" %}
           {% if not user.is_authenticated %}
-            <li><a href="{% url 'how_it_works_pub' %}">{%trans "How It Works"%}</a></li>
+            <!-- <li><a href="{% url 'how_it_works_pub' %}">{%trans "How It Works"%}</a></li> -->
           {% else %}
-            <li><a href="{% url 'how_it_works_priv' %}">{%trans "How It Works"%}</a></li>
+            <!-- <li><a href="{% url 'how_it_works_priv' %}">{%trans "How It Works"%}</a></li> -->
             <li><a href="{% url 'show_market' %}">Exchange</a></li>
             <li><a href="{% url 'show_users' %}">{%trans "Exchangivists"%}</a></li>
           {% endif %}
-          {% show_menu 0 100 100 100 "cms/menu.html" %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
@@ -167,9 +167,10 @@
 <div style="height: 70px"></div>
 <nav class="navbar navbar-default navbar-fixed-bottom footer-nav" role="navigation">
   <div class="footer-nav-content">
-    <a href="{% url 'contact_us' %}">{%trans "Contact Us"%}</a>&nbsp;&nbsp;
+    {% show_menu 0 100 100 100 "cms/navs/bottom_nav.html" %}
+<!--     <a href="{% url 'contact_us' %}">{%trans "Contact Us"%}</a>&nbsp;&nbsp;
     <a href="{% url 'terms_and_conditions' %}">{%trans "Terms and Conditions"%}</a>&nbsp;&nbsp;
-    <a href="{% url 'privacy' %}">{%trans "Privacy"%}</a>
+    <a href="{% url 'privacy' %}">{%trans "Privacy"%}</a> -->
   </div>
 </nav>
 <div id="modal-placeholder"></div>

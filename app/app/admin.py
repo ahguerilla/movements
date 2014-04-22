@@ -3,6 +3,16 @@ from django.contrib.admin.models import LogEntry, DELETION
 from django.utils.html import escape
 from django.core.urlresolvers import reverse
 
+from cms.extensions import PageExtensionAdmin
+
+from .models import MenuExtension
+
+
+class MenuExtensionAdmin(PageExtensionAdmin):
+    pass
+
+admin.site.register(MenuExtension, MenuExtensionAdmin)
+
 
 class LogEntryAdmin(admin.ModelAdmin):
 
@@ -60,3 +70,4 @@ class LogEntryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(LogEntry, LogEntryAdmin)
+
