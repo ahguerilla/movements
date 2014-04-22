@@ -87,6 +87,8 @@ def get_raw(request):
     skills = (0,)
     types = "('offer', 'request')"
     ids= ""
+    show_hidden = ""
+
     if request.GET.has_key('issues'):
         issues = tuple(map(int,request.GET.getlist('issues')))
 
@@ -105,6 +107,11 @@ def get_raw(request):
         _ids= tuple(int(obj.pk) for obj in objs)
         if len(_ids)>0:
             ids = 'AND "market_marketitem"."id" IN '+ ("%s"%(_ids,) if len(_ids)>1 else "(%s)"%(_ids))
+
+    if not request.GET.get('showHidden', 'false') == 'false':
+        show_hidden = 'AND NOT ("market_marketitem"."id" IN \
+                        (SELECT hiddens."item_id" FROM "market_marketitemhidden" hiddens WHERE hiddens."viewer_id" = \
+                        '+str(request.user.id)+'))'
 
     raw = """
        select market_marketitem.*, (counted_matches.i_sum+counted_matches.c_sum+counted_matches.s_sum) as tag_matches
@@ -129,10 +136,8 @@ def get_raw(request):
        INNER JOIN "auth_user" ON ( "market_marketitem"."owner_id" = "auth_user"."id" ) WHERE ("market_marketitem"."item_type" IN
        """+ types + """
        """+ids+"""
+       """+show_hidden+"""
        AND NOT ("market_marketitem"."id" IN
-       (SELECT hiddens."item_id" FROM "market_marketitemhidden" hiddens WHERE hiddens."viewer_id" =
-       """+str(request.user.id)+"""
-       )) AND NOT ("market_marketitem"."id" IN
        (SELECT stickies."item_id" FROM "market_marketitemstick" stickies WHERE stickies."viewer_id" =
        """+str(request.user.id)+"""
        )) AND "market_marketitem"."published" = True  AND "market_marketitem"."deleted" = False  AND "auth_user"."is_active" = True AND ("market_marketitem"."exp_date" >=
