@@ -72,7 +72,7 @@ def get_market_item(request, obj_id, rtype):
 
 def getStikies(request, hiddens, sfrom, to):
     sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
-    if not request.GET.get('showHidden') == 'false':
+    if request.GET.get('showHidden', 'false') == 'false':
         sticky_objs  = sticky_objs .filter(~Q(item_id__in=hiddens))
     if request.GET.has_key('types'):
         sticky_objs  = sticky_objs.filter(Q(item__item_type__in=request.GET.getlist('types')))
@@ -108,7 +108,7 @@ def get_raw(request):
         if len(_ids)>0:
             ids = 'AND "market_marketitem"."id" IN '+ ("%s"%(_ids,) if len(_ids)>1 else "(%s)"%(_ids))
 
-    if not request.GET.get('showHidden', 'false') == 'false':
+    if request.GET.get('showHidden', 'false') == 'false':
         show_hidden = 'AND NOT ("market_marketitem"."id" IN \
                         (SELECT hiddens."item_id" FROM "market_marketitemhidden" hiddens WHERE hiddens."viewer_id" = \
                         '+str(request.user.id)+'))'
@@ -135,8 +135,8 @@ def get_raw(request):
        join market_marketitem on market_marketitem.id = counted_matches.id
        INNER JOIN "auth_user" ON ( "market_marketitem"."owner_id" = "auth_user"."id" ) WHERE ("market_marketitem"."item_type" IN
        """+ types + """
-       """+ids+"""
-       """+show_hidden+"""
+       """+ ids +"""
+       """+ show_hidden +"""
        AND NOT ("market_marketitem"."id" IN
        (SELECT stickies."item_id" FROM "market_marketitemstick" stickies WHERE stickies."viewer_id" =
        """+str(request.user.id)+"""

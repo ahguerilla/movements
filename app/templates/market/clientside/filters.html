@@ -18,16 +18,16 @@
             <div id="filter-actions" class="right-on-big">
               <div class="filter-posts">
                 <button type="button"class="btn btn-success btn-default btn-xs item-type btn-group-justified" item_type="Request">
-                  <span id="filter-request-text">&nbsp; {% trans "Show Requests" %} &nbsp;</span>
+                  <span id="filter-request-text">&nbsp; {% trans "Hide Requests" %} &nbsp;</span>
                 </button>
               </div>
               <div class="filter-posts">
                 <button type="button" class="btn btn-success btn-default btn-xs item-type btn-group-justified" item_type="Offers">
-                  <span id="filter-offer-text">&nbsp; {% trans "Show Offers" %} &nbsp;</span>
+                  <span id="filter-offer-text">&nbsp; {% trans "Hide Offers" %} &nbsp;</span>
                 </button>
               </div>
               <div class="filter-posts" id="showhide-hidden-container">
-                <button class="btn btn-default btn-xs btn-group-justified" id="filter-show-hidden">Show hidden</button>
+                <button class="btn btn-success btn-default btn-xs btn-group-justified" id="filter-show-hidden">{% trans "Show hidden" %}</button>
               </div>
             </div>
           </div>
@@ -79,9 +79,9 @@
     showHidden: function(ev){
       $(ev.currentTarget).toggleClass("btn-success");
       if($(ev.currentTarget).hasClass('btn-success')){
-        this.filters.showHidden = true;
-      }else{
         this.filters.showHidden = false;
+      }else{
+        this.filters.showHidden = true;
       }
       this.callback();
     },
@@ -130,7 +130,15 @@
     },
 
     itemTypesfilter: function (ev) {
-      $(ev.currentTarget).toggleClass('btn-success');
+      
+      if($(ev.currentTarget).hasClass('btn-success')) {
+        $('.item-type').each(function(ind, item){
+          $(item).addClass('btn-success');
+        });
+        $(ev.currentTarget).removeClass('btn-success');
+      } else {
+        $(ev.currentTarget).addClass('btn-success');
+      }
       this.updateTypefilter();
       this.callback();
     },
