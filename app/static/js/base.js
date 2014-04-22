@@ -47,9 +47,9 @@
     if ($('#bs-example-navbar-collapse-1').hasClass('in')) {
       $(".navbar-toggle").click();
     }
-  };
+  }
 
-  lastsize = $(window).width();;
+  lastsize = $(window).width();
   $(window).on({
     "orientationchange": function (event) {
       toggleNav();
