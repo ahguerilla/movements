@@ -59,3 +59,5 @@ six==1.6.1
 sorl-thumbnail==11.12
 sqlparse==0.1.11
 webassets==0.9
+django-storages==1.1.8
+boto==2.25.0
