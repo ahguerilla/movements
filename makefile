@@ -61,5 +61,5 @@ staging-social:
 	python manage.py loaddata social_staging_settings --settings=app.settings.local
 
 celery:
-	cd app/app && \
-	celery -A celerytasks worker
+	cd app && \
+	celery -A tasks.celeryworker worker
