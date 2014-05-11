@@ -1,6 +1,6 @@
 {% load i18n %}{% autoescape off %}
 
-{% trans "Dear Exchangivist," %}
+{% trans "Dear Member," %}
 {% if action == 'rejection' %}
     {% blocktrans with object.sent_at|date:"DATETIME_FORMAT" as date and object.obfuscated_recipient as recipient %}
     On {{ date }}, you asked to send a message to the user '{{ recipient }}'.
@@ -15,7 +15,7 @@
 {% else %}{# 'acceptance' #}
     {% if object.parent_id %}
         {% if object.parent.sender_id == object.recipient_id %}
-{% blocktrans with object.parent.sent_at|date:"DATETIME_FORMAT" as date and object.obfuscated_sender as sender %}'{{ sender }}' has sent you a message. To view your message please login to Exchangivsit.{% endblocktrans %}
+{% blocktrans with object.parent.sent_at|date:"DATETIME_FORMAT" as date and object.obfuscated_sender as sender %}'{{ sender }}' has sent you a message. To view your message please login to Movements.{% endblocktrans %}
 {% trans "Your correspondent has given you an answer." %}
         {% else %}
 {% blocktrans with object.obfuscated_sender as sender %}
@@ -23,7 +23,7 @@ You have received a copy of a response from the user '{{ sender }}'.
 {% endblocktrans %}
         {% endif %}
     {% else %}
-{% blocktrans with object.obfuscated_sender as sender %}'{{ sender }}' has sent you a message. To view your message please login to Exchangivsit.{% endblocktrans %}
+{% blocktrans with object.obfuscated_sender as sender %}'{{ sender }}' has sent you a message. To view your message please login to Movements.{% endblocktrans %}
     {% endif %}
 {% endif %}{# 'acceptance' #}
 {% blocktrans %}Note: This message is issued by an automated system. Do not reply.{% endblocktrans %}

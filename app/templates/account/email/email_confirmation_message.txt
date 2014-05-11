@@ -3,13 +3,13 @@
 {% load i18n %}
 {% autoescape off %}
 {% blocktrans with current_site.name as site_name %}
-Dear Exchangivist,
+Dear Member,
 
-Thank you for signing up to Exchangivist. Please confirm your email address by clicking on the link below.
+Thank you for signing up to Movements. Please confirm your email address by clicking on the link below.
 
 {{ activate_url }}
 
-The Exchangivist team
+The Movements team
 
 {% endblocktrans %}
 {% endautoescape %}

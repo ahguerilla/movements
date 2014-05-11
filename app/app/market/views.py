@@ -39,7 +39,7 @@ def index(request):
 def users(request):
     return render_to_response('market/market.html',
                               {
-                                  'title':'Exchangivists',
+                                  'title':'Members',
                                   'help_text_template': 'market/copy/user_help.html',
                                   'init': 'users',
                                   'tags': getUserTags(request.user)

@@ -27,7 +27,7 @@ def create_notification_message(notifications, base_url):
 
 def send_notification(notifications, base_url):
     messagebody = create_notification_message(notifications, base_url)
-    mail = EmailMessage('Exchangivist Notification Email',
+    mail = EmailMessage('Movements Notification Email',
                         messagebody,
                         constance.config.NO_REPLY_EMAIL,
                         [notifications[0].user.email])

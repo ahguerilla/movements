@@ -22,7 +22,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>{% block head_title %}Exchangivist{% endblock %}</title>
+  <title>{% block head_title %}Movements{% endblock %}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -67,14 +67,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class_="navbar-brand" href="/"><img src="{{ STATIC_URL }}images/logos/Logo.png"/></a>
+        <a class_="navbar-brand" href="/"><img src="{{ STATIC_URL }}images/logos/movements-logo.jpg"/></a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           {% show_menu 0 100 100 100 "cms/navs/top_nav.html" %}
           {% if user.is_authenticated %}
             <li><a href="{% url 'show_market' %}">Exchange</a></li>
-            <li><a href="{% url 'show_users' %}">{%trans "Exchangivists"%}</a></li>
+            <li><a href="{% url 'show_users' %}">{%trans "Members"%}</a></li>
           {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">

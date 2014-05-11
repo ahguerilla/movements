@@ -184,6 +184,7 @@ def email_doublesignup_upret(self, ret):
         ret['form'].errors.has_key('email') and
         ret['form'].errors['email'][0] == u'A user is already registered with this e-mail address.'):
         confem = EmailAddress.objects.filter(email=ret['form'].data['email']).all()
+        print confem
 
         if len(ret['form'].errors)==1:
             self.template_name = "account/verification_sent.html"
@@ -204,7 +205,7 @@ def email_doublesignup_upret(self, ret):
             email.send()
         else:
             text = render_to_string('emails/securityalert.html',{})
-            email = EmailMessage('Security Alert from Exchangivist',
+            email = EmailMessage('Security Alert from Movements',
                                  text,
                                  constance.config.NO_REPLY_EMAIL,
                                  [ret['form'].data['email']])

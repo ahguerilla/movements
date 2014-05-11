@@ -1,4 +1,4 @@
-A new user has signed up on Exchangivist with the below details:
+A new user has signed up on Movements with the below details:
 
 First Name : {{ form.data.first_name }}
 Last Name  : {{ form.data.last_name }}
