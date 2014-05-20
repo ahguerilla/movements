@@ -1,4 +1,5 @@
 import json
+import re
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -112,16 +113,22 @@ def send_recommendation(request, rec_type, obj_id, rtype):
         href = '<!--user="'+obj_id+'"-->'
         additionals = obj_id
 
-    recipients = request.POST['recipients']
-    try:
-        pm_write(sender=request.user,
-                 recipient=users.models.User.objects.filter(username=recipients)[0],
-                 subject=request.POST['subject'][:120] if len(request.POST['subject'])>120 else request.POST['subject'],
-                 body=request.POST['message']+'\r\n----------------------------------------\r\n'+additionals+'\r\n'+href)
-    except:
+    recipients = re.split("\s*[ ;,]\s*", request.POST['recipients'])
+    badrecipients = []
+
+    for recipient in recipients:
+        try:
+            pm_write(sender=request.user,
+                     recipient=users.models.User.objects.filter(username=recipient)[0],
+                     subject=request.POST['subject'][:120] if len(request.POST['subject'])>120 else request.POST['subject'],
+                     body=request.POST['message']+'\r\n----------------------------------------\r\n'+additionals+'\r\n'+href)
+        except:
+            badrecipients.append(recipient)
+
+    if len(badrecipients) > 0:
         return HttpResponse(
             json.dumps({'success':       'false',
-                        'badrecipients': recipients}),
+                        'badrecipients': badrecipients}),
             mimetype="application/"+rtype)
 
     return HttpResponse(
