@@ -92,14 +92,14 @@
        }
        if ($('#touser').val() === '') {
          // Need proper address validation here.
-         this.alert('{%trans "Please enter a valid username or email address. "%}', '#recerror');
+         this.alert('{%trans "Please enter a valid username and/or email address. "%}', '#recerror');
          return
        }
        $('.sendrec').prop('disabled', true);
        if (this.rec_type == 'user') {
-         this.url = window.ahr.app_urls.senduserrecommendation.replace('0', $('#touser').val()) + this.obj_id;
+         this.url = window.ahr.app_urls.senduserrecommendation + this.obj_id;
        } else {
-         this.url = window.ahr.app_urls.senditemrecommendation.replace('0', $('#touser').val()) + this.obj_id;
+         this.url = window.ahr.app_urls.senditemrecommendation + this.obj_id;
        }
        window.ahr.getcsrf(function (csrf) {
          var dfrd = $.ajax({
@@ -108,14 +108,20 @@
            dataType: 'json',
            data: {
              csrfmiddlewaretoken: csrf.csrfmiddlewaretoken,
-             subject: $('#recsub').val(),
-             message: $('#recmessage').val()
+             recipients:  $('#touser').val(),
+             subject:     $('#recsub').val(),
+             message:     $('#recmessage').val()
            }
          });
-         dfrd.done(function () {
-           $('#recommenddialog').modal('hide');
+         dfrd.done(function (data) {
            $('.sendrec').prop('disabled', false);
-           $('#touser').typeahead('destroy');
+           if (data.success === 'true') {
+             $('#touser').typeahead('destroy');
+             $('#recommenddialog').modal('hide');
+           }
+           else {
+             that.alert('{%trans "Failed to send message: unknown user:"%} ' + data.badrecipients, '#recerror');
+           }
          });
          dfrd.fail(function () {
            $('.sendrec').prop('disabled', false);

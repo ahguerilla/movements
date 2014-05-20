@@ -103,7 +103,7 @@ def send_message(request, to_user, rtype):
 
 
 @login_required
-def send_recommendation(request, rec_type, to_user, obj_id, rtype):
+def send_recommendation(request, rec_type, obj_id, rtype):
     additionals =''
     if rec_type == 'item':
         href = '<!--item="'+obj_id+'"-->'
@@ -111,14 +111,17 @@ def send_recommendation(request, rec_type, to_user, obj_id, rtype):
     else:
         href = '<!--user="'+obj_id+'"-->'
         additionals = obj_id
+
+    recipients = request.POST['recipients']
     try:
         pm_write(sender=request.user,
-                 recipient=users.models.User.objects.filter(username=to_user)[0],
+                 recipient=users.models.User.objects.filter(username=recipients)[0],
                  subject=request.POST['subject'][:120] if len(request.POST['subject'])>120 else request.POST['subject'],
                  body=request.POST['message']+'\r\n----------------------------------------\r\n'+additionals+'\r\n'+href)
     except:
-        return HttpResponseError(
-            json.dumps({'success': 'false'}),
+        return HttpResponse(
+            json.dumps({'success':       'false',
+                        'badrecipients': recipients}),
             mimetype="application/"+rtype)
 
     return HttpResponse(
