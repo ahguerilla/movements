@@ -121,10 +121,10 @@
            }
            else {
              if (data.badrecipients.length == 1) {
-               that.alert('{%trans "Failed to send message: unknown user:"%} ' + data.badrecipients[0], '#recerror');
+               that.alert('{%trans "Failed to send message to user:"%} ' + data.badrecipients[0], '#recerror');
              }
              else {
-               that.alert('{%trans "Failed to send message: unknown users:"%} ' + data.badrecipients.join(', '), '#recerror');
+               that.alert('{%trans "Failed to send message to users:"%} ' + data.badrecipients.join(', '), '#recerror');
              }
            }
          });

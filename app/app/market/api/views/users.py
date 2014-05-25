@@ -119,20 +119,41 @@ def send_recommendation(request, rec_type, obj_id, rtype):
     msgcontext = { 'message'     : request.POST['message'],
                    'additionals' : additionals,
                    'rec_type'    : rec_type,
-                   'obj_id'      : obj_id }
+                   'obj_id'      : obj_id,
+                   'url'         : request.build_absolute_uri(reverse('preview', args=(rec_type,obj_id)))}
 
     subject = request.POST['subject']
     if len(subject) > 120: subject = subject[:120]
     body    = render_to_string('emails/recommendmessage.txt',  msgcontext)
+    emlrecips = []
 
     for recipient in recipients:
+        if EMAILRE.match(recipient):
+            emlrecips.append(recipient)
+        else:
+            try:
+                pm_write(sender=request.user,
+                         recipient=users.models.User.objects.filter(username=recipient)[0],
+                         subject=subject,
+                         body=body)
+            except Exception as e:
+                print "Exception sending to %s: %s %s:"%(recipient, type(e), e)
+                badrecipients.append(recipient + " (unknown user)")
+
+    if len(emlrecips) > 0:
+        emlbody = render_to_string('emails/recommendmessage.eml', msgcontext)
         try:
-            pm_write(sender=request.user,
-                     recipient=users.models.User.objects.filter(username=recipient)[0],
-                     subject=subject,
-                     body=body)
-        except:
-            badrecipients.append(recipient)
+            email = EmailMessage(
+                subject,
+                emlbody,
+                constance.config.NO_REPLY_EMAIL,
+                emlrecips
+            )
+            email.content_subtype = "plain"
+            email.send()
+        except Exception as e:
+            print "Exception sending to %s: %s %s:"%(recipient, type(e), e)
+            badrecipients.extend(emlrecips)
 
     if len(badrecipients) > 0:
         return HttpResponse(
