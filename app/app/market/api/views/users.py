@@ -1,4 +1,5 @@
 import json
+import re
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -6,6 +7,9 @@ from django.core.urlresolvers import reverse
 from haystack.query import SearchQuerySet
 from django.contrib.auth.decorators import login_required
 from postman.api import pm_write
+from django.core.mail import EmailMessage
+import constance
+from django.template.loader import render_to_string
 
 from app.market.api.utils import *
 from app.market.models import MarketItem
@@ -13,6 +17,7 @@ import app.users as users
 from django.utils.cache import get_cache
 cache = get_cache('default')
 
+EMAILRE = re.compile("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$")
 
 def create_query(request):
     query = Q()
@@ -103,22 +108,57 @@ def send_message(request, to_user, rtype):
 
 
 @login_required
-def send_recommendation(request, rec_type, to_user, obj_id, rtype):
-    additionals =''
+def send_recommendation(request, rec_type, obj_id, rtype):
     if rec_type == 'item':
-        href = '<!--item="'+obj_id+'"-->'
         additionals = MarketItem.objects.values('title').get(pk=obj_id)['title']
     else:
-        href = '<!--user="'+obj_id+'"-->'
         additionals = obj_id
-    try:
-        pm_write(sender=request.user,
-                 recipient=users.models.User.objects.filter(username=to_user)[0],
-                 subject=request.POST['subject'][:120] if len(request.POST['subject'])>120 else request.POST['subject'],
-                 body=request.POST['message']+'\r\n----------------------------------------\r\n'+additionals+'\r\n'+href)
-    except:
-        return HttpResponseError(
-            json.dumps({'success': 'false'}),
+
+    recipients = re.split("\s*[ ;,]\s*", request.POST['recipients'])
+    badrecipients = []
+    msgcontext = { 'message'     : request.POST['message'],
+                   'additionals' : additionals,
+                   'rec_type'    : rec_type,
+                   'obj_id'      : obj_id,
+                   'url'         : request.build_absolute_uri(reverse('preview', args=(rec_type,obj_id)))}
+
+    subject = request.POST['subject']
+    if len(subject) > 120: subject = subject[:120]
+    body    = render_to_string('emails/recommendmessage.txt',  msgcontext)
+    emlrecips = []
+
+    for recipient in recipients:
+        if EMAILRE.match(recipient):
+            emlrecips.append(recipient)
+        else:
+            try:
+                pm_write(sender=request.user,
+                         recipient=users.models.User.objects.filter(username=recipient)[0],
+                         subject=subject,
+                         body=body)
+            except Exception as e:
+                print "Exception sending to %s: %s %s:"%(recipient, type(e), e)
+                badrecipients.append(recipient + " (unknown user)")
+
+    if len(emlrecips) > 0:
+        emlbody = render_to_string('emails/recommendmessage.eml', msgcontext)
+        try:
+            email = EmailMessage(
+                subject,
+                emlbody,
+                constance.config.NO_REPLY_EMAIL,
+                emlrecips
+            )
+            email.content_subtype = "plain"
+            email.send()
+        except Exception as e:
+            print "Exception sending to %s: %s %s:"%(recipient, type(e), e)
+            badrecipients.extend(emlrecips)
+
+    if len(badrecipients) > 0:
+        return HttpResponse(
+            json.dumps({'success'       : 'false',
+                        'badrecipients' : badrecipients}),
             mimetype="application/"+rtype)
 
     return HttpResponse(

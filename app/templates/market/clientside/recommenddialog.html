@@ -10,9 +10,9 @@
         <div id="recerror"></div>
       </div>
       <div class="modal-body">
-        <label for="touser">{%trans "To registered user"%}</label>
+        <label for="touser">{%trans "To: username or email address"%}</label>
         <div style="margin-bottom:5px;">
-          <input  class="form-control" id="touser" type="text" name="subject" required="true" placeholder="{%trans "Start typing a username"%}"/>
+          <input  class="form-control" id="touser" type="text" name="subject" required="true" placeholder="{%trans "Start typing a username or enter an email address"%}"/>
         </div>
 
         <label for="recsub">{%trans "Subject"%}</label>
@@ -55,6 +55,7 @@
         obj_id = ev.currentTarget.getAttribute('obj_id'),
         rec_type = ev.currentTarget.getAttribute('rec_type');
       this.setup(rec_type, obj_id, subject, message);
+      this.clearalert('#recerror');
      },
 
      setHeader: function(rec_type){
@@ -85,37 +86,53 @@
 
      send: function () {
        var that = this;
-       $('.sendrec').prop('disabled', true);
-       if ($('#touser').val() !== '' && $('#recsub').val() !== '' && $('#recmessage').val() !== '') {
-         if (this.rec_type == 'user') {
-           this.url = window.ahr.app_urls.senduserrecommendation.replace('0', $('#touser').val()) + this.obj_id;
-         } else {
-           this.url = window.ahr.app_urls.senditemrecommendation.replace('0', $('#touser').val()) + this.obj_id;
-         }
-         window.ahr.getcsrf(function (csrf) {
-           var dfrd = $.ajax({
-             url: that.url,
-             type: 'POST',
-             dataType: 'json',
-             data: {
-               csrfmiddlewaretoken: csrf.csrfmiddlewaretoken,
-               subject: $('#recsub').val(),
-               message: $('#recmessage').val()
-             }
-           });
-           dfrd.done(function () {
-             $('#recommenddialog').modal('hide');
-             $('.sendrec').prop('disabled', false);
-             $('#touser').typeahead('destroy');
-           });
-           dfrd.fail(function () {
-             $('.sendrec').prop('disabled', false);
-             that.alert('{%trans "Failed to send message"%}', '#recerror');
-           });
-         });
-       } else {
+       if ($('#recsub').val() === '' || $('#recmessage').val() === '') {
          this.alert('{%trans "Please enter both a subject and a message."%}', '#recerror');
+         return;
        }
+       if ($('#touser').val() === '') {
+         // Need proper address validation here.
+         this.alert('{%trans "Please enter a valid username and/or email address. "%}', '#recerror');
+         return
+       }
+       $('.sendrec').prop('disabled', true);
+       if (this.rec_type == 'user') {
+         this.url = window.ahr.app_urls.senduserrecommendation + this.obj_id;
+       } else {
+         this.url = window.ahr.app_urls.senditemrecommendation + this.obj_id;
+       }
+       window.ahr.getcsrf(function (csrf) {
+         var dfrd = $.ajax({
+           url: that.url,
+           type: 'POST',
+           dataType: 'json',
+           data: {
+             csrfmiddlewaretoken: csrf.csrfmiddlewaretoken,
+             recipients:  $('#touser').val(),
+             subject:     $('#recsub').val(),
+             message:     $('#recmessage').val()
+           }
+         });
+         dfrd.done(function (data) {
+           $('.sendrec').prop('disabled', false);
+           if (data.success === 'true') {
+             $('#touser').typeahead('destroy');
+             $('#recommenddialog').modal('hide');
+           }
+           else {
+             if (data.badrecipients.length == 1) {
+               that.alert('{%trans "Failed to send message to user:"%} ' + data.badrecipients[0], '#recerror');
+             }
+             else {
+               that.alert('{%trans "Failed to send message to users:"%} ' + data.badrecipients.join(', '), '#recerror');
+             }
+           }
+         });
+         dfrd.fail(function () {
+           $('.sendrec').prop('disabled', false);
+           that.alert('{%trans "Failed to send message"%}', '#recerror');
+         });
+       });
      },
 
      initialize: function (data) {

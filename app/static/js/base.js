@@ -90,6 +90,10 @@
       window.ahr.alert(message, selector);
     },
 
+    clearalert: function (selector) {
+      window.ahr.clearalert(selector);
+    },
+
     info: function (message, selector) {
       $(selector).empty();
       $(selector).prepend('<div class="alert alert-success alert-dismissable">' +
