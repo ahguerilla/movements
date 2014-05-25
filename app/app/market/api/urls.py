@@ -21,7 +21,7 @@ market_user_patterns = patterns('',
         'app.market.api.views.users.send_message',
         name="send_message"),
 
-    url(r'(?P<rtype>\S+)/users/recommend/(?P<rec_type>item|user)/(?P<to_user>\S+)/(?P<obj_id>\d+|\S+)$',
+    url(r'(?P<rtype>\S+)/users/recommend/(?P<rec_type>item|user)/(?P<obj_id>\d+|\S+)$',
         'app.market.api.views.users.send_recommendation',
         name="send_recommendation"),
 

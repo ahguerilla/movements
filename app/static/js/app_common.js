@@ -131,6 +131,10 @@
       message + '</div>');
   }
 
+  function clearalert(selector) {
+    $(selector).empty();
+  }
+
   $.fn.clickUrl = function() {
     var regexp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
     this.each(function() {
@@ -144,6 +148,7 @@
   window.ahr = window.ahr || {};
   window.ahr.getcsrf = getcsrf;
   window.ahr.alert = alert;
+  window.ahr.clearalert = clearalert;
   window.ahr.getStatics = getStatics;
   window.ahr.clone = clone;
   window.ahr.expandTextarea = expandTextarea;

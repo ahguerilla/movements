@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^market/notifications$', 'app.market.views.notifications', name="show_notifications"),
     url(r'^market/users$', 'app.market.views.users', name="show_users"),
     url(r'^market/view/posts', 'app.market.views.posts', name="posts"),
+    url(r'^market/preview/(?P<obj_type>\w+)/(?P<obj_id>\w+)/', 'app.market.views.preview', name='preview'),
 
     url(r'^market/search/', include('haystack.urls')),
     url('^/messages/inbox/m/$','app.market.views.index'),

@@ -92,3 +92,7 @@ def postman_unarchive(request):
         if not (recipient_rows or sender_rows):
             raise Http404  # abnormal enough, like forged ids
     return redirect(reverse('postman_archives'))
+
+def preview(request, obj_type, obj_id):
+    print "got here"
+    raise Http404
