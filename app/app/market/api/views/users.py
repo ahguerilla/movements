@@ -10,6 +10,7 @@ from postman.api import pm_write
 from django.core.mail import EmailMessage
 import constance
 from django.template.loader import render_to_string
+from django.http import Http404
 
 from app.market.api.utils import *
 from app.market.models import MarketItem
