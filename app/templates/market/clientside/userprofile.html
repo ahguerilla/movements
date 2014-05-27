@@ -52,7 +52,7 @@
 <script type="text/javascript">
   (function(){
     var profileWidget = window.ahr.BaseView.extend({
-      set: function(username, container, ac_type, ac_data){
+      set: function(username, container, ac_type) {
         var that = this;
         $('.action-container').empty();
         $.getJSON(that.profile_url + username,
@@ -65,14 +65,15 @@
             $('.rateit', $(container)).each(function () {
               $(this).rateit('value', this.getAttribute('rate'));
             });
-            if(username !== window.ahr.username){
-            var ac_data ={'username':data.username,
-              'usercore':data.score,
-              'ratecount':data.ratecount,
-              'avatar': data.avatar
-              };
-            var actions = that.actions_view.get(ac_type, ac_data);
-            $('.action-container').html(actions);
+            if (username !== window.ahr.username) {
+              var ac_data ={
+                'username':data.username,
+                'usercore':data.score,
+                'ratecount':data.ratecount,
+                'avatar': data.avatar
+                };
+              var actions = that.actions_view.get(ac_type, ac_data);
+              $('.action-container').html(actions);
             }
             $('.actionitem.routehref',$('#singleItem')).empty();
 
