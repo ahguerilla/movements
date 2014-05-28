@@ -1,11 +1,11 @@
 from datetime import datetime
+
 from django.db import models
 from django.utils.timezone import now
-
 from django.utils.translation import ugettext_lazy as _
+from django.contrib import auth
 import tinymce
-
-import django.contrib.auth as auth
+from postman.models import Message
 
 from .market import MarketItem
 
@@ -53,3 +53,18 @@ class EmailRecommendation(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.market_item.title
+
+
+class Reporting(MarketItem):
+
+    class Meta:
+        proxy = True
+        app_label = 'reporting'
+
+
+# class ExtMessage(Message):
+#     is_post_recommendation = models.BooleanField(
+#         _('is post recommendation'))
+#     is_user_recommendation = models.BooleanField(
+#         _('is user recommendation'))
+#     conversation_id =
