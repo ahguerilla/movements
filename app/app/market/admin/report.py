@@ -21,3 +21,5 @@ class UserReportAdmin(admin.ModelAdmin):
         return obj.owner.username
 
 admin.site.register(models.UserReport, UserReportAdmin)
+
+admin.site.register(models.EmailRecommendation)
