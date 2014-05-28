@@ -40,7 +40,8 @@ class UserReport(models.Model):
 
 
 class EmailRecommendation(models.Model):
-    market_item = models.ForeignKey(MarketItem, null=True)
+    market_item = models.ForeignKey(
+        MarketItem, null=True, verbose_name=_('market item'))
     email = models.EmailField(_('e-mail'), default='', blank=True)
     recommendation_date = models.DateTimeField(
         _('date of recommendation'), default=now)
