@@ -6,7 +6,7 @@ from .market import MarketItemHidden
 from .market import MarketItemStick
 from .rate import ItemRate
 from .report import MarketItemPostReport
-from .report import UserReport
+from .report import UserReport, EmailRecommendation
 from .resourcefile import File
 from .notificatoin import Notification
 

@@ -12,7 +12,7 @@ import constance
 from django.template.loader import render_to_string
 
 from app.market.api.utils import *
-from app.market.models import MarketItem
+from app.market.models import MarketItem, EmailRecommendation
 import app.users as users
 from django.utils.cache import get_cache
 cache = get_cache('default')
@@ -109,8 +109,9 @@ def send_message(request, to_user, rtype):
 
 @login_required
 def send_recommendation(request, rec_type, obj_id, rtype):
+    market_item = MarketItem.objects.get(pk=obj_id)
     if rec_type == 'item':
-        additionals = MarketItem.objects.values('title').get(pk=obj_id)['title']
+        additionals = market_item.title
     else:
         additionals = obj_id
 
@@ -151,6 +152,7 @@ def send_recommendation(request, rec_type, obj_id, rtype):
             )
             email.content_subtype = "plain"
             email.send()
+            _update_email_recommendations(market_item, emlrecips)
         except Exception as e:
             print "Exception sending to %s: %s %s:"%(recipient, type(e), e)
             badrecipients.extend(emlrecips)
@@ -165,6 +167,12 @@ def send_recommendation(request, rec_type, obj_id, rtype):
         json.dumps({'success': 'true'}),
         mimetype="application/"+rtype)
 
+
+def _update_email_recommendations(market_item, emails):
+    EmailRecommendation.objects.bulk_create(
+        [EmailRecommendation(market_item=market_item, email=email)
+         for email in emails]
+    )
 
 @login_required
 def set_rate(request, username, rtype):

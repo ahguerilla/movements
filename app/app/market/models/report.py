@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db import models
+from django.utils.timezone import now
 
 from django.utils.translation import ugettext_lazy as _
 import tinymce
@@ -36,3 +37,18 @@ class UserReport(models.Model):
     class Meta:
         ordering = ['-resolved', '-pub_date']
         app_label="market"
+
+
+class EmailRecommendation(models.Model):
+    market_item = models.ForeignKey(MarketItem, null=True)
+    email = models.EmailField(_('e-mail'), default='', blank=True)
+    recommendation_date = models.DateTimeField(
+        _('date of recommendation'), default=now)
+
+    class Meta:
+        app_label = 'market'
+        verbose_name = _('email recommendation')
+        verbose_name_plural = _('email recommendations')
+
+    def __unicode__(self):
+        return u'%s' % self.market_item.title
