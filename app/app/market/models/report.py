@@ -4,6 +4,8 @@ from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import auth
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 import tinymce
 from postman.models import Message
 
@@ -62,9 +64,38 @@ class Reporting(MarketItem):
         app_label = 'reporting'
 
 
-# class ExtMessage(Message):
-#     is_post_recommendation = models.BooleanField(
-#         _('is post recommendation'))
-#     is_user_recommendation = models.BooleanField(
-#         _('is user recommendation'))
-#     conversation_id =
+class ExtMessage(Message):
+    is_post_recommendation = models.BooleanField(
+        _('is post recommendation'), default=False)
+    is_user_recommendation = models.BooleanField(
+        _('is user recommendation'), default=False)
+    market_item = models.ForeignKey(
+        MarketItem, null=True, verbose_name=_('market item'), blank=True)
+
+    class Meta:
+        app_label = 'market'
+        verbose_name = _('message')
+        verbose_name_plural = _('messages')
+        ordering = ('-sent_at', '-id')
+
+
+@receiver(post_save, sender=Message)
+def create_child_msg(sender, instance, **kwargs):
+    # Required because the child extended model (ExtMessage) displays in admin
+    # instead of standard postman model. So we manually add child model.
+    # FIXME: perhaps is there a standard way to do this?
+    msg = ExtMessage(message_ptr=instance)
+    msg.__dict__.update(instance.__dict__)
+    msg.is_post_recommendation = False
+    msg.is_user_recommendation = False
+    msg.save()
+
+
+class MessagePresentation(ExtMessage):
+
+    class Meta:
+        proxy = True
+        app_label = 'postman'
+        verbose_name = _('message')
+        verbose_name_plural = _('messages')
+        ordering = ('-sent_at', '-id')

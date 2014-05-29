@@ -1,10 +1,11 @@
 from django.contrib import admin
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 
+from postman.models import Message
+from postman.admin import MessageAdmin, MessageAdminForm as MessageAdminFormBase
+
 import app.market.models as models
-import django.db as db
+
 
 class MarketItemPostReportAdmin(admin.ModelAdmin):
     list_display = ('item_owner', 'reportedby', 'pub_date', 'resolved' )
@@ -32,7 +33,9 @@ admin.site.register(models.EmailRecommendation)
 class ReportAdmin(admin.ModelAdmin):
     list_display = (
         'get_id', 'title', 'get_view_count', 'commentcount',
-        'get_email_recomendations_count')
+        'get_email_rec_count', 'get_user_rec_count', 'get_conversation_count',
+        'get_total_msg_count'
+    )
     actions = None
 
     def get_id(self, obj):
@@ -43,10 +46,21 @@ class ReportAdmin(admin.ModelAdmin):
         return obj.marketitemviewconter_set.count()
     get_view_count.short_description = _('views')
 
-    def get_email_recomendations_count(self, obj):
+    def get_email_rec_count(self, obj):
         return obj.emailrecommendation_set.count()
-    get_email_recomendations_count.short_description = _(
-        'number of email recommendations')
+    get_email_rec_count.short_description = _('number of email recommendations')
+
+    def get_user_rec_count(self, obj):
+        return obj.extmessage_set.filter(is_post_recommendation=True).count()
+    get_user_rec_count.short_description = _('number of user recommendations')
+
+    def get_conversation_count(self, obj):
+        return obj.extmessage_set.filter(thread=None).count()
+    get_conversation_count.short_description = _('conversation count')
+
+    def get_total_msg_count(self, obj):
+        return obj.extmessage_set.count()
+    get_total_msg_count.short_description = _('total messages count')
 
     def has_add_permission(self, request):
         return False
@@ -60,3 +74,17 @@ class ReportAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Reporting, ReportAdmin)
+
+
+# Replacement the standard postman model to the extended model.
+class MessageAdminForm(MessageAdminFormBase):
+    class Meta:
+        model = models.MessagePresentation
+
+MessageAdmin.form = MessageAdminForm
+MessageAdmin.fieldsets = MessageAdmin.fieldsets + ((
+    _('Additional properties'), {'fields': (
+        ('is_post_recommendation', 'is_user_recommendation', 'market_item'),)
+    }),)
+admin.site.unregister(Message)
+admin.site.register(models.MessagePresentation, MessageAdmin)
