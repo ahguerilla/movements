@@ -141,9 +141,9 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                     body=body)
                 if rec_type == 'item':
                     msg.messageext.is_post_recommendation = True
+                    msg.messageext.market_item = market_item
                 else:
                     msg.messageext.is_user_recommendation = True
-                msg.messageext.market_item = market_item
                 msg.messageext.save()
             except Exception as e:
                 print "Exception sending to %s: %s %s:"%(recipient, type(e), e)

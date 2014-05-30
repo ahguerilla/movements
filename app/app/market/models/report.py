@@ -65,6 +65,15 @@ class Reporting(MarketItem):
 
 
 class MessageExt(Message):
+    """
+    - 'is_post_recommendation' (gets set to true if the message was created via
+      a market item recommendation);
+    - 'is_user_recommendation' as with market item recommendations, it is
+      possible to recommend a user via their profile (gets set to true if the
+      message was created via a user recommendation);
+    - 'market_item_id' (should be null if the conversation is initiated via a
+      to user private message or user recommendation)
+    """
     is_post_recommendation = models.BooleanField(
         _('is post recommendation'), default=False)
     is_user_recommendation = models.BooleanField(
@@ -92,7 +101,12 @@ def create_child_msg(sender, instance, **kwargs):
 
 
 class MessagePresentation(MessageExt):
-
+    """
+    MessageExt model should be used in postman admin area.
+    This is possible when set app_label = 'postman'.
+    However, migrations need stored in project, not in postman app.
+    So we used proxy model for this.
+    """
     class Meta:
         proxy = True
         app_label = 'postman'

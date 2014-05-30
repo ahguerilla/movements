@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.contrib.admin.views.main import ChangeList
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Count
 
 from postman.models import Message
 from postman.admin import MessageAdmin, MessageAdminForm as MessageAdminFormBase
@@ -30,7 +32,33 @@ admin.site.register(models.UserReport, UserReportAdmin)
 admin.site.register(models.EmailRecommendation)
 
 
-class ReportAdmin(admin.ModelAdmin):
+class IncidentChangeList(ChangeList):
+    def get_results(self, request):
+        super(IncidentChangeList, self).get_results(request)
+        orig_queryset = self.result_list
+        queryset = orig_queryset.annotate(
+            view_count=Count('marketitemviewconter', distinct=True),
+            email_rec_count=Count('emailrecommendation', distinct=True),
+            total_msg_count=Count('messageext', distinct=True),
+        )
+        user_rec_dict = dict(orig_queryset.filter(
+            messageext__is_post_recommendation=True).annotate(
+                user_rec_count=Count('messageext')
+            ).values_list('id', 'user_rec_count'))
+        conversation_dict = dict(orig_queryset.filter(
+            messageext__thread=None).annotate(
+                conversation_count=Count('messageext')
+            ).values_list('id', 'conversation_count'))
+        market_items = queryset[:]
+        for item in market_items:
+            item.user_rec_count = user_rec_dict.get(item.id, 0)
+            item.conversation_count = conversation_dict.get(item.id, 0)
+        self.result_list = market_items
+        return market_items
+
+
+class IncidentAdmin(admin.ModelAdmin):
+    list_select_related = ('messageext',)
     list_display = (
         'get_id', 'title', 'get_view_count', 'commentcount',
         'get_email_rec_count', 'get_user_rec_count', 'get_conversation_count',
@@ -43,23 +71,23 @@ class ReportAdmin(admin.ModelAdmin):
     get_id.short_description = _('id')
 
     def get_view_count(self, obj):
-        return obj.marketitemviewconter_set.count()
+        return obj.view_count
     get_view_count.short_description = _('views')
 
     def get_email_rec_count(self, obj):
-        return obj.emailrecommendation_set.count()
+        return obj.email_rec_count
     get_email_rec_count.short_description = _('number of email recommendations')
 
     def get_user_rec_count(self, obj):
-        return obj.messageext_set.filter(is_post_recommendation=True).count()
+        return obj.user_rec_count
     get_user_rec_count.short_description = _('number of user recommendations')
 
     def get_conversation_count(self, obj):
-        return obj.messageext_set.filter(thread=None).count()
+        return obj.conversation_count
     get_conversation_count.short_description = _('conversation count')
 
     def get_total_msg_count(self, obj):
-        return obj.messageext_set.count()
+        return obj.total_msg_count
     get_total_msg_count.short_description = _('total messages count')
 
     def has_add_permission(self, request):
@@ -70,10 +98,12 @@ class ReportAdmin(admin.ModelAdmin):
 
     def __init__(self, model, admin_site):
         self.list_display_links = (None,)
-        super(ReportAdmin, self).__init__(model, admin_site)
+        super(IncidentAdmin, self).__init__(model, admin_site)
 
+    def get_changelist(self, request, **kwargs):
+        return IncidentChangeList
 
-admin.site.register(models.Reporting, ReportAdmin)
+admin.site.register(models.Reporting, IncidentAdmin)
 
 
 # Replacement the standard postman model to the extended model.
