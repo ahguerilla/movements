@@ -54,7 +54,6 @@ class IncidentChangeList(ChangeList):
             item.user_rec_count = user_rec_dict.get(item.id, 0)
             item.conversation_count = conversation_dict.get(item.id, 0)
         self.result_list = market_items
-        return market_items
 
 
 class IncidentAdmin(admin.ModelAdmin):
