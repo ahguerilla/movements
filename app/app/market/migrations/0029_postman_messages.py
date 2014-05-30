@@ -12,7 +12,7 @@ class Migration(DataMigration):
         # Use orm.ModelName to refer to models in this application,
         # and orm['appname.ModelName'] for models in other applications.
         for msg in orm['postman.Message'].objects.all():
-            ext_msg = orm.ExtMessage(message_ptr=msg)
+            ext_msg = orm.MessageExt(message_ptr=msg)
             ext_msg.__dict__.update(msg.__dict__)
             ext_msg.is_post_recommendation = False
             ext_msg.is_user_recommendation = False
@@ -75,8 +75,8 @@ class Migration(DataMigration):
             'market_item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']", 'null': 'True'}),
             'recommendation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'})
         },
-        'market.extmessage': {
-            'Meta': {'ordering': "[u'-sent_at', u'-id']", 'object_name': 'ExtMessage', '_ormbases': [u'postman.Message']},
+        'market.messageext': {
+            'Meta': {'ordering': "[u'-sent_at', u'-id']", 'object_name': 'MessageExt', '_ormbases': [u'postman.Message']},
             'is_post_recommendation': ('django.db.models.fields.BooleanField', [], {}),
             'is_user_recommendation': ('django.db.models.fields.BooleanField', [], {}),
             'market_item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']", 'null': 'True'}),

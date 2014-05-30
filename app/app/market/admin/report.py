@@ -51,15 +51,15 @@ class ReportAdmin(admin.ModelAdmin):
     get_email_rec_count.short_description = _('number of email recommendations')
 
     def get_user_rec_count(self, obj):
-        return obj.extmessage_set.filter(is_post_recommendation=True).count()
+        return obj.messageext_set.filter(is_post_recommendation=True).count()
     get_user_rec_count.short_description = _('number of user recommendations')
 
     def get_conversation_count(self, obj):
-        return obj.extmessage_set.filter(thread=None).count()
+        return obj.messageext_set.filter(thread=None).count()
     get_conversation_count.short_description = _('conversation count')
 
     def get_total_msg_count(self, obj):
-        return obj.extmessage_set.count()
+        return obj.messageext_set.count()
     get_total_msg_count.short_description = _('total messages count')
 
     def has_add_permission(self, request):

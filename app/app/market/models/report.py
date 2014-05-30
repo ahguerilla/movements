@@ -64,7 +64,7 @@ class Reporting(MarketItem):
         app_label = 'reporting'
 
 
-class ExtMessage(Message):
+class MessageExt(Message):
     is_post_recommendation = models.BooleanField(
         _('is post recommendation'), default=False)
     is_user_recommendation = models.BooleanField(
@@ -81,17 +81,17 @@ class ExtMessage(Message):
 
 @receiver(post_save, sender=Message)
 def create_child_msg(sender, instance, **kwargs):
-    # Required because the child extended model (ExtMessage) displays in admin
+    # Required because the child extended model (MessageExt) displays in admin
     # instead of standard postman model. So we manually add child model.
     # FIXME: perhaps is there a standard way to do this?
-    msg = ExtMessage(message_ptr=instance)
+    msg = MessageExt(message_ptr=instance)
     msg.__dict__.update(instance.__dict__)
     msg.is_post_recommendation = False
     msg.is_user_recommendation = False
     msg.save()
 
 
-class MessagePresentation(ExtMessage):
+class MessagePresentation(MessageExt):
 
     class Meta:
         proxy = True

@@ -140,11 +140,11 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                     subject=subject,
                     body=body)
                 if rec_type == 'item':
-                    msg.extmessage.is_post_recommendation = True
+                    msg.messageext.is_post_recommendation = True
                 else:
-                    msg.extmessage.is_user_recommendation = True
-                msg.extmessage.market_item = market_item
-                msg.extmessage.save()
+                    msg.messageext.is_user_recommendation = True
+                msg.messageext.market_item = market_item
+                msg.messageext.save()
             except Exception as e:
                 print "Exception sending to %s: %s %s:"%(recipient, type(e), e)
                 badrecipients.append(recipient + " (unknown user)")

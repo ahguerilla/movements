@@ -7,7 +7,7 @@ from .market import MarketItemStick
 from .rate import ItemRate
 from .report import (
     MarketItemPostReport, UserReport, EmailRecommendation, Reporting,
-    ExtMessage, MessagePresentation
+    MessageExt, MessagePresentation
 )
 from .resourcefile import File
 from .notificatoin import Notification

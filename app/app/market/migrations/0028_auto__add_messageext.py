@@ -8,19 +8,19 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'ExtMessage'
-        db.create_table(u'market_extmessage', (
+        # Adding model 'MessageExt'
+        db.create_table(u'market_messageext', (
             (u'message_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['postman.Message'], unique=True, primary_key=True)),
             ('is_post_recommendation', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('is_user_recommendation', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('market_item', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['market.MarketItem'], null=True)),
         ))
-        db.send_create_signal('market', ['ExtMessage'])
+        db.send_create_signal('market', ['MessageExt'])
 
 
     def backwards(self, orm):
-        # Deleting model 'ExtMessage'
-        db.delete_table(u'market_extmessage')
+        # Deleting model 'MessageExt'
+        db.delete_table(u'market_messageext')
 
 
     models = {
@@ -77,8 +77,8 @@ class Migration(SchemaMigration):
             'market_item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']", 'null': 'True'}),
             'recommendation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'})
         },
-        'market.extmessage': {
-            'Meta': {'ordering': "[u'-sent_at', u'-id']", 'object_name': 'ExtMessage', '_ormbases': [u'postman.Message']},
+        'market.messageext': {
+            'Meta': {'ordering': "[u'-sent_at', u'-id']", 'object_name': 'MessageExt', '_ormbases': [u'postman.Message']},
             'is_post_recommendation': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_user_recommendation': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'market_item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']", 'null': 'True'}),
