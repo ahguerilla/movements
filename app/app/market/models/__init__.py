@@ -5,8 +5,10 @@ from .market import MarketItemViewConter
 from .market import MarketItemHidden
 from .market import MarketItemStick
 from .rate import ItemRate
-from .report import MarketItemPostReport
-from .report import UserReport, EmailRecommendation
+from .report import (
+    MarketItemPostReport, UserReport, EmailRecommendation, Reporting,
+    MessageExt, MessagePresentation
+)
 from .resourcefile import File
 from .notificatoin import Notification
 

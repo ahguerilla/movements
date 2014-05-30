@@ -1,20 +1,20 @@
 import json
 import re
+
 from django.db.models import Q
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
-from haystack.query import SearchQuerySet
 from django.contrib.auth.decorators import login_required
-from postman.api import pm_write
 from django.core.mail import EmailMessage
-import constance
 from django.template.loader import render_to_string
+from django.utils.cache import get_cache
+import constance
+from haystack.query import SearchQuerySet
 
 from app.market.api.utils import *
 from app.market.models import MarketItem, EmailRecommendation
-import app.users as users
-from django.utils.cache import get_cache
+from app import users
+
+
 cache = get_cache('default')
 
 EMAILRE = re.compile("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$")
@@ -109,8 +109,9 @@ def send_message(request, to_user, rtype):
 
 @login_required
 def send_recommendation(request, rec_type, obj_id, rtype):
-    market_item = MarketItem.objects.get(pk=obj_id)
+    market_item = None
     if rec_type == 'item':
+        market_item = MarketItem.objects.get(pk=obj_id)
         additionals = market_item.title
     else:
         additionals = obj_id
@@ -133,10 +134,17 @@ def send_recommendation(request, rec_type, obj_id, rtype):
             emlrecips.append(recipient)
         else:
             try:
-                pm_write(sender=request.user,
-                         recipient=users.models.User.objects.filter(username=recipient)[0],
-                         subject=subject,
-                         body=body)
+                msg = pm_write(
+                    sender=request.user,
+                    recipient=users.models.User.objects.filter(username=recipient)[0],
+                    subject=subject,
+                    body=body)
+                if rec_type == 'item':
+                    msg.messageext.is_post_recommendation = True
+                    msg.messageext.market_item = market_item
+                else:
+                    msg.messageext.is_user_recommendation = True
+                msg.messageext.save()
             except Exception as e:
                 print "Exception sending to %s: %s %s:"%(recipient, type(e), e)
                 badrecipients.append(recipient + " (unknown user)")
