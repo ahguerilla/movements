@@ -1,6 +1,12 @@
 from django.conf.urls import patterns, url, include
 
 market_user_patterns = patterns('',
+    # Unsecured entry points
+    url(r'(?P<rtype>\S+)/unsecured/userprofile/get/(?P<username>\S+)$',
+        'app.market.api.views.users.get_profile_insecure',
+        name="get_userprofile_insecure"),
+
+    # Secured entry points
     url(r'(?P<rtype>\S+)/avatar/get/(?P<obj_id>\d+)/(?P<size>\d+)$',
         'app.market.api.views.users.get_avatar',
         name="get_avatar"),
@@ -60,6 +66,12 @@ market_user_patterns = patterns('',
 
 
 market_item_patterns = patterns('',
+    # Unsecured entry points
+    url(r'(?P<rtype>\S+)/unsecured/item/get/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.get_market_item_insecure',
+        name="get_marketitem_insecure"),
+
+    # Secured entry points
     url(r'(?P<rtype>\S+)/item/add/(?P<obj_type>offer|request|resource)$',
         'app.market.api.views.market.add_market_item',
         name="add_marketitem"),

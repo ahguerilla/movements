@@ -18,13 +18,13 @@ def get_CSRF_token(request,rtype):
     return HttpResponse( json.dumps({'csrfmiddlewaretoken': c['csrf_token'].decode()}), mimetype="application/"+rtype)
 
 
-@login_required
+#@login_required
 def get_issues(request,rtype):
     issues = users.models.Issues.objects.all()
     return HttpResponse( value(rtype,issues), mimetype="application/"+rtype)
 
 
-@login_required
+#@login_required
 def get_countries(request,rtype):
     cntrs = users.models.Countries.objects.all()
     return HttpResponse( value(rtype,cntrs), mimetype="application/"+rtype)
@@ -36,7 +36,7 @@ def get_nationalities(request,rtype):
     return HttpResponse( value(rtype,ntnlts), mimetype="application/"+rtype)
 
 
-@login_required
+#@login_required
 def get_skills(request,rtype):
     sklls = users.models.Skills.objects.all()
     return HttpResponse( value(rtype,sklls), mimetype="application/"+rtype)

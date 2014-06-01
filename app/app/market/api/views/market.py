@@ -69,6 +69,21 @@ def get_market_item(request, obj_id, rtype):
     cache.add('item-' + obj_id, retval)
     return retval
 
+def get_market_item_insecure(request, obj_id, rtype):
+    retval = cache.get('item-' + obj_id)
+    if retval:
+        mark_read_notifications.delay((obj_id,),request.user.id)
+        return retval
+    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
+                            Q(exp_date__gte=datetime.now())|Q(never_exp=True),
+                            pk=obj_id,
+                            deleted=False,
+                            owner__is_active=True)
+    add_view.delay(obj_id, obj.owner.id, request.user.id)
+    mark_read_notifications.delay((obj.id,),request.user.id)
+    retval = return_item_list([obj], rtype)
+    cache.add('item-' + obj_id, retval)
+    return retval
 
 def getStikies(request, hiddens, sfrom, to):
     sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
