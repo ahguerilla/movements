@@ -6,7 +6,7 @@ from .market import (
 )
 from .rate import ItemRate
 from .report import (
-    MarketItemPostReport, UserReport, EmailRecommendation, Reporting,
+    MarketItemPostReport, UserReport, EmailRecommendation, IncidentTracking,
     MessageExt, MessagePresentation
 )
 from .resourcefile import File

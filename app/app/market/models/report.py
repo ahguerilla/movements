@@ -57,11 +57,53 @@ class EmailRecommendation(models.Model):
         return u'%s' % self.market_item.title
 
 
-class Reporting(MarketItem):
+class IncidentTracking(MarketItem):
+
+    def get_view_count(self):
+        return self.view_count
+    get_view_count.short_description = _('views')
+
+    def get_email_rec_count(self):
+        return self.email_rec_count
+    get_email_rec_count.short_description = _('number of email recommendations')
+
+    def get_user_rec_count(self):
+        return self.user_rec_count
+    get_user_rec_count.short_description = _('number of user recommendations')
+
+    def get_conversation_count(self):
+        return self.conversation_count
+    get_conversation_count.short_description = _('conversation count')
+
+    def get_total_msg_count(self):
+        return self.total_msg_count
+    get_total_msg_count.short_description = _('total messages count')
+
+    def get_screen_name(self):
+        return self.owner
+    get_screen_name.short_description = _('Screen name')
+
+    def get_create_date(self):
+        return self.pub_date
+    get_create_date.short_description = _('date of post')
+
+    def get_owner(self):
+        return self.staff_owner
+    get_owner.short_description = _('owner')
+
+    def get_aging(self):
+        if self.status == self.CLOSED_BY_ADMIN or \
+                self.status == self.CLOSED_BY_USER:
+            return 'N/A'
+        else:
+            return now() - self.pub_date
+    get_aging.short_description = _('Aging')
 
     class Meta:
         proxy = True
         app_label = 'reporting'
+        verbose_name = _('incident')
+        verbose_name_plural = _('incident tracking')
 
 
 class MessageExt(Message):
