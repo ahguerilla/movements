@@ -117,8 +117,7 @@ class MarketItemActions(models.Model):
     market_item = models.ForeignKey(
         MarketItem, verbose_name=_('market item'))
     action = models.TextField(_('action'))
-    date_of_action = models.DateTimeField(
-        _('date of action'), null=True)
+    date_of_action = models.DateTimeField(_('date of action'))
 
     class Meta:
         app_label = 'market'
@@ -132,3 +131,24 @@ class MarketItemActions(models.Model):
         if not self.pk:
             self.date_of_action = now()
         super(MarketItemActions, self).save(*args, **kwargs)
+
+
+class MarketItemNextSteps(models.Model):
+    market_item = models.ForeignKey(
+        MarketItem, verbose_name=_('market item'))
+    next_step = models.TextField(_('next step'))
+    date_of_action = models.DateTimeField(_('date of action'))
+    completed = models.BooleanField(_('completed'), default=False)
+
+    class Meta:
+        app_label = 'market'
+        verbose_name = _('next step of market item')
+        verbose_name_plural = _('next steps of market item')
+
+    def __unicode__(self):
+        return u'%s / %s' % (self.next_step, self.date_of_action)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.date_of_action = now()
+        super(MarketItemNextSteps, self).save(*args, **kwargs)
