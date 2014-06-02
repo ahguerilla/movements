@@ -112,3 +112,23 @@ class MarketItemStick(models.Model):
     class Meta:
         app_label="market"
 
+
+class MarketItemActions(models.Model):
+    market_item = models.ForeignKey(
+        MarketItem, verbose_name=_('market item'))
+    action = models.TextField(_('action'))
+    date_of_action = models.DateTimeField(
+        _('date of action'), null=True)
+
+    class Meta:
+        app_label = 'market'
+        verbose_name = _('actions of market item')
+        verbose_name_plural = _('actions of market item')
+
+    def __unicode__(self):
+        return u'%s / %s' % (self.actions, self.date_of_action)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.date_of_action = now()
+        super(MarketItemActions, self).save(*args, **kwargs)
