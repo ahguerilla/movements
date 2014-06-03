@@ -3,7 +3,6 @@ import csv
 from django.contrib import admin
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Count
 from django.http import HttpResponse
@@ -140,13 +139,9 @@ class IncidentAdmin(admin.ModelAdmin):
             context.update({
                 'owner': obj.owner,
                 'staff_owner': obj.staff_owner,
-                'commenters': set(
-                    comment.owner
-                    for comment in models.Comment.objects.filter(item=obj)),
-                'senders': set(
-                    msg.sender
-                    for msg in models.MessageExt.objects.filter(market_item=obj)
-                )
+                'commenters': User.objects.filter(comment__item=obj).distinct(),
+                'senders': User.objects.filter(
+                    sent_messages__messageext__market_item=obj).distinct()
             })
         return super(IncidentAdmin, self).render_change_form(request, context,
                                                              add, change,
