@@ -99,6 +99,10 @@ class IncidentTracking(MarketItem):
             return now() - self.pub_date
     get_aging.short_description = _('Aging')
 
+    def get_status(self):
+        return self.get_status_display()
+    get_status.short_description = _('status')
+
     class Meta:
         proxy = True
         app_label = 'reporting'
