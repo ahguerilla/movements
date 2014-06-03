@@ -1,0 +1,33 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block field_sets %}
+  {{ block.super }}
+  <fieldset class="module aligned {{ fieldset.classes }}">
+    <h2>{% trans 'Community' %}</h2>
+    <div class="form-row">
+      {% if owner %}
+        <p><b>{% trans 'Post creator' %}:</b> {{ owner }};</p>
+      {% endif %}
+      {% if staff_owner %}
+        <p><b>{% trans 'Staff owner' %}:</b> {{ staff_owner }};</p>
+      {% endif %}
+      {% if commenters %}
+        <p>
+          <b>{% trans 'Post commenters' %}:</b>
+          {% for commenter in commenters %}
+            {{ commenter|safe }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+      {% if commenters %}
+        <p>
+          <b>{% trans 'People that have private messages regarding the post' %}:</b>
+          {% for sender in commenters %}
+            {{ sender|safe }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+    </div>
+  </fieldset>
+{% endblock %}

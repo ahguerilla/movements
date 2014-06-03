@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Count
 
@@ -86,6 +85,7 @@ class IncidentAdmin(admin.ModelAdmin):
     actions = None
     inlines = (ActionsInline, NextStepsInline)
     change_list_template = 'admin/incident_change_list.html'
+    change_form_template = 'admin/incident_change_form.html'
 
     def has_add_permission(self, request):
         return False
@@ -103,6 +103,30 @@ class IncidentAdmin(admin.ModelAdmin):
                     self, _make_incident_queryset(self.get_queryset(request)))
         return super(IncidentAdmin, self).changelist_view(request,
                                                           extra_context)
+
+    def render_change_form(self, request, context, add=False, change=False,
+                           form_url='', obj=None):
+        if obj:
+            commenters = [
+                '<a href="%s">%s</a>' % (
+                    reverse('admin:auth_user_change',
+                            args=(comment.owner.id,)), comment.owner)
+                for comment in models.Comment.objects.filter(item=obj)]
+            senders = [
+                '<a href="%s">%s</a>' % (
+                    reverse('admin:auth_user_change',
+                            args=(msg.sender.id,)), msg.sender)
+                for msg in models.MessageExt.objects.filter(market_item=obj)
+            ]
+            context.update({
+                'owner': obj.owner,
+                'staff_owner': obj.staff_owner,
+                'commenters': commenters,
+                'senders': senders
+            })
+        return super(IncidentAdmin, self).render_change_form(request, context,
+                                                             add, change,
+                                                             form_url, obj)
 
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         if db_field.name == 'staff_owner':
