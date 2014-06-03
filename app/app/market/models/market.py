@@ -10,20 +10,16 @@ import django.contrib.auth as auth
 from django.core.urlresolvers import reverse
 from django.utils.timezone import now
 
+from app.utils import EnumChoices
+
 
 class MarketItem(models.Model):
-    OPEN = 0
-    WATCH = 1
-    URGENT = 2
-    CLOSED_BY_ADMIN = 3
-    CLOSED_BY_USER = 4
-
-    STATUS_CHOICES = (
-        (OPEN, _('Open')),
-        (WATCH, _('Watch')),
-        (URGENT, _('Urgent')),
-        (CLOSED_BY_ADMIN, _('Closed By Admin')),
-        (CLOSED_BY_USER, _('Closed By User')),
+    STATUS_CHOICES = EnumChoices(
+        OPEN=(0, _('Open')),
+        WATCH=(1, _('Watch')),
+        URGENT=(2, _('Urgent')),
+        CLOSED_BY_ADMIN=(3, _('Closed By Admin')),
+        CLOSED_BY_USER=(4, _('Closed By User')),
     )
 
     item_type = models.CharField(_('item_type'), max_length=200, blank=False)
@@ -46,7 +42,8 @@ class MarketItem(models.Model):
     deleted = models.BooleanField(_('deleted'), default=False)
     never_exp = models.BooleanField(_('never expires'), default=False)
     status = models.PositiveSmallIntegerField(
-        _('status'), max_length=1, default=OPEN, choices=STATUS_CHOICES)
+        _('status'), max_length=1,
+        default=STATUS_CHOICES.OPEN, choices=STATUS_CHOICES)
     closed_date = models.DateTimeField(
         _('closed date'), null=True, blank=True)
 
@@ -57,8 +54,9 @@ class MarketItem(models.Model):
         app_label="market"
 
     def save(self, *args, **kwargs):
-        if not self.closed_date and (self.status == self.CLOSED_BY_USER
-                                     or self.status == self.CLOSED_BY_ADMIN):
+        if not self.closed_date and (
+                self.status == self.STATUS_CHOICES.CLOSED_BY_USER or
+                self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN):
             self.closed_date = now()
         super(MarketItem, self).save(*args, **kwargs)
 
