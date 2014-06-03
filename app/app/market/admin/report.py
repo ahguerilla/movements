@@ -137,22 +137,16 @@ class IncidentAdmin(admin.ModelAdmin):
     def render_change_form(self, request, context, add=False, change=False,
                            form_url='', obj=None):
         if obj:
-            commenters = [
-                '<a href="%s">%s</a>' % (
-                    reverse('admin:auth_user_change',
-                            args=(comment.owner.id,)), comment.owner)
-                for comment in models.Comment.objects.filter(item=obj)]
-            senders = [
-                '<a href="%s">%s</a>' % (
-                    reverse('admin:auth_user_change',
-                            args=(msg.sender.id,)), msg.sender)
-                for msg in models.MessageExt.objects.filter(market_item=obj)
-            ]
             context.update({
                 'owner': obj.owner,
                 'staff_owner': obj.staff_owner,
-                'commenters': commenters,
-                'senders': senders
+                'commenters': set(
+                    comment.owner
+                    for comment in models.Comment.objects.filter(item=obj)),
+                'senders': set(
+                    msg.sender
+                    for msg in models.MessageExt.objects.filter(market_item=obj)
+                )
             })
         return super(IncidentAdmin, self).render_change_form(request, context,
                                                              add, change,
