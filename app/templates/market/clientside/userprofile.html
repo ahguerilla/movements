@@ -14,17 +14,21 @@
       </div>
       <div class="userprofile-widget-rating">
         {%trans "Community rating:"%}
-        <span
-          class="rateit numstars"
-          username="<%- username %>"
-          score="<%- score %>"
-          rate="<%- score %>"
-          image_src = "<%- avatar %>"
-          ratecount="<%- ratecount %>"></span>
+        {% if user.is_authenticated %}
+          <span
+            class="rateit numstars"
+            username="<%- username %>"
+            score="<%- score %>"
+            rate="<%- score %>"
+            image_src = "<%- avatar %>"
+            ratecount="<%- ratecount %>"></span>
           <span class="miniprof-score">
             <span class="score"  username="<%- username %>"> <%- score %> {%trans "Stars"%} </span>
             (<span class="ratecount"  username="<%- username %>"><%-ratecount %></span> {%trans "votes"%})
           </span>
+        {% else %}
+          <span class="rateit numstars" rate="<%- score %>"></span>
+        {% endif %}
       </div>
       <div>
         {%trans "Nationality"%}: <%- nationality %>
@@ -33,18 +37,20 @@
         {%trans "Country of residence"%}: <%- resident_country %>
       </div>
     </div>
-    <% if(username != window.ahr.username) {%>
-    <h4>Safety First</h4>
-    <div style="margin-bottom: 20px;">
-      {% blocktrans %}
-      For your own safety and security, do not share personal contact information
-      (such as your phone number, address, email address, etc.) with other users.
-      Movements also prohibits abusive language or harassment.
-      To report an abusive user,
-      {% endblocktrans %}
-      <span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>{%trans "click here"%}</strong></span>.
-    </div>
-    <% }%>
+    {% if user.is_authenticated %}
+      <% if (username != window.ahr.username) {%>
+        <h4>Safety First</h4>
+        <div style="margin-bottom: 20px;">
+          {% blocktrans %}
+          For your own safety and security, do not share personal contact information
+          (such as your phone number, address, email address, etc.) with other users.
+          Movements also prohibits abusive language or harassment.
+          To report an abusive user,
+          {% endblocktrans %}
+          <span class="report_user" style="cursor:pointer;" username="<%- username %>"> <strong>{%trans "click here"%}</strong></span>.
+        </div>
+      <% }%>
+    {% endif %}
   </div>
 </script>
 
@@ -52,9 +58,13 @@
 <script type="text/javascript">
   (function(){
     var profileWidget = window.ahr.BaseView.extend({
-      set: function(username, container, ac_type, ac_data){
+      set: function(username, container, ac_type) {
         var that = this;
-        $('.action-container').empty();
+
+        {% if user.is_authenticated %}
+          $('.action-container').empty();
+        {% endif %}
+
         $.getJSON(that.profile_url + username,
           function (data) {
             $(container).html(that.tmpl(data));
@@ -65,17 +75,19 @@
             $('.rateit', $(container)).each(function () {
               $(this).rateit('value', this.getAttribute('rate'));
             });
-            if(username !== window.ahr.username){
-            var ac_data ={'username':data.username,
-              'usercore':data.score,
-              'ratecount':data.ratecount,
-              'avatar': data.avatar
-              };
-            var actions = that.actions_view.get(ac_type, ac_data);
-            $('.action-container').html(actions);
-            }
-            $('.actionitem.routehref',$('#singleItem')).empty();
-
+            {% if user.is_authenticated %}
+              if(username !== window.ahr.username) {
+                var ac_data ={
+                  'username':data.username,
+                  'usercore':data.score,
+                  'ratecount':data.ratecount,
+                  'avatar': data.avatar
+                  };
+                var actions = that.actions_view.get(ac_type, ac_data);
+                $('.action-container').html(actions);
+              }
+              $('.actionitem.routehref',$('#singleItem')).empty();
+            {% endif %}
         });
       },
       initialize: function(data){

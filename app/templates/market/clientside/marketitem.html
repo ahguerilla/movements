@@ -11,16 +11,19 @@
           </a>
           <span>by&nbsp;<a href="/user/profile/<%- owner %>"><%- owner %> </a></span>
         </div>
-        <% if(stick===true){ %>
-          <a href="<%- window.ahr.app_urls.setMarketItemunStick+pk %>" item_id="<%- pk %>" class="marketitem-unstick toggle-stick pull-right">Unstick</a>
-        <% }else{ %>
-          <a href="<%- window.ahr.app_urls.setMarketItemStick+pk %>" item_id="<%- pk %>" class="marketitem-stick toggle-stick pull-right">Stick</a>
-        <%}%>
-        <% if(hidden===true){ %>
-          <a clas href="<%- window.ahr.app_urls.setMarketItemunHide+pk %>" item_id="<%- pk %>" class="show-hidden-item-link unhide-item toggle-hidden">Show</a>
-        <% }else{ %>
-          <a href="<%- window.ahr.app_urls.setMarketItemHide+pk %>" item_id="<%- pk %>" class="hide-item toggle-hidden">Hide</a>
-        <%}%>
+
+        {% if user.is_authenticated %}
+          <% if(stick===true){ %>
+            <a href="<%- window.ahr.app_urls.setMarketItemunStick+pk %>" item_id="<%- pk %>" class="marketitem-unstick toggle-stick pull-right">Unstick</a>
+          <% }else{ %>
+            <a href="<%- window.ahr.app_urls.setMarketItemStick+pk %>" item_id="<%- pk %>" class="marketitem-stick toggle-stick pull-right">Stick</a>
+          <%}%>
+          <% if(hidden===true){ %>
+            <a clas href="<%- window.ahr.app_urls.setMarketItemunHide+pk %>" item_id="<%- pk %>" class="show-hidden-item-link unhide-item toggle-hidden">Show</a>
+          <% }else{ %>
+            <a href="<%- window.ahr.app_urls.setMarketItemHide+pk %>" item_id="<%- pk %>" class="hide-item toggle-hidden">Hide</a>
+          <%}%>
+        {% endif %}
         <div class="clearfix"></div>
         <div class="pudate pull-left">
           <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>
@@ -68,14 +71,6 @@
 (function () {
   var MarketItemWidget = window.ahr.BaseView.extend({
 
-    getCommentData: function () {
-      var dfrd = $.Deferred();
-      window.ahr.getcsrf(function (csrf) {
-        dfrd.resolve(csrf);
-      });
-      return dfrd;
-    },
-
     confirmLeave:function(ev){
       ev.preventDefault();
       if(ev.currentTarget.href.slice(0,29) != window.ahr.current_site.slice(0,29)){
@@ -86,148 +81,160 @@
       return false;
     },
 
-    comment: function (ev) {
-      ev.preventDefault();
-      var id = $(ev.currentTarget).data().id;
-      var comment = $('#newcomment').val();
-      var that = this;
-      if (comment) {
-        var dfrd = this.getCommentData();
-        dfrd.done(function (csrf) {
-          $.ajax({
-            type: 'POST',
-            url: window.ahr.app_urls.addcomment + id,
-            dataType: 'json',
-            data: {
-              "csrfmiddlewaretoken": csrf.csrfmiddlewaretoken,
-              "contents": comment
-            },
-            success: function (item) {
-              $('#newcomment').val("");
-              $('#newcomment').height(100);
-              that.addCommentToCommentList(item.obj, true);
-              that.setCommentCount(id);
+    {% if user.is_authenticated %}
+
+      getCommentData: function () {
+        var dfrd = $.Deferred();
+        window.ahr.getcsrf(function (csrf) {
+          dfrd.resolve(csrf);
+        });
+        return dfrd;
+      },
+
+      comment: function (ev) {
+        ev.preventDefault();
+        var id = $(ev.currentTarget).data().id;
+        var comment = $('#newcomment').val();
+        var that = this;
+        if (comment) {
+          var dfrd = this.getCommentData();
+          dfrd.done(function (csrf) {
+            $.ajax({
+              type: 'POST',
+              url: window.ahr.app_urls.addcomment + id,
+              dataType: 'json',
+              data: {
+                "csrfmiddlewaretoken": csrf.csrfmiddlewaretoken,
+                "contents": comment
+              },
+              success: function (item) {
+                $('#newcomment').val("");
+                $('#newcomment').height(100);
+                that.addCommentToCommentList(item.obj, true);
+                that.setCommentCount(id);
+              }
+            });
+          });
+        }
+        return (false);
+      },
+
+      setCommentCount: function (id) {
+        $.getJSON(
+          window.ahr.app_urls.getcommentcount + id,
+          function (data) {
+            $('.market-item-card[item_id="' + id + '"] .item-comment-count .commentcount').text(data);
+          });
+      },
+
+      deleteComment: function (ev) {
+        ev.preventDefault();
+        var that = this;
+        if (confirm('{% trans "Are you sure you want yo delete your comment?" %}')) {
+          var comment_id = ev.currentTarget.getAttribute('comment-id');
+          var href = ev.currentTarget.href;
+          var dfrd = $.ajax({
+            url: href
+          });
+          dfrd.success(function (data) {
+            $('.comment[comment-id="' + comment_id + '"]').remove();
+          });
+        }
+        return false;
+      },
+
+      addCommentToCommentList: function (comment_item, front) {
+        front = front === true ? front : false;
+        var data = {
+          pk: comment_item.pk,
+          userpic: comment_item.fields.avatar,
+          user: comment_item.fields.username,
+          owner: comment_item.fields.owner,
+          owner_url: comment_item.fields.profile_url,
+          pub_date: moment(comment_item.fields.pub_date).format("HH:mm on D/MM/YY"),
+          content: comment_item.fields.contents, //.replace(/\n/g, '<br />')
+          score: comment_item.score,
+          username: comment_item.fields.username,
+          ownerid : comment_item.fields.ownerid,
+          ratecount: comment_item.ratecount,
+          avatar: comment_item.fields.avatar
+        };
+        var comment_html = this.comment_tmp(data);
+        var actions = this.market.actions_view.get('comment', data);
+        var $comment_html = $(comment_html);
+        $comment_html = $comment_html.clickUrl();
+        $comment_html.find('.commentaction-place').replaceWith(actions);
+        if (front) {
+          $('#marketitem_comments').prepend($comment_html);
+        } else {
+          $('#marketitem_comments').append($comment_html);
+        }
+      },
+
+      resetitemrate: function (username, rate) {
+        try {
+          $(".numstars[username=" + username + "]").each(function () {
+            $(this).rateit('value', rate);
+            $(this).attr('rate', rate);
+          });
+        } catch (err) {
+          $.noop();
+        }
+      },
+
+      deleteItem: function (ev) {
+        ev.preventDefault();
+        var that = this;
+        if (confirm('{% trans "Are you sure you want to delete this item?" %}')) {
+          var item_id = ev.currentTarget.getAttribute('item_id');
+          var dfrd = $.ajax({
+            url: window.ahr.app_urls.deletemarketitem + item_id,
+          });
+          dfrd.done(function (data) {
+            if (typeof that.del_callback == "function") {
+              that.del_callback(item_id);
             }
           });
-        });
-      }
-      return (false);
-    },
+        }
+        return (false);
+      },
 
-    setCommentCount: function (id) {
-      $.getJSON(
-        window.ahr.app_urls.getcommentcount + id,
-        function (data) {
-          $('.market-item-card[item_id="' + id + '"] .item-comment-count .commentcount').text(data);
-        });
-    },
-
-    deleteComment: function (ev) {
-      ev.preventDefault();
-      var that = this;
-      if (confirm('{% trans "Are you sure you want yo delete your comment?" %}')) {
-        var comment_id = ev.currentTarget.getAttribute('comment-id');
-        var href = ev.currentTarget.href;
-        var dfrd = $.ajax({
-          url: href
-        });
-        dfrd.success(function (data) {
-          $('.comment[comment-id="' + comment_id + '"]').remove();
-        });
-      }
-      return false;
-    },
-
-    addCommentToCommentList: function (comment_item, front) {
-      front = front === true ? front : false;
-      var data = {
-        pk: comment_item.pk,
-        userpic: comment_item.fields.avatar,
-        user: comment_item.fields.username,
-        owner: comment_item.fields.owner,
-        owner_url: comment_item.fields.profile_url,
-        pub_date: moment(comment_item.fields.pub_date).format("HH:mm on D/MM/YY"),
-        content: comment_item.fields.contents, //.replace(/\n/g, '<br />')
-        score: comment_item.score,
-        username: comment_item.fields.username,
-        ownerid : comment_item.fields.ownerid,
-        ratecount: comment_item.ratecount,
-        avatar: comment_item.fields.avatar
-      };
-      var comment_html = this.comment_tmp(data);
-      var actions = this.market.actions_view.get('comment', data);
-      var $comment_html = $(comment_html);
-      $comment_html = $comment_html.clickUrl();
-      $comment_html.find('.commentaction-place').replaceWith(actions);
-      if (front) {
-        $('#marketitem_comments').prepend($comment_html);
-      } else {
-        $('#marketitem_comments').append($comment_html);
-      }
-    },
-
-    resetitemrate: function (username, rate) {
-      try {
-        $(".numstars[username=" + username + "]").each(function () {
-          $(this).rateit('value', rate);
-          $(this).attr('rate', rate);
-        });
-      } catch (err) {
-        $.noop();
-      }
-    },
-
-    deleteItem: function (ev) {
-      ev.preventDefault();
-      var that = this;
-      if (confirm('{% trans "Are you sure you want to delete this item?" %}')) {
-        var item_id = ev.currentTarget.getAttribute('item_id');
-        var dfrd = $.ajax({
-          url: window.ahr.app_urls.deletemarketitem + item_id,
-        });
-        dfrd.done(function (data) {
-          if (typeof that.del_callback == "function") {
-            that.del_callback(item_id);
+      editItem: function (ev) {
+        ev.preventDefault();
+        var that = this;
+        var id = ev.currentTarget.getAttribute('item_id');
+        $.getJSON(window.ahr.app_urls.getuseritem + id, function (item) {
+          if (item[0].fields.item_type == "request") {
+            that.market.requestdialog.edit(item, that.edit_callback);
+            that.market.requestdialog.showModal();
+          } else {
+            that.market.offerdialog.edit(item, that.edit_callback);
+            that.market.offerdialog.showModal();
           }
         });
-      }
-      return (false);
-    },
+        return (false);
+      },
 
-    editItem: function (ev) {
-      ev.preventDefault();
-      var that = this;
-      var id = ev.currentTarget.getAttribute('item_id');
-      $.getJSON(window.ahr.app_urls.getuseritem + id, function (item) {
-        if (item[0].fields.item_type == "request") {
-          that.market.requestdialog.edit(item, that.edit_callback);
-          that.market.requestdialog.showModal();
-        } else {
-          that.market.offerdialog.edit(item, that.edit_callback);
-          that.market.offerdialog.showModal();
-        }
-      });
-      return (false);
-    },
+      reloadItem: function (item) {
+        var isSingle = this.market.isSingle();
+        return (this.item_tmp(_.extend(item[0].fields,{'isSingle': isSingle})));
+      },
 
-    reloadItem: function (item) {
-      var isSingle = this.market.isSingle();
-      return (this.item_tmp(_.extend(item[0].fields,{'isSingle': isSingle})));
-    },
+      showMoreTags: function(ev){
+        var item = $(ev.currentTarget).closest('.more-items-here');
+        item.removeClass('more-items-here');
+        this.market.fancyref();
+        $(ev.currentTarget).replaceWith('<div class="showlesstags">{% trans "Less ..." %}</div>');
+      },
 
-    showMoreTags: function(ev){
-      var item = $(ev.currentTarget).closest('.more-items-here');
-      item.removeClass('more-items-here');
-      this.market.fancyref();
-      $(ev.currentTarget).replaceWith('<div class="showlesstags">{% trans "Less ..." %}</div>');
-    },
+      showLessTags: function(ev){
+        var item = $(ev.currentTarget).closest('.item-tags.clearfix');
+        item.addClass('more-items-here');
+        this.market.fancyref();
+        $(ev.currentTarget).replaceWith('<div class="showmoretags">{% trans "More ..." %}</div>');
+      },
+    {% endif %}
 
-    showLessTags: function(ev){
-      var item = $(ev.currentTarget).closest('.item-tags.clearfix');
-      item.addClass('more-items-here');
-      this.market.fancyref();
-      $(ev.currentTarget).replaceWith('<div class="showmoretags">{% trans "More ..." %}</div>');
-    },
 
     afterset: function (item_container) {
       if(this.market.isSingle()){
@@ -237,44 +244,48 @@
       return;
     },
 
-    toggleHidden:  function(ev){
-      ev.preventDefault();
-      var that = this;
-      var id = ev.currentTarget.getAttribute('item_id');
-      $.getJSON(ev.currentTarget.href,function(data){
-        if(data.result===true){
-          if($(ev.currentTarget).hasClass('hide-item')){
-            if(that.market.isShowingHidden()){
-              $(ev.currentTarget).closest('.market-item-card').addClass('hidden-item');
-              $(ev.currentTarget).closest('.item-header').addClass('hidden-item');
-              $(ev.currentTarget).closest(".show-hidden-item-link");
-              $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemunHide+id+'" item_id="'+id+'" class="hidden-item toggle-hidden">Show</a>');
-            }else{
-              that.del_callback(id);
-            }
-          }else{
-            $(ev.currentTarget).closest('.market-item-card').removeClass('hidden-item');
-            $(ev.currentTarget).closest('.item-header').removeClass('hidden-item');
-            $(ev.currentTarget).closest(".show-hidden-item-link");
-            $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemHide+id+'" item_id="'+id+'" class="hide-item toggle-hidden">Hide</a>');
-          }
-        }
-      });
-      return false;
-    },
+    {% if user.is_authenticated %}
 
-    toggleStick: function(ev){
-      ev.preventDefault();
-      var that = this;
-      var id = ev.currentTarget.getAttribute('item_id');
-      $.getJSON(ev.currentTarget.href,function(data){
-        if($(ev.currentTarget).hasClass('marketitem-unstick')){
-          $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemStick+id+'" item_id="'+id+'" class="marketitem-stick toggle-stick pull-right">Stick</a>');
-        }else{
-          $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemunStick+id+'" item_id="'+id+'" class="marketitem-unstick toggle-stick pull-right">Unstick</a>');
-        }
-      });
-    },
+      toggleHidden:  function(ev){
+        ev.preventDefault();
+        var that = this;
+        var id = ev.currentTarget.getAttribute('item_id');
+        $.getJSON(ev.currentTarget.href,function(data){
+          if(data.result===true){
+            if($(ev.currentTarget).hasClass('hide-item')){
+              if(that.market.isShowingHidden()){
+                $(ev.currentTarget).closest('.market-item-card').addClass('hidden-item');
+                $(ev.currentTarget).closest('.item-header').addClass('hidden-item');
+                $(ev.currentTarget).closest(".show-hidden-item-link");
+                $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemunHide+id+'" item_id="'+id+'" class="hidden-item toggle-hidden">Show</a>');
+              }else{
+                that.del_callback(id);
+              }
+            }else{
+              $(ev.currentTarget).closest('.market-item-card').removeClass('hidden-item');
+              $(ev.currentTarget).closest('.item-header').removeClass('hidden-item');
+              $(ev.currentTarget).closest(".show-hidden-item-link");
+              $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemHide+id+'" item_id="'+id+'" class="hide-item toggle-hidden">Hide</a>');
+            }
+          }
+        });
+        return false;
+      },
+
+      toggleStick: function(ev){
+        ev.preventDefault();
+        var that = this;
+        var id = ev.currentTarget.getAttribute('item_id');
+        $.getJSON(ev.currentTarget.href,function(data){
+          if($(ev.currentTarget).hasClass('marketitem-unstick')){
+            $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemStick+id+'" item_id="'+id+'" class="marketitem-stick toggle-stick pull-right">Stick</a>');
+          }else{
+            $(ev.currentTarget).replaceWith('<a href="'+window.ahr.app_urls.setMarketItemunStick+id+'" item_id="'+id+'" class="marketitem-unstick toggle-stick pull-right">Unstick</a>');
+          }
+        });
+      },
+    {% endif %}
+
 
     initialize: function (options) {
       this.item_type = 'item';
@@ -282,27 +293,31 @@
       this.del_callback = options.del_callback;
       this.edit_callback = options.edit_callback;
       this.item_tmp = _.template($('#item_template').html());
-      this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
-      this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate.bind(this));
-      this.report_dialog = window.ahr.report_dialog.initWidget('body');
-      this.comment_tmp = _.template($('#comment_view_template').html());
-      this.comment_form_tmp = _.template($('#comment_add_template').html());
-      $('#marketitem_comment_form').html(this.comment_form_tmp());
 
-      window.ahr.expandTextarea('#newcomment');
+      {% if user.is_authenticated %}
+        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate.bind(this));
+        this.report_dialog = window.ahr.report_dialog.initWidget('body');
 
-      _.extend(this.events, {
-        'click .toggle-hidden': 'toggleHidden',
-        'click .toggle-stick': 'toggleStick',
-        'click .comment-btn': 'comment',
-        'click .comment-delete': 'deleteComment',
-        'click .delete': 'deleteItem',
-        'click .edit': 'editItem',
-        'click .showmoretags': 'showMoreTags',
-        'click .showlesstags': 'showLessTags',
-        'click .multi-line-text a': 'confirmLeave',
-        'click .comment-content a': 'confirmLeave'
-      });
+        this.comment_tmp = _.template($('#comment_view_template').html());
+        this.comment_form_tmp = _.template($('#comment_add_template').html());
+        $('#marketitem_comment_form').html(this.comment_form_tmp());
+        window.ahr.expandTextarea('#newcomment');
+
+        _.extend(this.events, {
+          'click .toggle-hidden': 'toggleHidden',
+          'click .toggle-stick': 'toggleStick',
+          'click .comment-btn': 'comment',
+          'click .comment-delete': 'deleteComment',
+          'click .delete': 'deleteItem',
+          'click .edit': 'editItem',
+          'click .showmoretags': 'showMoreTags',
+          'click .showlesstags': 'showLessTags',
+          'click .multi-line-text a': 'confirmLeave',
+          'click .comment-content a': 'confirmLeave'
+        });
+      {% endif %}
+
     }
   });
 
