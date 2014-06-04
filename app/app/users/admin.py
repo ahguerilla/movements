@@ -69,8 +69,11 @@ class UserTrackingAdmin(admin.ModelAdmin):
         'last_login', 'is_admin'
     )
     change_list_template = 'admin/tracking_change_list.html'
-    csv_field_exclude = ('is_superuser', 'password', 'username',
-                         'is_staff', 'fullname')
+    csv_field_exclude = (
+        'is_superuser', 'password', 'username', 'is_staff', 'fullname',
+        'is_active', 'first_name', 'last_name')
+    csv_safe_fields = csv_field_exclude + (
+        'get_full_name', 'email')
 
     # Prepare fields for change list and CSV.
 
@@ -129,6 +132,8 @@ class UserTrackingAdmin(admin.ModelAdmin):
         if request.method == 'POST':
             if '_export' in request.POST:
                 return self.export_as_csv(request)
+            elif '_safe_export' in request.POST:
+                return self.export_as_csv(request, safe_mode=True)
         return super(UserTrackingAdmin, self).changelist_view(request,
                                                               extra_context)
 
@@ -166,7 +171,8 @@ class UserTrackingAdmin(admin.ModelAdmin):
             attr = getattr(obj, field)
         return unicode(attr).encode('utf-8')
 
-    def export_as_csv(self, request, header=True):
+    def export_as_csv(self, request, header=True, safe_mode=False):
+        extra_file_name = ''
         opts = self.model._meta
         field_names = [f.name for f in opts.fields]
         field_names = list(self.list_display) + field_names
@@ -180,6 +186,12 @@ class UserTrackingAdmin(admin.ModelAdmin):
             field_names = [f for f in field_names
                            if not f in self.csv_field_exclude]
 
+        if safe_mode:
+            extra_file_name = '_safe'
+            if hasattr(self, 'csv_safe_fields'):
+                field_names = [f for f in field_names
+                               if not f in self.csv_safe_fields]
+
         def _get_model_attr():
             return getattr(self.model, label)
 
@@ -188,8 +200,8 @@ class UserTrackingAdmin(admin.ModelAdmin):
                     'short_description', label) for label in field_names]
 
         response = HttpResponse(mimetype='text/csv')
-        response['Content-Disposition'] = 'attachment; filename=%s.csv' % (
-            unicode(opts).replace('.', '_')
+        response['Content-Disposition'] = 'attachment; filename=%s%s.csv' % (
+            unicode(opts).replace('.', '_'), extra_file_name
         )
 
         writer = csv.writer(response, delimiter=';')

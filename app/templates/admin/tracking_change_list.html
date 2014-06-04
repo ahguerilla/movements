@@ -7,11 +7,20 @@
     {% csrf_token %}
     <input type="hidden" name="_export">
   </form>
+  <form id="safe_export_form" action="." method="post">
+    {% csrf_token %}
+    <input type="hidden" name="_safe_export">
+  </form>
 
   <ul class="object-tools">
     <li>
       <a class="addlink" onclick="getElementById('export_form').submit();" href="javascript:void(0);">
         {% trans 'Export as CSV' %}
+      </a>
+    </li>
+    <li>
+      <a class="addlink" onclick="getElementById('safe_export_form').submit();" href="javascript:void(0);">
+        {% trans 'Export as CSV in safe mode' %}
       </a>
     </li>
   </ul>
