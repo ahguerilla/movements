@@ -1,8 +1,11 @@
+import csv
+
 from django.core.urlresolvers import reverse
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.db.models import Count
+from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.views.main import ChangeList
 from app.users.models import (
@@ -60,11 +63,14 @@ class TrackingChangeList(ChangeList):
 class UserTrackingAdmin(admin.ModelAdmin):
     list_select_related = ('userprofile',)
     list_display = (
-        'get_screen_name', 'get_signup_date', 'get_full_name',
+        'id', 'get_screen_name', 'get_signup_date', 'get_full_name',
         'get_nationality', 'get_resident_country', 'email',
         'get_request_count', 'get_offer_count', 'get_comment_count',
         'last_login', 'is_admin'
     )
+    change_list_template = 'admin/tracking_change_list.html'
+    csv_field_exclude = ('is_superuser', 'password', 'username',
+                         'is_staff', 'fullname')
 
     # Prepare fields for change list and CSV.
 
@@ -81,11 +87,15 @@ class UserTrackingAdmin(admin.ModelAdmin):
     get_full_name.short_description = _('Full Name')
 
     def get_nationality(self, obj):
-        return obj.userprofile.nationality
+        if hasattr(obj, 'userprofile'):
+            return obj.userprofile.nationality
+        return ''
     get_nationality.short_description = _('Nationality')
 
     def get_resident_country(self, obj):
-        return obj.userprofile.resident_country
+        if hasattr(obj, 'userprofile'):
+            return obj.userprofile.resident_country
+        return ''
     get_resident_country.short_description = _('Country of Residence')
 
     def is_admin(self, obj):
@@ -115,6 +125,13 @@ class UserTrackingAdmin(admin.ModelAdmin):
     def get_changelist(self, request, **kwargs):
         return TrackingChangeList
 
+    def changelist_view(self, request, extra_context=None):
+        if request.method == 'POST':
+            if '_export' in request.POST:
+                return self.export_as_csv(request)
+        return super(UserTrackingAdmin, self).changelist_view(request,
+                                                              extra_context)
+
     # Utils.
 
     @staticmethod
@@ -136,6 +153,56 @@ class UserTrackingAdmin(admin.ModelAdmin):
             user.request_count = request_count_dict.get(user.id, 0)
             user.offer_count = offer_count_dict.get(user.id, 0)
         return users
+
+    def _prep_field(self, obj, field):
+        """
+        Returns the field as a unicode string. If the field is a callable,
+        it attempts to call it first.
+        """
+        attr = getattr(self, field, None)
+        if attr:
+            attr = attr(obj)
+        else:
+            attr = getattr(obj, field)
+        return unicode(attr).encode('utf-8')
+
+    def export_as_csv(self, request, header=True):
+        opts = self.model._meta
+        field_names = [f.name for f in opts.fields]
+        field_names = list(self.list_display) + field_names
+        # Make unique sequence with ordering.
+        unique = set()
+        unique_add = unique.add
+        field_names = [x for x in field_names
+                       if x not in unique and not unique_add(x)]
+
+        if hasattr(self, 'csv_field_exclude'):
+            field_names = [f for f in field_names
+                           if not f in self.csv_field_exclude]
+
+        def _get_model_attr():
+            return getattr(self.model, label)
+
+        labels = [
+            getattr(getattr(self, label, _get_model_attr),
+                    'short_description', label) for label in field_names]
+
+        response = HttpResponse(mimetype='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=%s.csv' % (
+            unicode(opts).replace('.', '_')
+        )
+
+        writer = csv.writer(response, delimiter=';')
+
+        if header:
+            writer.writerow([unicode(label).capitalize() for label in labels])
+
+        queryset = self.make_tracking_queryset(self.get_queryset(request))
+        for obj in queryset:
+            writer.writerow([self._prep_field(obj, field)
+                             for field in field_names])
+        return response
+
 
 # Re-register UserAdmin
 admin.site.unregister(User)
