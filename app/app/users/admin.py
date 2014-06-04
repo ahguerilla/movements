@@ -62,6 +62,7 @@ class TrackingChangeList(ChangeList):
 
 class UserTrackingAdmin(admin.ModelAdmin):
     list_select_related = ('userprofile',)
+    list_display_links = ('id', 'get_screen_name')
     list_display = (
         'id', 'get_screen_name', 'get_signup_date', 'get_full_name',
         'get_nationality', 'get_resident_country', 'email',
@@ -69,6 +70,7 @@ class UserTrackingAdmin(admin.ModelAdmin):
         'last_login', 'is_admin'
     )
     change_list_template = 'admin/tracking_change_list.html'
+    change_form_template = 'admin/tracking_change_form.html'
     csv_field_exclude = (
         'is_superuser', 'password', 'username', 'is_staff', 'fullname',
         'is_active', 'first_name', 'last_name')
@@ -137,6 +139,21 @@ class UserTrackingAdmin(admin.ModelAdmin):
         return super(UserTrackingAdmin, self).changelist_view(request,
                                                               extra_context)
 
+    def render_change_form(self, request, context, add=False, change=False,
+                           form_url='', obj=None):
+        if obj:
+            users = self.make_tracking_queryset(
+                self.get_queryset(request).filter(id=obj.id))
+            obj = users[0]
+            context.update(
+                {'report_fields': [
+                    (label, self._prep_field(obj, field))
+                    for label, field in zip(self._get_labels(self.list_display),
+                                            self.list_display)],
+                 'obj': obj})
+        return super(UserTrackingAdmin, self).render_change_form(
+            request, context, add, change, form_url, obj)
+
     # Utils.
 
     @staticmethod
@@ -171,6 +188,12 @@ class UserTrackingAdmin(admin.ModelAdmin):
             attr = getattr(obj, field)
         return unicode(attr).encode('utf-8')
 
+    def _get_labels(self, field_names):
+        def _get_model_attr():
+            return getattr(self.model, label)
+        return [getattr(getattr(self, label, _get_model_attr),
+                'short_description', label) for label in field_names]
+
     def export_as_csv(self, request, header=True, safe_mode=False):
         extra_file_name = ''
         opts = self.model._meta
@@ -192,12 +215,7 @@ class UserTrackingAdmin(admin.ModelAdmin):
                 field_names = [f for f in field_names
                                if not f in self.csv_safe_fields]
 
-        def _get_model_attr():
-            return getattr(self.model, label)
-
-        labels = [
-            getattr(getattr(self, label, _get_model_attr),
-                    'short_description', label) for label in field_names]
+        labels = self._get_labels(field_names)
 
         response = HttpResponse(mimetype='text/csv')
         response['Content-Disposition'] = 'attachment; filename=%s%s.csv' % (

@@ -169,3 +169,9 @@ class UserTracking(auth.models.User):
         app_label = 'reporting'
         verbose_name = _('user tracking')
         verbose_name_plural = _('user tracking')
+
+    def get_requests(self):
+        return self.marketitem_set.filter(item_type='request')
+
+    def get_offers(self):
+        return self.marketitem_set.filter(item_type='offer')
