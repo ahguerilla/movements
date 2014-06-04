@@ -57,11 +57,13 @@ class EmailRecommendation(models.Model):
         return u'%s' % self.market_item.title
 
 
-class Reporting(MarketItem):
+class IncidentTracking(MarketItem):
 
     class Meta:
         proxy = True
         app_label = 'reporting'
+        verbose_name = _('incident')
+        verbose_name_plural = _('incident tracking')
 
 
 class MessageExt(Message):

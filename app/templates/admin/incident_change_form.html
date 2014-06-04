@@ -1,0 +1,37 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block field_sets %}
+  {{ block.super }}
+  <fieldset class="module aligned {{ fieldset.classes }}">
+    <h2>{% trans 'Community' %}</h2>
+    <div class="form-row">
+      {% if owner %}
+        <p><b>{% trans 'Post creator' %}:</b> <a href="{% url 'admin:auth_user_change' owner.id %}">{{ owner }}</a>;</p>
+      {% endif %}
+      {% if staff_owner %}
+        <p><b>{% trans 'Staff owner' %}:</b> <a href="{% url 'admin:auth_user_change' staff_owner.id %}">{{ staff_owner }}</a>;</p>
+      {% endif %}
+      {% if commenters %}
+        <p>
+          <b>{% trans 'Post commenters' %}:</b>
+          {% for commenter in commenters %}
+            <a href="{% url 'admin:auth_user_change' commenter.id %}">
+              {{ commenter }}
+            </a>{% if not forloop.last %}, {% else %};{% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+      {% if senders %}
+        <p>
+          <b>{% trans 'People that have private messages regarding the post' %}:</b>
+          {% for sender in senders %}
+            <a href="{% url 'admin:auth_user_change' sender.id %}">
+              {{ sender }}
+            </a>{% if not forloop.last %}, {% else %};{% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+    </div>
+  </fieldset>
+{% endblock %}
