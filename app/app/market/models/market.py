@@ -8,11 +8,24 @@ from tinymce import models as tinymodels
 import django.contrib.auth as auth
 
 from django.core.urlresolvers import reverse
+from django.utils.timezone import now
+
+from app.utils import EnumChoices
 
 
 class MarketItem(models.Model):
+    STATUS_CHOICES = EnumChoices(
+        OPEN=(0, _('Open')),
+        WATCH=(1, _('Watch')),
+        URGENT=(2, _('Urgent')),
+        CLOSED_BY_ADMIN=(3, _('Closed By Admin')),
+        CLOSED_BY_USER=(4, _('Closed By User')),
+    )
+
     item_type = models.CharField(_('item_type'), max_length=200, blank=False)
     owner = models.ForeignKey(auth.models.User, blank=True)
+    staff_owner = models.ForeignKey(
+        auth.models.User, blank=True, null=True, related_name='marketitems')
     title = models.CharField(_('title'), max_length=200, blank=False)
     details = tinymodels.HTMLField(_('details'), blank=False)
     countries = models.ManyToManyField(user_models.Countries)
@@ -28,12 +41,24 @@ class MarketItem(models.Model):
     score = models.FloatField(_('score'),default=0)
     deleted = models.BooleanField(_('deleted'), default=False)
     never_exp = models.BooleanField(_('never expires'), default=False)
+    status = models.PositiveSmallIntegerField(
+        _('status'), max_length=1,
+        default=STATUS_CHOICES.OPEN, choices=STATUS_CHOICES)
+    closed_date = models.DateTimeField(
+        _('closed date'), null=True, blank=True)
 
     def __unicode__(self):
         return self.details
 
     class Meta:
         app_label="market"
+
+    def save(self, *args, **kwargs):
+        if not self.closed_date and (
+                self.status == self.STATUS_CHOICES.CLOSED_BY_USER or
+                self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN):
+            self.closed_date = now()
+        super(MarketItem, self).save(*args, **kwargs)
 
     def getdict(self, request=None):
         adict = {'fields':{}}
@@ -87,3 +112,33 @@ class MarketItemStick(models.Model):
     class Meta:
         app_label="market"
 
+
+class MarketItemActions(models.Model):
+    market_item = models.ForeignKey(
+        MarketItem, verbose_name=_('market item'))
+    action = models.TextField(_('action'))
+    date_of_action = models.DateTimeField(_('date of action'), default=now)
+
+    class Meta:
+        app_label = 'market'
+        verbose_name = _('actions of market item')
+        verbose_name_plural = _('actions of market item')
+
+    def __unicode__(self):
+        return u'%s / %s' % (self.actions, self.date_of_action)
+
+
+class MarketItemNextSteps(models.Model):
+    market_item = models.ForeignKey(
+        MarketItem, verbose_name=_('market item'))
+    next_step = models.TextField(_('next step'))
+    date_of_action = models.DateTimeField(_('date of action'), default=now)
+    completed = models.BooleanField(_('completed'), default=False)
+
+    class Meta:
+        app_label = 'market'
+        verbose_name = _('next step of market item')
+        verbose_name_plural = _('next steps of market item')
+
+    def __unicode__(self):
+        return u'%s / %s' % (self.next_step, self.date_of_action)
