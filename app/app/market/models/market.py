@@ -46,6 +46,8 @@ class MarketItem(models.Model):
         default=STATUS_CHOICES.OPEN, choices=STATUS_CHOICES)
     closed_date = models.DateTimeField(
         _('closed date'), null=True, blank=True)
+    feedback_response = models.TextField(
+        _('feedback response'), blank=True, default='')
 
     def __unicode__(self):
         return self.details
