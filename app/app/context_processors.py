@@ -6,6 +6,7 @@ def string_constants(context):
         {
             'exchange': _('Exchange'),
             'members': _('Members'),
+            'recommendation': _('Recommendation'),
             'more': _('more...'),
             'view_recommendation': _('Click here to view the recommendation'),
             'offering': _('Offering'),

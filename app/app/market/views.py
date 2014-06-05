@@ -8,6 +8,7 @@ from app.market.api.views.market import get_market_json
 from django.core.urlresolvers import reverse
 from postman.models import Message
 from django.db.models import Q
+from django.http import Http404
 
 def getUserTags(user):
     all_skills = []
@@ -94,5 +95,12 @@ def postman_unarchive(request):
     return redirect(reverse('postman_archives'))
 
 def preview(request, obj_type, obj_id):
-    print "got here"
-    raise Http404
+    return render_to_response('market/preview.html',
+                              {
+                                  'title':'Recommendation',
+                                  'help_text_template': 'market/copy/recommendation_help.html',
+                                  'init': 'recommendation',
+                                  'obj_type': obj_type,
+                                  'obj_id': obj_id
+                              },
+                              context_instance=RequestContext(request))
