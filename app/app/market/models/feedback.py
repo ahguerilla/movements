@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from app.utils import EnumChoices
+from ..models import MarketItem
 
 
 class Question(models.Model):
@@ -32,6 +33,9 @@ class Questionnaire(models.Model):
     title = models.CharField(_('title'), max_length=255)
     questions = models.ManyToManyField(
         Question, verbose_name=_('questions'))
+    market_type = models.CharField(
+        _('Market item type'), max_length=200, choices=MarketItem.TYPE_CHOICES,
+        default='', blank=True)
 
     class Meta:
         app_label = 'market'
