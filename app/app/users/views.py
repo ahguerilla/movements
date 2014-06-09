@@ -3,36 +3,33 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from models import UserProfile, OrganisationalRating
-from forms import SettingsForm, UserForm, SignupForm, VettingForm
+from forms import SettingsForm, UserForm, VettingForm
 from form_overrides import ResetPasswordFormSilent
-from allauth.account.models import EmailAddress
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
 from allauth.socialaccount.views import SignupView as SocialSignupView
 from allauth.account.adapter import DefaultAccountAdapter
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from allauth.account.models import EmailConfirmation, EmailAddress
 from constance import config
 from django.core.urlresolvers import reverse, reverse_lazy
 from app.market.api.utils import value
 import app.users as users
-from django.contrib.admin.models import LogEntry,CHANGE
+from django.contrib.admin.models import LogEntry
 from django.contrib.contenttypes.models import ContentType
 import json
-from django.core.mail import EmailMessage, send_mass_mail
+from django.core.mail import EmailMessage
 import constance
-from app.users.utils import get_client_ip
 from django.template.loader import render_to_string
 from django.utils import translation
+from django.conf import settings as django_settings
 
 
 def render_settings(request, initial=False):
     template = 'users/user_settings.html'
     user = User.objects.get(pk=request.user.id)
-    default_notification = False
     try:
         settings = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
@@ -91,7 +88,7 @@ def render_settings(request, initial=False):
 
 @login_required
 def initial_settings(request):
-    if hasattr(request.user,'userprofile'):
+    if hasattr(request.user, 'userprofile'):
         return HttpResponseRedirect(reverse('user_settings'))
     return render_settings(request, True)
 
@@ -228,8 +225,9 @@ class AhrSocialSignupView(SocialSignupView):
 
 ahr_social_signup = AhrSocialSignupView.as_view()
 
+
 def signup_from_home(request):
-    form = SignupView.form_class()
+    form = AhrSignupView.form_class()
     if request.method == 'POST':
         form.fields['first_name'].initial = request.POST.get('first_name', '')
         form.fields['last_name'].initial = request.POST.get('last_name', '')
@@ -240,10 +238,13 @@ def signup_from_home(request):
         'post_url': reverse(process_signup),
         'sign_up': True,
     }
-    return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))
+    return render_to_response(AhrSignupView.template_name, view_dict, context_instance=RequestContext(request))
 
 
 class AhrSignupView(SignupView):
+    if django_settings.V2_TEMPLATES:
+        template_name = "account/signup_v2.html"
+
     def get_context_data(self, **kwargs):
 
         ret = super(AhrSignupView, self).get_context_data(**kwargs)
