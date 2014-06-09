@@ -1,0 +1,43 @@
+// **************************************
+// default colors
+// **************************************
+$background-color = #F8F6F7
+
+// **************************************
+// some generic functions
+// **************************************
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  -ms-{prop} args
+  -o-{prop} args
+  {prop} args
+
+border-radius()
+  vendor('border-radius', arguments)
+
+box-shadow()
+  vendor('box-shadow', arguments)
+
+::-webkit-input-placeholder
+  font-style italic
+
+::-moz-placeholder
+  font-style italic
+
+:-ms-input-placeholder
+  font-style italic
+
+
+// **************************************
+// base styles
+// **************************************
+
+html
+  background-color $background-color
+
+body
+  background-color $background-color
+
+.container
+  max-width 960px
