@@ -2,7 +2,7 @@ import json
 
 from app.market.api.utils import *
 import app.market as market
-from app.market.forms import item_forms, saveMarketItem
+from app.market.forms import item_forms, saveMarketItem, QuestionnaireForm
 import app.users as users
 from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
@@ -20,6 +20,9 @@ import requests
 from django.conf import settings
 from django.utils.cache import get_cache_key, get_cache
 from django.db import connection
+from ...models import MarketItem, Questionnaire
+
+
 cache = get_cache('default')
 items_cache = get_cache('items')
 user_items_cache = get_cache('user_items')
@@ -208,15 +211,52 @@ def edit_market_item(request,obj_id,rtype):
 
 @login_required
 @check_perms_and_get(market.models.MarketItem)
-def delete_market_item(request,obj_id,rtype):
+def close_market_item(request, obj_id, rtype):
     cache.delete('item-'+obj_id)
-    user_items_cache.clear()
+    cache.delete('translation-'+obj_id)
     items_cache.clear()
-    obj=request.obj
-    obj.deleted = True
-    obj.save()
-    return HttpResponse(json.dumps({ 'success' : True}),
-                        mimetype="application"+rtype)
+    user_items_cache.clear()
+    market_item = request.obj
+
+    questionnaire = Questionnaire.objects.filter(
+        market_type=market_item.item_type).first()
+
+    # Convert questionnaire to json structure.
+    questions = [
+        {
+            'question_id': question.pk,
+            'question_text': question.question,
+            'question_answer': ''
+        } for question in questionnaire.questions.all()
+    ]
+    data = {'questionnaire': {
+        'questionnaire_id': questionnaire.pk,
+        'questionnaire_title': questionnaire.title,
+        'questions': questions
+    }}
+
+    if request.method == 'POST':
+        form = QuestionnaireForm(request.POST or None,
+                                 questionnaire=questionnaire)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            for question in questions:
+                answer = cleaned_data['question_%s' % question['question_id']]
+                question['question_answer'] = answer
+
+            market_item.feedback_response = data['questionnaire']
+            market_item.status = market_item.STATUS_CHOICES.CLOSED_BY_USER
+            market_item.save()
+
+            update_notifications.delay(market_item)
+            data = {'success': True}
+        else:
+            return HttpResponseError(
+                json.dumps(get_validation_errors(form)),
+                mimetype="application/" + rtype)
+
+    return HttpResponse(
+        json.dumps(data), mimetype="application" + rtype)
 
 
 @login_required

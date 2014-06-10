@@ -147,3 +147,13 @@ class reportUserForm(forms.ModelForm):
     class Meta:
         model = market.models.UserReport
         fields = ['contents',]
+
+
+class QuestionnaireForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        questionnaire = kwargs.pop('questionnaire')
+        super(QuestionnaireForm, self).__init__(*args, **kwargs)
+        for question in questionnaire.questions.all():
+            self.fields['question_%s' % question.pk] = forms.CharField(
+                widget=forms.Textarea()
+            )

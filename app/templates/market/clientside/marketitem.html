@@ -182,19 +182,25 @@
         }
       },
 
-      deleteItem: function (ev) {
+      closeItem: function (ev) {
         ev.preventDefault();
         var that = this;
-        if (confirm('{% trans "Are you sure you want to delete this item?" %}')) {
+        if (confirm('{% trans "Are you sure you want to close this item?" %}')) {
           var item_id = ev.currentTarget.getAttribute('item_id');
-          var dfrd = $.ajax({
-            url: window.ahr.app_urls.deletemarketitem + item_id,
+          $.getJSON(window.ahr.app_urls.getuseritem + item_id, function (item) {
+              $.getJSON(window.ahr.app_urls.closemarketitem + item_id, function (questionnaire) {
+                  that.market.close_marketitem_dialog.close(item, questionnaire, that.del_callback);
+              });
+          });
+          // TODO: 2. close (in backend)
+          {% comment %}var dfrd = $.ajax({
+            url: window.ahr.app_urls.closemarketitem + item_id,
           });
           dfrd.done(function (data) {
             if (typeof that.del_callback == "function") {
               that.del_callback(item_id);
             }
-          });
+          });{% endcomment %}
         }
         return (false);
       },
@@ -309,7 +315,7 @@
           'click .toggle-stick': 'toggleStick',
           'click .comment-btn': 'comment',
           'click .comment-delete': 'deleteComment',
-          'click .delete': 'deleteItem',
+          'click .close-item': 'closeItem',
           'click .edit': 'editItem',
           'click .showmoretags': 'showMoreTags',
           'click .showlesstags': 'showLessTags',

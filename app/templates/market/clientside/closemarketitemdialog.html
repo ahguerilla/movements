@@ -1,0 +1,158 @@
+{% load i18n %}
+{% load compress %}
+
+
+
+<div id="close_item_dialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">
+          <span id="close_modal_title"
+                data-request_title="{%trans "CLOSE A REQUEST"%}"
+                data-offer_title="{%trans "CLOSE AN OFFER"%}"></span>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" id="questionnaire_form"></form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/template" id="close-item-form-template">
+  <div id="itemformerror"></div>
+  <div class="form-group"><%- title %></div>
+  <% _.each(questions, function(question) { %>
+      <div class="form-group" id="question_<%- question.question_id %>"></div>
+  <% }); %>
+  <div class="modal-footer">
+    <span class="col-xs-offset-6 col-xs-6 pull-right">
+      <div class="row">
+        <button type="submit" class="btn btn-default full-width pull-right item-close">{% trans "Close" %}</button>
+      </div>
+    </span>
+  </div>
+</script>
+{% compress js inline %}
+<script type="text/javascript">
+(function(){
+    var CloseItemDialogView = window.ahr.item_form_base.extend({
+        item: '',
+        el: '#close_item_dialog',
+
+        dialogClosing: function(ev){
+          ev.stopImmediatePropagation();
+          if (!this.closing && !confirm('{%trans "Are you sure you want to close this dialog?"%}')) {
+            return false;
+          }
+          this.emptyTheForm();
+        },
+
+
+        init: function (item_type) {
+          this.url = window.ahr.app_urls.closemarketitem + item_type;
+          _.extend(this.events,{
+          'hide.bs.modal': 'dialogClosing'
+          });
+        },
+
+        close: function(item, questionnaire, del_callback){
+            $('#' + this.el.id + ' #itemformerror').empty();
+            $('#' + this.el.id + ' .error').empty();
+
+            item = item[0];
+            this.item_id = item.pk;
+            this.item_type = item.fields.item_type;
+            this.questionnaire = questionnaire.questionnaire;
+            this.url = window.ahr.app_urls.closemarketitem + item.pk;
+            this.del_callback = del_callback;
+
+            questionnaire = questionnaire.questionnaire;
+            var questionnaire_form = _.template(
+                $('#close-item-form-template').html(),
+                {title: questionnaire.questionnaire_title,
+                  questions: questionnaire.questions}
+            );
+            $('#questionnaire_form').html(questionnaire_form);
+
+            this._makeWidget();
+            this.showModal();
+        },
+
+        _makeWidget: function () {
+            var that = this;
+            var widgets = {},
+                widget;
+            var questions = that.questionnaire.questions;
+            for (var i in questions) {
+                var question = questions[i];
+                widget = window.ahr.textarea_widget.initWidget(
+                    '#question_' + question.question_id,
+                    {title: question.question_text,
+                     jsonfield: 'question_' + question.question_id,
+                     placeholder: '{%trans "Please enter your answer"%}'},
+                    null);
+                widgets['question_' + question.question_id] = widget;
+            }
+            this.widgets = widgets;
+        },
+
+        makeWidget: function () {
+            return undefined;
+        },
+
+        showModal: function () {
+            this.closing = false;
+            var that = this;
+            $('#' + that.el.id + ' #itemformerror').empty();
+            var $close_modal_title = $('#close_modal_title');
+            $close_modal_title.text($close_modal_title.data(this.item_type + '_title'));
+
+            that.$el.modal('show');
+            window.ahr.getcsrf(function (csrf) {
+                if (csrf == false) {
+                    that.alert('{%trans "Unable to connect to the server. please try again in a few minutes"%}','#infobar');
+                    return;
+                }
+                that.csrf = csrf.csrfmiddlewaretoken;
+            });
+        },
+
+        getFormData: function(){
+          var retdict = {};
+          var widgets = this.widgets;
+          for (var i in widgets) {
+              var widget = widgets[i];
+              retdict[i] = widget.getval();
+          }
+          retdict.csrfmiddlewaretoken = this.csrf;
+          return retdict;
+        },
+
+        emptyTheForm:function(){
+          $('input,textarea', $('#requestdialog')).val('');
+          if(typeof this.edit_calback == "function"){
+            this.edit_calback(this.item_id);
+          }
+        },
+
+        aftersubmit:function(){
+          this.closing= true;
+          this.$el.modal('hide');
+          this.emptyTheForm();
+          if (typeof this.del_callback == "function") {
+              this.del_callback(this.item_id);
+          }
+        }
+    });
+
+    window.ahr.close_marketitem_form_dialog = window.ahr.close_marketitem_form_dialog || {};
+    window.ahr.close_marketitem_form_dialog.initItem= function(item){
+        var close_form = new CloseItemDialogView(item);
+        return close_form;
+    };
+})();
+</script>
+{% endcompress %}
