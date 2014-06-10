@@ -7,30 +7,33 @@
 {% block public-content-message %}
 <div class="row dialog movements-form">
   <div class="col-md-12">
-    <div><h1>{% trans "Sign Up" %}</h1></div>
+    <div class="form-title"><h1>{% trans "About you" %}</h1></div>
     <p>
       {% if account.get_provider %}
         {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login. We first need a few more details for vetting.{% endblocktrans %}
       {% endif %}
-      {% blocktrans %}Already have an account? Then please <a href="/accounts/login">sign in here</a>.{% endblocktrans %}
+      {% blocktrans %}Hey, thanks for joining Movements. We now would like to know a little more about you before you get started.{% endblocktrans %}
     </p>
     <form class="form-horizontal" class="signup" id="signup_form" method="post" action="{{ post_url }}">
     {% csrf_token %}
       <div class="form-group">
         <div class="col-md-12">
+          <label for="{{ form.username.auto_id }}">{%trans "Username"%}</label>
+          {% render_field form.username class="form-control input-sm" required="true" autofocus="autofocus" placeholder="" %}
           {{ form.non_field_errors }}
           {{ form.username.errors }}
-          {% render_field form.username class="form-control input-sm" placeholder="Username" required="true" autofocus="autofocus" %}
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-6">
+          <label for="{{ form.first_name.auto_id }}">{%trans "First Name"%}</label>
+          {% render_field form.first_name class="form-control input-sm" placeholder="" required="true" %}
           {{ form.first_name.errors }}
-          {% render_field form.first_name class="form-control input-sm" placeholder="First Name" required="true" %}
         </div>
         <div class="col-xs-6">
+          <label for="{{ form.last_name.auto_id }}">{%trans "Last Name"%}</label>
+          {% render_field form.last_name class="form-control input-sm" placeholder="" required="true" %}
           {{ form.last_name.errors }}
-          {% render_field form.last_name class="form-control input-sm" placeholder="Last Name" required="true" %}
         </div>
       </div>
       <div class="form-group">

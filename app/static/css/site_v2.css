@@ -13,6 +13,32 @@
   -ms-border-radius: 0;
   -o-border-radius: 0;
   border-radius: 0;
+  padding: 25px 15px 25px 15px;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -moz-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -ms-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -o-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+}
+.movements-form .form-title {
+  text-align: center;
+}
+.movements-form .form-title h1 {
+  color: #005e86;
+}
+.movements-form .action-text {
+  margin-top: 30px;
+  text-align: center;
+}
+.movements-form .form-main-button {
+  margin-top: 15px;
+}
+.movements-form a {
+  color: #262626;
+  font-weight: bold;
+}
+.movements-form label {
+  margin-top: 10px;
 }
 .movements-form input[type=text]:focus,
 .movements-form input[type=email]:focus,
@@ -37,11 +63,27 @@
   border-radius: 3px;
   height: 40px;
 }
+.btn {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 9px 12px;
+}
+.btn-action {
+  background-color: #fe6d50;
+  color: #fff;
+}
+.btn-action:hover {
+  color: #fff;
+}
 html {
   background-color: #f8f6f7;
 }
 body {
   background-color: #f8f6f7;
+  color: #262626;
 }
 .container {
   max-width: 960px;
@@ -75,5 +117,13 @@ body {
 }
 .footer-navbar .right-elements img {
   margin-left: 15px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #005e86;
 }
 
