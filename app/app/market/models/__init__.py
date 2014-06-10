@@ -11,3 +11,4 @@ from .report import (
 )
 from .resourcefile import File
 from .notificatoin import Notification
+from .feedback import Question, Questionnaire

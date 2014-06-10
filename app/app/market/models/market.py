@@ -21,6 +21,10 @@ class MarketItem(models.Model):
         CLOSED_BY_ADMIN=(3, _('Closed By Admin')),
         CLOSED_BY_USER=(4, _('Closed By User')),
     )
+    TYPE_CHOICES = EnumChoices(
+        REQUEST=('request', _('Request')),
+        OFFER=('offer', _('Offer'))
+    )
 
     item_type = models.CharField(_('item_type'), max_length=200, blank=False)
     owner = models.ForeignKey(auth.models.User, blank=True)
@@ -46,6 +50,8 @@ class MarketItem(models.Model):
         default=STATUS_CHOICES.OPEN, choices=STATUS_CHOICES)
     closed_date = models.DateTimeField(
         _('closed date'), null=True, blank=True)
+    feedback_response = models.TextField(
+        _('feedback response'), blank=True, default='')
 
     def __unicode__(self):
         return self.details
