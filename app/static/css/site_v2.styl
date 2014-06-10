@@ -7,6 +7,7 @@ $secondary-color = #BDB4AF
 $background-color = #F8F6F7
 $border-color = #E0D7D8
 $border-color-alpha = rgba(224, 215, 216, 0.8)
+$facebook-blue = #3C5A9A
 
 // **************************************
 // font colors
@@ -70,6 +71,14 @@ box-shadow()
     border-radius 3px
     height 40px
 
+.extended-form
+  margin-top 30px
+  .action-text
+    margin-top 30px
+    text-align center
+  .form-main-button
+    margin-top 15px
+
 // **************************************
 // button styles
 // **************************************
@@ -77,12 +86,22 @@ box-shadow()
 .btn
   border-radius 3px
   padding 9px 12px
+  font-weight bold
 
 .btn-action
   background-color $primary-color
   color $white-font
 
 .btn-action:hover
+  color $white-font
+
+.btn-social-facebook
+  background-color $facebook-blue
+  color $white-font
+  img
+    margin-right 10px
+
+.btn-social-facebook:hover
   color $white-font
 
 // **************************************

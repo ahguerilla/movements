@@ -6,14 +6,14 @@
 
 {% block public-content-message %}
 <div class="row dialog movements-form">
-  <div class="col-md-12">
+  <div class="col-xs-12">
     <div class="form-title"><h1>{% trans "Welcome to Movements" %}</h1></div>
       <p>{% blocktrans %}Movements.org is a cross-platform service which allows people to connect with one another across the globe.{% endblocktrans %}</p>
       <p>{% blocktrans %}Let's start with the process:{% endblocktrans %}</p>
     <form class="form-horizontal" class="signup" id="signup_form" method="post" action="{{ post_url }}">
     {% csrf_token %}
       <div class="form-group">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <label for="email">{%trans "Email"%}</label>
           <input autofocus="autofocus" class="form-control input-sm" id="email" maxlength="30" name="email" required="true" type="text">
         </div>
@@ -35,6 +35,12 @@
         </div>
       </div>
     </form>
+  </div>
+</div>
+<div class="extended-form">
+  <div class="col-xs-12 action-text">{%trans "Use your Facebook details to sign in."%}</div>
+  <div class="col-xs-offset-2 col-xs-8 form-main-button">
+    <button type="submit" class="btn btn-social-facebook full-width"><img src="{{ STATIC_URL }}images/v2/facebook-social.png">Connect with Facebook</button>
   </div>
 </div>
 {% endblock %}

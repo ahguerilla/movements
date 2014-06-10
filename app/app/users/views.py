@@ -242,6 +242,8 @@ def signup_from_home(request):
 
 
 def signup_start(request):
+    if request.method == 'POST':
+        return HttpResponseRedirect('/sign-up')
     return render_to_response("account/signup_start.html", {}, context_instance=RequestContext(request))
 
 
