@@ -27,64 +27,61 @@
       <div class="form-group">
         <div class="col-xs-6">
           <label for="{{ form.first_name.auto_id }}">{%trans "First Name"%}</label>
-          {% render_field form.first_name class="form-control input-sm" placeholder="" required="true" %}
+          {% render_field form.first_name class="form-control input-sm" placeholder="" required="false" %}
           {{ form.first_name.errors }}
         </div>
         <div class="col-xs-6">
           <label for="{{ form.last_name.auto_id }}">{%trans "Last Name"%}</label>
-          {% render_field form.last_name class="form-control input-sm" placeholder="" required="true" %}
+          {% render_field form.last_name class="form-control input-sm" placeholder="" required="false" %}
           {{ form.last_name.errors }}
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-12">
-          {{ form.email.errors }}
-          {% render_field form.email class="form-control input-sm" placeholder="Email" required="true" %}
+          <label for="{{ form.resident_country.auto_id }}">{%trans "Country of Residence"%}</label>
+          {% render_field form.resident_country class="form-control input-sm" required="false" %}
+          {{ form.resident_country.errors }}
         </div>
       </div>
-      {% if form.password1 %}
-        <div class="form-group">
-          <div class="col-md-12">
-            {{ form.password1.errors }}
-            {% render_field form.password1 class="form-control input-sm" placeholder="Password" required="true" %}
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-12">
-            {{ form.password2.errors }}
-            {% render_field form.password2 class="form-control input-sm" placeholder="Password (again)" required="true" %}
-          </div>
-        </div>
-      {% endif %}
       <div class="form-group">
         <div class="col-md-12">
+          <label for="{{ form.bio.auto_id }}">{%trans "Biography"%}</label>
+          {% render_field form.bio class="form-control input-sm" required="false" %}
+          {{ form.bio.errors }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>{%trans "Social Vetting"%}</h2>
+          <p>{% blocktrans %}To protect the safety of our members we vet all applicants to make sure their intentions are aligned with ours. The more information you give the quicker you become a fully qualified member.{% endblocktrans %}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <label for="{{ form.linkedin_url.auto_id }}">{%trans "Linked In"%}</label>
+          {% render_field form.linkedin_url class="form-control input-sm" placeholder="" %}
           {{ form.linkedin_url.errors }}
-          {% render_field form.linkedin_url class="form-control input-sm" placeholder="Linked In Profile Link" %}
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-12">
+          <label for="{{ form.tweet_url.auto_id }}">{%trans "Twitter"%}</label>
+          {% render_field form.tweet_url class="form-control input-sm" placeholder="" %}
           {{ form.tweet_url.errors }}
-          {% render_field form.tweet_url class="form-control input-sm" placeholder="Twitter Profile Link" %}
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-12">
+          <label for="{{ form.fb_url.auto_id }}">{%trans "Facebook"%}</label>
+          {% render_field form.fb_url class="form-control input-sm" placeholder="" %}
           {{ form.fb_url.errors }}
-          {% render_field form.fb_url class="form-control input-sm" placeholder="Facebook Profile Link" %}
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-12">
+          <label for="{{ form.web_url.auto_id }}">{%trans "Website or Blog"%}</label>
+          {% render_field form.web_url class="form-control input-sm" placeholder="" %}
           {{ form.web_url.errors }}
-          {% render_field form.web_url class="form-control input-sm" placeholder="Website Link" %}
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-12">
-          {{ form.tnccheckbox.errors }}
-          {% render_field form.tnccheckbox required="true" %}
-          <label for="id_tnccheckbox">I agree to the </label> <a href="{% url 'terms_and_conditions' %}" target="_blank" alt="terms and conditions">Terms &amp; Conditions</a>
         </div>
       </div>
       {% if redirect_field_value %}
@@ -97,7 +94,6 @@
       </div>
     </form>
   </div>
-
 </div>
 {% endblock %}
 

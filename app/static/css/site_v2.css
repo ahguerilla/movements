@@ -20,11 +20,15 @@
   -o-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
   box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
 }
+.movements-form h1 {
+  color: #005e86;
+}
+.movements-form h2 {
+  color: #262626;
+  font-size: 20px;
+}
 .movements-form .form-title {
   text-align: center;
-}
-.movements-form .form-title h1 {
-  color: #005e86;
 }
 .movements-form .action-text {
   margin-top: 30px;
@@ -43,7 +47,9 @@
 .movements-form input[type=text]:focus,
 .movements-form input[type=email]:focus,
 .movements-form input[type=number]:focus,
-.movements-form input[type=password]:focus {
+.movements-form input[type=password]:focus,
+.movements-form select:focus,
+.movements-form textarea:focus {
   border-color: rgba(254,109,80,0.8);
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
@@ -55,7 +61,8 @@
 .movements-form input[type=text],
 .movements-form input[type=email],
 .movements-form input[type=number],
-.movements-form input[type=password] {
+.movements-form input[type=password],
+.movements-form select {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
