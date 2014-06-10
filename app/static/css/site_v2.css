@@ -34,6 +34,9 @@
   margin-top: 30px;
   text-align: center;
 }
+.movements-form .action-link {
+  line-height: 40px;
+}
 .movements-form .form-main-button {
   margin-top: 15px;
 }

@@ -6,7 +6,7 @@
 
 {% block public-content-message %}
 <div class="row dialog movements-form">
-  <div class="col-md-12">
+  <div class="col-xs-12">
     <div class="form-title"><h1>{% trans "About you" %}</h1></div>
     <p>
       {% if account.get_provider %}
@@ -17,7 +17,7 @@
     <form class="form-horizontal" class="signup" id="signup_form" method="post" action="{{ post_url }}">
     {% csrf_token %}
       <div class="form-group">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <label for="{{ form.username.auto_id }}">{%trans "Username"%}</label>
           {% render_field form.username class="form-control input-sm" required="true" autofocus="autofocus" placeholder="" %}
           {{ form.non_field_errors }}
@@ -37,48 +37,48 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <label for="{{ form.resident_country.auto_id }}">{%trans "Country of Residence"%}</label>
           {% render_field form.resident_country class="form-control input-sm" required="false" %}
           {{ form.resident_country.errors }}
         </div>
       </div>
       <div class="form-group">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <label for="{{ form.bio.auto_id }}">{%trans "Biography"%}</label>
           {% render_field form.bio class="form-control input-sm" required="false" %}
           {{ form.bio.errors }}
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <h2>{%trans "Social Vetting"%}</h2>
           <p>{% blocktrans %}To protect the safety of our members we vet all applicants to make sure their intentions are aligned with ours. The more information you give the quicker you become a fully qualified member.{% endblocktrans %}</p>
         </div>
       </div>
       <div class="form-group">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <label for="{{ form.linkedin_url.auto_id }}">{%trans "Linked In"%}</label>
           {% render_field form.linkedin_url class="form-control input-sm" placeholder="" %}
           {{ form.linkedin_url.errors }}
         </div>
       </div>
       <div class="form-group">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <label for="{{ form.tweet_url.auto_id }}">{%trans "Twitter"%}</label>
           {% render_field form.tweet_url class="form-control input-sm" placeholder="" %}
           {{ form.tweet_url.errors }}
         </div>
       </div>
       <div class="form-group">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <label for="{{ form.fb_url.auto_id }}">{%trans "Facebook"%}</label>
           {% render_field form.fb_url class="form-control input-sm" placeholder="" %}
           {{ form.fb_url.errors }}
         </div>
       </div>
       <div class="form-group">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <label for="{{ form.web_url.auto_id }}">{%trans "Website or Blog"%}</label>
           {% render_field form.web_url class="form-control input-sm" placeholder="" %}
           {{ form.web_url.errors }}
@@ -87,9 +87,12 @@
       {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
-      <div class="form-group">
-        <div class="col-xs-offset-6 col-xs-6">
-          <button type="submit" class="btn btn-default full-width">{% trans "Sign Up" %} &raquo;</button>
+      <div class="row action-text">
+        <div class="col-xs-offset-2 col-xs-2 form-main-button">
+          <a class="action-link" href="">Cancel</a>
+        </div>
+        <div class="col-xs-6 form-main-button">
+          <button type="submit" class="btn btn-action full-width">Next</button>
         </div>
       </div>
     </form>
