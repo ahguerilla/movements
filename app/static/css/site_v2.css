@@ -16,4 +16,34 @@ body {
 .container {
   max-width: 960px;
 }
+.navbar-default {
+  background-color: #f8f6f7;
+}
+.header-nav {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 5px solid #e0d7d8;
+}
+.header-nav .header-nav-wrapper {
+  text-align: center;
+}
+.header-nav .header-nav-wrapper .main-logo {
+  padding-top: 15px;
+}
+.footer-navbar {
+  background-color: #bdb4af;
+  min-height: 35px;
+  color: #fff;
+  line-height: 35px;
+}
+.footer-navbar .right-elements {
+  float: right;
+}
+.footer-navbar .right-elements img {
+  margin-left: 15px;
+}
 
