@@ -100,9 +100,9 @@ def getStikies(request, hiddens, sfrom, to):
 
 
 def get_raw(request):
-    issues = (0,)
-    countries = (0,)
-    skills = (0,)
+    issues = '(0)'
+    countries = '(0)'
+    skills = '(0)'
     types = "('offer', 'request')"
     ids= ""
     show_hidden = ""
@@ -124,45 +124,58 @@ def get_raw(request):
         objs = SearchQuerySet().models(market.models.MarketItem).filter(text=request.GET['search'])
         _ids= tuple(int(obj.pk) for obj in objs)
         if len(_ids)>0:
-            ids = 'AND "market_marketitem"."id" IN '+ ("%s"%(_ids,) if len(_ids)>1 else "(%s)"%(_ids))
+            ids = 'AND mi.id IN %s' % _ids if _ids else '(0)'
 
     if request.GET.get('showHidden', 'false') == 'false':
-        show_hidden = 'AND NOT ("market_marketitem"."id" IN \
+        show_hidden = 'AND NOT (mi.id IN \
                         (SELECT hiddens."item_id" FROM "market_marketitemhidden" hiddens WHERE hiddens."viewer_id" = \
                         '+str(request.user.id)+'))'
 
     raw = """
-       select market_marketitem.*, (counted_matches.i_sum+counted_matches.c_sum+counted_matches.s_sum) as tag_matches
-       FROM (select id,
-       count(distinct match_countries)as c_sum,
-       count(distinct match_issues) as i_sum,
-       count(distinct match_skills) as s_sum
-       FROM (select market_marketitem.id ,
-       market_marketitem_countries.countries_id as match_countries,
-       market_marketitem_issues.issues_id as match_issues,
-       market_marketitem_skills.skills_id as match_skills
-       FROM market_marketitem
-       left outer join market_marketitem_skills on market_marketitem_skills.marketitem_id = market_marketitem.id and market_marketitem_skills.skills_id IN
-       """+ ("%s"%(skills,) if len(skills)>1 else "(%s)"%(skills)) + """
-       left outer join market_marketitem_countries on market_marketitem_countries.marketitem_id = market_marketitem.id and market_marketitem_countries.countries_id IN
-       """+ ("%s"%(countries,) if len(countries)>1 else "(%s)"%(countries)) + """
-       left outer join market_marketitem_issues on market_marketitem_issues.marketitem_id = market_marketitem.id and market_marketitem_issues.issues_id IN
-       """+ ("%s"%(issues,) if len(issues)>1 else "(%s)"%(issues)) + """
-       )as item_countries_issues_skills group by id
-       ) as counted_matches
-       join market_marketitem on market_marketitem.id = counted_matches.id
-       INNER JOIN "auth_user" ON ( "market_marketitem"."owner_id" = "auth_user"."id" ) WHERE ("market_marketitem"."item_type" IN
-       """+ types + """
-       """+ ids +"""
-       """+ show_hidden +"""
-       AND NOT ("market_marketitem"."id" IN
-       (SELECT stickies."item_id" FROM "market_marketitemstick" stickies WHERE stickies."viewer_id" =
-       """+str(request.user.id)+"""
-       )) AND "market_marketitem"."published" = True  AND "market_marketitem"."deleted" = False  AND "auth_user"."is_active" = True AND NOT "market_marketitem"."status" IN (3, 4) AND
-        ("market_marketitem"."exp_date" >= '"""+str(datetime.now())+"""'
-       OR "market_marketitem"."never_exp" = True )  )
-       order by tag_matches desc, pub_date desc
-       """
+        SELECT mi.*,
+               (count(distinct market_marketitem_countries.countries_id) +
+               count(distinct market_marketitem_issues.issues_id) +
+               count(distinct market_marketitem_skills.skills_id)) as tag_matches
+        FROM market_marketitem AS mi
+        LEFT JOIN market_marketitem_countries ON
+            market_marketitem_countries.marketitem_id = mi.id AND
+            market_marketitem_countries.countries_id IN
+                """ + "%s" % countries + """
+        LEFT JOIN market_marketitem_issues ON
+            market_marketitem_issues.marketitem_id = mi.id AND
+            market_marketitem_issues.issues_id IN
+                """ + "%s" % issues + """
+        LEFT JOIN market_marketitem_skills ON
+            market_marketitem_skills.marketitem_id = mi.id AND
+            market_marketitem_skills.skills_id IN
+                """ + "%s" % skills + """
+        INNER JOIN "auth_user" ON
+            mi.owner_id = "auth_user"."id"
+        WHERE
+            mi.item_type IN
+                """ + types + """
+                """ + ids + """
+                """ + show_hidden + """ AND
+            NOT mi.id IN (
+                SELECT stickies."item_id"
+                FROM "market_marketitemstick" stickies
+                WHERE stickies."viewer_id" = """ + str(request.user.id) + """
+            ) AND
+            mi.published = True AND
+            mi.deleted = False AND
+            "auth_user"."is_active" = True AND
+            NOT mi.status IN (3, 4) AND
+            (
+                mi.exp_date >= '""" + str(datetime.now()) + """' OR
+                mi.never_exp = True
+            )
+        GROUP BY mi.id, mi.item_type, mi.owner_id, mi.staff_owner_id, mi.title, mi.details,
+            mi.url, mi.published, mi.pub_date, mi.exp_date,
+            mi.commentcount, mi.ratecount, mi.reportcount, mi.score, mi.deleted,
+            mi.never_exp, mi.status, mi.closed_date, mi.feedback_response
+
+        ORDER BY tag_matches DESC, pub_date DESC
+    """
     return raw
 
 
