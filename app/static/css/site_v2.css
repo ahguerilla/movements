@@ -7,6 +7,36 @@
 :-ms-input-placeholder {
   font-style: italic;
 }
+.movements-form {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+}
+.movements-form input[type=text]:focus,
+.movements-form input[type=email]:focus,
+.movements-form input[type=number]:focus,
+.movements-form input[type=password]:focus {
+  border-color: rgba(254,109,80,0.8);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  -ms-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  -o-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  outline: 0 none;
+}
+.movements-form input[type=text],
+.movements-form input[type=email],
+.movements-form input[type=number],
+.movements-form input[type=password] {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  height: 40px;
+}
 html {
   background-color: #f8f6f7;
 }
