@@ -158,8 +158,8 @@ def get_raw(request):
        AND NOT ("market_marketitem"."id" IN
        (SELECT stickies."item_id" FROM "market_marketitemstick" stickies WHERE stickies."viewer_id" =
        """+str(request.user.id)+"""
-       )) AND "market_marketitem"."published" = True  AND "market_marketitem"."deleted" = False  AND "auth_user"."is_active" = True AND ("market_marketitem"."exp_date" >=
-       '"""+str(datetime.now())+"""'
+       )) AND "market_marketitem"."published" = True  AND "market_marketitem"."deleted" = False  AND "auth_user"."is_active" = True AND NOT "market_marketitem"."status" IN (3, 4) AND
+        ("market_marketitem"."exp_date" >= '"""+str(datetime.now())+"""'
        OR "market_marketitem"."never_exp" = True )  )
        order by tag_matches desc, pub_date desc
        """
@@ -236,8 +236,7 @@ def close_market_item(request, obj_id, rtype):
     }}
 
     if request.method == 'POST':
-        form = QuestionnaireForm(request.POST or None,
-                                 questionnaire=questionnaire)
+        form = QuestionnaireForm(request.POST, questionnaire=questionnaire)
         if form.is_valid():
             cleaned_data = form.cleaned_data
             for question in questions:
