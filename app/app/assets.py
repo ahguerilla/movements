@@ -60,6 +60,7 @@ css = Bundle(
 css_v2 = Bundle(
     Bundle(
         './css/site_v2.styl',
+        './css/site-sm_v2.styl',
         filters='stylus',
         output ='./css/site_v2.css'
         ),
