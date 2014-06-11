@@ -253,7 +253,12 @@ def signup_start(request):
 
 
 def more_about_you(request):
-    return render_to_response("users/more_about_you.html", {}, context_instance=RequestContext(request))
+    view_dict = {
+        'languages': ["English", "French", "Spanish", "Arabic", "Farsi", "Chinese", "Russian"],
+        'skills': ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee", "Policy Expert", "Social Media", "Technology", "Translator", "Writer"],
+        'regions': ["North America", "Europe", "Asia", "South America", "Africa", "Oceania"]
+    }
+    return render_to_response("users/more_about_you.html", view_dict, context_instance=RequestContext(request))
 
 
 class AhrSignupView(SignupView):

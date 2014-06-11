@@ -3,7 +3,8 @@
     el: '.more-about-you-widget',
 
     events: {
-      'click .next-button': 'clickNextButton'
+      'click .next-button': 'clickNextButton',
+      'click .select-checkbox': 'checkClick'
     },
 
     clickNextButton: function(ev){
@@ -22,6 +23,11 @@
       if(nextItem){
         $(nextItem).removeClass("outstanding").addClass("current");
       }
+    },
+
+    checkClick: function(ev){
+      $(ev.currentTarget).find('input[type="checkbox"]').prop("checked", !$(ev.currentTarget).find('input[type="checkbox"]').prop("checked"));
+      $(ev.currentTarget).toggleClass("checked");
     }
   });
 
