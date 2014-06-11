@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import json
+import ast
+
 from django.contrib import admin
 from django.db.models import Count
 from django.utils.timezone import now
@@ -91,7 +94,8 @@ class IncidentAdmin(TrackingAdmin):
                 'commenters': self.user_model.objects.filter(
                     comment__item=obj).distinct(),
                 'senders': self.user_model.objects.filter(
-                    sent_messages__messageext__market_item=obj).distinct()
+                    sent_messages__messageext__market_item=obj).distinct(),
+                'feedback': ast.literal_eval(obj.feedback_response or '[]')
             })
         return super(IncidentAdmin, self).render_change_form(request, context,
                                                              add, change,
