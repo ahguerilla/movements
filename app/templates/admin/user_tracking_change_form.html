@@ -1,0 +1,48 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block field_sets %}
+  <fieldset class="module aligned {{ fieldset.classes }}">
+    <h2>{% trans 'User details' %}</h2>
+    <div class="form-row">
+      <table class="user-details">
+        {% for label, field in report_fields %}
+          {% if field %}
+            <tr><td><b>{{ label }}</b></td><td>{{ field }}</td></tr>
+          {% endif %}
+        {% endfor %}
+        <tr><td></td><td></td></tr>
+        {% with requests=obj.get_requests %}
+          {% if requests %}
+            <tr>
+              <td><b>{% trans 'Request List' %}:</b></td>
+              <td>
+                <ul>
+                  {% for request_post in requests %}
+                    <li>{{ request_post.title }} / {{ request_post.pub_date }}</li>
+                  {% endfor %}
+                </ul>
+              </td>
+            </tr>
+          {% endif %}
+        {% endwith %}
+        {% with offers=obj.get_offers %}
+          {% if offers %}
+            <tr>
+              <td><b>{% trans 'Offer List' %}:</b></td>
+              <td>
+                <ul>
+                  {% for offer_post in offers %}
+                    <li>{{ offer_post.title }} / {{ offer_post.pub_date }}</li>
+                  {% endfor %}
+                </ul>
+              </td>
+            </tr>
+          {% endif %}
+        {% endwith %}
+      </table>
+    </div>
+  </fieldset>
+{% endblock %}
+
+{% block submit_buttons_bottom %}{% endblock %}

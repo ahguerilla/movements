@@ -2,7 +2,9 @@ from django.core.urlresolvers import reverse
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from app.users.models import UserProfile, Countries, Skills, Issues, Nationality
+
+from app.users.models import (
+    UserProfile, Countries, Skills, Issues, Nationality)
 from django.contrib.admin.models import LogEntry
 from modeltranslation.admin import TranslationAdmin
 
