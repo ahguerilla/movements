@@ -238,7 +238,12 @@ def signup_from_home(request):
         'post_url': reverse(process_signup),
         'sign_up': True,
     }
-    return render_to_response(AhrSignupView.template_name, view_dict, context_instance=RequestContext(request))
+    if django_settings.V2_TEMPLATES:
+        template_name = "account/signup_v2.html"
+    else:
+        template_name = AhrSignupView.template_name
+
+    return render_to_response(template_name, view_dict, context_instance=RequestContext(request))
 
 
 def signup_start(request):
@@ -247,10 +252,11 @@ def signup_start(request):
     return render_to_response("account/signup_start.html", {}, context_instance=RequestContext(request))
 
 
-class AhrSignupView(SignupView):
-    if django_settings.V2_TEMPLATES:
-        template_name = "account/signup_v2.html"
+def more_about_you(request):
+    return render_to_response("users/more_about_you.html", {}, context_instance=RequestContext(request))
 
+
+class AhrSignupView(SignupView):
     def get_context_data(self, **kwargs):
 
         ret = super(AhrSignupView, self).get_context_data(**kwargs)

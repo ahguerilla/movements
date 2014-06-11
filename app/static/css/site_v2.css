@@ -97,7 +97,9 @@
   background-color: #fe6d50;
   color: #fff;
 }
-.btn-action:hover {
+.btn-action:hover,
+.btn-action:active,
+.btn-action:focus {
   color: #fff;
 }
 .btn-social-facebook {
@@ -107,8 +109,13 @@
 .btn-social-facebook img {
   margin-right: 10px;
 }
-.btn-social-facebook:hover {
+.btn-social-facebook:hover,
+.btn-social-facebook:active,
+.btn-social-facebook:focus {
   color: #fff;
+}
+.dialog {
+  background-color: #fff;
 }
 html {
   background-color: #f8f6f7;
@@ -157,6 +164,49 @@ h4,
 h5,
 h6 {
   color: #005e86;
+}
+.progress-counter {
+  border-top: 2px solid #e0d7d8;
+  margin-bottom: 50px;
+  position: relative;
+}
+.progress-counter .progress-item {
+  position: absolute;
+  top: -14px;
+}
+.progress-counter .complete-state {
+  text-align: center;
+  font-size: 35px;
+  line-height: 25px;
+}
+.progress-counter .complete-state span {
+  background-color: #fff;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.progress-counter .step1 {
+  left: -20px;
+}
+.progress-counter .step2 {
+  left: 16%;
+}
+.progress-counter .step3 {
+  left: 41%;
+}
+.progress-counter .step4 {
+  left: 69%;
+}
+.progress-counter .step5 {
+  right: -20px;
+}
+.progress-counter .complete {
+  color: #005e86;
+}
+.progress-counter .current {
+  color: #262626;
+}
+.progress-counter .outstanding {
+  color: #b7aba5;
 }
 
 

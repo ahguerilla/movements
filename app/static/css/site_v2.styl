@@ -15,6 +15,7 @@ $facebook-blue = #3C5A9A
 $main-font = #262626
 $white-font = #FFFFFF
 $title-font = #005E86
+$inactive-font = #b7aba5
 
 
 // **************************************
@@ -98,7 +99,7 @@ box-shadow()
   background-color $primary-color
   color $white-font
 
-.btn-action:hover
+.btn-action:hover, .btn-action:active, .btn-action:focus
   color $white-font
 
 .btn-social-facebook
@@ -107,8 +108,14 @@ box-shadow()
   img
     margin-right 10px
 
-.btn-social-facebook:hover
+.btn-social-facebook:hover, .btn-social-facebook:active, .btn-social-facebook:focus
   color $white-font
+
+// **************************************
+// bootstrap overrides
+// **************************************
+.dialog
+  background-color #fff
 
 // **************************************
 // base styles
@@ -148,3 +155,39 @@ body
 
 h1,h2,h3,h4,h5,h6
   color $title-font
+
+
+// **************************************
+// Sign up styles
+// **************************************
+.progress-counter
+  border-top 2px solid $border-color
+  margin-bottom 50px
+  position relative
+  .progress-item
+    position absolute
+    top -14px
+  .complete-state
+    text-align center
+    font-size 35px
+    line-height 25px
+    span
+      background-color #ffffff
+      padding-left 3px
+      padding-right 3px
+  .step1
+    left -20px
+  .step2
+    left 16%
+  .step3
+    left 41%
+  .step4
+    left 69%
+  .step5
+    right -20px
+  .complete
+    color $title-font
+  .current
+    color $main-font
+  .outstanding
+    color $inactive-font

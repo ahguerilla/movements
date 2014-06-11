@@ -30,6 +30,7 @@ js = Bundle(
         './js/messages.js',
         './js/posts.js',
         './js/recommendation.js',
+        './js/more_about_you.js',
         './js/lib/jquery.rateit.min.js',
         ),
     filters='jsmin',
