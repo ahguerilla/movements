@@ -27,26 +27,26 @@
       <div class="form-group">
         <div class="col-xs-6">
           <label for="{{ form.first_name.auto_id }}">{%trans "First Name"%}</label>
-          {% render_field form.first_name class="form-control input-sm" placeholder="" required="false" %}
+          {% render_field form.first_name class="form-control input-sm" placeholder="" %}
           {{ form.first_name.errors }}
         </div>
         <div class="col-xs-6">
           <label for="{{ form.last_name.auto_id }}">{%trans "Last Name"%}</label>
-          {% render_field form.last_name class="form-control input-sm" placeholder="" required="false" %}
+          {% render_field form.last_name class="form-control input-sm" placeholder=""%}
           {{ form.last_name.errors }}
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-12">
           <label for="{{ form.resident_country.auto_id }}">{%trans "Country of Residence"%}</label>
-          {% render_field form.resident_country class="form-control input-sm" required="false" %}
+          {% render_field form.resident_country class="form-control input-sm"%}
           {{ form.resident_country.errors }}
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-12">
           <label for="{{ form.bio.auto_id }}">{%trans "Biography"%}</label>
-          {% render_field form.bio class="form-control input-sm" required="false" %}
+          {% render_field form.bio class="form-control input-sm"%}
           {{ form.bio.errors }}
         </div>
       </div>

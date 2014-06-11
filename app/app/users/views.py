@@ -268,7 +268,7 @@ process_signup = AhrSignupView.as_view()
 class AccAdapter(DefaultAccountAdapter):
     def new_user(self, *args, **kwargs):
         user = super(AccAdapter, self).new_user(*args, **kwargs)
-        user.is_active = False
+        user.is_active = True
         return user
 
     def send_vetting_email(self, user, form):
