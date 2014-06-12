@@ -46,6 +46,13 @@
 }
 .movements-form label {
   margin-top: 10px;
+  font-family: "HurmeGeometricSans3-Bold";
+  font-weight: lighter;
+}
+.movements-form input,
+.movements-form select,
+.movements-form textarea {
+  font-size: 16px;
 }
 .movements-form input[type=text]:focus,
 .movements-form input[type=email]:focus,
@@ -92,6 +99,7 @@
   border-radius: 3px;
   padding: 9px 12px;
   font-weight: bold;
+  font-size: 16px;
 }
 .btn-action {
   background-color: #fe6d50;
@@ -123,6 +131,8 @@ html {
 body {
   background-color: #f8f6f7;
   color: #262626;
+  font-family: "LinotypeUnivers-330Light";
+  font-size: 16px;
 }
 .container {
   max-width: 960px;
@@ -164,6 +174,11 @@ h4,
 h5,
 h6 {
   color: #005e86;
+  font-family: "HurmeGeometricSans3-Bold";
+}
+.btn {
+  font-family: "HurmeGeometricSans3-Bold";
+  font-weight: lighter;
 }
 .progress-counter {
   border-top: 2px solid #e0d7d8;
@@ -173,6 +188,9 @@ h6 {
 .progress-counter .progress-item {
   position: absolute;
   top: -14px;
+}
+.progress-counter .progress-item-description {
+  font-weight: bold;
 }
 .progress-counter .complete-state {
   text-align: center;
@@ -283,6 +301,7 @@ h6 {
 .form-select-multi .select-label {
   font-size: 12px;
   margin-left: 23px;
+  line-height: 19px;
 }
 
 

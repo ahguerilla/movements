@@ -60,6 +60,9 @@ css = Bundle(
 
 css_v2 = Bundle(
     Bundle(
+        './css/fonts.css',
+        ),
+    Bundle(
         './css/site_v2.styl',
         './css/site-sm_v2.styl',
         filters='stylus',

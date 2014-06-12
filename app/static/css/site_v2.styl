@@ -70,6 +70,10 @@ box-shadow()
     font-weight bold
   label
     margin-top 10px
+    font-family "HurmeGeometricSans3-Bold"
+    font-weight lighter
+  input, select, textarea
+    font-size 16px
   input[type=text]:focus, input[type=email]:focus, input[type=number]:focus, input[type=password]:focus, select:focus, textarea:focus
     border-color $primary-color-alpha
     box-shadow 0 1px 1px rgba(0, 0, 0, 0.075)// inset, 0 0 8px rgba(254, 109, 80, 0.6)
@@ -95,6 +99,7 @@ box-shadow()
   border-radius 3px
   padding 9px 12px
   font-weight bold
+  font-size 16px
 
 .btn-action
   background-color $primary-color
@@ -128,6 +133,8 @@ html
 body
   background-color $background-color
   color $main-font
+  font-family "LinotypeUnivers-330Light"
+  font-size 16px
 
 .container
   max-width 960px
@@ -156,7 +163,11 @@ body
 
 h1,h2,h3,h4,h5,h6
   color $title-font
+  font-family "HurmeGeometricSans3-Bold"
 
+.btn
+  font-family "HurmeGeometricSans3-Bold"
+  font-weight lighter
 
 // **************************************
 // Sign up styles
@@ -168,6 +179,8 @@ h1,h2,h3,h4,h5,h6
   .progress-item
     position absolute
     top -14px
+  .progress-item-description
+    font-weight bold
   .complete-state
     text-align center
     font-size 35px
@@ -254,3 +267,4 @@ h1,h2,h3,h4,h5,h6
   .select-label
     font-size 12px
     margin-left 23px
+    line-height 19px
