@@ -157,6 +157,7 @@ body {
 }
 footer {
   margin-top: 30px;
+  padding-bottom: 30px;
   font-size: 14px;
   background-color: #b6aba5;
   border-top: 4px solid #e0d7d8;
@@ -206,12 +207,16 @@ footer .footer-nav-content li {
   line-height: 16px;
 }
 footer .footer-nav-content li a {
-  margin-left: 11px;
+  margin-left: 6px;
+  margin-right: 3px;
   color: #fff;
   text-decoration: underline;
 }
 footer .footer-nav-content li:first-child {
   border-left: none;
+}
+footer .footer-nav-content li:last-child a {
+  margin-right: 0;
 }
 .footer-navbar {
   background-color: #bdb4af;
