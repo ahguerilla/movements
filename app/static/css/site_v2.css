@@ -1,11 +1,11 @@
 ::-webkit-input-placeholder {
-  font-style: italic;
+  font-style: normal;
 }
 ::-moz-placeholder {
-  font-style: italic;
+  font-style: normal;
 }
 :-ms-input-placeholder {
-  font-style: italic;
+  font-style: normal;
 }
 .movements-form {
   -webkit-border-radius: 0;
@@ -126,7 +126,7 @@
   background-color: #fff;
 }
 html {
-  background-color: #f8f6f7;
+  background-color: #b6aba5;
 }
 body {
   background-color: #f8f6f7;
@@ -147,13 +147,71 @@ body {
   -o-border-radius: 0;
   border-radius: 0;
   border: 0;
-  border-bottom: 5px solid #e0d7d8;
+  border-bottom: 4px solid #e0d7d8;
 }
 .header-nav .header-nav-wrapper {
   text-align: center;
 }
 .header-nav .header-nav-wrapper .main-logo {
   padding-top: 15px;
+}
+footer {
+  margin-top: 30px;
+  font-size: 14px;
+  background-color: #b6aba5;
+  border-top: 4px solid #e0d7d8;
+  color: #fff;
+}
+footer h4 {
+  color: #fff;
+  margin-top: 30px;
+}
+footer .social-icons img {
+  margin-right: 20px;
+}
+footer input {
+  font-size: 14px;
+}
+footer input[type=text]:focus,
+footer input[type=email]:focus {
+  border-color: rgba(254,109,80,0.8);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  -ms-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  -o-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  outline: 0 none;
+}
+footer input[type=text],
+footer input[type=email] {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  height: 30px;
+  width: 80%;
+}
+footer hr {
+  border-top: 1px solid #e0d7d8;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+footer .footer-nav-content {
+  text-align: right;
+}
+footer .footer-nav-content li {
+  display: inline-block;
+  border-left: 1px solid #e0d7d8;
+  line-height: 16px;
+}
+footer .footer-nav-content li a {
+  margin-left: 11px;
+  color: #fff;
+  text-decoration: underline;
+}
+footer .footer-nav-content li:first-child {
+  border-left: none;
 }
 .footer-navbar {
   background-color: #bdb4af;
