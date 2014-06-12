@@ -280,6 +280,17 @@ h6 {
   color: #b7aba5;
   text-decoration: underline;
 }
+.content-page h1,
+.content-page h2,
+.content-page h3,
+.content-page h4,
+.content-page h5,
+.content-page h6 {
+  color: #005e86;
+}
+.content-page h1 {
+  font-size: 26px;
+}
 .landing-page {
   padding-top: 30px;
 }

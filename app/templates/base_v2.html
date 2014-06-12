@@ -145,6 +145,7 @@
 {% block endjavascript %}
 {% endblock %}
 {% render_block "js" %}
+
 <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 {% if user.is_authenticated %}
   {% include "market/clientside/notifications.html" %}
