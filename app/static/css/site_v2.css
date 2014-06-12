@@ -46,8 +46,8 @@
 }
 .movements-form label {
   margin-top: 10px;
-  font-family: "HurmeGeometricSans3-Bold";
-  font-weight: lighter;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
 }
 .movements-form input,
 .movements-form select,
@@ -191,6 +191,9 @@ body {
 #view-content-menu:hover {
   cursor: pointer;
 }
+#content-menu-container .popover-content {
+  width: 300px;
+}
 footer {
   padding-bottom: 30px;
   font-size: 14px;
@@ -275,12 +278,12 @@ h6 {
   font-family: "HurmeGeometricSans3-Bold";
 }
 .btn {
-  font-family: "HurmeGeometricSans3-Bold";
-  font-weight: lighter;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
 }
 .action-font {
-  font-family: "HurmeGeometricSans3-Bold";
-  font-weight: lighter;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
 }
 .action-font a {
   color: #b7aba5;

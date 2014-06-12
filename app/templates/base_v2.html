@@ -56,6 +56,7 @@
   <div class="container" style="position:relative;">
       <div class="navbar-left">
         <a id="view-content-menu"><img src="{{ STATIC_URL }}images/v2/hamburger.png" alt="Content Menu"></a>
+         <div id="content-menu-container"></div>
       </div>
     {% if user.is_authenticated %}
       <div class="navbar-right">
@@ -140,6 +141,10 @@
   <a class="btn btn-request" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/request_icon.png"/>Request</a>
   <a class="btn btn-offer" href="{% url 'create_request' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>Offer</a>
 </script>
+<script type="text/template" id="content-menu-template">
+  {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
+</script>
+
 {% assets "js_all" %}
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
