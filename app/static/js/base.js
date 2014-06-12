@@ -79,7 +79,7 @@
        title: '',
        html: true,
        content: $('#content-menu-template').html(),
-       container: '#content-menu-containerr',
+       container: '#content-menu-container',
        placement: 'bottom'
      });
   }

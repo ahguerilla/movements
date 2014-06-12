@@ -192,7 +192,7 @@ body {
   cursor: pointer;
 }
 #content-menu-container .popover-content {
-  width: 300px;
+  padding: 0;
 }
 footer {
   padding-bottom: 30px;
