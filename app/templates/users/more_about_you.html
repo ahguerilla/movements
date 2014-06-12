@@ -22,7 +22,7 @@
       </div>
       <div class="progress-item step4 outstanding">
         <div class="complete-state"><span>&#8226;</span></div>
-        <div class="progress-item-description">{% trans "Skills" %}</div>
+        <div class="progress-item-description">{% trans "Interests" %}</div>
       </div>
       <div class="progress-item step5 outstanding">
         <div class="complete-state"><span>&#8226;</span></div>
@@ -115,13 +115,13 @@
         </div>
       </div> <!-- End Regions -->
 
-      <div id="step4" class="step" style="display: none;" >  <!-- Start Skills -->
-        <div class="form-title"><h1>{% trans "Skills" %}</h1></div>
+      <div id="step4" class="step" style="display: none;" >  <!-- Start Interests -->
+        <div class="form-title"><h1>{% trans "Interests" %}</h1></div>
         <div class="form-select-multi">
           <p>
             {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
           </p>
-          {% for skill in skills %}
+          {% for item in interests %}
             {% if forloop.counter0|divisibleby:3 %}
             <div class="row">
             {% endif %}
@@ -129,7 +129,7 @@
                 <div class="select-checkbox">
                   <input type="checkbox" id="" name="">
                   <label for="checkboxFiveInput"></label>
-                  <div class="select-label">{{ skill }}</div>
+                  <div class="select-label">{{ item }}</div>
                 </div>
               </div>
             {% if forloop.last or forloop.counter|divisibleby:3 %}
@@ -145,7 +145,7 @@
             <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
           </div>
         </div>
-      </div>   <!-- Start Skills -->
+      </div>   <!-- End Interests -->
 
       <div id="step5" class="step" style="display: none;">
         <div class="form-title"><h1>{% trans "Done" %}</h1></div>

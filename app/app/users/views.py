@@ -190,7 +190,6 @@ def email_doublesignup_upret(self, ret):
             if len(ret['form'].errors['email']) == 0:
                 ret['form'].errors.pop('email')
 
-
         if not confem[0].user.is_active:
             text = render_to_string('emails/notready.html', {})
             subject = render_to_string('emails/notready_subject.html', {})
@@ -255,7 +254,7 @@ def signup_start(request):
 def more_about_you(request):
     view_dict = {
         'languages': ["English", "French", "Spanish", "Arabic", "Farsi", "Chinese", "Russian"],
-        'skills': ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee", "Policy Expert", "Social Media", "Technology", "Translator", "Writer"],
+        'interests': ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee", "Policy Expert", "Social Media", "Technology", "Translator", "Writer"],
         'regions': ["North America", "Europe", "Asia", "South America", "Africa", "Oceania"]
     }
     return render_to_response("users/more_about_you.html", view_dict, context_instance=RequestContext(request))
