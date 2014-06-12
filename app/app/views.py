@@ -3,13 +3,19 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
+from django.conf import settings as django_settings
 
 
 def home(request):
     if request.user.is_authenticated() and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('exchange'))
     view_dict = {'sign_up': True}
-    return render_to_response('ahr/home.html', view_dict, context_instance=RequestContext(request))
+    if django_settings.V2_TEMPLATES:
+        template = 'ahr/home_v2.html'
+    else:
+        template = 'ahr/home.html'
+
+    return render_to_response(template, view_dict, context_instance=RequestContext(request))
 
 
 def terms_and_conditions(request):

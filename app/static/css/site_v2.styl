@@ -21,7 +21,6 @@ $white-font = #FFFFFF
 $title-font = #005E86
 $inactive-font = #b7aba5
 
-
 // **************************************
 // some generic functions
 // **************************************
@@ -179,6 +178,7 @@ body
 
 footer
   margin-top 30px
+  padding-bottom 30px
   font-size 14px
   background-color $footer-color
   border-top 4px solid $border-color
@@ -210,11 +210,15 @@ footer
       border-left 1px solid $border-color
       line-height 16px
       a
-        margin-left 11px
+        margin-left 6px
+        margin-right 3px
         color #fff
         text-decoration underline
     li:first-child
       border-left none
+    li:last-child
+      a
+        margin-right 0
 
 .footer-navbar
   background-color $secondary-color

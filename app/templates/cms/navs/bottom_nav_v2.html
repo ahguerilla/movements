@@ -2,9 +2,7 @@
 <ul>
 {% for child in children %}
   {% if child.show_in_footer %}
-  <li>
-    <a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a>{% if not forloop.last %}&nbsp;&nbsp;{% endif %}
-  </li>
+  <li><a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a></li>
   {% endif %}
 {% endfor %}
 </ul>

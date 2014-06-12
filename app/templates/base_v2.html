@@ -50,6 +50,8 @@
     <div style="display:none;">{{ message }}</div>
   {% endfor %}
 {% endif %}
+
+{% block header_nav %}
 <nav class="navbar navbar-default header-nav {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
   <div class="container" style="position:relative;">
     {% if user.is_authenticated %}
@@ -63,10 +65,10 @@
     </div>
   </div>
 </nav>
-{% block outsidecontainer %}
 {% endblock %}
+
 {% block ext_container %}
-<div class="container" id="main-content-container">
+<div class="container">
 
   <div id="currentusername" class="hidden">{{ user.username }}</div>
 
