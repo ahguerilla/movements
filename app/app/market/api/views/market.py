@@ -101,18 +101,17 @@ def getStikies(request, hiddens, sfrom, to):
 
 def get_raw(request, filter_by_owner=False):
     params = {
-        'countries': tuple([0]),
-        'issues': tuple([0]),
-        'skills': tuple([0]),
-        'types': tuple(['offer', 'request']),
-        'user_id': str(request.user.id),
+        'countries': (0,),
+        'issues': (0,),
+        'skills': (0,),
+        'types': ('offer', 'request'),
+        'user_id': request.user.id,
         'date_now': datetime.now(),
         'closed_statuses': tuple([
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN])
     }
-    in_ids = ''
-    not_in_hidden = ''
+    additional_filter = ''
 
     if 'issues' in request.GET:
         params['issues'] = tuple(map(int, request.GET.getlist('issues')))
@@ -133,11 +132,11 @@ def get_raw(request, filter_by_owner=False):
         market_items = SearchQuerySet().models(
             market.models.MarketItem).filter(text=search)
         if market_items:
-            in_ids = 'AND mi.id IN %(ids)s'
+            additional_filter = 'AND mi.id IN %(ids)s'
             params['ids'] = tuple(int(obj.pk) for obj in market_items)
 
     if not request.GET.get('showHidden'):
-        not_in_hidden = """
+        additional_filter += """
             AND NOT mi.id IN (
                 SELECT hiddens.item_id
                 FROM market_marketitemhidden AS hiddens
@@ -147,7 +146,7 @@ def get_raw(request, filter_by_owner=False):
     if filter_by_owner:
         select = 'SELECT mi.* '
         order_by = 'ORDER BY id DESC , pub_date DESC'
-        user_filter = 'auth_user.id = %(user_id)s AND'
+        additional_filter += 'AND auth_user.id = %(user_id)s'
     else:
         select = """
         SELECT mi.*,
@@ -155,8 +154,7 @@ def get_raw(request, filter_by_owner=False):
                 COUNT(DISTINCT market_marketitem_issues.issues_id) +
                 COUNT(DISTINCT market_marketitem_skills.skills_id)) as tag_matches
         """
-        order_by = ' ORDER BY tag_matches DESC, pub_date DESC'
-        user_filter = ''
+        order_by = 'ORDER BY tag_matches DESC, pub_date DESC'
 
     raw = select + """
         FROM market_marketitem AS mi
@@ -173,8 +171,7 @@ def get_raw(request, filter_by_owner=False):
             mi.owner_id = "auth_user"."id"
         WHERE
             mi.item_type IN %(types)s
-    """ + in_ids + """
-    """ + not_in_hidden + """ AND
+    """ + additional_filter + """ AND
             NOT mi.id IN (
                 SELECT stickies."item_id"
                 FROM "market_marketitemstick" stickies
@@ -183,7 +180,6 @@ def get_raw(request, filter_by_owner=False):
             mi.published = True AND
             mi.deleted = False AND
             "auth_user"."is_active" = True AND
-    """ + user_filter + """
             NOT mi.status IN %(closed_statuses)s AND
             (
                 mi.exp_date >= %(date_now)s OR
