@@ -1,76 +1,62 @@
-{% extends "base.html" %}
+{% extends "base_v2.html" %}
 {% load i18n %}
 {% load compress %}
 
 
 {% block outsidecontainer %}
-<div style="height:50px;"></div>
-<div id="market">
-  <!-- Banner -->
-  {% include "ahr/market_banner.html"%}
-  <!-- Filter Spacer -->
-  <div class="action-banner-spacer">
-  </div>
-  <div id="filter-container"></div>
-  <div class="clearfix"></div>
 {% endblock %}
 
 {% block content %}
+  <div class="exchange-filters clearfix">
+    <div class="pull-left">
+      <ul>
+        <li>See all</li>
+        <li>Requests</li>
+        <li>Offers</li>
+      </ul>
+    </div>
+    <div class="pull-right">
+      Filters:
+    </div>
+  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div id="itemandsearchwrap">
-        <!-- Search -->
-        <div class="row market-search-box">
-          <div class="input-group col-md-offset-2 col-md-8">
-            <form id="searchform">
-              <label class="sr-only" for="q">{%trans "Search by keyword for offers and requests"%}</label>
-              <input type="text" class="form-control" id="q" name="q" placeholder="{%trans "Search by keyword for offers and requests"%}" />
-              <input type="submit"/>
-            </form>
-            <span class="btn btn-default input-group-addon" id="searchbtn">{%trans "Search"%}</span>
-          </div>
-        </div>
-        <!-- Market Items -->
-        <div class="row">
-          <div class="col-md-12">
-            <div id="marketitems"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-10" id="ajaxloader">
-        <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
-      </div>
-      <!--<div id="backtomarket-but-container" >-->
-        <!--<a  class="btn btn-sm btn-default pull-left" href="{% url 'show_market' %}#">{%trans "Back"%}</a>-->
-      <!--</div>-->
-      <div class="nanamorde-mobile col-md-4">
-        <div class="userprofile"></div>
-      </div>
-      <div class="row singleiteem-container">
-        <div class="col-md-8 left-on-big">
-          <div class="panel" id="backtothemarket"  style="margin-top:10px;">
-            <ol class="breadcrumb" style="margin-bottom: 0px;">
-              <li style="cursor:pointer;" class="">
-                <a id="backtoexchange" href="{% url 'show_market' %}#">{%trans "Exchange"%}</a>
-              </li>
-              <li class="active">
-                <span id="marketitem_title_breadc"></span>
-              </li>
-            </ol>
-          </div>
-          <div id="singleItem"></div>
-          <div id="marketitem_comment_form"></div>
-          <div id="marketitem_comments"></div>
-        </div>
-        <div class="col-md-4 dialog nanamorde">
-          <div class="userprofile"></div>
-          <div class="action-container"></div>
-        </div>
+  <div id="itemandsearchwrap">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="marketitems"></div>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="col-lg-10" id="ajaxloader">
+    <img src="{{ STATIC_URL}}images/ajax-loader.gif"/>
+  </div>
+
+  <div class="nanamorde-mobile col-md-4">
+    <div class="userprofile"></div>
+  </div>
+
+  <div class="row singleiteem-container">
+    <div class="col-md-8 left-on-big">
+      <div class="panel" id="backtothemarket"  style="margin-top:10px;">
+        <ol class="breadcrumb" style="margin-bottom: 0px;">
+          <li style="cursor:pointer;" class="">
+            <a id="backtoexchange" href="{% url 'show_market' %}#">{%trans "Exchange"%}</a>
+          </li>
+          <li class="active">
+            <span id="marketitem_title_breadc"></span>
+          </li>
+        </ol>
+      </div>
+      <div id="singleItem"></div>
+      <div id="marketitem_comment_form"></div>
+      <div id="marketitem_comments"></div>
+    </div>
+    <div class="col-md-4 dialog nanamorde">
+      <div class="userprofile"></div>
+      <div class="action-container"></div>
+    </div>
+  </div>
 
 {% endblock %}
 
@@ -103,7 +89,6 @@
 
   {% compress js inline %}
     <script type="text/javascript">
-
       $(document).ready(function(){
         window.GuerillaMarket = window.GuerillaMarket || {};
         window.GuerillaMarket.userDefaultTags = {{tags|safe}};
@@ -118,7 +103,6 @@
           }
         });
       });
-
     </script>
   {% endcompress %}
 

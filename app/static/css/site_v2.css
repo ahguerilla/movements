@@ -140,6 +140,11 @@ body {
 .navbar-default {
   background-color: #f8f6f7;
 }
+.navbar-default .btn {
+  font-size: 14px;
+  padding: 4px 12px;
+  margin-top: 7px;
+}
 .header-nav {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -365,6 +370,10 @@ h6 {
   font-size: 12px;
   margin-left: 23px;
   line-height: 19px;
+}
+.exchange-filters {
+  border-bottom: 2px solid #ded8d6;
+  margin-bottom: 20px;
 }
 
 
