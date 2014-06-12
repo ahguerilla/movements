@@ -16,9 +16,11 @@ $footer-color =  #B6ABA5
 // font colors
 // **************************************
 $main-font = #262626
+$main-font-dark = #171717
 $white-font = #FFFFFF
 $title-font = #005E86
 $inactive-font = #b7aba5
+
 
 // **************************************
 // some generic functions
@@ -158,7 +160,7 @@ body
       padding-top 15px
 
 footer
-  margin-top 30px
+  //margin-top 30px
   padding-bottom 30px
   font-size 14px
   background-color $footer-color
@@ -218,6 +220,32 @@ h1,h2,h3,h4,h5,h6
 .btn
   font-family "HurmeGeometricSans3-Bold"
   font-weight lighter
+
+.action-font
+  font-family "HurmeGeometricSans3-Bold"
+  font-weight lighter
+  a
+    color $inactive-font
+    text-decoration underline
+
+
+// **************************************
+// Landing page styles
+// **************************************
+.landing-page
+  padding-top 30px
+  .landing-content
+    margin-left 50px
+    color $main-font-dark
+    h3
+      color $main-font-dark
+    .btn
+      width 70%
+      margin-bottom 20px
+  .action-item
+    text-align right
+    margin-top 10px
+    margin-bottom 20px
 
 
 // **************************************

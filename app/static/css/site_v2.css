@@ -161,7 +161,6 @@ body {
   padding-top: 15px;
 }
 footer {
-  margin-top: 30px;
   padding-bottom: 30px;
   font-size: 14px;
   background-color: #b6aba5;
@@ -247,6 +246,33 @@ h6 {
 .btn {
   font-family: "HurmeGeometricSans3-Bold";
   font-weight: lighter;
+}
+.action-font {
+  font-family: "HurmeGeometricSans3-Bold";
+  font-weight: lighter;
+}
+.action-font a {
+  color: #b7aba5;
+  text-decoration: underline;
+}
+.landing-page {
+  padding-top: 30px;
+}
+.landing-page .landing-content {
+  margin-left: 50px;
+  color: #171717;
+}
+.landing-page .landing-content h3 {
+  color: #171717;
+}
+.landing-page .landing-content .btn {
+  width: 70%;
+  margin-bottom: 20px;
+}
+.landing-page .action-item {
+  text-align: right;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .progress-counter {
   border-top: 2px solid #e0d7d8;
