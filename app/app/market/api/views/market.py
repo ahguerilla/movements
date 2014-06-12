@@ -107,9 +107,9 @@ def get_raw(request, filter_by_owner=False):
         'types': ('offer', 'request'),
         'user_id': request.user.id,
         'date_now': datetime.now(),
-        'closed_statuses': tuple([
+        'closed_statuses': (
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
-            market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN])
+            market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN)
     }
     additional_filter = ''
 
