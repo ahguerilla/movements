@@ -49,7 +49,7 @@
     }
   }
 
-  lastsize = $(window).width();
+  var lastsize = $(window).width();
   $(window).on({
     "orientationchange": function (event) {
       toggleNav();
@@ -63,6 +63,18 @@
       lastsize = thissize;
     }
   });
+
+  function setupAddPostPopover() {
+    $('#add-post').popover({
+      title: '',
+      html: true,
+      content: $('#add-post-template').html(),
+      container: '#add-post-popup-container',
+      placement: 'bottom'
+    });
+  }
+
+  setupAddPostPopover();
 
   window.ahr.BaseView = Backbone.View.extend({
     events: {},
