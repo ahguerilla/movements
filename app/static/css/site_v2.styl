@@ -5,6 +5,7 @@ $primary-color = #FE6D50
 $primary-color-alpha = rgba(254, 109, 80, 0.8)
 $secondary-color = #BDB4AF
 $third-color = #005D86
+$request-color = #ff4545
 $background-color = #F8F6F7
 $border-color = #E0D7D8
 $border-color-alpha = rgba(224, 215, 216, 0.8)
@@ -108,7 +109,15 @@ box-shadow()
   background-color $primary-color
   color $white-font
 
-.btn-action:hover, .btn-action:active, .btn-action:focus
+.btn-offer
+  background-color $third-color
+  color $white-font
+
+.btn-request
+  background-color $request-color
+  color $white-font
+
+.btn-action:hover, .btn-action:active, .btn-action:focus, .btn-request:hover, .btn-request:focus, .btn-offer:hover, .btn-offer:focus
   color $white-font
 
 .btn-social-facebook
@@ -149,7 +158,6 @@ body
     padding 4px 12px
     margin-top 7px
 
-
 .header-nav
   border-radius 0
   border 0
@@ -158,6 +166,17 @@ body
     text-align center
     .main-logo
       padding-top 15px
+
+#add-post-popup-container
+  .popover-content
+    width 132px
+    padding 9px
+  .btn
+    width 115px
+    img
+      margin-right 5px
+  .btn-request
+    margin-top 0
 
 footer
   //margin-top 30px

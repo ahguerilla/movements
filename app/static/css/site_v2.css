@@ -105,9 +105,21 @@
   background-color: #fe6d50;
   color: #fff;
 }
+.btn-offer {
+  background-color: #005d86;
+  color: #fff;
+}
+.btn-request {
+  background-color: #ff4545;
+  color: #fff;
+}
 .btn-action:hover,
 .btn-action:active,
-.btn-action:focus {
+.btn-action:focus,
+.btn-request:hover,
+.btn-request:focus,
+.btn-offer:hover,
+.btn-offer:focus {
   color: #fff;
 }
 .btn-social-facebook {
@@ -159,6 +171,19 @@ body {
 }
 .header-nav .header-nav-wrapper .main-logo {
   padding-top: 15px;
+}
+#add-post-popup-container .popover-content {
+  width: 132px;
+  padding: 9px;
+}
+#add-post-popup-container .btn {
+  width: 115px;
+}
+#add-post-popup-container .btn img {
+  margin-right: 5px;
+}
+#add-post-popup-container .btn-request {
+  margin-top: 0;
 }
 footer {
   padding-bottom: 30px;

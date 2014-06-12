@@ -1,10 +1,7 @@
-from django.conf import settings
-from django_assets import register,Bundle
-
+from django_assets import register, Bundle
 
 js = Bundle(
     Bundle(
-        #'./js/lib/jquery-1.10.2.min.js',
         './js/lib/jquery-1.11.0.min.js',
         './js/lib/underscore-min.js',
         './js/lib/backbone-min.js',
@@ -32,11 +29,10 @@ js = Bundle(
         './js/recommendation.js',
         './js/more_about_you.js',
         './js/lib/jquery.rateit.min.js',
-        ),
+    ),
     filters='jsmin',
     output='./js/packed.js'
 )
-
 
 css = Bundle(
     Bundle(
@@ -46,14 +42,14 @@ css = Bundle(
         './css/lib/typeahead.css',
         './css/lib/jquery.mCustomScrollbar.css',
         './css/lib/rateit.css'
-        ),
+    ),
     Bundle(
         './css/site.styl',
         './css/site-sm.styl',
         './css/site-xs.styl',
         filters='stylus',
-        output ='./css/site.css'
-        ),
+        output='./css/site.css'
+    ),
     filters='cssmin',
     output='./css/packed.css',
 )
@@ -61,13 +57,13 @@ css = Bundle(
 css_v2 = Bundle(
     Bundle(
         './css/fonts.css',
-        ),
+    ),
     Bundle(
         './css/site_v2.styl',
         './css/site-sm_v2.styl',
         filters='stylus',
-        output ='./css/site_v2.css'
-        ),
+        output='./css/site_v2.css'
+    ),
     filters='cssmin',
     output='./css/packed_v2.css',
 )
