@@ -1,0 +1,103 @@
+{% extends "base_form.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block public-content-message %}
+<div class="row dialog movements-form">
+  <div class="col-xs-12">
+    <div class="form-title"><h1>{% trans "About you" %}</h1></div>
+    <p>
+      {% if account.get_provider %}
+        {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login. We first need a few more details for vetting.{% endblocktrans %}
+      {% endif %}
+      {% blocktrans %}Hey, thanks for joining Movements. We now would like to know a little more about you before you get started.{% endblocktrans %}
+    </p>
+    <form class="form-horizontal" class="signup" id="signup_form" method="post" action="{{ post_url }}">
+    {% csrf_token %}
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.username.auto_id }}">{%trans "Username"%}</label>
+          {% render_field form.username class="form-control input-sm" required="true" autofocus="autofocus" placeholder="" %}
+          {{ form.non_field_errors }}
+          {{ form.username.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-6">
+          <label for="{{ form.first_name.auto_id }}">{%trans "First Name"%}</label>
+          {% render_field form.first_name class="form-control input-sm" placeholder="" %}
+          {{ form.first_name.errors }}
+        </div>
+        <div class="col-xs-6">
+          <label for="{{ form.last_name.auto_id }}">{%trans "Last Name"%}</label>
+          {% render_field form.last_name class="form-control input-sm" placeholder=""%}
+          {{ form.last_name.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.resident_country.auto_id }}">{%trans "Country of Residence"%}</label>
+          {% render_field form.resident_country class="form-control input-sm"%}
+          {{ form.resident_country.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.bio.auto_id }}">{%trans "Biography"%}</label>
+          {% render_field form.bio class="form-control input-sm"%}
+          {{ form.bio.errors }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>{%trans "Social Vetting"%}</h2>
+          <p>{% blocktrans %}To protect the safety of our members we vet all applicants to make sure their intentions are aligned with ours. The more information you give the quicker you become a fully qualified member.{% endblocktrans %}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.linkedin_url.auto_id }}">{%trans "Linked In"%}</label>
+          {% render_field form.linkedin_url class="form-control input-sm" placeholder="" %}
+          {{ form.linkedin_url.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.tweet_url.auto_id }}">{%trans "Twitter"%}</label>
+          {% render_field form.tweet_url class="form-control input-sm" placeholder="" %}
+          {{ form.tweet_url.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.fb_url.auto_id }}">{%trans "Facebook"%}</label>
+          {% render_field form.fb_url class="form-control input-sm" placeholder="" %}
+          {{ form.fb_url.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.web_url.auto_id }}">{%trans "Website or Blog"%}</label>
+          {% render_field form.web_url class="form-control input-sm" placeholder="" %}
+          {{ form.web_url.errors }}
+        </div>
+      </div>
+      {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <div class="row action-text">
+        <div class="col-sm-offset-2 col-sm-2 form-main-button">
+          <a class="action-link" href="">Cancel</a>
+        </div>
+        <div class="col-sm-6 form-main-button">
+          <button type="submit" class="btn btn-action full-width">Next</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+

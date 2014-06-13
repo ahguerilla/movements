@@ -3,36 +3,33 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from models import UserProfile, OrganisationalRating
-from forms import SettingsForm, UserForm, SignupForm, VettingForm
+from forms import SettingsForm, UserForm, VettingForm
 from form_overrides import ResetPasswordFormSilent
-from allauth.account.models import EmailAddress
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
 from allauth.socialaccount.views import SignupView as SocialSignupView
 from allauth.account.adapter import DefaultAccountAdapter
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from allauth.account.models import EmailConfirmation, EmailAddress
 from constance import config
 from django.core.urlresolvers import reverse, reverse_lazy
 from app.market.api.utils import value
 import app.users as users
-from django.contrib.admin.models import LogEntry,CHANGE
+from django.contrib.admin.models import LogEntry
 from django.contrib.contenttypes.models import ContentType
 import json
-from django.core.mail import EmailMessage, send_mass_mail
+from django.core.mail import EmailMessage
 import constance
-from app.users.utils import get_client_ip
 from django.template.loader import render_to_string
 from django.utils import translation
+from django.conf import settings as django_settings
 
 
 def render_settings(request, initial=False):
     template = 'users/user_settings.html'
     user = User.objects.get(pk=request.user.id)
-    default_notification = False
     try:
         settings = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
@@ -82,16 +79,16 @@ def render_settings(request, initial=False):
                                 'notperm': str(perms).replace("u'","'"),
                                 'initial': initial,
                                 'has_password': user.has_usable_password(),
-                                'skills': value('json',users.models.Skills.objects.all()),
-                                'issues': value('json',users.models.Issues.objects.all()),
-                                'countries': value('json',users.models.Countries.objects.all())
+                                'skills': value('json', users.models.Skills.objects.all()),
+                                'issues': value('json', users.models.Issues.objects.all()),
+                                'countries': value('json', users.models.Countries.objects.all())
                               },
                               context_instance=RequestContext(request))
 
 
 @login_required
 def initial_settings(request):
-    if hasattr(request.user,'userprofile'):
+    if hasattr(request.user, 'userprofile'):
         return HttpResponseRedirect(reverse('user_settings'))
     return render_settings(request, True)
 
@@ -190,13 +187,12 @@ def email_doublesignup_upret(self, ret):
             self.template_name = "account/verification_sent.html"
         else:
             ret['form'].errors['email'].remove(u'A user is already registered with this e-mail address.')
-            if len(ret['form'].errors['email'])==0:
+            if len(ret['form'].errors['email']) == 0:
                 ret['form'].errors.pop('email')
 
-
         if not confem[0].user.is_active:
-            text = render_to_string('emails/notready.html',{})
-            subject = render_to_string('emails/notready_subject.html',{})
+            text = render_to_string('emails/notready.html', {})
+            subject = render_to_string('emails/notready_subject.html', {})
             email = EmailMessage(subject,
                                  text,
                                  constance.config.NO_REPLY_EMAIL,
@@ -204,7 +200,7 @@ def email_doublesignup_upret(self, ret):
             email.content_subtype = "html"
             email.send()
         else:
-            text = render_to_string('emails/securityalert.html',{})
+            text = render_to_string('emails/securityalert.html', {})
             email = EmailMessage('Security Alert from Movements',
                                  text,
                                  constance.config.NO_REPLY_EMAIL,
@@ -228,8 +224,9 @@ class AhrSocialSignupView(SocialSignupView):
 
 ahr_social_signup = AhrSocialSignupView.as_view()
 
+
 def signup_from_home(request):
-    form = SignupView.form_class()
+    form = AhrSignupView.form_class()
     if request.method == 'POST':
         form.fields['first_name'].initial = request.POST.get('first_name', '')
         form.fields['last_name'].initial = request.POST.get('last_name', '')
@@ -240,7 +237,27 @@ def signup_from_home(request):
         'post_url': reverse(process_signup),
         'sign_up': True,
     }
-    return render_to_response(SignupView.template_name, view_dict, context_instance=RequestContext(request))
+    if django_settings.V2_TEMPLATES:
+        template_name = "account/signup_v2.html"
+    else:
+        template_name = AhrSignupView.template_name
+
+    return render_to_response(template_name, view_dict, context_instance=RequestContext(request))
+
+
+def signup_start(request):
+    if request.method == 'POST':
+        return HttpResponseRedirect('/sign-up')
+    return render_to_response("account/signup_start.html", {}, context_instance=RequestContext(request))
+
+
+def more_about_you(request):
+    view_dict = {
+        'languages': ["English", "French", "Spanish", "Arabic", "Farsi", "Chinese", "Russian"],
+        'interests': ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee", "Policy Expert", "Social Media", "Technology", "Translator", "Writer"],
+        'regions': ["North America", "Europe", "Asia", "South America", "Africa", "Oceania"]
+    }
+    return render_to_response("users/more_about_you.html", view_dict, context_instance=RequestContext(request))
 
 
 class AhrSignupView(SignupView):
@@ -260,8 +277,8 @@ process_signup = AhrSignupView.as_view()
 
 class AccAdapter(DefaultAccountAdapter):
     def new_user(self, *args, **kwargs):
-        user = super(AccAdapter,self).new_user(*args,**kwargs)
-        user.is_active = False
+        user = super(AccAdapter, self).new_user(*args, **kwargs)
+        user.is_active = True
         return user
 
     def send_vetting_email(self, user, form):
@@ -280,12 +297,12 @@ class AccAdapter(DefaultAccountAdapter):
     def save_user(self, request, user, form, commit=True):
         user.first_name = ''
         user.last_name = ''
-        user = super(AccAdapter,self).save_user(request, user, form, commit=True)
+        user = super(AccAdapter, self).save_user(request, user, form, commit=True)
         self.send_vetting_email(user, form)
         return user
 
     def get_email_confirmation_redirect_url(self, request):
-        super(AccAdapter,self).get_email_confirmation_redirect_url(request)
+        super(AccAdapter, self).get_email_confirmation_redirect_url(request)
         key = request.path.split('/')[3]
         conf = EmailConfirmation.objects.filter(key=key)[0]
         user = conf.email_address.user
@@ -355,11 +372,11 @@ def vet_user(request, user_id):
 def email_vet_user(request, user_id):
     user = User.objects.get(pk=user_id)
     if not user.is_active:
-        return  HttpResponse(json.dumps({ 'success' : False, 'message': 'User is not vetted.'}),mimetype="application/json")
+        return  HttpResponse(json.dumps({'success': False, 'message': 'User is not vetted.'}), mimetype="application/json")
     text = render_to_string('emails/getstarted.html',
                             {
-                                'user':user,
-                                'login_url':'http://'+Site.objects.get_current().domain+'/accounts/login'
+                                'user': user,
+                                'login_url': 'http://'+Site.objects.get_current().domain+'/accounts/login'
                             }
                         )
     subject = render_to_string('emails/getstarted_subject.html',{})
@@ -370,5 +387,5 @@ def email_vet_user(request, user_id):
                          [user.email])
     email.content_subtype = "html"
     email.send()
-    return  HttpResponse(json.dumps({ 'success' : True, 'message': 'An email has been sent to the user.'}),mimetype="application/json")
+    return HttpResponse(json.dumps({'success': True, 'message': 'An email has been sent to the user.'}), mimetype="application/json")
 

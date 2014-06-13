@@ -1,4 +1,4 @@
-{% extends "account/base.html" %}
+{% extends "base_form.html" %}
 
 {% load i18n %}
 {% load account %}
@@ -9,69 +9,51 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 {% block sign_in %}{% endblock %}
 
-{% block public-content %}
-
-<div class="hero-text">
-  <p>
-    {% url 'home' as home_url %}
-    {% blocktrans %}
-    Welcome to Movements, please sign in below. If you don't have an account yet, please sign up <a href="{{home_url}}" alt="sign up">here</a>
-    {% endblocktrans %}
-  </p>
-</div>
-
-<div class="row">
-  <div class="col-md-6 col-sm-7">
-    <div class="dialog">
-      <h1>{% trans "Sign In" %}</h1>
-      <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form">
-        {% csrf_token %}
-        <div class="form-group">
-          <div class="col-md-12">
-            {{ form.login.errors }}
-            {% render_field form.login class="form-control input-sm" required="true" autofocus="autofocus" placeholder="Email or Username" %}
-          </div>
+{% block public-content-message %}
+<div class="row dialog movements-form">
+  <div class="col-xs-12">
+    <div class="form-title"><h1>{% trans "Sign In" %}</h1></div>
+    <p>
+      {% url 'signup_start' as home_url %}
+      {% blocktrans %}
+      Welcome to Movements, please sign in below. If you don't have an account yet, please sign up <a href="{{ home_url }}" alt="sign up">here</a>
+      {% endblocktrans %}
+    </p>
+    <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form">
+    {% csrf_token %}
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.login.auto_id }}">{%trans "Email or Username"%}</label>
+          {% render_field form.login class="form-control input-sm" required="true" autofocus="autofocus" placeholder="" %}
+          {{ form.login.errors }}
         </div>
-        <div class="form-group">
-          <div class="col-md-12">
-            {{ form.password.errors }}
-            {% render_field form.password class="form-control input-sm" required="true" placeholder="Password" %}
-          </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.password.auto_id }}">{%trans "Password"%}</label>
+          {% render_field form.password class="form-control input-sm" required="true" placeholder="" %}
+          {{ form.password.errors }}
         </div>
-        <div class="form-group">
-          <div class="col-md-6">
-            {{ form.remember_me.errors }}
-            <label for="id_remember">{%trans "Remember Me"%}</label> {{ form.remember }}
-          </div>
-          <div class="col-md-6 align-right">
-            <a class="button btn-xs" href="{% url 'account_reset_password' %}">"{% trans "Forgot Password?"%}"</a>
-          </div>
+      </div>
+      <div>
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+      </div>
+      <div class="row action-text">
+        <div class="col-md-offset-1 col-md-4 form-main-button">
+          <a class="action-link" href="{% url 'account_reset_password' %}">Forgot Password?</a>
         </div>
-        <div class="form-group">
-          <div class="col-xs-7">
-            {% blocktrans %}
-            Or, <a href="{{home_url}}" alt="sign up">sign up</a> for an account.
-            {% endblocktrans %}
-          </div>
-          <div class="col-xs-5">
-            <button type="submit" class="btn btn-default full-width">{% trans "Sign In" %}</button>
-          </div>
+        <div class="col-md-6 form-main-button">
+          <button type="submit" class="btn btn-action full-width">{% trans "Sign In" %}</button>
         </div>
-        <div>
-          {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-          {% endif %}
-        </div>
-      </form>
-    </div>
-    <div class="row" style="margin-top:10px;">
-      {% include 'ahr/_footer_logos.html' %}
-    </div>
+      </div>
+    </form>
   </div>
-  <div class="col-sm-5 col-md-offset-2 col-md-4 social-sign-up">
-    {% if socialaccount.providers  %}
-      {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-    {% endif %}
+</div>
+<div class="row extended-form">
+  <div class="col-md-offset-2 col-md-8 form-main-button">
+    <button type="submit" class="btn btn-social-facebook full-width"><img src="{{ STATIC_URL }}images/v2/facebook-social.png">Sign In with Facebook</button>
   </div>
 </div>
 {% endblock %}

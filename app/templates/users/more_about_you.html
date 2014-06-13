@@ -1,0 +1,179 @@
+{% extends "base_form.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block public-content-message %}
+<div class="row dialog movements-form more-about-you-widget">
+  <div class="col-xs-12">
+    <div class="progress-counter">
+      <div class="progress-item step1 current">
+        <div class="complete-state"><span>&#8226;</span></div>
+        <div class="progress-item-description">{% trans "Start" %}</div>
+      </div>
+      <div class="progress-item step2 outstanding">
+        <div class="complete-state"><span>&#8226;</span></div>
+        <div class="progress-item-description">{% trans "Languages" %}</div>
+      </div>
+      <div class="progress-item step3 outstanding">
+        <div class="complete-state"><span>&#8226;</span></div>
+        <div class="progress-item-description">{% trans "Regions" %}</div>
+      </div>
+      <div class="progress-item step4 outstanding">
+        <div class="complete-state"><span>&#8226;</span></div>
+        <div class="progress-item-description">{% trans "Interests" %}</div>
+      </div>
+      <div class="progress-item step5 outstanding">
+        <div class="complete-state"><span>&#8226;</span></div>
+        <div class="progress-item-description">{% trans "Finish" %}</div>
+      </div>
+    </div>
+    <form class="form-horizontal"  method="post" action="{{ post_url }}">
+    {% csrf_token %}
+      <div id="step1" class="step" >
+        <div class="form-title"><h1>{% trans "Welcome to Movements" %}</h1></div>
+        <div class="form-select-multi">
+          <p>
+            {% blocktrans %}You've now created an account. We've sent you an email to verify your email address, once you've done this you will have more access to the movements platform.{% endblocktrans %}
+          </p>
+          <p>
+            {% blocktrans %}For now it would be great if we can get some more details about you, or alternatively you can skip this step and fill out these details later in your settings page.{% endblocktrans %}
+          </p>
+        </div>
+        <div class="row action-text">
+          <div class="col-sm-offset-2 col-sm-2 form-main-button">
+            <a class="action-link" href="">{% trans "Skip" %}</a>
+          </div>
+          <div class="col-sm-6 form-main-button">
+            <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="step2" class="step" style="display: none;" >  <!-- Start Languages -->
+        <div class="form-title"><h1>{% trans "Languages" %}</h1></div>
+        <div class="form-select-multi">
+          <p>
+            {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
+          </p>
+          {% for lang in languages %}
+            {% if forloop.counter0|divisibleby:3 %}
+            <div class="row">
+            {% endif %}
+              <div class="col-xs-4">
+                <div class="select-checkbox">
+                  <input type="checkbox" id="" name="">
+                  <label for="checkboxFiveInput"></label>
+                  <div class="select-label">{{ lang }}</div>
+                </div>
+              </div>
+            {% if forloop.last or forloop.counter|divisibleby:3 %}
+             </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="row action-text">
+          <div class="col-sm-offset-2 col-sm-2 form-main-button">
+            <a class="action-link" href="">{% trans "Skip" %}</a>
+          </div>
+          <div class="col-sm-6 form-main-button">
+            <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
+          </div>
+        </div>
+      </div> <!-- End Languages -->
+
+      <div id="step3" class="step" style="display: none;" > <!-- Start Regions -->
+        <div class="form-title"><h1>{% trans "Regions" %}</h1></div>
+        <div class="form-select-multi">
+          <p>
+            {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
+          </p>
+          {% for reg in regions %}
+            {% if forloop.counter0|divisibleby:3 %}
+            <div class="row">
+            {% endif %}
+              <div class="col-xs-4">
+                <div class="select-checkbox">
+                  <input type="checkbox" id="" name="">
+                  <label for="checkboxFiveInput"></label>
+                  <div class="select-label">{{ reg }}</div>
+                </div>
+              </div>
+            {% if forloop.last or forloop.counter|divisibleby:3 %}
+             </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="row action-text">
+          <div class="col-sm-offset-2 col-sm-2 form-main-button">
+            <a class="action-link" href="">{% trans "Skip" %}</a>
+          </div>
+          <div class="col-sm-6 form-main-button">
+            <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
+          </div>
+        </div>
+      </div> <!-- End Regions -->
+
+      <div id="step4" class="step" style="display: none;" >  <!-- Start Interests -->
+        <div class="form-title"><h1>{% trans "Interests" %}</h1></div>
+        <div class="form-select-multi">
+          <p>
+            {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
+          </p>
+          {% for item in interests %}
+            {% if forloop.counter0|divisibleby:3 %}
+            <div class="row">
+            {% endif %}
+              <div class="col-xs-4">
+                <div class="select-checkbox">
+                  <input type="checkbox" id="" name="">
+                  <label for="checkboxFiveInput"></label>
+                  <div class="select-label">{{ item }}</div>
+                </div>
+              </div>
+            {% if forloop.last or forloop.counter|divisibleby:3 %}
+             </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="row action-text">
+          <div class="col-sm-offset-2 col-sm-2 form-main-button">
+            <a class="action-link" href="">{% trans "Skip" %}</a>
+          </div>
+          <div class="col-sm-6 form-main-button">
+            <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
+          </div>
+        </div>
+      </div>   <!-- End Interests -->
+
+      <div id="step5" class="step" style="display: none;">
+        <div class="form-title"><h1>{% trans "Done" %}</h1></div>
+        <div class="form-select-multi">
+          <p>
+            {% blocktrans %}Thanks for the additional information which will really help us connect you with the right people.{% endblocktrans %}
+          </p>
+          <p>
+            {% blocktrans %}If you would like to update this details at any time, this can be done in easily in your settings panel.{% endblocktrans %}
+          </p>
+        </div>
+        <div class="row action-text">
+          <div class="col-sm-offset-2 col-sm-8 form-main-button">
+            <button class="btn btn-action full-width">{% trans "Finish" %}</button>
+          </div>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block endjavascript %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    window.ahr.widgets.initMoreAboutYou();
+  });
+</script>
+{% endblock %}
