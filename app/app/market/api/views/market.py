@@ -101,10 +101,10 @@ def getStikies(request, hiddens, sfrom, to):
 
 def get_raw(request, filter_by_owner=False):
     params = {
-        'countries': (0,),
-        'issues': (0,),
-        'skills': (0,),
-        'types': ('offer', 'request'),
+        'countries': tuple(map(int, request.GET.getlist('countries', (0,)))),
+        'issues': tuple(map(int, request.GET.getlist('issues', (0,)))),
+        'skills': tuple(map(int, request.GET.getlist('skills', (0,)))),
+        'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
         'user_id': request.user.id,
         'date_now': datetime.now(),
         'closed_statuses': (
@@ -112,20 +112,6 @@ def get_raw(request, filter_by_owner=False):
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN)
     }
     additional_filter = ''
-
-    if 'issues' in request.GET:
-        params['issues'] = tuple(map(int, request.GET.getlist('issues')))
-
-    if 'skills' in request.GET:
-        params['skills'] = tuple(map(int, request.GET.getlist('skills')))
-
-    if 'countries' in request.GET:
-        params['countries'] = tuple(map(int, request.GET.getlist('countries')))
-
-    if 'types' in request.GET:
-        types = request.GET.getlist('types')
-        if types:
-            params['types'] = tuple(types)
 
     search = request.GET.get('search')
     if search:
@@ -135,7 +121,7 @@ def get_raw(request, filter_by_owner=False):
             additional_filter = 'AND mi.id IN %(ids)s'
             params['ids'] = tuple(int(obj.pk) for obj in market_items)
 
-    if not request.GET.get('showHidden'):
+    if request.GET.get('showHidden', 'false') == 'false':
         additional_filter += """
             AND NOT mi.id IN (
                 SELECT hiddens.item_id
