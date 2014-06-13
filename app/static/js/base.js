@@ -74,7 +74,18 @@
     });
   }
 
+  function setupContentMenuPopover() {
+     $('#view-content-menu').popover({
+       title: '',
+       html: true,
+       content: $('#content-menu-template').html(),
+       container: '#content-menu-container',
+       placement: 'bottom'
+     });
+  }
+
   setupAddPostPopover();
+  setupContentMenuPopover();
 
   window.ahr.BaseView = Backbone.View.extend({
     events: {},

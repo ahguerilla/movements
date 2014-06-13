@@ -46,8 +46,8 @@
 }
 .movements-form label {
   margin-top: 10px;
-  font-family: "HurmeGeometricSans3-Bold";
-  font-weight: lighter;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
 }
 .movements-form input,
 .movements-form select,
@@ -185,8 +185,16 @@ body {
 #add-post-popup-container .btn-request {
   margin-top: 0;
 }
+#view-content-menu {
+  line-height: 45px;
+}
+#view-content-menu:hover {
+  cursor: pointer;
+}
+#content-menu-container .popover-content {
+  padding: 0;
+}
 footer {
-  margin-top: 30px;
   padding-bottom: 30px;
   font-size: 14px;
   background-color: #b6aba5;
@@ -270,8 +278,46 @@ h6 {
   font-family: "HurmeGeometricSans3-Bold";
 }
 .btn {
-  font-family: "HurmeGeometricSans3-Bold";
-  font-weight: lighter;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
+}
+.action-font {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
+}
+.action-font a {
+  color: #b7aba5;
+  text-decoration: underline;
+}
+.content-page h1,
+.content-page h2,
+.content-page h3,
+.content-page h4,
+.content-page h5,
+.content-page h6 {
+  color: #005e86;
+}
+.content-page h1 {
+  font-size: 26px;
+}
+.landing-page {
+  padding-top: 30px;
+}
+.landing-page .landing-content {
+  margin-left: 50px;
+  color: #171717;
+}
+.landing-page .landing-content h3 {
+  color: #171717;
+}
+.landing-page .landing-content .btn {
+  width: 70%;
+  margin-bottom: 20px;
+}
+.landing-page .action-item {
+  text-align: right;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .progress-counter {
   border-top: 2px solid #e0d7d8;

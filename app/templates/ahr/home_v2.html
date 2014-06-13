@@ -2,5 +2,34 @@
 
 {% load url from future %}
 {% load i18n %}
+{% load cms_tags %}
 
 {% block header_nav %}{% endblock %}
+{% block footer_padding %}{% endblock %}
+
+{% block content %}
+<div class="landing-page">
+  <div class="row">
+    <div class="col-xs-6">
+      <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
+      <div class="landing-content">
+        <h3>{% blocktrans %}The Skills exchange platform for people out in the field.{% endblocktrans %}</h3>
+        <p>{% blocktrans %}Movements is a new innovative platform which is crowdsourcing the fight for human rights. It is an online portal that connects people and communities around the World with the tools and expertise they need to advance human rights in closed societies.{% endblocktrans %}</p>
+        <a href="{% url 'signup_start' %}">
+          <button class="btn btn-action">Sign up now</button>
+        </a>
+        <p>{% blocktrans %}Want to know more before signing up. Check out our how to section and see how you can connect with the right people.{% endblocktrans %}</p>
+        <a href="{% page_url 'how_it_works' %}">
+          <button class="btn btn-action">How it works</button>
+        </a>
+        <p>{% blocktrans %}Still not convinced. Take a browse some offers and requests on the Exchange.{% endblocktrans %}</p>
+        <button class="btn btn-action">Visit market</button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="action-item action-font"><a href="{% url 'account_login' %}">{%trans "Login"%}</a></div>
+      <img src="{{ STATIC_URL }}images/v2/home-page-image.png" />
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -54,10 +54,18 @@
 {% block header_nav %}
 <nav class="navbar navbar-default header-nav {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
   <div class="container" style="position:relative;">
+      <div class="navbar-left">
+        <a id="view-content-menu"><img src="{{ STATIC_URL }}images/v2/hamburger.png" alt="Content Menu"></a>
+         <div id="content-menu-container"></div>
+      </div>
     {% if user.is_authenticated %}
       <div class="navbar-right">
         <a id="add-post" class="btn btn-action"><img src="{{ STATIC_URL }}images/v2/add_icon.png"/> Add Post</a>
         <div id="add-post-popup-container"></div>
+      </div>
+    {% else %}
+      <div class="navbar-right">
+        <a class="btn btn-action">Visit Market</a>
       </div>
     {% endif %}
     <div class="header-nav-wrapper">
@@ -80,7 +88,7 @@
 </div>
 {% endblock %}
 
-
+{% block footer_padding %}<div style="height: 30px"></div>{% endblock %}
 <footer>
   <div class="footer">
     <div class="container">
@@ -97,7 +105,7 @@
         <div class="col-xs-3">
           <h4>{% trans "Connect with us"  %}</h4>
           <div class="social-icons">
-            <a href="">
+            <a href="/movements/">
               <img src="{{ STATIC_URL }}images/v2/twitter-bigger.png" alt="Connect with Twitter" >
             </a>
             </a>
@@ -133,15 +141,23 @@
   <a class="btn btn-request" href="{% url 'create_request' %}"><img src="{{ STATIC_URL }}images/v2/request_icon.png"/>Request</a>
   <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>Offer</a>
 </script>
+<script type="text/template" id="content-menu-template">
+  {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
+</script>
+
 {% assets "js_all" %}
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
+
 {% include "market/clientside/app_urls.html" %}
+
 {% block javascript %}
 {% endblock %}
 
 {% block endjavascript %}
 {% endblock %}
+{% render_block "js" %}
+
 <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 {% if user.is_authenticated %}
   {% include "market/clientside/notifications.html" %}
@@ -151,11 +167,12 @@
     })();
   </script>
 {% endif %}
+
 <script type="text/javascript">
   (function () {
     window.ahr.string_constants = {{ string_constants|safe }};
   })();
 </script>
-{% render_block "js" %}
+
 </body>
 </html>
