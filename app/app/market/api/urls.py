@@ -72,7 +72,7 @@ market_item_patterns = patterns('',
         name="get_marketitem_insecure"),
 
     # Secured entry points
-    url(r'(?P<rtype>\S+)/item/add/(?P<obj_type>offer|request|resource)$',
+    url(r'(?P<rtype>\S+)/item/add/(?P<obj_type>offer|request)$',
         'app.market.api.views.market.add_market_item',
         name="add_marketitem"),
 

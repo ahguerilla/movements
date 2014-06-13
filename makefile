@@ -32,7 +32,7 @@ runlocal:
 runlocalext:
 	cd app && python manage.py runserver 0.0.0.0:8000 --settings=app.settings.local
 
-shelllocal:
+shell:
 	cd app && python manage.py shell --settings=app.settings.local
 
 runprod:

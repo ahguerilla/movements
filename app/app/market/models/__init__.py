@@ -9,6 +9,5 @@ from .report import (
     MarketItemPostReport, UserReport, EmailRecommendation, MessageExt,
     MessagePresentation
 )
-from .resourcefile import File
 from .notificatoin import Notification
 from .feedback import Question, Questionnaire

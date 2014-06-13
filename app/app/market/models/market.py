@@ -26,7 +26,7 @@ class MarketItem(models.Model):
         OFFER=('offer', _('Offer'))
     )
 
-    item_type = models.CharField(_('item_type'), max_length=200, blank=False)
+    item_type = models.CharField(_('item_type'), max_length=50, blank=False)
     owner = models.ForeignKey(auth.models.User, blank=True)
     staff_owner = models.ForeignKey(
         auth.models.User, blank=True, null=True, related_name='marketitems')
@@ -35,16 +35,18 @@ class MarketItem(models.Model):
     countries = models.ManyToManyField(user_models.Countries)
     issues = models.ManyToManyField(user_models.Issues)
     skills = models.ManyToManyField(user_models.Skills)
+    specific_skill = models.CharField(_('Specific skill'), max_length=25, blank=True, null=True)
     url = models.CharField(_('URL Link'), max_length=500, blank=True)
     published = models.BooleanField(_('is published?'), default=True)
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
-    exp_date = models.DateTimeField(_('expiry date'),blank=True, null=True)
+    exp_date = models.DateTimeField(_('expiry date'), blank=True, null=True)
     commentcount = models.IntegerField(_('commentcount'), default=0)
     ratecount = models.IntegerField(_('ratecount'), default=0)
     reportcount = models.IntegerField(_('reportcount'), default=0)
-    score = models.FloatField(_('score'),default=0)
+    score = models.FloatField(_('score'), default=0)
     deleted = models.BooleanField(_('deleted'), default=False)
     never_exp = models.BooleanField(_('never expires'), default=False)
+    receive_notifications = models.BooleanField(_('receive notifications', default=True, blank=True))
     status = models.PositiveSmallIntegerField(
         _('status'), max_length=1,
         default=STATUS_CHOICES.OPEN, choices=STATUS_CHOICES)
@@ -57,18 +59,17 @@ class MarketItem(models.Model):
         return self.details
 
     class Meta:
-        app_label="market"
+        app_label = "market"
 
     def save(self, *args, **kwargs):
         if not self.closed_date and (
-                self.status == self.STATUS_CHOICES.CLOSED_BY_USER or
-                self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN):
+                        self.status == self.STATUS_CHOICES.CLOSED_BY_USER or
+                        self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN):
             self.closed_date = now()
         super(MarketItem, self).save(*args, **kwargs)
 
     def getdict(self, request=None):
-        adict = {'fields':{}}
-        adict['pk'] = self.id
+        adict = {'fields': {}, 'pk': self.id}
         adict['fields']['pk'] = self.id
         adict['fields']['item_type'] = self.item_type
         adict['fields']['issues'] = [ob.id for ob in self.issues.all()]
@@ -88,10 +89,13 @@ class MarketItem(models.Model):
         adict['fields']['ratecount'] = self.ratecount
         adict['fields']['score'] = self.score
         adict['fields']['views'] = self.marketitemviewconter_set.count()
-        adict['fields']['hidden'] = True if request!=None and self.marketitemhidden_set.filter(viewer_id=request.user.id).count()> 0 else False
-        adict['fields']['stick'] = True if request!=None and self.marketitemstick_set.filter(viewer_id=request.user.id, item_id=self.id).count()> 0 else False
-        adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username,80])
+        adict['fields']['hidden'] = True if request != None and self.marketitemhidden_set.filter(
+            viewer_id=request.user.id).count() > 0 else False
+        adict['fields']['stick'] = True if request != None and self.marketitemstick_set.filter(
+            viewer_id=request.user.id, item_id=self.id).count() > 0 else False
+        adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username, 80])
         return adict
+
 
 class MarketItemViewConter(models.Model):
     item = models.ForeignKey(MarketItem)
@@ -99,8 +103,7 @@ class MarketItemViewConter(models.Model):
     counter = models.IntegerField(_('counter'), default=0)
 
     class Meta:
-        app_label="market"
-
+        app_label = "market"
 
 
 class MarketItemHidden(models.Model):
@@ -108,7 +111,7 @@ class MarketItemHidden(models.Model):
     viewer = models.ForeignKey(user_models.User)
 
     class Meta:
-        app_label="market"
+        app_label = "market"
 
 
 class MarketItemStick(models.Model):
@@ -116,7 +119,7 @@ class MarketItemStick(models.Model):
     viewer = models.ForeignKey(user_models.User)
 
     class Meta:
-        app_label="market"
+        app_label = "market"
 
 
 class MarketItemActions(models.Model):
