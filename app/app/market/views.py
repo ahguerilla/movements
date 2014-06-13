@@ -36,12 +36,16 @@ def index(request):
 
 @login_required
 def create_offer(request):
-    return render_to_response('market/create_offer.html')
+    skills = ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee",
+              "Policy Expert", "Social Media", "Technology", "Translator", "Writer"]
+    return render_to_response('market/create_offer.html', {'skills': skills}, context_instance=RequestContext(request))
 
 
 @login_required
 def create_request(request):
-    return render_to_response('market/create_request.html')
+    skills = ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee",
+              "Policy Expert", "Social Media", "Technology", "Translator", "Writer"]
+    return render_to_response('market/create_request.html', {'skills': skills}, context_instance=RequestContext(request))
 
 
 @login_required
