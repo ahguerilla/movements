@@ -46,7 +46,7 @@ class MarketItem(models.Model):
     score = models.FloatField(_('score'), default=0)
     deleted = models.BooleanField(_('deleted'), default=False)
     never_exp = models.BooleanField(_('never expires'), default=False)
-    receive_notifications = models.BooleanField(_('receive notifications', default=True, blank=True))
+    receive_notifications = models.BooleanField(_('receive notifications'), default=True, blank=True)
     status = models.PositiveSmallIntegerField(
         _('status'), max_length=1,
         default=STATUS_CHOICES.OPEN, choices=STATUS_CHOICES)

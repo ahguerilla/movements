@@ -39,7 +39,11 @@ class OfferForm(forms.ModelForm):
 
     class Meta:
         model = market.models.MarketItem
-        fields = ['issues', 'skills', 'countries', 'title', 'details', 'exp_date', 'never_exp', 'specific_skill']
+        fields = ['title', 'details', 'exp_date', 'never_exp', 'specific_skill',
+                  'receive_notifications']
+        widgets = {
+            'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
+        }
 
     def clean(self):
         err = _('You should enter an expiry date for your offer or check never expires')
@@ -50,12 +54,10 @@ class OfferForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True, *args, **kwargs):
-        instance = super(OfferForm, self).save(commit=commit, *args, **kwargs)
-        instance.item_type = market.models.MarketItem.TYPE_CHOICES.OFFER
-        instance.owner = self.cleaned_data['owner']
-        if commit:
-            instance.save()
-        return instance
+        self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.OFFER
+        if self.instance.id is None:
+            self.instance.owner = kwargs['owner']
+        return super(OfferForm, self).save(commit=commit)
 
 
 class RequestForm(forms.ModelForm):
@@ -63,7 +65,11 @@ class RequestForm(forms.ModelForm):
 
     class Meta:
         model = market.models.MarketItem
-        fields = ['issues', 'countries', 'title', 'details', 'exp_date', 'never_exp', 'specific_skill']
+        fields = ['title', 'details', 'exp_date', 'never_exp', 'specific_skill',
+                  'receive_notifications']
+        widgets = {
+            'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
+        }
 
     def clean(self):
         err = _('You should enter an expiry date for your request or check never expires')
@@ -75,12 +81,10 @@ class RequestForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True, *args, **kwargs):
-        instance = super(RequestForm, self).save(commit=False, *args, **kwargs)
-        instance.item_type = market.models.MarketItem.TYPE_CHOICES.REQUEST
-        instance.owner = self.cleaned_data['owner']
-        if commit:
-            instance.save()
-        return instance
+        self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.REQUEST
+        if self.instance.id is None:
+            self.instance.owner = kwargs['owner']
+        return super(RequestForm, self).save(commit=commit)
 
 
 class commentForm(forms.ModelForm):
@@ -103,10 +107,8 @@ def save_market_item(form, owner):
     TODO - Alerts need to be sent to the admin for approval for new items, probably best done in the
            create notification?
     """
-    new_item = form.instance is None
-    form.cleaned_data['owner'] = owner
-    obj = form.save()
-    form.save_m2m()
+    new_item = form.instance.id is None
+    obj = form.save(owner=owner)
     items_cache.clear()
     user_items_cache.clear()
     if new_item:
