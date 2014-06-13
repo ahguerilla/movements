@@ -100,7 +100,7 @@
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (filters) {
     var market = new MarketView(filters);
-    var market_route = new MarketRoute(market);
+    new MarketRoute(market);
     Backbone.history.start();
     document.title = window.ahr.string_constants.exchange;
   };

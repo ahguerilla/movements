@@ -341,8 +341,5 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       'click #searchagainall': 'searchWithNoFilters',
       'click #searchwithdefaults': 'searchWithDefaultFilters',
     });
-
-
   }
-
 });

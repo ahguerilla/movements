@@ -57,6 +57,12 @@ css = Bundle(
 
 css_v2 = Bundle(
     Bundle(
+        './css/lib/bootstrap.css',
+        './css/lib/bootstrap-datetimepicker.min.css',
+        './css/lib/tagmanager.css',
+        './css/lib/typeahead.css',
+        './css/lib/jquery.mCustomScrollbar.css',
+        './css/lib/rateit.css',
         './css/fonts.css',
     ),
     Bundle(
