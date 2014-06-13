@@ -82,6 +82,11 @@
        container: '#content-menu-container',
        placement: 'bottom'
      });
+
+    $('#view-content-menu').on('shown.bs.popover', function(){
+      $('#content-menu-container .popover').css("left", 0);
+      $('#content-menu-container .arrow').css("left", "28px");
+    });
   }
 
   setupAddPostPopover();

@@ -191,8 +191,19 @@ body {
 #view-content-menu:hover {
   cursor: pointer;
 }
-#content-menu-container .popover-content {
+#content-menu-container .popover-content ul {
+  margin: 0;
   padding: 0;
+}
+#content-menu-container .popover-content li {
+  list-style: none;
+  line-height: 30px;
+}
+#content-menu-container .popover-content li a {
+  color: #171717;
+}
+#content-menu-container .popover-content li a:hover {
+  text-decoration: none;
 }
 footer {
   padding-bottom: 30px;
