@@ -5,6 +5,7 @@ $primary-color = #FE6D50
 $primary-color-alpha = rgba(254, 109, 80, 0.8)
 $secondary-color = #BDB4AF
 $third-color = #005D86
+$offer-color = $third-color
 $request-color = #ff4545
 $background-color = #F8F6F7
 $border-color = #E0D7D8
@@ -21,6 +22,7 @@ $main-font-dark = #171717
 $white-font = #FFFFFF
 $title-font = #005E86
 $inactive-font = #b7aba5
+$item-footer-font = #b7aba5
 
 
 // **************************************
@@ -395,6 +397,77 @@ h1,h2,h3,h4,h5,h6
 // **************************************
 // exchange page
 // **************************************
+
 .exchange-filters
   border-bottom 2px solid $separator-color
   margin-bottom 20px
+
+.featured
+  min-height 150px
+  padding 10px 15px
+  margin-bottom 10px
+  color #fff
+  a, a:hover, a:focus
+    color #fff
+    text-decoration underline
+    font-weight bold
+  .header
+    text-align right
+    margin-bottom 10px
+    .item-menu
+      margin-left 10px
+  .feature-type
+    font-family "HurmeGeometricSans3-SemiBold"
+    font-size 14px
+  .title
+    font-family "HurmeGeometricSans3-SemiBold"
+    margin 2px 0
+  .details
+    font-size 14px
+
+.featured.featured-request
+  background-color $request-color
+  .header
+    background url('../images/v2/request_icon.png') no-repeat left center
+
+.featured.featured-offer
+  background-color $offer-color
+  .header
+    background url('../images/v2/offer_icon.png') no-repeat left center
+
+#marketitems
+  .market-place-item
+    position relative
+    width 100%
+    margin-bottom 10px
+    padding-left 50px
+    .item-type
+      font-family "HurmeGeometricSans3-SemiBold"
+      font-size 14px
+    .title
+      font-family "HurmeGeometricSans3-SemiBold"
+    .details
+      color $item-footer-font
+      font-size 14px
+      a, a:hover, a:focus
+        color $item-footer-font
+        text-decoration underline
+    .market-item-card
+      background-color #fff
+      padding 10px 50px 10px 10px
+      .item-menu
+        position absolute
+        right 10px
+        top 10px
+      .share-twitter
+        position absolute
+        right 10px
+        bottom 10px
+  .market-place-item.request
+    background $request-color url('../images/v2/request_icon.png') no-repeat 10px center
+    .item-type
+      color $request-color
+  .market-place-item.offer
+    background $offer-color url('../images/v2/offer_icon.png') no-repeat 10px center
+    .item-type
+      color $offer-color

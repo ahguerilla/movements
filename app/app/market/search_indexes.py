@@ -1,8 +1,6 @@
-import datetime
 from haystack import indexes
 from app.market.models import MarketItem
 from app.users.models import UserProfile
-from django.db.models import Q
 
 
 class MarketItemIndex(indexes.SearchIndex, indexes.Indexable):

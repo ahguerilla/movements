@@ -86,8 +86,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
         _.each(data, function (item) {
           item.fields.pk = item.pk;
-          var item_html = that.get(_.extend(item.fields,{'isSingle': false}));
-          that.truncateLongText(item_html,item.pk);
+          var item_html = that.get(_.extend(item.fields, {'isSingle': false}));
+          that.truncateLongText(item_html, item.pk);
           itemsToAppend.push(item_html[0].outerHTML);
           $('#marketitems').append(item_html[0].outerHTML);
           $('.tm-tag').each(function(){

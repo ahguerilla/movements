@@ -457,6 +457,98 @@ h6 {
   border-bottom: 2px solid #ded8d6;
   margin-bottom: 20px;
 }
+.featured {
+  min-height: 150px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.featured a,
+.featured a:hover,
+.featured a:focus {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.featured .header {
+  text-align: right;
+  margin-bottom: 10px;
+}
+.featured .header .item-menu {
+  margin-left: 10px;
+}
+.featured .feature-type {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-size: 14px;
+}
+.featured .title {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  margin: 2px 0;
+}
+.featured .details {
+  font-size: 14px;
+}
+.featured.featured-request {
+  background-color: #ff4545;
+}
+.featured.featured-request .header {
+  background: url("../images/v2/request_icon.png") no-repeat left center;
+}
+.featured.featured-offer {
+  background-color: #005d86;
+}
+.featured.featured-offer .header {
+  background: url("../images/v2/offer_icon.png") no-repeat left center;
+}
+#marketitems .market-place-item {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-left: 50px;
+}
+#marketitems .market-place-item .item-type {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-size: 14px;
+}
+#marketitems .market-place-item .title {
+  font-family: "HurmeGeometricSans3-SemiBold";
+}
+#marketitems .market-place-item .details {
+  color: #b7aba5;
+  font-size: 14px;
+}
+#marketitems .market-place-item .details a,
+#marketitems .market-place-item .details a:hover,
+#marketitems .market-place-item .details a:focus {
+  color: #b7aba5;
+  text-decoration: underline;
+}
+#marketitems .market-place-item .market-item-card {
+  background-color: #fff;
+  padding: 10px 50px 10px 10px;
+}
+#marketitems .market-place-item .market-item-card .item-menu {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+#marketitems .market-place-item .market-item-card .share-twitter {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+#marketitems .market-place-item.request {
+  background: #ff4545 url("../images/v2/request_icon.png") no-repeat 10px center;
+}
+#marketitems .market-place-item.request .item-type {
+  color: #ff4545;
+}
+#marketitems .market-place-item.offer {
+  background: #005d86 url("../images/v2/offer_icon.png") no-repeat 10px center;
+}
+#marketitems .market-place-item.offer .item-type {
+  color: #005d86;
+}
 
 
 @media (max-width: 992px) {
