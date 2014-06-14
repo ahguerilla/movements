@@ -456,6 +456,31 @@ h6 {
 .exchange-filters {
   border-bottom: 2px solid #ded8d6;
   margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+.exchange-filters .type-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.exchange-filters .type-menu a {
+  color: #756b65;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  padding-bottom: 4px;
+}
+.exchange-filters .type-menu a:hover,
+.exchange-filters .type-menu a:focus {
+  text-decoration: none;
+}
+.exchange-filters .type-menu li {
+  display: inline;
+  margin-left: 10px;
+}
+.exchange-filters .type-menu li:first-child {
+  margin-left: 0;
+}
+.exchange-filters .type-menu li.active a {
+  border-bottom: 2px solid #756b65;
 }
 .featured {
   min-height: 150px;
@@ -522,6 +547,7 @@ h6 {
 #marketitems .market-place-item .details a:focus {
   color: #b7aba5;
   text-decoration: underline;
+  font-weight: bold;
 }
 #marketitems .market-place-item .market-item-card {
   background-color: #fff;

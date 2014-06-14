@@ -23,6 +23,7 @@ $white-font = #FFFFFF
 $title-font = #005E86
 $inactive-font = #b7aba5
 $item-footer-font = #b7aba5
+$filter-font = #756b65
 
 
 // **************************************
@@ -401,6 +402,24 @@ h1,h2,h3,h4,h5,h6
 .exchange-filters
   border-bottom 2px solid $separator-color
   margin-bottom 20px
+  padding-bottom 20px
+  .type-menu
+    list-style none
+    margin 0
+    padding 0
+    a
+      color $filter-font
+      font-family "HurmeGeometricSans3-SemiBold"
+      padding-bottom 4px
+    a:hover, a:focus
+      text-decoration none
+    li
+      display inline
+      margin-left 10px
+    li:first-child
+      margin-left 0
+    li.active a
+      border-bottom 2px solid $filter-font
 
 .featured
   min-height 150px
@@ -452,6 +471,7 @@ h1,h2,h3,h4,h5,h6
       a, a:hover, a:focus
         color $item-footer-font
         text-decoration underline
+        font-weight bold
     .market-item-card
       background-color #fff
       padding 10px 50px 10px 10px
