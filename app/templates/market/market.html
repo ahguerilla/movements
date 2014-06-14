@@ -3,12 +3,12 @@
 {% load compress %}
 
 {% block content %}
-  <div class="exchange-filters clearfix">
+  <div id="exchange-filters" class="exchange-filters clearfix">
     <div class="pull-left">
       <ul class="type-menu">
-        <li class="active"><a href="#">{% trans 'See all' %}</a></li>
-        <li><a href="#">{% trans 'Requests' %}</a></li>
-        <li><a href="#">{% trans 'Offers' %}</a></li>
+        <li class="active"><a href="#" data-filter="">{% trans 'See all' %}</a></li>
+        <li><a href="#" data-filter="requests">{% trans 'Requests' %}</a></li>
+        <li><a href="#" data-filter="offers">{% trans 'Offers' %}</a></li>
       </ul>
     </div>
     <div class="pull-right">
