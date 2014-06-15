@@ -458,6 +458,29 @@ h6 {
   margin-bottom: 20px;
   padding-bottom: 20px;
 }
+.exchange-filters .categories h4 {
+  color: #b7aba5;
+  font-weight: normal;
+  font-size: 16px;
+  display: inline;
+}
+.exchange-filters .categories ul.category-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+}
+.exchange-filters .categories ul.category-menu li {
+  margin-left: 20px;
+  display: inline-block;
+}
+.exchange-filters .categories ul.category-menu li a:focus {
+  text-decoration: none;
+}
+.exchange-filters .categories ul.category-menu li a {
+  height: 34px;
+  display: inline-block;
+}
 .exchange-filters .type-menu {
   list-style: none;
   margin: 0;
@@ -481,6 +504,11 @@ h6 {
 }
 .exchange-filters .type-menu li.active a {
   border-bottom: 2px solid #756b65;
+}
+.featured-col h2 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  color: #b7aba5;
 }
 .featured {
   min-height: 150px;

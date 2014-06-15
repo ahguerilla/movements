@@ -4,6 +4,26 @@
     events: {
       'click .type-menu a': 'setTypeFilter'
     },
+    initialize: function() {
+      var $skills = this.$el.find('a.skills');
+      var $container = $skills.parent().find('.popover-container');
+      $skills.popover({
+        title: '',
+        html: true,
+        content: 'skills dropdown here',
+        container: $container,
+        placement: 'bottom'
+      });
+      var $regions = this.$el.find('a.regions');
+      $container = $regions.parent().find('.popover-container');
+      $regions.popover({
+        title: '',
+        html: true,
+        content: 'regions dropdown here',
+        container: $container,
+        placement: 'bottom'
+      });
+    },
     setTypeFilter: function(ev) {
       ev.preventDefault();
       this.$el.find('.type-menu li.active').removeClass('active');
