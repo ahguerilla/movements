@@ -3,13 +3,13 @@ window.ahr.market = window.ahr.market || {};
 
 window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   el: '#market',
-  loadingScrollElemets: false,
+  loadingScrollElements: false,
   currentItem: 0,
   allItemsLoaded: false,
   itemsPerCall: 15,
-  requiresResetOnNewOfferRequest: false,
   loadedOnce: false,
-
+  currentCall: null,
+  
 
   levelReached: function (pixelTestValue) {
     if (!this.loadedOnce) {
@@ -32,8 +32,14 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   initInfiniteScroll: function () {
     $('#marketitems').empty();
+    if (this.currentCall) {
+      this.currentCall.abort();
+      this.currentCall = null;
+    }
     this.allItemsLoaded = false;
     this.currentItem = 0;
+    this.loadingScrollElements = false;
+    this.loadedOnce = false;
 
     this.loadScrollElements();
     var that = this;
@@ -60,8 +66,8 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   loadScrollElements: function () {
     var that = this;
-    if (!that.loadingScrollElemets && that.levelReached(30) && !that.allItemsLoaded) {
-      that.loadingScrollElemets = true;
+    if (!that.loadingScrollElements && that.levelReached(30) && !that.allItemsLoaded) {
+      that.loadingScrollElements = true;
 
       $('#ajaxloader').show();
 
@@ -70,7 +76,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         that.currentItem + that.itemsPerCall
       );
 
+      this.currentCall = dfrd;
+
       dfrd.done(function (data) {
+        this.currentCall = null;
         $('#no-search-result').remove();
         $('#ajaxloader').hide();
 
@@ -90,18 +99,19 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         });
 
         that.currentItem = that.currentItem + that.itemsPerCall;
-        that.loadingScrollElemets = false;
+        that.loadingScrollElements = false;
       });
     }
   },
 
   getItems: function (from, to) {
-    var that = this;
+    var data = {};
+    this.filterView.setFilter(data);
     return $.ajax({
-      url: that.getitemfromto.replace('0', from) + to,
+      url: this.getitemfromto.replace('0', from) + to,
       dataType: 'json',
       contentType: "application/json; charset=utf-8",
-      data: {},
+      data: data,
       traditional: true
     });
   },
@@ -116,9 +126,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       that.item_widget.addCommentToCommentList(comment);
     });
   },
-
+  
   init: function (filterView) {
+    var that = this;
     this.filterView = filterView;
-//    this.filterView.on('filter', this.)
+    this.filterView.on('filter', function() {that.initInfiniteScroll();});
   }
 });

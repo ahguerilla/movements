@@ -10,7 +10,12 @@
       var $filterLink = $(ev.currentTarget);
       $filterLink.parents('li').addClass('active');
       this.type = $filterLink.data('filter');
-      this.on('filter', {type: this.type});
+      this.trigger('filter', {type: this.type});
+    },
+    setFilter: function(data) {
+      if (this.type) {
+        data.types = this.type;
+      }
     }
   });
 
