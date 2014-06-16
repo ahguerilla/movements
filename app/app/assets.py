@@ -30,44 +30,45 @@ js = Bundle(
         './js/messages.js',
         './js/posts.js',
         './js/recommendation.js',
+        './js/more_about_you.js',
         './js/lib/jquery.rateit.min.js',
         ),
     filters='jsmin',
     output='./js/packed.js'
 )
 
-if settings.PRODUCTION or settings.STAGING:
-    css = Bundle(
+
+css = Bundle(
+    Bundle(
         './css/lib/bootstrap.css',
         './css/lib/bootstrap-datetimepicker.min.css',
         './css/lib/tagmanager.css',
         './css/lib/typeahead.css',
         './css/lib/jquery.mCustomScrollbar.css',
-        './css/lib/rateit.css',
-        './css/packed.css',
-        filters='cssmin',
-        output='./css/spacked.css'
-    )
-else:
-    css = Bundle(
-        Bundle(
-            './css/lib/bootstrap.css',
-            './css/lib/bootstrap-datetimepicker.min.css',
-            './css/lib/tagmanager.css',
-            './css/lib/typeahead.css',
-            './css/lib/jquery.mCustomScrollbar.css',
-            './css/lib/rateit.css'
-            ),
-        Bundle(
-            './css/site.styl',
-            './css/site-sm.styl',
-            './css/site-xs.styl',
-            filters='stylus',
-            output ='./css/site.css'
-            ),
-        filters='cssmin',
-        output='./css/packed.css'
-    )
+        './css/lib/rateit.css'
+        ),
+    Bundle(
+        './css/site.styl',
+        './css/site-sm.styl',
+        './css/site-xs.styl',
+        filters='stylus',
+        output ='./css/site.css'
+        ),
+    filters='cssmin',
+    output='./css/packed.css',
+)
+
+css_v2 = Bundle(
+    Bundle(
+        './css/site_v2.styl',
+        './css/site-sm_v2.styl',
+        filters='stylus',
+        output ='./css/site_v2.css'
+        ),
+    filters='cssmin',
+    output='./css/packed_v2.css',
+)
 
 register('js_all', js)
 register('css_all', css)
+register('css_all_v2', css_v2)

@@ -5,14 +5,22 @@ from django.utils.translation import ugettext_lazy as _
 import constance
 from django.conf.global_settings import LANGUAGES
 
+COUNTRIES = ((0, '--'),
+            (1, 'United Kingdom'),
+            (2, 'France'),
+            (3, 'Russia'),)
+
 
 class SignupForm(forms.Form):
-    first_name = forms.CharField(max_length=30, label='First Name')
-    last_name = forms.CharField(max_length=30, label='Last Name')
+    first_name = forms.CharField(max_length=30, label='First Name', required=False)
+    last_name = forms.CharField(max_length=30, label='Last Name', required=False)
+    resident_country = forms.ChoiceField(choices=COUNTRIES, label='Country of Residence', required=False)
+    bio = forms.CharField(widget=forms.Textarea(), label='Biography', required=False)
     linkedin_url = forms.CharField(max_length=100, label='Linked In', required=False)
     tweet_url = forms.CharField(max_length=100, label='Twitter', required=False)
     fb_url = forms.CharField(max_length=100, label='Facebook', required=False)
     web_url = forms.CharField(max_length=100, label='Website', required=False)
+
     tnccheckbox = forms.BooleanField()
 
 

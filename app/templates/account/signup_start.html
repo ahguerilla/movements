@@ -1,0 +1,46 @@
+{% extends "base_form.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block public-content-message %}
+<div class="row dialog movements-form">
+  <div class="col-xs-12">
+    <div class="form-title"><h1>{% trans "Welcome to Movements" %}</h1></div>
+      <p>{% blocktrans %}Movements.org is a cross-platform service which allows people to connect with one another across the globe.{% endblocktrans %}</p>
+      <p>{% blocktrans %}Let's start with the process:{% endblocktrans %}</p>
+    <form class="form-horizontal" class="signup" id="signup_form" method="post" action="{{ post_url }}">
+    {% csrf_token %}
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="email">{%trans "Email"%}</label>
+          <input autofocus="autofocus" class="form-control input-sm" id="email" maxlength="30" name="email" required="true" type="text">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-6">
+          <label for="password1">{%trans "Password"%}</label>
+          <input class="form-control input-sm" id="password1" name="password1" required="true" type="password">
+        </div>
+        <div class="col-xs-6">
+          <label for="password2">{%trans "Retype password"%}</label>
+          <input class="form-control input-sm" id="password2" name="password2" required="true" type="password">
+        </div>
+      </div>
+      <div class="row action-text">
+        <div class="col-xs-12">{% trans "By registering with us you agree to our" %}&nbsp;<a href="{% url 'terms_and_conditions' %}" target="_blank" alt="terms and conditions">terms &amp; conditions</a></div>
+        <div class="col-sm-offset-2 col-sm-8 form-main-button">
+          <button type="submit" class="btn btn-action full-width">Register</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row extended-form">
+  <div class="col-xs-12 action-text">{%trans "Use your Facebook details to sign in."%}</div>
+  <div class="col-sm-offset-2 col-sm-8 form-main-button">
+    <button type="submit" class="btn btn-social-facebook full-width"><img src="{{ STATIC_URL }}images/v2/facebook-social.png">Connect with Facebook</button>
+  </div>
+</div>
+{% endblock %}

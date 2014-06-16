@@ -1,0 +1,297 @@
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+::-moz-placeholder {
+  font-style: italic;
+}
+:-ms-input-placeholder {
+  font-style: italic;
+}
+.movements-form {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  padding: 45px 65px 45px 65px;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -moz-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -ms-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -o-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+}
+.movements-form h1 {
+  color: #005e86;
+}
+.movements-form h2 {
+  color: #262626;
+  font-size: 20px;
+}
+.movements-form .form-title {
+  text-align: center;
+}
+.movements-form .action-text {
+  margin-top: 30px;
+  text-align: center;
+}
+.movements-form .action-link {
+  line-height: 40px;
+}
+.movements-form .form-main-button {
+  margin-top: 15px;
+}
+.movements-form a {
+  color: #262626;
+  font-weight: bold;
+}
+.movements-form label {
+  margin-top: 10px;
+}
+.movements-form input[type=text]:focus,
+.movements-form input[type=email]:focus,
+.movements-form input[type=number]:focus,
+.movements-form input[type=password]:focus,
+.movements-form select:focus,
+.movements-form textarea:focus {
+  border-color: rgba(254,109,80,0.8);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  -ms-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  -o-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+  outline: 0 none;
+}
+.movements-form input[type=text],
+.movements-form input[type=email],
+.movements-form input[type=number],
+.movements-form input[type=password],
+.movements-form select {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  height: 40px;
+}
+.extended-form {
+  margin-top: 30px;
+  padding: 0 65px 0 65px;
+}
+.extended-form .action-text {
+  margin-top: 30px;
+  text-align: center;
+}
+.extended-form .form-main-button {
+  margin-top: 15px;
+}
+.btn {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 9px 12px;
+  font-weight: bold;
+}
+.btn-action {
+  background-color: #fe6d50;
+  color: #fff;
+}
+.btn-action:hover,
+.btn-action:active,
+.btn-action:focus {
+  color: #fff;
+}
+.btn-social-facebook {
+  background-color: #3c5a9a;
+  color: #fff;
+}
+.btn-social-facebook img {
+  margin-right: 10px;
+}
+.btn-social-facebook:hover,
+.btn-social-facebook:active,
+.btn-social-facebook:focus {
+  color: #fff;
+}
+.dialog {
+  background-color: #fff;
+}
+html {
+  background-color: #f8f6f7;
+}
+body {
+  background-color: #f8f6f7;
+  color: #262626;
+}
+.container {
+  max-width: 960px;
+}
+.navbar-default {
+  background-color: #f8f6f7;
+}
+.header-nav {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 5px solid #e0d7d8;
+}
+.header-nav .header-nav-wrapper {
+  text-align: center;
+}
+.header-nav .header-nav-wrapper .main-logo {
+  padding-top: 15px;
+}
+.footer-navbar {
+  background-color: #bdb4af;
+  min-height: 35px;
+  color: #fff;
+  line-height: 35px;
+}
+.footer-navbar .right-elements {
+  float: right;
+}
+.footer-navbar .right-elements img {
+  margin-left: 15px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #005e86;
+}
+.progress-counter {
+  border-top: 2px solid #e0d7d8;
+  margin-bottom: 50px;
+  position: relative;
+}
+.progress-counter .progress-item {
+  position: absolute;
+  top: -14px;
+}
+.progress-counter .complete-state {
+  text-align: center;
+  font-size: 35px;
+  line-height: 25px;
+}
+.progress-counter .complete-state span {
+  background-color: #fff;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.progress-counter .step1 {
+  left: -20px;
+}
+.progress-counter .step2 {
+  left: 15%;
+}
+.progress-counter .step3 {
+  left: 42%;
+}
+.progress-counter .step4 {
+  left: 70%;
+}
+.progress-counter .step5 {
+  right: -20px;
+}
+.progress-counter .complete {
+  color: #005e86;
+}
+.progress-counter .current {
+  color: #262626;
+}
+.progress-counter .outstanding {
+  color: #b7aba5;
+}
+.form-select-multi {
+  min-height: 250px;
+}
+.form-select-multi .row {
+  margin-top: 15px;
+}
+.form-select-multi input[type=checkbox] {
+  display: none;
+}
+.form-select-multi .select-checkbox {
+  width: 100%;
+  height: 30px;
+  padding: 6px;
+  border: 1px solid #e0d7d8;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -moz-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -ms-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -o-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  background-color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  color: #b7aba5;
+  cursor: pointer;
+}
+.form-select-multi .select-checkbox.checked {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  background-color: #005d86;
+  border: none;
+  color: #fff;
+}
+.form-select-multi .select-checkbox label {
+  margin: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #e0d7d8;
+  background-color: #fff;
+}
+.form-select-multi .select-checkbox label:after {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  width: 17px;
+  height: 9px;
+  background: transparent;
+  top: -1px;
+  left: 2px;
+  border: 3px solid #fff;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.form-select-multi .select-checkbox input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+.form-select-multi .select-checkbox input[type=checkbox]:checked + label {
+  background-color: #0d2e3f;
+  border: 1px solid #0d2e3f;
+}
+.form-select-multi .select-label {
+  font-size: 12px;
+  margin-left: 23px;
+}
+
+
+@media (max-width: 992px) {
+  .movements-form {
+    padding: 25px 15px 25px 15px;
+  }
+  .extended-form {
+    padding: 0 15px 0 15px;
+  }
+}
+
