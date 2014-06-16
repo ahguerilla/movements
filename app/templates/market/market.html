@@ -88,9 +88,17 @@
 {% block endjavascript %}
   <script type="text/template" id="skill-filter-list-template">
     <% var skills = ['Lawyer', 'Writer', 'Media Producer', 'Journalist']; %>
-    <ul>
+    <ul class="skill-filter">
       <% _.each(skills, function(skill) { %>
       <li><a href="#"><%- skill %></a></li>
+      <% }); %>
+    </ul>
+  </script>
+  <script type="text/template" id="region-filter-list-template">
+    <% var regions = ['Africa', 'Middle East', 'Asia', 'Europe', 'Americas', 'Oceania']; %>
+    <ul class="region-filter">
+      <% _.each(regions, function(region) { %>
+      <li><a href="#"><%- region %></a></li>
       <% }); %>
     </ul>
   </script>

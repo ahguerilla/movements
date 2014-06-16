@@ -1,8 +1,12 @@
 (function () {
   var MarketFilterView = Backbone.View.extend({
     type: '',
+    regions: [],
+    skills: [],
     events: {
-      'click .type-menu a': 'setTypeFilter'
+      'click .type-menu a': 'setTypeFilter',
+      'click .region-filter a': 'setRegionFilter',
+      'click .skill-filter a': 'setSkillsFilter'
     },
     initialize: function() {
       var $skills = this.$el.find('a.skills');
@@ -19,10 +23,27 @@
       $regions.popover({
         title: '',
         html: true,
-        content: 'Region list',
+        content: _.template($('#region-filter-list-template').html())(),
         container: $container,
         placement: 'bottom'
       });
+    },
+    toggleFilterState: function(ev) {
+      ev.preventDefault();
+      var $target = $(ev.currentTarget);
+      $target.toggleClass('selected');
+      return {
+        id: $target.data('id'),
+        selected: $target.hasClass('selected')
+      };
+    },
+    setSkillsFilter: function (ev) {
+      this.toggleFilterState(ev);
+      this.trigger('filter');
+    },
+    setRegionFilter: function(ev) {
+      this.toggleFilterState(ev);
+      this.trigger('filter');
     },
     setTypeFilter: function(ev) {
       ev.preventDefault();
@@ -30,7 +51,7 @@
       var $filterLink = $(ev.currentTarget);
       $filterLink.parents('li').addClass('active');
       this.type = $filterLink.data('filter');
-      this.trigger('filter', {type: this.type});
+      this.trigger('filter');
     },
     setFilter: function(data) {
       if (this.type) {

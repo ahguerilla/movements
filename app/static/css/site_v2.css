@@ -514,6 +514,13 @@ h6 {
   color: #fff;
   background: #beb4ae url("../images/v2/select_plus_hover.png") 210px center no-repeat;
 }
+.exchange-filters .categories ul.category-menu .popover-content ul li a.selected {
+  background: #fff url("../images/v2/select_tick.png") 210px center no-repeat;
+  color: #ff6d50;
+}
+.exchange-filters .categories ul.category-menu .popover-content ul li a.selected:hover {
+  background: #beb4ae url("../images/v2/select_tick.png") 210px center no-repeat;
+}
 .exchange-filters .type-menu {
   list-style: none;
   margin: 0;
