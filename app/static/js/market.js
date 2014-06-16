@@ -10,7 +10,7 @@
       $skills.popover({
         title: '',
         html: true,
-        content: 'skills dropdown here',
+        content: _.template($('#skill-filter-list-template').html())(),
         container: $container,
         placement: 'bottom'
       });
@@ -19,7 +19,7 @@
       $regions.popover({
         title: '',
         html: true,
-        content: 'regions dropdown here',
+        content: 'Region list',
         container: $container,
         placement: 'bottom'
       });

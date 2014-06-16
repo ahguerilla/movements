@@ -86,6 +86,14 @@
 {% endblock %}
 
 {% block endjavascript %}
+  <script type="text/template" id="skill-filter-list-template">
+    <% var skills = ['Lawyer', 'Writer', 'Media Producer', 'Journalist']; %>
+    <ul>
+      <% _.each(skills, function(skill) { %>
+      <li><a href="#"><%- skill %></a></li>
+      <% }); %>
+    </ul>
+  </script>
   {% include "market/clientside/marketitem.html" %}
 {#  {% include "market/clientside/marketuser.html" %}#}
   {% include "market/clientside/filtertag.html" %}
