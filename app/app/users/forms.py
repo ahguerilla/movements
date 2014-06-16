@@ -5,29 +5,55 @@ from django.utils.translation import ugettext_lazy as _
 import constance
 from django.conf.global_settings import LANGUAGES
 
+from allauth.account.adapter import get_adapter
+from allauth.account.utils import setup_user_email
+
 COUNTRIES = ((0, '--'),
             (1, 'United Kingdom'),
             (2, 'France'),
             (3, 'Russia'),)
 
 
+class SignUpStartForm(forms.Form):
+    email = forms.EmailField()
+    password1 = forms.CharField(widget=forms.PasswordInput())
+    password2 = forms.CharField(widget=forms.PasswordInput())
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(_('This email is used already'))
+        return email
+
+    def clean_password2(self):
+        password1 = self.cleaned_data['password1']
+        password2 = self.cleaned_data['password2']
+        if password1 != password2:
+            raise forms.ValidationError(_('Passwords must match'))
+        return password2
+
+
 class SignupForm(forms.Form):
-    first_name = forms.CharField(max_length=30, label='First Name', required=False)
-    last_name = forms.CharField(max_length=30, label='Last Name', required=False)
-    resident_country = forms.ChoiceField(choices=COUNTRIES, label='Country of Residence', required=False)
-    bio = forms.CharField(widget=forms.Textarea(), label='Biography', required=False)
-    linkedin_url = forms.CharField(max_length=100, label='Linked In', required=False)
+    first_name = forms.CharField(
+        max_length=30, label='First Name', required=False)
+    last_name = forms.CharField(
+        max_length=30, label='Last Name', required=False)
+    resident_country = forms.ChoiceField(
+        choices=COUNTRIES, label='Country of Residence', required=False)
+    bio = forms.CharField(
+        widget=forms.Textarea(), label='Biography', required=False)
+    linkedin_url = forms.CharField(
+        max_length=100, label='Linked In', required=False)
     tweet_url = forms.CharField(max_length=100, label='Twitter', required=False)
     fb_url = forms.CharField(max_length=100, label='Facebook', required=False)
     web_url = forms.CharField(max_length=100, label='Website', required=False)
 
-    tnccheckbox = forms.BooleanField()
-
-
-    def save(self, user):
-        user.first_name = ''
-        user.last_name = ''
-        user.save()
+    def save(self, request):
+        adapter = get_adapter()
+        user = adapter.new_user(request)
+        adapter.save_user(request, user, self)
+        setup_user_email(request, user, [])
+        return user
 
 
 class UserForm(forms.ModelForm):

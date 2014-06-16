@@ -3,11 +3,13 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from models import UserProfile, OrganisationalRating
-from forms import SettingsForm, UserForm, VettingForm
+from forms import (
+    SettingsForm, UserForm, VettingForm, SignUpStartForm, SignupForm)
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
 from allauth.socialaccount.views import SignupView as SocialSignupView
 from allauth.account.adapter import DefaultAccountAdapter
+from allauth.account.utils import passthrough_next_redirect_url
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -170,11 +172,6 @@ def password_change_done(request):
                               {'message':True},
                               context_instance=RequestContext(request))
 
-class AhrSignupView(SignupView):
-    pass
-
-ahr_signup_view = SignupView
-
 
 def email_doublesignup_upret(self, ret):
     if (ret.has_key('form') and
@@ -225,30 +222,56 @@ class AhrSocialSignupView(SocialSignupView):
 ahr_social_signup = AhrSocialSignupView.as_view()
 
 
-def signup_from_home(request):
-    form = AhrSignupView.form_class()
-    if request.method == 'POST':
-        form.fields['first_name'].initial = request.POST.get('first_name', '')
-        form.fields['last_name'].initial = request.POST.get('last_name', '')
-        form.fields['email'].initial = request.POST.get('email', '')
-        form.fields['tnccheckbox'].initial = request.POST.get('tnccheckbox', '')
-    view_dict = {
-        'form': form,
-        'post_url': reverse(process_signup),
-        'sign_up': True,
-    }
-    if django_settings.V2_TEMPLATES:
-        template_name = "account/signup_v2.html"
-    else:
-        template_name = AhrSignupView.template_name
+class AhrSignupView(SignupView):
+    form_class = SignupForm
 
-    return render_to_response(template_name, view_dict, context_instance=RequestContext(request))
+    def get_context_data(self, **kwargs):
+        ret = super(SignupView, self).get_context_data(**kwargs)
+        context_data = {
+            'sign_up': True,
+            'post_url': ''
+        }
+        ret.update(context_data)
+        ret = email_doublesignup_upret(self, ret)
+
+        login_url = passthrough_next_redirect_url(self.request,
+                                                  reverse("account_login"),
+                                                  self.redirect_field_name)
+        redirect_field_name = self.redirect_field_name
+        redirect_field_value = self.request.REQUEST.get(redirect_field_name)
+        ret.update({"login_url": login_url,
+                    "redirect_field_name": redirect_field_name,
+                    "redirect_field_value": redirect_field_value})
+        return ret
+
+process_signup = AhrSignupView.as_view()
+
+
+def signup_from_home(request):
+    if not request.session.get('email') or not request.session.get('password'):
+        return HttpResponseRedirect(reverse('signup_start'))
+
+    return render_to_response(
+        AhrSignupView.template_name, {
+            'form': AhrSignupView.form_class(request.POST or None),
+            'post_url': reverse(process_signup),
+            'sign_up': True,
+        }, context_instance=RequestContext(request))
 
 
 def signup_start(request):
-    if request.method == 'POST':
-        return HttpResponseRedirect('/sign-up')
-    return render_to_response("account/signup_start.html", {}, context_instance=RequestContext(request))
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('home'))
+
+    form = SignUpStartForm(request.POST or None)
+    if form.is_valid():
+        cleaned_data = form.cleaned_data
+        request.session['email'] = cleaned_data['email']
+        request.session['password'] = cleaned_data['password1']
+        return HttpResponseRedirect(reverse('sign_up'))
+    return render_to_response(
+        "account/signup_start.html", {'form': form},
+        context_instance=RequestContext(request))
 
 
 def more_about_you(request):
@@ -258,21 +281,6 @@ def more_about_you(request):
         'regions': ["North America", "Europe", "Asia", "South America", "Africa", "Oceania"]
     }
     return render_to_response("users/more_about_you.html", view_dict, context_instance=RequestContext(request))
-
-
-class AhrSignupView(SignupView):
-    def get_context_data(self, **kwargs):
-
-        ret = super(AhrSignupView, self).get_context_data(**kwargs)
-        context_data = {
-            'sign_up': True,
-            'post_url': ''
-        }
-        ret.update(context_data)
-        ret = email_doublesignup_upret(self, ret)
-        return ret
-
-process_signup = AhrSignupView.as_view()
 
 
 class AccAdapter(DefaultAccountAdapter):
@@ -294,10 +302,11 @@ class AccAdapter(DefaultAccountAdapter):
         }
         self.send_mail('account/email/user_vetting_email', config.ACTIVATE_USER_EMAIL, ctx)
 
-    def save_user(self, request, user, form, commit=True):
-        user.first_name = ''
-        user.last_name = ''
-        user = super(AccAdapter, self).save_user(request, user, form, commit=True)
+    def save_user(self, request, user, form, commit=False):
+        user = super(AccAdapter, self).save_user(request, user, form, commit)
+        user.email = request.session.pop('email')
+        user.set_password(request.session.pop('password'))
+        user.save()
         self.send_vetting_email(user, form)
         return user
 
