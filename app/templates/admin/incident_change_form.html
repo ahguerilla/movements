@@ -34,4 +34,16 @@
       {% endif %}
     </div>
   </fieldset>
+  {% if feedback %}
+    <fieldset class="module aligned {{ fieldset.classes }}">
+      <h2>{% trans 'Feedback' %}</h2>
+      <h3>{{ feedback.questionnaire_title }}</h3>
+      {% for question in feedback.questions %}
+        <div class="form-row">
+          <p>{{ forloop.counter }}. <b>{{ question.question_text }}</b></p>
+          <p>{{ question.question_answer }}</p>
+        </div>
+      {% endfor %}
+    </fieldset>
+  {% endif %}
 {% endblock %}

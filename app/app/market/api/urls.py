@@ -100,9 +100,9 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.edit_market_item',
         name="edit_marketitem"),
 
-    url(r'(?P<rtype>\S+)/item/delete/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.delete_market_item',
-        name="delete_marketitem"),
+    url(r'(?P<rtype>\S+)/item/close/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.close_market_item',
+        name="close_marketitem"),
 
     url(r'(?P<rtype>\S+)/item/set/rate/(?P<obj_id>\d+)$',
         'app.market.api.views.market.set_rate',

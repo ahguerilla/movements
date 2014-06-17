@@ -134,7 +134,7 @@ class MarketItemActions(models.Model):
         verbose_name_plural = _('actions of market item')
 
     def __unicode__(self):
-        return u'%s / %s' % (self.actions, self.date_of_action)
+        return u'%s / %s' % (self.id or '', self.date_of_action)
 
 
 class MarketItemNextSteps(models.Model):

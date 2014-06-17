@@ -15,6 +15,8 @@ from tasks.celerytasks import create_notification, update_notifications, mark_re
 from users import create_query
 
 
+
+
 cache = get_cache('default')
 items_cache = get_cache('items')
 user_items_cache = get_cache('user_items')
@@ -84,71 +86,84 @@ def getStikies(request, hiddens, sfrom, to):
     return obj
 
 
-def get_raw(request):
-    issues = (0,)
-    countries = (0,)
-    skills = (0,)
-    types = "('offer', 'request')"
-    ids = ""
-    show_hidden = ""
+def get_raw(request, filter_by_owner=False):
+    params = {
+        'countries': tuple(map(int, request.GET.getlist('countries', (0,)))),
+        'issues': tuple(map(int, request.GET.getlist('issues', (0,)))),
+        'skills': tuple(map(int, request.GET.getlist('skills', (0,)))),
+        'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
+        'user_id': request.user.id,
+        'date_now': datetime.now(),
+        'closed_statuses': (
+            market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
+            market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN)
+    }
+    additional_filter = ''
 
-    if request.GET.has_key('issues'):
-        issues = tuple(map(int, request.GET.getlist('issues')))
-
-    if request.GET.has_key('skills'):
-        skills = tuple(map(int, request.GET.getlist('skills')))
-
-    if request.GET.has_key('countries'):
-        countries = tuple(map(int, request.GET.getlist('countries')))
-
-    if request.GET.has_key('types') and len(request.GET.getlist('types')) > 0:
-        _req_types = tuple(str(item) for item in request.GET.getlist('types'))
-        types = ("%s" % (_req_types,) if len(_req_types) > 1 else "('%s')" % (_req_types))
-
-    if request.GET.has_key('search') and request.GET['search'] != '':
-        objs = SearchQuerySet().models(market.models.MarketItem).filter(text=request.GET['search'])
-        _ids = tuple(int(obj.pk) for obj in objs)
-        if len(_ids) > 0:
-            ids = 'AND "market_marketitem"."id" IN ' + ("%s" % (_ids,) if len(_ids) > 1 else "(%s)" % (_ids))
+    search = request.GET.get('search')
+    if search:
+        market_items = SearchQuerySet().models(
+            market.models.MarketItem).filter(text=search)
+        if market_items:
+            additional_filter = 'AND mi.id IN %(ids)s'
+            params['ids'] = tuple(int(obj.pk) for obj in market_items)
 
     if request.GET.get('showHidden', 'false') == 'false':
-        show_hidden = 'AND NOT ("market_marketitem"."id" IN \
-                        (SELECT hiddens."item_id" FROM "market_marketitemhidden" hiddens WHERE hiddens."viewer_id" = \
-                        ' + str(request.user.id) + '))'
+        additional_filter += """
+            AND NOT mi.id IN (
+                SELECT hiddens.item_id
+                FROM market_marketitemhidden AS hiddens
+                WHERE hiddens.viewer_id = %(user_id)s)
+        """
 
-    raw = """
-       select market_marketitem.*, (counted_matches.i_sum+counted_matches.c_sum+counted_matches.s_sum) as tag_matches
-       FROM (select id,
-       count(distinct match_countries)as c_sum,
-       count(distinct match_issues) as i_sum,
-       count(distinct match_skills) as s_sum
-       FROM (select market_marketitem.id ,
-       market_marketitem_countries.countries_id as match_countries,
-       market_marketitem_issues.issues_id as match_issues,
-       market_marketitem_skills.skills_id as match_skills
-       FROM market_marketitem
-       left outer join market_marketitem_skills on market_marketitem_skills.marketitem_id = market_marketitem.id and market_marketitem_skills.skills_id IN
-       """ + ("%s" % (skills,) if len(skills) > 1 else "(%s)" % (skills)) + """
-       left outer join market_marketitem_countries on market_marketitem_countries.marketitem_id = market_marketitem.id and market_marketitem_countries.countries_id IN
-       """ + ("%s" % (countries,) if len(countries) > 1 else "(%s)" % (countries)) + """
-       left outer join market_marketitem_issues on market_marketitem_issues.marketitem_id = market_marketitem.id and market_marketitem_issues.issues_id IN
-       """ + ("%s" % (issues,) if len(issues) > 1 else "(%s)" % (issues)) + """
-       )as item_countries_issues_skills group by id
-       ) as counted_matches
-       join market_marketitem on market_marketitem.id = counted_matches.id
-       INNER JOIN "auth_user" ON ( "market_marketitem"."owner_id" = "auth_user"."id" ) WHERE ("market_marketitem"."item_type" IN
-       """ + types + """
-       """ + ids + """
-       """ + show_hidden + """
-       AND NOT ("market_marketitem"."id" IN
-       (SELECT stickies."item_id" FROM "market_marketitemstick" stickies WHERE stickies."viewer_id" =
-       """ + str(request.user.id) + """
-       )) AND "market_marketitem"."published" = True  AND "market_marketitem"."deleted" = False  AND "auth_user"."is_active" = True AND ("market_marketitem"."exp_date" >=
-       '""" + str(datetime.now()) + """'
-       OR "market_marketitem"."never_exp" = True )  )
-       order by tag_matches desc, pub_date desc
-       """
-    return raw
+    if filter_by_owner:
+        select = 'SELECT mi.* '
+        order_by = 'ORDER BY id DESC , pub_date DESC'
+        additional_filter += 'AND auth_user.id = %(user_id)s'
+    else:
+        select = """
+        SELECT mi.*,
+               (COUNT(DISTINCT market_marketitem_countries.countries_id) +
+                COUNT(DISTINCT market_marketitem_issues.issues_id) +
+                COUNT(DISTINCT market_marketitem_skills.skills_id)) as tag_matches
+        """
+        order_by = 'ORDER BY tag_matches DESC, pub_date DESC'
+
+    raw = select + """
+        FROM market_marketitem AS mi
+        LEFT JOIN market_marketitem_countries ON
+            market_marketitem_countries.marketitem_id = mi.id AND
+            market_marketitem_countries.countries_id IN %(countries)s
+        LEFT JOIN market_marketitem_issues ON
+            market_marketitem_issues.marketitem_id = mi.id AND
+            market_marketitem_issues.issues_id IN %(issues)s
+        LEFT JOIN market_marketitem_skills ON
+            market_marketitem_skills.marketitem_id = mi.id AND
+            market_marketitem_skills.skills_id IN %(skills)s
+        INNER JOIN "auth_user" ON
+            mi.owner_id = "auth_user"."id"
+        WHERE
+            mi.item_type IN %(types)s
+    """ + additional_filter + """ AND
+            NOT mi.id IN (
+                SELECT stickies."item_id"
+                FROM "market_marketitemstick" stickies
+                WHERE stickies."viewer_id" = %(user_id)s
+            ) AND
+            mi.published = True AND
+            mi.deleted = False AND
+            "auth_user"."is_active" = True AND
+            NOT mi.status IN %(closed_statuses)s AND
+            (
+                mi.exp_date >= %(date_now)s OR
+                mi.never_exp = True
+            )
+        GROUP BY mi.id, mi.item_type, mi.owner_id, mi.staff_owner_id, mi.title,
+            mi.details, mi.url, mi.published, mi.pub_date, mi.exp_date,
+            mi.commentcount, mi.ratecount, mi.reportcount, mi.score, mi.deleted,
+            mi.never_exp, mi.status, mi.closed_date, mi.feedback_response
+    """ + order_by
+    return raw, params
 
 
 @login_required
@@ -157,42 +172,92 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
     retval = items_cache.get(reqhash)
     if retval:
         return retval
-
-    query = market.models.MarketItem.objects.raw(get_raw(request))
-    stickys = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id).count()
-    hiddens = market.models.MarketItemHidden.objects.values_list('item_id', flat=True).filter(viewer_id=request.user.id)
-    if stickys >= int(to):
-        obj = getStikies(request, hiddens, sfrom, to)
-    elif stickys <= int(sfrom):
-        obj = query[int(sfrom) - stickys:int(to) - stickys]
-    elif stickys >= int(sfrom) and stickys <= int(to):
-        sticky_objs = getStikies(request, hiddens, sfrom, stickys)
-        market_objs = query[0:(int(to) - stickys)]
-        obj = list(sticky_objs)
-        b = list(market_objs)
-        obj.extend(b)
-    retval = return_item_list(obj, rtype, request)
+    query = market.models.MarketItem.objects.raw(*get_raw(request))
+    stickies_count = market.models.MarketItemStick.objects.filter(
+        viewer_id=request.user.id).count()
+    hidden_items = market.models.MarketItemHidden.objects.values_list(
+        'item_id', flat=True).filter(viewer_id=request.user.id)
+    to = int(to)
+    sfrom = int(sfrom)
+    if stickies_count >= to:
+        stickies = getStikies(request, hidden_items, sfrom, to)
+    elif stickies_count <= sfrom:
+        stickies = query[sfrom-stickies_count:to-stickies_count]
+    else:
+        stickies = list(
+            getStikies(request, hidden_items, sfrom, stickies_count))
+        market_items = list(query[:to-stickies_count])
+        stickies.extend(market_items)
+    retval = return_item_list(stickies, rtype, request)
     items_cache.add(reqhash, retval)
     return retval
 
 
 @login_required
 @check_perms_and_get(market.models.MarketItem)
-def edit_market_item(request, obj_id, rtype):
-    raise NotImplementedError('This is now obsolete')
+def edit_market_item(request,obj_id,rtype):
+    cache.delete('item-'+obj_id)
+    cache.delete('translation-'+obj_id)
+    items_cache.clear()
+    user_items_cache.clear()
+    obj = request.obj
+    form = item_forms[obj.item_type](request.POST, instance=obj)
+    if form.is_valid():
+        saveMarketItem(form, obj.item_type, obj.owner)
+        update_notifications.delay(obj)
+    else:
+        return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
+    return HttpResponse(json.dumps({ 'success' : True}),
+                        mimetype="application"+rtype)
 
 
 @login_required
 @check_perms_and_get(market.models.MarketItem)
-def delete_market_item(request, obj_id, rtype):
-    cache.delete('item-' + obj_id)
-    user_items_cache.clear()
+def close_market_item(request, obj_id, rtype):
+    cache.delete('item-'+obj_id)
+    cache.delete('translation-'+obj_id)
     items_cache.clear()
-    obj = request.obj
-    obj.deleted = True
-    obj.save()
-    return HttpResponse(json.dumps({'success': True}),
-                        mimetype="application" + rtype)
+    user_items_cache.clear()
+    market_item = request.obj
+
+    questionnaire = Questionnaire.objects.filter(
+        market_type=market_item.item_type).first()
+
+    # Convert questionnaire to json structure.
+    questions = [
+        {
+            'question_id': question.pk,
+            'question_text': question.question,
+            'question_answer': ''
+        } for question in questionnaire.questions.all()
+    ]
+    data = {'questionnaire': {
+        'questionnaire_id': questionnaire.pk,
+        'questionnaire_title': questionnaire.title,
+        'questions': questions
+    }}
+
+    if request.method == 'POST':
+        form = QuestionnaireForm(request.POST, questionnaire=questionnaire)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            for question in questions:
+                answer = cleaned_data['question_%s' % question['question_id']]
+                question['question_answer'] = answer
+
+            market_item.feedback_response = data['questionnaire']
+            market_item.status = market_item.STATUS_CHOICES.CLOSED_BY_USER
+            market_item.save()
+
+            update_notifications.delay(market_item)
+            data = {'success': True}
+        else:
+            return HttpResponseError(
+                json.dumps(get_validation_errors(form)),
+                mimetype="application/" + rtype)
+
+    return HttpResponse(
+        json.dumps(data), mimetype="application" + rtype)
 
 
 @login_required
@@ -203,14 +268,13 @@ def user_get_marketitem(request, obj_id, rtype):
 
 @login_required
 def get_user_marketitem_fromto(request, sfrom, to, rtype):
-    reqhash = hash(request.path + str(request.GET))
+    reqhash = hash(request.path+str(request.GET))
     retval = user_items_cache.get(reqhash)
     if retval:
         return retval
-    query = create_query(request)
-    obj = market.models.MarketItem.objects.filter(owner=request.user).filter(query).distinct('id').order_by(
-        '-id').defer('comments')[sfrom:to]
-    retval = return_item_list(obj, rtype)
+    market_items = market.models.MarketItem.objects.raw(
+        *get_raw(request, filter_by_owner=True))[int(sfrom):int(to)]
+    retval = return_item_list(market_items, rtype)
     user_items_cache.add(reqhash, retval)
     return retval
 
