@@ -53,26 +53,19 @@
       {% render_field form.details class="form-control input-sm" required="true" placeholder="" %}
       {{ form.details.errors }}
     </div>
-    <div>
-      <div class="form-sub-title"><h2>{% trans "4. Tag your post" %}</h2></div>
-    </div>
-    <div>
-      <div class="form-sub-title"><h2>{% trans "5. Notifications and expiry" %}</h2></div>
+{#    <div>#}
+{#      <div class="form-sub-title"><h2>{% trans "4. Tag your post" %}</h2></div>#}
+{#    </div>#}
+    <div style="margin-top: 20px;">
       <div class="form-group">
         <div class="col-xs-12">
           <label for="{{ form.receive_notifications.auto_id }}">{% trans "Receive notifications" %}</label>
           {% render_field form.receive_notifications class="" required="true" autofocus="autofocus" placeholder="" %}
           {{ form.receive_notifications.errors }}
-        </div>
-        <div class="col-xs-12">
-          <label for="{{ form.never_exp.auto_id }}">{% trans "Never expires" %}</label>
-          {% render_field form.never_exp class="" required="true" autofocus="autofocus" placeholder="" %}
-          {{ form.never_exp.errors }}
+
+          <button class="btn btn-action pull-right">Post now</button>
         </div>
       </div>
-    </div>
-    <div class="clearfix">
-      <button class="btn btn-action pull-right">Post now</button>
     </div>
   </div>
 </form>

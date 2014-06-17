@@ -35,46 +35,6 @@ def return_item_list(obj, rtype, request=None):
         mimetype="application/" + rtype)
 
 
-@login_required
-def add_market_item(request, obj_type, rtype):
-    raise NotImplementedError('This is now obsolete')
-
-
-@login_required
-def get_market_item(request, obj_id, rtype):
-    retval = cache.get('item-' + obj_id)
-    if retval:
-        mark_read_notifications.delay((obj_id,), request.user.id)
-        return retval
-    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
-                            Q(exp_date__gte=datetime.now()) | Q(never_exp=True),
-                            pk=obj_id,
-                            deleted=False,
-                            owner__is_active=True)
-    add_view.delay(obj_id, obj.owner.id, request.user.id)
-    mark_read_notifications.delay((obj.id,), request.user.id)
-    retval = return_item_list([obj], rtype)
-    cache.add('item-' + obj_id, retval)
-    return retval
-
-
-def get_market_item_insecure(request, obj_id, rtype):
-    retval = cache.get('item-' + obj_id)
-    if retval:
-        mark_read_notifications.delay((obj_id,), request.user.id)
-        return retval
-    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
-                            Q(exp_date__gte=datetime.now()) | Q(never_exp=True),
-                            pk=obj_id,
-                            deleted=False,
-                            owner__is_active=True)
-    add_view.delay(obj_id, obj.owner.id, request.user.id)
-    mark_read_notifications.delay((obj.id,), request.user.id)
-    retval = return_item_list([obj], rtype)
-    cache.add('item-' + obj_id, retval)
-    return retval
-
-
 def getStikies(request, hiddens, sfrom, to):
     sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
     if request.GET.get('showHidden', 'false') == 'false':
@@ -153,15 +113,11 @@ def get_raw(request, filter_by_owner=False):
             mi.published = True AND
             mi.deleted = False AND
             "auth_user"."is_active" = True AND
-            NOT mi.status IN %(closed_statuses)s AND
-            (
-                mi.exp_date >= %(date_now)s OR
-                mi.never_exp = True
-            )
+            NOT mi.status IN %(closed_statuses)s
         GROUP BY mi.id, mi.item_type, mi.owner_id, mi.staff_owner_id, mi.title,
-            mi.details, mi.url, mi.published, mi.pub_date, mi.exp_date,
+            mi.details, mi.url, mi.published, mi.pub_date,
             mi.commentcount, mi.ratecount, mi.reportcount, mi.score, mi.deleted,
-            mi.never_exp, mi.status, mi.closed_date, mi.feedback_response
+            mi.status, mi.closed_date, mi.feedback_response
     """ + order_by
     return raw, params
 
@@ -285,7 +241,7 @@ def get_item_translation(request, obj_id, rtype):
     if retval:
         return retval
     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
-                            Q(exp_date__gte=datetime.now()) | Q(never_exp=True),
+                            closed_date=None,
                             pk=obj_id,
                             deleted=False,
                             owner__is_active=True)
@@ -304,7 +260,7 @@ def set_rate(request, obj_id, rtype):
     items_cache.clear()
     user_items_cache.clear()
     item = \
-        market.models.MarketItem.filter(Q(exp_date__gte=datetime.now()) | Q(never_exp=True)).objects.filter(id=obj_id)[0]
+        market.models.MarketItem.filter(closed_date=None).objects.filter(id=obj_id)[0]
     owner = request.user
     rate = market.models.ItemRate.objects.filter(owner=owner).filter(item=item)
     if len(rate) == 0:

@@ -66,20 +66,6 @@ market_user_patterns = patterns('',
 
 
 market_item_patterns = patterns('',
-    # Unsecured entry points
-    url(r'(?P<rtype>\S+)/unsecured/item/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.get_market_item_insecure',
-        name="get_marketitem_insecure"),
-
-    # Secured entry points
-    url(r'(?P<rtype>\S+)/item/add/(?P<obj_type>offer|request)$',
-        'app.market.api.views.market.add_market_item',
-        name="add_marketitem"),
-
-    url(r'(?P<rtype>\S+)/item/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.get_market_item',
-        name="get_marketitem"),
-
     url(r'(?P<rtype>\S+)/item/get/translation/(?P<obj_id>\d+)$',
         'app.market.api.views.market.get_item_translation',
         name="get_item_translation"),
