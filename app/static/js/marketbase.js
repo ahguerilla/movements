@@ -2,7 +2,6 @@ window.ahr = window.ahr || {};
 window.ahr.market = window.ahr.market || {};
 
 window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
-  el: '#market',
   loadingScrollElements: false,
   currentItem: 0,
   allItemsLoaded: false,
@@ -120,13 +119,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     $(window).scrollTop(this.scroll);
   },
 
-  ShowComments: function (comments) {
-    var that = this;
-    _.each(comments, function (comment) {
-      that.item_widget.addCommentToCommentList(comment);
-    });
-  },
-  
   init: function (filterView) {
     var that = this;
     this.filterView = filterView;

@@ -5,16 +5,22 @@
   <div class="market-place-item <%- item_type.toLowerCase() %> <% if(stick) { %>stuck-item<% } %> <% if (hidden) { %>hidden-item<% } %>" item_id="<%- pk %>" owner_id="<%- ownerid %>">
     <div class="market-item-card">
       <div class="body">
-        <div class="item-type"><%- item_type[0].toUpperCase() + item_type.substr(1).toLowerCase() %></div>
-        <div class="title"><%- title %></div>
+        <a href="/market/<%- pk %>" alt="Open post">
+          <div class="item-type"><%- item_type[0].toUpperCase() + item_type.substr(1).toLowerCase() %></div>
+          <div class="title"><%- title %></div>
+        </a>
         <div class="details">
           <%- item_type[0].toUpperCase() + item_type.substr(1).toLowerCase() %>
           by <a href="/user/profile/<%- owner %>"><%- owner %></a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
           <a href="#"><%- commentcount %> comments</a>.
         </div>
       </div>
-      <a class="item-menu"><img src="{{ STATIC_URL }}images/v2/item_menu_gray_icon.png"/></a>
-      <a class="share-twitter"><img src="{{ STATIC_URL }}images/v2/twitter_gray.png"/></a>
+      <div class="item-menu-container">
+        <a class="item-menu" href="#">
+          <img src="{{ STATIC_URL }}images/v2/item_menu_gray_icon.png"/>
+        </a>
+      </div>
+      <a class="share-twitter" href="#"><img src="{{ STATIC_URL }}images/v2/twitter_gray.png"/></a>
       </ul>
     </div>
   </div>
@@ -33,7 +39,14 @@
 {#        {% endif %}#}
 
 </script>
-
+<script type="text/template" id="item-menu-template">
+  <% var actions = ['Hide', 'Stick', 'Report']; %>
+  <ul>
+    <% _.each(actions, function(action) { %>
+    <li><a href="#"><%- action %></a></li>
+    <% }); %>
+  </ul>
+</script>
 
 {% compress js inline %}
 <script type="text/javascript">

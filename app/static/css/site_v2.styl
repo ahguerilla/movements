@@ -401,6 +401,35 @@ h1,h2,h3,h4,h5,h6
 // exchange page
 // **************************************
 
+popoverDropdown()
+  padding 0
+  ul
+    padding 0
+    margin 0
+    list-style none
+    li:first-child
+      border-top none
+    li
+      display block
+      border-top 1px solid $border-color
+      padding 4px
+      a
+        background url('../images/v2/select_plus.png') 210px center no-repeat
+        padding 10px
+        width 240px
+        height 40px
+        display block
+        text-decoration none
+        color #000
+      a:hover
+        color #fff
+        background $dropdown-hover-bg url('../images/v2/select_plus_hover.png') 210px center no-repeat
+      a.selected
+        background #fff url('../images/v2/select_tick.png') 210px center no-repeat
+        color $dropdown-select-color
+      a.selected:hover
+        background $dropdown-hover-bg url('../images/v2/select_tick.png') 210px center no-repeat
+
 .exchange-filters
   border-bottom 2px solid $separator-color
   margin-bottom 20px
@@ -425,34 +454,7 @@ h1,h2,h3,h4,h5,h6
       .popover
         border-radius 0
       .popover-content
-        padding 0
-        ul
-          padding 0
-          margin 0
-          list-style none
-          li:first-child
-            border-top none
-          li
-            display block
-            border-top 1px solid $border-color
-            padding 4px
-            a
-              background url('../images/v2/select_plus.png') 210px center no-repeat
-              padding 10px
-              width 240px
-              height 40px
-              display block
-              text-decoration none
-              color #000
-            a:hover
-              color #fff
-              background $dropdown-hover-bg url('../images/v2/select_plus_hover.png') 210px center no-repeat
-            a.selected
-              background #fff url('../images/v2/select_tick.png') 210px center no-repeat
-              color $dropdown-select-color
-            a.selected:hover
-              background $dropdown-hover-bg url('../images/v2/select_tick.png') 210px center no-repeat
-
+        popoverDropdown()
   .type-menu
     list-style none
     margin 0
@@ -517,10 +519,13 @@ h1,h2,h3,h4,h5,h6
     width 100%
     margin-bottom 10px
     padding-left 50px
+    a, a:hover
+      text-decoration none
     .item-type
       font-family "HurmeGeometricSans3-SemiBold"
       font-size 14px
     .title
+      color $main-font
       font-family "HurmeGeometricSans3-SemiBold"
     .details
       color $item-footer-font
@@ -532,6 +537,11 @@ h1,h2,h3,h4,h5,h6
     .market-item-card
       background-color #fff
       padding 10px 50px 10px 10px
+      .item-menu-container
+        .popover
+          border-radius 0
+        .popover-content
+          popoverDropdown()
       .item-menu
         position absolute
         right 10px

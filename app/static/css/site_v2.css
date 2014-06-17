@@ -599,11 +599,16 @@ h6 {
   margin-bottom: 10px;
   padding-left: 50px;
 }
+#marketitems .market-place-item a,
+#marketitems .market-place-item a:hover {
+  text-decoration: none;
+}
 #marketitems .market-place-item .item-type {
   font-family: "HurmeGeometricSans3-SemiBold";
   font-size: 14px;
 }
 #marketitems .market-place-item .title {
+  color: #262626;
   font-family: "HurmeGeometricSans3-SemiBold";
 }
 #marketitems .market-place-item .details {
@@ -620,6 +625,49 @@ h6 {
 #marketitems .market-place-item .market-item-card {
   background-color: #fff;
   padding: 10px 50px 10px 10px;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content {
+  padding: 0;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li:first-child {
+  border-top: none;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li {
+  display: block;
+  border-top: 1px solid #e0d7d8;
+  padding: 4px;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a {
+  background: url("../images/v2/select_plus.png") 210px center no-repeat;
+  padding: 10px;
+  width: 240px;
+  height: 40px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a:hover {
+  color: #fff;
+  background: #beb4ae url("../images/v2/select_plus_hover.png") 210px center no-repeat;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected {
+  background: #fff url("../images/v2/select_tick.png") 210px center no-repeat;
+  color: #ff6d50;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected:hover {
+  background: #beb4ae url("../images/v2/select_tick.png") 210px center no-repeat;
 }
 #marketitems .market-place-item .market-item-card .item-menu {
   position: absolute;
