@@ -79,6 +79,7 @@ box-shadow()
   a
     color $main-font
     font-weight bold
+    text-decoration underline
   label
     margin-top 10px
     font-family "HurmeGeometricSans3-SemiBold"
@@ -107,10 +108,13 @@ box-shadow()
 // **************************************
 
 .btn
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
   border-radius 3px
   padding 9px 12px
   font-weight bold
   font-size 16px
+
 
 .btn-action
   background-color $primary-color
@@ -151,6 +155,8 @@ box-shadow()
 
 html
   background-color $footer-color
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
 
 body
   background-color $background-color
@@ -159,7 +165,7 @@ body
   font-size 16px
 
 .container
-  max-width 960px
+  //max-width 960px
 
 .navbar-default
   background-color $background-color
@@ -283,6 +289,8 @@ footer
 h1,h2,h3,h4,h5,h6
   color $title-font
   font-family "HurmeGeometricSans3-Bold"
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
 
 .btn
   font-family "HurmeGeometricSans3-SemiBold"

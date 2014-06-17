@@ -44,6 +44,7 @@
 .movements-form a {
   color: #262626;
   font-weight: bold;
+  text-decoration: underline;
 }
 .movements-form label {
   margin-top: 10px;
@@ -93,6 +94,8 @@
   margin-top: 15px;
 }
 .btn {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -143,15 +146,14 @@
 }
 html {
   background-color: #b6aba5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 body {
   background-color: #f8f6f7;
   color: #262626;
   font-family: "LinotypeUnivers-330Light";
   font-size: 16px;
-}
-.container {
-  max-width: 960px;
 }
 .navbar-default {
   background-color: #f8f6f7;
@@ -313,6 +315,8 @@ h5,
 h6 {
   color: #005e86;
   font-family: "HurmeGeometricSans3-Bold";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .btn {
   font-family: "HurmeGeometricSans3-SemiBold";
