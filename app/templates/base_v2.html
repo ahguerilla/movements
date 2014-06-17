@@ -51,8 +51,7 @@
 <nav class="navbar navbar-default header-nav {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
   <div class="container" style="position:relative;">
       <div class="navbar-left">
-        <a id="view-content-menu"><img src="{{ STATIC_URL }}images/v2/hamburger.png" alt="Content Menu"></a>
-         <div id="content-menu-container"></div>
+        <a id="view-content-menu"><img src="{{ STATIC_URL }}images/v2/hamburger-v2.png" alt="Content Menu"></a>
       </div>
     {% if user.is_authenticated %}
       <div class="navbar-right">
@@ -69,6 +68,25 @@
     </div>
   </div>
 </nav>
+<div id="main-cms-nav" style="display: none;">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>About Movements</h4>
+        {% show_menu_below_id "col1" 0 100 100 100 %}
+      </div>
+      <div class="col-xs-4">
+        <h4>Navigation</h4>
+        {% show_menu_below_id "col2" 0 100 100 100 %}
+      </div>
+      <div class="col-xs-4">
+        <h4>Our Terms</h4>
+        {% show_menu_below_id "col3" 0 100 100 100 %}
+      </div>
+    </div>
+  </div>
+</div>
+<div style="height: 20px;"></div>
 {% endblock %}
 
 {% block content_outside_container %}
@@ -107,7 +125,6 @@
             <a href="/movements/">
               <img src="{{ STATIC_URL }}images/v2/twitter-bigger.png" alt="Connect with Twitter" >
             </a>
-            </a>
             <a href="">
               <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="Connect with Facebook" >
             </a>
@@ -140,9 +157,6 @@
   <a class="btn btn-request" href="{% url 'create_request' %}"><img src="{{ STATIC_URL }}images/v2/request_icon.png"/>Request</a>
   <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>Offer</a>
 </script>
-<script type="text/template" id="content-menu-template">
-  {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
-</script>
 
 {% assets "js_all" %}
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
@@ -172,6 +186,21 @@
     window.ahr.string_constants = {{ string_constants|safe }};
   })();
 </script>
+
+<script type="text/javascript">
+  (function () {
+    $('#view-content-menu').click(function(){
+      if($('#main-cms-nav').is(":visible")){
+        $('#main-cms-nav').slideUp();
+      } else {
+        $('#main-cms-nav').slideDown();
+        console.log("hello");
+      }
+    });
+  })();
+</script>
+
+
 
 </body>
 </html>

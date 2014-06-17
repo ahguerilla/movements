@@ -178,6 +178,7 @@ body
   border-radius 0
   border 0
   border-bottom 4px solid $border-color
+  margin-bottom 0
   .header-nav-wrapper
     text-align center
     .main-logo
@@ -219,18 +220,19 @@ $home-head-height = 85px
 #view-content-menu:hover
   cursor pointer
 
-#content-menu-container
-  .popover-content
-    ul
-      margin 0
-      padding 0
-    li
-      list-style none
-      line-height 30px
-      a
-        color $main-font-dark
-      a:hover
-        text-decoration none
+#main-cms-nav
+  background-color $footer-color
+  border-bottom 4px solid $border-color
+  padding-bottom 15px
+  h4
+    color #fff
+    margin-bottom 5px
+  a
+    color #fff
+    text-decoration underline
+  li
+    list-style none
+    line-height 30px
 
 footer
   //margin-top 30px
@@ -361,6 +363,8 @@ $page-banner-height = 600px
         margin-right 20%
         button
           width 40%
+          height 50px
+          font-size 22px
   .left-control
     position absolute
     left 0
