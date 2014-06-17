@@ -5,6 +5,7 @@
 {% load widget_tweaks %}
 
 {% block public-content-message %}
+  {{ form }}
 <div class="row dialog movements-form more-about-you-widget">
   <div class="col-xs-12">
     <div class="progress-counter">
@@ -43,7 +44,7 @@
         </div>
         <div class="row action-text">
           <div class="col-sm-offset-2 col-sm-2 form-main-button">
-            <a class="action-link" href="">{% trans "Skip" %}</a>
+            <a class="action-link skip-link" href="">{% trans "Skip" %}</a>
           </div>
           <div class="col-sm-6 form-main-button">
             <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
@@ -57,15 +58,15 @@
           <p>
             {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
           </p>
-          {% for lang in languages %}
+          {% for val, name in languages %}
             {% if forloop.counter0|divisibleby:3 %}
             <div class="row">
             {% endif %}
               <div class="col-xs-4">
                 <div class="select-checkbox">
-                  <input type="checkbox" id="" name="">
+                  <input type="checkbox" id="languages_{{ forloop.counter0 }}" value="{{ val }}" name="languages">
                   <label for="checkboxFiveInput"></label>
-                  <div class="select-label">{{ lang }}</div>
+                  <div class="select-label">{{ name }}</div>
                 </div>
               </div>
             {% if forloop.last or forloop.counter|divisibleby:3 %}
@@ -75,7 +76,7 @@
         </div>
         <div class="row action-text">
           <div class="col-sm-offset-2 col-sm-2 form-main-button">
-            <a class="action-link" href="">{% trans "Skip" %}</a>
+            <a class="action-link skip-link" href="">{% trans "Skip" %}</a>
           </div>
           <div class="col-sm-6 form-main-button">
             <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
@@ -89,15 +90,15 @@
           <p>
             {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
           </p>
-          {% for reg in regions %}
+          {% for val, name in regions %}
             {% if forloop.counter0|divisibleby:3 %}
             <div class="row">
             {% endif %}
               <div class="col-xs-4">
                 <div class="select-checkbox">
-                  <input type="checkbox" id="" name="">
+                  <input type="checkbox" id="regions_{{ forloop.counter0 }}" value="{{ val }}" name="regions">
                   <label for="checkboxFiveInput"></label>
-                  <div class="select-label">{{ reg }}</div>
+                  <div class="select-label">{{ name }}</div>
                 </div>
               </div>
             {% if forloop.last or forloop.counter|divisibleby:3 %}
@@ -107,7 +108,7 @@
         </div>
         <div class="row action-text">
           <div class="col-sm-offset-2 col-sm-2 form-main-button">
-            <a class="action-link" href="">{% trans "Skip" %}</a>
+            <a class="action-link skip-link" href="">{% trans "Skip" %}</a>
           </div>
           <div class="col-sm-6 form-main-button">
             <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
@@ -121,15 +122,15 @@
           <p>
             {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
           </p>
-          {% for item in interests %}
+          {% for val, name in interests %}
             {% if forloop.counter0|divisibleby:3 %}
             <div class="row">
             {% endif %}
               <div class="col-xs-4">
                 <div class="select-checkbox">
-                  <input type="checkbox" id="" name="">
+                  <input type="checkbox" id="interests_{{ forloop.counter0 }}" value="{{ val }}" name="interests">
                   <label for="checkboxFiveInput"></label>
-                  <div class="select-label">{{ item }}</div>
+                  <div class="select-label">{{ name }}</div>
                 </div>
               </div>
             {% if forloop.last or forloop.counter|divisibleby:3 %}
@@ -139,7 +140,7 @@
         </div>
         <div class="row action-text">
           <div class="col-sm-offset-2 col-sm-2 form-main-button">
-            <a class="action-link" href="">{% trans "Skip" %}</a>
+            <a class="action-link skip-link" href="">{% trans "Skip" %}</a>
           </div>
           <div class="col-sm-6 form-main-button">
             <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
@@ -159,7 +160,7 @@
         </div>
         <div class="row action-text">
           <div class="col-sm-offset-2 col-sm-8 form-main-button">
-            <button class="btn btn-action full-width">{% trans "Finish" %}</button>
+            <button type="submit" class="btn btn-action full-width">{% trans "Finish" %}</button>
           </div>
         </div>
       </div>

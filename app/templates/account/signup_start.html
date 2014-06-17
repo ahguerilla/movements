@@ -14,24 +14,28 @@
     {% csrf_token %}
       <div class="form-group">
         <div class="col-xs-12">
+          {{ form.non_field_errors }}
           <label for="email">{%trans "Email"%}</label>
-          <input autofocus="autofocus" class="form-control input-sm" id="email" maxlength="30" name="email" required="true" type="text">
+          {% render_field form.email class="form-control input-sm" maxlength="30" required="true" %}
+          {{ form.email.errors }}
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-6">
           <label for="password1">{%trans "Password"%}</label>
-          <input class="form-control input-sm" id="password1" name="password1" required="true" type="password">
+          {% render_field form.password1 class="form-control" required="true" %}
+          {{ form.password1.errors }}
         </div>
         <div class="col-xs-6">
           <label for="password2">{%trans "Retype password"%}</label>
-          <input class="form-control input-sm" id="password2" name="password2" required="true" type="password">
+          {% render_field form.password2 class="form-control input-sm" required="true" %}
+          {{ form.password2.errors }}
         </div>
       </div>
       <div class="row action-text">
         <div class="col-xs-12">{% trans "By registering with us you agree to our" %}&nbsp;<a href="{% url 'terms_and_conditions' %}" target="_blank" alt="terms and conditions">terms &amp; conditions</a></div>
         <div class="col-sm-offset-2 col-sm-8 form-main-button">
-          <button type="submit" class="btn btn-action full-width">Register</button>
+          <button type="submit" class="btn btn-action full-width">{% trans 'Register' %}</button>
         </div>
       </div>
     </form>

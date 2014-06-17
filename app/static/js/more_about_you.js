@@ -4,7 +4,8 @@
 
     events: {
       'click .next-button': 'clickNextButton',
-      'click .select-checkbox': 'checkClick'
+      'click .select-checkbox': 'checkClick',
+      'click .skip-link': 'skipAction'
     },
 
     clickNextButton: function(ev){
@@ -28,6 +29,11 @@
     checkClick: function(ev){
       $(ev.currentTarget).find('input[type="checkbox"]').prop("checked", !$(ev.currentTarget).find('input[type="checkbox"]').prop("checked"));
       $(ev.currentTarget).toggleClass("checked");
+    },
+    skipAction: function (ev) {
+      ev.stopPropagation();
+      ev.preventDefault();
+      $(ev.currentTarget).closest('form').submit();
     }
   });
 
