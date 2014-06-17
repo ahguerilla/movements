@@ -134,6 +134,9 @@
 .btn-social-facebook:focus {
   color: #fff;
 }
+.full-width {
+  width: 100%;
+}
 .dialog {
   background-color: #fff;
 }
