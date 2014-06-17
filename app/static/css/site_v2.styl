@@ -15,6 +15,7 @@ $separator-color = #ded8d6
 $footer-color = #B6ABA5
 $dropdown-hover-bg = #beb4ae
 $dropdown-select-color = #ff6d50
+$warn-color = #ff0000
 
 // **************************************
 // font colors
@@ -72,6 +73,7 @@ box-shadow()
     text-align center
   .action-link
     line-height 40px
+    text-decoration underline
   .form-main-button
     margin-top 15px
   a
@@ -299,6 +301,12 @@ h1,h2,h3,h4,h5,h6
   h1
     font-size 26px
 
+.errorlist
+  padding 0
+  li
+    color $warn-color
+    list-style none
+
 // **************************************
 // Landing page styles
 // **************************************
@@ -357,19 +365,24 @@ $page-banner-height = 600px
 .landing-page
   padding-top 10px
   .landing-content
-    margin-left 50px
-    color $main-font-dark
+    color #fff
+    height 499px
+
     h3
-      color $main-font-dark
-    .btn
-      width 70%
-      margin-bottom 20px
+      color #fff
+      font-family "HurmeGeometricSans3-SemiBold"
+      font-weight normal
+    .container
+      height 490px
+      display table
+      div
+        display table-cell
+        vertical-align middle
   .action-item
     text-align right
     margin-top 10px
     margin-bottom 20px
   .request-background
-    height 499px
     background url("../images/v2/request_background.jpg")
     background-repeat no-repeat
     background-position center center
@@ -378,6 +391,24 @@ $page-banner-height = 600px
     -ms-background-size cover
     -o-background-size cover
     background-size cover
+    .container
+      div
+        padding-left 25%
+        padding-right 10%
+  .offer-background
+    background url("../images/v2/offer_background.jpg")
+    background-repeat no-repeat
+    background-position center center
+    -webkit-background-size cover
+    -moz-background-size cover
+    -ms-background-size cover
+    -o-background-size cover
+    background-size cover
+    .container
+      div
+        padding-right 25%
+        padding-left 10%
+
 
 
 // **************************************

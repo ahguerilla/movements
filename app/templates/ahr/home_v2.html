@@ -35,7 +35,7 @@
                   </div>
                   <div class="carousel-button">
                     <a href="{% url 'signup_start' %}">
-                      <button class="btn btn-action">Sign up now</button>
+                      <button class="btn btn-action">{%trans "Sign up now"%}</button>
                     </a>
                   </div>
                 </div>
@@ -52,7 +52,7 @@
                   </div>
                   <div class="carousel-button">
                     <a href="{% page_url 'how_it_works' %}">
-                      <button class="btn btn-action">Find out more</button>
+                      <button class="btn btn-action">{%trans "Find out more"%}</button>
                     </a>
                   </div>
                 </div>
@@ -78,8 +78,26 @@
       <p>Testimonial1</p>
     </div>
     <div class="container-fluid">
-      <div class="request-background">
-
+      <div class="landing-content request-background">
+        <div class="container">
+          <div>
+            <h3>{%trans "Request"%}</h3>
+            <p>{% blocktrans %}To protect the safety of our members we vet all applicants to make sure their intentions are aligned with ours. The more information you give the quicker you become a fully qualified member.{% endblocktrans %}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <p>Testimonial2</p>
+    </div>
+    <div class="container-fluid">
+      <div class="landing-content offer-background">
+        <div class="container">
+          <div>
+            <h3>{%trans "Offer"%}</h3>
+            <p>{% blocktrans %}To protect the safety of our members we vet all applicants to make sure their intentions are aligned with ours. The more information you give the quicker you become a fully qualified member.{% endblocktrans %}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -87,10 +105,6 @@
 
 
 {% block content %}
-<div class="landing-page">
-  <div class="row">
-  </div>
-</div>
 {% endblock %}
 
 {% block javascript %}

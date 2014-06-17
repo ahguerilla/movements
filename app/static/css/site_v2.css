@@ -36,6 +36,7 @@
 }
 .movements-form .action-link {
   line-height: 40px;
+  text-decoration: underline;
 }
 .movements-form .form-main-button {
   margin-top: 15px;
@@ -336,6 +337,13 @@ h6 {
 .content-page h1 {
   font-size: 26px;
 }
+.errorlist {
+  padding: 0;
+}
+.errorlist li {
+  color: #f00;
+  list-style: none;
+}
 .page-banner {
   height: 600px;
   overflow: hidden;
@@ -404,15 +412,21 @@ h6 {
   padding-top: 10px;
 }
 .landing-page .landing-content {
-  margin-left: 50px;
-  color: #171717;
+  color: #fff;
+  height: 499px;
 }
 .landing-page .landing-content h3 {
-  color: #171717;
+  color: #fff;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
 }
-.landing-page .landing-content .btn {
-  width: 70%;
-  margin-bottom: 20px;
+.landing-page .landing-content .container {
+  height: 490px;
+  display: table;
+}
+.landing-page .landing-content .container div {
+  display: table-cell;
+  vertical-align: middle;
 }
 .landing-page .action-item {
   text-align: right;
@@ -420,7 +434,6 @@ h6 {
   margin-bottom: 20px;
 }
 .landing-page .request-background {
-  height: 499px;
   background: url("../images/v2/request_background.jpg");
   background-repeat: no-repeat;
   background-position: center center;
@@ -429,6 +442,24 @@ h6 {
   -ms-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+.landing-page .request-background .container div {
+  padding-left: 25%;
+  padding-right: 10%;
+}
+.landing-page .offer-background {
+  background: url("../images/v2/offer_background.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.landing-page .offer-background .container div {
+  padding-right: 25%;
+  padding-left: 10%;
 }
 .progress-counter {
   border-top: 2px solid #e0d7d8;
