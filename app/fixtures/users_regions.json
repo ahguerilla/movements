@@ -1,0 +1,62 @@
+[
+{
+    "pk": 1, 
+    "model": "users.region", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "North America", 
+        "name": "North America"
+    }
+},
+{
+    "pk": 2, 
+    "model": "users.region", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Europe", 
+        "name": "Europe"
+    }
+},
+{
+    "pk": 3, 
+    "model": "users.region", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Asia", 
+        "name": "Asia"
+    }
+},
+{
+    "pk": 4, 
+    "model": "users.region", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "South America", 
+        "name": "South America"
+    }
+},
+{
+    "pk": 5, 
+    "model": "users.region", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Africa", 
+        "name": "Africa"
+    }
+},
+{
+    "pk": 6, 
+    "model": "users.region", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Oceania", 
+        "name": "Oceania"
+    }
+}
+]
