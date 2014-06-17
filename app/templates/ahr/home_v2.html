@@ -4,14 +4,24 @@
 {% load i18n %}
 {% load cms_tags %}
 
-{% block header_nav %}{% endblock %}
+{% block header_nav %}
+<nav class="navbar navbar-default header-nav home-page-nav" role="navigation">
+  <div class="navbar-left">
+    <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
+  </div>
+  <div class="navbar-right">
+    <div class="action-item">Already have an account?&nbsp;<a href="{% url 'account_login' %}">{%trans "Login"%}</a></div>
+  </div>
+</nav>
+
+{% endblock %}
+
 {% block footer_padding %}{% endblock %}
 
 {% block content %}
 <div class="landing-page">
   <div class="row">
     <div class="col-xs-6">
-      <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
       <div class="landing-content">
         <h3>{% blocktrans %}The Skills exchange platform for people out in the field.{% endblocktrans %}</h3>
         <p>{% blocktrans %}Movements is a new innovative platform which is crowdsourcing the fight for human rights. It is an online portal that connects people and communities around the World with the tools and expertise they need to advance human rights in closed societies.{% endblocktrans %}</p>

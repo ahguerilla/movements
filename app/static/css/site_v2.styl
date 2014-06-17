@@ -23,8 +23,8 @@ $main-font = #262626
 $main-font-dark = #171717
 $white-font = #FFFFFF
 $title-font = #005E86
-$inactive-font = #b7aba5
-$item-footer-font = #b7aba5
+$inactive-font = #756b65
+$item-footer-font = #756b65
 $filter-font = #756b65
 
 
@@ -175,6 +175,24 @@ body
     .main-logo
       padding-top 15px
 
+$home-head-height = 85px
+.home-page-nav
+  height $home-head-height
+  color $filter-font
+  .navbar-left
+    margin-left 30px
+    margin-top 13px
+  .navbar-right
+    margin-right 30px
+    height $home-head-height
+    display table
+    .action-item
+      display table-cell
+      vertical-align middle
+  a
+    color $filter-font
+    text-decoration underline
+
 #add-post-popup-container
   .popover-content
     width 132px
@@ -284,7 +302,7 @@ h1,h2,h3,h4,h5,h6
 // Landing page styles
 // **************************************
 .landing-page
-  padding-top 30px
+  padding-top 10px
   .landing-content
     margin-left 50px
     color $main-font-dark

@@ -175,6 +175,27 @@ body {
 .header-nav .header-nav-wrapper .main-logo {
   padding-top: 15px;
 }
+.home-page-nav {
+  height: 85px;
+  color: #756b65;
+}
+.home-page-nav .navbar-left {
+  margin-left: 30px;
+  margin-top: 13px;
+}
+.home-page-nav .navbar-right {
+  margin-right: 30px;
+  height: 85px;
+  display: table;
+}
+.home-page-nav .navbar-right .action-item {
+  display: table-cell;
+  vertical-align: middle;
+}
+.home-page-nav a {
+  color: #756b65;
+  text-decoration: underline;
+}
 #add-post-popup-container .popover-content {
   width: 132px;
   padding: 9px;
@@ -300,7 +321,7 @@ h6 {
   font-weight: normal;
 }
 .action-font a {
-  color: #b7aba5;
+  color: #756b65;
   text-decoration: underline;
 }
 .content-page h1,
@@ -315,7 +336,7 @@ h6 {
   font-size: 26px;
 }
 .landing-page {
-  padding-top: 30px;
+  padding-top: 10px;
 }
 .landing-page .landing-content {
   margin-left: 50px;
@@ -377,7 +398,7 @@ h6 {
   color: #262626;
 }
 .progress-counter .outstanding {
-  color: #b7aba5;
+  color: #756b65;
 }
 .form-select-multi {
   min-height: 250px;
@@ -404,7 +425,7 @@ h6 {
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
-  color: #b7aba5;
+  color: #756b65;
   cursor: pointer;
 }
 .form-select-multi .select-checkbox.checked {
@@ -462,7 +483,7 @@ h6 {
   padding-bottom: 20px;
 }
 .exchange-filters .categories h4 {
-  color: #b7aba5;
+  color: #756b65;
   font-weight: normal;
   font-size: 16px;
   display: inline;
@@ -551,7 +572,7 @@ h6 {
 .featured-col h2 {
   font-size: 18px;
   margin: 0 0 10px 0;
-  color: #b7aba5;
+  color: #756b65;
 }
 .featured {
   min-height: 150px;
@@ -615,13 +636,13 @@ h6 {
   font-family: "HurmeGeometricSans3-SemiBold";
 }
 #marketitems .market-place-item .details {
-  color: #b7aba5;
+  color: #756b65;
   font-size: 14px;
 }
 #marketitems .market-place-item .details a,
 #marketitems .market-place-item .details a:hover,
 #marketitems .market-place-item .details a:focus {
-  color: #b7aba5;
+  color: #756b65;
   text-decoration: underline;
   font-weight: bold;
 }
