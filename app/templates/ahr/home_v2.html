@@ -18,28 +18,80 @@
 
 {% block footer_padding %}{% endblock %}
 
+{% block content_outside_container %}
+  <div class="landing-page-carousel">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="page-banner">
+          <div id="home-page-carousel" class="carousel slide">
+            <div class="carousel-inner">
+
+              <div class="item active" style="background-image: url('{{ STATIC_URL }}images/v2/background_1.jpg');">
+                <div class="carousel-filter">
+                  <div class="container carousel-content">
+                    <div class="carousel-title">
+                      {% blocktrans %}The Skills exchange platform for people out in the field.{% endblocktrans %}
+                    </div>
+                    <div class="carousel-blurb">
+                      <div>{% blocktrans %}Movements is a new innovative platform which is crowdsourcing the fight for human rights. It is an online portal that connects people and communities around the World with the tools and expertise they need to advance human rights in closed societies.{% endblocktrans %}</div>
+                    </div>
+                    <div class="carousel-button">
+                      <a href="{% url 'signup_start' %}">
+                        <button class="btn btn-action">Sign up now</button>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="item" style="background-image: url('{{ STATIC_URL }}images/v2/background_1.jpg');">
+                <div class="carousel-filter">
+                  <div class="container carousel-content">
+                    <div class="carousel-title">
+                      {% blocktrans %}Request help from people across the globe, or Offer help to those most in need.{% endblocktrans %}
+                    </div>
+                    <div class="carousel-blurb">
+                      <div>{% blocktrans %}Movements is a trust based platform. To access information about other users, everyone needs to undergo a vetting process which ensure safety.{% endblocktrans %}</div>
+                    </div>
+                    <div class="carousel-button">
+                      <a href="{% page_url 'how_it_works' %}">
+                        <button class="btn btn-action">How it works</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="left-control">
+              <a href="#home-page-carousel" data-slide="prev">
+                <img width="50px;" src="{{ STATIC_URL }}images/v2/carousel_left.jpg" >
+              </a>
+            </div>
+            <div class="right-control">
+              <a href="#home-page-carousel" data-slide="next">
+                <img width="50px;" src="{{ STATIC_URL }}images/v2/carousel_right.jpg" >
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
 {% block content %}
 <div class="landing-page">
   <div class="row">
-    <div class="col-xs-6">
-      <div class="landing-content">
-        <h3>{% blocktrans %}The Skills exchange platform for people out in the field.{% endblocktrans %}</h3>
-        <p>{% blocktrans %}Movements is a new innovative platform which is crowdsourcing the fight for human rights. It is an online portal that connects people and communities around the World with the tools and expertise they need to advance human rights in closed societies.{% endblocktrans %}</p>
-        <a href="{% url 'signup_start' %}">
-          <button class="btn btn-action">Sign up now</button>
-        </a>
-        <p>{% blocktrans %}Want to know more before signing up. Check out our how to section and see how you can connect with the right people.{% endblocktrans %}</p>
-        <a href="{% page_url 'how_it_works' %}">
-          <button class="btn btn-action">How it works</button>
-        </a>
-        <p>{% blocktrans %}Still not convinced. Take a browse some offers and requests on the Exchange.{% endblocktrans %}</p>
-        <button class="btn btn-action">Visit market</button>
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <div class="action-item action-font"><a href="{% url 'account_login' %}">{%trans "Login"%}</a></div>
-      <img src="{{ STATIC_URL }}images/v2/home-page-image.png" />
-    </div>
   </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+  $(document).ready(function(){
+      $("#home-page-carousel").carousel({interval: 6000, pause: "none"});
+  });
+  </script>
 {% endblock %}

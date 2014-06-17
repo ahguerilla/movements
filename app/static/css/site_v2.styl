@@ -179,6 +179,7 @@ $home-head-height = 85px
 .home-page-nav
   height $home-head-height
   color $filter-font
+  margin-bottom 0
   .navbar-left
     margin-left 30px
     margin-top 13px
@@ -301,6 +302,58 @@ h1,h2,h3,h4,h5,h6
 // **************************************
 // Landing page styles
 // **************************************
+$page-banner-height = 600px
+.page-banner
+  height $page-banner-height
+  overflow hidden
+  .carousel-filter
+    background-color rgba(130, 107, 110, 0.4)
+  .carousel-inner
+    img
+      height 100%
+    .item
+      height $page-banner-height
+      background-repeat no-repeat
+      background-position center center
+      vendor('background-size', cover)
+    .carousel-content
+      height $page-banner-height
+      position relative
+      color #fff
+      text-align center
+      .carousel-title
+        margin-left 15%
+        margin-right 15%
+        position absolute
+        top 150px
+        color #fff
+        font-size 36px
+        font-family "HurmeGeometricSans3-SemiBold"
+        font-weight normal
+        line-height 120%
+      .carousel-blurb
+        margin-left 20%
+        margin-right 20%
+        position absolute
+        top 295px
+        font-size 18px
+      .carousel-button
+        position absolute
+        top 420px
+        width 60%
+        margin-left 20%
+        margin-right 20%
+        button
+          width 40%
+  .left-control
+    position absolute
+    left 0
+    top 0
+  .right-control
+    position absolute
+    right 0
+    top 0
+
 .landing-page
   padding-top 10px
   .landing-content

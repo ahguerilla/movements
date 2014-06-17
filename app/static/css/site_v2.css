@@ -178,6 +178,7 @@ body {
 .home-page-nav {
   height: 85px;
   color: #756b65;
+  margin-bottom: 0;
 }
 .home-page-nav .navbar-left {
   margin-left: 30px;
@@ -334,6 +335,70 @@ h6 {
 }
 .content-page h1 {
   font-size: 26px;
+}
+.page-banner {
+  height: 600px;
+  overflow: hidden;
+}
+.page-banner .carousel-filter {
+  background-color: rgba(130,107,110,0.4);
+}
+.page-banner .carousel-inner img {
+  height: 100%;
+}
+.page-banner .carousel-inner .item {
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.page-banner .carousel-inner .carousel-content {
+  height: 600px;
+  position: relative;
+  color: #fff;
+  text-align: center;
+}
+.page-banner .carousel-inner .carousel-content .carousel-title {
+  margin-left: 15%;
+  margin-right: 15%;
+  position: absolute;
+  top: 150px;
+  color: #fff;
+  font-size: 36px;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
+  line-height: 120%;
+}
+.page-banner .carousel-inner .carousel-content .carousel-blurb {
+  margin-left: 20%;
+  margin-right: 20%;
+  position: absolute;
+  top: 295px;
+  font-size: 18px;
+}
+.page-banner .carousel-inner .carousel-content .carousel-button {
+  position: absolute;
+  top: 420px;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.page-banner .carousel-inner .carousel-content .carousel-button button {
+  width: 40%;
+}
+.page-banner .left-control {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.page-banner .right-control {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 .landing-page {
   padding-top: 10px;
