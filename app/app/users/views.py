@@ -2,9 +2,11 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
-from models import UserProfile, OrganisationalRating
+from models import (
+    UserProfile, OrganisationalRating, Language, Interest, Region)
 from forms import (
-    SettingsForm, UserForm, VettingForm, SignUpStartForm, SignupForm)
+    SettingsForm, UserForm, VettingForm, SignUpStartForm, SignupForm,
+    MoreAboutYouForm)
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
 from allauth.socialaccount.views import SignupView as SocialSignupView
@@ -278,12 +280,21 @@ def signup_start(request):
 
 
 def more_about_you(request):
-    view_dict = {
-        'languages': ["English", "French", "Spanish", "Arabic", "Farsi", "Chinese", "Russian"],
-        'interests': ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee", "Policy Expert", "Social Media", "Technology", "Translator", "Writer"],
-        'regions': ["North America", "Europe", "Asia", "South America", "Africa", "Oceania"]
-    }
-    return render_to_response("users/more_about_you.html", view_dict, context_instance=RequestContext(request))
+    form = MoreAboutYouForm(request.POST or None,
+                            instance=request.user.userprofile)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(
+            request.GET.get('next', reverse('show_market')))
+    return render_to_response(
+        "users/more_about_you.html",
+        {'languages': [(lang.id, lang.name)
+                       for lang in Language.objects.all()],
+         'interests': [(interest.id, interest.name)
+                       for interest in Interest.objects.all()],
+         'regions': [(region.id, region.name)
+                     for region in Region.objects.all()]},
+        context_instance=RequestContext(request))
 
 
 class AccAdapter(DefaultAccountAdapter):

@@ -148,6 +148,23 @@ class SettingsForm(forms.ModelForm):
         return data
 
 
+class MoreAboutYouForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('languages', 'interests', 'regions')
+        widgets = {
+            'languages': forms.CheckboxSelectMultiple(),
+            'interests': forms.CheckboxSelectMultiple(),
+            'regions': forms.CheckboxSelectMultiple()
+        }
+
+    def save(self, commit=True):
+        user_profile = super(MoreAboutYouForm, self).save(commit)
+        user_profile.first_login = False
+        user_profile.save()
+        return user_profile
+
+
 class VettingForm(forms.ModelForm):
     class Meta:
         model = OrganisationalRating

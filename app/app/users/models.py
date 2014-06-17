@@ -122,7 +122,6 @@ class UserProfile(models.Model):
     is_individual = models.BooleanField(_('individual'), default=True)
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=True)
-    firstlogin = models.BooleanField(_('first_login'), default=True)
     ratecount = models.IntegerField(_('ratecount'), default=0)
     score = models.FloatField(_('score'), default=0)
     interface_lang = models.CharField(_('Interface language'), max_length=3, default='en')
