@@ -5,7 +5,6 @@
 {% load widget_tweaks %}
 
 {% block public-content-message %}
-  {{ form }}
 <div class="row dialog movements-form">
   <div class="col-xs-12">
     <div class="form-title"><h1>{% trans "About you" %}</h1></div>
@@ -19,7 +18,6 @@
     {% csrf_token %}
       <div class="form-group">
         <div class="col-xs-12">
-          {{ form.non_field_errors }}
           <label for="{{ form.username.auto_id }}">{%trans "Username"%}</label>
           {% render_field form.username class="form-control input-sm" required="true" autofocus="autofocus" placeholder="" %}
           {{ form.non_field_errors }}
@@ -91,10 +89,10 @@
       {% endif %}
       <div class="row action-text">
         <div class="col-sm-offset-2 col-sm-2 form-main-button">
-          <a class="action-link" href="">Cancel</a>
+          <a class="action-link" href="{% url 'home' %}">{% trans 'Cancel' %}</a>
         </div>
         <div class="col-sm-6 form-main-button">
-          <button type="submit" class="btn btn-action full-width">Next</button>
+          <button type="submit" class="btn btn-action full-width">{% trans 'Next' %}</button>
         </div>
       </div>
     </form>

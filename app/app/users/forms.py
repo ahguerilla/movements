@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from models import UserProfile, OrganisationalRating
+from models import UserProfile, OrganisationalRating, Countries
 from django.utils.translation import ugettext_lazy as _
 import constance
 from django.conf.global_settings import LANGUAGES
@@ -8,10 +8,8 @@ from django.conf.global_settings import LANGUAGES
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 
-COUNTRIES = ((0, '--'),
-            (1, 'United Kingdom'),
-            (2, 'France'),
-            (3, 'Russia'),)
+COUNTRIES = [(0, u'--')] + [
+    (country.id, country.countries) for country in Countries.objects.all()]
 
 
 class SignUpStartForm(forms.Form):
@@ -34,6 +32,7 @@ class SignUpStartForm(forms.Form):
 
 
 class SignupForm(forms.Form):
+    username = forms.CharField()
     first_name = forms.CharField(
         max_length=30, label='First Name', required=False)
     last_name = forms.CharField(
@@ -54,6 +53,13 @@ class SignupForm(forms.Form):
         adapter.save_user(request, user, self)
         setup_user_email(request, user, [])
         return user
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        print User.objects.all()
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError(_('This username is already in used'))
+        return username
 
 
 class UserForm(forms.ModelForm):

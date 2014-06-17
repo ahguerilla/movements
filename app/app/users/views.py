@@ -248,7 +248,10 @@ process_signup = AhrSignupView.as_view()
 
 
 def signup_from_home(request):
-    if not request.session.get('email') or not request.session.get('password'):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('show_market'))
+    elif not request.session.get('email') or not \
+            request.session.get('password'):
         return HttpResponseRedirect(reverse('signup_start'))
 
     return render_to_response(
@@ -261,7 +264,7 @@ def signup_from_home(request):
 
 def signup_start(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('home'))
+        return HttpResponseRedirect(reverse('show_market'))
 
     form = SignUpStartForm(request.POST or None)
     if form.is_valid():
