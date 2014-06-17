@@ -332,6 +332,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     this.profile_widget = window.ahr.profile_widget.initWidget(this.actions_view, window.ahr.app_urls.getprofile);
     this.requestdialog = window.ahr.request_form_dialog.initItem(false);
     this.offerdialog = window.ahr.offer_form_dialog.initItem(false);
+    this.close_marketitem_dialog = window.ahr.close_marketitem_form_dialog.initItem(false);
     this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
     this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
 
