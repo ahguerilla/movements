@@ -41,8 +41,8 @@ def index(request):
 @login_required
 def show_post(request, post_id):
     post = get_object_or_404(MarketItem.objects.defer('comments'),
-                             Q(exp_date__gte=datetime.datetime.now()) | Q(never_exp=True),
                              pk=post_id,
+                             closed_date=None,
                              deleted=False,
                              owner__is_active=True)
     return render_to_response('market/view_post.html', {'post': post}, context_instance=RequestContext(request))

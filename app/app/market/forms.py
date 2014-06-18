@@ -35,23 +35,12 @@ class MarketWriteForm(WriteForm):
 
 
 class OfferForm(forms.ModelForm):
-    exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M', ], required=False)
-
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'exp_date', 'never_exp', 'specific_skill',
-                  'receive_notifications']
+        fields = ['title', 'details', 'specific_skill', 'receive_notifications']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
         }
-
-    def clean(self):
-        err = _('You should enter an expiry date for your offer or check never expires')
-        cleaned_data = super(OfferForm, self).clean()
-        check = [cleaned_data['exp_date'], cleaned_data['never_exp']]
-        if not any(check):
-            self._errors['exp_date'] = self.error_class([err])
-        return cleaned_data
 
     def save(self, commit=True, *args, **kwargs):
         self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.OFFER
@@ -61,24 +50,12 @@ class OfferForm(forms.ModelForm):
 
 
 class RequestForm(forms.ModelForm):
-    exp_date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M', ], required=False)
-
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'exp_date', 'never_exp', 'specific_skill',
-                  'receive_notifications']
+        fields = ['title', 'details', 'specific_skill', 'receive_notifications']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
         }
-
-    def clean(self):
-        err = _('You should enter an expiry date for your request or check never expires')
-        cleaned_data = super(RequestForm, self).clean()
-        check = [cleaned_data['exp_date'], cleaned_data['never_exp']]
-        if not any(check):
-            self._errors['exp_date'] = self.error_class([err])
-
-        return cleaned_data
 
     def save(self, commit=True, *args, **kwargs):
         self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.REQUEST

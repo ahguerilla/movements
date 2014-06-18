@@ -39,13 +39,11 @@ class MarketItem(models.Model):
     url = models.CharField(_('URL Link'), max_length=500, blank=True)
     published = models.BooleanField(_('is published?'), default=True)
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
-    exp_date = models.DateTimeField(_('expiry date'), blank=True, null=True)
     commentcount = models.IntegerField(_('commentcount'), default=0)
     ratecount = models.IntegerField(_('ratecount'), default=0)
     reportcount = models.IntegerField(_('reportcount'), default=0)
     score = models.FloatField(_('score'), default=0)
     deleted = models.BooleanField(_('deleted'), default=False)
-    never_exp = models.BooleanField(_('never expires'), default=False)
     receive_notifications = models.BooleanField(_('receive notifications'), default=True, blank=True)
     status = models.PositiveSmallIntegerField(
         _('status'), max_length=1,
@@ -68,18 +66,21 @@ class MarketItem(models.Model):
             self.closed_date = now()
         super(MarketItem, self).save(*args, **kwargs)
 
+    @property
+    def item_type_display(self):
+        return unicode(_(self.item_type[0].upper() + self.item_type[1:].lower()))
+
     def getdict(self, request=None):
         adict = {'fields': {}, 'pk': self.id}
         adict['fields']['pk'] = self.id
         adict['fields']['item_type'] = self.item_type
+        adict['fields']['item_type_display'] = self.item_type_display
         adict['fields']['issues'] = [ob.id for ob in self.issues.all()]
         adict['fields']['countries'] = [ob.id for ob in self.countries.all()]
         adict['fields']['skills'] = [ob.id for ob in self.skills.all()]
         adict['fields']['title'] = self.title
         adict['fields']['details'] = self.details
         adict['fields']['pub_date'] = str(self.pub_date)
-        adict['fields']['exp_date'] = str(self.exp_date) if self.exp_date != None else ''
-        adict['fields']['never_exp'] = self.never_exp
         adict['fields']['owner'] = [self.owner.username]
         adict['fields']['ownerid'] = [self.owner.id]
         adict['fields']['url'] = self.url

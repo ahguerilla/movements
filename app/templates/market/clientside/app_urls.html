@@ -9,8 +9,6 @@
     getcountries: "{% url 'get_countries' 'json' %}",
 
     {% if not user.is_authenticated %}
-      getmarketitem: "{% url 'get_marketitem_insecure' 'json' 0 %}".slice(0,-1),
-      getprofile: "{%  url 'get_userprofile_insecure' 'json' 0 %}".slice(0,-1),
     {% else %}
       postmanwrite: "{% url 'postman_write' 'a' %}".slice(0,-1),
       postmanreply: "{% url 'postman_reply' 0 %}".slice(0,-1),
@@ -31,10 +29,8 @@
 
       market: "{% url 'show_market' %}",
       getposts:  "{% url 'posts'  %}",
-      getmarketitem: "{% url 'get_marketitem' 'json' 0 %}".slice(0,-1),
       getItemTranslation: "{% url 'get_item_translation' 'json' 0 %}".slice(0,-1),
       getmarketitemfromto: "{% url 'get_marketitems_fromto' 'json' 0 0 %}".slice(0,-1),
-      addmarketitem: "{% url 'add_marketitem' 'json' 'offer' %}".slice(0,-5),
       editmarketitem: "{% url 'edit_marketitem' 'json' 0 %}".slice(0,-1),
       closemarketitem: "{% url 'close_marketitem' 'json' 0 %}".slice(0,-1),
       getViewsCount: "{% url 'marketitem_views_count' 'json' 0 %}".slice(0,-1),

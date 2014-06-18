@@ -33,7 +33,7 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_username(self,obj):
         return obj.user.username
-    
+
 
     def prepare_resident_country(self,obj):
         if obj.notperm.has_key('resident_country'):
@@ -68,8 +68,8 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
         if obj.notperm.has_key('occupation'):
             return ''
         return obj.occupation
-    
-        
+
+
     def get_model(self):
         return UserProfile
 
