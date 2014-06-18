@@ -96,7 +96,7 @@
         $link.popover({
           title: '',
           html: true,
-          content: _.template($('#item-menu-template').html())(),
+          content: _.template($('#item-menu-template').html())({hasEdit: $link.data('edit')}),
           container: $container,
           placement: 'bottom'
         });
