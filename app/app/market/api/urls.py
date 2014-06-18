@@ -66,10 +66,6 @@ market_user_patterns = patterns('',
 
 
 market_item_patterns = patterns('',
-    url(r'(?P<rtype>\S+)/item/get/translation/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.get_item_translation',
-        name="get_item_translation"),
-
     url(r'(?P<rtype>\S+)/useritem/get/(?P<obj_id>\d+)$',
         'app.market.api.views.market.user_get_marketitem',
         name="user_get_marketitem"),
@@ -81,10 +77,6 @@ market_item_patterns = patterns('',
     url(r'(?P<rtype>\S+)/useritem/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
         'app.market.api.views.market.get_user_marketitem_fromto',
         name="get_usermarketitems_fromto"),
-
-    url(r'(?P<rtype>\S+)/item/edit/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.edit_market_item',
-        name="edit_marketitem"),
 
     url(r'(?P<rtype>\S+)/item/close/(?P<obj_id>\d+)$',
         'app.market.api.views.market.close_market_item',

@@ -90,11 +90,18 @@ class MarketItem(models.Model):
         adict['fields']['ratecount'] = self.ratecount
         adict['fields']['score'] = self.score
         adict['fields']['views'] = self.marketitemviewconter_set.count()
-        adict['fields']['hidden'] = True if request != None and self.marketitemhidden_set.filter(
-            viewer_id=request.user.id).count() > 0 else False
-        adict['fields']['stick'] = True if request != None and self.marketitemstick_set.filter(
-            viewer_id=request.user.id, item_id=self.id).count() > 0 else False
-        adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username, 80])
+        if request:
+            # TODO this seems to be some crazily inefficient code, this hits a couple of extra queries for every
+            # market item to display
+            adict['fields']['hidden'] = self.marketitemhidden_set.filter(viewer_id=request.user.id).count() > 0
+            adict['fields']['stick'] = self.marketitemstick_set.filter(viewer_id=request.user.id, item_id=self.id).count() > 0
+            adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username, 80])
+            adict['fields']['hasEdit'] = request.user.id == self.owner.id
+        else:
+            adict['fields']['hidden'] = False
+            adict['fields']['stick'] = False
+            adict['fields']['avatar'] = False
+            adict['fields']['hasEdit'] = False
         return adict
 
 

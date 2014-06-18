@@ -4,22 +4,9 @@ from datetime import datetime
 from django.db.models import Q
 from haystack.query import SearchQuerySet
 from django.contrib.auth.decorators import login_required
-import constance
-import requests
-from django.conf import settings
-from django.utils.cache import get_cache
-
 from app.market.api.utils import *
 import app.market as market
-from tasks.celerytasks import create_notification, update_notifications, mark_read_notifications, add_view
-from users import create_query
-
-
-
-
-cache = get_cache('default')
-items_cache = get_cache('items')
-user_items_cache = get_cache('user_items')
+from tasks.celerytasks import update_notifications, mark_read_notifications
 
 
 def get_market_json(objs, request=None):
@@ -124,10 +111,6 @@ def get_raw(request, filter_by_owner=False):
 
 @login_required
 def get_marketItem_fromto(request, sfrom, to, rtype):
-    reqhash = hash(request.path + str(request.GET))
-    retval = items_cache.get(reqhash)
-    if retval:
-        return retval
     query = market.models.MarketItem.objects.raw(*get_raw(request))
     stickies_count = market.models.MarketItemStick.objects.filter(
         viewer_id=request.user.id).count()
@@ -145,35 +128,12 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
         market_items = list(query[:to-stickies_count])
         stickies.extend(market_items)
     retval = return_item_list(stickies, rtype, request)
-    items_cache.add(reqhash, retval)
     return retval
 
 
 @login_required
 @check_perms_and_get(market.models.MarketItem)
-def edit_market_item(request,obj_id,rtype):
-    cache.delete('item-'+obj_id)
-    cache.delete('translation-'+obj_id)
-    items_cache.clear()
-    user_items_cache.clear()
-    obj = request.obj
-    form = item_forms[obj.item_type](request.POST, instance=obj)
-    if form.is_valid():
-        saveMarketItem(form, obj.item_type, obj.owner)
-        update_notifications.delay(obj)
-    else:
-        return HttpResponseError(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
-    return HttpResponse(json.dumps({ 'success' : True}),
-                        mimetype="application"+rtype)
-
-
-@login_required
-@check_perms_and_get(market.models.MarketItem)
 def close_market_item(request, obj_id, rtype):
-    cache.delete('item-'+obj_id)
-    cache.delete('translation-'+obj_id)
-    items_cache.clear()
-    user_items_cache.clear()
     market_item = request.obj
 
     questionnaire = Questionnaire.objects.filter(
@@ -224,41 +184,29 @@ def user_get_marketitem(request, obj_id, rtype):
 
 @login_required
 def get_user_marketitem_fromto(request, sfrom, to, rtype):
-    reqhash = hash(request.path+str(request.GET))
-    retval = user_items_cache.get(reqhash)
-    if retval:
-        return retval
     market_items = market.models.MarketItem.objects.raw(
         *get_raw(request, filter_by_owner=True))[int(sfrom):int(to)]
     retval = return_item_list(market_items, rtype)
-    user_items_cache.add(reqhash, retval)
     return retval
 
 
-@login_required
-def get_item_translation(request, obj_id, rtype):
-    retval = cache.get('translation-' + obj_id)
-    if retval:
-        return retval
-    obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
-                            closed_date=None,
-                            pk=obj_id,
-                            deleted=False,
-                            owner__is_active=True)
-    resp = requests.get(
-        settings.GOOGLE_TRANS_URL + 'key=' + constance.config.GOOGLE_API_KEY + '&source=ar&target=' + 'en' + '&q=' + obj.details)
-    retval = return_item_list([obj], rtype)
-    cache.add('translation-' + obj_id, retval)
-    return retval
+# @login_required
+# def get_item_translation(request, obj_id, rtype):
+#     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
+#                             closed_date=None,
+#                             pk=obj_id,
+#                             deleted=False,
+#                             owner__is_active=True)
+#     resp = requests.get(
+#         settings.GOOGLE_TRANS_URL + 'key=' + constance.config.GOOGLE_API_KEY + '&source=ar&target=' + 'en' + '&q=' + obj.details)
+#     retval = return_item_list([obj], rtype)
+#     return retval
 
 
 @login_required
 def set_rate(request, obj_id, rtype):
     if not request.POST.has_key('score'):
         return HttpResponseError()
-    cache.delete('item-' + obj_id)
-    items_cache.clear()
-    user_items_cache.clear()
     item = \
         market.models.MarketItem.filter(closed_date=None).objects.filter(id=obj_id)[0]
     owner = request.user
