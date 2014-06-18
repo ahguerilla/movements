@@ -74,8 +74,8 @@
     });
   }
 
-  function setupContentMenuPopover() {
-     $('#view-content-menu').popover({
+  function setupProfileMenuPopover() {
+     $('#view-profile-menu').popover({
        title: '',
        html: true,
        content: $('#content-menu-template').html(),
@@ -83,14 +83,14 @@
        placement: 'bottom'
      });
 
-    $('#view-content-menu').on('shown.bs.popover', function(){
+    $('#view-profile-menu').on('shown.bs.popover', function(){
       $('#content-menu-container .popover').css("left", 0);
       $('#content-menu-container .arrow').css("left", "28px");
     });
   }
 
   setupAddPostPopover();
-  //setupContentMenuPopover();
+  setupProfileMenuPopover();
 
   window.ahr.BaseView = Backbone.View.extend({
     events: {},

@@ -169,6 +169,10 @@ body
 .container
   //max-width 960px
 
+.avatar
+  img
+    border-radius 50%
+
 .navbar-default
   background-color $background-color
   .btn
@@ -213,6 +217,19 @@ body
       color #fff
       .menu-icon
         background-image url("../images/v2/hamburger-selected-v2.png")
+    .nav-avatar
+      position absolute
+      width 90px
+      left 90px
+      top 9px
+      color $inactive-font
+      img
+        float left
+        margin-right 3px
+      .action-font
+        display inline-block
+        margin-top 6px
+
 
 $home-head-height = 85px
 .home-page-nav
@@ -249,6 +266,10 @@ $home-head-height = 85px
 
 #view-content-menu:hover
   cursor pointer
+
+#view-profile-menu:hover
+  cursor pointer
+
 
 #main-cms-nav
   background-color $footer-color
