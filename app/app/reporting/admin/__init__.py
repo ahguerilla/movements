@@ -22,7 +22,10 @@ class NextStepsInline(admin.TabularInline):
 
 class IncidentAdmin(TrackingAdmin):
     list_select_related = ('messageext',)
-    readonly_fields = ('closed_date',)
+    readonly_fields = (
+        'closed_date', 'title', 'details', 'pub_date', 'exp_date',
+        'commentcount', 'ratecount', 'reportcount', 'score', 'never_exp')
+    exclude = ('countries', 'issues', 'skills', 'published', 'deleted')
     list_display_links = ('id', 'title',)
     list_display = (
         'id', 'title', 'get_view_count', 'commentcount',
