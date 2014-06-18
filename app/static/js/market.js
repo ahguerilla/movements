@@ -20,6 +20,7 @@
         container: $container,
         placement: 'bottom'
       });
+
       var $regions = this.$el.find('a.regions');
       $container = $regions.parent().find('.popover-container');
       $regions.popover({
@@ -65,7 +66,6 @@
         data.types = this.type;
       }
     }
-
   });
 
   var MarketView = window.ahr.market.MarketBaseView.extend({
