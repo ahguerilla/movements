@@ -360,11 +360,22 @@ h6 {
   font-family: "HurmeGeometricSans3-SemiBold";
   font-weight: normal;
 }
-.action-font {
+.action-font,
+.statement-font {
   font-family: "HurmeGeometricSans3-SemiBold";
   font-weight: normal;
 }
-.action-font a {
+.action-font a,
+.statement-font a {
+  color: #756b65;
+  text-decoration: underline;
+}
+.statement-font {
+  color: #756b65;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
+}
+.statement-font a {
   color: #756b65;
   text-decoration: underline;
 }
@@ -501,6 +512,19 @@ h6 {
 .landing-page .offer-background .container div {
   padding-right: 25%;
   padding-left: 10%;
+}
+.testimonial {
+  padding-bottom: 70px;
+  padding-top: 70px;
+}
+.testimonial .person-image {
+  text-align: center;
+}
+.testimonial .statement {
+  font-size: 18px;
+}
+.testimonial .author {
+  font-size: 24px;
 }
 .progress-counter {
   border-top: 2px solid #e0d7d8;
