@@ -528,7 +528,7 @@ h6 {
   margin-bottom: 20px;
 }
 .landing-page .request-background {
-  background: url("../images/v2/request_background.jpg");
+  background: url("../images/v2/request_background_v2.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   -webkit-background-size: cover;
@@ -538,11 +538,11 @@ h6 {
   background-size: cover;
 }
 .landing-page .request-background .container div {
-  padding-left: 25%;
+  padding-left: 30%;
   padding-right: 10%;
 }
 .landing-page .offer-background {
-  background: url("../images/v2/offer_background.jpg");
+  background: url("../images/v2/offer_background_v2.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   -webkit-background-size: cover;
@@ -552,7 +552,7 @@ h6 {
   background-size: cover;
 }
 .landing-page .offer-background .container div {
-  padding-right: 25%;
+  padding-right: 30%;
   padding-left: 10%;
 }
 .testimonial {
