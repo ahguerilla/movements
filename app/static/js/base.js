@@ -90,7 +90,7 @@
   }
 
   setupAddPostPopover();
-  setupContentMenuPopover();
+  //setupContentMenuPopover();
 
   window.ahr.BaseView = Backbone.View.extend({
     events: {},

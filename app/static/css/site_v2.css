@@ -36,6 +36,7 @@
 }
 .movements-form .action-link {
   line-height: 40px;
+  text-decoration: underline;
 }
 .movements-form .form-main-button {
   margin-top: 15px;
@@ -43,6 +44,7 @@
 .movements-form a {
   color: #262626;
   font-weight: bold;
+  text-decoration: underline;
 }
 .movements-form label {
   margin-top: 10px;
@@ -92,6 +94,8 @@
   margin-top: 15px;
 }
 .btn {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -142,15 +146,14 @@
 }
 html {
   background-color: #b6aba5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 body {
   background-color: #f8f6f7;
   color: #262626;
   font-family: "LinotypeUnivers-330Light";
   font-size: 16px;
-}
-.container {
-  max-width: 960px;
 }
 .navbar-default {
   background-color: #f8f6f7;
@@ -168,12 +171,69 @@ body {
   border-radius: 0;
   border: 0;
   border-bottom: 4px solid #e0d7d8;
+  margin-bottom: 0;
 }
 .header-nav .header-nav-wrapper {
   text-align: center;
 }
 .header-nav .header-nav-wrapper .main-logo {
   padding-top: 15px;
+}
+.header-nav .navbar-left {
+  position: relative;
+}
+.header-nav .navbar-left .menu-selector {
+  position: absolute;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  top: -5px;
+  left: -5px;
+  width: 90px;
+  height: 55px;
+  border-bottom: 4px solid #e0d7d8;
+  color: #756b65;
+}
+.header-nav .navbar-left .menu-selector .menu-icon {
+  background-image: url("../images/v2/hamburger-v2.png");
+  width: 30px;
+  height: 30px;
+  margin-top: 8px;
+  margin-right: 3px;
+  float: left;
+}
+.header-nav .navbar-left .menu-selector .action-font {
+  padding-top: 3px;
+}
+.header-nav .navbar-left .menu-selector.selected {
+  border-bottom: 4px solid #b6aba5;
+  background-color: #b6aba5;
+  color: #fff;
+}
+.header-nav .navbar-left .menu-selector.selected .menu-icon {
+  background-image: url("../images/v2/hamburger-selected-v2.png");
+}
+.home-page-nav {
+  height: 85px;
+  color: #756b65;
+  margin-bottom: 0;
+}
+.home-page-nav .navbar-left {
+  margin-left: 30px;
+  margin-top: 13px;
+}
+.home-page-nav .navbar-right {
+  margin-right: 30px;
+  height: 85px;
+  display: table;
+}
+.home-page-nav .navbar-right .action-item {
+  display: table-cell;
+  vertical-align: middle;
+}
+.home-page-nav a {
+  color: #756b65;
+  text-decoration: underline;
 }
 #add-post-popup-container .popover-content {
   width: 132px;
@@ -194,19 +254,22 @@ body {
 #view-content-menu:hover {
   cursor: pointer;
 }
-#content-menu-container .popover-content ul {
-  margin: 0;
-  padding: 0;
+#main-cms-nav {
+  background-color: #b6aba5;
+  border-bottom: 4px solid #e0d7d8;
+  padding-bottom: 15px;
 }
-#content-menu-container .popover-content li {
+#main-cms-nav h4 {
+  color: #fff;
+  margin-bottom: 5px;
+}
+#main-cms-nav a {
+  color: #fff;
+  text-decoration: underline;
+}
+#main-cms-nav li {
   list-style: none;
-  line-height: 30px;
-}
-#content-menu-container .popover-content li a {
-  color: #171717;
-}
-#content-menu-container .popover-content li a:hover {
-  text-decoration: none;
+  line-height: 27px;
 }
 footer {
   padding-bottom: 30px;
@@ -290,17 +353,30 @@ h5,
 h6 {
   color: #005e86;
   font-family: "HurmeGeometricSans3-Bold";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .btn {
   font-family: "HurmeGeometricSans3-SemiBold";
   font-weight: normal;
 }
-.action-font {
+.action-font,
+.statement-font {
   font-family: "HurmeGeometricSans3-SemiBold";
   font-weight: normal;
 }
-.action-font a {
-  color: #b7aba5;
+.action-font a,
+.statement-font a {
+  color: #756b65;
+  text-decoration: underline;
+}
+.statement-font {
+  color: #756b65;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
+}
+.statement-font a {
+  color: #756b65;
   text-decoration: underline;
 }
 .content-page h1,
@@ -331,24 +407,141 @@ h6 {
   font-family: "HurmeGeometricSans3-SemiBold";
   margin-bottom: 0;
 }
-.landing-page {
-  padding-top: 30px;
+.errorlist {
+  padding: 0;
+}
+.errorlist li {
+  color: #f00;
+  list-style: none;
+}
+.page-banner {
+  height: 600px;
+  overflow: hidden;
+}
+.page-banner .carousel-filter {
+  background-color: rgba(130,107,110,0.4);
+}
+.page-banner .carousel-inner img {
+  height: 100%;
+}
+.page-banner .carousel-inner .item {
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.page-banner .carousel-inner .carousel-content {
+  height: 600px;
+  position: relative;
+  color: #fff;
+  text-align: center;
+}
+.page-banner .carousel-inner .carousel-content .carousel-title {
+  margin-left: 15%;
+  margin-right: 15%;
+  position: absolute;
+  top: 150px;
+  color: #fff;
+  font-size: 36px;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
+  line-height: 120%;
+}
+.page-banner .carousel-inner .carousel-content .carousel-blurb {
+  margin-left: 20%;
+  margin-right: 20%;
+  position: absolute;
+  top: 295px;
+  font-size: 18px;
+}
+.page-banner .carousel-inner .carousel-content .carousel-button {
+  position: absolute;
+  top: 420px;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.page-banner .carousel-inner .carousel-content .carousel-button button {
+  width: 40%;
+  height: 50px;
+  font-size: 22px;
+}
+.page-banner .left-control {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.page-banner .right-control {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 .landing-page .landing-content {
-  margin-left: 50px;
-  color: #171717;
+  color: #fff;
+  height: 499px;
 }
 .landing-page .landing-content h3 {
-  color: #171717;
+  color: #fff;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-weight: normal;
 }
-.landing-page .landing-content .btn {
-  width: 70%;
-  margin-bottom: 20px;
+.landing-page .landing-content .container {
+  height: 490px;
+  display: table;
+}
+.landing-page .landing-content .container div {
+  display: table-cell;
+  vertical-align: middle;
 }
 .landing-page .action-item {
   text-align: right;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+.landing-page .request-background {
+  background: url("../images/v2/request_background.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.landing-page .request-background .container div {
+  padding-left: 25%;
+  padding-right: 10%;
+}
+.landing-page .offer-background {
+  background: url("../images/v2/offer_background.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.landing-page .offer-background .container div {
+  padding-right: 25%;
+  padding-left: 10%;
+}
+.testimonial {
+  padding-bottom: 70px;
+  padding-top: 70px;
+}
+.testimonial .person-image {
+  text-align: center;
+}
+.testimonial .statement {
+  font-size: 18px;
+}
+.testimonial .author {
+  font-size: 24px;
 }
 .progress-counter {
   border-top: 2px solid #e0d7d8;
@@ -394,7 +587,7 @@ h6 {
   color: #262626;
 }
 .progress-counter .outstanding {
-  color: #b7aba5;
+  color: #756b65;
 }
 .form-select-multi {
   min-height: 250px;
@@ -421,7 +614,7 @@ h6 {
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
-  color: #b7aba5;
+  color: #756b65;
   cursor: pointer;
 }
 .form-select-multi .select-checkbox.checked {
@@ -479,7 +672,7 @@ h6 {
   padding-bottom: 20px;
 }
 .exchange-filters .categories h4 {
-  color: #b7aba5;
+  color: #756b65;
   font-weight: normal;
   font-size: 16px;
   display: inline;
@@ -568,7 +761,7 @@ h6 {
 .featured-col h2 {
   font-size: 18px;
   margin: 0 0 10px 0;
-  color: #b7aba5;
+  color: #756b65;
 }
 .featured {
   min-height: 150px;
@@ -632,13 +825,13 @@ h6 {
   font-family: "HurmeGeometricSans3-SemiBold";
 }
 #marketitems .market-place-item .details {
-  color: #b7aba5;
+  color: #756b65;
   font-size: 14px;
 }
 #marketitems .market-place-item .details a,
 #marketitems .market-place-item .details a:hover,
 #marketitems .market-place-item .details a:focus {
-  color: #b7aba5;
+  color: #756b65;
   text-decoration: underline;
   font-weight: bold;
 }
@@ -758,7 +951,7 @@ h6 {
   font-family: "HurmeGeometricSans3-SemiBold";
   padding: 5px 0;
   padding-left: 30px;
-  color: #b7aba5;
+  color: #756b65;
   margin-left: 40px;
 }
 .view-post .post-actions a.recommend {
@@ -791,7 +984,7 @@ h6 {
 }
 .view-post .comments .comments-header .comment-count {
   float: right;
-  color: #b7aba5;
+  color: #756b65;
   font-size: 14px;
 }
 .view-post .comments form {

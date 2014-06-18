@@ -1,0 +1,122 @@
+[
+{
+    "pk": 1, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Activist", 
+        "name": "Activist"
+    }
+},
+{
+    "pk": 2, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Advocate", 
+        "name": "Advocate"
+    }
+},
+{
+    "pk": 3, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Journalist", 
+        "name": "Journalist"
+    }
+},
+{
+    "pk": 4, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Lawyer", 
+        "name": "Lawyer"
+    }
+},
+{
+    "pk": 5, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Marketer", 
+        "name": "Marketer"
+    }
+},
+{
+    "pk": 6, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Media Producer", 
+        "name": "Media Producer"
+    }
+},
+{
+    "pk": 7, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "NGO Employee", 
+        "name": "NGO Employee"
+    }
+},
+{
+    "pk": 8, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Policy Expert", 
+        "name": "Policy Expert"
+    }
+},
+{
+    "pk": 9, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Social Media", 
+        "name": "Social Media"
+    }
+},
+{
+    "pk": 10, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Technology", 
+        "name": "Technology"
+    }
+},
+{
+    "pk": 11, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Translator", 
+        "name": "Translator"
+    }
+},
+{
+    "pk": 12, 
+    "model": "users.interest", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Writer", 
+        "name": "Writer"
+    }
+}
+]

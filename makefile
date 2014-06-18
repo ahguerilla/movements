@@ -63,3 +63,10 @@ staging-social:
 celery:
 	cd app && \
 	celery -A tasks.celeryworker worker
+
+fixturesJune14:
+	cd app && \
+	python manage.py loaddata questionnaires.json --settings=app.settings.local && \
+	python manage.py loaddata users_interests.json --settings=app.settings.local && \
+	python manage.py loaddata users_languages.json --settings=app.settings.local && \
+	python manage.py loaddata users_regions.json --settings=app.settings.local

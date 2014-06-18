@@ -33,18 +33,18 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_username(self,obj):
         return obj.user.username
-    
+
 
     def prepare_resident_country(self,obj):
         if obj.notperm.has_key('resident_country'):
             return ''
         return obj.resident_country.residence
-    
+
 
     def prepare_nationality(self, obj):
         if obj.notperm.has_key('nationality'):
             return ''
-        return obj.nationality.nationality        
+        return obj.nationality.nationality
 
 
     def prepate_bio(self, obj):
@@ -56,20 +56,20 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_expertise(self, obj):
         if obj.notperm.has_key('expertise'):
             return ''
-        return obj.expertise        
-    
-    
+        return obj.expertise
+
+
     def prepare_tag_ling(self, obj):
         if obj.notperm.has_key('tag_ling'):
             return ''
-        return obj.tag_ling      
-    
+        return obj.tag_ling
+
     def prepare_occupation(self, obj):
         if obj.notperm.has_key('occupation'):
             return ''
-        return obj.occupation      
-    
-        
+        return obj.occupation
+
+
     def get_model(self):
         return UserProfile
 

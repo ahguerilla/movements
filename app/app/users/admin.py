@@ -4,7 +4,8 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 from app.users.models import (
-    UserProfile, Countries, Skills, Issues, Nationality)
+    UserProfile, Countries, Skills, Issues, Nationality, Language, Region,
+    Interest)
 from django.contrib.admin.models import LogEntry
 from modeltranslation.admin import TranslationAdmin
 
@@ -48,6 +49,11 @@ class NationalityAdmin(TranslationAdmin):
     list_display = ('nationality',)
 
 
+class NamedObjectAdmin(TranslationAdmin):
+    list_display = ('name',)
+    list_display_links = list_display
+
+
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
@@ -55,3 +61,6 @@ admin.site.register(Countries, CountriesAdmin)
 admin.site.register(Skills, SkillsAdmin)
 admin.site.register(Issues, IssuesAdmin)
 admin.site.register(Nationality, NationalityAdmin)
+admin.site.register(Language, NamedObjectAdmin)
+admin.site.register(Region, NamedObjectAdmin)
+admin.site.register(Interest, NamedObjectAdmin)

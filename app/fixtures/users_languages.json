@@ -1,0 +1,72 @@
+[
+{
+    "pk": 1, 
+    "model": "users.language", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "English", 
+        "name": "English"
+    }
+},
+{
+    "pk": 2, 
+    "model": "users.language", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "French", 
+        "name": "French"
+    }
+},
+{
+    "pk": 3, 
+    "model": "users.language", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Spanish", 
+        "name": "Spanish"
+    }
+},
+{
+    "pk": 4, 
+    "model": "users.language", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Arabic", 
+        "name": "Arabic"
+    }
+},
+{
+    "pk": 5, 
+    "model": "users.language", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Farsi", 
+        "name": "Farsi"
+    }
+},
+{
+    "pk": 6, 
+    "model": "users.language", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Chinese", 
+        "name": "Chinese"
+    }
+},
+{
+    "pk": 7, 
+    "model": "users.language", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Russian", 
+        "name": "Russian"
+    }
+}
+]

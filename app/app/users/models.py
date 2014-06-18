@@ -58,6 +58,35 @@ class Residence(models.Model):
         ordering = ['residence']
 
 
+class NamedObject(models.Model):
+    name = models.CharField(_('name'), max_length=255, default='')
+
+    class Meta:
+        abstract = True
+        ordering = 'name',
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
+
+class Language(NamedObject):
+    class Meta:
+        verbose_name = _('language')
+        verbose_name_plural = _('languages')
+
+
+class Region(NamedObject):
+    class Meta:
+        verbose_name = _('region')
+        verbose_name_plural = _('regions')
+
+
+class Interest(NamedObject):
+    class Meta:
+        verbose_name = _('interest')
+        verbose_name_plural = _('interests')
+
+
 ahr_rating = [
     (0, '0 star'),
     (1, '1 star'),
@@ -81,18 +110,23 @@ class UserProfile(models.Model):
     privacy_settings = JSONField(_('privacy settings'), null=True, blank=True)
     nationality = models.ForeignKey(Nationality, null=True)
     resident_country = models.ForeignKey(Residence, null=True)
+
     skills = models.ManyToManyField(Skills, blank=False, null=True)
     issues = models.ManyToManyField(Issues, blank=False, null=True)
     countries = models.ManyToManyField(Countries, blank=False, null=True)
+    languages = models.ManyToManyField(Language, blank=True, null=True)
+    regions = models.ManyToManyField(Region, blank=True, null=True)
+    interests = models.ManyToManyField(Interest, blank=True, null=True)
+
     is_organisation = models.BooleanField(_('organisation'), default=False)
     is_individual = models.BooleanField(_('individual'), default=True)
     is_journalist = models.BooleanField(_('journalist'), default=False)
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=True)
-    firstlogin = models.BooleanField(_('first_login'), default=True)
     ratecount = models.IntegerField(_('ratecount'), default=0)
     score = models.FloatField(_('score'), default=0)
     interface_lang = models.CharField(_('Interface language'), max_length=3, default='en')
     notperm = JSONField(blank=True)
+    first_login = models.BooleanField(_('first login'), default=True)
 
 
     def get_twitter_url(self):
