@@ -66,10 +66,15 @@ class MarketItem(models.Model):
             self.closed_date = now()
         super(MarketItem, self).save(*args, **kwargs)
 
+    @property
+    def item_type_display(self):
+        return unicode(_(self.item_type[0].upper() + self.item_type[1:].lower()))
+
     def getdict(self, request=None):
         adict = {'fields': {}, 'pk': self.id}
         adict['fields']['pk'] = self.id
         adict['fields']['item_type'] = self.item_type
+        adict['fields']['item_type_display'] = self.item_type_display
         adict['fields']['issues'] = [ob.id for ob in self.issues.all()]
         adict['fields']['countries'] = [ob.id for ob in self.countries.all()]
         adict['fields']['skills'] = [ob.id for ob in self.skills.all()]

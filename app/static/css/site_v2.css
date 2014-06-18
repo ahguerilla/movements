@@ -314,6 +314,23 @@ h6 {
 .content-page h1 {
   font-size: 26px;
 }
+.avatar img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.alert-danger {
+  border: none;
+  color: #262626;
+  background: #ffbeb2 url("../images/v2/flag_icon_red.png") no-repeat 20px center;
+  padding-left: 80px;
+}
+.alert-danger h4 {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  margin-bottom: 0;
+}
 .landing-page {
   padding-top: 30px;
 }
@@ -693,6 +710,98 @@ h6 {
 }
 #marketitems .market-place-item.offer .item-type {
   color: #005d86;
+}
+.view-post .post-header {
+  padding: 10px 0;
+}
+.view-post .post-header span {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 50px;
+  color: #fff;
+}
+.view-post .post-header.offer {
+  background: #005d86 url("../images/v2/offer_icon.png") no-repeat 10px center;
+}
+.view-post .post-header.request {
+  background: #ff4545 url("../images/v2/request_icon.png") no-repeat 10px center;
+}
+.view-post .post-date {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+.view-post h1 {
+  margin-top: 0;
+}
+.view-post .poster {
+  font-family: "HurmeGeometricSans3-SemiBold";
+}
+.view-post .poster .avatar {
+  float: left;
+}
+.view-post .poster .poster-details {
+  float: left;
+  margin-left: 20px;
+}
+.view-post .poster .poster-details .poster-name {
+  margin: 6px 0 5px 0;
+}
+.view-post .poster .poster-details .poster-name a {
+  color: #262626;
+  text-decoration: underline;
+}
+.view-post .post {
+  margin: 20px 0;
+}
+.view-post .post-actions a {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  padding: 5px 0;
+  padding-left: 30px;
+  color: #b7aba5;
+  margin-left: 40px;
+}
+.view-post .post-actions a.recommend {
+  margin-left: 0;
+  background: url("../images/v2/recommend_off.png") no-repeat left 1px;
+}
+.view-post .post-actions a.message {
+  background: url("../images/v2/direct_message_icon.PNG") no-repeat left 4px;
+}
+.view-post .post-actions a.report {
+  background: url("../images/v2/flag_icon_gray.png") no-repeat left 1px;
+}
+.view-post .post-actions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.view-post .post-actions ul li {
+  display: inline-block;
+}
+.view-post .comments {
+  margin-top: 20px;
+}
+.view-post .comments .comments-header {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-size: 18px;
+  border-bottom: 1px solid #cdcbcc;
+  margin-bottom: 15px;
+  padding-bottom: 4px;
+}
+.view-post .comments .comments-header .comment-count {
+  float: right;
+  color: #b7aba5;
+  font-size: 14px;
+}
+.view-post .comments form {
+  margin-bottom: 20px;
+}
+.view-post .comments form .alert {
+  margin-bottom: 10px;
+}
+.view-post .comments form textarea {
+  margin-bottom: 10px;
 }
 
 
