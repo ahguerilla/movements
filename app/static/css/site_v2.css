@@ -155,6 +155,13 @@ body {
   font-family: "LinotypeUnivers-330Light";
   font-size: 16px;
 }
+.avatar img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
 .navbar-default {
   background-color: #f8f6f7;
 }
@@ -212,6 +219,21 @@ body {
 }
 .header-nav .navbar-left .menu-selector.selected .menu-icon {
   background-image: url("../images/v2/hamburger-selected-v2.png");
+}
+.header-nav .navbar-left .nav-avatar {
+  position: absolute;
+  width: 90px;
+  left: 90px;
+  top: 9px;
+  color: #756b65;
+}
+.header-nav .navbar-left .nav-avatar img {
+  float: left;
+  margin-right: 3px;
+}
+.header-nav .navbar-left .nav-avatar .action-font {
+  display: inline-block;
+  margin-top: 6px;
 }
 .home-page-nav {
   height: 85px;
