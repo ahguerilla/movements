@@ -83,6 +83,7 @@
       this.getitemfromto = window.ahr.app_urls.getmarketitemfromto;
       this.item_tmp = _.template($('#item_template').html());
       this.init(options.filterView);
+      this.item_menu_template = _.template($('#item-menu-template').html());
       return this;
     },
 
@@ -93,10 +94,11 @@
       } else {
         ev.preventDefault();
         var $container = $link.parent();
+        var content = this.item_menu_template({hasEdit: $link.data('has-edit')});
         $link.popover({
           title: '',
           html: true,
-          content: _.template($('#item-menu-template').html())({hasEdit: $link.data('edit')}),
+          content: content,
           container: $container,
           placement: 'bottom'
         });
