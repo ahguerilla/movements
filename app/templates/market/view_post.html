@@ -18,7 +18,7 @@
         <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ post.owner }}">{{ post.owner }}</a></div>
         <div class="poster-rating"><span class="rateit"
               data-rateit-readonly="true"
-              data-rateit-value="2"
+              data-rateit-value="{{ post.owner.userprofile.ahr_rating }}"
               data-rateit-min="0"
               data-rateit-starwidth="22"
               data-rateit-starheight="17"
@@ -52,14 +52,34 @@
         <textarea class="form-control" name="comment"></textarea>
         <button class="btn btn-action" type="submit">Post comment</button>
       </form>
+
       <div class="comment-list">
-        <div class="loader text-center"><img src="{{ STATIC_URL }}images/ajax-loader.gif" alt="loading comments"/></div>
+        <div class="loader text-center"><img src="{{ STATIC_URL }}images/ajax-loader.gif" alt="loading comments"/>
+        </div>
+        <div class="content"></div>
       </div>
     </div>
   </div>
 {% endblock %}
 
 {% block endjavascript %}
+  <script type="text/template" id="comment-list-template">
+    <% _.each(comments, function(comment) { %>
+      <div class="comment">
+        <div class="avatar"><img src="<%- comment.fields.avatar %>"></div>
+        <div class="comment-header">
+          <a href="<%- comment.fields.profile_url %>" alt="poster profile"><%- comment.fields.username %></a>,
+          <%- comment.fields.pub_date_formatted %>
+        </div>
+        <div class="comment-body"><%- comment.fields.contents %></div>
+      </div>
+    <% }); %>
+  </script>
   <script type="text/javascript">
+    (function() {
+      ahr.initViewPost({
+        getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}'
+      });
+    })();
   </script>
 {% endblock %}

@@ -687,7 +687,10 @@ h6 {
   margin-left: 20px;
   display: inline-block;
 }
-.exchange-filters .categories ul.category-menu > li a {
+.exchange-filters .categories ul.category-menu > li a,
+.exchange-filters .categories ul.category-menu > li a:hover,
+.exchange-filters .categories ul.category-menu > li a:focus {
+  text-decoration: none;
   height: 34px;
   display: inline-block;
 }
@@ -995,6 +998,35 @@ h6 {
 }
 .view-post .comments form textarea {
   margin-bottom: 10px;
+}
+.view-post .comment {
+  min-height: 60px;
+  margin-bottom: 30px;
+  position: relative;
+  padding-left: 70px;
+}
+.view-post .comment .avatar {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.view-post .comment .comment-header {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.view-post .comment .comment-header a {
+  color: #262626;
+  text-decoration: underline;
+}
+.view-post .comment .comment-body {
+  background-color: #fff;
+  padding: 15px;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -moz-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -ms-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -o-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
 }
 
 
