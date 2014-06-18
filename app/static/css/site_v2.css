@@ -179,6 +179,40 @@ body {
 .header-nav .header-nav-wrapper .main-logo {
   padding-top: 15px;
 }
+.header-nav .navbar-left {
+  position: relative;
+}
+.header-nav .navbar-left .menu-selector {
+  position: absolute;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  top: -5px;
+  left: 0;
+  width: 90px;
+  height: 55px;
+  border-bottom: 4px solid #e0d7d8;
+  color: #756b65;
+}
+.header-nav .navbar-left .menu-selector .menu-icon {
+  background-image: url("../images/v2/hamburger-v2.png");
+  width: 30px;
+  height: 30px;
+  margin-top: 8px;
+  margin-right: 3px;
+  float: left;
+}
+.header-nav .navbar-left .menu-selector .action-font {
+  padding-top: 3px;
+}
+.header-nav .navbar-left .menu-selector.selected {
+  border-bottom: 4px solid #b6aba5;
+  background-color: #b6aba5;
+  color: #fff;
+}
+.header-nav .navbar-left .menu-selector.selected .menu-icon {
+  background-image: url("../images/v2/hamburger-selected-v2.png");
+}
 .home-page-nav {
   height: 85px;
   color: #756b65;
@@ -417,9 +451,6 @@ h6 {
   position: absolute;
   right: 0;
   top: 0;
-}
-.landing-page {
-  padding-top: 10px;
 }
 .landing-page .landing-content {
   color: #fff;

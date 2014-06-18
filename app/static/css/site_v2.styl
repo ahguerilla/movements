@@ -183,6 +183,34 @@ body
     text-align center
     .main-logo
       padding-top 15px
+  .navbar-left
+    position relative
+    .menu-selector
+      position absolute
+      padding-left 5px
+      padding-right 5px
+      padding-top 5px
+      top -5px
+      left 0
+      width 90px
+      height 55px
+      border-bottom 4px solid $border-color
+      color $inactive-font
+      .menu-icon
+        background-image url("../images/v2/hamburger-v2.png")
+        width 30px
+        height 30px
+        margin-top 8px
+        margin-right 3px
+        float left
+      .action-font
+        padding-top 3px
+    .menu-selector.selected
+      border-bottom 4px solid $footer-color
+      background-color $footer-color
+      color #fff
+      .menu-icon
+        background-image url("../images/v2/hamburger-selected-v2.png")
 
 $home-head-height = 85px
 .home-page-nav
@@ -375,11 +403,9 @@ $page-banner-height = 600px
     top 0
 
 .landing-page
-  padding-top 10px
   .landing-content
     color #fff
     height 499px
-
     h3
       color #fff
       font-family "HurmeGeometricSans3-SemiBold"
