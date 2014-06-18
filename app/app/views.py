@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.conf import settings as django_settings
 
+
 def home(request):
     if request.user.is_authenticated() and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('exchange'))
@@ -17,11 +18,11 @@ def home(request):
 
 
 def terms_and_conditions(request):
-    return render_to_response('ahr/terms_and_conditions.html', context_instance=RequestContext(request))
+    return HttpResponseRedirect('/movements/terms-and-conditions/')
 
 
 def contact_us(request):
-    return render_to_response('ahr/contact_us.html', context_instance=RequestContext(request))
+    return HttpResponseRedirect('/movements/contact-us/')
 
 
 def exchange(request):
