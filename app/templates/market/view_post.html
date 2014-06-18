@@ -71,7 +71,8 @@
           <a href="<%- comment.fields.profile_url %>" alt="poster profile"><%- comment.fields.username %></a>,
           <%- comment.fields.pub_date_formatted %>
         </div>
-        <div class="comment-body"><%- comment.fields.contents %></div>
+        <div class="comment-body">
+          <pre><%- comment.fields.contents %></pre></div>
       </div>
     <% }); %>
   </script>

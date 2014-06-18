@@ -1053,6 +1053,13 @@ h6 {
   -o-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
   box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
 }
+.view-post .comment .comment-body pre {
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: "LinotypeUnivers-330Light";
+  font-size: 16px;
+}
 
 
 @media (max-width: 992px) {
