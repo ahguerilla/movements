@@ -301,18 +301,6 @@
 
     }
   });
-
-  window.ahr.marketitem_widget = window.ahr.marketitem_widget || {};
-  window.ahr.marketitem_widget.initWidget = function (element, market, del_callback, edit_callback) {
-    var marketitem_widget = new MarketItemWidget({
-      el: element,
-      market: market,
-      del_callback: del_callback,
-      edit_callback: edit_callback
-    });
-    return marketitem_widget;
-  };
-
 })();
 </script>
 {% endcompress %}

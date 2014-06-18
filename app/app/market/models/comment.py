@@ -17,23 +17,23 @@ class Comment(models.Model):
     published = models.BooleanField(_('is published?'), default=True)
     deleted = models.BooleanField(_('deleted'), default=False)
 
-
     class Meta:
         ordering = ['-pub_date']
         app_label="market"
 
     def save(self, *args, **kwargs):
         model = self.__class__
-        self.item.commentcount+=1
+        self.item.commentcount += 1
         self.item.save()
 
     def getdict(self):
         adict={'fields':{}}
         adict['fields']['pub_date'] = str(self.pub_date)
+        adict['fields']['pub_date_formatted'] = self.pub_date.strftime('%H:%M on %d %b %Y')
         adict['fields']['contents'] = self.contents
         adict['pk'] = self.id
         adict['fields']['ownerid'] = self.owner.id
-        adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username,80])
+        adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username, 60])
         adict['fields']['username'] = self.owner.username
         adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[self.owner.username])
         adict['score'] = self.owner.userprofile.score
