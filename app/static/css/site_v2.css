@@ -188,7 +188,7 @@ body {
   padding-right: 5px;
   padding-top: 5px;
   top: -5px;
-  left: 0;
+  left: -5px;
   width: 90px;
   height: 55px;
   border-bottom: 4px solid #e0d7d8;
@@ -269,7 +269,7 @@ body {
 }
 #main-cms-nav li {
   list-style: none;
-  line-height: 30px;
+  line-height: 27px;
 }
 footer {
   padding-bottom: 30px;

@@ -54,7 +54,6 @@
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
           <div class="action-font">Menu</div>
-{#          <a ><img src="{{ STATIC_URL }}images/v2/hamburger-v2.png" alt="Content Menu">Menu</a>#}
         </div>
       </div>
     {% if user.is_authenticated %}
@@ -68,7 +67,7 @@
       </div>
     {% endif %}
     <div class="header-nav-wrapper">
-      <img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png">
+      <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>
     </div>
   </div>
 </nav>
@@ -81,6 +80,17 @@
       </div>
       <div class="col-xs-4">
         <h4>Navigation</h4>
+        {% if not user.is_authenticated %}
+          <li>
+            <a href="{% url 'account_login' %}">Login</a>
+          </li>
+          <li>
+            <a href="{% url 'signup_start' %}">Sign up</a>
+          </li>
+        {% endif %}
+          <li>
+            <a href="{% url 'show_market' %}">Exchange</a>
+          </li>
         {% show_menu_below_id "col2" 0 100 100 100 %}
       </div>
       <div class="col-xs-4">
