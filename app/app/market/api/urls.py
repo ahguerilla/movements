@@ -121,21 +121,9 @@ market_comment_patterns = patterns('',
         'app.market.api.views.comments.add_comment',
         name="add_comment"),
 
-    url(r'(?P<rtype>\S+)/comment/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.comments.get_comment',
-        name="get_comment"),
-
-    url(r'(?P<rtype>\S+)/comment/get/count/(?P<obj_id>\d+)$',
-        'app.market.api.views.comments.get_comment_count',
-        name="get_comment_count"),
-
     url(r'(?P<rtype>\S+)/comments/get/(?P<obj_id>\d+)/last/(?P<count>\d+)$',
         'app.market.api.views.comments.get_comments',
         name="get_comments_last"),
-
-    url(r'(?P<rtype>\S+)/comments/get/(?P<obj_id>\d+)/range/(?P<st_date>\S+)/(?P<end_date>\S+)$',
-        'app.market.api.views.comments.get_commentids_range',
-        name="get_comments_range"),
 
     url(r'(?P<rtype>\S+)/comment/edit/(?P<obj_id>\d+)$',
         'app.market.api.views.comments.edit_comment',

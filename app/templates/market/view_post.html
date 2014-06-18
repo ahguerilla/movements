@@ -79,7 +79,8 @@
   <script type="text/javascript">
     (function() {
       ahr.initViewPost({
-        getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}'
+        getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}',
+        addCommentUrl: "{% url 'add_comment' 'json' post.id %}"
       });
     })();
   </script>

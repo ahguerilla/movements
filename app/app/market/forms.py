@@ -64,17 +64,15 @@ class RequestForm(forms.ModelForm):
         return super(RequestForm, self).save(commit=commit)
 
 
-class commentForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
         model = market.models.Comment
         fields = ['contents', ]
 
-    def save(self, commit=False, *args, **kwargs):
-        instance = super(commentForm, self).save(commit=commit, *args, **kwargs)
-        if instance.pk == None:
-            instance.owner = self.cleaned_data['owner']
-            instance.item = self.cleaned_data['item']
-        return instance
+    def save(self, owner, item, commit=True):
+        self.instance.owner = owner
+        self.instance.item = item
+        return super(CommentForm, self).save(commit=commit)
 
 
 def save_market_item(form, owner):

@@ -1,10 +1,10 @@
 from datetime import datetime
 from django.db import models
+from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 import django.contrib.auth as auth
 import tinymce
-import uuid
 
 from .market import MarketItem
 
@@ -19,15 +19,15 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-pub_date']
-        app_label="market"
+        app_label = "market"
 
     def save(self, *args, **kwargs):
-        model = self.__class__
-        self.item.commentcount += 1
+        self.item.commentcount = F('commentcount') + 1
         self.item.save()
+        return super(Comment, self).save(*args, **kwargs)
 
     def getdict(self):
-        adict={'fields':{}}
+        adict = {'fields': {}}
         adict['fields']['pub_date'] = str(self.pub_date)
         adict['fields']['pub_date_formatted'] = self.pub_date.strftime('%H:%M on %d %b %Y')
         adict['fields']['contents'] = self.contents
@@ -38,6 +38,5 @@ class Comment(models.Model):
         adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[self.owner.username])
         adict['score'] = self.owner.userprofile.score
         adict['ratecount'] = self.owner.userprofile.ratecount
-
         return adict
 
