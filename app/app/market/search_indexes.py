@@ -24,12 +24,12 @@ def make_cond(name, value):
 class UserIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.EdgeNgramField(document=True, use_template=True)
     username = indexes.EdgeNgramField()
-    occupation = indexes.EdgeNgramField(model_attr='occupation')
-    bio = indexes.EdgeNgramField(model_attr='bio')
-    expertise = indexes.EdgeNgramField(model_attr='expertise')
-    tag_ling = indexes.EdgeNgramField(model_attr='tag_ling')
-    nationality = indexes.EdgeNgramField(model_attr='nationality')
-    resident_country = indexes.EdgeNgramField(model_attr='resident_country')
+    #occupation = indexes.EdgeNgramField(model_attr='occupation')
+    #bio = indexes.EdgeNgramField(model_attr='bio')
+    #expertise = indexes.EdgeNgramField(model_attr='expertise')
+    #tag_ling = indexes.EdgeNgramField(model_attr='tag_ling')
+    #nationality = indexes.EdgeNgramField(model_attr='nationality')
+    #resident_country = indexes.EdgeNgramField(model_attr='resident_country')
 
     def prepare_username(self,obj):
         return obj.user.username
@@ -39,12 +39,12 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
         if obj.notperm.has_key('resident_country'):
             return ''
         return obj.resident_country.residence
-    
+
 
     def prepare_nationality(self, obj):
         if obj.notperm.has_key('nationality'):
             return ''
-        return obj.nationality.nationality        
+        return obj.nationality.nationality
 
 
     def prepate_bio(self, obj):
@@ -56,18 +56,18 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_expertise(self, obj):
         if obj.notperm.has_key('expertise'):
             return ''
-        return obj.expertise        
-    
-    
+        return obj.expertise
+
+
     def prepare_tag_ling(self, obj):
         if obj.notperm.has_key('tag_ling'):
             return ''
-        return obj.tag_ling      
-    
+        return obj.tag_ling
+
     def prepare_occupation(self, obj):
         if obj.notperm.has_key('occupation'):
             return ''
-        return obj.occupation      
+        return obj.occupation
     
         
     def get_model(self):
