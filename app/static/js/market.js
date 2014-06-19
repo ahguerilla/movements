@@ -3,9 +3,11 @@
     type: '',
     regions: [],
     skills: [],
+    showHidden: false,
 
     events: {
       'click .type-menu a': 'setTypeFilter',
+      'click .hidden-menu a': 'setHiddenFilter',
       'click .region-filter a': 'setRegionFilter',
       'click .skill-filter a': 'setSkillsFilter'
     },
@@ -52,6 +54,15 @@
       this.trigger('filter');
     },
 
+    setHiddenFilter: function(ev) {
+      ev.preventDefault();
+      this.$el.find('.hidden-menu li.active').removeClass('active');
+      var $filterLink = $(ev.currentTarget);
+      $filterLink.parents('li').addClass('active');
+      this.showHidden = $filterLink.data('filter');
+      this.trigger('filter');
+    },
+
     setTypeFilter: function(ev) {
       ev.preventDefault();
       this.$el.find('.type-menu li.active').removeClass('active');
@@ -65,6 +76,7 @@
       if (this.type) {
         data.types = this.type;
       }
+      data.showHidden = this.showHidden;
     }
   });
 
@@ -90,24 +102,49 @@
       return this;
     },
 
+    createItemPopover: function($link) {
+      var $container = $link.parent();
+      var $itemContainer = $link.parents('.market-place-item');
+      var toggled = {
+        hide: $itemContainer.data('hidden'),
+        stick: $itemContainer.data('stick')
+      };
+      var content = this.item_menu_template({
+        hasEdit: $itemContainer.data('has-edit'),
+        toggled: toggled
+      });
+      $link.popover({
+        title: '',
+        html: true,
+        content: content,
+        container: $container,
+        placement: 'bottom'
+      });
+      $link.popover('show');
+      $link.data('popover-made', true);
+    },
+
     showMenuItem: function(ev) {
       var $link = $(ev.currentTarget);
       if ($link.data('popover-made')) {
         return;
       } else {
         ev.preventDefault();
-        var $container = $link.parent();
-        var content = this.item_menu_template({hasEdit: $link.data('has-edit')});
-        $link.popover({
-          title: '',
-          html: true,
-          content: content,
-          container: $container,
-          placement: 'bottom'
-        });
-        $link.popover('show');
-        $link.data('popover-made', true);
+        this.createItemPopover($link);
       }
+    },
+
+    setItemAttibute: function($container, attribute, value) {
+      var data = {};
+      data[attribute] = value;
+      $.ajax({
+        url: $container.data('attributes-url'),
+        method: 'POST',
+        context: this,
+        data: data,
+        success: this.initInfiniteScroll
+      });
+      $container.data(attribute, value);
     },
 
     itemAction: function(ev) {
@@ -121,16 +158,28 @@
       var refresh = function () {
         that.initInfiniteScroll();
       }
+
+      var remakePopover = false
       if (action === 'close') {
         var closeUrl = $container.data('close-url');
         this.closeDialog.close(pk, itemType, closeUrl, refresh);
       } else if (action === 'report') {
         this.reportDialog.showReport($container.data('report-url'));
       } else if (action === 'hide') {
+        this.setItemAttibute($container, 'hidden', !$container.data('hidden'))
+        remakePopover = true;
       } else if (action === 'stick') {
+        this.setItemAttibute($container, 'stick', !$container.data('stick'))
+        remakePopover = true;
       }
-      var popover = $container.find('.item-menu');
-      popover.popover('toggle');
+
+      var $popover = $container.find('.item-menu');
+      if (remakePopover) {
+        $popover.popover('destroy');
+        $popover.data('popover-made', false);
+      } else {
+        $popover.popover('toggle');
+      }
     }
   });
 

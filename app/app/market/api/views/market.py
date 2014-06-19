@@ -178,12 +178,6 @@ def close_market_item(request, obj_id, rtype):
 
 
 @login_required
-@check_perms_and_get(market.models.MarketItem)
-def user_get_marketitem(request, obj_id, rtype):
-    return return_item_list([request.obj], rtype)
-
-
-@login_required
 def get_user_marketitem_fromto(request, sfrom, to, rtype):
     market_items = market.models.MarketItem.objects.raw(
         *get_raw(request, filter_by_owner=True))[int(sfrom):int(to)]
@@ -240,45 +234,25 @@ def get_notseen_notifications(request, sfrom, to, rtype):
 
 
 @login_required
-def get_views_count(request, obj_id, rtype):
-    views = market.models.MarketItemViewConter.objects.filter(item_id=obj_id).count()
-    return HttpResponse(json.dumps({'result': views}),
-                        mimetype="application" + rtype)
+def set_item_attributes_for_user(request, item_id):
+    hide = request.POST.get('hidden', None)
+    if hide is not None:
+        set_hidden(request.user.id, item_id, hide == 'true')
+    stick = request.POST.get('stick', None)
+    if stick is not None:
+        set_stuck(request.user.id, item_id, stick == 'true')
+    return HttpResponse(json.dumps({'result': True}))
 
 
-@login_required
-def hide_item(request, obj_id, rtype):
-    new_hidden = market.models.MarketItemHidden.objects.get_or_create(viewer_id=request.user.id, item_id=obj_id)[0]
-    new_hidden.save()
-    return HttpResponse(json.dumps({'result': True}),
-                        mimetype="application" + rtype)
+def set_hidden(user_id, item_id, hide):
+    if hide:
+        market.models.MarketItemHidden.objects.get_or_create(viewer_id=user_id, item_id=item_id)
+    else:
+        market.models.MarketItemHidden.objects.filter(viewer_id=user_id, item_id=item_id).delete()
 
 
-@login_required
-def unhide_item(request, obj_id, rtype):
-    result = False
-    hidden = market.models.MarketItemHidden.objects.get(viewer_id=request.user.id, item_id=obj_id)
-    if hidden:
-        hidden.delete()
-        result = True
-    return HttpResponse(json.dumps({'result': result}),
-                        mimetype="application" + rtype)
-
-
-@login_required
-def stick_item(request, obj_id, rtype):
-    new_sticky = market.models.MarketItemStick.objects.get_or_create(viewer_id=request.user.id, item_id=obj_id)[0]
-    new_sticky.save()
-    return HttpResponse(json.dumps({'result': True}),
-                        mimetype="application" + rtype)
-
-
-@login_required
-def unstick_item(request, obj_id, rtype):
-    result = False
-    sticky = market.models.MarketItemStick.objects.get(viewer_id=request.user.id, item_id=obj_id)
-    if sticky:
-        sticky.delete()
-        result = True
-    return HttpResponse(json.dumps({'result': result}),
-                        mimetype="application" + rtype)
+def set_stuck(user_id, item_id, stick):
+    if stick:
+        market.models.MarketItemStick.objects.get_or_create(viewer_id=user_id, item_id=item_id)
+    else:
+        market.models.MarketItemStick.objects.filter(viewer_id=user_id, item_id=item_id).delete()

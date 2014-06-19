@@ -29,14 +29,6 @@
       market: "{% url 'show_market' %}",
       getposts:  "{% url 'posts'  %}",
       getmarketitemfromto: "{% url 'get_marketitems_fromto' 'json' 0 0 %}".slice(0,-1),
-      getViewsCount: "{% url 'marketitem_views_count' 'json' 0 %}".slice(0,-1),
-      setMarketItemHide: "{% url 'marketitem_hide' 'json' 0 %}".slice(0,-1),
-      setMarketItemunHide: "{% url 'marketitem_unhide' 'json' 0 %}".slice(0,-1),
-
-      setMarketItemStick: "{% url 'stick_item' 'json' 0 %}".slice(0,-1),
-      setMarketItemunStick: "{% url 'unstick_item' 'json' 0 %}".slice(0,-1),
-
-      getuseritem: "{% url 'user_get_marketitem' 'json' 0 %}".slice(0,-1),
       getusermarketitemsfromto : "{% url 'get_usermarketitems_fromto' 'json' 0 0 %}".slice(0,-1),
       sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
       senditemrecommendation: "{% url 'send_recommendation' 'json' 'item' 0 %}".slice(0,-1),
