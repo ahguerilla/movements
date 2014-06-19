@@ -321,13 +321,6 @@ class AccAdapter(DefaultAccountAdapter):
         user.email = request.session.pop('email')
         user.set_password(request.session.pop('password'))
         user.save()
-
-        # # needs to create user and profile in transaction
-        # # and add profile information from request
-        # user_profile = UserProfile()
-        # user_profile.user = user
-        # user_profile.save()
-
         self.send_vetting_email(user, form)
         return user
 
