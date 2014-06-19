@@ -69,25 +69,22 @@
       this.disableSend();
       this.getval(ev);
       if (this.subject !== '' && this.message !== '') {
-        window.ahr.getcsrf(function (csrf) {
-          var dfrd = $.ajax({
-            url: window.ahr.app_urls.sendmessage + that.username,
-            type: 'POST',
-            dataType: 'json',
-            data: {
-              csrfmiddlewaretoken: csrf.csrfmiddlewaretoken,
-              subject: that.subject,
-              message: that.message
-            }
-          });
-          dfrd.done(function () {
-            that.$dialog.modal('hide');
-            that.enableSend();
-          });
-          dfrd.fail(function (data) {
-            that.alert(data.responseJSON.message + '{%trans ". Please try again."%}', that.alert_place);
-            that.enableSend();
-          });
+        var dfrd = $.ajax({
+          url: window.ahr.app_urls.sendmessage + that.username,
+          type: 'POST',
+          dataType: 'json',
+          data: {
+            subject: that.subject,
+            message: that.message
+          }
+        });
+        dfrd.done(function () {
+          that.$dialog.modal('hide');
+          that.enableSend();
+        });
+        dfrd.fail(function (data) {
+          that.alert(data.responseJSON.message + '{%trans ". Please try again."%}', that.alert_place);
+          that.enableSend();
         });
       } else {
         this.alert('{%trans "Please provide a subject and message."%}', that.alert_place);

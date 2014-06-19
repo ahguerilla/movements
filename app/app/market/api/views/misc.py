@@ -1,21 +1,10 @@
 import json
 
 from app.market.api.utils import *
-import app.market as market
 import app.users as users
-from django.core import serializers
-from django.core.context_processors import csrf
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404,render_to_response, RequestContext
+from django.http import HttpResponse
 from postman.models import Message
 from django.contrib.auth.decorators import login_required
-
-
-@login_required
-def get_CSRF_token(request,rtype):
-    c={}
-    c.update(csrf(request))
-    return HttpResponse( json.dumps({'csrfmiddlewaretoken': c['csrf_token'].decode()}), mimetype="application/"+rtype)
 
 
 #@login_required

@@ -37,125 +37,129 @@
 {% compress js inline %}
 <script type="text/javascript">
 (function(){
-    var CloseItemDialogView = window.ahr.item_form_base.extend({
-        el: '#close_item_dialog',
+  window.ahr.CloseItemDialogView = window.ahr.BaseView.extend({
+    el: '#close_item_dialog',
 
-        events: {
-          'hide.bs.modal': 'dialogClosing'
-        },
+    events: {
+      'hide.bs.modal': 'dialogClosing',
+      'submit': 'submit'
+    },
 
-        dialogClosing: function(ev){
-          ev.stopImmediatePropagation();
-          this.emptyTheForm();
-        },
+    initialize: function () {
+      this.widgets = [];
+    },
 
-        init: function () {
-          _.extend(this.events,{
+    dialogClosing: function(ev){
+      ev.stopImmediatePropagation();
+      this.emptyTheForm();
+    },
 
-          });
-        },
+    close: function(item_id, item_type, close_url, callback){
+      $('#' + this.el.id + ' #itemformerror').empty();
+      $('#' + this.el.id + ' .error').empty();
 
-        close: function(item_id, item_type, close_url, callback){
-          $('#' + this.el.id + ' #itemformerror').empty();
-          $('#' + this.el.id + ' .error').empty();
+      this.item_id = item_id;
+      this.item_type = item_type;
+      this.url = close_url;
+      this.callback = callback;
 
-          this.item_id = item_id;
-          this.item_type = item_type;
-          this.url = close_url;
-          this.del_callback = callback;
+      $.ajax({
+        url: this.url,
+        context: this,
+        success: this.setQuestionnaire
+      });
+    },
 
-          $.ajax({
-            url: this.url,
-            context: this,
-            success: this.setQuestionnaire
-          });
-        },
+    setQuestionnaire: function(data) {
+      this.questionnaire = data.questionnaire;
+      var templateArgs = {
+        title: this.questionnaire.questionnaire_title,
+        questions: this.questionnaire.questions
+      };
+      var questionnaire_form = _.template($('#close-item-form-template').html(), templateArgs);
+      $('#questionnaire_form').html(questionnaire_form);
 
-        setQuestionnaire: function(data) {
-          this.questionnaire = data.questionnaire;
-          var templateArgs = {
-            title: this.questionnaire.questionnaire_title,
-            questions: this.questionnaire.questions
-          };
-          var questionnaire_form = _.template($('#close-item-form-template').html(), templateArgs);
-          $('#questionnaire_form').html(questionnaire_form);
+      this.makeWidget();
+      this.showModal();
+    },
 
-          this._makeWidget();
-          this.showModal();
-        },
+    makeWidget: function () {
+      var widgets = {},
+          widget;
+      var questions = this.questionnaire.questions;
+      for (var i in questions) {
+          var question = questions[i];
+          widget = window.ahr.textarea_widget.initWidget(
+              '#question_' + question.question_id,
+              {title: question.question_text,
+               jsonfield: 'question_' + question.question_id,
+               placeholder: '{%trans "Please enter your answer"%}'},
+              null);
+          widgets['question_' + question.question_id] = widget;
+      }
+      this.widgets = widgets;
+    },
 
-        _makeWidget: function () {
-            var widgets = {},
-                widget;
-            var questions = this.questionnaire.questions;
-            for (var i in questions) {
-                var question = questions[i];
-                widget = window.ahr.textarea_widget.initWidget(
-                    '#question_' + question.question_id,
-                    {title: question.question_text,
-                     jsonfield: 'question_' + question.question_id,
-                     placeholder: '{%trans "Please enter your answer"%}'},
-                    null);
-                widgets['question_' + question.question_id] = widget;
-            }
-            this.widgets = widgets;
-        },
+    showModal: function () {
+      $('#' + this.el.id + ' #itemformerror').empty();
+      var $close_modal_title = $('#close_modal_title');
+      $close_modal_title.text($close_modal_title.data(this.item_type + '_title'));
+      this.$el.modal('show');
+    },
 
-        showModal: function () {
-            this.closing = false;
-            var that = this;
-            $('#' + that.el.id + ' #itemformerror').empty();
-            var $close_modal_title = $('#close_modal_title');
-            $close_modal_title.text($close_modal_title.data(this.item_type + '_title'));
+    getFormData: function(){
+      var retdict = {};
+      var widgets = this.widgets;
+      for (var i in widgets) {
+          var widget = widgets[i];
+          retdict[i] = widget.getval();
+      }
+      return retdict;
+    },
 
-            that.$el.modal('show');
-            window.ahr.getcsrf(function (csrf) {
-                if (csrf == false) {
-                    that.alert('{%trans "Unable to connect to the server. please try again in a few minutes"%}','#infobar');
-                    return;
-                }
-                that.csrf = csrf.csrfmiddlewaretoken;
-            });
-        },
+    emptyTheForm: function () {
+      $('input,textarea', $('#requestdialog')).val('');
+    },
 
-        getFormData: function(){
-          var retdict = {};
-          var widgets = this.widgets;
-          for (var i in widgets) {
-              var widget = widgets[i];
-              retdict[i] = widget.getval();
-          }
-          retdict.csrfmiddlewaretoken = this.csrf;
-          return retdict;
-        },
+    submit: function (e) {
+      e.preventDefault();
+      var that = this;
+      $('#' + that.el.id + ' #itemformerror').empty();
+      $('#' + that.el.id + ' .error').empty();
 
-        emptyTheForm: function () {
-          $('input,textarea', $('#requestdialog')).val('');
-        },
+      var dfrd = $.ajax({
+        type: 'POST',
+        url: this.url,
+        dataType: 'json',
+        traditional: true,
+        data: this.getFormData()
+      });
 
-        initialize: function () {
-          this.changing = false;
-          this.widgets = [];
-          _.extend(this.events, {
-            'submit': 'submit'
-          });
-          this.init();
-        },
+      dfrd.done(function () {
+        that.aftersubmit();
+        return true;
+      });
 
-        aftersubmit: function(){
-          this.closing = true;
-          this.$el.modal('hide');
-          this.emptyTheForm();
-          if (typeof this.del_callback == "function") {
-              this.del_callback(this.item_id);
+      dfrd.fail(function (data) {
+        for (var item in data.responseJSON.errors) {
+          $('.' + data.responseJSON.errors[item][0] + '.error', $(that.el)).html(data.responseJSON.errors[item][1]);
+          if (data.responseJSON.errors[item][0] == "__all__") {
+            that.alert(data.responseJSON.errors[item][1], '#' + that.el.id + ' #itemformerror');
           }
         }
-    });
+      });
 
-    window.ahr.close_marketitem_form_dialog = window.ahr.close_marketitem_form_dialog || {};
-    window.ahr.close_marketitem_form_dialog.initItem = function(item){
-        return new CloseItemDialogView(item);
-    };
+      return false;
+    },
+
+    aftersubmit: function(){
+      this.$el.modal('hide');
+      this.emptyTheForm();
+      if (typeof this.callback == "function") {
+          this.callback(this.item_id);
+      }
+    }
+  });
 })();
 </script>
 {% endcompress %}

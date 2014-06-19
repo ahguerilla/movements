@@ -56,32 +56,25 @@
 
         sendreport: function(){
           var that = this;
-          window.ahr.getcsrf(function(csrf){
-            if(csrf==false){
-              that.alert('{%trans "Unable to send report. please try again"%}','#reporterror');
-              return;
-              }
-            $('.senduserreport').attr('disabled','disabled');
-            $.ajax({
-                type: "POST",
-                url: window.ahr.app_urls.reportuser + that.username,
-                dataType: 'json',
-                data: {
-                  "csrfmiddlewaretoken": csrf.csrfmiddlewaretoken,
-                  "contents": $("#reportdialog #content").val()
-                },
-                success: function(data) {
-                  $('#reportdialog').modal('hide');
-                  $('.senduserreport').removeAttr('disabled');
-                },
-                statusCode: {
-                  400: function(data) {
-                  console.log(data);
-                  that.alert(data.responseJSON.errors[0].errors[0],'#reporterror');
-                  $('.senduserreport').removeAttr('disabled');
-                  },
+          $('.senduserreport').attr('disabled','disabled');
+          $.ajax({
+              type: "POST",
+              url: window.ahr.app_urls.reportuser + that.username,
+              dataType: 'json',
+              data: {
+                "contents": $("#reportdialog #content").val()
+              },
+              success: function(data) {
+                $('#reportdialog').modal('hide');
+                $('.senduserreport').removeAttr('disabled');
+              },
+              statusCode: {
+                400: function(data) {
+                console.log(data);
+                that.alert(data.responseJSON.errors[0].errors[0],'#reporterror');
+                $('.senduserreport').removeAttr('disabled');
                 }
-              });
+              }
             });
         },
 

@@ -39,10 +39,6 @@ market_user_patterns = patterns('',
         'app.market.api.views.users.get_usernames',
         name="user_get_usernames"),
 
-    url(r'(?P<rtype>\S+)/csrftoken/get$',
-        'app.market.api.views.misc.get_CSRF_token',
-        name="get_csrftoken"),
-
     url(r'(?P<rtype>\S+)/issues/get$',
         'app.market.api.views.misc.get_issues',
         name="get_issues"),

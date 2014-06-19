@@ -1025,6 +1025,13 @@ h6 {
 .view-post .post {
   margin: 20px 0;
 }
+.view-post .post pre {
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: "LinotypeUnivers-330Light";
+  font-size: 16px;
+}
 .view-post .post-actions a {
   font-family: "HurmeGeometricSans3-SemiBold";
   padding: 5px 0;

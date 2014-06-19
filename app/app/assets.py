@@ -20,7 +20,6 @@ js = Bundle(
         './js/lib/jquery.cookie.js',
         './js/app_common.js',
         './js/base.js',
-        './js/item_form_base.js',
         './js/marketbase.js',
         './js/market.js',
         './js/users.js',

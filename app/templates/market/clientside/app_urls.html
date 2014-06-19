@@ -13,7 +13,6 @@
       postmanwrite: "{% url 'postman_write' 'a' %}".slice(0,-1),
       postmanreply: "{% url 'postman_reply' 0 %}".slice(0,-1),
 
-      getcsrf: "{% url 'get_csrftoken' 'json' %}",
       getprofile: "{% url 'get_userprofile' 'json' 0 %}".slice(0,-1),
       getavatar: "{% url 'get_avatar' 'json' 0 0 %}".slice(0,-1),
       getusercount: "{% url 'get_usercount' 'json' %}",
@@ -44,7 +43,6 @@
       senduserrecommendation: "{% url 'send_recommendation' 'json' 'user' 0 %}".slice(0,-1),
       marketsetrate: "{% url 'market_set_rate' 'json' 0 %}".slice(0,-1),
 
-      reportpost: "{% url 'report_post' 'json' 0 %}".slice(0,-1),
       reportuser: "{% url 'report_user' 'json' 0 %}".slice(0,-1),
 
       getmarketnotificationsfromto: "{% url 'get_notifications_fromto' 'json' 0 0 %}".slice(0,-1),

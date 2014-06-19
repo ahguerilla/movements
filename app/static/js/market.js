@@ -81,11 +81,12 @@
 
     initialize: function (options) {
       this.item_type = 'item';
-      this.getitemfromto = window.ahr.app_urls.getmarketitemfromto;
+      this.getitemfromto = ahr.app_urls.getmarketitemfromto;
       this.item_tmp = _.template($('#item_template').html());
       this.init(options.filterView);
       this.item_menu_template = _.template($('#item-menu-template').html());
-      this.closeDialog = ahr.close_marketitem_form_dialog.initItem();
+      this.closeDialog = new ahr.CloseItemDialogView();
+      this.reportDialog = new ahr.ReportPostView();
       return this;
     },
 
@@ -116,10 +117,15 @@
       var $container = $link.parents('.market-place-item');
       var pk = $container.data('item-id');
       var itemType = $container.data('item-type');
+      var that = this;
+      var refresh = function () {
+        that.initInfiniteScroll();
+      }
       if (action === 'close') {
         var closeUrl = $container.data('close-url');
-        this.closeDialog.close(pk, itemType, closeUrl);
+        this.closeDialog.close(pk, itemType, closeUrl, refresh);
       } else if (action === 'report') {
+        this.reportDialog.showReport($container.data('report-url'));
       } else if (action === 'hide') {
       } else if (action === 'stick') {
       }
@@ -128,7 +134,6 @@
     }
   });
 
-  window.ahr = window.ahr || {};
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (filters) {
     var filterView = new MarketFilterView({el: '#exchange-filters'});
