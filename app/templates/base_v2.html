@@ -98,6 +98,9 @@
           <li>
             <a href="{% url 'show_market' %}">Exchange</a>
           </li>
+          <li>
+            <a href="{% url 'user_profile' %}">Profile</a>
+          </li>
         {% show_menu_below_id "col2" 0 100 100 100 %}
       </div>
       <div class="col-xs-4">
@@ -107,8 +110,9 @@
     </div>
   </div>
 </div>
-<div style="height: 20px;"></div>
 {% endblock %}
+
+{% block header_padding %}<div style="height: 20px;"></div>{% endblock %}
 
 {% block content_outside_container %}
 {% endblock %}
@@ -179,11 +183,13 @@
   <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>Offer</a>
 </script>
 <script type="text/template" id="content-menu-template">
-  <div class="nav-menu-item-wrap profile">
-    <div class="spacer"></div>
-    <div class="nav-menu-item"></div>
-    Profile
-  </div>
+  <a href="{% url 'user_profile' %}">
+    <div class="nav-menu-item-wrap profile">
+      <div class="spacer"></div>
+      <div class="nav-menu-item"></div>
+      Profile
+    </div>
+  </a>
   <div class="nav-menu-item-wrap settings">
     <div class="spacer"></div>
     <div class="nav-menu-item"></div>

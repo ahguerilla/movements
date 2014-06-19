@@ -181,7 +181,9 @@ body {
   margin-bottom: 0;
 }
 .header-nav .header-nav-wrapper {
-  text-align: center;
+  position: absolute;
+  left: 50%;
+  margin-left: -75px;
 }
 .header-nav .header-nav-wrapper .main-logo {
   padding-top: 15px;
@@ -1116,6 +1118,77 @@ h6 {
   border: none;
   font-family: "LinotypeUnivers-330Light";
   font-size: 16px;
+}
+.settings-bar {
+  background-color: #b6aba5;
+  border-bottom: 4px solid #e0d7d8;
+}
+.settings-bar .profile-nav-menu {
+  display: table;
+  margin: 0 auto;
+}
+.settings-bar .nav-icon {
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  width: 90px;
+  height: 70px;
+  float: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+.settings-bar .nav-menu-item {
+  width: 90px;
+  margin-top: 5px;
+}
+.settings-bar .spacer {
+  height: 5px;
+}
+.settings-bar .nav-menu-text {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+}
+.settings-bar .nav-icon.selected,
+.settings-bar .nav-icon:hover {
+  cursor: pointer;
+  background-color: #b6aba5;
+  color: #756b65;
+  background-color: #fff;
+}
+.settings-bar .inbox .nav-menu-item {
+  height: 19px;
+  background: url("../images/v2/profile-message-icon.png") center 0 no-repeat;
+}
+.settings-bar .inbox .spacer {
+  height: 10px;
+}
+.settings-bar .nav-icon.inbox:hover .nav-menu-item {
+  background: url("../images/v2/profile-message-icon.png") center -19px no-repeat;
+}
+.settings-bar .profile .nav-menu-item {
+  height: 30px;
+  background: url("../images/v2/profile-profile-icon.png") center 0 no-repeat;
+}
+.settings-bar .nav-icon.profile.selected .nav-menu-item,
+.settings-bar .nav-icon.profile:hover .nav-menu-item {
+  background: url("../images/v2/profile-profile-icon.png") center -30px no-repeat;
+}
+.settings-bar .settings .nav-menu-item {
+  height: 30px;
+  background: url("../images/v2/profile-settings-icon.png") center 0 no-repeat;
+}
+.settings-bar .nav-icon.settings:hover .nav-menu-item {
+  background: url("../images/v2/profile-settings-icon.png") center -30px no-repeat;
 }
 
 

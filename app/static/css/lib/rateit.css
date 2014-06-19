@@ -16,7 +16,7 @@
     position: relative;
     display: -moz-inline-box;
     display: inline-block;
-    background: url('../../images/v2/stars.png');
+    background: url('/static/images/v2/stars.png');
     height: 17px;
     width: 18px;
     outline: none;
@@ -62,7 +62,7 @@
 
 .rateit .rateit-hover
 {
-    background: url('../../images/v2/stars.png') left -34px;
+    background: url('/static/images/v2/stars.png') left -34px;
 }
 .rateit.redstars .rateit-hover
 {
@@ -76,7 +76,7 @@
 
 .rateit .rateit-selected
 {
-    background: url('../../images/v2/stars.png') left -34px;
+    background: url('/static/images/v2/stars.png') left -34px;
 }
 .rateit.redstars .rateit-selected
 {
@@ -92,7 +92,7 @@
 
 .rateit .rateit-preset
 {
-    background: url('../../images/v2/stars.png') left -51px;
+    background: url('/static/images/v2/stars.png') left -51px;
 }
 .rateit.redstars .rateit-preset
 {
@@ -101,7 +101,7 @@
 
 .rateit .rateit-preset-rtl
 {
-    background: url('../../images/v2/stars.png') left -51px;
+    background: url('/static/images/v2/stars.png') left -51px;
 }
 .rateit.redstars .rateit-preset-rtl
 {
