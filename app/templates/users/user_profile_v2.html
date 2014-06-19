@@ -48,6 +48,7 @@
       </div>
     </div>
     <hr />
+    <div class="settings-title">Bio</div>
     <div class="bio">
       {{ user_profile.bio }}
     </div>
@@ -60,7 +61,10 @@
     </div>
   </div>
   <div class="col-xs-6">
-
+    <div id="marketitems"></div>
+    <div id="ajaxloader">
+      <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
+    </div>
   </div>
 </div>
 {% endblock %}

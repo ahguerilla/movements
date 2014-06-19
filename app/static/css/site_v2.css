@@ -484,12 +484,33 @@ h6 {
   font-family: "HurmeGeometricSans3-SemiBold";
   margin-bottom: 0;
 }
+#ajaxloader {
+  text-align: center;
+}
 .errorlist {
   padding: 0;
 }
 .errorlist li {
   color: #f00;
   list-style: none;
+}
+.tags {
+  margin-left: -5px;
+}
+.tags .tag {
+  float: left;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  color: #005d86;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 8px 5px 8px;
+  border: 2px solid #005d86;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
 }
 .page-banner {
   height: 600px;
@@ -1218,6 +1239,11 @@ h6 {
 }
 .setting-page hr {
   border-top: 1px solid #cdcbcc;
+}
+.setting-page .settings-title {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  color: #756b65;
+  margin-bottom: 10px;
 }
 
 
