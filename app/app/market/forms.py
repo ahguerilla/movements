@@ -6,6 +6,7 @@ from postman.forms import WriteForm, FullReplyForm, QuickReplyForm
 
 from tasks.celerytasks import create_notification, update_notifications
 import app.market as market
+from app.users.models import Interest
 
 
 cache = get_cache('default')
@@ -34,10 +35,28 @@ class MarketWriteForm(WriteForm):
         }
 
 
+class SkillForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        kwargs.pop('instance', None)
+        user_skills = kwargs.pop('user_skills')
+        super(SkillForm, self).__init__(*args, **kwargs)
+        for skill in Interest.objects.all():
+            self.fields['interest_%s' % skill.id] = forms.BooleanField(
+                initial=skill.id in user_skills, required=False,
+                label=skill.name)
+
+    def clean(self):
+        cleaned_data = super(SkillForm, self).clean()
+        cleaned_data['interests'] = [
+            f.split('_')[1] for f, v in cleaned_data.iteritems() if v]
+        return cleaned_data
+
+
 class OfferForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'specific_skill', 'receive_notifications']
+        fields = ['title', 'details', 'specific_skill', 'receive_notifications', 'interests']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
         }
@@ -52,10 +71,25 @@ class OfferForm(forms.ModelForm):
 class RequestForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'specific_skill', 'receive_notifications']
+        fields = ['title', 'details', 'specific_skill',
+                  'receive_notifications', 'interests']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
+            'interests': forms.CheckboxSelectMultiple()
         }
+
+    def __init__(self, *args, **kwargs):
+        user_skills = kwargs.pop('user_skills')
+        self.skill_form = SkillForm(user_skills=user_skills, *args, **kwargs)
+        super(RequestForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        data = super(RequestForm, self).clean()
+        if not self.skill_form.is_valid():
+            raise forms.ValidationError(_('Interests are not valid'))
+        else:
+            data['interests'] = self.skill_form.cleaned_data['interests']
+        return data
 
     def save(self, commit=True, *args, **kwargs):
         self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.REQUEST

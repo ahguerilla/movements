@@ -24,16 +24,16 @@
               incididunt
               ut labore et dolore magna aliqua.{% endblocktrans %}
           </p>
-          {% for item in skills %}
+          {% for field in form.skill_form %}
             {% if forloop.counter0|divisibleby:3 %}
               <div class="row">
             {% endif %}
           <div class="col-xs-4">
             <div class="select-checkbox">
-              <input type="checkbox" id="" name="">
-              <label for="checkboxFiveInput"></label>
+              {% render_field field %}
+              <label for="interest_{{ forloop.counter0 }}"></label>
 
-              <div class="select-label">{{ item }}</div>
+              <div class="select-label">{{ field.label }}</div>
             </div>
           </div>
           {% if forloop.last or forloop.counter|divisibleby:3 %}
