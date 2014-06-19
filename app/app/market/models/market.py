@@ -92,10 +92,9 @@ class MarketItem(models.Model):
         adict['fields']['score'] = self.score
         adict['fields']['views'] = self.marketitemviewconter_set.count()
         if request:
-            # TODO this seems to be some crazily inefficient code, this hits a couple of extra queries for every
-            # market item to display
-            adict['fields']['hidden'] = self.marketitemhidden_set.filter(viewer_id=request.user.id).count() > 0
-            adict['fields']['stick'] = self.marketitemstick_set.filter(viewer_id=request.user.id, item_id=self.id).count() > 0
+            adict['fields']['hidden'] = self.marketitemhidden_set.filter(viewer_id=request.user.id).exists()
+            adict['fields']['stick'] = self.marketitemstick_set.filter(viewer_id=request.user.id,
+                                                                       item_id=self.id).exists()
             adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username, 80])
             adict['fields']['hasEdit'] = request.user.id == self.owner.id
         else:

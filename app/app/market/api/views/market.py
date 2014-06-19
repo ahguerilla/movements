@@ -24,11 +24,11 @@ def return_item_list(obj, rtype, request=None):
         mimetype="application/" + rtype)
 
 
-def getStikies(request, hiddens, sfrom, to):
+def get_stickies(request, hiddens, sfrom, to):
     sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
     if request.GET.get('showHidden', 'false') == 'false':
         sticky_objs = sticky_objs.filter(~Q(item_id__in=hiddens))
-    if request.GET.has_key('types'):
+    if 'types' in request.GET:
         sticky_objs = sticky_objs.filter(Q(item__item_type__in=request.GET.getlist('types')))
     sticky_objs = sticky_objs[sfrom:to]
     obj = [i.item for i in sticky_objs]
@@ -121,12 +121,12 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
     to = int(to)
     sfrom = int(sfrom)
     if stickies_count >= to:
-        stickies = getStikies(request, hidden_items, sfrom, to)
+        stickies = get_stickies(request, hidden_items, sfrom, to)
     elif stickies_count <= sfrom:
         stickies = query[sfrom-stickies_count:to-stickies_count]
     else:
         stickies = list(
-            getStikies(request, hidden_items, sfrom, stickies_count))
+            get_stickies(request, hidden_items, sfrom, stickies_count))
         market_items = list(query[:to-stickies_count])
         stickies.extend(market_items)
     retval = return_item_list(stickies, rtype, request)
@@ -189,19 +189,6 @@ def get_user_marketitem_fromto(request, sfrom, to, rtype):
         *get_raw(request, filter_by_owner=True))[int(sfrom):int(to)]
     retval = return_item_list(market_items, rtype)
     return retval
-
-
-# @login_required
-# def get_item_translation(request, obj_id, rtype):
-#     obj = get_object_or_404(market.models.MarketItem.objects.defer('comments'),
-#                             closed_date=None,
-#                             pk=obj_id,
-#                             deleted=False,
-#                             owner__is_active=True)
-#     resp = requests.get(
-#         settings.GOOGLE_TRANS_URL + 'key=' + constance.config.GOOGLE_API_KEY + '&source=ar&target=' + 'en' + '&q=' + obj.details)
-#     retval = return_item_list([obj], rtype)
-#     return retval
 
 
 @login_required

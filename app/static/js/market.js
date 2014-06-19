@@ -116,9 +116,13 @@
       var $container = $link.parents('.market-place-item');
       var pk = $container.data('item-id');
       var itemType = $container.data('item-type');
+      var that = this;
+      var refresh = function () {
+        that.initInfiniteScroll();
+      }
       if (action === 'close') {
         var closeUrl = $container.data('close-url');
-        this.closeDialog.close(pk, itemType, closeUrl);
+        this.closeDialog.close(pk, itemType, closeUrl, refresh);
       } else if (action === 'report') {
       } else if (action === 'hide') {
       } else if (action === 'stick') {
