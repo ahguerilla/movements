@@ -762,6 +762,9 @@ h6 {
 .exchange-filters .categories ul.category-menu .popover-content ul li a.selected:hover {
   background: #beb4ae url("../images/v2/select_tick.png") 210px center no-repeat;
 }
+.exchange-filters .categories ul.category-menu .popover-content ul li a.plain {
+  background-image: none;
+}
 .exchange-filters .type-menu {
   list-style: none;
   margin: 0;
@@ -891,9 +894,9 @@ h6 {
   padding: 4px;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a {
-  background: url("../images/v2/select_plus.png") 210px center no-repeat;
+  background: url("../images/v2/select_plus.png") 110px center no-repeat;
   padding: 10px;
-  width: 240px;
+  width: 140px;
   height: 40px;
   display: block;
   text-decoration: none;
@@ -901,14 +904,17 @@ h6 {
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a:hover {
   color: #fff;
-  background: #beb4ae url("../images/v2/select_plus_hover.png") 210px center no-repeat;
+  background: #beb4ae url("../images/v2/select_plus_hover.png") 110px center no-repeat;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected {
-  background: #fff url("../images/v2/select_tick.png") 210px center no-repeat;
+  background: #fff url("../images/v2/select_tick.png") 110px center no-repeat;
   color: #ff6d50;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected:hover {
-  background: #beb4ae url("../images/v2/select_tick.png") 210px center no-repeat;
+  background: #beb4ae url("../images/v2/select_tick.png") 110px center no-repeat;
+}
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.plain {
+  background-image: none;
 }
 #marketitems .market-place-item .market-item-card .item-menu {
   position: absolute;
@@ -960,6 +966,10 @@ h6 {
 }
 .view-post .poster .avatar {
   float: left;
+}
+.view-post .poster .avatar img {
+  width: 60px;
+  height: 60px;
 }
 .view-post .poster .poster-details {
   float: left;
@@ -1041,6 +1051,10 @@ h6 {
   position: absolute;
   left: 0;
   top: 0;
+}
+.view-post .comment .avatar img {
+  width: 60px;
+  height: 60px;
 }
 .view-post .comment .comment-header {
   font-family: "HurmeGeometricSans3-SemiBold";

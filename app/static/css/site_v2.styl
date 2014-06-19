@@ -608,7 +608,8 @@ $page-banner-height = 600px
 // exchange page
 // **************************************
 
-popoverDropdown()
+popoverDropdown(width)
+  $right-icon = width - 30
   padding 0
   ul
     padding 0
@@ -621,21 +622,23 @@ popoverDropdown()
       border-top 1px solid $border-color
       padding 4px
       a
-        background url('../images/v2/select_plus.png') 210px center no-repeat
+        background url('../images/v2/select_plus.png') $right-icon center no-repeat
         padding 10px
-        width 240px
+        width width
         height 40px
         display block
         text-decoration none
         color #000
       a:hover
         color #fff
-        background $dropdown-hover-bg url('../images/v2/select_plus_hover.png') 210px center no-repeat
+        background $dropdown-hover-bg url('../images/v2/select_plus_hover.png') $right-icon center no-repeat
       a.selected
-        background #fff url('../images/v2/select_tick.png') 210px center no-repeat
+        background #fff url('../images/v2/select_tick.png') $right-icon center no-repeat
         color $dropdown-select-color
       a.selected:hover
-        background $dropdown-hover-bg url('../images/v2/select_tick.png') 210px center no-repeat
+        background $dropdown-hover-bg url('../images/v2/select_tick.png') $right-icon center no-repeat
+      a.plain
+        background-image none
 
 .exchange-filters
   border-bottom 2px solid $separator-color
@@ -662,7 +665,7 @@ popoverDropdown()
       .popover
         border-radius 0
       .popover-content
-        popoverDropdown()
+        popoverDropdown(240px)
   .type-menu
     list-style none
     margin 0
@@ -749,7 +752,7 @@ popoverDropdown()
         .popover
           border-radius 0
         .popover-content
-          popoverDropdown()
+          popoverDropdown(140px)
       .item-menu
         position absolute
         right 10px
@@ -789,6 +792,9 @@ popoverDropdown()
     font-family "HurmeGeometricSans3-SemiBold"
     .avatar
       float left
+      img
+        width 60px
+        height 60px
     .poster-details
       float left
       margin-left 20px
@@ -852,6 +858,9 @@ popoverDropdown()
       position absolute
       left 0
       top 0
+      img
+        width 60px
+        height 60px
     .comment-header
       font-family "HurmeGeometricSans3-SemiBold"
       font-size 14px

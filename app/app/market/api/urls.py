@@ -62,10 +62,6 @@ market_user_patterns = patterns('',
 
 
 market_item_patterns = patterns('',
-    url(r'(?P<rtype>\S+)/useritem/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.user_get_marketitem',
-        name="user_get_marketitem"),
-
     url(r'(?P<rtype>\S+)/item/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
         'app.market.api.views.market.get_marketItem_fromto',
         name="get_marketitems_fromto"),
@@ -74,7 +70,7 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.get_user_marketitem_fromto',
         name="get_usermarketitems_fromto"),
 
-    url(r'(?P<rtype>\S+)/item/close/(?P<obj_id>\d+)$',
+    url(r'item/close/(?P<obj_id>\d+)$',
         'app.market.api.views.market.close_market_item',
         name="close_marketitem"),
 
@@ -82,25 +78,9 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.set_rate',
         name="market_set_rate"),
 
-    url(r'(?P<rtype>\S+)/item/get/count/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.get_views_count',
-        name="marketitem_views_count"),
-
-    url(r'(?P<rtype>\S+)/item/set/hide/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.hide_item',
-        name="marketitem_hide"),
-
-    url(r'(?P<rtype>\S+)/item/set/unhide/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.unhide_item',
-        name="marketitem_unhide"),
-
-    url(r'(?P<rtype>\S+)/item/set/stick/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.stick_item',
-        name="stick_item"),
-
-    url(r'(?P<rtype>\S+)/item/set/unstick/(?P<obj_id>\d+)$',
-            'app.market.api.views.market.unstick_item',
-            name="unstick_item"),
+    url(r'item/set/user_attributes/(?P<item_id>\d+)$',
+        'app.market.api.views.market.set_item_attributes_for_user',
+        name="set_item_attributes_for_user"),
 )
 
 
@@ -123,7 +103,7 @@ market_comment_patterns = patterns('',
 )
 
 report_patterns = patterns('',
-    url(r'(?P<rtype>\S+)/report/(?P<obj_id>\d+)$',
+    url(r'report/(?P<obj_id>\d+)$',
         'app.market.api.views.report.report_marketitem',
         name="report_post"),
 

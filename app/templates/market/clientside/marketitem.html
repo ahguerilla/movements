@@ -2,12 +2,16 @@
 {% load compress %}
 
 <script type="text/template" id="item_template">
-  <div class="market-place-item <%- item_type %> <% if(stick) { %>stuck-item<% } %> <% if (hidden) { %>hidden-item<% } %>"
+  <div class="market-place-item <%- item_type %> <% if(stick) { %>item-stuck<% } %> <% if (hidden) { %>item-hidden<% } %>"
        data-item-id="<%- pk %>"
        data-owner-id="<%- ownerid %>"
        data-close-url="<%- close_url %>"
        data-report-url="<%- report_url %>"
-       data-item-type="<%- item_type %>">
+       data-item-type="<%- item_type %>"
+       data-stick="<%- stick %>"
+       data-hidden="<%- hidden %>"
+       data-has-edit="<%- hasEdit %>"
+       data-attributes-url="<%- attributes_url %>">
     <div class="market-item-card">
       <div class="body">
         <a href="/market/<%- pk %>" alt="Open post">
@@ -21,7 +25,7 @@
         </div>
       </div>
       <div class="item-menu-container">
-        <a class="item-menu" href="#" data-has-edit="<%- hasEdit %>">
+        <a class="item-menu" href="#">
           <img src="{{ STATIC_URL }}images/v2/item_menu_gray_icon.png"/>
         </a>
       </div>
@@ -47,16 +51,22 @@
 <script type="text/template" id="item-menu-template">
   <%
      var actions = [
-       {display: 'Hide', value: 'hide'},
-       {display: 'Stick', value: 'stick'},
+       {display: 'Hide', value: 'hide', toggle: true},
+       {display: 'Stick', value: 'stick', toggle: true},
        {display: 'Report', value: 'report'}];
      if (hasEdit) {
         actions.push({display: 'Close', value: 'close'});
      }
   %>
   <ul class="item-action-menu">
-    <% _.each(actions, function(action) { %>
-    <li><a data-action="<%- action.value %>" href="#"><%- action.display %></a></li>
+    <% _.each(actions, function(action) {
+      var cssClass = '';
+      if (!action.toggle) cssClass += ' plain';
+      else if (toggled[action.value]) cssClass += ' selected';
+    %>
+    <li>
+      <a class="<%- cssClass %>" data-action="<%- action.value %>" href="#"><%- action.display %></a>
+    </li>
     <% }); %>
   </ul>
 </script>
