@@ -84,6 +84,7 @@ class MarketItem(models.Model):
         adict['fields']['owner'] = [self.owner.username]
         adict['fields']['ownerid'] = [self.owner.id]
         adict['fields']['url'] = self.url
+        adict['fields']['close_url'] = reverse('close_marketitem', args=['json', self.id])
         adict['fields']['commentcount'] = self.commentcount
         adict['fields']['usercore'] = self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['userratecount'] = self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0

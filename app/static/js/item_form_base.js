@@ -1,16 +1,9 @@
 (function () {
   window.ahr = window.ahr || {};
   window.ahr.item_form_base = window.ahr.BaseView.extend({
-    el: '#itemform',
-    oncomplete: null,
-    init: function () {
-      this.url = window.ahr.app_urls.addmarketitem + '';
-    },
-
     submit: function (e) {
       e.preventDefault();
       var that = this;
-      $('.itemdialogsave').attr('disabled', 'disabled');
       $('#' + that.el.id + ' #itemformerror').empty();
       $('#' + that.el.id + ' .error').empty();
 
@@ -25,10 +18,6 @@
         if (that.aftersubmit) {
           that.aftersubmit();
         }
-        if (that.oncomplete) {
-          that.oncomplete();
-        }
-        $('.itemdialogsave').removeAttr('disabled');
         return true;
       });
 
@@ -39,28 +28,9 @@
             that.alert(data.responseJSON.errors[item][1], '#' + that.el.id + ' #itemformerror');
           }
         }
-        $('.itemdialogsave').removeAttr('disabled');
       });
 
       return false;
-    },
-
-    initialize: function (item) {
-      var that = this;
-      this.changing = false;
-      this.widgets = [];
-      this.item_obj = null;
-      _.extend(this.events, {
-        'submit': 'submit'
-      });
-      this.init();
-      if (item !== false) {
-        that.url = window.ahr.app_urls.editmarketitem + item[0].pk;
-        that.item_obj = item[0].fields;
-      }
-      that.makeWidget();
     }
-
   });
-
 })();

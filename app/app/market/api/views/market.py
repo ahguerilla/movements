@@ -6,6 +6,8 @@ from haystack.query import SearchQuerySet
 from django.contrib.auth.decorators import login_required
 from app.market.api.utils import *
 import app.market as market
+from app.market.models import Questionnaire
+from app.market.forms import QuestionnaireForm
 from tasks.celerytasks import update_notifications, mark_read_notifications
 
 
@@ -136,8 +138,7 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
 def close_market_item(request, obj_id, rtype):
     market_item = request.obj
 
-    questionnaire = Questionnaire.objects.filter(
-        market_type=market_item.item_type).first()
+    questionnaire = Questionnaire.objects.filter(market_type=market_item.item_type).first()
 
     # Convert questionnaire to json structure.
     questions = [

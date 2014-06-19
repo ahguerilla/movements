@@ -75,7 +75,8 @@
     },
 
     events: {
-      'click .market-place-item .item-menu': 'showMenuItem'
+      'click .market-place-item .item-menu': 'showMenuItem',
+      'click .item-action-menu a': 'itemAction'
     },
 
     initialize: function (options) {
@@ -84,6 +85,7 @@
       this.item_tmp = _.template($('#item_template').html());
       this.init(options.filterView);
       this.item_menu_template = _.template($('#item-menu-template').html());
+      this.closeDialog = ahr.close_marketitem_form_dialog.initItem();
       return this;
     },
 
@@ -105,6 +107,24 @@
         $link.popover('show');
         $link.data('popover-made', true);
       }
+    },
+
+    itemAction: function(ev) {
+      ev.preventDefault();
+      var $link = $(ev.currentTarget);
+      var action = $link.data('action');
+      var $container = $link.parents('.market-place-item');
+      var pk = $container.data('item-id');
+      var itemType = $container.data('item-type');
+      if (action === 'close') {
+        var closeUrl = $container.data('close-url');
+        this.closeDialog.close(pk, itemType, closeUrl);
+      } else if (action === 'report') {
+      } else if (action === 'hide') {
+      } else if (action === 'stick') {
+      }
+      var popover = $container.find('.item-menu');
+      popover.popover('toggle');
     }
   });
 

@@ -2,7 +2,11 @@
 {% load compress %}
 
 <script type="text/template" id="item_template">
-  <div class="market-place-item <%- item_type.toLowerCase() %> <% if(stick) { %>stuck-item<% } %> <% if (hidden) { %>hidden-item<% } %>" item_id="<%- pk %>" owner_id="<%- ownerid %>">
+  <div class="market-place-item <%- item_type %> <% if(stick) { %>stuck-item<% } %> <% if (hidden) { %>hidden-item<% } %>"
+       data-item-id="<%- pk %>"
+       data-owner-id="<%- ownerid %>"
+       data-close-url="<%- close_url %>"
+       data-item-type="<%- item_type %>">
     <div class="market-item-card">
       <div class="body">
         <a href="/market/<%- pk %>" alt="Open post">
@@ -40,14 +44,18 @@
 
 </script>
 <script type="text/template" id="item-menu-template">
-  <% var actions = ['Hide', 'Stick', 'Report'];
+  <%
+     var actions = [
+       {display: 'Hide', value: 'hide'},
+       {display: 'Stick', value: 'stick'},
+       {display: 'Report', value: 'report'}];
      if (hasEdit) {
-        actions.push('Close');
+        actions.push({display: 'Close', value: 'close'});
      }
   %>
-  <ul>
+  <ul class="item-action-menu">
     <% _.each(actions, function(action) { %>
-    <li><a href="#"><%- action %></a></li>
+    <li><a data-action="<%- action.value %>" href="#"><%- action.display %></a></li>
     <% }); %>
   </ul>
 </script>
