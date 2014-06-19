@@ -765,28 +765,36 @@ h6 {
 .exchange-filters .categories ul.category-menu .popover-content ul li a.plain {
   background-image: none;
 }
-.exchange-filters .type-menu {
+.exchange-filters .type-menu,
+.exchange-filters .hidden-menu {
   list-style: none;
   margin: 0;
   padding: 0;
+  margin-right: 40px;
 }
-.exchange-filters .type-menu a {
+.exchange-filters .type-menu a,
+.exchange-filters .hidden-menu a {
   color: #756b65;
   font-family: "HurmeGeometricSans3-SemiBold";
   padding-bottom: 4px;
 }
 .exchange-filters .type-menu a:hover,
-.exchange-filters .type-menu a:focus {
+.exchange-filters .hidden-menu a:hover,
+.exchange-filters .type-menu a:focus,
+.exchange-filters .hidden-menu a:focus {
   text-decoration: none;
 }
-.exchange-filters .type-menu li {
+.exchange-filters .type-menu li,
+.exchange-filters .hidden-menu li {
   display: inline;
   margin-left: 10px;
 }
-.exchange-filters .type-menu li:first-child {
+.exchange-filters .type-menu li:first-child,
+.exchange-filters .hidden-menu li:first-child {
   margin-left: 0;
 }
-.exchange-filters .type-menu li.active a {
+.exchange-filters .type-menu li.active a,
+.exchange-filters .hidden-menu li.active a {
   border-bottom: 2px solid #756b65;
 }
 .featured-col h2 {

@@ -3,9 +3,11 @@
     type: '',
     regions: [],
     skills: [],
+    showHidden: false,
 
     events: {
       'click .type-menu a': 'setTypeFilter',
+      'click .hidden-menu a': 'setHiddenFilter',
       'click .region-filter a': 'setRegionFilter',
       'click .skill-filter a': 'setSkillsFilter'
     },
@@ -52,6 +54,15 @@
       this.trigger('filter');
     },
 
+    setHiddenFilter: function(ev) {
+      ev.preventDefault();
+      this.$el.find('.hidden-menu li.active').removeClass('active');
+      var $filterLink = $(ev.currentTarget);
+      $filterLink.parents('li').addClass('active');
+      this.showHidden = $filterLink.data('filter');
+      this.trigger('filter');
+    },
+
     setTypeFilter: function(ev) {
       ev.preventDefault();
       this.$el.find('.type-menu li.active').removeClass('active');
@@ -65,6 +76,7 @@
       if (this.type) {
         data.types = this.type;
       }
+      data.showHidden = this.showHidden;
     }
   });
 
@@ -129,7 +141,8 @@
         url: $container.data('attributes-url'),
         method: 'POST',
         context: this,
-        data: data
+        data: data,
+        success: this.initInfiniteScroll
       });
       $container.data(attribute, value);
     },
