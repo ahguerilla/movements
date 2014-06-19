@@ -95,7 +95,7 @@ def save_market_item(form, owner):
     return obj
 
 
-class reportMarketItemForm(forms.ModelForm):
+class ReportMarketItemForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItemPostReport
         fields = ['contents', ]

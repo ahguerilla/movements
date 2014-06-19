@@ -37,7 +37,7 @@
 {% compress js inline %}
 <script type="text/javascript">
 (function(){
-  var CloseItemDialogView = window.ahr.BaseView.extend({
+  window.ahr.CloseItemDialogView = window.ahr.BaseView.extend({
     el: '#close_item_dialog',
 
     events: {
@@ -160,11 +160,6 @@
       }
     }
   });
-
-    window.ahr.close_marketitem_form_dialog = window.ahr.close_marketitem_form_dialog || {};
-    window.ahr.close_marketitem_form_dialog.initItem = function(item){
-        return new CloseItemDialogView(item);
-    };
 })();
 </script>
 {% endcompress %}

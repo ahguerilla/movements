@@ -101,37 +101,34 @@
        } else {
          this.url = window.ahr.app_urls.senditemrecommendation + this.obj_id;
        }
-       window.ahr.getcsrf(function (csrf) {
-         var dfrd = $.ajax({
-           url: that.url,
-           type: 'POST',
-           dataType: 'json',
-           data: {
-             csrfmiddlewaretoken: csrf.csrfmiddlewaretoken,
-             recipients:  $('#touser').val(),
-             subject:     $('#recsub').val(),
-             message:     $('#recmessage').val()
-           }
-         });
-         dfrd.done(function (data) {
-           $('.sendrec').prop('disabled', false);
-           if (data.success === 'true') {
-             $('#touser').typeahead('destroy');
-             $('#recommenddialog').modal('hide');
+       var dfrd = $.ajax({
+         url: that.url,
+         type: 'POST',
+         dataType: 'json',
+         data: {
+           recipients:  $('#touser').val(),
+           subject:     $('#recsub').val(),
+           message:     $('#recmessage').val()
+         }
+       });
+       dfrd.done(function (data) {
+         $('.sendrec').prop('disabled', false);
+         if (data.success === 'true') {
+           $('#touser').typeahead('destroy');
+           $('#recommenddialog').modal('hide');
+         }
+         else {
+           if (data.badrecipients.length == 1) {
+             that.alert('{%trans "Failed to send message to user:"%} ' + data.badrecipients[0], '#recerror');
            }
            else {
-             if (data.badrecipients.length == 1) {
-               that.alert('{%trans "Failed to send message to user:"%} ' + data.badrecipients[0], '#recerror');
-             }
-             else {
-               that.alert('{%trans "Failed to send message to users:"%} ' + data.badrecipients.join(', '), '#recerror');
-             }
+             that.alert('{%trans "Failed to send message to users:"%} ' + data.badrecipients.join(', '), '#recerror');
            }
-         });
-         dfrd.fail(function () {
-           $('.sendrec').prop('disabled', false);
-           that.alert('{%trans "Failed to send message"%}', '#recerror');
-         });
+         }
+       });
+       dfrd.fail(function () {
+         $('.sendrec').prop('disabled', false);
+         that.alert('{%trans "Failed to send message"%}', '#recerror');
        });
      },
 
