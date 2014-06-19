@@ -56,7 +56,6 @@ class SignupForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        print User.objects.all()
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError(_('This username is already in used'))
         return username
