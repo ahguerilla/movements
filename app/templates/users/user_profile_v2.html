@@ -1,32 +1,66 @@
 {% extends "base_v2.html" %}
+{% load avatar_tags %}
+{% load account %}
 {% load i18n %}
 
 {% block header_padding %}{% endblock %}
 
 {% block content_outside_container %}
-  <div class="container-liquid settings-bar">
-    <div class="profile-nav-menu">
-      <div class="nav-icon inbox">
-        <div class="spacer"></div>
-        <div class="nav-menu-item"></div>
-        <div class="nav-menu-text">Inbox</div>
-      </div>
-      <div class="nav-icon profile selected">
-        <div class="spacer"></div>
-        <div class="nav-menu-item"></div>
-        <div class="nav-menu-text">Profile</div>
-      </div>
-      <div class="nav-icon settings">
-        <div class="spacer"></div>
-        <div class="nav-menu-item"></div>
-        <div class="nav-menu-text">Settings</div>
-      </div>
+<div class="container-liquid settings-bar">
+  <div class="profile-nav-menu">
+    <div class="nav-icon inbox">
+      <div class="spacer"></div>
+      <div class="nav-menu-item"></div>
+      <div class="nav-menu-text">Inbox</div>
     </div>
-    <div class="clearfix"></div>
+    <div class="nav-icon profile selected">
+      <div class="spacer"></div>
+      <div class="nav-menu-item"></div>
+      <div class="nav-menu-text">Profile</div>
+    </div>
+    <div class="nav-icon settings">
+      <div class="spacer"></div>
+      <div class="nav-menu-item"></div>
+      <div class="nav-menu-text">Settings</div>
+    </div>
   </div>
+  <div class="clearfix"></div>
+</div>
 {% endblock %}
 
 {% block content %}
+<div class="row setting-page">
+  <div class="col-xs-4">
+    <div class="poster clearfix">
+      <div class="avatar">
+        {% primary_avatar user_details 60 %}
+      </div>
+      <div class="poster-details">
+        <div class="poster-name">{{ user_details.username }}</div>
+        <div class="poster-rating"><span class="rateit"
+              data-rateit-readonly="true"
+              data-rateit-value="3"
+              data-rateit-min="0"
+              data-rateit-starwidth="22"
+              data-rateit-starheight="17"
+              data-rateit-max="5"></span>
+          </div>
+      </div>
+    </div>
+    <hr />
+    <div class="bio">
+      {{ user_profile.bio }}
+    </div>
+    <hr />
+    <div class="settings-title">Skills</div>
+    <div class="tags">
+      {% for interest in user_profile.interests.all %}
+        <div class="tag">{{ interest }}</div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col-xs-6">
 
-
+  </div>
+</div>
 {% endblock %}

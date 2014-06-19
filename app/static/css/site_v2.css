@@ -1024,27 +1024,6 @@ h6 {
 .view-post h1 {
   margin-top: 0;
 }
-.view-post .poster {
-  font-family: "HurmeGeometricSans3-SemiBold";
-}
-.view-post .poster .avatar {
-  float: left;
-}
-.view-post .poster .avatar img {
-  width: 60px;
-  height: 60px;
-}
-.view-post .poster .poster-details {
-  float: left;
-  margin-left: 20px;
-}
-.view-post .poster .poster-details .poster-name {
-  margin: 6px 0 5px 0;
-}
-.view-post .poster .poster-details .poster-name a {
-  color: #262626;
-  text-decoration: underline;
-}
 .view-post .post {
   margin: 20px 0;
 }
@@ -1144,9 +1123,31 @@ h6 {
   font-family: "LinotypeUnivers-330Light";
   font-size: 16px;
 }
+.poster {
+  font-family: "HurmeGeometricSans3-SemiBold";
+}
+.poster .avatar {
+  float: left;
+}
+.poster .avatar img {
+  width: 60px;
+  height: 60px;
+}
+.poster .poster-details {
+  float: left;
+  margin-left: 20px;
+}
+.poster .poster-details .poster-name {
+  margin: 6px 0 5px 0;
+}
+.poster .poster-details .poster-name a {
+  color: #262626;
+  text-decoration: underline;
+}
 .settings-bar {
   background-color: #b6aba5;
   border-bottom: 4px solid #e0d7d8;
+  margin-bottom: 20px;
 }
 .settings-bar .profile-nav-menu {
   display: table;
@@ -1214,6 +1215,9 @@ h6 {
 }
 .settings-bar .nav-icon.settings:hover .nav-menu-item {
   background: url("../images/v2/profile-settings-icon.png") center -30px no-repeat;
+}
+.setting-page hr {
+  border-top: 1px solid #cdcbcc;
 }
 
 

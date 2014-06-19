@@ -839,21 +839,6 @@ popoverDropdown(width)
     margin 20px 0
   h1
     margin-top 0
-  .poster
-    font-family "HurmeGeometricSans3-SemiBold"
-    .avatar
-      float left
-      img
-        width 60px
-        height 60px
-    .poster-details
-      float left
-      margin-left 20px
-      .poster-name
-        margin 6px 0 5px 0
-        a
-          color $main-font
-          text-decoration underline
   .post
     margin 20px 0
     pre
@@ -930,7 +915,21 @@ popoverDropdown(width)
         font-family "LinotypeUnivers-330Light"
         font-size 16px
 
-
+.poster
+  font-family "HurmeGeometricSans3-SemiBold"
+  .avatar
+    float left
+    img
+      width 60px
+      height 60px
+  .poster-details
+    float left
+    margin-left 20px
+    .poster-name
+      margin 6px 0 5px 0
+      a
+        color $main-font
+        text-decoration underline
 
 // **************************************
 // exchange page
@@ -938,6 +937,7 @@ popoverDropdown(width)
 .settings-bar
   background-color $footer-color
   border-bottom 4px solid $border-color
+  margin-bottom 20px
   .profile-nav-menu
     display table
     margin 0 auto
@@ -994,3 +994,7 @@ popoverDropdown(width)
   .nav-icon.settings:hover
     .nav-menu-item
       background url("../images/v2/profile-settings-icon.png") center -30px no-repeat
+
+.setting-page
+  hr
+    border-top 1px solid $hr-color
