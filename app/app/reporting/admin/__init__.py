@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
 import ast
 
 from django.contrib import admin
@@ -22,7 +21,10 @@ class NextStepsInline(admin.TabularInline):
 
 class IncidentAdmin(TrackingAdmin):
     list_select_related = ('messageext',)
-    readonly_fields = ('closed_date',)
+    readonly_fields = (
+        'closed_date', 'title', 'details', 'pub_date',
+        'commentcount', 'ratecount', 'reportcount', 'score')
+    exclude = ('countries', 'issues', 'skills', 'published', 'deleted')
     list_display_links = ('id', 'title',)
     list_display = (
         'id', 'title', 'get_view_count', 'commentcount',
@@ -30,6 +32,7 @@ class IncidentAdmin(TrackingAdmin):
         'get_total_msg_count', 'get_screen_name', 'get_create_date',
         'get_owner', 'get_aging', 'get_status'
     )
+    list_filter = ('status',)
     # Prevents duplicates.
     csv_field_exclude = ('owner', 'pub_date', 'status')
     actions = None
@@ -62,14 +65,17 @@ class IncidentAdmin(TrackingAdmin):
     def get_screen_name(self, obj):
         return obj.owner
     get_screen_name.short_description = _('Screen name')
+    get_screen_name.admin_order_field = 'owner'
 
     def get_create_date(self, obj):
         return obj.pub_date
     get_create_date.short_description = _('date of post')
+    get_create_date.admin_order_field = 'pub_date'
 
     def get_owner(self, obj):
         return obj.staff_owner
     get_owner.short_description = _('owner')
+    get_owner.admin_order_field = 'staff_owner'
 
     def get_aging(self, obj):
         if obj.status == obj.STATUS_CHOICES.CLOSED_BY_ADMIN or \
@@ -78,10 +84,12 @@ class IncidentAdmin(TrackingAdmin):
         else:
             return now() - obj.pub_date
     get_aging.short_description = _('Aging')
+    get_aging.admin_order_field = 'pub_date'
 
     def get_status(self, obj):
         return obj.get_status_display()
     get_status.short_description = _('status')
+    get_status.admin_order_field = 'status'
 
     # Overridden methods.
 
