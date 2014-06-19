@@ -946,6 +946,9 @@ h6 {
 #marketitems .market-place-item.offer .item-type {
   color: #005d86;
 }
+#marketitems .market-place-item.item-hidden {
+  opacity: 0.5;
+}
 .view-post .post-header {
   padding: 10px 0;
 }
