@@ -126,31 +126,28 @@
         this.alert('{%trans "You have to select a rateing."%}', '#rateerror');
         return (false);
       }
-      window.ahr.getcsrf(function (csrf) {
-        var dfrd = $.ajax({
-          url: that.rateurl,
-          type: 'POST',
-          dataType: 'json',
-          data: {
-            score: $('input[name="stars"]:checked').val(),
-            csrfmiddlewaretoken: csrf.csrfmiddlewaretoken,
-          }
-        });
-        dfrd.done(function (data) {
-          $(that.evrate.currentTarget).attr('ratecount', data.ratecount);
-          $(that.evrate.currentTarget).attr('score', data.score);
-          if (typeof that.callback == 'function') {
-            that.callback(that.evrate.currentTarget.getAttribute('username'), data.score);
-            $.noop();
-          }
+      var dfrd = $.ajax({
+        url: that.rateurl,
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          score: $('input[name="stars"]:checked').val()
+        }
+      });
+      dfrd.done(function (data) {
+        $(that.evrate.currentTarget).attr('ratecount', data.ratecount);
+        $(that.evrate.currentTarget).attr('score', data.score);
+        if (typeof that.callback == 'function') {
+          that.callback(that.evrate.currentTarget.getAttribute('username'), data.score);
+          $.noop();
+        }
 
-          $('#ratedialog').modal('hide');
-          var username = that.evrate.currentTarget.getAttribute('username')
-          that.resetrate(username , data.score, data.ratecount);
-        });
-        dfrd.fail(function (data) {
-          that.alert('{%trans "Rating failed."%}', '#rateerror');
-        });
+        $('#ratedialog').modal('hide');
+        var username = that.evrate.currentTarget.getAttribute('username')
+        that.resetrate(username , data.score, data.ratecount);
+      });
+      dfrd.fail(function (data) {
+        that.alert('{%trans "Rating failed."%}', '#rateerror');
       });
       return (false);
     },

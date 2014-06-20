@@ -1,40 +1,82 @@
 (function () {
-  $('.nanamorde').hide();
-  var MarketRoute = Backbone.Router.extend({
-    routes: {
-      "": "page",
-      ":itemid": "updateViews",
-      "item/:item_id": "gotoItem"
-    },
-    firstTime: true,
-    emptyPage: true,
+  var MarketFilterView = Backbone.View.extend({
+    type: '',
+    regions: [],
+    skills: [],
+    showHidden: false,
 
-    updateViews: function(item){
-      this.market.setViewsCount(item);
-      this.page();
+    events: {
+      'click .type-menu a': 'setTypeFilter',
+      'click .hidden-menu a': 'setHiddenFilter',
+      'click .region-filter a': 'setRegionFilter',
+      'click .skill-filter a': 'setSkillsFilter'
     },
 
-    gotoItem: function (item) {
-      this.market.showItem(item);
+    initialize: function() {
+      var $skills = this.$el.find('a.skills');
+      var $container = $skills.parent().find('.popover-container');
+      $skills.popover({
+        title: '',
+        html: true,
+        content: _.template($('#skill-filter-list-template').html())(),
+        container: $container,
+        placement: 'bottom'
+      });
+
+      var $regions = this.$el.find('a.regions');
+      $container = $regions.parent().find('.popover-container');
+      $regions.popover({
+        title: '',
+        html: true,
+        content: _.template($('#region-filter-list-template').html())(),
+        container: $container,
+        placement: 'bottom'
+      });
     },
 
-    page: function () {
-      if (this.firstTime) {
-        this.market.showMarket();
-        this.market.initInfiniteScroll();
-        this.market.scrollBack();
+    toggleFilterState: function(ev) {
+      ev.preventDefault();
+      var $target = $(ev.currentTarget);
+      $target.toggleClass('selected');
+      return {
+        id: $target.data('id'),
+        selected: $target.hasClass('selected')
+      };
+    },
 
-        this.firstTime = false;
-      } else {
-        this.market.resetSingle();
-        this.market.showMarket();
-        this.market.refreshScrollElements();
-        this.market.scrollBack();
+    setSkillsFilter: function (ev) {
+      this.toggleFilterState(ev);
+      this.trigger('filter');
+    },
+
+    setRegionFilter: function(ev) {
+      this.toggleFilterState(ev);
+      this.trigger('filter');
+    },
+
+    setHiddenFilter: function(ev) {
+      ev.preventDefault();
+      this.$el.find('.hidden-menu li.active').removeClass('active');
+      var $filterLink = $(ev.currentTarget);
+      $filterLink.parents('li').addClass('active');
+      this.showHidden = $filterLink.data('filter');
+      this.trigger('filter');
+    },
+
+    setTypeFilter: function(ev) {
+      ev.preventDefault();
+      this.$el.find('.type-menu li.active').removeClass('active');
+      var $filterLink = $(ev.currentTarget);
+      $filterLink.parents('li').addClass('active');
+      this.type = $filterLink.data('filter');
+      this.trigger('filter');
+    },
+
+    setFilter: function(data) {
+      if (this.type) {
+        data.types = this.type;
       }
-    },
-
-    initialize: function (market) {
-      this.market = market;
+      data.showHidden = this.showHidden;
     }
   });
 
@@ -44,63 +86,109 @@
       "Request": "request"
     },
 
-    isShowingHidden:function(){
-      return this.filter_widget.filters.showHidden;
+    events: {
+      'click .market-place-item .item-menu': 'showMenuItem',
+      'click .item-action-menu a': 'itemAction'
     },
 
-    setViewsCount: function(id){
-      $.getJSON(
-        window.ahr.app_urls.getViewsCount + id,
-        function (data) {
-          $('.market-item-card[item_id="' + id + '"] .views-counter').text(data.result);
-      });
-    },
-
-    gotoItem: function(ev){
-      window.location = ev.currentTarget.getAttribute('href');
-    },
-
-    edit_callback: function (item_id) {
-      var that = this;
-      var dfrd = $.ajax({
-        url: this.getItem + item_id
-      });
-      dfrd.done(function (item) {
-        var html = that.item_widget.reloadItem(item);
-        html = that.get(item[0].fields);
-        that.truncateLongText(html, item.pk);
-        $('.market-place-item[item_id=' + item_id + ']').replaceWith(html);
-        that.item_widget.afterset('.market-place-item[item_id=' + item_id + ']');
-        if (that.isSingle() === false) {
-          that.fancyref(html);
-        }
-      });
-    },
-
-    initialize: function (filters) {
+    initialize: function (options) {
       this.item_type = 'item';
-      this.getitemfromto = window.ahr.app_urls.getmarketitemfromto;
-      this.viewurl = window.ahr.app_urls.viewitem;
+      this.getitemfromto = ahr.app_urls.getmarketitemfromto;
       this.item_tmp = _.template($('#item_template').html());
-      this.requiresResetOnNewOfferRequest = true;
-      del_func = _.bind(this.del_callback, this);
-      edit_func = _.bind(this.edit_callback, this);
-      this.item_widget = window.ahr.marketitem_widget.initWidget('body', this, del_func, edit_func);
-      this.getItem = window.ahr.app_urls.getmarketitem;
-      this.init(filters);
-      this.filter_widget.filters.types = ["offer", "request"];
-      this.filter_widget.types = this.types;
-      _.extend(this.events,{'click .routehref': 'gotoItem'} );
+      this.init(options.filterView);
+      this.item_menu_template = _.template($('#item-menu-template').html());
+      this.closeDialog = new ahr.CloseItemDialogView();
+      this.reportDialog = new ahr.ReportPostView();
       return this;
     },
+
+    createItemPopover: function($link) {
+      var $container = $link.parent();
+      var $itemContainer = $link.parents('.market-place-item');
+      var toggled = {
+        hide: $itemContainer.data('hidden'),
+        stick: $itemContainer.data('stick')
+      };
+      var content = this.item_menu_template({
+        hasEdit: $itemContainer.data('has-edit'),
+        toggled: toggled
+      });
+      $link.popover({
+        title: '',
+        html: true,
+        content: content,
+        container: $container,
+        placement: 'bottom'
+      });
+      $link.popover('show');
+      $link.data('popover-made', true);
+    },
+
+    showMenuItem: function(ev) {
+      var $link = $(ev.currentTarget);
+      if ($link.data('popover-made')) {
+        return;
+      } else {
+        ev.preventDefault();
+        this.createItemPopover($link);
+      }
+    },
+
+    setItemAttibute: function($container, attribute, value) {
+      var data = {};
+      data[attribute] = value;
+      $.ajax({
+        url: $container.data('attributes-url'),
+        method: 'POST',
+        context: this,
+        data: data,
+        success: this.initInfiniteScroll
+      });
+      $container.data(attribute, value);
+    },
+
+    itemAction: function(ev) {
+      ev.preventDefault();
+      var $link = $(ev.currentTarget);
+      var action = $link.data('action');
+      var $container = $link.parents('.market-place-item');
+      var pk = $container.data('item-id');
+      var itemType = $container.data('item-type');
+      var that = this;
+      var refresh = function () {
+        that.initInfiniteScroll();
+      }
+
+      var remakePopover = false
+      if (action === 'close') {
+        var closeUrl = $container.data('close-url');
+        this.closeDialog.close(pk, itemType, closeUrl, refresh);
+      } else if (action === 'report') {
+        this.reportDialog.showReport($container.data('report-url'));
+      } else if (action === 'hide') {
+        this.setItemAttibute($container, 'hidden', !$container.data('hidden'))
+        remakePopover = true;
+      } else if (action === 'stick') {
+        this.setItemAttibute($container, 'stick', !$container.data('stick'))
+        remakePopover = true;
+      }
+
+      var $popover = $container.find('.item-menu');
+      if (remakePopover) {
+        $popover.popover('destroy');
+        $popover.data('popover-made', false);
+      } else {
+        $popover.popover('toggle');
+      }
+    }
   });
 
-  window.ahr = window.ahr || {};
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (filters) {
-    var market = new MarketView(filters);
-    var market_route = new MarketRoute(market);
-    Backbone.history.start();
+    var filterView = new MarketFilterView({el: '#exchange-filters'});
+    var market = new MarketView({el: '#itemandsearchwrap', filterView: filterView});
+    market.initInfiniteScroll();
     document.title = window.ahr.string_constants.exchange;
   };
+
 })();

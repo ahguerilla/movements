@@ -128,6 +128,12 @@ class UserProfile(models.Model):
     notperm = JSONField(blank=True)
     first_login = models.BooleanField(_('first login'), default=True)
 
+    @property
+    def ahr_rating(self):
+        ratings = OrganisationalRating.objects.filter(user=self).all()
+        if ratings:
+            return ratings[0].rated_by_ahr
+        return 0
 
     def get_twitter_url(self):
         base_twitter = 'https://twitter.com/'

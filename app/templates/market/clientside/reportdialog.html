@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load compress %}
-<script type="text/template" id="report_template">
 <div id="reportdialog" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -13,12 +12,12 @@
         <div id="reporterror"></div>
         <label for="content">{%trans "Message"%}</label>
         <div>
-          <textarea class="form-control" id="content" name="content" rows="6" placeholder="" required="true"></textarea>
+          <textarea class="form-control" id="report-dialog-content" name="content" rows="6" placeholder="" required="true"></textarea>
         </div>
         <div class="modal-footer">
           <div class="row">
             <div class="col-xs-6 col-md-offset-6 col-md-3">
-              <button type="button" class="btn btn-default full-width cancel cancelreport" data-dismiss="modal">{%trans "Cancel"%}</button>
+              <button type="button" class="btn btn-default full-width cancel" data-dismiss="modal">{%trans "Cancel"%}</button>
             </div>
             <div class="col-xs-6 col-md-3">
               <button type="button" class="btn btn-default full-width send sendreport">{%trans "Send"%}</button>
@@ -29,72 +28,55 @@
     </div>
   </div>
 </div>
-</script>
 
 {% compress js inline %}
 <script type="text/javascript" id="reportdialog_view">
  (function(){
-    var reportWidget = window.ahr.BaseView.extend({
-        events:{
-          'click .sendreport' : 'sendreport',
-          'click .cancelreport' : 'cancelreport',
-          'click .report_post' : 'showreport'
+   window.ahr.ReportPostView = window.ahr.BaseView.extend({
+    el: '#reportdialog',
+    events: {
+      'click .sendreport' : 'sendReport'
+    },
+    initialize: function() {
+      var that = this;
+      this.$content = $("#report-dialog-content");
+      this.$el.on('shown.bs.modal', function() {
+        that.dialogShown();
+      });
+    },
+    dialogShown: function() {
+      window.ahr.expandTextarea(this.$content);
+      this.$content.trigger('focus');
+    },
+    showReport: function(reportUrl){
+      this.$content.val('');
+      this.reportUrl = reportUrl;
+      this.$el.modal('show');
+    },
+    sendReport: function(ev) {
+      ev.preventDefault();
+      var that = this;
+      $('.sendreport').attr('disabled','disabled');
+      $.ajax({
+        type: "POST",
+        url: this.reportUrl,
+        dataType: 'json',
+        data: {
+          "contents": this.$content.val()
         },
-
-        showreport: function(ev){
-          ev.preventDefault();
-          var that = this;
-          var item_id = ev.currentTarget.getAttribute('item_id');
-          this.showModalDialog('#report_template', {}, '#reportdialog', function(){
-            that.item_id = item_id;
-            window.ahr.expandTextarea($("#reportdialog #content"));
-            $("#reportdialog #content").trigger('focus');
-          });
-          return(false);
+        success: function() {
+          $('#reportdialog').modal('hide');
+          $('.sendreport').removeAttr('disabled');
         },
-
-        sendreport: function(){
-          var that = this;
-          window.ahr.getcsrf(function(csrf){
-            if(csrf==false){
-              that.alert('{%trans "Unable to send report. please try again"%}','#reporterror');
-              return;
-              }
-            $('.sendreport').attr('disabled','disabled');
-            $.ajax({
-                type: "POST",
-                url: window.ahr.app_urls.reportpost + that.item_id,
-                dataType: 'json',
-                data: {
-                  "csrfmiddlewaretoken": csrf.csrfmiddlewaretoken,
-                  "contents": $("#reportdialog #content").val()
-                },
-                success: function(data) {
-                  console.log(data);
-                  // that.info('Report sent succesfuly','#infobar');
-                  $('#reportdialog').modal('hide');
-                  $('.sendreport').removeAttr('disabled');
-                },
-                statusCode: {
-                  400: function(data) {
-                  console.log(data);
-                  that.alert(data.responseJSON.errors[0].errors[0],'#reporterror');
-                  $('.sendreport').removeAttr('disabled');
-                  },
-                }
-              });
-            });
-        },
-
-        initialize: function(data){
-            var that = this;
+        statusCode: {
+          400: function(data) {
+          that.alert(data.responseJSON.errors[0].errors[0], '#reporterror');
+          $('.sendreport').removeAttr('disabled');
+          }
         }
-    });
-    window.ahr.report_dialog = window.ahr.report_dialog || {};
-    window.ahr.report_dialog.initWidget= function(element){
-        var widget = new reportWidget({'el':element});
-        return widget;
-    };
+      });
+    }
+  });
 })();
 </script>
 

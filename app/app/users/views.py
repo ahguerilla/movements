@@ -128,18 +128,18 @@ def profile(request, user_name=None):
     if user.id == request.user.id:
         is_self = True
     orate = users.models.OrganisationalRating.objects.filter(user=user).all()
-    if len(orate)>0:
+    if len(orate) > 0:
         orate = orate[0].rated_by_ahr
     else:
         orate = 0
-    return render_to_response('users/user_profile.html',
-                                {
-                                    'user_details': user,
-                                    'user_profile': user_profile,
-                                    'is_self': is_self,
-                                    'OrganisationalRating': orate
-                                },
-                                context_instance=RequestContext(request))
+    return render_to_response('users/user_profile_v2.html',
+                              {
+                                  'user_details': user,
+                                  'user_profile': user_profile,
+                                  'is_self': is_self,
+                                  'OrganisationalRating': orate
+                              },
+                              context_instance=RequestContext(request))
 
 
 def waitforactivation(request):
@@ -321,6 +321,13 @@ class AccAdapter(DefaultAccountAdapter):
         user.email = request.session.pop('email')
         user.set_password(request.session.pop('password'))
         user.save()
+
+        # needs to create user and profile in transaction
+        # and add profile information from request
+        user_profile = UserProfile()
+        user_profile.user = user
+        user_profile.save()
+
         self.send_vetting_email(user, form)
         return user
 

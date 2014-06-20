@@ -60,16 +60,6 @@
     return dfrd;
   }
 
-  function getcsrf(callback) {
-    var dfrd = $.getJSON(window.ahr.app_urls.getcsrf, function (data) {
-      callback(data);
-    });
-    dfrd.fail(function (data) {
-      callback(false);
-    });
-
-  }
-
   function clone(obj) {
     // Handle the 3 simple types, and null or undefined
     if (null === obj || "object" != typeof obj) return obj;
@@ -146,7 +136,6 @@
   }
 
   window.ahr = window.ahr || {};
-  window.ahr.getcsrf = getcsrf;
   window.ahr.alert = alert;
   window.ahr.clearalert = clearalert;
   window.ahr.getStatics = getStatics;

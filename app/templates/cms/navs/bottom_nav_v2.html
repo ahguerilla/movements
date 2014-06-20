@@ -1,0 +1,8 @@
+{% load menu_tags %}
+<ul>
+{% for child in children %}
+  {% if child.show_in_footer %}
+  <li><a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a></li>
+  {% endif %}
+{% endfor %}
+</ul>

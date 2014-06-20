@@ -39,10 +39,6 @@ market_user_patterns = patterns('',
         'app.market.api.views.users.get_usernames',
         name="user_get_usernames"),
 
-    url(r'(?P<rtype>\S+)/csrftoken/get$',
-        'app.market.api.views.misc.get_CSRF_token',
-        name="get_csrftoken"),
-
     url(r'(?P<rtype>\S+)/issues/get$',
         'app.market.api.views.misc.get_issues',
         name="get_issues"),
@@ -66,28 +62,6 @@ market_user_patterns = patterns('',
 
 
 market_item_patterns = patterns('',
-    # Unsecured entry points
-    url(r'(?P<rtype>\S+)/unsecured/item/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.get_market_item_insecure',
-        name="get_marketitem_insecure"),
-
-    # Secured entry points
-    url(r'(?P<rtype>\S+)/item/add/(?P<obj_type>offer|request|resource)$',
-        'app.market.api.views.market.add_market_item',
-        name="add_marketitem"),
-
-    url(r'(?P<rtype>\S+)/item/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.get_market_item',
-        name="get_marketitem"),
-
-    url(r'(?P<rtype>\S+)/item/get/translation/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.get_item_translation',
-        name="get_item_translation"),
-
-    url(r'(?P<rtype>\S+)/useritem/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.user_get_marketitem',
-        name="user_get_marketitem"),
-
     url(r'(?P<rtype>\S+)/item/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
         'app.market.api.views.market.get_marketItem_fromto',
         name="get_marketitems_fromto"),
@@ -96,11 +70,7 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.get_user_marketitem_fromto',
         name="get_usermarketitems_fromto"),
 
-    url(r'(?P<rtype>\S+)/item/edit/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.edit_market_item',
-        name="edit_marketitem"),
-
-    url(r'(?P<rtype>\S+)/item/close/(?P<obj_id>\d+)$',
+    url(r'item/close/(?P<obj_id>\d+)$',
         'app.market.api.views.market.close_market_item',
         name="close_marketitem"),
 
@@ -108,25 +78,9 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.set_rate',
         name="market_set_rate"),
 
-    url(r'(?P<rtype>\S+)/item/get/count/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.get_views_count',
-        name="marketitem_views_count"),
-
-    url(r'(?P<rtype>\S+)/item/set/hide/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.hide_item',
-        name="marketitem_hide"),
-
-    url(r'(?P<rtype>\S+)/item/set/unhide/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.unhide_item',
-        name="marketitem_unhide"),
-
-    url(r'(?P<rtype>\S+)/item/set/stick/(?P<obj_id>\d+)$',
-        'app.market.api.views.market.stick_item',
-        name="stick_item"),
-
-    url(r'(?P<rtype>\S+)/item/set/unstick/(?P<obj_id>\d+)$',
-            'app.market.api.views.market.unstick_item',
-            name="unstick_item"),
+    url(r'item/set/user_attributes/(?P<item_id>\d+)$',
+        'app.market.api.views.market.set_item_attributes_for_user',
+        name="set_item_attributes_for_user"),
 )
 
 
@@ -135,21 +89,9 @@ market_comment_patterns = patterns('',
         'app.market.api.views.comments.add_comment',
         name="add_comment"),
 
-    url(r'(?P<rtype>\S+)/comment/get/(?P<obj_id>\d+)$',
-        'app.market.api.views.comments.get_comment',
-        name="get_comment"),
-
-    url(r'(?P<rtype>\S+)/comment/get/count/(?P<obj_id>\d+)$',
-        'app.market.api.views.comments.get_comment_count',
-        name="get_comment_count"),
-
     url(r'(?P<rtype>\S+)/comments/get/(?P<obj_id>\d+)/last/(?P<count>\d+)$',
         'app.market.api.views.comments.get_comments',
         name="get_comments_last"),
-
-    url(r'(?P<rtype>\S+)/comments/get/(?P<obj_id>\d+)/range/(?P<st_date>\S+)/(?P<end_date>\S+)$',
-        'app.market.api.views.comments.get_commentids_range',
-        name="get_comments_range"),
 
     url(r'(?P<rtype>\S+)/comment/edit/(?P<obj_id>\d+)$',
         'app.market.api.views.comments.edit_comment',
@@ -161,7 +103,7 @@ market_comment_patterns = patterns('',
 )
 
 report_patterns = patterns('',
-    url(r'(?P<rtype>\S+)/report/(?P<obj_id>\d+)$',
+    url(r'report/(?P<obj_id>\d+)$',
         'app.market.api.views.report.report_marketitem',
         name="report_post"),
 

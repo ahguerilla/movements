@@ -1,0 +1,80 @@
+{% extends "base_form.html" %}
+
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block public-content-message %}
+  <form class="form-horizontal" method="post">
+    {% csrf_token %}
+    <div class="dialog movements-form new-post">
+      <div>
+        <div class="form-title"><h1>{% trans "Request a service" %}</h1></div>
+        <p>
+          {% blocktrans %}Porttitor magna cursus nec dolor magna in natoque magna, sed porta lectus ut tortor
+            par turient
+            odio. Magnis pellentesque et sit, nisi odio cum aliquet nec risus tincidunt.{% endblocktrans %}
+        </p>
+        {{ form.non_field_errors }}
+      </div>
+      <div>
+        <div class="form-sub-title"><h2>{% trans "1. What skills do you need?" %}</h2></div>
+        <div class="form-select-multi">
+          <p>
+            {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt
+              ut labore et dolore magna aliqua.{% endblocktrans %}
+          </p>
+          {% for item in skills %}
+            {% if forloop.counter0|divisibleby:3 %}
+              <div class="row">
+            {% endif %}
+          <div class="col-xs-4">
+            <div class="select-checkbox">
+              <input type="checkbox" id="" name="">
+              <label for="checkboxFiveInput"></label>
+
+              <div class="select-label">{{ item }}</div>
+            </div>
+          </div>
+          {% if forloop.last or forloop.counter|divisibleby:3 %}
+            </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div>
+        <div class="form-sub-title"><h2>{% trans "2. Please enter the title of your post" %}</h2></div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            {% render_field form.title class="form-control input-sm" required="true" autofocus="autofocus" placeholder="" %}
+            {{ form.title.errors }}
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-sub-title"><h2>{% trans "3. Please write your post" %}</h2></div>
+        {% render_field form.details class="form-control input-sm" required="true" placeholder="" %}
+        {{ form.details.errors }}
+      </div>
+{#      <div>#}
+{#        <div class="form-sub-title"><h2>{% trans "4. Tag your post" %}</h2></div>#}
+{#      </div>#}
+      <div style="margin-top: 20px;">
+        <div class="form-group">
+          <div class="col-xs-12">
+            <label for="{{ form.receive_notifications.auto_id }}">{% trans "Receive notifications" %}</label>
+            {% render_field form.receive_notifications class="" required="true" autofocus="autofocus" placeholder="" %}
+            {{ form.receive_notifications.errors }}
+            <button class="btn btn-action pull-right">Post now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    window.ahr.initCreatePost();
+  </script>
+{% endblock %}

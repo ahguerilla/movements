@@ -26,6 +26,38 @@
 
 
 (function () {
+
+  function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+
+  function sameOrigin(url) {
+    // test that a given url is a same-origin URL
+    // url could be relative or scheme relative or absolute
+    var host = document.location.host; // host + port
+    var protocol = document.location.protocol;
+    var sr_origin = '//' + host;
+    var origin = protocol + sr_origin;
+    // Allow absolute or scheme relative URLs to same origin
+    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+      // or any other URL that isn't scheme relative or absolute i.e relative.
+        !(/^(\/\/|http:|https:).*/.test(url));
+  }
+
+  $.ajaxSetup({
+    beforeSend: function (xhr, settings) {
+      var csrftoken = $.cookie('csrftoken');
+      if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+        // Send the token to same-origin, relative URLs only.
+        // Send the token only if the method warrants CSRF protection
+        // Using the CSRFToken value acquired earlier
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
+    }
+  });
+
   window.ahr.messageCounterWatch = function () {
     if (window.ahr.user_id > 0) {
       setInterval(function () {
@@ -49,7 +81,7 @@
     }
   }
 
-  lastsize = $(window).width();
+  var lastsize = $(window).width();
   $(window).on({
     "orientationchange": function (event) {
       toggleNav();
@@ -63,6 +95,50 @@
       lastsize = thissize;
     }
   });
+
+  var $currentPopover = null;
+  $(document).on('shown.bs.popover', function (ev) {
+    var $target = $(ev.target);
+    if ($currentPopover && ($currentPopover.get(0) != $target.get(0))) {
+      $currentPopover.popover('toggle');
+    }
+    $currentPopover = $target;
+  });
+
+  $(document).on('hidden.bs.popover', function (ev) {
+    var $target = $(ev.target);
+    if ($currentPopover && ($currentPopover.get(0) == $target.get(0))) {
+      $currentPopover = null;
+    }
+  });
+
+  function setupAddPostPopover() {
+    $('#add-post').popover({
+      title: '',
+      html: true,
+      content: $('#add-post-template').html(),
+      container: '#add-post-popup-container',
+      placement: 'bottom'
+    });
+  }
+
+  function setupProfileMenuPopover() {
+     $('#view-profile-menu').popover({
+       title: '',
+       html: true,
+       content: $('#content-menu-template').html(),
+       container: '#content-menu-container',
+       placement: 'bottom'
+     });
+
+    $('#view-profile-menu').on('shown.bs.popover', function(){
+      $('#content-menu-container .popover').css("left", 0);
+      $('#content-menu-container .arrow').css("left", "28px");
+    });
+  }
+
+  setupAddPostPopover();
+  setupProfileMenuPopover();
 
   window.ahr.BaseView = Backbone.View.extend({
     events: {},

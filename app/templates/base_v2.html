@@ -26,16 +26,8 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  {% assets "css_all" %}
-    <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
-  {% endassets %}
-
   {% assets "css_all_v2" %}
     <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
-  {% endassets %}
-
-  {% assets "js_all" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}
 
   {% block extra_head %}
@@ -54,67 +46,186 @@
     <div style="display:none;">{{ message }}</div>
   {% endfor %}
 {% endif %}
+
+{% block header_nav %}
 <nav class="navbar navbar-default header-nav {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
   <div class="container" style="position:relative;">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="header-nav-wrapper">
-          <img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo.png">
+      <div class="navbar-left">
+        <div id="view-content-menu" class="menu-selector">
+          <div class="menu-icon"></div>
+          <div class="action-font">Menu</div>
         </div>
+        {% if user.is_authenticated %}
+        <div class="nav-avatar avatar" id="view-profile-menu">
+          {% primary_avatar user 30 %}
+          <div class="action-font">Profile</div>
+          <div id="content-menu-container"></div>
+        </div>
+        {% endif %}
       </div>
+    {% if user.is_authenticated %}
+      <div class="navbar-right">
+        <a id="add-post" class="btn btn-action"><img src="{{ STATIC_URL }}images/v2/add_icon.png"/> Add Post</a>
+        <div id="add-post-popup-container"></div>
+      </div>
+    {% else %}
+      <div class="navbar-right">
+        <a href="{% url 'account_login' %}" class="btn btn-action">Login</a>
+      </div>
+    {% endif %}
+    <div class="header-nav-wrapper">
+      <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>
     </div>
   </div>
 </nav>
-<!--<div style="height:50px;"></div>-->
-{% block outsidecontainer %}
+<div id="main-cms-nav" style="display: none;">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>About Movements</h4>
+        {% show_menu_below_id "col1" 0 100 100 100 %}
+      </div>
+      <div class="col-xs-4">
+        <h4>Navigation</h4>
+        {% if not user.is_authenticated %}
+          <li>
+            <a href="{% url 'account_login' %}">Login</a>
+          </li>
+          <li>
+            <a href="{% url 'signup_start' %}">Sign up</a>
+          </li>
+        {% endif %}
+          <li>
+            <a href="{% url 'show_market' %}">Exchange</a>
+          </li>
+          <li>
+            <a href="{% url 'user_profile' %}">Profile</a>
+          </li>
+        {% show_menu_below_id "col2" 0 100 100 100 %}
+      </div>
+      <div class="col-xs-4">
+        <h4>Our Terms</h4>
+        {% show_menu_below_id "col3" 0 100 100 100 %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block header_padding %}<div style="height: 20px;"></div>{% endblock %}
+
+{% block content_outside_container %}
 {% endblock %}
 
 {% block ext_container %}
-<div class="container" id="main-content-container">
+<div class="container">
 
   <div id="currentusername" class="hidden">{{ user.username }}</div>
 
   {% block content %}
   {% endblock %}
 
-  {% include "market/clientside/app_urls.html" %}
-
   {% block extra_body %}
   {% endblock %}
 </div>
 {% endblock %}
 
-<div style="height: 70px"></div>
-<nav class="navbar navbar-fixed-bottom footer-navbar" role="navigation">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-6">
-        <div class="footer-copyright">Copyright &copy; 2014 Advancing Human Rights</div>
+{% block footer_padding %}<div style="height: 30px"></div>{% endblock %}
+<footer>
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-4">
+          <h4>{% trans "Get updates"  %}</h4>
+          <form>
+            <div class="form-group">
+              <input class="form-control" id="id_email" name="email" type="text" placeholder="Enter your e-mail...">
+            </div>
+          </form>
+          <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>
+        </div>
+        <div class="col-xs-3">
+          <h4>{% trans "Connect with us"  %}</h4>
+          <div class="social-icons">
+            <a href="/movements/">
+              <img src="{{ STATIC_URL }}images/v2/twitter-bigger.png" alt="Connect with Twitter" >
+            </a>
+            <a href="">
+              <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="Connect with Facebook" >
+            </a>
+            <a href="">
+              <img src="{{ STATIC_URL }}images/v2/gplus-bigger.png" alt="Connect with Google Plus" >
+            </a>
+          </div>
+        </div>
+        <div class="col-xs-5">
+          <h4>{% trans "About Movements"  %}</h4>
+          <p>{% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.{% endblocktrans %}</p>
+        </div>
       </div>
-      <div class="col-xs-6">
-        <div class="right-elements">
-          <span>Connect with us</span>
-          <a href="">
-            <img src="{{ STATIC_URL }}images/v2/twitter.png" alt="Connect with Twitter" >
-          </a>
-          <a href="">
-            <img src="{{ STATIC_URL }}images/v2/facebook.png" alt="Connect with Facebook" >
-          </a>
-          <a href="">
-            <img src="{{ STATIC_URL }}images/v2/gplus.png" alt="Connect with Google Plus" >
-          </a>
+      <hr>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
+        </div>
+        <div class="col-xs-6">
+          <div class="footer-nav-content">
+            {% show_menu 0 100 100 100 "cms/navs/bottom_nav_v2.html" %}
+          </div>
         </div>
       </div>
     </div>
   </div>
-</nav>
+</footer>
 <div id="modal-placeholder"></div>
+<script type="text/template" id="add-post-template">
+  <a class="btn btn-request" href="{% url 'create_request' %}"><img src="{{ STATIC_URL }}images/v2/request_icon.png"/>Request</a>
+  <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>Offer</a>
+</script>
+<script type="text/template" id="content-menu-template">
+  <a href="{% url 'user_profile' %}">
+    <div class="nav-menu-item-wrap profile">
+      <div class="spacer"></div>
+      <div class="nav-menu-item"></div>
+      Profile
+    </div>
+  </a>
+  <div class="nav-menu-item-wrap settings">
+    <div class="spacer"></div>
+    <div class="nav-menu-item"></div>
+    Settings
+  </div>
+  <div class="nav-menu-item-wrap messages">
+    <div class="spacer"></div>
+    <div class="nav-menu-item"></div>
+    Messages
+  </div>
+  <form method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    <a href="#" onclick="parentNode.submit();">
+      <div class="nav-menu-item-wrap logout">
+        <div class="spacer"></div>
+        <div class="nav-menu-item"></div>
+        Logout
+      </div>
+    </a>
+  </form>
+  <div class="clearfix"></div>
+</script>
+
+{% assets "js_all" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
+{% include "market/clientside/app_urls.html" %}
 
 {% block javascript %}
 {% endblock %}
 
 {% block endjavascript %}
 {% endblock %}
+{% render_block "js" %}
+
 <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 {% if user.is_authenticated %}
   {% include "market/clientside/notifications.html" %}
@@ -124,11 +235,26 @@
     })();
   </script>
 {% endif %}
+
 <script type="text/javascript">
   (function () {
     window.ahr.string_constants = {{ string_constants|safe }};
   })();
 </script>
-{% render_block "js" %}
+
+<script type="text/javascript">
+  (function () {
+    $('#view-content-menu').click(function(){
+      if($('#main-cms-nav').is(":visible")){
+        $('#main-cms-nav').hide();
+        $('.menu-selector').removeClass("selected");
+      } else {
+        $('#main-cms-nav').show();
+        $('.menu-selector').addClass("selected");
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>
