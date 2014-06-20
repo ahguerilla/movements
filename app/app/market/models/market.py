@@ -73,9 +73,7 @@ class MarketItem(models.Model):
         adict['fields']['pk'] = self.id
         adict['fields']['item_type'] = self.item_type
         adict['fields']['item_type_display'] = self.item_type_display
-        adict['fields']['issues'] = [ob.id for ob in self.issues.all()]
-        adict['fields']['countries'] = [ob.id for ob in self.countries.all()]
-        adict['fields']['skills'] = [ob.id for ob in self.skills.all()]
+        adict['fields']['interests'] = [ob.id for ob in self.interests.all()]
         adict['fields']['title'] = self.title
         adict['fields']['details'] = self.details
         adict['fields']['pub_date'] = str(self.pub_date)

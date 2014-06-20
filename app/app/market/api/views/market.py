@@ -37,9 +37,7 @@ def get_stickies(request, hiddens, sfrom, to):
 
 def get_raw(request, filter_by_owner=False):
     params = {
-        'countries': tuple(map(int, request.GET.getlist('countries', (0,)))),
-        'issues': tuple(map(int, request.GET.getlist('issues', (0,)))),
-        'skills': tuple(map(int, request.GET.getlist('skills', (0,)))),
+        'interests': tuple(map(int, request.GET.getlist('interests', (0,)))),
         'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
         'user_id': request.user.id,
         'date_now': datetime.now(),
@@ -70,25 +68,14 @@ def get_raw(request, filter_by_owner=False):
         order_by = 'ORDER BY id DESC , pub_date DESC'
         additional_filter += 'AND auth_user.id = %(user_id)s'
     else:
-        select = """
-        SELECT mi.*,
-               (COUNT(DISTINCT market_marketitem_countries.countries_id) +
-                COUNT(DISTINCT market_marketitem_issues.issues_id) +
-                COUNT(DISTINCT market_marketitem_skills.skills_id)) as tag_matches
-        """
-        order_by = 'ORDER BY tag_matches DESC, pub_date DESC'
+        select = 'SELECT mi.* '
+        order_by = 'ORDER BY pub_date DESC'
 
     raw = select + """
         FROM market_marketitem AS mi
-        LEFT JOIN market_marketitem_countries ON
-            market_marketitem_countries.marketitem_id = mi.id AND
-            market_marketitem_countries.countries_id IN %(countries)s
-        LEFT JOIN market_marketitem_issues ON
-            market_marketitem_issues.marketitem_id = mi.id AND
-            market_marketitem_issues.issues_id IN %(issues)s
-        LEFT JOIN market_marketitem_skills ON
-            market_marketitem_skills.marketitem_id = mi.id AND
-            market_marketitem_skills.skills_id IN %(skills)s
+        LEFT JOIN market_marketitem_interests ON
+            market_marketitem_interests.marketitem_id = mi.id AND
+            market_marketitem_interests.interest_id IN %(interests)s
         INNER JOIN "auth_user" ON
             mi.owner_id = "auth_user"."id"
         WHERE
@@ -103,10 +90,7 @@ def get_raw(request, filter_by_owner=False):
             mi.deleted = False AND
             "auth_user"."is_active" = True AND
             NOT mi.status IN %(closed_statuses)s
-        GROUP BY mi.id, mi.item_type, mi.owner_id, mi.staff_owner_id, mi.title,
-            mi.details, mi.url, mi.published, mi.pub_date,
-            mi.commentcount, mi.ratecount, mi.reportcount, mi.score, mi.deleted,
-            mi.status, mi.closed_date, mi.feedback_response
+        GROUP BY mi.id
     """ + order_by
     return raw, params
 
