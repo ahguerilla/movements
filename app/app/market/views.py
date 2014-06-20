@@ -51,14 +51,13 @@ def show_post(request, post_id):
 
 @login_required
 def create_offer(request):
-    form = OfferForm(request.POST if request.method == 'POST' else None)
+    user_skills = request.user.userprofile.interests.values_list('id', flat=True)
+    form = OfferForm(request.POST or None, user_skills=user_skills)
     if form.is_valid():
         save_market_item(form, request.user)
         # TODO This needs to be the new view offer page
         return redirect('/')
-    skills = ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee",
-              "Policy Expert", "Social Media", "Technology", "Translator", "Writer"]
-    return render_to_response('market/create_offer.html', {'skills': skills, 'form': form},
+    return render_to_response('market/create_offer.html', {'form': form},
                               context_instance=RequestContext(request))
 
 
@@ -70,10 +69,8 @@ def create_request(request):
         save_market_item(form, request.user)
         # TODO This needs to be the new view request page
         return redirect('/')
-
-    return render_to_response(
-        'market/create_request.html', {'form': form},
-        context_instance=RequestContext(request))
+    return render_to_response('market/create_request.html', {'form': form},
+                              context_instance=RequestContext(request))
 
 
 @login_required
