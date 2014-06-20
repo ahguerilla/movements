@@ -9,7 +9,6 @@ class FirstLoginMiddleware(object):
         current_url = request.get_full_path()
         target_url = reverse('more_about_you')
         if not target_url in current_url and \
-            hasattr(request, 'user') and \
             hasattr(request.user, 'userprofile') and \
             request.user.userprofile.first_login and not any([
                 request.user.is_superuser,
