@@ -6,8 +6,6 @@ import django.contrib.auth as auth
 from datetime import datetime
 from django.db.models import Q
 from django.core.urlresolvers import reverse
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 
 
 class Skills(models.Model):
@@ -175,12 +173,6 @@ class UserProfile(models.Model):
         start=kwargs.get('start', None)
         finish=kwargs.get('finish', None)
         return cls.objects.filter(query).filter(user__is_active=True).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
 
 
 class OrganisationalRating(models.Model):
