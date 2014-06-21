@@ -80,6 +80,12 @@
     }
   });
 
+  var ProfileFilterView = Backbone.View.extend({
+     setFilter: function(data) {
+      data.showHidden = true;
+    }
+  })
+
   var MarketView = window.ahr.market.MarketBaseView.extend({
     types: {
       "Offers": "offer",
@@ -208,10 +214,13 @@
   };
 
   window.ahr.market.initProfile = function(){
+    var filterView = new ProfileFilterView()
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">No posts created yet<div>';
+
     var market = new MarketView(
       {
         el: '#profile-view',
+        filterView: filterView,
         marketUrl: ahr.app_urls.getusermarketitemsfromto,
         noResultsString: noResultsString
       });
