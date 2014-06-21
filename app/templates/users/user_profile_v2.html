@@ -78,7 +78,11 @@
       $(document).ready(function(){
         window.GuerillaMarket = window.GuerillaMarket || {};
         window.GuerillaMarket.userDefaultTags = {'skills': [], 'issues': [], 'countries': []};
-        window.ahr.market.initProfile();
+        var userId = null;
+        {% if not is_self %}
+        userId = {{ user_details.id }};
+        {% endif %}
+        window.ahr.market.initProfile(userId);
       });
     </script>
 {% endblock %}

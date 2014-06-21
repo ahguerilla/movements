@@ -70,6 +70,10 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.get_user_marketitem_fromto',
         name="get_usermarketitems_fromto"),
 
+    url(r'(?P<rtype>\S+)/useritem/get/user_id/(?P<user_id>\d+)/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
+        'app.market.api.views.market.get_user_marketitem_for_user_fromto',
+        name="get_usermarketitems_for_user_fromto"),
+
     url(r'item/close/(?P<obj_id>\d+)$',
         'app.market.api.views.market.close_market_item',
         name="close_marketitem"),

@@ -50,19 +50,15 @@
 </script>
 <script type="text/template" id="item-menu-template">
   <%
-     if(isProfile) {
-        var actions = [
-          {display: 'Close', value: 'close'}
-        ]
+     var actions = [];
+     if (!isProfile) {
+       actions.push({display: 'Hide', value: 'hide', toggle: true});
+       actions.push({display: 'Stick', value: 'stick', toggle: true});
+     }
+     if (hasEdit) {
+       actions.push({display: 'Close', value: 'close'});
      } else {
-       var actions = [
-         {display: 'Hide', value: 'hide', toggle: true},
-         {display: 'Stick', value: 'stick', toggle: true}];
-       if (hasEdit) {
-          actions.push({display: 'Close', value: 'close'});
-       } else {
-          actions.push({display: 'Report', value: 'report'});
-       }
+       actions.push({display: 'Report', value: 'report'});
      }
   %>
   <ul class="item-action-menu">

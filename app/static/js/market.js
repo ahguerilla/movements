@@ -215,15 +215,19 @@
     document.title = window.ahr.string_constants.exchange;
   };
 
-  window.ahr.market.initProfile = function(){
+  window.ahr.market.initProfile = function(userId){
     var filterView = new ProfileFilterView()
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">No posts created yet<div>';
+    var marketUrl = ahr.app_urls.getusermarketitemsfromto;
+    if(userId) {
+      marketUrl =  ahr.app_urls.getusermarketitemsforuserfromto.replace("/user_id/0", "/user_id/" + userId);
+    }
 
     var market = new MarketView(
       {
         el: '#profile-view',
         filterView: filterView,
-        marketUrl: ahr.app_urls.getusermarketitemsfromto,
+        marketUrl: marketUrl,
         noResultsString: noResultsString,
         isProfile: true
       });

@@ -35,13 +35,13 @@ def get_stickies(request, hiddens, sfrom, to):
     return obj
 
 
-def get_raw(request, filter_by_owner=False):
+def get_raw(request, filter_by_owner=False, user_id=None):
     params = {
         'countries': tuple(map(int, request.GET.getlist('countries', (0,)))),
         'issues': tuple(map(int, request.GET.getlist('issues', (0,)))),
         'skills': tuple(map(int, request.GET.getlist('skills', (0,)))),
         'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
-        'user_id': request.user.id,
+        'user_id': user_id if user_id else request.user.id,
         'date_now': datetime.now(),
         'closed_statuses': (
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
@@ -183,6 +183,13 @@ def get_user_marketitem_fromto(request, sfrom, to, rtype):
         *get_raw(request, filter_by_owner=True))[int(sfrom):int(to)]
     retval = return_item_list(market_items, rtype)
     return retval
+
+
+@login_required
+def get_user_marketitem_for_user_fromto(request, user_id, sfrom, to, rtype):
+    market_items = market.models.MarketItem.objects.raw(
+        *get_raw(request, filter_by_owner=True, user_id=user_id))[int(sfrom):int(to)]
+    return return_item_list(market_items, rtype)
 
 
 @login_required
