@@ -1,15 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
-from models import UserProfile, OrganisationalRating, Countries
+from models import UserProfile, OrganisationalRating, Residence
 from django.utils.translation import ugettext_lazy as _
 import constance
 from django.conf.global_settings import LANGUAGES
 
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
-
-COUNTRIES = [(0, u'--')] + [
-    (country.id, country.countries) for country in Countries.objects.all()]
 
 
 class SignUpStartForm(forms.Form):
@@ -37,8 +34,8 @@ class SignupForm(forms.Form):
         max_length=30, label='First Name', required=False)
     last_name = forms.CharField(
         max_length=30, label='Last Name', required=False)
-    resident_country = forms.ChoiceField(
-        choices=COUNTRIES, label='Country of Residence', required=False)
+    resident_country = forms.ModelChoiceField(
+        queryset=(), label='Country of Residence', required=False)
     bio = forms.CharField(
         widget=forms.Textarea(), label='Biography', required=False)
     linkedin_url = forms.CharField(
@@ -46,6 +43,10 @@ class SignupForm(forms.Form):
     tweet_url = forms.CharField(max_length=100, label='Twitter', required=False)
     fb_url = forms.CharField(max_length=100, label='Facebook', required=False)
     web_url = forms.CharField(max_length=100, label='Website', required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(SignupForm, self).__init__(*args, **kwargs)
+        self.fields['resident_country'].queryset = Residence.objects.all()
 
     def save(self, request):
         adapter = get_adapter()

@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
+from django.db import transaction
 from models import (
     UserProfile, OrganisationalRating, Language, Interest, Region)
 from forms import (
@@ -317,16 +318,22 @@ class AccAdapter(DefaultAccountAdapter):
         self.send_mail('account/email/user_vetting_email', config.ACTIVATE_USER_EMAIL, ctx)
 
     def save_user(self, request, user, form, commit=False):
+        cleaned_data = form.cleaned_data
         user = super(AccAdapter, self).save_user(request, user, form, commit)
         user.email = request.session.pop('email')
         user.set_password(request.session.pop('password'))
-        user.save()
 
-        # needs to create user and profile in transaction
-        # and add profile information from request
-        user_profile = UserProfile()
-        user_profile.user = user
-        user_profile.save()
+        with transaction.atomic():
+            user.save()
+            UserProfile.objects.create(
+                user=user,
+                resident_country=cleaned_data['resident_country'],
+                bio=cleaned_data['bio'],
+                linkedin_url=cleaned_data['linkedin_url'],
+                tweet_url=cleaned_data['tweet_url'],
+                fb_url=cleaned_data['fb_url'],
+                web_url=cleaned_data['web_url']
+            )
 
         self.send_vetting_email(user, form)
         return user
