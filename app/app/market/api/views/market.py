@@ -181,7 +181,7 @@ def close_market_item(request, obj_id, rtype):
 def get_user_marketitem_fromto(request, sfrom, to, rtype):
     market_items = market.models.MarketItem.objects.raw(
         *get_raw(request, filter_by_owner=True))[int(sfrom):int(to)]
-    retval = return_item_list(market_items, rtype)
+    retval = return_item_list(market_items, rtype, request)
     return retval
 
 

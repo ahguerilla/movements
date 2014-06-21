@@ -50,9 +50,8 @@
 </script>
 <script type="text/template" id="item-menu-template">
   <%
-     var actions = [];
+     var actions = [{display: 'Hide', value: 'hide', toggle: true}];
      if (!isProfile) {
-       actions.push({display: 'Hide', value: 'hide', toggle: true});
        actions.push({display: 'Stick', value: 'stick', toggle: true});
      }
      if (hasEdit) {
