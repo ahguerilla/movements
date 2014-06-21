@@ -513,7 +513,7 @@ h6 {
   border-radius: 3px;
 }
 .page-banner {
-  height: 600px;
+  height: 550px;
   overflow: hidden;
 }
 .page-banner .carousel-filter {
@@ -523,7 +523,7 @@ h6 {
   height: 100%;
 }
 .page-banner .carousel-inner .item {
-  height: 600px;
+  height: 550px;
   background-repeat: no-repeat;
   background-position: center center;
   -webkit-background-size: cover;
@@ -533,7 +533,7 @@ h6 {
   background-size: cover;
 }
 .page-banner .carousel-inner .carousel-content {
-  height: 600px;
+  height: 550px;
   position: relative;
   color: #fff;
   text-align: center;

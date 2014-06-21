@@ -93,9 +93,12 @@
 
     initialize: function (options) {
       this.item_type = 'item';
-      this.getitemfromto = ahr.app_urls.getmarketitemfromto;
+      this.getitemfromto = options.marketUrl;
+      this.noResultsString = options.noResultsString;
       this.item_tmp = _.template($('#item_template').html());
-      this.init(options.filterView);
+      if(options.filterView) {
+        this.init(options.filterView);
+      }
       this.item_menu_template = _.template($('#item-menu-template').html());
       this.closeDialog = new ahr.CloseItemDialogView();
       this.reportDialog = new ahr.ReportPostView();
@@ -182,13 +185,37 @@
       }
     }
   });
-
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (filters) {
     var filterView = new MarketFilterView({el: '#exchange-filters'});
-    var market = new MarketView({el: '#itemandsearchwrap', filterView: filterView});
+//    var noResultsString = ['<p style="margin-top:20px;float:left;width:100%;text-align:center;" id="no-search-result">',
+//        window.ahr.string_constants.market_search_no_match_a,
+//        '<a href="#" id="searchagainall">',
+//        window.ahr.string_constants.market_search_no_match_b + '</a>' + window.ahr.string_constants.market_search_no_match_c,
+//        '<a href="#" id="searchwithdefaults">' ,
+//        window.ahr.string_constants.market_search_no_match_d,
+//        '</a></p>'].join(' ');
+    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Your filter selection does not match any posts<div>';
+    var market = new MarketView(
+      {
+        el: '#itemandsearchwrap',
+        filterView: filterView,
+        marketUrl: ahr.app_urls.getmarketitemfromto,
+        noResultsString: noResultsString
+      });
     market.initInfiniteScroll();
     document.title = window.ahr.string_constants.exchange;
   };
+
+  window.ahr.market.initProfile = function(){
+    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">No posts created yet<div>';
+    var market = new MarketView(
+      {
+        el: '#profile-view',
+        marketUrl: ahr.app_urls.getusermarketitemsfromto,
+        noResultsString: noResultsString
+      });
+    market.initInfiniteScroll();
+  }
 
 })();

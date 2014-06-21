@@ -8,6 +8,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   itemsPerCall: 15,
   loadedOnce: false,
   currentCall: null,
+  noResultsString: "",
   
 
   levelReached: function (pixelTestValue) {
@@ -53,13 +54,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   noSearchResult: function () {
     if ($('.market-place-item').length === 0) {
-      $('#marketitems').append(['<p style="margin-top:20px;float:left;width:100%;text-align:center;" id="no-search-result">',
-        window.ahr.string_constants.market_search_no_match_a,
-        '<a href="#" id="searchagainall">',
-        window.ahr.string_constants.market_search_no_match_b + '</a>' + window.ahr.string_constants.market_search_no_match_c,
-        '<a href="#" id="searchwithdefaults">' ,
-        window.ahr.string_constants.market_search_no_match_d,
-        '</a></p>'].join(' '));
+      $('#marketitems').append(this.noResultsString);
     }
   },
 
@@ -105,7 +100,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   getItems: function (from, to) {
     var data = {};
-    this.filterView.setFilter(data);
+    if(this.filterView) {
+      this.filterView.setFilter(data);
+    }
     return $.ajax({
       url: this.getitemfromto.replace('0', from) + to,
       dataType: 'json',
