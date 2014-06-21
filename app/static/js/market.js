@@ -105,6 +105,7 @@
       if(options.filterView) {
         this.init(options.filterView);
       }
+      this.isProfile = options.isProfile || false;
       this.item_menu_template = _.template($('#item-menu-template').html());
       this.closeDialog = new ahr.CloseItemDialogView();
       this.reportDialog = new ahr.ReportPostView();
@@ -120,6 +121,7 @@
       };
       var content = this.item_menu_template({
         hasEdit: $itemContainer.data('has-edit'),
+        isProfile: this.isProfile,
         toggled: toggled
       });
       $link.popover({
@@ -222,7 +224,8 @@
         el: '#profile-view',
         filterView: filterView,
         marketUrl: ahr.app_urls.getusermarketitemsfromto,
-        noResultsString: noResultsString
+        noResultsString: noResultsString,
+        isProfile: true
       });
     market.initInfiniteScroll();
   }

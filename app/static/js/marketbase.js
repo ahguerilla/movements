@@ -9,7 +9,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   loadedOnce: false,
   currentCall: null,
   noResultsString: "",
-  
 
   levelReached: function (pixelTestValue) {
     if (!this.loadedOnce) {
