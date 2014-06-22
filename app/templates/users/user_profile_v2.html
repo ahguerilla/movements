@@ -23,7 +23,7 @@
         <div class="poster-name">{{ user_details.username }}</div>
         <div class="poster-rating"><span class="rateit"
               data-rateit-readonly="true"
-              data-rateit-value="3"
+              data-rateit-value="{{ user_profile.score }}"
               data-rateit-min="0"
               data-rateit-starwidth="22"
               data-rateit-starheight="17"
@@ -34,15 +34,15 @@
     {% if not is_self %}
     <hr />
     <div class="profile-actions">
-      <div class="rate-user">
+      <div username="{{ user_profile.user.username }}" score="{{ user_profile.score }}" usercore="{{ user_profile.score }}" ratecount="{{ user_profile.ratecount }}" class="rate-user rate">
         <div class="profile-action-icon rate-icon"></div>
         <div class="profile-action-text">Rate User</div>
       </div>
-      <div class="message-user">
+      <div username="{{ user_profile.user.username }}" class="message-user private-message">
         <div class="profile-action-icon message-icon"></div>
         <div class="profile-action-text">Direct Message</div>
       </div>
-      <div class="report-user">
+      <div username="{{ user_profile.user.username }}" class="report-user report_user">
         <div class="profile-action-icon report-icon"></div>
         <div class="profile-action-text">Report User</div>
       </div>
@@ -71,18 +71,41 @@
 {% endblock %}
 
 {% block endjavascript %}
-    {% include "market/clientside/marketitem.html" %}
-    {% include "market/clientside/closemarketitemdialog.html"%}
-    {% include "market/clientside/reportdialog.html" %}
-    <script type="text/javascript">
-      $(document).ready(function(){
-        window.GuerillaMarket = window.GuerillaMarket || {};
-        window.GuerillaMarket.userDefaultTags = {'skills': [], 'issues': [], 'countries': []};
-        var userId = null;
-        {% if not is_self %}
-        userId = {{ user_details.id }};
-        {% endif %}
-        window.ahr.market.initProfile(userId);
-      });
-    </script>
+  {% include "market/clientside/marketitem.html" %}
+  {% include "market/clientside/closemarketitemdialog.html"%}
+  {% include "market/clientside/reportdialog.html" %}
+
+  {% include "market/clientside/messagedialog.html" %}
+  {% include 'market/clientside/reportuserdialog.html' %}
+  {% include "market/clientside/ratedialog.html" %}
+
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      window.GuerillaMarket = window.GuerillaMarket || {};
+      window.GuerillaMarket.userDefaultTags = {'skills': [], 'issues': [], 'countries': []};
+      var userId = null;
+      {% if not is_self %}
+      userId = {{ user_details.id }};
+      {% endif %}
+      window.ahr.market.initProfile(userId);
+    });
+  </script>
+
+  <script type="text/javascript">
+  $(function(){
+    var ProfileView = Backbone.View.extend({
+      resetitemrate: function (username, rate) {
+        window.location.reload();
+      },
+
+      initialize: function(){
+        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+        this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
+        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
+      }
+    });
+    var profileView = new ProfileView();
+  });
+  </script>
 {% endblock %}

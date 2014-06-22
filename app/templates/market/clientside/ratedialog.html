@@ -12,20 +12,15 @@
       </div>
       <div class="modal-body">
         <div class="row">
-
           <div class="round-image" style="text-align:center; font-size:160%;">
-           <img id="profileimage"/>
             <div style="margin-top:10px;">
               <span id="username"></span>
               <span id="numstars"></span>
               <span id="ratecount"></span>{%trans "Rating(s)"%}
             </div>
           </div>
-
         </div>
-
         <div style="margin-bottom:10px;"></div>
-
         <div class="row" id="rateradios" style="text-align:center;" >
           <div>
             <div>
@@ -34,28 +29,24 @@
                 <div class="stars1"></div>
               </label>
             </div>
-
             <div>
               <label class="">
                 <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="2">{%trans "Two stars"%}</div>
                 <div class="stars2"></div>
               </label>
             </div>
-
             <div>
               <label class="">
                 <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="3">{%trans "Three stars"%}</div>
                 <div class="stars3"></div>
               </label>
             </div>
-
             <div>
               <label class="">
                 <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="4">{%trans "Four stars"%}</div>
                 <div class="stars4"></div>
               </label>
             </div>
-
             <div>
               <label class="">
                 <div style="display: inline-block;width:150px;text-align:left;"><input type="radio" name="stars" value="5">{%trans "Five stars"%}</div>
@@ -93,28 +84,23 @@
       ev.preventDefault();
       this.evrate = ev;
       var username = ev.currentTarget.getAttribute('username');
-      var image_src = ev.currentTarget.getAttribute('image_src');
       var score = ev.currentTarget.getAttribute('score');
       var ratecount = ev.currentTarget.getAttribute('ratecount');
       $('#ratecount', $('#ratedialog')).text(ratecount);
-      if ($(ev.currentTarget).attr('rateing') == 'user') {
-        this.rateurl = window.ahr.app_urls.setuserrate + username;
-        $('#username', $('#ratedialog')).text(username);
-        $('#ratetitle', $('#ratedialog')).text(username);
-      } else {
-        this.rateurl = window.ahr.app_urls.marketsetrate + $("#item-single").attr("item-id");
-        $('#username', $('#ratedialog')).text($('#marketitem_title').text());
-        $('#ratetitle', $('#ratedialog')).text($('#marketitem_title').text());
-      }
-      $('#ratedialog').modal('show');
 
+      this.rateurl = window.ahr.app_urls.setuserrate + username;
+      $('#username', $('#ratedialog')).text(username);
+      $('#ratetitle', $('#ratedialog')).text(username);
+
+      $('#ratedialog').modal('show');
       $('#numstars').rateit();
       $('#numstars').rateit('min', 0);
       $('#numstars').rateit('max', 5);
       $('#numstars').rateit('readonly', true);
       $('#numstars').rateit('value', score);
+      $('#numstars').rateit('starwidth', 22);
+      $('#numstars').rateit('starheight', 17);
 
-      $('#profileimage',$('#ratedialog')).attr('src', image_src);
       return (false);
     },
 
