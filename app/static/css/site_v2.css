@@ -1314,6 +1314,25 @@ h6 {
 .setting-page .profile-actions .report-user:hover .report-icon {
   background: url("../images/v2/profile-report.png") center -21px no-repeat;
 }
+.settings-form {
+  margin-top: 20px;
+}
+.settings-form h1 {
+  margin-top: 0;
+}
+.settings-form .settingavatar {
+  text-align: center;
+}
+.settings-form .settingavatar img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.settings-form #changeavatar {
+  line-height: 100px;
+}
 #ratedialog .stars0 {
   background: url("/static/images/stars.png") 0 0px;
   width: 118px;
