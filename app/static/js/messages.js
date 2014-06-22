@@ -1,17 +1,4 @@
 (function () {
-  //var InboxRoute = Backbone.Router.extend({
-  //routes: {
-  //"": "page",
-  //"p:page": "page"
-  //},
-  //page: function (page) {
-  //$.noop();
-  //},
-  //initialize: function (market) {
-  //$.noop();
-  //}
-  //});
-
   var InboxView = Backbone.View.extend({
     el: '#postman',
     events: {
@@ -29,9 +16,9 @@
         if ($('.next', $(data)).hasClass('disabled')) {
           $('#paginationblock').remove();
         }
-        var more = $('.next', $(data))[0];
-        $('.next').replaceWith(more);
-        $(more).html('<button style="margin-top:5px;" class="btn btn-default">' + window.ahr.string_constants.more + '</button>');
+//        var more = $('.next', $(data))[0];
+//        $('.next').replaceWith(more);
+//        $(more).html('<button style="margin-top:5px;" class="btn btn-default">' + window.ahr.string_constants.more + '</button>');
         $('.messagelist').append($('.messagelist', $(data)).children());
       });
     },
@@ -39,12 +26,6 @@
     reply: function (ev) {
       ev.reventDefault();
       return false;
-    },
-
-    setProfile: function (user) {
-      this.profile_widget.set(user, '.profilecontainer', 'user');
-      $('#conversation').show();
-      $('#id_body').trigger('focus');
     },
 
     postProccessConv: function(data){
@@ -108,7 +89,6 @@
 
       dfrd.done(function (data) {
         var conv = that.postProccessConv(data);
-        that.setProfile(conv.user);
 
         $('#conversation').html(conv.html);
         if ($('#id_body').length > 0) {
@@ -122,62 +102,29 @@
     },
 
     showconv: function () {
-      if ($(window).width() < 992) {
-        $('.nanamorde-mobile').show();
-      } else if ($(window).width() >= 992) {
-        $('.nanamorde').show();
-      }
       $("#message-col").hide();
+      $('#conversation').show();
       $('#conversation-cont').show();
-      //$('#messagenav').hide();
       $('#back').show();
       $('#breadsubject').text($('#messagesubjectheader').text());
       $('body').scrollTop(0);
     },
 
     back: function (ev) {
-      $('.nanamorde').hide();
-      $('.nanamorde-mobile').hide();
       $('#conversation-cont').hide();
       $("#message-col").show();
       $('#back').hide();
       $('#messagenav').show();
     },
 
-    resize: function (ev) {
-      if ($(window).width() < 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {
-        $('.nanamorde-mobile').show();
-        $('.nanamorde').hide();
-      } else if ($(window).width() >= 992 && $('#conversation-cont').css('display') != 'none' && $("#message-col").css('display') == 'none') {
-        $('.nanamorde-mobile').hide();
-        $('.nanamorde').show();
-      } else {
-        $('.nanamorde-mobile').hide();
-        $('#conversation-cont').hide();
-      }
-    },
-
-    resetitemrate: function (username, rate) {
-      this.setProfile(username);
-    },
-
     initialize: function () {
-      $(window).resize(this.resize);
-      this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
-      this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
       this.actions_view = window.ahr.actions_view();
-      this.profile_widget = window.ahr.profile_widget.initWidget(this.actions_view, window.ahr.app_urls.getprofile);
-      this.recommend_dialog = window.ahr.recommend_widget.initWidget(window.ahr.username);
-      this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate.bind(this));
       this.itemre = new RegExp(/&lt;!--item=&quot;(\d+)&quot;--&gt;/);
       this.userre = new RegExp(/&lt;!--user=&quot;(\S+)&quot;--&gt;/);
-      var more = $('.next')[0];
-      $(more).html('<button style="margin-top:5px;" class="btn btn-default">' + window.ahr.string_constants.more + '</button>');
-      $('#paginationblock').html(more);
+//      var more = $('.next')[0];
+//      $(more).html('<button style="margin-top:5px;" class="btn btn-default">' + window.ahr.string_constants.more + '</button>');
+//      $('#paginationblock').html(more);
       $('#conversation-cont').hide();
-      //$('.nanamorde').hide();
-      $('.nanamorde-mobile').hide();
-      this.resize();
     }
   });
 
@@ -185,8 +132,6 @@
   window.ahr.messages = window.ahr.messages || {};
   window.ahr.messages.initInbox = function () {
     var messages = new InboxView();
-    //var messages_route = new InboxRoute(messages);
     $('#back').hide();
-    //Backbone.history.start();
   };
 })();

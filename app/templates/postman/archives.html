@@ -6,18 +6,11 @@
 {% block head_title %}{% trans "Archived Messages" %}{% endblock %}
 
 {% block pm_archive_button %}{% endblock %}
-{% block pm_undelete_button %}{% endblock %}
 {% block pm_footer_info %}{% endblock %}
 
 {% block endjavascript %}
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    var dfrd = window.ahr.getStatics();
-    dfrd.done(function(){
-      window.ahr.messages.initInbox();
-    });
-  });
-</script>
-
+  {{ block.super }}
+  <script type="text/javascript">
+    window.ahr.messages.initInbox();
+  </script>
 {% endblock %}
