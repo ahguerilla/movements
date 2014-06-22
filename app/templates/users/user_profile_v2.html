@@ -31,6 +31,23 @@
           </div>
       </div>
     </div>
+    {% if not is_self %}
+    <hr />
+    <div class="profile-actions">
+      <div class="rate-user">
+        <div class="profile-action-icon rate-icon"></div>
+        <div class="profile-action-text">Rate User</div>
+      </div>
+      <div class="message-user">
+        <div class="profile-action-icon message-icon"></div>
+        <div class="profile-action-text">Direct Message</div>
+      </div>
+      <div class="report-user">
+        <div class="profile-action-icon report-icon"></div>
+        <div class="profile-action-text">Report User</div>
+      </div>
+    </div>
+    {% endif %}
     <hr />
     <div class="settings-title">Bio</div>
     <div class="bio">

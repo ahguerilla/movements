@@ -1257,6 +1257,63 @@ h6 {
   color: #756b65;
   margin-bottom: 10px;
 }
+.setting-page .profile-actions {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  color: #756b65;
+}
+.setting-page .profile-actions .profile-action-icon {
+  width: 35px;
+  margin-right: 5px;
+  float: left;
+}
+.setting-page .profile-actions .rate-user {
+  margin-bottom: 8px;
+}
+.setting-page .profile-actions .rate-user .rate-icon {
+  background: url("../images/v2/profile-rate.png") center 0 no-repeat;
+  height: 22px;
+}
+.setting-page .profile-actions .rate-user .profile-action-text {
+  line-height: 26px;
+}
+.setting-page .profile-actions .rate-user:hover {
+  cursor: pointer;
+  color: #262626;
+}
+.setting-page .profile-actions .rate-user:hover .rate-icon {
+  background: url("../images/v2/profile-rate.png") center -22px no-repeat;
+}
+.setting-page .profile-actions .message-user {
+  margin-bottom: 10px;
+}
+.setting-page .profile-actions .message-user .message-icon {
+  background: url("../images/v2/profile-direct-message.png") center center no-repeat;
+  height: 22px;
+}
+.setting-page .profile-actions .message-user .profile-action-text {
+  line-height: 26px;
+}
+.setting-page .profile-actions .message-user:hover {
+  cursor: pointer;
+  color: #262626;
+}
+.setting-page .profile-actions .report-user {
+  margin-bottom: 8px;
+}
+.setting-page .profile-actions .report-user .report-icon {
+  background: url("../images/v2/profile-report.png") center 0 no-repeat;
+  height: 21px;
+}
+.setting-page .profile-actions .report-user .profile-action-text {
+  line-height: 23px;
+}
+.setting-page .profile-actions .report-user:hover {
+  cursor: pointer;
+  color: #262626;
+}
+.setting-page .profile-actions .report-user:hover .report-icon {
+  background: url("../images/v2/profile-report.png") center -21px no-repeat;
+}
 
 
 @media (max-width: 992px) {
