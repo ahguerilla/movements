@@ -49,17 +49,42 @@
     </div>
     {% endif %}
     <hr />
+    <div class="settings-title">About</div>
+    <div class="row">
+      <div class="col-xs-4">Name:</div>
+      <div class="col-xs-8">{{ user_details.first_name }}&nbsp;{{ user_details.last_name }}</div>
+      <div class="col-xs-4">Nationality:</div>
+      <div class="col-xs-8">{{ user_profile.nationality }}</div>
+      <div class="col-xs-4">TODO:</div>
+      <div class="col-xs-8">Add More</div>
+    </div>
+    <hr />
     <div class="settings-title">Bio</div>
     <div class="bio">
       {{ user_profile.bio }}
     </div>
     <hr />
     <div class="settings-title">Skills</div>
+    {% if  user_profile.interests.all.count > 0 %}
     <div class="tags">
       {% for interest in user_profile.interests.all %}
         <div class="tag">{{ interest }}</div>
       {% endfor %}
     </div>
+    {% else %}
+      No interests specified
+    {% endif %}
+    <div class="clearfix" ></div>
+    <div class="settings-title" style="margin-top: 10px;">Languages</div>
+    {% if  user_profile.languages.all.count > 0 %}
+    <div class="tags">
+      {% for language in user_profile.languages.all %}
+        <div class="tag">{{ language }}</div>
+      {% endfor %}
+    </div>
+    {% else %}
+      No languages specified
+    {% endif %}
   </div>
   <div class="col-xs-8">
     <div id="marketitems"></div>
