@@ -33,7 +33,7 @@ from django.conf import settings as django_settings
 
 
 def render_settings(request, initial=False):
-    template = 'users/user_settings.html'
+    template = 'users/user_settings_v2.html'
     user = User.objects.get(pk=request.user.id)
     try:
         settings = UserProfile.objects.get(user=user)

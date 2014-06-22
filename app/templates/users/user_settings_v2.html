@@ -1,0 +1,15 @@
+{% extends "base_v2.html" %}
+{% load avatar_tags %}
+{% load account %}
+{% load compress %}
+{% load i18n %}
+
+{% block header_padding %}{% endblock %}
+
+{% block content_outside_container %}
+  {% include "users/snippets/profile_navigation.html" with page_type="settings" %}
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
