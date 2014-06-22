@@ -1,21 +1,21 @@
 <div class="container-liquid settings-bar">
   <div class="profile-nav-menu">
-    <div class="nav-icon inbox">
+    <div class="nav-icon inbox {% if page_type == 'inbox' %}selected{% endif %}">
       <div class="spacer"></div>
       <div class="nav-menu-item"></div>
       <div class="nav-menu-text">Inbox</div>
     </div>
-    <div class="nav-icon notifications">
+    <div class="nav-icon notifications {% if page_type == 'notifications' %}selected{% endif %}">
       <div class="spacer"></div>
       <div class="nav-menu-item"></div>
       <div class="nav-menu-text">Alerts</div>
     </div>
-    <div class="nav-icon profile selected">
+    <div class="nav-icon profile {% if page_type == 'profile' %}selected{% endif %}">
       <div class="spacer"></div>
       <div class="nav-menu-item"></div>
       <div class="nav-menu-text">Profile</div>
     </div>
-    <div class="nav-icon settings">
+    <div class="nav-icon settings {% if page_type == 'settings' %}selected{% endif %}">
       <div class="spacer"></div>
       <div class="nav-menu-item"></div>
       <div class="nav-menu-text">Settings</div>

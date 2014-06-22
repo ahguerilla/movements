@@ -8,7 +8,7 @@
 
 {% block content_outside_container %}
   {% if is_self %}
-    {% include "users/snippets/profile_navigation.html" %}
+    {% include "users/snippets/profile_navigation.html" with page_type="profile" %}
   {% endif %}
 {% endblock %}
 
