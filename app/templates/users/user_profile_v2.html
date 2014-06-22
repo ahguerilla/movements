@@ -7,28 +7,9 @@
 {% block header_padding %}{% endblock %}
 
 {% block content_outside_container %}
-<div class="container-liquid settings-bar">
-  <div class="profile-nav-menu">
-    <a href="{% url 'postman_inbox' %}" alt="inbox">
-    <div class="nav-icon inbox">
-      <div class="spacer"></div>
-      <div class="nav-menu-item"></div>
-      <div class="nav-menu-text">Inbox</div>
-    </div>
-    </a>
-    <div class="nav-icon profile selected">
-      <div class="spacer"></div>
-      <div class="nav-menu-item"></div>
-      <div class="nav-menu-text">Profile</div>
-    </div>
-    <div class="nav-icon settings">
-      <div class="spacer"></div>
-      <div class="nav-menu-item"></div>
-      <div class="nav-menu-text">Settings</div>
-    </div>
-  </div>
-  <div class="clearfix"></div>
-</div>
+  {% if is_self %}
+    {% include "users/snippets/profile_navigation.html" with page_type="profile" %}
+  {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -42,13 +23,40 @@
         <div class="poster-name">{{ user_details.username }}</div>
         <div class="poster-rating"><span class="rateit"
               data-rateit-readonly="true"
-              data-rateit-value="3"
+              data-rateit-value="{{ user_profile.score }}"
               data-rateit-min="0"
               data-rateit-starwidth="22"
               data-rateit-starheight="17"
               data-rateit-max="5"></span>
           </div>
       </div>
+    </div>
+    {% if not is_self %}
+    <hr />
+    <div class="profile-actions">
+      <div username="{{ user_profile.user.username }}" score="{{ user_profile.score }}" usercore="{{ user_profile.score }}" ratecount="{{ user_profile.ratecount }}" class="rate-user rate">
+        <div class="profile-action-icon rate-icon"></div>
+        <div class="profile-action-text">Rate User</div>
+      </div>
+      <div username="{{ user_profile.user.username }}" class="message-user private-message">
+        <div class="profile-action-icon message-icon"></div>
+        <div class="profile-action-text">Direct Message</div>
+      </div>
+      <div username="{{ user_profile.user.username }}" class="report-user report_user">
+        <div class="profile-action-icon report-icon"></div>
+        <div class="profile-action-text">Report User</div>
+      </div>
+    </div>
+    {% endif %}
+    <hr />
+    <div class="settings-title">About</div>
+    <div class="row">
+      <div class="col-xs-4">Name:</div>
+      <div class="col-xs-8">{{ user_details.first_name }}&nbsp;{{ user_details.last_name }}</div>
+      <div class="col-xs-4">Nationality:</div>
+      <div class="col-xs-8">{{ user_profile.nationality }}</div>
+      <div class="col-xs-4">TODO:</div>
+      <div class="col-xs-8">Add More</div>
     </div>
     <hr />
     <div class="settings-title">Bio</div>
@@ -57,11 +65,26 @@
     </div>
     <hr />
     <div class="settings-title">Skills</div>
+    {% if  user_profile.interests.all.count > 0 %}
     <div class="tags">
       {% for interest in user_profile.interests.all %}
         <div class="tag">{{ interest }}</div>
       {% endfor %}
     </div>
+    {% else %}
+      No interests specified
+    {% endif %}
+    <div class="clearfix" ></div>
+    <div class="settings-title" style="margin-top: 10px;">Languages</div>
+    {% if  user_profile.languages.all.count > 0 %}
+    <div class="tags">
+      {% for language in user_profile.languages.all %}
+        <div class="tag">{{ language }}</div>
+      {% endfor %}
+    </div>
+    {% else %}
+      No languages specified
+    {% endif %}
   </div>
   <div class="col-xs-8">
     <div id="marketitems"></div>
@@ -73,18 +96,41 @@
 {% endblock %}
 
 {% block endjavascript %}
-    {% include "market/clientside/marketitem.html" %}
-    {% include "market/clientside/closemarketitemdialog.html"%}
-    {% include "market/clientside/reportdialog.html" %}
-    <script type="text/javascript">
-      $(document).ready(function(){
-        window.GuerillaMarket = window.GuerillaMarket || {};
-        window.GuerillaMarket.userDefaultTags = {'skills': [], 'issues': [], 'countries': []};
-        var userId = null;
-        {% if not is_self %}
-        userId = {{ user_details.id }};
-        {% endif %}
-        window.ahr.market.initProfile(userId);
-      });
-    </script>
+  {% include "market/clientside/marketitem.html" %}
+  {% include "market/clientside/closemarketitemdialog.html"%}
+  {% include "market/clientside/reportdialog.html" %}
+
+  {% include "market/clientside/messagedialog.html" %}
+  {% include 'market/clientside/reportuserdialog.html' %}
+  {% include "market/clientside/ratedialog.html" %}
+
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      window.GuerillaMarket = window.GuerillaMarket || {};
+      window.GuerillaMarket.userDefaultTags = {'skills': [], 'issues': [], 'countries': []};
+      var userId = null;
+      {% if not is_self %}
+      userId = {{ user_details.id }};
+      {% endif %}
+      window.ahr.market.initProfile(userId);
+    });
+  </script>
+
+  <script type="text/javascript">
+  $(function(){
+    var ProfileView = Backbone.View.extend({
+      resetitemrate: function (username, rate) {
+        window.location.reload();
+      },
+
+      initialize: function(){
+        this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+        this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
+        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
+      }
+    });
+    var profileView = new ProfileView();
+  });
+  </script>
 {% endblock %}

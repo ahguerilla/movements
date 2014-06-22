@@ -1,0 +1,29 @@
+{% extends "base_form.html" %}
+{% load avatar_tags %}
+{% load account %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block header_padding %}{% endblock %}
+
+{% block content_outside_container %}
+  {% include "users/snippets/profile_navigation.html" with page_type="settings" %}
+{% endblock %}
+
+{% block public-content-message %}
+<div class="row dialog movements-form settings-form">
+  <div class="col-xs-12">
+    <div class="form-title"><h1>{% trans "Settings" %}</h1></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4">
+      <div class="settings-change-avatar">
+        <div class="settingavatar">{% primary_avatar user 100 %}</div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <a id="changeavatar" href="{% url 'avatar_change' %}">Change picture</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

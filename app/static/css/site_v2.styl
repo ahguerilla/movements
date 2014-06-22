@@ -953,7 +953,6 @@ popoverDropdown(width)
 .settings-bar
   background-color $footer-color
   border-bottom 4px solid $border-color
-  margin-bottom 20px
   .profile-nav-menu
     display table
     margin 0 auto
@@ -992,9 +991,18 @@ popoverDropdown(width)
       background url("../images/v2/profile-message-icon.png") center 0 no-repeat
     .spacer
       height 10px
+  .nav-icon.inbox.selected
   .nav-icon.inbox:hover
     .nav-menu-item
       background url("../images/v2/profile-message-icon.png") center -19px no-repeat
+  .notifications
+    .nav-menu-item
+      height 30px
+      background url("../images/v2/profile-notifications-icon.png") center 0 no-repeat
+  .nav-icon.notifications.selected
+  .nav-icon.notifications:hover
+    .nav-menu-item
+      background url("../images/v2/profile-notifications-icon.png") center -30px no-repeat
   .profile
     .nav-menu-item
       height 30px
@@ -1007,14 +1015,105 @@ popoverDropdown(width)
     .nav-menu-item
       height 30px
       background url("../images/v2/profile-settings-icon.png") center 0 no-repeat
+  .nav-icon.settings.selected
   .nav-icon.settings:hover
     .nav-menu-item
       background url("../images/v2/profile-settings-icon.png") center -30px no-repeat
 
 .setting-page
+  margin-top 20px
   hr
     border-top 1px solid $hr-color
   .settings-title
     font-family "HurmeGeometricSans3-SemiBold"
     color $inactive-font
     margin-bottom 10px
+  .profile-actions
+    font-family "HurmeGeometricSans3-SemiBold"
+    color $inactive-font
+    .profile-action-icon
+      width 35px
+      margin-right 5px
+      float left
+    .rate-user
+      margin-bottom 8px
+      .rate-icon
+        background url("../images/v2/profile-rate.png") center 0 no-repeat
+        height 22px
+      .profile-action-text
+        line-height 26px
+    .rate-user:hover
+      cursor pointer
+      color $main-font
+      .rate-icon
+        background url("../images/v2/profile-rate.png") center -22px no-repeat
+    .message-user
+      margin-bottom 10px
+      .message-icon
+        background url("../images/v2/profile-direct-message.png") center center no-repeat
+        height 22px
+      .profile-action-text
+        line-height 26px
+    .message-user:hover
+      cursor pointer
+      color $main-font
+    .report-user
+      margin-bottom 8px
+      .report-icon
+        background url("../images/v2/profile-report.png") center 0 no-repeat
+        height 21px
+      .profile-action-text
+        line-height 23px
+    .report-user:hover
+      cursor pointer
+      color $main-font
+      .report-icon
+        background url("../images/v2/profile-report.png") center -21px no-repeat
+
+.settings-form
+  margin-top 20px
+  h1
+    margin-top 0
+  .settingavatar
+    text-align center
+    img
+      border-radius 50%
+  #changeavatar
+    line-height 100px
+
+#ratedialog
+  .stars0
+      background url('/static/images/stars.png') 0 0px
+      width 118px
+      height 22px
+      display inline-block
+
+  .stars1
+      background url('/static/images/stars.png') 0 108px
+      width 118px
+      height 21px
+      display inline-block
+
+  .stars2
+      background url('/static/images/stars.png') 0 86px
+      width 118px
+      height 21px
+      display inline-block
+
+  .stars3
+      background url('/static/images/stars.png') 0 65px
+      width 118px
+      height 21px
+      display inline-block
+
+  .stars4
+      background url('/static/images/stars.png') 0 43px
+      width 118px
+      height 21px
+      display inline-block
+
+  .stars5
+      background url('/static/images/stars.png') 0 22px
+      width 118px
+      height 22px
+      display inline-block

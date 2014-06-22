@@ -1168,7 +1168,6 @@ h6 {
 .settings-bar {
   background-color: #b6aba5;
   border-bottom: 4px solid #e0d7d8;
-  margin-bottom: 20px;
 }
 .settings-bar .profile-nav-menu {
   display: table;
@@ -1219,8 +1218,17 @@ h6 {
 .settings-bar .inbox .spacer {
   height: 10px;
 }
+.settings-bar .nav-icon.inbox.selected .nav-menu-item,
 .settings-bar .nav-icon.inbox:hover .nav-menu-item {
   background: url("../images/v2/profile-message-icon.png") center -19px no-repeat;
+}
+.settings-bar .notifications .nav-menu-item {
+  height: 30px;
+  background: url("../images/v2/profile-notifications-icon.png") center 0 no-repeat;
+}
+.settings-bar .nav-icon.notifications.selected .nav-menu-item,
+.settings-bar .nav-icon.notifications:hover .nav-menu-item {
+  background: url("../images/v2/profile-notifications-icon.png") center -30px no-repeat;
 }
 .settings-bar .profile .nav-menu-item {
   height: 30px;
@@ -1234,8 +1242,12 @@ h6 {
   height: 30px;
   background: url("../images/v2/profile-settings-icon.png") center 0 no-repeat;
 }
+.settings-bar .nav-icon.settings.selected .nav-menu-item,
 .settings-bar .nav-icon.settings:hover .nav-menu-item {
   background: url("../images/v2/profile-settings-icon.png") center -30px no-repeat;
+}
+.setting-page {
+  margin-top: 20px;
 }
 .setting-page hr {
   border-top: 1px solid #cdcbcc;
@@ -1244,6 +1256,118 @@ h6 {
   font-family: "HurmeGeometricSans3-SemiBold";
   color: #756b65;
   margin-bottom: 10px;
+}
+.setting-page .profile-actions {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  color: #756b65;
+}
+.setting-page .profile-actions .profile-action-icon {
+  width: 35px;
+  margin-right: 5px;
+  float: left;
+}
+.setting-page .profile-actions .rate-user {
+  margin-bottom: 8px;
+}
+.setting-page .profile-actions .rate-user .rate-icon {
+  background: url("../images/v2/profile-rate.png") center 0 no-repeat;
+  height: 22px;
+}
+.setting-page .profile-actions .rate-user .profile-action-text {
+  line-height: 26px;
+}
+.setting-page .profile-actions .rate-user:hover {
+  cursor: pointer;
+  color: #262626;
+}
+.setting-page .profile-actions .rate-user:hover .rate-icon {
+  background: url("../images/v2/profile-rate.png") center -22px no-repeat;
+}
+.setting-page .profile-actions .message-user {
+  margin-bottom: 10px;
+}
+.setting-page .profile-actions .message-user .message-icon {
+  background: url("../images/v2/profile-direct-message.png") center center no-repeat;
+  height: 22px;
+}
+.setting-page .profile-actions .message-user .profile-action-text {
+  line-height: 26px;
+}
+.setting-page .profile-actions .message-user:hover {
+  cursor: pointer;
+  color: #262626;
+}
+.setting-page .profile-actions .report-user {
+  margin-bottom: 8px;
+}
+.setting-page .profile-actions .report-user .report-icon {
+  background: url("../images/v2/profile-report.png") center 0 no-repeat;
+  height: 21px;
+}
+.setting-page .profile-actions .report-user .profile-action-text {
+  line-height: 23px;
+}
+.setting-page .profile-actions .report-user:hover {
+  cursor: pointer;
+  color: #262626;
+}
+.setting-page .profile-actions .report-user:hover .report-icon {
+  background: url("../images/v2/profile-report.png") center -21px no-repeat;
+}
+.settings-form {
+  margin-top: 20px;
+}
+.settings-form h1 {
+  margin-top: 0;
+}
+.settings-form .settingavatar {
+  text-align: center;
+}
+.settings-form .settingavatar img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.settings-form #changeavatar {
+  line-height: 100px;
+}
+#ratedialog .stars0 {
+  background: url("/static/images/stars.png") 0 0px;
+  width: 118px;
+  height: 22px;
+  display: inline-block;
+}
+#ratedialog .stars1 {
+  background: url("/static/images/stars.png") 0 108px;
+  width: 118px;
+  height: 21px;
+  display: inline-block;
+}
+#ratedialog .stars2 {
+  background: url("/static/images/stars.png") 0 86px;
+  width: 118px;
+  height: 21px;
+  display: inline-block;
+}
+#ratedialog .stars3 {
+  background: url("/static/images/stars.png") 0 65px;
+  width: 118px;
+  height: 21px;
+  display: inline-block;
+}
+#ratedialog .stars4 {
+  background: url("/static/images/stars.png") 0 43px;
+  width: 118px;
+  height: 21px;
+  display: inline-block;
+}
+#ratedialog .stars5 {
+  background: url("/static/images/stars.png") 0 22px;
+  width: 118px;
+  height: 22px;
+  display: inline-block;
 }
 
 
