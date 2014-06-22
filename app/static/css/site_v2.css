@@ -1168,7 +1168,6 @@ h6 {
 .settings-bar {
   background-color: #b6aba5;
   border-bottom: 4px solid #e0d7d8;
-  margin-bottom: 20px;
 }
 .settings-bar .profile-nav-menu {
   display: table;
@@ -1219,8 +1218,17 @@ h6 {
 .settings-bar .inbox .spacer {
   height: 10px;
 }
+.settings-bar .nav-icon.inbox.selected .nav-menu-item,
 .settings-bar .nav-icon.inbox:hover .nav-menu-item {
   background: url("../images/v2/profile-message-icon.png") center -19px no-repeat;
+}
+.settings-bar .notifications .nav-menu-item {
+  height: 30px;
+  background: url("../images/v2/profile-notifications-icon.png") center 0 no-repeat;
+}
+.settings-bar .nav-icon.notifications.selected .nav-menu-item,
+.settings-bar .nav-icon.notifications:hover .nav-menu-item {
+  background: url("../images/v2/profile-notifications-icon.png") center -30px no-repeat;
 }
 .settings-bar .profile .nav-menu-item {
   height: 30px;
@@ -1234,8 +1242,12 @@ h6 {
   height: 30px;
   background: url("../images/v2/profile-settings-icon.png") center 0 no-repeat;
 }
+.settings-bar .nav-icon.settings.selected .nav-menu-item,
 .settings-bar .nav-icon.settings:hover .nav-menu-item {
   background: url("../images/v2/profile-settings-icon.png") center -30px no-repeat;
+}
+.setting-page {
+  margin-top: 20px;
 }
 .setting-page hr {
   border-top: 1px solid #cdcbcc;
