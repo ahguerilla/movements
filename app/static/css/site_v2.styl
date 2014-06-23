@@ -1145,7 +1145,6 @@ popoverDropdown(width)
       display inline-block
 
 
-
 // **************************************
 // messaging styles
 // **************************************
@@ -1153,16 +1152,35 @@ popoverDropdown(width)
   margin-top 30px
   background-color #fff
   box-shadow 0 1px 1px 0 $border-color-alpha
-  .leftcol
-    border-right 1px solid $border-color
+
   .folder-select
     padding 5px
   .conv_link
     cursor pointer
-  .message
-    padding 5px
-    background-color $background-color
-  .message.alt
-    background-color #fff
+  .sidebar
+    border-right 1px solid $border-color
+    .message
+      padding 5px 5px 5px 28px
+      background-color $background-color
+      position relative
+      .status
+        border-radius 50%
+        width 10px
+        height 10px
+        border 2px solid $primary-color
+        position absolute
+        left 8px
+        top 12px
+      h4
+        font-family "HurmeGeometricSans3-SemiBold"
+        margin 0
+        color $main-font
+      .date
+        float right
+    .message.new
+      .status
+        background-color $primary-color
+    .message.alt
+      background-color #fff
 #message-col
   padding 5px

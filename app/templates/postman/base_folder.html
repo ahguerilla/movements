@@ -26,7 +26,7 @@
 {% with request.get_full_path as path %}
 <div id="postman">
     <div class="row no-gutter">
-      <div class="col-md-4 leftcol">
+      <div class="col-md-4 sidebar">
         <div class="btn-group folder-select btn-group-justified btn-group-md" id="messagenav">
           <a type="button" class="btn btn-tab {% if path == inbox %}selected{% endif %}" href="{{inbox}}">Inbox</a>
           <a type="button" class="btn btn-tab {% if path == sent %}selected{% endif %}" href="{{sent}}">Sent</a>
@@ -34,33 +34,29 @@
 
         <div class="messagelist">
           {% for message in pm_messages %}
-            <div class="message{% if forloop.counter|divisibleby:2 %} alt{% endif %}">
+            <div class="message{% if forloop.counter|divisibleby:2 %} alt{% endif %}{% if message.is_new %} new{% endif %}">
               <div class="message-well">
                 <div class="conv_link" href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{ message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
+                  <div class="status"></div>
                   <div class="name-and-date">
                     <div class="date">
                       {{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}
                     </div>
-                    <strong class="name">
+                    <h4>
                       {% block pm_sender_cell %}
-                        {{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}
+                        {{ message.obfuscated_sender|or_me:user }}
+{#                        {% if message.count %} ({{ message.count }}){% endif %}#}
                       {% endblock %}
                       {% block pm_recipient_cell %}
                         {{ message.obfuscated_recipient|or_me:user }}
-                        {% if message.count %}({{ message.count }}){% endif %}
+{#                        {% if message.count %}({{ message.count }}){% endif %}#}
                       {% endblock %}
-                    </strong>
+                    </h4>
                   </div>
                   <div class="subject">
-                    {% if path != sent %}{% if message.is_new %}<strong>{% endif %}{% endif %}
-                    {% if message.is_replied %}<em>{% endif %}
-
                     {% block pm_subject %}
                       {% include "postman/inc_subject_ex.html" %}
                     {% endblock %}
-
-                    {% if message.is_replied %}</em>{% endif %}
-                    {% if path != sent %}{% if message.is_new %}</strong>{% endif %}{% endif %}
                   </div>
                 </div>
               </div>
