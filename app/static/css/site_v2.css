@@ -1400,11 +1400,21 @@ h6 {
   -o-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
   box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
 }
+#postman .leftcol {
+  border-right: 1px solid #e0d7d8;
+}
 #postman .folder-select {
   padding: 5px;
 }
 #postman .conv_link {
   cursor: pointer;
+}
+#postman .message {
+  padding: 5px;
+  background-color: #f8f6f7;
+}
+#postman .message.alt {
+  background-color: #fff;
 }
 #message-col {
   padding: 5px;
