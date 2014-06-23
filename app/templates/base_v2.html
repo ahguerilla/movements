@@ -197,11 +197,13 @@
       Settings
     </div>
   </a>
-  <div class="nav-menu-item-wrap messages">
-    <div class="spacer"></div>
-    <div class="nav-menu-item"></div>
-    Messages
-  </div>
+  <a href="{% url 'postman_inbox' %}">
+    <div class="nav-menu-item-wrap messages">
+      <div class="spacer"></div>
+      <div class="nav-menu-item"></div>
+      Messages
+    </div>
+  </a>
   <form method="post" action="{% url 'account_logout' %}">
     {% csrf_token %}
     <a href="#" onclick="parentNode.submit();">
