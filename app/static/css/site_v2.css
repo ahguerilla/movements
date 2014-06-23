@@ -82,6 +82,14 @@
   border-radius: 3px;
   height: 40px;
 }
+.movements-form .btn-group a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #b6aba5;
+}
+.movements-form .btn-group .selected {
+  color: #fff;
+}
 .extended-form {
   margin-top: 30px;
   padding: 0 65px 0 65px;
@@ -1354,6 +1362,10 @@ h6 {
 }
 .settings-form #changeavatar {
   line-height: 100px;
+}
+.settings-form .folder-select {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 #profile_change_stuff img {
   -webkit-border-radius: 50%;
