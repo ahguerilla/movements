@@ -5,7 +5,6 @@
 
 {% block head_title %}{% trans "Sent Messages" %}{% endblock %}
 
-{% block pm_undelete_button %}{% endblock %}
 {% block pm_sender_header %}{% endblock %}
 {% block pm_unarchive_button %}{% endblock %}
 {% block pm_date %}{% trans "Sent" %}{% endblock %}
@@ -13,14 +12,9 @@
 
 
 {% block endjavascript %}
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    var dfrd = window.ahr.getStatics();
-    dfrd.done(function(){
-      window.ahr.messages.initInbox();
-    });
-  });
-</script>
+  {{ block.super }}
+  <script type="text/javascript">
+    window.ahr.messages.initInbox();
+  </script>
 
 {% endblock %}

@@ -127,21 +127,6 @@ def permanent_delete_postman(request):
     return redirect(reverse('postman_trash'))
 
 
-@login_required
-def postman_unarchive(request):
-    tpks = request.POST.getlist('tpks')
-    pks = request.POST.getlist('pks')
-    user = request.user
-    if pks or tpks:
-        filter = Q(pk__in=pks) | Q(thread__in=tpks)
-        recipient_rows = Message.objects.as_recipient(user, filter).update(
-            **{'recipient_{0}'.format('archived'): False})
-        sender_rows = Message.objects.as_sender(user, filter).update(**{'sender_{0}'.format('archived'): False})
-        if not (recipient_rows or sender_rows):
-            raise Http404  # abnormal enough, like forged ids
-    return redirect(reverse('postman_archives'))
-
-
 def preview(request, obj_type, obj_id):
     return render_to_response('market/preview.html',
                               {

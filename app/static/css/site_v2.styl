@@ -13,6 +13,7 @@ $border-color-alpha = rgba(224, 215, 216, 0.8)
 $facebook-blue = #3C5A9A
 $separator-color = #ded8d6
 $footer-color = #B6ABA5
+$selected-tab-color = $footer-color
 $dropdown-hover-bg = #beb4ae
 $dropdown-select-color = #ff6d50
 $hr-color = #CDCBCC
@@ -117,6 +118,18 @@ box-shadow()
   font-weight bold
   font-size 16px
 
+.btn-tab
+  background-color $white-font
+  border-color $selected-tab-color
+  color $selected-tab-color
+
+.btn-tab:hover
+  color $selected-tab-color
+
+.btn-tab.selected
+  background-color $selected-tab-color
+  border-color $selected-tab-color
+  color $white-font
 
 .btn-action
   background-color $primary-color
@@ -150,6 +163,18 @@ box-shadow()
 // **************************************
 .dialog
   background-color #fff
+
+
+.row.no-gutter
+  margin-left 0
+  margin-right 0
+
+
+.row.no-gutter > [class*='col-']:not(:first-child),
+.row.no-gutter > [class*='col-']:not(:last-child)
+  padding-right 0
+  padding-left 0
+
 
 // **************************************
 // base styles
@@ -950,6 +975,7 @@ popoverDropdown(width)
 // **************************************
 // exchange page
 // **************************************
+
 .settings-bar
   background-color $footer-color
   border-bottom 4px solid $border-color
@@ -1121,3 +1147,20 @@ popoverDropdown(width)
       width 118px
       height 22px
       display inline-block
+
+
+
+// **************************************
+// messaging styles
+// **************************************
+#postman
+  margin-top 30px
+  background-color #fff
+  box-shadow 0 1px 1px 0 $border-color-alpha
+  .folder-select
+    padding 5px
+  .conv_link
+    cursor pointer
+
+#message-col
+  padding 5px
