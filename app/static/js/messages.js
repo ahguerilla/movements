@@ -18,14 +18,14 @@
     postProcessConv: function(data){
       var that = this;
       var data1 = data.replace(that.itemre, function (match, item_id, offset, string) {
-        return "<a href='/market/#item/" + item_id + "'>" + window.ahr.string_constants.view_recommendation + "</a>";
+        return "<a href='/market/" + item_id + "'>" + window.ahr.string_constants.view_recommendation + "</a>";
       });
       var data2 = data1.replace(that.userre, function (match, username, offset, string) {
         return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>" + window.ahr.string_constants.view_recommendation + "</a>";
       });
 
       var data3 = data2.replace(that.itemre, function (match, item_id, offset, string) {
-        return "<a href='/market/#item/" + item_id + "'>" + window.ahr.string_constants.view_recommendation + "</a>";
+        return "<a href='/market/" + item_id + "'>" + window.ahr.string_constants.view_recommendation + "</a>";
       });
       var data4 = data3.replace(that.userre, function (match, username, offset, string) {
         return "<a href='" + window.ahr.app_urls.viewuserprofile + username + "'>" + window.ahr.string_constants.view_recommendation + "</a>";
