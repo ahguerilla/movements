@@ -96,11 +96,8 @@
          return
        }
        $('.sendrec').prop('disabled', true);
-       if (this.rec_type == 'user') {
-         this.url = window.ahr.app_urls.senduserrecommendation + this.obj_id;
-       } else {
-         this.url = window.ahr.app_urls.senditemrecommendation + this.obj_id;
-       }
+       this.url = window.ahr.app_urls.senduserrecommendation + this.obj_id;
+
        var dfrd = $.ajax({
          url: that.url,
          type: 'POST',
