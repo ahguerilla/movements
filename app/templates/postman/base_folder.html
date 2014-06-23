@@ -24,77 +24,66 @@
 {% url 'postman_sent' as sent %}
 {% url 'postman_trash' as trash%}
 {% with request.get_full_path as path %}
-<div id="postman">
-    <div class="row no-gutter">
-      <div class="col-md-4 sidebar">
-        <div class="btn-group folder-select btn-group-justified btn-group-md" id="messagenav">
-          <a type="button" class="btn btn-tab {% if path == inbox %}selected{% endif %}" href="{{inbox}}">Inbox</a>
-          <a type="button" class="btn btn-tab {% if path == sent %}selected{% endif %}" href="{{sent}}">Sent</a>
-        </div>
-
-        <div class="messagelist">
-          {% for message in pm_messages %}
-            <div class="message{% if forloop.counter|divisibleby:2 %} alt{% endif %}{% if message.is_new %} new{% endif %}">
-              <div class="message-well">
-                <div class="conv_link" href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{ message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
-                  <div class="status"></div>
-                  <div class="name-and-date">
-                    <div class="date">
-                      {{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}
-                    </div>
-                    <h4>
-                      {% block pm_sender_cell %}
-                        {{ message.obfuscated_sender|or_me:user }}
-{#                        {% if message.count %} ({{ message.count }}){% endif %}#}
-                      {% endblock %}
-                      {% block pm_recipient_cell %}
-                        {{ message.obfuscated_recipient|or_me:user }}
-{#                        {% if message.count %}({{ message.count }}){% endif %}#}
-                      {% endblock %}
-                    </h4>
-                  </div>
-                  <div class="subject">
-                    {% block pm_subject %}
-                      {% include "postman/inc_subject_ex.html" %}
-                    {% endblock %}
-                  </div>
+<div id="postman" data-folder-type="{% if path == sent %}outbox{% endif %}{% if path == inbox %}inbox{% endif %}">
+  <div class="row no-gutter">
+    <div class="col-md-4 sidebar">
+      <div class="btn-group folder-select btn-group-justified btn-group-md" id="messagenav">
+        <a type="button" class="btn btn-tab {% if path == inbox %}selected{% endif %}" href="{{inbox}}">Inbox</a>
+        <a type="button" class="btn btn-tab {% if path == sent %}selected{% endif %}" href="{{sent}}">Sent</a>
+      </div>
+      {% if pm_messages %}
+      <div class="messagelist">
+        {% for message in pm_messages %}
+          <div class="message{% if forloop.counter|divisibleby:2 %} alt{% endif %}{% if message.is_new %} new{% endif %}"
+               href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{ message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
+            <div class="message-well">
+              <div class="status"></div>
+              <div class="name-and-date">
+                <div class="date">
+                  {{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}
                 </div>
+                <h4>
+                  {% block pm_sender_cell %}
+                    {{ message.obfuscated_sender|or_me:user }}
+                  {% endblock %}
+                  {% block pm_recipient_cell %}
+                    {{ message.obfuscated_recipient|or_me:user }}
+                  {% endblock %}
+                </h4>
+              </div>
+              <div class="subject">
+                {% block pm_subject %}
+                  {% include "postman/inc_subject_ex.html" %}
+                {% endblock %}
               </div>
             </div>
-          {% endfor %}
-        </div>
-        <div id="paginationblock">
-          {% paginate %}
-        </div>
-      </div>
-      <div class="col-md-8" id="message-col">
-    {% autopaginate pm_messages %}
-    {% if invalid_page %}
-      <p>{% trans "Sorry, this page number is invalid." %}</p>
-    {% else %}
-      {% if pm_messages %}
-      <form action="{% block pm_form_action %}{% endblock %}" method="post">{% csrf_token %}
-        <div id="conversation-cont">
-          <div class="panel">
-            <div class="col-md-12" id="conversation"></div>
           </div>
-        </div>
-      </form>
+        {% endfor %}
+      </div>
       {% else %}
-        <div class="col-md-12">
-          <div class="dialog">
-            <p>{% trans "No messages." %}</p>
-          </div>
-        </div>
+        <p>{% trans "No messages." %}</p>
       {% endif %}
-    {% endif %}
+
+      <div id="paginationblock">
+        {% paginate %}
       </div>
+
+      {% autopaginate pm_messages %}
+      {% if invalid_page %}
+        <p>{% trans "Sorry, this page number is invalid." %}</p>
+      {% else %}
+      {% endif %}
     </div>
+    <div class="col-md-8" id="conversation">
+    </div>
+  </div>
 </div>
 
 {% endwith %}
 {% endblock content %}
 
 {% block endjavascript %}
-  {% include "market/clientside/actions/actions.html" %}
+  <script type="text/javascript">
+    window.ahr.messages.initInbox();
+  </script>
 {% endblock %}

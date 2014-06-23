@@ -1162,11 +1162,11 @@ popoverDropdown(width)
   .conv_link
     cursor pointer
   .sidebar
-    border-right 1px solid $border-color
     .message
       padding 5px 5px 5px 28px
       background-color $background-color
       position relative
+      cursor pointer
       .status
         border-radius 50%
         width 10px
@@ -1184,7 +1184,49 @@ popoverDropdown(width)
     .message.new
       .status
         background-color $primary-color
+    .message.new.selected
+      .status
+        background-color #fff
     .message.alt
       background-color #fff
-#message-col
-  padding 5px
+    .message.selected
+      background-color $primary-color
+      color #fff
+      h4
+        color #fff
+      .status
+        border-color #fff
+
+#conversation
+  border-left 1px solid $border-color
+  h1
+    color $main-font
+    font-family "HurmeGeometricSans3-SemiBold"
+    margin 0
+  .conversation-header
+    padding 10px
+    border-bottom 1px solid $border-color
+  .replyarea
+    padding 10px
+    border-bottom 1px solid $border-color
+    button
+      margin-top 10px
+  .message
+    border-bottom 1px solid $border-color
+  .message.alt
+    background-color $background-color
+  .message-header
+    padding 10px
+    cursor pointer
+    .send-receive
+      font-family "HurmeGeometricSans3-SemiBold"
+    a
+      color $primary-color
+      text-decoration underline
+  .message-body
+    hr
+      padding-bottom  10px
+      margin 0
+    padding 0 10px 10px 10px
+  .message:last-child
+    border-bottom none

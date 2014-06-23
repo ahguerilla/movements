@@ -9,12 +9,3 @@
 {% block pm_unarchive_button %}{% endblock %}
 {% block pm_date %}{% trans "Sent" %}{% endblock %}
 {% block pm_sender_cell %}{% endblock %}
-
-
-{% block endjavascript %}
-  {{ block.super }}
-  <script type="text/javascript">
-    window.ahr.messages.initInbox();
-  </script>
-
-{% endblock %}

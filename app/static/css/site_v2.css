@@ -1413,13 +1413,11 @@ h6 {
 #postman .conv_link {
   cursor: pointer;
 }
-#postman .sidebar {
-  border-right: 1px solid #e0d7d8;
-}
 #postman .sidebar .message {
   padding: 5px 5px 5px 28px;
   background-color: #f8f6f7;
   position: relative;
+  cursor: pointer;
 }
 #postman .sidebar .message .status {
   -webkit-border-radius: 50%;
@@ -1445,11 +1443,67 @@ h6 {
 #postman .sidebar .message.new .status {
   background-color: #fe6d50;
 }
+#postman .sidebar .message.new.selected .status {
+  background-color: #fff;
+}
 #postman .sidebar .message.alt {
   background-color: #fff;
 }
-#message-col {
-  padding: 5px;
+#postman .sidebar .message.selected {
+  background-color: #fe6d50;
+  color: #fff;
+}
+#postman .sidebar .message.selected h4 {
+  color: #fff;
+}
+#postman .sidebar .message.selected .status {
+  border-color: #fff;
+}
+#conversation {
+  border-left: 1px solid #e0d7d8;
+}
+#conversation h1 {
+  color: #262626;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  margin: 0;
+}
+#conversation .conversation-header {
+  padding: 10px;
+  border-bottom: 1px solid #e0d7d8;
+}
+#conversation .replyarea {
+  padding: 10px;
+  border-bottom: 1px solid #e0d7d8;
+}
+#conversation .replyarea button {
+  margin-top: 10px;
+}
+#conversation .message {
+  border-bottom: 1px solid #e0d7d8;
+}
+#conversation .message.alt {
+  background-color: #f8f6f7;
+}
+#conversation .message-header {
+  padding: 10px;
+  cursor: pointer;
+}
+#conversation .message-header .send-receive {
+  font-family: "HurmeGeometricSans3-SemiBold";
+}
+#conversation .message-header a {
+  color: #fe6d50;
+  text-decoration: underline;
+}
+#conversation .message-body {
+  padding: 0 10px 10px 10px;
+}
+#conversation .message-body hr {
+  padding-bottom: 10px;
+  margin: 0;
+}
+#conversation .message:last-child {
+  border-bottom: none;
 }
 
 
