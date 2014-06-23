@@ -1333,6 +1333,13 @@ h6 {
 .settings-form #changeavatar {
   line-height: 100px;
 }
+#profile_change_stuff img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
 #ratedialog .stars0 {
   background: url("/static/images/stars.png") 0 0px;
   width: 118px;

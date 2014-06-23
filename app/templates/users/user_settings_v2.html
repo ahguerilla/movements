@@ -26,4 +26,28 @@
     </div>
   </div>
 </div>
+
+<div id="changeavatardialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{%trans "Upload Avatar"%}</h4>
+      </div>
+      <div class="modal-body">
+        <div id="avataralert"></div>
+        <div id="profile_change_stuff" style="width:100%;"></div>
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endblock %}
+
+{% block endjavascript %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    window.ahr.widgets.initUserSettingsView();
+  });
+</script>
 {% endblock %}

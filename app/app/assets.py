@@ -27,6 +27,7 @@ js = Bundle(
         './js/posts.js',
         './js/recommendation.js',
         './js/more_about_you.js',
+        './js/user_settings.js',
         './js/create_post.js',
         './js/view_post.js',
         './js/lib/jquery.rateit.min.js',
