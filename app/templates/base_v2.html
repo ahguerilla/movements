@@ -220,8 +220,10 @@
 {% assets "js_all" %}
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
-
 {% include "market/clientside/app_urls.html" %}
+<script type="text/javascript">
+  window.ahr.string_constants = {{ string_constants|safe }};
+</script>
 
 {% block javascript %}
 {% endblock %}
@@ -239,12 +241,6 @@
     })();
   </script>
 {% endif %}
-
-<script type="text/javascript">
-  (function () {
-    window.ahr.string_constants = {{ string_constants|safe }};
-  })();
-</script>
 
 <script type="text/javascript">
   (function () {
