@@ -105,6 +105,19 @@
   font-weight: bold;
   font-size: 16px;
 }
+.btn-tab {
+  background-color: #fff;
+  border-color: #b6aba5;
+  color: #b6aba5;
+}
+.btn-tab:hover {
+  color: #b6aba5;
+}
+.btn-tab.selected {
+  background-color: #b6aba5;
+  border-color: #b6aba5;
+  color: #fff;
+}
 .btn-action {
   background-color: #fe6d50;
   color: #fff;
@@ -1377,6 +1390,24 @@ h6 {
   width: 118px;
   height: 22px;
   display: inline-block;
+}
+#postman {
+  margin-top: 30px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -moz-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -ms-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  -o-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+  box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
+}
+#postman .folder-select {
+  padding: 5px;
+}
+#postman .conv_link {
+  cursor: pointer;
+}
+#message-col {
+  padding: 5px;
 }
 
 

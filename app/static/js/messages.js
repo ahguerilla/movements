@@ -79,7 +79,6 @@
     },
 
     showconv: function () {
-      $("#message-col").hide();
       $('#conversation').show();
       $('#conversation-cont').show();
       $('#back').show();
@@ -89,9 +88,7 @@
 
     back: function (ev) {
       $('#conversation-cont').hide();
-      $("#message-col").show();
       $('#back').hide();
-      $('#messagenav').show();
     },
 
     initialize: function () {
