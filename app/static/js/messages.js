@@ -100,7 +100,7 @@
       this.leftColBaseHeight = this.$el.find('.sidebar').height();
 
       var $messages = this.$el.find('.sidebar .message:first-child');
-      this.openConversation($messages);
+      if ($messages.length) this.openConversation($messages);
 
       this.$el.find('#conversation').css('min-height', this.$el.find('.sidebar').height());
     }
