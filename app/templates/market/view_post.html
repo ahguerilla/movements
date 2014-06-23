@@ -97,6 +97,7 @@
         addCommentUrl: "{% url 'add_comment' 'json' post.id %}"
       });
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+      this.recommend_widget = window.ahr.recommend_widget.initWidget(window.ahr.username);
     })();
   </script>
 {% endblock %}
