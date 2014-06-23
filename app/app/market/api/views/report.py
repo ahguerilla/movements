@@ -21,7 +21,7 @@ def create_marketitem_json(item):
 
 
 @login_required
-def report_marketitem(request, obj_id, rtype):
+def report_marketitem(request, obj_id):
     if request.method == "POST":
         market_item = get_object_or_404(market.models.MarketItem.objects.only('pk'), pk=obj_id)
         form = ReportMarketItemForm(request.POST)
@@ -53,7 +53,7 @@ def report_marketitem(request, obj_id, rtype):
         )
         email.content_subtype = "html"
         email.send()
-        return HttpResponse(json.dumps({'success': True, 'data': create_marketitem_json(f)}), mimetype="application"+rtype)
+        return HttpResponse(json.dumps({'success': True, 'data': create_marketitem_json(f)}), mimetype="application/json")
     return HttpResponseNotAllowed('Invalid request')
 
 

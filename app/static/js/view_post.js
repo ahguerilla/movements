@@ -2,7 +2,8 @@
 
   var PostView = Backbone.View.extend({
     events: {
-      'submit .comments form': 'submitComment'
+      'submit .comments form': 'submitComment',
+      'click .report': 'showReportForm'
     },
     initialize: function(options) {
       this.options = options;
@@ -12,6 +13,12 @@
       this.$commentText = this.$el.find('.comments form textarea');
       this.$submitButton = this.$el.find('.comments form button');
       this.loadComments();
+
+      this.report_widget = new window.ahr.ReportPostView();
+    },
+    showReportForm: function(ev){
+      ev.preventDefault();
+      this.report_widget.showReport(ev.currentTarget.getAttribute('report_url'));
     },
     loadComments: function() {
       this.$submitButton.removeAttr('disabled');
