@@ -175,6 +175,17 @@
           </select>
         </div>
       </div>
+      <div style="margin-top:30px;">
+        {% if has_password %}
+        <a id="changepassword" form_class="password_change" href="{% url 'account_change_password' %}">
+          {%trans "Change Password"%}
+        </a>
+        {% else %}
+        <a id="changepassword" form_class="password_set" href="{% url 'account_set_password' %}">
+          {%trans "Set Password"%}
+        </a>
+        {% endif %}
+      </div>
     </div>
     <div class="row action-text">
       <div class="col-sm-offset-2 col-sm-2 form-main-button">
@@ -202,6 +213,22 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+<div id="changepassworddialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{%trans "Change Password"%}</h4>
+      </div>
+      <div class="modal-body">
+        <div id="profile_change_password" style="width:100%;"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 {% endblock %}
 
 {% block endjavascript %}
