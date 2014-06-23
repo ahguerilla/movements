@@ -33,7 +33,10 @@
       </div>
       <div class="post-actions">
         <ul>
-          <li><a class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
+          <li><a
+              obj_id="{{ post.id }}"
+              rec_type="market_item"
+              class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
           <li><a
                 username="{{ post.owner.username }}"
                 subject="RE: {{ post.title }}"
