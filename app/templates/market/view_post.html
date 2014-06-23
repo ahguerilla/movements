@@ -2,67 +2,81 @@
 {% load avatar_tags %}
 {% load i18n %}
 {% block content %}
-  <div class="view-post">
-    <div class="post-header {{ post.item_type|lower }} %>">
-      <span>{{ post.item_type_display }}</span>
-    </div>
-    <div class="post-date">
-      {{ post.pub_date|date:"G:i"}} {%  trans 'on' %} {{ post.pub_date|date:"d M Y" }}
-    </div>
-    <h1>{{ post.title }}</h1>
-    <div class="poster clearfix">
-      <div class="avatar">
-        {% primary_avatar post.owner 60 %}
+<div class="row">
+  <div class="col-xs-12 col-md-offset-2 col-md-8">
+    <div class="view-post">
+      <div class="post-header {{ post.item_type|lower }} %>">
+        <span>{{ post.item_type_display }}</span>
       </div>
-      <div class="poster-details">
-        <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ post.owner }}">{{ post.owner }}</a></div>
-        <div class="poster-rating"><span class="rateit"
-              data-rateit-readonly="true"
-              data-rateit-value="{{ post.owner.userprofile.ahr_rating }}"
-              data-rateit-min="0"
-              data-rateit-starwidth="22"
-              data-rateit-starheight="17"
-              data-rateit-max="5"></span>
+      <div class="post-date">
+        {{ post.pub_date|date:"G:i"}} {%  trans 'on' %} {{ post.pub_date|date:"d M Y" }}
+      </div>
+      <h1>{{ post.title }}</h1>
+      <div class="poster clearfix">
+        <div class="avatar">
+          {% primary_avatar post.owner 60 %}
+        </div>
+        <div class="poster-details">
+          <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ post.owner }}">{{ post.owner }}</a></div>
+          <div class="poster-rating"><span class="rateit"
+                data-rateit-readonly="true"
+                data-rateit-value="{{ post.owner.userprofile.ahr_rating }}"
+                data-rateit-min="0"
+                data-rateit-starwidth="22"
+                data-rateit-starheight="17"
+                data-rateit-max="5"></span>
+            </div>
+        </div>
+      </div>
+      <div class="post">
+        <pre>{{ post.details }}</pre>
+      </div>
+      <div class="post-actions">
+        <ul>
+          <li><a class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
+          <li><a
+                username="{{ post.owner.username }}"
+                subject="RE: {{ post.title }}"
+                readonlysub="1"
+                class="message private-message" href='#' alt="direct message author">{% trans 'Direct message' %}</a></li>
+          <li><a
+              report_url="{{ report_url }}"
+              class="report" href='#' alt="report post">{% trans 'Report this post' %}</a></li>
+        </ul>
+      </div>
+      <div class="comments">
+        <div class="comments-header">
+          <div class="comment-count">
+            {{ post.commentcount }}
+            <img src="{{ STATIC_URL }}images/v2/comment_icon.png" alt="comment count" />
           </div>
-      </div>
-    </div>
-    <div class="post">
-      <pre>{{ post.details }}</pre>
-    </div>
-    <div class="post-actions">
-      <ul>
-        <li><a class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
-        <li><a class="message" href='#' alt="direct message author">{% trans 'Direct message' %}</a></li>
-        <li><a class="report" href='#' alt="report post">{% trans 'Report this post' %}</a></li>
-      </ul>
-    </div>
-    <div class="comments">
-      <div class="comments-header">
-        <div class="comment-count">
-          {{ post.commentcount }}
-          <img src="{{ STATIC_URL }}images/v2/comment_icon.png" alt="comment count" />
+          {% trans 'Leave a comment' %}
         </div>
-        {% trans 'Leave a comment' %}
-      </div>
-      <form>
-        <div class="alert alert-danger">
-          <h4>{% trans "No personally identifiable information!" %}</h4>
-          <p>{% trans "Please don't use your real name or email address when leaving a comment." %}</p>
-        </div>
-        <textarea class="form-control" name="comment"></textarea>
-        <button class="btn btn-action" type="submit">Post comment</button>
-      </form>
+        <form>
+          <div class="alert alert-danger">
+            <h4>{% trans "No personally identifiable information!" %}</h4>
+            <p>{% trans "Please don't use your real name or email address when leaving a comment." %}</p>
+          </div>
+          <textarea class="form-control" name="comment"></textarea>
+          <button class="btn btn-action" type="submit">Post comment</button>
+        </form>
 
-      <div class="comment-list">
-        <div class="loader text-center"><img src="{{ STATIC_URL }}images/ajax-loader.gif" alt="loading comments"/>
+        <div class="comment-list">
+          <div class="loader text-center"><img src="{{ STATIC_URL }}images/ajax-loader.gif" alt="loading comments"/>
+          </div>
+          <div class="content"></div>
         </div>
-        <div class="content"></div>
       </div>
     </div>
   </div>
+</div>
 {% endblock %}
 
 {% block endjavascript %}
+  {% include "market/clientside/recommenddialog.html" %}
+  {% include "market/clientside/messagedialog.html" %}
+  {% include "market/clientside/reportdialog.html" %}
+
   <script type="text/template" id="comment-list-template">
     <% _.each(comments, function(comment) { %>
       <div class="comment">
@@ -82,6 +96,8 @@
         getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}',
         addCommentUrl: "{% url 'add_comment' 'json' post.id %}"
       });
+      this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+      this.recommend_widget = window.ahr.recommend_widget.initWidget(window.ahr.username);
     })();
   </script>
 {% endblock %}

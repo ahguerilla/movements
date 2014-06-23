@@ -3,7 +3,47 @@
     el: 'body',
     events:{
       'click #changeavatar': 'ShowAvChange',
-      'click #changepassword' : 'ShowChangePass'
+      'click #changepassword' : 'ShowChangePass',
+      'click .select-checkbox': 'checkClick',
+
+      //selecting tabs
+      'click #personal-select': 'showPersonal',
+      'click #skills-select': 'showSkills',
+      'click #security-select': 'showSecurity'
+    },
+
+    showPersonal: function(ev) {
+      $('#personal-tab').show();
+      $('#personal-select').addClass("selected");
+      $('#skills-tab').hide();
+      $('#skills-select').removeClass("selected");
+      $('#security-tab').hide();
+      $('#security-select').removeClass("selected");
+    },
+
+    showSkills: function(ev) {
+      $('#personal-tab').hide();
+      $('#personal-select').removeClass("selected");
+      $('#skills-tab').show();
+      $('#skills-select').addClass("selected");
+      $('#security-tab').hide();
+      $('#security-select').removeClass("selected");
+    },
+
+    showSecurity: function(ev){
+      $('#personal-tab').hide();
+      $('#personal-select').removeClass("selected");
+
+      $('#skills-tab').hide();
+      $('#skills-select').removeClass("selected");
+
+      $('#security-tab').show();
+      $('#security-select').addClass("selected");
+    },
+
+    checkClick: function(ev){
+      $(ev.currentTarget).find('input[type="checkbox"]').prop("checked", !$(ev.currentTarget).find('input[type="checkbox"]').prop("checked"));
+      $(ev.currentTarget).toggleClass("checked");
     },
 
     ShowChangePass:function(ev){

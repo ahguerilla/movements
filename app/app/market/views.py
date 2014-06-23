@@ -45,7 +45,13 @@ def show_post(request, post_id):
                              closed_date=None,
                              deleted=False,
                              owner__is_active=True)
-    return render_to_response('market/view_post.html', {'post': post}, context_instance=RequestContext(request))
+
+    post_data = {
+        'post': post,
+        'report_url': reverse('report_post', args=[post.id])
+    }
+
+    return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))
 
 
 @login_required

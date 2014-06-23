@@ -77,12 +77,17 @@ def render_settings(request, initial=False):
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)
 
+    interest_types = {'languages': [(lang.id, lang.name) for lang in Language.objects.all()],
+                      'interests': [(interest.id, interest.name) for interest in Interest.objects.all()],
+                      'regions': [(region.id, region.name) for region in Region.objects.all()]}
+
     return render_to_response(template,
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
                                 'notperm': str(perms).replace("u'","'"),
                                 'initial': initial,
+                                'interest_types': interest_types,
                                 'has_password': user.has_usable_password(),
                                 'skills': value('json', users.models.Skills.objects.all()),
                                 'issues': value('json', users.models.Issues.objects.all()),
