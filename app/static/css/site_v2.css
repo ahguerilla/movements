@@ -234,10 +234,10 @@ body {
   color: #756b65;
 }
 .header-nav .navbar-left .menu-selector .menu-icon {
-  background-image: url("../images/v2/hamburger-v2.png");
+  background-image: url("../images/v2/hamburger-v3.png");
   width: 30px;
-  height: 30px;
-  margin-top: 8px;
+  height: 24px;
+  margin-top: 11px;
   margin-right: 3px;
   float: left;
 }
@@ -250,7 +250,7 @@ body {
   color: #fff;
 }
 .header-nav .navbar-left .menu-selector.selected .menu-icon {
-  background-image: url("../images/v2/hamburger-selected-v2.png");
+  background-image: url("../images/v2/hamburger-selected-v3.png");
 }
 .header-nav .navbar-left .nav-avatar {
   position: absolute;
