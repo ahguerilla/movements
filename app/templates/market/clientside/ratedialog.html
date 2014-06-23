@@ -2,7 +2,7 @@
 {% load avatar_tags %}
 {% load compress %}
 
-<div id="ratedialog" class="modal fade">
+<div id="ratedialog" class="modal fade movements-form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -56,12 +56,12 @@
           </div>
         </div>
         <div class="modal-footer">
-          <div class="row">
-            <div class="col-xs-6 col-md-offset-6 col-md-3">
-              <button type="button" class="btn full-width btn-default cancelrate" data-dismiss="modal">{%trans "Cancel"%}</button>
+          <div class="row action-text">
+            <div class="col-sm-offset-2 col-sm-2 form-main-button">
+              <a href="#" class="action-link cancelrate" data-dismiss="modal">{% trans 'Cancel' %}</a>
             </div>
-            <div class="col-xs-6 col-md-3">
-              <button type="button" class="btn btn-default full-width sendrate">{%trans "Submit"%}</button>
+            <div class="col-sm-6 form-main-button">
+              <button type="button" class="btn btn-action full-width send sendrate">{% trans 'Submit' %}</button>
             </div>
           </div>
         </div>
