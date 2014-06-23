@@ -1425,6 +1425,41 @@ h6 {
 #postman .conv_link {
   cursor: pointer;
 }
+#postman .sidebar {
+  border-right: 1px solid #e0d7d8;
+}
+#postman .sidebar .message {
+  padding: 5px 5px 5px 28px;
+  background-color: #f8f6f7;
+  position: relative;
+}
+#postman .sidebar .message .status {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #fe6d50;
+  position: absolute;
+  left: 8px;
+  top: 12px;
+}
+#postman .sidebar .message h4 {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  margin: 0;
+  color: #262626;
+}
+#postman .sidebar .message .date {
+  float: right;
+}
+#postman .sidebar .message.new .status {
+  background-color: #fe6d50;
+}
+#postman .sidebar .message.alt {
+  background-color: #fff;
+}
 #message-col {
   padding: 5px;
 }
