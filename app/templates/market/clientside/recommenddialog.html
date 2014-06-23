@@ -96,7 +96,8 @@
          return
        }
        $('.sendrec').prop('disabled', true);
-       this.url = window.ahr.app_urls.senduserrecommendation + this.obj_id;
+
+       this.url = window.ahr.app_urls.senditemrecommendation + this.obj_id;
 
        var dfrd = $.ajax({
          url: that.url,
