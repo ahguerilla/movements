@@ -52,8 +52,10 @@ market_user_patterns = patterns('',
         name="get_nationalities"),
 
     url(r'(?P<rtype>\S+)/skills/get$',
-        'app.market.api.views.misc.get_skills',
-        name="get_skills"),
+        'app.market.api.views.misc.get_skills_old',
+        name="get_skills_old"),
+    url(r'skills/get$',
+        'app.market.api.views.misc.get_skills', name="get_skills"),
 
     url(r'(?P<rtype>\S+)/message/get/count$',
         'app.market.api.views.misc.get_unreadCount',

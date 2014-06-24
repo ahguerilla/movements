@@ -5,7 +5,8 @@
   window.ahr = window.ahr || {};
   window.ahr.app_urls = {
     getissues: "{% url 'get_issues' 'json' %}",
-    getskills: "{% url 'get_skills' 'json' %}",
+    getskills: "{% url 'get_skills_old' 'json' %}",
+    getSkills: "{% url 'get_skills' %}",
     getcountries: "{% url 'get_countries' 'json' %}",
 
     {% if not user.is_authenticated %}

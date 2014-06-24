@@ -13,12 +13,16 @@ $(function () {
     initialize: function() {
       var $skills = this.$el.find('a.skills');
       var $container = $skills.parent().find('.popover-container');
-      $skills.popover({
+      $.get(window.ahr.app_urls.getSkills, function (data) {
+        $skills.popover({
         title: '',
         html: true,
-        content: _.template($('#skill-filter-list-template').html())(),
-        container: $container,
-        placement: 'bottom'
+        content: _.template(
+              $('#skill-filter-list-template').html(),
+              {skills: data}),
+          container: $container,
+          placement: 'bottom'
+        });
       });
 
       var $regions = this.$el.find('a.regions');
@@ -38,12 +42,20 @@ $(function () {
       $target.toggleClass('selected');
       return {
         id: $target.data('id'),
-        selected: $target.hasClass('selected')
+        selected: $target.hasClass('selected'),
+        value: $target.data('filter')
       };
     },
 
     setSkillsFilter: function (ev) {
-      this.toggleFilterState(ev);
+      var skill = this.toggleFilterState(ev);
+      if (skill.selected) {
+        this.skills.push(skill.value);
+      } else {
+        this.skills = $.grep(this.skills, function (value) {
+          return value != skill.value;
+        });
+      }
       this.trigger('filter');
     },
 
@@ -65,6 +77,10 @@ $(function () {
       if (this.type) {
         data.types = this.type;
       }
+      if (this.skills) {
+        data.skills = this.skills;
+      }
+      console.log(data);
     }
   });
 

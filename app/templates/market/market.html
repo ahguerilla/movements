@@ -88,10 +88,10 @@
 
 {% block endjavascript %}
   <script type="text/template" id="skill-filter-list-template">
-    <% var skills = ['Lawyer', 'Writer', 'Media Producer', 'Journalist']; %>
+{#    <% var skills = ['Lawyer', 'Writer', 'Media Producer', 'Journalist']; %>#}
     <ul class="skill-filter">
       <% _.each(skills, function(skill) { %>
-      <li><a href="#"><%- skill %></a></li>
+      <li><a href="#" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
       <% }); %>
     </ul>
   </script>

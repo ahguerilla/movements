@@ -42,7 +42,7 @@ def get_stickies(request, hiddens, sfrom, to):
 def get_raw(request, from_item=0, to_item=None,
             filter_by_owner=False, count=False):
     params = {
-        'interests': tuple(map(int, request.GET.getlist('interests', (0,)))),
+        'interests': tuple(map(int, request.GET.getlist('skills', (0,)))),
         'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
         'user_id': request.user.id,
         'date_now': datetime.now(),
