@@ -3,6 +3,7 @@
 {% load url from future %}
 {% load i18n %}
 {% load widget_tweaks %}
+{% load socialaccount %}
 
 {% block public-content-message %}
 <div class="row dialog movements-form">
@@ -44,7 +45,9 @@
 <div class="row extended-form">
   <div class="col-xs-12 action-text">{%trans "Use your Facebook details to sign in."%}</div>
   <div class="col-sm-offset-2 col-sm-8 form-main-button">
-    <button type="submit" class="btn btn-social-facebook full-width"><img src="{{ STATIC_URL }}images/v2/facebook-social.png">Connect with Facebook</button>
+     <a href="{% provider_login_url "facebook" %}">
+      <button class="btn btn-social-facebook full-width"><img src="{{ STATIC_URL }}images/v2/facebook-social.png">Connect with Facebook</button>
+     </a>
   </div>
 </div>
 {% endblock %}
