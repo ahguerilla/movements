@@ -7,7 +7,7 @@
 {% block header_padding %}{% endblock %}
 
 {% block content_outside_container %}
-  {% if is_self %}
+  {% if is_self and not is_public %}
     {% include "users/snippets/profile_navigation.html" with page_type="profile" %}
   {% endif %}
 {% endblock %}
@@ -31,6 +31,30 @@
           </div>
       </div>
     </div>
+    {% if is_self and not is_public %}
+    <div class="view-public action-font"><a href="?public">View Public Profile</a></div>
+    {% endif %}
+    <hr />
+    <div class="settings-title">AHR Rating</div>
+    <div class="vetting-status">
+      <div class="poster-details">
+        <div class="poster-rating"><span class="rateit"
+              data-rateit-readonly="true"
+              data-rateit-value="{{ ahr_rating }}"
+              data-rateit-min="0"
+              data-rateit-starwidth="22"
+              data-rateit-starheight="17"
+              data-rateit-max="5"></span>
+          </div>
+      </div>
+      <div class="status {% if ahr_rating == 0 %}warn{% endif %}">
+        {% if ahr_rating > 0 %}
+          {% if is_public or not is_self %}This user has {% else %}You have{% endif %} been verified by Advancing Human Rights
+        {% else %}
+          {% if is_public or not is_self %}This user has {% else %}You have{% endif %} not been verified by Advancing Human Rights
+        {% endif %}
+      </div>
+    </div>
     {% if not is_self %}
     <hr />
     <div class="profile-actions">
@@ -48,44 +72,52 @@
       </div>
     </div>
     {% endif %}
-    <hr />
-    <div class="settings-title">About</div>
-    <div class="row">
-      <div class="col-xs-4">Name:</div>
-      <div class="col-xs-8">{{ user_details.first_name }}&nbsp;{{ user_details.last_name }}</div>
-      <div class="col-xs-4">Nationality:</div>
-      <div class="col-xs-8">{{ user_profile.nationality }}</div>
-      <div class="col-xs-4">TODO:</div>
-      <div class="col-xs-8">Add More</div>
-    </div>
-    <hr />
-    <div class="settings-title">Bio</div>
-    <div class="bio">
-      {{ user_profile.bio }}
-    </div>
-    <hr />
-    <div class="settings-title">Skills</div>
-    {% if  user_profile.interests.all.count > 0 %}
-    <div class="tags">
-      {% for interest in user_profile.interests.all %}
-        <div class="tag">{{ interest }}</div>
-      {% endfor %}
-    </div>
-    {% else %}
-      No interests specified
-    {% endif %}
-    <div class="clearfix" ></div>
-    <div class="settings-title" style="margin-top: 10px;">Languages</div>
-    {% if  user_profile.languages.all.count > 0 %}
-    <div class="tags">
-      {% for language in user_profile.languages.all %}
-        <div class="tag">{{ language }}</div>
-      {% endfor %}
-    </div>
-    {% else %}
-      No languages specified
+
+    {% if visibility_settings >= 1 %}
+      {% if visibility_settings >= 2 %}
+      <hr />
+      <div class="settings-title">About</div>
+      <div class="row">
+        <div class="col-xs-4">Name:</div>
+        <div class="col-xs-8">{{ user_details.first_name }}&nbsp;{{ user_details.last_name }}</div>
+        <div class="col-xs-4">Nationality:</div>
+        <div class="col-xs-8">{{ user_profile.nationality }}</div>
+        <div class="col-xs-4">Residence:</div>
+        <div class="col-xs-8">{{ user_profile.resident_country }}</div>
+        <div class="col-xs-4">TODO:</div>
+        <div class="col-xs-8">Add More</div>
+      </div>
+      {% endif %}
+      <hr />
+      <div class="settings-title">Bio</div>
+      <div class="bio">
+        {{ user_profile.bio }}
+      </div>
+      <hr />
+      <div class="settings-title">Skills</div>
+      {% if  user_profile.interests.all.count > 0 %}
+      <div class="tags">
+        {% for interest in user_profile.interests.all %}
+          <div class="tag">{{ interest }}</div>
+        {% endfor %}
+      </div>
+      {% else %}
+        No interests specified
+      {% endif %}
+      <div class="clearfix" ></div>
+      <div class="settings-title" style="margin-top: 10px;">Languages</div>
+      {% if  user_profile.languages.all.count > 0 %}
+      <div class="tags">
+        {% for language in user_profile.languages.all %}
+          <div class="tag">{{ language }}</div>
+        {% endfor %}
+      </div>
+      {% else %}
+        No languages specified
+      {% endif %}
     {% endif %}
   </div>
+
   <div class="col-xs-8">
     <div id="marketitems"></div>
     <div id="ajaxloader">

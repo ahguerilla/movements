@@ -117,6 +117,7 @@ def profile_for_user(request, user_name):
 
 @login_required
 def profile(request, user_name=None):
+    is_public = False if request.GET.get("public", False) is False else True
     if not user_name:
         user = User.objects.get(pk=request.user.id)
     else:
@@ -138,12 +139,16 @@ def profile(request, user_name=None):
         orate = orate[0].rated_by_ahr
     else:
         orate = 0
+    # 2 == public, 1 == secure, 0 == private
+    visibility_settings = 2 if is_self and not is_public else 0
     return render_to_response('users/user_profile_v2.html',
                               {
                                   'user_details': user,
                                   'user_profile': user_profile,
                                   'is_self': is_self,
-                                  'OrganisationalRating': orate
+                                  'is_public': is_public,
+                                  'visibility_settings': visibility_settings,
+                                  'ahr_rating': orate
                               },
                               context_instance=RequestContext(request))
 

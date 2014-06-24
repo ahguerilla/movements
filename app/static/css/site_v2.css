@@ -1527,6 +1527,14 @@ h6 {
 #conversation .message:last-child {
   border-bottom: none;
 }
+#profile-view .view-public {
+  margin-top: 10px;
+  text-align: right;
+  font-size: 14px;
+}
+#profile-view .vetting-status .status.warn {
+  color: #f00;
+}
 
 
 @media (max-width: 992px) {
