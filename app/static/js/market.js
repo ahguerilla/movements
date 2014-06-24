@@ -182,6 +182,8 @@
       } else if (action === 'stick') {
         this.setItemAttibute($container, 'stick', !$container.data('stick'))
         remakePopover = true;
+      } else if (action === 'edit') {
+        window.location.href = $container.data('edit-url');
       }
 
       var $popover = $container.find('.item-menu');

@@ -89,6 +89,22 @@ def create_request(request):
 
 
 @login_required
+def edit_offer(request, post_id):
+    """
+    TODO This is placeholder
+    """
+    return create_offer(request)
+
+
+@login_required
+def edit_request(request, post_id):
+    """
+    TODO This is placeholder
+    """
+    return create_request(request)
+
+
+@login_required
 def users(request):
     return render_to_response('market/market.html',
                               {

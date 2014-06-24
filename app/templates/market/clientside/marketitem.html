@@ -6,6 +6,7 @@
        data-item-id="<%- pk %>"
        data-owner-id="<%- ownerid %>"
        data-close-url="<%- close_url %>"
+       data-edit-url="<%- edit_url %>"
        data-report-url="<%- report_url %>"
        data-item-type="<%- item_type %>"
        data-stick="<%- stick %>"
@@ -55,6 +56,7 @@
        actions.push({display: 'Stick', value: 'stick', toggle: true});
      }
      if (hasEdit) {
+       actions.push({display: 'Edit', value: 'edit'});
        actions.push({display: 'Close', value: 'close'});
      } else {
        actions.push({display: 'Report', value: 'report'});

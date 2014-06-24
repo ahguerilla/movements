@@ -696,7 +696,7 @@ h6 {
 .progress-counter .complete-state {
   text-align: center;
   font-size: 35px;
-  line-height: 25px;
+  line-height: 34px;
 }
 .progress-counter .complete-state span {
   background-color: #fff;

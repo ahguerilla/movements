@@ -135,7 +135,7 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
 
 @login_required
 @check_perms_and_get(market.models.MarketItem)
-def close_market_item(request, obj_id, rtype):
+def close_market_item(request, obj_id):
     market_item = request.obj
 
     questionnaire = Questionnaire.objects.filter(market_type=market_item.item_type).first()
@@ -174,7 +174,7 @@ def close_market_item(request, obj_id, rtype):
                 mimetype="application/" + rtype)
 
     return HttpResponse(
-        json.dumps(data), mimetype="application" + rtype)
+        json.dumps(data), mimetype="application/json")
 
 
 @login_required

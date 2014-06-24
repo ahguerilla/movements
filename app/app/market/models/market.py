@@ -85,6 +85,8 @@ class MarketItem(models.Model):
         adict['fields']['ownerid'] = [self.owner.id]
         adict['fields']['url'] = self.url
         adict['fields']['close_url'] = reverse('close_marketitem', args=[self.id])
+        adict['fields']['edit_url'] = reverse('edit_request', args=[
+            self.id]) if self.item_type is MarketItem.TYPE_CHOICES.REQUEST else reverse('edit_offer', args=[self.id])
         adict['fields']['report_url'] = reverse('report_post', args=[self.id])
         adict['fields']['attributes_url'] = reverse('set_item_attributes_for_user', args=[self.id])
         adict['fields']['commentcount'] = self.commentcount
