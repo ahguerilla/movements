@@ -149,6 +149,9 @@ def close_market_item(request, obj_id):
             'question_answer': ''
         } for question in questionnaire.questions.all()
     ]
+
+    questions.sort(key=lambda x: x["question_id"], reverse=False)
+
     data = {'questionnaire': {
         'questionnaire_id': questionnaire.pk,
         'questionnaire_title': questionnaire.title,
