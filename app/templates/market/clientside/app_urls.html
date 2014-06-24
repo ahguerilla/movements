@@ -28,6 +28,7 @@
 
       market: "{% url 'show_market' %}",
       getposts:  "{% url 'posts'  %}",
+      getMarketItems: '{% url 'get_marketitems_fromto' 'json' 0 0 %}',
       getmarketitemfromto: "{% url 'get_marketitems_fromto' 'json' 0 0 %}".slice(0,-1),
       getusermarketitemsfromto : "{% url 'get_usermarketitems_fromto' 'json' 0 0 %}".slice(0,-1),
       sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
