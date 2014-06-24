@@ -94,11 +94,12 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   getItems: function (page) {
     var data = {};
     this.filterView.setFilter(data);
+    data.page = page;
     return $.ajax({
       url: this.getMarketItems,
       dataType: 'json',
       contentType: "application/json; charset=utf-8",
-      data: {page: page},
+      data: data,
       traditional: true
     });
   },
