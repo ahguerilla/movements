@@ -1,0 +1,57 @@
+{% load compress %}
+
+<script type="text/template" id="dropdown_template">
+  <div class="col-md-12">
+    <div class="<%- jsonfield %> error"></div>
+  </div>
+  <div class="col-xs-12">
+    <label for="<%- jsonfield %>"><%- title %></label>
+    <select class="form-control input-sm" name="<%- jsonfield %>" id="<%- jsonfield %>" >
+      <option value="" selected="selected">---------</option>
+      <% _.each(selectItems, function(item, index){ %>
+      <option value="<%- index %>" ><%- item %></option>
+      <% }); %>
+    </select>
+  </div>
+</script>
+
+{% compress js inline %}
+
+<script type="text/javascript" id="textarea_view">
+ (function () {
+   var DropdownWidget = window.ahr.BaseView.extend({
+     el: '#itemform',
+
+     getval: function () {
+       return $('#' + this.jsonfield + ' :selected', $(this.container)).text();
+     },
+
+     initialize: function (data) {
+       var that = this;
+       this.container = data.cont;
+       this.item = data.itm;
+       this.jsonfield = data.itm.jsonfield;
+       var tmpl = _.template($('#dropdown_template').html());
+       var html = tmpl({
+         title: this.item.title,
+         jsonfield: this.item.jsonfield,
+         selectItems: this.item.dropdownOptions
+       });
+       $(this.container).html(html);
+       if (data.prvl) {
+         $('#' + this.jsonfield, $(this.container)).val(data.prvl);
+       }
+     }
+   });
+   window.ahr.dropdown_widget = window.ahr.dropdown_widget || {};
+   window.ahr.dropdown_widget.initWidget = function (container, item, preval) {
+     var widget = new DropdownWidget({
+       'cont': container,
+       'itm': item,
+       'prvl': preval
+     });
+     return widget;
+   };
+ })();
+</script>
+{% endcompress %}

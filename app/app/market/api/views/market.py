@@ -144,6 +144,7 @@ def close_market_item(request, obj_id):
     questions = [
         {
             'question_id': question.pk,
+            'question_type': question.question_type,
             'question_text': question.question,
             'question_answer': ''
         } for question in questionnaire.questions.all()
@@ -171,7 +172,7 @@ def close_market_item(request, obj_id):
         else:
             return HttpResponseError(
                 json.dumps(get_validation_errors(form)),
-                mimetype="application/" + rtype)
+                mimetype="application/json")
 
     return HttpResponse(
         json.dumps(data), mimetype="application/json")

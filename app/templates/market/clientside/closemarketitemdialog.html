@@ -89,12 +89,29 @@
       var questions = this.questionnaire.questions;
       for (var i in questions) {
           var question = questions[i];
-          widget = window.ahr.textarea_widget.initWidget(
-              '#question_' + question.question_id,
-              {title: question.question_text,
-               jsonfield: 'question_' + question.question_id,
-               placeholder: '{%trans "Please enter your answer"%}'},
-              null);
+          var questionData = {
+            title: question.question_text,
+            jsonfield: 'question_' + question.question_id
+          };
+
+          // 0 == Yes/No
+          // 1 == 1->5
+          // 2 == Text
+          var widgetItem = null;
+          if(question.question_type == 0){
+            widgetItem = window.ahr.dropdown_widget;
+            questionData.dropdownOptions = ["Yes", "No"];
+          } else if(question.question_type == 1){
+            widgetItem = window.ahr.dropdown_widget;
+            questionData.dropdownOptions = ["1", "2", "3", "4", "5"];
+          } else {
+            widgetItem = window.ahr.textarea_widget;
+            questionData.placeholder = '{%trans "Please enter your answer"%}';
+          }
+          widget = widgetItem.initWidget(
+                  '#question_' + question.question_id,
+                   questionData,
+                   null);
           widgets['question_' + question.question_id] = widget;
       }
       this.widgets = widgets;
@@ -120,6 +137,7 @@
     emptyTheForm: function () {
       $('input,textarea', $('#requestdialog')).val('');
     },
+
 
     submit: function (e) {
       e.preventDefault();
