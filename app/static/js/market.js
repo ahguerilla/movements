@@ -82,12 +82,18 @@ $(function () {
     template: _.template($("#pagination_template").html()),
 
     getPage: function (e) {
+      var that = this;
       e.preventDefault();
       var targetPage = $(e.currentTarget).data('page');
-      this.marketView.loadPage(targetPage);
+      var request = this.marketView.loadPage(targetPage);
+      request.done(function () {
+        that.render();
+      });
     },
-    getPageCount: function () {
-      return 2;
+    updatePageState: function () {
+      this.pageCount = this.marketView.pageCount;
+      this.pageActive = this.marketView.pageActive;
+      this.pageSize = this.marketView.pageSize;
     },
 
     initialize: function (options) {
@@ -95,15 +101,14 @@ $(function () {
       this.pageSize = options.pageSize;
       this.pageRange = options.pageRange;
       this.pageActive = options.pageActive;
-
-      this.pageCount = this.getPageCount();
-      if (this.pageCount <= this.pageRange) {
-        this.pageRange = this.pageCount;
-      }
       this.init();
     },
 
     render: function () {
+      this.updatePageState();
+      if (this.pageCount <= this.pageRange) {
+        this.pageRange = this.pageCount;
+      }
       var range = Math.floor(this.pageRange / 2);
       var navBegin = this.pageActive - range;
       if (this.pageRange % 2 == 0) {
@@ -134,7 +139,7 @@ $(function () {
         rightDots = false;
       }
 
-      this._initTemplate({
+      this.$el.html(this.template({
         link: this.link,
         pageCount: this.pageCount,
         pageActive: this.pageActive,
@@ -142,17 +147,17 @@ $(function () {
         navEnd: navEnd,
         leftDots: leftDots,
         rightDots: rightDots
-      });
+      }));
       return this;
     },
     init: function () {
+      var that = this;
       this.pageActive = 1;
-      this.marketView.loadPage(1);
-      return this.render();
+      var request = this.marketView.loadPage(1);
+      request.done(function () {
+        return that.render();
+      });
     },
-    _initTemplate: function (params) {
-      this.$el.html(this.template(params));
-    }
   });
 
   var MarketView = window.ahr.market.MarketBaseView.extend({
@@ -265,7 +270,6 @@ $(function () {
     // market.initInfiniteScroll();
     var pagination = new PaginationView({
       marketView: market,
-      pageSize: 5,
       pageRange: 3,
       pageActive: 1
     });

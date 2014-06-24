@@ -127,6 +127,20 @@
 {#  {% include 'market/clientside/userprofile.html' %}#}
 {#  {% include 'market/clientside/reportuserdialog.html' %}#}
 {#  {% include "market/clientside/actions/actions.html"%}#}
+  <style>
+    #pagination li {
+        float: left;
+        list-style: none;
+        margin-left: 15px;
+    }
+    #pagination .page {
+        cursor: pointer;
+    }
+    #pagination .active .page {
+        cursor: default;
+        color: red;
+    }
+  </style>
   <script type="text/template" id="pagination_template">
     <ul>
       <% if (pageActive > 1) { %>
@@ -134,7 +148,7 @@
       <% } %>
       <% if (leftDots) { %>
         <li><span class="page" data-page="1">1</span></li>
-        <li><span>...</span>></li>
+        <li><span>...</span></li>
       <% } %>
 
       <% for (var i = navBegin; i <= navEnd; i++) { %>

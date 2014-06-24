@@ -7,24 +7,24 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   loadedOnce: false,
   currentCall: null,
 
-  levelReached: function (pixelTestValue) {
-    if (!this.loadedOnce) {
-      this.loadedOnce = true;
-      return true;
-    }
-
-    // is it low enough to add elements to bottom?
-    var pageHeight = Math.max(document.body.scrollHeight ||
-      document.body.offsetHeight);
-    var viewportHeight = window.innerHeight ||
-      document.documentElement.clientHeight ||
-      document.body.clientHeight || 0;
-    var scrollHeight = window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop || 0;
-    // Trigger for scrolls within 30 pixels from page bottom
-    return pageHeight - viewportHeight - scrollHeight < pixelTestValue;
-  },
+//  levelReached: function (pixelTestValue) {
+//    if (!this.loadedOnce) {
+//      this.loadedOnce = true;
+//      return true;
+//    }
+//
+//    // is it low enough to add elements to bottom?
+//    var pageHeight = Math.max(document.body.scrollHeight ||
+//      document.body.offsetHeight);
+//    var viewportHeight = window.innerHeight ||
+//      document.documentElement.clientHeight ||
+//      document.body.clientHeight || 0;
+//    var scrollHeight = window.pageYOffset ||
+//      document.documentElement.scrollTop ||
+//      document.body.scrollTop || 0;
+//    // Trigger for scrolls within 30 pixels from page bottom
+//    return pageHeight - viewportHeight - scrollHeight < pixelTestValue;
+//  },
 
   clearMarketPage: function () {
     $('#marketitems').empty();
@@ -38,7 +38,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
 
   loadPage: function (page) {
     var that = this;
-    if (!that.loadingPage && that.levelReached(30) && !that.allItemsLoaded) {
+    if (!that.loadingPage && !that.allItemsLoaded) {
       that.loadingPage = true;
 
       this.clearMarketPage();
@@ -59,16 +59,23 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         }
 
         _.each(data, function (item) {
-          item.fields.pk = item.pk;
-          var item_html = that.item_tmp(item.fields);
-          $('#marketitems').append(item_html);
-          $('.tm-tag').each(function(){
-             var txt = $('span',$(this)).text();
-             $('.tag-button:contains('+txt+')').css('background-color','#cccccc');
-          });
+          if (item.page_count) {
+            that.pageCount = item.page_count;
+            that.pageActive = item.current_page;
+            that.pageSize = item.page_size;
+          } else {
+           item.fields.pk = item.pk;
+            var item_html = that.item_tmp(item.fields);
+            $('#marketitems').append(item_html);
+            $('.tm-tag').each(function(){
+               var txt = $('span',$(this)).text();
+               $('.tag-button:contains('+txt+')').css('background-color','#cccccc');
+            });
+          }
         });
         that.loadingPage = false;
       });
+      return dfrd;
     }
   },
 
