@@ -11,6 +11,8 @@ $background-color = #F8F6F7
 $border-color = #E0D7D8
 $border-color-alpha = rgba(224, 215, 216, 0.8)
 $facebook-blue = #3C5A9A
+$twitter-blue = #4099FF
+$google-red = #DD4B39
 $separator-color = #ded8d6
 $footer-color = #B6ABA5
 $selected-tab-color = $footer-color
@@ -155,11 +157,20 @@ box-shadow()
 
 .btn-social-facebook
   background-color $facebook-blue
+
+.btn-social-twitter
+  background-color $twitter-blue
+
+.btn-social-google
+  background-color $google-red
+
+.btn-social
+  margin-bottom 15px
   color $white-font
   img
     margin-right 10px
 
-.btn-social-facebook:hover, .btn-social-facebook:active, .btn-social-facebook:focus
+.btn-social:hover, .btn-social:active, .btn-social:focus
   color $white-font
 
 .full-width

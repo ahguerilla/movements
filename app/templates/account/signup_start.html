@@ -46,8 +46,14 @@
   <div class="col-xs-12 action-text">{%trans "Use your Facebook details to sign in."%}</div>
   <div class="col-sm-offset-2 col-sm-8 form-main-button">
      <a href="{% provider_login_url "facebook" %}">
-       <button class="btn btn-social-facebook full-width"><img src="{{ STATIC_URL }}images/v2/facebook-social.png">Connect with Facebook</button>
+       <button class="btn btn-social btn-social-facebook full-width"><img src="{{ STATIC_URL }}images/v2/facebook-social.png">Connect with Facebook</button>
      </a>
+     <a href="{% provider_login_url "twitter" %}">
+       <button class="btn btn-social btn-social-twitter full-width"><img src="{{ STATIC_URL }}images/v2/twitter.png">Connect with Twitter</button>
+     </a>
+{#     <a href="{% provider_login_url "google" %}">#}
+{#       <button class="btn btn-social btn-social-google full-width"><img src="{{ STATIC_URL }}images/v2/gplus.png">Connect with G+</button>#}
+{#     </a>#}
   </div>
 </div>
 {% endblock %}
