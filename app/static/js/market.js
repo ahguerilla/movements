@@ -1,4 +1,4 @@
-(function () {
+$(function () {
   var MarketFilterView = Backbone.View.extend({
     type: '',
     regions: [],
@@ -15,12 +15,16 @@
     initialize: function() {
       var $skills = this.$el.find('a.skills');
       var $container = $skills.parent().find('.popover-container');
-      $skills.popover({
+      $.get(window.ahr.app_urls.getSkills, function (data) {
+        $skills.popover({
         title: '',
         html: true,
-        content: _.template($('#skill-filter-list-template').html())(),
-        container: $container,
-        placement: 'bottom'
+        content: _.template(
+              $('#skill-filter-list-template').html(),
+              {skills: data}),
+          container: $container,
+          placement: 'bottom'
+        });
       });
 
       var $regions = this.$el.find('a.regions');
@@ -40,12 +44,20 @@
       $target.toggleClass('selected');
       return {
         id: $target.data('id'),
-        selected: $target.hasClass('selected')
+        selected: $target.hasClass('selected'),
+        value: $target.data('filter')
       };
     },
 
     setSkillsFilter: function (ev) {
-      this.toggleFilterState(ev);
+      var skill = this.toggleFilterState(ev);
+      if (skill.selected) {
+        this.skills.push(skill.value);
+      } else {
+        this.skills = $.grep(this.skills, function (value) {
+          return value != skill.value;
+        });
+      }
       this.trigger('filter');
     },
 
@@ -76,8 +88,104 @@
       if (this.type) {
         data.types = this.type;
       }
+      if (this.skills) {
+	data.skills = this.skills;
+      }
+      
       data.showHidden = this.showHidden;
     }
+  });
+
+  var PaginationView = Backbone.View.extend({
+    el: '#pagination',
+    marketView: null,
+    pageSize: null,
+    pageRange: null,
+    pageActive: null,
+    events: {
+      "click .prev-page": "getPage",
+      "click .page": "getPage",
+      "click .next-page": "getPage"
+    },
+    template: _.template($("#pagination_template").html()),
+
+    getPage: function (e) {
+      var that = this;
+      e.preventDefault();
+      var targetPage = $(e.currentTarget).data('page');
+      var request = this.marketView.loadPage(targetPage);
+      request.done(function () {
+        that.render();
+      });
+    },
+    updatePageState: function () {
+      this.pageCount = this.marketView.pageCount;
+      this.pageActive = this.marketView.pageActive;
+      this.pageSize = this.marketView.pageSize;
+    },
+
+    initialize: function (options) {
+      this.marketView = options.marketView;
+      this.pageSize = options.pageSize;
+      this.pageRange = options.pageRange;
+      this.pageActive = options.pageActive;
+      this.init();
+    },
+
+    render: function () {
+      this.updatePageState();
+      if (this.pageCount <= this.pageRange) {
+        this.pageRange = this.pageCount;
+      }
+      var range = Math.floor(this.pageRange / 2);
+      var navBegin = this.pageActive - range;
+      if (this.pageRange % 2 == 0) {
+        navBegin++;
+      }
+      var navEnd = this.pageActive + range;
+
+
+      var leftDots = true;
+      var rightDots = true;
+
+
+      if (navBegin <= 2) {
+        navEnd = this.pageRange;
+        if (navBegin == 2) {
+           navEnd++;
+        }
+        navBegin = 1;
+        leftDots = false;
+      }
+
+      if (navEnd >= this.pageCount - 1) {
+        navBegin = this.pageCount - this.pageRange + 1;
+        if (navEnd == this.pageCount - 1) {
+           navBegin--;
+        }
+        navEnd = this.pageCount;
+        rightDots = false;
+      }
+
+      this.$el.html(this.template({
+        link: this.link,
+        pageCount: this.pageCount,
+        pageActive: this.pageActive,
+        navBegin: navBegin,
+        navEnd: navEnd,
+        leftDots: leftDots,
+        rightDots: rightDots
+      }));
+      return this;
+    },
+    init: function () {
+      var that = this;
+      this.pageActive = 1;
+      var request = this.marketView.loadPage(1);
+      request.done(function () {
+        return that.render();
+      });
+    },
   });
 
   var ProfileFilterView = Backbone.View.extend({
@@ -99,7 +207,7 @@
 
     initialize: function (options) {
       this.item_type = 'item';
-      this.getitemfromto = options.marketUrl;
+      this.getMarketItems = options.marketUrl;
       this.noResultsString = options.noResultsString;
       this.item_tmp = _.template($('#item_template').html());
       if(options.filterView) {
@@ -198,6 +306,7 @@
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (filters) {
     var filterView = new MarketFilterView({el: '#exchange-filters'});
+    //var pagination = new PaginationView({'marketView': market});
 //    var noResultsString = ['<p style="margin-top:20px;float:left;width:100%;text-align:center;" id="no-search-result">',
 //        window.ahr.string_constants.market_search_no_match_a,
 //        '<a href="#" id="searchagainall">',
@@ -210,10 +319,18 @@
       {
         el: '#itemandsearchwrap',
         filterView: filterView,
-        marketUrl: ahr.app_urls.getmarketitemfromto,
+        marketUrl: ahr.app_urls.getMarketItems,
         noResultsString: noResultsString
       });
-    market.initInfiniteScroll();
+    // market.initInfiniteScroll();
+    var pagination = new PaginationView({
+      marketView: market,
+      pageRange: 3,
+      pageActive: 1
+    });
+    filterView.on('filter', function () {
+      pagination.init();
+    });
     document.title = window.ahr.string_constants.exchange;
   };
 
@@ -233,7 +350,14 @@
         noResultsString: noResultsString,
         isProfile: true
       });
-    market.initInfiniteScroll();
+    var pagination = new PaginationView({
+      marketView: market,
+      pageRange: 3,
+      pageActive: 1
+    });
+    filterView.on('filter', function () {
+      pagination.init();
+    });
   }
 
-})();
+});

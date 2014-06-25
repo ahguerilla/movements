@@ -8,6 +8,7 @@ from postman.models import Message
 from django.db.models import Q
 from django.http import Http404
 
+from app.users.models import Interest, UserProfile
 from forms import RequestForm, OfferForm, save_market_item
 from models.market import MarketItem
 
@@ -56,35 +57,25 @@ def show_post(request, post_id):
 
 @login_required
 def create_offer(request):
-    """
-    TODO This is largely placeholder to generate dummy items for the front-end development. It needs to be updated
-    to properly read in the skills list etc
-    """
-    form = OfferForm(request.POST if request.method == 'POST' else None)
+    user_skills = request.user.userprofile.interests.values_list('id', flat=True)
+    form = OfferForm(request.POST or None, user_skills=user_skills)
     if form.is_valid():
         save_market_item(form, request.user)
         # TODO This needs to be the new view offer page
         return redirect('/')
-    skills = ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee",
-              "Policy Expert", "Social Media", "Technology", "Translator", "Writer"]
-    return render_to_response('market/create_offer.html', {'skills': skills, 'form': form},
+    return render_to_response('market/create_offer.html', {'form': form},
                               context_instance=RequestContext(request))
 
 
 @login_required
 def create_request(request):
-    """
-    TODO This is largely placeholder to generate dummy items for the front-end development. It needs to be updated
-    to properly read in the skills list etc
-    """
-    form = RequestForm(request.POST if request.method == 'POST' else None)
+    user_skills = request.user.userprofile.interests.values_list('id', flat=True)
+    form = RequestForm(request.POST or None, user_skills=user_skills)
     if form.is_valid():
         save_market_item(form, request.user)
         # TODO This needs to be the new view request page
         return redirect('/')
-    skills = ["Activist", "Advocate", "Journalist", "Lawyer", "Marketer", "Media Producer", "NGO Employee",
-              "Policy Expert", "Social Media", "Technology", "Translator", "Writer"]
-    return render_to_response('market/create_request.html', {'skills': skills, 'form': form},
+    return render_to_response('market/create_request.html', {'form': form},
                               context_instance=RequestContext(request))
 
 

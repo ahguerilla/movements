@@ -1,9 +1,13 @@
 import json
+import math
 from datetime import datetime
 
 from django.db.models import Q
-from haystack.query import SearchQuerySet
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.db import connection
+from haystack.query import SearchQuerySet
+
 from app.market.api.utils import *
 import app.market as market
 from app.market.models import Questionnaire
@@ -11,14 +15,14 @@ from app.market.forms import QuestionnaireForm
 from tasks.celerytasks import update_notifications, mark_read_notifications
 
 
-def get_market_json(objs, request=None):
-    alist = []
-    for obj in objs:
-        alist.append(obj.getdict(request))
-    return json.dumps(alist)
+def get_market_json(items, request=None, extra_data=None):
+    to_json = [item.getdict(request) for item in items]
+    if extra_data:
+        to_json.append(extra_data)
+    return json.dumps(to_json)
 
 
-def return_item_list(obj, rtype, request=None):
+def return_item_list(obj, rtype='json', request=None):
     return HttpResponse(
         get_market_json(obj, request),
         mimetype="application/" + rtype)
@@ -35,19 +39,25 @@ def get_stickies(request, hiddens, sfrom, to):
     return obj
 
 
-def get_raw(request, filter_by_owner=False, user_id=None):
+def get_raw(request, from_item=0, to_item=None,
+            filter_by_owner=False, count=False, user_id=None):
     params = {
-        'countries': tuple(map(int, request.GET.getlist('countries', (0,)))),
-        'issues': tuple(map(int, request.GET.getlist('issues', (0,)))),
-        'skills': tuple(map(int, request.GET.getlist('skills', (0,)))),
+        'interests': tuple(map(int, request.GET.getlist('skills', (0,)))),
         'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
         'user_id': user_id if user_id else request.user.id,
         'date_now': datetime.now(),
         'closed_statuses': (
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
-            market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN)
+            market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN),
+        'offset': from_item,
     }
     additional_filter = ''
+
+    if to_item:
+        params['limit'] = to_item - from_item
+        limit = ' LIMIT %(limit)s'
+    else:
+        limit = ''
 
     search = request.GET.get('search')
     if search:
@@ -67,28 +77,26 @@ def get_raw(request, filter_by_owner=False, user_id=None):
 
     if filter_by_owner:
         select = 'SELECT mi.* '
-        order_by = 'ORDER BY id DESC , pub_date DESC'
+        order_by = ' ORDER BY id DESC , pub_date DESC'
         additional_filter += 'AND auth_user.id = %(user_id)s'
     else:
-        select = """
-        SELECT mi.*,
-               (COUNT(DISTINCT market_marketitem_countries.countries_id) +
-                COUNT(DISTINCT market_marketitem_issues.issues_id) +
-                COUNT(DISTINCT market_marketitem_skills.skills_id)) as tag_matches
+        select = """SELECT mi.*,
+                           COUNT(DISTINCT market_marketitem_interests.interest_id) as tag_matches
         """
-        order_by = 'ORDER BY tag_matches DESC, pub_date DESC'
+        order_by = ' ORDER BY tag_matches DESC, pub_date DESC'
+
+    if count:
+        select = 'SELECT COUNT(DISTINCT mi.id) '
+        group_by = ''
+        order_by = ''
+    else:
+        group_by = ' GROUP BY mi.id'
 
     raw = select + """
         FROM market_marketitem AS mi
-        LEFT JOIN market_marketitem_countries ON
-            market_marketitem_countries.marketitem_id = mi.id AND
-            market_marketitem_countries.countries_id IN %(countries)s
-        LEFT JOIN market_marketitem_issues ON
-            market_marketitem_issues.marketitem_id = mi.id AND
-            market_marketitem_issues.issues_id IN %(issues)s
-        LEFT JOIN market_marketitem_skills ON
-            market_marketitem_skills.marketitem_id = mi.id AND
-            market_marketitem_skills.skills_id IN %(skills)s
+        LEFT JOIN market_marketitem_interests ON
+            market_marketitem_interests.marketitem_id = mi.id AND
+            market_marketitem_interests.interest_id IN %(interests)s
         INNER JOIN "auth_user" ON
             mi.owner_id = "auth_user"."id"
         WHERE
@@ -103,12 +111,14 @@ def get_raw(request, filter_by_owner=False, user_id=None):
             mi.deleted = False AND
             "auth_user"."is_active" = True AND
             NOT mi.status IN %(closed_statuses)s
-        GROUP BY mi.id, mi.item_type, mi.owner_id, mi.staff_owner_id, mi.title,
-            mi.details, mi.url, mi.published, mi.pub_date,
-            mi.commentcount, mi.ratecount, mi.reportcount, mi.score, mi.deleted,
-            mi.status, mi.closed_date, mi.feedback_response
-    """ + order_by
+        """ + group_by + order_by + ' OFFSET %(offset)s' + limit
     return raw, params
+
+
+def get_item_count(request):
+    cursor = connection.cursor()
+    cursor.execute(*get_raw(request, count=True))
+    return cursor.fetchone()[0]
 
 
 @login_required
@@ -131,6 +141,39 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
         stickies.extend(market_items)
     retval = return_item_list(stickies, rtype, request)
     return retval
+
+
+@login_required
+def get_market_items(request):
+    page = int(request.GET.get('page', 1))
+    market_items_count = get_item_count(request)
+    max_page_num = math.ceil(market_items_count / float(settings.PAGE_SIZE))
+    page_num = min(page, max_page_num)
+    from_item = (page_num - 1) * settings.PAGE_SIZE
+    to_item = from_item + settings.PAGE_SIZE
+
+    stickies_count = market.models.MarketItemStick.objects.filter(
+        viewer_id=request.user.id).count()
+    hidden_items = market.models.MarketItemHidden.objects.values_list(
+        'item_id', flat=True).filter(viewer_id=request.user.id)
+
+    if stickies_count >= to_item:
+        stickies = get_stickies(request, hidden_items, from_item, to_item)
+    elif stickies_count <= from_item:
+        stickies = market.models.MarketItem.objects.raw(
+            *get_raw(request, from_item-stickies_count, to_item-stickies_count))
+    else:
+        stickies = list(
+            get_stickies(request, hidden_items, from_item, stickies_count))
+        market_items = list(market.models.MarketItem.objects.raw(
+            *get_raw(request, 0, to_item-stickies_count)))
+        stickies.extend(market_items)
+
+    market_json = get_market_json(
+        stickies, request, {'page_count': max_page_num,
+                            'current_page': page_num,
+                            'page_size': settings.PAGE_SIZE})
+    return HttpResponse(market_json, mimetype='application/json')
 
 
 @login_required
