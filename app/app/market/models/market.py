@@ -52,6 +52,7 @@ class MarketItem(models.Model):
         _('closed date'), null=True, blank=True)
     feedback_response = models.TextField(
         _('feedback response'), blank=True, default='')
+    is_featured = models.BooleanField(_('is featured'), default=False)
 
     def __unicode__(self):
         return self.details
