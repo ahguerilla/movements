@@ -3,6 +3,7 @@
 {% load url from future %}
 {% load i18n %}
 {% load widget_tweaks %}
+{% load socialaccount %}
 
 {% block public-content-message %}
 <div class="row dialog movements-form">
@@ -24,6 +25,15 @@
           {{ form.username.errors }}
         </div>
       </div>
+    {% if account.get_provider %}
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.email.auto_id }}">{%trans "Email" %}</label>
+          {% render_field form.email class="form-control input-sm" required="true" autofocus="autofocus" placeholder="" %}
+          {{ form.username.errors }}
+        </div>
+      </div>
+    {% endif %}
       <div class="form-group">
         <div class="col-xs-6">
           <label for="{{ form.first_name.auto_id }}">{%trans "First Name"%}</label>
