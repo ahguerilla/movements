@@ -45,7 +45,8 @@ def get_raw(request, filter_by_owner=False, user_id=None):
         'date_now': datetime.now(),
         'closed_statuses': (
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
-            market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN)
+            market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN),
+        'is_featured': request.GET.get('is_featured', False)
     }
     additional_filter = ''
 
@@ -92,7 +93,8 @@ def get_raw(request, filter_by_owner=False, user_id=None):
         INNER JOIN "auth_user" ON
             mi.owner_id = "auth_user"."id"
         WHERE
-            mi.item_type IN %(types)s
+            mi.item_type IN %(types)s AND
+            mi.is_featured = %(is_featured)s
     """ + additional_filter + """ AND
             NOT mi.id IN (
                 SELECT stickies."item_id"
@@ -106,7 +108,7 @@ def get_raw(request, filter_by_owner=False, user_id=None):
         GROUP BY mi.id, mi.item_type, mi.owner_id, mi.staff_owner_id, mi.title,
             mi.details, mi.url, mi.published, mi.pub_date,
             mi.commentcount, mi.ratecount, mi.reportcount, mi.score, mi.deleted,
-            mi.status, mi.closed_date, mi.feedback_response
+            mi.status, mi.closed_date, mi.feedback_response, mi.is_featured
     """ + order_by
     return raw, params
 

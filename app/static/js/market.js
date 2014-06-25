@@ -102,6 +102,7 @@
       this.getitemfromto = options.marketUrl;
       this.noResultsString = options.noResultsString;
       this.item_tmp = _.template($('#item_template').html());
+      this.itemContainer = $('#marketitems');
       if(options.filterView) {
         this.init(options.filterView);
       }
@@ -195,6 +196,26 @@
       }
     }
   });
+  var FeaturedMarketView = MarketView.extend({
+    initialize: function (options) {
+      console.log('featured init');
+      this.itemContainer = $('#featured-marketitems');
+      this.is_featured = true;
+      this.item_type = 'item';
+      this.getitemfromto = options.marketUrl;
+      this.noResultsString = options.noResultsString;
+      this.item_tmp = _.template($('#featured_item_template').html());
+      if(options.filterView) {
+        this.init(options.filterView);
+      }
+      this.isProfile = options.isProfile || false;
+      this.item_menu_template = _.template($('#item-menu-template').html());
+      this.closeDialog = new ahr.CloseItemDialogView();
+      this.reportDialog = new ahr.ReportPostView();
+      return this;
+    }
+  });
+
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (filters) {
     var filterView = new MarketFilterView({el: '#exchange-filters'});
@@ -214,6 +235,13 @@
         noResultsString: noResultsString
       });
     market.initInfiniteScroll();
+    var featuredMarket = new FeaturedMarketView({
+      el: '#itemandsearchwrap',
+      filterView: filterView,
+      marketUrl: ahr.app_urls.getmarketitemfromto,
+      noResultsString: noResultsString
+    });
+    featuredMarket.initInfiniteScroll();
     document.title = window.ahr.string_constants.exchange;
   };
 

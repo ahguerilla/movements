@@ -9,6 +9,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   loadedOnce: false,
   currentCall: null,
   noResultsString: "",
+  is_featured: false,
 
   levelReached: function (pixelTestValue) {
     if (!this.loadedOnce) {
@@ -84,7 +85,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         _.each(data, function (item) {
           item.fields.pk = item.pk;
           var item_html = that.item_tmp(item.fields);
-          $('#marketitems').append(item_html);
+          that.itemContainer.append(item_html);
           $('.tm-tag').each(function(){
              var txt = $('span',$(this)).text();
              $('.tag-button:contains('+txt+')').css('background-color','#cccccc');
@@ -101,6 +102,9 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     var data = {};
     if(this.filterView) {
       this.filterView.setFilter(data);
+    }
+    if (this.is_featured) {
+      data.is_featured = true;
     }
     return $.ajax({
       url: this.getitemfromto.replace('0', from) + to,
