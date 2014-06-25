@@ -1,0 +1,38 @@
+  <style>
+    #pagination li {
+        float: left;
+        list-style: none;
+        margin-left: 15px;
+    }
+    #pagination .page {
+        cursor: pointer;
+    }
+    #pagination .active .page {
+        cursor: default;
+        color: red;
+    }
+  </style>
+  <script type="text/template" id="pagination_template">
+    <ul>
+      <% if (pageActive > 1) { %>
+        <li><span class="page" data-page="<%= pageActive - 1 %>">«</span></li>
+      <% } %>
+      <% if (leftDots) { %>
+        <li><span class="page" data-page="1">1</span></li>
+        <li><span>...</span></li>
+      <% } %>
+
+      <% for (var i = navBegin; i <= navEnd; i++) { %>
+        <li <% if (pageActive == i) print('class="active"') %> ><span class="page" data-page="<%= i %>"><%= i %></span></li>
+      <% } %>
+
+      <% if (rightDots) { %>
+        <li><span>...</span></li>
+        <li><span class="page" data-page="<%= pageCount %>"><%= pageCount %></span></li>
+      <% } %>
+
+      <% if (pageActive < pageCount) { %>
+        <li><span class="page" data-page="<%= link %><%= pageActive + 1 %>">»</span></li>
+      <% } %>
+    </ul>
+  </script>

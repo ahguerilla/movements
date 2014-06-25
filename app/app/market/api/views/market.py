@@ -115,9 +115,9 @@ def get_raw(request, from_item=0, to_item=None,
     return raw, params
 
 
-def get_item_count(request):
+def get_item_count(request, user_id=None, filter_by_user=False):
     cursor = connection.cursor()
-    cursor.execute(*get_raw(request, count=True))
+    cursor.execute(*get_raw(request, count=True, user_id=user_id, filter_by_owner=filter_by_user))
     return cursor.fetchone()[0]
 
 
@@ -144,9 +144,16 @@ def get_marketItem_fromto(request, sfrom, to, rtype):
 
 
 @login_required
-def get_market_items(request):
+def get_market_items_user(request, user_id=None):
+    if not user_id:
+        user_id = request.user.id
+    return get_market_items(request, user_id=user_id, filter_by_user=True)
+
+
+@login_required
+def get_market_items(request, user_id=None, filter_by_user=False):
     page = int(request.GET.get('page', 1))
-    market_items_count = get_item_count(request)
+    market_items_count = get_item_count(request, user_id=user_id, filter_by_user=filter_by_user)
     max_page_num = math.ceil(market_items_count / float(settings.PAGE_SIZE))
     page_num = min(page, max_page_num)
     from_item = (page_num - 1) * settings.PAGE_SIZE
@@ -161,12 +168,13 @@ def get_market_items(request):
         stickies = get_stickies(request, hidden_items, from_item, to_item)
     elif stickies_count <= from_item:
         stickies = market.models.MarketItem.objects.raw(
-            *get_raw(request, from_item-stickies_count, to_item-stickies_count))
+            *get_raw(request, from_item - stickies_count, to_item - stickies_count, filter_by_owner=filter_by_user,
+                     user_id=user_id))
     else:
         stickies = list(
             get_stickies(request, hidden_items, from_item, stickies_count))
         market_items = list(market.models.MarketItem.objects.raw(
-            *get_raw(request, 0, to_item-stickies_count)))
+            *get_raw(request, 0, to_item - stickies_count, filter_by_owner=filter_by_user, user_id=user_id)))
         stickies.extend(market_items)
 
     market_json = get_market_json(

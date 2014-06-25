@@ -337,9 +337,10 @@ $(function () {
   window.ahr.market.initProfile = function(userId){
     var filterView = new ProfileFilterView()
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">No posts available<div>';
-    var marketUrl = ahr.app_urls.getusermarketitemsfromto;
+
+    var marketUrl = ahr.app_urls.getMarketItemsUser;
     if(userId) {
-      marketUrl =  ahr.app_urls.getusermarketitemsforuserfromto.replace("/user_id/0", "/user_id/" + userId);
+      marketUrl =  ahr.app_urls.getMarketItemsUser + userId;
     }
 
     var market = new MarketView(
