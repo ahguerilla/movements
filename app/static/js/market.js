@@ -102,7 +102,7 @@
       this.getitemfromto = options.marketUrl;
       this.noResultsString = options.noResultsString;
       this.item_tmp = _.template($('#item_template').html());
-      this.itemContainer = $('#marketitems');
+      this.$itemContainer = $('#marketitems');
       if(options.filterView) {
         this.init(options.filterView);
       }
@@ -198,8 +198,7 @@
   });
   var FeaturedMarketView = MarketView.extend({
     initialize: function (options) {
-      console.log('featured init');
-      this.itemContainer = $('#featured-marketitems');
+      this.$itemContainer = $('#featured-marketitems');
       this.is_featured = true;
       this.item_type = 'item';
       this.getitemfromto = options.marketUrl;
