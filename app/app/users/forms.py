@@ -72,7 +72,7 @@ class SignupForm(forms.Form):
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "username",]
+        fields = ["first_name", "last_name"]
 
     def save(self, force_insert=False, force_update=False, commit=True):
         m = super(UserForm, self).save(commit=False)
@@ -107,44 +107,14 @@ class CheckboxSelectMultiple(BaseCheckboxSelectMultiple):
 
 
 class SettingsForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(SettingsForm, self).__init__(*args, **kwargs)
-        if kwargs.has_key('instance'):
-            user_profile = initial=kwargs['instance']
-        else:
-            user_profile = None
-        langs = constance.config.TRANSLATED_LANGUAGES.split(',')
-        translated = []
-        initial = None
-        for lang in LANGUAGES:
-            if lang[0] in langs:
-                translated.append(lang)
-            if user_profile and not initial and lang[0] == user_profile.interface_lang:
-                initial = lang
-            else:
-                initial = 'en'
-        self.fields['interface_lang'] = forms.ChoiceField(choices=translated, initial=initial[0])
-
     class Meta:
         model = UserProfile
-        fields = ['nationality',
-                  'occupation',
-                  'resident_country',
-                  'expertise',
-                  'web_url',
-                  'fb_url',
-                  'linkedin_url',
-                  'tweet_url',
-                  'tag_ling',
-                  'bio',
-                  'interests',
-                  'regions',
-                  'languages',
-                  'is_organisation',
-                  'is_journalist',
-                  'get_newsletter',
-                  'profile_visibility',
-                  'notification_frequency']
+        fields = [
+            'occupation', 'resident_country', 'expertise', 'web_url', 'fb_url',
+            'linkedin_url', 'tweet_url', 'tag_ling', 'bio', 'interests',
+            'regions', 'languages', 'is_organisation', 'is_journalist',
+            'get_newsletter', 'profile_visibility', 'notification_frequency'
+        ]
         widgets = {
             'interests': CheckboxSelectMultiple(),
             'regions': CheckboxSelectMultiple(),
