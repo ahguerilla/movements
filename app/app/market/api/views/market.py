@@ -155,6 +155,7 @@ def get_market_items(request, user_id=None, filter_by_user=False):
     page = int(request.GET.get('page', 1))
     market_items_count = get_item_count(request, user_id=user_id, filter_by_user=filter_by_user)
     max_page_num = math.ceil(market_items_count / float(settings.PAGE_SIZE))
+    max_page_num = max(max_page_num, 1)
     page_num = min(page, max_page_num)
     from_item = (page_num - 1) * settings.PAGE_SIZE
     to_item = from_item + settings.PAGE_SIZE

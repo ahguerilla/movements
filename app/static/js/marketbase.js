@@ -54,18 +54,15 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('#no-search-result').remove();
         $('#ajaxloader').hide();
 
-        if (data.length === 0) {
-          that.allItemsLoaded = true;
-          that.noSearchResult();
-        }
-
+        var hasItem = false;
         _.each(data, function (item) {
           if (item.page_count) {
             that.pageCount = item.page_count;
             that.pageActive = item.current_page;
             that.pageSize = item.page_size;
           } else {
-           item.fields.pk = item.pk;
+            hasItem = true;
+            item.fields.pk = item.pk;
             var item_html = that.item_tmp(item.fields);
             $('#marketitems').append(item_html);
             $('.tm-tag').each(function(){
@@ -74,6 +71,10 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
             });
           }
         });
+        if (!hasItem) {
+          that.allItemsLoaded = true;
+          that.noSearchResult();
+        }
         that.loadingPage = false;
       });
       return dfrd;
@@ -83,6 +84,7 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   noSearchResult: function () {
     if ($('.market-place-item').length === 0) {
       $('#marketitems').append(this.noResultsString);
+      $('#pagination').hide();
     }
   },
 
