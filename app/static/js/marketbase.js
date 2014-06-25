@@ -8,25 +8,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   currentCall: null,
   noResultsString: "",
 
-//  levelReached: function (pixelTestValue) {
-//    if (!this.loadedOnce) {
-//      this.loadedOnce = true;
-//      return true;
-//    }
-//
-//    // is it low enough to add elements to bottom?
-//    var pageHeight = Math.max(document.body.scrollHeight ||
-//      document.body.offsetHeight);
-//    var viewportHeight = window.innerHeight ||
-//      document.documentElement.clientHeight ||
-//      document.body.clientHeight || 0;
-//    var scrollHeight = window.pageYOffset ||
-//      document.documentElement.scrollTop ||
-//      document.body.scrollTop || 0;
-//    // Trigger for scrolls within 30 pixels from page bottom
-//    return pageHeight - viewportHeight - scrollHeight < pixelTestValue;
-//  },
-
   clearMarketPage: function () {
     $('#marketitems').empty();
     if (this.currentCall) {
@@ -110,6 +91,5 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   init: function (filterView) {
     var that = this;
     this.filterView = filterView;
-    //this.filterView.on('filter', function() {that.initMarket();});
   }
 });

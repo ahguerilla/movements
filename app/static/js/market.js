@@ -89,7 +89,7 @@ $(function () {
         data.types = this.type;
       }
       if (this.skills) {
-	data.skills = this.skills;
+        data.skills = this.skills;
       }
       
       data.showHidden = this.showHidden;
@@ -107,7 +107,6 @@ $(function () {
       "click .page": "getPage",
       "click .next-page": "getPage"
     },
-    template: _.template($("#pagination_template").html()),
 
     getPage: function (e) {
       var that = this;
@@ -125,6 +124,7 @@ $(function () {
     },
 
     initialize: function (options) {
+      this.template = _.template($("#pagination_template").html()),
       this.marketView = options.marketView;
       this.pageSize = options.pageSize;
       this.pageRange = options.pageRange;
@@ -185,7 +185,7 @@ $(function () {
       request.done(function () {
         return that.render();
       });
-    },
+    }
   });
 
   var ProfileFilterView = Backbone.View.extend({
@@ -256,12 +256,15 @@ $(function () {
     setItemAttibute: function($container, attribute, value) {
       var data = {};
       data[attribute] = value;
+      var triggerFilter = function(){
+        this.filterView.trigger('filter');
+      };
       $.ajax({
         url: $container.data('attributes-url'),
         method: 'POST',
         context: this,
         data: data,
-        success: this.initInfiniteScroll
+        success: triggerFilter
       });
       $container.data(attribute, value);
     },
@@ -275,7 +278,7 @@ $(function () {
       var itemType = $container.data('item-type');
       var that = this;
       var refresh = function () {
-        that.initInfiniteScroll();
+        that.filterView.trigger('filter');
       }
 
       var remakePopover = false
@@ -306,7 +309,6 @@ $(function () {
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (filters) {
     var filterView = new MarketFilterView({el: '#exchange-filters'});
-    //var pagination = new PaginationView({'marketView': market});
 //    var noResultsString = ['<p style="margin-top:20px;float:left;width:100%;text-align:center;" id="no-search-result">',
 //        window.ahr.string_constants.market_search_no_match_a,
 //        '<a href="#" id="searchagainall">',
@@ -322,7 +324,6 @@ $(function () {
         marketUrl: ahr.app_urls.getMarketItems,
         noResultsString: noResultsString
       });
-    // market.initInfiniteScroll();
     var pagination = new PaginationView({
       marketView: market,
       pageRange: 3,
