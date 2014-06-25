@@ -100,55 +100,13 @@
         {% blocktrans %}The skills and interests you enter help us make Movements more personalised to your interests.{% endblocktrans %}
       </p>
       <label>{%trans "Interests"%}</label>
-      {% for val, name in interest_types.interests %}
-        {% if forloop.counter0|divisibleby:3 %}
-        <div class="row">
-        {% endif %}
-          <div class="col-xs-4">
-            <div class="select-checkbox">
-              <input type="checkbox" id="languages_{{ forloop.counter0 }}" value="{{ val }}" name="languages">
-              <label for="checkboxFiveInput"></label>
-              <div class="select-label">{{ name }}</div>
-            </div>
-          </div>
-        {% if forloop.last or forloop.counter|divisibleby:3 %}
-         </div>
-        {% endif %}
-      {% endfor %}
+      {{ settings_form.interests }}
       <div style="margin-top:10px;"></div>
       <label>{%trans "Regions"%}</label>
-      {% for val, name in interest_types.regions %}
-        {% if forloop.counter0|divisibleby:3 %}
-        <div class="row">
-        {% endif %}
-          <div class="col-xs-4">
-            <div class="select-checkbox">
-              <input type="checkbox" id="languages_{{ forloop.counter0 }}" value="{{ val }}" name="languages">
-              <label for="checkboxFiveInput"></label>
-              <div class="select-label">{{ name }}</div>
-            </div>
-          </div>
-        {% if forloop.last or forloop.counter|divisibleby:3 %}
-         </div>
-        {% endif %}
-      {% endfor %}
+      {{ settings_form.regions }}
       <div style="margin-top:10px;"></div>
       <label>{%trans "Languages"%}</label>
-      {% for val, name in interest_types.languages %}
-        {% if forloop.counter0|divisibleby:3 %}
-        <div class="row">
-        {% endif %}
-          <div class="col-xs-4">
-            <div class="select-checkbox">
-              <input type="checkbox" id="languages_{{ forloop.counter0 }}" value="{{ val }}" name="languages">
-              <label for="checkboxFiveInput"></label>
-              <div class="select-label">{{ name }}</div>
-            </div>
-          </div>
-        {% if forloop.last or forloop.counter|divisibleby:3 %}
-         </div>
-        {% endif %}
-      {% endfor %}
+      {{ settings_form.languages }}
     </div>
     <div id="security-tab" style="display:none;">
       <p>
@@ -156,23 +114,14 @@
       </p>
       <div class="form-group">
         <div class="col-xs-12">
-          <label for="">Profile Visibility</label>
-          <select class="form-control input-sm" id="" name="">
-            <option value="1">Hidden</option>
-            <option value="2">Secure</option>
-            <option value="3">Public</option>
-          </select>
+          <label for="id_profile_visibility">{% trans 'Profile Visibility' %}</label>
+          {% render_field settings_form.profile_visibility class="form-control input-sm" %}
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-12">
-          <label for="">Notifications</label>
-          <select class="form-control input-sm" id="" name="">
-            <option value="1">Never</option>
-            <option value="2">Weekly</option>
-            <option value="3">Daily</option>
-            <option value="4">Instantly</option>
-          </select>
+          <label for="id_notification_frequency">{% trans 'Notifications' %}</label>
+          {% render_field settings_form.notification_frequency class="form-control input-sm" %}
         </div>
       </div>
       <div style="margin-top:30px;">
