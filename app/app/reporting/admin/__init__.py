@@ -30,7 +30,7 @@ class IncidentAdmin(TrackingAdmin):
         'id', 'title', 'get_view_count', 'commentcount',
         'get_email_rec_count', 'get_user_rec_count', 'get_conversation_count',
         'get_total_msg_count', 'get_screen_name', 'get_create_date',
-        'get_owner', 'get_aging', 'get_status'
+        'get_owner', 'get_aging', 'get_status', 'is_featured'
     )
     list_filter = ('status',)
     # Prevents duplicates.
