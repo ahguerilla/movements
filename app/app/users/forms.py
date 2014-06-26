@@ -72,13 +72,19 @@ class SignupForm(forms.Form):
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["first_name", "last_name"]
+        fields = ["first_name", "last_name", "username"]
 
     def save(self, force_insert=False, force_update=False, commit=True):
         m = super(UserForm, self).save(commit=False)
         if commit:
             m.save()
         return m
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if username != self.instance.username and User.objects.filter(username=username).exists():
+            raise forms.ValidationError(_('This username is already in used'))
+        return username
 
 
 class CheckboxInput(BaseCheckboxChoiceInput):
