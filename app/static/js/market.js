@@ -124,7 +124,7 @@ $(function () {
     },
 
     initialize: function (options) {
-      this.template = _.template($("#pagination_template").html()),
+      this.template = _.template($("#pagination_template").html());
       this.marketView = options.marketView;
       this.pageSize = options.pageSize;
       this.pageRange = options.pageRange;
@@ -206,14 +206,20 @@ $(function () {
     },
 
     initialize: function (options) {
+      this.options = options;
       this.item_type = 'item';
       this.getMarketItems = options.marketUrl;
       this.noResultsString = options.noResultsString;
-      this.item_tmp = _.template($('#item_template').html());
+      this.item_tmp = options.item_tmp || _.template($('#item_template').html());
+      this.$itemContainer = options.$itemContainer || $('#marketitems');
       if(options.filterView) {
         this.init(options.filterView);
       }
       this.isProfile = options.isProfile || false;
+      this.isFeatured = options.isFeatured || false;
+      if (this.isFeatured) {
+        this.initFeatured();
+      }
       this.item_menu_template = _.template($('#item-menu-template').html());
       this.closeDialog = new ahr.CloseItemDialogView();
       this.reportDialog = new ahr.ReportPostView();
@@ -230,6 +236,7 @@ $(function () {
       var content = this.item_menu_template({
         hasEdit: $itemContainer.data('has-edit'),
         isProfile: this.isProfile,
+        isFeatured: this.isFeatured,
         toggled: toggled
       });
       $link.popover({
@@ -304,8 +311,16 @@ $(function () {
       } else {
         $popover.popover('toggle');
       }
+    },
+    initFeatured: function () {
+      var that = this;
+      var request = that.getItems();
+      request.done(function (data) {
+        that.render(data, that);
+      });
     }
   });
+
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (filters) {
     var filterView = new MarketFilterView({el: '#exchange-filters'});
@@ -322,7 +337,8 @@ $(function () {
         el: '#itemandsearchwrap',
         filterView: filterView,
         marketUrl: ahr.app_urls.getMarketItems,
-        noResultsString: noResultsString
+        noResultsString: noResultsString,
+        isFeatured: false
       });
     var pagination = new PaginationView({
       marketView: market,
@@ -331,6 +347,14 @@ $(function () {
     });
     filterView.on('filter', function () {
       pagination.init();
+    });
+    var featuredMarket = new MarketView({
+      el: '#featured-marketitems',
+      marketUrl: ahr.app_urls.getFeaturedMarketItems,
+      noResultsString: noResultsString,
+      isFeatured: true,
+      $itemContainer: $('#featured-marketitems'),
+      item_tmp: _.template($('#featured_item_template').html())
     });
     document.title = window.ahr.string_constants.exchange;
   };
