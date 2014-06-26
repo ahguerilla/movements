@@ -81,18 +81,24 @@ def create_request(request):
 
 @login_required
 def edit_offer(request, post_id):
-    """
-    TODO This is placeholder
-    """
-    return create_offer(request)
+    market_item = get_object_or_404(MarketItem, pk=post_id)
+    form = OfferForm(request.POST or None, instance=market_item)
+    if form.is_valid():
+        save_market_item(form, request.user)
+        return redirect(reverse('home'))
+    return render_to_response('market/create_offer.html', {'form': form},
+                              context_instance=RequestContext(request))
 
 
 @login_required
 def edit_request(request, post_id):
-    """
-    TODO This is placeholder
-    """
-    return create_request(request)
+    market_item = get_object_or_404(MarketItem, pk=post_id)
+    form = RequestForm(request.POST or None, instance=market_item)
+    if form.is_valid():
+        save_market_item(form, request.user)
+        return redirect(reverse('home'))
+    return render_to_response('market/create_request.html', {'form': form},
+                              context_instance=RequestContext(request))
 
 
 @login_required
