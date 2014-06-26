@@ -76,9 +76,6 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     if(this.filterView) {
       this.filterView.setFilter(data);
     }
-    if (this.is_featured) {
-      data.is_featured = true;
-    }
     data.page = page;
     return $.ajax({
       url: this.getMarketItems,

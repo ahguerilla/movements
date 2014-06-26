@@ -50,7 +50,6 @@ def get_raw(request, from_item=0, to_item=None,
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN),
         'offset': from_item,
-        'is_featured': request.GET.get('is_featured', False)
     }
     additional_filter = ''
 
