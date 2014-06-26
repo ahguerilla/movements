@@ -7,6 +7,8 @@ from datetime import datetime
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 
+from app.utils import EnumChoices
+
 
 class Skills(models.Model):
     skills = models.CharField(_('skill set'), max_length=255, null=True)
@@ -97,6 +99,18 @@ ahr_rating = [
 ]
 
 class UserProfile(models.Model):
+    VISIBILITY_CHOICES = EnumChoices(
+        HIDDEN=(0, _('Hidden')),
+        SECURE=(1, _('Secure')),
+        PUBLIC=(2, _('Public')),
+    )
+    NOTIFICATION_FREQUENCY = EnumChoices(
+        NEVER=(0, _('Never')),
+        WEEKLY=(1, _('Weekly')),
+        DAILY=(2, _('Daily')),
+        INSTANTLY=(3, _('Instantly')),
+    )
+
     user = models.OneToOneField(User)
     bio = models.TextField(_('bio'), null=True, blank=True)
     tag_ling = models.CharField(_('tag line'), max_length=255, null=True, blank=True)
@@ -127,6 +141,12 @@ class UserProfile(models.Model):
     interface_lang = models.CharField(_('Interface language'), max_length=3, default='en')
     notperm = JSONField(blank=True)
     first_login = models.BooleanField(_('first login'), default=True)
+    profile_visibility = models.PositiveSmallIntegerField(
+        _('profile visibility'), choices=VISIBILITY_CHOICES,
+        default=VISIBILITY_CHOICES.SECURE)
+    notification_frequency = models.PositiveSmallIntegerField(
+        _('notification frequency'), choices=NOTIFICATION_FREQUENCY,
+        default=NOTIFICATION_FREQUENCY.DAILY)
 
     @property
     def ahr_rating(self):
