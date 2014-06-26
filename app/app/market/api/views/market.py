@@ -186,6 +186,14 @@ def get_market_items(request, user_id=None, filter_by_user=False):
 
 
 @login_required
+def get_featured_market_items(request):
+    featured_posts = market.models.MarketItem.objects.exclude(
+        status__in=[market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
+                    market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN]).filter(is_featured=True)
+    return return_item_list(featured_posts, request=request)
+
+
+@login_required
 @check_perms_and_get(market.models.MarketItem)
 def close_market_item(request, obj_id):
     market_item = request.obj
