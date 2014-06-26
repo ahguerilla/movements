@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load compress %}
 <script type="text/template" id="report_user_template">
-<div id="reportdialog" class="modal fade">
+<div id="reportdialog" class="modal fade movements-form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,12 +16,12 @@
           <textarea class="form-control" id="content" name="content" rows="6" placeholder="" required="true"></textarea>
         </div>
         <div class="modal-footer">
-          <div class="row">
-            <div class="col-xs-6 col-md-offset-6 col-md-3">
-              <button type="button" class="btn btn-default full-width cancel cancelreport" data-dismiss="modal">{%trans "Cancel"%}</button>
+          <div class="row action-text">
+            <div class="col-sm-offset-2 col-sm-2 form-main-button">
+              <a href="#" class="action-link cancelreport" data-dismiss="modal">{% trans 'Cancel' %}</a>
             </div>
-            <div class="col-xs-6 col-md-3">
-              <button type="button" class="btn btn-default full-width send senduserreport">{%trans "Send"%}</button>
+            <div class="col-sm-6 form-main-button">
+              <button type="button" class="btn btn-action full-width send senduserreport">{% trans 'Send' %}</button>
             </div>
           </div>
         </div>

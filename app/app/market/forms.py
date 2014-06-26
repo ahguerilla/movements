@@ -1,11 +1,18 @@
 from django import forms
+from django.forms.widgets import CheckboxFieldRenderer, CheckboxChoiceInput
 from django.utils.cache import get_cache
+from django.utils.encoding import force_text
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from django.template.loader import get_template, render_to_string
+from django.template import Context
 
 from postman.forms import WriteForm, FullReplyForm, QuickReplyForm
 
 from tasks.celerytasks import create_notification, update_notifications
 import app.market as market
+from app.users.models import Interest
 
 
 cache = get_cache('default')
@@ -34,13 +41,61 @@ class MarketWriteForm(WriteForm):
         }
 
 
+class SkillForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        kwargs.pop('instance', None)
+        user_skills = kwargs.pop('user_skills')
+        super(SkillForm, self).__init__(*args, **kwargs)
+        for skill in Interest.objects.all():
+            self.fields['interest_%s' % skill.id] = forms.BooleanField(
+                initial=skill.id in user_skills, required=False,
+                label=skill.name)
+
+    def clean(self):
+        cleaned_data = super(SkillForm, self).clean()
+        cleaned_data['interests'] = [
+            f.split('_')[1] for f, v in cleaned_data.iteritems() if v]
+        return cleaned_data
+
+
+class SkillCheckboxInput(CheckboxChoiceInput):
+    def render(self, name=None, value=None, attrs=None, choices=()):
+        if 'id' in self.attrs:
+            label_for = format_html(
+                ' for="{0}_{1}"', self.attrs['id'], self.index)
+        else:
+            label_for = ''
+        return format_html(
+            '{0}<label></label><div{1} class="select-label">{2}</div>',
+            self.tag(), label_for, self.choice_label)
+
+
+class SkillCheckboxRenderer(CheckboxFieldRenderer):
+    choice_input_class = SkillCheckboxInput
+
+    def render(self):
+        return render_to_string('market/skills_widget.html', {
+            'widgets': [force_text(widget) for widget in self]})
+
+
+class SkillWidget(forms.CheckboxSelectMultiple):
+    renderer = SkillCheckboxRenderer
+
+
 class OfferForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'specific_skill', 'receive_notifications']
+        fields = ['title', 'details', 'specific_skill', 'receive_notifications', 'interests']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
+            'interests': SkillWidget()
         }
+
+    def __init__(self, *args, **kwargs):
+        user_skills = kwargs.pop('user_skills')
+        super(OfferForm, self).__init__(*args, **kwargs)
+        self.fields['interests'].initial = user_skills
 
     def save(self, commit=True, *args, **kwargs):
         self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.OFFER
@@ -52,10 +107,17 @@ class OfferForm(forms.ModelForm):
 class RequestForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'specific_skill', 'receive_notifications']
+        fields = ['title', 'details', 'specific_skill',
+                  'receive_notifications', 'interests']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
+            'interests': SkillWidget()
         }
+
+    def __init__(self, *args, **kwargs):
+        user_skills = kwargs.pop('user_skills')
+        super(RequestForm, self).__init__(*args, **kwargs)
+        self.fields['interests'].initial = user_skills
 
     def save(self, commit=True, *args, **kwargs):
         self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.REQUEST

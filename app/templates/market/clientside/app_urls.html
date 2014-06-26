@@ -5,11 +5,11 @@
   window.ahr = window.ahr || {};
   window.ahr.app_urls = {
     getissues: "{% url 'get_issues' 'json' %}",
-    getskills: "{% url 'get_skills' 'json' %}",
+    getskills: "{% url 'get_skills_old' 'json' %}",
+    getSkills: "{% url 'get_skills' %}",
     getcountries: "{% url 'get_countries' 'json' %}",
 
-    {% if not user.is_authenticated %}
-    {% else %}
+    {% if user.is_authenticated %}
       postmanwrite: "{% url 'postman_write' 'a' %}".slice(0,-1),
       postmanreply: "{% url 'postman_reply' 0 %}".slice(0,-1),
 
@@ -28,8 +28,11 @@
 
       market: "{% url 'show_market' %}",
       getposts:  "{% url 'posts'  %}",
+      getMarketItems: '{% url 'get_market_items' %}',
+      getMarketItemsUser: '{% url 'get_market_items_user' 0 %}'.slice(0,-1),
       getmarketitemfromto: "{% url 'get_marketitems_fromto' 'json' 0 0 %}".slice(0,-1),
       getusermarketitemsfromto : "{% url 'get_usermarketitems_fromto' 'json' 0 0 %}".slice(0,-1),
+      getusermarketitemsforuserfromto: "{% url 'get_usermarketitems_for_user_fromto' 'json' 0 0 0 %}".slice(0,-1),
       sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
       senditemrecommendation: "{% url 'send_recommendation' 'json' 'item' 0 %}".slice(0,-1),
       senduserrecommendation: "{% url 'send_recommendation' 'json' 'user' 0 %}".slice(0,-1),

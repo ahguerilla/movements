@@ -1,0 +1,240 @@
+{% extends "base_form.html" %}
+{% load avatar_tags %}
+{% load account %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block header_padding %}{% endblock %}
+
+{% block content_outside_container %}
+  {% include "users/snippets/profile_navigation.html" with page_type="settings" %}
+{% endblock %}
+
+{% block public-content-message %}
+<div class="row dialog movements-form settings-form">
+  <div class="col-xs-12">
+    <div class="form-title"><h1>{% trans "Settings" %}</h1></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-4">
+      <div class="settings-change-avatar">
+        <div class="settingavatar">{% primary_avatar user 100 %}</div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <a id="changeavatar" href="{% url 'avatar_change' %}">Change picture</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group folder-select btn-group-justified btn-group-md">
+        <a id="personal-select" type="button" class="btn btn-tab selected">Personal details</a>
+        <a id="skills-select" type="button" class="btn btn-tab" >Skills & interests</a>
+        <a id="security-select" type="button" class="btn btn-tab" >Security & Alerts</a>
+      </div>
+    </div>
+  </div>
+  <form class="form-horizontal"  method="post" class="form-horizontal" role="form">
+    {% csrf_token %}
+    <div id="personal-tab">
+      <p>
+        {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.{% endblocktrans %}
+      </p>
+      <div class="form-group">
+        <div class="col-xs-6">
+          <label for="{{ user_form.first_name.auto_id }}">{%trans "First Name"%}</label>
+          {% render_field user_form.first_name class="form-control input-sm" placeholder="" %}
+          {{ user_form.first_name.errors }}
+        </div>
+        <div class="col-xs-6">
+          <label for="{{ user_form.last_name.auto_id }}">{%trans "Last Name"%}</label>
+          {% render_field user_form.last_name class="form-control input-sm" placeholder=""%}
+          {{ user_form.last_name.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ settings_form.resident_country.auto_id }}">{%trans "Country of Residence"%}</label>
+          {% render_field settings_form.resident_country class="form-control input-sm"%}
+          {{ settings_form.resident_country.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ settings_form.bio.auto_id }}">{%trans "Biography"%}</label>
+          {% render_field settings_form.bio class="form-control input-sm"%}
+          {{ settings_form.bio.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ settings_form.linkedin_url.auto_id }}">{%trans "Linked In"%}</label>
+          {% render_field settings_form.linkedin_url class="form-control input-sm" placeholder="" %}
+          {{ settings_form.linkedin_url.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ settings_form.tweet_url.auto_id }}">{%trans "Twitter"%}</label>
+          {% render_field settings_form.tweet_url class="form-control input-sm" placeholder="" %}
+          {{ settings_form.tweet_url.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ settings_form.fb_url.auto_id }}">{%trans "Facebook"%}</label>
+          {% render_field settings_form.fb_url class="form-control input-sm" placeholder="" %}
+          {{ settings_form.fb_url.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ settings_form.web_url.auto_id }}">{%trans "Website or Blog"%}</label>
+          {% render_field settings_form.web_url class="form-control input-sm" placeholder="" %}
+          {{ settings_form.web_url.errors }}
+        </div>
+      </div>
+    </div>
+    <div id="skills-tab" style="display:none;" class="form-select-multi">
+      <p>
+        {% blocktrans %}The skills and interests you enter help us make Movements more personalised to your interests.{% endblocktrans %}
+      </p>
+      <label>{%trans "Interests"%}</label>
+      {% for val, name in interest_types.interests %}
+        {% if forloop.counter0|divisibleby:3 %}
+        <div class="row">
+        {% endif %}
+          <div class="col-xs-4">
+            <div class="select-checkbox">
+              <input type="checkbox" id="languages_{{ forloop.counter0 }}" value="{{ val }}" name="languages">
+              <label for="checkboxFiveInput"></label>
+              <div class="select-label">{{ name }}</div>
+            </div>
+          </div>
+        {% if forloop.last or forloop.counter|divisibleby:3 %}
+         </div>
+        {% endif %}
+      {% endfor %}
+      <div style="margin-top:10px;"></div>
+      <label>{%trans "Regions"%}</label>
+      {% for val, name in interest_types.regions %}
+        {% if forloop.counter0|divisibleby:3 %}
+        <div class="row">
+        {% endif %}
+          <div class="col-xs-4">
+            <div class="select-checkbox">
+              <input type="checkbox" id="languages_{{ forloop.counter0 }}" value="{{ val }}" name="languages">
+              <label for="checkboxFiveInput"></label>
+              <div class="select-label">{{ name }}</div>
+            </div>
+          </div>
+        {% if forloop.last or forloop.counter|divisibleby:3 %}
+         </div>
+        {% endif %}
+      {% endfor %}
+      <div style="margin-top:10px;"></div>
+      <label>{%trans "Languages"%}</label>
+      {% for val, name in interest_types.languages %}
+        {% if forloop.counter0|divisibleby:3 %}
+        <div class="row">
+        {% endif %}
+          <div class="col-xs-4">
+            <div class="select-checkbox">
+              <input type="checkbox" id="languages_{{ forloop.counter0 }}" value="{{ val }}" name="languages">
+              <label for="checkboxFiveInput"></label>
+              <div class="select-label">{{ name }}</div>
+            </div>
+          </div>
+        {% if forloop.last or forloop.counter|divisibleby:3 %}
+         </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div id="security-tab" style="display:none;">
+      <p>
+        {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.{% endblocktrans %}
+      </p>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="">Profile Visibility</label>
+          <select class="form-control input-sm" id="" name="">
+            <option value="1">Hidden</option>
+            <option value="2">Secure</option>
+            <option value="3">Public</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="">Notifications</label>
+          <select class="form-control input-sm" id="" name="">
+            <option value="1">Never</option>
+            <option value="2">Weekly</option>
+            <option value="3">Daily</option>
+            <option value="4">Instantly</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:30px;">
+        {% if has_password %}
+        <a id="changepassword" form_class="password_change" href="{% url 'account_change_password' %}">
+          {%trans "Change Password"%}
+        </a>
+        {% else %}
+        <a id="changepassword" form_class="password_set" href="{% url 'account_set_password' %}">
+          {%trans "Set Password"%}
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row action-text">
+      <div class="col-sm-offset-2 col-sm-2 form-main-button">
+        <a class="action-link" href="{% url 'home' %}">{% trans 'Cancel' %}</a>
+      </div>
+      <div class="col-sm-6 form-main-button">
+        <button type="submit" class="btn btn-action full-width">{% trans 'Save' %}</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div id="changeavatardialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{%trans "Upload Avatar"%}</h4>
+      </div>
+      <div class="modal-body">
+        <div id="avataralert"></div>
+        <div id="profile_change_stuff" style="width:100%;"></div>
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div id="changepassworddialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{%trans "Change Password"%}</h4>
+      </div>
+      <div class="modal-body">
+        <div id="profile_change_password" style="width:100%;"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% endblock %}
+
+{% block endjavascript %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    window.ahr.widgets.initUserSettingsView();
+  });
+</script>
+{% endblock %}

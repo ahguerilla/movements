@@ -6,10 +6,10 @@
         "market_type": "request", 
         "questions": [
             1, 
-            2, 
-            3, 
-            4, 
-            5
+            3,
+            4,
+            7,
+            8
         ], 
         "title": "Request Feedback Form"
     }
@@ -20,10 +20,10 @@
     "fields": {
         "market_type": "offer", 
         "questions": [
-            2, 
-            4, 
+            1,
+            3,
             5, 
-            6, 
+            6,
             7, 
             8
         ], 
@@ -47,7 +47,15 @@
     }
 },
 {
-    "pk": 3, 
+    "pk": 3,
+    "model": "market.question",
+    "fields": {
+        "question": "How satisfied are you with the response you received from the users?",
+        "question_type": 1
+    }
+},
+{
+    "pk": 4,
     "model": "market.question", 
     "fields": {
         "question": "Was your request resolved to your satisfaction?", 
@@ -55,7 +63,23 @@
     }
 },
 {
-    "pk": 4, 
+    "pk": 5,
+    "model": "market.question",
+    "fields": {
+        "question": "Did someone ask for your help?",
+        "question_type": 0
+    }
+},
+{
+    "pk": 6,
+    "model": "market.question",
+    "fields": {
+        "question": "Did you offer to help another user?",
+        "question_type": 0
+    }
+},
+{
+    "pk": 7,
     "model": "market.question", 
     "fields": {
         "question": "Please give details", 
@@ -63,35 +87,11 @@
     }
 },
 {
-    "pk": 5, 
+    "pk": 8,
     "model": "market.question", 
     "fields": {
         "question": "Any other comments", 
         "question_type": 2
-    }
-},
-{
-    "pk": 6, 
-    "model": "market.question", 
-    "fields": {
-        "question": "How satisfied are you with the response you received from the users?", 
-        "question_type": 1
-    }
-},
-{
-    "pk": 7, 
-    "model": "market.question", 
-    "fields": {
-        "question": "Did someone ask for your help?", 
-        "question_type": 0
-    }
-},
-{
-    "pk": 8, 
-    "model": "market.question", 
-    "fields": {
-        "question": "Did you offer to help another user?", 
-        "question_type": 0
     }
 }
 ]

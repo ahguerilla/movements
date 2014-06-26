@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load compress %}
 
-<div id="close_item_dialog" class="modal fade">
+<div id="close_item_dialog" class="modal fade movements-form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -21,16 +21,18 @@
 
 <script type="text/template" id="close-item-form-template">
   <div id="itemformerror"></div>
-  <div class="form-group"><%- title %></div>
   <% _.each(questions, function(question) { %>
       <div class="form-group" id="question_<%- question.question_id %>"></div>
   <% }); %>
   <div class="modal-footer">
-    <span class="col-xs-offset-6 col-xs-6 pull-right">
-      <div class="row">
-        <button type="submit" class="btn btn-default full-width pull-right item-close">{% trans "Close" %}</button>
+    <div class="row action-text">
+      <div class="col-sm-offset-2 col-sm-2 form-main-button">
+        <a href="#" class="action-link cancel" data-dismiss="modal">{% trans 'Cancel' %}</a>
       </div>
-    </span>
+      <div class="col-sm-6 form-main-button">
+        <button type="submit" class="btn btn-action full-width item-close">{% trans 'Close' %}</button>
+      </div>
+    </div>
   </div>
 </script>
 
@@ -78,6 +80,8 @@
       };
       var questionnaire_form = _.template($('#close-item-form-template').html(), templateArgs);
       $('#questionnaire_form').html(questionnaire_form);
+      var $close_modal_title = $('#close_modal_title');
+      $close_modal_title.text(templateArgs.title);
 
       this.makeWidget();
       this.showModal();
@@ -89,12 +93,29 @@
       var questions = this.questionnaire.questions;
       for (var i in questions) {
           var question = questions[i];
-          widget = window.ahr.textarea_widget.initWidget(
-              '#question_' + question.question_id,
-              {title: question.question_text,
-               jsonfield: 'question_' + question.question_id,
-               placeholder: '{%trans "Please enter your answer"%}'},
-              null);
+          var questionData = {
+            title: question.question_text,
+            jsonfield: 'question_' + question.question_id
+          };
+
+          // 0 == Yes/No
+          // 1 == 1->5
+          // 2 == Text
+          var widgetItem = null;
+          if(question.question_type == 0){
+            widgetItem = window.ahr.dropdown_widget;
+            questionData.dropdownOptions = ["Yes", "No"];
+          } else if(question.question_type == 1){
+            widgetItem = window.ahr.dropdown_widget;
+            questionData.dropdownOptions = ["1", "2", "3", "4", "5"];
+          } else {
+            widgetItem = window.ahr.textarea_widget;
+            questionData.placeholder = '{%trans "Please enter your answer"%}';
+          }
+          widget = widgetItem.initWidget(
+                  '#question_' + question.question_id,
+                   questionData,
+                   null);
           widgets['question_' + question.question_id] = widget;
       }
       this.widgets = widgets;
@@ -102,8 +123,6 @@
 
     showModal: function () {
       $('#' + this.el.id + ' #itemformerror').empty();
-      var $close_modal_title = $('#close_modal_title');
-      $close_modal_title.text($close_modal_title.data(this.item_type + '_title'));
       this.$el.modal('show');
     },
 
@@ -120,6 +139,7 @@
     emptyTheForm: function () {
       $('input,textarea', $('#requestdialog')).val('');
     },
+
 
     submit: function (e) {
       e.preventDefault();

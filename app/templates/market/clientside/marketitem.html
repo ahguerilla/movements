@@ -6,6 +6,7 @@
        data-item-id="<%- pk %>"
        data-owner-id="<%- ownerid %>"
        data-close-url="<%- close_url %>"
+       data-edit-url="<%- edit_url %>"
        data-report-url="<%- report_url %>"
        data-item-type="<%- item_type %>"
        data-stick="<%- stick %>"
@@ -50,12 +51,15 @@
 </script>
 <script type="text/template" id="item-menu-template">
   <%
-     var actions = [
-       {display: 'Hide', value: 'hide', toggle: true},
-       {display: 'Stick', value: 'stick', toggle: true},
-       {display: 'Report', value: 'report'}];
+     var actions = [{display: 'Hide', value: 'hide', toggle: true}];
+     if (!isProfile) {
+       actions.push({display: 'Stick', value: 'stick', toggle: true});
+     }
      if (hasEdit) {
-        actions.push({display: 'Close', value: 'close'});
+       actions.push({display: 'Edit', value: 'edit'});
+       actions.push({display: 'Close', value: 'close'});
+     } else {
+       actions.push({display: 'Report', value: 'report'});
      }
   %>
   <ul class="item-action-menu">

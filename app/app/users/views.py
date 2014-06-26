@@ -11,6 +11,8 @@ from forms import (
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
 from allauth.socialaccount.views import SignupView as SocialSignupView
+from allauth.socialaccount.forms import SignupForm as SocialSignupForm
+from allauth.socialaccount.adapter import get_adapter
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.account.utils import passthrough_next_redirect_url
 from django.contrib.admin.views.decorators import staff_member_required
@@ -29,11 +31,10 @@ from django.core.mail import EmailMessage
 import constance
 from django.template.loader import render_to_string
 from django.utils import translation
-from django.conf import settings as django_settings
 
 
 def render_settings(request, initial=False):
-    template = 'users/user_settings.html'
+    template = 'users/user_settings_v2.html'
     user = User.objects.get(pk=request.user.id)
     try:
         settings = UserProfile.objects.get(user=user)
@@ -77,12 +78,17 @@ def render_settings(request, initial=False):
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)
 
+    interest_types = {'languages': [(lang.id, lang.name) for lang in Language.objects.all()],
+                      'interests': [(interest.id, interest.name) for interest in Interest.objects.all()],
+                      'regions': [(region.id, region.name) for region in Region.objects.all()]}
+
     return render_to_response(template,
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
                                 'notperm': str(perms).replace("u'","'"),
                                 'initial': initial,
+                                'interest_types': interest_types,
                                 'has_password': user.has_usable_password(),
                                 'skills': value('json', users.models.Skills.objects.all()),
                                 'issues': value('json', users.models.Issues.objects.all()),
@@ -112,6 +118,7 @@ def profile_for_user(request, user_name):
 
 @login_required
 def profile(request, user_name=None):
+    is_public = False if request.GET.get("public", False) is False else True
     if not user_name:
         user = User.objects.get(pk=request.user.id)
     else:
@@ -133,12 +140,16 @@ def profile(request, user_name=None):
         orate = orate[0].rated_by_ahr
     else:
         orate = 0
+    # 2 == public, 1 == secure, 0 == private
+    visibility_settings = 2 if is_self and not is_public else 0
     return render_to_response('users/user_profile_v2.html',
                               {
                                   'user_details': user,
                                   'user_profile': user_profile,
                                   'is_self': is_self,
-                                  'OrganisationalRating': orate
+                                  'is_public': is_public,
+                                  'visibility_settings': visibility_settings,
+                                  'ahr_rating': orate
                               },
                               context_instance=RequestContext(request))
 
@@ -210,7 +221,17 @@ def email_doublesignup_upret(self, ret):
     return ret
 
 
+class AhrSocialSignupForm(SocialSignupForm):
+
+    def save(self, request):
+        adapter = get_adapter()
+        user = adapter.save_user(request, self.sociallogin, form=self)
+        return user
+
+
 class AhrSocialSignupView(SocialSignupView):
+    form_class = AhrSocialSignupForm
+
     def get_context_data(self, **kwargs):
         ret = super(AhrSocialSignupView, self).get_context_data(**kwargs)
         context_data = {
@@ -219,6 +240,7 @@ class AhrSocialSignupView(SocialSignupView):
         }
         ret.update(context_data)
         ret = email_doublesignup_upret(self, ret)
+
         return ret
     template_name = SignupView.template_name
 
@@ -320,8 +342,11 @@ class AccAdapter(DefaultAccountAdapter):
     def save_user(self, request, user, form, commit=False):
         cleaned_data = form.cleaned_data
         user = super(AccAdapter, self).save_user(request, user, form, commit)
-        user.email = request.session.pop('email')
-        user.set_password(request.session.pop('password'))
+        if 'email' in request.session:
+            user.email = request.session.pop('email')
+
+        if 'password' in request.session:
+            user.set_password(request.session.pop('password'))
 
         with transaction.atomic():
             user.save()

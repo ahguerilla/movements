@@ -22,21 +22,9 @@
           {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
             ut labore et dolore magna aliqua.{% endblocktrans %}
         </p>
-        {% for item in skills %}
-          {% if forloop.counter0|divisibleby:3 %}
-            <div class="row">
-          {% endif %}
-        <div class="col-xs-4">
-          <div class="select-checkbox">
-            <input type="checkbox" id="" name="">
-            <label for="checkboxFiveInput"></label>
-            <div class="select-label">{{ item }}</div>
-          </div>
-        </div>
-        {% if forloop.last or forloop.counter|divisibleby:3 %}
-          </div>
-        {% endif %}
-        {% endfor %}
+
+        {{ form.interests }}
+
       </div>
     </div>
     <div>

@@ -1,114 +1,40 @@
-
 {% load url from future %}
 
 {% load i18n %}
 {% load postman_tags %}
 
-{% load avatar_tags %}
-
 {% block content %}
-<div id="postman_message">
-  <div>
-    <div>
-      <div style="margin-top:10px;" class="pull-left">
-        <h4 style="display:none;" id="messagesubjectheader">{% if pm_messages|length > 0 %}{{ pm_messages.0.subject }}{% endif %}</h4>
-      </div>
-    </div>
-    <div style="clear:both;">
-      <div class="row">
-        <div class="col-md-12">
-          {% if reply_to_pk %}
-          <div id="replyarea">
-            <form id="replyform" action="{% url 'postman_reply' reply_to_pk %}?next={{ next_url|urlencode }}" method="post">{% csrf_token %}
-              <div id="pm_reply">{{ form.body }}</div>
-              <div class="pull-right">
-                <button  style="margin-bottom:10px;margin-top:10px;"type="submit" id="reply-btn" class="btn btn-default">{% trans 'Reply' %}</button>
-              </div>
-            </form>
-            <script type="text/javascript">
-            (function(){
-              $('#reply-btn').on('click',function(ev){
-                ev.preventDefault();
-                if ($('#id_body').val()!=""){
-                  $('#replyform').submit();
-                }else{
-                  alert('{%trans "You cant send an empty message."%}');
-                }
-                return false;
-              });
-              $('#showmoremessages').on('click',function(){
-                $('#hiddenmessages').show(400);
-                $('#more-wrap').hide(400);
-              });
-            })();
-            </script>
-          </div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div style="clear:both;">
-      <hr/>
-      {% for message in pm_messages %}
-      {% if  pm_messages|length > 4 and forloop.counter == 2%}
-        <div id="more-wrap">
-        <div class="row">
-         <div class="col-md-offset-5 col-md-7">
-          <a id="showmoremessages">{{pm_messages|length|add:-2}} {%trans "More...."%}</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <hr/>
-          </div>
-        </div>
-        </div>
-        <div id="hiddenmessages" style="display:none;">
-      {% endif %}
-      <div class="row">
-        <div class="col-md-1 pull-left messageavatar">
-          {% primary_avatar message.obfuscated_sender 40 %}
-        </div>
-        <div class="col-md-10">
-          <div class="pm_message{% if message.is_pending %} pm_pending{% endif %}
-            {% if message.is_rejected %} pm_rejected{% endif %}
-            {% if message.sender == user and message.sender_archived or message.recipient == user and message.recipient_archived %} pm_archived{% endif %}
-            {% if message.sender == user and message.sender_deleted_at or message.recipient == user and message.recipient_deleted_at %} pm_deleted{% endif %}
-            {% if message.recipient == user and not message.read_at %} pm_unread{% endif %}">
-            <div _class="well">
-              <div class="row pm_header">
-                <a  data-toggle="collapse"  href="#message-{{forloop.counter}}">
-                  <div class="col-md-12" style="line-height:2.5em;">
-                    <strong><span class="pm_sender">{{ message.obfuscated_sender }}</span>
-                    <span style="display:none;" class="pm_recipient">{{ message.obfuscated_recipient|or_me:user }}</span>
-                    <span class="pm_date pull-right">{{ message.sent_at|date:"M d Y H:i"}}</span></strong>
-                    {% if message.is_rejected %}
-                      <div class="pm_status">{% trans "Rejected" %}{% if message.moderation_reason %}:{{ message.moderation_reason }}{% endif %}</div>
-                    {% endif %}
-                  </div>
-                </a>
-              </div>
-             </div>
-          </div>
-        </div>
-         <div class="row">
-            <div class="col-sm-offset-1 col-xs-offset-1 col-md-offset-1 col-md-11 pm_body collapse{% if forloop.first %} in{%endif%}"  id="message-{{forloop.counter}}">
-              <div style="margin-left:10px;">{{ message.body|linebreaksbr }}</div>
-            </div>
-         </div>
-      </div>
-      <hr/>
-      {% with pm_messages|length|add:-1 as len %}
-      {% if  pm_messages|length > 4 and forloop.counter == len %}
-        </div>
-      {% endif%}
-      {% endwith %}
-      {% if forloop.last %}
-    </div>
 
-      {% endif %}
-      {% endfor %}
-
-  </div>
+<div class="conversation-header">
+  <h1 id="messagesubjectheader">{% if pm_messages|length > 0 %}{{ pm_messages.0.subject }}{% endif %}</h1>
 </div>
+{% if reply_to_pk %}
+<div class="clearfix replyarea" id="replyarea">
+  <form id="replyform" action="{% url 'postman_reply' reply_to_pk %}?next={{ next_url|urlencode }}" method="post">
+    {% csrf_token %}
+    <div id="pm_reply">{{ form.body }}</div>
+    <div class="pull-right">
+      <button type="submit" id="reply-btn" class="btn btn-action">{% trans 'Reply' %}</button>
+    </div>
+  </form>
+</div>
+{% endif %}
+<div class="conversation-body">
+  {% for message in pm_messages %}
+  <div class="message{% if forloop.counter|divisibleby:2 %} alt{% endif %}">
+    <div class="message-header" href="#message-{{ forloop.counter }}">
+      <span class="message-date pull-right">{{ message.sent_at|date:"M d Y H:i" }}</span>
+      <span class="send-receive">
+        <a href="{% url 'user_profile_for_user' message.sender.username %}">{% if message.sender == request.user %}Me{% else %}{{ message.obfuscated_sender }}{% endif %}</a> to
+        <a href="{% url 'user_profile_for_user' message.recipient.username %}">{% if message.recipient == request.user %}Me{% else %}{{ message.obfuscated_recipient }}{% endif %}</a>
+      </span>
+    </div>
+    <div class="message-body{% if forloop.counter0 != 0 %} collapse{% endif %}">
+      <hr/>
+      {{ message.body|linebreaksbr }}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
 {% endblock %}

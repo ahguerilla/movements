@@ -26,9 +26,15 @@ def get_nationalities(request,rtype):
 
 
 #@login_required
-def get_skills(request,rtype):
+def get_skills_old(request,rtype):
     sklls = users.models.Skills.objects.all()
     return HttpResponse( value(rtype,sklls), mimetype="application/"+rtype)
+
+
+def get_skills(request):
+    skills = users.models.Interest.objects.all()
+    rtype = 'json'
+    return HttpResponse(value(rtype, skills), mimetype="application/" + rtype)
 
 
 @login_required

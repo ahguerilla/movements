@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% load compress %}
-<div id="messagedialog" class="modal fade">
+<div id="messagedialog" class="modal fade movements-form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -19,12 +19,12 @@
           <textarea class="form-control" name="newmessage" id="newmessage" rows="4" placeholder="" required="true"></textarea>
         </div>
         <div class="modal-footer">
-          <div class="row">
-            <div class="col-xs-6 col-md-offset-6 col-md-3">
-              <button type="button" class="btn btn-default full-width cancelpm" data-dismiss="modal">{%trans "Cancel"%}</button>
+          <div class="row action-text">
+            <div class="col-sm-offset-2 col-sm-2 form-main-button">
+              <a href="#" class="action-link cancelpm" data-dismiss="modal">{% trans 'Cancel' %}</a>
             </div>
-            <div class="col-xs-6 col-md-3">
-              <button type="button" class="btn btn-default full-width btn-default sendpm">{%trans "Send"%}</button>
+            <div class="col-sm-6 form-main-button">
+              <button type="button" class="btn btn-action full-width send sendpm">{% trans 'Send' %}</button>
             </div>
           </div>
         </div>
@@ -115,12 +115,12 @@
     },
 
     initialize: function (settings) {
-      this.alert_place = '#pmerror'
+      this.alert_place = '#pmerror';
       this.$messageText = $('#newmessage');
       this.$username = $('#usernameh');
       this.$subject = $('#msgsub');
       this.$dialog = $('#messagedialog');
-      this.$sendkey = $('.sendpm')
+      this.$sendkey = $('.sendpm');
       window.ahr.expandTextarea('#newmessage');
       return this;
     }

@@ -2,78 +2,31 @@ window.ahr = window.ahr || {};
 window.ahr.market = window.ahr.market || {};
 
 window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
-  loadingScrollElements: false,
-  currentItem: 0,
+  loadingPage: false,
   allItemsLoaded: false,
-  itemsPerCall: 15,
   loadedOnce: false,
   currentCall: null,
-  
+  noResultsString: "",
 
-  levelReached: function (pixelTestValue) {
-    if (!this.loadedOnce) {
-      this.loadedOnce = true;
-      return true;
-    }
-
-    // is it low enough to add elements to bottom?
-    var pageHeight = Math.max(document.body.scrollHeight ||
-      document.body.offsetHeight);
-    var viewportHeight = window.innerHeight ||
-      document.documentElement.clientHeight ||
-      document.body.clientHeight || 0;
-    var scrollHeight = window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop || 0;
-    // Trigger for scrolls within 30 pixels from page bottom
-    return pageHeight - viewportHeight - scrollHeight < pixelTestValue;
-  },
-
-  initInfiniteScroll: function () {
+  clearMarketPage: function () {
     $('#marketitems').empty();
     if (this.currentCall) {
       this.currentCall.abort();
       this.currentCall = null;
     }
     this.allItemsLoaded = false;
-    this.currentItem = 0;
-    this.loadingScrollElements = false;
-    this.loadedOnce = false;
-
-    this.loadScrollElements();
-    var that = this;
-    $(window).scroll(function () {
-      that.loadScrollElements();
-    });
-    // For ipad
-    document.addEventListener('touchmove', function (e) {
-      that.loadScrollElements();
-    }, false);
+    this.loadingPage = false;
   },
 
-  noSearchResult: function () {
-    if ($('.market-place-item').length === 0) {
-      $('#marketitems').append(['<p style="margin-top:20px;float:left;width:100%;text-align:center;" id="no-search-result">',
-        window.ahr.string_constants.market_search_no_match_a,
-        '<a href="#" id="searchagainall">',
-        window.ahr.string_constants.market_search_no_match_b + '</a>' + window.ahr.string_constants.market_search_no_match_c,
-        '<a href="#" id="searchwithdefaults">' ,
-        window.ahr.string_constants.market_search_no_match_d,
-        '</a></p>'].join(' '));
-    }
-  },
-
-  loadScrollElements: function () {
+  loadPage: function (page) {
     var that = this;
-    if (!that.loadingScrollElements && that.levelReached(30) && !that.allItemsLoaded) {
-      that.loadingScrollElements = true;
+    if (!that.loadingPage && !that.allItemsLoaded) {
+      that.loadingPage = true;
 
+      this.clearMarketPage();
       $('#ajaxloader').show();
 
-      var dfrd = that.getItems(
-        that.currentItem,
-        that.currentItem + that.itemsPerCall
-      );
+      var dfrd = that.getItems(page);
 
       this.currentCall = dfrd;
 
@@ -82,32 +35,48 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
         $('#no-search-result').remove();
         $('#ajaxloader').hide();
 
-        if (data.length === 0) {
+        var hasItem = false;
+        _.each(data, function (item) {
+          if (item.page_count) {
+            that.pageCount = item.page_count;
+            that.pageActive = item.current_page;
+            that.pageSize = item.page_size;
+          } else {
+            hasItem = true;
+            item.fields.pk = item.pk;
+            var item_html = that.item_tmp(item.fields);
+            $('#marketitems').append(item_html);
+            $('.tm-tag').each(function(){
+               var txt = $('span',$(this)).text();
+               $('.tag-button:contains('+txt+')').css('background-color','#cccccc');
+            });
+          }
+        });
+        if (!hasItem) {
           that.allItemsLoaded = true;
           that.noSearchResult();
         }
-
-        _.each(data, function (item) {
-          item.fields.pk = item.pk;
-          var item_html = that.item_tmp(item.fields);
-          $('#marketitems').append(item_html);
-          $('.tm-tag').each(function(){
-             var txt = $('span',$(this)).text();
-             $('.tag-button:contains('+txt+')').css('background-color','#cccccc');
-          });
-        });
-
-        that.currentItem = that.currentItem + that.itemsPerCall;
-        that.loadingScrollElements = false;
+        that.loadingPage = false;
       });
+      return dfrd;
     }
   },
 
-  getItems: function (from, to) {
+  noSearchResult: function () {
+    if ($('.market-place-item').length === 0) {
+      $('#marketitems').append(this.noResultsString);
+      $('#pagination').hide();
+    }
+  },
+
+  getItems: function (page) {
     var data = {};
-    this.filterView.setFilter(data);
+    if(this.filterView) {
+      this.filterView.setFilter(data);
+    }
+    data.page = page;
     return $.ajax({
-      url: this.getitemfromto.replace('0', from) + to,
+      url: this.getMarketItems,
       dataType: 'json',
       contentType: "application/json; charset=utf-8",
       data: data,
@@ -122,6 +91,5 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
   init: function (filterView) {
     var that = this;
     this.filterView = filterView;
-    this.filterView.on('filter', function() {that.initInfiniteScroll();});
   }
 });

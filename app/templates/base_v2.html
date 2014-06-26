@@ -190,16 +190,20 @@
       Profile
     </div>
   </a>
-  <div class="nav-menu-item-wrap settings">
-    <div class="spacer"></div>
-    <div class="nav-menu-item"></div>
-    Settings
-  </div>
-  <div class="nav-menu-item-wrap messages">
-    <div class="spacer"></div>
-    <div class="nav-menu-item"></div>
-    Messages
-  </div>
+  <a href="{% url 'user_settings' %}">
+    <div class="nav-menu-item-wrap settings">
+      <div class="spacer"></div>
+      <div class="nav-menu-item"></div>
+      Settings
+    </div>
+  </a>
+  <a href="{% url 'postman_inbox' %}">
+    <div class="nav-menu-item-wrap messages">
+      <div class="spacer"></div>
+      <div class="nav-menu-item"></div>
+      Messages
+    </div>
+  </a>
   <form method="post" action="{% url 'account_logout' %}">
     {% csrf_token %}
     <a href="#" onclick="parentNode.submit();">
@@ -216,8 +220,10 @@
 {% assets "js_all" %}
   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
-
 {% include "market/clientside/app_urls.html" %}
+<script type="text/javascript">
+  window.ahr.string_constants = {{ string_constants|safe }};
+</script>
 
 {% block javascript %}
 {% endblock %}
@@ -235,12 +241,6 @@
     })();
   </script>
 {% endif %}
-
-<script type="text/javascript">
-  (function () {
-    window.ahr.string_constants = {{ string_constants|safe }};
-  })();
-</script>
 
 <script type="text/javascript">
   (function () {

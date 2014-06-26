@@ -32,9 +32,7 @@ class MarketItem(models.Model):
         auth.models.User, blank=True, null=True, related_name='marketitems')
     title = models.CharField(_('title'), max_length=200, blank=False)
     details = tinymodels.HTMLField(_('details'), blank=False)
-    countries = models.ManyToManyField(user_models.Countries)
-    issues = models.ManyToManyField(user_models.Issues)
-    skills = models.ManyToManyField(user_models.Skills)
+    interests = models.ManyToManyField(user_models.Interest, null=True, blank=True)
     specific_skill = models.CharField(_('Specific skill'), max_length=25, blank=True, null=True)
     url = models.CharField(_('URL Link'), max_length=500, blank=True)
     published = models.BooleanField(_('is published?'), default=True)
@@ -61,8 +59,8 @@ class MarketItem(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.closed_date and (
-                        self.status == self.STATUS_CHOICES.CLOSED_BY_USER or
-                        self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN):
+                self.status == self.STATUS_CHOICES.CLOSED_BY_USER or
+                self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN):
             self.closed_date = now()
         super(MarketItem, self).save(*args, **kwargs)
 
@@ -75,9 +73,7 @@ class MarketItem(models.Model):
         adict['fields']['pk'] = self.id
         adict['fields']['item_type'] = self.item_type
         adict['fields']['item_type_display'] = self.item_type_display
-        adict['fields']['issues'] = [ob.id for ob in self.issues.all()]
-        adict['fields']['countries'] = [ob.id for ob in self.countries.all()]
-        adict['fields']['skills'] = [ob.id for ob in self.skills.all()]
+        adict['fields']['interests'] = [ob.id for ob in self.interests.all()]
         adict['fields']['title'] = self.title
         adict['fields']['details'] = self.details
         adict['fields']['pub_date'] = str(self.pub_date)
@@ -85,6 +81,8 @@ class MarketItem(models.Model):
         adict['fields']['ownerid'] = [self.owner.id]
         adict['fields']['url'] = self.url
         adict['fields']['close_url'] = reverse('close_marketitem', args=[self.id])
+        adict['fields']['edit_url'] = reverse('edit_request', args=[
+            self.id]) if self.item_type is MarketItem.TYPE_CHOICES.REQUEST else reverse('edit_offer', args=[self.id])
         adict['fields']['report_url'] = reverse('report_post', args=[self.id])
         adict['fields']['attributes_url'] = reverse('set_item_attributes_for_user', args=[self.id])
         adict['fields']['commentcount'] = self.commentcount

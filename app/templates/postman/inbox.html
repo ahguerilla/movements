@@ -4,22 +4,7 @@
 
 {% block head_title %}{% trans "Inbox" %}{% endblock %}
 
-{% block pm_undelete_button %}{% endblock %}
 {% block pm_recipient_header %}{% endblock %}
 {% block pm_unarchive_button %}{% endblock %}
 {% block pm_date %}{% trans "Received" %}{% endblock %}
 {% block pm_recipient_cell %}{% endblock %}
-
-
-{% block endjavascript %}
-
-  <script type="text/javascript">
-    $(document).ready(function(){
-      var dfrd = window.ahr.getStatics();
-      dfrd.done(function(){
-        window.ahr.messages.initInbox();
-      });
-    });
-  </script>
-
-{% endblock %}

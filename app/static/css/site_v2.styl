@@ -11,8 +11,11 @@ $background-color = #F8F6F7
 $border-color = #E0D7D8
 $border-color-alpha = rgba(224, 215, 216, 0.8)
 $facebook-blue = #3C5A9A
+$twitter-blue = #4099FF
+$google-red = #DD4B39
 $separator-color = #ded8d6
 $footer-color = #B6ABA5
+$selected-tab-color = $footer-color
 $dropdown-hover-bg = #beb4ae
 $dropdown-select-color = #ff6d50
 $hr-color = #CDCBCC
@@ -95,6 +98,13 @@ box-shadow()
   input[type=text], input[type=email], input[type=number], input[type=password], select
     border-radius 3px
     height 40px
+  .btn-group
+    a
+      text-decoration none
+      font-weight normal
+      color $footer-color
+    .selected
+      color #fff
 
 .extended-form
   margin-top 30px
@@ -117,6 +127,18 @@ box-shadow()
   font-weight bold
   font-size 16px
 
+.btn-tab
+  background-color $white-font
+  border-color $selected-tab-color
+  color $selected-tab-color
+
+.btn-tab:hover
+  color $selected-tab-color
+
+.btn-tab.selected
+  background-color $selected-tab-color
+  border-color $selected-tab-color
+  color $white-font
 
 .btn-action
   background-color $primary-color
@@ -135,11 +157,20 @@ box-shadow()
 
 .btn-social-facebook
   background-color $facebook-blue
+
+.btn-social-twitter
+  background-color $twitter-blue
+
+.btn-social-google
+  background-color $google-red
+
+.btn-social
+  margin-bottom 15px
   color $white-font
   img
     margin-right 10px
 
-.btn-social-facebook:hover, .btn-social-facebook:active, .btn-social-facebook:focus
+.btn-social:hover, .btn-social:active, .btn-social:focus
   color $white-font
 
 .full-width
@@ -151,6 +182,20 @@ box-shadow()
 .dialog
   background-color #fff
 
+.row.no-gutter
+  margin-left 0
+  margin-right 0
+
+.row.no-gutter > [class*='col-']:not(:first-child),
+.row.no-gutter > [class*='col-']:not(:last-child)
+  padding-right 0
+  padding-left 0
+
+.modal-content
+  border-radius 0
+
+.modal-header
+  padding 20px
 // **************************************
 // base styles
 // **************************************
@@ -205,10 +250,10 @@ body
       border-bottom 4px solid $border-color
       color $inactive-font
       .menu-icon
-        background-image url("../images/v2/hamburger-v2.png")
+        background-image url("../images/v2/hamburger-v3.png")
         width 30px
-        height 30px
-        margin-top 8px
+        height 24px
+        margin-top 11px
         margin-right 3px
         float left
       .action-font
@@ -218,7 +263,7 @@ body
       background-color $footer-color
       color #fff
       .menu-icon
-        background-image url("../images/v2/hamburger-selected-v2.png")
+        background-image url("../images/v2/hamburger-selected-v3.png")
     .nav-avatar
       position absolute
       width 90px
@@ -457,7 +502,7 @@ h1,h2,h3,h4,h5,h6
 // **************************************
 // Landing page styles
 // **************************************
-$page-banner-height = 600px
+$page-banner-height = 550px
 .page-banner
   height $page-banner-height
   overflow hidden
@@ -582,7 +627,7 @@ $page-banner-height = 600px
   .complete-state
     text-align center
     font-size 35px
-    line-height 25px
+    line-height 34px
     span
       background-color #ffffff
       padding-left 3px
@@ -950,10 +995,10 @@ popoverDropdown(width)
 // **************************************
 // exchange page
 // **************************************
+
 .settings-bar
   background-color $footer-color
   border-bottom 4px solid $border-color
-  margin-bottom 20px
   .profile-nav-menu
     display table
     margin 0 auto
@@ -992,9 +1037,18 @@ popoverDropdown(width)
       background url("../images/v2/profile-message-icon.png") center 0 no-repeat
     .spacer
       height 10px
+  .nav-icon.inbox.selected
   .nav-icon.inbox:hover
     .nav-menu-item
       background url("../images/v2/profile-message-icon.png") center -19px no-repeat
+  .notifications
+    .nav-menu-item
+      height 30px
+      background url("../images/v2/profile-notifications-icon.png") center 0 no-repeat
+  .nav-icon.notifications.selected
+  .nav-icon.notifications:hover
+    .nav-menu-item
+      background url("../images/v2/profile-notifications-icon.png") center -30px no-repeat
   .profile
     .nav-menu-item
       height 30px
@@ -1007,14 +1061,209 @@ popoverDropdown(width)
     .nav-menu-item
       height 30px
       background url("../images/v2/profile-settings-icon.png") center 0 no-repeat
+  .nav-icon.settings.selected
   .nav-icon.settings:hover
     .nav-menu-item
       background url("../images/v2/profile-settings-icon.png") center -30px no-repeat
 
 .setting-page
+  margin-top 20px
   hr
     border-top 1px solid $hr-color
   .settings-title
     font-family "HurmeGeometricSans3-SemiBold"
     color $inactive-font
     margin-bottom 10px
+  .profile-actions
+    font-family "HurmeGeometricSans3-SemiBold"
+    color $inactive-font
+    .profile-action-icon
+      width 35px
+      margin-right 5px
+      float left
+    .rate-user
+      margin-bottom 8px
+      .rate-icon
+        background url("../images/v2/profile-rate.png") center 0 no-repeat
+        height 22px
+      .profile-action-text
+        line-height 26px
+    .rate-user:hover
+      cursor pointer
+      color $main-font
+      .rate-icon
+        background url("../images/v2/profile-rate.png") center -22px no-repeat
+    .message-user
+      margin-bottom 10px
+      .message-icon
+        background url("../images/v2/profile-direct-message.png") center center no-repeat
+        height 22px
+      .profile-action-text
+        line-height 26px
+    .message-user:hover
+      cursor pointer
+      color $main-font
+    .report-user
+      margin-bottom 8px
+      .report-icon
+        background url("../images/v2/profile-report.png") center 0 no-repeat
+        height 21px
+      .profile-action-text
+        line-height 23px
+    .report-user:hover
+      cursor pointer
+      color $main-font
+      .report-icon
+        background url("../images/v2/profile-report.png") center -21px no-repeat
+
+.settings-form
+  margin-top 20px
+  h1
+    margin-top 0
+  .settingavatar
+    text-align center
+    img
+      border-radius 50%
+  #changeavatar
+    line-height 100px
+  .folder-select
+    padding-top 20px
+    padding-bottom 20px
+
+#profile_change_stuff
+  img
+    border-radius 50%
+
+#ratedialog
+  .stars0
+      background url('/static/images/stars.png') 0 0px
+      width 118px
+      height 22px
+      display inline-block
+
+  .stars1
+      background url('/static/images/stars.png') 0 108px
+      width 118px
+      height 21px
+      display inline-block
+
+  .stars2
+      background url('/static/images/stars.png') 0 86px
+      width 118px
+      height 21px
+      display inline-block
+
+  .stars3
+      background url('/static/images/stars.png') 0 65px
+      width 118px
+      height 21px
+      display inline-block
+
+  .stars4
+      background url('/static/images/stars.png') 0 43px
+      width 118px
+      height 21px
+      display inline-block
+
+  .stars5
+      background url('/static/images/stars.png') 0 22px
+      width 118px
+      height 22px
+      display inline-block
+
+
+// **************************************
+// messaging styles
+// **************************************
+#postman
+  margin-top 30px
+  background-color #fff
+  box-shadow 0 1px 1px 0 $border-color-alpha
+
+  .folder-select
+    padding 5px
+  .conv_link
+    cursor pointer
+  .sidebar
+    .message
+      padding 5px 5px 5px 28px
+      background-color $background-color
+      position relative
+      cursor pointer
+      .status
+        border-radius 50%
+        width 10px
+        height 10px
+        border 2px solid $primary-color
+        position absolute
+        left 8px
+        top 12px
+      h4
+        font-family "HurmeGeometricSans3-SemiBold"
+        margin 0
+        color $main-font
+      .date
+        float right
+    .message.new
+      .status
+        background-color $primary-color
+    .message.new.selected
+      .status
+        background-color #fff
+    .message.alt
+      background-color #fff
+    .message.selected
+      background-color $primary-color
+      color #fff
+      h4
+        color #fff
+      .status
+        border-color #fff
+
+#conversation
+  border-left 1px solid $border-color
+  h1
+    color $main-font
+    font-family "HurmeGeometricSans3-SemiBold"
+    margin 0
+  .conversation-header
+    padding 10px
+    border-bottom 1px solid $border-color
+  .replyarea
+    padding 10px
+    border-bottom 1px solid $border-color
+    button
+      margin-top 10px
+  .message
+    border-bottom 1px solid $border-color
+  .message.alt
+    background-color $background-color
+  .message-header
+    padding 10px
+    cursor pointer
+    .send-receive
+      font-family "HurmeGeometricSans3-SemiBold"
+    a
+      color $primary-color
+      text-decoration underline
+  .message-body
+    hr
+      padding-bottom  10px
+      margin 0
+    padding 0 10px 10px 10px
+  .message:last-child
+    border-bottom none
+
+
+// **************************************
+// profile styles
+// **************************************
+
+#profile-view
+  .view-public
+    margin-top 10px
+    text-align right
+    font-size 14px
+  .vetting-status
+    .status.warn
+      color #ff0000
