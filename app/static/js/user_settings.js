@@ -7,9 +7,9 @@
       'click .select-checkbox': 'checkClick',
 
       //selecting tabs
-      'click #personal-select': 'showPersonal',
-      'click #skills-select': 'showSkills',
-      'click #security-select': 'showSecurity'
+      //'click #personal-select': 'showPersonal',
+      //'click #skills-select': 'showSkills',
+      //'click #security-select': 'showSecurity'
     },
 
     showPersonal: function(ev) {
@@ -187,9 +187,39 @@
     }
   });
 
+  var SettingsRouter = Backbone.Router.extend({
+    userSettingsView: null,
+    routes: {
+      "": "showDefault",
+      "personal": "showPersonal",
+      "skills": "showSkills",
+      "security": "showSecurity"
+    },
+    initialize: function (options) {
+      this.userSettingsView = options.userSettingsView;
+    },
+    showDefault: function() {
+      this.userSettingsView.showPersonal();
+    },
+    showPersonal: function() {
+      this.userSettingsView.showPersonal();
+    },
+    showSkills: function() {
+      this.userSettingsView.showSkills();
+    },
+    showSecurity: function() {
+      this.userSettingsView.showSecurity();
+    }
+  });
+
   window.ahr = window.ahr || {};
   window.ahr.widgets = window.ahr.widgets || {};
   window.ahr.widgets.initUserSettingsView = function () {
     var widget = new UserSettingsView();
+    var options = {
+      userSettingsView: widget
+    };
+    var router = new SettingsRouter(options);
+    Backbone.history.start()
   };
 })();
