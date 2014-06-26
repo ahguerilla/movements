@@ -3,9 +3,7 @@
     <div class="row">
   {% endif %}
   <div class="col-xs-4">
-    <div class="select-checkbox">
-      {{ widget }}
-    </div>
+    {{ widget }}
   </div>
   {% if forloop.last or forloop.counter|divisibleby:3 %}
     </div>

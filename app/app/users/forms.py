@@ -89,7 +89,8 @@ class CheckboxInput(BaseCheckboxChoiceInput):
         else:
             label_for = ''
         return format_html(
-            '{0}<label></label><div{1} class="select-label">{2}</div>',
+            '<div class="select-checkbox {0}">{1}<label></label><div{2} class="select-label">{3}</div></div>',
+            "checked" if self.is_checked() else "",
             self.tag(), label_for, self.choice_label)
 
 
