@@ -67,10 +67,8 @@ def render_settings(request, initial=False):
             settings = settings_form.save(commit=False)
             settings.user_id = request.user.id
             settings.notperm = perms
-            settings.interface_lang = settings_form.data['interface_lang']
             settings.save()
             settings_form.save_m2m()
-            translation.activate(settings_form.data['interface_lang'])
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
             if initial:
                 template = 'users/welcome.html'

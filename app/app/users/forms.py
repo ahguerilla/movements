@@ -1,5 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.forms.widgets import (
+    CheckboxFieldRenderer as BaseCheckboxFieldRenderer,
+    CheckboxChoiceInput as BaseCheckboxChoiceInput,
+    CheckboxSelectMultiple as BaseCheckboxSelectMultiple)
+from django.template.loader import render_to_string
+from django.utils.encoding import force_text
+from django.utils.html import format_html
 from models import UserProfile, OrganisationalRating, Residence
 from django.utils.translation import ugettext_lazy as _
 import constance
@@ -65,7 +72,7 @@ class SignupForm(forms.Form):
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "username",]
+        fields = ["first_name", "last_name"]
 
     def save(self, force_insert=False, force_update=False, commit=True):
         m = super(UserForm, self).save(commit=False)
@@ -74,43 +81,45 @@ class UserForm(forms.ModelForm):
         return m
 
 
-class SettingsForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(SettingsForm, self).__init__(*args, **kwargs)
-        if kwargs.has_key('instance'):
-            user_profile = initial=kwargs['instance']
+class CheckboxInput(BaseCheckboxChoiceInput):
+    def render(self, name=None, value=None, attrs=None, choices=()):
+        if 'id' in self.attrs:
+            label_for = format_html(
+                ' for="{0}_{1}"', self.attrs['id'], self.index)
         else:
-            user_profile = None
-        langs = constance.config.TRANSLATED_LANGUAGES.split(',')
-        translated = []
-        initial = None
-        for lang in LANGUAGES:
-            if lang[0] in langs:
-                translated.append(lang)
-            if user_profile and not initial and lang[0] == user_profile.interface_lang:
-                initial = lang
-            else:
-                initial = 'en'
-        self.fields['interface_lang'] = forms.ChoiceField(choices=translated, initial=initial[0])
+            label_for = ''
+        return format_html(
+            '{0}<label></label><div{1} class="select-label">{2}</div>',
+            self.tag(), label_for, self.choice_label)
 
+
+class CheckboxRenderer(BaseCheckboxFieldRenderer):
+    choice_input_class = CheckboxInput
+
+    def render(self):
+        return render_to_string('users/checkbox_select_multiple.html', {
+            'widgets': [force_text(widget) for widget in self]})
+
+
+class CheckboxSelectMultiple(BaseCheckboxSelectMultiple):
+    """Custom CheckboxSelectMultiple for skills and interests"""
+    renderer = CheckboxRenderer
+
+
+class SettingsForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['nationality',
-                  'occupation',
-                  'resident_country',
-                  'expertise',
-                  'web_url',
-                  'fb_url',
-                  'linkedin_url',
-                  'tweet_url',
-                  'tag_ling',
-                  'bio',
-                  'issues',
-                  'countries',
-                  'skills',
-                  'is_organisation',
-                  'is_journalist',
-                  'get_newsletter']
+        fields = [
+            'occupation', 'resident_country', 'expertise', 'web_url', 'fb_url',
+            'linkedin_url', 'tweet_url', 'tag_ling', 'bio', 'interests',
+            'regions', 'languages', 'is_organisation', 'is_journalist',
+            'get_newsletter', 'profile_visibility', 'notification_frequency'
+        ]
+        widgets = {
+            'interests': CheckboxSelectMultiple(),
+            'regions': CheckboxSelectMultiple(),
+            'languages': CheckboxSelectMultiple(),
+        }
 
     def save(self, force_insert=False, force_update=False, commit=True):
         m = super(SettingsForm, self).save(commit=False)
