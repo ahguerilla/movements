@@ -33,28 +33,13 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
       this.currentCall = dfrd;
 
       dfrd.done(function (data) {
-        this.currentCall = null;
+        that.currentCall = null;
         $('#no-search-result').remove();
         $('#ajaxloader').hide();
 
-        var hasItem = false;
-        _.each(data, function (item) {
-          if (item.page_count) {
-            that.pageCount = item.page_count;
-            that.pageActive = item.current_page;
-            that.pageSize = item.page_size;
-          } else {
-            hasItem = true;
-            item.fields.pk = item.pk;
-            var item_html = that.item_tmp(item.fields);
-            that.$itemContainer.append(item_html);
-            $('.tm-tag').each(function(){
-               var txt = $('span',$(this)).text();
-               $('.tag-button:contains('+txt+')').css('background-color','#cccccc');
-            });
-          }
-        });
-        if (!hasItem) {
+        that.hasItem = false;
+        that.render(data, that);
+        if (!that.hasItem) {
           that.allItemsLoaded = true;
           that.noSearchResult();
         }
@@ -76,13 +61,34 @@ window.ahr.market.MarketBaseView = window.ahr.BaseView.extend({
     if(this.filterView) {
       this.filterView.setFilter(data);
     }
-    data.page = page;
+    if (page) {
+      data.page = page;
+    }
     return $.ajax({
       url: this.getMarketItems,
       dataType: 'json',
       contentType: "application/json; charset=utf-8",
       data: data,
       traditional: true
+    });
+  },
+
+  render: function (data, that) {
+    _.each(data, function (item) {
+      if (item.page_count) {
+        that.pageCount = item.page_count;
+        that.pageActive = item.current_page;
+        that.pageSize = item.page_size;
+      } else {
+        that.hasItem = true;
+        item.fields.pk = item.pk;
+        var item_html = that.item_tmp(item.fields);
+        that.$itemContainer.append(item_html);
+        $('.tm-tag').each(function(){
+           var txt = $('span',$(this)).text();
+           $('.tag-button:contains('+txt+')').css('background-color','#cccccc');
+        });
+      }
     });
   },
 

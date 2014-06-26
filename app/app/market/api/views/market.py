@@ -100,8 +100,7 @@ def get_raw(request, from_item=0, to_item=None,
         INNER JOIN "auth_user" ON
             mi.owner_id = "auth_user"."id"
         WHERE
-            mi.item_type IN %(types)s AND
-            mi.is_featured = %(is_featured)s
+            mi.item_type IN %(types)s
     """ + additional_filter + """ AND
             NOT mi.id IN (
                 SELECT stickies."item_id"
@@ -184,6 +183,14 @@ def get_market_items(request, user_id=None, filter_by_user=False):
                             'current_page': page_num,
                             'page_size': settings.PAGE_SIZE})
     return HttpResponse(market_json, mimetype='application/json')
+
+
+@login_required
+def get_featured_market_items(request):
+    featured_posts = market.models.MarketItem.objects.exclude(
+        status__in=[market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
+                    market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN]).filter(is_featured=True)
+    return return_item_list(featured_posts, request=request)
 
 
 @login_required

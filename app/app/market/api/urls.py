@@ -68,9 +68,13 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.get_marketItem_fromto',
         name="get_marketitems_fromto"),
 
-    url(r'items/get/$',
+    url(r'^items/get/$',
         'app.market.api.views.market.get_market_items',
         name="get_market_items"),
+
+    url(r'^featured-items/get/$',
+        'app.market.api.views.market.get_featured_market_items',
+        name="get_featured_market_items"),
 
     url(r'items/user/get/$',
         'app.market.api.views.market.get_market_items_user',

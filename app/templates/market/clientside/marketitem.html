@@ -57,8 +57,6 @@
      data-edit-url="<%- edit_url %>"
      data-report-url="<%- report_url %>"
      data-item-type="<%- item_type %>"
-     data-stick="<%- stick %>"
-     data-hidden="<%- hidden %>"
      data-has-edit="<%- hasEdit %>"
      data-attributes-url="<%- attributes_url %>">
   <div class="header">
@@ -88,8 +86,11 @@
 </script>
 <script type="text/template" id="item-menu-template">
   <%
-     var actions = [{display: 'Hide', value: 'hide', toggle: true}];
-     if (!isProfile) {
+     var actions = [];
+     if (!isFeatured) {
+       actions.push({display: 'Hide', value: 'hide', toggle: true});
+     }
+     if (!isProfile && !isFeatured) {
        actions.push({display: 'Stick', value: 'stick', toggle: true});
      }
      if (hasEdit) {
