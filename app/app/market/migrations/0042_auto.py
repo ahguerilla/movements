@@ -8,15 +8,43 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'MarketItem.is_featured'
-        db.add_column(u'market_marketitem', 'is_featured',
-                      self.gf('django.db.models.fields.BooleanField')(default=False),
-                      keep_default=False)
+        # Removing M2M table for field issues on 'MarketItem'
+        db.delete_table(db.shorten_name(u'market_marketitem_issues'))
+
+        # Removing M2M table for field countries on 'MarketItem'
+        db.delete_table(db.shorten_name(u'market_marketitem_countries'))
+
+        # Removing M2M table for field skills on 'MarketItem'
+        db.delete_table(db.shorten_name(u'market_marketitem_skills'))
 
 
     def backwards(self, orm):
-        # Deleting field 'MarketItem.is_featured'
-        db.delete_column(u'market_marketitem', 'is_featured')
+        # Adding M2M table for field issues on 'MarketItem'
+        m2m_table_name = db.shorten_name(u'market_marketitem_issues')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('marketitem', models.ForeignKey(orm['market.marketitem'], null=False)),
+            ('issues', models.ForeignKey(orm[u'users.issues'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['marketitem_id', 'issues_id'])
+
+        # Adding M2M table for field countries on 'MarketItem'
+        m2m_table_name = db.shorten_name(u'market_marketitem_countries')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('marketitem', models.ForeignKey(orm['market.marketitem'], null=False)),
+            ('countries', models.ForeignKey(orm[u'users.countries'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['marketitem_id', 'countries_id'])
+
+        # Adding M2M table for field skills on 'MarketItem'
+        m2m_table_name = db.shorten_name(u'market_marketitem_skills')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('marketitem', models.ForeignKey(orm['market.marketitem'], null=False)),
+            ('skills', models.ForeignKey(orm[u'users.skills'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['marketitem_id', 'skills_id'])
 
 
     models = {
@@ -86,13 +114,11 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'MarketItem'},
             'closed_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'commentcount': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'countries': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['users.Countries']", 'symmetrical': 'False'}),
             'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'details': ('tinymce.models.HTMLField', [], {}),
             'feedback_response': ('django.db.models.fields.TextField', [], {'default': "''", 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'issues': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['users.Issues']", 'symmetrical': 'False'}),
+            'interests': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['users.Interest']", 'null': 'True', 'symmetrical': 'False'}),
             'item_type': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'blank': 'True'}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
@@ -101,7 +127,6 @@ class Migration(SchemaMigration):
             'receive_notifications': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'reportcount': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'score': ('django.db.models.fields.FloatField', [], {'default': '0'}),
-            'skills': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['users.Skills']", 'symmetrical': 'False'}),
             'specific_skill': ('django.db.models.fields.CharField', [], {'max_length': '25', 'null': 'True', 'blank': 'True'}),
             'staff_owner': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'marketitems'", 'null': 'True', 'to': u"orm['auth.User']"}),
             'status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'max_length': '1'}),
@@ -215,29 +240,13 @@ class Migration(SchemaMigration):
             'subject': ('django.db.models.fields.CharField', [], {'max_length': '120'}),
             'thread': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "u'child_messages'", 'null': 'True', 'to': u"orm['postman.Message']"})
         },
-        u'users.countries': {
-            'Meta': {'ordering': "['countries']", 'object_name': 'Countries'},
-            'countries': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'}),
-            'countries_ar': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'countries_en': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'countries_ru': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        },
-        u'users.issues': {
-            'Meta': {'ordering': "['issues']", 'object_name': 'Issues'},
+        u'users.interest': {
+            'Meta': {'object_name': 'Interest'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'issues': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'}),
-            'issues_ar': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'issues_en': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'issues_ru': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
-        },
-        u'users.skills': {
-            'Meta': {'ordering': "['skills']", 'object_name': 'Skills'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'skills': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'}),
-            'skills_ar': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'skills_en': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'skills_ru': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+            'name': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255'}),
+            'name_ar': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'name_en': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'name_ru': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'})
         }
     }
 

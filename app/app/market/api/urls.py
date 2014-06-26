@@ -52,8 +52,10 @@ market_user_patterns = patterns('',
         name="get_nationalities"),
 
     url(r'(?P<rtype>\S+)/skills/get$',
-        'app.market.api.views.misc.get_skills',
-        name="get_skills"),
+        'app.market.api.views.misc.get_skills_old',
+        name="get_skills_old"),
+    url(r'skills/get$',
+        'app.market.api.views.misc.get_skills', name="get_skills"),
 
     url(r'(?P<rtype>\S+)/message/get/count$',
         'app.market.api.views.misc.get_unreadCount',
@@ -65,6 +67,18 @@ market_item_patterns = patterns('',
     url(r'(?P<rtype>\S+)/item/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
         'app.market.api.views.market.get_marketItem_fromto',
         name="get_marketitems_fromto"),
+
+    url(r'items/get/$',
+        'app.market.api.views.market.get_market_items',
+        name="get_market_items"),
+
+    url(r'items/user/get/$',
+        'app.market.api.views.market.get_market_items_user',
+        name="get_market_items_user"),
+
+    url(r'items/user/get/(?P<user_id>\d+)$',
+        'app.market.api.views.market.get_market_items_user',
+        name="get_market_items_user"),
 
     url(r'(?P<rtype>\S+)/useritem/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
         'app.market.api.views.market.get_user_marketitem_fromto',

@@ -11,6 +11,8 @@ from forms import (
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
 from allauth.socialaccount.views import SignupView as SocialSignupView
+from allauth.socialaccount.forms import SignupForm as SocialSignupForm
+from allauth.socialaccount.adapter import get_adapter
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.account.utils import passthrough_next_redirect_url
 from django.contrib.admin.views.decorators import staff_member_required
@@ -29,7 +31,6 @@ from django.core.mail import EmailMessage
 import constance
 from django.template.loader import render_to_string
 from django.utils import translation
-from django.conf import settings as django_settings
 
 
 def render_settings(request, initial=False):
@@ -220,7 +221,17 @@ def email_doublesignup_upret(self, ret):
     return ret
 
 
+class AhrSocialSignupForm(SocialSignupForm):
+
+    def save(self, request):
+        adapter = get_adapter()
+        user = adapter.save_user(request, self.sociallogin, form=self)
+        return user
+
+
 class AhrSocialSignupView(SocialSignupView):
+    form_class = AhrSocialSignupForm
+
     def get_context_data(self, **kwargs):
         ret = super(AhrSocialSignupView, self).get_context_data(**kwargs)
         context_data = {
@@ -229,6 +240,7 @@ class AhrSocialSignupView(SocialSignupView):
         }
         ret.update(context_data)
         ret = email_doublesignup_upret(self, ret)
+
         return ret
     template_name = SignupView.template_name
 
@@ -330,8 +342,11 @@ class AccAdapter(DefaultAccountAdapter):
     def save_user(self, request, user, form, commit=False):
         cleaned_data = form.cleaned_data
         user = super(AccAdapter, self).save_user(request, user, form, commit)
-        user.email = request.session.pop('email')
-        user.set_password(request.session.pop('password'))
+        if 'email' in request.session:
+            user.email = request.session.pop('email')
+
+        if 'password' in request.session:
+            user.set_password(request.session.pop('password'))
 
         with transaction.atomic():
             user.save()

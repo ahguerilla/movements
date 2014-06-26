@@ -149,14 +149,23 @@
 }
 .btn-social-facebook {
   background-color: #3c5a9a;
+}
+.btn-social-twitter {
+  background-color: #4099ff;
+}
+.btn-social-google {
+  background-color: #dd4b39;
+}
+.btn-social {
+  margin-bottom: 15px;
   color: #fff;
 }
-.btn-social-facebook img {
+.btn-social img {
   margin-right: 10px;
 }
-.btn-social-facebook:hover,
-.btn-social-facebook:active,
-.btn-social-facebook:focus {
+.btn-social:hover,
+.btn-social:active,
+.btn-social:focus {
   color: #fff;
 }
 .full-width {

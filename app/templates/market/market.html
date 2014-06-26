@@ -54,6 +54,7 @@
         <div id="ajaxloader">
           <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
         </div>
+        <div id="pagination"></div>
       </div>
     </div>
   </div>
@@ -62,10 +63,10 @@
 
 {% block endjavascript %}
   <script type="text/template" id="skill-filter-list-template">
-    <% var skills = ['Lawyer', 'Writer', 'Media Producer', 'Journalist']; %>
+{#    <% var skills = ['Lawyer', 'Writer', 'Media Producer', 'Journalist']; %>#}
     <ul class="skill-filter">
       <% _.each(skills, function(skill) { %>
-      <li><a href="#"><%- skill %></a></li>
+      <li><a href="#" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
       <% }); %>
     </ul>
   </script>
@@ -99,6 +100,8 @@
 {#  {% include 'market/clientside/userprofile.html' %}#}
 {#  {% include 'market/clientside/reportuserdialog.html' %}#}
 {#  {% include "market/clientside/actions/actions.html"%}#}
+  {% include "market/clientside/pagination_template.html"%}
+
 
   {% compress js inline %}
     <script type="text/javascript">
