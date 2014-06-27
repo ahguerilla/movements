@@ -62,7 +62,8 @@ class RequestForm(forms.ModelForm):
                   'receive_notifications', 'interests']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
-            'interests': CheckboxSelectMultiple()
+            'interests': CheckboxSelectMultiple(),
+            'specific_skill': forms.Textarea(attrs={'cols': 55, 'rows': 3})
         }
 
     def __init__(self, *args, **kwargs):
