@@ -115,16 +115,13 @@ class RegionAccordionRenderer(BaseCheckboxFieldRenderer):
         regions = Region.objects.all()
         region_dict = dict()
         for widget in self:
-            country = None
-            region = None
-            for c in countries:
-                country = c if str(c.id) == widget.choice_value else country
-            for r in regions:
-                region = r if r.id == country.region_id else region
-            if region.name in region_dict.keys():
-                region_dict[region.name].append(force_text(widget))
-            else:
-                region_dict[region.name] = [force_text(widget)]
+            country = next((c for c in countries if str(c.id) == widget.choice_value), None)
+            region = next((r for r in regions if r.id == country.region_id), None)
+            if region:
+                if region.name in region_dict.keys():
+                    region_dict[region.name].append(force_text(widget))
+                else:
+                    region_dict[region.name] = [force_text(widget)]
 
         region_list = []
         for reg in region_dict:
