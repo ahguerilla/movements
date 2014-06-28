@@ -30,6 +30,7 @@ js = Bundle(
         './js/user_settings.js',
         './js/create_post.js',
         './js/view_post.js',
+        './js/region_accordion_select.js',
         './js/lib/jquery.rateit.min.js',
     ),
     filters='jsmin',
