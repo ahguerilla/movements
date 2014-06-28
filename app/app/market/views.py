@@ -58,7 +58,8 @@ def show_post(request, post_id):
 @login_required
 def create_offer(request):
     user_skills = request.user.userprofile.interests.values_list('id', flat=True)
-    form = OfferForm(request.POST or None, user_skills=user_skills)
+    user_countries = request.user.userprofile.countries.values_list('id', flat=True)
+    form = OfferForm(request.POST or None, user_skills=user_skills, user_countries=user_countries)
     if form.is_valid():
         save_market_item(form, request.user)
         # TODO This needs to be the new view offer page
@@ -70,7 +71,8 @@ def create_offer(request):
 @login_required
 def create_request(request):
     user_skills = request.user.userprofile.interests.values_list('id', flat=True)
-    form = RequestForm(request.POST or None, user_skills=user_skills)
+    user_countries = request.user.userprofile.countries.values_list('id', flat=True)
+    form = RequestForm(request.POST or None, user_skills=user_skills, user_countries=user_countries)
     if form.is_valid():
         save_market_item(form, request.user)
         # TODO This needs to be the new view request page

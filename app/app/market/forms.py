@@ -45,9 +45,12 @@ class OfferForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         user_skills = kwargs.pop('user_skills', None)
+        user_countries = kwargs.pop('user_countries', None)
         super(OfferForm, self).__init__(*args, **kwargs)
         if user_skills:
             self.fields['interests'].initial = user_skills
+        if user_countries:
+            self.fields['countries'].initial = user_countries
 
     def save(self, commit=True, *args, **kwargs):
         self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.OFFER
@@ -69,9 +72,12 @@ class RequestForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         user_skills = kwargs.pop('user_skills', None)
+        user_countries = kwargs.pop('user_countries', None)
         super(RequestForm, self).__init__(*args, **kwargs)
         if user_skills:
             self.fields['interests'].initial = user_skills
+        if user_countries:
+            self.fields['countries'].initial = user_countries
 
     def save(self, commit=True, *args, **kwargs):
         self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.REQUEST
