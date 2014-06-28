@@ -4,7 +4,7 @@
     events:{
       'click #changeavatar': 'ShowAvChange',
       'click #changepassword' : 'ShowChangePass',
-      'click .select-checkbox': 'checkClick',
+      'click .select-checkbox': 'checkClick'
     },
 
     showPersonal: function(ev) {
@@ -37,9 +37,6 @@
     checkClick: function(ev){
       $(ev.currentTarget).find('input[type="checkbox"]').prop("checked", !$(ev.currentTarget).find('input[type="checkbox"]').prop("checked"));
       $(ev.currentTarget).toggleClass("checked");
-      if( $(ev.currentTarget).closest('.select-multi-items') ){
-        this.updateCounts();
-      }
     },
 
     ShowChangePass:function(ev){

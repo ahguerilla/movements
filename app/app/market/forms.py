@@ -4,7 +4,7 @@ from postman.forms import WriteForm, FullReplyForm, QuickReplyForm
 from tasks.celerytasks import create_notification, update_notifications
 
 import app.market as market
-from app.users.forms import CheckboxSelectMultiple
+from app.users.forms import CheckboxSelectMultiple, RegionAccordionSelectMultiple
 
 
 cache = get_cache('default')
@@ -36,10 +36,11 @@ class MarketWriteForm(WriteForm):
 class OfferForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'specific_skill', 'receive_notifications', 'interests']
+        fields = ['title', 'details', 'specific_skill', 'receive_notifications', 'interests', 'countries']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
-            'interests': CheckboxSelectMultiple()
+            'interests': CheckboxSelectMultiple(),
+            'countries': RegionAccordionSelectMultiple()
         }
 
     def __init__(self, *args, **kwargs):
@@ -59,10 +60,11 @@ class RequestForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
         fields = ['title', 'details', 'specific_skill',
-                  'receive_notifications', 'interests']
+                  'receive_notifications', 'interests', 'countries']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
-            'interests': CheckboxSelectMultiple()
+            'interests': CheckboxSelectMultiple(),
+            'countries': RegionAccordionSelectMultiple()
         }
 
     def __init__(self, *args, **kwargs):

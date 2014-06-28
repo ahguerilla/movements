@@ -3,7 +3,8 @@
     el: 'body',
     events:{
       'click .select-multi-checkbox': 'multiCheckClick',
-      'click .select-multi-checkbox label': 'multiCheckLabelClick'
+      'click .select-multi-checkbox label': 'multiCheckLabelClick',
+      'click .select-checkbox': 'checkClick'
     },
 
     multiCheckLabelClick: function(ev){
@@ -40,6 +41,12 @@
           $(region).find('input[type="checkbox"]').prop("checked", false);
         }
       });
+    },
+
+    checkClick: function(ev){
+      if( $(ev.currentTarget).closest('.select-multi-items') ){
+        this.updateCounts();
+      }
     },
 
 
