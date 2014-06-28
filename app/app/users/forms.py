@@ -83,7 +83,7 @@ class UserForm(forms.ModelForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         if username != self.instance.username and User.objects.filter(username=username).exists():
-            raise forms.ValidationError(_('This username is already in used'))
+            raise forms.ValidationError(_('This username is already in use'))
         return username
 
 
