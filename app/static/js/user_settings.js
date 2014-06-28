@@ -166,6 +166,9 @@
     },
 
     initialize : function(){
+      var that = this;
+      var $settingAvatar = $('.settingavatar').find('img');
+      var $profileMenuAvatar = $('#view-profile-menu').find('img');
       $('#changeavatardialog').on('hidden.bs.modal', function () {
         $('#profile_change_stuff').empty();
         var href = document.getElementById('changeavatar').href;
@@ -174,16 +177,19 @@
           url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'80'
         });
         dfrd.done(function(data){
-          $('#settingavatar>img').attr('src',data.avatar+'?' + new Date().getTime());
+          that.updateImage($settingAvatar, data);
         });
         var dfrd2 = $.ajax({
           url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'50'
         });
         dfrd2.done(function(data){
-          $('.navavatar img').attr('src',data.avatar+'?' + new Date().getTime());
+          that.updateImage($profileMenuAvatar, data);
         });
       });
       return this;
+    },
+    updateImage: function ($img, data) {
+      $img.attr('src', data.avatar + '?' + new Date().getTime());
     }
   });
 

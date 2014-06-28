@@ -41,6 +41,13 @@
         {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.{% endblocktrans %}
       </p>
       <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ user_form.username.auto_id }}">{%trans "Username"%}</label>
+          {% render_field user_form.username class="form-control input-sm" placeholder="" %}
+          {{ user_form.username.errors }}
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-xs-6">
           <label for="{{ user_form.first_name.auto_id }}">{%trans "First Name"%}</label>
           {% render_field user_form.first_name class="form-control input-sm" placeholder="" %}
