@@ -33,7 +33,7 @@ class MarketItem(models.Model):
     title = models.CharField(_('title'), max_length=200, blank=False)
     details = tinymodels.HTMLField(_('details'), blank=False)
     interests = models.ManyToManyField(user_models.Interest, null=True, blank=True)
-    specific_skill = models.CharField(_('Specific skill'), max_length=25, blank=True, null=True)
+    specific_skill = models.CharField(_('Specific skill'), max_length=100, blank=True, null=True)
     url = models.CharField(_('URL Link'), max_length=500, blank=True)
     published = models.BooleanField(_('is published?'), default=True)
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
