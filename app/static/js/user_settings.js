@@ -5,11 +5,8 @@
       'click #changeavatar': 'ShowAvChange',
       'click #changepassword' : 'ShowChangePass',
       'click .select-checkbox': 'checkClick',
-
-      //selecting tabs
-      //'click #personal-select': 'showPersonal',
-      //'click #skills-select': 'showSkills',
-      //'click #security-select': 'showSecurity'
+      'click .select-multi-checkbox': 'multiCheckClick',
+      'click .select-multi-checkbox label': 'multiCheckLabelClick'
     },
 
     showPersonal: function(ev) {
@@ -33,17 +30,54 @@
     showSecurity: function(ev){
       $('#personal-tab').hide();
       $('#personal-select').removeClass("selected");
-
       $('#skills-tab').hide();
       $('#skills-select').removeClass("selected");
-
       $('#security-tab').show();
       $('#security-select').addClass("selected");
+    },
+
+    multiCheckLabelClick: function(ev){
+      ev.stopPropagation();
+      var currentState = $(ev.currentTarget).parent().find('input[type="checkbox"]').prop("checked");
+      $(ev.currentTarget).parent().find('input[type="checkbox"]').prop("checked", !currentState);
+      var countries = $(ev.currentTarget).closest('.row').next('.select-multi-items').find('input[type="checkbox"]');
+      _.each(countries, function(country){
+        $(country).prop("checked", !currentState);
+        if(currentState){
+          $(country).parent('.select-checkbox').removeClass("checked");
+        } else {
+          $(country).parent('.select-checkbox').addClass("checked");
+        }
+      });
+      this.updateCounts();
+    },
+
+    multiCheckClick: function(ev){
+      $(ev.currentTarget).toggleClass('selected');
+      $(ev.currentTarget).closest('.row').next('.select-multi-items').toggle();
+    },
+
+    updateCounts: function(){
+      var regions = $('.select-multi-checkbox');
+      _.each(regions, function(region){
+        var totalItems = $(region).closest('.row').next('.select-multi-items').find('input[type="checkbox"]').length;
+        var checkedItems = $(region).closest('.row').next('.select-multi-items').find('input[type="checkbox"]:checked').length;
+        if (totalItems === checkedItems) {
+          $(region).find('.select-count').text("All Selected");
+          $(region).find('input[type="checkbox"]').prop("checked", true);
+        } else {
+          $(region).find('.select-count').text(checkedItems + " Selected");
+          $(region).find('input[type="checkbox"]').prop("checked", false);
+        }
+      });
     },
 
     checkClick: function(ev){
       $(ev.currentTarget).find('input[type="checkbox"]').prop("checked", !$(ev.currentTarget).find('input[type="checkbox"]').prop("checked"));
       $(ev.currentTarget).toggleClass("checked");
+      if( $(ev.currentTarget).closest('.select-multi-items') ){
+        this.updateCounts();
+      }
     },
 
     ShowChangePass:function(ev){
@@ -183,6 +217,7 @@
           $('.navavatar img').attr('src',data.avatar+'?' + new Date().getTime());
         });
       });
+      this.updateCounts();
       return this;
     }
   });

@@ -1,0 +1,553 @@
+[
+  {
+    "pk": 1000,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Algeria",
+      "countries": "Algeria",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1001,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Angola",
+      "countries": "Angola",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1002,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Congo",
+      "countries": "Congo",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1003,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Cote d'Ivoire",
+      "countries": "Cote d'Ivoire",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1004,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Uganda",
+      "countries": "Uganda",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1005,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Uganda",
+      "countries": "Uganda",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1006,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Kenya",
+      "countries": "Kenya",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1007,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Madagascar",
+      "countries": "Madagascar",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1008,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Niger",
+      "countries": "Niger",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1009,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Nigeria",
+      "countries": "Nigeria",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1010,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Burkina Faso",
+      "countries": "Burkina Faso",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1011,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Tanzania",
+      "countries": "Tanzania",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1012,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Ethiopia",
+      "countries": "Ethiopia",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1013,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Morocco",
+      "countries": "Morocco",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1014,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Mozambique",
+      "countries": "Mozambique",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1015,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Egypt",
+      "countries": "Egypt",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1016,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Malawi",
+      "countries": "Malawi",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1017,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Cameroon",
+      "countries": "Cameroon",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1018,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Sudan",
+      "countries": "Sudan",
+      "region": 100
+    }
+  },
+  {
+    "pk": 1019,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Burma",
+      "countries": "Burma",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1020,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Cambodia",
+      "countries": "Cambodia",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1021,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "China",
+      "countries": "China",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1022,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Ukraine",
+      "countries": "Ukraine",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1023,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Vietnam",
+      "countries": "Vietnam",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1024,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Kazakhstan",
+      "countries": "Kazakhstan",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1025,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Bangladesh",
+      "countries": "Bangladesh",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1026,
+    "model": "users.countries",
+    "fields": {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Bangladesh",
+      "countries": "Bangladesh",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1027,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Sri Lanka",
+      "countries": "Sri Lanka",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1028,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Uzbekistan",
+      "countries": "Uzbekistan",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1029,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Malaysia",
+      "countries": "Malaysia",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1030,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Nepal",
+      "countries": "Nepal",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1031,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "North Korea",
+      "countries": "North Korea",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1032,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Russia",
+      "countries": "Russia",
+      "region": 101
+    }
+  },
+  {
+    "pk": 1033,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Iraq",
+      "countries": "Iraq",
+      "region": 102
+    }
+  },
+  {
+    "pk": 1034,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Pakistan",
+      "countries": "Pakistan",
+      "region": 102
+    }
+  },
+  {
+    "pk": 1035,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Saudi Arabia",
+      "countries": "Saudi Arabia",
+      "region": 102
+    }
+  },
+  {
+    "pk": 1036,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Syria",
+      "countries": "Syria",
+      "region": 102
+    }
+  },
+  {
+    "pk": 1037,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Turkey",
+      "countries": "Turkey",
+      "region": 102
+    }
+  },
+  {
+    "pk": 1038,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Yemen",
+      "countries": "Yemen",
+      "region": 102
+    }
+  },
+  {
+    "pk": 1039,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Iran",
+      "countries": "Iran",
+      "region": 102
+    }
+  },
+  {
+    "pk": 1040,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Afghanistan",
+      "countries": "Afghanistan",
+      "region": 102
+    }
+  },
+  {
+    "pk": 1041,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Tajikistan",
+      "countries": "Tajikistan",
+      "region": 102
+    }
+  },
+  {
+    "pk": 1042,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Venezuela",
+      "countries": "Venezuela",
+      "region": 103
+    }
+  },
+  {
+    "pk": 1043,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Guatemala",
+      "countries": "Guatemala",
+      "region": 103
+    }
+  },
+  {
+    "pk": 1044,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Ecuador",
+      "countries": "Ecuador",
+      "region": 103
+    }
+  },
+  {
+    "pk": 1045,
+    "model": "users.countries",
+    "fields":
+    {
+      "countries_ru": "",
+      "countries_ar": "",
+      "countries_en": "Colombia",
+      "countries": "Colombia",
+      "region": 103
+    }
+  }
+]

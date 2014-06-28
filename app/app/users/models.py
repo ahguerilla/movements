@@ -32,6 +32,7 @@ class Issues(models.Model):
 
 class Countries(models.Model):
     countries = models.CharField(_('countries of interest'), max_length=255, null=True)
+    region = models.ForeignKey('Region', null=True)
 
     def __unicode__(self):
         return self.countries
