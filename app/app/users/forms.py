@@ -195,11 +195,11 @@ class SettingsForm(forms.ModelForm):
 class MoreAboutYouForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('languages', 'interests', 'regions')
+        fields = ('languages', 'interests', 'countries')
         widgets = {
-            'languages': forms.CheckboxSelectMultiple(),
-            'interests': forms.CheckboxSelectMultiple(),
-            'regions': forms.CheckboxSelectMultiple()
+            'languages': CheckboxSelectMultiple(),
+            'interests': CheckboxSelectMultiple(),
+            'countries': RegionAccordionSelectMultiple()
         }
 
     def save(self, commit=True):

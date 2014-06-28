@@ -58,21 +58,7 @@
           <p>
             {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
           </p>
-          {% for val, name in languages %}
-            {% if forloop.counter0|divisibleby:3 %}
-            <div class="row">
-            {% endif %}
-              <div class="col-xs-4">
-                <div class="select-checkbox">
-                  <input type="checkbox" id="languages_{{ forloop.counter0 }}" value="{{ val }}" name="languages">
-                  <label for="checkboxFiveInput"></label>
-                  <div class="select-label">{{ name }}</div>
-                </div>
-              </div>
-            {% if forloop.last or forloop.counter|divisibleby:3 %}
-             </div>
-            {% endif %}
-          {% endfor %}
+          {{ settings_form.languages }}
         </div>
         <div class="row action-text">
           <div class="col-sm-offset-2 col-sm-2 form-main-button">
@@ -85,26 +71,12 @@
       </div> <!-- End Languages -->
 
       <div id="step3" class="step" style="display: none;" > <!-- Start Regions -->
-        <div class="form-title"><h1>{% trans "Regions" %}</h1></div>
+        <div class="form-title"><h1>{% trans "Countries" %}</h1></div>
         <div class="form-select-multi">
           <p>
             {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
           </p>
-          {% for val, name in regions %}
-            {% if forloop.counter0|divisibleby:3 %}
-            <div class="row">
-            {% endif %}
-              <div class="col-xs-4">
-                <div class="select-checkbox">
-                  <input type="checkbox" id="regions_{{ forloop.counter0 }}" value="{{ val }}" name="regions">
-                  <label for="checkboxFiveInput"></label>
-                  <div class="select-label">{{ name }}</div>
-                </div>
-              </div>
-            {% if forloop.last or forloop.counter|divisibleby:3 %}
-             </div>
-            {% endif %}
-          {% endfor %}
+          {{ settings_form.countries }}
         </div>
         <div class="row action-text">
           <div class="col-sm-offset-2 col-sm-2 form-main-button">
@@ -122,21 +94,7 @@
           <p>
             {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
           </p>
-          {% for val, name in interests %}
-            {% if forloop.counter0|divisibleby:3 %}
-            <div class="row">
-            {% endif %}
-              <div class="col-xs-4">
-                <div class="select-checkbox">
-                  <input type="checkbox" id="interests_{{ forloop.counter0 }}" value="{{ val }}" name="interests">
-                  <label for="checkboxFiveInput"></label>
-                  <div class="select-label">{{ name }}</div>
-                </div>
-              </div>
-            {% if forloop.last or forloop.counter|divisibleby:3 %}
-             </div>
-            {% endif %}
-          {% endfor %}
+          {{ settings_form.interests }}
         </div>
         <div class="row action-text">
           <div class="col-sm-offset-2 col-sm-2 form-main-button">
@@ -175,6 +133,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
     window.ahr.widgets.initMoreAboutYou();
+    window.ahr.widgets.initAccordionView();
   });
 </script>
 {% endblock %}
