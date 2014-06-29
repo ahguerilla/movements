@@ -34,63 +34,49 @@
       </ul>
     </div>
   </div>
-
-{#        {% if user.is_authenticated %}#}
-{#          <% if (stick) { %>#}
-{#            <a href="<%- window.ahr.app_urls.setMarketItemunStick+pk %>" item_id="<%- pk %>" class="marketitem-unstick toggle-stick pull-right">Unstick</a>#}
-{#          <% } else { %>#}
-{#            <a href="<%- window.ahr.app_urls.setMarketItemStick+pk %>" item_id="<%- pk %>" class="marketitem-stick toggle-stick pull-right">Stick</a>#}
-{#          <% } %>#}
-{#          <% if (hidden) { %>#}
-{#            <a clas href="<%- window.ahr.app_urls.setMarketItemunHide+pk %>" item_id="<%- pk %>" class="show-hidden-item-link unhide-item toggle-hidden">Show</a>#}
-{#          <% } else { %>#}
-{#            <a href="<%- window.ahr.app_urls.setMarketItemHide+pk %>" item_id="<%- pk %>" class="hide-item toggle-hidden">Hide</a>#}
-{#          <% } %>#}
-{#        {% endif %}#}
-
 </script>
 <script type="text/template" id="featured_item_template">
-<div class="market-place-item featured featured-<%- item_type %> <%- item_type %> <% if(stick) { %>item-stuck<% } %> <% if (hidden) { %>item-hidden<% } %>"
-     data-item-id="<%- pk %>"
-     data-owner-id="<%- ownerid %>"
-     data-close-url="<%- close_url %>"
-     data-edit-url="<%- edit_url %>"
-     data-report-url="<%- report_url %>"
-     data-item-type="<%- item_type %>"
-     data-has-edit="<%- hasEdit %>"
-     data-attributes-url="<%- attributes_url %>">
-  <div class="header">
-    <a class="share-twitter"><img src="{{ STATIC_URL }}images/v2/twitter.png"/></a>
-    <div class="item-menu-container">
-      <a class="item-menu" href="#">
-        <img src="{{ STATIC_URL }}images/v2/item_menu_icon.png"/>
-      </a>
+  <div class="market-place-item featured featured-<%- item_type %> <%- item_type %> <% if(stick) { %>item-stuck<% } %> <% if (hidden) { %>item-hidden<% } %>"
+       data-item-id="<%- pk %>"
+       data-owner-id="<%- ownerid %>"
+       data-close-url="<%- close_url %>"
+       data-edit-url="<%- edit_url %>"
+       data-report-url="<%- report_url %>"
+       data-item-type="<%- item_type %>"
+       data-has-edit="<%- hasEdit %>"
+       data-attributes-url="<%- attributes_url %>">
+    <div class="header">
+      <a class="share-twitter"><img src="{{ STATIC_URL }}images/v2/twitter.png"/></a>
+      <div class="item-menu-container">
+        <a class="item-menu" href="#">
+          <img src="{{ STATIC_URL }}images/v2/item_menu_icon.png"/>
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="feature-type">
-    <% if (item_type == 'offer') { %>
-      {% trans "FEATURED OFFER" %}
-    <% } else if (item_type == 'request') { %>
-      {% trans "FEATURED REQUEST" %}
-    <% } %>
-  </div>
-  <a href="/market/<%- pk %>" alt="Open post">
-    <div class="title"><%- title %></div>
-    <div class="details">
-      <%- item_type_display %>
-      by <a href="/user/profile/<%- owner %>"><%- owner %></a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
-      <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.
+    <div class="feature-type">
+      <% if (item_type == 'offer') { %>
+        {% trans "FEATURED OFFER" %}
+      <% } else if (item_type == 'request') { %>
+        {% trans "FEATURED REQUEST" %}
+      <% } %>
     </div>
-  </a>
-</div>
+    <a href="/market/<%- pk %>" alt="Open post">
+      <div class="title"><%- title %></div>
+      <div class="details">
+        <%- item_type_display %>
+        by <a href="/user/profile/<%- owner %>"><%- owner %></a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
+        <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.
+      </div>
+    </a>
+  </div>
 </script>
 <script type="text/template" id="item-menu-template">
   <%
      var actions = [];
-     if (!isFeatured) {
+     if (showHide) {
        actions.push({display: 'Hide', value: 'hide', toggle: true});
      }
-     if (!isProfile && !isFeatured) {
+     if (showSticky) {
        actions.push({display: 'Stick', value: 'stick', toggle: true});
      }
      if (hasEdit) {
