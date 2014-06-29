@@ -21,6 +21,9 @@ $dropdown-select-color = #ff6d50
 $hr-color = #CDCBCC
 $danger-bg-color = #FFBEB2
 $warn-color = #ff0000
+$hidden-item-color = #FBFAFB
+$hidden-offer-color = #7CA9BF
+$hidden-request-color = #FB9D9E
 
 // **************************************
 // font colors
@@ -920,8 +923,19 @@ popoverDropdown(width)
     background $offer-color url('../images/v2/offer_icon.png') no-repeat 10px center
     .item-type
       color $offer-color
+
+#marketitems
+  .market-place-item.request.item-hidden
+    .item-type
+      color $hidden-request-color
+  .market-place-item.offer.item-hidden
+      .item-type
+        color $hidden-offer-color
   .market-place-item.item-hidden
-    opacity 0.5
+    .market-item-card
+      background-color $hidden-item-color
+      .title
+        color #8F8E8F
 
 #featured-marketitems
   .item-menu-container

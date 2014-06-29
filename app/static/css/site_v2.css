@@ -1136,9 +1136,17 @@ h6 {
 #stuck-marketitems .market-place-item.offer .item-type {
   color: #005d86;
 }
-#marketitems .market-place-item.item-hidden,
-#stuck-marketitems .market-place-item.item-hidden {
-  opacity: 0.5;
+#marketitems .market-place-item.request.item-hidden .item-type {
+  color: #fb9d9e;
+}
+#marketitems .market-place-item.offer.item-hidden .item-type {
+  color: #7ca9bf;
+}
+#marketitems .market-place-item.item-hidden .market-item-card {
+  background-color: #fbfafb;
+}
+#marketitems .market-place-item.item-hidden .market-item-card .title {
+  color: #8f8e8f;
 }
 #featured-marketitems .item-menu-container .popover {
   -webkit-border-radius: 0;
