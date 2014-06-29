@@ -1,10 +1,6 @@
 from django.conf.urls import patterns, url, include
 
 market_user_patterns = patterns('',
-    # Unsecured entry points
-    url(r'(?P<rtype>\S+)/unsecured/userprofile/get/(?P<username>\S+)$',
-        'app.market.api.views.users.get_profile_insecure',
-        name="get_userprofile_insecure"),
 
     # Secured entry points
     url(r'(?P<rtype>\S+)/avatar/get/(?P<obj_id>\d+)/(?P<size>\d+)$',
@@ -14,14 +10,6 @@ market_user_patterns = patterns('',
     url(r'(?P<rtype>\S+)/userprofile/get/(?P<username>\S+)$',
         'app.market.api.views.users.get_profile',
         name="get_userprofile"),
-
-    url(r'(?P<rtype>\S+)/users/get/count$',
-        'app.market.api.views.users.get_user_count',
-        name="get_usercount"),
-
-    url(r'(?P<rtype>\S+)/users/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
-        'app.market.api.views.users.get_users_fromto',
-        name="get_user_fromto"),
 
     url(r'(?P<rtype>\S+)/users/sendmessage/(?P<to_user>\S+)$',
         'app.market.api.views.users.send_message',
