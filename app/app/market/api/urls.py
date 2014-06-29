@@ -42,6 +42,10 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.get_featured_market_items',
         name="get_featured_market_items"),
 
+    url(r'^items/sticky',
+        'app.market.api.views.market.get_user_stickies',
+        name="get_user_stickies"),
+
     url(r'items/user/get/$',
         'app.market.api.views.market.get_market_items_user',
         name="get_market_items_user"),

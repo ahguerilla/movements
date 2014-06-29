@@ -124,7 +124,6 @@ $(function () {
       this.pageSize = options.pageSize;
       this.pageRange = options.pageRange;
       this.pageActive = options.pageActive;
-      this.init();
     },
 
     render: function () {
@@ -197,6 +196,7 @@ $(function () {
     noResultsString: "",
     is_featured: false,
     $itemContainer: null,
+    paginationView: null,
 
     types: {
       "Offers": "offer",
@@ -214,17 +214,16 @@ $(function () {
       this.getMarketItems = options.marketUrl;
       this.noResultsString = options.noResultsString;
       this.item_tmp = options.item_tmp || _.template($('#item_template').html());
-      this.$itemContainer = options.$itemContainer || $('#marketitems');
+      this.$itemContainer = this.$el.find('.item-container');
       this.filterView = options.filterView;
       this.isProfile = options.isProfile || false;
-      this.isFeatured = options.isFeatured || false;
       this.item_menu_template = _.template($('#item-menu-template').html());
       this.closeDialog = new ahr.CloseItemDialogView();
       this.reportDialog = new ahr.ReportPostView();
 
       var $pagination = this.$el.find('.pagination');
       if ($pagination.length) {
-        var pagination = new PaginationView({
+        this.paginationView = new PaginationView({
           el: $pagination,
           marketView: this,
           pageRange: 3,
@@ -232,17 +231,24 @@ $(function () {
         });
 
         if (this.filterView) {
+          var that = this;
           this.filterView.on('filter', function () {
-            pagination.init();
+            that.paginationView.init();
           });
         }
       }
 
-      if (this.isFeatured) {
-        this.initFeatured();
-      }
+      this.refresh();
 
       return this;
+    },
+
+    refresh: function() {
+      if (this.paginationView) {
+        this.paginationView.init();
+      } else {
+        this.initNoPagination();
+      }
     },
 
     createItemPopover: function($link) {
@@ -279,18 +285,23 @@ $(function () {
       }
     },
 
-    setItemAttibute: function($container, attribute, value) {
+    setItemAttibute: function($container, attribute, value, callback) {
       var data = {};
       data[attribute] = value;
-      var triggerFilter = function(){
-        this.filterView.trigger('filter');
+      var onSuccess = function(){
+        if (attribute == 'hidden') {
+          this.filterView.trigger('filter');
+        }
+        if (callback) {
+          callback();
+        }
       };
       $.ajax({
         url: $container.data('attributes-url'),
         method: 'POST',
         context: this,
         data: data,
-        success: triggerFilter
+        success: onSuccess
       });
       $container.data(attribute, value);
     },
@@ -317,7 +328,11 @@ $(function () {
         this.setItemAttibute($container, 'hidden', !$container.data('hidden'))
         remakePopover = true;
       } else if (action === 'stick') {
-        this.setItemAttibute($container, 'stick', !$container.data('stick'))
+        this.setItemAttibute($container, 'stick', !$container.data('stick'), function () {
+          if (stickyView) {
+            stickyView.refresh();
+          }
+        });
         remakePopover = true;
       } else if (action === 'edit') {
         window.location.href = $container.data('edit-url');
@@ -332,7 +347,9 @@ $(function () {
       }
     },
 
-    initFeatured: function () {
+    initNoPagination: function () {
+      this.$el.find('.ajaxloader').show();
+      this.$itemContainer.html('');
       var request = this.getItems();
       request.done(function (data) {
         this.render(data);
@@ -425,6 +442,7 @@ $(function () {
     }
   });
 
+  var stickyView = null;
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (options) {
     var filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills});
@@ -433,18 +451,23 @@ $(function () {
       el: '#market-main',
       filterView: filterView,
       marketUrl: ahr.app_urls.getMarketItems,
-      noResultsString: noResultsString,
-      isFeatured: false
+      noResultsString: noResultsString
     });
 
-    var featuredMarket = new MarketView({
+    new MarketView({
       el: '#featured-marketitems',
       marketUrl: ahr.app_urls.getFeaturedMarketItems,
       noResultsString: '<div style="font-size: 16px; font-weight:bold">No featured items</div>',
-      isFeatured: true,
-      $itemContainer: $('#featured-marketitems'),
       item_tmp: _.template($('#featured_item_template').html())
     });
+
+    stickyView = new MarketView({
+      el: '#stuck-marketitems',
+      marketUrl: ahr.app_urls.getStickyMarketItems,
+      noResultsString: '<div style="font-size: 16px; font-weight:bold">You have no stuck items</div>',
+      item_tmp: _.template($('#featured_item_template').html())
+    });
+
     document.title = window.ahr.string_constants.exchange;
   };
 

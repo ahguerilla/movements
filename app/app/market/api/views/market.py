@@ -28,15 +28,6 @@ def return_item_list(obj, rtype='json', request=None):
         mimetype="application/" + rtype)
 
 
-def get_stickies(request, sfrom, to):
-    sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
-    if 'types' in request.GET:
-        sticky_objs = sticky_objs.filter(Q(item__item_type__in=request.GET.getlist('types')))
-    sticky_objs = sticky_objs[sfrom:to]
-    obj = [i.item for i in sticky_objs]
-    return obj
-
-
 def get_raw(request, from_item=0, to_item=None,
             filter_by_owner=False, count=False, user_id=None):
     params = {
@@ -59,8 +50,7 @@ def get_raw(request, from_item=0, to_item=None,
 
     search = request.GET.get('search')
     if search:
-        market_items = SearchQuerySet().models(
-            market.models.MarketItem).filter(text=search)
+        market_items = SearchQuerySet().models(market.models.MarketItem).filter(text=search)
         if market_items:
             additional_filter = 'AND mi.id IN %(ids)s'
             params['ids'] = tuple(int(obj.pk) for obj in market_items)
@@ -81,7 +71,7 @@ def get_raw(request, from_item=0, to_item=None,
         select = """SELECT mi.*,
                            COUNT(DISTINCT market_marketitem_interests.interest_id) as tag_matches
         """
-        order_by = ' ORDER BY tag_matches DESC, pub_date DESC'
+        order_by = ' ORDER BY pub_date DESC'
 
     if count:
         select = 'SELECT COUNT(DISTINCT mi.id) '
@@ -112,6 +102,13 @@ def get_item_count(request, user_id=None, filter_by_user=False):
     cursor = connection.cursor()
     cursor.execute(*get_raw(request, count=True, user_id=user_id, filter_by_owner=filter_by_user))
     return cursor.fetchone()[0]
+
+
+@login_required
+def get_user_stickies(request):
+    market_items = market.models.MarketItem.objects.filter(marketitemstick__viewer_id=request.user.id)
+    market_json = get_market_json(market_items, request)
+    return HttpResponse(market_json, mimetype='application/json')
 
 
 @login_required

@@ -51,10 +51,19 @@
           <div class="ajaxloader">
             <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
           </div>
+          <div class="item-container"></div>
+        </div>
+        <br/>
+        <h2>Stickied Posts</h2>
+        <div id="stuck-marketitems">
+          <div class="ajaxloader">
+            <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
+          </div>
+          <div class="item-container"></div>
         </div>
       </div>
       <div class="col-md-8" id="market-main">
-        <div id="marketitems"></div>
+        <div id="marketitems" class="item-container"></div>
         <div class="ajaxloader">
           <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
         </div>
