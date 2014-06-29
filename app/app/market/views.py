@@ -9,20 +9,6 @@ from forms import RequestForm, OfferForm, save_market_item
 from models.market import MarketItem
 
 
-def get_user_tags(user):
-    all_skills = []
-    all_countris = []
-    all_issues = []
-    if hasattr(user, 'userprofile'):
-        all_skills = user.userprofile.skills.all()
-        all_countris = user.userprofile.countries.all()
-        all_issues = user.userprofile.issues.all()
-
-    return {'skills': [up.pk for up in all_skills],
-            'countries': [up.pk for up in all_countris],
-            'issues': [up.pk for up in all_issues]}
-
-
 @login_required
 def index(request):
     interests = Interest.objects.all()
@@ -30,7 +16,6 @@ def index(request):
                               {
                                   'title': 'Exchange',
                                   'help_text_template': 'market/copy/market_help.html',
-                                  'tags': get_user_tags(request.user),
                                   'interests': serializers.serialize('json', interests)
 
                               },

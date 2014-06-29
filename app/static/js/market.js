@@ -470,8 +470,6 @@ $(function () {
       marketUrl: ahr.app_urls.getStickyMarketItems,
       noResultsString: '<div style="font-size: 16px; font-weight:bold">You have no sticky items</div>'
     });
-
-    document.title = window.ahr.string_constants.exchange;
   };
 
   window.ahr.market.initProfile = function(userId){

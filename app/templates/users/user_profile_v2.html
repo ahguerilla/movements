@@ -142,8 +142,6 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
-      window.GuerillaMarket = window.GuerillaMarket || {};
-      window.GuerillaMarket.userDefaultTags = {'skills': [], 'issues': [], 'countries': []};
       var userId = null;
       {% if not is_self %}
       userId = {{ user_details.id }};

@@ -106,8 +106,6 @@
   {% compress js inline %}
     <script type="text/javascript">
       $(document).ready(function(){
-        window.GuerillaMarket = window.GuerillaMarket || {};
-        window.GuerillaMarket.userDefaultTags = {{tags|safe}};
         window.ahr.market.initMarket({
           skills: {{ interests|safe }}
         });
