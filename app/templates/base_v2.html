@@ -55,7 +55,7 @@
           <div class="menu-icon"></div>
           <div class="action-font">Menu</div>
         </div>
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and not user.userprofile.first_login %}
         <div class="nav-avatar avatar" id="view-profile-menu">
           {% primary_avatar user 30 %}
           <div class="action-font">Profile</div>
@@ -63,7 +63,7 @@
         </div>
         {% endif %}
       </div>
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and not user.userprofile.first_login %}
       <div class="navbar-right">
         <a id="add-post" class="btn btn-action"><img src="{{ STATIC_URL }}images/v2/add_icon.png"/> Add Post</a>
         <div id="add-post-popup-container"></div>
@@ -232,8 +232,7 @@
 {% endblock %}
 {% render_block "js" %}
 
-<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
-{% if user.is_authenticated %}
+{% if user.is_authenticated and not user.userprofile.first_login %}
   {% include "market/clientside/notifications.html" %}
   <script type="text/javascript" id="notifications_view">
     (function () {
