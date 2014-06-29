@@ -27,6 +27,13 @@
 
           {{ form.interests }}
 
+          <label for="{{ form.specific_skill.auto_id }}">{% trans 'Other' %}</label>
+          <div class="form-group">
+            <div class="col-xs-12">
+              {% render_field form.specific_skill class="form-control" placeholder="" %}
+              {{ form.specific_skill.errors }}
+            </div>
+          </div>
         </div>
       </div>
 
