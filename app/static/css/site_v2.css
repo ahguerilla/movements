@@ -961,7 +961,7 @@ h6 {
 .exchange-filters .hidden-menu li.active a {
   border-bottom: 2px solid #756b65;
 }
-.featured-col h2 {
+#itemandsearchwrap h2 {
   font-size: 18px;
   margin: 0 0 10px 0;
   color: #756b65;
