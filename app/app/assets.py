@@ -15,7 +15,6 @@ js = Bundle(
         './js/lib/jquery.blockUI.js',
         './js/lib/jquery.mCustomScrollbar.min.js',
         './js/lib/jstz.js',
-        './js/lib/jquery.backstretch.min.js',
         './js/lib/masonry.pkgd.js',
         './js/lib/jquery.cookie.js',
         './js/app_common.js',
