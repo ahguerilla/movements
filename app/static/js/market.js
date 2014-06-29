@@ -218,12 +218,30 @@ $(function () {
       this.filterView = options.filterView;
       this.isProfile = options.isProfile || false;
       this.isFeatured = options.isFeatured || false;
-      if (this.isFeatured) {
-        this.initFeatured();
-      }
       this.item_menu_template = _.template($('#item-menu-template').html());
       this.closeDialog = new ahr.CloseItemDialogView();
       this.reportDialog = new ahr.ReportPostView();
+
+      var $pagination = this.$el.find('.pagination');
+      if ($pagination.length) {
+        var pagination = new PaginationView({
+          el: $pagination,
+          marketView: this,
+          pageRange: 3,
+          pageActive: 1
+        });
+
+        if (this.filterView) {
+          this.filterView.on('filter', function () {
+            pagination.init();
+          });
+        }
+      }
+
+      if (this.isFeatured) {
+        this.initFeatured();
+      }
+
       return this;
     },
 
@@ -411,23 +429,14 @@ $(function () {
   window.ahr.market.initMarket = function (options) {
     var filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills});
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Your filter selection does not match any posts</div>';
-    var market = new MarketView(
-      {
-        el: '#market-main',
-        filterView: filterView,
-        marketUrl: ahr.app_urls.getMarketItems,
-        noResultsString: noResultsString,
-        isFeatured: false
-      });
-    var pagination = new PaginationView({
-      el: '#itemandsearchwrap .pagination',
-      marketView: market,
-      pageRange: 3,
-      pageActive: 1
+    var market = new MarketView({
+      el: '#market-main',
+      filterView: filterView,
+      marketUrl: ahr.app_urls.getMarketItems,
+      noResultsString: noResultsString,
+      isFeatured: false
     });
-    filterView.on('filter', function () {
-      pagination.init();
-    });
+
     var featuredMarket = new MarketView({
       el: '#featured-marketitems',
       marketUrl: ahr.app_urls.getFeaturedMarketItems,
@@ -442,28 +451,18 @@ $(function () {
   window.ahr.market.initProfile = function(userId){
     var filterView = new ProfileFilterView()
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">No posts available<div>';
-
     var marketUrl = ahr.app_urls.getMarketItemsUser;
+
     if(userId) {
       marketUrl =  ahr.app_urls.getMarketItemsUser + userId;
     }
 
-    var market = new MarketView(
-      {
-        el: '#profile-view',
-        filterView: filterView,
-        marketUrl: marketUrl,
-        noResultsString: noResultsString,
-        isProfile: true
-      });
-    var pagination = new PaginationView({
-      el: '#profile-view .pagination',
-      marketView: market,
-      pageRange: 3,
-      pageActive: 1
-    });
-    filterView.on('filter', function () {
-      pagination.init();
+    var market = new MarketView({
+      el: '#profile-view',
+      filterView: filterView,
+      marketUrl: marketUrl,
+      noResultsString: noResultsString,
+      isProfile: true
     });
   }
 
