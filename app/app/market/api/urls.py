@@ -39,24 +39,6 @@ market_user_patterns = patterns('',
         'app.market.api.views.users.get_usernames',
         name="user_get_usernames"),
 
-    url(r'(?P<rtype>\S+)/issues/get$',
-        'app.market.api.views.misc.get_issues',
-        name="get_issues"),
-
-    url(r'(?P<rtype>\S+)/countries/get$',
-        'app.market.api.views.misc.get_countries',
-        name="get_countries"),
-
-    url(r'(?P<rtype>\S+)/nationalities/get$',
-        'app.market.api.views.misc.get_nationalities',
-        name="get_nationalities"),
-
-    url(r'(?P<rtype>\S+)/skills/get$',
-        'app.market.api.views.misc.get_skills_old',
-        name="get_skills_old"),
-    url(r'skills/get$',
-        'app.market.api.views.misc.get_skills', name="get_skills"),
-
     url(r'(?P<rtype>\S+)/message/get/count$',
         'app.market.api.views.misc.get_unreadCount',
         name="get_messagecount"),

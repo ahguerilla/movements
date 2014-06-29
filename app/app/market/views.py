@@ -1,14 +1,10 @@
-import datetime
-
+from django.contrib.auth.decorators import login_required
+from django.core import serializers
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
-from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
-from postman.models import Message
-from django.db.models import Q
-from django.http import Http404
 
-from app.users.models import Interest, UserProfile
+from app.users.models import Interest
 from forms import RequestForm, OfferForm, save_market_item
 from models.market import MarketItem
 
@@ -29,12 +25,14 @@ def get_user_tags(user):
 
 @login_required
 def index(request):
+    interests = Interest.objects.all()
     return render_to_response('market/market.html',
                               {
                                   'title': 'Exchange',
                                   'help_text_template': 'market/copy/market_help.html',
-                                  'init': 'market',
-                                  'tags': get_user_tags(request.user)
+                                  'tags': get_user_tags(request.user),
+                                  'interests': serializers.serialize('json', interests)
+
                               },
                               context_instance=RequestContext(request))
 
@@ -112,25 +110,4 @@ def notifications(request):
 
 @login_required
 def permanent_delete_postman(request):
-    # There is only one row for both users, deleting will delete for both users
     return redirect(reverse('postman_trash'))
-    tpks = request.POST.getlist('tpks')
-    pks = request.POST.getlist('pks')
-    user = request.user
-    if pks or tpks:
-        filter = Q(pk__in=pks) | Q(thread__in=tpks)
-        recipient_rows = Message.objects.as_recipient(user, filter).delete()
-        sender_rows = Message.objects.as_sender(user, filter).delete()
-    return redirect(reverse('postman_trash'))
-
-
-def preview(request, obj_type, obj_id):
-    return render_to_response('market/preview.html',
-                              {
-                                  'title': 'Recommendation',
-                                  'help_text_template': 'market/copy/recommendation_help.html',
-                                  'init': 'recommendation',
-                                  'obj_type': obj_type,
-                                  'obj_id': obj_id
-                              },
-                              context_instance=RequestContext(request))

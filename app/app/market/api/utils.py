@@ -42,8 +42,9 @@ def get_val_errors(form):
              'errors' : errors }
 
 
-def value(atype,objs,**kwargs):
-    return serializers.serialize(atype,objs,**kwargs)
+def value(atype, objs, **kwargs):
+    return serializers.serialize(atype, objs, **kwargs)
+
 
 def check_perms_and_get(object_class):
     def __decorator(view_func):

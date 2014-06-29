@@ -63,7 +63,6 @@
 
 {% block endjavascript %}
   <script type="text/template" id="skill-filter-list-template">
-{#    <% var skills = ['Lawyer', 'Writer', 'Media Producer', 'Journalist']; %>#}
     <ul class="skill-filter">
       <% _.each(skills, function(skill) { %>
       <li><a href="#" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
@@ -108,13 +107,8 @@
       $(document).ready(function(){
         window.GuerillaMarket = window.GuerillaMarket || {};
         window.GuerillaMarket.userDefaultTags = {{tags|safe}};
-        var dfrd = window.ahr.getStatics();
-        dfrd.done(function(){
-          if("{{init}}"=="market"){
-            window.ahr.market.initMarket({{tags|safe}});
-          }else if("{{init}}"=="posts"){
-            window.ahr.posts.initPosts({{tags|safe}});
-          }
+        window.ahr.market.initMarket({
+          skills: {{ interests|safe }}
         });
       });
     </script>

@@ -4,11 +4,6 @@
 <script type="text/javascript" id="api_urls">
   window.ahr = window.ahr || {};
   window.ahr.app_urls = {
-    getissues: "{% url 'get_issues' 'json' %}",
-    getskills: "{% url 'get_skills_old' 'json' %}",
-    getSkills: "{% url 'get_skills' %}",
-    getcountries: "{% url 'get_countries' 'json' %}",
-
     {% if user.is_authenticated %}
       postmanwrite: "{% url 'postman_write' 'a' %}".slice(0,-1),
       postmanreply: "{% url 'postman_reply' 0 %}".slice(0,-1),
@@ -23,7 +18,6 @@
       changepassword : "{% url 'account_change_password' %}",
       setpassword: "{% url 'account_set_password' %}",
 
-      getNationalities: "{% url 'get_nationalities' 'json' %}",
       getmessagecount: "{% url 'get_messagecount' 'json' %}",
 
       market: "{% url 'show_market' %}",

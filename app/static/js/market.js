@@ -12,19 +12,15 @@ $(function () {
       'click .skill-filter a': 'setSkillsFilter'
     },
 
-    initialize: function() {
+    initialize: function(options) {
       var $skills = this.$el.find('a.skills');
       var $container = $skills.parent().find('.popover-container');
-      $.get(window.ahr.app_urls.getSkills, function (data) {
-        $skills.popover({
-        title: '',
-        html: true,
-        content: _.template(
-              $('#skill-filter-list-template').html(),
-              {skills: data}),
-          container: $container,
-          placement: 'bottom'
-        });
+      $skills.popover({
+      title: '',
+      html: true,
+      content: _.template($('#skill-filter-list-template').html(), {skills: options.skills}),
+        container: $container,
+        placement: 'bottom'
       });
 
       var $regions = this.$el.find('a.regions');
@@ -414,8 +410,8 @@ $(function () {
   });
 
   window.ahr.market = window.ahr.market || {};
-  window.ahr.market.initMarket = function (filters) {
-    var filterView = new MarketFilterView({el: '#exchange-filters'});
+  window.ahr.market.initMarket = function (options) {
+    var filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills});
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Your filter selection does not match any posts<div>';
     var market = new MarketView(
       {
