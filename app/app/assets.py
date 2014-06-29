@@ -14,7 +14,6 @@ js = Bundle(
         './js/base.js',
         './js/market.js',
         './js/messages.js',
-        './js/recommendation.js',
         './js/more_about_you.js',
         './js/user_settings.js',
         './js/create_post.js',
