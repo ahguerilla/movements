@@ -104,30 +104,6 @@ def edit_request(request, post_id):
 
 
 @login_required
-def users(request):
-    return render_to_response('market/market.html',
-                              {
-                                  'title': 'Members',
-                                  'help_text_template': 'market/copy/user_help.html',
-                                  'init': 'users',
-                                  'tags': get_user_tags(request.user)
-                              },
-                              context_instance=RequestContext(request))
-
-
-@login_required
-def posts(request):
-    return render_to_response('market/market.html',
-                              {
-                                  'title': 'My Posts',
-                                  'help_text_template': 'market/copy/myposts_help.html',
-                                  'init': 'posts',
-                                  'tags': get_user_tags(request.user)
-                              },
-                              context_instance=RequestContext(request))
-
-
-@login_required
 def notifications(request):
     return render_to_response('market/notifications.html',
         {},

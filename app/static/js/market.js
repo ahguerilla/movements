@@ -194,7 +194,15 @@ $(function () {
     }
   })
 
-  var MarketView = window.ahr.market.MarketBaseView.extend({
+  var MarketView = window.ahr.BaseView.extend({
+    loadingPage: false,
+    allItemsLoaded: false,
+    loadedOnce: false,
+    currentCall: null,
+    noResultsString: "",
+    is_featured: false,
+    $itemContainer: null,
+
     types: {
       "Offers": "offer",
       "Request": "request"
@@ -212,9 +220,7 @@ $(function () {
       this.noResultsString = options.noResultsString;
       this.item_tmp = options.item_tmp || _.template($('#item_template').html());
       this.$itemContainer = options.$itemContainer || $('#marketitems');
-      if(options.filterView) {
-        this.init(options.filterView);
-      }
+      this.filterView = options.filterView;
       this.isProfile = options.isProfile || false;
       this.isFeatured = options.isFeatured || false;
       if (this.isFeatured) {
@@ -318,19 +324,98 @@ $(function () {
       request.done(function (data) {
         that.render(data, that);
       });
+    },
+
+    clearMarketPage: function () {
+      this.$itemContainer.empty();
+      if (this.currentCall) {
+        this.currentCall.abort();
+        this.currentCall = null;
+      }
+      this.allItemsLoaded = false;
+      this.loadingPage = false;
+    },
+
+    loadPage: function (page) {
+      var that = this;
+      if (!that.loadingPage && !that.allItemsLoaded) {
+        that.loadingPage = true;
+
+        this.clearMarketPage();
+        $('#ajaxloader').show();
+
+        var dfrd = that.getItems(page);
+
+        this.currentCall = dfrd;
+
+        dfrd.done(function (data) {
+          that.currentCall = null;
+          $('#no-search-result').remove();
+          $('#ajaxloader').hide();
+
+          that.hasItem = false;
+          that.render(data, that);
+          if (!that.hasItem) {
+            that.allItemsLoaded = true;
+            that.noSearchResult();
+          }
+          that.loadingPage = false;
+        });
+        return dfrd;
+      }
+    },
+
+    noSearchResult: function () {
+      if ($('.market-place-item').length === 0) {
+        this.$itemContainer.append(this.noResultsString);
+        $('#pagination').hide();
+      }
+    },
+
+    getItems: function (page) {
+      var data = {};
+      if (this.filterView) {
+        this.filterView.setFilter(data);
+      }
+      if (page) {
+        data.page = page;
+      }
+      return $.ajax({
+        url: this.getMarketItems,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: data,
+        traditional: true
+      });
+    },
+
+    render: function (data, that) {
+      _.each(data, function (item) {
+        if (item.page_count) {
+          that.pageCount = item.page_count;
+          that.pageActive = item.current_page;
+          that.pageSize = item.page_size;
+        } else {
+          that.hasItem = true;
+          item.fields.pk = item.pk;
+          var item_html = that.item_tmp(item.fields);
+          that.$itemContainer.append(item_html);
+          $('.tm-tag').each(function () {
+            var txt = $('span', $(this)).text();
+            $('.tag-button:contains(' + txt + ')').css('background-color', '#cccccc');
+          });
+        }
+      });
+    },
+
+    scrollBack: function () {
+      $(window).scrollTop(this.scroll);
     }
   });
 
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (filters) {
     var filterView = new MarketFilterView({el: '#exchange-filters'});
-//    var noResultsString = ['<p style="margin-top:20px;float:left;width:100%;text-align:center;" id="no-search-result">',
-//        window.ahr.string_constants.market_search_no_match_a,
-//        '<a href="#" id="searchagainall">',
-//        window.ahr.string_constants.market_search_no_match_b + '</a>' + window.ahr.string_constants.market_search_no_match_c,
-//        '<a href="#" id="searchwithdefaults">' ,
-//        window.ahr.string_constants.market_search_no_match_d,
-//        '</a></p>'].join(' ');
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Your filter selection does not match any posts<div>';
     var market = new MarketView(
       {
