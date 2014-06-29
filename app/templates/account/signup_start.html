@@ -17,7 +17,7 @@
         <div class="col-xs-12">
           {{ form.non_field_errors }}
           <label for="email">{%trans "Email"%}</label>
-          {% render_field form.email class="form-control input-sm" maxlength="30" required="true" %}
+          {% render_field form.email class="form-control input-sm" required="true" %}
           {{ form.email.errors }}
         </div>
       </div>

@@ -300,6 +300,7 @@ def signup_start(request):
         context_instance=RequestContext(request))
 
 
+@login_required
 def more_about_you(request):
     form = MoreAboutYouForm(request.POST or None,
                             instance=request.user.userprofile)
@@ -311,7 +312,7 @@ def more_about_you(request):
         "users/more_about_you.html",
         {
             'settings_form': form,
-         },
+        },
         context_instance=RequestContext(request))
 
 
