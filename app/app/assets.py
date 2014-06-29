@@ -5,16 +5,10 @@ js = Bundle(
         './js/lib/jquery-1.11.0.min.js',
         './js/lib/underscore-min.js',
         './js/lib/backbone-min.js',
-        './js/lib/jquery.ui.position.js',
         './js/lib/moment-with-langs.min.js',
         './js/lib/moment-timezone.min.js',
         './js/lib/bootstrap.min.js',
-        './js/lib/bootstrap-datetimepicker.min.js',
-        './js/lib/tagmanager.js',
         './js/lib/typeahead.js',
-        './js/lib/jquery.mCustomScrollbar.min.js',
-        './js/lib/jstz.js',
-        './js/lib/masonry.pkgd.js',
         './js/lib/jquery.cookie.js',
         './js/app_common.js',
         './js/base.js',
@@ -35,10 +29,7 @@ js = Bundle(
 css = Bundle(
     Bundle(
         './css/lib/bootstrap.css',
-        './css/lib/bootstrap-datetimepicker.min.css',
-        './css/lib/tagmanager.css',
         './css/lib/typeahead.css',
-        './css/lib/jquery.mCustomScrollbar.css',
         './css/lib/rateit.css'
     ),
     Bundle(
@@ -55,10 +46,7 @@ css = Bundle(
 css_v2 = Bundle(
     Bundle(
         './css/lib/bootstrap.css',
-        './css/lib/bootstrap-datetimepicker.min.css',
-        './css/lib/tagmanager.css',
         './css/lib/typeahead.css',
-        './css/lib/jquery.mCustomScrollbar.css',
         './css/lib/rateit.css',
         './css/fonts.css',
     ),
