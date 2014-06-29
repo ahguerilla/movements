@@ -533,7 +533,7 @@ h6 {
   font-family: "HurmeGeometricSans3-SemiBold";
   margin-bottom: 0;
 }
-#ajaxloader {
+.ajaxloader {
   text-align: center;
 }
 .errorlist {

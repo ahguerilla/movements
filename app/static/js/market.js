@@ -93,7 +93,6 @@ $(function () {
   });
 
   var PaginationView = Backbone.View.extend({
-    el: '#pagination',
     marketView: null,
     pageSize: null,
     pageRange: null,
@@ -314,11 +313,11 @@ $(function () {
         $popover.popover('toggle');
       }
     },
+
     initFeatured: function () {
-      var that = this;
-      var request = that.getItems();
+      var request = this.getItems();
       request.done(function (data) {
-        that.render(data, that);
+        this.render(data);
       });
     },
 
@@ -333,29 +332,20 @@ $(function () {
     },
 
     loadPage: function (page) {
-      var that = this;
-      if (!that.loadingPage && !that.allItemsLoaded) {
-        that.loadingPage = true;
+      if (!this.loadingPage && !this.allItemsLoaded) {
+        this.loadingPage = true;
 
         this.clearMarketPage();
-        $('#ajaxloader').show();
+        this.$el.find('.ajaxloader').show();
 
-        var dfrd = that.getItems(page);
+        var dfrd = this.getItems(page);
 
         this.currentCall = dfrd;
 
         dfrd.done(function (data) {
-          that.currentCall = null;
-          $('#no-search-result').remove();
-          $('#ajaxloader').hide();
-
-          that.hasItem = false;
-          that.render(data, that);
-          if (!that.hasItem) {
-            that.allItemsLoaded = true;
-            that.noSearchResult();
-          }
-          that.loadingPage = false;
+          this.currentCall = null;
+          this.render(data);
+          this.loadingPage = false;
         });
         return dfrd;
       }
@@ -364,7 +354,7 @@ $(function () {
     noSearchResult: function () {
       if ($('.market-place-item').length === 0) {
         this.$itemContainer.append(this.noResultsString);
-        $('#pagination').hide();
+        $('.pagination').hide();
       }
     },
 
@@ -379,20 +369,24 @@ $(function () {
       return $.ajax({
         url: this.getMarketItems,
         dataType: 'json',
+        context: this,
         contentType: "application/json; charset=utf-8",
         data: data,
         traditional: true
       });
     },
 
-    render: function (data, that) {
+    render: function (data) {
+      this.$el.find('.ajaxloader').hide();
+      var that = this;
+      var hasItem = false;
       _.each(data, function (item) {
         if (item.page_count) {
           that.pageCount = item.page_count;
           that.pageActive = item.current_page;
           that.pageSize = item.page_size;
         } else {
-          that.hasItem = true;
+          hasItem = true;
           item.fields.pk = item.pk;
           var item_html = that.item_tmp(item.fields);
           that.$itemContainer.append(item_html);
@@ -402,6 +396,10 @@ $(function () {
           });
         }
       });
+      if (!hasItem) {
+        this.allItemsLoaded = true;
+        this.noSearchResult();
+      }
     },
 
     scrollBack: function () {
@@ -412,16 +410,17 @@ $(function () {
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (options) {
     var filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills});
-    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Your filter selection does not match any posts<div>';
+    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Your filter selection does not match any posts</div>';
     var market = new MarketView(
       {
-        el: '#itemandsearchwrap',
+        el: '#market-main',
         filterView: filterView,
         marketUrl: ahr.app_urls.getMarketItems,
         noResultsString: noResultsString,
         isFeatured: false
       });
     var pagination = new PaginationView({
+      el: '#itemandsearchwrap .pagination',
       marketView: market,
       pageRange: 3,
       pageActive: 1
@@ -432,7 +431,7 @@ $(function () {
     var featuredMarket = new MarketView({
       el: '#featured-marketitems',
       marketUrl: ahr.app_urls.getFeaturedMarketItems,
-      noResultsString: noResultsString,
+      noResultsString: '<div style="font-size: 16px; font-weight:bold">No featured items</div>',
       isFeatured: true,
       $itemContainer: $('#featured-marketitems'),
       item_tmp: _.template($('#featured_item_template').html())
@@ -458,6 +457,7 @@ $(function () {
         isProfile: true
       });
     var pagination = new PaginationView({
+      el: '#profile-view .pagination',
       marketView: market,
       pageRange: 3,
       pageActive: 1
