@@ -28,10 +28,8 @@ def return_item_list(obj, rtype='json', request=None):
         mimetype="application/" + rtype)
 
 
-def get_stickies(request, hiddens, sfrom, to):
+def get_stickies(request, sfrom, to):
     sticky_objs = market.models.MarketItemStick.objects.filter(viewer_id=request.user.id)
-    if request.GET.get('showHidden', 'false') == 'false':
-        sticky_objs = sticky_objs.filter(~Q(item_id__in=hiddens))
     if 'types' in request.GET:
         sticky_objs = sticky_objs.filter(Q(item__item_type__in=request.GET.getlist('types')))
     sticky_objs = sticky_objs[sfrom:to]
@@ -102,11 +100,6 @@ def get_raw(request, from_item=0, to_item=None,
         WHERE
             mi.item_type IN %(types)s
     """ + additional_filter + """ AND
-            NOT mi.id IN (
-                SELECT stickies."item_id"
-                FROM "market_marketitemstick" stickies
-                WHERE stickies."viewer_id" = %(user_id)s
-            ) AND
             mi.published = True AND
             mi.deleted = False AND
             "auth_user"."is_active" = True AND
@@ -119,28 +112,6 @@ def get_item_count(request, user_id=None, filter_by_user=False):
     cursor = connection.cursor()
     cursor.execute(*get_raw(request, count=True, user_id=user_id, filter_by_owner=filter_by_user))
     return cursor.fetchone()[0]
-
-
-@login_required
-def get_marketItem_fromto(request, sfrom, to, rtype):
-    query = market.models.MarketItem.objects.raw(*get_raw(request))
-    stickies_count = market.models.MarketItemStick.objects.filter(
-        viewer_id=request.user.id).count()
-    hidden_items = market.models.MarketItemHidden.objects.values_list(
-        'item_id', flat=True).filter(viewer_id=request.user.id)
-    to = int(to)
-    sfrom = int(sfrom)
-    if stickies_count >= to:
-        stickies = get_stickies(request, hidden_items, sfrom, to)
-    elif stickies_count <= sfrom:
-        stickies = query[sfrom-stickies_count:to-stickies_count]
-    else:
-        stickies = list(
-            get_stickies(request, hidden_items, sfrom, stickies_count))
-        market_items = list(query[:to-stickies_count])
-        stickies.extend(market_items)
-    retval = return_item_list(stickies, rtype, request)
-    return retval
 
 
 @login_required
@@ -160,28 +131,11 @@ def get_market_items(request, user_id=None, filter_by_user=False):
     from_item = (page_num - 1) * settings.PAGE_SIZE
     to_item = from_item + settings.PAGE_SIZE
 
-    stickies_count = market.models.MarketItemStick.objects.filter(
-        viewer_id=request.user.id).count()
-    hidden_items = market.models.MarketItemHidden.objects.values_list(
-        'item_id', flat=True).filter(viewer_id=request.user.id)
+    market_items = list(market.models.MarketItem.objects.raw(
+        *get_raw(request, from_item, to_item, filter_by_owner=filter_by_user, user_id=user_id)))
 
-    if stickies_count >= to_item:
-        stickies = get_stickies(request, hidden_items, from_item, to_item)
-    elif stickies_count <= from_item:
-        stickies = market.models.MarketItem.objects.raw(
-            *get_raw(request, from_item - stickies_count, to_item - stickies_count, filter_by_owner=filter_by_user,
-                     user_id=user_id))
-    else:
-        stickies = list(
-            get_stickies(request, hidden_items, from_item, stickies_count))
-        market_items = list(market.models.MarketItem.objects.raw(
-            *get_raw(request, 0, to_item - stickies_count, filter_by_owner=filter_by_user, user_id=user_id)))
-        stickies.extend(market_items)
-
-    market_json = get_market_json(
-        stickies, request, {'page_count': max_page_num,
-                            'current_page': page_num,
-                            'page_size': settings.PAGE_SIZE})
+    market_json = get_market_json(market_items, request, {'page_count': max_page_num, 'current_page': page_num,
+                                                          'page_size': settings.PAGE_SIZE})
     return HttpResponse(market_json, mimetype='application/json')
 
 

@@ -34,10 +34,6 @@ market_user_patterns = patterns('',
 
 
 market_item_patterns = patterns('',
-    url(r'(?P<rtype>\S+)/item/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
-        'app.market.api.views.market.get_marketItem_fromto',
-        name="get_marketitems_fromto"),
-
     url(r'^items/get/$',
         'app.market.api.views.market.get_market_items',
         name="get_market_items"),
