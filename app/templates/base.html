@@ -26,14 +26,14 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  {% assets "css_all" %}
-    <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
-  {% endassets %}
-
-
-  {% assets "js_all" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
+{#  {% assets "css_all" %}#}
+{#    <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">#}
+{#  {% endassets %}#}
+{##}
+{##}
+{#  {% assets "js_all" %}#}
+{#    <script type="text/javascript" src="{{ ASSET_URL }}"></script>#}
+{#  {% endassets %}#}
 
   {% block extra_head %}
   {% endblock %}
@@ -174,7 +174,7 @@
 
 {% block endjavascript %}
 {% endblock %}
-<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+{#<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>#}
 {% if user.is_authenticated %}
   {% include "market/clientside/notifications.html" %}
   <script type="text/javascript" id="notifications_view">

@@ -1,12 +1,13 @@
-{% extends "account/signup_base.html" %}
-
+{% extends "base_message.html" %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
 
-{% block public-content %}
-<div class="row dialog sign-up-form">
-  <h1>{% trans "Verify Your E-mail Address" %}</h1>
-  <p>We have sent an e-mail to the address that you provided at sign-up for verification. Follow the link provided in the e-mail to finalize the signup process. Please <a href="{% url 'contact_us' %}">contact us</a> if you do not receive an email within a few minutes.</p>
-</div>
+{% block content-message %}
+  <div class="content-wrap">
+    <div class="movements-form dialog">
+      <h1>{% trans "Verify Your E-mail Address" %}</h1>
+      <p>We have sent an e-mail to the address that you provided at sign-up for verification. Follow the link provided in the e-mail to finalize the signup process. Please <a href="{% url 'contact_us' %}">contact us</a> if you do not receive an email within a few minutes.</p>
+    </div>
+  </div>
 {% endblock %}

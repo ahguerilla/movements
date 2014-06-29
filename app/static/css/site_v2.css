@@ -561,6 +561,9 @@ h6 {
   -o-border-radius: 3px;
   border-radius: 3px;
 }
+.content-wrap {
+  min-height: 500px;
+}
 .page-banner {
   height: 550px;
   overflow: hidden;
