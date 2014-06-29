@@ -30,8 +30,9 @@ def return_item_list(obj, rtype='json', request=None):
 
 def get_raw(request, from_item=0, to_item=None,
             filter_by_owner=False, count=False, user_id=None):
+    skills = map(int, request.GET.getlist('skills', []))
     params = {
-        'interests': tuple(map(int, request.GET.getlist('skills', (0,)))),
+        'interests': tuple(skills),
         'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
         'user_id': user_id if user_id else request.user.id,
         'date_now': datetime.now(),
@@ -57,10 +58,21 @@ def get_raw(request, from_item=0, to_item=None,
 
     if request.GET.get('showHidden', 'false') == 'false':
         additional_filter += """
-            AND NOT mi.id IN (
-                SELECT hiddens.item_id
-                FROM market_marketitemhidden AS hiddens
-                WHERE hiddens.viewer_id = %(user_id)s)
+            AND NOT EXISTS (
+                SELECT *
+                FROM market_marketitemhidden
+                WHERE market_marketitemhidden.item_id = mi.id AND
+                      market_marketitemhidden.viewer_id = %(user_id)s
+            )
+        """
+
+    if skills:
+        additional_filter += """
+            AND EXISTS (
+                SELECT * FROM market_marketitem_interests
+                WHERE market_marketitem_interests.marketitem_id = mi.id AND
+                      market_marketitem_interests.interest_id IN %(interests)s
+            )
         """
 
     if filter_by_owner:
@@ -68,9 +80,7 @@ def get_raw(request, from_item=0, to_item=None,
         order_by = ' ORDER BY id DESC , pub_date DESC'
         additional_filter += 'AND auth_user.id = %(user_id)s'
     else:
-        select = """SELECT mi.*,
-                           COUNT(DISTINCT market_marketitem_interests.interest_id) as tag_matches
-        """
+        select = """SELECT mi.*"""
         order_by = ' ORDER BY pub_date DESC'
 
     if count:
@@ -82,9 +92,6 @@ def get_raw(request, from_item=0, to_item=None,
 
     raw = select + """
         FROM market_marketitem AS mi
-        LEFT JOIN market_marketitem_interests ON
-            market_marketitem_interests.marketitem_id = mi.id AND
-            market_marketitem_interests.interest_id IN %(interests)s
         INNER JOIN "auth_user" ON
             mi.owner_id = "auth_user"."id"
         WHERE

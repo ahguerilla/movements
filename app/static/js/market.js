@@ -87,7 +87,6 @@ $(function () {
       if (this.skills) {
         data.skills = this.skills;
       }
-      
       data.showHidden = this.showHidden;
     }
   });
