@@ -123,8 +123,8 @@ class UserProfile(models.Model):
     expertise = models.CharField(_('area of expertise'), max_length=255, null=True, blank=True)
     notifications = JSONField(_('notifications'), null=True, blank=True)
     privacy_settings = JSONField(_('privacy settings'), null=True, blank=True)
-    nationality = models.ForeignKey(Nationality, null=True)
-    resident_country = models.ForeignKey(Residence, null=True)
+    nationality = models.ForeignKey(Nationality, null=True, blank=True)
+    resident_country = models.ForeignKey(Residence, null=True, blank=True)
 
     skills = models.ManyToManyField(Skills, blank=False, null=True)
     issues = models.ManyToManyField(Issues, blank=False, null=True)
