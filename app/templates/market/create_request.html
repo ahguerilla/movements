@@ -10,24 +10,16 @@
       <div>
         <div class="form-title"><h1>{% trans "Request a service" %}</h1></div>
         <p>
-          {% blocktrans %}Porttitor magna cursus nec dolor magna in natoque magna, sed porta lectus ut tortor
-            par turient
-            odio. Magnis pellentesque et sit, nisi odio cum aliquet nec risus tincidunt.{% endblocktrans %}
+          {% blocktrans %}A Request is a way to ask for help from experts on Movements. Be as specific and clear as possible about what you need.  If you need a lawyer tell us what kind (asylum or civil?) Where do you need that lawyer (In the UK,  US or China?)  The more you explain your need, the easier it will be for someone to help.{% endblocktrans %}
         </p>
         {{ form.non_field_errors }}
       </div>
       <div>
         <div class="form-sub-title"><h2>{% trans "1. What skills do you need?" %}</h2></div>
         <div class="form-select-multi">
-          <p>
-            {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt
-              ut labore et dolore magna aliqua.{% endblocktrans %}
-          </p>
-
           {{ form.interests }}
-
           <label for="{{ form.specific_skill.auto_id }}">{% trans 'Other' %}</label>
+          <p>Movements.org provides access to skills and experts. At this time, we cannot provide funding or equipment. If you need either please see the Resources page. What might be available is a proposal writer to help you secure funding from a different source.</p>
           <div class="form-group">
             <div class="col-xs-12">
               {% render_field form.specific_skill class="form-control" placeholder="" %}
@@ -40,16 +32,13 @@
       <div>
         <div class="form-sub-title"><h2>{% trans "2. What countries does this affect?" %}</h2></div>
         <div class="form-select-multi">
-          <p>
-            {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-              ut labore et dolore magna aliqua.{% endblocktrans %}
-          </p>
           {{ form.countries }}
         </div>
       </div>
 
       <div>
-        <div class="form-sub-title"><h2>{% trans "2. Please enter the title of your post" %}</h2></div>
+        <div class="form-sub-title"><h2>{% trans "2. Title of your post" %}</h2></div>
+        <p>Be specific and clear. Think of this as a tweet.</p>
         <div class="form-group">
           <div class="col-xs-12">
             {% render_field form.title class="form-control input-sm" required="true" autofocus="autofocus" placeholder="" %}
@@ -59,6 +48,7 @@
       </div>
       <div>
         <div class="form-sub-title"><h2>{% trans "3. Please write your post" %}</h2></div>
+        <p>Tell a compelling story and state your needs.</p>
         {% render_field form.details class="form-control input-sm" required="true" placeholder="" %}
         {{ form.details.errors }}
       </div>
