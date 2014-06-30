@@ -41,6 +41,9 @@
 .movements-form .form-main-button {
   margin-top: 15px;
 }
+.movements-form .form-select-multi {
+  margin-bottom: 30px;
+}
 .movements-form a {
   color: #262626;
   font-weight: bold;
@@ -695,7 +698,7 @@ h6 {
 }
 .progress-counter {
   border-top: 2px solid #e0d7d8;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   position: relative;
 }
 .progress-counter .progress-item {
@@ -739,7 +742,7 @@ h6 {
 .progress-counter .outstanding {
   color: #756b65;
 }
-.form-select-multi {
+.more-about-you-widget .form-select-multi {
   min-height: 250px;
 }
 .form-select-multi .row {

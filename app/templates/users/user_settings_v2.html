@@ -37,9 +37,6 @@
   <form class="form-horizontal"  method="post" class="form-horizontal" role="form">
     {% csrf_token %}
     <div id="personal-tab">
-      <p>
-        {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.{% endblocktrans %}
-      </p>
       <div class="form-group">
         <div class="col-xs-12">
           <label for="{{ user_form.username.auto_id }}">{%trans "Username"%}</label>
@@ -47,6 +44,9 @@
           {{ user_form.username.errors }}
         </div>
       </div>
+      <p>
+        {% blocktrans %}This information is optional but the more you provide the more trusted you’ll be by other users.{% endblocktrans %}
+      </p>
       <div class="form-group">
         <div class="col-xs-6">
           <label for="{{ user_form.first_name.auto_id }}">{%trans "First Name"%}</label>
@@ -73,6 +73,10 @@
           {{ settings_form.bio.errors }}
         </div>
       </div>
+      <h3>Digital Presence</h3>
+      <p>
+        {% blocktrans %}The more links you provide, the higher your star rating will be. Link to Twitter, LinkedIn, and Facebook to help verify your identity.{% endblocktrans %}
+      </p>
       <div class="form-group">
         <div class="col-xs-12">
           <label for="{{ settings_form.linkedin_url.auto_id }}">{%trans "Linked In"%}</label>
@@ -103,31 +107,43 @@
       </div>
     </div>
     <div id="skills-tab" style="display:none;" class="form-select-multi">
+      <label>{%trans "Skills/Interests"%}</label>
       <p>
-        {% blocktrans %}The skills and interests you enter help us make Movements more personalised to your interests.{% endblocktrans %}
+        {% blocktrans %}Your skills and interests you enter help other find the right expertise and help us show you the postings that are most relevant to you.{% endblocktrans %}
       </p>
-      <label>{%trans "Interests"%}</label>
       {{ settings_form.interests }}
       <div style="margin-top:10px;"></div>
-      <label>{%trans "Countries"%}</label>
+      <label>{%trans "Regions/Countries"%}</label>
+      <p>
+        {% blocktrans %}Where do you need help and/or where would you like to be able to help out?{% endblocktrans %}
+      </p>
       {{ settings_form.countries }}
       <div style="margin-top:10px;"></div>
       <label>{%trans "Languages"%}</label>
+      <p>
+        {% blocktrans %}Please indicate which languages you are able to communicate in. Google Translate is also available however it is not 100% accurate.{% endblocktrans %}
+      </p>
       {{ settings_form.languages }}
     </div>
     <div id="security-tab" style="display:none;">
       <p>
-        {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.{% endblocktrans %}
+        {% blocktrans %}Control the visibility of your profile and notifications.{% endblocktrans %}
       </p>
       <div class="form-group">
         <div class="col-xs-12">
           <label for="id_profile_visibility">{% trans 'Profile Visibility' %}</label>
+          <p>
+            {% blocktrans %}How much information do you want to make public? So as to help protect your security and privacy, you may not want to expose your email address.{% endblocktrans %}
+          </p>
           {% render_field settings_form.profile_visibility class="form-control input-sm" %}
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-12">
           <label for="id_notification_frequency">{% trans 'Notifications' %}</label>
+          <p>
+            {% blocktrans %}When would you like to receive a notification when someone responds to your post or creates one that matches your interests?{% endblocktrans %}
+          </p>
           {% render_field settings_form.notification_frequency class="form-control input-sm" %}
         </div>
       </div>

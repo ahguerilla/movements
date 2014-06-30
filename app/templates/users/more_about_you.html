@@ -36,10 +36,15 @@
         <div class="form-title"><h1>{% trans "Welcome to Movements" %}</h1></div>
         <div class="form-select-multi">
           <p>
-            {% blocktrans %}You've now created an account. We've sent you an email to verify your email address, once you've done this you will have more access to the movements platform.{% endblocktrans %}
+            {% blocktrans %}You're account is now fully active. Fill out additional details now or you can skip this step and do it later in your settings page.{% endblocktrans %}
           </p>
+          <h3>Create a Request</h3>
           <p>
-            {% blocktrans %}For now it would be great if we can get some more details about you, or alternatively you can skip this step and fill out these details later in your settings page.{% endblocktrans %}
+            {% blocktrans %}Are you an activist in need of help?  Movements.org leverages technology to help those in closed societies find the assistance they need to amplify their voice and expand their influence.{% endblocktrans %}
+          </p>
+          <h3>Offer your Services</h3>
+          <p>
+            {% blocktrans %}If you’ve ever wanted to help a human rights activist, here’s your opportunity. All of us have skills that can be put to use to advance basic liberties.{% endblocktrans %}
           </p>
         </div>
         <div class="row action-text">
@@ -56,7 +61,7 @@
         <div class="form-title"><h1>{% trans "Languages" %}</h1></div>
         <div class="form-select-multi">
           <p>
-            {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
+            {% blocktrans %}Please indicate which languages you speak. Google Translate is also available, but it is not fully accurate.{% endblocktrans %}
           </p>
           {{ settings_form.languages }}
         </div>
@@ -74,7 +79,7 @@
         <div class="form-title"><h1>{% trans "Countries" %}</h1></div>
         <div class="form-select-multi">
           <p>
-            {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
+            {% blocktrans %}Please indicate which regions and countries you are interested in helping.{% endblocktrans %}
           </p>
           {{ settings_form.countries }}
         </div>
@@ -89,10 +94,10 @@
       </div> <!-- End Regions -->
 
       <div id="step4" class="step" style="display: none;" >  <!-- Start Interests -->
-        <div class="form-title"><h1>{% trans "Interests" %}</h1></div>
+        <div class="form-title"><h1>{% trans "Skills" %}</h1></div>
         <div class="form-select-multi">
           <p>
-            {% blocktrans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}
+            {% blocktrans %}Please indicate your skill set.{% endblocktrans %}
           </p>
           {{ settings_form.interests }}
         </div>
@@ -114,6 +119,10 @@
           </p>
           <p>
             {% blocktrans %}If you would like to update this details at any time, this can be done in easily in your settings panel.{% endblocktrans %}
+          </p>
+          <h3>Your Safety</h3>
+          <p>
+            {% blocktrans %}Please remember that no online platform is 100% secure. We have gone to great lengths to try and protect your personal privacy and are working with some of the best experts in the field who share and appreciate your concern for digital security. However it is important to always stay safe online and only share personal information with people you trust.  Please see our <a href="/movements/about-movements/your-safety/">Security</a> and <a href="/movements/privacy/">Privacy</a> pages for more information.{% endblocktrans %}
           </p>
         </div>
         <div class="row action-text">
