@@ -863,6 +863,16 @@ h6 {
   margin-bottom: 20px;
   padding-bottom: 20px;
 }
+.exchange-filters .search-expanded {
+  margin-top: 5px;
+}
+.exchange-filters .search-expanded input.form-control {
+  width: 188px;
+  display: inline-block;
+}
+.exchange-filters .search-expanded button.btn {
+  padding: 4px 12px;
+}
 .exchange-filters .categories h4 {
   color: #756b65;
   font-weight: normal;

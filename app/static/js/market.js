@@ -9,29 +9,60 @@ $(function () {
       'click .type-menu a': 'setTypeFilter',
       'click .hidden-menu a': 'setHiddenFilter',
       'click .region-filter a': 'setRegionFilter',
-      'click .skill-filter a': 'setSkillsFilter'
+      'click .skill-filter a': 'setSkillsFilter',
+      'click a.search': 'toggleSearchControls',
+      'click .run-search': 'triggerFilter',
+      'keydown input[name=query]': 'checkForEnter',
+      'shown.bs.popover a': 'setPopoverContent',
+      'hide.bs.popover a': 'hidePopoverContent'
     },
 
     initialize: function(options) {
       var $skills = this.$el.find('a.skills');
-      var $container = $skills.parent().find('.popover-container');
+      this.$skillsContainer = $skills.parent().find('.popover-container');
+      this.skillsContent = _.template($('#skill-filter-list-template').html(), {skills: options.skills});
       $skills.popover({
-      title: '',
-      html: true,
-      content: _.template($('#skill-filter-list-template').html(), {skills: options.skills}),
-        container: $container,
+        title: '',
+        html: true,
+        content: this.skillsContent,
+        container: this.$skillsContainer,
         placement: 'bottom'
       });
 
       var $regions = this.$el.find('a.regions');
-      $container = $regions.parent().find('.popover-container');
+      this.$regionContainer = $regions.parent().find('.popover-container');
+      this.regionsContent = _.template($('#region-filter-list-template').html())();
       $regions.popover({
         title: '',
         html: true,
-        content: _.template($('#region-filter-list-template').html())(),
-        container: $container,
+        content: this.regionsContent,
+        container: this.$regionContainer,
         placement: 'bottom'
       });
+
+      this.$query = this.$el.find('input[name=query]');
+    },
+
+    setPopoverContent: function(ev) {
+      var $currentTarget = $(ev.currentTarget);
+      if ($currentTarget.hasClass('skills')) {
+        this.$skillsContainer.find('.popover-content').html(this.skillsContent);
+      } else {
+        this.$regionContainer.find('.popover-content').html(this.regionsContent);
+      }
+    },
+
+    hidePopoverContent: function (ev) {
+      var $currentTarget = $(ev.currentTarget);
+      if ($currentTarget.hasClass('skills')) {
+        this.skillsContent = this.$skillsContainer.find('.popover-content').html();
+      } else {
+        this.regionsContent = this.$regionContainer.find('.popover-content').html();
+      }
+    },
+
+    toggleSearchControls: function(ev) {
+      this.$el.find('.search-expanded').toggleClass('hide');
     },
 
     toggleFilterState: function(ev) {
@@ -80,6 +111,14 @@ $(function () {
       this.trigger('filter');
     },
 
+    checkForEnter: function(ev) {
+
+    },
+
+    triggerFilter: function() {
+      this.trigger('filter');
+    },
+
     setFilter: function(data) {
       if (this.type) {
         data.types = this.type;
@@ -88,6 +127,9 @@ $(function () {
         data.skills = this.skills;
       }
       data.showHidden = this.showHidden;
+      if (this.$query.is(':visible')) {
+        data.search = this.$query.val();
+      }
     }
   });
 
@@ -437,10 +479,6 @@ $(function () {
       if (!hasItem) {
         this.noSearchResult();
       }
-    },
-
-    scrollBack: function () {
-      $(window).scrollTop(this.scroll);
     }
   });
 

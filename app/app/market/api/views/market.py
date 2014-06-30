@@ -2,7 +2,6 @@ import json
 import math
 from datetime import datetime
 
-from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.db import connection
@@ -51,10 +50,12 @@ def get_raw(request, from_item=0, to_item=None,
 
     search = request.GET.get('search')
     if search:
+        additional_filter = 'AND mi.id IN %(ids)s'
         market_items = SearchQuerySet().models(market.models.MarketItem).filter(text=search)
         if market_items:
-            additional_filter = 'AND mi.id IN %(ids)s'
             params['ids'] = tuple(int(obj.pk) for obj in market_items)
+        else:
+            params['ids'] = (-1,)
 
     if request.GET.get('showHidden', 'false') == 'false':
         additional_filter += """
@@ -195,8 +196,7 @@ def close_market_item(request, obj_id):
                 json.dumps(get_validation_errors(form)),
                 mimetype="application/json")
 
-    return HttpResponse(
-        json.dumps(data), mimetype="application/json")
+    return HttpResponse(json.dumps(data), mimetype="application/json")
 
 
 @login_required
