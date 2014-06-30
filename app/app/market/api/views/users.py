@@ -58,7 +58,7 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                    'additionals' : additionals,
                    'rec_type'    : rec_type,
                    'obj_id'      : obj_id,
-                   'url'         : request.build_absolute_uri(reverse('preview', args=(rec_type,obj_id)))}
+                   'url'         : request.build_absolute_uri(reverse('show_post', args=[obj_id]))}
 
     subject = request.POST['subject']
     if len(subject) > 120: subject = subject[:120]
