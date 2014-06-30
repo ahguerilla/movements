@@ -783,9 +783,14 @@ popoverDropdown(width, showIcon = true)
       display block
       border-top 1px solid $border-color
       padding 4px
+      a.no-icon, a.no-icon:hover
+        background-image none
       a
         if showIcon
           background url('../images/v2/select_plus.png') $right-icon center no-repeat
+          margin 0
+        else
+          margin 4px
         padding 10px
         width width
         height 40px
@@ -844,6 +849,12 @@ popoverDropdown(width, showIcon = true)
         popoverDropdown(240px)
       .regions .popover-content
         popoverDropdown(248px, showIcon = false)
+        ul.region-filter.expanded
+          > li
+            border none
+            > a
+              display none
+              margin 0
         ul.region-filter
           li
             popoverDropdown(240 px)

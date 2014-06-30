@@ -922,8 +922,13 @@ h6 {
   border-top: 1px solid #e0d7d8;
   padding: 4px;
 }
+.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.no-icon,
+.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.no-icon:hover {
+  background-image: none;
+}
 .exchange-filters .categories ul.category-menu .skills .popover-content ul li a {
   background: url("../images/v2/select_plus.png") 210px center no-repeat;
+  margin: 0;
   padding: 10px;
   width: 240px;
   height: 40px;
@@ -964,7 +969,12 @@ h6 {
   border-top: 1px solid #e0d7d8;
   padding: 4px;
 }
+.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.no-icon,
+.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.no-icon:hover {
+  background-image: none;
+}
 .exchange-filters .categories ul.category-menu .regions .popover-content ul li a {
+  margin: 4px;
   padding: 10px;
   width: 248px;
   height: 40px;
@@ -986,6 +996,13 @@ h6 {
 .exchange-filters .categories ul.category-menu .regions .popover-content ul li a.plain {
   background-image: none;
 }
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter.expanded > li {
+  border: none;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter.expanded > li > a {
+  display: none;
+  margin: 0;
+}
 .exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li {
   padding: 0;
 }
@@ -1002,8 +1019,13 @@ h6 {
   border-top: 1px solid #e0d7d8;
   padding: 4px;
 }
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.no-icon,
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.no-icon:hover {
+  background-image: none;
+}
 .exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a {
   background: url("../images/v2/select_plus.png") 210px center no-repeat;
+  margin: 0;
   padding: 10px;
   width: 240px;
   height: 40px;
@@ -1179,9 +1201,16 @@ h6 {
   border-top: 1px solid #e0d7d8;
   padding: 4px;
 }
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.no-icon,
+#stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.no-icon,
+#marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.no-icon:hover,
+#stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.no-icon:hover {
+  background-image: none;
+}
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a {
   background: url("../images/v2/select_plus.png") 110px center no-repeat;
+  margin: 0;
   padding: 10px;
   width: 140px;
   height: 40px;
@@ -1273,8 +1302,13 @@ h6 {
   border-top: 1px solid #e0d7d8;
   padding: 4px;
 }
+#featured-marketitems .item-menu-container .popover-content ul li a.no-icon,
+#featured-marketitems .item-menu-container .popover-content ul li a.no-icon:hover {
+  background-image: none;
+}
 #featured-marketitems .item-menu-container .popover-content ul li a {
   background: url("../images/v2/select_plus.png") 110px center no-repeat;
+  margin: 0;
   padding: 10px;
   width: 140px;
   height: 40px;

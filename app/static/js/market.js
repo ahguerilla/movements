@@ -8,8 +8,9 @@ $(function () {
     events: {
       'click .type-menu a': 'setTypeFilter',
       'click .hidden-menu a': 'setHiddenFilter',
-      'click .region-filter > li > a': 'toggleRegion',
-      'click .country-list a': 'setRegionFilter',
+      'click .region-filter > li > a': 'showCountries',
+      'click .country-list a.back': 'showRegions',
+      'click .country-list a.country': 'setRegionFilter',
       'click .skill-filter a': 'setSkillsFilter',
       'click a.search': 'toggleSearchControls',
       'click .run-search': 'triggerFilter',
@@ -70,10 +71,22 @@ $(function () {
       }
     },
 
-    toggleRegion: function(ev) {
+    showCountries: function(ev) {
+      ev.preventDefault();
       var $currentTarget = $(ev.currentTarget);
-      var countryList = $currentTarget.parent().find('.country-list');
-      countryList.toggleClass('hide');
+      var $countryList = $currentTarget.parent().find('.country-list');
+      var $topLevel = $currentTarget.parents('.region-filter');
+      $topLevel.addClass('expanded');
+      $countryList.removeClass('hide');
+    },
+
+    showRegions: function(ev) {
+      ev.preventDefault();
+      var $currentTarget = $(ev.currentTarget);
+      var $countryList = $currentTarget.parents('.country-list');
+      var $topLevel = $currentTarget.parents('.region-filter');
+      $topLevel.removeClass('expanded');
+      $countryList.addClass('hide');
     },
 
     toggleFilterState: function(ev) {

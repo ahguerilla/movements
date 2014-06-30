@@ -98,8 +98,9 @@
       <li>
         <a href="#">{{ region.name }}</a>
         <ul class="country-list hide">
+          <li><a href='#' class="no-icon back">Back</a></li>
           {% for country in region.country_list %}
-            <li><a href='#' data-filter="{{ country.id }}">{{ country }}</a></li>
+            <li><a href='#' class="country" data-filter="{{ country.id }}">{{ country }}</a></li>
           {% endfor %}
         </ul>
       </li>
