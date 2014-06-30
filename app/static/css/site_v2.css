@@ -1,11 +1,14 @@
 ::-webkit-input-placeholder {
   font-style: normal;
+  font-family: "LinotypeUnivers-330Light";
 }
 ::-moz-placeholder {
   font-style: normal;
+  font-family: "LinotypeUnivers-330Light";
 }
 :-ms-input-placeholder {
   font-style: normal;
+  font-family: "LinotypeUnivers-330Light";
 }
 .movements-form {
   -webkit-border-radius: 0;
@@ -103,6 +106,9 @@
 }
 .extended-form .form-main-button {
   margin-top: 15px;
+}
+.twitter-typeahead .tt-hint {
+  font-size: 16px;
 }
 .btn {
   -webkit-font-smoothing: antialiased;
