@@ -8,7 +8,9 @@ $(function () {
     events: {
       'click .type-menu a': 'setTypeFilter',
       'click .hidden-menu a': 'setHiddenFilter',
-      'click .region-filter a': 'setRegionFilter',
+      'click .region-filter > li > a': 'showCountries',
+      'click .country-list a.back': 'showRegions',
+      'click .country-list a.country': 'setRegionFilter',
       'click .skill-filter a': 'setSkillsFilter',
       'click a.search': 'toggleSearchControls',
       'click .run-search': 'triggerFilter',
@@ -31,7 +33,7 @@ $(function () {
 
       var $regions = this.$el.find('a.regions');
       this.$regionContainer = $regions.parent().find('.popover-container');
-      this.regionsContent = _.template($('#region-filter-list-template').html())();
+      this.regionsContent = $('#region-filter-list-template').html();
       $regions.popover({
         title: '',
         html: true,
@@ -69,6 +71,24 @@ $(function () {
       }
     },
 
+    showCountries: function(ev) {
+      ev.preventDefault();
+      var $currentTarget = $(ev.currentTarget);
+      var $countryList = $currentTarget.parent().find('.country-list');
+      var $topLevel = $currentTarget.parents('.region-filter');
+      $topLevel.addClass('expanded');
+      $countryList.removeClass('hide');
+    },
+
+    showRegions: function(ev) {
+      ev.preventDefault();
+      var $currentTarget = $(ev.currentTarget);
+      var $countryList = $currentTarget.parents('.country-list');
+      var $topLevel = $currentTarget.parents('.region-filter');
+      $topLevel.removeClass('expanded');
+      $countryList.addClass('hide');
+    },
+
     toggleFilterState: function(ev) {
       ev.preventDefault();
       var $target = $(ev.currentTarget);
@@ -93,7 +113,14 @@ $(function () {
     },
 
     setRegionFilter: function(ev) {
-      this.toggleFilterState(ev);
+      var region = this.toggleFilterState(ev);
+      if (region.selected) {
+        this.regions.push(region.value)
+      } else {
+        this.regions = $.grep(this.regions, function (value) {
+          return value != region.value;
+        });
+      }
       this.trigger('filter');
     },
 
@@ -132,6 +159,9 @@ $(function () {
       }
       if (this.skills) {
         data.skills = this.skills;
+      }
+      if (this.regions) {
+        data.countries = this.regions;
       }
       data.showHidden = this.showHidden;
       var query = this.$query.val();

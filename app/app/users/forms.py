@@ -136,6 +136,7 @@ class RegionAccordionRenderer(BaseCheckboxFieldRenderer):
                 "country_list": region_dict[reg]
             }
             region_list.append(region_item)
+        region_list = sorted(region_list, key=lambda r: r['region'])
 
         return render_to_string('widgets/accordion_multi_select.html', {'regions': region_list})
 

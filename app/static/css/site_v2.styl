@@ -774,7 +774,7 @@ $page-banner-height = 550px
 // exchange page
 // **************************************
 
-popoverDropdown(width)
+popoverDropdown(width, showIcon = true)
   $right-icon = width - 30
   padding 0
   ul
@@ -787,8 +787,14 @@ popoverDropdown(width)
       display block
       border-top 1px solid $border-color
       padding 4px
+      a.no-icon, a.no-icon:hover
+        background-image none
       a
-        background url('../images/v2/select_plus.png') $right-icon center no-repeat
+        if showIcon
+          background url('../images/v2/select_plus.png') $right-icon center no-repeat
+          margin 0
+        else
+          margin 4px
         padding 10px
         width width
         height 40px
@@ -797,12 +803,18 @@ popoverDropdown(width)
         color #000
       a:hover
         color #fff
-        background $dropdown-hover-bg url('../images/v2/select_plus_hover.png') $right-icon center no-repeat
+        if showIcon
+          background url('../images/v2/select_plus_hover.png') $right-icon center no-repeat
+        background-color $dropdown-hover-bg
       a.selected
-        background #fff url('../images/v2/select_tick.png') $right-icon center no-repeat
+        if showIcon
+          background url('../images/v2/select_tick.png') $right-icon center no-repeat
+         background-color #fff
         color $dropdown-select-color
       a.selected:hover
-        background $dropdown-hover-bg url('../images/v2/select_tick.png') $right-icon center no-repeat
+        if showIcon
+          background url('../images/v2/select_tick.png') $right-icon center no-repeat
+        background-color $dropdown-hover-bg
       a.plain
         background-image none
 
@@ -837,8 +849,19 @@ popoverDropdown(width)
           display inline-block
       .popover
         border-radius 0
-      .popover-content
+      .skills .popover-content
         popoverDropdown(240px)
+      .regions .popover-content
+        popoverDropdown(248px, showIcon = false)
+        ul.region-filter.expanded
+          > li
+            border none
+            > a
+              display none
+        ul.region-filter
+          li
+            popoverDropdown(240 px)
+
   .type-menu, .hidden-menu
     list-style none
     margin 0

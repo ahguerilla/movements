@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 
-from app.users.models import Interest
+from app.users.models import Interest, Countries
 from forms import RequestForm, OfferForm, save_market_item
 from models.market import MarketItem
 
@@ -12,11 +12,23 @@ from models.market import MarketItem
 @login_required
 def index(request):
     interests = Interest.objects.all()
+    countries = Countries.objects.all()
+    region_dict = {}
+    for country in countries:
+        region = country.region
+        if region.id in region_dict:
+            region_dict[region.id].country_list.append(country)
+        else:
+            region_dict[region.id] = region
+            region.country_list = [country]
+    regions = region_dict.values()
+    regions = sorted(regions, key=lambda r: r.name)
     return render_to_response('market/market.html',
                               {
                                   'title': 'Exchange',
                                   'help_text_template': 'market/copy/market_help.html',
-                                  'interests': serializers.serialize('json', interests)
+                                  'interests': serializers.serialize('json', interests),
+                                  'regions': regions,
 
                               },
                               context_instance=RequestContext(request))

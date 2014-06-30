@@ -21,14 +21,14 @@
       <div class="pull-right categories">
         <h4>Filter by:</h4>
         <ul class="category-menu">
-          <li>
+          <li class="skills">
             <a href="#" alt="filter by skills" class="skills">
               <img src="{{ STATIC_URL }}images/v2/market-filter-icon.png" />
               <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
             </a>
             <div class="popover-container"></div>
           </li>
-          <li>
+          <li class="regions">
             <a href="#" alt="skills" class="regions">
               <img src="{{ STATIC_URL }}images/v2/market-countries-icon.png"/>
               <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
@@ -93,11 +93,18 @@
     </ul>
   </script>
   <script type="text/template" id="region-filter-list-template">
-    <% var regions = ['Africa', 'Middle East', 'Asia', 'Europe', 'Americas', 'Oceania']; %>
     <ul class="region-filter">
-      <% _.each(regions, function(region) { %>
-      <li><a href="#"><%- region %></a></li>
-      <% }); %>
+    {% for region in regions %}
+      <li>
+        <a href="#">{{ region.name }}</a>
+        <ul class="country-list hide">
+          <li><a href='#' class="no-icon back">Back</a></li>
+          {% for country in region.country_list %}
+            <li><a href='#' class="country" data-filter="{{ country.id }}">{{ country }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
     </ul>
   </script>
 
@@ -109,7 +116,6 @@
   {% include "market/clientside/reportdialog.html" %}
   {% include "market/clientside/closemarketitemdialog.html"%}
   {% include "market/clientside/pagination_template.html"%}
-
 
   {% compress js inline %}
     <script type="text/javascript">
