@@ -36,7 +36,8 @@ class MarketWriteForm(WriteForm):
 class OfferForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'specific_skill', 'receive_notifications', 'interests', 'countries']
+        fields = ['title', 'details', 'specific_skill', 'receive_notifications', 'interests', 'countries',
+                  'tweet_permission']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
             'interests': CheckboxSelectMultiple(),
@@ -63,12 +64,12 @@ class RequestForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
         fields = ['title', 'details', 'specific_skill',
-                  'receive_notifications', 'interests', 'countries']
+                  'receive_notifications', 'interests', 'countries', 'tweet_permission']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
             'interests': CheckboxSelectMultiple(),
-			'countries': RegionAccordionSelectMultiple(),
-			'specific_skill': forms.Textarea(attrs={'cols': 55, 'rows': 3})
+            'countries': RegionAccordionSelectMultiple(),
+            'specific_skill': forms.Textarea(attrs={'cols': 55, 'rows': 3})
         }
 
     def __init__(self, *args, **kwargs):

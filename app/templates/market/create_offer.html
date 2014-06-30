@@ -30,7 +30,7 @@
       <p>Be specific and clear. Think of this as a tweet.</p>
       <div class="form-group">
         <div class="col-xs-12">
-          {% render_field form.title class="form-control input-sm" required="true" autofocus="autofocus" placeholder="" %}
+          {% render_field form.title class="form-control input-sm" required="true" placeholder="" %}
           {{ form.title.errors }}
         </div>
       </div>
@@ -44,13 +44,29 @@
 {#    <div>#}
 {#      <div class="form-sub-title"><h2>{% trans "4. Tag your post" %}</h2></div>#}
 {#    </div>#}
-    <div style="margin-top: 20px;">
+    <div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="{{ form.tweet_permission.auto_id }}">{% trans "May we tweet this request" %}</label>
+          {% render_field form.tweet_permission class="" placeholder="" %}
+          {{ form.tweet_permission.errors }}
+          <p>We won’t use your name or any identifying information if you </p>
+         </div>
+      </div>
+    </div>
+    <div>
       <div class="form-group">
         <div class="col-xs-12">
           <label for="{{ form.receive_notifications.auto_id }}">{% trans "Receive notifications" %}</label>
-          {% render_field form.receive_notifications class="" required="true" autofocus="autofocus" placeholder="" %}
+          {% render_field form.receive_notifications class="" placeholder="" %}
           {{ form.receive_notifications.errors }}
+         </div>
+      </div>
+    </div>
 
+    <div style="margin-top: 20px;">
+      <div class="form-group">
+        <div class="col-xs-12">
           <button class="btn btn-action pull-right">Post now</button>
         </div>
       </div>
