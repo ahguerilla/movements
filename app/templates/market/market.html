@@ -4,49 +4,57 @@
 
 {% block content %}
   <div id="exchange-filters" class="exchange-filters clearfix">
-    <div class="pull-left">
-      <ul class="type-menu">
-        <li class="active"><a href="#" alt="filter all" data-filter="">{% trans 'See all' %}</a></li>
-        <li><a href="#" alt="filter to requests" data-filter="request">{% trans 'Requests' %}</a></li>
-        <li><a href="#" alt="filter to offers" data-filter="offer">{% trans 'Offers' %}</a></li>
-      </ul>
+    <div class="clearfix">
+      <div class="pull-left">
+        <ul class="type-menu">
+          <li class="active"><a href="#" alt="filter all" data-filter="">{% trans 'See all' %}</a></li>
+          <li><a href="#" alt="filter to requests" data-filter="request">{% trans 'Requests' %}</a></li>
+          <li><a href="#" alt="filter to offers" data-filter="offer">{% trans 'Offers' %}</a></li>
+        </ul>
+      </div>
+      <div class="pull-left">
+        <ul class="hidden-menu">
+          <li class="active"><a href="#" alt="filter all" data-filter="false">{% trans 'Hide Hidden' %}</a></li>
+          <li><a href="#" alt="filter to requests" data-filter="true">{% trans 'Show Hidden' %}</a></li>
+        </ul>
+      </div>
+      <div class="pull-right categories">
+        <h4>Filter by:</h4>
+        <ul class="category-menu">
+          <li>
+            <a href="#" alt="filter by skills" class="skills">
+              <img src="{{ STATIC_URL }}images/v2/market-filter-icon.png" />
+              <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
+            </a>
+            <div class="popover-container"></div>
+          </li>
+          <li>
+            <a href="#" alt="skills" class="regions">
+              <img src="{{ STATIC_URL }}images/v2/market-countries-icon.png"/>
+              <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
+            </a>
+            <div class="popover-container"></div>
+          </li>
+          <li>
+            <a href="#" alt="text search" class="search">
+              <img src="{{ STATIC_URL }}images/v2/market-search-icon.png"/>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="pull-left">
-      <ul class="hidden-menu">
-        <li class="active"><a href="#" alt="filter all" data-filter="false">{% trans 'Hide Hidden' %}</a></li>
-        <li><a href="#" alt="filter to requests" data-filter="true">{% trans 'Show Hidden' %}</a></li>
-      </ul>
-    </div>
-    <div class="pull-right categories">
-      <h4>Filter by:</h4>
-      <ul class="category-menu">
-        <li>
-          <a href="#" alt="filter by skills" class="skills">
-            <img src="{{ STATIC_URL }}images/v2/market-filter-icon.png" />
-            <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
-          </a>
-          <div class="popover-container"></div>
-        </li>
-        <li>
-          <a href="#" alt="skills" class="regions">
-            <img src="{{ STATIC_URL }}images/v2/market-countries-icon.png"/>
-            <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
-          </a>
-          <div class="popover-container"></div>
-        </li>
-        <li>
-          <a href="#" alt="text search" class="search">
-            <img src="{{ STATIC_URL }}images/v2/market-search-icon.png"/>
-          </a>
-        </li>
-      </ul>
+    <div class="search-expanded hide">
+      <div class="pull-right">
+        <input class="form-control" type="text" name="query">
+        <button type="button" class="btn btn-action run-search">Search</button>
+      </div>
     </div>
   </div>
 
   <div id="itemandsearchwrap">
     <div class="row">
       <div class="col-md-4 featured-col">
-        <h2>Featured posts</h2>
+        <h2>{% trans 'Featured posts' %}</h2>
         <div id="featured-marketitems">
           <div class="ajaxloader">
             <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
@@ -54,7 +62,7 @@
           <div class="item-container"></div>
         </div>
         <br/>
-        <h2>Stickied Posts</h2>
+        <h2>{% trans 'Sticky posts' %}</h2>
         <div id="stuck-marketitems">
           <div class="ajaxloader">
             <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
