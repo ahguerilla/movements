@@ -93,11 +93,17 @@
     </ul>
   </script>
   <script type="text/template" id="region-filter-list-template">
-    <% var regions = ['Africa', 'Middle East', 'Asia', 'Europe', 'Americas', 'Oceania']; %>
     <ul class="region-filter">
-      <% _.each(regions, function(region) { %>
-      <li><a href="#"><%- region %></a></li>
-      <% }); %>
+    {% for region in regions %}
+      <li>
+        <a href="#">{{ region.name }}</a>
+        <ul class="country-list hide">
+          {% for country in region.country_list %}
+            <li><a href='#' data-filter="{{ country.id }}">{{ country }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
     </ul>
   </script>
 
@@ -109,7 +115,6 @@
   {% include "market/clientside/reportdialog.html" %}
   {% include "market/clientside/closemarketitemdialog.html"%}
   {% include "market/clientside/pagination_template.html"%}
-
 
   {% compress js inline %}
     <script type="text/javascript">
