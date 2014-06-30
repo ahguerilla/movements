@@ -538,6 +538,11 @@ h6 {
 .content-page h1 {
   font-size: 26px;
 }
+.content-block a {
+  color: #262626;
+  font-weight: bold;
+  text-decoration: underline;
+}
 .avatar img {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
