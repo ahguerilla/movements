@@ -62,7 +62,11 @@ $(function () {
     },
 
     toggleSearchControls: function(ev) {
+      var expand = this.$el.find('.search-expanded');
       this.$el.find('.search-expanded').toggleClass('hide');
+      if (!expand.hasClass('hide')) {
+        this.$query.focus();
+      }
     },
 
     toggleFilterState: function(ev) {
@@ -112,7 +116,10 @@ $(function () {
     },
 
     checkForEnter: function(ev) {
-
+      var key = ev.charCode ? ev.charCode : ev.keyCode ? ev.keyCode : 0;
+      if (key === 13) {
+        this.triggerFilter();
+      }
     },
 
     triggerFilter: function() {
@@ -127,8 +134,9 @@ $(function () {
         data.skills = this.skills;
       }
       data.showHidden = this.showHidden;
-      if (this.$query.is(':visible')) {
-        data.search = this.$query.val();
+      var query = this.$query.val();
+      if (query) {
+        data.search = query;
       }
     }
   });
