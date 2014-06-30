@@ -906,23 +906,23 @@ h6 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-.exchange-filters .categories ul.category-menu .popover-content {
+.exchange-filters .categories ul.category-menu .skills .popover-content {
   padding: 0;
 }
-.exchange-filters .categories ul.category-menu .popover-content ul {
+.exchange-filters .categories ul.category-menu .skills .popover-content ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-.exchange-filters .categories ul.category-menu .popover-content ul li:first-child {
+.exchange-filters .categories ul.category-menu .skills .popover-content ul li:first-child {
   border-top: none;
 }
-.exchange-filters .categories ul.category-menu .popover-content ul li {
+.exchange-filters .categories ul.category-menu .skills .popover-content ul li {
   display: block;
   border-top: 1px solid #e0d7d8;
   padding: 4px;
 }
-.exchange-filters .categories ul.category-menu .popover-content ul li a {
+.exchange-filters .categories ul.category-menu .skills .popover-content ul li a {
   background: url("../images/v2/select_plus.png") 210px center no-repeat;
   padding: 10px;
   width: 240px;
@@ -931,18 +931,101 @@ h6 {
   text-decoration: none;
   color: #000;
 }
-.exchange-filters .categories ul.category-menu .popover-content ul li a:hover {
+.exchange-filters .categories ul.category-menu .skills .popover-content ul li a:hover {
   color: #fff;
-  background: #beb4ae url("../images/v2/select_plus_hover.png") 210px center no-repeat;
+  background: url("../images/v2/select_plus_hover.png") 210px center no-repeat;
+  background-color: #beb4ae;
 }
-.exchange-filters .categories ul.category-menu .popover-content ul li a.selected {
-  background: #fff url("../images/v2/select_tick.png") 210px center no-repeat;
+.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.selected {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
+  background-color: #fff;
   color: #ff6d50;
 }
-.exchange-filters .categories ul.category-menu .popover-content ul li a.selected:hover {
-  background: #beb4ae url("../images/v2/select_tick.png") 210px center no-repeat;
+.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.selected:hover {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
+  background-color: #beb4ae;
 }
-.exchange-filters .categories ul.category-menu .popover-content ul li a.plain {
+.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.plain {
+  background-image: none;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content {
+  padding: 0;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul li:first-child {
+  border-top: none;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul li {
+  display: block;
+  border-top: 1px solid #e0d7d8;
+  padding: 4px;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul li a {
+  padding: 10px;
+  width: 248px;
+  height: 40px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul li a:hover {
+  color: #fff;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.selected {
+  background-color: #fff;
+  color: #ff6d50;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.selected:hover {
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.plain {
+  background-image: none;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li {
+  padding: 0;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li:first-child {
+  border-top: none;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li {
+  display: block;
+  border-top: 1px solid #e0d7d8;
+  padding: 4px;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a {
+  background: url("../images/v2/select_plus.png") 210px center no-repeat;
+  padding: 10px;
+  width: 240px;
+  height: 40px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a:hover {
+  color: #fff;
+  background: url("../images/v2/select_plus_hover.png") 210px center no-repeat;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.selected {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
+  background-color: #fff;
+  color: #ff6d50;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.selected:hover {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.plain {
   background-image: none;
 }
 .exchange-filters .type-menu,
@@ -1109,16 +1192,19 @@ h6 {
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a:hover,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a:hover {
   color: #fff;
-  background: #beb4ae url("../images/v2/select_plus_hover.png") 110px center no-repeat;
+  background: url("../images/v2/select_plus_hover.png") 110px center no-repeat;
+  background-color: #beb4ae;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected {
-  background: #fff url("../images/v2/select_tick.png") 110px center no-repeat;
+  background: url("../images/v2/select_tick.png") 110px center no-repeat;
+  background-color: #fff;
   color: #ff6d50;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected:hover,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected:hover {
-  background: #beb4ae url("../images/v2/select_tick.png") 110px center no-repeat;
+  background: url("../images/v2/select_tick.png") 110px center no-repeat;
+  background-color: #beb4ae;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.plain,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.plain {
@@ -1198,14 +1284,17 @@ h6 {
 }
 #featured-marketitems .item-menu-container .popover-content ul li a:hover {
   color: #fff;
-  background: #beb4ae url("../images/v2/select_plus_hover.png") 110px center no-repeat;
+  background: url("../images/v2/select_plus_hover.png") 110px center no-repeat;
+  background-color: #beb4ae;
 }
 #featured-marketitems .item-menu-container .popover-content ul li a.selected {
-  background: #fff url("../images/v2/select_tick.png") 110px center no-repeat;
+  background: url("../images/v2/select_tick.png") 110px center no-repeat;
+  background-color: #fff;
   color: #ff6d50;
 }
 #featured-marketitems .item-menu-container .popover-content ul li a.selected:hover {
-  background: #beb4ae url("../images/v2/select_tick.png") 110px center no-repeat;
+  background: url("../images/v2/select_tick.png") 110px center no-repeat;
+  background-color: #beb4ae;
 }
 #featured-marketitems .item-menu-container .popover-content ul li a.plain {
   background-image: none;
