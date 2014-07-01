@@ -14,16 +14,19 @@ from app.market.forms import QuestionnaireForm
 from tasks.celerytasks import update_notifications, mark_read_notifications
 
 
-def get_market_json(items, request=None, extra_data=None):
-    to_json = [item.getdict(request) for item in items]
+def get_market_json(items, request=None, extra_data=None, is_safe=True):
+    if is_safe:
+        to_json = [item.getdict_safe() for item in items]
+    else:
+        to_json = [item.getdict(request) for item in items]
     if extra_data:
         to_json.append(extra_data)
     return json.dumps(to_json)
 
 
-def return_item_list(obj, rtype='json', request=None):
+def return_item_list(obj, rtype='json', request=None, is_safe=True):
     return HttpResponse(
-        get_market_json(obj, request),
+        get_market_json(obj, request, is_safe=is_safe),
         mimetype="application/" + rtype)
 
 
@@ -126,7 +129,7 @@ def get_item_count(request, user_id=None, filter_by_user=False):
 @login_required
 def get_user_stickies(request):
     market_items = market.models.MarketItem.objects.filter(marketitemstick__viewer_id=request.user.id)
-    market_json = get_market_json(market_items, request)
+    market_json = get_market_json(market_items, request, is_safe=False)
     return HttpResponse(market_json, mimetype='application/json')
 
 
@@ -137,7 +140,6 @@ def get_market_items_user(request, user_id=None):
     return get_market_items(request, user_id=user_id, filter_by_user=True)
 
 
-@login_required
 def get_market_items(request, user_id=None, filter_by_user=False):
     page = int(request.GET.get('page', 1))
     market_items_count = get_item_count(request, user_id=user_id, filter_by_user=filter_by_user)
@@ -150,17 +152,25 @@ def get_market_items(request, user_id=None, filter_by_user=False):
     market_items = list(market.models.MarketItem.objects.raw(
         *get_raw(request, from_item, to_item, filter_by_owner=filter_by_user, user_id=user_id)))
 
+    is_safe = True
+    if request.user.is_authenticated():
+        is_safe = False
+
     market_json = get_market_json(market_items, request, {'page_count': max_page_num, 'current_page': page_num,
-                                                          'page_size': settings.PAGE_SIZE})
+                                                          'page_size': settings.PAGE_SIZE}, is_safe=is_safe)
     return HttpResponse(market_json, mimetype='application/json')
 
 
-@login_required
 def get_featured_market_items(request):
     featured_posts = market.models.MarketItem.objects.exclude(
         status__in=[market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
                     market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN]).filter(is_featured=True)
-    return return_item_list(featured_posts, request=request)
+
+    is_safe = True
+    if request.user.is_authenticated():
+        is_safe = False
+
+    return return_item_list(featured_posts, request=request, is_safe=is_safe)
 
 
 @login_required
@@ -214,7 +224,7 @@ def close_market_item(request, obj_id):
 def get_user_marketitem_fromto(request, sfrom, to, rtype):
     market_items = market.models.MarketItem.objects.raw(
         *get_raw(request, filter_by_owner=True))[int(sfrom):int(to)]
-    retval = return_item_list(market_items, rtype, request)
+    retval = return_item_list(market_items, rtype, request, is_safe=False)
     return retval
 
 
@@ -222,7 +232,7 @@ def get_user_marketitem_fromto(request, sfrom, to, rtype):
 def get_user_marketitem_for_user_fromto(request, user_id, sfrom, to, rtype):
     market_items = market.models.MarketItem.objects.raw(
         *get_raw(request, filter_by_owner=True, user_id=user_id))[int(sfrom):int(to)]
-    return return_item_list(market_items, rtype, request)
+    return return_item_list(market_items, rtype, request, is_safe=False)
 
 
 @login_required

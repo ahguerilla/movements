@@ -19,8 +19,7 @@
       getmessagecount: "{% url 'get_messagecount' 'json' %}",
 
       market: "{% url 'show_market' %}",
-      getMarketItems: '{% url 'get_market_items' %}',
-      getFeaturedMarketItems: '{% url 'get_featured_market_items' %}',
+
       getStickyMarketItems: '{% url 'get_user_stickies' %}',
       getMarketItemsUser: '{% url 'get_market_items_user' 0 %}'.slice(0,-1),
       getusermarketitemsfromto : "{% url 'get_usermarketitems_fromto' 'json' 0 0 %}".slice(0,-1),
@@ -34,8 +33,10 @@
 
       getmarketnotificationsfromto: "{% url 'get_notifications_fromto' 'json' 0 0 %}".slice(0,-1),
       getnotseennotif: "{% url 'get_notseen_notif' 'json' 0 0 %}".slice(0,-1),
-      shownotifications: "{% url 'show_notifications' %}"
+      shownotifications: "{% url 'show_notifications' %}",
     {% endif %}
+    getMarketItems: '{% url 'get_market_items' %}',
+    getFeaturedMarketItems: '{% url 'get_featured_market_items' %}'
   };
 
   {% if user and user.id %}

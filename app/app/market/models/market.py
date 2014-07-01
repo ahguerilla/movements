@@ -71,24 +71,38 @@ class MarketItem(models.Model):
     def item_type_display(self):
         return unicode(_(self.item_type[0].upper() + self.item_type[1:].lower()))
 
-    def getdict(self, request=None):
+    def getdict_safe(self):
         adict = {'fields': {}, 'pk': self.id}
         adict['fields']['pk'] = self.id
+        adict['fields']['is_safe'] = True
         adict['fields']['item_type'] = self.item_type
         adict['fields']['item_type_display'] = self.item_type_display
         adict['fields']['interests'] = [ob.id for ob in self.interests.all()]
         adict['fields']['title'] = self.title
-        adict['fields']['details'] = self.details
         adict['fields']['pub_date'] = str(self.pub_date)
         adict['fields']['owner'] = [self.owner.username]
         adict['fields']['ownerid'] = [self.owner.id]
         adict['fields']['url'] = self.url
+        adict['fields']['commentcount'] = self.commentcount
+        adict['fields']['hidden'] = False
+        adict['fields']['stick'] = False
+        adict['fields']['avatar'] = False
+        adict['fields']['hasEdit'] = False
+        adict['fields']['close_url'] = ""
+        adict['fields']['edit_url'] = ""
+        adict['fields']['report_url'] = ""
+        adict['fields']['attributes_url'] = ""
+        return adict
+
+    def getdict(self, request=None):
+        adict = self.getdict_safe()
+        adict['fields']['is_safe'] = False
+        adict['fields']['details'] = self.details
         adict['fields']['close_url'] = reverse('close_marketitem', args=[self.id])
         reverse_name = 'edit_request' if self.item_type == MarketItem.TYPE_CHOICES.REQUEST else 'edit_offer'
         adict['fields']['edit_url'] = reverse(reverse_name, args=[self.id])
         adict['fields']['report_url'] = reverse('report_post', args=[self.id])
         adict['fields']['attributes_url'] = reverse('set_item_attributes_for_user', args=[self.id])
-        adict['fields']['commentcount'] = self.commentcount
         adict['fields']['usercore'] = self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['userratecount'] = self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['ratecount'] = self.ratecount

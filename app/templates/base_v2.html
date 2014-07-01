@@ -95,12 +95,13 @@
           <li>
             <a href="{% url 'signup_start' %}">Sign up</a>
           </li>
+        {% else %}
+          <li>
+            <a href="{% url 'user_profile' %}">Profile</a>
+          </li>
         {% endif %}
           <li>
             <a href="{% url 'show_market' %}">Exchange</a>
-          </li>
-          <li>
-            <a href="{% url 'user_profile' %}">Profile</a>
           </li>
         {% show_menu_below_id "col2" 0 100 100 100 %}
       </div>
