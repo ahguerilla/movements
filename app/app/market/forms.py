@@ -2,6 +2,7 @@ from django import forms
 from django.utils.cache import get_cache
 from postman.forms import WriteForm, FullReplyForm, QuickReplyForm
 from tasks.celerytasks import create_notification, update_notifications
+from django.utils.translation import ugettext_lazy as _
 
 import app.market as market
 from app.users.forms import CheckboxSelectMultiple, RegionAccordionSelectMultiple
@@ -59,6 +60,12 @@ class OfferForm(forms.ModelForm):
             self.instance.owner = kwargs['owner']
         return super(OfferForm, self).save(commit=commit)
 
+    def clean_interests(self):
+        data = self.cleaned_data['interests']
+        if len(data) == 0:
+            raise forms.ValidationError(_("You must select at least one skill"))
+        return data
+
 
 class RequestForm(forms.ModelForm):
     class Meta:
@@ -86,6 +93,11 @@ class RequestForm(forms.ModelForm):
             self.instance.owner = kwargs['owner']
         return super(RequestForm, self).save(commit=commit)
 
+    def clean_interests(self):
+        data = self.cleaned_data['interests']
+        if len(data) == 0:
+            raise forms.ValidationError(_("You must select at least one skill"))
+        return data
 
 class CommentForm(forms.ModelForm):
     class Meta:
