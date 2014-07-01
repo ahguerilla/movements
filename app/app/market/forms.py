@@ -68,8 +68,7 @@ class RequestForm(forms.ModelForm):
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
             'interests': CheckboxSelectMultiple(),
-            'countries': RegionAccordionSelectMultiple(),
-            'specific_skill': forms.Textarea(attrs={'cols': 55, 'rows': 3})
+            'countries': RegionAccordionSelectMultiple()
         }
 
     def __init__(self, *args, **kwargs):

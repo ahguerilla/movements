@@ -17,6 +17,13 @@
       <div class="form-sub-title"><h2>{% trans "1. What skills can you offer?" %}</h2></div>
       <div class="form-select-multi">
         {{ form.interests }}
+        <label for="{{ form.specific_skill.auto_id }}">{% trans 'Other' %}</label>
+        <div class="form-group">
+          <div class="col-xs-12">
+            {% render_field form.specific_skill class="form-control" placeholder="" maxlength="30" %}
+            {{ form.specific_skill.errors }}
+          </div>
+        </div>
       </div>
     </div>
     <div>
@@ -54,7 +61,7 @@
          </div>
       </div>
     </div>
-    <div>
+    <div style="display: none;">
       <div class="form-group">
         <div class="col-xs-12">
           <label for="{{ form.receive_notifications.auto_id }}">{% trans "Receive notifications" %}</label>
