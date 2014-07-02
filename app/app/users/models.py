@@ -99,6 +99,7 @@ ahr_rating = [
     (5, '5 stars'),
 ]
 
+
 class UserProfile(models.Model):
     VISIBILITY_CHOICES = EnumChoices(
         HIDDEN=(0, _('Hidden')),
@@ -139,7 +140,6 @@ class UserProfile(models.Model):
     ratecount = models.IntegerField(_('ratecount'), default=0)
     score = models.FloatField(_('score'), default=0)
     interface_lang = models.CharField(_('Interface language'), max_length=3, default='en')
-    notperm = JSONField(blank=True)
     first_login = models.BooleanField(_('first login'), default=True)
     profile_visibility = models.PositiveSmallIntegerField(
         _('profile visibility'), choices=VISIBILITY_CHOICES,
@@ -147,6 +147,7 @@ class UserProfile(models.Model):
     notification_frequency = models.PositiveSmallIntegerField(
         _('notification frequency'), choices=NOTIFICATION_FREQUENCY,
         default=NOTIFICATION_FREQUENCY.DAILY)
+    last_notification_email = models.DateTimeField(null=True)
 
     @property
     def ahr_rating(self):
@@ -177,7 +178,6 @@ class UserProfile(models.Model):
         adict['fields']['issues']= [ob.id for ob in self.issues.all()] if not self.notperm.has_key('issues') else ''
         adict['fields']['countries']= [ob.id for ob in self.countries.all()] if not self.notperm.has_key('countries') else ''
         adict['fields']['skills']= [ob.id for ob in self.skills.all()] if not self.notperm.has_key('skills') else ''
-        # AB - I added these to make the user page render, but it's rendering kinda funny
         adict['fields']['ownerid'] = self.user.id
         adict['fields']['item_type'] = 'user'
         adict['fields']['owner'] = self.user.username
