@@ -27,7 +27,7 @@ class IncidentAdmin(TrackingAdmin):
     exclude = ('countries', 'issues', 'skills', 'published', 'deleted')
     list_display_links = ('id', 'title',)
     list_display = (
-        'id', 'title', 'get_view_count', 'commentcount',
+        'id', 'title', 'commentcount',
         'get_email_rec_count', 'get_user_rec_count', 'get_conversation_count',
         'get_total_msg_count', 'get_screen_name', 'get_create_date',
         'get_owner', 'get_aging', 'get_status', 'is_featured'
@@ -39,12 +39,6 @@ class IncidentAdmin(TrackingAdmin):
     inlines = (ActionsInline, NextStepsInline)
     change_list_template = 'admin/incident_change_list.html'
     change_form_template = 'admin/incident_change_form.html'
-
-    # Prepare fields for change list and CSV.
-
-    def get_view_count(self, obj):
-        return obj.view_count
-    get_view_count.short_description = _('views')
 
     def get_email_rec_count(self, obj):
         return obj.email_rec_count
@@ -120,7 +114,6 @@ class IncidentAdmin(TrackingAdmin):
     @staticmethod
     def make_tracking_queryset(orig_queryset):
         queryset = orig_queryset.annotate(
-            view_count=Count('marketitemviewconter', distinct=True),
             email_rec_count=Count('emailrecommendation', distinct=True),
             total_msg_count=Count('messageext', distinct=True),
         )

@@ -11,7 +11,7 @@ from app.market.api.utils import *
 import app.market as market
 from app.market.models import Questionnaire
 from app.market.forms import QuestionnaireForm
-from tasks.celerytasks import update_notifications, mark_read_notifications
+from tasks.celerytasks import update_notifications
 
 
 def get_market_json(items, request=None, extra_data=None):
@@ -240,7 +240,6 @@ def set_rate(request, obj_id, rtype):
     rate.score = int(request.POST['score'])
     rate.save()
     rate.save_base()
-    mark_read_notifications.delay((item.id,), request.user.id)
     return HttpResponse(
         json.dumps({'success': 'true',
                     'score': item.score,
@@ -250,27 +249,21 @@ def set_rate(request, obj_id, rtype):
 
 
 @login_required
-def get_notifications_fromto(request, sfrom, to, rtype):
+def get_notifications_fromto(request, sfrom, to):
     notifications = market.models.Notification.objects.filter(user=request.user.id, item__deleted=False)[sfrom:to]
-    alist = []
-    notification_ids = []
+    ret_list = []
     for notification in notifications:
-        alist.append(notification.getDict())
-        notification_ids.append(notification.id)
-    market.models.Notification.objects.filter(id__in=notification_ids).update(seen=True)
-    return HttpResponse(json.dumps({'notifications': alist}),
-                        mimetype="application" + rtype)
+        ret_list.append(notification.get_dict())
+    market.models.Notification.objects.filter(pk__in=notifications).update(seen=True)
+    return HttpResponse(json.dumps({'notifications': ret_list}), mimetype="application/json")
 
 
 @login_required
-def get_notseen_notifications(request, sfrom, to, rtype):
-    notifications = market.models.Notification.objects.filter(user=request.user.id, item__deleted=False).filter(
-        seen=False).only('seen')
-    if len(notifications) > 0:
-        return HttpResponse(json.dumps({'result': True}),
-                            mimetype="application" + rtype)
-    return HttpResponse(json.dumps({'result': False}),
-                        mimetype="application" + rtype)
+def get_notseen_notifications(request):
+    has_unseen = market.models.Notification.objects.filter(user=request.user.id, item__deleted=False,
+                                                           seen=False).exists()
+    return HttpResponse(json.dumps({'result': has_unseen}),
+                        mimetype="application/json")
 
 
 @login_required

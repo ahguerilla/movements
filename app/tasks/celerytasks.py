@@ -1,6 +1,5 @@
-from celery import shared_task, task
 from app.users.models import UserProfile
-from app.market.models import MarketItem,Notification, MarketItemViewConter
+from app.market.models import Notification
 from django.db.models import Q
 from django.conf import settings
 import json
@@ -30,13 +29,14 @@ def get_notification_comment_text(obj, username, comment, not_yours=False):
 
 
 def find_people_interested_in(obj):
-    skills = [skill.id for skill in obj.skills.all()]
-    countries = [country.id for country in obj.countries.all()]
-    issues = [issue.id for issue in obj.issues.all()]
-    query = Q(skills__in=skills) | Q(issues__in=issues) | Q(countries__in=countries)
-    query = query & ~Q(user=obj.owner)
-    profiles = UserProfile.objects.filter(query).distinct('id').only('user').all()
-    return profiles
+    # skills = [skill.id for skill in obj.skills.all()]
+    # countries = [country.id for country in obj.countries.all()]
+    # issues = [issue.id for issue in obj.issues.all()]
+    # query = Q(skills__in=skills) | Q(issues__in=issues) | Q(countries__in=countries)
+    # query = query & ~Q(user=obj.owner)
+    # profiles = UserProfile.objects.filter(query).distinct('id').only('user').all()
+    # return profiles
+    return []
 
 
 @_app.task(name="createNotification", bind=True)
@@ -52,12 +52,11 @@ def create_notification(self, obj):
         notification.avatar_user = obj.owner.username
         notification.text = get_notification_text(obj)
         notification.save()
-    return
 
 
 @_app.task(name="createCommentNotification", bind=True)
 def create_comment_notification(self, obj, comment, username):
-    created = []
+    created = set()
     if obj.owner.username != username:
         notification = Notification()
         notification.user = obj.owner
@@ -66,7 +65,7 @@ def create_comment_notification(self, obj, comment, username):
         notification.comment_id = comment.id
         notification.text = get_notification_comment_text(obj,username,comment)
         notification.save()
-        created.append(obj.owner.id)
+        created.add(obj.owner.id)
     for cmnt in obj.comments.all():
         if cmnt.owner.username != username and cmnt.owner.id not in created and cmnt.deleted==False:
             notification = Notification()
@@ -74,16 +73,15 @@ def create_comment_notification(self, obj, comment, username):
             notification.item = obj
             notification.avatar_user = username
             notification.comment_id = comment.id
-            notification.text = get_notification_comment_text(obj,username,comment,True)
+            notification.text = get_notification_comment_text(obj, username, comment, True)
             notification.save()
-            created.append(cmnt.owner.id)
-    return
+            created.add(cmnt.owner.id)
 
 
 @_app.task(name="updateNotifications", bind=True)
 def update_notifications(self, obj):
-    notification_objs = Notification.objects.filter(item=obj.id).only('user','read').all()
-    notification_userids =set(notification.user.id for notification in notification_objs )
+    notification_objs = Notification.objects.filter(item=obj.id).only('user', 'read').all()
+    notification_userids = set(notification.user.id for notification in notification_objs)
     profiles = find_people_interested_in(obj)
     user_ids = set(profile.user.id for profile in profiles)
 
@@ -102,23 +100,5 @@ def update_notifications(self, obj):
         notification.user_id = user_id
         notification.item = obj
         notification.avatar_user = obj.owner.username
-        notification.text = get_notification_text(obj,update=True)
+        notification.text = get_notification_text(obj, update=True)
         notification.save()
-    return
-
-
-@_app.task(name="markReadNotifications", bind=True)
-def mark_read_notifications(self, obj_ids, user_id):
-    notifications = Notification.objects.filter(user=user_id).filter(item__in=obj_ids).filter(read=False).update(read=True)
-    return
-
-
-@_app.task(name="add_view", bind=True)
-def add_view(self, obj_id, owner_id, user_id):
-    if obj_id == owner_id:
-        return
-    view = MarketItemViewConter.objects.get_or_create(viewer_id=user_id, item_id=obj_id)[0]
-    view.counter = view.counter + 1
-    view.save()
-    return
-

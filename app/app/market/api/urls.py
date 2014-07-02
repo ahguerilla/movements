@@ -95,7 +95,7 @@ market_comment_patterns = patterns('',
 )
 
 report_patterns = patterns('',
-    url(r'report/(?P<obj_id>\d+)$',
+    url(r'report/(?P<obj_id>\d+)',
         'app.market.api.views.report.report_marketitem',
         name="report_post"),
 
@@ -104,12 +104,12 @@ report_patterns = patterns('',
         name="report_user"),
 )
 
-market_notificatoin_patterns = patterns('',
-    url(r'(?P<rtype>\S+)/notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$',
+market_notification_patterns = patterns('',
+    url(r'notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$',
         'app.market.api.views.market.get_notifications_fromto',
         name="get_notifications_fromto"),
 
-    url(r'(?P<rtype>\S+)/notifications/get/notseen/(?P<sfrom>\d+)/(?P<to>\d+)$',
+    url(r'notifications/get/notseen$',
         'app.market.api.views.market.get_notseen_notifications',
         name="get_notseen_notif"),
 )
@@ -119,6 +119,6 @@ urlpatterns = patterns('',
     url(r'', include(market_item_patterns)),
     url(r'', include(market_comment_patterns)),
     url(r'', include(market_user_patterns)),
-    url(r'', include(market_notificatoin_patterns)),
+    url(r'', include(market_notification_patterns)),
     url(r'', include(report_patterns)),
     )

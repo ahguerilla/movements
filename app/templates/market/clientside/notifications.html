@@ -8,14 +8,14 @@
             </div>
             <div style="width:220px;white-space:normal;float:right;margin-left:8px;">
                 <div style="max-height:40px;overflow:hidden;">
-                <% if(notif.read==false){ %><strong><%}%>
+                <% if (!notif.seen) { %><strong><% } %>
                 <% if(notif.comment===null){ %>
                     <%- notif.owner %> <% if(notif.text.update==true ){ %>{%trans "updated"%}<%}else { %> {%trans "posted"%} <%}%> the
                     <%- notif.item_type %> "<%- notif.text.title %>"
                 <% }else{ %>
                     <%- notif.comment_user %> {%trans "commented on "%}<% if(notif.owner_id==window.ahr.user_id){ %>{%trans "your"%}<%}%> <%- notif.item_type %> "<%- notif.text.title %>"
                 <% } %>
-                <% if(notif.read==false){ %></strong><%}%><br/>
+                <% if(!notif.seen) { %></strong><% } %><br/>
                 </div>
                 <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
             </div>
@@ -61,19 +61,6 @@
       return ev;
     },
 
-    newNotifExists: function () {
-      var that = this;
-      $.getJSON(that.notseen_url, function (data) {
-        if (data.result == true) {
-          $('.notifbell').removeClass('nonotif');
-          $('.notifbell').addClass('notif');
-        } else {
-          $('.notifbell').addClass('nonotif');
-          $('.notifbell').removeClass('notif');
-        }
-      });
-    },
-
     initialize: function (data) {
       var that = this;
       this.notif_url = window.ahr.app_urls.getmarketnotificationsfromto;
@@ -81,8 +68,6 @@
       this.notseen_url = window.ahr.app_urls.getnotseennotif + '10';
       this.tmpl = _.template($('#notifications_template').html());
       var that = this
-      that.newNotifExists();
-      window.setInterval(that.newNotifExists.bind(this), 60000);
     }
   });
   window.ahr.notifications_widget = window.ahr.notifications_widget || {};

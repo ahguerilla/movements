@@ -121,7 +121,6 @@ class UserProfile(models.Model):
     tweet_url = models.CharField(_('twitter page'), max_length=255, null=True, blank=True)
     occupation = models.CharField(_('occupation'), max_length=255, null=True, blank=True)
     expertise = models.CharField(_('area of expertise'), max_length=255, null=True, blank=True)
-    notifications = JSONField(_('notifications'), null=True, blank=True)
     privacy_settings = JSONField(_('privacy settings'), null=True, blank=True)
     nationality = models.ForeignKey(Nationality, null=True, blank=True)
     resident_country = models.ForeignKey(Residence, null=True, blank=True)
