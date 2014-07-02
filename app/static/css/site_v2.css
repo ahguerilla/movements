@@ -317,6 +317,11 @@ body {
   color: #756b65;
   text-decoration: underline;
 }
+#add-post-popup-container .popover {
+  left: inherit;
+  right: 14px;
+  width: 136px;
+}
 #add-post-popup-container .popover-content {
   width: 132px;
   padding: 9px;
@@ -1848,11 +1853,6 @@ h6 {
 
 
 @media (max-width: 767px) {
-  .header-nav .header-nav-wrapper {
-    left: 56%;
-  }
-}
-@media (max-width: 479px) {
   #view-content-menu {
     width: 41px;
   }
@@ -1866,13 +1866,16 @@ h6 {
   #view-profile-menu .action-font {
     display: none;
   }
-  #add-post-popup-container .popover {
-    left: inherit;
-    right: 14px;
-    width: 136px;
+}
+@media (max-width: 479px) {
+  .header-nav .header-nav-wrapper {
+    left: 56%;
   }
   #AddPostText {
     display: none;
+  }
+  #add-post-popup-container .arrow {
+    left: 112px;
   }
 }
 
