@@ -5,6 +5,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.db import connection
+from django.db.models import Q
 from haystack.query import SearchQuerySet
 
 from app.market.api.utils import *
@@ -260,7 +261,8 @@ def set_rate(request, obj_id, rtype):
 
 @login_required
 def get_notifications_fromto(request, sfrom, to):
-    notifications = market.models.Notification.objects.filter(user=request.user.id, item__deleted=False)[sfrom:to]
+    query = (Q(item__deleted=False) | Q(item=None)) & Q(user_id=request.user.id)
+    notifications = market.models.Notification.objects.filter(query)[sfrom:to]
     ret_list = []
     for notification in notifications:
         ret_list.append(notification.get_dict())

@@ -1712,7 +1712,7 @@ h6 {
   display: inline-block;
 }
 #postman {
-  margin-top: 30px;
+  margin-top: 20px;
   background-color: #fff;
   -webkit-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
   -moz-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
@@ -1827,7 +1827,10 @@ h6 {
   color: #f00;
 }
 #notifications {
-  margin-top: 10px;
+  margin-top: 20px;
+}
+#notifications .details.new {
+  font-weight: bold;
 }
 
 

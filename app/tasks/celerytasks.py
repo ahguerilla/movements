@@ -14,17 +14,16 @@ if not '_app' in dir():
 
 def get_notification_text(obj, update=False):
     return json.dumps({
-        'update':update,
+        'update': update,
         'title': obj.title
     })
 
 
-def get_notification_comment_text(obj, username, comment, not_yours=False):
+def get_notification_comment_text(obj, username, comment):
     return json.dumps({
         'username': username,
         'title': obj.title,
         'comment': comment.id,
-        'not_yours': not_yours
     })
 
 
@@ -63,17 +62,17 @@ def create_comment_notification(self, obj, comment, username):
         notification.item = obj
         notification.avatar_user = username
         notification.comment_id = comment.id
-        notification.text = get_notification_comment_text(obj,username,comment)
+        notification.text = get_notification_comment_text(obj, username, comment)
         notification.save()
         created.add(obj.owner.id)
     for cmnt in obj.comments.all():
-        if cmnt.owner.username != username and cmnt.owner.id not in created and cmnt.deleted==False:
+        if cmnt.owner.username != username and cmnt.owner.id not in created and not cmnt.deleted:
             notification = Notification()
             notification.user = cmnt.owner
             notification.item = obj
             notification.avatar_user = username
             notification.comment_id = comment.id
-            notification.text = get_notification_comment_text(obj, username, comment, True)
+            notification.text = get_notification_comment_text(obj, username, comment)
             notification.save()
             created.add(cmnt.owner.id)
 
@@ -102,3 +101,16 @@ def update_notifications(self, obj):
         notification.avatar_user = obj.owner.username
         notification.text = get_notification_text(obj, update=True)
         notification.save()
+
+
+@_app.task(name="new_postman_message", bind=True)
+def new_postman_message(self, message):
+    notification = Notification()
+    notification.user_id = message.recipient.id
+    notification.text = json.dumps({
+        'type': 'message',
+        'subject': message.subject,
+        'sender': message.sender.username,
+    })
+    notification.avatar_user = message.sender.username
+    notification.save()
