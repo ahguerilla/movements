@@ -1,11 +1,14 @@
 ::-webkit-input-placeholder {
   font-style: normal;
+  font-family: "LinotypeUnivers-330Light";
 }
 ::-moz-placeholder {
   font-style: normal;
+  font-family: "LinotypeUnivers-330Light";
 }
 :-ms-input-placeholder {
   font-style: normal;
+  font-family: "LinotypeUnivers-330Light";
 }
 .movements-form {
   -webkit-border-radius: 0;
@@ -40,9 +43,6 @@
 }
 .movements-form .form-main-button {
   margin-top: 15px;
-}
-.movements-form .form-select-multi {
-  margin-bottom: 30px;
 }
 .movements-form a {
   color: #262626;
@@ -103,6 +103,9 @@
 }
 .extended-form .form-main-button {
   margin-top: 15px;
+}
+.twitter-typeahead .tt-hint {
+  font-size: 16px;
 }
 .btn {
   -webkit-font-smoothing: antialiased;
@@ -531,6 +534,11 @@ h6 {
 }
 .content-page h1 {
   font-size: 26px;
+}
+.content-block a {
+  color: #262626;
+  font-weight: bold;
+  text-decoration: underline;
 }
 .avatar img {
   -webkit-border-radius: 50%;

@@ -9,7 +9,6 @@ from forms import RequestForm, OfferForm, save_market_item
 from models.market import MarketItem
 
 
-@login_required
 def index(request):
     interests = Interest.objects.all()
     countries = Countries.objects.all()
@@ -25,16 +24,13 @@ def index(request):
     regions = sorted(regions, key=lambda r: r.name)
     return render_to_response('market/market.html',
                               {
-                                  'title': 'Exchange',
-                                  'help_text_template': 'market/copy/market_help.html',
                                   'interests': serializers.serialize('json', interests),
                                   'regions': regions,
-
+                                  'is_logged_in': request.user.is_authenticated()
                               },
                               context_instance=RequestContext(request))
 
 
-@login_required
 def show_post(request, post_id):
     post = get_object_or_404(MarketItem.objects.defer('comments'),
                              pk=post_id,
@@ -44,7 +40,8 @@ def show_post(request, post_id):
 
     post_data = {
         'post': post,
-        'report_url': reverse('report_post', args=[post.id])
+        'report_url': reverse('report_post', args=[post.id]),
+        'is_logged_in': request.user.is_authenticated()
     }
 
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))

@@ -1,6 +1,7 @@
 from django import forms
 from postman.forms import WriteForm, FullReplyForm, QuickReplyForm
 from tasks.celerytasks import create_notification, update_notifications
+from django.utils.translation import ugettext_lazy as _
 
 import app.market as market
 from app.users.forms import CheckboxSelectMultiple, RegionAccordionSelectMultiple
@@ -30,7 +31,8 @@ class MarketWriteForm(WriteForm):
 class OfferForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'specific_skill', 'receive_notifications', 'interests', 'countries']
+        fields = ['title', 'details', 'specific_skill', 'receive_notifications', 'interests', 'countries',
+                  'tweet_permission']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
             'interests': CheckboxSelectMultiple(),
@@ -52,17 +54,22 @@ class OfferForm(forms.ModelForm):
             self.instance.owner = kwargs['owner']
         return super(OfferForm, self).save(commit=commit)
 
+    def clean_interests(self):
+        data = self.cleaned_data['interests']
+        if len(data) == 0:
+            raise forms.ValidationError(_("You must select at least one skill"))
+        return data
+
 
 class RequestForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
         fields = ['title', 'details', 'specific_skill',
-                  'receive_notifications', 'interests', 'countries']
+                  'receive_notifications', 'interests', 'countries', 'tweet_permission']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
             'interests': CheckboxSelectMultiple(),
-            'countries': RegionAccordionSelectMultiple(),
-            'specific_skill': forms.Textarea(attrs={'cols': 55, 'rows': 3}),
+            'countries': RegionAccordionSelectMultiple()
         }
 
     def __init__(self, *args, **kwargs):
@@ -80,6 +87,11 @@ class RequestForm(forms.ModelForm):
             self.instance.owner = kwargs['owner']
         return super(RequestForm, self).save(commit=commit)
 
+    def clean_interests(self):
+        data = self.cleaned_data['interests']
+        if len(data) == 0:
+            raise forms.ValidationError(_("You must select at least one skill"))
+        return data
 
 class CommentForm(forms.ModelForm):
     class Meta:

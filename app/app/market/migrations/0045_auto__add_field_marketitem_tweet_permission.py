@@ -8,35 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting model 'MarketItemViewConter'
-        db.delete_table(u'market_marketitemviewconter')
-
-        # Deleting field 'Notification.read'
-        db.delete_column(u'market_notification', 'read')
-
-        # Adding field 'Notification.emailed'
-        db.add_column(u'market_notification', 'emailed',
+        # Adding field 'MarketItem.tweet_permission'
+        db.add_column(u'market_marketitem', 'tweet_permission',
                       self.gf('django.db.models.fields.BooleanField')(default=True),
                       keep_default=False)
 
-
     def backwards(self, orm):
-        # Adding model 'MarketItemViewConter'
-        db.create_table(u'market_marketitemviewconter', (
-            ('viewer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('item', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['market.MarketItem'])),
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('counter', self.gf('django.db.models.fields.IntegerField')(default=0)),
-        ))
-        db.send_create_signal('market', ['MarketItemViewConter'])
+        # Deleting field 'MarketItem.tweet_permission'
+        db.delete_column(u'market_marketitem', 'tweet_permission')
 
-        # Adding field 'Notification.read'
-        db.add_column(u'market_notification', 'read',
-                      self.gf('django.db.models.fields.BooleanField')(default=False),
-                      keep_default=False)
-
-        # Deleting field 'Notification.emailed'
-        db.delete_column(u'market_notification', 'emailed')
 
     models = {
         u'auth.group': {
@@ -124,6 +104,7 @@ class Migration(SchemaMigration):
             'staff_owner': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'marketitems'", 'null': 'True', 'to': u"orm['auth.User']"}),
             'status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'max_length': '1'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'tweet_permission': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'url': ('django.db.models.fields.CharField', [], {'max_length': '500', 'blank': 'True'})
         },
         'market.marketitemactions': {
@@ -163,6 +144,13 @@ class Migration(SchemaMigration):
             'item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']"}),
             'viewer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         },
+        'market.marketitemviewconter': {
+            'Meta': {'object_name': 'MarketItemViewConter'},
+            'counter': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']"}),
+            'viewer': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
+        },
         'market.messageext': {
             'Meta': {'ordering': "('-sent_at', '-id')", 'object_name': 'MessageExt', '_ormbases': [u'postman.Message']},
             'is_post_recommendation': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -174,11 +162,11 @@ class Migration(SchemaMigration):
             'Meta': {'ordering': "['-pub_date']", 'object_name': 'Notification'},
             'avatar_user': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'comment': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.Comment']", 'null': 'True', 'blank': 'True'}),
-            'emailed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']", 'null': 'True', 'blank': 'True'}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'seen': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'read': ('django.db.models.fields.BooleanField', [], {}),
+            'seen': ('django.db.models.fields.BooleanField', [], {}),
             'text': ('json_field.fields.JSONField', [], {'default': "u'null'"}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         },

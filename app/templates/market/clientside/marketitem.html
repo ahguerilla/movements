@@ -25,11 +25,13 @@
           <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.
         </div>
       </div>
+      <% if (!is_safe) { %>
       <div class="item-menu-container">
         <a class="item-menu" href="#">
           <img src="{{ STATIC_URL }}images/v2/item_menu_gray_icon.png"/>
         </a>
       </div>
+      <% } %>
       <a class="share-twitter" href="#"><img src="{{ STATIC_URL }}images/v2/twitter_gray.png"/></a>
       </ul>
     </div>
@@ -47,11 +49,13 @@
        data-attributes-url="<%- attributes_url %>">
     <div class="header">
       <a class="share-twitter"><img src="{{ STATIC_URL }}images/v2/twitter.png"/></a>
+      <% if (!is_safe) { %>
       <div class="item-menu-container">
         <a class="item-menu" href="#">
           <img src="{{ STATIC_URL }}images/v2/item_menu_icon.png"/>
         </a>
       </div>
+      <% } %>
     </div>
     <div class="feature-type">
       <% if (item_type == 'offer') { %>

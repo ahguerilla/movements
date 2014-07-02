@@ -185,13 +185,16 @@ class UserProfile(models.Model):
         adict['fields']['commentcount'] = 0
         return adict
 
+    def has_full_access(self):
+        return not self.userprofile.first_login
+
     @classmethod
     def get_application_users(cls, **kwargs):
         query = kwargs.get('query', None)
-        distinct=kwargs.get('distinct', None)
-        order=kwargs.get('order', None)
-        start=kwargs.get('start', None)
-        finish=kwargs.get('finish', None)
+        distinct = kwargs.get('distinct', None)
+        order = kwargs.get('order', None)
+        start = kwargs.get('start', None)
+        finish = kwargs.get('finish', None)
         return cls.objects.filter(query).filter(user__is_active=True).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
 
 

@@ -28,6 +28,7 @@
             </div>
         </div>
       </div>
+      {% if is_logged_in %}
       <div class="post">
         <pre>{{ post.details }}</pre>
       </div>
@@ -70,12 +71,18 @@
           <div class="content"></div>
         </div>
       </div>
+      {% else %}
+      <div class="post content-block">
+        <p>Please <a href="{% url 'account_login' %}">Login</a> or <a href="{% url 'signup_start' %}">Sign up</a> to view more about this post. Once you've done this you will be able to send messages to the author, comment and rate this post.</p>
+      </div>
+      {% endif %}
     </div>
   </div>
 </div>
 {% endblock %}
 
 {% block endjavascript %}
+  {% if is_logged_in %}
   {% include "market/clientside/recommenddialog.html" %}
   {% include "market/clientside/messagedialog.html" %}
   {% include "market/clientside/reportdialog.html" %}
@@ -103,4 +110,5 @@
       this.recommend_widget = window.ahr.recommend_widget.initWidget(window.ahr.username);
     })();
   </script>
+  {% endif %}
 {% endblock %}
