@@ -120,6 +120,13 @@
       container: '#add-post-popup-container',
       placement: 'bottom'
     });
+
+    $('#add-post').on('shown.bs.popover', function(){
+//        if ($(document).screenX < 480) {
+          //$('#add-post .popover').css("left", $(document).screenX - 150);
+          $('#add-post .arrow').css("left", "28px");
+//        }
+    });
   }
 
   function setupProfileMenuPopover() {
