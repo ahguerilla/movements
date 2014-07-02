@@ -26,14 +26,14 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  {% assets "css_all" %}
-    <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
-  {% endassets %}
-
-
-  {% assets "js_all" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
+{#  {% assets "css_all" %}#}
+{#    <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">#}
+{#  {% endassets %}#}
+{##}
+{##}
+{#  {% assets "js_all" %}#}
+{#    <script type="text/javascript" src="{{ ASSET_URL }}"></script>#}
+{#  {% endassets %}#}
 
   {% block extra_head %}
   {% endblock %}
@@ -74,7 +74,7 @@
           {% show_menu 0 100 100 100 "cms/navs/top_nav.html" %}
           {% if user.is_authenticated %}
             <li><a href="{% url 'show_market' %}">Exchange</a></li>
-            <li><a href="{% url 'show_users' %}">{%trans "Members"%}</a></li>
+{#            <li><a href="{% url 'show_users' %}">{%trans "Members"%}</a></li>#}
           {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -174,7 +174,7 @@
 
 {% block endjavascript %}
 {% endblock %}
-<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+{#<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>#}
 {% if user.is_authenticated %}
   {% include "market/clientside/notifications.html" %}
   <script type="text/javascript" id="notifications_view">

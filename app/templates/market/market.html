@@ -4,57 +4,84 @@
 
 {% block content %}
   <div id="exchange-filters" class="exchange-filters clearfix">
-    <div class="pull-left">
-      <ul class="type-menu">
-        <li class="active"><a href="#" alt="filter all" data-filter="">{% trans 'See all' %}</a></li>
-        <li><a href="#" alt="filter to requests" data-filter="request">{% trans 'Requests' %}</a></li>
-        <li><a href="#" alt="filter to offers" data-filter="offer">{% trans 'Offers' %}</a></li>
-      </ul>
+    <div class="clearfix">
+      <div class="pull-left">
+        <ul class="type-menu">
+          <li class="active"><a href="#" alt="filter all" data-filter="">{% trans 'See all' %}</a></li>
+          <li><a href="#" alt="filter to requests" data-filter="request">{% trans 'Requests' %}</a></li>
+          <li><a href="#" alt="filter to offers" data-filter="offer">{% trans 'Offers' %}</a></li>
+        </ul>
+      </div>
+      {% if is_logged_in %}
+      <div class="pull-left">
+        <ul class="hidden-menu">
+          <li class="active"><a href="#" alt="filter all" data-filter="false">{% trans 'Hide Hidden' %}</a></li>
+          <li><a href="#" alt="filter to requests" data-filter="true">{% trans 'Show Hidden' %}</a></li>
+        </ul>
+      </div>
+      {% endif %}
+      <div class="pull-right categories">
+        <h4>Filter by:</h4>
+        <ul class="category-menu">
+          <li class="skills">
+            <a href="#" alt="filter by skills" class="skills">
+              <img src="{{ STATIC_URL }}images/v2/market-filter-icon.png" />
+              <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
+            </a>
+            <div class="popover-container"></div>
+          </li>
+          <li class="regions">
+            <a href="#" alt="skills" class="regions">
+              <img src="{{ STATIC_URL }}images/v2/market-countries-icon.png"/>
+              <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
+            </a>
+            <div class="popover-container"></div>
+          </li>
+          <li>
+            <a href="#" alt="text search" class="search">
+              <img src="{{ STATIC_URL }}images/v2/market-search-icon.png"/>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="pull-left">
-      <ul class="hidden-menu">
-        <li class="active"><a href="#" alt="filter all" data-filter="false">{% trans 'Hide Hidden' %}</a></li>
-        <li><a href="#" alt="filter to requests" data-filter="true">{% trans 'Show Hidden' %}</a></li>
-      </ul>
-    </div>
-    <div class="pull-right categories">
-      <h4>Filter by:</h4>
-      <ul class="category-menu">
-        <li>
-          <a href="#" alt="filter by skills" class="skills">
-            <img src="{{ STATIC_URL }}images/v2/market-filter-icon.png" />
-            <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
-          </a>
-          <div class="popover-container"></div>
-        </li>
-        <li>
-          <a href="#" alt="skills" class="regions">
-            <img src="{{ STATIC_URL }}images/v2/market-countries-icon.png"/>
-            <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
-          </a>
-          <div class="popover-container"></div>
-        </li>
-        <li>
-          <a href="#" alt="text search" class="search">
-            <img src="{{ STATIC_URL }}images/v2/market-search-icon.png"/>
-          </a>
-        </li>
-      </ul>
+    <div class="search-expanded hide">
+      <div class="pull-right">
+        <input class="form-control" type="text" name="query">
+        <button type="button" class="btn btn-action run-search">Search</button>
+      </div>
     </div>
   </div>
 
   <div id="itemandsearchwrap">
     <div class="row">
       <div class="col-md-4 featured-col">
-        <h2>Featured posts</h2>
-        <div id="featured-marketitems"></div>
+        <h2>{% trans 'Featured posts' %}</h2>
+        <div id="featured-marketitems">
+          <div class="ajaxloader">
+            <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
+          </div>
+          <div class="item-container"></div>
+        </div>
+        <br/>
+        {% if is_logged_in %}
+        <h2>{% trans 'Sticky posts' %}</h2>
+        <div id="stuck-marketitems">
+          <div class="ajaxloader">
+            <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
+          </div>
+          <div class="item-container"></div>
+        </div>
+        {% endif %}
       </div>
-      <div class="col-md-8">
-        <div id="marketitems"></div>
-        <div id="ajaxloader">
+      <div class="col-md-8" id="market-main">
+        <br class="visible-xs visible-sm" />
+        <h2 class="visible-xs visible-sm">Market Posts</h2>
+        <div id="marketitems" class="item-container"></div>
+        <div class="ajaxloader">
           <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
         </div>
-        <div id="pagination"></div>
+        <div class="pagination"></div>
       </div>
     </div>
   </div>
@@ -63,7 +90,6 @@
 
 {% block endjavascript %}
   <script type="text/template" id="skill-filter-list-template">
-{#    <% var skills = ['Lawyer', 'Writer', 'Media Producer', 'Journalist']; %>#}
     <ul class="skill-filter">
       <% _.each(skills, function(skill) { %>
       <li><a href="#" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
@@ -71,52 +97,35 @@
     </ul>
   </script>
   <script type="text/template" id="region-filter-list-template">
-    <% var regions = ['Africa', 'Middle East', 'Asia', 'Europe', 'Americas', 'Oceania']; %>
     <ul class="region-filter">
-      <% _.each(regions, function(region) { %>
-      <li><a href="#"><%- region %></a></li>
-      <% }); %>
+    {% for region in regions %}
+      <li>
+        <a href="#">{{ region.name }}</a>
+        <ul class="country-list hide">
+          <li><a href='#' class="no-icon back">Back</a></li>
+          {% for country in region.country_list %}
+            <li><a href='#' class="country" data-filter="{{ country.id }}">{{ country }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
     </ul>
   </script>
+
   {% include "market/clientside/marketitem.html" %}
-{#  {% include "market/clientside/marketuser.html" %}#}
-  {% include "market/clientside/filtertag.html" %}
   {% include "market/clientside/checkbox.html" %}
   {% include "market/clientside/typetag.html" %}
-  {% include "market/clientside/filters.html"%}
-
-{#  {% include "market/clientside/expdate.html"%}#}
-{#  {% include "market/clientside/datetimepicker.html"%}#}
-{#  {% include "market/clientside/datepicker.html"%}#}
-{#  {% include "market/clientside/typeahead.html" %}#}
-{#  {% include "market/clientside/input.html" %}#}
   {% include "market/clientside/textarea.html" %}
-
-{#  {% include "market/clientside/messagedialog.html" %}#}
-{#  {% include "market/clientside/recommenddialog.html" %}#}
-{#  {% include "market/clientside/ratedialog.html" %}#}
+  {% include "market/clientside/dropdown.html" %}
   {% include "market/clientside/reportdialog.html" %}
   {% include "market/clientside/closemarketitemdialog.html"%}
-{#  {% include 'market/clientside/userprofile.html' %}#}
-{#  {% include 'market/clientside/reportuserdialog.html' %}#}
-{#  {% include "market/clientside/actions/actions.html"%}#}
   {% include "market/clientside/pagination_template.html"%}
-
 
   {% compress js inline %}
     <script type="text/javascript">
       $(document).ready(function(){
-        window.GuerillaMarket = window.GuerillaMarket || {};
-        window.GuerillaMarket.userDefaultTags = {{tags|safe}};
-        var dfrd = window.ahr.getStatics();
-        dfrd.done(function(){
-          if("{{init}}"=="market"){
-            window.ahr.market.initMarket({{tags|safe}});
-          }else if("{{init}}"=="posts"){
-            window.ahr.posts.initPosts({{tags|safe}});
-          }else if ("{{init}}"=="users"){
-            window.ahr.users.initUsers({{tags|safe}});
-          }
+        window.ahr.market.initMarket({
+          skills: {{ interests|safe }}
         });
       });
     </script>

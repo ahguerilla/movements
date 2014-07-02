@@ -21,6 +21,9 @@ $dropdown-select-color = #ff6d50
 $hr-color = #CDCBCC
 $danger-bg-color = #FFBEB2
 $warn-color = #ff0000
+$hidden-item-color = #FBFAFB
+$hidden-offer-color = #7CA9BF
+$hidden-request-color = #FB9D9E
 
 // **************************************
 // font colors
@@ -52,12 +55,15 @@ box-shadow()
 
 ::-webkit-input-placeholder
   font-style normal
+  font-family "LinotypeUnivers-330Light"
 
 ::-moz-placeholder
   font-style normal
+  font-family: "LinotypeUnivers-330Light";
 
 :-ms-input-placeholder
   font-style normal
+  font-family: "LinotypeUnivers-330Light";
 
 // **************************************
 // form styles
@@ -114,6 +120,9 @@ box-shadow()
     text-align center
   .form-main-button
     margin-top 15px
+
+.twitter-typeahead .tt-hint
+  font-size 16px
 
 // **************************************
 // button styles
@@ -461,10 +470,23 @@ h1,h2,h3,h4,h5,h6
     text-decoration underline
 
 .content-page
+  a
+    color $main-font
+    font-weight bold
+    text-decoration underline
   h1,h2,h3,h4,h5,h6
     color $title-font
+    a
+      font-weight normal
   h1
     font-size 26px
+
+.content-block
+  a
+    color $main-font
+    font-weight bold
+    text-decoration underline
+
 
 .avatar
   img
@@ -479,7 +501,7 @@ h1,h2,h3,h4,h5,h6
     font-family "HurmeGeometricSans3-SemiBold"
     margin-bottom 0
 
-#ajaxloader
+.ajaxloader
   text-align center
 
 .errorlist
@@ -500,6 +522,9 @@ h1,h2,h3,h4,h5,h6
     padding 5px 8px 5px 8px
     border 2px solid $third-color
     border-radius 3px
+
+.content-wrap
+  min-height 500px
 
 // **************************************
 // Landing page styles
@@ -557,6 +582,7 @@ $page-banner-height = 550px
     position absolute
     right 0
     top 0
+
 
 .landing-page
   .landing-content
@@ -619,7 +645,7 @@ $page-banner-height = 550px
 // **************************************
 .progress-counter
   border-top 2px solid $border-color
-  margin-bottom 50px
+  margin-bottom 60px
   position relative
   .progress-item
     position absolute
@@ -651,13 +677,18 @@ $page-banner-height = 550px
   .outstanding
     color $inactive-font
 
+
+.more-about-you-widget
+  .form-select-multi
+    min-height 250px
+
 .form-select-multi
-  min-height 250px
   .row
-    margin-top 15px
+    margin-top 10px
   input[type=checkbox]
     display none
 
+  .select-multi-checkbox
   .select-checkbox
     width 100%
     height 30px
@@ -669,12 +700,14 @@ $page-banner-height = 550px
     color $inactive-font
     cursor pointer
 
+  .select-multi-checkbox.checked
   .select-checkbox.checked
     box-shadow none
     background-color $third-color
     border none
     color #fff
 
+  .select-multi-checkbox label
   .select-checkbox label
     margin 0
     cursor pointer
@@ -684,6 +717,7 @@ $page-banner-height = 550px
     border 1px solid $border-color
     background-color #fff
 
+  .select-multi-checkbox label:after
   .select-checkbox label:after
     opacity 0
     content ''
@@ -702,9 +736,11 @@ $page-banner-height = 550px
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
 
+  .select-multi-checkbox input[type=checkbox]:checked + label:after
   .select-checkbox input[type=checkbox]:checked + label:after
     opacity 1
 
+  .select-multi-checkbox input[type=checkbox]:checked + label
   .select-checkbox input[type=checkbox]:checked + label
     background-color #0D2E3F
     border 1px solid #0D2E3F
@@ -714,12 +750,47 @@ $page-banner-height = 550px
     margin-left 23px
     line-height 19px
 
+  // overrides for the multi checkbox
+  .select-multi-checkbox
+  .select-multi-checkbox.checked
+    background-color $footer-color
+    .select-label
+      font-size 16px
 
+  .select-multi-checkbox input[type=checkbox]:checked + label
+    background-color #FFF
+    border 1px solid #FFF
+
+  .select-multi-checkbox label:after
+    border 3px solid #0D2E3F
+    border-top none
+    border-right none
+    opacity 0
+
+  .select-arrow
+    background url("../images/v2/multi-select-arrow.png")
+    float right
+    width 12px
+    height 10px
+    margin-top 4px
+
+  .select-count
+    float right
+    font-size 14px
+    margin-right 5px
+
+  .select-multi-checkbox.selected
+    .select-arrow
+      background url("../images/v2/multi-select-arrow.png") 0 -10px
+
+
+.share-twitter
+  display none
 // **************************************
 // exchange page
 // **************************************
 
-popoverDropdown(width)
+popoverDropdown(width, showIcon = true)
   $right-icon = width - 30
   padding 0
   ul
@@ -732,8 +803,14 @@ popoverDropdown(width)
       display block
       border-top 1px solid $border-color
       padding 4px
+      a.no-icon, a.no-icon:hover
+        background-image none
       a
-        background url('../images/v2/select_plus.png') $right-icon center no-repeat
+        if showIcon
+          background url('../images/v2/select_plus.png') $right-icon center no-repeat
+          margin 0
+        else
+          margin 4px
         padding 10px
         width width
         height 40px
@@ -742,12 +819,18 @@ popoverDropdown(width)
         color #000
       a:hover
         color #fff
-        background $dropdown-hover-bg url('../images/v2/select_plus_hover.png') $right-icon center no-repeat
+        if showIcon
+          background url('../images/v2/select_plus_hover.png') $right-icon center no-repeat
+        background-color $dropdown-hover-bg
       a.selected
-        background #fff url('../images/v2/select_tick.png') $right-icon center no-repeat
+        if showIcon
+          background url('../images/v2/select_tick.png') $right-icon center no-repeat
+         background-color #fff
         color $dropdown-select-color
       a.selected:hover
-        background $dropdown-hover-bg url('../images/v2/select_tick.png') $right-icon center no-repeat
+        if showIcon
+          background url('../images/v2/select_tick.png') $right-icon center no-repeat
+        background-color $dropdown-hover-bg
       a.plain
         background-image none
 
@@ -755,6 +838,13 @@ popoverDropdown(width)
   border-bottom 2px solid $separator-color
   margin-bottom 20px
   padding-bottom 20px
+  .search-expanded
+    margin-top 5px
+    input.form-control
+      width 188px
+      display inline-block
+    button.btn
+      padding 4px 12px
   .categories
     h4
       color $item-footer-font
@@ -775,8 +865,19 @@ popoverDropdown(width)
           display inline-block
       .popover
         border-radius 0
-      .popover-content
+      .skills .popover-content
         popoverDropdown(240px)
+      .regions .popover-content
+        popoverDropdown(248px, showIcon = false)
+        ul.region-filter.expanded
+          > li
+            border none
+            > a
+              display none
+        ul.region-filter
+          li
+            popoverDropdown(240 px)
+
   .type-menu, .hidden-menu
     list-style none
     margin 0
@@ -797,7 +898,7 @@ popoverDropdown(width)
       border-bottom 2px solid $filter-font
 
 
-.featured-col
+#itemandsearchwrap
   h2
     font-size 18px
     margin 0 0 10px 0
@@ -836,7 +937,7 @@ popoverDropdown(width)
   .header
     background url('../images/v2/offer_icon.png') no-repeat left center
 
-#marketitems
+#marketitems, #stuck-marketitems
   .market-place-item
     position relative
     width 100%
@@ -881,8 +982,19 @@ popoverDropdown(width)
     background $offer-color url('../images/v2/offer_icon.png') no-repeat 10px center
     .item-type
       color $offer-color
+
+#marketitems
+  .market-place-item.request.item-hidden
+    .item-type
+      color $hidden-request-color
+  .market-place-item.offer.item-hidden
+      .item-type
+        color $hidden-offer-color
   .market-place-item.item-hidden
-    opacity 0.5
+    .market-item-card
+      background-color $hidden-item-color
+      .title
+        color #8F8E8F
 
 #featured-marketitems
   .item-menu-container
@@ -1185,7 +1297,7 @@ popoverDropdown(width)
 // messaging styles
 // **************************************
 #postman
-  margin-top 30px
+  margin-top 20px
   background-color #fff
   box-shadow 0 1px 1px 0 $border-color-alpha
 
@@ -1276,3 +1388,13 @@ popoverDropdown(width)
   .vetting-status
     .status.warn
       color #ff0000
+
+
+// **************************************
+// Notifications page styles
+// **************************************
+
+#notifications
+  margin-top 20px
+  .details.new
+    font-weight bold

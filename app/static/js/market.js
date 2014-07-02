@@ -8,34 +8,85 @@ $(function () {
     events: {
       'click .type-menu a': 'setTypeFilter',
       'click .hidden-menu a': 'setHiddenFilter',
-      'click .region-filter a': 'setRegionFilter',
-      'click .skill-filter a': 'setSkillsFilter'
+      'click .region-filter > li > a': 'showCountries',
+      'click .country-list a.back': 'showRegions',
+      'click .country-list a.country': 'setRegionFilter',
+      'click .skill-filter a': 'setSkillsFilter',
+      'click a.search': 'toggleSearchControls',
+      'click .run-search': 'triggerFilter',
+      'keydown input[name=query]': 'checkForEnter',
+      'shown.bs.popover a': 'setPopoverContent',
+      'hide.bs.popover a': 'hidePopoverContent'
     },
 
-    initialize: function() {
+    initialize: function(options) {
       var $skills = this.$el.find('a.skills');
-      var $container = $skills.parent().find('.popover-container');
-      $.get(window.ahr.app_urls.getSkills, function (data) {
-        $skills.popover({
+      this.$skillsContainer = $skills.parent().find('.popover-container');
+      this.skillsContent = _.template($('#skill-filter-list-template').html(), {skills: options.skills});
+      $skills.popover({
         title: '',
         html: true,
-        content: _.template(
-              $('#skill-filter-list-template').html(),
-              {skills: data}),
-          container: $container,
-          placement: 'bottom'
-        });
+        content: this.skillsContent,
+        container: this.$skillsContainer,
+        placement: 'bottom'
       });
 
       var $regions = this.$el.find('a.regions');
-      $container = $regions.parent().find('.popover-container');
+      this.$regionContainer = $regions.parent().find('.popover-container');
+      this.regionsContent = $('#region-filter-list-template').html();
       $regions.popover({
         title: '',
         html: true,
-        content: _.template($('#region-filter-list-template').html())(),
-        container: $container,
+        content: this.regionsContent,
+        container: this.$regionContainer,
         placement: 'bottom'
       });
+
+      this.$query = this.$el.find('input[name=query]');
+    },
+
+    setPopoverContent: function(ev) {
+      var $currentTarget = $(ev.currentTarget);
+      if ($currentTarget.hasClass('skills')) {
+        this.$skillsContainer.find('.popover-content').html(this.skillsContent);
+      } else {
+        this.$regionContainer.find('.popover-content').html(this.regionsContent);
+      }
+    },
+
+    hidePopoverContent: function (ev) {
+      var $currentTarget = $(ev.currentTarget);
+      if ($currentTarget.hasClass('skills')) {
+        this.skillsContent = this.$skillsContainer.find('.popover-content').html();
+      } else {
+        this.regionsContent = this.$regionContainer.find('.popover-content').html();
+      }
+    },
+
+    toggleSearchControls: function(ev) {
+      var expand = this.$el.find('.search-expanded');
+      this.$el.find('.search-expanded').toggleClass('hide');
+      if (!expand.hasClass('hide')) {
+        this.$query.focus();
+      }
+    },
+
+    showCountries: function(ev) {
+      ev.preventDefault();
+      var $currentTarget = $(ev.currentTarget);
+      var $countryList = $currentTarget.parent().find('.country-list');
+      var $topLevel = $currentTarget.parents('.region-filter');
+      $topLevel.addClass('expanded');
+      $countryList.removeClass('hide');
+    },
+
+    showRegions: function(ev) {
+      ev.preventDefault();
+      var $currentTarget = $(ev.currentTarget);
+      var $countryList = $currentTarget.parents('.country-list');
+      var $topLevel = $currentTarget.parents('.region-filter');
+      $topLevel.removeClass('expanded');
+      $countryList.addClass('hide');
     },
 
     toggleFilterState: function(ev) {
@@ -62,7 +113,14 @@ $(function () {
     },
 
     setRegionFilter: function(ev) {
-      this.toggleFilterState(ev);
+      var region = this.toggleFilterState(ev);
+      if (region.selected) {
+        this.regions.push(region.value)
+      } else {
+        this.regions = $.grep(this.regions, function (value) {
+          return value != region.value;
+        });
+      }
       this.trigger('filter');
     },
 
@@ -84,6 +142,17 @@ $(function () {
       this.trigger('filter');
     },
 
+    checkForEnter: function(ev) {
+      var key = ev.charCode ? ev.charCode : ev.keyCode ? ev.keyCode : 0;
+      if (key === 13) {
+        this.triggerFilter();
+      }
+    },
+
+    triggerFilter: function() {
+      this.trigger('filter');
+    },
+
     setFilter: function(data) {
       if (this.type) {
         data.types = this.type;
@@ -91,13 +160,18 @@ $(function () {
       if (this.skills) {
         data.skills = this.skills;
       }
-      
+      if (this.regions) {
+        data.countries = this.regions;
+      }
       data.showHidden = this.showHidden;
+      var query = this.$query.val();
+      if (query) {
+        data.search = query;
+      }
     }
   });
 
   var PaginationView = Backbone.View.extend({
-    el: '#pagination',
     marketView: null,
     pageSize: null,
     pageRange: null,
@@ -129,7 +203,6 @@ $(function () {
       this.pageSize = options.pageSize;
       this.pageRange = options.pageRange;
       this.pageActive = options.pageActive;
-      this.init();
     },
 
     render: function () {
@@ -194,7 +267,15 @@ $(function () {
     }
   })
 
-  var MarketView = window.ahr.market.MarketBaseView.extend({
+  var MarketView = window.ahr.BaseView.extend({
+    loadingPage: false,
+    loadedOnce: false,
+    currentCall: null,
+    noResultsString: "",
+    is_featured: false,
+    $itemContainer: null,
+    paginationView: null,
+
     types: {
       "Offers": "offer",
       "Request": "request"
@@ -205,25 +286,55 @@ $(function () {
       'click .item-action-menu a': 'itemAction'
     },
 
+    defaultOptions: {
+      showHide: true,
+      showSticky: true,
+      item_tmp: '#item_template',
+      item_menu_template: '#item-menu-template'
+    },
+
     initialize: function (options) {
+      options = _.extend({}, this.defaultOptions, options);
       this.options = options;
       this.item_type = 'item';
       this.getMarketItems = options.marketUrl;
       this.noResultsString = options.noResultsString;
-      this.item_tmp = options.item_tmp || _.template($('#item_template').html());
-      this.$itemContainer = options.$itemContainer || $('#marketitems');
-      if(options.filterView) {
-        this.init(options.filterView);
-      }
+      this.item_tmp = _.template($(options.item_tmp).html());
+      this.$itemContainer = this.$el.find('.item-container');
+      this.filterView = options.filterView;
       this.isProfile = options.isProfile || false;
-      this.isFeatured = options.isFeatured || false;
-      if (this.isFeatured) {
-        this.initFeatured();
-      }
-      this.item_menu_template = _.template($('#item-menu-template').html());
+      this.item_menu_template = _.template($(options.item_menu_template).html());
       this.closeDialog = new ahr.CloseItemDialogView();
       this.reportDialog = new ahr.ReportPostView();
+
+      var $pagination = this.$el.find('.pagination');
+      if ($pagination.length) {
+        this.paginationView = new PaginationView({
+          el: $pagination,
+          marketView: this,
+          pageRange: 3,
+          pageActive: 1
+        });
+
+        if (this.filterView) {
+          var that = this;
+          this.filterView.on('filter', function () {
+            that.paginationView.init();
+          });
+        }
+      }
+
+      this.refresh();
+
       return this;
+    },
+
+    refresh: function() {
+      if (this.paginationView) {
+        this.paginationView.init();
+      } else {
+        this.initNoPagination();
+      }
     },
 
     createItemPopover: function($link) {
@@ -235,8 +346,8 @@ $(function () {
       };
       var content = this.item_menu_template({
         hasEdit: $itemContainer.data('has-edit'),
-        isProfile: this.isProfile,
-        isFeatured: this.isFeatured,
+        showSticky: this.options.showSticky,
+        showHide: this.options.showHide,
         toggled: toggled
       });
       $link.popover({
@@ -260,18 +371,23 @@ $(function () {
       }
     },
 
-    setItemAttibute: function($container, attribute, value) {
+    setItemAttibute: function($container, attribute, value, callback) {
       var data = {};
       data[attribute] = value;
-      var triggerFilter = function(){
-        this.filterView.trigger('filter');
+      var onSuccess = function(){
+        if (filterView && (attribute == 'hidden')) {
+          filterView.trigger('filter');
+        }
+        if (callback) {
+          callback();
+        }
       };
       $.ajax({
         url: $container.data('attributes-url'),
         method: 'POST',
         context: this,
         data: data,
-        success: triggerFilter
+        success: onSuccess
       });
       $container.data(attribute, value);
     },
@@ -298,7 +414,11 @@ $(function () {
         this.setItemAttibute($container, 'hidden', !$container.data('hidden'))
         remakePopover = true;
       } else if (action === 'stick') {
-        this.setItemAttibute($container, 'stick', !$container.data('stick'))
+        this.setItemAttibute($container, 'stick', !$container.data('stick'), function () {
+          if (stickyView) {
+            stickyView.refresh();
+          }
+        });
         remakePopover = true;
       } else if (action === 'edit') {
         window.location.href = $container.data('edit-url');
@@ -312,78 +432,137 @@ $(function () {
         $popover.popover('toggle');
       }
     },
-    initFeatured: function () {
-      var that = this;
-      var request = that.getItems();
+
+    initNoPagination: function () {
+      this.$el.find('.ajaxloader').show();
+      this.$itemContainer.empty();
+      var request = this.getItems();
       request.done(function (data) {
-        that.render(data, that);
+        this.render(data);
       });
+    },
+
+    clearMarketPage: function () {
+      this.$itemContainer.empty();
+      if (this.currentCall) {
+        this.currentCall.abort();
+        this.currentCall = null;
+      }
+      this.loadingPage = false;
+    },
+
+    loadPage: function (page) {
+      if (!this.loadingPage) {
+        this.loadingPage = true;
+
+        this.clearMarketPage();
+        this.$el.find('.ajaxloader').show();
+
+        var dfrd = this.getItems(page);
+
+        this.currentCall = dfrd;
+
+        dfrd.done(function (data) {
+          this.currentCall = null;
+          this.render(data);
+          this.loadingPage = false;
+        });
+        return dfrd;
+      }
+    },
+
+    noSearchResult: function () {
+      this.$itemContainer.append(this.noResultsString);
+      this.$el.find('.pagination').hide();
+    },
+
+    getItems: function (page) {
+      var data = {};
+      if (this.filterView) {
+        this.filterView.setFilter(data);
+      }
+      if (page) {
+        data.page = page;
+      }
+      return $.ajax({
+        url: this.getMarketItems,
+        dataType: 'json',
+        context: this,
+        contentType: "application/json; charset=utf-8",
+        data: data,
+        traditional: true
+      });
+    },
+
+    render: function (data) {
+      this.$el.find('.ajaxloader').hide();
+      var that = this;
+      var hasItem = false;
+      _.each(data, function (item) {
+        if (item.page_count) {
+          that.pageCount = item.page_count;
+          that.pageActive = item.current_page;
+          that.pageSize = item.page_size;
+        } else {
+          hasItem = true;
+          item.fields.pk = item.pk;
+          var item_html = that.item_tmp(item.fields);
+          that.$itemContainer.append(item_html);
+          $('.tm-tag').each(function () {
+            var txt = $('span', $(this)).text();
+            $('.tag-button:contains(' + txt + ')').css('background-color', '#cccccc');
+          });
+        }
+      });
+      if (!hasItem) {
+        this.noSearchResult();
+      }
     }
   });
 
+  var stickyView = null;
+  var filterView = null;
   window.ahr.market = window.ahr.market || {};
-  window.ahr.market.initMarket = function (filters) {
-    var filterView = new MarketFilterView({el: '#exchange-filters'});
-//    var noResultsString = ['<p style="margin-top:20px;float:left;width:100%;text-align:center;" id="no-search-result">',
-//        window.ahr.string_constants.market_search_no_match_a,
-//        '<a href="#" id="searchagainall">',
-//        window.ahr.string_constants.market_search_no_match_b + '</a>' + window.ahr.string_constants.market_search_no_match_c,
-//        '<a href="#" id="searchwithdefaults">' ,
-//        window.ahr.string_constants.market_search_no_match_d,
-//        '</a></p>'].join(' ');
-    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Your filter selection does not match any posts<div>';
-    var market = new MarketView(
-      {
-        el: '#itemandsearchwrap',
-        filterView: filterView,
-        marketUrl: ahr.app_urls.getMarketItems,
-        noResultsString: noResultsString,
-        isFeatured: false
-      });
-    var pagination = new PaginationView({
-      marketView: market,
-      pageRange: 3,
-      pageActive: 1
+  window.ahr.market.initMarket = function (options) {
+    filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills});
+    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Your filter selection does not match any posts</div>';
+    var market = new MarketView({
+      el: '#market-main',
+      filterView: filterView,
+      marketUrl: ahr.app_urls.getMarketItems,
+      noResultsString: noResultsString
     });
-    filterView.on('filter', function () {
-      pagination.init();
-    });
-    var featuredMarket = new MarketView({
+
+    new MarketView({
       el: '#featured-marketitems',
       marketUrl: ahr.app_urls.getFeaturedMarketItems,
-      noResultsString: noResultsString,
-      isFeatured: true,
-      $itemContainer: $('#featured-marketitems'),
-      item_tmp: _.template($('#featured_item_template').html())
+      noResultsString: '<div style="font-size: 16px; font-weight:bold">No featured items</div>',
+      item_tmp: '#featured_item_template',
+      showHide: false
     });
-    document.title = window.ahr.string_constants.exchange;
+
+    stickyView = new MarketView({
+      el: '#stuck-marketitems',
+      marketUrl: ahr.app_urls.getStickyMarketItems,
+      noResultsString: '<div style="font-size: 16px; font-weight:bold">You have no sticky items</div>'
+    });
   };
 
   window.ahr.market.initProfile = function(userId){
-    var filterView = new ProfileFilterView()
+    filterView = new ProfileFilterView()
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">No posts available<div>';
-
     var marketUrl = ahr.app_urls.getMarketItemsUser;
+
     if(userId) {
       marketUrl =  ahr.app_urls.getMarketItemsUser + userId;
     }
 
-    var market = new MarketView(
-      {
-        el: '#profile-view',
-        filterView: filterView,
-        marketUrl: marketUrl,
-        noResultsString: noResultsString,
-        isProfile: true
-      });
-    var pagination = new PaginationView({
-      marketView: market,
-      pageRange: 3,
-      pageActive: 1
-    });
-    filterView.on('filter', function () {
-      pagination.init();
+    new MarketView({
+      el: '#profile-view',
+      filterView: filterView,
+      marketUrl: marketUrl,
+      noResultsString: noResultsString,
+      showSticky: false
     });
   }
-
 });

@@ -1,0 +1,26 @@
+{% for region in regions %}
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="select-multi-checkbox checked">
+        <input checked="checked" type="checkbox">
+        <label></label>
+        <div class="select-arrow up"></div>
+        <div class="select-count"></div>
+        <div for="id_interests_0" class="select-label">{{ region.region }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="select-multi-items" style="display: none;">
+  {% for country in region.country_list %}
+    {% if forloop.counter0|divisibleby:3 %}
+      <div class="row">
+    {% endif %}
+    <div class="col-xs-4">
+      {{ country }}
+    </div>
+    {% if forloop.last or forloop.counter|divisibleby:3 %}
+      </div>
+    {% endif %}
+  {% endfor %}
+  </div>
+{% endfor %}

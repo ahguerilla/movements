@@ -33,7 +33,8 @@ class MarketItem(models.Model):
     title = models.CharField(_('title'), max_length=200, blank=False)
     details = tinymodels.HTMLField(_('details'), blank=False)
     interests = models.ManyToManyField(user_models.Interest, null=True, blank=True)
-    specific_skill = models.CharField(_('Specific skill'), max_length=25, blank=True, null=True)
+    countries = models.ManyToManyField(user_models.Countries, null=True, blank=True)
+    specific_skill = models.CharField(_('Specific skill'), max_length=30, blank=True, null=True)
     url = models.CharField(_('URL Link'), max_length=500, blank=True)
     published = models.BooleanField(_('is published?'), default=True)
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
@@ -43,6 +44,7 @@ class MarketItem(models.Model):
     score = models.FloatField(_('score'), default=0)
     deleted = models.BooleanField(_('deleted'), default=False)
     receive_notifications = models.BooleanField(_('receive notifications'), default=True, blank=True)
+    tweet_permission = models.BooleanField(_('Tweet Permission'), default=True, blank=True)
     status = models.PositiveSmallIntegerField(
         _('status'), max_length=1,
         default=STATUS_CHOICES.OPEN, choices=STATUS_CHOICES)
@@ -69,29 +71,42 @@ class MarketItem(models.Model):
     def item_type_display(self):
         return unicode(_(self.item_type[0].upper() + self.item_type[1:].lower()))
 
-    def getdict(self, request=None):
+    def getdict_safe(self):
         adict = {'fields': {}, 'pk': self.id}
         adict['fields']['pk'] = self.id
+        adict['fields']['is_safe'] = True
         adict['fields']['item_type'] = self.item_type
         adict['fields']['item_type_display'] = self.item_type_display
         adict['fields']['interests'] = [ob.id for ob in self.interests.all()]
         adict['fields']['title'] = self.title
-        adict['fields']['details'] = self.details
         adict['fields']['pub_date'] = str(self.pub_date)
         adict['fields']['owner'] = [self.owner.username]
         adict['fields']['ownerid'] = [self.owner.id]
         adict['fields']['url'] = self.url
+        adict['fields']['commentcount'] = self.commentcount
+        adict['fields']['hidden'] = False
+        adict['fields']['stick'] = False
+        adict['fields']['avatar'] = False
+        adict['fields']['hasEdit'] = False
+        adict['fields']['close_url'] = ""
+        adict['fields']['edit_url'] = ""
+        adict['fields']['report_url'] = ""
+        adict['fields']['attributes_url'] = ""
+        return adict
+
+    def getdict(self, request=None):
+        adict = self.getdict_safe()
+        adict['fields']['is_safe'] = False
+        adict['fields']['details'] = self.details
         adict['fields']['close_url'] = reverse('close_marketitem', args=[self.id])
-        adict['fields']['edit_url'] = reverse('edit_request', args=[
-            self.id]) if self.item_type is MarketItem.TYPE_CHOICES.REQUEST else reverse('edit_offer', args=[self.id])
+        reverse_name = 'edit_request' if self.item_type == MarketItem.TYPE_CHOICES.REQUEST else 'edit_offer'
+        adict['fields']['edit_url'] = reverse(reverse_name, args=[self.id])
         adict['fields']['report_url'] = reverse('report_post', args=[self.id])
         adict['fields']['attributes_url'] = reverse('set_item_attributes_for_user', args=[self.id])
-        adict['fields']['commentcount'] = self.commentcount
         adict['fields']['usercore'] = self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['userratecount'] = self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['ratecount'] = self.ratecount
         adict['fields']['score'] = self.score
-        adict['fields']['views'] = self.marketitemviewconter_set.count()
         if request:
             adict['fields']['hidden'] = self.marketitemhidden_set.filter(viewer_id=request.user.id).exists()
             adict['fields']['stick'] = self.marketitemstick_set.filter(viewer_id=request.user.id,
@@ -104,15 +119,6 @@ class MarketItem(models.Model):
             adict['fields']['avatar'] = False
             adict['fields']['hasEdit'] = False
         return adict
-
-
-class MarketItemViewConter(models.Model):
-    item = models.ForeignKey(MarketItem)
-    viewer = models.ForeignKey(user_models.User)
-    counter = models.IntegerField(_('counter'), default=0)
-
-    class Meta:
-        app_label = "market"
 
 
 class MarketItemHidden(models.Model):

@@ -7,7 +7,7 @@ from django.forms.widgets import (
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text
 from django.utils.html import format_html
-from models import UserProfile, OrganisationalRating, Residence
+from models import UserProfile, OrganisationalRating, Residence, Countries, Region
 from django.utils.translation import ugettext_lazy as _
 import constance
 from django.conf.global_settings import LANGUAGES
@@ -72,13 +72,19 @@ class SignupForm(forms.Form):
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["first_name", "last_name"]
+        fields = ["first_name", "last_name", "username"]
 
     def save(self, force_insert=False, force_update=False, commit=True):
         m = super(UserForm, self).save(commit=False)
         if commit:
             m.save()
         return m
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if username != self.instance.username and User.objects.filter(username=username).exists():
+            raise forms.ValidationError(_('This username is already in use'))
+        return username
 
 
 class CheckboxInput(BaseCheckboxChoiceInput):
@@ -107,19 +113,51 @@ class CheckboxSelectMultiple(BaseCheckboxSelectMultiple):
     renderer = CheckboxRenderer
 
 
+class RegionAccordionRenderer(BaseCheckboxFieldRenderer):
+    choice_input_class = CheckboxInput
+
+    def render(self):
+        countries = Countries.objects.all()
+        regions = Region.objects.all()
+        region_dict = dict()
+        for widget in self:
+            country = next((c for c in countries if str(c.id) == widget.choice_value), None)
+            region = next((r for r in regions if r.id == country.region_id), None)
+            if region:
+                if region.name in region_dict.keys():
+                    region_dict[region.name].append(force_text(widget))
+                else:
+                    region_dict[region.name] = [force_text(widget)]
+
+        region_list = []
+        for reg in region_dict:
+            region_item = {
+                "region": reg,
+                "country_list": region_dict[reg]
+            }
+            region_list.append(region_item)
+        region_list = sorted(region_list, key=lambda r: r['region'])
+
+        return render_to_string('widgets/accordion_multi_select.html', {'regions': region_list})
+
+
+class RegionAccordionSelectMultiple(BaseCheckboxSelectMultiple):
+    renderer = RegionAccordionRenderer
+
+
 class SettingsForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = [
             'occupation', 'resident_country', 'expertise', 'web_url', 'fb_url',
             'linkedin_url', 'tweet_url', 'tag_ling', 'bio', 'interests',
-            'regions', 'languages', 'is_organisation', 'is_journalist',
+            'countries', 'languages', 'is_organisation', 'is_journalist',
             'get_newsletter', 'profile_visibility', 'notification_frequency'
         ]
         widgets = {
             'interests': CheckboxSelectMultiple(),
-            'regions': CheckboxSelectMultiple(),
             'languages': CheckboxSelectMultiple(),
+            'countries': RegionAccordionSelectMultiple(),
         }
 
     def save(self, force_insert=False, force_update=False, commit=True):
@@ -161,11 +199,11 @@ class SettingsForm(forms.ModelForm):
 class MoreAboutYouForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('languages', 'interests', 'regions')
+        fields = ('languages', 'interests', 'countries')
         widgets = {
-            'languages': forms.CheckboxSelectMultiple(),
-            'interests': forms.CheckboxSelectMultiple(),
-            'regions': forms.CheckboxSelectMultiple()
+            'languages': CheckboxSelectMultiple(),
+            'interests': CheckboxSelectMultiple(),
+            'countries': RegionAccordionSelectMultiple()
         }
 
     def save(self, commit=True):

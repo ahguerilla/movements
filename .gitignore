@@ -19,6 +19,7 @@ env_*
 *.wpu
 
 test.lite
+setenv.sh
 
 # PyCharm project files
 .idea

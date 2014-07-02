@@ -32,6 +32,7 @@ class Issues(models.Model):
 
 class Countries(models.Model):
     countries = models.CharField(_('countries of interest'), max_length=255, null=True)
+    region = models.ForeignKey('Region', null=True)
 
     def __unicode__(self):
         return self.countries
@@ -98,6 +99,7 @@ ahr_rating = [
     (5, '5 stars'),
 ]
 
+
 class UserProfile(models.Model):
     VISIBILITY_CHOICES = EnumChoices(
         HIDDEN=(0, _('Hidden')),
@@ -120,10 +122,9 @@ class UserProfile(models.Model):
     tweet_url = models.CharField(_('twitter page'), max_length=255, null=True, blank=True)
     occupation = models.CharField(_('occupation'), max_length=255, null=True, blank=True)
     expertise = models.CharField(_('area of expertise'), max_length=255, null=True, blank=True)
-    notifications = JSONField(_('notifications'), null=True, blank=True)
     privacy_settings = JSONField(_('privacy settings'), null=True, blank=True)
-    nationality = models.ForeignKey(Nationality, null=True)
-    resident_country = models.ForeignKey(Residence, null=True)
+    nationality = models.ForeignKey(Nationality, null=True, blank=True)
+    resident_country = models.ForeignKey(Residence, null=True, blank=True)
 
     skills = models.ManyToManyField(Skills, blank=False, null=True)
     issues = models.ManyToManyField(Issues, blank=False, null=True)
@@ -139,7 +140,6 @@ class UserProfile(models.Model):
     ratecount = models.IntegerField(_('ratecount'), default=0)
     score = models.FloatField(_('score'), default=0)
     interface_lang = models.CharField(_('Interface language'), max_length=3, default='en')
-    notperm = JSONField(blank=True)
     first_login = models.BooleanField(_('first login'), default=True)
     profile_visibility = models.PositiveSmallIntegerField(
         _('profile visibility'), choices=VISIBILITY_CHOICES,
@@ -147,6 +147,7 @@ class UserProfile(models.Model):
     notification_frequency = models.PositiveSmallIntegerField(
         _('notification frequency'), choices=NOTIFICATION_FREQUENCY,
         default=NOTIFICATION_FREQUENCY.DAILY)
+    last_notification_email = models.DateTimeField(null=True)
 
     @property
     def ahr_rating(self):
@@ -177,7 +178,6 @@ class UserProfile(models.Model):
         adict['fields']['issues']= [ob.id for ob in self.issues.all()] if not self.notperm.has_key('issues') else ''
         adict['fields']['countries']= [ob.id for ob in self.countries.all()] if not self.notperm.has_key('countries') else ''
         adict['fields']['skills']= [ob.id for ob in self.skills.all()] if not self.notperm.has_key('skills') else ''
-        # AB - I added these to make the user page render, but it's rendering kinda funny
         adict['fields']['ownerid'] = self.user.id
         adict['fields']['item_type'] = 'user'
         adict['fields']['owner'] = self.user.username
@@ -185,13 +185,16 @@ class UserProfile(models.Model):
         adict['fields']['commentcount'] = 0
         return adict
 
+    def has_full_access(self):
+        return not self.userprofile.first_login
+
     @classmethod
     def get_application_users(cls, **kwargs):
         query = kwargs.get('query', None)
-        distinct=kwargs.get('distinct', None)
-        order=kwargs.get('order', None)
-        start=kwargs.get('start', None)
-        finish=kwargs.get('finish', None)
+        distinct = kwargs.get('distinct', None)
+        order = kwargs.get('order', None)
+        start = kwargs.get('start', None)
+        finish = kwargs.get('finish', None)
         return cls.objects.filter(query).filter(user__is_active=True).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
 
 

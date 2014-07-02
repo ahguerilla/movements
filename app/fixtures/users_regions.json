@@ -1,62 +1,42 @@
 [
 {
-    "pk": 1, 
+    "pk": 100,
     "model": "users.region", 
     "fields": {
         "name_ru": "", 
         "name_ar": "", 
-        "name_en": "North America", 
-        "name": "North America"
+        "name_en": "Africa",
+        "name": "Africa"
     }
 },
 {
-    "pk": 2, 
+    "pk": 101,
     "model": "users.region", 
     "fields": {
         "name_ru": "", 
         "name_ar": "", 
-        "name_en": "Europe", 
-        "name": "Europe"
-    }
-},
-{
-    "pk": 3, 
-    "model": "users.region", 
-    "fields": {
-        "name_ru": "", 
-        "name_ar": "", 
-        "name_en": "Asia", 
+        "name_en": "Asia",
         "name": "Asia"
     }
 },
 {
-    "pk": 4, 
+    "pk": 102,
+    "model": "users.region", 
+    "fields": {
+        "name_ru": "", 
+        "name_ar": "", 
+        "name_en": "Middle East",
+        "name": "Middle East"
+    }
+},
+{
+    "pk": 103,
     "model": "users.region", 
     "fields": {
         "name_ru": "", 
         "name_ar": "", 
         "name_en": "South America", 
         "name": "South America"
-    }
-},
-{
-    "pk": 5, 
-    "model": "users.region", 
-    "fields": {
-        "name_ru": "", 
-        "name_ar": "", 
-        "name_en": "Africa", 
-        "name": "Africa"
-    }
-},
-{
-    "pk": 6, 
-    "model": "users.region", 
-    "fields": {
-        "name_ru": "", 
-        "name_ar": "", 
-        "name_en": "Oceania", 
-        "name": "Oceania"
     }
 }
 ]

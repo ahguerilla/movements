@@ -7,11 +7,13 @@
         <div class="nav-menu-text">Inbox</div>
       </div>
     </a>
-    <div class="nav-icon notifications {% if page_type == 'notifications' %}selected{% endif %}">
-      <div class="spacer"></div>
-      <div class="nav-menu-item"></div>
-      <div class="nav-menu-text">Alerts</div>
-    </div>
+    <a href="{% url 'show_notifications' %}">
+      <div class="nav-icon notifications {% if page_type == 'notifications' %}selected{% endif %}">
+        <div class="spacer"></div>
+        <div class="nav-menu-item"></div>
+        <div class="nav-menu-text">Alerts</div>
+      </div>
+    </a>
     <a href="{% url 'user_profile' %}">
       <div class="nav-icon profile {% if page_type == 'profile' %}selected{% endif %}">
         <div class="spacer"></div>

@@ -300,6 +300,7 @@ def signup_start(request):
         context_instance=RequestContext(request))
 
 
+@login_required
 def more_about_you(request):
     form = MoreAboutYouForm(request.POST or None,
                             instance=request.user.userprofile)
@@ -309,12 +310,9 @@ def more_about_you(request):
             request.GET.get('next', reverse('show_market')))
     return render_to_response(
         "users/more_about_you.html",
-        {'languages': [(lang.id, lang.name)
-                       for lang in Language.objects.all()],
-         'interests': [(interest.id, interest.name)
-                       for interest in Interest.objects.all()],
-         'regions': [(region.id, region.name)
-                     for region in Region.objects.all()]},
+        {
+            'settings_form': form,
+        },
         context_instance=RequestContext(request))
 
 

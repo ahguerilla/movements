@@ -1,10 +1,6 @@
 from django.conf.urls import patterns, url, include
 
 market_user_patterns = patterns('',
-    # Unsecured entry points
-    url(r'(?P<rtype>\S+)/unsecured/userprofile/get/(?P<username>\S+)$',
-        'app.market.api.views.users.get_profile_insecure',
-        name="get_userprofile_insecure"),
 
     # Secured entry points
     url(r'(?P<rtype>\S+)/avatar/get/(?P<obj_id>\d+)/(?P<size>\d+)$',
@@ -14,14 +10,6 @@ market_user_patterns = patterns('',
     url(r'(?P<rtype>\S+)/userprofile/get/(?P<username>\S+)$',
         'app.market.api.views.users.get_profile',
         name="get_userprofile"),
-
-    url(r'(?P<rtype>\S+)/users/get/count$',
-        'app.market.api.views.users.get_user_count',
-        name="get_usercount"),
-
-    url(r'(?P<rtype>\S+)/users/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
-        'app.market.api.views.users.get_users_fromto',
-        name="get_user_fromto"),
 
     url(r'(?P<rtype>\S+)/users/sendmessage/(?P<to_user>\S+)$',
         'app.market.api.views.users.send_message',
@@ -39,24 +27,6 @@ market_user_patterns = patterns('',
         'app.market.api.views.users.get_usernames',
         name="user_get_usernames"),
 
-    url(r'(?P<rtype>\S+)/issues/get$',
-        'app.market.api.views.misc.get_issues',
-        name="get_issues"),
-
-    url(r'(?P<rtype>\S+)/countries/get$',
-        'app.market.api.views.misc.get_countries',
-        name="get_countries"),
-
-    url(r'(?P<rtype>\S+)/nationalities/get$',
-        'app.market.api.views.misc.get_nationalities',
-        name="get_nationalities"),
-
-    url(r'(?P<rtype>\S+)/skills/get$',
-        'app.market.api.views.misc.get_skills_old',
-        name="get_skills_old"),
-    url(r'skills/get$',
-        'app.market.api.views.misc.get_skills', name="get_skills"),
-
     url(r'(?P<rtype>\S+)/message/get/count$',
         'app.market.api.views.misc.get_unreadCount',
         name="get_messagecount"),
@@ -64,10 +34,6 @@ market_user_patterns = patterns('',
 
 
 market_item_patterns = patterns('',
-    url(r'(?P<rtype>\S+)/item/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
-        'app.market.api.views.market.get_marketItem_fromto',
-        name="get_marketitems_fromto"),
-
     url(r'^items/get/$',
         'app.market.api.views.market.get_market_items',
         name="get_market_items"),
@@ -75,6 +41,10 @@ market_item_patterns = patterns('',
     url(r'^featured-items/get/$',
         'app.market.api.views.market.get_featured_market_items',
         name="get_featured_market_items"),
+
+    url(r'^items/sticky',
+        'app.market.api.views.market.get_user_stickies',
+        name="get_user_stickies"),
 
     url(r'items/user/get/$',
         'app.market.api.views.market.get_market_items_user',
@@ -125,7 +95,7 @@ market_comment_patterns = patterns('',
 )
 
 report_patterns = patterns('',
-    url(r'report/(?P<obj_id>\d+)$',
+    url(r'report/(?P<obj_id>\d+)',
         'app.market.api.views.report.report_marketitem',
         name="report_post"),
 
@@ -134,12 +104,12 @@ report_patterns = patterns('',
         name="report_user"),
 )
 
-market_notificatoin_patterns = patterns('',
-    url(r'(?P<rtype>\S+)/notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$',
+market_notification_patterns = patterns('',
+    url(r'notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$',
         'app.market.api.views.market.get_notifications_fromto',
         name="get_notifications_fromto"),
 
-    url(r'(?P<rtype>\S+)/notifications/get/notseen/(?P<sfrom>\d+)/(?P<to>\d+)$',
+    url(r'notifications/get/notseen$',
         'app.market.api.views.market.get_notseen_notifications',
         name="get_notseen_notif"),
 )
@@ -149,6 +119,6 @@ urlpatterns = patterns('',
     url(r'', include(market_item_patterns)),
     url(r'', include(market_comment_patterns)),
     url(r'', include(market_user_patterns)),
-    url(r'', include(market_notificatoin_patterns)),
+    url(r'', include(market_notification_patterns)),
     url(r'', include(report_patterns)),
     )
