@@ -5,7 +5,6 @@
   window.ahr = window.ahr || {};
   window.ahr.app_urls = {
     {% if user.is_authenticated %}
-      getprofile: "{% url 'get_userprofile' 'json' 0 %}".slice(0,-1),
       getavatar: "{% url 'get_avatar' 'json' 0 0 %}".slice(0,-1),
       viewuserprofile: "{% url 'user_profile_for_user' 'a' %}".slice(0,-1),
       setuserrate: "{% url 'user_set_rate' 'json' 'a' %}".slice(0,-1),

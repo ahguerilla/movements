@@ -40,21 +40,6 @@ def render_settings(request, initial=False):
         settings = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
         settings = None
-    try:
-        perms = request.user.userprofile.notperm
-    except:
-        perms = {u'experties': u'on',
-                 u'bio': u'on',
-                 u'resident_country': u'on',
-                 u'fb_url': u'on',
-                 u'name': u'on',
-                 u'linkedin_url': u'on',
-                 u'web_url': u'on',
-                 u'tweet_url': u'on',
-                 u'nationality': u'on',
-                 u'occupation': u'on',
-                 u'tag_ling': u'on'}
-
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=user)
         if settings:
@@ -62,14 +47,12 @@ def render_settings(request, initial=False):
         else:
             settings_form = SettingsForm(request.POST)
         if user_form.is_valid() and settings_form.is_valid():
-            perms = {k[8:]:v for k, v in request.POST.items() if k.startswith('notperm-')}
             user = user_form.save()
             settings = settings_form.save(commit=False)
             settings.user_id = request.user.id
-            settings.notperm = perms
             settings.save()
             settings_form.save_m2m()
-            messages.add_message(request, messages.SUCCESS, 'Profile Update Successfull.')
+            messages.add_message(request, messages.SUCCESS, 'Profile Update Successful.')
             if initial:
                 template = 'users/welcome.html'
     else:
@@ -84,7 +67,6 @@ def render_settings(request, initial=False):
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
-                                'notperm': str(perms).replace("u'","'"),
                                 'initial': initial,
                                 'interest_types': interest_types,
                                 'has_password': user.has_usable_password(),
@@ -139,7 +121,7 @@ def profile(request, user_name=None):
     else:
         orate = 0
     # 2 == public, 1 == secure, 0 == private
-    visibility_settings = 2 if is_self and not is_public else 0
+    visibility_settings = 2 if is_self and not is_public else user_profile.profile_visibility
     return render_to_response('users/user_profile_v2.html',
                               {
                                   'user_details': user,

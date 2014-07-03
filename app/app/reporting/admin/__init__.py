@@ -6,7 +6,7 @@ from django.db.models import Count
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
-from ...market.models import MarketItemActions, MarketItemNextSteps
+from ...market.models import MarketItemActions, MarketItemNextSteps, MarketItemViewCounter
 from ..models import IncidentTracking, UserTracking
 from .base import TrackingAdmin
 
@@ -27,7 +27,7 @@ class IncidentAdmin(TrackingAdmin):
     exclude = ('countries', 'issues', 'skills', 'published', 'deleted')
     list_display_links = ('id', 'title',)
     list_display = (
-        'id', 'title', 'commentcount',
+        'id', 'title', 'commentcount', 'get_view_count',
         'get_email_rec_count', 'get_user_rec_count', 'get_conversation_count',
         'get_total_msg_count', 'get_screen_name', 'get_create_date',
         'get_owner', 'get_aging', 'get_status', 'is_featured'
@@ -51,6 +51,10 @@ class IncidentAdmin(TrackingAdmin):
     def get_conversation_count(self, obj):
         return obj.conversation_count
     get_conversation_count.short_description = _('conversation count')
+
+    def get_view_count(self, obj):
+        return MarketItemViewCounter.objects.filter(item_id=obj.id).count()
+    get_view_count.short_description = _('number of views')
 
     def get_total_msg_count(self, obj):
         return obj.total_msg_count
