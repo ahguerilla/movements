@@ -1,34 +1,28 @@
-<h4>Dear Member,</h4>
+<div>
+  <p>Hello Movements.Org member,</p>
 
-<p>
-Your Notifications:
-</p>
+  <p>You have the following new notifications.</p>
 
-<p>
-    {% for notification in notifications %}
-        {% if notification.comment %}
-            {{ notification.comment.owner.username}} commented on {{ notification.text.title}} at {{ notification.pub_date }}
-            <a href="{{base_url}}/market/{{notification.item.id}}">
-                click here to view this {{notification.item.item_type}}
-            </a>
-        {% elif notification.item_type %}
-            {{ notification.item.owner.username }}
-            {% if notification.text.update %}
-            updated
-            {% else %}
-            created 
-            {% endif %} 
-            {{ notification.text.title }} at {{ notification.pub_date }}
-            <a href="{{base_url}}/market/{{notification.item.id}}">
-                click here to view this {{notification.item.item_type}}
-            </a>
-        {% elif notification.text.title == "message" %}
-          {{ notification.text.sender }} sent you <a href="{{ base_url }}{% url 'postman_inbox' %}">a private message</a>
-        {% endif %}
-          <br/><br/>
-    {% endfor %}
-</p>
+  {% for notification in notifications %}
+    <p>
+      {% if notification.comment %}
+          On {{ notification.pub_date }} {{ notification.comment.owner.username}} commented on a post titled
+          <a href="{{ base_url }}/market/{{ notification.item.id }}"><em>{{ notification.text.title}}</em></a>.
+      {% elif notification.item %}
+          On {{ notification.pub_date }} {{ notification.item.owner.username }}
+          {% if notification.text.update %}updated{% else %}created{% endif %} the {{ notification.item.item_type }}
+          <a href="{{ base_url }}/market/{{ notification.item.id }}"><em>{{ notification.text.title }}</em></a>.
+      {% else %}
+          On {{ notification.pub_date }} {{ notification.text.sender }} sent you <a href="{{ base_url }}{% url 'postman_inbox' %}">a private message</a> with the
+          subject <em>{{ notification.text.subject }}</em>.
+      {% endif %}
+    </p>
+  {% endfor %}
 
-<p>You can change the frequency of your notification emails or stop them all together in your settings.</p>
-<p>Thanks very much for using Movements</p>
-<p>The Movements Team</p>
+</div>
+
+<hr/>
+<p>The Movements.Org Team</p>
+<p>Movements are made up of individuals. Movements.Org brings them together.</p>
+<p style="font-size: 10px;">You can update your notification preferences in <a
+    href="{{ base_url }}{% url 'user_settings' %}">your settings page.</a></p>

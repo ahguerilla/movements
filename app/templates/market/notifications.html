@@ -27,14 +27,16 @@
             </div>
             <div class="col-md-11 col-xs-10 details<% if (!notif.seen) { %> new<% } %>">
               <a href="<%- notif.profile_link %>"><%- notif.user %></a>
-              <% if (notif.item_type) { %>
-                <% if (notif.text.update) { %>{% trans "updated" %}<% } else { %> {% trans "posted" %} <% } %> {% trans "the" %} <%- notif.item_type %>
+              <% if (notif.comment) { %>
+                <a href="/market/<%- notif.item_id %>" style="display:inline-block;">
+                  {% trans "commented on" %} <% if (notif.owner_id == window.ahr.user_id) { %>{% trans "your" %}<% } %>
+                  <%- notif.item_type %> "<%- notif.text.title %>"
+                </a>
+              <% } else if (notif.item_type) { %>
+                <% if (notif.text.update) { %>{% trans "updated" %}<% } else { %> {% trans "posted" %} <% } %>
+                {% trans "the" %} <%- notif.item_type %>
                 <a href="/market/<%- notif.item_id %>">
                   "<%- notif.text.title %>"
-                </a>
-              <% } else if (notif.comment) { %>
-                <a href="/market/<%- notif.item_id %>" style="display:inline-block;">
-                  {% trans "commented on" %} <% if (notif.owner_id == window.ahr.user_id) { %>{% trans "your" %}<% } %> <%- notif.item_type %> "<%- notif.text.title %>"
                 </a>
               <% } else if (notif.text.type == "message") { %>
                 <a href="{% url 'postman_inbox' %}">
@@ -69,12 +71,15 @@
             url: window.ahr.app_urls.getmarketnotificationsfromto.replace(0, that.counter) + (that.counter + 15),
             context: this
           });
+
           dfrd.done(function (data) {
             if (!data.notifications.length) {
+              if (!that.counter) {
+                this.$el.find('.message').html('You have no notifications');
+              }
               this.$el.find('.message').removeClass('hide');
               this.$el.find('button.more').hide();
               return;
-
             }
             _.each(data.notifications, function (notif) {
               that.$container.append(that.tmpl({'notif': notif}));
