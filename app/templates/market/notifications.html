@@ -71,12 +71,15 @@
             url: window.ahr.app_urls.getmarketnotificationsfromto.replace(0, that.counter) + (that.counter + 15),
             context: this
           });
+
           dfrd.done(function (data) {
             if (!data.notifications.length) {
+              if (!that.counter) {
+                this.$el.find('.message').html('You have no notifications');
+              }
               this.$el.find('.message').removeClass('hide');
               this.$el.find('button.more').hide();
               return;
-
             }
             _.each(data.notifications, function (notif) {
               that.$container.append(that.tmpl({'notif': notif}));
