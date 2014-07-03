@@ -27,9 +27,9 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="btn-group folder-select btn-group-justified btn-group-md">
-        <a href="#personal" id="personal-select" type="button" class="btn btn-tab selected">Personal details</a>
-        <a href="#skills" id="skills-select" type="button" class="btn btn-tab" >Skills & interests</a>
+      <div class="btn-group folder-select btn-group-justifThe more information you give the quicker you becoied btn-group-md">
+        <a href="#personal" id="personal-select" type="button" class="btn btn-tab selected">Personal Details</a>
+        <a href="#skills" id="skills-select" type="button" class="btn btn-tab" >Skills & Interests</a>
         <a href="#security" id="security-select" type="button" class="btn btn-tab" >Security & Alerts</a>
       </div>
     </div>
@@ -109,7 +109,7 @@
     <div id="skills-tab" style="display:none;" class="form-select-multi">
       <label>{%trans "Skills/Interests"%}</label>
       <p>
-        {% blocktrans %}Your skills and interests you enter help other find the right expertise and help us show you the postings that are most relevant to you.{% endblocktrans %}
+        {% blocktrans %}The skills and interests you provide will help others find the right expertise for you. This will also help us to show the postings that are the most relevant for you.{% endblocktrans %}
       </p>
       {{ settings_form.interests }}
       <div style="margin-top:10px;"></div>
@@ -143,7 +143,7 @@
         <div class="col-xs-12">
           <label for="id_notification_frequency">{% trans 'Notifications' %}</label>
           <p>
-            {% blocktrans %}When would you like to receive a notification when someone responds to your post or creates one that matches your interests?{% endblocktrans %}
+            {% blocktrans %}When would you like to receive a notification if someone responds to your post or creates one that matches your interest?{% endblocktrans %}
           </p>
           {% render_field settings_form.notification_frequency class="form-control input-sm" %}
         </div>

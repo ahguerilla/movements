@@ -28,7 +28,7 @@
               <div class="carousel-filter">
                 <div class="container carousel-content">
                   <div class="carousel-title">
-                    {% blocktrans %}The Skills exchange platform which is crowdsourcing the fight for human rights.{% endblocktrans %}
+                    {% blocktrans %}Crowdsourcing the fight for human rights.{% endblocktrans %}
                   </div>
                   <div class="carousel-blurb">
                     <div>{% blocktrans %}Movements connects human rights activists in closed societies with those with skills to help them around the world.  Join today and help a dissident in need.{% endblocktrans %}</div>
@@ -158,7 +158,7 @@
 {% block javascript %}
   <script type="text/javascript">
   $(document).ready(function(){
-      $("#home-page-carousel").carousel({interval: 8000, pause: "none"});
+      $("#home-page-carousel").carousel({interval: 8000, pause: 'hover'});
   });
   </script>
 {% endblock %}
