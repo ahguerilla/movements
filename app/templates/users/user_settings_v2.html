@@ -118,6 +118,7 @@
         {% blocktrans %}Where do you need help and/or where would you like to be able to help out?{% endblocktrans %}
       </p>
       {{ settings_form.countries }}
+      {{ settings_form.countries.errors }}
       <div style="margin-top:10px;"></div>
       <label>{%trans "Languages"%}</label>
       <p>

@@ -165,23 +165,3 @@ def get_user_details(username):
         raise Http404
     orate = users.models.OrganisationalRating.objects.filter(user=user).all()
     return (user, user_profile, orate)
-
-
-@login_required
-def get_profile(request, username, rtype):
-    (user, user_profile, orate) = get_user_details(username)
-    perms = user_profile.notperm
-    return HttpResponse(
-        json.dumps(
-            {
-                'username': user.username,
-                'avatar': reverse('avatar_render_primary', args=[user.username, 60]),
-                'nationality': user_profile.nationality.nationality if not perms.has_key('nationality') else 'hidden',
-                'resident_country': user_profile.resident_country.residence if not perms.has_key(
-                    'resident_country') else 'hidden',
-                'score': round(user_profile.score, 1),
-                'ratecount': user_profile.ratecount,
-                'orate': orate[0].rated_by_ahr if len(orate) > 0 else 0
-            }
-        ),
-        mimetype="application/" + rtype)

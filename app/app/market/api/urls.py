@@ -7,10 +7,6 @@ market_user_patterns = patterns('',
         'app.market.api.views.users.get_avatar',
         name="get_avatar"),
 
-    url(r'(?P<rtype>\S+)/userprofile/get/(?P<username>\S+)$',
-        'app.market.api.views.users.get_profile',
-        name="get_userprofile"),
-
     url(r'(?P<rtype>\S+)/users/sendmessage/(?P<to_user>\S+)$',
         'app.market.api.views.users.send_message',
         name="send_message"),
