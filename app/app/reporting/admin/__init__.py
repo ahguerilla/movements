@@ -53,7 +53,7 @@ class IncidentAdmin(TrackingAdmin):
     get_conversation_count.short_description = _('conversation count')
 
     def get_view_count(self, obj):
-        return MarketItemViewCounter.objects.filter(item_id=obj.id).count()
+        return obj.total_view_count
     get_view_count.short_description = _('number of views')
 
     def get_total_msg_count(self, obj):
@@ -120,6 +120,7 @@ class IncidentAdmin(TrackingAdmin):
         queryset = orig_queryset.annotate(
             email_rec_count=Count('emailrecommendation', distinct=True),
             total_msg_count=Count('messageext', distinct=True),
+            total_view_count=Count('marketitemviewcounter', distinct=True),
         )
         user_rec_dict = dict(orig_queryset.filter(
             messageext__is_post_recommendation=True).annotate(
