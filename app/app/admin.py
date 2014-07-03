@@ -51,15 +51,18 @@ class LogEntryAdmin(admin.ModelAdmin):
         return False
 
     def object_link(self, obj):
-        if obj.action_flag == DELETION:
-            link = escape(obj.object_repr)
-        else:
-            ct = obj.content_type
-            link = u'<a href="%s">%s</a>' % (
-                reverse('admin:%s_%s_change' % (ct.app_label, ct.model), args=[obj.object_id]),
-                escape(obj.object_repr),
-            )
-        return link
+        try:
+            if obj.action_flag == DELETION:
+                link = escape(obj.object_repr)
+            else:
+                ct = obj.content_type
+                link = u'<a href="%s">%s</a>' % (
+                    reverse('admin:%s_%s_change' % (ct.app_label, ct.model), args=[obj.object_id]),
+                    escape(obj.object_repr),
+                )
+            return link
+        except:
+            return "link unavailable"
     object_link.allow_tags = True
     object_link.admin_order_field = 'object_repr'
     object_link.short_description = u'object'
