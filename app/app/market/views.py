@@ -6,7 +6,7 @@ from django.template import RequestContext
 
 from app.users.models import Interest, Countries
 from forms import RequestForm, OfferForm, save_market_item
-from models.market import MarketItem
+from models.market import MarketItem, MarketItemViewCounter
 
 
 def index(request):
@@ -37,6 +37,10 @@ def show_post(request, post_id):
                              closed_date=None,
                              deleted=False,
                              owner__is_active=True)
+
+    #update view counter
+    if request.user.is_authenticated:
+        MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
 
     post_data = {
         'post': post,

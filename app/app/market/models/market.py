@@ -137,6 +137,14 @@ class MarketItemStick(models.Model):
         app_label = "market"
 
 
+class MarketItemViewCounter(models.Model):
+    item = models.ForeignKey(MarketItem)
+    viewer = models.ForeignKey(user_models.User)
+
+    class Meta:
+        app_label = "market"
+
+
 class MarketItemActions(models.Model):
     market_item = models.ForeignKey(
         MarketItem, verbose_name=_('market item'))
