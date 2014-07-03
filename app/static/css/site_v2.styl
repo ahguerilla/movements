@@ -437,6 +437,20 @@ footer
       a
         margin-right 0
 
+#FooterSocialMedia_Small
+  display none
+  .footer-copyright
+    margin-top 15px
+    text-align center
+  .social-icons
+    position relative
+    margin-top 5px
+    left 50%
+    margin-left -108px
+    img
+      margin-left 15px
+      margin-right 0
+
 .footer-navbar
   background-color $secondary-color
   min-height 35px
@@ -902,6 +916,9 @@ popoverDropdown(width, showIcon = true)
     li.active a
       border-bottom 2px solid $filter-font
 
+// This menu should be removed once the buttons have been incorporated elsewhere
+.hidden-menu
+  display:none
 
 #itemandsearchwrap
   h2
@@ -1406,7 +1423,3 @@ popoverDropdown(width, showIcon = true)
   margin-top 20px
   .details.new
     font-weight bold
-
-// This menu should be removed once the buttons have been incorporated elsewhere
-.hidden-menu
-  display:none
