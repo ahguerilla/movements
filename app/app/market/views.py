@@ -39,7 +39,7 @@ def show_post(request, post_id):
                              owner__is_active=True)
 
     #update view counter
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
 
     post_data = {
