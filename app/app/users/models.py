@@ -77,6 +77,9 @@ class Language(NamedObject):
         verbose_name = _('language')
         verbose_name_plural = _('languages')
 
+    class Meta:
+        ordering = ['name']
+
 
 class Region(NamedObject):
     class Meta:
@@ -88,6 +91,9 @@ class Interest(NamedObject):
     class Meta:
         verbose_name = _('interest')
         verbose_name_plural = _('interests')
+
+    class Meta:
+        ordering = ['name']
 
 
 ahr_rating = [
