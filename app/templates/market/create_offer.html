@@ -28,13 +28,13 @@
       </div>
     </div>
     <div>
-      <div class="form-sub-title"><h2>{% trans "2. What countries are you intrested in helping?" %}</h2></div>
+      <div class="form-sub-title"><h2>{% trans "2. Which countries are you interested in helping?" %}</h2></div>
       <div class="form-select-multi">
         {{ form.countries }}
       </div>
     </div>
     <div>
-      <div class="form-sub-title"><h2>{% trans "2. Title of your post" %}</h2></div>
+      <div class="form-sub-title"><h2>{% trans "3. Title of your post" %}</h2></div>
       <p>Be specific and clear. Think of this as a tweet.</p>
       <div class="form-group">
         <div class="col-xs-12">
@@ -55,7 +55,7 @@
     <div>
       <div class="form-group">
         <div class="col-xs-12">
-          <label for="{{ form.tweet_permission.auto_id }}">{% trans "May we tweet this request" %}</label>
+          <label for="{{ form.tweet_permission.auto_id }}">{% trans "May we tweet this request?" %}</label>
           {% render_field form.tweet_permission class="" placeholder="" %}
           {{ form.tweet_permission.errors }}
           <p>We won’t use your name or any identifying information</p>
