@@ -244,7 +244,7 @@ body {
   padding-top: 15px;
 }
 .header-nav .navbar-left {
-  position: relative;
+  position: absolute;
 }
 .header-nav .navbar-left .menu-selector {
   position: absolute;
@@ -1868,6 +1868,9 @@ h6 {
   }
 }
 @media (max-width: 479px) {
+  #AlreadyHaveText {
+    display: none;
+  }
   .header-nav .header-nav-wrapper {
     left: 56%;
   }
