@@ -30,7 +30,7 @@ def send_user_notification_email(profile, items):
     }
     message = render_to_string('emails/notification_email.html', template_args)
     email = EmailMessage(
-        'Movements Notification Email',
+        'You have new notifications on Movements.Org',
         message,
         constance.config.NO_REPLY_EMAIL,
         [profile.user.email]

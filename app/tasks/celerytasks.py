@@ -28,23 +28,18 @@ def get_notification_comment_text(obj, username, comment):
 
 
 def find_people_interested_in(obj):
-    # skills = [skill.id for skill in obj.skills.all()]
-    # countries = [country.id for country in obj.countries.all()]
-    # issues = [issue.id for issue in obj.issues.all()]
-    # query = Q(skills__in=skills) | Q(issues__in=issues) | Q(countries__in=countries)
-    # query = query & ~Q(user=obj.owner)
-    # profiles = UserProfile.objects.filter(query).distinct('id').only('user').all()
-    # return profiles
-    return []
+    interests = [interest.id for interest in obj.interests.all()]
+    countries = [country.id for country in obj.countries.all()]
+    query = Q(interests__in=interests) | Q(countries__in=countries)
+    query = query & ~Q(user=obj.owner)
+    profiles = UserProfile.objects.filter(query).distinct('id').only('user').all()
+    return profiles
 
 
 @_app.task(name="createNotification", bind=True)
 def create_notification(self, obj):
-    notifications = [ notif.user for notif in Notification.objects.filter(item=obj.id).only('user').all()]
     profiles = find_people_interested_in(obj)
     for profile in profiles:
-        if profile.user.id in notifications:
-            continue
         notification = Notification()
         notification.user = profile.user
         notification.item = obj
@@ -79,13 +74,13 @@ def create_comment_notification(self, obj, comment, username):
 
 @_app.task(name="updateNotifications", bind=True)
 def update_notifications(self, obj):
-    notification_objs = Notification.objects.filter(item=obj.id).only('user', 'read').all()
+    notification_objs = Notification.objects.filter(item=obj.id).only('user').all()
     notification_userids = set(notification.user.id for notification in notification_objs)
     profiles = find_people_interested_in(obj)
     user_ids = set(profile.user.id for profile in profiles)
 
-    notifications_tocereate = user_ids.difference(notification_userids)
-    for user_id in notifications_tocereate:
+    notifications_to_create = user_ids.difference(notification_userids)
+    for user_id in notifications_to_create:
         notification = Notification()
         notification.user_id = user_id
         notification.item = obj
@@ -93,8 +88,8 @@ def update_notifications(self, obj):
         notification.text = get_notification_text(obj)
         notification.save()
 
-    notifications_toupdate = user_ids.intersection(notification_userids)
-    for user_id in notifications_toupdate:
+    notifications_to_update = user_ids.intersection(notification_userids)
+    for user_id in notifications_to_update:
         notification = Notification()
         notification.user_id = user_id
         notification.item = obj
