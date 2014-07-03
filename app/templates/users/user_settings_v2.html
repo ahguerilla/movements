@@ -26,14 +26,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
-      <div class="btn-group folder-select btn-group-justifThe more information you give the quicker you becoied btn-group-md">
+    <div class="col-md-12 text-center">
+      <div class="btn-group folder-select btn-group-justied btn-group-md">
         <a href="#personal" id="personal-select" type="button" class="btn btn-tab selected">Personal Details</a>
         <a href="#skills" id="skills-select" type="button" class="btn btn-tab" >Skills & Interests</a>
         <a href="#security" id="security-select" type="button" class="btn btn-tab" >Security & Alerts</a>
       </div>
     </div>
   </div>
+  {% if errors %}
+    <div class="clearfix text-center errors">
+      There are errors that need to be corrected before your settings can be saved.
+    </div>
+  {% endif %}
   <form class="form-horizontal"  method="post" class="form-horizontal" role="form">
     {% csrf_token %}
     <div id="personal-tab">
@@ -116,9 +121,10 @@
       <label>{%trans "Regions/Countries"%}</label>
       <p>
         {% blocktrans %}Where do you need help and/or where would you like to be able to help out?{% endblocktrans %}
+        {{ settings_form.countries.errors }}
       </p>
       {{ settings_form.countries }}
-      {{ settings_form.countries.errors }}
+
       <div style="margin-top:10px;"></div>
       <label>{%trans "Languages"%}</label>
       <p>

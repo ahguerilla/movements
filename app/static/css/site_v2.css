@@ -1670,6 +1670,10 @@ h6 {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.settings-form .errors {
+  color: #f00;
+  margin-bottom: 10px;
+}
 #profile_change_stuff img {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
