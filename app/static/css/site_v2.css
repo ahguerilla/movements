@@ -1840,6 +1840,9 @@ h6 {
 #notifications .details.new {
   font-weight: bold;
 }
+.hidden-menu {
+  display: none;
+}
 
 
 @media (max-width: 991px) {
@@ -1865,6 +1868,27 @@ h6 {
   }
   #view-profile-menu .action-font {
     display: none;
+  }
+}
+@media (max-width: 530px) {
+  #FilterByType {
+    float: none !important;
+    position: relative;
+    left: 50%;
+    margin-left: -100px;
+  }
+  #FilterDropdowns {
+    float: none !important;
+    position: relative;
+    left: 50%;
+    margin-left: -135px;
+    margin-top: 18px;
+  }
+  .exchange-filters .search-expanded {
+    position: relative;
+    left: 50%;
+    margin-left: -135px;
+    width: 270px;
   }
 }
 @media (max-width: 479px) {
