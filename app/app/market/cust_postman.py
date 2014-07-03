@@ -5,14 +5,14 @@ from postman.forms import FullReplyForm
 from postman.views import ConversationView
 from postman.models import Message
 
-from celerytasks import new_postman_message
+#from celerytasks import new_postman_message
 
 
 class MovementsReplyForm(FullReplyForm):
     def save(self, *args, **kwargs):
         is_success = super(MovementsReplyForm, self).save(*args, **kwargs)
-        if is_success:
-            new_postman_message.delay(self.instance)
+        # if is_success:
+        #     new_postman_message.delay(self.instance)
         return is_success
 
 
