@@ -238,14 +238,15 @@
 {% endblock %}
 {% render_block "js" %}
 
-{% if user.is_authenticated and not user.userprofile.first_login %}
-  {% include "market/clientside/notifications.html" %}
-  <script type="text/javascript" id="notifications_view">
-    (function () {
-      window.ahr.notifications_widget.initWidget()
-    })();
-  </script>
-{% endif %}
+{#Commenting this out until we have some sort of design for it and can redo it#}
+{#{% if user.is_authenticated and not user.userprofile.first_login %}#}
+{#  {% include "market/clientside/notifications.html" %}#}
+{#  <script type="text/javascript" id="notifications_view">#}
+{#    (function () {#}
+{#      window.ahr.notifications_widget.initWidget()#}
+{#    })();#}
+{#  </script>#}
+{#{% endif %}#}
 
 <script type="text/javascript">
   (function () {

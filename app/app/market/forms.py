@@ -1,16 +1,10 @@
 from django import forms
-from django.utils.cache import get_cache
 from postman.forms import WriteForm, FullReplyForm, QuickReplyForm
 from tasks.celerytasks import create_notification, update_notifications
 from django.utils.translation import ugettext_lazy as _
 
 import app.market as market
 from app.users.forms import CheckboxSelectMultiple, RegionAccordionSelectMultiple
-
-
-cache = get_cache('default')
-items_cache = get_cache('items')
-user_items_cache = get_cache('user_items')
 
 
 class MarketQuickReplyForm(QuickReplyForm):
@@ -112,20 +106,14 @@ class CommentForm(forms.ModelForm):
 
 def save_market_item(form, owner):
     """
-    TODO - I've moved code here from the api views but not really checked if it's sane, cache clearing stuff
-           seems badly thought out.
     TODO - Alerts need to be sent to the admin for approval for new items, probably best done in the
            create notification?
     """
     new_item = form.instance.id is None
     obj = form.save(owner=owner)
-    items_cache.clear()
-    user_items_cache.clear()
     if new_item:
         create_notification.delay(obj)
     else:
-        cache.delete('item-' + str(obj.id))
-        cache.delete('translation-' + str(obj.id))
         update_notifications.delay(obj)
     return obj
 

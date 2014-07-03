@@ -5,9 +5,6 @@
   window.ahr = window.ahr || {};
   window.ahr.app_urls = {
     {% if user.is_authenticated %}
-      postmanwrite: "{% url 'postman_write' 'a' %}".slice(0,-1),
-      postmanreply: "{% url 'postman_reply' 0 %}".slice(0,-1),
-
       getprofile: "{% url 'get_userprofile' 'json' 0 %}".slice(0,-1),
       getavatar: "{% url 'get_avatar' 'json' 0 0 %}".slice(0,-1),
       viewuserprofile: "{% url 'user_profile_for_user' 'a' %}".slice(0,-1),
@@ -31,8 +28,8 @@
 
       reportuser: "{% url 'report_user' 'json' 0 %}".slice(0,-1),
 
-      getmarketnotificationsfromto: "{% url 'get_notifications_fromto' 'json' 0 0 %}".slice(0,-1),
-      getnotseennotif: "{% url 'get_notseen_notif' 'json' 0 0 %}".slice(0,-1),
+      getmarketnotificationsfromto: "{% url 'get_notifications_fromto' 0 0 %}".slice(0,-1),
+      getnotseennotif: "{% url 'get_notseen_notif' %}",
       shownotifications: "{% url 'show_notifications' %}",
     {% endif %}
     getMarketItems: '{% url 'get_market_items' %}',

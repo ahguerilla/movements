@@ -948,7 +948,7 @@ h6 {
   background-image: none;
 }
 .exchange-filters .categories ul.category-menu .skills .popover-content ul li a {
-  background: url("../images/v2/select_plus.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_plus.png") 210px center no-repeat;
   margin: 0;
   padding: 10px;
   width: 240px;
@@ -959,16 +959,16 @@ h6 {
 }
 .exchange-filters .categories ul.category-menu .skills .popover-content ul li a:hover {
   color: #fff;
-  background: url("../images/v2/select_plus_hover.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_plus_hover.png") 210px center no-repeat;
   background-color: #beb4ae;
 }
 .exchange-filters .categories ul.category-menu .skills .popover-content ul li a.selected {
-  background: url("../images/v2/select_tick.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
   background-color: #fff;
   color: #ff6d50;
 }
 .exchange-filters .categories ul.category-menu .skills .popover-content ul li a.selected:hover {
-  background: url("../images/v2/select_tick.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
   background-color: #beb4ae;
 }
 .exchange-filters .categories ul.category-menu .skills .popover-content ul li a.plain {
@@ -1044,7 +1044,7 @@ h6 {
   background-image: none;
 }
 .exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a {
-  background: url("../images/v2/select_plus.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_plus.png") 210px center no-repeat;
   margin: 0;
   padding: 10px;
   width: 240px;
@@ -1055,16 +1055,16 @@ h6 {
 }
 .exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a:hover {
   color: #fff;
-  background: url("../images/v2/select_plus_hover.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_plus_hover.png") 210px center no-repeat;
   background-color: #beb4ae;
 }
 .exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.selected {
-  background: url("../images/v2/select_tick.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
   background-color: #fff;
   color: #ff6d50;
 }
 .exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.selected:hover {
-  background: url("../images/v2/select_tick.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
   background-color: #beb4ae;
 }
 .exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.plain {
@@ -1229,7 +1229,7 @@ h6 {
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a {
-  background: url("../images/v2/select_plus.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_plus.png") 110px center no-repeat;
   margin: 0;
   padding: 10px;
   width: 140px;
@@ -1241,18 +1241,18 @@ h6 {
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a:hover,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a:hover {
   color: #fff;
-  background: url("../images/v2/select_plus_hover.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_plus_hover.png") 110px center no-repeat;
   background-color: #beb4ae;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected {
-  background: url("../images/v2/select_tick.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_tick.png") 110px center no-repeat;
   background-color: #fff;
   color: #ff6d50;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected:hover,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.selected:hover {
-  background: url("../images/v2/select_tick.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_tick.png") 110px center no-repeat;
   background-color: #beb4ae;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover-content ul li a.plain,
@@ -1327,7 +1327,7 @@ h6 {
   background-image: none;
 }
 #featured-marketitems .item-menu-container .popover-content ul li a {
-  background: url("../images/v2/select_plus.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_plus.png") 110px center no-repeat;
   margin: 0;
   padding: 10px;
   width: 140px;
@@ -1338,16 +1338,16 @@ h6 {
 }
 #featured-marketitems .item-menu-container .popover-content ul li a:hover {
   color: #fff;
-  background: url("../images/v2/select_plus_hover.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_plus_hover.png") 110px center no-repeat;
   background-color: #beb4ae;
 }
 #featured-marketitems .item-menu-container .popover-content ul li a.selected {
-  background: url("../images/v2/select_tick.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_tick.png") 110px center no-repeat;
   background-color: #fff;
   color: #ff6d50;
 }
 #featured-marketitems .item-menu-container .popover-content ul li a.selected:hover {
-  background: url("../images/v2/select_tick.png") $right-icon center no-repeat;
+  background: url("../images/v2/select_tick.png") 110px center no-repeat;
   background-color: #beb4ae;
 }
 #featured-marketitems .item-menu-container .popover-content ul li a.plain {
@@ -1712,7 +1712,7 @@ h6 {
   display: inline-block;
 }
 #postman {
-  margin-top: 30px;
+  margin-top: 20px;
   background-color: #fff;
   -webkit-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
   -moz-box-shadow: 0 1px 1px 0 rgba(224,215,216,0.8);
@@ -1825,6 +1825,12 @@ h6 {
 }
 #profile-view .vetting-status .status.warn {
   color: #f00;
+}
+#notifications {
+  margin-top: 20px;
+}
+#notifications .details.new {
+  font-weight: bold;
 }
 
 

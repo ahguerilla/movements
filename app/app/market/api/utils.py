@@ -2,10 +2,8 @@ from django.core import serializers
 from functools import wraps
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.utils.timezone import now
-
-from postman.api import _get_site
 from postman.models import Message, STATUS_ACCEPTED
+from tasks.celerytasks import new_postman_message
 
 
 class HttpResponseError(HttpResponse):
@@ -53,30 +51,12 @@ def check_perms_and_get(object_class):
     return __decorator
 
 
-def pm_write(sender, recipient, subject, body='', skip_notification=False,
-             auto_archive=False, auto_delete=False, auto_moderators=None):
-    """
-    Based on the postman API.
-    Write a message to a User.
-    Optional arguments:
-        ``skip_notification``: if the normal notification event is not wished
-        ``auto_archive``: to mark the message as archived on the sender side
-        ``auto_delete``: to mark the message as deleted on the sender side
-        ``auto_moderators``: a list of auto-moderation functions
-    """
+def pm_write(sender, recipient, subject, body=''):
     message = Message(
         subject=subject, body=body, sender=sender, recipient=recipient)
     initial_status = message.moderation_status
-    if auto_moderators:
-        message.auto_moderate(auto_moderators)
-    else:
-        message.moderation_status = STATUS_ACCEPTED
+    message.moderation_status = STATUS_ACCEPTED
     message.clean_moderation(initial_status)
-    if auto_archive:
-        message.sender_archived = True
-    if auto_delete:
-        message.sender_deleted_at = now()
     message.save()
-    if not skip_notification:
-        message.notify_users(initial_status, _get_site())
+    new_postman_message.delay(message)
     return message

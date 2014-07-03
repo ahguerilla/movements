@@ -21,7 +21,8 @@ EMAILRE = re.compile("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[
 def get_avatar(request, obj_id, size, rtype):
     user = get_object_or_404(users.models.User, pk=obj_id)
     obj = user.avatar_set.all()
-    return HttpResponse( json.dumps({'pk': 0, 'avatar': reverse('avatar_render_primary', args=[user.username,size])}),mimetype="application"+rtype)
+    return HttpResponse(json.dumps({'pk': 0, 'avatar': reverse('avatar_render_primary', args=[user.username, size])}),
+                        mimetype="application" + rtype)
 
 
 @login_required
@@ -31,16 +32,16 @@ def send_message(request, to_user, rtype):
                  recipient=users.models.User.objects.filter(username=to_user)[0],
                  subject=request.POST['subject'],
                  body=request.POST['message'])
-    except Exception,err:
-        if err.message== 'value too long for type character varying(120)\n':
-            message= "subject is too long (maximum 120 characters)"
+    except Exception, err:
+        if err.message == 'value too long for type character varying(120)\n':
+            message = "subject is too long (maximum 120 characters)"
         return HttpResponseError(
-            json.dumps({'success': 'false','message':message}),
-            mimetype="application/"+rtype)
+            json.dumps({'success': 'false', 'message': message}),
+            mimetype="application/" + rtype)
 
     return HttpResponse(
         json.dumps({'success': 'true'}),
-        mimetype="application/"+rtype)
+        mimetype="application/" + rtype)
 
 
 @login_required
@@ -54,15 +55,15 @@ def send_recommendation(request, rec_type, obj_id, rtype):
 
     recipients = re.split("\s*[ ;,]\s*", request.POST['recipients'])
     badrecipients = []
-    msgcontext = { 'message'     : request.POST['message'],
-                   'additionals' : additionals,
-                   'rec_type'    : rec_type,
-                   'obj_id'      : obj_id,
-                   'url'         : request.build_absolute_uri(reverse('show_post', args=[obj_id]))}
+    msgcontext = {'message': request.POST['message'],
+                  'additionals': additionals,
+                  'rec_type': rec_type,
+                  'obj_id': obj_id,
+                  'url': request.build_absolute_uri(reverse('show_post', args=[obj_id]))}
 
     subject = request.POST['subject']
     if len(subject) > 120: subject = subject[:120]
-    body    = render_to_string('emails/recommendmessage.txt',  msgcontext)
+    body = render_to_string('emails/recommendmessage.txt', msgcontext)
     emlrecips = []
 
     for recipient in recipients:
@@ -82,7 +83,7 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                     msg.messageext.is_user_recommendation = True
                 msg.messageext.save()
             except Exception as e:
-                print "Exception sending to %s: %s %s:"%(recipient, type(e), e)
+                print "Exception sending to %s: %s %s:" % (recipient, type(e), e)
                 badrecipients.append(recipient + " (unknown user)")
 
     if len(emlrecips) > 0:
@@ -98,18 +99,18 @@ def send_recommendation(request, rec_type, obj_id, rtype):
             email.send()
             _update_email_recommendations(market_item, emlrecips)
         except Exception as e:
-            print "Exception sending to %s: %s %s:"%(recipient, type(e), e)
+            print "Exception sending to %s: %s %s:" % (recipient, type(e), e)
             badrecipients.extend(emlrecips)
 
     if len(badrecipients) > 0:
         return HttpResponse(
-            json.dumps({'success'       : 'false',
-                        'badrecipients' : badrecipients}),
-            mimetype="application/"+rtype)
+            json.dumps({'success': 'false',
+                        'badrecipients': badrecipients}),
+            mimetype="application/" + rtype)
 
     return HttpResponse(
         json.dumps({'success': 'true'}),
-        mimetype="application/"+rtype)
+        mimetype="application/" + rtype)
 
 
 def _update_email_recommendations(market_item, emails):
@@ -127,7 +128,7 @@ def set_rate(request, username, rtype):
     owner = request.user
     rate = users.models.UserRate.objects.filter(owner=owner).filter(user=user)
     if len(rate) == 0:
-        rate = users.models.UserRate(owner=owner,user=user)
+        rate = users.models.UserRate(owner=owner, user=user)
     else:
         rate = rate[0]
     rate.score = int(request.POST['score'])
@@ -135,23 +136,23 @@ def set_rate(request, username, rtype):
     rate.save_base()
     return HttpResponse(
         json.dumps({'success': 'true',
-                    'score':round(user.userprofile.score,1) ,
-                    'ratecount':user.userprofile.ratecount
-                    }),
-        mimetype="application/"+rtype)
+                    'score': round(user.userprofile.score, 1),
+                    'ratecount': user.userprofile.ratecount
+        }),
+        mimetype="application/" + rtype)
 
 
 @login_required
 def get_usernames(request, rtype):
     usernames = users.models.User.objects \
-                        .filter(is_active=True)\
-                        .filter(username__icontains=request.GET['username']) \
-                        .filter(~Q(pk=request.user.id)&~Q(username='admin')).only('username')[:10]
+                    .filter(is_active=True) \
+                    .filter(username__icontains=request.GET['username']) \
+                    .filter(~Q(pk=request.user.id) & ~Q(username='admin')).only('username')[:10]
     return HttpResponse(
         json.dumps(
             [user.username for user in usernames if hasattr(user, 'userprofile')]
         ),
-        mimetype="application/"+rtype)
+        mimetype="application/" + rtype)
 
 
 def get_user_details(username):
@@ -174,12 +175,13 @@ def get_profile(request, username, rtype):
         json.dumps(
             {
                 'username': user.username,
-                'avatar': reverse('avatar_render_primary', args=[user.username,60]),
+                'avatar': reverse('avatar_render_primary', args=[user.username, 60]),
                 'nationality': user_profile.nationality.nationality if not perms.has_key('nationality') else 'hidden',
-                'resident_country': user_profile.resident_country.residence if not perms.has_key('resident_country') else 'hidden',
-                'score': round(user_profile.score,1),
+                'resident_country': user_profile.resident_country.residence if not perms.has_key(
+                    'resident_country') else 'hidden',
+                'score': round(user_profile.score, 1),
                 'ratecount': user_profile.ratecount,
-                'orate': orate[0].rated_by_ahr if len(orate)>0 else 0
+                'orate': orate[0].rated_by_ahr if len(orate) > 0 else 0
             }
-            ),
-        mimetype="application/"+rtype)
+        ),
+        mimetype="application/" + rtype)

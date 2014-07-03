@@ -107,7 +107,6 @@ class MarketItem(models.Model):
         adict['fields']['userratecount'] = self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['ratecount'] = self.ratecount
         adict['fields']['score'] = self.score
-        adict['fields']['views'] = self.marketitemviewconter_set.count()
         if request:
             adict['fields']['hidden'] = self.marketitemhidden_set.filter(viewer_id=request.user.id).exists()
             adict['fields']['stick'] = self.marketitemstick_set.filter(viewer_id=request.user.id,
@@ -120,15 +119,6 @@ class MarketItem(models.Model):
             adict['fields']['avatar'] = False
             adict['fields']['hasEdit'] = False
         return adict
-
-
-class MarketItemViewConter(models.Model):
-    item = models.ForeignKey(MarketItem)
-    viewer = models.ForeignKey(user_models.User)
-    counter = models.IntegerField(_('counter'), default=0)
-
-    class Meta:
-        app_label = "market"
 
 
 class MarketItemHidden(models.Model):
