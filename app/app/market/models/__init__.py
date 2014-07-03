@@ -1,7 +1,7 @@
 #__all__ = ["Comment","MarketItem", "ItemRate", "MarketItemPostReport", "File"]
 from .comment import Comment
 from .market import (
-    MarketItem, MarketItemHidden, MarketItemStick,
+    MarketItem, MarketItemHidden, MarketItemStick, MarketItemViewCounter,
     MarketItemActions, MarketItemNextSteps
 )
 from .rate import ItemRate
