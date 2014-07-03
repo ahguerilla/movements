@@ -1,0 +1,14 @@
+{% block greeting %}
+  <p>Hello Movements.Org member,</p>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+{% block footer %}
+  <hr/>
+  <p>The Movements.Org Team</p>
+  <p>Movements are made up of individuals. Movements.Org brings them together.</p>
+  <p style="font-size: 10px;">You can update your notification preferences in <a
+      href="{{ base_url }}{% url 'user_settings' %}">your settings page.</a></p>
+{% endblock %}

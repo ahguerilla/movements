@@ -1,0 +1,14 @@
+{% block greeting %}
+Hello Movements.Org member,
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+{% block footer %}
+----------------------
+The Movements.Org Team
+Movements are made up of individuals. Movements.Org brings them together.
+
+You can update your notification preferences in {{ base_url }} your settings page.
+{% endblock %}

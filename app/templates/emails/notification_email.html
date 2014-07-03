@@ -1,6 +1,6 @@
-<div>
-  <p>Hello Movements.Org member,</p>
+{% extends 'emails/base_email.html' %}
 
+{% block body %}
   <p>You have the following new notifications.</p>
 
   {% for notification in notifications %}
@@ -18,11 +18,4 @@
       {% endif %}
     </p>
   {% endfor %}
-
-</div>
-
-<hr/>
-<p>The Movements.Org Team</p>
-<p>Movements are made up of individuals. Movements.Org brings them together.</p>
-<p style="font-size: 10px;">You can update your notification preferences in <a
-    href="{{ base_url }}{% url 'user_settings' %}">your settings page.</a></p>
+{% endblock %}
