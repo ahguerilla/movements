@@ -18,7 +18,6 @@
         <div class="form-sub-title"><h2>{% trans "1. What skills do you need?" %}</h2></div>
         <div class="form-select-multi">
           {{ form.interests }}
-          {{ form.interests.errors }}
         </div>
         <label for="{{ form.specific_skill.auto_id }}">{% trans 'Other' %}</label>
         <p>Movements.org provides access to skills and experts. At this time, we cannot provide funding or equipment. If you need either please see the Resources page. What might be available is a proposal writer to help you secure funding from a different source.</p>
@@ -26,6 +25,7 @@
           <div class="col-xs-12">
             {% render_field form.specific_skill class="form-control" placeholder="" maxlength="30" %}
             {{ form.specific_skill.errors }}
+            {{ form.interests.errors }}
           </div>
         </div>
       </div>

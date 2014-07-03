@@ -56,8 +56,9 @@ class OfferForm(forms.ModelForm):
 
     def clean_interests(self):
         data = self.cleaned_data['interests']
-        if len(data) == 0:
-            raise forms.ValidationError(_("You must select at least one skill"))
+        specific_skill = self.cleaned_data['specific_skill']
+        if len(data) == 0 and not specific_skill:
+            raise forms.ValidationError(_("You must add at least one skill"))
         return data
 
 
@@ -89,9 +90,11 @@ class RequestForm(forms.ModelForm):
 
     def clean_interests(self):
         data = self.cleaned_data['interests']
-        if len(data) == 0:
-            raise forms.ValidationError(_("You must select at least one skill"))
+        specific_skill = self.cleaned_data['specific_skill']
+        if len(data) == 0 and not specific_skill:
+            raise forms.ValidationError(_("You must add at least one skill"))
         return data
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
