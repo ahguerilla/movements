@@ -59,6 +59,9 @@ def render_settings(request, initial=False):
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)
 
+    errors = dict(user_form.errors)
+    errors.update(settings_form.errors)
+
     interest_types = {'languages': [(lang.id, lang.name) for lang in Language.objects.all()],
                       'interests': [(interest.id, interest.name) for interest in Interest.objects.all()],
                       'regions': [(region.id, region.name) for region in Region.objects.all()]}
@@ -72,7 +75,8 @@ def render_settings(request, initial=False):
                                 'has_password': user.has_usable_password(),
                                 'skills': value('json', users.models.Skills.objects.all()),
                                 'issues': value('json', users.models.Issues.objects.all()),
-                                'countries': value('json', users.models.Countries.objects.all())
+                                'countries': value('json', users.models.Countries.objects.all()),
+                                'errors': errors,
                               },
                               context_instance=RequestContext(request))
 
@@ -86,8 +90,6 @@ def initial_settings(request):
 
 @login_required
 def settings(request):
-    from avatar.util import invalidate_cache
-    invalidate_cache(request.user)
     return render_settings(request)
 
 
