@@ -20,7 +20,7 @@
           {{ form.interests }}
         </div>
         <label for="{{ form.specific_skill.auto_id }}">{% trans 'Other' %}</label>
-        <p>Movements.org provides access to skills and experts. At this time, we cannot provide funding or equipment. If you need either please see the Resources page. What might be available is a proposal writer to help you secure funding from a different source.</p>
+        <p>Movements.org provides access to skills and experts. At this time, we cannot provide funding or equipment. If you need either please see the <a href="/movements/resources/">Resources</a> page. What might be available is a proposal writer to help you secure funding from a different source.</p>
         <div class="form-group">
           <div class="col-xs-12">
             {% render_field form.specific_skill class="form-control" placeholder="" maxlength="30" %}
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div>
-        <div class="form-sub-title"><h2>{% trans "2. What countries does this affect?" %}</h2></div>
+        <div class="form-sub-title"><h2>{% trans "2. Which countries does this request apply to?" %}</h2></div>
         <div class="form-select-multi">
           {{ form.countries }}
         </div>
@@ -58,7 +58,7 @@
       <div>
         <div class="form-group">
           <div class="col-xs-12">
-            <label for="{{ form.tweet_permission.auto_id }}">{% trans "May we tweet this request" %}</label>
+            <label for="{{ form.tweet_permission.auto_id }}">{% trans "May we tweet this request?" %}</label>
             {% render_field form.tweet_permission class="" placeholder="" %}
             {{ form.tweet_permission.errors }}
             <p>We won’t use your name or any identifying information</p>

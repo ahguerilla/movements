@@ -553,8 +553,9 @@ $page-banner-height = 550px
       color #fff
       text-align center
       .carousel-title
-        margin-left 15%
-        margin-right 15%
+        padding-left 15%
+        padding-right 15%
+        width 100%
         position absolute
         top 150px
         color #fff
@@ -563,8 +564,9 @@ $page-banner-height = 550px
         font-weight normal
         line-height 120%
       .carousel-blurb
-        margin-left 20%
-        margin-right 20%
+        padding-left 20%
+        padding-right 20%
+        width 100%
         position absolute
         top 295px
         font-size 18px
@@ -793,7 +795,6 @@ $page-banner-height = 550px
 // **************************************
 // exchange page
 // **************************************
-
 popoverDropdown(width, showIcon = true)
   $right-icon = width - 30
   padding 0
@@ -1254,6 +1255,9 @@ popoverDropdown(width, showIcon = true)
   .folder-select
     padding-top 20px
     padding-bottom 20px
+  .errors
+    color #ff0000
+    margin-bottom 10px
 
 #profile_change_stuff
   img

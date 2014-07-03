@@ -1,16 +1,15 @@
-{% load account %}
-{% user_display user as user_display %}
-{% load i18n %}
-{% autoescape off %}
-{% blocktrans with current_site.name as site_name %}
-Dear Member,
+{% extends 'emails/base_email.txt' %}
 
-Thank you for signing up to Movements. Please confirm your email address by clicking on the link below.
+{% block body %}
+Thank you for registering on Movements.Org, the platform that is crowdsourcing the fight for human rights.
+
+Please confirm your email address and read an important message by following the link below. It will take you to the Sign-In page where you will enter your screen name and the password you created. Then you will be asked to read our Acceptable Use Policy and indicate that you have read it.
+
+This process help ensure your security.
 
 {{ activate_url }}
 
-The Movements team
+After you have read the Policy you’ll have full access to Movements.Org.
+Thanks for joining the fight.
 
-{% endblocktrans %}
-{% endautoescape %}
-
+{% endblock %}
