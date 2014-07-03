@@ -1901,8 +1901,8 @@ h6 {
   #AlreadyHaveText {
     display: none;
   }
-  .header-nav .header-nav-wrapper {
-    left: 56%;
+  #view-profile-menu {
+    display: none;
   }
   #AddPostText {
     display: none;

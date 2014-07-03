@@ -98,7 +98,22 @@
           </li>
         {% else %}
           <li>
+            <a href="{% url 'postman_inbox' %}">Inbox</a>
+          </li>
+          <li>
+            <a href="{% url 'show_notifications' %}">Alerts</a>
+          </li>
+          <li>
             <a href="{% url 'user_profile' %}">Profile</a>
+          </li>
+          <li>
+            <a href="{% url 'user_settings' %}">Settings</a>
+          </li>
+          <li>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                <a href="#" onclick="parentNode.submit();">Logout</a>
+              </form>
           </li>
         {% endif %}
           <li>
