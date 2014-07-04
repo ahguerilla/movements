@@ -35,6 +35,7 @@ $title-font = #005E86
 $inactive-font = #756b65
 $item-footer-font = #756b65
 $filter-font = #756b65
+$active-link = #ff6d50
 
 
 // **************************************
@@ -249,30 +250,18 @@ body
     position relative
     .menu-selector
       position absolute
-      padding-left 5px
-      padding-right 5px
-      padding-top 5px
-      top -5px
-      left -5px
-      width 90px
+      top 3px
+      left -10px
       height 55px
-      border-bottom 4px solid $border-color
-      color $inactive-font
       .menu-icon
-        background-image url("../images/v2/hamburger-v3.png")
-        width 30px
-        height 24px
-        margin-top 11px
-        margin-right 3px
-        float left
+        background-image url("../images/v2/hamburger.png")
+        width 50px
+        height 40px
       .action-font
         padding-top 3px
     .menu-selector.selected
-      border-bottom 4px solid $footer-color
-      background-color $footer-color
-      color #fff
       .menu-icon
-        background-image url("../images/v2/hamburger-selected-v3.png")
+        background-image url("../images/v2/hamburger-selected.png")
     .nav-avatar
       position absolute
       width 90px
@@ -377,15 +366,31 @@ $home-head-height = 85px
   background-color $footer-color
   border-bottom 4px solid $border-color
   padding-bottom 15px
-  h4
+  padding-top 5px
+  position absolute
+  width 100%
+  z-index 10000
+  opacity 0.9
+  h3
     color #fff
-    margin-bottom 5px
+    font-family "HurmeGeometricSans3-SemiBold"
   a
     color #fff
-    text-decoration underline
-  li
-    list-style none
-    line-height 27px
+
+  a:hover
+    text-decoration none
+  .main-menu-slider
+    ul
+      margin 0
+      padding-left 30%
+      padding-right 30%
+      text-align center
+    li
+      list-style none
+      line-height 27px
+      border-bottom 1px solid rgba(224, 215, 216, 0.5)
+    li:last-child
+      border-bottom none
 
 footer
   //margin-top 30px
@@ -478,6 +483,7 @@ h1,h2,h3,h4,h5,h6
       font-weight normal
   h1
     font-size 26px
+    margin-top 13px
 
 .content-block
   a
@@ -523,6 +529,30 @@ h1,h2,h3,h4,h5,h6
 
 .content-wrap
   min-height 500px
+
+.cms-left-column
+  ul
+    padding 0
+    li
+      list-style none
+      border-bottom 1px solid $border-color
+      a
+        display block
+        padding 12px 0 12px 0
+        color $main-font
+        text-decoration none
+      a:hover
+        text-decoration none
+        //color #625035
+        color $active-link
+    li.active
+      a
+        color $active-link
+      a:hover
+        color $active-link
+    li:last-child
+      border-bottom none
+
 
 // **************************************
 // Landing page styles

@@ -54,12 +54,10 @@
       <div class="navbar-left">
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
-          <div class="action-font">Menu</div>
         </div>
         {% if user.is_authenticated and not user.userprofile.first_login %}
         <div class="nav-avatar avatar" id="view-profile-menu">
           {% primary_avatar user 30 %}
-          <div class="action-font">Profile</div>
           <div id="content-menu-container"></div>
         </div>
         {% endif %}
@@ -82,36 +80,16 @@
 <div id="main-cms-nav" style="display: none;">
   <div class="container">
     <div class="row">
-      <div class="col-xs-3">
-        <h4>About Movements</h4>
-        {% show_menu_below_id "col1" 0 100 100 100 %}
-      </div>
-      <div class="col-xs-3">
-        <h4>Navigation</h4>
-        {% if not user.is_authenticated %}
-          <li>
-            <a href="{% url 'account_login' %}">Login</a>
-          </li>
-          <li>
-            <a href="{% url 'signup_start' %}">Sign up</a>
-          </li>
-        {% else %}
-          <li>
-            <a href="{% url 'user_profile' %}">Profile</a>
-          </li>
-        {% endif %}
-          <li>
-            <a href="{% url 'show_market' %}">Exchange</a>
-          </li>
-        {% show_menu_below_id "col2" 0 100 100 100 %}
-      </div>
-      <div class="col-xs-3">
-        <h4>Our Terms</h4>
-        {% show_menu_below_id "col3" 0 100 100 100 %}
-      </div>
-      <div class="col-xs-3">
-        <h4>Resources</h4>
-        {% show_menu_below_id "col4" 0 100 100 100 %}
+      <div class="main-menu-slider">
+        <ul>
+          {% if not user.is_authenticated %}
+            <li><h3><a href="{% url 'signup_start' %}">Sign up</a></h3></li>
+          {% endif %}
+          {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
+          {% if not user.is_authenticated %}
+            <li><h3><a href="{% url 'show_market' %}">Visit market</a></h3></li>
+          {% endif %}
+        </ul>
       </div>
     </div>
   </div>
@@ -252,10 +230,10 @@
   (function () {
     $('#view-content-menu').click(function(){
       if($('#main-cms-nav').is(":visible")){
-        $('#main-cms-nav').hide();
+        $('#main-cms-nav').slideUp("fast");
         $('.menu-selector').removeClass("selected");
       } else {
-        $('#main-cms-nav').show();
+        $('#main-cms-nav').slideDown("fast");
         $('.menu-selector').addClass("selected");
       }
     });

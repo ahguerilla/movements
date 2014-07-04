@@ -25,8 +25,8 @@
         <ul class="category-menu">
           <li class="skills">
             <a href="#" alt="filter by skills" class="skills">
-              <img src="{{ STATIC_URL }}images/v2/market-filter-icon.png" />
-              <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
+              <div><img src="{{ STATIC_URL }}images/v2/market-filter-icon.png" /></div>
+              <div>Skills<img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/></div>
             </a>
             <div class="popover-container"></div>
           </li>
@@ -91,6 +91,7 @@
 {% block endjavascript %}
   <script type="text/template" id="skill-filter-list-template">
     <ul class="skill-filter">
+      <li><a href="#" class="skill-all" data-filter="all">Select all</a></li>
       <% _.each(skills, function(skill) { %>
       <li><a href="#" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
       <% }); %>
