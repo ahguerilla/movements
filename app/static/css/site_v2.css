@@ -265,10 +265,14 @@ body {
 }
 .header-nav .navbar-left .nav-avatar {
   position: absolute;
-  width: 90px;
-  left: 90px;
-  top: 9px;
+  top: 8px;
+  left: 55px;
   color: #756b65;
+}
+.header-nav .navbar-left .nav-avatar .menu-icon-profile {
+  background: url("../images/v2/profile-profile-icon.png") center -30px no-repeat;
+  height: 30px;
+  width: 30px;
 }
 .header-nav .navbar-left .nav-avatar img {
   float: left;

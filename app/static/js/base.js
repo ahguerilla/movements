@@ -132,7 +132,7 @@
      });
 
     $('#view-profile-menu').on('shown.bs.popover', function(){
-      $('#content-menu-container .popover').css("left", 0);
+      $('#content-menu-container .popover').css("left", "-14px");
       $('#content-menu-container .arrow').css("left", "28px");
     });
   }

@@ -57,7 +57,7 @@
         </div>
         {% if user.is_authenticated and not user.userprofile.first_login %}
         <div class="nav-avatar avatar" id="view-profile-menu">
-          {% primary_avatar user 30 %}
+          <div class="menu-icon-profile"></div>
           <div id="content-menu-container"></div>
         </div>
         {% endif %}
