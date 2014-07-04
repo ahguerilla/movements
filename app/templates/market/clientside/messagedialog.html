@@ -75,7 +75,8 @@
           dataType: 'json',
           data: {
             subject: that.subject,
-            message: that.message
+            message: that.message,
+            post_id: that.post_id
           }
         });
         dfrd.done(function () {
@@ -114,7 +115,8 @@
       this.$dialog.modal('show');
     },
 
-    initialize: function (settings) {
+    initialize: function (options) {
+      this.post_id = options.post_id || null;
       this.alert_place = '#pmerror';
       this.$messageText = $('#newmessage');
       this.$username = $('#usernameh');
@@ -127,10 +129,11 @@
   });
 
   window.ahr.messagedialog_widget = window.ahr.messagedialog_widget || {};
-  window.ahr.messagedialog_widget.initWidget = function (container, alert_place) {
+  window.ahr.messagedialog_widget.initWidget = function (container, alert_place, post_id) {
     var widget = new MessageDialogWidget({
       el: container,
-      alert_place: alert_place
+      alert_place: alert_place,
+      post_id: post_id
     });
     return widget;
   };

@@ -127,7 +127,7 @@ class IncidentAdmin(TrackingAdmin):
                 user_rec_count=Count('messageext')
             ).values_list('id', 'user_rec_count'))
         conversation_dict = dict(orig_queryset.filter(
-            messageext__thread=None).annotate(
+            messageext__parent=None).annotate(
                 conversation_count=Count('messageext')
             ).values_list('id', 'conversation_count'))
         market_items = queryset[:]
