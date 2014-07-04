@@ -147,6 +147,9 @@
   setupProfileMenuPopover();
   $(document).ready(function() {
     doHeartBeat();
+    $(document).on('doHeartBeat', function(){
+      doHeartBeat();
+    });
   });
 
 

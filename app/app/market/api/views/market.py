@@ -266,7 +266,7 @@ def get_notifications_fromto(request, sfrom, to):
     ret_list = []
     for notification in notifications:
         ret_list.append(notification.get_dict())
-    market.models.Notification.objects.filter(pk__in=notifications).update(seen=True)
+    market.models.Notification.objects.filter(user_id=request.user.id).update(seen=True)
     return HttpResponse(json.dumps({'notifications': ret_list}), mimetype="application/json")
 
 

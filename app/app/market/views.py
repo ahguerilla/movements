@@ -104,7 +104,6 @@ def notifications(request):
     return render_to_response('market/notifications.html', {},
                               context_instance=RequestContext(request))
 
-
 @login_required
 def permanent_delete_postman(request):
     return redirect(reverse('postman_trash'))

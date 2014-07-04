@@ -85,6 +85,7 @@
               that.$container.append(that.tmpl({'notif': notif}));
             });
             that.counter = that.counter + 15;
+            $(document).trigger('doHeartBeat');
           });
         },
 
