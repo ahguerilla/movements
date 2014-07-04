@@ -267,20 +267,21 @@ body {
   position: absolute;
   top: 8px;
   left: 55px;
-  color: #756b65;
 }
 .header-nav .navbar-left .nav-avatar .menu-icon-profile {
   background: url("../images/v2/profile-profile-icon.png") center -30px no-repeat;
   height: 30px;
   width: 30px;
 }
-.header-nav .navbar-left .nav-avatar img {
-  float: left;
-  margin-right: 3px;
+.header-nav .navbar-left .nav-notification {
+  position: absolute;
+  top: 8px;
+  left: 105px;
 }
-.header-nav .navbar-left .nav-avatar .action-font {
-  display: inline-block;
-  margin-top: 6px;
+.header-nav .navbar-left .nav-notification .menu-icon-bell {
+  background: url("../images/v2/profile-notifications-icon.png") center -30px no-repeat;
+  height: 30px;
+  width: 30px;
 }
 .home-page-nav {
   height: 85px;
@@ -621,6 +622,24 @@ h6 {
 }
 .cms-left-column ul li:last-child {
   border-bottom: none;
+}
+.notification-count {
+  position: absolute;
+  right: -8px;
+  top: 0;
+  background-color: #fe6d50;
+  width: 20px;
+  height: 14px;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #fff;
+  text-align: center;
+  -webkit-border-radius: 45%;
+  -moz-border-radius: 45%;
+  -ms-border-radius: 45%;
+  -o-border-radius: 45%;
+  border-radius: 45%;
 }
 .page-banner {
   height: 550px;

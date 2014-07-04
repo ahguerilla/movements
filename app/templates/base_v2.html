@@ -56,9 +56,13 @@
           <div class="menu-icon"></div>
         </div>
         {% if user.is_authenticated and not user.userprofile.first_login %}
-        <div class="nav-avatar avatar" id="view-profile-menu">
+        <div class="nav-avatar" id="view-profile-menu">
           <div class="menu-icon-profile"></div>
           <div id="content-menu-container"></div>
+        </div>
+        <div class="nav-notification">
+          <div style="display: none;" id="main-nav-count" class="notification-count"></div>
+          <div class="menu-icon-bell"></div>
         </div>
         {% endif %}
       </div>

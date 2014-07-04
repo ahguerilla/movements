@@ -101,8 +101,7 @@ def edit_request(request, post_id):
 
 @login_required
 def notifications(request):
-    return render_to_response('market/notifications.html',
-        {},
+    return render_to_response('market/notifications.html', {},
                               context_instance=RequestContext(request))
 
 

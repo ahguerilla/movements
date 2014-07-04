@@ -266,17 +266,18 @@ body
       position absolute
       top 8px
       left 55px
-      color $inactive-font
       .menu-icon-profile
         background url("../images/v2/profile-profile-icon.png") center -30px no-repeat
         height 30px
         width 30px
-      img
-        float left
-        margin-right 3px
-      .action-font
-        display inline-block
-        margin-top 6px
+    .nav-notification
+      position absolute
+      top 8px
+      left 105px
+      .menu-icon-bell
+        background url("../images/v2/profile-notifications-icon.png") center -30px no-repeat
+        height 30px
+        width 30px
 
 
 $home-head-height = 85px
@@ -555,6 +556,20 @@ h1,h2,h3,h4,h5,h6
         color $active-link
     li:last-child
       border-bottom none
+
+.notification-count
+  position absolute
+  right -8px
+  top 0
+  background-color $primary-color
+  width 20px
+  height 14px
+  font-size 10px
+  font-weight bold
+  line-height 14px
+  color #fff
+  text-align center
+  border-radius 45%
 
 
 // **************************************

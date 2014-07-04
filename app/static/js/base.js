@@ -58,20 +58,26 @@
     }
   });
 
-  window.ahr.messageCounterWatch = function () {
+  function doHeartBeat() {
     if (window.ahr.user_id > 0) {
-      setInterval(function () {
-        var text;
-        $.getJSON(window.ahr.app_urls.getmessagecount, function (data) {
-          $('.message-counter').each(function (tmp, item) {
-            if (data > 0) {
-              $('#msgcntr', $(item)).text('(' + data + ')');
-            } else {
-              $('#msgcntr', $(item)).text('');
-            }
-          });
-        });
-      }, 60000);
+      $.getJSON(window.ahr.app_urls.heartbeat, function (data) {
+        var notification_count = data.notifications || 0;
+        if (notification_count > 0) {
+          $('#main-nav-count').text(notification_count);
+          $('#main-nav-count').show();
+        } else {
+          $('#main-nav-count').text("");
+          $('#main-nav-count').hide();
+        }
+      });
+    }
+  }
+
+  window.ahr.messageCounterWatch = function () {
+    // check for new notification and messages
+    // every 30 seconds
+    if (window.ahr.user_id > 0) {
+      setInterval(doHeartBeat, 30000);
     }
   };
 
@@ -139,6 +145,10 @@
 
   setupAddPostPopover();
   setupProfileMenuPopover();
+  $(document).ready(function() {
+    doHeartBeat();
+  });
+
 
   window.ahr.BaseView = Backbone.View.extend({
     events: {},
