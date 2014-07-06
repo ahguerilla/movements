@@ -957,17 +957,51 @@ h6 {
 .share-twitter {
   display: none;
 }
+input.borderless-control {
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  background-color: inherit;
+  padding: 0;
+  outline: none;
+}
+input.borderless-control:focus,
+input.borderless-control:focus:invalid,
+input.borderless-control:focus:invalid:focus {
+  color: inherit;
+  border-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}
+.exchange-filters.search-expanded > .container {
+  padding-bottom: 0;
+  border-bottom: none;
+}
 .exchange-filters {
-  border-bottom: 2px solid #ded8d6;
   margin-bottom: 20px;
-  padding-bottom: 20px;
+}
+.exchange-filters > .container {
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ded8d6;
 }
 .exchange-filters .search-expanded {
-  margin-top: 5px;
+  margin-top: 10px;
+  padding: 20px;
+  color: #fff;
+  background-color: #beb4ae;
+  z-index: 10;
+  border-top: 4px solid #e0d7d8;
+  border-bottom: 4px solid #e0d7d8;
 }
-.exchange-filters .search-expanded input.form-control {
-  width: 188px;
-  display: inline-block;
+.exchange-filters .search-expanded input {
+  font-size: 32px;
 }
 .exchange-filters .search-expanded button.btn {
   padding: 4px 12px;
@@ -985,15 +1019,257 @@ h6 {
   display: inline-block;
 }
 .exchange-filters .categories ul.category-menu > li {
-  margin-left: 20px;
+  position: relative;
   display: inline-block;
+}
+.exchange-filters .categories ul.category-menu > li > a {
+  position: relative;
+  display: inline-block;
+  padding: 5px 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+  color: #756b65;
+  font-weight: bold;
+}
+.exchange-filters .categories ul.category-menu > li > a div {
+  font-size: 15px;
+  margin-top: 38px;
+}
+.exchange-filters .categories ul.category-menu > li > a .toggle {
+  display: inline-block;
+  width: 16px;
+  height: 8px;
+  background: url("../images/v2/dropdown_normal.png") no-repeat center center;
 }
 .exchange-filters .categories ul.category-menu > li a,
 .exchange-filters .categories ul.category-menu > li a:hover,
 .exchange-filters .categories ul.category-menu > li a:focus {
   text-decoration: none;
-  height: 34px;
   display: inline-block;
+}
+.exchange-filters .categories ul.category-menu > li a.showhide {
+  background: url("../images/v2/market-hide-show-icon.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li a.skills {
+  background: url("../images/v2/market-filter-icon.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li a.regions {
+  background: url("../images/v2/market-countries-icon.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li a.search {
+  background: url("../images/v2/market-search-icon.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li.active > a {
+  color: #fff;
+}
+.exchange-filters .categories ul.category-menu > li.active > a .toggle {
+  background: url("../images/v2/dropdown_toggled.png") no-repeat center center;
+}
+.exchange-filters .categories ul.category-menu > li.active a.showhide {
+  background: #beb4ae url("../images/v2/market-hide-show-icon-toggled.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li.active a.skills {
+  background: #beb4ae url("../images/v2/market-filter-icon-toggled.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li.active a.regions {
+  background: #beb4ae url("../images/v2/market-countries-icon-toggled.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li.active a.search {
+  background: #beb4ae url("../images/v2/market-search-icon-toggled.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content {
+  padding: 0;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li:first-child {
+  border-top: none;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li {
+  display: block;
+  border-top: 1px solid #e0d7d8;
+  padding: 4px;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li a.no-icon,
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li a.no-icon:hover {
+  background-image: none;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li a {
+  background: url("../images/v2/select_plus.png") 170px center no-repeat;
+  margin: 0;
+  padding: 10px;
+  width: 200px;
+  height: 40px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li a:hover {
+  color: #fff;
+  background: url("../images/v2/select_plus_hover.png") 170px center no-repeat;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li a.selected {
+  background: url("../images/v2/select_tick.png") 170px center no-repeat;
+  background-color: #fff;
+  color: #ff6d50;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li a.selected:hover {
+  background: url("../images/v2/select_tick.png") 170px center no-repeat;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li a.plain {
+  background-image: none;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content {
+  padding: 0;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li:first-child {
+  border-top: none;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li {
+  display: block;
+  border-top: 1px solid #e0d7d8;
+  padding: 4px;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.no-icon,
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.no-icon:hover {
+  background-image: none;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a {
+  background: url("../images/v2/select_plus.png") 210px center no-repeat;
+  margin: 0;
+  padding: 10px;
+  width: 240px;
+  height: 40px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a:hover {
+  color: #fff;
+  background: url("../images/v2/select_plus_hover.png") 210px center no-repeat;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.selected {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
+  background-color: #fff;
+  color: #ff6d50;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.selected:hover {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.plain {
+  background-image: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content {
+  padding: 0;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul li:first-child {
+  border-top: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul li {
+  display: block;
+  border-top: 1px solid #e0d7d8;
+  padding: 4px;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a.no-icon,
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a.no-icon:hover {
+  background-image: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a {
+  margin: 4px;
+  padding: 10px;
+  width: 240px;
+  height: 40px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a:hover {
+  color: #fff;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a.selected {
+  background-color: #fff;
+  color: #ff6d50;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a.selected:hover {
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a.plain {
+  background-image: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter.expanded > li {
+  border: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter.expanded > li > a {
+  display: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li {
+  padding: 0;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul li:first-child {
+  border-top: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul li {
+  display: block;
+  border-top: 1px solid #e0d7d8;
+  padding: 4px;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul li a.no-icon,
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul li a.no-icon:hover {
+  background-image: none;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul li a {
+  background: url("../images/v2/select_plus.png") 210px center no-repeat;
+  margin: 0;
+  padding: 10px;
+  width: 240px;
+  height: 40px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul li a:hover {
+  color: #fff;
+  background: url("../images/v2/select_plus_hover.png") 210px center no-repeat;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul li a.selected {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
+  background-color: #fff;
+  color: #ff6d50;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul li a.selected:hover {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
+  background-color: #beb4ae;
+}
+.exchange-filters .categories ul.category-menu > li.regions .popover-content ul.region-filter li ul li a.plain {
+  background-image: none;
 }
 .exchange-filters .categories ul.category-menu .popover {
   -webkit-border-radius: 0;
@@ -1002,154 +1278,12 @@ h6 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-.exchange-filters .categories ul.category-menu .skills .popover-content {
-  padding: 0;
-}
-.exchange-filters .categories ul.category-menu .skills .popover-content ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.exchange-filters .categories ul.category-menu .skills .popover-content ul li:first-child {
-  border-top: none;
-}
-.exchange-filters .categories ul.category-menu .skills .popover-content ul li {
-  display: block;
-  border-top: 1px solid #e0d7d8;
-  padding: 4px;
-}
-.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.no-icon,
-.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.no-icon:hover {
-  background-image: none;
-}
-.exchange-filters .categories ul.category-menu .skills .popover-content ul li a {
-  background: url("../images/v2/select_plus.png") 210px center no-repeat;
-  margin: 0;
-  padding: 10px;
-  width: 240px;
-  height: 40px;
-  display: block;
-  text-decoration: none;
-  color: #000;
-}
-.exchange-filters .categories ul.category-menu .skills .popover-content ul li a:hover {
-  color: #fff;
-  background: url("../images/v2/select_plus_hover.png") 210px center no-repeat;
-  background-color: #beb4ae;
-}
-.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.selected {
-  background: url("../images/v2/select_tick.png") 210px center no-repeat;
-  background-color: #fff;
-  color: #ff6d50;
-}
-.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.selected:hover {
-  background: url("../images/v2/select_tick.png") 210px center no-repeat;
-  background-color: #beb4ae;
-}
-.exchange-filters .categories ul.category-menu .skills .popover-content ul li a.plain {
-  background-image: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content {
-  padding: 0;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul li:first-child {
-  border-top: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul li {
-  display: block;
-  border-top: 1px solid #e0d7d8;
-  padding: 4px;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.no-icon,
-.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.no-icon:hover {
-  background-image: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul li a {
-  margin: 4px;
-  padding: 10px;
-  width: 248px;
-  height: 40px;
-  display: block;
-  text-decoration: none;
-  color: #000;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul li a:hover {
-  color: #fff;
-  background-color: #beb4ae;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.selected {
-  background-color: #fff;
-  color: #ff6d50;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.selected:hover {
-  background-color: #beb4ae;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul li a.plain {
-  background-image: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter.expanded > li {
-  border: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter.expanded > li > a {
-  display: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li {
-  padding: 0;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li:first-child {
-  border-top: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li {
-  display: block;
-  border-top: 1px solid #e0d7d8;
-  padding: 4px;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.no-icon,
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.no-icon:hover {
-  background-image: none;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a {
-  background: url("../images/v2/select_plus.png") 210px center no-repeat;
-  margin: 0;
-  padding: 10px;
-  width: 240px;
-  height: 40px;
-  display: block;
-  text-decoration: none;
-  color: #000;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a:hover {
-  color: #fff;
-  background: url("../images/v2/select_plus_hover.png") 210px center no-repeat;
-  background-color: #beb4ae;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.selected {
-  background: url("../images/v2/select_tick.png") 210px center no-repeat;
-  background-color: #fff;
-  color: #ff6d50;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.selected:hover {
-  background: url("../images/v2/select_tick.png") 210px center no-repeat;
-  background-color: #beb4ae;
-}
-.exchange-filters .categories ul.category-menu .regions .popover-content ul.region-filter li ul li a.plain {
-  background-image: none;
-}
 .exchange-filters .type-menu,
 .exchange-filters .hidden-menu {
   list-style: none;
   margin: 0;
   padding: 0;
+  margin-top: 25px;
   margin-right: 40px;
 }
 .exchange-filters .type-menu a,

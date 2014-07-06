@@ -849,9 +849,24 @@ $page-banner-height = 550px
 
 .share-twitter
   display none
+
 // **************************************
 // exchange page
 // **************************************
+
+input.borderless-control
+  border none
+  box-shadow none
+  background-color inherit
+  padding 0
+  outline none
+  &:focus, &:focus:invalid, &:focus:invalid:focus
+    color inherit
+    border-color transparent
+    box-shadow none
+    outline none
+
+
 popoverDropdown(width, showIcon = true)
   $right-icon = width - 30
   padding 0
@@ -896,15 +911,27 @@ popoverDropdown(width, showIcon = true)
       a.plain
         background-image none
 
+
+.exchange-filters.search-expanded
+  > .container
+    padding-bottom 0
+    border-bottom none
+
 .exchange-filters
-  border-bottom 2px solid $separator-color
   margin-bottom 20px
-  padding-bottom 20px
+  > .container
+    padding-bottom 10px
+    border-bottom 2px solid $separator-color
   .search-expanded
-    margin-top 5px
-    input.form-control
-      width 188px
-      display inline-block
+    margin-top 10px
+    padding 20px
+    color #fff
+    background-color $dropdown-hover-bg
+    z-index 10
+    border-top 4px solid $border-color
+    border-bottom 4px solid $border-color
+    input
+      font-size 32px
     button.btn
       padding 4px 12px
   .categories
@@ -919,31 +946,73 @@ popoverDropdown(width, showIcon = true)
       list-style none
       display inline-block
       > li
-        margin-left 20px
+        position relative
         display inline-block
+        > a
+          position relative
+          display inline-block
+          padding 5px 10px
+          border-radius 5px
+          text-align center
+          color $item-footer-font
+          font-weight bold
+          div
+            font-size 15px
+            margin-top 38px
+          .toggle
+            display inline-block
+            width 16px
+            height 8px
+            background url('../images/v2/dropdown_normal.png') no-repeat center center
         a, a:hover, a:focus
           text-decoration none
-          height 34px
           display inline-block
+        a.showhide
+          background url('../images/v2/market-hide-show-icon.png') no-repeat center 10px
+        a.skills
+          background  url('../images/v2/market-filter-icon.png') no-repeat center 10px
+        a.regions
+          background url('../images/v2/market-countries-icon.png') no-repeat center 10px
+        a.search
+          background url('../images/v2/market-search-icon.png') no-repeat center 10px
+      > li.active
+        > a
+          color #fff
+          .toggle
+            background url('../images/v2/dropdown_toggled.png') no-repeat center center
+        a.showhide
+          background $dropdown-hover-bg url('../images/v2/market-hide-show-icon-toggled.png') no-repeat center 10px
+        a.skills
+          background $dropdown-hover-bg url('../images/v2/market-filter-icon-toggled.png') no-repeat center 10px
+        a.regions
+          background $dropdown-hover-bg url('../images/v2/market-countries-icon-toggled.png') no-repeat center 10px
+        a.search
+          background $dropdown-hover-bg url('../images/v2/market-search-icon-toggled.png') no-repeat center 10px
+      > li.showhide
+        .popover-content
+          popoverDropdown(200px)
+      > li.skills
+        .popover-content
+          popoverDropdown(240px)
+      > li.regions
+        .popover-content
+          popoverDropdown(240px, showIcon = false)
+          ul.region-filter.expanded
+            > li
+              border none
+              > a
+                display none
+          ul.region-filter
+            li
+              popoverDropdown(240px)
       .popover
         border-radius 0
-      .skills .popover-content
-        popoverDropdown(240px)
-      .regions .popover-content
-        popoverDropdown(248px, showIcon = false)
-        ul.region-filter.expanded
-          > li
-            border none
-            > a
-              display none
-        ul.region-filter
-          li
-            popoverDropdown(240 px)
 
   .type-menu, .hidden-menu
     list-style none
     margin 0
     padding 0
+    margin-top 25px
     margin-right 40px
     a
       color $filter-font
