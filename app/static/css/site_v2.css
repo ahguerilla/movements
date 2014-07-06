@@ -1084,7 +1084,7 @@ input.borderless-control:focus:invalid:focus {
   background: url("../images/v2/market-filter-icon.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li a.regions {
-  width: 113px;
+  width: 118px;
   background: url("../images/v2/market-countries-icon.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li a.search {
