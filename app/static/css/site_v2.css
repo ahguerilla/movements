@@ -283,6 +283,19 @@ body {
   height: 30px;
   width: 30px;
 }
+.header-nav .navbar-left .nav-messages {
+  position: absolute;
+  top: 15px;
+  left: 160px;
+}
+.header-nav .navbar-left .nav-messages .menu-icon-message {
+  background: url("../images/v2/profile-message-icon.png") center -19px no-repeat;
+  height: 19px;
+  width: 30px;
+}
+.header-nav .navbar-left .nav-messages #main-nav-message-count.notification-count {
+  top: -5px;
+}
 .home-page-nav {
   height: 85px;
   color: #756b65;

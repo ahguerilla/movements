@@ -66,6 +66,12 @@
             <div class="menu-icon-bell"></div>
           </div>
         </a>
+        <a href="{% url 'postman_inbox' %}">
+          <div class="nav-messages">
+            <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>
+            <div class="menu-icon-message"></div>
+          </div>
+        </a>
         {% endif %}
       </div>
     {% if user.is_authenticated and not user.userprofile.first_login %}
