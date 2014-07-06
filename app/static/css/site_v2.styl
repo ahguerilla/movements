@@ -849,9 +849,24 @@ $page-banner-height = 550px
 
 .share-twitter
   display none
+
 // **************************************
 // exchange page
 // **************************************
+
+input.borderless-control
+  border none
+  box-shadow none
+  background-color inherit
+  padding 0
+  outline none
+  &:focus, &:focus:invalid, &:focus:invalid:focus
+    color inherit
+    border-color transparent
+    box-shadow none
+    outline none
+
+
 popoverDropdown(width, showIcon = true)
   $right-icon = width - 30
   padding 0
@@ -896,15 +911,27 @@ popoverDropdown(width, showIcon = true)
       a.plain
         background-image none
 
+
+.exchange-filters.search-expanded
+  > .container
+    padding-bottom 0
+    border-bottom none
+
 .exchange-filters
-  border-bottom 2px solid $separator-color
   margin-bottom 20px
-  padding-bottom 20px
+  > .container
+    padding-bottom 10px
+    border-bottom 2px solid $separator-color
   .search-expanded
-    margin-top 5px
-    input.form-control
-      width 188px
-      display inline-block
+    margin-top 10px
+    padding 20px
+    color #fff
+    background-color $dropdown-hover-bg
+    z-index 10
+    border-top 4px solid $border-color
+    border-bottom 4px solid $border-color
+    input
+      font-size 32px
     button.btn
       padding 4px 12px
   .categories

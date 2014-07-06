@@ -86,6 +86,7 @@ $(function () {
     },
 
     toggleSearchControls: function(ev) {
+      this.$el.toggleClass('search-expanded');
       var $currentTarget = $(ev.currentTarget);
       $currentTarget.parents('li').toggleClass('active');
       var expand = this.$el.find('.search-expanded');
