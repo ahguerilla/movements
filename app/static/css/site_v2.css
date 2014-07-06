@@ -258,20 +258,33 @@ body {
   position: absolute;
   top: 3px;
   left: -10px;
-  height: 55px;
 }
 .header-nav .navbar-left .menu-selector .action-font {
   padding-top: 3px;
 }
 .header-nav .navbar-left .nav-avatar {
   position: absolute;
-  top: 8px;
-  left: 55px;
+  top: 3px;
+  left: 47px;
+  width: 46px;
+  height: 40px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px 0 0 8px;
 }
 .header-nav .navbar-left .nav-avatar .menu-icon-profile {
   background: url("../images/v2/profile-profile-icon.png") center -30px no-repeat;
   height: 30px;
   width: 30px;
+}
+.header-nav .navbar-left .nav-avatar.active {
+  background-color: #beb4ae;
+}
+.header-nav .navbar-left .nav-avatar.active .menu-icon-profile {
+  background: url("../images/v2/profile-profile-icon.png") center 0px no-repeat;
 }
 .header-nav .navbar-left .nav-notification {
   position: absolute;
