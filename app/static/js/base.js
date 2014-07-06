@@ -62,12 +62,20 @@
     if (window.ahr.user_id > 0) {
       $.getJSON(window.ahr.app_urls.heartbeat, function (data) {
         var notification_count = data.notifications || 0;
+        var message_count = data.messages || 0;
         if (notification_count > 0) {
           $('#main-nav-count').text(notification_count);
           $('#main-nav-count').show();
         } else {
           $('#main-nav-count').text("");
           $('#main-nav-count').hide();
+        }
+        if (message_count > 0){
+          $('#main-nav-message-count').text(message_count);
+          $('#main-nav-message-count').show();
+        } else {
+          $('#main-nav-message-count').text("");
+          $('#main-nav-message-count').hide();
         }
       });
     }

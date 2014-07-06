@@ -66,6 +66,12 @@
             <div class="menu-icon-bell"></div>
           </div>
         </a>
+        <a href="{% url 'postman_inbox' %}">
+          <div class="nav-messages">
+            <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>
+            <div class="menu-icon-message"></div>
+          </div>
+        </a>
         {% endif %}
       </div>
     {% if user.is_authenticated and not user.userprofile.first_login %}
@@ -83,6 +89,7 @@
     </div>
   </div>
 </nav>
+{% endblock %}
 <div id="main-cms-nav" style="display: none;">
   <div class="container">
     <div class="row">
@@ -100,7 +107,6 @@
     </div>
   </div>
 </div>
-{% endblock %}
 
 {% block header_padding %}<div style="height: 20px;"></div>{% endblock %}
 {% block content_outside_container %}{% endblock %}

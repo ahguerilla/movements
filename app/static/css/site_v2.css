@@ -235,6 +235,14 @@ body {
   border-bottom: 4px solid #e0d7d8;
   margin-bottom: 0;
 }
+.header-nav .menu-selector .menu-icon {
+  background-image: url("../images/v2/hamburger.png");
+  width: 50px;
+  height: 40px;
+}
+.header-nav .menu-selector.selected .menu-icon {
+  background-image: url("../images/v2/hamburger-selected.png");
+}
 .header-nav .header-nav-wrapper {
   position: absolute;
   left: 50%;
@@ -252,16 +260,8 @@ body {
   left: -10px;
   height: 55px;
 }
-.header-nav .navbar-left .menu-selector .menu-icon {
-  background-image: url("../images/v2/hamburger.png");
-  width: 50px;
-  height: 40px;
-}
 .header-nav .navbar-left .menu-selector .action-font {
   padding-top: 3px;
-}
-.header-nav .navbar-left .menu-selector.selected .menu-icon {
-  background-image: url("../images/v2/hamburger-selected.png");
 }
 .header-nav .navbar-left .nav-avatar {
   position: absolute;
@@ -283,6 +283,19 @@ body {
   height: 30px;
   width: 30px;
 }
+.header-nav .navbar-left .nav-messages {
+  position: absolute;
+  top: 15px;
+  left: 160px;
+}
+.header-nav .navbar-left .nav-messages .menu-icon-message {
+  background: url("../images/v2/profile-message-icon.png") center -19px no-repeat;
+  height: 19px;
+  width: 30px;
+}
+.header-nav .navbar-left .nav-messages #main-nav-message-count.notification-count {
+  top: -5px;
+}
 .home-page-nav {
   height: 85px;
   color: #756b65;
@@ -296,10 +309,17 @@ body {
   margin-right: 30px;
   height: 85px;
   display: table;
+  position: relative;
 }
 .home-page-nav .navbar-right .action-item {
   display: table-cell;
   vertical-align: middle;
+  padding-right: 85px;
+}
+.home-page-nav .navbar-right .menu-selector {
+  position: absolute;
+  top: 22px;
+  right: -10px;
 }
 .home-page-nav a {
   color: #756b65;
@@ -385,7 +405,7 @@ body {
   position: absolute;
   width: 100%;
   z-index: 10000;
-  opacity: 0.9;
+  opacity: 0.98;
 }
 #main-cms-nav h3 {
   color: #fff;
