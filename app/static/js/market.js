@@ -24,6 +24,8 @@ $(function () {
       var $skills = this.$el.find('a.skills');
       this.$skillsContainer = $skills.parent().find('.popover-container');
       this.skillsContent = _.template($('#skill-filter-list-template').html(), {skills: options.skills});
+      this.skillsCount = options.skills.length;
+      this.$skillCount = $skills.find('.count');
       $skills.popover({
         title: '',
         html: true,
@@ -119,6 +121,7 @@ $(function () {
       var $target = $(ev.currentTarget);
       $target.toggleClass('selected');
       return {
+        $target: $target,
         id: $target.data('id'),
         selected: $target.hasClass('selected'),
         value: $target.data('filter')
@@ -127,12 +130,37 @@ $(function () {
 
     setSkillsFilter: function (ev) {
       var skill = this.toggleFilterState(ev);
-      if (skill.selected) {
-        this.skills.push(skill.value);
+      if (skill.value == 'all') {
+        if (this.skills.length == this.skillsCount) {
+          this.skills = [];
+          this.$el.find('.skill-filter a').removeClass('selected');
+        } else {
+          this.skills = [];
+          skill.$target.addClass('selected');
+          _.each(this.$el.find('.skill-filter a.skill-normal'), function(elem) {
+            var $elem = $(elem);
+            this.skills.push($elem.data('filter'))
+            $elem.addClass('selected');
+          }, this);
+        }
       } else {
-        this.skills = $.grep(this.skills, function (value) {
-          return value != skill.value;
-        });
+        if (skill.selected) {
+          this.skills.push(skill.value);
+          if (this.skills.length == this.skillsCount) {
+            this.$el.find('.skill-filter .skill-all').addClass('selected');
+          }
+        } else {
+          this.$el.find('.skill-filter .skill-all').removeClass('selected');
+          this.skills = $.grep(this.skills, function (value) {
+            return value != skill.value;
+          });
+        }
+      }
+      if (this.skills.length) {
+        this.$skillCount.html('(' + this.skills.length + ')');
+        this.$skillCount.show();
+      } else {
+        this.$skillCount.hide();
       }
       this.trigger('filter');
     },

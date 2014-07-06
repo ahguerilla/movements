@@ -1028,23 +1028,27 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .categories ul.category-menu > li {
   position: relative;
   display: inline-block;
-}
-.exchange-filters .categories ul.category-menu > li > a {
-  position: relative;
-  display: inline-block;
-  padding: 5px 10px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
+  padding: 0 10px;
+}
+.exchange-filters .categories ul.category-menu > li > a {
+  position: relative;
+  display: inline-block;
   text-align: center;
   color: #756b65;
   font-weight: bold;
+  padding: 5px 0;
 }
 .exchange-filters .categories ul.category-menu > li > a div {
   font-size: 15px;
   margin-top: 38px;
+}
+.exchange-filters .categories ul.category-menu > li > a .count {
+  color: #fe6d50;
 }
 .exchange-filters .categories ul.category-menu > li > a .toggle {
   display: inline-block;
@@ -1062,6 +1066,7 @@ input.borderless-control:focus:invalid:focus {
   background: url("../images/v2/market-hide-show-icon.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li a.skills {
+  width: 90px;
   background: url("../images/v2/market-filter-icon.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li a.regions {
@@ -1070,23 +1075,29 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .categories ul.category-menu > li a.search {
   background: url("../images/v2/market-search-icon.png") no-repeat center 10px;
 }
+.exchange-filters .categories ul.category-menu > li.active {
+  background-color: #beb4ae;
+}
 .exchange-filters .categories ul.category-menu > li.active > a {
+  color: #fff;
+}
+.exchange-filters .categories ul.category-menu > li.active > a .count {
   color: #fff;
 }
 .exchange-filters .categories ul.category-menu > li.active > a .toggle {
   background: url("../images/v2/dropdown_toggled.png") no-repeat center center;
 }
 .exchange-filters .categories ul.category-menu > li.active a.showhide {
-  background: #beb4ae url("../images/v2/market-hide-show-icon-toggled.png") no-repeat center 10px;
+  background: url("../images/v2/market-hide-show-icon-toggled.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li.active a.skills {
-  background: #beb4ae url("../images/v2/market-filter-icon-toggled.png") no-repeat center 10px;
+  background: url("../images/v2/market-filter-icon-toggled.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li.active a.regions {
-  background: #beb4ae url("../images/v2/market-countries-icon-toggled.png") no-repeat center 10px;
+  background: url("../images/v2/market-countries-icon-toggled.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li.active a.search {
-  background: #beb4ae url("../images/v2/market-search-icon-toggled.png") no-repeat center 10px;
+  background: url("../images/v2/market-search-icon-toggled.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li.showhide .popover-content {
   padding: 0;

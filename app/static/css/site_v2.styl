@@ -948,17 +948,20 @@ popoverDropdown(width, showIcon = true)
       > li
         position relative
         display inline-block
+        border-radius 5px
+        padding 0 10px
         > a
           position relative
           display inline-block
-          padding 5px 10px
-          border-radius 5px
           text-align center
           color $item-footer-font
           font-weight bold
+          padding 5px 0
           div
             font-size 15px
             margin-top 38px
+          .count
+            color $primary-color
           .toggle
             display inline-block
             width 16px
@@ -970,24 +973,28 @@ popoverDropdown(width, showIcon = true)
         a.showhide
           background url('../images/v2/market-hide-show-icon.png') no-repeat center 10px
         a.skills
+          width 90px
           background  url('../images/v2/market-filter-icon.png') no-repeat center 10px
         a.regions
           background url('../images/v2/market-countries-icon.png') no-repeat center 10px
         a.search
           background url('../images/v2/market-search-icon.png') no-repeat center 10px
       > li.active
+        background-color $dropdown-hover-bg
         > a
           color #fff
+          .count
+            color #fff
           .toggle
             background url('../images/v2/dropdown_toggled.png') no-repeat center center
         a.showhide
-          background $dropdown-hover-bg url('../images/v2/market-hide-show-icon-toggled.png') no-repeat center 10px
+          background url('../images/v2/market-hide-show-icon-toggled.png') no-repeat center 10px
         a.skills
-          background $dropdown-hover-bg url('../images/v2/market-filter-icon-toggled.png') no-repeat center 10px
+          background url('../images/v2/market-filter-icon-toggled.png') no-repeat center 10px
         a.regions
-          background $dropdown-hover-bg url('../images/v2/market-countries-icon-toggled.png') no-repeat center 10px
+          background url('../images/v2/market-countries-icon-toggled.png') no-repeat center 10px
         a.search
-          background $dropdown-hover-bg url('../images/v2/market-search-icon-toggled.png') no-repeat center 10px
+          background url('../images/v2/market-search-icon-toggled.png') no-repeat center 10px
       > li.showhide
         .popover-content
           popoverDropdown(200px)
