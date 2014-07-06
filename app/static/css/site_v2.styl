@@ -24,6 +24,7 @@ $warn-color = #ff0000
 $hidden-item-color = #FBFAFB
 $hidden-offer-color = #7CA9BF
 $hidden-request-color = #FB9D9E
+$hr-separator-color = #dad8d9
 
 // **************************************
 // font colors
@@ -1547,5 +1548,24 @@ popoverDropdown(width, showIcon = true)
 
 #notifications
   margin-top 20px
-  .details.new
-    font-weight bold
+  .movements-form
+    background-color #fff
+    padding 20px
+    a.user
+      color $main-font
+    a
+      color $primary-color
+    hr
+      border-color $hr-separator-color
+    h2
+      font-family "LinotypeUnivers-330Light"
+      font-weight bold
+      font-size 26px
+      margin-top 0
+    .details
+      margin-right 150px
+    .dates
+      text-align right
+      width 150px
+    .details.new
+      font-weight bold

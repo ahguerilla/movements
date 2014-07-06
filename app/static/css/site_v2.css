@@ -2077,7 +2077,33 @@ input.borderless-control:focus:invalid:focus {
 #notifications {
   margin-top: 20px;
 }
-#notifications .details.new {
+#notifications .movements-form {
+  background-color: #fff;
+  padding: 20px;
+}
+#notifications .movements-form a.user {
+  color: #262626;
+}
+#notifications .movements-form a {
+  color: #fe6d50;
+}
+#notifications .movements-form hr {
+  border-color: #dad8d9;
+}
+#notifications .movements-form h2 {
+  font-family: "LinotypeUnivers-330Light";
+  font-weight: bold;
+  font-size: 26px;
+  margin-top: 0;
+}
+#notifications .movements-form .details {
+  margin-right: 150px;
+}
+#notifications .movements-form .dates {
+  text-align: right;
+  width: 150px;
+}
+#notifications .movements-form .details.new {
   font-weight: bold;
 }
 
