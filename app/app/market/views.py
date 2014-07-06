@@ -26,6 +26,7 @@ def index(request):
                               {
                                   'interests': serializers.serialize('json', interests),
                                   'regions': regions,
+                                  'countries': countries,
                                   'is_logged_in': request.user.is_authenticated()
                               },
                               context_instance=RequestContext(request))
