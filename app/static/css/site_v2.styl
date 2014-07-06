@@ -911,13 +911,11 @@ popoverDropdown(width, showIcon = true)
           background url('../images/v2/select_plus_hover.png') $right-icon center no-repeat
         background-color $dropdown-hover-bg
       a.selected
-        if showIcon
-          background url('../images/v2/select_tick.png') $right-icon center no-repeat
-         background-color #fff
+        background url('../images/v2/select_tick.png') $right-icon center no-repeat
+        background-color #fff
         color $dropdown-select-color
       a.selected:hover
-        if showIcon
-          background url('../images/v2/select_tick.png') $right-icon center no-repeat
+        background url('../images/v2/select_tick.png') $right-icon center no-repeat
         background-color $dropdown-hover-bg
       a.plain
         background-image none
@@ -951,6 +949,8 @@ popoverDropdown(width, showIcon = true)
       font-weight normal
       font-size 16px
       display inline
+    .count
+      color $primary-color
     ul.category-menu
       margin 0
       padding 0
@@ -971,8 +971,6 @@ popoverDropdown(width, showIcon = true)
           div
             font-size 15px
             margin-top 38px
-          .count
-            color $primary-color
           .toggle
             display inline-block
             width 16px
@@ -987,6 +985,7 @@ popoverDropdown(width, showIcon = true)
           width 90px
           background  url('../images/v2/market-filter-icon.png') no-repeat center 10px
         a.regions
+          width 113px
           background url('../images/v2/market-countries-icon.png') no-repeat center 10px
         a.search
           background url('../images/v2/market-search-icon.png') no-repeat center 10px

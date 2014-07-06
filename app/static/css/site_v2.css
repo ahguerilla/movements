@@ -1033,6 +1033,9 @@ input.borderless-control:focus:invalid:focus {
   font-size: 16px;
   display: inline;
 }
+.exchange-filters .categories .count {
+  color: #fe6d50;
+}
 .exchange-filters .categories ul.category-menu {
   margin: 0;
   padding: 0;
@@ -1061,9 +1064,6 @@ input.borderless-control:focus:invalid:focus {
   font-size: 15px;
   margin-top: 38px;
 }
-.exchange-filters .categories ul.category-menu > li > a .count {
-  color: #fe6d50;
-}
 .exchange-filters .categories ul.category-menu > li > a .toggle {
   display: inline-block;
   width: 16px;
@@ -1084,6 +1084,7 @@ input.borderless-control:focus:invalid:focus {
   background: url("../images/v2/market-filter-icon.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li a.regions {
+  width: 113px;
   background: url("../images/v2/market-countries-icon.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li a.search {
@@ -1241,10 +1242,12 @@ input.borderless-control:focus:invalid:focus {
   background-color: #beb4ae;
 }
 .exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a.selected {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
   background-color: #fff;
   color: #ff6d50;
 }
 .exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a.selected:hover {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
   background-color: #beb4ae;
 }
 .exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a.plain {

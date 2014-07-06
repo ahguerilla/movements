@@ -35,7 +35,7 @@
               <div class="popover-container"></div>
             </li>
             <li class="regions">
-              <a href="#" alt="filter by countries" class="regions">
+              <a href="#" alt="filter by countries" class="regions" data-country-count="{{ countries|length }}">
                 <div>Countries <span class="count" style="display: none;">(0)</span> <span class="toggle"/></div>
               </a>
               <div class="popover-container"></div>
@@ -117,11 +117,13 @@
   </script>
   <script type="text/template" id="region-filter-list-template">
     <ul class="region-filter">
+      <li><a href="#" class="region-all no-icon text-center" data-filter="all">Select all</a></li>
     {% for region in regions %}
-      <li>
-        <a href="#">{{ region.name }}</a>
-        <ul class="country-list hide">
-          <li><a href='#' class="no-icon back">Back</a></li>
+      <li class="region-top">
+        <a href="#" class="no-icon">{{ region.name }} <span class="count"></span></a>
+        <ul class="country-list hide" data-country-count="{{ region.country_list|length }}">
+          <li><a href='#' class="no-icon back text-center">Back</a></li>
+          <li><a href="#" class="country-all no-icon text-center" data-filter="all">Select all</a></li>
           {% for country in region.country_list %}
             <li><a href='#' class="country" data-filter="{{ country.id }}">{{ country }}</a></li>
           {% endfor %}

@@ -11,6 +11,7 @@ $(function () {
       'click .region-filter > li > a': 'showCountries',
       'click .country-list a.back': 'showRegions',
       'click .country-list a.country': 'setRegionFilter',
+      'click .country-list a.country-all': 'setRegionFilter',
       'click .skill-filter a': 'setSkillsFilter',
       'click a.search': 'toggleSearchControls',
       'click .run-search': 'triggerFilter',
@@ -36,6 +37,8 @@ $(function () {
 
       var $regions = this.$el.find('a.regions');
       this.$regionContainer = $regions.parent().find('.popover-container');
+      this.$regionsCount = $regions.find('.count');
+      this.regionsCount = parseInt($regions.data('country-count'));
       this.regionsContent = $('#region-filter-list-template').html();
       $regions.popover({
         title: '',
@@ -101,10 +104,21 @@ $(function () {
     showCountries: function(ev) {
       ev.preventDefault();
       var $currentTarget = $(ev.currentTarget);
-      var $countryList = $currentTarget.parent().find('.country-list');
-      var $topLevel = $currentTarget.parents('.region-filter');
-      $topLevel.addClass('expanded');
-      $countryList.removeClass('hide');
+      if ($currentTarget.hasClass('region-all')) {
+        var setSelected = (this.regionsCount != this.regions.length);
+        var $countryLists = $currentTarget.parents('.region-filter').find('.country-list');
+        _.each($countryLists, function(countryList) {
+          var $countryList = $(countryList);
+          this.setRegionAll($countryList, setSelected)
+          this.setRegionalCounts($countryList);
+        }, this);
+        this.setRegionCounts();
+      } else {
+        var $countryList = $currentTarget.parent().find('.country-list');
+        var $topLevel = $currentTarget.parents('.region-filter');
+        $topLevel.addClass('expanded');
+        $countryList.removeClass('hide');
+      }
     },
 
     showRegions: function(ev) {
@@ -116,9 +130,11 @@ $(function () {
       $countryList.addClass('hide');
     },
 
-    toggleFilterState: function(ev) {
-      ev.preventDefault();
-      var $target = $(ev.currentTarget);
+    toggleFilterState: function(ev, $target) {
+      if (ev) {
+        ev.preventDefault();
+        $target = $(ev.currentTarget);
+      }
       $target.toggleClass('selected');
       return {
         $target: $target,
@@ -165,8 +181,7 @@ $(function () {
       this.trigger('filter');
     },
 
-    setRegionFilter: function(ev) {
-      var region = this.toggleFilterState(ev);
+    setRegion: function(region) {
       if (region.selected) {
         this.regions.push(region.value)
       } else {
@@ -174,6 +189,66 @@ $(function () {
           return value != region.value;
         });
       }
+    },
+
+    setRegionAll: function($countryList, setSelected) {
+      _.each($countryList.find('.country'), function (country) {
+        var $country = $(country);
+        if ((setSelected && !$country.hasClass('selected')) || (!setSelected && $country.hasClass('selected'))) {
+          this.setRegion(this.toggleFilterState(null, $country));
+        }
+      }, this);
+    },
+
+    setRegionCounts: function() {
+      if (this.regions.length) {
+        this.$regionsCount.html('(' + this.regions.length + ')');
+        this.$regionsCount.show();
+      } else {
+        this.$regionsCount.hide();
+      }
+      if (this.regionsCount == this.regions.length) {
+        this.$el.find('.region-all').addClass('selected');
+      } else {
+        this.$el.find('.region-all').removeClass('selected');
+      }
+    },
+
+    setRegionalCounts: function($countryList) {
+      var fullCount = parseInt($countryList.data('country-count'));
+      var $count = $countryList.parents('.region-top').find('.count');
+      var selected = $countryList.find('.country.selected').length;
+      if (selected) {
+        $count.html('(' + selected + ')');
+        $count.show();
+      } else {
+        $count.hide();
+      }
+
+      var $countryAll = $countryList.find('.country-all');
+      if (selected == fullCount) {
+        $countryAll.addClass('selected');
+      } else {
+        $countryAll.removeClass('selected');
+      }
+    },
+
+    setRegionFilter: function(ev) {
+      var region = this.toggleFilterState(ev);
+      var $countryList = region.$target.parents('.country-list');
+      var fullCount = parseInt($countryList.data('country-count'));
+
+      if (region.value == 'all') {
+        var currentlySelected = $countryList.find('.country.selected').length;
+        var setSelected = (currentlySelected != fullCount);
+        this.setRegionAll($countryList, setSelected);
+      } else {
+        this.setRegion(region);
+      }
+
+      this.setRegionalCounts($countryList);
+      this.setRegionCounts();
+
       this.trigger('filter');
     },
 
