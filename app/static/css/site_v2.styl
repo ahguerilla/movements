@@ -343,23 +343,22 @@ $home-head-height = 85px
   cursor pointer
 
 #content-menu-container
+  .popover-content
+    padding 0
+  li
+    list-style none
+    padding 4px
+    border-bottom 1px solid #e0d7d8
   .popover
     width 213px
   .nav-menu-item-wrap
-    text-align center
-    font-size 14px
-    color $main-font
     font-family "HurmeGeometricSans3-SemiBold"
-    width 90px
-    height 70px
-    float left
+    height 45px
+    padding 10px
   .nav-menu-item
-    width 90px
-    margin-bottom 5px
+    width 30px
     height 30px
-    margin-top 5px
-  .spacer
-    height 5px
+    float right
   .nav-menu-item-wrap:hover
     cursor pointer
     background-color $footer-color
@@ -376,12 +375,6 @@ $home-head-height = 85px
   .nav-menu-item-wrap.settings:hover
     .nav-menu-item
       background url("../images/v2/nav-settings-icon.png ") center -30px no-repeat
-  .messages
-    .nav-menu-item
-      background url("../images/v2/nav-messages-icon.png ") center 0 no-repeat
-  .nav-menu-item-wrap.messages:hover
-    .nav-menu-item
-      background url("../images/v2/nav-messages-icon.png ") center -21px no-repeat
   .logout
     .nav-menu-item
       background url("../images/v2/nav-logout-icon.png ") center 0 no-repeat

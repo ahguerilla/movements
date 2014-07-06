@@ -360,26 +360,26 @@ body {
 #view-profile-menu:hover {
   cursor: pointer;
 }
+#content-menu-container .popover-content {
+  padding: 0;
+}
+#content-menu-container li {
+  list-style: none;
+  padding: 4px;
+  border-bottom: 1px solid #e0d7d8;
+}
 #content-menu-container .popover {
   width: 213px;
 }
 #content-menu-container .nav-menu-item-wrap {
-  text-align: center;
-  font-size: 14px;
-  color: #262626;
   font-family: "HurmeGeometricSans3-SemiBold";
-  width: 90px;
-  height: 70px;
-  float: left;
+  height: 45px;
+  padding: 10px;
 }
 #content-menu-container .nav-menu-item {
-  width: 90px;
-  margin-bottom: 5px;
+  width: 30px;
   height: 30px;
-  margin-top: 5px;
-}
-#content-menu-container .spacer {
-  height: 5px;
+  float: right;
 }
 #content-menu-container .nav-menu-item-wrap:hover {
   cursor: pointer;
@@ -397,12 +397,6 @@ body {
 }
 #content-menu-container .nav-menu-item-wrap.settings:hover .nav-menu-item {
   background: url("../images/v2/nav-settings-icon.png ") center -30px no-repeat;
-}
-#content-menu-container .messages .nav-menu-item {
-  background: url("../images/v2/nav-messages-icon.png ") center 0 no-repeat;
-}
-#content-menu-container .nav-menu-item-wrap.messages:hover .nav-menu-item {
-  background: url("../images/v2/nav-messages-icon.png ") center -21px no-repeat;
 }
 #content-menu-container .logout .nav-menu-item {
   background: url("../images/v2/nav-logout-icon.png ") center 0 no-repeat;

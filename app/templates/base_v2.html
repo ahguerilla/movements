@@ -172,37 +172,27 @@
   <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>Offer</a>
 </script>
 <script type="text/template" id="content-menu-template">
-  <a href="{% url 'user_profile' %}">
+  <li><a href="{% url 'user_profile' %}">
     <div class="nav-menu-item-wrap profile">
-      <div class="spacer"></div>
       <div class="nav-menu-item"></div>
       Profile
     </div>
-  </a>
-  <a href="{% url 'user_settings' %}">
+  </a></li>
+  <li><a href="{% url 'user_settings' %}">
     <div class="nav-menu-item-wrap settings">
-      <div class="spacer"></div>
       <div class="nav-menu-item"></div>
       Settings
     </div>
-  </a>
-  <a href="{% url 'postman_inbox' %}">
-    <div class="nav-menu-item-wrap messages">
-      <div class="spacer"></div>
-      <div class="nav-menu-item"></div>
-      Messages
-    </div>
-  </a>
-  <form method="post" action="{% url 'account_logout' %}">
+  </a></li>
+  <li><form method="post" action="{% url 'account_logout' %}">
     {% csrf_token %}
     <a href="#" onclick="parentNode.submit();">
       <div class="nav-menu-item-wrap logout">
-        <div class="spacer"></div>
         <div class="nav-menu-item"></div>
         Logout
       </div>
     </a>
-  </form>
+  </form></li>
   <div class="clearfix"></div>
 </script>
 
