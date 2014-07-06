@@ -7,7 +7,7 @@ $(function () {
 
     events: {
       'click .type-menu a': 'setTypeFilter',
-      'click .hidden-menu a': 'setHiddenFilter',
+      'click .hidden-filter a': 'setHiddenFilter',
       'click .region-filter > li > a': 'showCountries',
       'click .country-list a.back': 'showRegions',
       'click .country-list a.country': 'setRegionFilter',
@@ -15,6 +15,7 @@ $(function () {
       'click a.search': 'toggleSearchControls',
       'click .run-search': 'triggerFilter',
       'keydown input[name=query]': 'checkForEnter',
+      'show.bs.popover a': 'setActive',
       'shown.bs.popover a': 'setPopoverContent',
       'hide.bs.popover a': 'hidePopoverContent'
     },
@@ -42,28 +43,51 @@ $(function () {
         placement: 'bottom'
       });
 
+      var $hidden = this.$el.find('a.showhide');
+      this.$hiddenContainer = $hidden.parent().find('.popover-container');
+      this.hiddenContent = $('#hidden-filter-template').html();
+      $hidden.popover({
+        title: '',
+        html: true,
+        content: this.hiddenContent,
+        container: this.$hiddenContainer,
+        placement: 'bottom'
+      });
+
       this.$query = this.$el.find('input[name=query]');
+    },
+
+    setActive: function(ev) {
+      var $currentTarget = $(ev.currentTarget);
+      $currentTarget.parents('li').addClass('active');
     },
 
     setPopoverContent: function(ev) {
       var $currentTarget = $(ev.currentTarget);
       if ($currentTarget.hasClass('skills')) {
         this.$skillsContainer.find('.popover-content').html(this.skillsContent);
-      } else {
+      } else if ($currentTarget.hasClass('regions')) {
         this.$regionContainer.find('.popover-content').html(this.regionsContent);
+      } else {
+        this.$hiddenContainer.find('.popover-content').html(this.hiddenContent);
       }
     },
 
     hidePopoverContent: function (ev) {
       var $currentTarget = $(ev.currentTarget);
+      $currentTarget.parents('li').removeClass('active');
       if ($currentTarget.hasClass('skills')) {
         this.skillsContent = this.$skillsContainer.find('.popover-content').html();
-      } else {
+      } else if ($currentTarget.hasClass('regions')) {
         this.regionsContent = this.$regionContainer.find('.popover-content').html();
+      } else {
+        this.hiddenContent = this.$hiddenContainer.find('.popover-content').html();
       }
     },
 
     toggleSearchControls: function(ev) {
+      var $currentTarget = $(ev.currentTarget);
+      $currentTarget.parents('li').toggleClass('active');
       var expand = this.$el.find('.search-expanded');
       this.$el.find('.search-expanded').toggleClass('hide');
       if (!expand.hasClass('hide')) {
@@ -125,11 +149,8 @@ $(function () {
     },
 
     setHiddenFilter: function(ev) {
-      ev.preventDefault();
-      this.$el.find('.hidden-menu li.active').removeClass('active');
-      var $filterLink = $(ev.currentTarget);
-      $filterLink.parents('li').addClass('active');
-      this.showHidden = $filterLink.data('filter');
+      var showHidden = this.toggleFilterState(ev);
+      this.showHidden = showHidden.selected;
       this.trigger('filter');
     },
 

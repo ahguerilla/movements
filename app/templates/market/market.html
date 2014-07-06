@@ -12,34 +12,32 @@
           <li><a href="#" alt="filter to offers" data-filter="offer">{% trans 'Offers' %}</a></li>
         </ul>
       </div>
-      {% if is_logged_in %}
-      <div class="pull-left">
-        <ul class="hidden-menu">
-          <li class="active"><a href="#" alt="filter all" data-filter="false">{% trans 'Hide Hidden' %}</a></li>
-          <li><a href="#" alt="filter to requests" data-filter="true">{% trans 'Show Hidden' %}</a></li>
-        </ul>
-      </div>
-      {% endif %}
+
       <div class="pull-right categories">
-        <h4>Filter by:</h4>
         <ul class="category-menu">
+          {% if is_logged_in %}
+          <li class="showhide">
+            <a href="#" alt="toggle hidden" class="showhide">
+              <div>Hide/Show <span class="toggle"/></div>
+            </a>
+            <div class="popover-container"></div>
+          </li>
+          {% endif %}
           <li class="skills">
             <a href="#" alt="filter by skills" class="skills">
-              <div><img src="{{ STATIC_URL }}images/v2/market-filter-icon.png" /></div>
-              <div>Skills<img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/></div>
+              <div>Skills <span class="count">(0)</span> <span class="toggle"/></div>
             </a>
             <div class="popover-container"></div>
           </li>
           <li class="regions">
-            <a href="#" alt="skills" class="regions">
-              <img src="{{ STATIC_URL }}images/v2/market-countries-icon.png"/>
-              <img src="{{ STATIC_URL }}images/v2/dropdown-icon.png"/>
+            <a href="#" alt="filter by countries" class="regions">
+              <div>Countries <span class="count">(0)</span> <span class="toggle"/></div>
             </a>
             <div class="popover-container"></div>
           </li>
           <li>
             <a href="#" alt="text search" class="search">
-              <img src="{{ STATIC_URL }}images/v2/market-search-icon.png"/>
+              <div>Search</div>
             </a>
           </li>
         </ul>
@@ -89,6 +87,11 @@
 {% endblock %}
 
 {% block endjavascript %}
+  <script type="text/template" id="hidden-filter-template">
+    <ul class="hidden-filter">
+      <li><a href="#" class="show-hidden" data-filter="show-hidden">Show hidden</a></li>
+    </ul>
+  </script>
   <script type="text/template" id="skill-filter-list-template">
     <ul class="skill-filter">
       <li><a href="#" class="skill-all" data-filter="all">Select all</a></li>
