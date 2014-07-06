@@ -113,6 +113,7 @@ $(function () {
           this.setRegionalCounts($countryList);
         }, this);
         this.setRegionCounts();
+        this.trigger('filter');
       } else {
         var $countryList = $currentTarget.parent().find('.country-list');
         var $topLevel = $currentTarget.parents('.region-filter');
