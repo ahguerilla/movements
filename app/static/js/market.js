@@ -105,7 +105,14 @@ $(function () {
       ev.preventDefault();
       var $currentTarget = $(ev.currentTarget);
       if ($currentTarget.hasClass('region-all')) {
-
+        var setSelected = (this.regionsCount != this.regions.length);
+        var $countryLists = $currentTarget.parents('.region-filter').find('.country-list');
+        _.each($countryLists, function(countryList) {
+          var $countryList = $(countryList);
+          this.setRegionAll($countryList, setSelected)
+          this.setRegionalCounts($countryList);
+        }, this);
+        this.setRegionCounts();
       } else {
         var $countryList = $currentTarget.parent().find('.country-list');
         var $topLevel = $currentTarget.parents('.region-filter');
@@ -188,25 +195,28 @@ $(function () {
       _.each($countryList.find('.country'), function (country) {
         var $country = $(country);
         if ((setSelected && !$country.hasClass('selected')) || (!setSelected && $country.hasClass('selected'))) {
-          this.setRegion(!this.toggleFilterState(null, $country));
+          this.setRegion(this.toggleFilterState(null, $country));
         }
       }, this);
     },
 
-    setRegionFilter: function(ev) {
-      var region = this.toggleFilterState(ev);
-      var $countryList = region.$target.parents('.country-list');
+    setRegionCounts: function() {
+      if (this.regions.length) {
+        this.$regionsCount.html('(' + this.regions.length + ')');
+        this.$regionsCount.show();
+      } else {
+        this.$regionsCount.hide();
+      }
+      if (this.regionsCount == this.regions.length) {
+        this.$el.find('.region-all').addClass('selected');
+      } else {
+        this.$el.find('.region-all').removeClass('selected');
+      }
+    },
+
+    setRegionalCounts: function($countryList) {
       var fullCount = parseInt($countryList.data('country-count'));
       var $count = $countryList.parents('.region-top').find('.count');
-
-      if (region.value == 'all') {
-        var currentlySelected = $countryList.find('.country.selected').length;
-        var setSelected = (currentlySelected != fullCount);
-        this.setRegionAll($countryList, setSelected);
-      } else {
-        this.setRegion(region);
-      }
-
       var selected = $countryList.find('.country.selected').length;
       if (selected) {
         $count.html('(' + selected + ')');
@@ -221,13 +231,24 @@ $(function () {
       } else {
         $countryAll.removeClass('selected');
       }
+    },
 
-      if (this.regions.length) {
-        this.$regionsCount.html('(' + this.regions.length + ')');
-        this.$regionsCount.show();
+    setRegionFilter: function(ev) {
+      var region = this.toggleFilterState(ev);
+      var $countryList = region.$target.parents('.country-list');
+      var fullCount = parseInt($countryList.data('country-count'));
+
+      if (region.value == 'all') {
+        var currentlySelected = $countryList.find('.country.selected').length;
+        var setSelected = (currentlySelected != fullCount);
+        this.setRegionAll($countryList, setSelected);
       } else {
-        this.$regionsCount.hide();
+        this.setRegion(region);
       }
+
+      this.setRegionalCounts($countryList);
+      this.setRegionCounts();
+
       this.trigger('filter');
     },
 

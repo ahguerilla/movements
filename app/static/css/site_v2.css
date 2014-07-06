@@ -1242,6 +1242,7 @@ input.borderless-control:focus:invalid:focus {
   background-color: #beb4ae;
 }
 .exchange-filters .categories ul.category-menu > li.regions .popover-content ul li a.selected {
+  background: url("../images/v2/select_tick.png") 210px center no-repeat;
   background-color: #fff;
   color: #ff6d50;
 }
