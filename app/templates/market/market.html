@@ -25,22 +25,19 @@
                 <a href="#" alt="toggle hidden" class="showhide">
                   <div>Hide/Show <span class="toggle"/></div>
                 </a>
-
                 <div class="popover-container"></div>
               </li>
             {% endif %}
             <li class="skills">
               <a href="#" alt="filter by skills" class="skills">
-                <div>Skills <span class="count">(0)</span> <span class="toggle"/></div>
+                <div>Skills <span class="count" style="display: none;">(0)</span> <span class="toggle"/></div>
               </a>
-
               <div class="popover-container"></div>
             </li>
             <li class="regions">
               <a href="#" alt="filter by countries" class="regions">
-                <div>Countries <span class="count">(0)</span> <span class="toggle"/></div>
+                <div>Countries <span class="count" style="display: none;">(0)</span> <span class="toggle"/></div>
               </a>
-
               <div class="popover-container"></div>
             </li>
             <li>
@@ -112,9 +109,9 @@
   </script>
   <script type="text/template" id="skill-filter-list-template">
     <ul class="skill-filter">
-      <li><a href="#" class="skill-all" data-filter="all">Select all</a></li>
+      <li><a href="#" class="skill-all no-icon text-center" data-filter="all">Select all</a></li>
       <% _.each(skills, function(skill) { %>
-      <li><a href="#" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
+      <li><a href="#" class="skill-normal" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
       <% }); %>
     </ul>
   </script>
