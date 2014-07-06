@@ -146,6 +146,12 @@ class RegionAccordionSelectMultiple(BaseCheckboxSelectMultiple):
 
 
 class SettingsForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SettingsForm, self).__init__(*args, **kwargs)
+        self.fields['languages'].required = False
+        self.fields['interests'].required = False
+        self.fields['countries'].required = False
+
     class Meta:
         model = UserProfile
         fields = [
@@ -176,6 +182,12 @@ class SettingsForm(forms.ModelForm):
 
 
 class MoreAboutYouForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MoreAboutYouForm, self).__init__(*args, **kwargs)
+        self.fields['languages'].required = False
+        self.fields['interests'].required = False
+        self.fields['countries'].required = False
+
     class Meta:
         model = UserProfile
         fields = ('languages', 'interests', 'countries')

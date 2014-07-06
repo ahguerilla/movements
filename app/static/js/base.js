@@ -146,8 +146,13 @@
      });
 
     $('#view-profile-menu').on('shown.bs.popover', function(){
-      $('#content-menu-container .popover').css("left", "-14px");
+      $('#view-profile-menu').addClass("active");
+      $('#content-menu-container .popover').css("left", "-7px");
       $('#content-menu-container .arrow').css("left", "28px");
+    });
+
+    $('#view-profile-menu').on('hidden.bs.popover', function(){
+      $('#view-profile-menu').removeClass("active");
     });
   }
 
