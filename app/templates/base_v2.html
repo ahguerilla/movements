@@ -126,11 +126,12 @@
       <div class="row">
         <div class="col-xs-4">
           <h4>{% trans "Get updates"  %}</h4>
-          <form>
+          <form id="sign-up-form" action="{% url 'newsletter_signup' %}">
             <div class="form-group">
               <input class="form-control" id="id_email" name="email" type="text" placeholder="Enter your e-mail...">
             </div>
           </form>
+          <p id="newsletter-conf"></p>
           <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>
         </div>
         <div class="col-xs-3">

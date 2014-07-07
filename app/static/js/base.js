@@ -156,6 +156,32 @@
     });
   }
 
+  $("#sign-up-form").on('submit', function(ev){
+    ev.preventDefault();
+    var action_url = $(this).attr('action');
+    var email = $(this).find('input').val();
+    $.ajax({
+      url: action_url,
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        email: email
+      },
+      success: function(data){
+        var r = data.result || "";
+        var m = data.message || "Unable to process email at this time"
+        $('#newsletter-conf').text(m);
+        if(r === "success"){
+          $("#sign-up-form").find('input').val("");
+          $('#newsletter-conf').removeClass("alert-text");
+        } else {
+          $('#newsletter-conf').addClass("alert-text");
+        }
+
+      }
+    });
+  });
+
   setupAddPostPopover();
   setupProfileMenuPopover();
   $(document).ready(function() {

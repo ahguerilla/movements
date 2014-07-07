@@ -487,7 +487,7 @@ footer input[type=email] {
   -o-border-radius: 3px;
   border-radius: 3px;
   height: 30px;
-  width: 80%;
+  width: 90%;
 }
 footer hr {
   border-top: 1px solid #e0d7d8;
@@ -606,6 +606,9 @@ h6 {
 .alert-danger h4 {
   font-family: "HurmeGeometricSans3-SemiBold";
   margin-bottom: 0;
+}
+.alert-text {
+  color: #f00;
 }
 .ajaxloader {
   text-align: center;
