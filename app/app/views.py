@@ -46,7 +46,6 @@ def newsletter_signup(request):
             'message': message
         }
 
-
     else:
         response_data = {
             'result': 'failed',
