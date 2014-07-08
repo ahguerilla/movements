@@ -15,6 +15,19 @@
       this.loadComments();
 
       this.report_widget = new window.ahr.ReportPostView();
+      this.linkifyContent();
+    },
+    linkifyContent: function(){
+      var toLinkify = $('.linkify');
+      var autolinker = new Autolinker({
+        newWindow: true,
+        stripPrefix: false,
+        truncate: 50
+      });
+      _.each(toLinkify, function(item) {
+        var textToLink = $(item).text();
+        $(item).html(autolinker.link(textToLink));
+      });
     },
     showReportForm: function(ev){
       ev.preventDefault();

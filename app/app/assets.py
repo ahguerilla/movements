@@ -10,6 +10,7 @@ js = Bundle(
         './js/lib/bootstrap.min.js',
         './js/lib/typeahead.js',
         './js/lib/jquery.cookie.js',
+        './js/lib/Autolinker.js',
         './js/app_common.js',
         './js/base.js',
         './js/market.js',

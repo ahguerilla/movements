@@ -18,6 +18,7 @@ class FirstLoginMiddleware(object):
 
 
 class CsrfLoginMiddleware(object):
+    """ Set login csrftoken to httponly. """
 
     def process_response(self, request, response):
         current_url = request.get_full_path()

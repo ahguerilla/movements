@@ -30,7 +30,7 @@
       </div>
       {% if is_logged_in %}
       <div class="post">
-        <pre>{{ post.details|striptags }}</pre>
+        <pre class="linkify">{{ post.details|striptags }}</pre>
       </div>
       <div class="post-actions">
         <ul>
