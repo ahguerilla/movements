@@ -61,3 +61,5 @@ webassets==0.9
 django-storages==1.1.8
 boto==2.25.0
 # comment
+django-redis==3.5.2
+redis==2.9.1
