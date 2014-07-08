@@ -1,12 +1,14 @@
-{% extends "account/signup_base.html" %}
-
+{% extends "base_message.html" %}
 {% load i18n %}
+{% load account %}
 
 {% block head_title %}{% trans "Social Network Login Failure" %}{% endblock %}
 
-{% block public-content %}
-<div class="row dialog sign-up-form">
-    <h1>{% trans "Social Network Login Failure" %}</h1>
-    <p>{% trans "An error occurred while attempting to login via your social network account." %}</p>
-</div>
+{% block content-message %}
+  <div class="content-wrap">
+    <div class="movements-form dialog">
+      <h1>{% trans "Social Network Login Failure" %}</h1>
+      <p>{% trans "An error occurred while attempting to login via your social network account." %}</p>
+    </div>
+  </div>
 {% endblock %}

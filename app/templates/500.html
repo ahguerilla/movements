@@ -1,12 +1,14 @@
-{% extends "base.html" %}
-
-{% load url from future %}
+{% extends "base_message.html" %}
 {% load i18n %}
+{% load account %}
 
-{% block head_title %}{% trans "The page you are trying to visit does not exist" %}{% endblock %}
+{% block head_title %}{% trans "500" %}{% endblock %}
 
-{% block content %}
-<div class="dialog">
-  {%trans "There has been an unexpected error."%}
-</div>
+{% block content-message %}
+  <div class="content-wrap">
+    <div class="movements-form dialog">
+      <h1>{% trans "500" %}</h1>
+      <p>{%trans "Server error - we're on it."%}</p>
+    </div>
+  </div>
 {% endblock %}
