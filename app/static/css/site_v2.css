@@ -199,6 +199,9 @@
 .modal-header {
   padding: 20px;
 }
+pre {
+  word-break: normal;
+}
 html {
   background-color: #b6aba5;
   -webkit-font-smoothing: antialiased;
