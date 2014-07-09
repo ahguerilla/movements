@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load compress %}
+
 <script type="text/template" id="report_user_template">
 <div id="reportdialog" class="modal fade movements-form">
   <div class="modal-dialog">
@@ -31,7 +31,6 @@
 </div>
 </script>
 
-{% compress js %}
 <script type="text/javascript" id="reportuser_dialog">
  (function(){
     var reportUserWidget = window.ahr.BaseView.extend({
@@ -89,5 +88,3 @@
     };
 })();
 </script>
-
-{% endcompress %}

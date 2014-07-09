@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load compress %}
 
 <div id="close_item_dialog" class="modal fade movements-form">
   <div class="modal-dialog">
@@ -36,7 +35,6 @@
   </div>
 </script>
 
-{% compress js inline %}
 <script type="text/javascript">
 (function(){
   window.ahr.CloseItemDialogView = window.ahr.BaseView.extend({
@@ -182,4 +180,3 @@
   });
 })();
 </script>
-{% endcompress %}

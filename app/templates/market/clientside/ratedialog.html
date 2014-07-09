@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load avatar_tags %}
-{% load compress %}
 
 <div id="ratedialog" class="modal fade movements-form">
   <div class="modal-dialog">
@@ -70,8 +69,6 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
-{% compress js inline %}
 <script type="text/javascript">
 (function () {
   var RateDialogView = window.ahr.BaseView.extend({
@@ -165,4 +162,3 @@
   };
 })();
 </script>
-{% endcompress %}

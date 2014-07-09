@@ -1,6 +1,4 @@
 {% load i18n %}
-{% load compress %}
-
 <div id="recommenddialog" class="modal fade movements-form">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -37,8 +35,6 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-{% compress js inline %}
 
 <script type="text/javascript" id="recommend_view">
  (function () {
@@ -153,4 +149,3 @@
    };
  })();
 </script>
-{% endcompress %}

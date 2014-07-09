@@ -1,6 +1,3 @@
-{% load compress %}
-
-{% compress js inline %}
 <script type="text/javascript" id="api_urls">
   window.ahr = window.ahr || {};
   window.ahr.app_urls = {
@@ -46,5 +43,4 @@
   {% endif %}
     window.ahr.current_site = "{{ request.build_absolute_uri }}"
 </script>
-{% endcompress %}
 

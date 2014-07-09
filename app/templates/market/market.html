@@ -142,15 +142,13 @@
   {% include "market/clientside/closemarketitemdialog.html"%}
   {% include "market/clientside/pagination_template.html"%}
 
-  {% compress js inline %}
-    <script type="text/javascript">
-      $(document).ready(function(){
-        window.ahr.market.initMarket({
-          skills: {{ interests|safe }}
-        });
+  <script type="text/javascript">
+    $(document).ready(function(){
+      window.ahr.market.initMarket({
+        skills: {{ interests|safe }}
       });
-    </script>
-  {% endcompress %}
+    });
+  </script>
 
 {% endblock %}
 

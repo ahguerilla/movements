@@ -1,5 +1,3 @@
-{% load compress %}
-
 <script type="text/template" id="dropdown_template">
   <div class="col-md-12">
     <div class="<%- jsonfield %> error"></div>
@@ -14,8 +12,6 @@
     </select>
   </div>
 </script>
-
-{% compress js inline %}
 
 <script type="text/javascript" id="textarea_view">
  (function () {
@@ -54,4 +50,3 @@
    };
  })();
 </script>
-{% endcompress %}
