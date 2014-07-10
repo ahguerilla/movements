@@ -1,3 +1,5 @@
+import re
+from django.contrib.sites.models import Site
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.utils import translation
@@ -18,3 +20,13 @@ class SSLRedirect:
             if url.startswith('http://'):
                 secure_url = url.replace("http://", "https://")
                 return HttpResponseRedirect(secure_url)
+
+
+class SitesRedirect:
+    def process_request(self, request):
+        host = request.get_host()
+        site = Site.objects.get_current()
+        if host == site.domain:
+            return None
+        url = "%s://%s%s" % ('https' if request.is_secure() else 'http', site, request.get_full_path())
+        return HttpResponseRedirect(url)
