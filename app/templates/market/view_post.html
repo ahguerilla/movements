@@ -11,7 +11,7 @@
       <div class="post-date">
         {{ post.pub_date|date:"G:i"}} {%  trans 'on' %} {{ post.pub_date|date:"d M Y" }}
       </div>
-      <h1>{{ post.title }}</h1>
+      <h1 id="post-title">{{ post.title }}</h1>
       <div class="poster clearfix">
         <div class="avatar">
           {% primary_avatar post.owner 60 %}
@@ -30,7 +30,7 @@
       </div>
       {% if is_logged_in %}
       <div class="post">
-        <pre class="linkify">{{ post.details|striptags }}</pre>
+        <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
       </div>
       <div class="post-translate">
         <div class="translate"><span>{% trans 'Translate this post' %}</span></div>
@@ -94,8 +94,9 @@
   <script type="text/template" id="translate-menu-template">
     <div class="language-selector">
       <ul>
-        <li>French</li>
-        <li>English</li>
+        {% for l in language_list %}
+        <li data-translate_url="{% url 'translate_market_item' post.id l.launguage_code %}">{{ l.name }}</li>
+        {% endfor %}
       </ul>
     </div>
   </script>
@@ -105,7 +106,7 @@
       <div class="comment">
         <div class="avatar"><img src="<%- comment.fields.avatar %>"></div>
         <div class="comment-header">
-          <a href="<%- comment.fields.profile_url %>" alt="poster profile"><%- comment.fields.username %></a>,
+          <a href="<%- comment.fields.profile_url %>" alt="poster profile"><%- comment.fields.username %></a>
           <%- comment.fields.pub_date_formatted %>
         </div>
         <div class="comment-body">

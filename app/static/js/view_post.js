@@ -38,6 +38,25 @@
         container: '#translate-menu-container',
         placement: 'top'
       });
+
+      $('.translate span').on('shown.bs.popover', function() {
+        $('.language-selector ul li').click(function () {
+          var translate_url = $(this).data("translate_url");
+          if (translate_url) {
+            $.ajax({
+              url: translate_url,
+              type: 'GET',
+              dataType: 'json',
+              success: function (data) {
+                // todo: make this more robuts (error case etc)
+                $('#post-title').text(data.title);
+                $('#post-body').text(data.details);
+                //$('.translate span').modal('hide')
+              }
+            });
+          }
+        });
+      });
     },
     showReportForm: function(ev){
       ev.preventDefault();
