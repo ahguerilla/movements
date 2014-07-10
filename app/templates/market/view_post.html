@@ -32,6 +32,10 @@
       <div class="post">
         <pre class="linkify">{{ post.details|striptags }}</pre>
       </div>
+      <div class="post-translate">
+        <div class="translate"><span>{% trans 'Translate this post' %}</span></div>
+        <div id="translate-menu-container"></div>
+      </div>
       <div class="post-actions">
         <ul>
           <li><a
@@ -86,6 +90,15 @@
   {% include "market/clientside/recommenddialog.html" %}
   {% include "market/clientside/messagedialog.html" %}
   {% include "market/clientside/reportdialog.html" %}
+
+  <script type="text/template" id="translate-menu-template">
+    <div class="language-selector">
+      <ul>
+        <li>French</li>
+        <li>English</li>
+      </ul>
+    </div>
+  </script>
 
   <script type="text/template" id="comment-list-template">
     <% _.each(comments, function(comment) { %>

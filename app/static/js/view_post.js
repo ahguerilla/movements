@@ -16,6 +16,7 @@
 
       this.report_widget = new window.ahr.ReportPostView();
       this.linkifyContent();
+      this.initTranslatePopup();
     },
     linkifyContent: function(){
       var toLinkify = $('.linkify');
@@ -27,6 +28,15 @@
       _.each(toLinkify, function(item) {
         var textToLink = $(item).text();
         $(item).html(autolinker.link(textToLink));
+      });
+    },
+    initTranslatePopup: function(){
+      $('.translate span').popover({
+        title: '',
+        html: true,
+        content: $('#translate-menu-template').html(),
+        container: '#translate-menu-container',
+        placement: 'top'
       });
     },
     showReportForm: function(ev){

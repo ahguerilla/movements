@@ -688,6 +688,30 @@ h6 {
   -o-border-radius: 45%;
   border-radius: 45%;
 }
+.translate span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.language-selector ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 150px;
+}
+.language-selector li {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top: 1px solid #e0d7d8;
+}
+.language-selector li:first-child {
+  border-top: none;
+}
+.language-selector li:hover {
+  cursor: pointer;
+  background-color: #beb4ae;
+}
 .page-banner {
   height: 550px;
   overflow: hidden;
@@ -1660,6 +1684,12 @@ input.borderless-control:focus:invalid:focus {
 }
 .view-post .post-actions ul li {
   display: inline-block;
+}
+.view-post .post-translate {
+  margin-bottom: 15px;
+}
+.view-post .post-translate .translate {
+  text-align: right;
 }
 .view-post .comments {
   margin-top: 20px;

@@ -65,6 +65,10 @@ market_item_patterns = patterns('',
     url(r'item/set/user_attributes/(?P<item_id>\d+)$',
         'app.market.api.views.market.set_item_attributes_for_user',
         name="set_item_attributes_for_user"),
+
+    url(r'item/translate/(?P<item_id>\d+)/(?P<lang_code>\S+)$',
+        'app.market.api.views.market.translate_market_item',
+        name="translate_market_item"),
 )
 
 

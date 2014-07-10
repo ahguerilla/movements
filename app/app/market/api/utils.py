@@ -1,9 +1,12 @@
 from django.core import serializers
+from django.conf import settings
 from functools import wraps
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from postman.models import Message, STATUS_ACCEPTED
 from tasks.celerytasks import new_postman_message
+import requests
+import json
 
 
 class HttpResponseError(HttpResponse):
@@ -60,3 +63,27 @@ def pm_write(sender, recipient, subject, body=''):
     message.save()
     new_postman_message.delay(message)
     return message
+
+
+def translate_text(original_text, language):
+    success = False
+    translation = ""
+    try:
+        api_key = settings.GOOGLE_TRANSLATE_API_KEY
+        base_url = settings.GOOGLE_TRANSLATE_BASE
+        key = "key=" + api_key
+        query = "q=" + original_text
+        target = "target=" + language
+        query_string = base_url + key + "&" + query + "&" + target
+        r = requests.get(query_string)
+        if r.status_code == 200:
+            data = json.loads(r.content)
+            data = data.get("data", {}).get("translations", [])
+            if len(data) > 0:
+                translation = data[0].get("translatedText", "")
+                if translation:
+                    success = True
+    except:
+        pass
+
+    return success, translation
