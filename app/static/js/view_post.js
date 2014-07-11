@@ -38,7 +38,7 @@
         container: '#translate-menu-container',
         placement: 'top'
       });
-
+      var self = this;
       $('.translate span').on('shown.bs.popover', function() {
         $('.language-selector ul li').click(function () {
           var translate_url = $(this).data("translate_url");
@@ -51,6 +51,7 @@
                 if(data.response === "success") {
                   $('#post-title').html(data.title);
                   $('#post-body').html(data.details);
+                  self.linkifyContent();
                 } else {
                   $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
                 }
