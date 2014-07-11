@@ -48,10 +48,17 @@
               type: 'GET',
               dataType: 'json',
               success: function (data) {
-                // todo: make this more robuts (error case etc)
-                $('#post-title').text(data.title);
-                $('#post-body').text(data.details);
-                //$('.translate span').modal('hide')
+                if(data.response === "success") {
+                  $('#post-title').html(data.title);
+                  $('#post-body').html(data.details);
+                } else {
+                  $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+                }
+                $('.translate span').popover('hide');
+              },
+              error: function (){
+                $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+                $('.translate span').popover('hide');
               }
             });
           }

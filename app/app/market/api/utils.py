@@ -7,6 +7,8 @@ from postman.models import Message, STATUS_ACCEPTED
 from tasks.celerytasks import new_postman_message
 import requests
 import json
+from django.utils.html import escape
+
 
 
 class HttpResponseError(HttpResponse):
@@ -72,7 +74,7 @@ def translate_text(original_text, language):
         api_key = settings.GOOGLE_TRANSLATE_API_KEY
         base_url = settings.GOOGLE_TRANSLATE_BASE
         key = "key=" + api_key
-        query = "q=" + original_text
+        query = "q=" + escape(original_text)
         target = "target=" + language
         query_string = base_url + key + "&" + query + "&" + target
         r = requests.get(query_string)

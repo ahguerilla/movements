@@ -93,11 +93,15 @@
 
   <script type="text/template" id="translate-menu-template">
     <div class="language-selector">
+      {% if language_list.count > 0 %}
       <ul>
         {% for l in language_list %}
         <li data-translate_url="{% url 'translate_market_item' post.id l.launguage_code %}">{{ l.name }}</li>
         {% endfor %}
       </ul>
+      {% else %}
+        <p class="content-page">You don't have any languages selected. Please add some in you <a href="{% url 'user_settings' %}#skills">settings</a></p>
+      {% endif %}
     </div>
   </script>
 

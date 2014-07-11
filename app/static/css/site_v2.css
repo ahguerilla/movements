@@ -712,6 +712,12 @@ h6 {
   cursor: pointer;
   background-color: #beb4ae;
 }
+.language-selector p {
+  min-width: 200px;
+}
+#translate-menu-container {
+  position: relative;
+}
 .page-banner {
   height: 550px;
   overflow: hidden;
