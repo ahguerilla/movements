@@ -158,7 +158,7 @@ class UserProfile(models.Model):
 
     @property
     def ahr_rating(self):
-        ratings = OrganisationalRating.objects.filter(user=self).all()
+        ratings = OrganisationalRating.objects.filter(user=self.user).all()
         if ratings:
             return ratings[0].rated_by_ahr
         return 0

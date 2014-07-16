@@ -385,7 +385,6 @@ def vet_user(request, user_id):
                 rating.save()
             else:
                 form.save()
-            user.is_active = rating.rated_by_ahr != 0
             user.save()
             typeuser = ContentType.objects.filter(name='user').all()[0]
             log = LogEntry(user_id=request.user.id,
