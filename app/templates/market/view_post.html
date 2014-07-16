@@ -36,6 +36,18 @@
         <div class="translate"><span>{% trans 'Translate this post' %}</span></div>
         <div id="translate-menu-container"></div>
       </div>
+      <div class="clearfix"></div>
+      {% endif %}
+      <div class="tags" style="margin-bottom: 15px; margin-top: 10px;">
+        {% for tag in post.interests.all %}
+          <div class="tag">{{ tag }}</div>
+        {% endfor %}
+        {% if post.specific_skill %}
+          <div class="tag">{{ post.specific_skill }}</div>
+        {% endif %}
+        <div class="clearfix"></div>
+      </div>
+      {% if is_logged_in %}
       <div class="post-actions">
         <ul>
           <li><a
@@ -62,8 +74,8 @@
         </div>
         <form>
           <div class="alert alert-danger">
-            <h4>{% trans "No personally identifiable information!" %}</h4>
-            <p>{% trans "Please don't use your real name or email address when leaving a comment." %}</p>
+            <h4>{% trans "Please do no post any personally identifying information." %}</h4>
+            <p>{% trans "Don't use your real name or email address when leaving a comment." %}</p>
           </div>
           <textarea class="form-control" name="comment"></textarea>
           <button class="btn btn-action" type="submit">Post comment</button>
