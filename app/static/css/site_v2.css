@@ -2189,6 +2189,18 @@ input.borderless-control:focus:invalid:focus {
 
 
 @media (max-width: 767px) {
+  #NavLeftMenus {
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+  #NavRightLoggedIn {
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+  #NavRightLoggedOut {
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
   #view-content-menu {
     width: 41px;
   }
@@ -2207,6 +2219,11 @@ input.borderless-control:focus:invalid:focus {
   }
   footer #FooterSocialMedia_Small {
     display: inherit;
+  }
+}
+@media (max-width: 579px) {
+  #AlreadyHaveText {
+    display: none;
   }
 }
 @media (max-width: 530px) {
@@ -2231,12 +2248,6 @@ input.borderless-control:focus:invalid:focus {
   }
 }
 @media (max-width: 479px) {
-  #AlreadyHaveText {
-    display: none;
-  }
-  #view-profile-menu {
-    display: none;
-  }
   #AddPostText {
     display: none;
   }

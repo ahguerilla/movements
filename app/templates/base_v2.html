@@ -51,7 +51,7 @@
 {% block header_nav %}
 <nav class="navbar navbar-default header-nav {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
   <div class="container" style="position:relative;">
-      <div class="navbar-left">
+      <div id="NavLeftMenus" class="navbar-left">
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
         </div>
@@ -75,13 +75,13 @@
         {% endif %}
       </div>
     {% if user.is_authenticated and not user.userprofile.first_login %}
-      <div class="navbar-right">
+      <div id="NavRightLoggedIn" class="navbar-right">
         <a id="add-post" class="btn btn-action"><img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
             <span id="AddPostText"> Add Post</span></a>
         <div id="add-post-popup-container"></div>
       </div>
     {% else %}
-      <div class="navbar-right">
+      <div id="NavRightLoggedOut" class="navbar-right">
         <a href="{% url 'account_login' %}" class="btn btn-action">Login</a>
       </div>
     {% endif %}
