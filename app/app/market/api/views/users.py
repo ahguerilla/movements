@@ -28,10 +28,20 @@ def get_avatar(request, obj_id, size, rtype):
 @login_required
 def send_message(request, to_user, rtype):
     try:
-        pm_write(sender=request.user,
-                 recipient=users.models.User.objects.filter(username=to_user)[0],
-                 subject=request.POST['subject'],
-                 body=request.POST['message'])
+        market_item = None
+        post_id = request.POST.get("post_id")
+        if post_id:
+            market_item = MarketItem.objects.get(pk=post_id)
+
+        msg = pm_write(sender=request.user,
+                       recipient=users.models.User.objects.filter(username=to_user)[0],
+                       subject=request.POST['subject'],
+                       body=request.POST['message'])
+
+        if market_item:
+            msg.messageext.market_item = market_item
+            msg.messageext.save()
+
     except Exception, err:
         if err.message == 'value too long for type character varying(120)\n':
             message = "subject is too long (maximum 120 characters)"

@@ -13,7 +13,7 @@ import app.market as market
 from app.market.models import Questionnaire
 from app.market.forms import QuestionnaireForm
 from tasks.celerytasks import update_notifications
-
+from app.market.api.utils import translate_text
 
 def get_market_json(items, request=None, extra_data=None, is_safe=True):
     if is_safe:
@@ -266,7 +266,7 @@ def get_notifications_fromto(request, sfrom, to):
     ret_list = []
     for notification in notifications:
         ret_list.append(notification.get_dict())
-    market.models.Notification.objects.filter(pk__in=notifications).update(seen=True)
+    market.models.Notification.objects.filter(user_id=request.user.id).update(seen=True)
     return HttpResponse(json.dumps({'notifications': ret_list}), mimetype="application/json")
 
 
@@ -301,3 +301,38 @@ def set_stuck(user_id, item_id, stick):
         market.models.MarketItemStick.objects.get_or_create(viewer_id=user_id, item_id=item_id)
     else:
         market.models.MarketItemStick.objects.filter(viewer_id=user_id, item_id=item_id).delete()
+
+
+@login_required
+def translate_market_item(request, item_id, lang_code):
+    # find out if the translation already exists
+    translation = market.models.MarketItemTranslation.objects.filter(market_item_id=item_id, language=lang_code).first()
+    title_translation = ""
+    details_translation = ""
+    success = False
+
+    if not translation:
+        item = market.models.MarketItem.objects.get(id=item_id)
+        if item:
+            success, title_translation = translate_text(item.title, lang_code)
+            if success:
+                success, details_translation = translate_text(item.details, lang_code)
+            if success:
+                market_translation = market.models.MarketItemTranslation()
+                market_translation.market_item = item
+                market_translation.title_translated = title_translation
+                market_translation.details_translated = details_translation
+                market_translation.language = lang_code
+                market_translation.save()
+
+    else:
+        title_translation = translation.title_translated
+        details_translation = translation.details_translated
+        success = True
+
+    result = {
+        'response': "success" if success else "failed",
+        'title': title_translation,
+        'details': details_translation,
+    }
+    return HttpResponse(json.dumps(result), mimetype="application/json")

@@ -11,7 +11,7 @@
       <div class="post-date">
         {{ post.pub_date|date:"G:i"}} {%  trans 'on' %} {{ post.pub_date|date:"d M Y" }}
       </div>
-      <h1>{{ post.title }}</h1>
+      <h1 id="post-title">{{ post.title }}</h1>
       <div class="poster clearfix">
         <div class="avatar">
           {% primary_avatar post.owner 60 %}
@@ -20,7 +20,7 @@
           <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ post.owner }}">{{ post.owner }}</a></div>
           <div class="poster-rating"><span class="rateit"
                 data-rateit-readonly="true"
-                data-rateit-value="{{ post.owner.userprofile.ahr_rating }}"
+                data-rateit-value="{{ post.owner.userprofile.score }}"
                 data-rateit-min="0"
                 data-rateit-starwidth="22"
                 data-rateit-starheight="17"
@@ -30,8 +30,24 @@
       </div>
       {% if is_logged_in %}
       <div class="post">
-        <pre>{{ post.details }}</pre>
+        <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
       </div>
+      <div class="post-translate">
+        <div class="translate"><span>{% trans 'Translate this post' %}</span></div>
+        <div id="translate-menu-container"></div>
+      </div>
+      <div class="clearfix"></div>
+      {% endif %}
+      <div class="tags" style="margin-bottom: 15px; margin-top: 10px;">
+        {% for tag in post.interests.all %}
+          <div class="tag">{{ tag }}</div>
+        {% endfor %}
+        {% if post.specific_skill %}
+          <div class="tag">{{ post.specific_skill }}</div>
+        {% endif %}
+        <div class="clearfix"></div>
+      </div>
+      {% if is_logged_in %}
       <div class="post-actions">
         <ul>
           <li><a
@@ -58,8 +74,8 @@
         </div>
         <form>
           <div class="alert alert-danger">
-            <h4>{% trans "No personally identifiable information!" %}</h4>
-            <p>{% trans "Please don't use your real name or email address when leaving a comment." %}</p>
+            <h4>{% trans "Please do no post any personally identifying information." %}</h4>
+            <p>{% trans "Don't use your real name or email address when leaving a comment." %}</p>
           </div>
           <textarea class="form-control" name="comment"></textarea>
           <button class="btn btn-action" type="submit">Post comment</button>
@@ -87,12 +103,26 @@
   {% include "market/clientside/messagedialog.html" %}
   {% include "market/clientside/reportdialog.html" %}
 
+  <script type="text/template" id="translate-menu-template">
+    <div class="language-selector">
+      {% if language_list.count > 0 %}
+      <ul>
+        {% for l in language_list %}
+        <li data-translate_url="{% url 'translate_market_item' post.id l.launguage_code %}">{{ l.name }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <p class="content-page">You don't have any languages selected. Please add some in you <a href="{% url 'user_settings' %}#skills">settings</a></p>
+      {% endif %}
+    </div>
+  </script>
+
   <script type="text/template" id="comment-list-template">
     <% _.each(comments, function(comment) { %>
       <div class="comment">
         <div class="avatar"><img src="<%- comment.fields.avatar %>"></div>
         <div class="comment-header">
-          <a href="<%- comment.fields.profile_url %>" alt="poster profile"><%- comment.fields.username %></a>,
+          <a href="<%- comment.fields.profile_url %>" alt="poster profile"><%- comment.fields.username %></a>
           <%- comment.fields.pub_date_formatted %>
         </div>
         <div class="comment-body">
@@ -106,7 +136,7 @@
         getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}',
         addCommentUrl: "{% url 'add_comment' 'json' post.id %}"
       });
-      this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
+      this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar', {{ post.id }});
       this.recommend_widget = window.ahr.recommend_widget.initWidget(window.ahr.username);
     })();
   </script>

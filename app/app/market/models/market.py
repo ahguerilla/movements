@@ -174,3 +174,15 @@ class MarketItemNextSteps(models.Model):
 
     def __unicode__(self):
         return u'%s / %s' % (self.next_step, self.date_of_action)
+
+
+class MarketItemTranslation(models.Model):
+    market_item = models.ForeignKey(
+        MarketItem, verbose_name=_('market item'))
+    language = models.CharField(_('language'), max_length=10, blank=False)
+    title_translated = models.TextField(_('title translated'), blank=False)
+    details_translated = models.TextField(_('details translated'), blank=False)
+    generated_at = models.DateField(_('date generated'), auto_now_add=True)
+
+    class Meta:
+        app_label = 'market'

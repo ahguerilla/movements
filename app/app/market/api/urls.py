@@ -22,10 +22,6 @@ market_user_patterns = patterns('',
     url(r'(?P<rtype>\S+)/users/get/usernames$',
         'app.market.api.views.users.get_usernames',
         name="user_get_usernames"),
-
-    url(r'(?P<rtype>\S+)/message/get/count$',
-        'app.market.api.views.misc.get_unreadCount',
-        name="get_messagecount"),
 )
 
 
@@ -69,6 +65,10 @@ market_item_patterns = patterns('',
     url(r'item/set/user_attributes/(?P<item_id>\d+)$',
         'app.market.api.views.market.set_item_attributes_for_user',
         name="set_item_attributes_for_user"),
+
+    url(r'item/translate/(?P<item_id>\d+)/(?P<lang_code>\S+)$',
+        'app.market.api.views.market.translate_market_item',
+        name="translate_market_item"),
 )
 
 
@@ -110,6 +110,12 @@ market_notification_patterns = patterns('',
         name="get_notseen_notif"),
 )
 
+market_heartbeat_patters = patterns('',
+    url(r'heartbeat/get/counts$',
+        'app.market.api.views.heartbeat.get_counts',
+        name="heartbeat"),
+)
+
 
 urlpatterns = patterns('',
     url(r'', include(market_item_patterns)),
@@ -117,4 +123,5 @@ urlpatterns = patterns('',
     url(r'', include(market_user_patterns)),
     url(r'', include(market_notification_patterns)),
     url(r'', include(report_patterns)),
-    )
+    url(r'', include(market_heartbeat_patters)),
+)

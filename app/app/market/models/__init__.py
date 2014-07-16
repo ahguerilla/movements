@@ -2,7 +2,7 @@
 from .comment import Comment
 from .market import (
     MarketItem, MarketItemHidden, MarketItemStick, MarketItemViewCounter,
-    MarketItemActions, MarketItemNextSteps
+    MarketItemActions, MarketItemNextSteps, MarketItemTranslation
 )
 from .rate import ItemRate
 from .report import (

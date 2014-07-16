@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
     url(r'^contact-us$', 'app.views.contact_us', name='contact_us'),
+    url(r'^newsletter-signup$', 'app.views.newsletter_signup', name='newsletter_signup'),
 
     url(r'^sign-up-start$', 'app.users.views.signup_start', name="signup_start"),
     url(r'^sign-up$', 'app.users.views.signup_from_home', name="sign_up"),

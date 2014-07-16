@@ -10,7 +10,6 @@ app/static/tiny_mce/
 app/static/.webassets-cache/
 bin/
 include/
-lib/
 local/
 
 env_*

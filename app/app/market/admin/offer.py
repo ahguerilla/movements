@@ -20,7 +20,8 @@ class OfferAdmin(admin.ModelAdmin):
     list_display = ('title', 'owner', 'pub_date', 'published')
     def get_readonly_fields(self, request, obj=None):
         if obj:
-            return self.readonly_fields + ('owner', 'pub_date', 'closed_date')
+            #return self.readonly_fields + ('owner', 'pub_date', 'closed_date')
+            return self.readonly_fields + ('owner', 'closed_date')
         return self.readonly_fields
 
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):

@@ -127,7 +127,7 @@ class IncidentAdmin(TrackingAdmin):
                 user_rec_count=Count('messageext')
             ).values_list('id', 'user_rec_count'))
         conversation_dict = dict(orig_queryset.filter(
-            messageext__thread=None).annotate(
+            messageext__parent=None).annotate(
                 conversation_count=Count('messageext')
             ).values_list('id', 'conversation_count'))
         market_items = queryset[:]
@@ -145,7 +145,7 @@ class UserAdmin(TrackingAdmin):
     list_display = (
         'id', 'get_screen_name', 'get_signup_date', 'get_full_name',
         'get_nationality', 'get_resident_country', 'email',
-        'get_request_count', 'get_offer_count', 'get_comment_count',
+        #'get_request_count', 'get_offer_count', 'get_comment_count',
         'last_login', 'is_admin'
     )
     change_list_template = 'admin/user_tracking_change_list.html'
@@ -224,22 +224,23 @@ class UserAdmin(TrackingAdmin):
 
     @staticmethod
     def make_tracking_queryset(orig_queryset):
-        queryset = orig_queryset.annotate(
-            comment_count=Count('comment', distinct=True)
-        )
-        request_count_dict = dict(orig_queryset.filter(
-            marketitem__item_type='request').annotate(
-                request_count=Count('marketitem')
-            ).values_list('id', 'request_count'))
-        offer_count_dict = dict(orig_queryset.filter(
-            marketitem__item_type='offer').annotate(
-                offer_count=Count('marketitem')
-            ).values_list('id', 'offer_count'))
-
-        users = queryset[:]
-        for user in users:
-            user.request_count = request_count_dict.get(user.id, 0)
-            user.offer_count = offer_count_dict.get(user.id, 0)
-        return users
+        return orig_queryset
+        # queryset = orig_queryset.annotate(
+        #     comment_count=Count('comment', distinct=True)
+        # )
+        # request_count_dict = dict(orig_queryset.filter(
+        #     marketitem__item_type='request').annotate(
+        #         request_count=Count('marketitem')
+        #     ).values_list('id', 'request_count'))
+        # offer_count_dict = dict(orig_queryset.filter(
+        #     marketitem__item_type='offer').annotate(
+        #         offer_count=Count('marketitem')
+        #     ).values_list('id', 'offer_count'))
+        #
+        # users = queryset[:]
+        # for user in users:
+        #     user.request_count = request_count_dict.get(user.id, 0)
+        #     user.offer_count = offer_count_dict.get(user.id, 0)
+        # return users
 
 admin.site.register(UserTracking, UserAdmin)

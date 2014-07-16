@@ -15,6 +15,56 @@
       this.loadComments();
 
       this.report_widget = new window.ahr.ReportPostView();
+      this.linkifyContent();
+      this.initTranslatePopup();
+    },
+    linkifyContent: function(){
+      var toLinkify = $('.linkify');
+      var autolinker = new Autolinker({
+        newWindow: true,
+        stripPrefix: false,
+        truncate: 50
+      });
+      _.each(toLinkify, function(item) {
+        var textToLink = $(item).text();
+        $(item).html(autolinker.link(textToLink));
+      });
+    },
+    initTranslatePopup: function(){
+      $('.translate span').popover({
+        title: '',
+        html: true,
+        content: $('#translate-menu-template').html(),
+        container: '#translate-menu-container',
+        placement: 'top'
+      });
+      var self = this;
+      $('.translate span').on('shown.bs.popover', function() {
+        $('.language-selector ul li').click(function () {
+          var translate_url = $(this).data("translate_url");
+          if (translate_url) {
+            $.ajax({
+              url: translate_url,
+              type: 'GET',
+              dataType: 'json',
+              success: function (data) {
+                if(data.response === "success") {
+                  $('#post-title').html(data.title);
+                  $('#post-body').html(data.details);
+                  self.linkifyContent();
+                } else {
+                  $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+                }
+                $('.translate span').popover('hide');
+              },
+              error: function (){
+                $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+                $('.translate span').popover('hide');
+              }
+            });
+          }
+        });
+      });
     },
     showReportForm: function(ev){
       ev.preventDefault();

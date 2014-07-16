@@ -24,6 +24,7 @@ $warn-color = #ff0000
 $hidden-item-color = #FBFAFB
 $hidden-offer-color = #7CA9BF
 $hidden-request-color = #FB9D9E
+$hr-separator-color = #dad8d9
 
 // **************************************
 // font colors
@@ -35,6 +36,7 @@ $title-font = #005E86
 $inactive-font = #756b65
 $item-footer-font = #756b65
 $filter-font = #756b65
+$active-link = #ff6d50
 
 
 // **************************************
@@ -205,6 +207,9 @@ box-shadow()
 
 .modal-header
   padding 20px
+
+pre
+  word-break: normal
 // **************************************
 // base styles
 // **************************************
@@ -239,6 +244,14 @@ body
   border 0
   border-bottom 4px solid $border-color
   margin-bottom 0
+  .menu-selector
+    .menu-icon
+      background-image url("../images/v2/hamburger.png")
+      width 50px
+      height 40px
+  .menu-selector.selected
+    .menu-icon
+      background-image url("../images/v2/hamburger-selected.png")
   .header-nav-wrapper
     position  absolute
     left 50%
@@ -249,45 +262,44 @@ body
     position absolute
     .menu-selector
       position absolute
-      padding-left 5px
-      padding-right 5px
-      padding-top 5px
-      top -5px
-      left -5px
-      width 90px
-      height 55px
-      border-bottom 4px solid $border-color
-      color $inactive-font
-      .menu-icon
-        background-image url("../images/v2/hamburger-v3.png")
-        width 30px
-        height 24px
-        margin-top 11px
-        margin-right 3px
-        float left
+      top 3px
+      left -10px
       .action-font
         padding-top 3px
-    .menu-selector.selected
-      border-bottom 4px solid $footer-color
-      background-color $footer-color
-      color #fff
-      .menu-icon
-        background-image url("../images/v2/hamburger-selected-v3.png")
     .nav-avatar
       position absolute
-      width 90px
-      left 90px
-      top 9px
-      color $inactive-font
-      img
-        float left
-        margin-right 3px
-      .action-font
-        display inline-block
-        margin-top 6px
-  .navbar-right
-    float: right !important
-
+      top 3px
+      left 47px
+      width 46px
+      height 40px
+      border-radius 4px
+      padding 5px 0 0 8px
+      .menu-icon-profile
+        background url("../images/v2/profile-profile-icon.png") center -30px no-repeat
+        height 30px
+        width 30px
+    .nav-avatar.active
+      background-color $dropdown-hover-bg
+      .menu-icon-profile
+        background url("../images/v2/profile-profile-icon.png") center 0px no-repeat
+    .nav-notification
+      position absolute
+      top 8px
+      left 105px
+      .menu-icon-bell
+        background url("../images/v2/profile-notifications-icon.png") center -30px no-repeat
+        height 30px
+        width 30px
+    .nav-messages
+      position absolute
+      top 15px
+      left 160px
+      .menu-icon-message
+        background url("../images/v2/profile-message-icon.png") center -19px no-repeat
+        height 19px
+        width 30px
+      #main-nav-message-count.notification-count
+        top -5px
 
 $home-head-height = 85px
 .home-page-nav
@@ -301,9 +313,15 @@ $home-head-height = 85px
     margin-right 30px
     height $home-head-height
     display table
+    position relative
     .action-item
       display table-cell
       vertical-align middle
+      padding-right 85px
+    .menu-selector
+      position absolute
+      top 22px
+      right -10px
   a
     color $filter-font
     text-decoration underline
@@ -333,65 +351,84 @@ $home-head-height = 85px
   cursor pointer
 
 #content-menu-container
+  .popover-content
+    padding 0
+  ul
+    margin 0
+    padding 0
+  li
+    list-style none
+    padding 4px
+    border-bottom 1px solid #e0d7d8
+  li:last-child
+    border-bottom none
   .popover
     width 213px
   .nav-menu-item-wrap
-    text-align center
-    font-size 14px
-    color $main-font
     font-family "HurmeGeometricSans3-SemiBold"
-    width 90px
-    height 70px
-    float left
+    height 50px
+    padding 10px
+    line-height 35px
+    color $main-font-dark
   .nav-menu-item
-    width 90px
-    margin-bottom 5px
+    width 30px
     height 30px
-    margin-top 5px
-  .spacer
-    height 5px
+    float right
   .nav-menu-item-wrap:hover
     cursor pointer
     background-color $footer-color
     color #fff
+  a
+    text-decoration none
   .profile
     .nav-menu-item
-      background url("../images/v2/nav-profile-icon.png ") center 0 no-repeat
+      background url("../images/v2/profile-profile-icon.png ") center -30px no-repeat
   .nav-menu-item-wrap.profile:hover
     .nav-menu-item
-      background url("../images/v2/nav-profile-icon.png ") center -29px no-repeat
+      background url("../images/v2/profile-profile-icon.png ") center 0 no-repeat
   .settings
     .nav-menu-item
-      background url("../images/v2/nav-settings-icon.png ") center 0 no-repeat
+      background url("../images/v2/profile-settings-icon.png ") center -30px no-repeat
   .nav-menu-item-wrap.settings:hover
     .nav-menu-item
-      background url("../images/v2/nav-settings-icon.png ") center -30px no-repeat
-  .messages
-    .nav-menu-item
-      background url("../images/v2/nav-messages-icon.png ") center 0 no-repeat
-  .nav-menu-item-wrap.messages:hover
-    .nav-menu-item
-      background url("../images/v2/nav-messages-icon.png ") center -21px no-repeat
+      background url("../images/v2/profile-settings-icon.png ") center 0 no-repeat
   .logout
     .nav-menu-item
-      background url("../images/v2/nav-logout-icon.png ") center 0 no-repeat
+      height 24px
+      margin-top 5px
+      background url("../images/v2/logout-icon.png ") center -24px no-repeat
   .nav-menu-item-wrap.logout:hover
     .nav-menu-item
-      background url("../images/v2/nav-logout-icon.png ") center -30px no-repeat
+      background url("../images/v2/logout-icon.png ") center 0 no-repeat
 
 #main-cms-nav
   background-color $footer-color
   border-bottom 4px solid $border-color
   padding-bottom 15px
-  h4
+  padding-top 5px
+  position absolute
+  width 100%
+  z-index 10000
+  opacity 0.98
+  h3
     color #fff
-    margin-bottom 5px
+    font-family "HurmeGeometricSans3-SemiBold"
   a
     color #fff
-    text-decoration underline
-  li
-    list-style none
-    line-height 27px
+  a:hover
+    text-decoration none
+  .main-menu-slider
+    ul
+      margin 0
+      padding-left 30%
+      padding-right 30%
+      text-align center
+    li
+      list-style none
+      line-height 27px
+      border-bottom 1px solid rgba(224, 215, 216, 0.5)
+    li:last-child
+      border-bottom none
 
 footer
   //margin-top 30px
@@ -415,7 +452,7 @@ footer
   input[type=text], input[type=email]
     border-radius 3px
     height 30px
-    width 80%
+    width 90%
   hr
     border-top 1px solid $border-color
     margin-top 5px
@@ -498,6 +535,7 @@ h1,h2,h3,h4,h5,h6
       font-weight normal
   h1
     font-size 26px
+    margin-top 13px
 
 .content-block
   a
@@ -518,6 +556,10 @@ h1,h2,h3,h4,h5,h6
   h4
     font-family "HurmeGeometricSans3-SemiBold"
     margin-bottom 0
+
+.alert-text
+  color #ff0000
+
 
 .ajaxloader
   text-align center
@@ -543,6 +585,71 @@ h1,h2,h3,h4,h5,h6
 
 .content-wrap
   min-height 500px
+
+.cms-left-column
+  ul
+    padding 0
+    li
+      list-style none
+      border-bottom 1px solid $border-color
+      a
+        display block
+        padding 12px 0 12px 0
+        color $main-font
+        text-decoration none
+      a:hover
+        text-decoration none
+        //color #625035
+        color $active-link
+    li.active
+      a
+        color $active-link
+      a:hover
+        color $active-link
+    li:last-child
+      border-bottom none
+
+.notification-count
+  position absolute
+  right -8px
+  top 0
+  background-color $primary-color
+  width 20px
+  height 14px
+  font-size 10px
+  font-weight bold
+  line-height 14px
+  color #fff
+  text-align center
+  border-radius 45%
+
+.translate
+  span
+    text-decoration underline
+    cursor pointer
+
+.language-selector
+  ul
+    margin 0
+    padding 0
+    list-style none
+    min-width 150px
+  li
+    height 40px
+    line-height 40px
+    padding-left 5px
+    padding-right 5px
+    border-top 1px solid $border-color
+  li:first-child
+    border-top none
+  li:hover
+    cursor pointer
+    background-color $dropdown-hover-bg
+  p
+    min-width 200px
+
+#translate-menu-container
+  position relative
 
 // **************************************
 // Landing page styles
@@ -806,9 +913,24 @@ $page-banner-height = 550px
 
 .share-twitter
   display none
+
 // **************************************
 // exchange page
 // **************************************
+
+input.borderless-control
+  border none
+  box-shadow none
+  background-color inherit
+  padding 0
+  outline none
+  &:focus, &:focus:invalid, &:focus:invalid:focus
+    color inherit
+    border-color transparent
+    box-shadow none
+    outline none
+
+
 popoverDropdown(width, showIcon = true)
   $right-icon = width - 30
   padding 0
@@ -842,26 +964,36 @@ popoverDropdown(width, showIcon = true)
           background url('../images/v2/select_plus_hover.png') $right-icon center no-repeat
         background-color $dropdown-hover-bg
       a.selected
-        if showIcon
-          background url('../images/v2/select_tick.png') $right-icon center no-repeat
-         background-color #fff
+        background url('../images/v2/select_tick.png') $right-icon center no-repeat
+        background-color #fff
         color $dropdown-select-color
       a.selected:hover
-        if showIcon
-          background url('../images/v2/select_tick.png') $right-icon center no-repeat
+        background url('../images/v2/select_tick.png') $right-icon center no-repeat
         background-color $dropdown-hover-bg
       a.plain
         background-image none
 
+
+.exchange-filters.search-expanded
+  > .container
+    padding-bottom 0
+    border-bottom none
+
 .exchange-filters
-  border-bottom 2px solid $separator-color
   margin-bottom 20px
-  padding-bottom 20px
+  > .container
+    padding-bottom 10px
+    border-bottom 2px solid $separator-color
   .search-expanded
-    margin-top 5px
-    input.form-control
-      width 188px
-      display inline-block
+    margin-top 10px
+    padding 20px
+    color #fff
+    background-color $dropdown-hover-bg
+    z-index 10
+    border-top 4px solid $border-color
+    border-bottom 4px solid $border-color
+    input
+      font-size 32px
     button.btn
       padding 4px 12px
   .categories
@@ -870,37 +1002,87 @@ popoverDropdown(width, showIcon = true)
       font-weight normal
       font-size 16px
       display inline
+    .count
+      color $primary-color
     ul.category-menu
       margin 0
       padding 0
       list-style none
       display inline-block
       > li
-        margin-left 20px
+        position relative
         display inline-block
+        border-radius 5px
+        padding 0 10px
+        > a
+          position relative
+          display inline-block
+          text-align center
+          color $item-footer-font
+          font-weight bold
+          padding 5px 0
+          div
+            font-size 15px
+            margin-top 38px
+          .toggle
+            display inline-block
+            width 16px
+            height 8px
+            background url('../images/v2/dropdown_normal.png') no-repeat center center
         a, a:hover, a:focus
           text-decoration none
-          height 34px
           display inline-block
+        a.showhide
+          background url('../images/v2/market-hide-show-icon.png') no-repeat center 10px
+        a.skills
+          width 90px
+          background  url('../images/v2/market-filter-icon.png') no-repeat center 10px
+        a.regions
+          width 118px
+          background url('../images/v2/market-countries-icon.png') no-repeat center 10px
+        a.search
+          background url('../images/v2/market-search-icon.png') no-repeat center 10px
+      > li.active
+        background-color $dropdown-hover-bg
+        > a
+          color #fff
+          .count
+            color #fff
+          .toggle
+            background url('../images/v2/dropdown_toggled.png') no-repeat center center
+        a.showhide
+          background url('../images/v2/market-hide-show-icon-toggled.png') no-repeat center 10px
+        a.skills
+          background url('../images/v2/market-filter-icon-toggled.png') no-repeat center 10px
+        a.regions
+          background url('../images/v2/market-countries-icon-toggled.png') no-repeat center 10px
+        a.search
+          background url('../images/v2/market-search-icon-toggled.png') no-repeat center 10px
+      > li.showhide
+        .popover-content
+          popoverDropdown(200px)
+      > li.skills
+        .popover-content
+          popoverDropdown(240px)
+      > li.regions
+        .popover-content
+          popoverDropdown(240px, showIcon = false)
+          ul.region-filter.expanded
+            > li
+              border none
+              > a
+                display none
+          ul.region-filter
+            li
+              popoverDropdown(240px)
       .popover
         border-radius 0
-      .skills .popover-content
-        popoverDropdown(240px)
-      .regions .popover-content
-        popoverDropdown(248px, showIcon = false)
-        ul.region-filter.expanded
-          > li
-            border none
-            > a
-              display none
-        ul.region-filter
-          li
-            popoverDropdown(240 px)
 
   .type-menu, .hidden-menu
     list-style none
     margin 0
     padding 0
+    margin-top 25px
     margin-right 40px
     a
       color $filter-font
@@ -1071,6 +1253,10 @@ popoverDropdown(width, showIcon = true)
       padding 0
       li
         display inline-block
+  .post-translate
+    margin-bottom 15px
+    .translate
+      text-align right
   .comments
     margin-top 20px
     .comments-header
@@ -1421,5 +1607,24 @@ popoverDropdown(width, showIcon = true)
 
 #notifications
   margin-top 20px
-  .details.new
-    font-weight bold
+  .movements-form
+    background-color #fff
+    padding 20px
+    a.user
+      color $main-font
+    a
+      color $primary-color
+    hr
+      border-color $hr-separator-color
+    h2
+      font-family "LinotypeUnivers-330Light"
+      font-weight bold
+      font-size 26px
+      margin-top 0
+    .details
+      margin-right 150px
+    .dates
+      text-align right
+      width 150px
+    .details.new
+      font-weight bold

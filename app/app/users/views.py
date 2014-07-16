@@ -385,7 +385,6 @@ def vet_user(request, user_id):
                 rating.save()
             else:
                 form.save()
-            user.is_active = rating.rated_by_ahr != 0
             user.save()
             typeuser = ContentType.objects.filter(name='user').all()[0]
             log = LogEntry(user_id=request.user.id,
@@ -414,7 +413,7 @@ def vet_user(request, user_id):
 def email_vet_user(request, user_id):
     user = User.objects.get(pk=user_id)
     if not user.is_active:
-        return  HttpResponse(json.dumps({'success': False, 'message': 'User is not vetted.'}), mimetype="application/json")
+        return HttpResponse(json.dumps({'success': False, 'message': 'User is not vetted.'}), mimetype="application/json")
     text = render_to_string('emails/getstarted.html',
                             {
                                 'user': user,

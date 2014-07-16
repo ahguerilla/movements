@@ -1,7 +1,10 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from .models import NewsletterSignups
+import json
+import re
 
 
 def home(request):
@@ -21,3 +24,31 @@ def contact_us(request):
 
 def exchange(request):
     return HttpResponseRedirect(reverse('show_market'))
+
+
+def newsletter_signup(request):
+    if request.POST:
+        email = request.POST.get("email", "")
+        result = "success" if re.match(r"[^@]+@[^@]+\.[^@]+", email) else "failed"
+        message = "Thanks for your interest in movements!!" if result == "success" else "Please enter a valid email"
+
+        if result == "success":
+            try:
+                signup = NewsletterSignups()
+                signup.email = email
+                signup.save()
+            except:
+                result = "failed"
+                message = "Unable to process email at this time"
+
+        response_data = {
+            'result': result,
+            'message': message
+        }
+
+    else:
+        response_data = {
+            'result': 'failed',
+            'message': 'Not a valid request'
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")

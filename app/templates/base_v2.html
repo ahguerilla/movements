@@ -54,14 +54,24 @@
       <div class="navbar-left">
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
-          <div class="action-font">Menu</div>
         </div>
         {% if user.is_authenticated and not user.userprofile.first_login %}
-        <div class="nav-avatar avatar" id="view-profile-menu">
-          {% primary_avatar user 30 %}
-          <div class="action-font">Profile</div>
+        <div class="nav-avatar" id="view-profile-menu">
+          <div class="menu-icon-profile"></div>
           <div id="content-menu-container"></div>
         </div>
+        <a href="{% url 'show_notifications' %}">
+          <div class="nav-notification">
+            <div style="display: none;" id="main-nav-count" class="notification-count"></div>
+            <div class="menu-icon-bell"></div>
+          </div>
+        </a>
+        <a href="{% url 'postman_inbox' %}">
+          <div class="nav-messages">
+            <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>
+            <div class="menu-icon-message"></div>
+          </div>
+        </a>
         {% endif %}
       </div>
     {% if user.is_authenticated and not user.userprofile.first_login %}
@@ -80,75 +90,33 @@
     </div>
   </div>
 </nav>
+{% endblock %}
 <div id="main-cms-nav" style="display: none;">
   <div class="container">
     <div class="row">
-      <div class="col-xs-3">
-        <h4>About Movements</h4>
-        {% show_menu_below_id "col1" 0 100 100 100 %}
-      </div>
-      <div class="col-xs-3">
-        <h4>Navigation</h4>
-        {% if not user.is_authenticated %}
-          <li>
-            <a href="{% url 'account_login' %}">Login</a>
-          </li>
-          <li>
-            <a href="{% url 'signup_start' %}">Sign up</a>
-          </li>
-        {% else %}
-          <li>
-            <a href="{% url 'postman_inbox' %}">Inbox</a>
-          </li>
-          <li>
-            <a href="{% url 'show_notifications' %}">Alerts</a>
-          </li>
-          <li>
-            <a href="{% url 'user_profile' %}">Profile</a>
-          </li>
-          <li>
-            <a href="{% url 'user_settings' %}">Settings</a>
-          </li>
-          <li>
-            <form method="post" action="{% url 'account_logout' %}">
-                {% csrf_token %}
-                <a href="#" onclick="parentNode.submit();">Logout</a>
-              </form>
-          </li>
-        {% endif %}
-          <li>
-            <a href="{% url 'show_market' %}">Exchange</a>
-          </li>
-        {% show_menu_below_id "col2" 0 100 100 100 %}
-      </div>
-      <div class="col-xs-3">
-        <h4>Our Terms</h4>
-        {% show_menu_below_id "col3" 0 100 100 100 %}
-      </div>
-      <div class="col-xs-3">
-        <h4>Resources</h4>
-        {% show_menu_below_id "col4" 0 100 100 100 %}
+      <div class="main-menu-slider">
+        <ul>
+          {% if not user.is_authenticated %}
+            <li><h3><a href="{% url 'signup_start' %}">Sign up</a></h3></li>
+          {% endif %}
+          {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
+          {% if not user.is_authenticated %}
+            <li><h3><a href="{% url 'show_market' %}">Visit market</a></h3></li>
+          {% endif %}
+        </ul>
       </div>
     </div>
   </div>
 </div>
-{% endblock %}
 
 {% block header_padding %}<div style="height: 20px;"></div>{% endblock %}
-
-{% block content_outside_container %}
-{% endblock %}
+{% block content_outside_container %}{% endblock %}
 
 {% block ext_container %}
-<div class="container">
-
+<div class="container" >
   <div id="currentusername" class="hidden">{{ user.username }}</div>
-
-  {% block content %}
-  {% endblock %}
-
-  {% block extra_body %}
-  {% endblock %}
+  {% block content %}{% endblock %}
+  {% block extra_body %}{% endblock %}
 </div>
 {% endblock %}
 
@@ -156,69 +124,44 @@
 <footer>
   <div class="footer">
     <div class="container">
-      <div id="FooterSocialMedia_Big">
-          <div class="row">
-            <div class="col-xs-4">
-              <h4>{% trans "Get updates"  %}</h4>
-              <form>
-                <div class="form-group">
-                  <input class="form-control" id="id_email" name="email" type="text" placeholder="Enter your e-mail...">
-                </div>
-              </form>
-              <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>
+      <div class="row">
+        <div class="col-xs-4">
+          <h4>{% trans "Get updates"  %}</h4>
+          <form id="sign-up-form" action="{% url 'newsletter_signup' %}">
+            <div class="form-group">
+              <input class="form-control" id="id_email" name="email" type="text" placeholder="Enter your e-mail...">
             </div>
-            <div class="col-xs-3">
-              <h4>{% trans "Connect with us"  %}</h4>
-              <div class="social-icons">
-                <a href="/movements/">
-                  <img src="{{ STATIC_URL }}images/v2/twitter-bigger.png" alt="Connect with Twitter" >
-                </a>
-                <a href="">
-                  <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="Connect with Facebook" >
-                </a>
-                <a href="">
-                  <img src="{{ STATIC_URL }}images/v2/gplus-bigger.png" alt="Connect with Google Plus" >
-                </a>
-              </div>
-            </div>
-            <div class="col-xs-5">
-              <h4>{% trans "About Movements"  %}</h4>
-              <p>{% blocktrans %}Movements.org connects human rights activists in closed societies with people around the world with the skills to help.{% endblocktrans %}</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-6">
-              <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
-            </div>
-            <div class="col-xs-6">
-              <div class="footer-nav-content">
-                {% show_menu 0 100 100 100 "cms/navs/bottom_nav_v2.html" %}
-              </div>
-            </div>
+          </form>
+          <p id="newsletter-conf"></p>
+          <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>
+        </div>
+        <div class="col-xs-3">
+          <h4>{% trans "Connect with us"  %}</h4>
+          <div class="social-icons">
+            <a target="_blank" href="https://twitter.com/movements_org">
+              <img src="{{ STATIC_URL }}images/v2/twitter-bigger.png" alt="Connect with Twitter" >
+            </a>
+            <a target="_blank" href="https://www.facebook.com/Movements.org">
+              <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="Connect with Facebook" >
+            </a>
+{#            <a href="">#}
+{#              <img src="{{ STATIC_URL }}images/v2/gplus-bigger.png" alt="Connect with Google Plus" >#}
+{#            </a>#}
           </div>
         </div>
-        <div id="FooterSocialMedia_Small">
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="social-icons">
-                Connect with us:
-                <a href="/movements/">
-                  <img src="{{ STATIC_URL }}images/v2/twitter.png" alt="Twitter" >
-                </a>
-                <a href="">
-                  <img src="{{ STATIC_URL }}images/v2/facebook.png" alt="Facebook" >
-                </a>
-                <a href="">
-                  <img src="{{ STATIC_URL }}images/v2/gplus.png" alt="Google+" >
-                </a>
-              </div>
-            </div>
+        <div class="col-xs-5">
+          <h4>{% trans "About Movements"  %}</h4>
+          <p>{% blocktrans %}Crowdsourcing the fight for human rights. The online platform that is opening closed societies.{% endblocktrans %}</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
+        </div>
+        <div class="col-xs-6">
+          <div class="footer-nav-content">
+            {% show_menu 0 100 100 100 "cms/navs/bottom_nav_v2.html" %}
           </div>
         </div>
       </div>
@@ -231,37 +174,27 @@
   <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>Offer</a>
 </script>
 <script type="text/template" id="content-menu-template">
-  <a href="{% url 'user_profile' %}">
+  <ul><li><a href="{% url 'user_profile' %}">
     <div class="nav-menu-item-wrap profile">
-      <div class="spacer"></div>
       <div class="nav-menu-item"></div>
       Profile
     </div>
-  </a>
-  <a href="{% url 'user_settings' %}">
+  </a></li>
+  <li><a href="{% url 'user_settings' %}">
     <div class="nav-menu-item-wrap settings">
-      <div class="spacer"></div>
       <div class="nav-menu-item"></div>
       Settings
     </div>
-  </a>
-  <a href="{% url 'postman_inbox' %}">
-    <div class="nav-menu-item-wrap messages">
-      <div class="spacer"></div>
-      <div class="nav-menu-item"></div>
-      Messages
-    </div>
-  </a>
-  <form method="post" action="{% url 'account_logout' %}">
+  </a></li>
+  <li><form method="post" action="{% url 'account_logout' %}">
     {% csrf_token %}
     <a href="#" onclick="parentNode.submit();">
       <div class="nav-menu-item-wrap logout">
-        <div class="spacer"></div>
         <div class="nav-menu-item"></div>
         Logout
       </div>
     </a>
-  </form>
+  </form></li></ul>
   <div class="clearfix"></div>
 </script>
 
@@ -294,10 +227,10 @@
   (function () {
     $('#view-content-menu').click(function(){
       if($('#main-cms-nav').is(":visible")){
-        $('#main-cms-nav').hide();
+        $('#main-cms-nav').slideUp("fast");
         $('.menu-selector').removeClass("selected");
       } else {
-        $('#main-cms-nav').show();
+        $('#main-cms-nav').slideDown("fast");
         $('.menu-selector').addClass("selected");
       }
     });

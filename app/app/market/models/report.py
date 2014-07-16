@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import auth
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.exceptions import ObjectDoesNotExist
 import tinymce
 from postman.models import Message
 
@@ -86,10 +87,21 @@ def create_child_msg(sender, instance, **kwargs):
     # Required because the child extended model (MessageExt) displays in admin
     # instead of standard postman model. So we manually add child model.
     # FIXME: perhaps is there a standard way to do this?
+    mes_ext = None
+    try:
+        mes_ext = MessageExt.objects.get(message_ptr=instance)
+        if mes_ext:
+            return
+    except ObjectDoesNotExist:
+        if instance.parent:
+            mes_ext = instance.parent.messageext
+
     msg = MessageExt(message_ptr=instance)
     msg.__dict__.update(instance.__dict__)
     msg.is_post_recommendation = False
     msg.is_user_recommendation = False
+    if mes_ext:
+        msg.market_item = mes_ext.market_item
     msg.save()
 
 

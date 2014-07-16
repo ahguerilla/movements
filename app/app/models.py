@@ -17,3 +17,19 @@ def update_menu_settings(sender, **kwargs):
     invalidate_menu_cache()
 
 post_save.connect(update_menu_settings, sender=MenuExtension, dispatch_uid='update_menu_settings')
+
+
+class NewsletterSignups(models.Model):
+    registered_date = models.DateTimeField(auto_now_add=True)
+    email = models.CharField(max_length=300)
+
+    class Meta:
+        verbose_name = 'Newsletter Signup'
+        verbose_name_plural = 'Newsletter Signups'
+        ordering = ('-registered_date',)
+
+    def __str__(self):
+        return self.email
+
+    def __unicode__(self):
+        return self.email

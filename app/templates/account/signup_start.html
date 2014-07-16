@@ -9,14 +9,13 @@
 <div class="row dialog movements-form">
   <div class="col-xs-12">
     <div class="form-title"><h1>{% trans "Welcome to Movements" %}</h1></div>
-      <p>{% blocktrans %}Movements.org is a cross-platform service which allows people to connect with one another across the globe.{% endblocktrans %}</p>
-      <p>{% blocktrans %}Let's start with the process:{% endblocktrans %}</p>
+      <p>{% blocktrans %}Sign up to connect to human rights defenders and activist. Let’s get started.{% endblocktrans %}</p>
     <form class="form-horizontal" class="signup" id="signup_form" method="post" action="{{ post_url }}">
     {% csrf_token %}
       <div class="form-group">
         <div class="col-xs-12">
           {{ form.non_field_errors }}
-          <label for="email">{%trans "Email"%}</label>
+          <label for="email">{%trans "Email (we will never reveal this)"%}</label>
           {% render_field form.email class="form-control input-sm" required="true" %}
           {{ form.email.errors }}
         </div>
@@ -34,7 +33,7 @@
         </div>
       </div>
       <div class="row action-text">
-        <div class="col-xs-12">{% trans "By registering with us you agree to our" %}&nbsp;<a href="{% url 'terms_and_conditions' %}" target="_blank" alt="terms and conditions">terms &amp; conditions</a></div>
+        <div class="col-xs-12">{% trans "By registering with us you agree to our" %}&nbsp;<a href="{% url 'terms_and_conditions' %}" target="_blank">terms &amp; conditions</a></div>
         <div class="col-sm-offset-2 col-sm-8 form-main-button">
           <button type="submit" class="btn btn-action full-width">{% trans 'Register' %}</button>
         </div>

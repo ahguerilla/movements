@@ -18,7 +18,16 @@ class UserProfileInline(admin.StackedInline):
 
 class UserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
-    list_display = ('username', 'email', 'first_name', 'last_name', 'vetting' ,'vetted_by')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'star_rating', 'rated_by')
+
+    def star_rating(self, obj):
+        try:
+            rating = obj.userprofile.ahr_rating
+            vet_url = reverse('vet_user', args=(obj.id,))
+            return u'{0} (<a href="{1}" target="_blank" alt="vet user">Rate User</a>)'.format(rating, vet_url)
+        except:
+            return 'No profile'
+    star_rating.allow_tags = True
 
     def vetting(self, obj):
         if obj.is_staff:
@@ -29,9 +38,9 @@ class UserAdmin(UserAdmin):
     vetting.process = 'Process'
     vetting.allow_tags = True
 
-    def vetted_by(self,obj):
+    def rated_by(self,obj):
         log = LogEntry.objects.filter(object_id = obj.id).all()
-        if len(log)>0:
+        if len(log) > 0:
             return log[0].user.username
         else:
             return ''

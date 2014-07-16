@@ -58,20 +58,34 @@
     }
   });
 
-  window.ahr.messageCounterWatch = function () {
+  function doHeartBeat() {
     if (window.ahr.user_id > 0) {
-      setInterval(function () {
-        var text;
-        $.getJSON(window.ahr.app_urls.getmessagecount, function (data) {
-          $('.message-counter').each(function (tmp, item) {
-            if (data > 0) {
-              $('#msgcntr', $(item)).text('(' + data + ')');
-            } else {
-              $('#msgcntr', $(item)).text('');
-            }
-          });
-        });
-      }, 60000);
+      $.getJSON(window.ahr.app_urls.heartbeat, function (data) {
+        var notification_count = data.notifications || 0;
+        var message_count = data.messages || 0;
+        if (notification_count > 0) {
+          $('#main-nav-count').text(notification_count);
+          $('#main-nav-count').show();
+        } else {
+          $('#main-nav-count').text("");
+          $('#main-nav-count').hide();
+        }
+        if (message_count > 0){
+          $('#main-nav-message-count').text(message_count);
+          $('#main-nav-message-count').show();
+        } else {
+          $('#main-nav-message-count').text("");
+          $('#main-nav-message-count').hide();
+        }
+      });
+    }
+  }
+
+  window.ahr.messageCounterWatch = function () {
+    // check for new notification and messages
+    // every 30 seconds
+    if (window.ahr.user_id > 0) {
+      setInterval(doHeartBeat, 30000);
     }
   };
 
@@ -136,13 +150,51 @@
      });
 
     $('#view-profile-menu').on('shown.bs.popover', function(){
-      $('#content-menu-container .popover').css("left", 0);
+      $('#view-profile-menu').addClass("active");
+      $('#content-menu-container .popover').css("left", "-7px");
       $('#content-menu-container .arrow').css("left", "28px");
+    });
+
+    $('#view-profile-menu').on('hidden.bs.popover', function(){
+      $('#view-profile-menu').removeClass("active");
     });
   }
 
+  $("#sign-up-form").on('submit', function(ev){
+    ev.preventDefault();
+    var action_url = $(this).attr('action');
+    var email = $(this).find('input').val();
+    $.ajax({
+      url: action_url,
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        email: email
+      },
+      success: function(data){
+        var r = data.result || "";
+        var m = data.message || "Unable to process email at this time"
+        $('#newsletter-conf').text(m);
+        if(r === "success"){
+          $("#sign-up-form").find('input').val("");
+          $('#newsletter-conf').removeClass("alert-text");
+        } else {
+          $('#newsletter-conf').addClass("alert-text");
+        }
+
+      }
+    });
+  });
+
   setupAddPostPopover();
   setupProfileMenuPopover();
+  $(document).ready(function() {
+    doHeartBeat();
+    $(document).on('doHeartBeat', function(){
+      doHeartBeat();
+    });
+  });
+
 
   window.ahr.BaseView = Backbone.View.extend({
     events: {},

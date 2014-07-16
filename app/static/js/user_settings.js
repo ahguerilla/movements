@@ -161,7 +161,6 @@
     initialize : function(){
       var that = this;
       var $settingAvatar = $('.settingavatar').find('img');
-      var $profileMenuAvatar = $('#view-profile-menu').find('img');
       $('#changeavatardialog').on('hidden.bs.modal', function () {
         $('#profile_change_stuff').empty();
         var href = document.getElementById('changeavatar').href;
@@ -171,12 +170,6 @@
         });
         dfrd.done(function(data){
           that.updateImage($settingAvatar, data);
-        });
-        var dfrd2 = $.ajax({
-          url : window.ahr.app_urls.getavatar.replace(0,window.ahr.user_id)+'50'
-        });
-        dfrd2.done(function(data){
-          that.updateImage($profileMenuAvatar, data);
         });
       });
       return this;

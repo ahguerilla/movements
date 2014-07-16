@@ -26,6 +26,7 @@ def index(request):
                               {
                                   'interests': serializers.serialize('json', interests),
                                   'regions': regions,
+                                  'countries': countries,
                                   'is_logged_in': request.user.is_authenticated()
                               },
                               context_instance=RequestContext(request))
@@ -38,14 +39,16 @@ def show_post(request, post_id):
                              deleted=False,
                              owner__is_active=True)
 
-    #update view counter
+    language_list = []
     if request.user.is_authenticated():
         MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
+        language_list = request.user.userprofile.languages.all()
 
     post_data = {
         'post': post,
         'report_url': reverse('report_post', args=[post.id]),
-        'is_logged_in': request.user.is_authenticated()
+        'is_logged_in': request.user.is_authenticated(),
+        'language_list': language_list,
     }
 
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))
@@ -101,10 +104,8 @@ def edit_request(request, post_id):
 
 @login_required
 def notifications(request):
-    return render_to_response('market/notifications.html',
-        {},
+    return render_to_response('market/notifications.html', {},
                               context_instance=RequestContext(request))
-
 
 @login_required
 def permanent_delete_postman(request):

@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 
 from cms.extensions import PageExtensionAdmin
 
+from .models import NewsletterSignups
+
 from .models import MenuExtension
 
 
@@ -12,6 +14,8 @@ class MenuExtensionAdmin(PageExtensionAdmin):
     pass
 
 admin.site.register(MenuExtension, MenuExtensionAdmin)
+
+admin.site.register(NewsletterSignups)
 
 
 class LogEntryAdmin(admin.ModelAdmin):

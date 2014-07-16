@@ -7,14 +7,16 @@ $(function () {
 
     events: {
       'click .type-menu a': 'setTypeFilter',
-      'click .hidden-menu a': 'setHiddenFilter',
+      'click .hidden-filter a': 'setHiddenFilter',
       'click .region-filter > li > a': 'showCountries',
       'click .country-list a.back': 'showRegions',
       'click .country-list a.country': 'setRegionFilter',
+      'click .country-list a.country-all': 'setRegionFilter',
       'click .skill-filter a': 'setSkillsFilter',
       'click a.search': 'toggleSearchControls',
       'click .run-search': 'triggerFilter',
       'keydown input[name=query]': 'checkForEnter',
+      'show.bs.popover a': 'setActive',
       'shown.bs.popover a': 'setPopoverContent',
       'hide.bs.popover a': 'hidePopoverContent'
     },
@@ -23,6 +25,8 @@ $(function () {
       var $skills = this.$el.find('a.skills');
       this.$skillsContainer = $skills.parent().find('.popover-container');
       this.skillsContent = _.template($('#skill-filter-list-template').html(), {skills: options.skills});
+      this.skillsCount = options.skills.length;
+      this.$skillCount = $skills.find('.count');
       $skills.popover({
         title: '',
         html: true,
@@ -33,6 +37,8 @@ $(function () {
 
       var $regions = this.$el.find('a.regions');
       this.$regionContainer = $regions.parent().find('.popover-container');
+      this.$regionsCount = $regions.find('.count');
+      this.regionsCount = parseInt($regions.data('country-count'));
       this.regionsContent = $('#region-filter-list-template').html();
       $regions.popover({
         title: '',
@@ -42,28 +48,52 @@ $(function () {
         placement: 'bottom'
       });
 
+      var $hidden = this.$el.find('a.showhide');
+      this.$hiddenContainer = $hidden.parent().find('.popover-container');
+      this.hiddenContent = $('#hidden-filter-template').html();
+      $hidden.popover({
+        title: '',
+        html: true,
+        content: this.hiddenContent,
+        container: this.$hiddenContainer,
+        placement: 'bottom'
+      });
+
       this.$query = this.$el.find('input[name=query]');
+    },
+
+    setActive: function(ev) {
+      var $currentTarget = $(ev.currentTarget);
+      $currentTarget.parents('li').addClass('active');
     },
 
     setPopoverContent: function(ev) {
       var $currentTarget = $(ev.currentTarget);
       if ($currentTarget.hasClass('skills')) {
         this.$skillsContainer.find('.popover-content').html(this.skillsContent);
-      } else {
+      } else if ($currentTarget.hasClass('regions')) {
         this.$regionContainer.find('.popover-content').html(this.regionsContent);
+      } else {
+        this.$hiddenContainer.find('.popover-content').html(this.hiddenContent);
       }
     },
 
     hidePopoverContent: function (ev) {
       var $currentTarget = $(ev.currentTarget);
+      $currentTarget.parents('li').removeClass('active');
       if ($currentTarget.hasClass('skills')) {
         this.skillsContent = this.$skillsContainer.find('.popover-content').html();
-      } else {
+      } else if ($currentTarget.hasClass('regions')) {
         this.regionsContent = this.$regionContainer.find('.popover-content').html();
+      } else {
+        this.hiddenContent = this.$hiddenContainer.find('.popover-content').html();
       }
     },
 
     toggleSearchControls: function(ev) {
+      this.$el.toggleClass('search-expanded');
+      var $currentTarget = $(ev.currentTarget);
+      $currentTarget.parents('li').toggleClass('active');
       var expand = this.$el.find('.search-expanded');
       this.$el.find('.search-expanded').toggleClass('hide');
       if (!expand.hasClass('hide')) {
@@ -74,10 +104,22 @@ $(function () {
     showCountries: function(ev) {
       ev.preventDefault();
       var $currentTarget = $(ev.currentTarget);
-      var $countryList = $currentTarget.parent().find('.country-list');
-      var $topLevel = $currentTarget.parents('.region-filter');
-      $topLevel.addClass('expanded');
-      $countryList.removeClass('hide');
+      if ($currentTarget.hasClass('region-all')) {
+        var setSelected = (this.regionsCount != this.regions.length);
+        var $countryLists = $currentTarget.parents('.region-filter').find('.country-list');
+        _.each($countryLists, function(countryList) {
+          var $countryList = $(countryList);
+          this.setRegionAll($countryList, setSelected)
+          this.setRegionalCounts($countryList);
+        }, this);
+        this.setRegionCounts();
+        this.trigger('filter');
+      } else {
+        var $countryList = $currentTarget.parent().find('.country-list');
+        var $topLevel = $currentTarget.parents('.region-filter');
+        $topLevel.addClass('expanded');
+        $countryList.removeClass('hide');
+      }
     },
 
     showRegions: function(ev) {
@@ -89,11 +131,14 @@ $(function () {
       $countryList.addClass('hide');
     },
 
-    toggleFilterState: function(ev) {
-      ev.preventDefault();
-      var $target = $(ev.currentTarget);
+    toggleFilterState: function(ev, $target) {
+      if (ev) {
+        ev.preventDefault();
+        $target = $(ev.currentTarget);
+      }
       $target.toggleClass('selected');
       return {
+        $target: $target,
         id: $target.data('id'),
         selected: $target.hasClass('selected'),
         value: $target.data('filter')
@@ -102,18 +147,42 @@ $(function () {
 
     setSkillsFilter: function (ev) {
       var skill = this.toggleFilterState(ev);
-      if (skill.selected) {
-        this.skills.push(skill.value);
+      if (skill.value == 'all') {
+        if (this.skills.length == this.skillsCount) {
+          this.skills = [];
+          this.$el.find('.skill-filter a').removeClass('selected');
+        } else {
+          this.skills = [];
+          skill.$target.addClass('selected');
+          _.each(this.$el.find('.skill-filter a.skill-normal'), function(elem) {
+            var $elem = $(elem);
+            this.skills.push($elem.data('filter'))
+            $elem.addClass('selected');
+          }, this);
+        }
       } else {
-        this.skills = $.grep(this.skills, function (value) {
-          return value != skill.value;
-        });
+        if (skill.selected) {
+          this.skills.push(skill.value);
+          if (this.skills.length == this.skillsCount) {
+            this.$el.find('.skill-filter .skill-all').addClass('selected');
+          }
+        } else {
+          this.$el.find('.skill-filter .skill-all').removeClass('selected');
+          this.skills = $.grep(this.skills, function (value) {
+            return value != skill.value;
+          });
+        }
+      }
+      if (this.skills.length) {
+        this.$skillCount.html('(' + this.skills.length + ')');
+        this.$skillCount.show();
+      } else {
+        this.$skillCount.hide();
       }
       this.trigger('filter');
     },
 
-    setRegionFilter: function(ev) {
-      var region = this.toggleFilterState(ev);
+    setRegion: function(region) {
       if (region.selected) {
         this.regions.push(region.value)
       } else {
@@ -121,15 +190,72 @@ $(function () {
           return value != region.value;
         });
       }
+    },
+
+    setRegionAll: function($countryList, setSelected) {
+      _.each($countryList.find('.country'), function (country) {
+        var $country = $(country);
+        if ((setSelected && !$country.hasClass('selected')) || (!setSelected && $country.hasClass('selected'))) {
+          this.setRegion(this.toggleFilterState(null, $country));
+        }
+      }, this);
+    },
+
+    setRegionCounts: function() {
+      if (this.regions.length) {
+        this.$regionsCount.html('(' + this.regions.length + ')');
+        this.$regionsCount.show();
+      } else {
+        this.$regionsCount.hide();
+      }
+      if (this.regionsCount == this.regions.length) {
+        this.$el.find('.region-all').addClass('selected');
+      } else {
+        this.$el.find('.region-all').removeClass('selected');
+      }
+    },
+
+    setRegionalCounts: function($countryList) {
+      var fullCount = parseInt($countryList.data('country-count'));
+      var $count = $countryList.parents('.region-top').find('.count');
+      var selected = $countryList.find('.country.selected').length;
+      if (selected) {
+        $count.html('(' + selected + ')');
+        $count.show();
+      } else {
+        $count.hide();
+      }
+
+      var $countryAll = $countryList.find('.country-all');
+      if (selected == fullCount) {
+        $countryAll.addClass('selected');
+      } else {
+        $countryAll.removeClass('selected');
+      }
+    },
+
+    setRegionFilter: function(ev) {
+      var region = this.toggleFilterState(ev);
+      var $countryList = region.$target.parents('.country-list');
+      var fullCount = parseInt($countryList.data('country-count'));
+
+      if (region.value == 'all') {
+        var currentlySelected = $countryList.find('.country.selected').length;
+        var setSelected = (currentlySelected != fullCount);
+        this.setRegionAll($countryList, setSelected);
+      } else {
+        this.setRegion(region);
+      }
+
+      this.setRegionalCounts($countryList);
+      this.setRegionCounts();
+
       this.trigger('filter');
     },
 
     setHiddenFilter: function(ev) {
-      ev.preventDefault();
-      this.$el.find('.hidden-menu li.active').removeClass('active');
-      var $filterLink = $(ev.currentTarget);
-      $filterLink.parents('li').addClass('active');
-      this.showHidden = $filterLink.data('filter');
+      var showHidden = this.toggleFilterState(ev);
+      this.showHidden = showHidden.selected;
       this.trigger('filter');
     },
 

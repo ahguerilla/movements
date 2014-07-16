@@ -1,6 +1,3 @@
-{% load compress %}
-
-{% compress js inline %}
 <script type="text/javascript" id="api_urls">
   window.ahr = window.ahr || {};
   window.ahr.app_urls = {
@@ -11,9 +8,6 @@
       getusernames: "{% url 'user_get_usernames' 'json' %}",
       changepassword : "{% url 'account_change_password' %}",
       setpassword: "{% url 'account_set_password' %}",
-
-      getmessagecount: "{% url 'get_messagecount' 'json' %}",
-
       market: "{% url 'show_market' %}",
 
       getStickyMarketItems: '{% url 'get_user_stickies' %}',
@@ -28,14 +22,19 @@
       reportuser: "{% url 'report_user' 'json' 0 %}".slice(0,-1),
 
       getmarketnotificationsfromto: "{% url 'get_notifications_fromto' 0 0 %}".slice(0,-1),
+
       getnotseennotif: "{% url 'get_notseen_notif' %}",
       shownotifications: "{% url 'show_notifications' %}",
+
+
+      heartbeat: "{% url 'heartbeat' %}",
+
     {% endif %}
     getMarketItems: '{% url 'get_market_items' %}',
     getFeaturedMarketItems: '{% url 'get_featured_market_items' %}'
   };
 
-  {% if user and user.id %}
+  {% if user and user.is_authenticated and not user.userprofile.first_login and user.id %}
     window.ahr.user_id = {{ user.id }};
     window.ahr.username = "{{ user.username }}";
     window.ahr.messageCounterWatch();
@@ -44,5 +43,4 @@
   {% endif %}
     window.ahr.current_site = "{{ request.build_absolute_uri }}"
 </script>
-{% endcompress %}
 

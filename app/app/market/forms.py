@@ -117,6 +117,8 @@ def save_market_item(form, owner):
     if new_item:
         create_notification.delay(obj)
     else:
+        # delete the translations
+        obj.marketitemtranslation_set.all().delete()
         update_notifications.delay(obj)
     return obj
 

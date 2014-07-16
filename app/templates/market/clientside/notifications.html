@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load compress %}
 <script type="text/template" id="notifications_template">
     <li class="list-item notif-seen <% if(notif.seen){ %>true<% }else{ %>false<%}%>">
         <a href="/market/#item/<%- notif.item_id %>" style="display:inline-block;">
@@ -23,8 +22,6 @@
     </li>
 </script>
 
-
-{% compress js inline %}
 <script type="text/javascript" id="notifications_view">
 (function () {
   var notificationsWidget = Backbone.View.extend({
@@ -77,4 +74,3 @@
   };
 })();
 </script>
-{% endcompress %}

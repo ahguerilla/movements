@@ -19,7 +19,7 @@
       Welcome to Movements, please sign in below. If you don't have an account yet, please sign up <a href="{{ home_url }}" alt="sign up">here</a>
       {% endblocktrans %}
     </p>
-    <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form">
+    <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form" autocomplete="off">
     {% csrf_token %}
       <div class="form-group">
         <div class="col-xs-12">

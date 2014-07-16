@@ -11,6 +11,7 @@ from models import UserProfile, OrganisationalRating, Residence, Countries, Regi
 from django.utils.translation import ugettext_lazy as _
 import constance
 from django.conf.global_settings import LANGUAGES
+import re
 
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
@@ -64,8 +65,13 @@ class SignupForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data['username']
+        username = username.strip()
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError(_('This username is already in used'))
+        if not re.match("^[A-Za-z0-9_-]*$", username):
+            raise forms.ValidationError(_('Username must contain only letters, numbers - and _. White space is not allowed'))
+        if len(username) < 3 or len(username) > 30:
+            raise forms.ValidationError(_('Username must be greater that 2 characters and less than 30 contain only letters, numbers - and _. White space is not allowed'))
         return username
 
 
@@ -82,8 +88,13 @@ class UserForm(forms.ModelForm):
 
     def clean_username(self):
         username = self.cleaned_data['username']
+        username = username.strip()
         if username != self.instance.username and User.objects.filter(username=username).exists():
             raise forms.ValidationError(_('This username is already in use'))
+        if not re.match("^[A-Za-z0-9_-]*$", username):
+            raise forms.ValidationError(_('Username must contain only letters, numbers - and _. White space is not allowed'))
+        if len(username) < 3 or len(username) > 30:
+            raise forms.ValidationError(_('Username must be greater that 2 characters and less than 30 contain only letters, numbers - and _. White space is not allowed'))
         return username
 
 
@@ -146,6 +157,12 @@ class RegionAccordionSelectMultiple(BaseCheckboxSelectMultiple):
 
 
 class SettingsForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SettingsForm, self).__init__(*args, **kwargs)
+        self.fields['languages'].required = False
+        self.fields['interests'].required = False
+        self.fields['countries'].required = False
+
     class Meta:
         model = UserProfile
         fields = [
@@ -176,6 +193,12 @@ class SettingsForm(forms.ModelForm):
 
 
 class MoreAboutYouForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MoreAboutYouForm, self).__init__(*args, **kwargs)
+        self.fields['languages'].required = False
+        self.fields['interests'].required = False
+        self.fields['countries'].required = False
+
     class Meta:
         model = UserProfile
         fields = ('languages', 'interests', 'countries')

@@ -65,6 +65,7 @@
             window.ahr.expandTextarea('#id_body');
           }
           this.showconv();
+          $(document).trigger('doHeartBeat');
         }
       });
 
