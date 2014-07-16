@@ -18,7 +18,7 @@ class UserProfileInline(admin.StackedInline):
 
 class UserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
-    list_display = ('username', 'email', 'first_name', 'last_name', 'vetting' ,'vetted_by')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'vetting', 'vetted_by')
 
     def vetting(self, obj):
         if obj.is_staff:
@@ -31,7 +31,7 @@ class UserAdmin(UserAdmin):
 
     def vetted_by(self,obj):
         log = LogEntry.objects.filter(object_id = obj.id).all()
-        if len(log)>0:
+        if len(log) > 0:
             return log[0].user.username
         else:
             return ''

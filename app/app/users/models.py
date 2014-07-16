@@ -133,9 +133,9 @@ class UserProfile(models.Model):
     nationality = models.ForeignKey(Nationality, null=True, blank=True)
     resident_country = models.ForeignKey(Residence, null=True, blank=True)
 
-    skills = models.ManyToManyField(Skills, blank=False, null=True)
-    issues = models.ManyToManyField(Issues, blank=False, null=True)
-    countries = models.ManyToManyField(Countries, blank=False, null=True)
+    skills = models.ManyToManyField(Skills, blank=True, null=True)
+    issues = models.ManyToManyField(Issues, blank=True, null=True)
+    countries = models.ManyToManyField(Countries, blank=True, null=True)
     languages = models.ManyToManyField(Language, blank=True, null=True)
     regions = models.ManyToManyField(Region, blank=True, null=True)
     interests = models.ManyToManyField(Interest, blank=True, null=True)
@@ -154,7 +154,7 @@ class UserProfile(models.Model):
     notification_frequency = models.PositiveSmallIntegerField(
         _('notification frequency'), choices=NOTIFICATION_FREQUENCY,
         default=NOTIFICATION_FREQUENCY.DAILY)
-    last_notification_email = models.DateTimeField(null=True)
+    last_notification_email = models.DateTimeField(null=True, blank=True)
 
     @property
     def ahr_rating(self):
