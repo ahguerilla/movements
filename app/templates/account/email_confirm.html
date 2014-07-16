@@ -4,6 +4,8 @@
 {% user_display user as user_display %}
 {% load url from future %}
 {% load i18n %}
+{% load cms_tags %}
+{% load get_setting from settings %}
 
 {% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
 
@@ -13,7 +15,9 @@
     <h1>{% trans "Confirm E-mail Address" %}</h1>
     {% if confirmation %}
     {% user_display confirmation.email_address.user as user_display %}
-    <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is the e-mail address you provided for the user {{ user_display }}.{% endblocktrans %}</p>
+    {% get_setting 'CMS_PAGE_TERMS' as page_terms %}
+    {% page_url page_terms as terms_url %}
+    <p>{% blocktrans with confirmation.email_address.email as email %}Before confirming that <a href="mailto:{{email}}">{{ email }}</a> is the e-mail address you provided for the user {{ user_display }}, please read and accept the <a href="{{ terms_url }}">terms and conditions</a>.{% endblocktrans %}</p>
     <form class="form-horizontal" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
       {% csrf_token %}
       <div class="col-md-offset-5 col-md-6">
