@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from django.db import transaction
+from django.utils.translation import ugettext_lazy as _
 from models import (
     UserProfile, OrganisationalRating, Language, Interest, Region)
 from forms import (
@@ -11,6 +12,7 @@ from forms import (
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
 from allauth.socialaccount.views import SignupView as SocialSignupView
+from allauth.account.views import ConfirmEmailView as BaseConfirmEmailView
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from allauth.socialaccount.adapter import get_adapter
 from allauth.account.adapter import DefaultAccountAdapter
@@ -430,3 +432,14 @@ def email_vet_user(request, user_id):
     email.send()
     return HttpResponse(json.dumps({'success': True, 'message': 'An email has been sent to the user.'}), mimetype="application/json")
 
+
+class ConfirmEmailView(BaseConfirmEmailView):
+    def post(self, *args, **kwargs):
+        self.object = self.get_object()
+        if 'accept_terms' in self.request.POST:
+            return super(ConfirmEmailView, self).post(*args, **kwargs)
+
+        messages.warning(self.request, _('You have not accepted terms and conditions'))
+        return HttpResponseRedirect(reverse('account_confirm_email', args=[self.get_object().key]))
+
+confirm_email = ConfirmEmailView.as_view()
