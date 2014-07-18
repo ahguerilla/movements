@@ -2,9 +2,11 @@
 import ast
 
 from django.contrib import admin
+from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import ObjectDoesNotExist
 
 from ...market.models import MarketItemActions, MarketItemNextSteps, MarketItemViewCounter
 from ..models import IncidentTracking, UserTracking
@@ -146,7 +148,7 @@ class UserAdmin(TrackingAdmin):
         'id', 'get_screen_name', 'get_signup_date', 'get_full_name',
         'get_nationality', 'get_resident_country', 'email',
         #'get_request_count', 'get_offer_count', 'get_comment_count',
-        'last_login', 'is_admin'
+        'last_login', 'is_admin', 'get_star_rating'
     )
     change_list_template = 'admin/user_tracking_change_list.html'
     change_form_template = 'admin/user_tracking_change_form.html'
@@ -197,6 +199,19 @@ class UserAdmin(TrackingAdmin):
     def get_comment_count(self, obj):
         return obj.comment_count
     get_comment_count.short_description = _('Comment Count')
+
+    def get_star_rating(self, obj):
+        try:
+            rating = obj.userprofile.ahr_rating
+        except ObjectDoesNotExist:
+            return _('No profile')
+
+        vet_url = reverse('vet_user', args=(obj.id,))
+        return u'{0} (<a href="{1}" target="_blank" alt="vet user">{2}</a>)'.format(
+            rating, vet_url, _('Rate user'))
+
+    get_star_rating.short_description = _('Star rating')
+    get_star_rating.allow_tags = True
 
     # Overridden methods.
 
