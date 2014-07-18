@@ -143,7 +143,7 @@ admin.site.register(IncidentTracking, IncidentAdmin)
 
 
 class UserAdmin(TrackingAdmin):
-    list_select_related = ('userprofile',)
+    list_select_related = ('userprofile', 'organisationalrating')
     list_display_links = ('id', 'get_screen_name')
     list_display = (
         'id', 'get_screen_name', 'get_signup_date', 'get_full_name',
@@ -151,6 +151,7 @@ class UserAdmin(TrackingAdmin):
         #'get_request_count', 'get_offer_count', 'get_comment_count',
         'last_login', 'is_admin', 'get_star_rating'
     )
+    list_filter = ('organisationalrating__rated_by_ahr',)
     change_list_template = 'admin/user_tracking_change_list.html'
     change_form_template = 'admin/user_tracking_change_form.html'
     csv_field_exclude = (
@@ -204,7 +205,7 @@ class UserAdmin(TrackingAdmin):
     def get_star_rating(self, obj):
         vet_url = reverse('vet_user', args=(obj.id,))
         return u'{0} (<a href="{1}" target="_blank" alt="vet user">{2}</a>)'.format(
-            obj.star_rating or 0, vet_url, _('Rate user'))
+            obj.star_rating or _('no rate'), vet_url, _('Rate user'))
 
     get_star_rating.short_description = _('Star rating')
     get_star_rating.allow_tags = True
