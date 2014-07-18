@@ -3,7 +3,7 @@ import ast
 
 from django.contrib import admin
 from django.core.urlresolvers import reverse
-from django.db.models import Count
+from django.db.models import Count, Sum, Avg
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import ObjectDoesNotExist
@@ -202,17 +202,13 @@ class UserAdmin(TrackingAdmin):
     get_comment_count.short_description = _('Comment Count')
 
     def get_star_rating(self, obj):
-        try:
-            rating = obj.userprofile.ahr_rating
-        except ObjectDoesNotExist:
-            return _('No profile')
-
         vet_url = reverse('vet_user', args=(obj.id,))
         return u'{0} (<a href="{1}" target="_blank" alt="vet user">{2}</a>)'.format(
-            rating, vet_url, _('Rate user'))
+            obj.star_rating or 0, vet_url, _('Rate user'))
 
     get_star_rating.short_description = _('Star rating')
     get_star_rating.allow_tags = True
+    get_star_rating.admin_order_field = 'star_rating'
 
     def get_email_status(self, obj):
         if EmailAddress.objects.filter(verified=True, email=obj.email, user=obj).exists():
@@ -241,6 +237,11 @@ class UserAdmin(TrackingAdmin):
                  'obj': obj})
         return super(UserAdmin, self).render_change_form(
             request, context, add, change, form_url, obj)
+
+    def get_queryset(self, request):
+        queryset = super(UserAdmin, self).get_queryset(request)
+        queryset = queryset.annotate(star_rating=Sum('organisationalrating__rated_by_ahr'))
+        return queryset
 
     # Utils.
 
