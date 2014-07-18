@@ -7,6 +7,7 @@ from django.db.models import Count
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import ObjectDoesNotExist
+from allauth.account.models import EmailAddress
 
 from ...market.models import MarketItemActions, MarketItemNextSteps, MarketItemViewCounter
 from ..models import IncidentTracking, UserTracking
@@ -146,7 +147,7 @@ class UserAdmin(TrackingAdmin):
     list_display_links = ('id', 'get_screen_name')
     list_display = (
         'id', 'get_screen_name', 'get_signup_date', 'get_full_name',
-        'get_nationality', 'get_resident_country', 'email',
+        'get_nationality', 'get_resident_country', 'email', 'get_email_status',
         #'get_request_count', 'get_offer_count', 'get_comment_count',
         'last_login', 'is_admin', 'get_star_rating'
     )
@@ -212,6 +213,12 @@ class UserAdmin(TrackingAdmin):
 
     get_star_rating.short_description = _('Star rating')
     get_star_rating.allow_tags = True
+
+    def get_email_status(self, obj):
+        if EmailAddress.objects.filter(verified=True, email=obj.email, user=obj).exists():
+            return 'true'
+        return 'false'
+    get_email_status.short_description = _('Email verified')
 
     # Overridden methods.
 
