@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.core.urlresolvers import reverse
+from django.db.models import Count, Sum
 from django.utils.translation import ugettext_lazy as _
+from allauth.account.models import EmailAddress
 
 from ...market.models import MarketItemViewCounter
 from ..models import UserTracking
