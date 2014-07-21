@@ -107,12 +107,12 @@ def send_recommendation(request, rec_type, obj_id, rtype):
             'post_date': market_item.pub_date if market_item else ''}
         try:
             email = EmailMessage(
-                _('User Supplied via form'),
+                subject,
                 render_to_string('emails/recommendation_message.html', context),
                 constance.config.NO_REPLY_EMAIL,
                 emlrecips
             )
-            email.content_subtype = "plain"
+            email.content_subtype = "html"
             email.send()
             _update_email_recommendations(market_item, emlrecips)
         except Exception as e:
