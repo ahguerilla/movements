@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 import constance
 from django.http import Http404
 
@@ -97,11 +98,17 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                 badrecipients.append(recipient + " (unknown user)")
 
     if len(emlrecips) > 0:
-        emlbody = render_to_string('emails/recommendmessage.eml', msgcontext)
+        context = {
+            'message': request.POST['message'],
+            'screen_name': request.user.username,
+            'post_link': request.build_absolute_uri(reverse('show_post', args=[obj_id])),
+            'post_title': market_item.title if market_item else '',
+            'registration_link': reverse('sign_up'),
+            'post_date': market_item.pub_date if market_item else ''}
         try:
             email = EmailMessage(
-                subject,
-                emlbody,
+                _('User Supplied via form'),
+                render_to_string('emails/recommendation_message.html', context),
                 constance.config.NO_REPLY_EMAIL,
                 emlrecips
             )

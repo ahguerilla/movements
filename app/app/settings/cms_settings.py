@@ -24,3 +24,6 @@ CMS_PLACEHOLDER_CONF = {
         'plugins': ['TextPlugin',],
     },
 }
+
+# Reverse id for cms pages.
+CMS_PAGE_TERMS = 'terms-and-conditions'
