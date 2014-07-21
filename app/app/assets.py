@@ -23,6 +23,7 @@ js = Bundle(
         './js/region_accordion_select.js',
         './js/lib/jquery.rateit.min.js',
         './js/email_confirmation.js',
+        './js/signup.js',
     ),
     filters='jsmin',
     output='./js/packed.js'

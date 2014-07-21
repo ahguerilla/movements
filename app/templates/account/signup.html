@@ -113,3 +113,10 @@
 {% endblock %}
 
 
+{% block endjavascript %}
+  <script type="text/javascript">
+    $(function(){
+      window.ahr.widgets.initSignup();
+    });
+  </script>
+{% endblock %}
