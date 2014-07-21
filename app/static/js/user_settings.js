@@ -115,7 +115,12 @@
         type: 'post'
       });
       dfrd.done(function(data){
-        $('#changeavatardialog').modal('hide');
+        var $errors = $(data).find('.errorlist li');
+        if ($errors.length) {
+          window.ahr.alert($errors.html(), '#avataralert');
+        } else {
+          $('#changeavatardialog').modal('hide');
+        }
       });
 
       return false;
