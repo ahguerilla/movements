@@ -13,11 +13,15 @@
       var request = $.get($(e.currentTarget).attr('href')),
         that = this;
       request.done(function (resp) {
+
+        var template_data = {
+          'termConditionsText': $(resp).find('.cms-body-content').html(),
+          'acceptCheck': $('#accept_terms_tpl').html()
+        };
+        var termsContent = _.template($('#accept_terms_page_tpl').html(), template_data);
         that.$acceptTerms.prop('checked', false);
         $.colorbox({
-          width: "100%",
-          height: '100%',
-          html: $(resp).find('.content-page').html() + $('#accept_terms_tpl').html()
+          html: termsContent
         });
       });
     },

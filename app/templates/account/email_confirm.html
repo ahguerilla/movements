@@ -51,6 +51,16 @@
     <input type="checkbox" name="colorbox_accept_terms"><b>{% trans 'I have read and accepted the terms and conditions' %}</b>
   </div>
 </script>
+<script type="text/template" id="accept_terms_page_tpl">
+  <div class="container content-page">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <%= termConditionsText %>
+      </div>
+    </div>
+    <%= acceptCheck %>
+  </div>
+</script>
 <script type="text/javascript">
   $(function(){
     window.ahr.widgets.initConfirmation();
