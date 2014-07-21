@@ -24,7 +24,7 @@
     {% user_display confirmation.email_address.user as user_display %}
     {% get_setting 'CMS_PAGE_TERMS' as page_terms %}
     {% page_url page_terms as terms_url %}
-    <p>{% blocktrans with confirmation.email_address.email as email %}Before confirming that <a href="mailto:{{email}}">{{ email }}</a> is the e-mail address you provided for the user {{ user_display }}, please read and accept the <a class="terms" href="{{ terms_url }}">terms and conditions</a>.{% endblocktrans %}</p>
+    <p>{% blocktrans with confirmation.email_address.email as email %}Before confirming that <a href="mailto:{{email}}">{{ email }}</a> is the e-mail address you provided for the user {{ user_display }}, please read and accept the <a class="terms" href="{{ terms_url }}">acceptable use policy</a>.{% endblocktrans %}</p>
     <form class="form-horizontal" method="post" action="{% url 'users_confirm_email' confirmation.key %}">
       {% csrf_token %}
       <div id="accept_terms" style="display: none;">
@@ -48,7 +48,17 @@
 <script id="accept_terms_tpl" type="text/html">
 <div class="row">
   <div class="col-md-offset-2 col-md-8">
-    <input type="checkbox" name="colorbox_accept_terms"><b>{% trans 'I have read and accepted the terms and conditions' %}</b>
+    <input type="checkbox" name="colorbox_accept_terms"><b>{% trans 'I have read and accepted the acceptable use policy' %}</b>
+  </div>
+</script>
+<script type="text/template" id="accept_terms_page_tpl">
+  <div class="container content-page">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <%= termConditionsText %>
+      </div>
+    </div>
+    <%= acceptCheck %>
   </div>
 </script>
 <script type="text/javascript">

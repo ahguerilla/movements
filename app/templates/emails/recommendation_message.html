@@ -1,6 +1,14 @@
 {% extends 'emails/base_email.html' %}
 
+{% block greeting %}
+  <p>A message from Movements.Org,</p>
+{% endblock %}
+
 {% block body %}
+  <p>
+  {{ message }}
+  </p>
+
   <p>
     This email was sent to you by {{ screen_name }}, a registered user on Movements.org.
     Movements helps activists in need connect directly with the people who have the skills and
@@ -15,10 +23,10 @@
     <p>Post Title: {{ post_title }}</p>
   {% endif %}
   {% if post_link %}
-    <p>Post URL {{ post_link }}</p>
+    <p>Post URL: {{ post_link }}</p>
   {% endif %}
   {% if post_date %}
-    <p>Date of Post {{ post_date }}</p>
+    <p>Date of Post: {{ post_date }}</p>
   {% endif %}
   <p>
     This email was automatically created by Movements.org. You cannot reply to this email but can reply
@@ -26,4 +34,7 @@
   </p>
   <br>
   <p>Thank you,</p>
+{% endblock %}
+
+{% block update_settings %}
 {% endblock %}
