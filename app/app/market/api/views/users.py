@@ -103,7 +103,7 @@ def send_recommendation(request, rec_type, obj_id, rtype):
             'screen_name': request.user.username,
             'post_link': request.build_absolute_uri(reverse('show_post', args=[obj_id])),
             'post_title': market_item.title if market_item else '',
-            'registration_link': reverse('sign_up'),
+            'registration_link': request.build_absolute_uri(reverse('sign_up')),
             'post_date': market_item.pub_date if market_item else ''}
         try:
             email = EmailMessage(

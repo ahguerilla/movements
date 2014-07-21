@@ -23,10 +23,10 @@
     <p>Post Title: {{ post_title }}</p>
   {% endif %}
   {% if post_link %}
-    <p>Post URL {{ post_link }}</p>
+    <p>Post URL: {{ post_link }}</p>
   {% endif %}
   {% if post_date %}
-    <p>Date of Post {{ post_date }}</p>
+    <p>Date of Post: {{ post_date }}</p>
   {% endif %}
   <p>
     This email was automatically created by Movements.org. You cannot reply to this email but can reply
@@ -34,4 +34,7 @@
   </p>
   <br>
   <p>Thank you,</p>
+{% endblock %}
+
+{% block update_settings %}
 {% endblock %}
