@@ -527,6 +527,7 @@ footer .footer-nav-content li:last-child a {
 }
 #FooterSocialMedia_Small {
   display: none;
+  font-size: 10pt;
 }
 #FooterSocialMedia_Small .footer-copyright {
   margin-top: 15px;
@@ -534,7 +535,7 @@ footer .footer-nav-content li:last-child a {
 }
 #FooterSocialMedia_Small .social-icons {
   position: relative;
-  margin-top: 5px;
+  margin-top: 10px;
   left: 50%;
   margin-left: -108px;
 }
