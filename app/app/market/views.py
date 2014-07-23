@@ -14,12 +14,13 @@ def index(request):
     countries = Countries.objects.all()
     region_dict = {}
     for country in countries:
-        region = country.region
-        if region.id in region_dict:
-            region_dict[region.id].country_list.append(country)
-        else:
-            region_dict[region.id] = region
-            region.country_list = [country]
+        if country.region:
+            region = country.region
+            if region.id in region_dict:
+                region_dict[region.id].country_list.append(country)
+            else:
+                region_dict[region.id] = region
+                region.country_list = [country]
     regions = region_dict.values()
     regions = sorted(regions, key=lambda r: r.name)
     return render_to_response('market/market.html',

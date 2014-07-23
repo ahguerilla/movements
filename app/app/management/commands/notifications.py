@@ -45,10 +45,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         valid_item = Q(item__deleted=False) | Q(item=None)
-        a_day_ago = timezone.now() + relativedelta(days=-1)
-        a_week_ago = timezone.now() + relativedelta(days=-7)
         while True:
             logger.info('Running the notification process')
+            a_day_ago = timezone.now() + relativedelta(days=-1)
+            a_week_ago = timezone.now() + relativedelta(days=-7)
             try:
                 # Very simple notification implementation, might need to be made more efficient
                 # - for each user

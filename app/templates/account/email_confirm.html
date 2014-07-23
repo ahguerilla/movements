@@ -4,6 +4,8 @@
 {% user_display user as user_display %}
 {% load url from future %}
 {% load i18n %}
+{% load cms_tags %}
+{% load get_setting from settings %}
 
 {% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
 
@@ -11,11 +13,23 @@
 <div class="content-wrap">
   <div class="movements-form dialog">
     <h1>{% trans "Confirm E-mail Address" %}</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     {% if confirmation %}
     {% user_display confirmation.email_address.user as user_display %}
-    <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is the e-mail address you provided for the user {{ user_display }}.{% endblocktrans %}</p>
-    <form class="form-horizontal" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+    {% get_setting 'CMS_PAGE_TERMS' as page_terms %}
+    {% page_url page_terms as terms_url %}
+    <p>{% blocktrans with confirmation.email_address.email as email %}Before confirming that <a href="mailto:{{email}}">{{ email }}</a> is the e-mail address you provided for the user {{ user_display }}, please read and accept the <a class="terms" href="{{ terms_url }}">acceptable use policy</a>.{% endblocktrans %}</p>
+    <form class="form-horizontal" method="post" action="{% url 'users_confirm_email' confirmation.key %}">
       {% csrf_token %}
+      <div id="accept_terms" style="display: none;">
+        <input type="checkbox" name="accept_terms">
+      </div>
       <div class="col-md-offset-5 col-md-6">
         <div class="form-group">
           <button class="btn btn-action full-width" type="submit">{% trans 'Confirm' %}</button>
@@ -28,4 +42,28 @@
     {% endif %}
   </div>
 </div>
+{% endblock %}
+
+{% block endjavascript %}
+<script id="accept_terms_tpl" type="text/html">
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <input type="checkbox" name="colorbox_accept_terms"><b>{% trans 'I have read and accepted the acceptable use policy' %}</b>
+  </div>
+</script>
+<script type="text/template" id="accept_terms_page_tpl">
+  <div class="container content-page">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <%= termConditionsText %>
+      </div>
+    </div>
+    <%= acceptCheck %>
+  </div>
+</script>
+<script type="text/javascript">
+  $(function(){
+    window.ahr.widgets.initConfirmation();
+  });
+</script>
 {% endblock %}

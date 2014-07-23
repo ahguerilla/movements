@@ -11,6 +11,7 @@ js = Bundle(
         './js/lib/typeahead.js',
         './js/lib/jquery.cookie.js',
         './js/lib/Autolinker.js',
+        './colorbox/jquery.colorbox-min.js',
         './js/app_common.js',
         './js/base.js',
         './js/market.js',
@@ -21,6 +22,7 @@ js = Bundle(
         './js/view_post.js',
         './js/region_accordion_select.js',
         './js/lib/jquery.rateit.min.js',
+        './js/email_confirmation.js',
     ),
     filters='jsmin',
     output='./js/packed.js'
@@ -49,6 +51,7 @@ css_v2 = Bundle(
         './css/lib/typeahead.css',
         './css/lib/rateit.css',
         './css/fonts.css',
+        './colorbox/example1/colorbox.css',
     ),
     Bundle(
         './css/site_v2.styl',

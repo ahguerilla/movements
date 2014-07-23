@@ -743,6 +743,14 @@ h6 {
 #translate-menu-container {
   position: relative;
 }
+.messages {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.messages .warning {
+  color: #f00;
+}
 .page-banner {
   height: 550px;
   overflow: hidden;
@@ -2175,6 +2183,9 @@ input.borderless-control:focus:invalid:focus {
 }
 #notifications .movements-form .details.new {
   font-weight: bold;
+}
+#cboxOverlay {
+  background: #000;
 }
 
 
