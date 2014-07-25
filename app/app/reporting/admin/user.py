@@ -50,6 +50,12 @@ class EmailVerifiedFilter(admin.SimpleListFilter):
 
 
 class UserAdmin(TrackingAdmin):
+    #class Media:
+        #js = ('colorbox/jquery.colorbox.js',)
+        # css = {
+        #      'all': ('css/admin/my_own_admin.css',)
+        # }
+
     list_select_related = ('userprofile', 'organisationalrating', 'emailaddress')
     list_display_links = ('id', 'get_screen_name')
     list_display = (
@@ -58,6 +64,12 @@ class UserAdmin(TrackingAdmin):
         'get_signup_date', 'last_login', 'email', 'is_admin',
         #'get_request_count', 'get_offer_count', 'get_comment_count',
 
+    )
+    details_display = (
+        'id', 'get_screen_name', 'get_movements_rating', 'get_email_status',  'get_full_name',
+        'get_nationality', 'get_resident_country',
+        'get_signup_date', 'last_login', 'email', 'is_admin',
+        'get_fb', 'get_twitter', 'get_linkedin', 'get_website',
     )
     list_filter = (StarRatingListFilter, EmailVerifiedFilter, )
     change_list_template = 'admin/user_tracking_change_list.html'
@@ -122,6 +134,26 @@ class UserAdmin(TrackingAdmin):
     get_star_rating.allow_tags = True
     get_star_rating.admin_order_field = 'star_rating'
 
+    def get_movements_rating(self, obj):
+        return obj.star_rating if obj.star_rating else _('unassigned')
+    get_movements_rating.short_description = _('Movements Rating')
+
+    def get_fb(self, obj):
+        return obj.userprofile.fb_url or _("Not supplied")
+    get_fb.short_description = _('Facebook')
+
+    def get_twitter(self, obj):
+        return obj.userprofile.tweet_url or _("Not supplied")
+    get_twitter.short_description = _('Twitter')
+
+    def get_linkedin(self, obj):
+        return obj.userprofile.linkedin_url or _("Not supplied")
+    get_linkedin.short_description = _('Linked in')
+
+    def get_website(self, obj):
+        return obj.userprofile.web_url or _("Not supplied")
+    get_website.short_description = _('Website/blog')
+
     def get_email_status(self, obj):
         if EmailAddress.objects.filter(verified=True, email=obj.email, user=obj).exists():
             return 'true'
@@ -144,8 +176,8 @@ class UserAdmin(TrackingAdmin):
             context.update(
                 {'report_fields': [
                     (label, self._prep_field(obj, field))
-                    for label, field in zip(self._get_labels(self.list_display),
-                                            self.list_display)],
+                    for label, field in zip(self._get_labels(self.details_display),
+                                            self.details_display)],
                  'obj': obj})
         return super(UserAdmin, self).render_change_form(
             request, context, add, change, form_url, obj)

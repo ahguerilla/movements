@@ -70,7 +70,6 @@ def render_settings(request):
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
-                                'initial': initial,
                                 'interest_types': interest_types,
                                 'has_password': user.has_usable_password(),
                                 'skills': value('json', users.models.Skills.objects.all()),
