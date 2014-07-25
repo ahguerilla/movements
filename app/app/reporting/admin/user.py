@@ -118,7 +118,7 @@ class UserAdmin(TrackingAdmin):
         return u'{0} (<a href="{1}" target="_blank" alt="vet user">{2}</a>)'.format(
             stars, vet_url, _('Rate user'))
 
-    get_star_rating.short_description = _('Star rating')
+    get_star_rating.short_description = _('Movements rating')
     get_star_rating.allow_tags = True
     get_star_rating.admin_order_field = 'star_rating'
 
