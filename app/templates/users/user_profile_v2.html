@@ -22,7 +22,7 @@
         <div class="poster-name">{{ user_details.username }}</div>
         <div class="poster-rating"><span class="rateit"
               data-rateit-readonly="true"
-              data-rateit-value="{{ user_profile.score }}"
+              data-rateit-value="{{ ahr_rating }}"
               data-rateit-min="0"
               data-rateit-starwidth="22"
               data-rateit-starheight="17"
@@ -33,34 +33,9 @@
     {% if is_self and not is_public %}
     <div class="view-public action-font"><a href="?public">View Public Profile</a></div>
     {% endif %}
-    <hr />
-    <div class="settings-title">AHR Rating</div>
-    <div class="vetting-status">
-      <div class="poster-details">
-        <div class="poster-rating"><span class="rateit"
-              data-rateit-readonly="true"
-              data-rateit-value="{{ ahr_rating }}"
-              data-rateit-min="0"
-              data-rateit-starwidth="22"
-              data-rateit-starheight="17"
-              data-rateit-max="5"></span>
-          </div>
-      </div>
-      <div class="status {% if ahr_rating == 0 %}warn{% endif %}">
-        {% if ahr_rating > 0 %}
-          {% if is_public or not is_self %}This user has {% else %}You have{% endif %} been verified by Advancing Human Rights
-        {% else %}
-          {% if is_public or not is_self %}This user has {% else %}You have{% endif %} not been verified by Advancing Human Rights
-        {% endif %}
-      </div>
-    </div>
     {% if not is_self %}
     <hr />
     <div class="profile-actions">
-      <div username="{{ user_profile.user.username }}" score="{{ user_profile.score }}" usercore="{{ user_profile.score }}" ratecount="{{ user_profile.ratecount }}" class="rate-user rate">
-        <div class="profile-action-icon rate-icon"></div>
-        <div class="profile-action-text">Rate User</div>
-      </div>
       <div username="{{ user_profile.user.username }}" class="message-user private-message">
         <div class="profile-action-icon message-icon"></div>
         <div class="profile-action-text">Direct Message</div>
@@ -134,7 +109,6 @@
 
   {% include "market/clientside/messagedialog.html" %}
   {% include 'market/clientside/reportuserdialog.html' %}
-  {% include "market/clientside/ratedialog.html" %}
   {% include "market/clientside/pagination_template.html"%}
 
   <script type="text/javascript">
@@ -157,7 +131,6 @@
       initialize: function(){
         this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
         this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
-        this.rate_widget = window.ahr.rate_form_dialog.initWidget('body', this.resetitemrate);
       }
     });
     var profileView = new ProfileView();

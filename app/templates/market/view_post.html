@@ -20,7 +20,7 @@
           <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ post.owner }}">{{ post.owner }}</a></div>
           <div class="poster-rating"><span class="rateit"
                 data-rateit-readonly="true"
-                data-rateit-value="{{ post.owner.userprofile.score }}"
+                data-rateit-value="{{ post.owner.userprofile.ahr_rating }}"
                 data-rateit-min="0"
                 data-rateit-starwidth="22"
                 data-rateit-starheight="17"
