@@ -169,7 +169,7 @@
       },
       success: function(data){
         var r = data.result || "";
-        var m = data.message || "Unable to process email at this time"
+        var m = data.message || "Unable to process email at this time";
         $('#newsletter-conf').text(m);
         if(r === "success"){
           $("#sign-up-form").find('input').val("");
