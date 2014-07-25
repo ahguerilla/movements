@@ -23,14 +23,14 @@ class IncidentAdmin(TrackingAdmin):
     list_select_related = ('messageext',)
     readonly_fields = (
         'closed_date', 'title', 'details', 'pub_date',
-        'commentcount', 'ratecount', 'reportcount', 'score')
+        'commentcount', 'ratecount', 'reportcount', 'score', 'tweet_permission')
     exclude = ('countries', 'issues', 'skills', 'published', 'deleted')
     list_display_links = ('id', 'title',)
     list_display = (
         'id', 'title', 'commentcount', 'get_view_count',
         'get_email_rec_count', 'get_user_rec_count', 'get_conversation_count',
         'get_total_msg_count', 'get_screen_name', 'get_create_date',
-        'get_owner', 'get_aging', 'get_status', 'is_featured'
+        'get_owner', 'get_aging', 'get_status', 'is_featured', 'tweet_permission'
     )
     list_filter = ('status',)
     # Prevents duplicates.
