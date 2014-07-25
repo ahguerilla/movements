@@ -50,17 +50,11 @@ class EmailVerifiedFilter(admin.SimpleListFilter):
 
 
 class UserAdmin(TrackingAdmin):
-    #class Media:
-        #js = ('colorbox/jquery.colorbox.js',)
-        # css = {
-        #      'all': ('css/admin/my_own_admin.css',)
-        # }
-
     list_select_related = ('userprofile', 'organisationalrating', 'emailaddress')
     list_display_links = ('id', 'get_screen_name')
     list_display = (
         'id', 'get_screen_name', 'get_star_rating', 'get_email_status',  'get_full_name',
-        'get_nationality', 'get_resident_country',
+        'get_vet_info_count', 'get_nationality', 'get_resident_country',
         'get_signup_date', 'last_login', 'email', 'is_admin',
         #'get_request_count', 'get_offer_count', 'get_comment_count',
 
@@ -69,7 +63,7 @@ class UserAdmin(TrackingAdmin):
         'id', 'get_screen_name', 'get_movements_rating', 'get_email_status',  'get_full_name',
         'get_nationality', 'get_resident_country',
         'get_signup_date', 'last_login', 'email', 'is_admin',
-        'get_fb', 'get_twitter', 'get_linkedin', 'get_website',
+        'get_fb', 'get_twitter', 'get_linkedin', 'get_website', 'get_bio',
     )
     list_filter = (StarRatingListFilter, EmailVerifiedFilter, )
     change_list_template = 'admin/user_tracking_change_list.html'
@@ -154,11 +148,31 @@ class UserAdmin(TrackingAdmin):
         return obj.userprofile.web_url or _("Not supplied")
     get_website.short_description = _('Website/blog')
 
+    def get_bio(self, obj):
+        return obj.userprofile.bio or _("Not supplied")
+    get_bio.short_description = _('Bio')
+
+    def get_vet_info_count(self, obj):
+        count = 0
+        if obj.userprofile.fb_url:
+            count = count + 1
+        if obj.userprofile.tweet_url:
+            count = count + 1
+        if obj.userprofile.linkedin_url:
+            count = count + 1
+        if obj.userprofile.web_url:
+            count = count + 1
+        if obj.userprofile.web_url:
+            count = count + 1
+        return count
+    get_vet_info_count.short_description = _('Count social')
+
     def get_email_status(self, obj):
         if EmailAddress.objects.filter(verified=True, email=obj.email, user=obj).exists():
             return 'true'
         return 'false'
     get_email_status.short_description = _('Email verified')
+
 
     # Overridden methods.
 
