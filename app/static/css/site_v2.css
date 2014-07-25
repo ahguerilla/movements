@@ -213,6 +213,18 @@ body {
   font-family: "LinotypeUnivers-330Light";
   font-size: 16px;
 }
+.glyphicon {
+  color: #fe6d50;
+  font-size: 22px;
+}
+.glyphicon-question-sign {
+  position: absolute;
+  top: -2px;
+  right: -30px;
+}
+.glyphicon-question-sign:hover {
+  cursor: pointer;
+}
 .avatar img {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -1789,6 +1801,12 @@ input.borderless-control:focus:invalid:focus {
 .poster .poster-details .poster-name a {
   color: #262626;
   text-decoration: underline;
+}
+.poster .poster-details .poster-rating {
+  position: relative;
+}
+.poster .poster-details .poster-rating .popover {
+  width: 400px;
 }
 .settings-bar {
   background-color: #b6aba5;

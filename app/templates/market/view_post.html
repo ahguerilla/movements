@@ -18,14 +18,7 @@
         </div>
         <div class="poster-details">
           <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ post.owner }}">{{ post.owner }}</a></div>
-          <div class="poster-rating"><span class="rateit"
-                data-rateit-readonly="true"
-                data-rateit-value="{{ post.owner.userprofile.ahr_rating }}"
-                data-rateit-min="0"
-                data-rateit-starwidth="22"
-                data-rateit-starheight="17"
-                data-rateit-max="5"></span>
-            </div>
+          {% include "users/snippets/star_rating.html" with rating=post.owner.userprofile.ahr_rating %}
         </div>
       </div>
       {% if is_logged_in %}
@@ -132,6 +125,9 @@
   </script>
   <script type="text/javascript">
     (function() {
+      $('.gpopover').popover({
+        html: true
+      });
       ahr.initViewPost({
         getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}',
         addCommentUrl: "{% url 'add_comment' 'json' post.id %}"

@@ -19,15 +19,8 @@
         {% primary_avatar user_details 60 %}
       </div>
       <div class="poster-details">
-        <div class="poster-name">{{ user_details.username }}</div>
-        <div class="poster-rating"><span class="rateit"
-              data-rateit-readonly="true"
-              data-rateit-value="{{ ahr_rating }}"
-              data-rateit-min="0"
-              data-rateit-starwidth="22"
-              data-rateit-starheight="17"
-              data-rateit-max="5"></span>
-          </div>
+        <div class="poster-name">{{ user_profile.user.username }}</div>
+        {% include "users/snippets/star_rating.html" with rating=ahr_rating %}
       </div>
     </div>
     {% if is_self and not is_public %}
@@ -118,6 +111,9 @@
       userId = {{ user_details.id }};
       {% endif %}
       window.ahr.market.initProfile(userId);
+      $('.gpopover').popover({
+        html: true
+      });
     });
   </script>
 
