@@ -53,10 +53,11 @@ class UserAdmin(TrackingAdmin):
     list_select_related = ('userprofile', 'organisationalrating', 'emailaddress')
     list_display_links = ('id', 'get_screen_name')
     list_display = (
-        'id', 'get_screen_name', 'get_signup_date', 'get_full_name',
-        'get_nationality', 'get_resident_country', 'email', 'get_email_status',
+        'id', 'get_screen_name', 'get_star_rating', 'get_email_status',  'get_full_name',
+        'get_nationality', 'get_resident_country',
+        'get_signup_date', 'last_login', 'email', 'is_admin',
         #'get_request_count', 'get_offer_count', 'get_comment_count',
-        'last_login', 'is_admin', 'get_star_rating'
+
     )
     list_filter = (StarRatingListFilter, EmailVerifiedFilter, )
     change_list_template = 'admin/user_tracking_change_list.html'
