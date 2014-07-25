@@ -11,7 +11,7 @@ from .base import TrackingAdmin
 
 
 class UserAdmin(TrackingAdmin):
-    list_select_related = ('userprofile', 'organisationalrating')
+    list_select_related = ('userprofile', 'organisationalrating', 'emailaddress')
     list_display_links = ('id', 'get_screen_name')
     list_display = (
         'id', 'get_screen_name', 'get_signup_date', 'get_full_name',
@@ -19,7 +19,7 @@ class UserAdmin(TrackingAdmin):
         #'get_request_count', 'get_offer_count', 'get_comment_count',
         'last_login', 'is_admin', 'get_star_rating'
     )
-    list_filter = ('organisationalrating__rated_by_ahr',)
+    list_filter = ('organisationalrating__rated_by_ahr', 'emailaddress__verified')
     change_list_template = 'admin/user_tracking_change_list.html'
     change_form_template = 'admin/user_tracking_change_form.html'
     csv_field_exclude = (
