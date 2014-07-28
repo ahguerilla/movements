@@ -28,7 +28,7 @@ class IncidentAdmin(TrackingAdmin):
     list_display_links = ('id', 'title',)
     list_display = (
         'id', 'title', 'commentcount', 'get_view_count',
-        'get_email_rec_count', 'get_user_rec_count', 'get_conversation_count',
+        'get_email_rec_count', 'get_conversation_count', #'get_user_rec_count',
         'get_total_msg_count', 'get_screen_name', 'get_create_date',
         'get_owner', 'get_aging', 'get_status', 'is_featured', 'tweet_permission'
     )
@@ -44,9 +44,9 @@ class IncidentAdmin(TrackingAdmin):
         return obj.email_rec_count
     get_email_rec_count.short_description = _('number of email recommendations')
 
-    def get_user_rec_count(self, obj):
-        return obj.user_rec_count
-    get_user_rec_count.short_description = _('number of user recommendations')
+    # def get_user_rec_count(self, obj):
+    #     return obj.user_rec_count
+    # get_user_rec_count.short_description = _('number of user recommendations')
 
     def get_conversation_count(self, obj):
         return obj.conversation_count
@@ -122,17 +122,17 @@ class IncidentAdmin(TrackingAdmin):
             total_msg_count=Count('messageext', distinct=True),
             total_view_count=Count('marketitemviewcounter', distinct=True),
         )
-        user_rec_dict = dict(orig_queryset.filter(
-            messageext__is_post_recommendation=True).annotate(
-                user_rec_count=Count('messageext')
-            ).values_list('id', 'user_rec_count'))
+        # user_rec_dict = dict(orig_queryset.filter(
+        #     messageext__is_post_recommendation=True).annotate(
+        #         user_rec_count=Count('messageext')
+        #     ).values_list('id', 'user_rec_count'))
         conversation_dict = dict(orig_queryset.filter(
             messageext__parent=None).annotate(
                 conversation_count=Count('messageext')
             ).values_list('id', 'conversation_count'))
         market_items = queryset[:]
         for item in market_items:
-            item.user_rec_count = user_rec_dict.get(item.id, 0)
+            #item.user_rec_count = user_rec_dict.get(item.id, 0)
             item.conversation_count = conversation_dict.get(item.id, 0)
         return market_items
 
