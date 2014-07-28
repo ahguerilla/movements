@@ -15,7 +15,7 @@ from app.market.models import MarketItem, EmailRecommendation
 from app import users
 
 
-EMAILRE = re.compile("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$")
+EMAILRE = re.compile("^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$")
 
 
 @login_required
