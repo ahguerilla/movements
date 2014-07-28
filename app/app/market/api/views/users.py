@@ -37,7 +37,7 @@ def send_message(request, to_user, rtype):
         msg = pm_write(sender=request.user,
                        recipient=users.models.User.objects.filter(username=to_user)[0],
                        subject=request.POST['subject'],
-                       body=request.POST['message'])
+                       body=request.POST['message'], truncate=True)
 
         if market_item:
             msg.messageext.market_item = market_item
@@ -88,7 +88,7 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                         sender=request.user,
                         recipient=users.models.User.objects.filter(username=recipient)[0],
                         subject=subject,
-                        body=body)
+                        body=body, truncate=True)
                     if rec_type == 'item':
                         msg.messageext.is_post_recommendation = True
                         msg.messageext.market_item = market_item
