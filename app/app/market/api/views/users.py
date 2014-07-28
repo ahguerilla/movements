@@ -64,7 +64,8 @@ def send_recommendation(request, rec_type, obj_id, rtype):
     else:
         additionals = obj_id
 
-    recipients = re.split("\s*[ ;,]\s*", request.POST['recipients'])
+    recipients = re.split("\s*[;,]\s*", request.POST['recipients'])
+    recipients = [x.strip() for x in recipients]
     badrecipients = []
     msgcontext = {'message': request.POST['message'],
                   'additionals': additionals,
@@ -78,24 +79,25 @@ def send_recommendation(request, rec_type, obj_id, rtype):
     emlrecips = []
 
     for recipient in recipients:
-        if EMAILRE.match(recipient):
-            emlrecips.append(recipient)
-        else:
-            try:
-                msg = pm_write(
-                    sender=request.user,
-                    recipient=users.models.User.objects.filter(username=recipient)[0],
-                    subject=subject,
-                    body=body)
-                if rec_type == 'item':
-                    msg.messageext.is_post_recommendation = True
-                    msg.messageext.market_item = market_item
-                else:
-                    msg.messageext.is_user_recommendation = True
-                msg.messageext.save()
-            except Exception as e:
-                print "Exception sending to %s: %s %s:" % (recipient, type(e), e)
-                badrecipients.append(recipient + " (unknown user)")
+        if len(recipient) > 0:
+            if EMAILRE.match(recipient):
+                emlrecips.append(recipient)
+            else:
+                try:
+                    msg = pm_write(
+                        sender=request.user,
+                        recipient=users.models.User.objects.filter(username=recipient)[0],
+                        subject=subject,
+                        body=body)
+                    if rec_type == 'item':
+                        msg.messageext.is_post_recommendation = True
+                        msg.messageext.market_item = market_item
+                    else:
+                        msg.messageext.is_user_recommendation = True
+                    msg.messageext.save()
+                except Exception as e:
+                    print "Exception sending to %s: %s %s:" % (recipient, type(e), e)
+                    badrecipients.append(recipient + " (unknown user)")
 
     if len(emlrecips) > 0:
         context = {
