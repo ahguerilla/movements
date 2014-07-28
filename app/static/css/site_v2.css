@@ -1806,7 +1806,8 @@ input.borderless-control:focus:invalid:focus {
   position: relative;
 }
 .poster .poster-details .poster-rating .popover {
-  width: 400px;
+  width: 260px;
+  font-size: 10px;
 }
 .settings-bar {
   background-color: #b6aba5;
