@@ -56,7 +56,9 @@ def check_perms_and_get(object_class):
     return __decorator
 
 
-def pm_write(sender, recipient, subject, body=''):
+def pm_write(sender, recipient, subject, body='', truncate=False):
+    if truncate:
+        subject = (subject[:115] + '..') if len(subject) > 120 else subject
     message = Message(
         subject=subject, body=body, sender=sender, recipient=recipient)
     initial_status = message.moderation_status

@@ -35,7 +35,7 @@ from django.template.loader import render_to_string
 from django.utils import translation
 
 
-def render_settings(request, initial=False):
+def render_settings(request):
     template = 'users/user_settings_v2.html'
     user = User.objects.get(pk=request.user.id)
     try:
@@ -55,8 +55,6 @@ def render_settings(request, initial=False):
             settings.save()
             settings_form.save_m2m()
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successful.')
-            if initial:
-                template = 'users/welcome.html'
     else:
         user_form = UserForm(instance=request.user)
         settings_form = SettingsForm(instance=settings)
@@ -72,7 +70,6 @@ def render_settings(request, initial=False):
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
-                                'initial': initial,
                                 'interest_types': interest_types,
                                 'has_password': user.has_usable_password(),
                                 'skills': value('json', users.models.Skills.objects.all()),
@@ -81,13 +78,6 @@ def render_settings(request, initial=False):
                                 'errors': errors,
                               },
                               context_instance=RequestContext(request))
-
-
-@login_required
-def initial_settings(request):
-    if hasattr(request.user, 'userprofile'):
-        return HttpResponseRedirect(reverse('user_settings'))
-    return render_settings(request, True)
 
 
 @login_required
