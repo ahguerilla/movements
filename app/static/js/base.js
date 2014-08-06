@@ -134,6 +134,10 @@
       container: '#add-post-popup-container',
       placement: 'bottom'
     });
+
+    $('#add-post').on('shown.bs.popover', function(){
+        $('#add-post-popup-container .popover').css("left", ($(document).screenX - 150).toString() + "px");
+    });
   }
 
   function setupProfileMenuPopover() {

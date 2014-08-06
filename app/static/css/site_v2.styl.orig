@@ -228,18 +228,6 @@ body
 .container
   //max-width 960px
 
-.glyphicon
-  color #fe6d50
-  font-size 22px
-
-.glyphicon-question-sign
-  position absolute
-  top -2px
-  right -30px
-
-.glyphicon-question-sign:hover
-  cursor pointer
-
 .avatar
   img
     border-radius 50%
@@ -280,6 +268,21 @@ body
         padding-top 3px
     .nav-avatar
       position absolute
+<<<<<<< HEAD
+      width 90px
+      left 90px
+      top 9px
+      color $inactive-font
+      img
+        float left
+        margin-right 3px
+      .action-font
+        display inline-block
+        margin-top 6px
+  .navbar-right
+    float: right !important
+
+=======
       top 3px
       left 47px
       width 46px
@@ -312,8 +315,7 @@ body
         width 30px
       #main-nav-message-count.notification-count
         top -5px
-  .navbar-right
-    float right !important
+>>>>>>> master
 
 $home-head-height = 85px
 .home-page-nav
@@ -490,13 +492,12 @@ footer
 
 #FooterSocialMedia_Small
   display none
-  font-size 10pt
   .footer-copyright
     margin-top 15px
     text-align center
   .social-icons
     position relative
-    margin-top 10px
+    margin-top 5px
     left 50%
     margin-left -108px
     img
@@ -665,13 +666,6 @@ h1,h2,h3,h4,h5,h6
 
 #translate-menu-container
   position relative
-
-.messages
-  margin 0
-  padding 0
-  list-style none
-  .warning
-    color #FF0000
 
 // **************************************
 // Landing page styles
@@ -1342,11 +1336,6 @@ popoverDropdown(width, showIcon = true)
       a
         color $main-font
         text-decoration underline
-    .poster-rating
-      position relative
-      .popover
-        width 260px
-        font-size 10px
 
 // **************************************
 // exchange page
@@ -1655,9 +1644,3 @@ popoverDropdown(width, showIcon = true)
       width 150px
     .details.new
       font-weight bold
-
-// **************************************
-// Colorbox overrides
-// **************************************
-#cboxOverlay
-  background #000000

@@ -51,7 +51,7 @@
 {% block header_nav %}
 <nav class="navbar navbar-default header-nav {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
   <div class="container" style="position:relative;">
-      <div id="NavLeftMenus" class="navbar-left">
+      <div class="navbar-left">
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
         </div>
@@ -75,13 +75,13 @@
         {% endif %}
       </div>
     {% if user.is_authenticated and not user.userprofile.first_login %}
-      <div id="NavRightLoggedIn" class="navbar-right">
+      <div class="navbar-right">
         <a id="add-post" class="btn btn-action"><img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
             <span id="AddPostText"> Add Post</span></a>
         <div id="add-post-popup-container"></div>
       </div>
     {% else %}
-      <div id="NavRightLoggedOut" class="navbar-right">
+      <div class="navbar-right">
         <a href="{% url 'account_login' %}" class="btn btn-action">Login</a>
       </div>
     {% endif %}
@@ -94,6 +94,53 @@
 <div id="main-cms-nav" style="display: none;">
   <div class="container">
     <div class="row">
+<<<<<<< HEAD
+      <div class="col-xs-3">
+        <h4>About Movements</h4>
+        {% show_menu_below_id "col1" 0 100 100 100 %}
+      </div>
+      <div class="col-xs-3">
+        <h4>Navigation</h4>
+        {% if not user.is_authenticated %}
+          <li>
+            <a href="{% url 'account_login' %}">Login</a>
+          </li>
+          <li>
+            <a href="{% url 'signup_start' %}">Sign up</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{% url 'postman_inbox' %}">Inbox</a>
+          </li>
+          <li>
+            <a href="{% url 'show_notifications' %}">Alerts</a>
+          </li>
+          <li>
+            <a href="{% url 'user_profile' %}">Profile</a>
+          </li>
+          <li>
+            <a href="{% url 'user_settings' %}">Settings</a>
+          </li>
+          <li>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                <a href="#" onclick="parentNode.submit();">Logout</a>
+              </form>
+          </li>
+        {% endif %}
+          <li>
+            <a href="{% url 'show_market' %}">Exchange</a>
+          </li>
+        {% show_menu_below_id "col2" 0 100 100 100 %}
+      </div>
+      <div class="col-xs-3">
+        <h4>Our Terms</h4>
+        {% show_menu_below_id "col3" 0 100 100 100 %}
+      </div>
+      <div class="col-xs-3">
+        <h4>Resources</h4>
+        {% show_menu_below_id "col4" 0 100 100 100 %}
+=======
       <div class="main-menu-slider">
         <ul>
           {% if not user.is_authenticated %}
@@ -104,6 +151,7 @@
             <li><h3><a href="{% url 'show_market' %}">Visit market</a></h3></li>
           {% endif %}
         </ul>
+>>>>>>> master
       </div>
     </div>
   </div>
@@ -122,8 +170,73 @@
 
 {% block footer_padding %}<div style="height: 30px"></div>{% endblock %}
 <footer>
-  <div id="FooterSocialMedia_Big" class="footer">
+  <div class="footer">
     <div class="container">
+<<<<<<< HEAD
+      <div id="FooterSocialMedia_Big">
+          <div class="row">
+            <div class="col-xs-4">
+              <h4>{% trans "Get updates"  %}</h4>
+              <form>
+                <div class="form-group">
+                  <input class="form-control" id="id_email" name="email" type="text" placeholder="Enter your e-mail...">
+                </div>
+              </form>
+              <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>
+            </div>
+            <div class="col-xs-3">
+              <h4>{% trans "Connect with us"  %}</h4>
+              <div class="social-icons">
+                <a href="/movements/">
+                  <img src="{{ STATIC_URL }}images/v2/twitter-bigger.png" alt="Connect with Twitter" >
+                </a>
+                <a href="">
+                  <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="Connect with Facebook" >
+                </a>
+                <a href="">
+                  <img src="{{ STATIC_URL }}images/v2/gplus-bigger.png" alt="Connect with Google Plus" >
+                </a>
+              </div>
+            </div>
+            <div class="col-xs-5">
+              <h4>{% trans "About Movements"  %}</h4>
+              <p>{% blocktrans %}Movements.org connects human rights activists in closed societies with people around the world with the skills to help.{% endblocktrans %}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
+            </div>
+            <div class="col-xs-6">
+              <div class="footer-nav-content">
+                {% show_menu 0 100 100 100 "cms/navs/bottom_nav_v2.html" %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="FooterSocialMedia_Small">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="social-icons">
+                Connect with us:
+                <a href="/movements/">
+                  <img src="{{ STATIC_URL }}images/v2/twitter.png" alt="Twitter" >
+                </a>
+                <a href="">
+                  <img src="{{ STATIC_URL }}images/v2/facebook.png" alt="Facebook" >
+                </a>
+                <a href="">
+                  <img src="{{ STATIC_URL }}images/v2/gplus.png" alt="Google+" >
+                </a>
+              </div>
+            </div>
+=======
       <div class="row">
         <div class="col-xs-4">
           <h4>{% trans "Get updates"  %}</h4>
@@ -150,7 +263,7 @@
           </div>
         </div>
         <div class="col-xs-5">
-          <h4>{% trans "About MOVEMENTS"  %}</h4>
+          <h4>{% trans "About Movements"  %}</h4>
           <p>{% blocktrans %}Crowdsourcing the fight for human rights. The online platform that is opening closed societies.{% endblocktrans %}</p>
         </div>
       </div>
@@ -162,24 +275,10 @@
         <div class="col-xs-6">
           <div class="footer-nav-content">
             {% show_menu 0 100 100 100 "cms/navs/bottom_nav_v2.html" %}
+>>>>>>> master
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div id="FooterSocialMedia_Small" class="footer">
-    <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
-    <div class="social-icons">
-        {% trans "Connect with us"  %}
-        <a target="_blank" href="https://twitter.com/movements_org">
-          <img src="{{ STATIC_URL }}images/v2/twitter.png" alt="Twitter" >
-        </a>
-        <a target="_blank" href="https://www.facebook.com/Movements.org">
-          <img src="{{ STATIC_URL }}images/v2/facebook.png" alt="Facebook" >
-        </a>
-        <a href="">
-          <img src="{{ STATIC_URL }}images/v2/gplus.png" alt="Google Plus" >
-        </a>
     </div>
   </div>
 </footer>

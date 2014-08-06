@@ -267,7 +267,7 @@ body {
   padding-top: 15px;
 }
 .header-nav .navbar-left {
-  position: relative;
+  position: absolute;
 }
 .header-nav .navbar-left .menu-selector {
   position: absolute;
@@ -324,6 +324,9 @@ body {
 .header-nav .navbar-left .nav-messages #main-nav-message-count.notification-count {
   top: -5px;
 }
+.header-nav .navbar-right {
+  float: right !important;
+}
 .home-page-nav {
   height: 85px;
   color: #756b65;
@@ -352,6 +355,11 @@ body {
 .home-page-nav a {
   color: #756b65;
   text-decoration: underline;
+}
+#add-post-popup-container .popover {
+  left: inherit;
+  right: 14px;
+  width: 136px;
 }
 #add-post-popup-container .popover-content {
   width: 132px;
@@ -527,6 +535,24 @@ footer .footer-nav-content li:first-child {
   border-left: none;
 }
 footer .footer-nav-content li:last-child a {
+  margin-right: 0;
+}
+#FooterSocialMedia_Small {
+  display: none;
+  font-size: 10pt;
+}
+#FooterSocialMedia_Small .footer-copyright {
+  margin-top: 15px;
+  text-align: center;
+}
+#FooterSocialMedia_Small .social-icons {
+  position: relative;
+  margin-top: 10px;
+  left: 50%;
+  margin-left: -108px;
+}
+#FooterSocialMedia_Small .social-icons img {
+  margin-left: 15px;
   margin-right: 0;
 }
 .footer-navbar {
@@ -1402,6 +1428,9 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .hidden-menu li.active a {
   border-bottom: 2px solid #756b65;
 }
+.hidden-menu {
+  display: none;
+}
 #itemandsearchwrap h2 {
   font-size: 18px;
   margin: 0 0 10px 0;
@@ -2180,12 +2209,81 @@ input.borderless-control:focus:invalid:focus {
 }
 
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .movements-form {
     padding: 25px 15px 25px 15px;
   }
   .extended-form {
     padding: 0 15px 0 15px;
+  }
+}
+
+
+@media (max-width: 767px) {
+  #NavLeftMenus {
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+  #NavRightLoggedIn {
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+  #NavRightLoggedOut {
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+  #view-content-menu {
+    width: 41px;
+  }
+  #view-content-menu .action-font {
+    display: none;
+  }
+  #view-profile-menu {
+    width: 41px;
+    left: 45px;
+  }
+  #view-profile-menu .action-font {
+    display: none;
+  }
+  footer #FooterSocialMedia_Big {
+    display: none;
+  }
+  footer #FooterSocialMedia_Small {
+    display: inherit;
+  }
+}
+@media (max-width: 579px) {
+  #AlreadyHaveText {
+    display: none;
+  }
+}
+@media (max-width: 530px) {
+  #FilterByType {
+    float: none !important;
+    position: relative;
+    left: 50%;
+    margin-left: -100px;
+  }
+  #FilterDropdowns {
+    float: none !important;
+    position: relative;
+    left: 50%;
+    margin-left: -135px;
+    margin-top: 18px;
+  }
+  .exchange-filters .search-expanded {
+    position: relative;
+    left: 50%;
+    margin-left: -135px;
+    width: 270px;
+  }
+}
+@media (max-width: 479px) {
+  #AddPostText {
+    display: none;
+  }
+  #add-post-popup-container .arrow {
+    left: 112px;
   }
 }
 
