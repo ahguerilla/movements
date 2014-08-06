@@ -36,6 +36,7 @@ class Comment(models.Model):
         adict['fields']['avatar'] = reverse('avatar_render_primary', args=[self.owner.username, 60])
         adict['fields']['username'] = self.owner.username
         adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[self.owner.username])
+        adict['fields']['delete_url'] = reverse('delete_comment')
         adict['score'] = self.owner.userprofile.score
         adict['ratecount'] = self.owner.userprofile.ratecount
         return adict
