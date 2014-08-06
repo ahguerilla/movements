@@ -29,7 +29,7 @@
           <div class="carousel-inner">
             <div class="item active" style="background-image: url('{{ STATIC_URL }}images/v2/backgrounds/shutterstock_185872262_reduced.jpg');">
               <div class="carousel-filter">
-                <div class="container carousel-content">
+                <div class="carousel-content">
                   <div class="carousel-title">
                     {% blocktrans %}Crowdsourcing the fight for human rights.{% endblocktrans %}
                   </div>
@@ -41,12 +41,17 @@
                       <button class="btn btn-action">{%trans "Sign up now"%}</button>
                     </a>
                   </div>
+                  <div class="carousel-button" id="FindOutMoreButton">
+                    <a href="{% page_url 'how_it_works' %}">
+                      <button class="btn btn-action">{%trans "Find out more"%}</button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="item" style="background-image: url('{{ STATIC_URL }}images/v2/backgrounds/shutterstock_165869969_reduced.jpg');">
               <div class="carousel-filter">
-                <div class="container carousel-content">
+                <div class="carousel-content">
                   <div class="carousel-title">
                     {% blocktrans %}Request help from people across the globe, offer help to an activist in need.{% endblocktrans %}
                   </div>
@@ -54,6 +59,11 @@
                     <div>{% blocktrans %}Whether you’re a journalist, artist, technologist, policy-maker, linguist or PR agent - everyone has skills that can advance human rights.{% endblocktrans %}</div>
                   </div>
                   <div class="carousel-button">
+                    <a href="{% url 'signup_start' %}">
+                      <button class="btn btn-action">{%trans "Sign up now"%}</button>
+                    </a>
+                  </div>
+                  <div class="carousel-button" id="FindOutMoreButton">
                     <a href="{% page_url 'how_it_works' %}">
                       <button class="btn btn-action">{%trans "Find out more"%}</button>
                     </a>
