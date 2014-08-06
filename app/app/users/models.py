@@ -109,9 +109,9 @@ ahr_rating = [
 
 class UserProfile(models.Model):
     VISIBILITY_CHOICES = EnumChoices(
-        HIDDEN=(0, _('Hidden')),
-        SECURE=(1, _('Secure')),
-        PUBLIC=(2, _('Public')),
+        HIDDEN=(0, _('Hidden - only your screen name and avatar is shared')),
+        SECURE=(1, _('Secure - only your screen name, skills and country is shared')),
+        PUBLIC=(2, _('Public - all your profile information is shared')),
     )
     NOTIFICATION_FREQUENCY = EnumChoices(
         NEVER=(0, _('Never')),

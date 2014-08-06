@@ -1,17 +1,29 @@
 {% extends "admin/change_form.html" %}
 {% load i18n admin_urls admin_static admin_modify %}
 
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static "colorbox/example1/colorbox.css" %}" />
+{% endblock %}
+
 {% block field_sets %}
   <fieldset class="module aligned {{ fieldset.classes }}">
     <h2>{% trans 'User details' %}</h2>
     <div class="form-row">
       <table class="user-details">
+        <tr>
+          <td>
+            <a href='javascript:history.go(-1)'>Back</a>
+          </td>
+          <td>
+            <button id="rateuser-button" href="/admin/auth/user/{{ obj.id }}/vet">Update movements rating rating</button>
+          </td>
+        </tr>
         {% for label, field in report_fields %}
           {% if field %}
             <tr><td><b>{{ label }}</b></td><td>{{ field }}</td></tr>
           {% endif %}
         {% endfor %}
-        <tr><td></td><td></td></tr>
         {% with requests=obj.get_requests %}
           {% if requests %}
             <tr>
@@ -43,6 +55,22 @@
       </table>
     </div>
   </fieldset>
+  <script type="text/javascript" src="{% static "js/lib/jquery-1.11.0.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "colorbox/jquery.colorbox.js" %}"></script>
+  <script type="text/javascript">
+     $('#rateuser-button').colorbox(
+         {
+           iframe:true,
+           innerWidth:750,
+           innerHeight:300,
+           close: "close",
+           onClosed: function(){
+             location.reload();
+           }
+         }
+     )
+  </script>
+
 {% endblock %}
 
 {% block submit_buttons_bottom %}{% endblock %}
