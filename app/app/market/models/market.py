@@ -92,6 +92,7 @@ class MarketItem(models.Model):
         adict['fields']['edit_url'] = ""
         adict['fields']['report_url'] = ""
         adict['fields']['attributes_url'] = ""
+        adict['fields']['tweet_permission'] = self.tweet_permission
         return adict
 
     def getdict(self, request=None):
@@ -107,6 +108,7 @@ class MarketItem(models.Model):
         adict['fields']['userratecount'] = self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['ratecount'] = self.ratecount
         adict['fields']['score'] = self.score
+        adict['fields']['tweet_permission'] = self.tweet_permission
         if request:
             adict['fields']['hidden'] = self.marketitemhidden_set.filter(viewer_id=request.user.id).exists()
             adict['fields']['stick'] = self.marketitemstick_set.filter(viewer_id=request.user.id,

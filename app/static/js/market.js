@@ -409,7 +409,8 @@ $(function () {
 
     events: {
       'click .market-place-item .item-menu': 'showMenuItem',
-      'click .item-action-menu a': 'itemAction'
+      'click .item-action-menu a': 'itemAction',
+      'click .share-twitter': 'shareTwitter'
     },
 
     defaultOptions: {
@@ -453,6 +454,36 @@ $(function () {
       this.refresh();
 
       return this;
+    },
+
+    shareTwitter: function(ev) {
+      ev.preventDefault();
+
+      // url is (up to) 23 char, 140 total... 117 left for message, including automatic space separator.
+
+      var postUrl = ev.currentTarget.href;
+      var preamble = "New on #Movements: \"";
+      var postTitle = $(ev.currentTarget).closest(".market-place-item").find(".title").text();
+      var comment = preamble + postTitle + "\"";
+      if (comment.length > 116) {
+        comment = comment.substring(0, 112) + "...\"";
+      }
+      var twitterUrl = "https://twitter.com/share?url=" + encodeURIComponent(postUrl) + "&text=" + encodeURIComponent(comment);
+      this.openTwitterPopup(twitterUrl);
+    },
+
+    openTwitterPopup: function(url){
+      var width  = 575,
+        height = 400,
+        left   = ($(window).width()  - width)  / 2,
+        top    = ($(window).height() - height) / 2,
+        opts   = 'status=1' +
+                 ',width='  + width  +
+                 ',height=' + height +
+                 ',top='    + top    +
+                 ',left='   + left;
+
+      window.open(url, 'twitter', opts);
     },
 
     refresh: function() {

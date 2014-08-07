@@ -1064,7 +1064,7 @@ h6 {
   background: url("../images/v2/multi-select-arrow.png") 0 -10px;
 }
 .share-twitter {
-  display: none;
+  float: right;
 }
 input.borderless-control {
   border: none;
