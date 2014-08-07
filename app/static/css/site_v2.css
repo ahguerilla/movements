@@ -1819,6 +1819,7 @@ input.borderless-control:focus:invalid:focus {
 .view-post .comment .comment-body #CommentButtons {
   text-align: right;
   font-family: "HurmeGeometricSans3-SemiBold";
+  font-size: 14px;
 }
 .view-post .comment .comment-body #CommentButtons a {
   color: #756b65;

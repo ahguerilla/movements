@@ -46,6 +46,7 @@ def edit_comment(request, obj_id, rtype):
 @login_required
 @require_http_methods(["POST"])
 def delete_comment(request):
+    is_success = False
     obj_id = request.POST.get("commentID", 0)
     try:
         comment = Comment.objects.get(pk=obj_id)
@@ -54,10 +55,11 @@ def delete_comment(request):
 
     if comment:
         if request.user.id == comment.owner.id:
+            is_success = True
             comment.deleted = True
             comment.item.commentcount -= 1
             comment.item.save()
             comment.save_base()
 
-    return HttpResponse(json.dumps({'success': True}),
+    return HttpResponse(json.dumps({'success': is_success}),
                         mimetype="application/json")

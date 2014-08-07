@@ -108,8 +108,9 @@
       })
     },
     deleteComment: function(ev) {
+      var $comment = $(ev.currentTarget);
       ev.preventDefault();
-      var commentId = $(ev.currentTarget).closest('.comment').attr('comment_id');
+      var commentId = $comment.closest('.comment').attr('comment_id');
       if(!commentId){
         return;
       }
@@ -121,7 +122,11 @@
         data: {
           commentID: commentId
         },
-        success: this.loadComments
+        success: function(data) {
+          if (data.success == true) {
+            $comment.closest('.comment').remove();
+          }
+        }
       })
     }
   });
