@@ -121,7 +121,9 @@
         <div class="comment-body">
           <pre><%- comment.fields.contents %></pre>
           <% if (comment.fields.username == document.getElementById('currentusername').innerHTML) { %>
-          <a class="delete-comment" href="<%- comment.fields.delete_url %>">Delete</a>
+          <div id="CommentButtons">
+            <a class="delete-comment" href="<%- comment.fields.delete_url %>">Delete</a>
+          </div>
           <% } %>
         </div>
       </div>
