@@ -41,6 +41,9 @@ def send_user_notification_email(profile, items):
                 items_already_mentioned.append(notif.item)
                 notifs_to_include.append(notif)
 
+    if not notifs_to_include:
+        return
+
     template_args = {
         'notifications': notifs_to_include,
         'base_url': settings.BASE_URL,
