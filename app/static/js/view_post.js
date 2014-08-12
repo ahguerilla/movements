@@ -3,7 +3,8 @@
   var PostView = Backbone.View.extend({
     events: {
       'submit .comments form': 'submitComment',
-      'click .report': 'showReportForm'
+      'click .report': 'showReportForm',
+      'click .delete-comment': 'deleteComment'
     },
     initialize: function(options) {
       this.options = options;
@@ -105,11 +106,33 @@
         },
         success: this.loadComments
       })
+    },
+    deleteComment: function(ev) {
+      var $comment = $(ev.currentTarget);
+      ev.preventDefault();
+      var commentId = $comment.closest('.comment').attr('comment_id');
+      if(!commentId){
+        return;
+      }
+      $.ajax({
+        context: this,
+        method: 'post',
+        dataType: 'json',
+        url: this.options.deleteCommentUrl,
+        data: {
+          commentID: commentId
+        },
+        success: function(data) {
+          if (data.success == true) {
+            $comment.closest('.comment').remove();
+          }
+        }
+      })
     }
   });
 
   global.ahr.initViewPost = function (options) {
-    new PostView({el: '.view-post', getCommentsUrl: options.getCommentsUrl, addCommentUrl: options.addCommentUrl});
+    new PostView({el: '.view-post', getCommentsUrl: options.getCommentsUrl, addCommentUrl: options.addCommentUrl, deleteCommentUrl: options.deleteCommentUrl});
   };
 
 })(window);

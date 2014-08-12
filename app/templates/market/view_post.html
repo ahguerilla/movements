@@ -112,14 +112,20 @@
 
   <script type="text/template" id="comment-list-template">
     <% _.each(comments, function(comment) { %>
-      <div class="comment">
+      <div comment_id="<%- comment.pk %>" class="comment">
         <div class="avatar"><img src="<%- comment.fields.avatar %>"></div>
         <div class="comment-header">
           <a href="<%- comment.fields.profile_url %>" alt="poster profile"><%- comment.fields.username %></a>
           <%- comment.fields.pub_date_formatted %>
         </div>
         <div class="comment-body">
-          <pre><%- comment.fields.contents %></pre></div>
+          <pre><%- comment.fields.contents %></pre>
+          <% if (comment.fields.username == document.getElementById('currentusername').innerHTML) { %>
+          <div id="CommentButtons">
+            <a class="delete-comment" href="<%- comment.fields.delete_url %>">Delete</a>
+          </div>
+          <% } %>
+        </div>
       </div>
     <% }); %>
   </script>
@@ -130,7 +136,8 @@
       });
       ahr.initViewPost({
         getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}',
-        addCommentUrl: "{% url 'add_comment' 'json' post.id %}"
+        addCommentUrl: "{% url 'add_comment' 'json' post.id %}",
+        deleteCommentUrl: "{% url 'delete_comment' %}"
       });
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar', {{ post.id }});
       this.recommend_widget = window.ahr.recommend_widget.initWidget(window.ahr.username);

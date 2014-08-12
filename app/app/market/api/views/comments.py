@@ -4,6 +4,8 @@ import json
 from app.market.api.utils import *
 from django.contrib.auth.decorators import login_required
 from tasks.celerytasks import create_comment_notification
+from django.views.decorators.http import require_http_methods
+from app.market.models import Comment
 
 
 @login_required
@@ -42,12 +44,22 @@ def edit_comment(request, obj_id, rtype):
 
 
 @login_required
-@check_perms_and_get(market.models.Comment)
-def delete_comment(request, obj_id, rtype):
-    obj = request.obj
-    obj.deleted = True
-    obj.item.commentcount -= 1
-    obj.item.save()
-    obj.save_base()
-    return HttpResponse(json.dumps({'success': True}),
-                        mimetype="application"+rtype)
+@require_http_methods(["POST"])
+def delete_comment(request):
+    is_success = False
+    obj_id = request.POST.get("commentID", 0)
+    try:
+        comment = Comment.objects.get(pk=obj_id)
+    except Comment.DoesNotExist:
+        comment = None
+
+    if comment:
+        if request.user.id == comment.owner.id:
+            is_success = True
+            comment.deleted = True
+            comment.item.commentcount -= 1
+            comment.item.save()
+            comment.save_base()
+
+    return HttpResponse(json.dumps({'success': is_success}),
+                        mimetype="application/json")
