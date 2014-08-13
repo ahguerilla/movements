@@ -27,17 +27,16 @@ def send_user_notification_email(profile, items):
 
     notifs_to_include = []
     items_already_mentioned = []
-    for notif in list(items):
+    for notif in items:
         add_to_list = True
-        if (notif.item.closed_date is not None):
+        if notif.item is not None and notif.item.closed_date is not None:
             # Post has been closed
             add_to_list = False
-        elif (notif.comment is not None):
-            if (notif.comment.deleted == True):
-                # Comment has been deleted
-                add_to_list = False
-        if (add_to_list == True):
-            if (items_already_mentioned.__contains__(notif.item) == False):
+        elif notif.comment is not None and notif.comment.deleted:
+            # Comment has been deleted
+            add_to_list = False
+        if add_to_list:
+            if notif.item not in items_already_mentioned:
                 items_already_mentioned.append(notif.item)
                 notifs_to_include.append(notif)
 
