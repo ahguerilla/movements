@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block content %}
 <div class="row">
-  <div class="col-xs-12 col-md-offset-2 col-md-8">
+  <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
     <div class="view-post">
       <div class="post-header {{ post.item_type|lower }} %>">
         <span>{{ post.item_type_display }}</span>
@@ -47,6 +47,12 @@
               obj_id="{{ post.id }}"
               rec_type="market_item"
               class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
+          {% if post.tweet_permission %}
+            <li><a
+              obj_id="{{ post.id }}"
+              rec_type="market_item"
+              class="tweet" href='#' alt="tweet post">{% trans 'Tweet' %}</a></li>
+          {% endif %}
           <li><a
                 username="{{ post.owner.username }}"
                 subject="RE: {{ post.title }}"

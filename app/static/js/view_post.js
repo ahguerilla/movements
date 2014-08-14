@@ -4,7 +4,8 @@
     events: {
       'submit .comments form': 'submitComment',
       'click .report': 'showReportForm',
-      'click .delete-comment': 'deleteComment'
+      'click .delete-comment': 'deleteComment',
+      'click .tweet': 'shareTwitter'
     },
     initialize: function(options) {
       this.options = options;
@@ -67,6 +68,37 @@
         });
       });
     },
+
+    shareTwitter: function(ev) {
+      ev.preventDefault();
+
+      // url is (up to) 23 char, 140 total... 117 left for message, including automatic space separator.
+
+      var postUrl = ev.currentTarget.href;
+      var preamble = "New on #Movements: \"";
+      var postTitle = document.getElementById('post-title').innerText;
+      var comment = preamble + postTitle + "\"";
+      if (comment.length > 116) {
+        comment = comment.substring(0, 112) + "...\"";
+      }
+      var twitterUrl = "https://twitter.com/share?url=" + encodeURIComponent(postUrl) + "&text=" + encodeURIComponent(comment);
+      this.openTwitterPopup(twitterUrl);
+    },
+
+    openTwitterPopup: function(url){
+      var width  = 575,
+        height = 400,
+        left   = ($(window).width()  - width)  / 2,
+        top    = ($(window).height() - height) / 2,
+        opts   = 'status=1' +
+                 ',width='  + width  +
+                 ',height=' + height +
+                 ',top='    + top    +
+                 ',left='   + left;
+
+      window.open(url, 'twitter', opts);
+    },
+
     showReportForm: function(ev){
       ev.preventDefault();
       this.report_widget.showReport(ev.currentTarget.getAttribute('report_url'));

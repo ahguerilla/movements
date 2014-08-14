@@ -24,8 +24,27 @@ def send_user_notification_email(profile, items):
     profile.save()
     if not items:
         return
+
+    notifs_to_include = []
+    items_already_mentioned = []
+    for notif in items:
+        add_to_list = True
+        if notif.item is not None and notif.item.closed_date is not None:
+            # Post has been closed
+            add_to_list = False
+        elif notif.comment is not None and notif.comment.deleted:
+            # Comment has been deleted
+            add_to_list = False
+        if add_to_list:
+            if notif.item not in items_already_mentioned:
+                items_already_mentioned.append(notif.item)
+                notifs_to_include.append(notif)
+
+    if not notifs_to_include:
+        return
+
     template_args = {
-        'notifications': items,
+        'notifications': notifs_to_include,
         'base_url': settings.BASE_URL,
     }
     message = render_to_string('emails/notification_email.html', template_args)
@@ -47,6 +66,7 @@ class Command(BaseCommand):
         valid_item = Q(item__deleted=False) | Q(item=None)
         while True:
             logger.info('Running the notification process')
+            notification_delay_time = timezone.now() + relativedelta(minutes=-10)
             a_day_ago = timezone.now() + relativedelta(days=-1)
             a_week_ago = timezone.now() + relativedelta(days=-7)
             try:
@@ -65,9 +85,9 @@ class Command(BaseCommand):
                     elif profile.notification_frequency == UserProfile.NOTIFICATION_FREQUENCY.WEEKLY:
                         send_email = profile.last_notification_email < a_week_ago
                     if send_email:
-                        items = Notification.objects.filter(valid_item).filter(user=profile.user, emailed=False)
+                        items = Notification.objects.filter(valid_item).filter(user=profile.user, emailed=False, pub_date__lt=notification_delay_time)
                         send_user_notification_email(profile, items)
                         items.update(emailed=True)
             except Exception as ex:
                 logger.exception(ex)
-            time.sleep(1)
+            time.sleep(600)

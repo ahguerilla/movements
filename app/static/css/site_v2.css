@@ -1732,6 +1732,9 @@ input.borderless-control:focus:invalid:focus {
   margin-left: 0;
   background: url("../images/v2/recommend_off.png") no-repeat left 1px;
 }
+.view-post .post-actions a.tweet {
+  background: url("../images/v2/twitter_gray.png") no-repeat left 1px top 4px;
+}
 .view-post .post-actions a.message {
   background: url("../images/v2/direct_message_icon.PNG") no-repeat left 4px;
 }
