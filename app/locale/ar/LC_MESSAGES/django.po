@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-20 11:52+0100\n"
+"POT-Creation-Date: 2014-08-20 20:23+0100\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -900,30 +900,34 @@ msgstr ""
 
 #: templates/base_v2.html:129
 msgid "Get updates"
-msgstr ""
+msgstr "Get updates (TBD)"
 
 #: templates/base_v2.html:136
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr ""
+"Get all the latest updates, including featured posts, and security tips! "
+"(TBD)"
 
 #: templates/base_v2.html:139 templates/base_v2.html.py:173
 msgid "Connect with us"
-msgstr ""
+msgstr "Connect with us (TBD)"
 
-#: templates/base_v2.html:153
+#: templates/base_v2.html:153 templates/ahr/home_v2.html:103
 msgid "About MOVEMENTS"
-msgstr ""
+msgstr "من نحن"
 
 #: templates/base_v2.html:154
 msgid ""
 "Crowdsourcing the fight for human rights. The online platform that is "
 "opening closed societies."
 msgstr ""
+"Crowdsourcing the fight for human rights. The online platform that is "
+"(TBD)opening closed societies. (TBD)"
 
 #: templates/base_v2.html:160 templates/base_v2.html.py:171
 msgid "Copyright &copy; 2014 Advancing Human Rights"
-msgstr ""
+msgstr "Copyright &copy; 2014 Advancing Human Rights (TBD)"
 
 #: templates/account/account_inactive.html:5
 #: templates/account/account_inactive.html:9
@@ -1516,12 +1520,17 @@ msgid "Update"
 msgstr ""
 
 #: templates/ahr/home_v2.html:13
+msgid "Already have an account?"
+msgstr "Already have an account? (TBD)"
+
+#: templates/ahr/home_v2.html:13
 msgid "Login"
-msgstr ""
+msgstr "Login (TBD)"
 
 #: templates/ahr/home_v2.html:34
 msgid "Crowdsourcing the fight for human rights."
 msgstr ""
+"موفمنتس هي منظمة تقوم على حشد الطاقات الفاعلة من اجل الدفاع عن حقوق الإنسام."
 
 #: templates/ahr/home_v2.html:37
 msgid ""
@@ -1529,29 +1538,55 @@ msgid ""
 "rights activists in closed societies with those with skills to help them "
 "around the world. Join today and help a dissident in need."
 msgstr ""
+"موفمنتس هي منظمة تقوم على حشد الطاقات الفاعلة من اجل الدفاع عن حقوق الإنسام. "
+"تقوم المنظمة بوصل نشطاء حقوق الإنسان في المجتمعات المغلقة مع خبراء يتمتعون "
+"بمهارات حول العالم. انضموا إلينا اليوم، وساعدوا النشطاء والمنشقين من هم "
+"بحاجة لمساعدتكم"
 
 #: templates/ahr/home_v2.html:41 templates/ahr/home_v2.html.py:63
+#: templates/ahr/home_v2.html:142
 msgid "Sign up now"
-msgstr ""
+msgstr "سجل الأن"
 
 #: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:68
+#: templates/ahr/home_v2.html:105
 msgid "Find out more"
-msgstr ""
+msgstr "Find out more (TBD)"
 
 #: templates/ahr/home_v2.html:56
 msgid ""
 "Request help from people across the globe, offer help to an activist in need."
 msgstr ""
+"طلب خدمة من أفراد مقيمين حول العالم، اعرض مساعدتك على ناشط  بحاجة إليها"
 
 #: templates/ahr/home_v2.html:59
 msgid ""
 "Whether you’re a journalist, artist, technologist, policy-maker, linguist or "
 "PR agent - everyone has skills that can advance human rights."
 msgstr ""
+"سواء كنت صحافي، فنان، تقني، رجل سياسة، لغوي، او خبير علاقات عامة، لكل منا "
+"خبرات يستطيع تسخيرها لأجل تعزيز حقوق الإنسان.اعرف عنا أكثر "
+
+#: templates/ahr/home_v2.html:104
+msgid ""
+"In closed societies around the world, brave human rights defenders face "
+"enormous hurdles to advance human rights.  Movements.org is a new platform "
+"that allows people everywhere to help protect basic freedoms.  This online "
+"platform connects activists in closed societies with people around the globe "
+"with skills to help. Whether you’re a journalist, politician, activist, "
+"artist, technologist or you speak a few languages, everyone has a role to "
+"play."
+msgstr ""
+"يتعرض مدافعي حقوق الإنسان في المجتمعات ذات الإنظمة المغلقة إلى عقبات متعددة "
+"أثناء محاولتهم تعزيز حقوق الإنسان. موفمنتس ستكون منصة جديدة تقوم على مساعدة "
+"الشعوب في كل مكان من أجل الدفاع عن الحريات الأساسيةهذه المنصة الإلكترونية "
+"ستقونم بوصل النشطاء في المجتمعات ذات الإنظمة المغلقة مع افراد حول الحالم "
+"يتمتعون بمهارات تؤهلهم لمساعدة النشطاء. سواء كنت صحافي،سياسي، ناشط،فنان، "
+"تقني او تتحدث عدة لغات، سيكون لك دور لتلعبه "
 
 #: templates/ahr/home_v2.html:121
 msgid "Create a Request"
-msgstr ""
+msgstr "انشر طلبك"
 
 #: templates/ahr/home_v2.html:122
 msgid ""
@@ -1559,10 +1594,25 @@ msgid ""
 "help those in closed societies find the assistance they need to amplify "
 "their voice and expand their influence."
 msgstr ""
+"هل انت ناشط وبحاجة لمساعدة؟  تسخر موفمنتس التكنولجيا من أجل مساعدة النشطاء "
+"الموجودين في الدول المحكومة من نظم مغلقة وذلك توفير المساعدة التي يحتاجونها "
+"من أجل تقويه أصواتها وتوسيع نفوذهم "
+
+#: templates/ahr/home_v2.html:140
+msgid "Getting Started"
+msgstr "إبدا معنا"
+
+#: templates/ahr/home_v2.html:141
+msgid ""
+"The Movements platform enables dissidents who need help to connect to "
+"activists and others who can provide it. Get started by joining today."
+msgstr ""
+"تقوم منظمة موفمنتس بتمكين النشطاء والمنشقين في الدول الديكتاتورية من هم "
+"بحاجة لمساعدة عبر وصلهم بنشطاء وأشخاص قادرين على المساعدة. انضم إلينا اليوم"
 
 #: templates/ahr/home_v2.html:158
 msgid "Offer your Services"
-msgstr ""
+msgstr "أعرض خدمة"
 
 #: templates/ahr/home_v2.html:159 templates/users/more_about_you.html:47
 msgid ""
@@ -1570,10 +1620,12 @@ msgid ""
 "opportunity. All of us have skills that can be put to use to advance basic "
 "liberties."
 msgstr ""
+"لو أردت يوما أن تقوم بمساعدة ناشط حقوق إنسان، موفمنتس تقدم لك الفرصة في ذلك. "
+"لكل منا مهارات معينة يمكن إستخدامها من أجل تعزيز الحريات الأساسية"
 
 #: templates/market/create_offer.html:11
 msgid "Offer a service"
-msgstr ""
+msgstr "أعرض خدمة"
 
 #: templates/market/create_offer.html:12
 msgid "Do you have expertise to offer?"
@@ -2127,6 +2179,10 @@ msgstr ""
 
 #: templates/users/thanksforactivation.html:13
 msgid "Your account is now activated."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:31
+msgid "Personal Details"
 msgstr ""
 
 #: templates/users/user_settings_v2.html:47
