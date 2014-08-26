@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-26 13:02-0500\n"
+"POT-Creation-Date: 2014-08-26 14:04-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -464,7 +464,7 @@ msgstr ""
 #: app/reporting/admin/user.py:101 templates/account/signup.html:52
 #: templates/users/user_settings_v2.html:69
 msgid "Country of Residence"
-msgstr ""
+msgstr "بلد الإقامة"
 
 #: app/reporting/admin/user.py:105
 msgid "Is Admin"
@@ -503,20 +503,20 @@ msgstr ""
 #: app/reporting/admin/user.py:137 templates/account/signup.html:87
 #: templates/users/user_settings_v2.html:101
 msgid "Facebook"
-msgstr ""
+msgstr "الفيس بوك"
 
 #: app/reporting/admin/user.py:141 templates/account/signup.html:80
 #: templates/users/user_settings_v2.html:94
 msgid "Twitter"
-msgstr ""
+msgstr "التويتر"
 
 #: app/reporting/admin/user.py:145
 msgid "Linked in"
-msgstr ""
+msgstr "Linked in (TBD)"
 
 #: app/reporting/admin/user.py:149
 msgid "Website/blog"
-msgstr ""
+msgstr "Website/blog (TBD)"
 
 #: app/reporting/admin/user.py:153
 msgid "Bio"
@@ -933,11 +933,11 @@ msgstr ""
 msgid "Connect with us"
 msgstr "Connect with us (TBD)"
 
-#: templates/base_v2.html:142
+#: templates/base_v2.html:142 templates/account/signup_start.html:51
 msgid "Connect with Twitter"
 msgstr "إتصل عبر التويتر"
 
-#: templates/base_v2.html:145
+#: templates/base_v2.html:145 templates/account/signup_start.html:48
 msgid "Connect with Facebook"
 msgstr "إتصل عبر الفيس بوك"
 
@@ -1234,15 +1234,15 @@ msgstr ""
 
 #: templates/account/signup.html:40 templates/users/user_settings_v2.html:57
 msgid "First Name"
-msgstr ""
+msgstr "الأسم الأول"
 
 #: templates/account/signup.html:45 templates/users/user_settings_v2.html:62
 msgid "Last Name"
-msgstr ""
+msgstr "الإسم لثاني"
 
 #: templates/account/signup.html:59 templates/users/user_settings_v2.html:76
 msgid "Biography"
-msgstr ""
+msgstr "السيرة الذاتية "
 
 #: templates/account/signup.html:67
 msgid "Social Vetting"
@@ -1259,11 +1259,11 @@ msgstr ""
 
 #: templates/account/signup.html:73 templates/users/user_settings_v2.html:87
 msgid "Linked In"
-msgstr ""
+msgstr "Linked In (TBD)"
 
 #: templates/account/signup.html:94 templates/users/user_settings_v2.html:108
 msgid "Website or Blog"
-msgstr ""
+msgstr "Website or Blog (TBD)"
 
 #: templates/account/signup.html:104
 #: templates/market/clientside/closemarketitemdialog.html:29
@@ -1350,7 +1350,8 @@ msgid "Welcome to Movements"
 msgstr "أهلا بكم في موفمنتس"
 
 #: templates/account/signup_start.html:12
-msgid "Sign up to connect to human rights defenders and activist. Let’s get started."
+msgid ""
+"Sign up to connect to human rights defenders and activist. Let’s get started."
 msgstr "سجل معنا اليوم للتواصل مع مدافعي حقوق الإنسان والنشطاء"
 
 #: templates/account/signup_start.html:18
@@ -2225,9 +2226,21 @@ msgstr ""
 msgid "Your account is now activated."
 msgstr ""
 
+#: templates/users/user_settings_v2.html:25
+msgid "Change picture"
+msgstr "Change picture (TBD)"
+
 #: templates/users/user_settings_v2.html:31
 msgid "Personal Details"
-msgstr ""
+msgstr "Personal Details (TBD)"
+
+#: templates/users/user_settings_v2.html:32
+msgid "Skills & Interests"
+msgstr "Skills & Interests (TBD)"
+
+#: templates/users/user_settings_v2.html:33
+msgid "Security & Alerts"
+msgstr "Security & Alerts (TBD)"
 
 #: templates/users/user_settings_v2.html:47
 msgid "Username"
@@ -2238,12 +2251,20 @@ msgid ""
 "This information is optional but the more you provide the more trusted "
 "you’ll be by other users."
 msgstr ""
+"المعلومات التي نطلبها هي إختيارية، لكن كلما قدمت معلومات أكثر، سيكون من "
+"الأسهل على الأخرين الثقة بك"
+
+#: templates/users/user_settings_v2.html:81
+msgid "Digital Presence"
+msgstr "Digital Presence (TBD)"
 
 #: templates/users/user_settings_v2.html:83
 msgid ""
 "The more links you provide, the higher your star rating will be. Link to "
 "Twitter, LinkedIn, and Facebook to help verify your identity."
 msgstr ""
+"The more links you provide, the higher your star rating will be. Link to "
+"Twitter, LinkedIn, and Facebook to help verify your identity. (TBD)"
 
 #: templates/users/user_settings_v2.html:115
 msgid "Skills/Interests"

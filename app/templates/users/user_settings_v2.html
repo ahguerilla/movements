@@ -22,15 +22,15 @@
       </div>
     </div>
     <div class="col-xs-4">
-      <a id="changeavatar" href="{% url 'avatar_change' %}">Change picture</a>
+      <a id="changeavatar" href="{% url 'avatar_change' %}">{% trans "Change picture"%}</a>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="btn-group folder-select btn-group-justied btn-group-md">
         <a href="#personal" id="personal-select" type="button" class="btn btn-tab selected">{% trans "Personal Details" %}</a>
-        <a href="#skills" id="skills-select" type="button" class="btn btn-tab" >Skills & Interests</a>
-        <a href="#security" id="security-select" type="button" class="btn btn-tab" >Security & Alerts</a>
+        <a href="#skills" id="skills-select" type="button" class="btn btn-tab" >{% trans "Skills & Interests"%}</a>
+        <a href="#security" id="security-select" type="button" class="btn btn-tab" >{% trans "Security & Alerts"%}</a>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
         </div>
       </div>
       <p>
-        {% blocktrans %}This information is optional but the more you provide the more trusted you’ll be by other users.{% endblocktrans %}
+        {% trans "This information is optional but the more you provide the more trusted you’ll be by other users." %}
       </p>
       <div class="form-group">
         <div class="col-xs-6">
@@ -78,7 +78,7 @@
           {{ settings_form.bio.errors }}
         </div>
       </div>
-      <h3>Digital Presence</h3>
+      <h3>{% trans "Digital Presence"%}</h3>
       <p>
         {% blocktrans %}The more links you provide, the higher your star rating will be. Link to Twitter, LinkedIn, and Facebook to help verify your identity.{% endblocktrans %}
       </p>
