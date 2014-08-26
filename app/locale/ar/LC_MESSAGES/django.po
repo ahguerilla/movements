@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-20 20:23+0100\n"
+"POT-Creation-Date: 2014-08-26 13:02-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,11 +180,11 @@ msgstr ""
 msgid "Closed By User"
 msgstr ""
 
-#: app/market/models/market.py:25
+#: app/market/models/market.py:25 templates/base_v2.html:188
 msgid "Request"
 msgstr ""
 
-#: app/market/models/market.py:26
+#: app/market/models/market.py:26 templates/base_v2.html:189
 msgid "Offer"
 msgstr ""
 
@@ -890,7 +890,7 @@ msgstr ""
 #: templates/account/login.html.py:15 templates/account/login.html:48
 #: templates/openid/login.html:16
 msgid "Sign In"
-msgstr ""
+msgstr "Sign In (TBD)"
 
 #: templates/base.html:122 templates/base_private_settings.html:6
 #: templates/base_public.html:6 templates/account/signup_old.html:30
@@ -898,9 +898,29 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
+#: templates/base_v2.html:80
+msgid "Add Post"
+msgstr ""
+
+#: templates/base_v2.html:85 templates/ahr/home_v2.html:13
+msgid "Login"
+msgstr "Login (TBD)"
+
+#: templates/base_v2.html:100
+msgid "Sign up"
+msgstr "سجل الأن"
+
+#: templates/base_v2.html:104
+msgid "Visit market"
+msgstr "Visit market (TBD)"
+
 #: templates/base_v2.html:129
 msgid "Get updates"
 msgstr "Get updates (TBD)"
+
+#: templates/base_v2.html:132
+msgid "Enter your e-mail..."
+msgstr "Enter your e-mail... (TBD)"
 
 #: templates/base_v2.html:136
 msgid ""
@@ -912,6 +932,14 @@ msgstr ""
 #: templates/base_v2.html:139 templates/base_v2.html.py:173
 msgid "Connect with us"
 msgstr "Connect with us (TBD)"
+
+#: templates/base_v2.html:142
+msgid "Connect with Twitter"
+msgstr "إتصل عبر التويتر"
+
+#: templates/base_v2.html:145
+msgid "Connect with Facebook"
+msgstr "إتصل عبر الفيس بوك"
 
 #: templates/base_v2.html:153 templates/ahr/home_v2.html:103
 msgid "About MOVEMENTS"
@@ -1044,14 +1072,31 @@ msgid ""
 "a>\n"
 "      "
 msgstr ""
+"\n"
+"      Welcome to Movements, please sign in below. If you don't have an "
+"account yet, please sign up <a href=\"%(home_url)s\" alt=\"sign up\">here</"
+"a> (TBD)\n"
+"      "
 
 #: templates/account/login.html:26
 msgid "Email or Username"
-msgstr ""
+msgstr "Email or Username (TBD)"
 
 #: templates/account/login.html:33 templates/account/signup_start.html:25
 msgid "Password"
 msgstr ""
+
+#: templates/account/login.html:45
+msgid "Forgot Password?"
+msgstr "Forgot Password? (TBD)"
+
+#: templates/account/login.html:57
+msgid "Sign In with Facebook"
+msgstr "إتصل عبر الفيس بوك"
+
+#: templates/account/login.html:60
+msgid "Sign In with Twitter"
+msgstr "إتصل عبر التويتر"
 
 #: templates/account/logout.html:12
 msgid "Are you sure you want to sign out?"
@@ -1302,32 +1347,35 @@ msgstr ""
 #: templates/account/signup_start.html:11
 #: templates/users/more_about_you.html:36
 msgid "Welcome to Movements"
-msgstr ""
+msgstr "أهلا بكم في موفمنتس"
 
 #: templates/account/signup_start.html:12
-msgid ""
-"Sign up to connect to human rights defenders and activist. Let’s get started."
-msgstr ""
+msgid "Sign up to connect to human rights defenders and activist. Let’s get started."
+msgstr "سجل معنا اليوم للتواصل مع مدافعي حقوق الإنسان والنشطاء"
 
 #: templates/account/signup_start.html:18
 msgid "Email (we will never reveal this)"
-msgstr ""
+msgstr "البريد الإلكتروني( لن نقوم بنشره أبداً)"
 
 #: templates/account/signup_start.html:30
 msgid "Retype password"
-msgstr ""
+msgstr "إعادة كتابة كلمة السر"
 
 #: templates/account/signup_start.html:36
 msgid "By registering with us you agree to our"
-msgstr ""
+msgstr "حالما تسجل لدينا، عليك ان تقبل"
+
+#: templates/account/signup_start.html:36
+msgid "terms &amp; conditions"
+msgstr "بشروط الإنضمام"
 
 #: templates/account/signup_start.html:38
 msgid "Register"
-msgstr ""
+msgstr "سحل"
 
 #: templates/account/signup_start.html:45
 msgid "Use your Facebook details to sign in."
-msgstr ""
+msgstr "إستخدم وسائل التواصل الإجتماعي من أجل ان تسجل."
 
 #: templates/account/verification_sent.html:4
 #: templates/account/verification_sent.html:9
@@ -1522,10 +1570,6 @@ msgstr ""
 #: templates/ahr/home_v2.html:13
 msgid "Already have an account?"
 msgstr "Already have an account? (TBD)"
-
-#: templates/ahr/home_v2.html:13
-msgid "Login"
-msgstr "Login (TBD)"
 
 #: templates/ahr/home_v2.html:34
 msgid "Crowdsourcing the fight for human rights."
