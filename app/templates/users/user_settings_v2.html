@@ -73,6 +73,13 @@
       </div>
       <div class="form-group">
         <div class="col-xs-12">
+          <label for="{{ settings_form.interface_lang.auto_id }}">{%trans "Interface Language"%} (under test)</label>
+          {% render_field settings_form.interface_lang class="form-control input-sm"%}
+          {{ settings_form.interface_lang.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
           <label for="{{ settings_form.bio.auto_id }}">{%trans "Biography"%}</label>
           {% render_field settings_form.bio class="form-control input-sm"%}
           {{ settings_form.bio.errors }}

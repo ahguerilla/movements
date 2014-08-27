@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-26 14:04-0500\n"
+"POT-Creation-Date: 2014-08-27 11:55-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,11 +182,11 @@ msgstr ""
 
 #: app/market/models/market.py:25 templates/base_v2.html:188
 msgid "Request"
-msgstr ""
+msgstr "Request (TBD)"
 
 #: app/market/models/market.py:26 templates/base_v2.html:189
 msgid "Offer"
-msgstr ""
+msgstr "Offer (TBD)"
 
 #: app/market/models/market.py:29
 msgid "item_type"
@@ -501,12 +501,12 @@ msgid "Not supplied"
 msgstr ""
 
 #: app/reporting/admin/user.py:137 templates/account/signup.html:87
-#: templates/users/user_settings_v2.html:101
+#: templates/users/user_settings_v2.html:108
 msgid "Facebook"
 msgstr "الفيس بوك"
 
 #: app/reporting/admin/user.py:141 templates/account/signup.html:80
-#: templates/users/user_settings_v2.html:94
+#: templates/users/user_settings_v2.html:101
 msgid "Twitter"
 msgstr "التويتر"
 
@@ -704,7 +704,7 @@ msgstr ""
 
 #: app/users/models.py:149
 msgid "Interface language"
-msgstr ""
+msgstr "Interface language (TBD)"
 
 #: app/users/models.py:150
 msgid "first login"
@@ -722,7 +722,7 @@ msgstr ""
 msgid "Rated by AHR"
 msgstr ""
 
-#: app/users/views.py:432
+#: app/users/views.py:433
 msgid "You have not accepted terms and conditions"
 msgstr ""
 
@@ -864,14 +864,15 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: templates/base.html:92 templates/users/user_settings_v2.html:150
+#: templates/base.html:92 templates/users/user_settings_v2.html:157
 msgid "Notifications"
 msgstr ""
 
 #: templates/base.html:100 templates/base.html.py:109
 #: templates/users/user_settings_v2.html:16
+#: templates/users/snippets/profile_navigation.html:28
 msgid "Settings"
-msgstr ""
+msgstr "Settings (TBD)"
 
 #: templates/base.html:105
 msgid "My Posts"
@@ -896,11 +897,11 @@ msgstr "Sign In (TBD)"
 #: templates/base_public.html:6 templates/account/signup_old.html:30
 #: templates/account/signup_old.html:112
 msgid "Sign Up"
-msgstr ""
+msgstr "سجل الأن"
 
 #: templates/base_v2.html:80
 msgid "Add Post"
-msgstr ""
+msgstr "Add Post (TBD)"
 
 #: templates/base_v2.html:85 templates/ahr/home_v2.html:13
 msgid "Login"
@@ -1111,8 +1112,8 @@ msgstr ""
 #: templates/account/password_reset_from_key.html:19
 #: templates/account/password_reset_from_key.html:38
 #: templates/account/password_reset_from_key_done.html:5
-#: templates/users/user_settings_v2.html:160
-#: templates/users/user_settings_v2.html:202
+#: templates/users/user_settings_v2.html:167
+#: templates/users/user_settings_v2.html:209
 msgid "Change Password"
 msgstr ""
 
@@ -1209,7 +1210,7 @@ msgstr ""
 #: templates/account/password_set.html:6
 #: templates/account/password_set.html:13
 #: templates/account/password_set.html:25
-#: templates/users/user_settings_v2.html:164
+#: templates/users/user_settings_v2.html:171
 msgid "Set Password"
 msgstr ""
 
@@ -1240,7 +1241,7 @@ msgstr "الأسم الأول"
 msgid "Last Name"
 msgstr "الإسم لثاني"
 
-#: templates/account/signup.html:59 templates/users/user_settings_v2.html:76
+#: templates/account/signup.html:59 templates/users/user_settings_v2.html:83
 msgid "Biography"
 msgstr "السيرة الذاتية "
 
@@ -1257,11 +1258,11 @@ msgid ""
 "others to trust you."
 msgstr ""
 
-#: templates/account/signup.html:73 templates/users/user_settings_v2.html:87
+#: templates/account/signup.html:73 templates/users/user_settings_v2.html:94
 msgid "Linked In"
 msgstr "Linked In (TBD)"
 
-#: templates/account/signup.html:94 templates/users/user_settings_v2.html:108
+#: templates/account/signup.html:94 templates/users/user_settings_v2.html:115
 msgid "Website or Blog"
 msgstr "Website or Blog (TBD)"
 
@@ -1271,7 +1272,7 @@ msgstr "Website or Blog (TBD)"
 #: templates/market/clientside/recommenddialog.html:27
 #: templates/market/clientside/reportdialog.html:20
 #: templates/market/clientside/reportuserdialog.html:21
-#: templates/users/user_settings_v2.html:171
+#: templates/users/user_settings_v2.html:178
 msgid "Cancel"
 msgstr ""
 
@@ -2053,8 +2054,9 @@ msgid "Please find below the answer from your correspondent."
 msgstr ""
 
 #: templates/postman/inbox.html:5
+#: templates/users/snippets/profile_navigation.html:7
 msgid "Inbox"
-msgstr ""
+msgstr "Inbox (TBD)"
 
 #: templates/postman/inbox.html:9
 msgid "Received"
@@ -2133,7 +2135,7 @@ msgstr ""
 
 #: templates/users/more_about_you.html:18
 #: templates/users/more_about_you.html:61
-#: templates/users/user_settings_v2.html:129
+#: templates/users/user_settings_v2.html:136
 msgid "Languages"
 msgstr ""
 
@@ -2254,11 +2256,15 @@ msgstr ""
 "المعلومات التي نطلبها هي إختيارية، لكن كلما قدمت معلومات أكثر، سيكون من "
 "الأسهل على الأخرين الثقة بك"
 
-#: templates/users/user_settings_v2.html:81
+#: templates/users/user_settings_v2.html:76
+msgid "Interface Language"
+msgstr "Interface Language (TBD)"
+
+#: templates/users/user_settings_v2.html:88
 msgid "Digital Presence"
 msgstr "Digital Presence (TBD)"
 
-#: templates/users/user_settings_v2.html:83
+#: templates/users/user_settings_v2.html:90
 msgid ""
 "The more links you provide, the higher your star rating will be. Link to "
 "Twitter, LinkedIn, and Facebook to help verify your identity."
@@ -2266,58 +2272,58 @@ msgstr ""
 "The more links you provide, the higher your star rating will be. Link to "
 "Twitter, LinkedIn, and Facebook to help verify your identity. (TBD)"
 
-#: templates/users/user_settings_v2.html:115
+#: templates/users/user_settings_v2.html:122
 msgid "Skills/Interests"
 msgstr ""
 
-#: templates/users/user_settings_v2.html:117
+#: templates/users/user_settings_v2.html:124
 msgid ""
 "The skills and interests you provide will help others find the right "
 "expertise for you. This will also help us to show the postings that are the "
 "most relevant for you."
 msgstr ""
 
-#: templates/users/user_settings_v2.html:121
+#: templates/users/user_settings_v2.html:128
 msgid "Regions/Countries"
 msgstr ""
 
-#: templates/users/user_settings_v2.html:123
+#: templates/users/user_settings_v2.html:130
 msgid ""
 "Where do you need help and/or where would you like to be able to help out?"
 msgstr ""
 
-#: templates/users/user_settings_v2.html:131
+#: templates/users/user_settings_v2.html:138
 #, python-format
 msgid ""
 "Please indicate which languages you are able to communicate in. Google "
 "Translate is also available however it is not 100%% accurate."
 msgstr ""
 
-#: templates/users/user_settings_v2.html:137
+#: templates/users/user_settings_v2.html:144
 msgid "Control the visibility of your profile and notifications."
 msgstr ""
 
-#: templates/users/user_settings_v2.html:141
+#: templates/users/user_settings_v2.html:148
 msgid "Profile Visibility"
 msgstr ""
 
-#: templates/users/user_settings_v2.html:143
+#: templates/users/user_settings_v2.html:150
 msgid ""
 "How much information do you want to make public? So as to help protect your "
 "security and privacy, you may not want to expose your email address."
 msgstr ""
 
-#: templates/users/user_settings_v2.html:152
+#: templates/users/user_settings_v2.html:159
 msgid ""
 "When would you like to receive a notification if someone responds to your "
 "post or creates one that matches your interest?"
 msgstr ""
 
-#: templates/users/user_settings_v2.html:174
+#: templates/users/user_settings_v2.html:181
 msgid "Save"
 msgstr ""
 
-#: templates/users/user_settings_v2.html:185
+#: templates/users/user_settings_v2.html:192
 msgid "Upload Avatar"
 msgstr ""
 
@@ -2326,3 +2332,11 @@ msgid ""
 "Someone will be in contact with you shortly to help you activate your "
 "account."
 msgstr ""
+
+#: templates/users/snippets/profile_navigation.html:14
+msgid "Alerts"
+msgstr "Alerts (TBD)"
+
+#: templates/users/snippets/profile_navigation.html:21
+msgid "Profile"
+msgstr "Profile (TBD)"

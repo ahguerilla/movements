@@ -166,7 +166,7 @@ class SettingsForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = [
-            'occupation', 'resident_country', 'expertise', 'web_url', 'fb_url',
+            'occupation', 'resident_country', 'interface_lang', 'expertise', 'web_url', 'fb_url',
             'linkedin_url', 'tweet_url', 'tag_ling', 'bio', 'interests',
             'countries', 'languages', 'is_organisation', 'is_journalist',
             'get_newsletter', 'profile_visibility', 'notification_frequency'

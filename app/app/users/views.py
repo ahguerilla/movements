@@ -325,6 +325,7 @@ class AccAdapter(DefaultAccountAdapter):
             UserProfile.objects.create(
                 user=user,
                 resident_country=cleaned_data['resident_country'],
+                interface_lang=cleaned_data['interface_lang'],
                 bio=cleaned_data['bio'],
                 linkedin_url=cleaned_data['linkedin_url'],
                 tweet_url=cleaned_data['tweet_url'],
