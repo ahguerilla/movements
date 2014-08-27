@@ -20,8 +20,8 @@
         </a>
         <div class="details">
           <%- item_type_display %>
-          by <a href="/user/profile/<%- owner %>"><%- owner %></a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
-          <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.
+            {% blocktrans with user_name="<%- owner %>"%}by <a href="/user/profile/<%- owner %>">{{ user_name }}</a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
+            <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.{% endblocktrans %}
         </div>
       </div>
       <% if (!is_safe) { %>
@@ -71,8 +71,8 @@
       <div class="title"><%- title %></div>
       <div class="details">
         <%- item_type_display %>
-        by <a href="/user/profile/<%- owner %>"><%- owner %></a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
-        <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.
+        {% blocktrans with user_name="<%- owner %>"%}by <a href="/user/profile/<%- owner %>">{{ user_name }}</a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
+        <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.{% endblocktrans %}
       </div>
     </a>
   </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-27 11:55-0500\n"
+"POT-Creation-Date: 2014-08-27 13:34-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -870,7 +870,7 @@ msgstr ""
 
 #: templates/base.html:100 templates/base.html.py:109
 #: templates/users/user_settings_v2.html:16
-#: templates/users/snippets/profile_navigation.html:28
+#: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
 msgstr "Settings (TBD)"
 
@@ -1743,23 +1743,57 @@ msgstr "3. ماذا تحتاج؟"
 
 #: templates/market/market.html:15
 msgid "See all"
-msgstr ""
+msgstr "See all (TBD)"
 
 #: templates/market/market.html:16
 msgid "Requests"
-msgstr ""
+msgstr "Requests (TBD)"
 
 #: templates/market/market.html:17
 msgid "Offers"
-msgstr ""
+msgstr "Offers (TBD)"
+
+#: templates/market/market.html:26
+msgid "Hide/Show"
+msgstr "Hide/Show (TBD)"
+
+#: templates/market/market.html:33 templates/users/more_about_you.html:26
+#: templates/users/more_about_you.html:97
+msgid "Skills"
+msgstr "المهارات"
+
+#: templates/market/market.html:39 templates/users/more_about_you.html:79
+msgid "Countries"
+msgstr "البلدان"
+
+#: templates/market/market.html:45
+msgid "Search"
+msgstr "Search (TBD)"
+
+#: templates/market/market.html:58
+msgid "Press enter to search"
+msgstr "Press enter to search (TBD)"
+
+#: templates/market/market.html:59
+msgid "Click \"Search\" above to close"
+msgstr "Click \"Search\" above to close (TBD)"
 
 #: templates/market/market.html:72
 msgid "Featured posts"
-msgstr ""
+msgstr "Featured posts (TBD)"
 
 #: templates/market/market.html:81
 msgid "Sticky posts"
-msgstr ""
+msgstr "Sticky posts (TBD)"
+
+#: templates/market/market.html:107
+msgid "Show hidden"
+msgstr "Show hidden (TBD)"
+
+#: templates/market/market.html:112 templates/market/market.html.py:120
+#: templates/market/market.html:126
+msgid "Select all"
+msgstr "Select all (TBD)"
 
 #: templates/market/notifications.html:17
 msgid "More"
@@ -1848,13 +1882,38 @@ msgstr ""
 msgid "Please enter your answer"
 msgstr ""
 
+#: templates/market/clientside/marketitem.html:23
+#, python-format
+msgid ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
+"a>."
+msgstr ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
+"a>. (TBD)"
+
 #: templates/market/clientside/marketitem.html:62
 msgid "FEATURED OFFER"
-msgstr ""
+msgstr "FEATURED OFFER (TBD)"
 
 #: templates/market/clientside/marketitem.html:64
 msgid "FEATURED REQUEST"
+msgstr "FEATURED REQUEST (TBD)"
+
+#: templates/market/clientside/marketitem.html:74
+#, python-format
+msgid ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</a>."
 msgstr ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
+"a>. (TBD)"
 
 #: templates/market/clientside/messagedialog.html:8
 msgid "New message to "
@@ -2054,7 +2113,7 @@ msgid "Please find below the answer from your correspondent."
 msgstr ""
 
 #: templates/postman/inbox.html:5
-#: templates/users/snippets/profile_navigation.html:7
+#: templates/users/snippets/profile_navigation.html:9
 msgid "Inbox"
 msgstr "Inbox (TBD)"
 
@@ -2143,11 +2202,6 @@ msgstr ""
 msgid "Regions"
 msgstr ""
 
-#: templates/users/more_about_you.html:26
-#: templates/users/more_about_you.html:97
-msgid "Skills"
-msgstr ""
-
 #: templates/users/more_about_you.html:30
 #: templates/users/more_about_you.html:130
 msgid "Finish"
@@ -2177,10 +2231,6 @@ msgstr ""
 msgid ""
 "Please indicate which languages you speak. Google Translate is also "
 "available, but it is not fully accurate."
-msgstr ""
-
-#: templates/users/more_about_you.html:79
-msgid "Countries"
 msgstr ""
 
 #: templates/users/more_about_you.html:82
@@ -2333,10 +2383,10 @@ msgid ""
 "account."
 msgstr ""
 
-#: templates/users/snippets/profile_navigation.html:14
+#: templates/users/snippets/profile_navigation.html:16
 msgid "Alerts"
 msgstr "Alerts (TBD)"
 
-#: templates/users/snippets/profile_navigation.html:21
+#: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
 msgstr "Profile (TBD)"
