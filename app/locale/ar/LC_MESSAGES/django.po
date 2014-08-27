@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-27 13:34-0500\n"
+"POT-Creation-Date: 2014-08-27 14:02-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1875,8 +1875,9 @@ msgid "CLOSE AN OFFER"
 msgstr ""
 
 #: templates/market/clientside/closemarketitemdialog.html:32
+#: templates/market/clientside/marketitem.html:85
 msgid "Close"
-msgstr ""
+msgstr "Close (TBD)"
 
 #: templates/market/clientside/closemarketitemdialog.html:111
 msgid "Please enter your answer"
@@ -1914,6 +1915,22 @@ msgstr ""
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
 "a>. (TBD)"
+
+#: templates/market/clientside/marketitem.html:82
+msgid "Hide"
+msgstr "Hide (TBD)"
+
+#: templates/market/clientside/marketitem.html:83
+msgid "Stick"
+msgstr "Stick (TBD)"
+
+#: templates/market/clientside/marketitem.html:84
+msgid "Edit"
+msgstr "Edit (TBD)"
+
+#: templates/market/clientside/marketitem.html:86
+msgid "Report"
+msgstr "Report (TBD)"
 
 #: templates/market/clientside/messagedialog.html:8
 msgid "New message to "
