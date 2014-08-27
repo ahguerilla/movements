@@ -624,31 +624,31 @@ msgstr ""
 
 #: app/users/models.py:112
 msgid "Hidden - only your screen name and avatar is shared"
-msgstr ""
+msgstr " مخفي : سيظهر اسم العرض الذي اخترته فقط للعامة   "
 
 #: app/users/models.py:113
 msgid "Secure - only your screen name, skills and country is shared"
-msgstr ""
+msgstr ".آمن : ستظهر للعامة مهاراتك،اسم العرض الخاص بك،و اللغات  التي تجيدها"
 
 #: app/users/models.py:114
 msgid "Public - all your profile information is shared"
-msgstr ""
+msgstr "عام: كل معلوماتك الشخصية ستكون ظاهرة للعامة"
 
 #: app/users/models.py:117
 msgid "Never"
-msgstr ""
+msgstr "Never (TBD)"
 
 #: app/users/models.py:118
 msgid "Weekly"
-msgstr ""
+msgstr "Weekly (TBD)"
 
 #: app/users/models.py:119
 msgid "Daily"
-msgstr ""
+msgstr "Daily (TBD)"
 
 #: app/users/models.py:120
 msgid "Instantly"
-msgstr ""
+msgstr "Instantly (TBD)"
 
 #: app/users/models.py:124
 msgid "bio"
@@ -866,7 +866,7 @@ msgstr ""
 
 #: templates/base.html:92 templates/users/user_settings_v2.html:157
 msgid "Notifications"
-msgstr ""
+msgstr "Notifications (TBD)"
 
 #: templates/base.html:100 templates/base.html.py:109
 #: templates/users/user_settings_v2.html:16
@@ -1115,7 +1115,7 @@ msgstr ""
 #: templates/users/user_settings_v2.html:167
 #: templates/users/user_settings_v2.html:209
 msgid "Change Password"
-msgstr ""
+msgstr "Change Password (TBD)"
 
 #: templates/account/password_delete.html:5
 #: templates/account/password_delete.html:8
@@ -2213,7 +2213,7 @@ msgstr ""
 #: templates/users/more_about_you.html:61
 #: templates/users/user_settings_v2.html:136
 msgid "Languages"
-msgstr ""
+msgstr "Languages (TBD)"
 
 #: templates/users/more_about_you.html:22
 msgid "Regions"
@@ -2341,7 +2341,7 @@ msgstr ""
 
 #: templates/users/user_settings_v2.html:122
 msgid "Skills/Interests"
-msgstr ""
+msgstr "Skills/Interests (TBD)"
 
 #: templates/users/user_settings_v2.html:124
 msgid ""
@@ -2349,15 +2349,19 @@ msgid ""
 "expertise for you. This will also help us to show the postings that are the "
 "most relevant for you."
 msgstr ""
+"The skills and interests you provide will help others find the right "
+"expertise for you. This will also help us to show the postings that are the "
+"most relevant for you. (TBD)"
 
 #: templates/users/user_settings_v2.html:128
 msgid "Regions/Countries"
-msgstr ""
+msgstr "Regions/Countries (TBD)"
 
 #: templates/users/user_settings_v2.html:130
 msgid ""
 "Where do you need help and/or where would you like to be able to help out?"
 msgstr ""
+"Where do you need help and/or where would you like to be able to help out? (TBD)"
 
 #: templates/users/user_settings_v2.html:138
 #, python-format
@@ -2365,26 +2369,31 @@ msgid ""
 "Please indicate which languages you are able to communicate in. Google "
 "Translate is also available however it is not 100%% accurate."
 msgstr ""
+"الرجاء تحديد اللغات التي تتحدثها. مترجم غوغل متوفر ضمن موقعنا، لكنه ليس دقيق بشكل تام"
 
 #: templates/users/user_settings_v2.html:144
 msgid "Control the visibility of your profile and notifications."
-msgstr ""
+msgstr "Control the visibility of your profile and notifications. (TBD)"
 
 #: templates/users/user_settings_v2.html:148
 msgid "Profile Visibility"
-msgstr ""
+msgstr "Profile Visibility (TBD)"
 
 #: templates/users/user_settings_v2.html:150
 msgid ""
 "How much information do you want to make public? So as to help protect your "
 "security and privacy, you may not want to expose your email address."
 msgstr ""
+"How much information do you want to make public? So as to help protect your "
+"security and privacy, you may not want to expose your email address. (TBD)"
 
 #: templates/users/user_settings_v2.html:159
 msgid ""
 "When would you like to receive a notification if someone responds to your "
 "post or creates one that matches your interest?"
 msgstr ""
+"When would you like to receive a notification if someone responds to your "
+"post or creates one that matches your interest? (TBD)"
 
 #: templates/users/user_settings_v2.html:181
 msgid "Save"
