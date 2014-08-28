@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-27 14:02-0500\n"
+"POT-Creation-Date: 2014-08-28 07:03-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1691,7 +1691,7 @@ msgstr ""
 #: templates/market/create_offer.html:21
 #: templates/market/create_request.html:22
 msgid "Other"
-msgstr ""
+msgstr "Other (TBD)"
 
 #: templates/market/create_offer.html:31
 msgid "2. Which countries are you interested in helping?"
@@ -1704,12 +1704,12 @@ msgstr ""
 #: templates/market/create_offer.html:48
 #: templates/market/create_request.html:52
 msgid "4. Please write your post"
-msgstr ""
+msgstr "4. Please write your post (TBD)"
 
 #: templates/market/create_offer.html:59
 #: templates/market/create_request.html:63
 msgid "May we tweet this request?"
-msgstr ""
+msgstr "هل بامكاننا نشر الطلب كتغريدة على موقع تويتر (الفراغ يعني موافق)"
 
 #: templates/market/create_offer.html:69
 #: templates/market/create_request.html:73
@@ -1718,7 +1718,7 @@ msgstr ""
 
 #: templates/market/create_request.html:11
 msgid "Request a service"
-msgstr ""
+msgstr "اطلب خدمة"
 
 #: templates/market/create_request.html:13
 msgid ""
@@ -1728,18 +1728,59 @@ msgid ""
 "or China?)  The more you explain your need, the easier it will be for "
 "someone to help."
 msgstr ""
+"الطلب هو طريقة لطلب مساعدة من أحد خبراء موفمينتس ، كن واضحاً و محدداً عما "
+"تحتاجه . اذا كنت تريد محامي أخبرنا أي محامي تريد (مدني أو لجوء) أين تريد "
+"المحامي (أمريكا، ألمانيا، بريطانيا)اذا كان هناك المزيد لتشرحه فصل بالشرح "
+"فذلك سيجعل مساعدتك أسهل "
 
 #: templates/market/create_request.html:18
 msgid "1. What skills do you need?"
-msgstr ""
+msgstr "1. ما المهارات التي تحتاجها ؟ "
 
 #: templates/market/create_request.html:32
 msgid "2. What countries does this request apply to?"
-msgstr "ما هي الدول التي لا تنطبق على هذا الطلب؟"
+msgstr "2. ما هي البلدان التي يقدم هذا الطلب لها"
+
+#: templates/market/create_request.html:33
+msgid "Indicate the region and/or specific country."
+msgstr "حدد المنطقة و الدولة "
+
+#: templates/market/create_request.html:40
+msgid ""
+" Movements.org provides access to skills and experts. At this time, we "
+"cannot provide funding or equipment. If you need either please see the <a "
+"href=\"/movements/resources/\">Resources</a> page. What might be available "
+"is a proposal writer to help you secure funding from a different source. "
+msgstr ""
+"توفر Movements.org الوصول إلى المهارات والخبراء. في هذا الوقت، لا يمكننا "
+"تقديم التمويل أو المعدات. إذا كنت في حاجة إما يرجى الاطلاع على صفحة <a href="
+"\"/movements/resources/\">الموارد</a>. قد يكون كاتب الاقتراح قادر على "
+"مساعدتك في الحصول على تمويل من مصدر مختلف."
+
+#: templates/market/create_request.html:41
+msgid ""
+"Please describe your request below. Be as explicit and clear as possible."
+msgstr "صف طلبك بالأسفل و كن واضحاً قدر الامكان"
 
 #: templates/market/create_request.html:42
 msgid "3. What do you need?"
-msgstr "3. ماذا تحتاج؟"
+msgstr "3. العنوان : ماذا تحتاج (مساحة محدودة)"
+
+#: templates/market/create_request.html:43
+msgid "Be specific and clear."
+msgstr "Be specific and clear (TBD)"
+
+#: templates/market/create_request.html:53
+msgid "Tell a compelling story and state your needs."
+msgstr "Tell a compelling story and state your needs. (TBD)"
+
+#: templates/market/create_request.html:66
+msgid "We won’t use your name or any identifying information"
+msgstr "We won’t use your name or any identifying information. (TBD)"
+
+#: templates/market/create_request.html:82
+msgid "Post now"
+msgstr "Post now (TBD)"
 
 #: templates/market/market.html:15
 msgid "See all"
@@ -2361,7 +2402,8 @@ msgstr "Regions/Countries (TBD)"
 msgid ""
 "Where do you need help and/or where would you like to be able to help out?"
 msgstr ""
-"Where do you need help and/or where would you like to be able to help out? (TBD)"
+"Where do you need help and/or where would you like to be able to help out? "
+"(TBD)"
 
 #: templates/users/user_settings_v2.html:138
 #, python-format
@@ -2369,7 +2411,8 @@ msgid ""
 "Please indicate which languages you are able to communicate in. Google "
 "Translate is also available however it is not 100%% accurate."
 msgstr ""
-"الرجاء تحديد اللغات التي تتحدثها. مترجم غوغل متوفر ضمن موقعنا، لكنه ليس دقيق بشكل تام"
+"الرجاء تحديد اللغات التي تتحدثها. مترجم غوغل متوفر ضمن موقعنا، لكنه ليس دقيق "
+"بشكل تام"
 
 #: templates/users/user_settings_v2.html:144
 msgid "Control the visibility of your profile and notifications."
