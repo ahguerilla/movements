@@ -67,7 +67,7 @@ class SignupForm(forms.Form):
         username = self.cleaned_data['username']
         username = username.strip()
         if User.objects.filter(username=username).exists():
-            raise forms.ValidationError(_('This username is already in used'))
+            raise forms.ValidationError(_('This username is already in use'))
         if not re.match("^[A-Za-z0-9_-]*$", username):
             raise forms.ValidationError(_('Username must contain only letters, numbers - and _. White space is not allowed'))
         if len(username) < 3 or len(username) > 30:

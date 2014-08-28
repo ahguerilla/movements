@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 10:05-0500\n"
+"POT-Creation-Date: 2014-08-28 11:20-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -548,31 +548,31 @@ msgstr ""
 
 #: app/users/forms.py:28
 msgid "This email is used already"
-msgstr ""
+msgstr "This email is used already (TBD)"
 
 #: app/users/forms.py:35
 msgid "Passwords must match"
-msgstr ""
+msgstr "Passwords must match (TBD)"
 
-#: app/users/forms.py:70
-msgid "This username is already in used"
-msgstr ""
+#: app/users/forms.py:70 app/users/forms.py:93
+msgid "This username is already in use"
+msgstr "This username is already in use (TBD)"
 
 #: app/users/forms.py:72 app/users/forms.py:95
 msgid ""
 "Username must contain only letters, numbers - and _. White space is not "
 "allowed"
 msgstr ""
+"Username must contain only letters, numbers - and _. White space is not "
+"allowed (TBD)"
 
 #: app/users/forms.py:74 app/users/forms.py:97
 msgid ""
 "Username must be greater that 2 characters and less than 30 contain only "
 "letters, numbers - and _. White space is not allowed"
 msgstr ""
-
-#: app/users/forms.py:93
-msgid "This username is already in use"
-msgstr ""
+"Username must be greater that 2 characters and less than 30 contain only "
+"letters, numbers - and _. White space is not allowed (TBD)"
 
 #: app/users/models.py:14
 msgid "skill set"
@@ -1104,8 +1104,8 @@ msgid "Are you sure you want to sign out?"
 msgstr ""
 
 #: templates/account/password_change.html:12
-msgid "Password changed successfuly"
-msgstr ""
+msgid "Password changed successfully"
+msgstr "Password changed successfully (TBD)"
 
 #: templates/account/password_change.html:26
 #: templates/account/password_reset_from_key.html:7
@@ -1120,45 +1120,49 @@ msgstr "Change Password (TBD)"
 #: templates/account/password_delete.html:5
 #: templates/account/password_delete.html:8
 msgid "Delete Password"
-msgstr ""
+msgstr "Delete Password (TBD)"
 
 #: templates/account/password_delete.html:9
 msgid ""
 "You may delete your password since you are currently logged in using OpenID."
 msgstr ""
+"You may delete your password since you are currently logged in using OpenID. "
+"(TBD)"
 
 #: templates/account/password_delete.html:12
 msgid "delete my password"
-msgstr ""
+msgstr "delete my password (TBD)"
 
 #: templates/account/password_delete_done.html:5
 #: templates/account/password_delete_done.html:8
 msgid "Password Deleted"
-msgstr ""
+msgstr "Password Deleted (TBD)"
 
 #: templates/account/password_delete_done.html:9
 msgid "Your password has been deleted."
-msgstr ""
+msgstr "Your password has been deleted. (TBD)"
 
 #: templates/account/password_reset.html:7
 #: templates/account/password_reset_done.html:5
 #: templates/account/password_reset_done.html:10
 msgid "Password Reset"
-msgstr ""
+msgstr "Password Reset (TBD)"
 
 #: templates/account/password_reset.html:12
 msgid "Forgotten Password"
-msgstr ""
+msgstr "Forgotten Password (TBD)"
 
 #: templates/account/password_reset.html:16
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
 msgstr ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it. (TBD)"
 
 #: templates/account/password_reset.html:21 templates/account/signup.html:31
 msgid "Email"
-msgstr ""
+msgstr "Email (TBD)"
 
 #: templates/account/password_reset.html:30
 #, python-format
@@ -1168,10 +1172,14 @@ msgid ""
 "any trouble resetting your password.\n"
 "          "
 msgstr ""
+"\n"
+"          Please <a href=\"%(contactus_url)s\">contact us</a> if you have "
+"any trouble resetting your password.\n"
+" (TBD)          "
 
 #: templates/account/password_reset.html:38
 msgid "Reset My Password"
-msgstr ""
+msgstr "Reset My Password (TBD)"
 
 #: templates/account/password_reset_done.html:18
 #, python-format
@@ -1181,10 +1189,14 @@ msgid ""
 "\">contact us</a> if you do not receive it within a few minutes.\n"
 "      "
 msgstr ""
+"\n"
+"      We have sent you an e-mail. Please <a href=\"%(contactus_url)s"
+"\">contact us</a> if you do not receive it within a few minutes.\n"
+" (TBD)      "
 
 #: templates/account/password_reset_from_key.html:14
 msgid "Bad Token"
-msgstr ""
+msgstr "Bad Token (TBD)"
 
 #: templates/account/password_reset_from_key.html:16
 #, python-format
@@ -1193,30 +1205,33 @@ msgid ""
 "used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
 "a>."
 msgstr ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>. (TBD)"
 
 #: templates/account/password_reset_from_key.html:24
 msgid "New Password"
-msgstr ""
+msgstr "New Password (TBD)"
 
 #: templates/account/password_reset_from_key.html:31
 msgid "New Password (again)"
-msgstr ""
+msgstr "New Password (again) (TBD)"
 
 #: templates/account/password_reset_from_key.html:43
 #: templates/account/password_reset_from_key_done.html:10
 msgid "Your password has been changed."
-msgstr ""
+msgstr "Your password has been changed. (TBD)"
 
 #: templates/account/password_set.html:6
 #: templates/account/password_set.html:13
 #: templates/account/password_set.html:25
 #: templates/users/user_settings_v2.html:171
 msgid "Set Password"
-msgstr ""
+msgstr "Set Password (TBD)"
 
 #: templates/account/signup.html:11
 msgid "About you"
-msgstr ""
+msgstr "نبذة عنك"
 
 #: templates/account/signup.html:14
 #, python-format
@@ -1224,14 +1239,24 @@ msgid ""
 "You are about to use your %(provider_name)s account to login. We first need "
 "a few more details before you get started."
 msgstr ""
+"You are about to use your %(provider_name)s account to login. We first need "
+"a few more details before you get started. (TBD)"
 
 #: templates/account/signup.html:16
 msgid "First we would like to know a little more about you."
-msgstr ""
+msgstr "First we would like to know a little more about you. (TBD)"
 
 #: templates/account/signup.html:22
 msgid "Username (We recommend that you do not use your real name)"
+msgstr "إسم المستخدم ننصح بعد إستخدام الأسم الحقيقي"
+
+#: templates/account/signup.html:37
+msgid ""
+"All the following information is optional but will help Movements.org ensure "
+"that you see the postings that are most relevant to your needs and interests."
 msgstr ""
+"كل المعلومات التالية هي إختيارية، إلا انها ستساعد موفمنتس في تحديد العروض "
+"والطلبات المناسبة لك ولإحتياجاتك"
 
 #: templates/account/signup.html:40 templates/users/user_settings_v2.html:57
 msgid "First Name"
@@ -1245,9 +1270,17 @@ msgstr "الإسم لثاني"
 msgid "Biography"
 msgstr "السيرة الذاتية "
 
+#: templates/account/signup.html:60
+msgid ""
+"If you want other users to know something about you. You can control how "
+"much if any information to make public."
+msgstr ""
+"If you want other users to know something about you. You can control how "
+"much if any information to make public. (TBD)"
+
 #: templates/account/signup.html:67
 msgid "Social Vetting"
-msgstr ""
+msgstr "التحقق الإجتماعي"
 
 #: templates/account/signup.html:68
 msgid ""
@@ -1257,6 +1290,10 @@ msgid ""
 "information is optional but the more you provide the easier it will be for "
 "others to trust you."
 msgstr ""
+"من أجل حماية أعضائنا، نقوم بالتحقق من كون نياتهم تتطابق مع <a href=\"/"
+"movements/terms-and-conditions\" target=\"_blank\">شروط العضوية</a>. "
+"المعلومات التي نطلبها هي إختيارية، لكن كلما قدمت معلومات أكثر، سيكون من "
+"الأسهل على الأخرين الثقة بك"
 
 #: templates/account/signup.html:73 templates/users/user_settings_v2.html:94
 msgid "Linked In"
@@ -1281,7 +1318,7 @@ msgstr ""
 #: templates/users/more_about_you.html:91
 #: templates/users/more_about_you.html:109
 msgid "Next"
-msgstr ""
+msgstr "Next (TBD)"
 
 #: templates/account/signup_closed.html:6
 #: templates/account/signup_closed.html:12
@@ -1384,7 +1421,24 @@ msgstr "إستخدم وسائل التواصل الإجتماعي من أجل ا
 #: templates/account/verified_email_required.html:7
 #: templates/account/verified_email_required.html:12
 msgid "Verify Your E-mail Address"
+msgstr "التحقق من بريدك الإلكتروني"
+
+#: templates/account/verification_sent.html:10
+msgid ""
+"You've now created an account. We've sent you an email to verify your email "
+"address, once you've done this you will have full access to the Movements "
+"platform."
 msgstr ""
+"لقد قمت الان بإنشاء حساب. قمنا بإرسال رسالة لك لتحقق من عنوانك الإلكتروني. حالما تقوم بفتح الرسالة وإتباع الخطوات ستحصل على صلاحية كاملة لدخول منصة موفمنتس."
+
+#: templates/account/verification_sent.html:12
+#, python-format
+msgid ""
+"Please <a href=\"%(contactUrl)s\">contact us</a> if you do not receive an "
+"email within a few minutes."
+msgstr ""
+" في حال عدم وصول الرسالة إلى بريدك نرجوا التواصل معنا على العنوان التالي"
+"<a href=\"%(contactUrl)s\">Info@movements.org</a>"
 
 #: templates/account/verified_email_required.html:19
 msgid ""
@@ -1630,7 +1684,7 @@ msgstr ""
 "يتمتعون بمهارات تؤهلهم لمساعدة النشطاء. سواء كنت صحافي،سياسي، ناشط،فنان، "
 "تقني او تتحدث عدة لغات، سيكون لك دور لتلعبه "
 
-#: templates/ahr/home_v2.html:121
+#: templates/ahr/home_v2.html:121 templates/users/more_about_you.html:41
 msgid "Create a Request"
 msgstr "انشر طلبك"
 
@@ -2301,7 +2355,7 @@ msgstr ""
 
 #: templates/users/more_about_you.html:14
 msgid "Start"
-msgstr ""
+msgstr "Start (TBD)"
 
 #: templates/users/more_about_you.html:18
 #: templates/users/more_about_you.html:61
@@ -2312,18 +2366,20 @@ msgstr "Languages (TBD)"
 
 #: templates/users/more_about_you.html:22
 msgid "Regions"
-msgstr ""
+msgstr "Regions (TBD)"
 
 #: templates/users/more_about_you.html:30
 #: templates/users/more_about_you.html:130
 msgid "Finish"
-msgstr ""
+msgstr "Finish (TBD)"
 
 #: templates/users/more_about_you.html:39
 msgid ""
 "Your account is now fully active. Fill out additional profile details now or "
 "you can skip this step and do it later in your settings page."
 msgstr ""
+"حسابك الأن مفعل بشكل كامل. نرجوا ملئ المعلومات الأخرى، وبإستطاعتك أيضاً تجاوز "
+"هذه الخطوة والقيام بها في وقت الاحقا عن طريق إعدادت الصفحة"
 
 #: templates/users/more_about_you.html:43
 msgid ""
@@ -2331,6 +2387,11 @@ msgid ""
 "help those in closed societies find the assistance they need to amplify "
 "their voice and expand their influence."
 msgstr ""
+
+#: templates/users/more_about_you.html:45
+#, fuzzy
+msgid "Create an Offer"
+msgstr "انشر طلبك"
 
 #: templates/users/more_about_you.html:52
 #: templates/users/more_about_you.html:70
@@ -2352,21 +2413,23 @@ msgstr ""
 
 #: templates/users/more_about_you.html:100
 msgid "Please indicate your skill set."
-msgstr ""
+msgstr "الرجاء تحديد قائمة المهارات"
 
 #: templates/users/more_about_you.html:115
 msgid "Done"
-msgstr ""
+msgstr "تم"
 
 #: templates/users/more_about_you.html:118
 msgid "Thank You! You are one step closer to opening a closed society!"
-msgstr ""
+msgstr "شكرا لك! انت على خطوة واحدة من المساهمة في إنفتاح المجتمعات المغلقة"
 
 #: templates/users/more_about_you.html:121
 msgid ""
 "If you would like to update this details at any time, this can be done in "
 "easily in your settings panel."
 msgstr ""
+"في حال أردت القيام بتحديث التفاصيل التي أدخلت في أي وقت، تستطيع القيام بهذا "
+"بسهولة وذلك عبر لائحة الإعدادات"
 
 #: templates/users/more_about_you.html:125
 #, python-format
