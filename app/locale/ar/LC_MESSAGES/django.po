@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 09:24-0500\n"
+"POT-Creation-Date: 2014-08-28 10:05-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -518,9 +518,9 @@ msgstr "Linked in (TBD)"
 msgid "Website/blog"
 msgstr "Website/blog (TBD)"
 
-#: app/reporting/admin/user.py:153
+#: app/reporting/admin/user.py:153 templates/users/user_profile_v2.html:57
 msgid "Bio"
-msgstr ""
+msgstr "السيرة الذاتية "
 
 #: app/reporting/admin/user.py:168
 msgid "Count social"
@@ -1819,6 +1819,7 @@ msgstr "Hide/Show (TBD)"
 
 #: templates/market/market.html:33 templates/users/more_about_you.html:26
 #: templates/users/more_about_you.html:97
+#: templates/users/user_profile_v2.html:62
 msgid "Skills"
 msgstr "المهارات"
 
@@ -2023,7 +2024,7 @@ msgstr "Report (TBD)"
 
 #: templates/market/clientside/messagedialog.html:8
 msgid "New message to "
-msgstr ""
+msgstr "New message to (TBD)"
 
 #: templates/market/clientside/messagedialog.html:12
 #: templates/market/clientside/recommenddialog.html:16
@@ -2042,7 +2043,7 @@ msgstr ""
 #: templates/market/clientside/reportdialog.html:23
 #: templates/market/clientside/reportuserdialog.html:24
 msgid "Send"
-msgstr ""
+msgstr "Send (TBD)"
 
 #: templates/market/clientside/messagedialog.html:85
 msgid ". Please try again."
@@ -2050,47 +2051,47 @@ msgstr ""
 
 #: templates/market/clientside/messagedialog.html:89
 msgid "Please provide a subject and message."
-msgstr ""
+msgstr "Please provide a subject and message. (TBD)"
 
 #: templates/market/clientside/notifications.html:15
 msgid "commented on "
 msgstr ""
 
 #: templates/market/clientside/recommenddialog.html:7
-msgid "Recommed this"
-msgstr ""
+msgid "Recommend this"
+msgstr "Recommend this (TBD)"
 
 #: templates/market/clientside/recommenddialog.html:11
 msgid "To: username or email address"
-msgstr ""
+msgstr "To: username or email address (TBD)"
 
 #: templates/market/clientside/recommenddialog.html:13
 msgid "Start typing a username or enter an email address"
-msgstr ""
+msgstr "Start typing a username or enter an email address (TBD)"
 
 #: templates/market/clientside/recommenddialog.html:86
 msgid "Please enter both a subject and a message."
-msgstr ""
+msgstr "Please enter both a subject and a message. (TBD)"
 
 #: templates/market/clientside/recommenddialog.html:91
 msgid "Please enter a valid username and/or email address. "
-msgstr ""
+msgstr "Please enter a valid username and/or email address. (TBD)"
 
 #: templates/market/clientside/recommenddialog.html:118
 msgid "Failed to send message to user:"
-msgstr ""
+msgstr "Failed to send message to user: (TBD)"
 
 #: templates/market/clientside/recommenddialog.html:121
 msgid "Failed to send message to users:"
-msgstr ""
+msgstr "Failed to send message to users: (TBD)"
 
 #: templates/market/clientside/recommenddialog.html:127
 msgid "Failed to send message"
-msgstr ""
+msgstr "Failed to send message (TBD)"
 
 #: templates/market/clientside/reportdialog.html:8
 msgid "Report Post"
-msgstr ""
+msgstr "Report Post (TBD)"
 
 #: templates/market/clientside/reportuserdialog.html:9
 msgid "Report User "
@@ -2136,13 +2137,22 @@ msgstr ""
 msgid "OpenID Sign In"
 msgstr ""
 
+#: templates/postman/base_folder.html:31 templates/postman/inbox.html:5
+#: templates/users/snippets/profile_navigation.html:9
+msgid "Inbox"
+msgstr "Inbox (TBD)"
+
+#: templates/postman/base_folder.html:32 templates/postman/sent.html:10
+msgid "Sent"
+msgstr "Sent (TBD)"
+
 #: templates/postman/base_folder.html:43
 msgid "g:i A,M j,n/j/y"
 msgstr ""
 
 #: templates/postman/base_folder.html:64
 msgid "No messages."
-msgstr ""
+msgstr "No messages. (TBD)"
 
 #: templates/postman/base_folder.html:73
 msgid "Sorry, this page number is invalid."
@@ -2218,11 +2228,6 @@ msgstr ""
 msgid "Please find below the answer from your correspondent."
 msgstr ""
 
-#: templates/postman/inbox.html:5
-#: templates/users/snippets/profile_navigation.html:9
-msgid "Inbox"
-msgstr "Inbox (TBD)"
-
 #: templates/postman/inbox.html:9
 msgid "Received"
 msgstr ""
@@ -2231,13 +2236,13 @@ msgstr ""
 msgid "Sent Messages"
 msgstr ""
 
-#: templates/postman/sent.html:10
-msgid "Sent"
-msgstr ""
-
 #: templates/postman/view.html:17
 msgid "Reply"
-msgstr ""
+msgstr "Reply (TBD)"
+
+#: templates/postman/view.html:28
+msgid "to"
+msgstr "to (TBD)"
 
 #: templates/socialaccount/authentication_error.html:5
 #: templates/socialaccount/authentication_error.html:10
@@ -2300,6 +2305,7 @@ msgstr ""
 
 #: templates/users/more_about_you.html:18
 #: templates/users/more_about_you.html:61
+#: templates/users/user_profile_v2.html:73
 #: templates/users/user_settings_v2.html:136
 msgid "Languages"
 msgstr "Languages (TBD)"
@@ -2383,6 +2389,38 @@ msgstr ""
 #: templates/users/thanksforactivation.html:13
 msgid "Your account is now activated."
 msgstr ""
+
+#: templates/users/user_profile_v2.html:27
+msgid "View Public Profile"
+msgstr "View Public Profile (TBD)"
+
+#: templates/users/user_profile_v2.html:34
+msgid "Direct Message"
+msgstr "Direct Message (TBD)"
+
+#: templates/users/user_profile_v2.html:38
+msgid "Report User"
+msgstr "Report User (TBD)"
+
+#: templates/users/user_profile_v2.html:46
+msgid "About"
+msgstr "About (TBD)"
+
+#: templates/users/user_profile_v2.html:48
+msgid "Name:"
+msgstr "Name: (TBD)"
+
+#: templates/users/user_profile_v2.html:50
+msgid "Nationality:"
+msgstr "Nationality: (TBD)"
+
+#: templates/users/user_profile_v2.html:52
+msgid "Residence:"
+msgstr "بلد الإقامة"
+
+#: templates/users/user_profile_v2.html:81
+msgid "No languages specified"
+msgstr "No languages specified (TBD)"
 
 #: templates/users/user_settings_v2.html:25
 msgid "Change picture"
@@ -2507,3 +2545,23 @@ msgstr "Alerts (TBD)"
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
 msgstr "Profile (TBD)"
+
+#: templates/users/snippets/star_rating.html:11
+msgid "MOVEMENTS STAR RATING"
+msgstr "MOVEMENTS STAR RATING (TBD)"
+
+#: templates/users/snippets/star_rating.html:12
+msgid ""
+"0 Stars: Confirmed Email<br>\n"
+"                   1 Star: Confirmed 1 social media account<br>\n"
+"                   2 Stars: Confirmed 2 social media accounts<br>\n"
+"                   3 Stars: Confirmed all social media and bio<br>\n"
+"                   4 Stars: Confirmed significant online presence<br>\n"
+"                   5 Stars: Personally known by Movements.org<br>"
+msgstr ""
+"0 Stars: Confirmed Email<br>\n"
+"                   1 Star: Confirmed 1 social media account<br>\n"
+"                   2 Stars: Confirmed 2 social media accounts<br>\n"
+"                   3 Stars: Confirmed all social media and bio<br>\n"
+"                   4 Stars: Confirmed significant online presence<br>\n"
+"                   5 Stars: Personally known by Movements.org<br> (TBD)"
