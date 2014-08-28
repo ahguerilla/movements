@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 07:03-0500\n"
+"POT-Creation-Date: 2014-08-28 07:14-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1675,18 +1675,18 @@ msgstr "أعرض خدمة"
 
 #: templates/market/create_offer.html:12
 msgid "Do you have expertise to offer?"
-msgstr ""
+msgstr "هل لديك خبرات لتقدمها ؟"
 
 #: templates/market/create_offer.html:13
 msgid ""
 "An Offer can be technical or professional skills, an opportunity to publish "
 "a story, or any skill that may be of help to others. Your Offer will be "
 "posted on Movements and will be seen by all members."
-msgstr ""
+msgstr "الخدمة قد تكون مهارة أو تقنية تستطيع تقديمها أو فرصة لنشر قصة ما أو أي مهارة اخرى تملكها و بامكانك افادة الاخرين بها . عرضك سيتم نشره على المنصة و  سيكون ظاهراً لجميع المستخدمين ."
 
 #: templates/market/create_offer.html:17
 msgid "1. What skills can you offer?"
-msgstr ""
+msgstr "1. ما هي المهارات التي بامكانك تقديمها"
 
 #: templates/market/create_offer.html:21
 #: templates/market/create_request.html:22
@@ -1695,26 +1695,53 @@ msgstr "Other (TBD)"
 
 #: templates/market/create_offer.html:31
 msgid "2. Which countries are you interested in helping?"
+msgstr "2. ما هي الدول التي تهتم بمساعدتها"
+
+#: templates/market/create_offer.html:37
+msgid ""
+"Movements.org provides access to skills and experts. Please describe your "
+"skills, abilities, or services below. Be as explicit and clear as possible."
 msgstr ""
+"Movements.org provides access to skills and experts. Please describe your "
+"skills, abilities, or services below. Be as explicit and clear as possible. (TBD)"
 
 #: templates/market/create_offer.html:38
 msgid "3. How can you help?"
-msgstr ""
+msgstr "3. ؟العنوان : ماذا تعرض"
+
+#: templates/market/create_offer.html:39
+#: templates/market/create_request.html:43
+msgid "Be specific and clear."
+msgstr "Be specific and clear (TBD)"
 
 #: templates/market/create_offer.html:48
 #: templates/market/create_request.html:52
 msgid "4. Please write your post"
 msgstr "4. Please write your post (TBD)"
 
+#: templates/market/create_offer.html:49
+msgid "Tell a compelling story."
+msgstr "Tell a compelling story. (TBD)"
+
 #: templates/market/create_offer.html:59
 #: templates/market/create_request.html:63
 msgid "May we tweet this request?"
 msgstr "هل بامكاننا نشر الطلب كتغريدة على موقع تويتر (الفراغ يعني موافق)"
 
+#: templates/market/create_offer.html:62
+#: templates/market/create_request.html:66
+msgid "We won’t use your name or any identifying information"
+msgstr "We won’t use your name or any identifying information (TBD)"
+
 #: templates/market/create_offer.html:69
 #: templates/market/create_request.html:73
 msgid "Receive notifications"
 msgstr ""
+
+#: templates/market/create_offer.html:79
+#: templates/market/create_request.html:82
+msgid "Post now"
+msgstr "Post now (TBD)"
 
 #: templates/market/create_request.html:11
 msgid "Request a service"
@@ -1766,21 +1793,9 @@ msgstr "صف طلبك بالأسفل و كن واضحاً قدر الامكان"
 msgid "3. What do you need?"
 msgstr "3. العنوان : ماذا تحتاج (مساحة محدودة)"
 
-#: templates/market/create_request.html:43
-msgid "Be specific and clear."
-msgstr "Be specific and clear (TBD)"
-
 #: templates/market/create_request.html:53
 msgid "Tell a compelling story and state your needs."
 msgstr "Tell a compelling story and state your needs. (TBD)"
-
-#: templates/market/create_request.html:66
-msgid "We won’t use your name or any identifying information"
-msgstr "We won’t use your name or any identifying information. (TBD)"
-
-#: templates/market/create_request.html:82
-msgid "Post now"
-msgstr "Post now (TBD)"
 
 #: templates/market/market.html:15
 msgid "See all"
