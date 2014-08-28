@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 07:14-0500\n"
+"POT-Creation-Date: 2014-08-28 09:24-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1682,7 +1682,10 @@ msgid ""
 "An Offer can be technical or professional skills, an opportunity to publish "
 "a story, or any skill that may be of help to others. Your Offer will be "
 "posted on Movements and will be seen by all members."
-msgstr "الخدمة قد تكون مهارة أو تقنية تستطيع تقديمها أو فرصة لنشر قصة ما أو أي مهارة اخرى تملكها و بامكانك افادة الاخرين بها . عرضك سيتم نشره على المنصة و  سيكون ظاهراً لجميع المستخدمين ."
+msgstr ""
+"الخدمة قد تكون مهارة أو تقنية تستطيع تقديمها أو فرصة لنشر قصة ما أو أي مهارة "
+"اخرى تملكها و بامكانك افادة الاخرين بها . عرضك سيتم نشره على المنصة و  سيكون "
+"ظاهراً لجميع المستخدمين ."
 
 #: templates/market/create_offer.html:17
 msgid "1. What skills can you offer?"
@@ -1703,7 +1706,8 @@ msgid ""
 "skills, abilities, or services below. Be as explicit and clear as possible."
 msgstr ""
 "Movements.org provides access to skills and experts. Please describe your "
-"skills, abilities, or services below. Be as explicit and clear as possible. (TBD)"
+"skills, abilities, or services below. Be as explicit and clear as possible. "
+"(TBD)"
 
 #: templates/market/create_offer.html:38
 msgid "3. How can you help?"
@@ -1884,43 +1888,72 @@ msgstr ""
 
 #: templates/market/view_post.html:12
 msgid "on"
-msgstr ""
+msgstr "on (TBD)"
 
 #: templates/market/view_post.html:20
 msgid "Posted by"
-msgstr ""
+msgstr "Posted by (TBD)"
 
 #: templates/market/view_post.html:29
 msgid "Translate this post"
-msgstr ""
+msgstr "Translate this post (TBD)"
 
 #: templates/market/view_post.html:49
 msgid "Recommend"
-msgstr ""
+msgstr "Recommend (TBD)"
 
 #: templates/market/view_post.html:54
 msgid "Tweet"
-msgstr ""
+msgstr "Tweet (TBD)"
 
 #: templates/market/view_post.html:60
 msgid "Direct message"
-msgstr ""
+msgstr "Direct message (TBD)"
 
 #: templates/market/view_post.html:63
 msgid "Report this post"
-msgstr ""
+msgstr "Report this post (TBD)"
 
 #: templates/market/view_post.html:72
 msgid "Leave a comment"
-msgstr ""
+msgstr "Leave a comment (TBD)"
 
 #: templates/market/view_post.html:76
 msgid "Please do not post any personally identifying information."
-msgstr ""
+msgstr "Please do not post any personally identifying information. (TBD)"
 
 #: templates/market/view_post.html:77
 msgid "Don't use your real name or email address when leaving a comment."
 msgstr ""
+"Don't use your real name or email address when leaving a comment. (TBD)"
+
+#: templates/market/view_post.html:80
+msgid "Post comment"
+msgstr "Post comment (TBD)"
+
+#: templates/market/view_post.html:93
+#, python-format
+msgid ""
+"Please <a href=\"%(accountUrl)s\">Login</a> or <a href=\"%(signupUrl)s"
+"\">Sign up</a> to view more about this post. Once you've done this you will "
+"be able to send messages to the author, comment and rate this post."
+msgstr ""
+"Please <a href=\"%(accountUrl)s\">Login</a> or <a href=\"%(signupUrl)s"
+"\">Sign up</a> to view more about this post. Once you've done this you will "
+"be able to send messages to the author, comment and rate this post. (TBD)"
+
+#: templates/market/view_post.html:117
+#, python-format
+msgid ""
+"You don't have any languages selected. Please add some in your <a href="
+"\"%(settingsUrl)s#skills\">settings</a>"
+msgstr ""
+"You don't have any languages selected. Please add some in your <a href="
+"\"%(settingsUrl)s#skills\">settings</a> (TBD)"
+
+#: templates/market/view_post.html:134
+msgid "Delete"
+msgstr "Delete (TBD)"
 
 #: templates/market/clientside/closemarketitemdialog.html:10
 msgid "CLOSE A REQUEST"
