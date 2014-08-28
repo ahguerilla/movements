@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 11:20-0500\n"
+"POT-Creation-Date: 2014-08-28 11:47-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -722,7 +722,7 @@ msgstr ""
 msgid "Rated by AHR"
 msgstr ""
 
-#: app/users/views.py:433
+#: app/users/views.py:432
 msgid "You have not accepted terms and conditions"
 msgstr ""
 
@@ -732,7 +732,7 @@ msgstr ""
 
 #: avatar/forms.py:24
 msgid "avatar"
-msgstr ""
+msgstr "avatar (TBD)"
 
 #: avatar/forms.py:37
 #, python-format
@@ -740,6 +740,8 @@ msgid ""
 "%(ext)s is an invalid file extension. Authorized extensions are : "
 "%(valid_exts_list)s"
 msgstr ""
+"%(ext)s is an invalid file extension. Authorized extensions are : "
+"%(valid_exts_list)s (TBD)"
 
 #: avatar/forms.py:44
 #, python-format
@@ -747,6 +749,8 @@ msgid ""
 "Your file is too big (%(size)s), the maximum allowed size is "
 "%(max_valid_size)s"
 msgstr ""
+"Your file is too big (%(size)s), the maximum allowed size is "
+"%(max_valid_size)s (TBD)"
 
 #: avatar/forms.py:54
 #, python-format
@@ -754,46 +758,48 @@ msgid ""
 "You already have %(nb_avatars)d avatars, and the maximum allowed is "
 "%(nb_max_avatars)d."
 msgstr ""
+"You already have %(nb_avatars)d avatars, and the maximum allowed is "
+"%(nb_max_avatars)d. (TBD)"
 
 #: avatar/forms.py:71 avatar/forms.py:84
 msgid "Choices"
-msgstr ""
+msgstr "Choices (TBD)"
 
 #: avatar/views.py:74
 msgid "Successfully uploaded a new avatar."
-msgstr ""
+msgstr "Successfully uploaded a new avatar. (TBD)"
 
 #: avatar/views.py:110
 msgid "Successfully updated your avatar."
-msgstr ""
+msgstr "Successfully updated your avatar. (TBD)"
 
 #: avatar/views.py:148
 msgid "Successfully deleted the requested avatars."
-msgstr ""
+msgstr "Successfully deleted the requested avatars. (TBD)"
 
 #: avatar/templates/avatar/add.html:6 avatar/templates/avatar/change.html:6
 #: templates/avatar/add.html:6 templates/avatar/change.html:8
 msgid "Your current avatar: "
-msgstr ""
+msgstr "Your current avatar: (TBD)"
 
 #: avatar/templates/avatar/add.html:9 avatar/templates/avatar/change.html:9
 #: templates/avatar/add.html:9 templates/avatar/change.html:11
 msgid "You haven't uploaded an avatar yet. Please upload one now."
-msgstr ""
+msgstr "You haven't uploaded an avatar yet. Please upload one now. (TBD)"
 
 #: avatar/templates/avatar/add.html:13 avatar/templates/avatar/change.html:20
 #: templates/avatar/add.html:13 templates/avatar/change.html:25
 msgid "Upload New Image"
-msgstr ""
+msgstr "Upload New Image (TBD)"
 
 #: avatar/templates/avatar/change.html:15 templates/avatar/change.html:19
 msgid "Choose new Default"
-msgstr ""
+msgstr "Choose new Default (TBD)"
 
 #: avatar/templates/avatar/confirm_delete.html:6
 #: templates/avatar/confirm_delete.html:6
 msgid "Please select the avatars that you would like to delete."
-msgstr ""
+msgstr "Please select the avatars that you would like to delete. (TBD)"
 
 #: avatar/templates/avatar/confirm_delete.html:9
 #: templates/avatar/confirm_delete.html:9
@@ -802,11 +808,13 @@ msgid ""
 "You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
 "\">upload one</a> now."
 msgstr ""
+"You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
+"\">upload one</a> now. (TBD)"
 
 #: avatar/templates/avatar/confirm_delete.html:15
 #: templates/avatar/confirm_delete.html:15
 msgid "Delete These"
-msgstr ""
+msgstr "Delete These (TBD)"
 
 #: avatar/templates/notification/avatar_friend_updated/full.txt:1
 #, python-format
@@ -815,6 +823,9 @@ msgid ""
 "\n"
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
+"%(avatar_creator)s has updated their avatar %(avatar)s.\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s (TBD)\n"
 
 #: avatar/templates/notification/avatar_friend_updated/notice.html:2
 #, python-format
@@ -822,6 +833,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
 "href=\"%(avatar_url)s\">%(avatar)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
+"href=\"%(avatar_url)s\">%(avatar)s</a>. (TBD)"
 
 #: avatar/templates/notification/avatar_updated/full.txt:1
 #, python-format
@@ -830,15 +843,18 @@ msgid ""
 "\n"
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
+"Your avatar has been updated.  %(avatar)s\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s (TBD)\n"
 
 #: avatar/templates/notification/avatar_updated/notice.html:2
 #, python-format
 msgid "You have updated your avatar <a href=\"%(avatar_url)s\">%(avatar)s</a>."
-msgstr ""
+msgstr "You have updated your avatar <a href=\"%(avatar_url)s\">%(avatar)s</a>. (TBD)"
 
 #: avatar/templatetags/avatar_tags.py:51
 msgid "Default Avatar"
-msgstr ""
+msgstr "Default Avatar (TBD)"
 
 #: templates/404.html:5 templates/404.html.py:10
 msgid "404"
@@ -1311,7 +1327,7 @@ msgstr "Website or Blog (TBD)"
 #: templates/market/clientside/reportuserdialog.html:21
 #: templates/users/user_settings_v2.html:178
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel (TBD)"
 
 #: templates/account/signup.html:107 templates/users/more_about_you.html:55
 #: templates/users/more_about_you.html:73
@@ -1429,7 +1445,9 @@ msgid ""
 "address, once you've done this you will have full access to the Movements "
 "platform."
 msgstr ""
-"لقد قمت الان بإنشاء حساب. قمنا بإرسال رسالة لك لتحقق من عنوانك الإلكتروني. حالما تقوم بفتح الرسالة وإتباع الخطوات ستحصل على صلاحية كاملة لدخول منصة موفمنتس."
+"لقد قمت الان بإنشاء حساب. قمنا بإرسال رسالة لك لتحقق من عنوانك الإلكتروني. "
+"حالما تقوم بفتح الرسالة وإتباع الخطوات ستحصل على صلاحية كاملة لدخول منصة "
+"موفمنتس."
 
 #: templates/account/verification_sent.html:12
 #, python-format
@@ -1437,8 +1455,8 @@ msgid ""
 "Please <a href=\"%(contactUrl)s\">contact us</a> if you do not receive an "
 "email within a few minutes."
 msgstr ""
-" في حال عدم وصول الرسالة إلى بريدك نرجوا التواصل معنا على العنوان التالي"
-"<a href=\"%(contactUrl)s\">Info@movements.org</a>"
+" في حال عدم وصول الرسالة إلى بريدك نرجوا التواصل معنا على العنوان التالي<a "
+"href=\"%(contactUrl)s\">Info@movements.org</a>"
 
 #: templates/account/verified_email_required.html:19
 msgid ""
@@ -1910,36 +1928,44 @@ msgstr "Show hidden (TBD)"
 msgid "Select all"
 msgstr "Select all (TBD)"
 
+#: templates/market/notifications.html:13
+msgid "Alert History"
+msgstr "Alert History (TBD)"
+
+#: templates/market/notifications.html:16
+msgid "All notifications loaded"
+msgstr "All notifications loaded (TBD)"
+
 #: templates/market/notifications.html:17
 msgid "More"
-msgstr ""
+msgstr "More (TBD)"
 
 #: templates/market/notifications.html:30
 msgid "commented on"
-msgstr ""
+msgstr "commented on (TBD)"
 
 #: templates/market/notifications.html:30
 #: templates/market/clientside/notifications.html:15
 msgid "your"
-msgstr ""
+msgstr "your (TBD)"
 
 #: templates/market/notifications.html:35
 #: templates/market/clientside/notifications.html:12
 msgid "updated"
-msgstr ""
+msgstr "updated (TBD)"
 
 #: templates/market/notifications.html:35
 #: templates/market/clientside/notifications.html:12
 msgid "posted"
-msgstr ""
+msgstr "posted (TBD)"
 
 #: templates/market/notifications.html:36
 msgid "the"
-msgstr ""
+msgstr "the (TBD)"
 
 #: templates/market/notifications.html:41
 msgid "sent you a private "
-msgstr ""
+msgstr "sent you a private (TBD)"
 
 #: templates/market/view_post.html:12
 msgid "on"
@@ -2389,9 +2415,8 @@ msgid ""
 msgstr ""
 
 #: templates/users/more_about_you.html:45
-#, fuzzy
 msgid "Create an Offer"
-msgstr "انشر طلبك"
+msgstr "إنشاء عرض"
 
 #: templates/users/more_about_you.html:52
 #: templates/users/more_about_you.html:70
@@ -2593,7 +2618,7 @@ msgstr ""
 
 #: templates/users/user_settings_v2.html:192
 msgid "Upload Avatar"
-msgstr ""
+msgstr "Upload Avatar (TBD)"
 
 #: templates/users/waitforactivation.html:13
 msgid ""

@@ -192,13 +192,13 @@
   <ul><li><a href="{% url 'user_profile' %}">
     <div class="nav-menu-item-wrap profile">
       <div class="nav-menu-item"></div>
-      Profile
+      {% trans "Profile"%}
     </div>
   </a></li>
   <li><a href="{% url 'user_settings' %}">
     <div class="nav-menu-item-wrap settings">
       <div class="nav-menu-item"></div>
-      Settings
+      {% trans "Settings"%}
     </div>
   </a></li>
   <li><form method="post" action="{% url 'account_logout' %}">
@@ -206,7 +206,7 @@
     <a href="#" onclick="parentNode.submit();">
       <div class="nav-menu-item-wrap logout">
         <div class="nav-menu-item"></div>
-        Logout
+        {% trans "Logout" %}
       </div>
     </a>
   </form></li></ul>
