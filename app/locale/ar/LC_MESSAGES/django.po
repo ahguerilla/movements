@@ -182,11 +182,11 @@ msgstr ""
 
 #: app/market/models/market.py:25 templates/base_v2.html:188
 msgid "Request"
-msgstr "Request (TBD)"
+msgstr "طلب"
 
 #: app/market/models/market.py:26 templates/base_v2.html:189
 msgid "Offer"
-msgstr "Offer (TBD)"
+msgstr "عرض"
 
 #: app/market/models/market.py:29
 msgid "item_type"
@@ -512,11 +512,11 @@ msgstr "التويتر"
 
 #: app/reporting/admin/user.py:145
 msgid "Linked in"
-msgstr "Linked in (TBD)"
+msgstr "لينكيد اين"
 
 #: app/reporting/admin/user.py:149
 msgid "Website/blog"
-msgstr "Website/blog (TBD)"
+msgstr "موقع/مدونة"
 
 #: app/reporting/admin/user.py:153 templates/users/user_profile_v2.html:57
 msgid "Bio"
@@ -548,31 +548,29 @@ msgstr ""
 
 #: app/users/forms.py:28
 msgid "This email is used already"
-msgstr "This email is used already (TBD)"
+msgstr "هذا الايميل مستخدم سابقاً"
 
 #: app/users/forms.py:35
 msgid "Passwords must match"
-msgstr "Passwords must match (TBD)"
+msgstr "يجب تطابق كلمات السر"
 
 #: app/users/forms.py:70 app/users/forms.py:93
 msgid "This username is already in use"
-msgstr "This username is already in use (TBD)"
+msgstr "اسم المستخدم هذا مستخدم سابقاًذ"
 
 #: app/users/forms.py:72 app/users/forms.py:95
 msgid ""
 "Username must contain only letters, numbers - and _. White space is not "
 "allowed"
 msgstr ""
-"Username must contain only letters, numbers - and _. White space is not "
-"allowed (TBD)"
+"أسم المستخدم يجب الا يحتوي الا على أحرف , أرقام , الرمز - و ـ و الفراغ غير مسموح"
 
 #: app/users/forms.py:74 app/users/forms.py:97
 msgid ""
 "Username must be greater that 2 characters and less than 30 contain only "
 "letters, numbers - and _. White space is not allowed"
 msgstr ""
-"Username must be greater that 2 characters and less than 30 contain only "
-"letters, numbers - and _. White space is not allowed (TBD)"
+"يجب أن يتألف اسم المستخدم من حرفين,رقمين ,أو ـ و - على الأقل و ٣٠ حرف على الأكثر . و الفراغ غير مسموح "
 
 #: app/users/models.py:14
 msgid "skill set"
@@ -636,19 +634,19 @@ msgstr "عام: كل معلوماتك الشخصية ستكون ظاهرة لل�
 
 #: app/users/models.py:117
 msgid "Never"
-msgstr "Never (TBD)"
+msgstr "أبداً"
 
 #: app/users/models.py:118
 msgid "Weekly"
-msgstr "Weekly (TBD)"
+msgstr "اسبوعياً"
 
 #: app/users/models.py:119
 msgid "Daily"
-msgstr "Daily (TBD)"
+msgstr "يومياَ"
 
 #: app/users/models.py:120
 msgid "Instantly"
-msgstr "Instantly (TBD)"
+msgstr "بشكل مستمر"
 
 #: app/users/models.py:124
 msgid "bio"
@@ -704,7 +702,7 @@ msgstr ""
 
 #: app/users/models.py:149
 msgid "Interface language"
-msgstr "Interface language (TBD)"
+msgstr "لغة الواجهة"
 
 #: app/users/models.py:150
 msgid "first login"
@@ -732,7 +730,7 @@ msgstr ""
 
 #: avatar/forms.py:24
 msgid "avatar"
-msgstr "avatar (TBD)"
+msgstr "الصورة الرمزية"
 
 #: avatar/forms.py:37
 #, python-format
@@ -740,8 +738,7 @@ msgid ""
 "%(ext)s is an invalid file extension. Authorized extensions are : "
 "%(valid_exts_list)s"
 msgstr ""
-"%(ext)s is an invalid file extension. Authorized extensions are : "
-"%(valid_exts_list)s (TBD)"
+"%(ext)s رابط لملف غير صالح , الروابط المسموحة هي : %(valid_exts_list)s"
 
 #: avatar/forms.py:44
 #, python-format
@@ -749,8 +746,7 @@ msgid ""
 "Your file is too big (%(size)s), the maximum allowed size is "
 "%(max_valid_size)s"
 msgstr ""
-"Your file is too big (%(size)s), the maximum allowed size is "
-"%(max_valid_size)s (TBD)"
+"الملف كبير (%(size)s), الحجم الأقصى المسموح به للملفات : %(max_valid_size)s"
 
 #: avatar/forms.py:54
 #, python-format
@@ -758,48 +754,47 @@ msgid ""
 "You already have %(nb_avatars)d avatars, and the maximum allowed is "
 "%(nb_max_avatars)d."
 msgstr ""
-"You already have %(nb_avatars)d avatars, and the maximum allowed is "
-"%(nb_max_avatars)d. (TBD)"
+"لديك مسبقاً %(nb_avatars)d  صورة رمزية , الحجم الأقصى المسموح به للصورة الرمزية : %(nb_max_avatars)d."
 
 #: avatar/forms.py:71 avatar/forms.py:84
 msgid "Choices"
-msgstr "Choices (TBD)"
+msgstr "خيارات "
 
 #: avatar/views.py:74
 msgid "Successfully uploaded a new avatar."
-msgstr "Successfully uploaded a new avatar. (TBD)"
+msgstr "تم تحميل صورة رمزية جديدة بنجاح"
 
 #: avatar/views.py:110
 msgid "Successfully updated your avatar."
-msgstr "Successfully updated your avatar. (TBD)"
+msgstr "تم تحميل الصورة الرمزية بنجاح"
 
 #: avatar/views.py:148
 msgid "Successfully deleted the requested avatars."
-msgstr "Successfully deleted the requested avatars. (TBD)"
+msgstr "تم حذف الصور الرمزية المطلوبة بنجاح"
 
 #: avatar/templates/avatar/add.html:6 avatar/templates/avatar/change.html:6
 #: templates/avatar/add.html:6 templates/avatar/change.html:8
 msgid "Your current avatar: "
-msgstr "Your current avatar: (TBD)"
+msgstr "صورتك الرمزية الحالية: "
 
 #: avatar/templates/avatar/add.html:9 avatar/templates/avatar/change.html:9
 #: templates/avatar/add.html:9 templates/avatar/change.html:11
 msgid "You haven't uploaded an avatar yet. Please upload one now."
-msgstr "You haven't uploaded an avatar yet. Please upload one now. (TBD)"
+msgstr "لم تقم بتحميل صورة رمزية بعد .الرجاء تحميل صورة"
 
 #: avatar/templates/avatar/add.html:13 avatar/templates/avatar/change.html:20
 #: templates/avatar/add.html:13 templates/avatar/change.html:25
 msgid "Upload New Image"
-msgstr "Upload New Image (TBD)"
+msgstr "حمل صورة جديدة "
 
 #: avatar/templates/avatar/change.html:15 templates/avatar/change.html:19
 msgid "Choose new Default"
-msgstr "Choose new Default (TBD)"
+msgstr "اختر فراغ جديد"
 
 #: avatar/templates/avatar/confirm_delete.html:6
 #: templates/avatar/confirm_delete.html:6
 msgid "Please select the avatars that you would like to delete."
-msgstr "Please select the avatars that you would like to delete. (TBD)"
+msgstr "الرجاء اختيار الصور الرمزية التي تريد حذفها"
 
 #: avatar/templates/avatar/confirm_delete.html:9
 #: templates/avatar/confirm_delete.html:9
@@ -808,13 +803,12 @@ msgid ""
 "You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
 "\">upload one</a> now."
 msgstr ""
-"You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
-"\">upload one</a> now. (TBD)"
+"لا تملك أي صور رمزية لحذفها , يرجى <a href=\"%(avatar_change_url)s\">تحميل</a> صورة الان"
 
 #: avatar/templates/avatar/confirm_delete.html:15
 #: templates/avatar/confirm_delete.html:15
 msgid "Delete These"
-msgstr "Delete These (TBD)"
+msgstr "احذف هذه"
 
 #: avatar/templates/notification/avatar_friend_updated/full.txt:1
 #, python-format
@@ -823,9 +817,9 @@ msgid ""
 "\n"
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
-"%(avatar_creator)s has updated their avatar %(avatar)s.\n"
+"%(avatar_creator)s تم تحديث الصورة الرمزية %(avatar)s.\n"
 "\n"
-"http://%(current_site)s%(avatar_url)s (TBD)\n"
+"http://%(current_site)s%(avatar_url)s\n"
 
 #: avatar/templates/notification/avatar_friend_updated/notice.html:2
 #, python-format
@@ -833,8 +827,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
 "href=\"%(avatar_url)s\">%(avatar)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
-"href=\"%(avatar_url)s\">%(avatar)s</a>. (TBD)"
+"<a href=\"%(user_url)s\">%(avatar_creator)s</a> تم تحديث الصورة الرمزية <a "
+"href=\"%(avatar_url)s\">%(avatar)s</a>."
 
 #: avatar/templates/notification/avatar_updated/full.txt:1
 #, python-format
@@ -843,18 +837,18 @@ msgid ""
 "\n"
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
-"Your avatar has been updated.  %(avatar)s\n"
+"لقد تم تحديث صورتك الرمزية  %(avatar)s\n"
 "\n"
-"http://%(current_site)s%(avatar_url)s (TBD)\n"
+"http://%(current_site)s%(avatar_url)s\n"
 
 #: avatar/templates/notification/avatar_updated/notice.html:2
 #, python-format
 msgid "You have updated your avatar <a href=\"%(avatar_url)s\">%(avatar)s</a>."
-msgstr "You have updated your avatar <a href=\"%(avatar_url)s\">%(avatar)s</a>. (TBD)"
+msgstr "لقد قمت بتحديث صورتك الرمزية <a href=\"%(avatar_url)s\">%(avatar)s</a>."
 
 #: avatar/templatetags/avatar_tags.py:51
 msgid "Default Avatar"
-msgstr "Default Avatar (TBD)"
+msgstr "الصورة الرمزية فارغة"
 
 #: templates/404.html:5 templates/404.html.py:10
 msgid "404"
@@ -882,13 +876,13 @@ msgstr ""
 
 #: templates/base.html:92 templates/users/user_settings_v2.html:157
 msgid "Notifications"
-msgstr "Notifications (TBD)"
+msgstr "اشعارات"
 
 #: templates/base.html:100 templates/base.html.py:109
 #: templates/users/user_settings_v2.html:16
 #: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
-msgstr "Settings (TBD)"
+msgstr "خيارات"
 
 #: templates/base.html:105
 msgid "My Posts"
@@ -907,7 +901,7 @@ msgstr ""
 #: templates/account/login.html.py:15 templates/account/login.html:48
 #: templates/openid/login.html:16
 msgid "Sign In"
-msgstr "Sign In (TBD)"
+msgstr "تسجيل الدخول"
 
 #: templates/base.html:122 templates/base_private_settings.html:6
 #: templates/base_public.html:6 templates/account/signup_old.html:30
@@ -917,11 +911,11 @@ msgstr "سجل الأن"
 
 #: templates/base_v2.html:80
 msgid "Add Post"
-msgstr "Add Post (TBD)"
+msgstr "اضافة منشور "
 
 #: templates/base_v2.html:85 templates/ahr/home_v2.html:13
 msgid "Login"
-msgstr "Login (TBD)"
+msgstr "تسجيل دخول"
 
 #: templates/base_v2.html:100
 msgid "Sign up"
@@ -929,26 +923,25 @@ msgstr "سجل الأن"
 
 #: templates/base_v2.html:104
 msgid "Visit market"
-msgstr "Visit market (TBD)"
+msgstr "زيارة السوق"
 
 #: templates/base_v2.html:129
 msgid "Get updates"
-msgstr "Get updates (TBD)"
+msgstr "احصل على تحديثات"
 
 #: templates/base_v2.html:132
 msgid "Enter your e-mail..."
-msgstr "Enter your e-mail... (TBD)"
+msgstr "ادخل بريدك الالكتروني"
 
 #: templates/base_v2.html:136
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr ""
-"Get all the latest updates, including featured posts, and security tips! "
-"(TBD)"
+"احصل على اخر التحديثات , بما قيها المنشورات الجديدة و النصائح الأمنية"
 
 #: templates/base_v2.html:139 templates/base_v2.html.py:173
 msgid "Connect with us"
-msgstr "Connect with us (TBD)"
+msgstr "اتصل بنا"
 
 #: templates/base_v2.html:142 templates/account/signup_start.html:51
 msgid "Connect with Twitter"
@@ -967,12 +960,11 @@ msgid ""
 "Crowdsourcing the fight for human rights. The online platform that is "
 "opening closed societies."
 msgstr ""
-"Crowdsourcing the fight for human rights. The online platform that is "
-"(TBD)opening closed societies. (TBD)"
+"تعهد جماعي بالمحاربة من أجل حقوق الانسان،المنصة الالكترونية تساعد المجتمعات المغلق على الانفتاح"
 
 #: templates/base_v2.html:160 templates/base_v2.html.py:171
 msgid "Copyright &copy; 2014 Advancing Human Rights"
-msgstr "Copyright &copy; 2014 Advancing Human Rights (TBD)"
+msgstr "حقوق النشر محفوظة &copy;  :٢٠١٤ أدفانسينغ هيومان رايتس"
 
 #: templates/account/account_inactive.html:5
 #: templates/account/account_inactive.html:9
@@ -1090,14 +1082,12 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"      Welcome to Movements, please sign in below. If you don't have an "
-"account yet, please sign up <a href=\"%(home_url)s\" alt=\"sign up\">here</"
-"a> (TBD)\n"
+"      أهلا بك في موفمينتس . يرجى تسجيل الدخول في الأسفل . اذا كنت غير مسجل بعد <a href=\"%(home_url)s\" alt=\"sign up\">  يرجى التسجيل </a>.\n"
 "      "
 
 #: templates/account/login.html:26
 msgid "Email or Username"
-msgstr "Email or Username (TBD)"
+msgstr "بريد الكتروني أو اسم مستخدم"
 
 #: templates/account/login.html:33 templates/account/signup_start.html:25
 msgid "Password"
@@ -1105,7 +1095,7 @@ msgstr ""
 
 #: templates/account/login.html:45
 msgid "Forgot Password?"
-msgstr "Forgot Password? (TBD)"
+msgstr "نسيت كلمة السر"
 
 #: templates/account/login.html:57
 msgid "Sign In with Facebook"
@@ -1121,7 +1111,7 @@ msgstr ""
 
 #: templates/account/password_change.html:12
 msgid "Password changed successfully"
-msgstr "Password changed successfully (TBD)"
+msgstr "تم تغيير كلمة السر بنجاح"
 
 #: templates/account/password_change.html:26
 #: templates/account/password_reset_from_key.html:7
@@ -1131,54 +1121,52 @@ msgstr "Password changed successfully (TBD)"
 #: templates/users/user_settings_v2.html:167
 #: templates/users/user_settings_v2.html:209
 msgid "Change Password"
-msgstr "Change Password (TBD)"
+msgstr "تغيير كلمة السر"
 
 #: templates/account/password_delete.html:5
 #: templates/account/password_delete.html:8
 msgid "Delete Password"
-msgstr "Delete Password (TBD)"
+msgstr "حذف كلمة السر"
 
 #: templates/account/password_delete.html:9
 msgid ""
 "You may delete your password since you are currently logged in using OpenID."
 msgstr ""
-"You may delete your password since you are currently logged in using OpenID. "
-"(TBD)"
+"قد تقوم بحذف كلمة السر لأنك مسجل دخولك الان من هوية مفتوحة"
 
 #: templates/account/password_delete.html:12
 msgid "delete my password"
-msgstr "delete my password (TBD)"
+msgstr "احذف كلمة سري"
 
 #: templates/account/password_delete_done.html:5
 #: templates/account/password_delete_done.html:8
 msgid "Password Deleted"
-msgstr "Password Deleted (TBD)"
+msgstr "تم حذف كلمة السر"
 
 #: templates/account/password_delete_done.html:9
 msgid "Your password has been deleted."
-msgstr "Your password has been deleted. (TBD)"
+msgstr "تم حذف كلمة السر الخاصة بك"
 
 #: templates/account/password_reset.html:7
 #: templates/account/password_reset_done.html:5
 #: templates/account/password_reset_done.html:10
 msgid "Password Reset"
-msgstr "Password Reset (TBD)"
+msgstr "استعادة كلمة السر"
 
 #: templates/account/password_reset.html:12
 msgid "Forgotten Password"
-msgstr "Forgotten Password (TBD)"
+msgstr "نسيت كلمة السر "
 
 #: templates/account/password_reset.html:16
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
 msgstr ""
-"Forgotten your password? Enter your e-mail address below, and we'll send you "
-"an e-mail allowing you to reset it. (TBD)"
+"نسيت كلمة السر الخاصة بك؟ادخل بريدك الالكتروني في الأسفل، و سنرسل لك رسالة الكترونية لتستعيد كلمة السر."
 
 #: templates/account/password_reset.html:21 templates/account/signup.html:31
 msgid "Email"
-msgstr "Email (TBD)"
+msgstr "بريد الكتروني"
 
 #: templates/account/password_reset.html:30
 #, python-format
@@ -1189,13 +1177,12 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"          Please <a href=\"%(contactus_url)s\">contact us</a> if you have "
-"any trouble resetting your password.\n"
-" (TBD)          "
+"          <a href=\"%(contactus_url)s\">يرجى الاتصال بنا اذا  </a>واجهتك أي مشاكل في استعادة كلمة السر\n"
+"          "
 
 #: templates/account/password_reset.html:38
 msgid "Reset My Password"
-msgstr "Reset My Password (TBD)"
+msgstr "استعادة كلمة السر الخاصة بي"
 
 #: templates/account/password_reset_done.html:18
 #, python-format
@@ -1206,13 +1193,12 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"      We have sent you an e-mail. Please <a href=\"%(contactus_url)s"
-"\">contact us</a> if you do not receive it within a few minutes.\n"
-" (TBD)      "
+"     لقد أرسلنا لك رسالة الكترونية،يرجى<a href=\"%(contactus_url)s\">  الاتصال بنا اذا  </a> لم تتلقى رسالى خلال بضع دقائق\n"
+"      "
 
 #: templates/account/password_reset_from_key.html:14
 msgid "Bad Token"
-msgstr "Bad Token (TBD)"
+msgstr "رمز سئ"
 
 #: templates/account/password_reset_from_key.html:16
 #, python-format
@@ -1221,29 +1207,27 @@ msgid ""
 "used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
 "a>."
 msgstr ""
-"The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
-"a>. (TBD)"
+"رابط استعادة كلمة المرور غير صالح،لأنه استخدم مسبقاً،الرجاء طلب  <a href=\"%(passwd_reset_url)s\"> استعادة كلمة السر مجدداً</a>."
 
 #: templates/account/password_reset_from_key.html:24
 msgid "New Password"
-msgstr "New Password (TBD)"
+msgstr "كلمة مرور جديدة"
 
 #: templates/account/password_reset_from_key.html:31
 msgid "New Password (again)"
-msgstr "New Password (again) (TBD)"
+msgstr "كلمة مرور جديدة (مرة أخرى)"
 
 #: templates/account/password_reset_from_key.html:43
 #: templates/account/password_reset_from_key_done.html:10
 msgid "Your password has been changed."
-msgstr "Your password has been changed. (TBD)"
+msgstr "لقد تم تغيير كلمة المرور الخاصة بك"
 
 #: templates/account/password_set.html:6
 #: templates/account/password_set.html:13
 #: templates/account/password_set.html:25
 #: templates/users/user_settings_v2.html:171
 msgid "Set Password"
-msgstr "Set Password (TBD)"
+msgstr "انشأ كلمة مرور"
 
 #: templates/account/signup.html:11
 msgid "About you"
@@ -1255,12 +1239,11 @@ msgid ""
 "You are about to use your %(provider_name)s account to login. We first need "
 "a few more details before you get started."
 msgstr ""
-"You are about to use your %(provider_name)s account to login. We first need "
-"a few more details before you get started. (TBD)"
+"أنت على وشك استخدام أسم %(provider_name)s مزودك كاسم لحسابك لتسجيل الدخول. نحتاج أولاً بعض المعلومات قبل البدء "
 
 #: templates/account/signup.html:16
 msgid "First we would like to know a little more about you."
-msgstr "First we would like to know a little more about you. (TBD)"
+msgstr "أولاً نرغب بمعرفة المزيد عنك "
 
 #: templates/account/signup.html:22
 msgid "Username (We recommend that you do not use your real name)"
@@ -1291,8 +1274,7 @@ msgid ""
 "If you want other users to know something about you. You can control how "
 "much if any information to make public."
 msgstr ""
-"If you want other users to know something about you. You can control how "
-"much if any information to make public. (TBD)"
+"اذا كنت ترغب بأن يعرف المسخدمين المزيد عنك بامكانك التحكم بحجم المعلومات الظاهرة للعامة"
 
 #: templates/account/signup.html:67
 msgid "Social Vetting"
@@ -1313,11 +1295,11 @@ msgstr ""
 
 #: templates/account/signup.html:73 templates/users/user_settings_v2.html:94
 msgid "Linked In"
-msgstr "Linked In (TBD)"
+msgstr "لينكيد لن"
 
 #: templates/account/signup.html:94 templates/users/user_settings_v2.html:115
 msgid "Website or Blog"
-msgstr "Website or Blog (TBD)"
+msgstr "موقع أو مدونة"
 
 #: templates/account/signup.html:104
 #: templates/market/clientside/closemarketitemdialog.html:29
@@ -1327,14 +1309,14 @@ msgstr "Website or Blog (TBD)"
 #: templates/market/clientside/reportuserdialog.html:21
 #: templates/users/user_settings_v2.html:178
 msgid "Cancel"
-msgstr "Cancel (TBD)"
+msgstr "الغاء"
 
 #: templates/account/signup.html:107 templates/users/more_about_you.html:55
 #: templates/users/more_about_you.html:73
 #: templates/users/more_about_you.html:91
 #: templates/users/more_about_you.html:109
 msgid "Next"
-msgstr "Next (TBD)"
+msgstr "التالي"
 
 #: templates/account/signup_closed.html:6
 #: templates/account/signup_closed.html:12
@@ -1643,7 +1625,7 @@ msgstr ""
 
 #: templates/ahr/home_v2.html:13
 msgid "Already have an account?"
-msgstr "Already have an account? (TBD)"
+msgstr "تملك حساب مسبقاً ؟"
 
 #: templates/ahr/home_v2.html:34
 msgid "Crowdsourcing the fight for human rights."
@@ -1669,7 +1651,7 @@ msgstr "سجل الأن"
 #: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:68
 #: templates/ahr/home_v2.html:105
 msgid "Find out more"
-msgstr "Find out more (TBD)"
+msgstr "اكتشف المزيد"
 
 #: templates/ahr/home_v2.html:56
 msgid ""
@@ -1766,7 +1748,7 @@ msgstr "1. ما هي المهارات التي بامكانك تقديمها"
 #: templates/market/create_offer.html:21
 #: templates/market/create_request.html:22
 msgid "Other"
-msgstr "Other (TBD)"
+msgstr "المزيد"
 
 #: templates/market/create_offer.html:31
 msgid "2. Which countries are you interested in helping?"
@@ -1777,9 +1759,7 @@ msgid ""
 "Movements.org provides access to skills and experts. Please describe your "
 "skills, abilities, or services below. Be as explicit and clear as possible."
 msgstr ""
-"Movements.org provides access to skills and experts. Please describe your "
-"skills, abilities, or services below. Be as explicit and clear as possible. "
-"(TBD)"
+"موفمينتس.اورغ تمنحك الوسيلة للتواصل مع الخبراء و اصحاب المهارات"
 
 #: templates/market/create_offer.html:38
 msgid "3. How can you help?"
@@ -1788,16 +1768,16 @@ msgstr "3. ؟العنوان : ماذا تعرض"
 #: templates/market/create_offer.html:39
 #: templates/market/create_request.html:43
 msgid "Be specific and clear."
-msgstr "Be specific and clear (TBD)"
+msgstr "كن واضح و محدد"
 
 #: templates/market/create_offer.html:48
 #: templates/market/create_request.html:52
 msgid "4. Please write your post"
-msgstr "4. Please write your post (TBD)"
+msgstr "4. رجاءاً أكتب منشورك"
 
 #: templates/market/create_offer.html:49
 msgid "Tell a compelling story."
-msgstr "Tell a compelling story. (TBD)"
+msgstr "أخبر قصة قاهرة"
 
 #: templates/market/create_offer.html:59
 #: templates/market/create_request.html:63
@@ -1807,7 +1787,7 @@ msgstr "هل بامكاننا نشر الطلب كتغريدة على موقع �
 #: templates/market/create_offer.html:62
 #: templates/market/create_request.html:66
 msgid "We won’t use your name or any identifying information"
-msgstr "We won’t use your name or any identifying information (TBD)"
+msgstr "لن نقوم باستخدام اسمك أو أي معلومات شخصية تخصك"
 
 #: templates/market/create_offer.html:69
 #: templates/market/create_request.html:73
@@ -1817,7 +1797,7 @@ msgstr ""
 #: templates/market/create_offer.html:79
 #: templates/market/create_request.html:82
 msgid "Post now"
-msgstr "Post now (TBD)"
+msgstr "انشر الان"
 
 #: templates/market/create_request.html:11
 msgid "Request a service"
@@ -1871,23 +1851,23 @@ msgstr "3. العنوان : ماذا تحتاج (مساحة محدودة)"
 
 #: templates/market/create_request.html:53
 msgid "Tell a compelling story and state your needs."
-msgstr "Tell a compelling story and state your needs. (TBD)"
+msgstr "اخبر قصة قاهرة و حدد طلباتك"
 
 #: templates/market/market.html:15
 msgid "See all"
-msgstr "See all (TBD)"
+msgstr "انظر الكل"
 
 #: templates/market/market.html:16
 msgid "Requests"
-msgstr "Requests (TBD)"
+msgstr "طلبات"
 
 #: templates/market/market.html:17
 msgid "Offers"
-msgstr "Offers (TBD)"
+msgstr "عروض"
 
 #: templates/market/market.html:26
 msgid "Hide/Show"
-msgstr "Hide/Show (TBD)"
+msgstr "أخفي/أظهر"
 
 #: templates/market/market.html:33 templates/users/more_about_you.html:26
 #: templates/users/more_about_you.html:97
@@ -1901,116 +1881,115 @@ msgstr "البلدان"
 
 #: templates/market/market.html:45
 msgid "Search"
-msgstr "Search (TBD)"
+msgstr "ابحث"
 
 #: templates/market/market.html:58
 msgid "Press enter to search"
-msgstr "Press enter to search (TBD)"
+msgstr "أضغط ادخال للبحث"
 
 #: templates/market/market.html:59
 msgid "Click \"Search\" above to close"
-msgstr "Click \"Search\" above to close (TBD)"
+msgstr "اضغط\"بحث\" في الأعلى للاغلاق"
 
 #: templates/market/market.html:72
 msgid "Featured posts"
-msgstr "Featured posts (TBD)"
+msgstr "منشورات اخيرة"
 
 #: templates/market/market.html:81
 msgid "Sticky posts"
-msgstr "Sticky posts (TBD)"
+msgstr "منشورات ملصوقة"
 
 #: templates/market/market.html:107
 msgid "Show hidden"
-msgstr "Show hidden (TBD)"
+msgstr "أظهر المخفي"
 
 #: templates/market/market.html:112 templates/market/market.html.py:120
 #: templates/market/market.html:126
 msgid "Select all"
-msgstr "Select all (TBD)"
+msgstr "اختر الكل"
 
 #: templates/market/notifications.html:13
 msgid "Alert History"
-msgstr "Alert History (TBD)"
+msgstr "منبه التاريخ"
 
 #: templates/market/notifications.html:16
 msgid "All notifications loaded"
-msgstr "All notifications loaded (TBD)"
+msgstr "تم تحميل كل الاشعارات"
 
 #: templates/market/notifications.html:17
 msgid "More"
-msgstr "More (TBD)"
+msgstr "المزيد"
 
 #: templates/market/notifications.html:30
 msgid "commented on"
-msgstr "commented on (TBD)"
+msgstr "تعليق على"
 
 #: templates/market/notifications.html:30
 #: templates/market/clientside/notifications.html:15
 msgid "your"
-msgstr "your (TBD)"
+msgstr "أنت"
 
 #: templates/market/notifications.html:35
 #: templates/market/clientside/notifications.html:12
 msgid "updated"
-msgstr "updated (TBD)"
+msgstr "محدث"
 
 #: templates/market/notifications.html:35
 #: templates/market/clientside/notifications.html:12
 msgid "posted"
-msgstr "posted (TBD)"
+msgstr "منشور"
 
 #: templates/market/notifications.html:36
 msgid "the"
-msgstr "the (TBD)"
+msgstr "ال"
 
 #: templates/market/notifications.html:41
 msgid "sent you a private "
-msgstr "sent you a private (TBD)"
+msgstr "مرسل لك بشكل خاص"
 
 #: templates/market/view_post.html:12
 msgid "on"
-msgstr "on (TBD)"
+msgstr "على"
 
 #: templates/market/view_post.html:20
 msgid "Posted by"
-msgstr "Posted by (TBD)"
+msgstr "منشور بواسطة"
 
 #: templates/market/view_post.html:29
 msgid "Translate this post"
-msgstr "Translate this post (TBD)"
+msgstr "ترجم هذا المنشور"
 
 #: templates/market/view_post.html:49
 msgid "Recommend"
-msgstr "Recommend (TBD)"
+msgstr "مقترح"
 
 #: templates/market/view_post.html:54
 msgid "Tweet"
-msgstr "Tweet (TBD)"
+msgstr "تغريدة"
 
 #: templates/market/view_post.html:60
 msgid "Direct message"
-msgstr "Direct message (TBD)"
+msgstr "رسالة مباشرة"
 
 #: templates/market/view_post.html:63
 msgid "Report this post"
-msgstr "Report this post (TBD)"
+msgstr "أخبر عن هذا المنشور"
 
 #: templates/market/view_post.html:72
 msgid "Leave a comment"
-msgstr "Leave a comment (TBD)"
+msgstr "اترك تعليق"
 
 #: templates/market/view_post.html:76
 msgid "Please do not post any personally identifying information."
-msgstr "Please do not post any personally identifying information. (TBD)"
+msgstr "الرجاء عدم نشر أي معلومات شخصية عن الهوية"
 
 #: templates/market/view_post.html:77
 msgid "Don't use your real name or email address when leaving a comment."
-msgstr ""
-"Don't use your real name or email address when leaving a comment. (TBD)"
+msgstr "لا تترك اسمك الحقيقي أو بريدك الالكتروني عند ترك تعليق"
 
 #: templates/market/view_post.html:80
 msgid "Post comment"
-msgstr "Post comment (TBD)"
+msgstr "أنشر تعليق"
 
 #: templates/market/view_post.html:93
 #, python-format
@@ -2019,9 +1998,8 @@ msgid ""
 "\">Sign up</a> to view more about this post. Once you've done this you will "
 "be able to send messages to the author, comment and rate this post."
 msgstr ""
-"Please <a href=\"%(accountUrl)s\">Login</a> or <a href=\"%(signupUrl)s"
-"\">Sign up</a> to view more about this post. Once you've done this you will "
-"be able to send messages to the author, comment and rate this post. (TBD)"
+"<a href=\"%(accountUrl)s\">الرجاء تسجيل الدخول لعرض</a> المزيد حول هذا المنشور. عندما <a href=\"%(signupUrl)s"
+"\">تتنهي من تسجيل الدخول</a> ستتمكن من ارسال رسائل لكاتب المنشور و تصنيف المنشور و التعليق عليه"
 
 #: templates/market/view_post.html:117
 #, python-format
@@ -2029,12 +2007,11 @@ msgid ""
 "You don't have any languages selected. Please add some in your <a href="
 "\"%(settingsUrl)s#skills\">settings</a>"
 msgstr ""
-"You don't have any languages selected. Please add some in your <a href="
-"\"%(settingsUrl)s#skills\">settings</a> (TBD)"
+"لم تختر أي لغة، الرجاء اضافة اللغة  <a href=\"%(settingsUrl)s#skills\">لمهاراتك </a>  من قسم الخيارات"
 
 #: templates/market/view_post.html:134
 msgid "Delete"
-msgstr "Delete (TBD)"
+msgstr "حذف"
 
 #: templates/market/clientside/closemarketitemdialog.html:10
 msgid "CLOSE A REQUEST"
@@ -2047,7 +2024,7 @@ msgstr ""
 #: templates/market/clientside/closemarketitemdialog.html:32
 #: templates/market/clientside/marketitem.html:85
 msgid "Close"
-msgstr "Close (TBD)"
+msgstr "اغلاق"
 
 #: templates/market/clientside/closemarketitemdialog.html:111
 msgid "Please enter your answer"
@@ -2061,18 +2038,18 @@ msgid ""
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
 "a>."
 msgstr ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور بتاريخ  <"
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
 "a>. (TBD)"
 
 #: templates/market/clientside/marketitem.html:62
 msgid "FEATURED OFFER"
-msgstr "FEATURED OFFER (TBD)"
+msgstr "عرض أخير"
 
 #: templates/market/clientside/marketitem.html:64
 msgid "FEATURED REQUEST"
-msgstr "FEATURED REQUEST (TBD)"
+msgstr "طلب أخير"
 
 #: templates/market/clientside/marketitem.html:74
 #, python-format
@@ -2081,30 +2058,30 @@ msgid ""
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
 "        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</a>."
 msgstr ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور بتاريخ   <"
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
-"a>. (TBD)"
+"a>. (TBD) (dupe)"
 
 #: templates/market/clientside/marketitem.html:82
 msgid "Hide"
-msgstr "Hide (TBD)"
+msgstr "اخفاء"
 
 #: templates/market/clientside/marketitem.html:83
 msgid "Stick"
-msgstr "Stick (TBD)"
+msgstr "الصق"
 
 #: templates/market/clientside/marketitem.html:84
 msgid "Edit"
-msgstr "Edit (TBD)"
+msgstr "تحرير"
 
 #: templates/market/clientside/marketitem.html:86
 msgid "Report"
-msgstr "Report (TBD)"
+msgstr "تقرير"
 
 #: templates/market/clientside/messagedialog.html:8
 msgid "New message to "
-msgstr "New message to (TBD)"
+msgstr "رسالة جديدة ل"
 
 #: templates/market/clientside/messagedialog.html:12
 #: templates/market/clientside/recommenddialog.html:16
@@ -2123,7 +2100,7 @@ msgstr ""
 #: templates/market/clientside/reportdialog.html:23
 #: templates/market/clientside/reportuserdialog.html:24
 msgid "Send"
-msgstr "Send (TBD)"
+msgstr "ارسال"
 
 #: templates/market/clientside/messagedialog.html:85
 msgid ". Please try again."
@@ -2131,7 +2108,7 @@ msgstr ""
 
 #: templates/market/clientside/messagedialog.html:89
 msgid "Please provide a subject and message."
-msgstr "Please provide a subject and message. (TBD)"
+msgstr "رجاء قم بالتزويد بعنوان و رسالة"
 
 #: templates/market/clientside/notifications.html:15
 msgid "commented on "
@@ -2139,39 +2116,39 @@ msgstr ""
 
 #: templates/market/clientside/recommenddialog.html:7
 msgid "Recommend this"
-msgstr "Recommend this (TBD)"
+msgstr "أقترح هذا"
 
 #: templates/market/clientside/recommenddialog.html:11
 msgid "To: username or email address"
-msgstr "To: username or email address (TBD)"
+msgstr "الى: اسم المستخدم و البريد الالكتروني"
 
 #: templates/market/clientside/recommenddialog.html:13
 msgid "Start typing a username or enter an email address"
-msgstr "Start typing a username or enter an email address (TBD)"
+msgstr "ابدأ بكتابة اسم المستخدم و أدخل بريدك الالكتروني"
 
 #: templates/market/clientside/recommenddialog.html:86
 msgid "Please enter both a subject and a message."
-msgstr "Please enter both a subject and a message. (TBD)"
+msgstr "الرجاء ادخال العنوان و الرسالة"
 
 #: templates/market/clientside/recommenddialog.html:91
 msgid "Please enter a valid username and/or email address. "
-msgstr "Please enter a valid username and/or email address. (TBD)"
+msgstr "الرجاء ادخال اسم مستخدم و بريد الكتروني صالح"
 
 #: templates/market/clientside/recommenddialog.html:118
 msgid "Failed to send message to user:"
-msgstr "Failed to send message to user: (TBD)"
+msgstr "فشل في ارسال الرسالة للمستخدم"
 
 #: templates/market/clientside/recommenddialog.html:121
 msgid "Failed to send message to users:"
-msgstr "Failed to send message to users: (TBD)"
+msgstr "فشل في ارسال الرسالة للمستخدمين"
 
 #: templates/market/clientside/recommenddialog.html:127
 msgid "Failed to send message"
-msgstr "Failed to send message (TBD)"
+msgstr "فشل في ارسال الرسالة"
 
 #: templates/market/clientside/reportdialog.html:8
 msgid "Report Post"
-msgstr "Report Post (TBD)"
+msgstr "أخبر عن منشور"
 
 #: templates/market/clientside/reportuserdialog.html:9
 msgid "Report User "
@@ -2220,11 +2197,11 @@ msgstr ""
 #: templates/postman/base_folder.html:31 templates/postman/inbox.html:5
 #: templates/users/snippets/profile_navigation.html:9
 msgid "Inbox"
-msgstr "Inbox (TBD)"
+msgstr "صندوق الرسائل"
 
 #: templates/postman/base_folder.html:32 templates/postman/sent.html:10
 msgid "Sent"
-msgstr "Sent (TBD)"
+msgstr "المرسل"
 
 #: templates/postman/base_folder.html:43
 msgid "g:i A,M j,n/j/y"
@@ -2232,7 +2209,7 @@ msgstr ""
 
 #: templates/postman/base_folder.html:64
 msgid "No messages."
-msgstr "No messages. (TBD)"
+msgstr "لا رسائل"
 
 #: templates/postman/base_folder.html:73
 msgid "Sorry, this page number is invalid."
@@ -2318,11 +2295,11 @@ msgstr ""
 
 #: templates/postman/view.html:17
 msgid "Reply"
-msgstr "Reply (TBD)"
+msgstr "رد"
 
 #: templates/postman/view.html:28
 msgid "to"
-msgstr "to (TBD)"
+msgstr "الى"
 
 #: templates/socialaccount/authentication_error.html:5
 #: templates/socialaccount/authentication_error.html:10
@@ -2381,23 +2358,23 @@ msgstr ""
 
 #: templates/users/more_about_you.html:14
 msgid "Start"
-msgstr "Start (TBD)"
+msgstr "ابدأ"
 
 #: templates/users/more_about_you.html:18
 #: templates/users/more_about_you.html:61
 #: templates/users/user_profile_v2.html:73
 #: templates/users/user_settings_v2.html:136
 msgid "Languages"
-msgstr "Languages (TBD)"
+msgstr "لغات"
 
 #: templates/users/more_about_you.html:22
 msgid "Regions"
-msgstr "Regions (TBD)"
+msgstr "مناطق"
 
 #: templates/users/more_about_you.html:30
 #: templates/users/more_about_you.html:130
 msgid "Finish"
-msgstr "Finish (TBD)"
+msgstr "انهاء"
 
 #: templates/users/more_about_you.html:39
 msgid ""
@@ -2480,27 +2457,27 @@ msgstr ""
 
 #: templates/users/user_profile_v2.html:27
 msgid "View Public Profile"
-msgstr "View Public Profile (TBD)"
+msgstr "اظهر الصفحة الشخصة العامة"
 
 #: templates/users/user_profile_v2.html:34
 msgid "Direct Message"
-msgstr "Direct Message (TBD)"
+msgstr "رسائل فورية"
 
 #: templates/users/user_profile_v2.html:38
 msgid "Report User"
-msgstr "Report User (TBD)"
+msgstr "أخبر عن مستخدم"
 
 #: templates/users/user_profile_v2.html:46
 msgid "About"
-msgstr "About (TBD)"
+msgstr "حول"
 
 #: templates/users/user_profile_v2.html:48
 msgid "Name:"
-msgstr "Name: (TBD)"
+msgstr "اسم"
 
 #: templates/users/user_profile_v2.html:50
 msgid "Nationality:"
-msgstr "Nationality: (TBD)"
+msgstr "الجنسية"
 
 #: templates/users/user_profile_v2.html:52
 msgid "Residence:"
@@ -2508,23 +2485,23 @@ msgstr "بلد الإقامة"
 
 #: templates/users/user_profile_v2.html:81
 msgid "No languages specified"
-msgstr "No languages specified (TBD)"
+msgstr "لا لغات محددة"
 
 #: templates/users/user_settings_v2.html:25
 msgid "Change picture"
-msgstr "Change picture (TBD)"
+msgstr "تغيير الصورة"
 
 #: templates/users/user_settings_v2.html:31
 msgid "Personal Details"
-msgstr "Personal Details (TBD)"
+msgstr "تفاصيل شخصية"
 
 #: templates/users/user_settings_v2.html:32
 msgid "Skills & Interests"
-msgstr "Skills & Interests (TBD)"
+msgstr "مهارات و اهتمامات"
 
 #: templates/users/user_settings_v2.html:33
 msgid "Security & Alerts"
-msgstr "Security & Alerts (TBD)"
+msgstr "أمان و تنبيهات"
 
 #: templates/users/user_settings_v2.html:47
 msgid "Username"
@@ -2540,23 +2517,22 @@ msgstr ""
 
 #: templates/users/user_settings_v2.html:76
 msgid "Interface Language"
-msgstr "Interface Language (TBD)"
+msgstr "لغة الواجهة"
 
 #: templates/users/user_settings_v2.html:88
 msgid "Digital Presence"
-msgstr "Digital Presence (TBD)"
+msgstr "التواجد الالكتروني"
 
 #: templates/users/user_settings_v2.html:90
 msgid ""
 "The more links you provide, the higher your star rating will be. Link to "
 "Twitter, LinkedIn, and Facebook to help verify your identity."
 msgstr ""
-"The more links you provide, the higher your star rating will be. Link to "
-"Twitter, LinkedIn, and Facebook to help verify your identity. (TBD)"
+"كلما قمت بتزويدنا بمعلومات أكثر ستحصل على تصنيف أعلى.روابط لتويتر،لينكيدلن،فيس بوك، لتساعدنا على التأكد من هويتك"
 
 #: templates/users/user_settings_v2.html:122
 msgid "Skills/Interests"
-msgstr "Skills/Interests (TBD)"
+msgstr "مهارات/اهتمامات"
 
 #: templates/users/user_settings_v2.html:124
 msgid ""
@@ -2564,20 +2540,17 @@ msgid ""
 "expertise for you. This will also help us to show the postings that are the "
 "most relevant for you."
 msgstr ""
-"The skills and interests you provide will help others find the right "
-"expertise for you. This will also help us to show the postings that are the "
-"most relevant for you. (TBD)"
+"المهارات و الاهتمامات التي تزودنا بها ستمكن الاخرين من معرفة الأمور التي تختص بها و ستمكننا من مساعدتك على اظهار المنشورات المناسبة لك."
 
 #: templates/users/user_settings_v2.html:128
 msgid "Regions/Countries"
-msgstr "Regions/Countries (TBD)"
+msgstr "مناطق/دول"
 
 #: templates/users/user_settings_v2.html:130
 msgid ""
 "Where do you need help and/or where would you like to be able to help out?"
 msgstr ""
-"Where do you need help and/or where would you like to be able to help out? "
-"(TBD)"
+"ما هي الأماكن التي تريد أن تتم مساعدتك فيها و أين ترغب بالمساعدة ؟ "
 
 #: templates/users/user_settings_v2.html:138
 #, python-format
@@ -2590,7 +2563,7 @@ msgstr ""
 
 #: templates/users/user_settings_v2.html:144
 msgid "Control the visibility of your profile and notifications."
-msgstr "Control the visibility of your profile and notifications. (TBD)"
+msgstr "تحكم بالقدرة على رؤيتك و اشعاراتك"
 
 #: templates/users/user_settings_v2.html:148
 msgid "Profile Visibility"
@@ -2601,16 +2574,14 @@ msgid ""
 "How much information do you want to make public? So as to help protect your "
 "security and privacy, you may not want to expose your email address."
 msgstr ""
-"How much information do you want to make public? So as to help protect your "
-"security and privacy, you may not want to expose your email address. (TBD)"
+"كم من المعلومات ترغب بأن تنشر علناً،كي تتمكن من حماية أمنك الشخصي قد ترغب في عدم الاعلان عن بريدك الالكتروني للعامة"
 
 #: templates/users/user_settings_v2.html:159
 msgid ""
 "When would you like to receive a notification if someone responds to your "
 "post or creates one that matches your interest?"
 msgstr ""
-"When would you like to receive a notification if someone responds to your "
-"post or creates one that matches your interest? (TBD)"
+"متى تريد أن تتلقى اشعار ااذا استجاب أحد المستخدمين لمنشور لك ؟ "
 
 #: templates/users/user_settings_v2.html:181
 msgid "Save"
@@ -2618,7 +2589,7 @@ msgstr ""
 
 #: templates/users/user_settings_v2.html:192
 msgid "Upload Avatar"
-msgstr "Upload Avatar (TBD)"
+msgstr "تحميل صورة رمزية"
 
 #: templates/users/waitforactivation.html:13
 msgid ""
@@ -2628,15 +2599,15 @@ msgstr ""
 
 #: templates/users/snippets/profile_navigation.html:16
 msgid "Alerts"
-msgstr "Alerts (TBD)"
+msgstr "تنبيهات"
 
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
-msgstr "Profile (TBD)"
+msgstr "صفحة شخصية "
 
 #: templates/users/snippets/star_rating.html:11
 msgid "MOVEMENTS STAR RATING"
-msgstr "MOVEMENTS STAR RATING (TBD)"
+msgstr "تصنيف موفمينتس\"نجوم\""
 
 #: templates/users/snippets/star_rating.html:12
 msgid ""
@@ -2647,9 +2618,8 @@ msgid ""
 "                   4 Stars: Confirmed significant online presence<br>\n"
 "                   5 Stars: Personally known by Movements.org<br>"
 msgstr ""
-"0 Stars: Confirmed Email<br>\n"
-"                   1 Star: Confirmed 1 social media account<br>\n"
-"                   2 Stars: Confirmed 2 social media accounts<br>\n"
-"                   3 Stars: Confirmed all social media and bio<br>\n"
-"                   4 Stars: Confirmed significant online presence<br>\n"
-"                   5 Stars: Personally known by Movements.org<br> (TBD)"
+"٠ نجمة: بريد الكتروني مؤكد<br>\n"
+"١ نجمة: حساب موقع تواصل اجتماعي<br>\n"
+"٢ نجمة: حسابين تواصل اجتماعي<br>\n"
+"٣ نجمة: تأكيد كل حسابات التواصل الاجتماعي مع سيرة ذاتية<br>\n"
+"٤ نجمة : معلوم شخصياً من قبل موفمينتس<br>"
