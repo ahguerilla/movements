@@ -2091,7 +2091,7 @@ input.borderless-control:focus:invalid:focus {
   cursor: pointer;
 }
 #postman .sidebar .message {
-  padding: 5px 5px 5px 28px;
+  padding: 5px 5px 5px 5px;
   background-color: #f8f6f7;
   position: relative;
   cursor: pointer;
@@ -2105,9 +2105,10 @@ input.borderless-control:focus:invalid:focus {
   width: 10px;
   height: 10px;
   border: 2px solid #fe6d50;
-  position: absolute;
-  left: 8px;
-  top: 12px;
+  float: left;
+  margin-right: 12px;
+  margin-left: 8px;
+  margin-top: 14px;
 }
 #postman .sidebar .message h4 {
   font-family: "HurmeGeometricSans3-SemiBold";
@@ -2116,6 +2117,7 @@ input.borderless-control:focus:invalid:focus {
 }
 #postman .sidebar .message .date {
   float: right;
+  padding: 0px 5px;
 }
 #postman .sidebar .message.new .status {
   background-color: #fe6d50;

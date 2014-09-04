@@ -65,6 +65,17 @@ css_v2 = Bundle(
     output='./css/packed_v2.css',
 )
 
+language_ar = Bundle(
+    Bundle(
+        './css/language_ar.styl',
+        filters='stylus',
+        output='./css/language_ar.css'
+    ),
+    filters='cssmin',
+    output='./css/packed_language_ar.css',
+)
+
 register('js_all', js)
 register('css_all', css)
 register('css_all_v2', css_v2)
+register('css_language_ar', language_ar)

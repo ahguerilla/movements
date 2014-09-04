@@ -1,0 +1,37 @@
+body {
+  direction: rtl;
+}
+.header-nav {
+  direction: ltr;
+}
+.select-checkbox .select-label {
+  margin-right: 23px;
+}
+.select-multi-checkbox .select-arrow {
+  float: left;
+}
+.select-multi-checkbox .select-count {
+  float: left;
+  margin-left: 5px;
+}
+.select-multi-checkbox .select-label {
+  margin-right: 23px;
+}
+/* Inbox / Messages */
+.message-header .message-date {
+  float: left !important;
+}
+.message-well .status {
+  float: right !important;
+  margin-right: 8px !important;
+  margin-left: 12px !important;
+}
+.message-well .name-and-date .date {
+  float: left !important;
+}
+.message-well .name-and-date .name {
+  margin-right: 20px;
+}
+.message-well .subject {
+  margin-right: 20px;
+}
