@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-03 14:40-0500\n"
+"POT-Creation-Date: 2014-09-05 12:28-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,11 +180,11 @@ msgstr ""
 msgid "Closed By User"
 msgstr ""
 
-#: app/market/models/market.py:25 templates/base_v2.html:188
+#: app/market/models/market.py:25 templates/base_v2.html:198
 msgid "Request"
 msgstr "طلب"
 
-#: app/market/models/market.py:26 templates/base_v2.html:189
+#: app/market/models/market.py:26 templates/base_v2.html:199
 msgid "Offer"
 msgstr "عرض"
 
@@ -883,7 +883,7 @@ msgid "Notifications"
 msgstr "اشعارات"
 
 #: templates/base.html:100 templates/base.html.py:109
-#: templates/base_v2.html:201 templates/users/user_settings_v2.html:16
+#: templates/base_v2.html:211 templates/users/user_settings_v2.html:16
 #: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
 msgstr "خيارات"
@@ -913,52 +913,52 @@ msgstr "تسجيل الدخول"
 msgid "Sign Up"
 msgstr "سجل الأن"
 
-#: templates/base_v2.html:80
+#: templates/base_v2.html:90
 msgid "Add Post"
 msgstr "اضافة منشور "
 
-#: templates/base_v2.html:85 templates/ahr/home_v2.html:13
+#: templates/base_v2.html:95 templates/ahr/home_v2.html:13
 msgid "Login"
 msgstr "تسجيل دخول"
 
-#: templates/base_v2.html:100
+#: templates/base_v2.html:110
 msgid "Sign up"
 msgstr "سجل الأن"
 
-#: templates/base_v2.html:104
+#: templates/base_v2.html:114
 msgid "Visit market"
 msgstr "زيارة السوق"
 
-#: templates/base_v2.html:129
+#: templates/base_v2.html:139
 msgid "Get updates"
 msgstr "احصل على تحديثات"
 
-#: templates/base_v2.html:132
+#: templates/base_v2.html:142
 msgid "Enter your e-mail..."
 msgstr "ادخل بريدك الالكتروني"
 
-#: templates/base_v2.html:136
+#: templates/base_v2.html:146
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr "احصل على اخر التحديثات , بما قيها المنشورات الجديدة و النصائح الأمنية"
 
-#: templates/base_v2.html:139 templates/base_v2.html.py:173
+#: templates/base_v2.html:149 templates/base_v2.html.py:183
 msgid "Connect with us"
 msgstr "اتصل بنا"
 
-#: templates/base_v2.html:142 templates/account/signup_start.html:51
+#: templates/base_v2.html:152 templates/account/signup_start.html:51
 msgid "Connect with Twitter"
 msgstr "إتصل عبر التويتر"
 
-#: templates/base_v2.html:145 templates/account/signup_start.html:48
+#: templates/base_v2.html:155 templates/account/signup_start.html:48
 msgid "Connect with Facebook"
 msgstr "إتصل عبر الفيس بوك"
 
-#: templates/base_v2.html:153 templates/ahr/home_v2.html:103
+#: templates/base_v2.html:163 templates/ahr/home_v2.html:103
 msgid "About MOVEMENTS"
 msgstr "من نحن"
 
-#: templates/base_v2.html:154
+#: templates/base_v2.html:164
 msgid ""
 "Crowdsourcing the fight for human rights. The online platform that is "
 "opening closed societies."
@@ -966,16 +966,16 @@ msgstr ""
 "تعهد جماعي بالمحاربة من أجل حقوق الانسان،المنصة الالكترونية تساعد المجتمعات "
 "المغلق على الانفتاح"
 
-#: templates/base_v2.html:160 templates/base_v2.html.py:171
+#: templates/base_v2.html:170 templates/base_v2.html.py:181
 msgid "Copyright &copy; 2014 Advancing Human Rights"
 msgstr "حقوق النشر محفوظة &copy;  :٢٠١٤ أدفانسينغ هيومان رايتس"
 
-#: templates/base_v2.html:195
+#: templates/base_v2.html:205
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
 msgstr "صفحة شخصية "
 
-#: templates/base_v2.html:209
+#: templates/base_v2.html:219
 msgid "Logout"
 msgstr ""
 
@@ -2058,10 +2058,10 @@ msgid ""
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
 "a>."
 msgstr ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور بتاريخ  "
-"<%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
-"a>. (TBD)"
+"كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
+"بتاريخ  <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> تعليقات</"
+"a>."
 
 #: templates/market/clientside/marketitem.html:62
 msgid "FEATURED OFFER"
@@ -2078,10 +2078,10 @@ msgid ""
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
 "        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</a>."
 msgstr ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
-"بتاريخ   <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
-"a>. (TBD) (dupe)"
+"كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
+"بتاريخ  <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> تعليقات</"
+"a>."
 
 #: templates/market/clientside/marketitem.html:82
 msgid "Hide"
@@ -2588,7 +2588,7 @@ msgstr "تحكم بالقدرة على رؤيتك و اشعاراتك"
 
 #: templates/users/user_settings_v2.html:148
 msgid "Profile Visibility"
-msgstr "Profile Visibility (TBD)"
+msgstr "الملف الرؤية"
 
 #: templates/users/user_settings_v2.html:150
 msgid ""

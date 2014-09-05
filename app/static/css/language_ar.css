@@ -35,3 +35,31 @@ body {
 .message-well .subject {
   margin-right: 20px;
 }
+/* Footers */
+#FooterSocialMedia_Small {
+  direction: ltr;
+}
+#FooterSocialMedia_Small .social-icons {
+  margin-left: -80px;
+}
+.footer-copyright {
+  direction: ltr;
+}
+.footer-nav-content {
+  direction: ltr;
+}
+/* Misc */
+.btn-social img {
+  margin-left: 10px;
+  margin-right: 0px;
+}
+/* Posts */
+.view-post .post-actions a.recommend {
+  margin-left: 40px;
+}
+.view-post .post-header span {
+  margin-right: 50px;
+}
+.view-post .comment-count {
+  float: left !important;
+}
