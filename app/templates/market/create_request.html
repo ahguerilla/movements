@@ -10,7 +10,7 @@
       <div>
         <div class="form-title"><h1>{% trans "Request a service" %}</h1></div>
         <p>
-          {% blocktrans %}A Request is a way to ask for help from experts on Movements. Be as specific and clear as possible about what you need.  If you need a lawyer tell us what kind (asylum or civil?) Where do you need that lawyer (In the UK,  US or China?)  The more you explain your need, the easier it will be for someone to help.{% endblocktrans %}
+          {% trans "A Request is a way to ask for help from experts on Movements. Be as specific and clear as possible about what you need.  If you need a lawyer tell us what kind (asylum or civil?) Where do you need that lawyer (In the UK,  US or China?)  The more you explain your need, the easier it will be for someone to help."%}
         </p>
         {{ form.non_field_errors }}
       </div>
@@ -30,17 +30,17 @@
       </div>
       <div>
         <div class="form-sub-title"><h2>{% trans "2. What countries does this request apply to?" %}</h2></div>
-        <p>Indicate the region and/or specific country.</p>
+        <p>{% trans "Indicate the region and/or specific country."%}</p>
         <div class="form-select-multi">
           {{ form.countries }}
         </div>
       </div>
 
       <div>
-        <p style="margin-top: 15px;">Movements.org provides access to skills and experts. At this time, we cannot provide funding or equipment. If you need either please see the <a href="/movements/resources/">Resources</a> page. What might be available is a proposal writer to help you secure funding from a different source.</p>
-        <p>Please describe your request below. Be as explicit and clear as possible.</p>
+        <p style="margin-top: 15px;">{% blocktrans %} Movements.org provides access to skills and experts. At this time, we cannot provide funding or equipment. If you need either please see the <a href="/movements/resources/">Resources</a> page. What might be available is a proposal writer to help you secure funding from a different source. {% endblocktrans %}</p>
+        <p>{% trans "Please describe your request below. Be as explicit and clear as possible."%}</p>
         <div class="form-sub-title"><h2>{% trans "3. What do you need?" %}</h2></div>
-        <p>Be specific and clear.</p>
+        <p>{% trans "Be specific and clear."%}</p>
         <div class="form-group">
           <div class="col-xs-12">
             {% render_field form.title class="form-control input-sm" required="true" placeholder="" %}
@@ -50,7 +50,7 @@
       </div>
       <div>
         <div class="form-sub-title"><h2>{% trans "4. Please write your post" %}</h2></div>
-        <p>Tell a compelling story and state your needs.</p>
+        <p>{% trans "Tell a compelling story and state your needs."%}</p>
         {% render_field form.details class="form-control input-sm" required="true" placeholder="" %}
         {{ form.details.errors }}
       </div>
@@ -63,7 +63,7 @@
             <label for="{{ form.tweet_permission.auto_id }}">{% trans "May we tweet this request?" %}</label>
             {% render_field form.tweet_permission class="" placeholder="" %}
             {{ form.tweet_permission.errors }}
-            <p>We won’t use your name or any identifying information</p>
+            <p>{% trans "We won’t use your name or any identifying information"%}</p>
            </div>
         </div>
       </div>
@@ -79,7 +79,7 @@
       <div style="margin-top: 20px;">
         <div class="form-group">
           <div class="col-xs-12">
-            <button class="btn btn-action pull-right">Post now</button>
+            <button class="btn btn-action pull-right">{% trans "Post now"%}</button>
           </div>
         </div>
       </div>

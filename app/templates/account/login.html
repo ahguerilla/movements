@@ -42,7 +42,7 @@
       </div>
       <div class="row action-text">
         <div class="col-md-offset-1 col-md-4 form-main-button">
-          <a class="action-link" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+          <a class="action-link" href="{% url 'account_reset_password' %}">{%trans "Forgot Password?"%}</a>
         </div>
         <div class="col-md-6 form-main-button">
           <button type="submit" class="btn btn-action full-width">{% trans "Sign In" %}</button>
@@ -54,10 +54,10 @@
 <div class="row extended-form">
   <div class="col-md-offset-2 col-md-8 form-main-button">
     <a href="{% provider_login_url "facebook" %}">
-      <button class="btn btn-social btn-social-facebook full-width"><img src="{{ STATIC_URL }}images/v2/facebook-social.png">Sign In with Facebook</button>
+      <button class="btn btn-social btn-social-facebook full-width"><img src="{{ STATIC_URL }}images/v2/facebook-social.png">{% trans "Sign In with Facebook"%}</button>
     </a>
      <a href="{% provider_login_url "twitter" %}">
-       <button class="btn btn-social btn-social-twitter full-width"><img src="{{ STATIC_URL }}images/v2/twitter.png">Sign In with Twitter</button>
+       <button class="btn btn-social btn-social-twitter full-width"><img src="{{ STATIC_URL }}images/v2/twitter.png">{% trans "Sign In with Twitter"%}</button>
      </a>
   </div>
 </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-20 11:52+0100\n"
+"POT-Creation-Date: 2014-09-05 12:28-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,13 +180,13 @@ msgstr ""
 msgid "Closed By User"
 msgstr ""
 
-#: app/market/models/market.py:25
+#: app/market/models/market.py:25 templates/base_v2.html:198
 msgid "Request"
-msgstr ""
+msgstr "طلب"
 
-#: app/market/models/market.py:26
+#: app/market/models/market.py:26 templates/base_v2.html:199
 msgid "Offer"
-msgstr ""
+msgstr "عرض"
 
 #: app/market/models/market.py:29
 msgid "item_type"
@@ -464,7 +464,7 @@ msgstr ""
 #: app/reporting/admin/user.py:101 templates/account/signup.html:52
 #: templates/users/user_settings_v2.html:69
 msgid "Country of Residence"
-msgstr ""
+msgstr "بلد الإقامة"
 
 #: app/reporting/admin/user.py:105
 msgid "Is Admin"
@@ -501,26 +501,26 @@ msgid "Not supplied"
 msgstr ""
 
 #: app/reporting/admin/user.py:137 templates/account/signup.html:87
-#: templates/users/user_settings_v2.html:101
+#: templates/users/user_settings_v2.html:108
 msgid "Facebook"
-msgstr ""
+msgstr "الفيس بوك"
 
 #: app/reporting/admin/user.py:141 templates/account/signup.html:80
-#: templates/users/user_settings_v2.html:94
+#: templates/users/user_settings_v2.html:101
 msgid "Twitter"
-msgstr ""
+msgstr "التويتر"
 
 #: app/reporting/admin/user.py:145
 msgid "Linked in"
-msgstr ""
+msgstr "لينكيد اين"
 
 #: app/reporting/admin/user.py:149
 msgid "Website/blog"
-msgstr ""
+msgstr "موقع/مدونة"
 
-#: app/reporting/admin/user.py:153
+#: app/reporting/admin/user.py:153 templates/users/user_profile_v2.html:57
 msgid "Bio"
-msgstr ""
+msgstr "السيرة الذاتية "
 
 #: app/reporting/admin/user.py:168
 msgid "Count social"
@@ -548,31 +548,31 @@ msgstr ""
 
 #: app/users/forms.py:28
 msgid "This email is used already"
-msgstr ""
+msgstr "هذا الايميل مستخدم سابقاً"
 
 #: app/users/forms.py:35
 msgid "Passwords must match"
-msgstr ""
+msgstr "يجب تطابق كلمات السر"
 
-#: app/users/forms.py:70
-msgid "This username is already in used"
-msgstr ""
+#: app/users/forms.py:70 app/users/forms.py:93
+msgid "This username is already in use"
+msgstr "اسم المستخدم هذا مستخدم سابقاًذ"
 
 #: app/users/forms.py:72 app/users/forms.py:95
 msgid ""
 "Username must contain only letters, numbers - and _. White space is not "
 "allowed"
 msgstr ""
+"أسم المستخدم يجب الا يحتوي الا على أحرف , أرقام , الرمز - و ـ و الفراغ غير "
+"مسموح"
 
 #: app/users/forms.py:74 app/users/forms.py:97
 msgid ""
 "Username must be greater that 2 characters and less than 30 contain only "
 "letters, numbers - and _. White space is not allowed"
 msgstr ""
-
-#: app/users/forms.py:93
-msgid "This username is already in use"
-msgstr ""
+"يجب أن يتألف اسم المستخدم من حرفين,رقمين ,أو ـ و - على الأقل و ٣٠ حرف على "
+"الأكثر . و الفراغ غير مسموح "
 
 #: app/users/models.py:14
 msgid "skill set"
@@ -624,31 +624,31 @@ msgstr ""
 
 #: app/users/models.py:112
 msgid "Hidden - only your screen name and avatar is shared"
-msgstr ""
+msgstr " مخفي : سيظهر اسم العرض الذي اخترته فقط للعامة   "
 
 #: app/users/models.py:113
 msgid "Secure - only your screen name, skills and country is shared"
-msgstr ""
+msgstr ".آمن : ستظهر للعامة مهاراتك،اسم العرض الخاص بك،و اللغات  التي تجيدها"
 
 #: app/users/models.py:114
 msgid "Public - all your profile information is shared"
-msgstr ""
+msgstr "عام: كل معلوماتك الشخصية ستكون ظاهرة للعامة"
 
 #: app/users/models.py:117
 msgid "Never"
-msgstr ""
+msgstr "أبداً"
 
 #: app/users/models.py:118
 msgid "Weekly"
-msgstr ""
+msgstr "اسبوعياً"
 
 #: app/users/models.py:119
 msgid "Daily"
-msgstr ""
+msgstr "يومياَ"
 
 #: app/users/models.py:120
 msgid "Instantly"
-msgstr ""
+msgstr "بشكل مستمر"
 
 #: app/users/models.py:124
 msgid "bio"
@@ -704,7 +704,7 @@ msgstr ""
 
 #: app/users/models.py:149
 msgid "Interface language"
-msgstr ""
+msgstr "لغة الواجهة"
 
 #: app/users/models.py:150
 msgid "first login"
@@ -732,14 +732,14 @@ msgstr ""
 
 #: avatar/forms.py:24
 msgid "avatar"
-msgstr ""
+msgstr "الصورة الرمزية"
 
 #: avatar/forms.py:37
 #, python-format
 msgid ""
 "%(ext)s is an invalid file extension. Authorized extensions are : "
 "%(valid_exts_list)s"
-msgstr ""
+msgstr "%(ext)s رابط لملف غير صالح , الروابط المسموحة هي : %(valid_exts_list)s"
 
 #: avatar/forms.py:44
 #, python-format
@@ -747,6 +747,7 @@ msgid ""
 "Your file is too big (%(size)s), the maximum allowed size is "
 "%(max_valid_size)s"
 msgstr ""
+"الملف كبير (%(size)s), الحجم الأقصى المسموح به للملفات : %(max_valid_size)s"
 
 #: avatar/forms.py:54
 #, python-format
@@ -754,46 +755,48 @@ msgid ""
 "You already have %(nb_avatars)d avatars, and the maximum allowed is "
 "%(nb_max_avatars)d."
 msgstr ""
+"لديك مسبقاً %(nb_avatars)d  صورة رمزية , الحجم الأقصى المسموح به للصورة "
+"الرمزية : %(nb_max_avatars)d."
 
 #: avatar/forms.py:71 avatar/forms.py:84
 msgid "Choices"
-msgstr ""
+msgstr "خيارات "
 
 #: avatar/views.py:74
 msgid "Successfully uploaded a new avatar."
-msgstr ""
+msgstr "تم تحميل صورة رمزية جديدة بنجاح"
 
 #: avatar/views.py:110
 msgid "Successfully updated your avatar."
-msgstr ""
+msgstr "تم تحميل الصورة الرمزية بنجاح"
 
 #: avatar/views.py:148
 msgid "Successfully deleted the requested avatars."
-msgstr ""
+msgstr "تم حذف الصور الرمزية المطلوبة بنجاح"
 
 #: avatar/templates/avatar/add.html:6 avatar/templates/avatar/change.html:6
 #: templates/avatar/add.html:6 templates/avatar/change.html:8
 msgid "Your current avatar: "
-msgstr ""
+msgstr "صورتك الرمزية الحالية: "
 
 #: avatar/templates/avatar/add.html:9 avatar/templates/avatar/change.html:9
 #: templates/avatar/add.html:9 templates/avatar/change.html:11
 msgid "You haven't uploaded an avatar yet. Please upload one now."
-msgstr ""
+msgstr "لم تقم بتحميل صورة رمزية بعد .الرجاء تحميل صورة"
 
 #: avatar/templates/avatar/add.html:13 avatar/templates/avatar/change.html:20
 #: templates/avatar/add.html:13 templates/avatar/change.html:25
 msgid "Upload New Image"
-msgstr ""
+msgstr "حمل صورة جديدة "
 
 #: avatar/templates/avatar/change.html:15 templates/avatar/change.html:19
 msgid "Choose new Default"
-msgstr ""
+msgstr "اختر فراغ جديد"
 
 #: avatar/templates/avatar/confirm_delete.html:6
 #: templates/avatar/confirm_delete.html:6
 msgid "Please select the avatars that you would like to delete."
-msgstr ""
+msgstr "الرجاء اختيار الصور الرمزية التي تريد حذفها"
 
 #: avatar/templates/avatar/confirm_delete.html:9
 #: templates/avatar/confirm_delete.html:9
@@ -802,11 +805,13 @@ msgid ""
 "You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
 "\">upload one</a> now."
 msgstr ""
+"لا تملك أي صور رمزية لحذفها , يرجى <a href=\"%(avatar_change_url)s\">تحميل</"
+"a> صورة الان"
 
 #: avatar/templates/avatar/confirm_delete.html:15
 #: templates/avatar/confirm_delete.html:15
 msgid "Delete These"
-msgstr ""
+msgstr "احذف هذه"
 
 #: avatar/templates/notification/avatar_friend_updated/full.txt:1
 #, python-format
@@ -815,6 +820,9 @@ msgid ""
 "\n"
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
+"%(avatar_creator)s تم تحديث الصورة الرمزية %(avatar)s.\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s\n"
 
 #: avatar/templates/notification/avatar_friend_updated/notice.html:2
 #, python-format
@@ -822,6 +830,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
 "href=\"%(avatar_url)s\">%(avatar)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(avatar_creator)s</a> تم تحديث الصورة الرمزية <a "
+"href=\"%(avatar_url)s\">%(avatar)s</a>."
 
 #: avatar/templates/notification/avatar_updated/full.txt:1
 #, python-format
@@ -830,15 +840,19 @@ msgid ""
 "\n"
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
+"لقد تم تحديث صورتك الرمزية  %(avatar)s\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s\n"
 
 #: avatar/templates/notification/avatar_updated/notice.html:2
 #, python-format
 msgid "You have updated your avatar <a href=\"%(avatar_url)s\">%(avatar)s</a>."
 msgstr ""
+"لقد قمت بتحديث صورتك الرمزية <a href=\"%(avatar_url)s\">%(avatar)s</a>."
 
 #: avatar/templatetags/avatar_tags.py:51
 msgid "Default Avatar"
-msgstr ""
+msgstr "الصورة الرمزية فارغة"
 
 #: templates/404.html:5 templates/404.html.py:10
 msgid "404"
@@ -864,14 +878,15 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: templates/base.html:92 templates/users/user_settings_v2.html:150
+#: templates/base.html:92 templates/users/user_settings_v2.html:157
 msgid "Notifications"
-msgstr ""
+msgstr "اشعارات"
 
 #: templates/base.html:100 templates/base.html.py:109
-#: templates/users/user_settings_v2.html:16
+#: templates/base_v2.html:211 templates/users/user_settings_v2.html:16
+#: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
-msgstr ""
+msgstr "خيارات"
 
 #: templates/base.html:105
 msgid "My Posts"
@@ -890,39 +905,78 @@ msgstr ""
 #: templates/account/login.html.py:15 templates/account/login.html:48
 #: templates/openid/login.html:16
 msgid "Sign In"
-msgstr ""
+msgstr "تسجيل الدخول"
 
 #: templates/base.html:122 templates/base_private_settings.html:6
 #: templates/base_public.html:6 templates/account/signup_old.html:30
 #: templates/account/signup_old.html:112
 msgid "Sign Up"
-msgstr ""
+msgstr "سجل الأن"
 
-#: templates/base_v2.html:129
+#: templates/base_v2.html:90
+msgid "Add Post"
+msgstr "اضافة منشور "
+
+#: templates/base_v2.html:95 templates/ahr/home_v2.html:13
+msgid "Login"
+msgstr "تسجيل دخول"
+
+#: templates/base_v2.html:110
+msgid "Sign up"
+msgstr "سجل الأن"
+
+#: templates/base_v2.html:114
+msgid "Visit market"
+msgstr "زيارة السوق"
+
+#: templates/base_v2.html:139
 msgid "Get updates"
-msgstr ""
+msgstr "احصل على تحديثات"
 
-#: templates/base_v2.html:136
+#: templates/base_v2.html:142
+msgid "Enter your e-mail..."
+msgstr "ادخل بريدك الالكتروني"
+
+#: templates/base_v2.html:146
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
-msgstr ""
+msgstr "احصل على اخر التحديثات , بما قيها المنشورات الجديدة و النصائح الأمنية"
 
-#: templates/base_v2.html:139 templates/base_v2.html.py:173
+#: templates/base_v2.html:149 templates/base_v2.html.py:183
 msgid "Connect with us"
-msgstr ""
+msgstr "اتصل بنا"
 
-#: templates/base_v2.html:153
+#: templates/base_v2.html:152 templates/account/signup_start.html:51
+msgid "Connect with Twitter"
+msgstr "إتصل عبر التويتر"
+
+#: templates/base_v2.html:155 templates/account/signup_start.html:48
+msgid "Connect with Facebook"
+msgstr "إتصل عبر الفيس بوك"
+
+#: templates/base_v2.html:163 templates/ahr/home_v2.html:103
 msgid "About MOVEMENTS"
-msgstr ""
+msgstr "من نحن"
 
-#: templates/base_v2.html:154
+#: templates/base_v2.html:164
 msgid ""
 "Crowdsourcing the fight for human rights. The online platform that is "
 "opening closed societies."
 msgstr ""
+"تعهد جماعي بالمحاربة من أجل حقوق الانسان،المنصة الالكترونية تساعد المجتمعات "
+"المغلق على الانفتاح"
 
-#: templates/base_v2.html:160 templates/base_v2.html.py:171
+#: templates/base_v2.html:170 templates/base_v2.html.py:181
 msgid "Copyright &copy; 2014 Advancing Human Rights"
+msgstr "حقوق النشر محفوظة &copy;  :٢٠١٤ أدفانسينغ هيومان رايتس"
+
+#: templates/base_v2.html:205
+#: templates/users/snippets/profile_navigation.html:23
+msgid "Profile"
+msgstr "صفحة شخصية "
+
+#: templates/base_v2.html:219
+msgid "Logout"
 msgstr ""
 
 #: templates/account/account_inactive.html:5
@@ -1040,75 +1094,93 @@ msgid ""
 "a>\n"
 "      "
 msgstr ""
+"\n"
+"      أهلا بك في موفمينتس . يرجى تسجيل الدخول في الأسفل . اذا كنت غير مسجل "
+"بعد <a href=\"%(home_url)s\" alt=\"sign up\">  يرجى التسجيل </a>.\n"
+"      "
 
 #: templates/account/login.html:26
 msgid "Email or Username"
-msgstr ""
+msgstr "بريد الكتروني أو اسم مستخدم"
 
 #: templates/account/login.html:33 templates/account/signup_start.html:25
 msgid "Password"
 msgstr ""
+
+#: templates/account/login.html:45
+msgid "Forgot Password?"
+msgstr "نسيت كلمة السر"
+
+#: templates/account/login.html:57
+msgid "Sign In with Facebook"
+msgstr "إتصل عبر الفيس بوك"
+
+#: templates/account/login.html:60
+msgid "Sign In with Twitter"
+msgstr "إتصل عبر التويتر"
 
 #: templates/account/logout.html:12
 msgid "Are you sure you want to sign out?"
 msgstr ""
 
 #: templates/account/password_change.html:12
-msgid "Password changed successfuly"
-msgstr ""
+msgid "Password changed successfully"
+msgstr "تم تغيير كلمة السر بنجاح"
 
 #: templates/account/password_change.html:26
 #: templates/account/password_reset_from_key.html:7
 #: templates/account/password_reset_from_key.html:19
 #: templates/account/password_reset_from_key.html:38
 #: templates/account/password_reset_from_key_done.html:5
-#: templates/users/user_settings_v2.html:160
-#: templates/users/user_settings_v2.html:202
+#: templates/users/user_settings_v2.html:167
+#: templates/users/user_settings_v2.html:209
 msgid "Change Password"
-msgstr ""
+msgstr "تغيير كلمة السر"
 
 #: templates/account/password_delete.html:5
 #: templates/account/password_delete.html:8
 msgid "Delete Password"
-msgstr ""
+msgstr "حذف كلمة السر"
 
 #: templates/account/password_delete.html:9
 msgid ""
 "You may delete your password since you are currently logged in using OpenID."
-msgstr ""
+msgstr "قد تقوم بحذف كلمة السر لأنك مسجل دخولك الان من هوية مفتوحة"
 
 #: templates/account/password_delete.html:12
 msgid "delete my password"
-msgstr ""
+msgstr "احذف كلمة سري"
 
 #: templates/account/password_delete_done.html:5
 #: templates/account/password_delete_done.html:8
 msgid "Password Deleted"
-msgstr ""
+msgstr "تم حذف كلمة السر"
 
 #: templates/account/password_delete_done.html:9
 msgid "Your password has been deleted."
-msgstr ""
+msgstr "تم حذف كلمة السر الخاصة بك"
 
 #: templates/account/password_reset.html:7
 #: templates/account/password_reset_done.html:5
 #: templates/account/password_reset_done.html:10
 msgid "Password Reset"
-msgstr ""
+msgstr "استعادة كلمة السر"
 
 #: templates/account/password_reset.html:12
 msgid "Forgotten Password"
-msgstr ""
+msgstr "نسيت كلمة السر "
 
 #: templates/account/password_reset.html:16
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
 msgstr ""
+"نسيت كلمة السر الخاصة بك؟ادخل بريدك الالكتروني في الأسفل، و سنرسل لك رسالة "
+"الكترونية لتستعيد كلمة السر."
 
 #: templates/account/password_reset.html:21 templates/account/signup.html:31
 msgid "Email"
-msgstr ""
+msgstr "بريد الكتروني"
 
 #: templates/account/password_reset.html:30
 #, python-format
@@ -1118,10 +1190,14 @@ msgid ""
 "any trouble resetting your password.\n"
 "          "
 msgstr ""
+"\n"
+"          <a href=\"%(contactus_url)s\">يرجى الاتصال بنا اذا  </a>واجهتك أي "
+"مشاكل في استعادة كلمة السر\n"
+"          "
 
 #: templates/account/password_reset.html:38
 msgid "Reset My Password"
-msgstr ""
+msgstr "استعادة كلمة السر الخاصة بي"
 
 #: templates/account/password_reset_done.html:18
 #, python-format
@@ -1131,10 +1207,14 @@ msgid ""
 "\">contact us</a> if you do not receive it within a few minutes.\n"
 "      "
 msgstr ""
+"\n"
+"     لقد أرسلنا لك رسالة الكترونية،يرجى<a href=\"%(contactus_url)s\">  "
+"الاتصال بنا اذا  </a> لم تتلقى رسالى خلال بضع دقائق\n"
+"      "
 
 #: templates/account/password_reset_from_key.html:14
 msgid "Bad Token"
-msgstr ""
+msgstr "رمز سئ"
 
 #: templates/account/password_reset_from_key.html:16
 #, python-format
@@ -1143,30 +1223,32 @@ msgid ""
 "used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
 "a>."
 msgstr ""
+"رابط استعادة كلمة المرور غير صالح،لأنه استخدم مسبقاً،الرجاء طلب  <a href="
+"\"%(passwd_reset_url)s\"> استعادة كلمة السر مجدداً</a>."
 
 #: templates/account/password_reset_from_key.html:24
 msgid "New Password"
-msgstr ""
+msgstr "كلمة مرور جديدة"
 
 #: templates/account/password_reset_from_key.html:31
 msgid "New Password (again)"
-msgstr ""
+msgstr "كلمة مرور جديدة (مرة أخرى)"
 
 #: templates/account/password_reset_from_key.html:43
 #: templates/account/password_reset_from_key_done.html:10
 msgid "Your password has been changed."
-msgstr ""
+msgstr "لقد تم تغيير كلمة المرور الخاصة بك"
 
 #: templates/account/password_set.html:6
 #: templates/account/password_set.html:13
 #: templates/account/password_set.html:25
-#: templates/users/user_settings_v2.html:164
+#: templates/users/user_settings_v2.html:171
 msgid "Set Password"
-msgstr ""
+msgstr "انشأ كلمة مرور"
 
 #: templates/account/signup.html:11
 msgid "About you"
-msgstr ""
+msgstr "نبذة عنك"
 
 #: templates/account/signup.html:14
 #, python-format
@@ -1174,30 +1256,48 @@ msgid ""
 "You are about to use your %(provider_name)s account to login. We first need "
 "a few more details before you get started."
 msgstr ""
+"أنت على وشك استخدام أسم %(provider_name)s مزودك كاسم لحسابك لتسجيل الدخول. "
+"نحتاج أولاً بعض المعلومات قبل البدء "
 
 #: templates/account/signup.html:16
 msgid "First we would like to know a little more about you."
-msgstr ""
+msgstr "أولاً نرغب بمعرفة المزيد عنك "
 
 #: templates/account/signup.html:22
 msgid "Username (We recommend that you do not use your real name)"
+msgstr "إسم المستخدم ننصح بعد إستخدام الأسم الحقيقي"
+
+#: templates/account/signup.html:37
+msgid ""
+"All the following information is optional but will help Movements.org ensure "
+"that you see the postings that are most relevant to your needs and interests."
 msgstr ""
+"كل المعلومات التالية هي إختيارية، إلا انها ستساعد موفمنتس في تحديد العروض "
+"والطلبات المناسبة لك ولإحتياجاتك"
 
 #: templates/account/signup.html:40 templates/users/user_settings_v2.html:57
 msgid "First Name"
-msgstr ""
+msgstr "الأسم الأول"
 
 #: templates/account/signup.html:45 templates/users/user_settings_v2.html:62
 msgid "Last Name"
-msgstr ""
+msgstr "الإسم لثاني"
 
-#: templates/account/signup.html:59 templates/users/user_settings_v2.html:76
+#: templates/account/signup.html:59 templates/users/user_settings_v2.html:83
 msgid "Biography"
+msgstr "السيرة الذاتية "
+
+#: templates/account/signup.html:60
+msgid ""
+"If you want other users to know something about you. You can control how "
+"much if any information to make public."
 msgstr ""
+"اذا كنت ترغب بأن يعرف المسخدمين المزيد عنك بامكانك التحكم بحجم المعلومات "
+"الظاهرة للعامة"
 
 #: templates/account/signup.html:67
 msgid "Social Vetting"
-msgstr ""
+msgstr "التحقق الإجتماعي"
 
 #: templates/account/signup.html:68
 msgid ""
@@ -1207,14 +1307,18 @@ msgid ""
 "information is optional but the more you provide the easier it will be for "
 "others to trust you."
 msgstr ""
+"من أجل حماية أعضائنا، نقوم بالتحقق من كون نياتهم تتطابق مع <a href=\"/"
+"movements/terms-and-conditions\" target=\"_blank\">شروط العضوية</a>. "
+"المعلومات التي نطلبها هي إختيارية، لكن كلما قدمت معلومات أكثر، سيكون من "
+"الأسهل على الأخرين الثقة بك"
 
-#: templates/account/signup.html:73 templates/users/user_settings_v2.html:87
+#: templates/account/signup.html:73 templates/users/user_settings_v2.html:94
 msgid "Linked In"
-msgstr ""
+msgstr "لينكيد لن"
 
-#: templates/account/signup.html:94 templates/users/user_settings_v2.html:108
+#: templates/account/signup.html:94 templates/users/user_settings_v2.html:115
 msgid "Website or Blog"
-msgstr ""
+msgstr "موقع أو مدونة"
 
 #: templates/account/signup.html:104
 #: templates/market/clientside/closemarketitemdialog.html:29
@@ -1222,16 +1326,16 @@ msgstr ""
 #: templates/market/clientside/recommenddialog.html:27
 #: templates/market/clientside/reportdialog.html:20
 #: templates/market/clientside/reportuserdialog.html:21
-#: templates/users/user_settings_v2.html:171
+#: templates/users/user_settings_v2.html:178
 msgid "Cancel"
-msgstr ""
+msgstr "الغاء"
 
 #: templates/account/signup.html:107 templates/users/more_about_you.html:55
 #: templates/users/more_about_you.html:73
 #: templates/users/more_about_you.html:91
 #: templates/users/more_about_you.html:109
 msgid "Next"
-msgstr ""
+msgstr "التالي"
 
 #: templates/account/signup_closed.html:6
 #: templates/account/signup_closed.html:12
@@ -1298,39 +1402,62 @@ msgstr ""
 #: templates/account/signup_start.html:11
 #: templates/users/more_about_you.html:36
 msgid "Welcome to Movements"
-msgstr ""
+msgstr "أهلا بكم في موفمنتس"
 
 #: templates/account/signup_start.html:12
 msgid ""
 "Sign up to connect to human rights defenders and activist. Let’s get started."
-msgstr ""
+msgstr "سجل معنا اليوم للتواصل مع مدافعي حقوق الإنسان والنشطاء"
 
 #: templates/account/signup_start.html:18
 msgid "Email (we will never reveal this)"
-msgstr ""
+msgstr "البريد الإلكتروني( لن نقوم بنشره أبداً)"
 
 #: templates/account/signup_start.html:30
 msgid "Retype password"
-msgstr ""
+msgstr "إعادة كتابة كلمة السر"
 
 #: templates/account/signup_start.html:36
 msgid "By registering with us you agree to our"
-msgstr ""
+msgstr "حالما تسجل لدينا، عليك ان تقبل"
+
+#: templates/account/signup_start.html:36
+msgid "terms &amp; conditions"
+msgstr "بشروط الإنضمام"
 
 #: templates/account/signup_start.html:38
 msgid "Register"
-msgstr ""
+msgstr "سحل"
 
 #: templates/account/signup_start.html:45
 msgid "Use your Facebook details to sign in."
-msgstr ""
+msgstr "إستخدم وسائل التواصل الإجتماعي من أجل ان تسجل."
 
 #: templates/account/verification_sent.html:4
 #: templates/account/verification_sent.html:9
 #: templates/account/verified_email_required.html:7
 #: templates/account/verified_email_required.html:12
 msgid "Verify Your E-mail Address"
+msgstr "التحقق من بريدك الإلكتروني"
+
+#: templates/account/verification_sent.html:10
+msgid ""
+"You've now created an account. We've sent you an email to verify your email "
+"address, once you've done this you will have full access to the Movements "
+"platform."
 msgstr ""
+"لقد قمت الان بإنشاء حساب. قمنا بإرسال رسالة لك لتحقق من عنوانك الإلكتروني. "
+"حالما تقوم بفتح الرسالة وإتباع الخطوات ستحصل على صلاحية كاملة لدخول منصة "
+"موفمنتس."
+
+#: templates/account/verification_sent.html:12
+#, python-format
+msgid ""
+"Please <a href=\"%(contactUrl)s\">contact us</a> if you do not receive an "
+"email within a few minutes."
+msgstr ""
+" في حال عدم وصول الرسالة إلى بريدك نرجوا التواصل معنا على العنوان التالي<a "
+"href=\"%(contactUrl)s\">Info@movements.org</a>"
 
 #: templates/account/verified_email_required.html:19
 msgid ""
@@ -1516,12 +1643,13 @@ msgid "Update"
 msgstr ""
 
 #: templates/ahr/home_v2.html:13
-msgid "Login"
-msgstr ""
+msgid "Already have an account?"
+msgstr "تملك حساب مسبقاً ؟"
 
 #: templates/ahr/home_v2.html:34
 msgid "Crowdsourcing the fight for human rights."
 msgstr ""
+"موفمنتس هي منظمة تقوم على حشد الطاقات الفاعلة من اجل الدفاع عن حقوق الإنسام."
 
 #: templates/ahr/home_v2.html:37
 msgid ""
@@ -1529,29 +1657,55 @@ msgid ""
 "rights activists in closed societies with those with skills to help them "
 "around the world. Join today and help a dissident in need."
 msgstr ""
+"موفمنتس هي منظمة تقوم على حشد الطاقات الفاعلة من اجل الدفاع عن حقوق الإنسام. "
+"تقوم المنظمة بوصل نشطاء حقوق الإنسان في المجتمعات المغلقة مع خبراء يتمتعون "
+"بمهارات حول العالم. انضموا إلينا اليوم، وساعدوا النشطاء والمنشقين من هم "
+"بحاجة لمساعدتكم"
 
 #: templates/ahr/home_v2.html:41 templates/ahr/home_v2.html.py:63
+#: templates/ahr/home_v2.html:142
 msgid "Sign up now"
-msgstr ""
+msgstr "سجل الأن"
 
 #: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:68
+#: templates/ahr/home_v2.html:105
 msgid "Find out more"
-msgstr ""
+msgstr "اكتشف المزيد"
 
 #: templates/ahr/home_v2.html:56
 msgid ""
 "Request help from people across the globe, offer help to an activist in need."
 msgstr ""
+"طلب خدمة من أفراد مقيمين حول العالم، اعرض مساعدتك على ناشط  بحاجة إليها"
 
 #: templates/ahr/home_v2.html:59
 msgid ""
 "Whether you’re a journalist, artist, technologist, policy-maker, linguist or "
 "PR agent - everyone has skills that can advance human rights."
 msgstr ""
+"سواء كنت صحافي، فنان، تقني، رجل سياسة، لغوي، او خبير علاقات عامة، لكل منا "
+"خبرات يستطيع تسخيرها لأجل تعزيز حقوق الإنسان.اعرف عنا أكثر "
 
-#: templates/ahr/home_v2.html:121
-msgid "Create a Request"
+#: templates/ahr/home_v2.html:104
+msgid ""
+"In closed societies around the world, brave human rights defenders face "
+"enormous hurdles to advance human rights.  Movements.org is a new platform "
+"that allows people everywhere to help protect basic freedoms.  This online "
+"platform connects activists in closed societies with people around the globe "
+"with skills to help. Whether you’re a journalist, politician, activist, "
+"artist, technologist or you speak a few languages, everyone has a role to "
+"play."
 msgstr ""
+"يتعرض مدافعي حقوق الإنسان في المجتمعات ذات الإنظمة المغلقة إلى عقبات متعددة "
+"أثناء محاولتهم تعزيز حقوق الإنسان. موفمنتس ستكون منصة جديدة تقوم على مساعدة "
+"الشعوب في كل مكان من أجل الدفاع عن الحريات الأساسيةهذه المنصة الإلكترونية "
+"ستقونم بوصل النشطاء في المجتمعات ذات الإنظمة المغلقة مع افراد حول الحالم "
+"يتمتعون بمهارات تؤهلهم لمساعدة النشطاء. سواء كنت صحافي،سياسي، ناشط،فنان، "
+"تقني او تتحدث عدة لغات، سيكون لك دور لتلعبه "
+
+#: templates/ahr/home_v2.html:121 templates/users/more_about_you.html:41
+msgid "Create a Request"
+msgstr "انشر طلبك"
 
 #: templates/ahr/home_v2.html:122
 msgid ""
@@ -1559,10 +1713,25 @@ msgid ""
 "help those in closed societies find the assistance they need to amplify "
 "their voice and expand their influence."
 msgstr ""
+"هل انت ناشط وبحاجة لمساعدة؟  تسخر موفمنتس التكنولجيا من أجل مساعدة النشطاء "
+"الموجودين في الدول المحكومة من نظم مغلقة وذلك توفير المساعدة التي يحتاجونها "
+"من أجل تقويه أصواتها وتوسيع نفوذهم "
+
+#: templates/ahr/home_v2.html:140
+msgid "Getting Started"
+msgstr "إبدا معنا"
+
+#: templates/ahr/home_v2.html:141
+msgid ""
+"The Movements platform enables dissidents who need help to connect to "
+"activists and others who can provide it. Get started by joining today."
+msgstr ""
+"تقوم منظمة موفمنتس بتمكين النشطاء والمنشقين في الدول الديكتاتورية من هم "
+"بحاجة لمساعدة عبر وصلهم بنشطاء وأشخاص قادرين على المساعدة. انضم إلينا اليوم"
 
 #: templates/ahr/home_v2.html:158
 msgid "Offer your Services"
-msgstr ""
+msgstr "أعرض خدمة"
 
 #: templates/ahr/home_v2.html:159 templates/users/more_about_you.html:47
 msgid ""
@@ -1570,14 +1739,16 @@ msgid ""
 "opportunity. All of us have skills that can be put to use to advance basic "
 "liberties."
 msgstr ""
+"لو أردت يوما أن تقوم بمساعدة ناشط حقوق إنسان، موفمنتس تقدم لك الفرصة في ذلك. "
+"لكل منا مهارات معينة يمكن إستخدامها من أجل تعزيز الحريات الأساسية"
 
 #: templates/market/create_offer.html:11
 msgid "Offer a service"
-msgstr ""
+msgstr "أعرض خدمة"
 
 #: templates/market/create_offer.html:12
 msgid "Do you have expertise to offer?"
-msgstr ""
+msgstr "هل لديك خبرات لتقدمها ؟"
 
 #: templates/market/create_offer.html:13
 msgid ""
@@ -1585,42 +1756,70 @@ msgid ""
 "a story, or any skill that may be of help to others. Your Offer will be "
 "posted on Movements and will be seen by all members."
 msgstr ""
+"الخدمة قد تكون مهارة أو تقنية تستطيع تقديمها أو فرصة لنشر قصة ما أو أي مهارة "
+"اخرى تملكها و بامكانك افادة الاخرين بها . عرضك سيتم نشره على المنصة و  سيكون "
+"ظاهراً لجميع المستخدمين ."
 
 #: templates/market/create_offer.html:17
 msgid "1. What skills can you offer?"
-msgstr ""
+msgstr "1. ما هي المهارات التي بامكانك تقديمها"
 
 #: templates/market/create_offer.html:21
 #: templates/market/create_request.html:22
 msgid "Other"
-msgstr ""
+msgstr "المزيد"
 
 #: templates/market/create_offer.html:31
 msgid "2. Which countries are you interested in helping?"
-msgstr ""
+msgstr "2. ما هي الدول التي تهتم بمساعدتها"
+
+#: templates/market/create_offer.html:37
+msgid ""
+"Movements.org provides access to skills and experts. Please describe your "
+"skills, abilities, or services below. Be as explicit and clear as possible."
+msgstr "موفمينتس.اورغ تمنحك الوسيلة للتواصل مع الخبراء و اصحاب المهارات"
 
 #: templates/market/create_offer.html:38
 msgid "3. How can you help?"
-msgstr ""
+msgstr "3. ؟العنوان : ماذا تعرض"
+
+#: templates/market/create_offer.html:39
+#: templates/market/create_request.html:43
+msgid "Be specific and clear."
+msgstr "كن واضح و محدد"
 
 #: templates/market/create_offer.html:48
 #: templates/market/create_request.html:52
 msgid "4. Please write your post"
-msgstr ""
+msgstr "4. رجاءاً أكتب منشورك"
+
+#: templates/market/create_offer.html:49
+msgid "Tell a compelling story."
+msgstr "أخبر قصة قاهرة"
 
 #: templates/market/create_offer.html:59
 #: templates/market/create_request.html:63
 msgid "May we tweet this request?"
-msgstr ""
+msgstr "هل بامكاننا نشر الطلب كتغريدة على موقع تويتر (الفراغ يعني موافق)"
+
+#: templates/market/create_offer.html:62
+#: templates/market/create_request.html:66
+msgid "We won’t use your name or any identifying information"
+msgstr "لن نقوم باستخدام اسمك أو أي معلومات شخصية تخصك"
 
 #: templates/market/create_offer.html:69
 #: templates/market/create_request.html:73
 msgid "Receive notifications"
 msgstr ""
 
+#: templates/market/create_offer.html:79
+#: templates/market/create_request.html:82
+msgid "Post now"
+msgstr "انشر الان"
+
 #: templates/market/create_request.html:11
 msgid "Request a service"
-msgstr ""
+msgstr "اطلب خدمة"
 
 #: templates/market/create_request.html:13
 msgid ""
@@ -1630,109 +1829,209 @@ msgid ""
 "or China?)  The more you explain your need, the easier it will be for "
 "someone to help."
 msgstr ""
+"الطلب هو طريقة لطلب مساعدة من أحد خبراء موفمينتس ، كن واضحاً و محدداً عما "
+"تحتاجه . اذا كنت تريد محامي أخبرنا أي محامي تريد (مدني أو لجوء) أين تريد "
+"المحامي (أمريكا، ألمانيا، بريطانيا)اذا كان هناك المزيد لتشرحه فصل بالشرح "
+"فذلك سيجعل مساعدتك أسهل "
 
 #: templates/market/create_request.html:18
 msgid "1. What skills do you need?"
-msgstr ""
+msgstr "1. ما المهارات التي تحتاجها ؟ "
 
 #: templates/market/create_request.html:32
 msgid "2. What countries does this request apply to?"
-msgstr "ما هي الدول التي لا تنطبق على هذا الطلب؟"
+msgstr "2. ما هي البلدان التي يقدم هذا الطلب لها"
+
+#: templates/market/create_request.html:33
+msgid "Indicate the region and/or specific country."
+msgstr "حدد المنطقة و الدولة "
+
+#: templates/market/create_request.html:40
+msgid ""
+" Movements.org provides access to skills and experts. At this time, we "
+"cannot provide funding or equipment. If you need either please see the <a "
+"href=\"/movements/resources/\">Resources</a> page. What might be available "
+"is a proposal writer to help you secure funding from a different source. "
+msgstr ""
+"توفر Movements.org الوصول إلى المهارات والخبراء. في هذا الوقت، لا يمكننا "
+"تقديم التمويل أو المعدات. إذا كنت في حاجة إما يرجى الاطلاع على صفحة <a href="
+"\"/movements/resources/\">الموارد</a>. قد يكون كاتب الاقتراح قادر على "
+"مساعدتك في الحصول على تمويل من مصدر مختلف."
+
+#: templates/market/create_request.html:41
+msgid ""
+"Please describe your request below. Be as explicit and clear as possible."
+msgstr "صف طلبك بالأسفل و كن واضحاً قدر الامكان"
 
 #: templates/market/create_request.html:42
 msgid "3. What do you need?"
-msgstr "3. ماذا تحتاج؟"
+msgstr "3. العنوان : ماذا تحتاج (مساحة محدودة)"
+
+#: templates/market/create_request.html:53
+msgid "Tell a compelling story and state your needs."
+msgstr "اخبر قصة قاهرة و حدد طلباتك"
 
 #: templates/market/market.html:15
 msgid "See all"
-msgstr ""
+msgstr "انظر الكل"
 
 #: templates/market/market.html:16
 msgid "Requests"
-msgstr ""
+msgstr "طلبات"
 
 #: templates/market/market.html:17
 msgid "Offers"
-msgstr ""
+msgstr "عروض"
+
+#: templates/market/market.html:26
+msgid "Hide/Show"
+msgstr "أخفي/أظهر"
+
+#: templates/market/market.html:33 templates/users/more_about_you.html:26
+#: templates/users/more_about_you.html:97
+#: templates/users/user_profile_v2.html:62
+msgid "Skills"
+msgstr "المهارات"
+
+#: templates/market/market.html:39 templates/users/more_about_you.html:79
+msgid "Countries"
+msgstr "البلدان"
+
+#: templates/market/market.html:45
+msgid "Search"
+msgstr "ابحث"
+
+#: templates/market/market.html:58
+msgid "Press enter to search"
+msgstr "أضغط ادخال للبحث"
+
+#: templates/market/market.html:59
+msgid "Click \"Search\" above to close"
+msgstr "اضغط\"بحث\" في الأعلى للاغلاق"
 
 #: templates/market/market.html:72
 msgid "Featured posts"
-msgstr ""
+msgstr "منشورات اخيرة"
 
 #: templates/market/market.html:81
 msgid "Sticky posts"
-msgstr ""
+msgstr "منشورات ملصوقة"
+
+#: templates/market/market.html:107
+msgid "Show hidden"
+msgstr "أظهر المخفي"
+
+#: templates/market/market.html:112 templates/market/market.html.py:120
+#: templates/market/market.html:126
+msgid "Select all"
+msgstr "اختر الكل"
+
+#: templates/market/notifications.html:13
+msgid "Alert History"
+msgstr "منبه التاريخ"
+
+#: templates/market/notifications.html:16
+msgid "All notifications loaded"
+msgstr "تم تحميل كل الاشعارات"
 
 #: templates/market/notifications.html:17
 msgid "More"
-msgstr ""
+msgstr "المزيد"
 
 #: templates/market/notifications.html:30
 msgid "commented on"
-msgstr ""
+msgstr "تعليق على"
 
 #: templates/market/notifications.html:30
 #: templates/market/clientside/notifications.html:15
 msgid "your"
-msgstr ""
+msgstr "أنت"
 
 #: templates/market/notifications.html:35
 #: templates/market/clientside/notifications.html:12
 msgid "updated"
-msgstr ""
+msgstr "محدث"
 
 #: templates/market/notifications.html:35
 #: templates/market/clientside/notifications.html:12
 msgid "posted"
-msgstr ""
+msgstr "منشور"
 
 #: templates/market/notifications.html:36
 msgid "the"
-msgstr ""
+msgstr "ال"
 
 #: templates/market/notifications.html:41
 msgid "sent you a private "
-msgstr ""
+msgstr "مرسل لك بشكل خاص"
 
 #: templates/market/view_post.html:12
 msgid "on"
-msgstr ""
+msgstr "على"
 
 #: templates/market/view_post.html:20
 msgid "Posted by"
-msgstr ""
+msgstr "منشور بواسطة"
 
 #: templates/market/view_post.html:29
 msgid "Translate this post"
-msgstr ""
+msgstr "ترجم هذا المنشور"
 
 #: templates/market/view_post.html:49
 msgid "Recommend"
-msgstr ""
+msgstr "مقترح"
 
 #: templates/market/view_post.html:54
 msgid "Tweet"
-msgstr ""
+msgstr "تغريدة"
 
 #: templates/market/view_post.html:60
 msgid "Direct message"
-msgstr ""
+msgstr "رسالة مباشرة"
 
 #: templates/market/view_post.html:63
 msgid "Report this post"
-msgstr ""
+msgstr "أخبر عن هذا المنشور"
 
 #: templates/market/view_post.html:72
 msgid "Leave a comment"
-msgstr ""
+msgstr "اترك تعليق"
 
 #: templates/market/view_post.html:76
 msgid "Please do not post any personally identifying information."
-msgstr ""
+msgstr "الرجاء عدم نشر أي معلومات شخصية عن الهوية"
 
 #: templates/market/view_post.html:77
 msgid "Don't use your real name or email address when leaving a comment."
+msgstr "لا تترك اسمك الحقيقي أو بريدك الالكتروني عند ترك تعليق"
+
+#: templates/market/view_post.html:80
+msgid "Post comment"
+msgstr "أنشر تعليق"
+
+#: templates/market/view_post.html:93
+#, python-format
+msgid ""
+"Please <a href=\"%(accountUrl)s\">Login</a> or <a href=\"%(signupUrl)s"
+"\">Sign up</a> to view more about this post. Once you've done this you will "
+"be able to send messages to the author, comment and rate this post."
 msgstr ""
+"<a href=\"%(accountUrl)s\">الرجاء تسجيل الدخول لعرض</a> المزيد حول هذا "
+"المنشور. عندما <a href=\"%(signupUrl)s\">تتنهي من تسجيل الدخول</a> ستتمكن من "
+"ارسال رسائل لكاتب المنشور و تصنيف المنشور و التعليق عليه"
+
+#: templates/market/view_post.html:117
+#, python-format
+msgid ""
+"You don't have any languages selected. Please add some in your <a href="
+"\"%(settingsUrl)s#skills\">settings</a>"
+msgstr ""
+"لم تختر أي لغة، الرجاء اضافة اللغة  <a href=\"%(settingsUrl)s#skills"
+"\">لمهاراتك </a>  من قسم الخيارات"
+
+#: templates/market/view_post.html:134
+msgid "Delete"
+msgstr "حذف"
 
 #: templates/market/clientside/closemarketitemdialog.html:10
 msgid "CLOSE A REQUEST"
@@ -1743,24 +2042,66 @@ msgid "CLOSE AN OFFER"
 msgstr ""
 
 #: templates/market/clientside/closemarketitemdialog.html:32
+#: templates/market/clientside/marketitem.html:85
 msgid "Close"
-msgstr ""
+msgstr "اغلاق"
 
 #: templates/market/clientside/closemarketitemdialog.html:111
 msgid "Please enter your answer"
 msgstr ""
 
+#: templates/market/clientside/marketitem.html:23
+#, python-format
+msgid ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
+"a>."
+msgstr ""
+"كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
+"بتاريخ  <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> تعليقات</"
+"a>."
+
 #: templates/market/clientside/marketitem.html:62
 msgid "FEATURED OFFER"
-msgstr ""
+msgstr "عرض أخير"
 
 #: templates/market/clientside/marketitem.html:64
 msgid "FEATURED REQUEST"
+msgstr "طلب أخير"
+
+#: templates/market/clientside/marketitem.html:74
+#, python-format
+msgid ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</a>."
 msgstr ""
+"كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
+"بتاريخ  <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> تعليقات</"
+"a>."
+
+#: templates/market/clientside/marketitem.html:82
+msgid "Hide"
+msgstr "اخفاء"
+
+#: templates/market/clientside/marketitem.html:83
+msgid "Stick"
+msgstr "الصق"
+
+#: templates/market/clientside/marketitem.html:84
+msgid "Edit"
+msgstr "تحرير"
+
+#: templates/market/clientside/marketitem.html:86
+msgid "Report"
+msgstr "تقرير"
 
 #: templates/market/clientside/messagedialog.html:8
 msgid "New message to "
-msgstr ""
+msgstr "رسالة جديدة ل"
 
 #: templates/market/clientside/messagedialog.html:12
 #: templates/market/clientside/recommenddialog.html:16
@@ -1779,7 +2120,7 @@ msgstr ""
 #: templates/market/clientside/reportdialog.html:23
 #: templates/market/clientside/reportuserdialog.html:24
 msgid "Send"
-msgstr ""
+msgstr "ارسال"
 
 #: templates/market/clientside/messagedialog.html:85
 msgid ". Please try again."
@@ -1787,47 +2128,47 @@ msgstr ""
 
 #: templates/market/clientside/messagedialog.html:89
 msgid "Please provide a subject and message."
-msgstr ""
+msgstr "رجاء قم بالتزويد بعنوان و رسالة"
 
 #: templates/market/clientside/notifications.html:15
 msgid "commented on "
 msgstr ""
 
 #: templates/market/clientside/recommenddialog.html:7
-msgid "Recommed this"
-msgstr ""
+msgid "Recommend this"
+msgstr "أقترح هذا"
 
 #: templates/market/clientside/recommenddialog.html:11
 msgid "To: username or email address"
-msgstr ""
+msgstr "الى: اسم المستخدم و البريد الالكتروني"
 
 #: templates/market/clientside/recommenddialog.html:13
 msgid "Start typing a username or enter an email address"
-msgstr ""
+msgstr "ابدأ بكتابة اسم المستخدم و أدخل بريدك الالكتروني"
 
 #: templates/market/clientside/recommenddialog.html:86
 msgid "Please enter both a subject and a message."
-msgstr ""
+msgstr "الرجاء ادخال العنوان و الرسالة"
 
 #: templates/market/clientside/recommenddialog.html:91
 msgid "Please enter a valid username and/or email address. "
-msgstr ""
+msgstr "الرجاء ادخال اسم مستخدم و بريد الكتروني صالح"
 
 #: templates/market/clientside/recommenddialog.html:118
 msgid "Failed to send message to user:"
-msgstr ""
+msgstr "فشل في ارسال الرسالة للمستخدم"
 
 #: templates/market/clientside/recommenddialog.html:121
 msgid "Failed to send message to users:"
-msgstr ""
+msgstr "فشل في ارسال الرسالة للمستخدمين"
 
 #: templates/market/clientside/recommenddialog.html:127
 msgid "Failed to send message"
-msgstr ""
+msgstr "فشل في ارسال الرسالة"
 
 #: templates/market/clientside/reportdialog.html:8
 msgid "Report Post"
-msgstr ""
+msgstr "أخبر عن منشور"
 
 #: templates/market/clientside/reportuserdialog.html:9
 msgid "Report User "
@@ -1873,13 +2214,22 @@ msgstr ""
 msgid "OpenID Sign In"
 msgstr ""
 
+#: templates/postman/base_folder.html:31 templates/postman/inbox.html:5
+#: templates/users/snippets/profile_navigation.html:9
+msgid "Inbox"
+msgstr "صندوق الرسائل"
+
+#: templates/postman/base_folder.html:32 templates/postman/sent.html:10
+msgid "Sent"
+msgstr "المرسل"
+
 #: templates/postman/base_folder.html:43
 msgid "g:i A,M j,n/j/y"
 msgstr ""
 
 #: templates/postman/base_folder.html:64
 msgid "No messages."
-msgstr ""
+msgstr "لا رسائل"
 
 #: templates/postman/base_folder.html:73
 msgid "Sorry, this page number is invalid."
@@ -1955,10 +2305,6 @@ msgstr ""
 msgid "Please find below the answer from your correspondent."
 msgstr ""
 
-#: templates/postman/inbox.html:5
-msgid "Inbox"
-msgstr ""
-
 #: templates/postman/inbox.html:9
 msgid "Received"
 msgstr ""
@@ -1967,13 +2313,13 @@ msgstr ""
 msgid "Sent Messages"
 msgstr ""
 
-#: templates/postman/sent.html:10
-msgid "Sent"
-msgstr ""
-
 #: templates/postman/view.html:17
 msgid "Reply"
-msgstr ""
+msgstr "رد"
+
+#: templates/postman/view.html:28
+msgid "to"
+msgstr "الى"
 
 #: templates/socialaccount/authentication_error.html:5
 #: templates/socialaccount/authentication_error.html:10
@@ -2032,33 +2378,31 @@ msgstr ""
 
 #: templates/users/more_about_you.html:14
 msgid "Start"
-msgstr ""
+msgstr "ابدأ"
 
 #: templates/users/more_about_you.html:18
 #: templates/users/more_about_you.html:61
-#: templates/users/user_settings_v2.html:129
+#: templates/users/user_profile_v2.html:73
+#: templates/users/user_settings_v2.html:136
 msgid "Languages"
-msgstr ""
+msgstr "لغات"
 
 #: templates/users/more_about_you.html:22
 msgid "Regions"
-msgstr ""
-
-#: templates/users/more_about_you.html:26
-#: templates/users/more_about_you.html:97
-msgid "Skills"
-msgstr ""
+msgstr "مناطق"
 
 #: templates/users/more_about_you.html:30
 #: templates/users/more_about_you.html:130
 msgid "Finish"
-msgstr ""
+msgstr "انهاء"
 
 #: templates/users/more_about_you.html:39
 msgid ""
 "Your account is now fully active. Fill out additional profile details now or "
 "you can skip this step and do it later in your settings page."
 msgstr ""
+"حسابك الأن مفعل بشكل كامل. نرجوا ملئ المعلومات الأخرى، وبإستطاعتك أيضاً تجاوز "
+"هذه الخطوة والقيام بها في وقت الاحقا عن طريق إعدادت الصفحة"
 
 #: templates/users/more_about_you.html:43
 msgid ""
@@ -2066,6 +2410,10 @@ msgid ""
 "help those in closed societies find the assistance they need to amplify "
 "their voice and expand their influence."
 msgstr ""
+
+#: templates/users/more_about_you.html:45
+msgid "Create an Offer"
+msgstr "إنشاء عرض"
 
 #: templates/users/more_about_you.html:52
 #: templates/users/more_about_you.html:70
@@ -2080,10 +2428,6 @@ msgid ""
 "available, but it is not fully accurate."
 msgstr ""
 
-#: templates/users/more_about_you.html:79
-msgid "Countries"
-msgstr ""
-
 #: templates/users/more_about_you.html:82
 msgid ""
 "Please indicate which regions and countries you are interested in helping."
@@ -2091,21 +2435,23 @@ msgstr ""
 
 #: templates/users/more_about_you.html:100
 msgid "Please indicate your skill set."
-msgstr ""
+msgstr "الرجاء تحديد قائمة المهارات"
 
 #: templates/users/more_about_you.html:115
 msgid "Done"
-msgstr ""
+msgstr "تم"
 
 #: templates/users/more_about_you.html:118
 msgid "Thank You! You are one step closer to opening a closed society!"
-msgstr ""
+msgstr "شكرا لك! انت على خطوة واحدة من المساهمة في إنفتاح المجتمعات المغلقة"
 
 #: templates/users/more_about_you.html:121
 msgid ""
 "If you would like to update this details at any time, this can be done in "
 "easily in your settings panel."
 msgstr ""
+"في حال أردت القيام بتحديث التفاصيل التي أدخلت في أي وقت، تستطيع القيام بهذا "
+"بسهولة وذلك عبر لائحة الإعدادات"
 
 #: templates/users/more_about_you.html:125
 #, python-format
@@ -2129,6 +2475,54 @@ msgstr ""
 msgid "Your account is now activated."
 msgstr ""
 
+#: templates/users/user_profile_v2.html:27
+msgid "View Public Profile"
+msgstr "اظهر الصفحة الشخصة العامة"
+
+#: templates/users/user_profile_v2.html:34
+msgid "Direct Message"
+msgstr "رسائل فورية"
+
+#: templates/users/user_profile_v2.html:38
+msgid "Report User"
+msgstr "أخبر عن مستخدم"
+
+#: templates/users/user_profile_v2.html:46
+msgid "About"
+msgstr "حول"
+
+#: templates/users/user_profile_v2.html:48
+msgid "Name:"
+msgstr "اسم"
+
+#: templates/users/user_profile_v2.html:50
+msgid "Nationality:"
+msgstr "الجنسية"
+
+#: templates/users/user_profile_v2.html:52
+msgid "Residence:"
+msgstr "بلد الإقامة"
+
+#: templates/users/user_profile_v2.html:81
+msgid "No languages specified"
+msgstr "لا لغات محددة"
+
+#: templates/users/user_settings_v2.html:25
+msgid "Change picture"
+msgstr "تغيير الصورة"
+
+#: templates/users/user_settings_v2.html:31
+msgid "Personal Details"
+msgstr "تفاصيل شخصية"
+
+#: templates/users/user_settings_v2.html:32
+msgid "Skills & Interests"
+msgstr "مهارات و اهتمامات"
+
+#: templates/users/user_settings_v2.html:33
+msgid "Security & Alerts"
+msgstr "أمان و تنبيهات"
+
 #: templates/users/user_settings_v2.html:47
 msgid "Username"
 msgstr ""
@@ -2138,70 +2532,111 @@ msgid ""
 "This information is optional but the more you provide the more trusted "
 "you’ll be by other users."
 msgstr ""
+"المعلومات التي نطلبها هي إختيارية، لكن كلما قدمت معلومات أكثر، سيكون من "
+"الأسهل على الأخرين الثقة بك"
 
-#: templates/users/user_settings_v2.html:83
+#: templates/users/user_settings_v2.html:76
+msgid "Interface Language"
+msgstr "لغة الواجهة"
+
+#: templates/users/user_settings_v2.html:88
+msgid "Digital Presence"
+msgstr "التواجد الالكتروني"
+
+#: templates/users/user_settings_v2.html:90
 msgid ""
 "The more links you provide, the higher your star rating will be. Link to "
 "Twitter, LinkedIn, and Facebook to help verify your identity."
 msgstr ""
+"كلما قمت بتزويدنا بمعلومات أكثر ستحصل على تصنيف أعلى.روابط لتويتر،لينكيدلن،"
+"فيس بوك، لتساعدنا على التأكد من هويتك"
 
-#: templates/users/user_settings_v2.html:115
+#: templates/users/user_settings_v2.html:122
 msgid "Skills/Interests"
-msgstr ""
+msgstr "مهارات/اهتمامات"
 
-#: templates/users/user_settings_v2.html:117
+#: templates/users/user_settings_v2.html:124
 msgid ""
 "The skills and interests you provide will help others find the right "
 "expertise for you. This will also help us to show the postings that are the "
 "most relevant for you."
 msgstr ""
+"المهارات و الاهتمامات التي تزودنا بها ستمكن الاخرين من معرفة الأمور التي "
+"تختص بها و ستمكننا من مساعدتك على اظهار المنشورات المناسبة لك."
 
-#: templates/users/user_settings_v2.html:121
+#: templates/users/user_settings_v2.html:128
 msgid "Regions/Countries"
-msgstr ""
+msgstr "مناطق/دول"
 
-#: templates/users/user_settings_v2.html:123
+#: templates/users/user_settings_v2.html:130
 msgid ""
 "Where do you need help and/or where would you like to be able to help out?"
-msgstr ""
+msgstr "ما هي الأماكن التي تريد أن تتم مساعدتك فيها و أين ترغب بالمساعدة ؟ "
 
-#: templates/users/user_settings_v2.html:131
+#: templates/users/user_settings_v2.html:138
 #, python-format
 msgid ""
 "Please indicate which languages you are able to communicate in. Google "
 "Translate is also available however it is not 100%% accurate."
 msgstr ""
+"الرجاء تحديد اللغات التي تتحدثها. مترجم غوغل متوفر ضمن موقعنا، لكنه ليس دقيق "
+"بشكل تام"
 
-#: templates/users/user_settings_v2.html:137
+#: templates/users/user_settings_v2.html:144
 msgid "Control the visibility of your profile and notifications."
-msgstr ""
+msgstr "تحكم بالقدرة على رؤيتك و اشعاراتك"
 
-#: templates/users/user_settings_v2.html:141
+#: templates/users/user_settings_v2.html:148
 msgid "Profile Visibility"
-msgstr ""
+msgstr "الملف الرؤية"
 
-#: templates/users/user_settings_v2.html:143
+#: templates/users/user_settings_v2.html:150
 msgid ""
 "How much information do you want to make public? So as to help protect your "
 "security and privacy, you may not want to expose your email address."
 msgstr ""
+"كم من المعلومات ترغب بأن تنشر علناً،كي تتمكن من حماية أمنك الشخصي قد ترغب في "
+"عدم الاعلان عن بريدك الالكتروني للعامة"
 
-#: templates/users/user_settings_v2.html:152
+#: templates/users/user_settings_v2.html:159
 msgid ""
 "When would you like to receive a notification if someone responds to your "
 "post or creates one that matches your interest?"
-msgstr ""
+msgstr "متى تريد أن تتلقى اشعار ااذا استجاب أحد المستخدمين لمنشور لك ؟ "
 
-#: templates/users/user_settings_v2.html:174
+#: templates/users/user_settings_v2.html:181
 msgid "Save"
 msgstr ""
 
-#: templates/users/user_settings_v2.html:185
+#: templates/users/user_settings_v2.html:192
 msgid "Upload Avatar"
-msgstr ""
+msgstr "تحميل صورة رمزية"
 
 #: templates/users/waitforactivation.html:13
 msgid ""
 "Someone will be in contact with you shortly to help you activate your "
 "account."
 msgstr ""
+
+#: templates/users/snippets/profile_navigation.html:16
+msgid "Alerts"
+msgstr "تنبيهات"
+
+#: templates/users/snippets/star_rating.html:11
+msgid "MOVEMENTS STAR RATING"
+msgstr "تصنيف موفمينتس\"نجوم\""
+
+#: templates/users/snippets/star_rating.html:12
+msgid ""
+"0 Stars: Confirmed Email<br>\n"
+"                   1 Star: Confirmed 1 social media account<br>\n"
+"                   2 Stars: Confirmed 2 social media accounts<br>\n"
+"                   3 Stars: Confirmed all social media and bio<br>\n"
+"                   4 Stars: Confirmed significant online presence<br>\n"
+"                   5 Stars: Personally known by Movements.org<br>"
+msgstr ""
+"٠ نجمة: بريد الكتروني مؤكد<br>\n"
+"١ نجمة: حساب موقع تواصل اجتماعي<br>\n"
+"٢ نجمة: حسابين تواصل اجتماعي<br>\n"
+"٣ نجمة: تأكيد كل حسابات التواصل الاجتماعي مع سيرة ذاتية<br>\n"
+"٤ نجمة : معلوم شخصياً من قبل موفمينتس<br>"

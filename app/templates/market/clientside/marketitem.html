@@ -20,8 +20,8 @@
         </a>
         <div class="details">
           <%- item_type_display %>
-          by <a href="/user/profile/<%- owner %>"><%- owner %></a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
-          <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.
+            {% blocktrans with user_name="<%- owner %>"%}by <a href="/user/profile/<%- owner %>">{{ user_name }}</a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
+            <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.{% endblocktrans %}
         </div>
       </div>
       <% if (!is_safe) { %>
@@ -71,26 +71,33 @@
       <div class="title"><%- title %></div>
       <div class="details">
         <%- item_type_display %>
-        by <a href="/user/profile/<%- owner %>"><%- owner %></a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
-        <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.
+        {% blocktrans with user_name="<%- owner %>"%}by <a href="/user/profile/<%- owner %>">{{ user_name }}</a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
+        <a href="/market/<%- pk %>"><%- commentcount %> comments</a>.{% endblocktrans %}
       </div>
     </a>
   </div>
 </script>
 <script type="text/template" id="item-menu-template">
+
+    {% trans "Hide" as hide_text %}
+    {% trans "Stick" as stick_text %}
+    {% trans "Edit" as edit_text %}
+    {% trans "Close" as close_text %}
+    {% trans "Report" as report_text %}
+
   <%
      var actions = [];
      if (showHide) {
-       actions.push({display: 'Hide', value: 'hide', toggle: true});
+       actions.push({display: '{{ hide_text }}', value: 'hide', toggle: true});
      }
      if (showSticky) {
-       actions.push({display: 'Stick', value: 'stick', toggle: true});
+       actions.push({display: '{{ stick_text }}', value: 'stick', toggle: true});
      }
      if (hasEdit) {
-       actions.push({display: 'Edit', value: 'edit'});
-       actions.push({display: 'Close', value: 'close'});
+       actions.push({display: '{{ edit_text }}', value: 'edit'});
+       actions.push({display: '{{ close_text }}', value: 'close'});
      } else {
-       actions.push({display: 'Report', value: 'report'});
+       actions.push({display: '{{ report_text }}', value: 'report'});
      }
   %>
   <ul class="item-action-menu">

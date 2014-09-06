@@ -67,7 +67,7 @@ class SignupForm(forms.Form):
         username = self.cleaned_data['username']
         username = username.strip()
         if User.objects.filter(username=username).exists():
-            raise forms.ValidationError(_('This username is already in used'))
+            raise forms.ValidationError(_('This username is already in use'))
         if not re.match("^[A-Za-z0-9_-]*$", username):
             raise forms.ValidationError(_('Username must contain only letters, numbers - and _. White space is not allowed'))
         if len(username) < 3 or len(username) > 30:
@@ -166,7 +166,7 @@ class SettingsForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = [
-            'occupation', 'resident_country', 'expertise', 'web_url', 'fb_url',
+            'occupation', 'resident_country', 'interface_lang', 'expertise', 'web_url', 'fb_url',
             'linkedin_url', 'tweet_url', 'tag_ling', 'bio', 'interests',
             'countries', 'languages', 'is_organisation', 'is_journalist',
             'get_newsletter', 'profile_visibility', 'notification_frequency'

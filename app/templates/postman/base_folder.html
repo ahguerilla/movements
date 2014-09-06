@@ -28,8 +28,8 @@
   <div class="row no-gutter">
     <div class="col-md-4 sidebar">
       <div class="btn-group folder-select btn-group-justified btn-group-md" id="messagenav">
-        <a type="button" class="btn btn-tab {% if path == inbox %}selected{% endif %}" href="{{inbox}}">Inbox</a>
-        <a type="button" class="btn btn-tab {% if path == sent %}selected{% endif %}" href="{{sent}}">Sent</a>
+        <a type="button" class="btn btn-tab {% if path == inbox %}selected{% endif %}" href="{{inbox}}">{% trans "Inbox"%}</a>
+        <a type="button" class="btn btn-tab {% if path == sent %}selected{% endif %}" href="{{sent}}">{% trans "Sent"%}</a>
       </div>
       {% if pm_messages %}
       <div class="messagelist">

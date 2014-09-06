@@ -34,7 +34,7 @@
         </div>
       </div>
     {% endif %}
-      <p>All the following information is optional but will help Movements.org ensure that you see the postings that are most relevant to your needs and interests.</p>
+      <p>{% trans "All the following information is optional but will help Movements.org ensure that you see the postings that are most relevant to your needs and interests."%}</p>
       <div class="form-group">
         <div class="col-xs-6">
           <label for="{{ form.first_name.auto_id }}">{%trans "First Name"%}</label>
@@ -57,7 +57,7 @@
       <div class="form-group">
         <div class="col-xs-12">
           <label for="{{ form.bio.auto_id }}">{%trans "Biography"%}</label>
-          <p>If you want other users to know something about you. You can control how much if any information to make public.</p>
+          <p>{% trans "If you want other users to know something about you. You can control how much if any information to make public."%}</p>
           {% render_field form.bio class="form-control input-sm"%}
           {{ form.bio.errors }}
         </div>

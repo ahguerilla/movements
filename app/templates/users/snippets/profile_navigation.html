@@ -1,31 +1,33 @@
+{% load i18n %}
+
 <div class="container-liquid settings-bar">
   <div class="profile-nav-menu">
     <a href="{% url 'postman_inbox' %}">
       <div class="nav-icon inbox {% if page_type == 'inbox' %}selected{% endif %}">
         <div class="spacer"></div>
         <div class="nav-menu-item"></div>
-        <div class="nav-menu-text">Inbox</div>
+        <div class="nav-menu-text">{%trans "Inbox"%}</div>
       </div>
     </a>
     <a href="{% url 'show_notifications' %}">
       <div class="nav-icon notifications {% if page_type == 'notifications' %}selected{% endif %}">
         <div class="spacer"></div>
         <div class="nav-menu-item"></div>
-        <div class="nav-menu-text">Alerts</div>
+        <div class="nav-menu-text">{%trans "Alerts"%}</div>
       </div>
     </a>
     <a href="{% url 'user_profile' %}">
       <div class="nav-icon profile {% if page_type == 'profile' %}selected{% endif %}">
         <div class="spacer"></div>
         <div class="nav-menu-item"></div>
-        <div class="nav-menu-text">Profile</div>
+        <div class="nav-menu-text">{%trans "Profile"%}</div>
       </div>
     </a>
     <a href="{% url 'user_settings' %}">
       <div class="nav-icon settings {% if page_type == 'settings' %}selected{% endif %}">
         <div class="spacer"></div>
         <div class="nav-menu-item"></div>
-        <div class="nav-menu-text">Settings</div>
+        <div class="nav-menu-text">{%trans "Settings"%}</div>
       </div>
     </a>
   </div>

@@ -25,7 +25,7 @@
     <div class="message-header" href="#message-{{ forloop.counter }}">
       <span class="message-date pull-right">{{ message.sent_at|date:"M d Y H:i" }}</span>
       <span class="send-receive">
-        <a href="{% url 'user_profile_for_user' message.sender.username %}">{% if message.sender == request.user %}Me{% else %}{{ message.obfuscated_sender }}{% endif %}</a> to
+        <a href="{% url 'user_profile_for_user' message.sender.username %}">{% if message.sender == request.user %}Me{% else %}{{ message.obfuscated_sender }}{% endif %}</a> {% trans "to"%}
         <a href="{% url 'user_profile_for_user' message.recipient.username %}">{% if message.recipient == request.user %}Me{% else %}{{ message.obfuscated_recipient }}{% endif %}</a>
       </span>
     </div>

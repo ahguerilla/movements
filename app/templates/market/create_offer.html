@@ -9,8 +9,8 @@
   <div class="dialog movements-form new-post">
     <div>
       <div class="form-title"><h1>{% trans "Offer a service" %}</h1></div>
-      <p>{% blocktrans %}Do you have expertise to offer?{% endblocktrans %}</p>
-      <p>{% blocktrans %}An Offer can be technical or professional skills, an opportunity to publish a story, or any skill that may be of help to others. Your Offer will be posted on Movements and will be seen by all members.{% endblocktrans %}</p>
+      <p>{% trans "Do you have expertise to offer?" %}</p>
+      <p>{% trans "An Offer can be technical or professional skills, an opportunity to publish a story, or any skill that may be of help to others. Your Offer will be posted on Movements and will be seen by all members." %}</p>
       {{ form.non_field_errors }}
     </div>
     <div>
@@ -34,9 +34,9 @@
       </div>
     </div>
     <div>
-      <p style="margin-top: 15px;">Movements.org provides access to skills and experts. Please describe your skills, abilities, or services below. Be as explicit and clear as possible.</p>
+      <p style="margin-top: 15px;">{% trans "Movements.org provides access to skills and experts. Please describe your skills, abilities, or services below. Be as explicit and clear as possible."%}</p>
       <div class="form-sub-title"><h2>{% trans "3. How can you help?" %}</h2></div>
-      <p>Be specific and clear.</p>
+      <p>{% trans "Be specific and clear."%}</p>
       <div class="form-group">
         <div class="col-xs-12">
           {% render_field form.title class="form-control input-sm" required="true" placeholder="" %}
@@ -46,7 +46,7 @@
     </div>
     <div>
       <div class="form-sub-title"><h2>{% trans "4. Please write your post" %}</h2></div>
-      <p>Tell a compelling story.</p>
+      <p>{% trans "Tell a compelling story."%}</p>
       {% render_field form.details class="form-control input-sm" required="true" placeholder="" %}
       {{ form.details.errors }}
     </div>
@@ -59,7 +59,7 @@
           <label for="{{ form.tweet_permission.auto_id }}">{% trans "May we tweet this request?" %}</label>
           {% render_field form.tweet_permission class="" placeholder="" %}
           {{ form.tweet_permission.errors }}
-          <p>We won’t use your name or any identifying information</p>
+          <p>{% trans "We won’t use your name or any identifying information"%}</p>
          </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
     <div style="margin-top: 20px;">
       <div class="form-group">
         <div class="col-xs-12">
-          <button class="btn btn-action pull-right">Post now</button>
+          <button class="btn btn-action pull-right">{% trans "Post now"%}</button>
         </div>
       </div>
     </div>

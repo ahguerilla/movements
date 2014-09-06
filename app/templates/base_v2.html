@@ -31,6 +31,16 @@
     <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
   {% endassets %}
 
+
+  {% if LANGUAGE_CODE == 'ar' %}
+    {% assets "css_language_ar" %}
+      <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
+    {% endassets %}
+
+{#    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/language_ar.css" />#}
+  {% endif %}
+
+
   {% block extra_head %}
   {% endblock %}
 
@@ -77,12 +87,12 @@
     {% if user.is_authenticated and not user.userprofile.first_login %}
       <div id="NavRightLoggedIn" class="navbar-right">
         <a id="add-post" class="btn btn-action"><img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
-            <span id="AddPostText"> Add Post</span></a>
+            <span id="AddPostText"> {%trans "Add Post"%}</span></a>
         <div id="add-post-popup-container"></div>
       </div>
     {% else %}
       <div id="NavRightLoggedOut" class="navbar-right">
-        <a href="{% url 'account_login' %}" class="btn btn-action">Login</a>
+        <a href="{% url 'account_login' %}" class="btn btn-action">{%trans "Login"%}</a>
       </div>
     {% endif %}
     <div class="header-nav-wrapper">
@@ -97,11 +107,11 @@
       <div class="main-menu-slider">
         <ul>
           {% if not user.is_authenticated %}
-            <li><h3><a href="{% url 'signup_start' %}">Sign up</a></h3></li>
+            <li><h3><a href="{% url 'signup_start' %}">{%trans "Sign up"%}</a></h3></li>
           {% endif %}
           {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
           {% if not user.is_authenticated %}
-            <li><h3><a href="{% url 'show_market' %}">Visit market</a></h3></li>
+            <li><h3><a href="{% url 'show_market' %}">{%trans "Visit market"%}</a></h3></li>
           {% endif %}
         </ul>
       </div>
@@ -129,7 +139,7 @@
           <h4>{% trans "Get updates"  %}</h4>
           <form id="sign-up-form" action="{% url 'newsletter_signup' %}">
             <div class="form-group">
-              <input class="form-control" id="id_email" name="email" type="text" placeholder="Enter your e-mail...">
+              <input class="form-control" id="id_email" name="email" type="text" placeholder="{%trans "Enter your e-mail..."%}">
             </div>
           </form>
           <p id="newsletter-conf"></p>
@@ -139,10 +149,10 @@
           <h4>{% trans "Connect with us"  %}</h4>
           <div class="social-icons">
             <a target="_blank" href="https://twitter.com/movements_org">
-              <img src="{{ STATIC_URL }}images/v2/twitter-bigger.png" alt="Connect with Twitter" >
+              <img src="{{ STATIC_URL }}images/v2/twitter-bigger.png" alt="{%trans "Connect with Twitter"%}" >
             </a>
             <a target="_blank" href="https://www.facebook.com/Movements.org">
-              <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="Connect with Facebook" >
+              <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="{%trans "Connect with Facebook"%}" >
             </a>
 {#            <a href="">#}
 {#              <img src="{{ STATIC_URL }}images/v2/gplus-bigger.png" alt="Connect with Google Plus" >#}
@@ -185,20 +195,20 @@
 </footer>
 <div id="modal-placeholder"></div>
 <script type="text/template" id="add-post-template">
-  <a class="btn btn-request" href="{% url 'create_request' %}"><img src="{{ STATIC_URL }}images/v2/request_icon.png"/>Request</a>
-  <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>Offer</a>
+  <a class="btn btn-request" href="{% url 'create_request' %}"><img src="{{ STATIC_URL }}images/v2/request_icon.png"/>{%trans "Request"%}</a>
+  <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>{%trans "Offer"%}</a>
 </script>
 <script type="text/template" id="content-menu-template">
   <ul><li><a href="{% url 'user_profile' %}">
     <div class="nav-menu-item-wrap profile">
       <div class="nav-menu-item"></div>
-      Profile
+      {% trans "Profile"%}
     </div>
   </a></li>
   <li><a href="{% url 'user_settings' %}">
     <div class="nav-menu-item-wrap settings">
       <div class="nav-menu-item"></div>
-      Settings
+      {% trans "Settings"%}
     </div>
   </a></li>
   <li><form method="post" action="{% url 'account_logout' %}">
@@ -206,7 +216,7 @@
     <a href="#" onclick="parentNode.submit();">
       <div class="nav-menu-item-wrap logout">
         <div class="nav-menu-item"></div>
-        Logout
+        {% trans "Logout" %}
       </div>
     </a>
   </form></li></ul>
