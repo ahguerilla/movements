@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-05 12:28-0500\n"
+"POT-Creation-Date: 2014-09-09 15:34-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -328,7 +328,7 @@ msgid "is user recommendation"
 msgstr ""
 
 #: app/market/models/report.py:80 app/market/models/report.py:118
-#: templates/market/notifications.html:41
+#: templates/market/notifications.html:50
 msgid "message"
 msgstr ""
 
@@ -1947,21 +1947,31 @@ msgstr "تعليق على"
 msgid "your"
 msgstr "أنت"
 
-#: templates/market/notifications.html:35
+#: templates/market/notifications.html:32
+#: templates/market/notifications.html:42
+msgid "offer"
+msgstr "عرض"
+
+#: templates/market/notifications.html:34
+#: templates/market/notifications.html:44
+msgid "request"
+msgstr "طلب"
+
+#: templates/market/notifications.html:39
 #: templates/market/clientside/notifications.html:12
 msgid "updated"
 msgstr "محدث"
 
-#: templates/market/notifications.html:35
+#: templates/market/notifications.html:39
 #: templates/market/clientside/notifications.html:12
 msgid "posted"
 msgstr "منشور"
 
-#: templates/market/notifications.html:36
+#: templates/market/notifications.html:40
 msgid "the"
 msgstr "ال"
 
-#: templates/market/notifications.html:41
+#: templates/market/notifications.html:50
 msgid "sent you a private "
 msgstr "مرسل لك بشكل خاص"
 
