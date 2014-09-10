@@ -1063,9 +1063,6 @@ h6 {
 .form-select-multi .select-multi-checkbox.selected .select-arrow {
   background: url("../images/v2/multi-select-arrow.png") 0 -10px;
 }
-.share-twitter {
-  float: right;
-}
 input.borderless-control {
   border: none;
   -webkit-box-shadow: none;
