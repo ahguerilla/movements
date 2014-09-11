@@ -4,7 +4,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "ناشط",
         "name_en": "Activist", 
         "name": "Activist"
     }
@@ -14,7 +14,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "مدافع",
         "name_en": "Advocate", 
         "name": "Advocate"
     }
@@ -24,7 +24,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "صحافي",
         "name_en": "Journalist", 
         "name": "Journalist"
     }
@@ -34,7 +34,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "محامي",
         "name_en": "Lawyer", 
         "name": "Lawyer"
     }
@@ -44,7 +44,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "مروج",
         "name_en": "Marketer", 
         "name": "Marketer"
     }
@@ -54,7 +54,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "منتج إعلامي",
         "name_en": "Media Producer", 
         "name": "Media Producer"
     }
@@ -64,7 +64,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "موظف غير حكومي",
         "name_en": "NGO Employee", 
         "name": "NGO Employee"
     }
@@ -74,7 +74,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "خبير سياسي",
         "name_en": "Policy Expert", 
         "name": "Policy Expert"
     }
@@ -84,7 +84,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "وسائل التواصل الإجتماعي",
         "name_en": "Social Media", 
         "name": "Social Media"
     }
@@ -94,7 +94,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "التكنولوجيا",
         "name_en": "Technology", 
         "name": "Technology"
     }
@@ -104,7 +104,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "مترجم",
         "name_en": "Translator", 
         "name": "Translator"
     }
@@ -114,7 +114,7 @@
     "model": "users.interest", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "كاتب",
         "name_en": "Writer", 
         "name": "Writer"
     }

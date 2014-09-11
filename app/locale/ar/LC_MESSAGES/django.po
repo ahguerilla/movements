@@ -2158,7 +2158,7 @@ msgstr "ابدأ بكتابة اسم المستخدم و أدخل بريدك ا�
 
 #: templates/market/clientside/recommenddialog.html:60
 msgid "user"
-msgstr "user (TBD)"
+msgstr "مستخدم"
 
 #: templates/market/clientside/recommenddialog.html:62
 msgid "post"

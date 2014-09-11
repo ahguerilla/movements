@@ -5,7 +5,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "الجزائر",
       "countries_en": "Algeria",
       "countries": "Algeria",
       "region": 100
@@ -17,7 +17,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "أنغولا",
       "countries_en": "Angola",
       "countries": "Angola",
       "region": 100
@@ -29,7 +29,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "كونغو",
       "countries_en": "Congo",
       "countries": "Congo",
       "region": 100
@@ -41,7 +41,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "كوت ديفوار",
       "countries_en": "Cote d'Ivoire",
       "countries": "Cote d'Ivoire",
       "region": 100
@@ -53,7 +53,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "اوغندا",
       "countries_en": "Uganda",
       "countries": "Uganda",
       "region": 100
@@ -65,7 +65,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "اوغندا",
       "countries_en": "Uganda",
       "countries": "Uganda",
       "region": 100
@@ -77,7 +77,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "كينيا",
       "countries_en": "Kenya",
       "countries": "Kenya",
       "region": 100
@@ -89,7 +89,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "مدغشقر",
       "countries_en": "Madagascar",
       "countries": "Madagascar",
       "region": 100
@@ -101,7 +101,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "النيجر",
       "countries_en": "Niger",
       "countries": "Niger",
       "region": 100
@@ -113,7 +113,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "نيجيريا",
       "countries_en": "Nigeria",
       "countries": "Nigeria",
       "region": 100
@@ -125,7 +125,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "بوركينا فاسو",
       "countries_en": "Burkina Faso",
       "countries": "Burkina Faso",
       "region": 100
@@ -137,7 +137,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "تانزانيا",
       "countries_en": "Tanzania",
       "countries": "Tanzania",
       "region": 100
@@ -149,7 +149,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "اثيوبيا",
       "countries_en": "Ethiopia",
       "countries": "Ethiopia",
       "region": 100
@@ -161,7 +161,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "المغرب",
       "countries_en": "Morocco",
       "countries": "Morocco",
       "region": 100
@@ -173,7 +173,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "موزمبيق",
       "countries_en": "Mozambique",
       "countries": "Mozambique",
       "region": 100
@@ -185,7 +185,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "مصر",
       "countries_en": "Egypt",
       "countries": "Egypt",
       "region": 100
@@ -197,7 +197,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "مالاوي",
       "countries_en": "Malawi",
       "countries": "Malawi",
       "region": 100
@@ -209,7 +209,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "الكامرون",
       "countries_en": "Cameroon",
       "countries": "Cameroon",
       "region": 100
@@ -221,7 +221,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "السودان",
       "countries_en": "Sudan",
       "countries": "Sudan",
       "region": 100
@@ -233,7 +233,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "بورما",
       "countries_en": "Burma",
       "countries": "Burma",
       "region": 101
@@ -245,7 +245,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "كامبوديا",
       "countries_en": "Cambodia",
       "countries": "Cambodia",
       "region": 101
@@ -257,7 +257,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "الصين",
       "countries_en": "China",
       "countries": "China",
       "region": 101
@@ -269,7 +269,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "أوكرانيا",
       "countries_en": "Ukraine",
       "countries": "Ukraine",
       "region": 101
@@ -281,7 +281,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "فيتنام",
       "countries_en": "Vietnam",
       "countries": "Vietnam",
       "region": 101
@@ -293,7 +293,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "كازاخستان",
       "countries_en": "Kazakhstan",
       "countries": "Kazakhstan",
       "region": 101
@@ -305,7 +305,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "بنغلادش",
       "countries_en": "Bangladesh",
       "countries": "Bangladesh",
       "region": 101
@@ -316,7 +316,7 @@
     "model": "users.countries",
     "fields": {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "بنغلادش",
       "countries_en": "Bangladesh",
       "countries": "Bangladesh",
       "region": 101
@@ -328,7 +328,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "سيريلانكا",
       "countries_en": "Sri Lanka",
       "countries": "Sri Lanka",
       "region": 101
@@ -340,7 +340,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "أوزباكستان",
       "countries_en": "Uzbekistan",
       "countries": "Uzbekistan",
       "region": 101
@@ -352,7 +352,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "ماليزيا",
       "countries_en": "Malaysia",
       "countries": "Malaysia",
       "region": 101
@@ -364,7 +364,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "نيبال",
       "countries_en": "Nepal",
       "countries": "Nepal",
       "region": 101
@@ -376,7 +376,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "كوريا الشمالية",
       "countries_en": "North Korea",
       "countries": "North Korea",
       "region": 101
@@ -388,7 +388,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "روسيا",
       "countries_en": "Russia",
       "countries": "Russia",
       "region": 101
@@ -400,7 +400,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "العراق",
       "countries_en": "Iraq",
       "countries": "Iraq",
       "region": 102
@@ -412,7 +412,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "باكستان",
       "countries_en": "Pakistan",
       "countries": "Pakistan",
       "region": 102
@@ -424,7 +424,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "المملكة العربية",
       "countries_en": "Saudi Arabia",
       "countries": "Saudi Arabia",
       "region": 102
@@ -436,7 +436,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "سوريا",
       "countries_en": "Syria",
       "countries": "Syria",
       "region": 102
@@ -448,7 +448,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "تركيا",
       "countries_en": "Turkey",
       "countries": "Turkey",
       "region": 102
@@ -460,7 +460,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "اليمن",
       "countries_en": "Yemen",
       "countries": "Yemen",
       "region": 102
@@ -472,7 +472,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "ايران",
       "countries_en": "Iran",
       "countries": "Iran",
       "region": 102
@@ -484,7 +484,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "افغانستان",
       "countries_en": "Afghanistan",
       "countries": "Afghanistan",
       "region": 102
@@ -496,7 +496,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "طاجيكستان",
       "countries_en": "Tajikistan",
       "countries": "Tajikistan",
       "region": 102
@@ -508,7 +508,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "فنزويلا",
       "countries_en": "Venezuela",
       "countries": "Venezuela",
       "region": 103
@@ -520,7 +520,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "غوانتمالا",
       "countries_en": "Guatemala",
       "countries": "Guatemala",
       "region": 103
@@ -532,7 +532,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "اكاودور",
       "countries_en": "Ecuador",
       "countries": "Ecuador",
       "region": 103
@@ -544,7 +544,7 @@
     "fields":
     {
       "countries_ru": "",
-      "countries_ar": "",
+      "countries_ar": "كولومبيا",
       "countries_en": "Colombia",
       "countries": "Colombia",
       "region": 103
