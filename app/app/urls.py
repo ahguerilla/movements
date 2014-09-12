@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
+
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -11,7 +13,6 @@ js_info_dict = {
 }
 urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
-    url(r'^movements/', include('cms.urls')),
 
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
     url(r'^contact-us$', 'app.views.contact_us', name='contact_us'),
@@ -40,6 +41,11 @@ urlpatterns = patterns('',
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += i18n_patterns('',
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^movements/', include('cms.urls')),
+)
 
 
 if settings.DEBUG:
