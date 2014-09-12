@@ -57,9 +57,9 @@
      setHeader: function(rec_type){
       var dialog_header;
       if(rec_type === "user"){
-        dialog_header = ' user';
+        dialog_header = ' {%trans "user"%}';
       }else{
-        dialog_header = ' post';
+        dialog_header = ' {%trans "post"%}';
       }
       $('#rec-thing').text(dialog_header);
      },

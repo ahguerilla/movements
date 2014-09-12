@@ -48,11 +48,6 @@ body {
 .footer-nav-content {
   direction: ltr;
 }
-/* Misc */
-.btn-social img {
-  margin-left: 10px;
-  margin-right: 0px;
-}
 /* Posts */
 .view-post .post-actions a.recommend {
   margin-left: 40px;
@@ -62,4 +57,22 @@ body {
 }
 .view-post .comment-count {
   float: left !important;
+}
+.tags .tag {
+  float: right;
+}
+/* Misc */
+.btn-social img {
+  margin-left: 10px;
+  margin-right: 0px;
+}
+.item-menu-container {
+  direction: ltr;
+}
+.poster .avatar {
+  float: right;
+}
+.poster .poster-details {
+  float: right;
+  margin-right: 42px;
 }

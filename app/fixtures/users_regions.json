@@ -4,7 +4,7 @@
     "model": "users.region", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "إفريقيا",
         "name_en": "Africa",
         "name": "Africa"
     }
@@ -14,7 +14,7 @@
     "model": "users.region", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "أيروسيا",
         "name_en": "Asia",
         "name": "Asia"
     }
@@ -24,7 +24,7 @@
     "model": "users.region", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "الشرق الأوسط",
         "name_en": "Middle East",
         "name": "Middle East"
     }
@@ -34,7 +34,7 @@
     "model": "users.region", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "أمريكا الجنوبية",
         "name_en": "South America", 
         "name": "South America"
     }

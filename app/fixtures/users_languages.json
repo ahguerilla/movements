@@ -4,7 +4,7 @@
     "model": "users.language", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "الإنكليزية",
         "name_en": "English", 
         "name": "English"
     }
@@ -14,7 +14,7 @@
     "model": "users.language", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "الفرنسية",
         "name_en": "French", 
         "name": "French"
     }
@@ -24,7 +24,7 @@
     "model": "users.language", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "الإسبانية",
         "name_en": "Spanish", 
         "name": "Spanish"
     }
@@ -34,7 +34,7 @@
     "model": "users.language", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "العربية",
         "name_en": "Arabic", 
         "name": "Arabic"
     }
@@ -44,7 +44,7 @@
     "model": "users.language", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "الفارسية",
         "name_en": "Farsi", 
         "name": "Farsi"
     }
@@ -54,7 +54,7 @@
     "model": "users.language", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "الصينية",
         "name_en": "Chinese", 
         "name": "Chinese"
     }
@@ -64,7 +64,7 @@
     "model": "users.language", 
     "fields": {
         "name_ru": "", 
-        "name_ar": "", 
+        "name_ar": "الروسية",
         "name_en": "Russian", 
         "name": "Russian"
     }
