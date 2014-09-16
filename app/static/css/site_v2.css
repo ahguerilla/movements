@@ -730,6 +730,9 @@ h6 {
   text-decoration: underline;
   cursor: pointer;
 }
+.auto-translated-text {
+  color: #808080;
+}
 .language-selector ul {
   margin: 0;
   padding: 0;
@@ -1470,6 +1473,9 @@ input.borderless-control:focus:invalid:focus {
 .featured .details {
   font-size: 14px;
 }
+.featured .auto-translated-text {
+  color: #faf0e6;
+}
 .featured.featured-request {
   background-color: #ff4545;
 }
@@ -1745,6 +1751,9 @@ input.borderless-control:focus:invalid:focus {
 }
 .view-post .post-actions ul li {
   display: inline-block;
+}
+.view-post .auto-translated-text {
+  margin-bottom: 10px;
 }
 .view-post .post-translate {
   margin-bottom: 15px;

@@ -679,9 +679,12 @@ $(function () {
               success: function (data) {
                 if(data.response === "success") {
                   if (document.querySelectorAll) {
-                    var posts = document.body.querySelectorAll('.market-place-item[data-item-id="' + data.itemid + '"] div.title');
+                    var posts = document.body.querySelectorAll('.market-place-item[data-item-id="' + data.itemid + '"]');
                     for (var i=0; i<posts.length; i++){
-                      posts[i].innerHTML = data.title;
+                      if (posts[i].querySelector('.title').innerHTML != data.title) {
+                          posts[i].querySelector('.title').innerHTML = data.title;
+                          posts[i].querySelector('.auto-translated-text').setAttribute('style', '');
+                      }
                     }
                   }
                 }

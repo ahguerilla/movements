@@ -29,8 +29,11 @@
           dataType: 'json',
           success: function (data) {
             if(data.response === "success") {
-              $('#post-title').html(data.title);
-              $('#post-body').html(data.details);
+              if ($('#post-title').html() != data.title) {
+                  $('#post-title').html(data.title);
+                  $('#post-body').html(data.details);
+                  document.querySelector('.auto-translated-text').setAttribute('style', '');
+              }
             } else {
               $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
             }
