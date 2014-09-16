@@ -4,7 +4,7 @@
 {% block content %}
 <div class="row">
   <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-    <div class="view-post">
+    <div class="view-post" data-default_translate_url="{% url 'translate_market_item' post.id LANGUAGE_CODE %}">
       <div class="post-header {{ post.item_type|lower }} %>">
         <span>{{ post.item_type_display }}</span>
       </div>

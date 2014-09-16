@@ -669,6 +669,25 @@ $(function () {
             var txt = $('span', $(this)).text();
             $('.tag-button:contains(' + txt + ')').css('background-color', '#cccccc');
           });
+
+          // Auto-Google-Translate the post title for each item.
+          if (item.fields.translate_language_url) {
+            $.ajax({
+              url: item.fields.translate_language_url,
+              type: 'GET',
+              dataType: 'json',
+              success: function (data) {
+                if(data.response === "success") {
+                  if (document.querySelectorAll) {
+                    var posts = document.body.querySelectorAll('.market-place-item[data-item-id="' + data.itemid + '"] div.title');
+                    for (var i=0; i<posts.length; i++){
+                      posts[i].innerHTML = data.title;
+                    }
+                  }
+                }
+              }
+            });
+          }
         }
       });
       if (!hasItem) {

@@ -19,6 +19,29 @@
       this.report_widget = new window.ahr.ReportPostView();
       this.linkifyContent();
       this.initTranslatePopup();
+
+      // Auto-Google-Translate the post title and body.
+      var translate_url = $(".view-post").data('default_translate_url');
+      if (translate_url) {
+        $.ajax({
+          url: translate_url,
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+            if(data.response === "success") {
+              $('#post-title').html(data.title);
+              $('#post-body').html(data.details);
+            } else {
+              $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+            }
+            $('.translate span').popover('hide');
+          },
+          error: function (){
+            $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+            $('.translate span').popover('hide');
+          }
+        });
+      }
     },
     linkifyContent: function(){
       var toLinkify = $('.linkify');
