@@ -29,18 +29,23 @@
           dataType: 'json',
           success: function (data) {
             if(data.response === "success") {
-              if ($('#post-title').html() != data.title) {
-                  $('#post-title').html(data.title);
-                  $('#post-body').html(data.details);
-                  document.querySelector('.auto-translated-text').setAttribute('style', '');
+              $('#post-title').html(data.title);
+              if ($('#post-body').html() != data.details) {
+                $('#post-body-translated').html(data.details);
+                $('#via-google-translate').attr('style', '');
+              }
+              else
+              {
+                $('#post-body-translated').html('');
+                $('#via-google-translate').attr('style', 'display: none;');
               }
             } else {
-              $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+              $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
             }
             $('.translate span').popover('hide');
           },
           error: function (){
-            $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+            $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
             $('.translate span').popover('hide');
           }
         });
@@ -78,15 +83,23 @@
               success: function (data) {
                 if(data.response === "success") {
                   $('#post-title').html(data.title);
-                  $('#post-body').html(data.details);
+                  if ($('#post-body').html() != data.details) {
+                    $('#post-body-translated').html(data.details);
+                    $('#via-google-translate').attr('style', '');
+                  }
+                  else
+                  {
+                    $('#post-body-translated').html('');
+                    $('#via-google-translate').attr('style', 'display: none;');
+                  }
                   self.linkifyContent();
                 } else {
-                  $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+                  $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
                 }
                 $('.translate span').popover('hide');
               },
               error: function (){
-                $('#post-body').append('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+                $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
                 $('.translate span').popover('hide');
               }
             });

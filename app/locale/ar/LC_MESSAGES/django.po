@@ -2075,11 +2075,11 @@ msgstr ""
 
 #: templates/market/clientside/marketitem.html:65
 msgid "FEATURED OFFER"
-msgstr "عرض أخير"
+msgstr "العرض الأخير"
 
 #: templates/market/clientside/marketitem.html:67
 msgid "FEATURED REQUEST"
-msgstr "طلب أخير"
+msgstr " الطلب الأخير"
 
 #: templates/market/clientside/marketitem.html:74
 #, python-format

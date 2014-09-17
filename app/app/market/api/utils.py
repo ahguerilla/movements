@@ -72,6 +72,7 @@ def pm_write(sender, recipient, subject, body='', truncate=False):
 def translate_text(original_text, language):
     success = False
     translation = ""
+    source_language = ""
     try:
         api_key = settings.GOOGLE_TRANSLATE_API_KEY
         base_url = settings.GOOGLE_TRANSLATE_BASE
@@ -84,9 +85,12 @@ def translate_text(original_text, language):
             data = json.loads(r.content)
             data = data.get("data", {}).get("translations", [])
             if len(data) > 0:
+                source_language = data[0].get("detectedSourceLanguage", "")
                 translation = data[0].get("translatedText", "")
                 if translation:
                     success = True
+                    if source_language == language:
+                        translation = original_text
     except:
         pass
 
