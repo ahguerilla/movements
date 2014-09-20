@@ -29,24 +29,20 @@
           dataType: 'json',
           success: function (data) {
             if(data.response === "success") {
-              $('#post-title').html(data.title);
-              if ($('#post-body').html() != data.details) {
-                $('#post-body-translated').html(data.details);
-                $('#via-google-translate').attr('style', '');
-              }
-              else
-              {
-                $('#post-body-translated').html('');
-                $('#via-google-translate').attr('style', 'display: none;');
+              var user_lang = translate_url.slice(-2);
+              if(user_lang === data.source_language){
+                $('#post-body-translated').text('');
+              } else {
+                $('#post-title').text(data.title);
+                $('#post-body-translated').text(data.details);
+                $('#via-google-translate').show();
               }
             } else {
-              $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+              $('#post-body-translated').html('<p><span style="color:red">Unable to provide translation</span></p>');
             }
-            $('.translate span').popover('hide');
           },
           error: function (){
             $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
-            $('.translate span').popover('hide');
           }
         });
       }
@@ -82,15 +78,15 @@
               dataType: 'json',
               success: function (data) {
                 if(data.response === "success") {
-                  $('#post-title').html(data.title);
-                  if ($('#post-body').html() != data.details) {
-                    $('#post-body-translated').html(data.details);
-                    $('#via-google-translate').attr('style', '');
-                  }
-                  else
-                  {
-                    $('#post-body-translated').html('');
-                    $('#via-google-translate').attr('style', 'display: none;');
+                  var trans_lang = translate_url.slice(-2);
+                  $('#post-title').text(data.title);
+
+                  if(trans_lang === data.source_language){
+                    $('#post-body-translated').text("");
+                    $('#via-google-translate').hide();
+                  } else {
+                    $('#post-body-translated').text(data.details);
+                    $('#via-google-translate').show();
                   }
                   self.linkifyContent();
                 } else {
