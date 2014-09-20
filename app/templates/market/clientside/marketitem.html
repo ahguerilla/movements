@@ -11,13 +11,15 @@
        data-stick="<%- stick %>"
        data-hidden="<%- hidden %>"
        data-has-edit="<%- hasEdit %>"
-       data-attributes-url="<%- attributes_url %>">
+       data-attributes-url="<%- attributes_url %>"
+       data-translate-language-url="<%- translate_language_url %>">
     <div class="market-item-card">
       <div class="body">
         <a href="/market/<%- pk %>" alt="Open post">
           <div class="item-type"><%- item_type_display %></div>
           <div class="title"><%- title %></div>
         </a>
+        <div class="auto-translated-text" style="display:none">Auto translated by Google Translate</div>
         <div class="details">
           <%- item_type_display %>
             {% blocktrans with user_name="<%- owner %>"%}by <a href="/user/profile/<%- owner %>">{{ user_name }}</a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
@@ -47,7 +49,8 @@
        data-report-url="<%- report_url %>"
        data-item-type="<%- item_type %>"
        data-has-edit="<%- hasEdit %>"
-       data-attributes-url="<%- attributes_url %>">
+       data-attributes-url="<%- attributes_url %>"
+       data-translate-language-url="<%- translate_language_url %>">
     <div class="header">
       <% if (!is_safe) { %>
       <div class="item-menu-container">
@@ -69,6 +72,9 @@
     </div>
     <a href="/market/<%- pk %>" alt="Open post">
       <div class="title"><%- title %></div>
+    </a>
+    <div class="auto-translated-text" style="display:none">Auto translated by Google Translate</div>
+    <a href="/market/<%- pk %>" alt="Open post">
       <div class="details">
         <%- item_type_display %>
         {% blocktrans with user_name="<%- owner %>"%}by <a href="/user/profile/<%- owner %>">{{ user_name }}</a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>

@@ -730,6 +730,9 @@ h6 {
   text-decoration: underline;
   cursor: pointer;
 }
+.auto-translated-text {
+  color: #808080;
+}
 .language-selector ul {
   margin: 0;
   padding: 0;
@@ -1470,6 +1473,9 @@ input.borderless-control:focus:invalid:focus {
 .featured .details {
   font-size: 14px;
 }
+.featured .auto-translated-text {
+  color: #faf0e6;
+}
 .featured.featured-request {
   background-color: #ff4545;
 }
@@ -1717,6 +1723,10 @@ input.borderless-control:focus:invalid:focus {
   border: none;
   font-family: "LinotypeUnivers-330Light";
   font-size: 16px;
+}
+.view-post .post #via-google-translate {
+  font-weight: bold;
+  margin-top: 20px;
 }
 .view-post .post-actions a {
   font-family: "HurmeGeometricSans3-SemiBold";

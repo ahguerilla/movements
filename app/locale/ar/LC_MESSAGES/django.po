@@ -2069,17 +2069,17 @@ msgid ""
 "a>."
 msgstr ""
 "كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
-"بتاريخ  <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"بتاريخ  <%%- moment(pub_date).format('DD/MM/YYYY, HH:mm') %%>, </span>\n"
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> تعليقات</"
 "a>."
 
 #: templates/market/clientside/marketitem.html:65
 msgid "FEATURED OFFER"
-msgstr "عرض أخير"
+msgstr "العرض الأخير"
 
 #: templates/market/clientside/marketitem.html:67
 msgid "FEATURED REQUEST"
-msgstr "طلب أخير"
+msgstr " الطلب الأخير"
 
 #: templates/market/clientside/marketitem.html:74
 #, python-format
@@ -2089,7 +2089,7 @@ msgid ""
 "        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</a>."
 msgstr ""
 "كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
-"بتاريخ  <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"بتاريخ  <%%- moment(pub_date).format('DD/MM/YYYY, HH:mm') %%>, </span>\n"
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> تعليقات</"
 "a>."
 

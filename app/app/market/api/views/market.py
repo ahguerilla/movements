@@ -334,5 +334,6 @@ def translate_market_item(request, item_id, lang_code):
         'response': "success" if success else "failed",
         'title': title_translation,
         'details': details_translation,
+        'itemid': item_id,
     }
     return HttpResponse(json.dumps(result), mimetype="application/json")

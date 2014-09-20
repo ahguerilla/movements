@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.utils import translation
 import app.users.models as user_models
 from django.db import models
 
@@ -104,6 +105,8 @@ class MarketItem(models.Model):
         adict['fields']['edit_url'] = reverse(reverse_name, args=[self.id])
         adict['fields']['report_url'] = reverse('report_post', args=[self.id])
         adict['fields']['attributes_url'] = reverse('set_item_attributes_for_user', args=[self.id])
+        adict['fields']['translate_language_url'] = \
+            reverse('translate_market_item', args=[self.id, translation.get_language()])
         adict['fields']['usercore'] = self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['userratecount'] = self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['ratecount'] = self.ratecount
