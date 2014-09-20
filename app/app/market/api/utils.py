@@ -94,4 +94,4 @@ def translate_text(original_text, language):
     except:
         pass
 
-    return success, translation
+    return success, translation, source_language

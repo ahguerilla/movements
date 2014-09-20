@@ -669,7 +669,7 @@ $(function () {
             var txt = $('span', $(this)).text();
             $('.tag-button:contains(' + txt + ')').css('background-color', '#cccccc');
           });
-
+          var theItem = item;
           // Auto-Google-Translate the post title for each item.
           if (item.fields.translate_language_url) {
             $.ajax({
@@ -678,13 +678,12 @@ $(function () {
               dataType: 'json',
               success: function (data) {
                 if(data.response === "success") {
-                  if (document.querySelectorAll) {
-                    var posts = document.body.querySelectorAll('.market-place-item[data-item-id="' + data.itemid + '"]');
-                    for (var i=0; i<posts.length; i++){
-                      if (posts[i].querySelector('.title').innerHTML != data.title) {
-                          posts[i].querySelector('.title').innerHTML = data.title;
-                          posts[i].querySelector('.auto-translated-text').setAttribute('style', '');
-                      }
+                  var post = $('.market-place-item[data-item-id="' + data.itemid + '"]');
+                  if(post){
+                    var langCode = theItem.fields.translate_language_url.slice(-2);
+                    if(langCode != data.source_language){
+                      post.find('.title').text(data.title);
+                      post.find('.auto-translated-text').show();
                     }
                   }
                 }

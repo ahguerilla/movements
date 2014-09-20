@@ -309,31 +309,35 @@ def translate_market_item(request, item_id, lang_code):
     translation = market.models.MarketItemTranslation.objects.filter(market_item_id=item_id, language=lang_code).first()
     title_translation = ""
     details_translation = ""
+    source_lang = ""
     success = False
 
     if not translation:
         item = market.models.MarketItem.objects.get(id=item_id)
         if item:
-            success, title_translation = translate_text(item.title, lang_code)
+            success, title_translation, source_lang = translate_text(item.title, lang_code)
             if success:
-                success, details_translation = translate_text(item.details, lang_code)
+                success, details_translation, source_lang = translate_text(item.details, lang_code)
             if success:
                 market_translation = market.models.MarketItemTranslation()
                 market_translation.market_item = item
                 market_translation.title_translated = title_translation
                 market_translation.details_translated = details_translation
                 market_translation.language = lang_code
+                market_translation.source_language = source_lang
                 market_translation.save()
 
     else:
         title_translation = translation.title_translated
         details_translation = translation.details_translated
+        source_lang = translation.source_language
         success = True
 
     result = {
         'response': "success" if success else "failed",
         'title': title_translation,
         'details': details_translation,
+        'source_language': source_lang,
         'itemid': item_id,
     }
     return HttpResponse(json.dumps(result), mimetype="application/json")

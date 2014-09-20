@@ -185,6 +185,7 @@ class MarketItemTranslation(models.Model):
     market_item = models.ForeignKey(
         MarketItem, verbose_name=_('market item'))
     language = models.CharField(_('language'), max_length=10, blank=False)
+    source_language = models.CharField(_('source language'), max_length=10, blank=False, default='en')
     title_translated = models.TextField(_('title translated'), blank=False)
     details_translated = models.TextField(_('details translated'), blank=False)
     generated_at = models.DateField(_('date generated'), auto_now_add=True)
