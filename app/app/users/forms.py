@@ -102,12 +102,12 @@ class CheckboxInput(BaseCheckboxChoiceInput):
     def render(self, name=None, value=None, attrs=None, choices=()):
         if 'id' in self.attrs:
             label_for = format_html(
-                ' for="{0}_{1}"', self.attrs['id'], self.index)
+                u' for="{0}_{1}"', self.attrs['id'], self.index)
         else:
-            label_for = ''
+            label_for = u''
         return format_html(
-            '<div class="select-checkbox {0}">{1}<label></label><div{2} class="select-label">{3}</div></div>',
-            "checked" if self.is_checked() else "",
+            u'<div class="select-checkbox {0}">{1}<label></label><div{2} class="select-label">{3}</div></div>',
+            u'checked' if self.is_checked() else u'',
             self.tag(), label_for, self.choice_label)
 
 
