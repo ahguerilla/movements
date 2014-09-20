@@ -14,6 +14,7 @@ from app.market.models import Questionnaire
 from app.market.forms import QuestionnaireForm
 from tasks.celerytasks import update_notifications
 from app.market.api.utils import translate_text
+import bleach
 
 def get_market_json(items, request=None, extra_data=None, is_safe=True):
     if is_safe:
@@ -335,8 +336,8 @@ def translate_market_item(request, item_id, lang_code):
 
     result = {
         'response': "success" if success else "failed",
-        'title': title_translation,
-        'details': details_translation,
+        'title': bleach.clean(title_translation, strip=True),
+        'details': bleach.clean(details_translation, strip=True),
         'source_language': source_lang,
         'itemid': item_id,
     }

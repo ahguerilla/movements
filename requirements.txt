@@ -74,3 +74,4 @@ boto==2.25.0
 django-redis==3.5.2
 redis==2.9.1
 hiredis==0.1.4
+bleach==1.4
