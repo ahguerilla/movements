@@ -25,5 +25,14 @@ CMS_PLACEHOLDER_CONF = {
     },
 }
 
+CMS_LANGUAGES = {
+    'default': {
+        'fallbacks': ['en'],
+        'redirect_on_fallback': True,
+        'public': True,
+        'hide_untranslated': False,
+    }
+}
+
 # Reverse id for cms pages.
 CMS_PAGE_TERMS = 'terms-and-conditions'
