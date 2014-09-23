@@ -3,9 +3,9 @@
 {% block body %}
 
   {% if number_unread == 1 %}
-    <p>You have an unread message on Movements.org.</p>
+    <p>You have an unread message on Movements.Org.</p>
   {% else  %}
-    <p>You have {{ number_unread }} unread messages on Movements.org.</p>
+    <p>You have {{ number_unread }} unread messages on Movements.Org.</p>
   {% endif %}
 
   <p><a href="{{ base_url }}{% url 'postman_inbox' %}">Login now</a> to read your messages.</p>

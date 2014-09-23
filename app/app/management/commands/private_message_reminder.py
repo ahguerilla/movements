@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 
 import constance
 from app.users.models import UserProfile
+import app.market.models
 from postman.models import Message
 
 
@@ -45,7 +46,7 @@ class Command(BaseCommand):
         # For each user, send an email notifying of unread Messages if there are any.
         try:
             for profile in UserProfile.objects.all():
-                number_unread = postman.models.Message.objects.inbox_unread_count(profile.user)
+                number_unread = Message.objects.inbox_unread_count(profile.user)
                 if number_unread > 0:
                     send_unread_messages_notification_email(profile, number_unread)
         except Exception as ex:
