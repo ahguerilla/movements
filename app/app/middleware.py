@@ -10,7 +10,9 @@ class UserProfileLocaleMiddleware(object):
         if hasattr(request.user, 'userprofile'):
             translation.activate(request.user.userprofile.interface_lang)
             request.LANGUAGE_CODE = translation.get_language()
-
+#        else:
+#            translation.activate('ar') # read from language cookie?
+#            request.LANGUAGE_CODE = translation.get_language()
 
 class SSLRedirect:
     def process_request(self, request):
