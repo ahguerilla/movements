@@ -320,6 +320,9 @@ class AccAdapter(DefaultAccountAdapter):
         if 'password' in request.session:
             user.set_password(request.session.pop('password'))
 
+        # set the language code from the cookie default to english
+        lang_code = request.LANGUAGE_CODE if request.LANGUAGE_CODE else 'en'
+
         with transaction.atomic():
             user.save()
             UserProfile.objects.create(
@@ -329,7 +332,8 @@ class AccAdapter(DefaultAccountAdapter):
                 linkedin_url=cleaned_data['linkedin_url'],
                 tweet_url=cleaned_data['tweet_url'],
                 fb_url=cleaned_data['fb_url'],
-                web_url=cleaned_data['web_url']
+                web_url=cleaned_data['web_url'],
+                interface_lang=lang_code,
             )
 
         self.send_vetting_email(user, form)
