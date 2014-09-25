@@ -1122,6 +1122,7 @@ input.borderless-control:focus:invalid:focus {
 }
 .exchange-filters .search-expanded input {
   font-size: 32px;
+  background-color: #beb4ae;
 }
 .exchange-filters .search-expanded button.btn {
   padding: 4px 12px;
