@@ -841,6 +841,20 @@ h6 {
   right: 0;
   top: 0;
 }
+.page-banner #language-flags {
+  position: absolute;
+  left: 50px;
+  top: 0;
+  width: 80%;
+}
+.page-banner #language-flags img {
+  width: 50px;
+  margin: 20px 0px 0px 25px;
+}
+.page-banner #language-flags input {
+  width: 50px;
+  margin: 20px 0px 0px 25px;
+}
 .landing-page .landing-content {
   color: #fff;
   height: 499px;
