@@ -13,6 +13,7 @@ js_info_dict = {
 }
 urlpatterns = patterns('',
     url(r'^$', 'app.views.home', name='home'),
+    url(r'^set-language', 'app.views.set_language', name='set_lang'),
 
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
     url(r'^contact-us$', 'app.views.contact_us', name='contact_us'),

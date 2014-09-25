@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from .models import NewsletterSignups
+from django.utils import translation
 import json
 import re
 
@@ -16,6 +17,19 @@ def home(request):
 
 def terms_and_conditions(request):
     return HttpResponseRedirect('/movements/terms-and-conditions/')
+
+
+def set_language(request):
+    lang_code = request.POST.get('language_code')
+    result = 'error'
+    if lang_code:
+        translation.activate(lang_code)
+        request.LANGUAGE_CODE = translation.get_language()
+        result = 'success'
+    response_data = {
+        'result': result,
+    }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
 def contact_us(request):

@@ -559,9 +559,9 @@ $(function () {
       var that = this;
       var refresh = function () {
         that.filterView.trigger('filter');
-      }
+      };
 
-      var remakePopover = false
+      var remakePopover = false;
       if (action === 'close') {
         var closeUrl = $container.data('close-url');
         this.closeDialog.close(pk, itemType, closeUrl, refresh);

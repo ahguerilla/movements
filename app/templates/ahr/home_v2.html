@@ -3,8 +3,6 @@
 {% load url from future %}
 {% load i18n %}
 {% load cms_tags %}
-{% load menu_tags %}
-{% load settings %}
 
 {% block header_nav %}
 <nav class="navbar navbar-default header-nav home-page-nav" role="navigation">
@@ -85,21 +83,8 @@
             </a>
           </div>
           <div id="language-flags">
-{#            <form action="{% url 'set_language' %}" method="post">#}
-{#              {% csrf_token %}#}
-{#              <input name="next" type="hidden" value="{{ redirect_to }}" />#}
-{#              <input name="language" type="image" src="{{ STATIC_URL }}images/v2/flag_uk.png" value="en" />#}
-{#            </form>#}
-{#            <form action="{% url 'set_language' %}" method="post">#}
-{#              {% csrf_token %}#}
-{#              <input name="next" type="hidden" value="{{ redirect_to }}" />#}
-{#              <input name="language" type="image" src="{{ STATIC_URL }}images/v2/flag_arabic.png" value="ar" />#}
-{#            </form>#}
-
-{#            or just pretty flag images...#}
-
-{#            <a href=""><img src="{{ STATIC_URL }}images/v2/flag_uk.png" ></a>#}
-{#            <a href=""><img src="{{ STATIC_URL }}images/v2/flag_arabic.png" ></a>#}
+            <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png" ></a>
+            <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png" ></a>
           </div>
         </div>
       </div>
@@ -107,15 +92,6 @@
   </div>
   <div class="landing-page">
     <div class="container">
-{#      <div class="testimonial row">#}
-{#        <div class="col-xs-2 person-image">#}
-{#          <img src="{{ STATIC_URL }}images/v2/temp/person_2.png" >#}
-{#        </div>#}
-{#        <div class="col-xs-10 person-comment">#}
-{#          <div class="statement statement-font">Movements helped me get support for a technology project which is now helping people in Iran. I would recommend movements to anyone trying to make a difference in their communities.</div>#}
-{#          <div class="author statement-font">- Simon M.</div>#}
-{#        </div>#}
-{#      </div>#}
       <div class="testimonial">
         <div class="row">
           <div class="col-sm-offset-1 col-sm-10">
@@ -124,13 +100,6 @@
             <div class="statement statement-font" style="margin-top:10px;"><a href="{% page_url 'how_it_works' %}">{%  trans "Find out more" %}&nbsp;>></a></div>
           </div>
         </div>
-{#        <div class="row">#}
-{#          <div class="col-sm-offset-1 col-sm-2" style="margin-top:20px;" >#}
-{#            <a href="{% page_url 'how_it_works' %}" >#}
-{#              <button class="btn btn-action full-width">{%trans "Find out more"%}</button>#}
-{#            </a>#}
-{#          </div>#}
-{#        </div>#}
       </div>
     </div>
     <div class="container-fluid">
@@ -144,15 +113,6 @@
       </div>
     </div>
     <div class="container">
-{#      <div class="testimonial row">#}
-{#        <div class="col-xs-2 person-image">#}
-{#          <img src="{{ STATIC_URL }}images/v2/temp/person_1.png" >#}
-{#        </div>#}
-{#        <div class="col-xs-10 person-comment">#}
-{#          <div class="statement statement-font">If it wasn't for movements, I don't think I would have been able to support as many people as I have. They helped me every step of the way as soon as I connected with them.</div>#}
-{#          <div class="author statement-font">- Mary</div>#}
-{#        </div>#}
-{#      </div>#}
       <div class="testimonial">
         <div class="row">
           <div class="col-sm-offset-1 col-sm-10">
@@ -161,13 +121,6 @@
             <div class="statement statement-font" style="margin-top:10px;"><a href="{% url 'signup_start' %}">{%trans "Sign up now" %}&nbsp;>></a></div>
           </div>
         </div>
-{#        <div class="row">#}
-{#          <div class="col-sm-offset-1 col-sm-2" style="margin-top:20px;" >#}
-{#            <a href="{% url 'signup_start' %}">#}
-{#              <button class="btn btn-action full-width">{%trans "Sign up now"%}</button>#}
-{#            </a>#}
-{#          </div>#}
-{#        </div>#}
       </div>
     </div>
     <div class="container-fluid">
@@ -191,6 +144,23 @@
   <script type="text/javascript">
   $(document).ready(function(){
       $("#home-page-carousel").carousel({interval: 8000, pause: 'hover'});
+      $('.set-lang').click(function(ev){
+        ev.preventDefault();
+        var lang = $(ev.currentTarget).data('language');
+        $.ajax({
+          url: '{% url 'set_lang' %}',
+          type: 'POST',
+          dataType: 'json',
+          data: {
+            language_code: lang
+          },
+          success: function(ev){
+            if(ev.result === 'success'){
+              window.location.reload();
+            }
+          }
+        });
+      });
   });
   </script>
 {% endblock %}
