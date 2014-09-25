@@ -842,6 +842,7 @@ h6 {
   top: 0;
 }
 .page-banner #language-flags {
+  direction: ltr;
   position: absolute;
   left: 50px;
   top: 0;
@@ -849,10 +850,6 @@ h6 {
 }
 .page-banner #language-flags img {
   width: 100px;
-  margin: 20px 0px 0px 25px;
-}
-.page-banner #language-flags input {
-  width: 50px;
   margin: 20px 0px 0px 25px;
 }
 .landing-page .landing-content {
