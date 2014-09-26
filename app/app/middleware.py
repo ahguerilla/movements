@@ -1,15 +1,15 @@
-import re
 from django.contrib.sites.models import Site
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from django.utils import translation
+# import re
+# from django.utils import translation
 
 
-class UserProfileLocaleMiddleware(object):
-    def process_request(self, request):
-        if hasattr(request.user, 'userprofile'):
-            translation.activate(request.user.userprofile.interface_lang)
-            request.LANGUAGE_CODE = translation.get_language()
+# class UserProfileLocaleMiddleware(object):
+#     def process_request(self, request):
+#         if hasattr(request.user, 'userprofile'):
+#             translation.activate(request.user.userprofile.interface_lang)
+#             request.LANGUAGE_CODE = translation.get_language()
 
 
 class SSLRedirect:

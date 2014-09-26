@@ -7,6 +7,8 @@ from django.contrib.admin.models import LogEntry
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
 from django.contrib.admin.models import ADDITION, CHANGE, DELETION
+from django.utils import translation
+
 
 from app.utils import EnumChoices
 from ..market.models import MarketItem
@@ -58,6 +60,11 @@ class UserActivity(LogEntry):
 
 @receiver(user_logged_in)
 def do_stuff(sender, request, user, **kwargs):
+    # set the interface language
+    if hasattr(request.user, 'userprofile'):
+        translation.activate(request.user.userprofile.interface_lang)
+        request.LANGUAGE_CODE = translation.get_language()
+
     UserActivity.objects.log_action(
         user_id=request.user.pk,
         content_type_id=ContentType.objects.get_for_model(user).pk,
