@@ -54,6 +54,11 @@ def render_settings(request):
             settings.user_id = request.user.id
             settings.save()
             settings_form.save_m2m()
+            # update the interface language
+            if settings.interface_lang:
+                translation.activate(settings.interface_lang)
+                request.LANGUAGE_CODE = translation.get_language()
+
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successful.')
     else:
         user_form = UserForm(instance=request.user)
