@@ -739,15 +739,13 @@ $page-banner-height = 550px
     right 0
     top 0
   #language-flags
+    direction ltr
     position absolute
     left 50px
     top 0
     width 80%
     img
       width 100px
-      margin 20px 0px 0px 25px
-    input
-      width 50px
       margin 20px 0px 0px 25px
 
 
@@ -1031,6 +1029,7 @@ popoverDropdown(width, showIcon = true)
     border-bottom 4px solid $border-color
     input
       font-size 32px
+      background-color $dropdown-hover-bg
     button.btn
       padding 4px 12px
   .categories
