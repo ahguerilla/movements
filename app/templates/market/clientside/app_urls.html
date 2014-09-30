@@ -31,6 +31,7 @@
 
     {% endif %}
     getMarketItems: '{% url 'get_market_items' %}',
+    getmarketitemfromto: "{% url 'get_marketitems_fromto' 'json' 0 0 %}".slice(0,-1),
     getFeaturedMarketItems: '{% url 'get_featured_market_items' %}'
   };
 

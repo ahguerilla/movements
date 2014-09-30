@@ -30,6 +30,10 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.get_market_items',
         name="get_market_items"),
 
+    url(r'(?P<rtype>\S+)/useritem/get/from/(?P<sfrom>\d+)/to/(?P<to>\d+)$',
+        'app.market.api.views.market.get_marketitems_fromto',
+        name="get_marketitems_fromto"),
+
     url(r'^featured-items/get/$',
         'app.market.api.views.market.get_featured_market_items',
         name="get_featured_market_items"),

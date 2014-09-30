@@ -394,6 +394,9 @@ $(function () {
   })
 
   var MarketView = window.ahr.BaseView.extend({
+    loadingScrollElements: false,
+    currentItem: 0,
+    itemsPerCall: 12,
     loadingPage: false,
     loadedOnce: false,
     currentCall: null,
@@ -424,6 +427,7 @@ $(function () {
       options = _.extend({}, this.defaultOptions, options);
       this.options = options;
       this.item_type = 'item';
+      this.getitemfromto = ahr.app_urls.getmarketitemfromto;
       this.getMarketItems = options.marketUrl;
       this.noResultsString = options.noResultsString;
       this.item_tmp = _.template($(options.item_tmp).html());
@@ -446,7 +450,8 @@ $(function () {
         if (this.filterView) {
           var that = this;
           this.filterView.on('filter', function () {
-            that.paginationView.init();
+            //that.paginationView.init();
+	    that.initInfiniteScroll();
           });
         }
       }
@@ -488,7 +493,8 @@ $(function () {
 
     refresh: function() {
       if (this.paginationView) {
-        this.paginationView.init();
+        //this.paginationView.init();
+        this.initInfiniteScroll();
       } else {
         this.initNoPagination();
       }
@@ -599,6 +605,47 @@ $(function () {
       });
     },
 
+    initInfiniteScroll: function () {
+      $('#marketitems').empty();
+      if (this.currentCall) {
+        this.currentCall.abort();
+        this.currentCall = null;
+      }
+      this.allItemsLoaded = false;
+      this.currentItem = 0;
+      this.loadingScrollElements = false;
+      this.loadedOnce = false;
+
+      this.loadScrollElements();
+      var that = this;
+      $(window).scroll(function () {
+        that.loadScrollElements();
+      });
+      // For ipad
+      document.addEventListener('touchmove', function (e) {
+        that.loadScrollElements();
+      }, false);
+    },
+
+    levelReached: function (pixelTestValue) {
+      if (!this.loadedOnce) {
+        this.loadedOnce = true;
+        return true;
+      }
+
+      // is it low enough to add elements to bottom?
+      var pageHeight = Math.max(document.body.scrollHeight ||
+        document.body.offsetHeight);
+      var viewportHeight = window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight || 0;
+      var scrollHeight = window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop || 0;
+      // Trigger for scrolls within 30 pixels from page bottom
+      return pageHeight - viewportHeight - scrollHeight < pixelTestValue;
+    },
+
     clearMarketPage: function () {
       this.$itemContainer.empty();
       if (this.currentCall) {
@@ -606,6 +653,35 @@ $(function () {
         this.currentCall = null;
       }
       this.loadingPage = false;
+    },
+
+    loadScrollElements: function () {
+      var that = this;
+      if (!that.loadingScrollElements && that.levelReached(30) && !that.allItemsLoaded) {
+        that.loadingScrollElements = true;
+
+        that.$el.find('.ajaxloader').show();
+
+        var dfrd = that.getItemsFromTo(
+          that.currentItem,
+          that.currentItem + that.itemsPerCall
+        );
+
+        this.currentCall = dfrd;
+
+        dfrd.done(function (data) {
+          that.currentCall = null;
+          that.render(data);
+
+          if (data.length === 0) {
+            that.allItemsLoaded = true;
+          }
+
+          that.currentItem = that.currentItem + that.itemsPerCall;
+          that.loadingScrollElements = false;
+        });
+        return dfrd;
+      }
     },
 
     loadPage: function (page) {
@@ -631,6 +707,21 @@ $(function () {
     noSearchResult: function () {
       this.$itemContainer.append(this.noResultsString);
       this.$el.find('.pagination').hide();
+    },
+
+    getItemsFromTo: function (from, to) {
+      var data = {};
+      if (this.filterView) {
+        this.filterView.setFilter(data);
+      }
+      return $.ajax({
+        url: this.getitemfromto.replace('0', from) + to,
+        dataType: 'json',
+        context: this,
+        contentType: "application/json; charset=utf-8",
+        data: data,
+        traditional: true
+      });
     },
 
     getItems: function (page) {
