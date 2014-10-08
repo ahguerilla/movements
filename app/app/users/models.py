@@ -152,7 +152,7 @@ class UserProfile(models.Model):
     get_newsletter = models.BooleanField(_('recieves newsletter'), default=True)
     ratecount = models.IntegerField(_('ratecount'), default=0)
     score = models.FloatField(_('score'), default=0)
-    interface_lang = models.CharField(_('Interface language'), max_length=3,
+    interface_lang = models.CharField(_('Interface language'), max_length=6,
                                       default='en', choices=INTERFACE_LANGUAGE,)
     first_login = models.BooleanField(_('first login'), default=True)
     profile_visibility = models.PositiveSmallIntegerField(
