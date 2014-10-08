@@ -123,6 +123,7 @@ class UserProfile(models.Model):
     INTERFACE_LANGUAGE = (
         ('en', 'English'),
         ('ar', 'Arabic'),
+        ('zh-cn', 'Chinese'),
     )
 
     user = models.OneToOneField(User)
