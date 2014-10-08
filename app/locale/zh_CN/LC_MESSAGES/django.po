@@ -179,7 +179,7 @@ msgstr ""
 
 #: app/market/models/market.py:26 templates/base_v2.html:198
 msgid "Request"
-msgstr ""
+msgstr "请求"
 
 #: app/market/models/market.py:27 templates/base_v2.html:199
 msgid "Offer"
@@ -601,7 +601,7 @@ msgstr ""
 
 #: app/users/models.py:79
 msgid "languages"
-msgstr ""
+msgstr "语言"
 
 #: app/users/models.py:87
 msgid "region"
@@ -931,11 +931,11 @@ msgstr ""
 
 #: templates/base_v2.html:152 templates/account/signup_start.html:51
 msgid "Connect with Twitter"
-msgstr ""
+msgstr "使用推特连接"
 
 #: templates/base_v2.html:155 templates/account/signup_start.html:48
 msgid "Connect with Facebook"
-msgstr ""
+msgstr "使用脸书连接"
 
 #: templates/base_v2.html:163 templates/ahr/home_v2.html:99
 msgid "About MOVEMENTS"
@@ -1082,7 +1082,7 @@ msgstr ""
 
 #: templates/account/login.html:33 templates/account/signup_start.html:25
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #: templates/account/login.html:45
 msgid "Forgot Password?"
@@ -1213,7 +1213,7 @@ msgstr ""
 
 #: templates/account/signup.html:11
 msgid "About you"
-msgstr ""
+msgstr "关于您自己"
 
 #: templates/account/signup.html:14
 #, python-format
@@ -1228,35 +1228,35 @@ msgstr ""
 
 #: templates/account/signup.html:22
 msgid "Username (We recommend that you do not use your real name)"
-msgstr ""
+msgstr "账号（建议不要使用使用真名）"
 
 #: templates/account/signup.html:37
 msgid ""
 "All the following information is optional but will help Movements.org ensure "
 "that you see the postings that are most relevant to your needs and interests."
-msgstr ""
+msgstr "以下所有信息可以任选填入，但这些信息将有助于“运动”网站确保您能看到最适合您需要和您关注的贴子。"
 
 #: templates/account/signup.html:40 templates/users/user_settings_v2.html:57
 msgid "First Name"
-msgstr ""
+msgstr "名"
 
 #: templates/account/signup.html:45 templates/users/user_settings_v2.html:62
 msgid "Last Name"
-msgstr ""
+msgstr "姓"
 
 #: templates/account/signup.html:59 templates/users/user_settings_v2.html:83
 msgid "Biography"
-msgstr ""
+msgstr "个人履历"
 
 #: templates/account/signup.html:60
 msgid ""
 "If you want other users to know something about you. You can control how "
 "much if any information to make public."
-msgstr ""
+msgstr "请提供便于用户了解您的个人资料。例如，可以列举出您是哪里人，以及一些个人兴趣，职业等。您可以控制这些信息公开程度。 （最多字数：300-500）"
 
 #: templates/account/signup.html:67
 msgid "Social Vetting"
-msgstr ""
+msgstr "社会审查"
 
 #: templates/account/signup.html:68
 msgid ""
@@ -1265,7 +1265,7 @@ msgid ""
 "terms-and-conditions\" target=\"_blank\">terms &amp; conditions</a>. This "
 "information is optional but the more you provide the easier it will be for "
 "others to trust you."
-msgstr ""
+msgstr "为了保护网站成员的安全，我们会审查所有申请，确保其符合使用<a href=\"/movements/terms-and-conditions\" target=\"_blank\">条款和条件</a>。此信息可以任选，但是您提供的信息越多，就越容易为他人信任。"
 
 #: templates/account/signup.html:73 templates/users/user_settings_v2.html:94
 msgid "Linked In"
@@ -1357,57 +1357,57 @@ msgstr ""
 #: templates/account/signup_start.html:11
 #: templates/users/more_about_you.html:36
 msgid "Welcome to Movements"
-msgstr ""
+msgstr "欢迎来到\"运动\"平台"
 
 #: templates/account/signup_start.html:12
 msgid ""
 "Sign up to connect to human rights defenders and activist. Let’s get started."
-msgstr ""
+msgstr "注册连接维权人士和活动家。"
 
 #: templates/account/signup_start.html:18
 msgid "Email (we will never reveal this)"
-msgstr ""
+msgstr "电子邮箱（我们永远不会公布邮箱信息）"
 
 #: templates/account/signup_start.html:30
 msgid "Retype password"
-msgstr ""
+msgstr "重填密码"
 
 #: templates/account/signup_start.html:36
 msgid "By registering with us you agree to our"
-msgstr ""
+msgstr "在网站注册意味着同意我们的"
 
 #: templates/account/signup_start.html:36
 msgid "terms &amp; conditions"
-msgstr ""
+msgstr "条款和条件"
 
 #: templates/account/signup_start.html:38
 msgid "Register"
-msgstr ""
+msgstr "注册"
 
 #: templates/account/signup_start.html:45
 msgid "Use your Facebook details to sign in."
-msgstr ""
+msgstr "使用社交媒体登录"
 
 #: templates/account/verification_sent.html:4
 #: templates/account/verification_sent.html:9
 #: templates/account/verified_email_required.html:7
 #: templates/account/verified_email_required.html:12
 msgid "Verify Your E-mail Address"
-msgstr ""
+msgstr "确认您的电子邮箱"
 
 #: templates/account/verification_sent.html:10
 msgid ""
 "You've now created an account. We've sent you an email to verify your email "
 "address, once you've done this you will have full access to the Movements "
 "platform."
-msgstr ""
+msgstr "您现在已经创建了帐户。我们已经向您发送了一封电子邮件，确认您的电子邮箱；一经完成这一步骤，您即可拥有充分权限使用“运动”平台。"
 
 #: templates/account/verification_sent.html:12
 #, python-format
 msgid ""
 "Please <a href=\"%(contactUrl)s\">contact us</a> if you do not receive an "
 "email within a few minutes."
-msgstr ""
+msgstr "如果您在几分钟之内未收到确认邮件，请通过以下电子邮箱与我们联系：<a href=\"%(contactUrl)s\">info@movements.org</a>"
 
 #: templates/account/verified_email_required.html:19
 msgid ""
@@ -1617,18 +1617,18 @@ msgstr "立即注册"
 #: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:68
 #: templates/ahr/home_v2.html:101
 msgid "Find out more"
-msgstr ""
+msgstr "请了解更多信息。"
 
 #: templates/ahr/home_v2.html:56
 msgid ""
 "Request help from people across the globe, offer help to an activist in need."
-msgstr ""
+msgstr "请求世界人民提供帮助；向有需要的维权人士提供帮助。"
 
 #: templates/ahr/home_v2.html:59
 msgid ""
 "Whether you’re a journalist, artist, technologist, policy-maker, linguist or "
 "PR agent - everyone has skills that can advance human rights."
-msgstr ""
+msgstr "无论是新闻工作者，艺术家，科技人员，决策者或公关代理 – 有技能的每一个人都能推动人权进步。请了解更多信息。"
 
 #: templates/ahr/home_v2.html:100
 msgid ""
@@ -1639,58 +1639,58 @@ msgid ""
 "with skills to help. Whether you’re a journalist, politician, activist, "
 "artist, technologist or you speak a few languages, everyone has a role to "
 "play."
-msgstr ""
+msgstr "在世界各地的封闭社会中，勇敢的维权人士面对重重障碍，坚持推动人权。“运动” 网站是一个新平台，让世界人民共同参与帮助捍卫基本自由。这个网络平台将封闭社会的维权活动家与与世界各地有专业技能、愿意提供帮助的人们连接在一起。无论您是新闻工作者，政治家，社会活动人士，艺术家，科技人员，还是能说几门外语的人士，都可以发挥作用。"
 
 #: templates/ahr/home_v2.html:110 templates/users/more_about_you.html:41
 msgid "Create a Request"
-msgstr ""
+msgstr "提交请求"
 
 #: templates/ahr/home_v2.html:111 templates/users/more_about_you.html:43
 msgid ""
 "Are you an activist in need of help? Movements.org leverages technology to "
 "help those in closed societies find the assistance they need to amplify "
 "their voice and expand their influence."
-msgstr ""
+msgstr "您是需要帮助的人权活动人士吗？ 利用技术来帮助那些在封闭的社会中维权人士找到他们需要的帮助，来放大他们的声音，扩大他们的影响。"
 
 #: templates/ahr/home_v2.html:120
 msgid "Getting Started"
-msgstr ""
+msgstr "开始使用"
 
 #: templates/ahr/home_v2.html:121
 msgid ""
 "The Movements platform enables dissidents who need help to connect to "
 "activists and others who can provide it. Get started by joining today."
-msgstr ""
+msgstr "\"运动\"网站平台让需要帮助的持不同政见者和可以提供帮助的活动家和其他人士实现对接。即刻加入，即刻使用"
 
 #: templates/ahr/home_v2.html:131
 msgid "Offer your Services"
-msgstr ""
+msgstr "提供服务"
 
 #: templates/ahr/home_v2.html:132 templates/users/more_about_you.html:47
 msgid ""
 "If you’ve ever wanted to help a human rights activist, here’s your "
 "opportunity. All of us have skills that can be put to use to advance basic "
 "liberties."
-msgstr ""
+msgstr "如果您想帮助人权活动家，这是一个机会。人人都有用得上的技能来促进基本自由。"
 
 #: templates/market/create_offer.html:11
 msgid "Offer a service"
-msgstr ""
+msgstr "提供服务"
 
 #: templates/market/create_offer.html:12
 msgid "Do you have expertise to offer?"
-msgstr ""
+msgstr "您有什么专长可以提供？ "
 
 #: templates/market/create_offer.html:13
 msgid ""
 "An Offer can be technical or professional skills, an opportunity to publish "
 "a story, or any skill that may be of help to others. Your Offer will be "
 "posted on Movements and will be seen by all members."
-msgstr ""
+msgstr "提供帮助服务可以是技术或专业技能，也可以帮助发表新闻消息的技能，或者任何能帮助他人的技能。您提供的服务将被张贴在本平台上，所有用户都会看到。 "
 
 #: templates/market/create_offer.html:17
 msgid "1. What skills can you offer?"
-msgstr ""
+msgstr "1.您能提供什么样的技能？"
 
 #: templates/market/create_offer.html:21
 #: templates/market/create_request.html:22
@@ -1699,7 +1699,7 @@ msgstr ""
 
 #: templates/market/create_offer.html:31
 msgid "2. Which countries are you interested in helping?"
-msgstr ""
+msgstr "2.您希望帮助哪些国家？"
 
 #: templates/market/create_offer.html:37
 msgid ""
@@ -1709,7 +1709,7 @@ msgstr ""
 
 #: templates/market/create_offer.html:38
 msgid "3. How can you help?"
-msgstr ""
+msgstr "3.您提供什么样的服务？ "
 
 #: templates/market/create_offer.html:39
 #: templates/market/create_request.html:43
@@ -1719,7 +1719,7 @@ msgstr ""
 #: templates/market/create_offer.html:48
 #: templates/market/create_request.html:52
 msgid "4. Please write your post"
-msgstr ""
+msgstr "4.请详细说明您提供的服务（我们建议用一个段落）（最多500字）"
 
 #: templates/market/create_offer.html:49
 msgid "Tell a compelling story."
@@ -1728,12 +1728,12 @@ msgstr ""
 #: templates/market/create_offer.html:59
 #: templates/market/create_request.html:63
 msgid "May we tweet this request?"
-msgstr ""
+msgstr "我们可以在网络上推送这一请求吗？"
 
 #: templates/market/create_offer.html:62
 #: templates/market/create_request.html:66
 msgid "We won’t use your name or any identifying information"
-msgstr ""
+msgstr "我们不会使用您的姓名或任何身份识别信息。 "
 
 #: templates/market/create_offer.html:69
 #: templates/market/create_request.html:73
@@ -1747,7 +1747,7 @@ msgstr ""
 
 #: templates/market/create_request.html:11
 msgid "Request a service"
-msgstr ""
+msgstr "请求服务"
 
 #: templates/market/create_request.html:13
 msgid ""
@@ -1756,19 +1756,19 @@ msgid ""
 "what kind (asylum or civil?) Where do you need that lawyer (In the UK,  US "
 "or China?)  The more you explain your need, the easier it will be for "
 "someone to help."
-msgstr ""
+msgstr "提交请求是要求“运动”网站专家提供帮助的方式之一。请将请求具体化，明确提出您所需要什么。如果需要一位律师，请告诉我们需要什么样的律师（庇护或民事律师）？需要哪个国家的律师（英国，美国还是中国）？您解释得越具体，就越容易让人来提供帮忙。 "
 
 #: templates/market/create_request.html:18
 msgid "1. What skills do you need?"
-msgstr ""
+msgstr "1.您需要哪方面的专长？ （必填） "
 
 #: templates/market/create_request.html:32
 msgid "2. What countries does this request apply to?"
-msgstr ""
+msgstr "2.这一请求适用于哪些国家？ "
 
 #: templates/market/create_request.html:33
 msgid "Indicate the region and/or specific country."
-msgstr ""
+msgstr "注明区域和/或特定的国家。 "
 
 #: templates/market/create_request.html:40
 msgid ""
@@ -1776,16 +1776,17 @@ msgid ""
 "cannot provide funding or equipment. If you need either please see the <a "
 "href=\"/movements/resources/\">Resources</a> page. What might be available "
 "is a proposal writer to help you secure funding from a different source. "
-msgstr ""
+msgstr " \"运动\"网站使您能获得拥有技能和专长的人士的帮助。目前，我们不能提供资金或设备。如果您需要这两项帮助，请参阅<a "
+"href=\"/movements/resources/\">资源</a>页面。资助基金申请专家可能会帮助您从不同渠道获得所需资金。 "
 
 #: templates/market/create_request.html:41
 msgid ""
 "Please describe your request below. Be as explicit and clear as possible."
-msgstr ""
+msgstr "请在下面说明您的请求。请尽可能明确和清晰。 "
 
 #: templates/market/create_request.html:42
 msgid "3. What do you need?"
-msgstr ""
+msgstr "3.标题：您需要什么？ （限字）"
 
 #: templates/market/create_request.html:53
 msgid "Tell a compelling story and state your needs."
@@ -1811,11 +1812,11 @@ msgstr ""
 #: templates/users/more_about_you.html:97
 #: templates/users/user_profile_v2.html:62
 msgid "Skills"
-msgstr ""
+msgstr "技能"
 
 #: templates/market/market.html:39 templates/users/more_about_you.html:79
 msgid "Countries"
-msgstr ""
+msgstr "国家"
 
 #: templates/market/market.html:45
 msgid "Search"
@@ -2117,7 +2118,7 @@ msgstr ""
 
 #: templates/market/clientside/userprofile.html:37
 msgid "Country of residence"
-msgstr ""
+msgstr "居住国"
 
 #: templates/market/clientside/userprofile.html:44
 msgid ""
@@ -2310,7 +2311,7 @@ msgstr ""
 #: templates/users/user_profile_v2.html:73
 #: templates/users/user_settings_v2.html:136
 msgid "Languages"
-msgstr ""
+msgstr "语言"
 
 #: templates/users/more_about_you.html:22
 msgid "Regions"
@@ -2325,51 +2326,51 @@ msgstr ""
 msgid ""
 "Your account is now fully active. Fill out additional profile details now or "
 "you can skip this step and do it later in your settings page."
-msgstr ""
+msgstr "您的帐户现已全面激活。现在可以填写更多的个人资料，也可以跳过这一步，以后在设置页面中填入。"
 
 #: templates/users/more_about_you.html:45
 msgid "Create an Offer"
-msgstr ""
+msgstr "提供帮助"
 
 #: templates/users/more_about_you.html:52
 #: templates/users/more_about_you.html:70
 #: templates/users/more_about_you.html:88
 #: templates/users/more_about_you.html:106
 msgid "Skip"
-msgstr ""
+msgstr "跳过"
 
 #: templates/users/more_about_you.html:64
 msgid ""
 "Please indicate which languages you speak. Google Translate is also "
 "available, but it is not fully accurate."
-msgstr ""
+msgstr "请注明您能使用的语言。也可使用谷歌翻译，但其翻译并不一定非常准确。"
 
 #: templates/users/more_about_you.html:82
 msgid ""
 "Please indicate which regions and countries you are interested in helping."
-msgstr ""
+msgstr "请注明您希望提供帮助的国家和地区。"
 
 #: templates/users/more_about_you.html:100
 msgid "Please indicate your skill set."
-msgstr ""
+msgstr "请注明您的所有技能。"
 
 #: templates/users/more_about_you.html:115
 msgid "Done"
-msgstr ""
+msgstr "完成"
 
 #: templates/users/more_about_you.html:118
 msgid "Thank You! You are one step closer to opening a closed society!"
-msgstr ""
+msgstr "谢谢！您在促使封闭社会开放的努力中又向前迈进了一步！"
 
 #: templates/users/more_about_you.html:121
 msgid ""
 "If you would like to update this details at any time, this can be done in "
 "easily in your settings panel."
-msgstr ""
+msgstr "如果您愿意的话您可以随时在设置页面中更新个人资料"
 
 #: templates/users/more_about_you.html:123
 msgid "Your Safety"
-msgstr ""
+msgstr "您的安全"
 
 #: templates/users/more_about_you.html:125
 #, python-format
@@ -2380,7 +2381,7 @@ msgid ""
 "for digital security. However it is important to always stay safe online and "
 "only share personal information with people you trust. Please see our "
 "Security and Privacy pages for more information."
-msgstr ""
+msgstr "请牢记，没有任何在线平台是100％安全的。我们已尽力来保护您的个人隐私，并正与一些同样担心网络数据安全的业界顶尖专家一起加强这方面的安全。然而，不懈地注意在线安全，只与所信任的人分享个人信息尤为重要。欲了解此方面更多信息，请参阅我们的安全和隐私网页。"
 
 #: templates/users/thanksforactivation.html:7
 #: templates/users/thanksforactivation.html:12
@@ -2494,7 +2495,7 @@ msgstr ""
 msgid ""
 "Please indicate which languages you are able to communicate in. Google "
 "Translate is also available however it is not 100%% accurate."
-msgstr ""
+msgstr "请注明您能使用的语言。也可使用谷歌翻译，但其翻译并不一定非常准确。"
 
 #: templates/users/user_settings_v2.html:144
 msgid "Control the visibility of your profile and notifications."
