@@ -19,8 +19,9 @@ from app.market.models.notification import Notification
 logger = logging.getLogger('notifications')
 
 
-def send_user_notification_email(profile, items):
-    profile.last_notification_email = timezone.now()
+def send_user_notification_email(profile, items, set_last_notification_date=True):
+    if set_last_notification_date:
+        profile.last_notification_email = timezone.now()
     profile.save()
     if not items:
         return
@@ -77,7 +78,7 @@ class Command(BaseCommand):
                         Notification.objects.filter(user=profile.user, emailed=False).update(emailed=True)
                     else:
                         items = Notification.objects.filter(valid_item).filter(user=profile.user, emailed=False, text__contains='''message''')
-                        send_user_notification_email(profile, items)
+                        send_user_notification_email(profile, items, set_last_notification_date=False)
                         items.update(emailed=True)
             except Exception as ex:
                 logger.exception(ex)
