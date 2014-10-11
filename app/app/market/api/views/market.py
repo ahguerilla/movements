@@ -221,6 +221,11 @@ def close_market_item(request, obj_id):
 
     return HttpResponse(json.dumps(data), mimetype="application/json")
 
+def get_marketitems_fromto(request, sfrom, to, rtype):
+    market_items = market.models.MarketItem.objects.raw(
+        *get_raw(request, filter_by_owner=False))[int(sfrom):int(to)]
+    retval = return_item_list(market_items, rtype, request, is_safe=False)
+    return retval
 
 @login_required
 def get_user_marketitem_fromto(request, sfrom, to, rtype):
