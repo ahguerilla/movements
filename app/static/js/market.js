@@ -450,8 +450,8 @@ $(function () {
         if (this.filterView) {
           var that = this;
           this.filterView.on('filter', function () {
-            //that.paginationView.init();
-	    that.initInfiniteScroll();
+            that.paginationView.init();
+            //that.initInfiniteScroll();
           });
         }
       }
@@ -493,8 +493,8 @@ $(function () {
 
     refresh: function() {
       if (this.paginationView) {
-        //this.paginationView.init();
-        this.initInfiniteScroll();
+        this.paginationView.init();
+        //this.initInfiniteScroll();
       } else {
         this.initNoPagination();
       }
@@ -794,7 +794,7 @@ $(function () {
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (options) {
     filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills});
-    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Your filter selection does not match any posts</div>';
+    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold"></div>';
     var market = new MarketView({
       el: '#market-main',
       filterView: filterView,
