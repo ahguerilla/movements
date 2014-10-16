@@ -93,6 +93,7 @@ class MarketItem(models.Model):
         adict['fields']['edit_url'] = ""
         adict['fields']['report_url'] = ""
         adict['fields']['attributes_url'] = ""
+        adict['fields']['translate_language_url'] = ""
         adict['fields']['tweet_permission'] = self.tweet_permission
         return adict
 
