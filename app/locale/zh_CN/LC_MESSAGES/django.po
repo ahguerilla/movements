@@ -1129,7 +1129,7 @@ msgstr "密码更变成功"
 #: templates/users/user_settings_v2.html:167
 #: templates/users/user_settings_v2.html:209
 msgid "Change Password"
-msgstr ""
+msgstr "更改密碼"
 
 #: templates/account/password_delete.html:5
 #: templates/account/password_delete.html:8
@@ -2011,6 +2011,8 @@ msgid ""
 "\">Sign up</a> to view more about this post. Once you've done this you will "
 "be able to send messages to the author, comment and rate this post."
 msgstr ""
+"請<a href=\"%(accountUrl)s\">登錄</a>或<a href=\"%(signupUrl)s"
+"\">報名</a>查看更多關於這個職位。一旦你做到了這一點，你就可以將消息發送給作者，評論和這個職位。 "
 
 #: templates/market/view_post.html:119
 #, python-format
@@ -2018,6 +2020,8 @@ msgid ""
 "You don't have any languages selected. Please add some in your <a href="
 "\"%(settingsUrl)s#skills\">settings</a>"
 msgstr ""
+"您沒有選擇任何語言。請添加一些你 <a href="
+"\"%(settingsUrl)s#skills\">設置</a>"
 
 #: templates/market/view_post.html:136
 msgid "Delete"
