@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-16 10:18-0500\n"
+"POT-Creation-Date: 2014-10-20 07:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -242,57 +242,57 @@ msgstr ""
 msgid "is featured"
 msgstr ""
 
-#: app/market/models/market.py:155 app/market/models/market.py:170
-#: app/market/models/market.py:186 app/market/models/report.py:47
+#: app/market/models/market.py:156 app/market/models/market.py:171
+#: app/market/models/market.py:187 app/market/models/report.py:47
 #: app/market/models/report.py:76
 msgid "market item"
 msgstr ""
 
-#: app/market/models/market.py:156
+#: app/market/models/market.py:157
 msgid "action"
 msgstr ""
 
-#: app/market/models/market.py:157 app/market/models/market.py:172
+#: app/market/models/market.py:158 app/market/models/market.py:173
 msgid "date of action"
 msgstr ""
 
-#: app/market/models/market.py:161 app/market/models/market.py:162
+#: app/market/models/market.py:162 app/market/models/market.py:163
 msgid "actions of market item"
 msgstr ""
 
-#: app/market/models/market.py:171
+#: app/market/models/market.py:172
 msgid "next step"
 msgstr ""
 
-#: app/market/models/market.py:173
+#: app/market/models/market.py:174
 msgid "completed"
 msgstr ""
 
-#: app/market/models/market.py:177
+#: app/market/models/market.py:178
 msgid "next step of market item"
 msgstr ""
 
-#: app/market/models/market.py:178
+#: app/market/models/market.py:179
 msgid "next steps of market item"
 msgstr ""
 
-#: app/market/models/market.py:187 app/users/models.py:78
+#: app/market/models/market.py:188 app/users/models.py:78
 msgid "language"
 msgstr ""
 
-#: app/market/models/market.py:188
+#: app/market/models/market.py:189
 msgid "source language"
 msgstr "始发语言"
 
-#: app/market/models/market.py:189
+#: app/market/models/market.py:190
 msgid "title translated"
 msgstr ""
 
-#: app/market/models/market.py:190
+#: app/market/models/market.py:191
 msgid "details translated"
 msgstr ""
 
-#: app/market/models/market.py:191
+#: app/market/models/market.py:192
 msgid "date generated"
 msgstr ""
 
@@ -537,15 +537,15 @@ msgstr ""
 
 #: app/settings/base.py:73
 msgid "Arabic"
-msgstr ""
+msgstr "阿拉伯语"
 
 #: app/settings/base.py:74
 msgid "English"
-msgstr ""
+msgstr "英语"
 
 #: app/settings/base.py:75
 msgid "Chinese"
-msgstr ""
+msgstr "中文"
 
 #: app/users/forms.py:28
 msgid "This email is used already"
@@ -1185,8 +1185,8 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"          如果重新设置密码碰到困难，请与 <a href=\"%(contactus_url)s\">我们联系</"
-"a> 。\n"
+"          如果重新设置密码碰到困难，请与 <a href=\"%(contactus_url)s\">我们联"
+"系</a> 。\n"
 "          "
 
 #: templates/account/password_reset.html:38
@@ -1911,6 +1911,10 @@ msgstr "显示隐匿内容"
 msgid "Select all"
 msgstr "选择所有选项"
 
+#: templates/market/market.html:125
+msgid "Back"
+msgstr "回"
+
 #: templates/market/notifications.html:13
 msgid "Alert History"
 msgstr "提示历史"
@@ -2011,8 +2015,9 @@ msgid ""
 "\">Sign up</a> to view more about this post. Once you've done this you will "
 "be able to send messages to the author, comment and rate this post."
 msgstr ""
-"請<a href=\"%(accountUrl)s\">登錄</a>或<a href=\"%(signupUrl)s"
-"\">報名</a>查看更多關於這個職位。一旦你做到了這一點，你就可以將消息發送給作者，評論和這個職位。 "
+"請<a href=\"%(accountUrl)s\">登錄</a>或<a href=\"%(signupUrl)s\">報名</a>查看"
+"更多關於這個職位。一旦你做到了這一點，你就可以將消息發送給作者，評論和這個職"
+"位。 "
 
 #: templates/market/view_post.html:119
 #, python-format
@@ -2020,8 +2025,7 @@ msgid ""
 "You don't have any languages selected. Please add some in your <a href="
 "\"%(settingsUrl)s#skills\">settings</a>"
 msgstr ""
-"您沒有選擇任何語言。請添加一些你 <a href="
-"\"%(settingsUrl)s#skills\">設置</a>"
+"您沒有選擇任何語言。請添加一些你 <a href=\"%(settingsUrl)s#skills\">設置</a>"
 
 #: templates/market/view_post.html:136
 msgid "Delete"
@@ -2052,7 +2056,7 @@ msgid ""
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
 "a>."
 msgstr ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
+"由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
 "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>            <a "
 "href=\"/market/<%%- pk %%>\"><%%- commentcount %%> 评论</a>."
 
@@ -2071,7 +2075,7 @@ msgid ""
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
 "        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</a>."
 msgstr ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
+"由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
 "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>        <a href="
 "\"/market/<%%- pk %%>\"><%%- commentcount %%> 评论</a>."
 
