@@ -450,8 +450,8 @@ $(function () {
         if (this.filterView) {
           var that = this;
           this.filterView.on('filter', function () {
-            //that.paginationView.init();
-            that.initInfiniteScroll();
+            that.paginationView.init();
+            //that.initInfiniteScroll();
           });
         }
       }
@@ -493,8 +493,8 @@ $(function () {
 
     refresh: function() {
       if (this.paginationView) {
-        //this.paginationView.init();
-        this.initInfiniteScroll();
+        this.paginationView.init();
+        //this.initInfiniteScroll();
       } else {
         this.initNoPagination();
       }
