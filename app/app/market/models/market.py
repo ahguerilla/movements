@@ -61,6 +61,11 @@ class MarketItem(models.Model):
     class Meta:
         app_label = "market"
 
+    def is_closed(self):
+        if self.status == self.STATUS_CHOICES.CLOSED_BY_USER or self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN:
+            return True
+        return False
+
     def save(self, *args, **kwargs):
         if not self.closed_date and (
                 self.status == self.STATUS_CHOICES.CLOSED_BY_USER or

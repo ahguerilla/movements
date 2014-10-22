@@ -3,6 +3,7 @@ from django.core import serializers
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
+from django.http import Http404
 
 from app.users.models import Interest, Countries
 from forms import RequestForm, OfferForm, save_market_item
@@ -36,9 +37,11 @@ def index(request):
 def show_post(request, post_id):
     post = get_object_or_404(MarketItem.objects.defer('comments'),
                              pk=post_id,
-                             closed_date=None,
                              deleted=False,
                              owner__is_active=True)
+
+    if post.is_closed():
+        raise Http404('No post matches the given query.')
 
     language_list = []
     if request.user.is_authenticated():
