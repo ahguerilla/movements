@@ -11,7 +11,7 @@ import constance
 from django.http import Http404
 
 from app.market.api.utils import *
-from app.market.models import MarketItem, EmailRecommendation
+from app.market.models import MarketItem, EmailRecommendation, MarketItemCollaborators
 from app import users
 
 
@@ -42,6 +42,17 @@ def send_message(request, to_user, rtype):
         if market_item:
             msg.messageext.market_item = market_item
             msg.messageext.save()
+
+            market_collaborator = MarketItemCollaborators()
+            market_collaborator.market_item_id = post_id
+            market_collaborator.collaborator_id = request.user.id
+            market_collaborator.interaction_type = "Message"
+            market_collaborator.save()
+
+            # Recalc new number of collaborators and store in market item.
+            market_item.collaboratorcount = MarketItemCollaborators.objects.filter(market_item_id=post_id).values(
+                "collaborator_id").distinct().count()
+            market_item.save()
 
     except Exception, err:
         if err.message == 'value too long for type character varying(120)\n':

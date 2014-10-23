@@ -5,7 +5,7 @@ from app.market.api.utils import *
 from django.contrib.auth.decorators import login_required
 from tasks.celerytasks import create_comment_notification
 from django.views.decorators.http import require_http_methods
-from app.market.models import Comment
+from app.market.models import Comment, MarketItemCollaborators
 
 
 @login_required
@@ -15,6 +15,20 @@ def add_comment(request, obj_id, rtype):
     if form.is_valid():        
         obj = form.save(request.user, m_obj)
         create_comment_notification.delay(m_obj, obj, request.user.username)
+
+        item = market.models.MarketItem.objects.get(id=obj_id)
+        if item:
+            market_collaborator = MarketItemCollaborators()
+            market_collaborator.market_item_id = obj_id
+            market_collaborator.collaborator_id = obj.owner_id
+            market_collaborator.interaction_type = "Comment"
+            market_collaborator.save()
+
+            # Recalc number of collaborators and store in market item.
+            item.collaboratorcount = MarketItemCollaborators.objects.filter(market_item_id=obj_id).values(
+                "collaborator_id").distinct().count()
+            item.save()
+
         return HttpResponse(json.dumps({'success': True, 'obj': obj.getdict()}),
                             mimetype="application"+rtype)
     else:

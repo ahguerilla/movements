@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-20 07:09-0500\n"
+"POT-Creation-Date: 2014-10-23 07:26-0500\n"
 "PO-Revision-Date: 2014-04-21 14:16+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,7 +103,7 @@ msgstr ""
 msgid "is published?"
 msgstr ""
 
-#: app/market/models/comment.py:18 app/market/models/market.py:46
+#: app/market/models/comment.py:18 app/market/models/market.py:47
 msgid "deleted"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr "طلب"
 msgid "Offer"
 msgstr "عرض"
 
-#: app/market/models/market.py:30
+#: app/market/models/market.py:30 app/market/models/market.py:210
 msgid "item_type"
 msgstr ""
 
@@ -208,96 +208,104 @@ msgstr ""
 msgid "commentcount"
 msgstr ""
 
-#: app/market/models/market.py:43 app/users/models.py:153
+#: app/market/models/market.py:43
+msgid "collaboratorcount"
+msgstr ""
+
+#: app/market/models/market.py:44 app/users/models.py:153
 msgid "ratecount"
 msgstr ""
 
-#: app/market/models/market.py:44
+#: app/market/models/market.py:45
 msgid "reportcount"
 msgstr ""
 
-#: app/market/models/market.py:45 app/market/models/rate.py:15
+#: app/market/models/market.py:46 app/market/models/rate.py:15
 #: app/users/models.py:154 app/users/models.py:205
 msgid "score"
 msgstr ""
 
-#: app/market/models/market.py:47
+#: app/market/models/market.py:48
 msgid "receive notifications"
 msgstr ""
 
-#: app/market/models/market.py:48
+#: app/market/models/market.py:49
 msgid "Tweet Permission"
 msgstr ""
 
-#: app/market/models/market.py:50 app/reporting/admin/incident.py:89
+#: app/market/models/market.py:51 app/reporting/admin/incident.py:89
 msgid "status"
 msgstr ""
 
-#: app/market/models/market.py:53
+#: app/market/models/market.py:54
 msgid "closed date"
 msgstr ""
 
-#: app/market/models/market.py:55
+#: app/market/models/market.py:56
 msgid "feedback response"
 msgstr ""
 
-#: app/market/models/market.py:56
+#: app/market/models/market.py:57
 msgid "is featured"
 msgstr ""
 
-#: app/market/models/market.py:156 app/market/models/market.py:171
-#: app/market/models/market.py:187 app/market/models/report.py:47
-#: app/market/models/report.py:76
+#: app/market/models/market.py:163 app/market/models/market.py:178
+#: app/market/models/market.py:194 app/market/models/market.py:207
+#: app/market/models/report.py:47 app/market/models/report.py:76
 msgid "market item"
 msgstr ""
 
-#: app/market/models/market.py:157
+#: app/market/models/market.py:164
 msgid "action"
 msgstr ""
 
-#: app/market/models/market.py:158 app/market/models/market.py:173
+#: app/market/models/market.py:165 app/market/models/market.py:180
 msgid "date of action"
 msgstr ""
 
-#: app/market/models/market.py:162 app/market/models/market.py:163
+#: app/market/models/market.py:169 app/market/models/market.py:170
 msgid "actions of market item"
 msgstr ""
 
-#: app/market/models/market.py:172
+#: app/market/models/market.py:179
 msgid "next step"
 msgstr ""
 
-#: app/market/models/market.py:174
+#: app/market/models/market.py:181
 msgid "completed"
 msgstr ""
 
-#: app/market/models/market.py:178
+#: app/market/models/market.py:185
 msgid "next step of market item"
 msgstr ""
 
-#: app/market/models/market.py:179
+#: app/market/models/market.py:186
 msgid "next steps of market item"
 msgstr ""
 
-#: app/market/models/market.py:188 app/users/models.py:78
+#: app/market/models/market.py:195 app/users/models.py:78
 msgid "language"
 msgstr ""
 
-#: app/market/models/market.py:189
+#: app/market/models/market.py:196
 #, fuzzy
 msgid "source language"
 msgstr "لغة الواجهة"
 
-#: app/market/models/market.py:190
+#: app/market/models/market.py:197
 msgid "title translated"
 msgstr ""
 
-#: app/market/models/market.py:191
+#: app/market/models/market.py:198
 msgid "details translated"
 msgstr ""
 
-#: app/market/models/market.py:192
+#: app/market/models/market.py:199
 msgid "date generated"
+msgstr ""
+
+#: app/market/models/market.py:211
+msgid "interaction date"
 msgstr ""
 
 #: app/market/models/notification.py:16
@@ -2070,16 +2078,27 @@ msgid "Please enter your answer"
 msgstr ""
 
 #: templates/market/clientside/marketitem.html:25
-#, python-format
 msgid ""
 "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
-"a>."
+"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> "
+"comments</a>."
 msgstr ""
 "كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
 "بتاريخ  <%%- moment(pub_date).format('DD/MM/YYYY, HH:mm') %%>, </span>\n"
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> تعليقات</"
+"a>."
+
+#: templates/market/clientside/marketitem.html:25
+msgid ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
+"collaborators</a>."
+msgstr ""
+"كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
+"بتاريخ  <%%- moment(pub_date).format('DD/MM/YYYY, HH:mm') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> المتعاونين</"
 "a>."
 
 #: templates/market/clientside/marketitem.html:68
@@ -2091,15 +2110,27 @@ msgid "FEATURED REQUEST"
 msgstr " الطلب الأخير"
 
 #: templates/market/clientside/marketitem.html:80
-#, python-format
 msgid ""
 "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</a>."
+"        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> "
+"comments</a>."
 msgstr ""
 "كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
 "بتاريخ  <%%- moment(pub_date).format('DD/MM/YYYY, HH:mm') %%>, </span>\n"
 "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> تعليقات</"
+"a>."
+
+#: templates/market/clientside/marketitem.html:80
+msgid ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"        <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
+"collaborators</a>."
+msgstr ""
+"كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور "
+"بتاريخ  <%%- moment(pub_date).format('DD/MM/YYYY, HH:mm') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> المتعاونين</"
 "a>."
 
 #: templates/market/clientside/marketitem.html:88
