@@ -1,10 +1,12 @@
+{% load i18n avatar_tags %}
+
 <p>
-You or someone recently tried to register on Movements using your email address.
+{% blocktrans %}You or someone recently tried to register on Movements using your email address.
 If this was not you and you did not make this request, it's likely that another user entered
 your email address by mistake. If you believe an unauthorised person has accessed your account
 we advise that you change your password for both your email account and Movements.
-Movements did not reveal that you are registerd with the site or any of your personal
-Information. We are sending this email as a precautionary measure only.
+Movements did not reveal that you are registered with the site or any of your personal
+Information. We are sending this email as a precautionary measure only.{% endblocktrans %}
 </p>
-<p>Thanks</p>
-<p>The Movements Team</p>
+<p>{% trans "Thanks"%}</p>
+<p>{% trans "The Movements Team"%}</p>

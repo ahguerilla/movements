@@ -1,3 +1,4 @@
 {% autoescape off %}
-New User for Vetting on Movements
+{% load i18n avatar_tags %}
+{% trans "New User for Vetting on Movements"%}
 {% endautoescape %}

@@ -1,20 +1,21 @@
 {% extends 'emails/base_email.html' %}
+{% load i18n avatar_tags %}
 
 {% block body %}
-  <p>You have the following new notifications.</p>
+  <p>{% trans "You have the following new notifications."%}</p>
 
   {% for notification in notifications %}
     <p>
       {% if notification.comment %}
-          On {{ notification.pub_date }} {{ notification.comment.owner.username}} commented on a post titled
+          {% trans "On"%} {{ notification.pub_date }} {{ notification.comment.owner.username}} {% trans "commented on a post titled"%}
           <a href="{{ base_url }}/market/{{ notification.item.id }}"><em>{{ notification.text.title}}</em></a>.
       {% elif notification.item %}
-          On {{ notification.pub_date }} {{ notification.item.owner.username }}
-          {% if notification.text.update %}updated{% else %}created{% endif %} the {{ notification.item.item_type }}
+          {% trans "On"%} {{ notification.pub_date }} {{ notification.item.owner.username }}
+          {% if notification.text.update %}{% trans "updated"%}{% else %}{% trans "created"%}{% endif %} {% trans "the"%} {{ notification.item.item_type }}
           <a href="{{ base_url }}/market/{{ notification.item.id }}"><em>{{ notification.text.title }}</em></a>.
       {% else %}
-          On {{ notification.pub_date }} {{ notification.text.sender }} sent you <a href="{{ base_url }}{% url 'postman_inbox' %}">a private message</a> with the
-          subject <em>{{ notification.text.subject }}</em>.
+          {% trans "On"%} {{ notification.pub_date }} {{ notification.text.sender }} {% trans "sent you"%} <a href="{{ base_url }}{% url 'postman_inbox' %}">{% trans "a private message"%}</a>
+          {% trans "with the subject"%} <em>{{ notification.text.subject }}</em>.
       {% endif %}
     </p>
   {% endfor %}

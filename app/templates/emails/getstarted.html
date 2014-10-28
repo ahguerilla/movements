@@ -1,14 +1,16 @@
-<h4>Dear {{user.username }}</h4>
+{% load i18n avatar_tags %}
+
+<h4>{% trans "Dear"%} {{user.username }}</h4>
 
 <p>
-Thank you for signing up to be part of Movements, a new innovative platform 
+{% blocktrans %}Thank you for signing up to be part of Movements, a new innovative platform
 that is crowd-sourcing the fight for human rights. We are writing to confirm that 
 you are now approved to use the site as an Member. To get started, 
 log-in <a href="{{login_url}}">here</a> (using the username and password you signed up with) 
-and create a user profile. Once you're finished, you can begin posting on the Exchange!
+and create a user profile. Once you're finished, you can begin posting on the Exchange!{% endblocktrans %}
 </p>
 
 <p>
-Thanks<br/>
-The Movements Team
+{% trans "Thanks"%}<br/>
+{% trans "The Movements Team"%}
 </p>

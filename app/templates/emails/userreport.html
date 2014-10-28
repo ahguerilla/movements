@@ -1,3 +1,5 @@
-<h3>User message</h3>
+{% load i18n avatar_tags %}
+
+<h3>{% trans "User message"%}</h3>
 <p>{{contents}}</p>
-<p>Link to user: {{link}}</p>
+<p>{% trans "Link to user:"%} {{link}}</p>

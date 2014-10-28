@@ -1,4 +1,5 @@
-A new user has signed up on Movements with the below details:
+{% load i18n avatar_tags %}
+{% blocktrans %}A new user has signed up to Movements using the details below:
 
 First Name : {{ form.data.first_name }}
 Last Name  : {{ form.data.last_name }}
@@ -9,7 +10,12 @@ Facebook   : {{ form.data.fb_url }}
 Twitter    : {{ form.data.tweet_url }}
 Website    : {{ form.data.web_url }}
 
-You can vet this user at the link:
+Please vet this user by clicking on the link below:{% endblocktrans %}
+
 {{vet_url}}
 
-You will get another email once they have confirmed their email address. Of the above details only the username and email are currently stored on the server. Once vetted the user can enter whatever information they're comfortable with on the site.
+{% blocktrans %}Once the user has confirmed their email address you will receive another email
+to let you know. From the list above only the username and email are currently
+stored on the server. Once you have  vetted the user, the user will then be able
+to fill out all their profile information. Sharing via their settings what
+personal information they feel comfortable with.{% endblocktrans %}
