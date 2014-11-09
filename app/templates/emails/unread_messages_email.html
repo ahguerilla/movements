@@ -1,14 +1,15 @@
 {% extends 'emails/base_email.html' %}
+{% load i18n avatar_tags %}
 
 {% block body %}
 
   {% if number_unread == 1 %}
-    <p>You have an unread message on Movements.Org.</p>
+    <p>{% trans "You have an unread message on Movements.Org."%}</p>
   {% else  %}
-    <p>You have {{ number_unread }} unread messages on Movements.Org.</p>
+    <p>{% trans "You have {{ number_unread }} unread messages on Movements.Org."%}</p>
   {% endif %}
 
-  <p><a href="{{ base_url }}{% url 'postman_inbox' %}">Login now</a> to read your messages.</p>
+  <p><a href="{{ base_url }}{% url 'postman_inbox' %}">{% trans "Login now"%}</a> {% trans "to read your messages."%}</p>
   <p><a href="{{ base_url }}{% url 'postman_inbox' %}">{{ base_url }}{% url 'postman_inbox' %}</a></p>
 
 {% endblock %}

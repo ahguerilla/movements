@@ -1,5 +1,6 @@
+{% load i18n avatar_tags %}
 {% block greeting %}
-Hello Movements.Org member,
+{% trans "Hello Movements.Org user,"%}
 {% endblock %}
 
 {% block body %}
@@ -7,8 +8,8 @@ Hello Movements.Org member,
 
 {% block footer %}
 ----------------------
-The Movements.Org Team
-Movements are made up of individuals. Movements.Org brings them together.
+{% trans "The Movements.Org Team"%}
+{% trans "Movements are made up of individuals. Movements.Org brings them together."%}
 
-You can update your notification preferences in {{ base_url }} your settings page.
+{% trans "You can update your notification preferences in "%} {{ base_url }} {% trans "your settings page."%}
 {% endblock %}

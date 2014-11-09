@@ -1,7 +1,8 @@
 {% extends 'emails/base_email.html' %}
+{% load i18n avatar_tags %}
 
 {% block greeting %}
-  <p>A message from Movements.Org,</p>
+  <p>{% trans "A message from Movements.Org,"%}</p>
 {% endblock %}
 
 {% block body %}
@@ -10,30 +11,30 @@
   </p>
 
   <p>
-    This email was sent to you by {{ screen_name }}, a registered user on Movements.org.
+    {% blocktrans %}This email was sent to you by {{ screen_name }}, a registered user on Movements.org.
     Movements helps activists in need connect directly with the people who have the skills and
-    expertise that can help.
+    expertise that can help.{% endblocktrans %}
   </p>
   <p>
-    All personal information on Movements.org is confidential. To view the full post that they
+    {% blocktrans %}All personal information on Movements.org is confidential. To view the full post that they
     have recommended to you please go to {{ post_link }}. If you wish to respond to the post please
-    <a href="{{ registration_link }}">register</a>. The registration process is designed to help protect the security and privacy of all users.
+    <a href="{{ registration_link }}">register</a>. The registration process is designed to help protect the security and privacy of all users.{% endblocktrans %}
   </p>
   {% if post_title %}
-    <p>Post Title: {{ post_title }}</p>
+    <p>{% trans "Post Title:"%} {{ post_title }}</p>
   {% endif %}
   {% if post_link %}
-    <p>Post URL: {{ post_link }}</p>
+    <p>{% trans "Post URL:"%} {{ post_link }}</p>
   {% endif %}
   {% if post_date %}
-    <p>Date of Post: {{ post_date }}</p>
+    <p>{% trans "Date of Post:"%} {{ post_date }}</p>
   {% endif %}
   <p>
-    This email was automatically created by Movements.org. You cannot reply to this email but can reply
-    to {{ screen_name }} on Movements.org once your register.
+    {% blocktrans %}This email was automatically created by Movements.org. You cannot reply to this email but can reply
+    to {{ screen_name }} on Movements.org once you register.{% endblocktrans %}
   </p>
   <br>
-  <p>Thank you,</p>
+  <p>{% trans "Thank you,"%}</p>
 {% endblock %}
 
 {% block update_settings %}

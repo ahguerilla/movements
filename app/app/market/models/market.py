@@ -40,6 +40,7 @@ class MarketItem(models.Model):
     published = models.BooleanField(_('is published?'), default=True)
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
     commentcount = models.IntegerField(_('commentcount'), default=0)
+    collaboratorcount = models.IntegerField(_('collaboratorcount'), default=0)
     ratecount = models.IntegerField(_('ratecount'), default=0)
     reportcount = models.IntegerField(_('reportcount'), default=0)
     score = models.FloatField(_('score'), default=0)
@@ -90,6 +91,7 @@ class MarketItem(models.Model):
         adict['fields']['ownerid'] = [self.owner.id]
         adict['fields']['url'] = self.url
         adict['fields']['commentcount'] = self.commentcount
+        adict['fields']['collaboratorcount'] = self.collaboratorcount
         adict['fields']['hidden'] = False
         adict['fields']['stick'] = False
         adict['fields']['avatar'] = False
@@ -195,6 +197,18 @@ class MarketItemTranslation(models.Model):
     title_translated = models.TextField(_('title translated'), blank=False)
     details_translated = models.TextField(_('details translated'), blank=False)
     generated_at = models.DateField(_('date generated'), auto_now_add=True)
+
+    class Meta:
+        app_label = 'market'
+
+
+class MarketItemCollaborators(models.Model):
+    market_item = models.ForeignKey(
+        MarketItem, verbose_name=_('market item'))
+    collaborator = models.ForeignKey(
+        auth.models.User, blank=True, null=True)
+    interaction_type = models.CharField(_('item_type'), max_length=50, blank=False)
+    interaction_date = models.DateTimeField(_('interaction date'), auto_now_add=True)
 
     class Meta:
         app_label = 'market'

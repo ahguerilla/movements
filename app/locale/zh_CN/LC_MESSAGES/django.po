@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-20 07:09-0500\n"
+"POT-Creation-Date: 2014-10-28 13:46-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,7 +100,7 @@ msgstr ""
 msgid "is published?"
 msgstr ""
 
-#: app/market/models/comment.py:18 app/market/models/market.py:46
+#: app/market/models/comment.py:18 app/market/models/market.py:47
 msgid "deleted"
 msgstr ""
 
@@ -185,7 +185,7 @@ msgstr "请求"
 msgid "Offer"
 msgstr "提供帮助"
 
-#: app/market/models/market.py:30
+#: app/market/models/market.py:30 app/market/models/market.py:210
 msgid "item_type"
 msgstr ""
 
@@ -205,95 +205,103 @@ msgstr ""
 msgid "commentcount"
 msgstr ""
 
-#: app/market/models/market.py:43 app/users/models.py:153
+#: app/market/models/market.py:43
+msgid "collaboratorcount"
+msgstr ""
+
+#: app/market/models/market.py:44 app/users/models.py:153
 msgid "ratecount"
 msgstr ""
 
-#: app/market/models/market.py:44
+#: app/market/models/market.py:45
 msgid "reportcount"
 msgstr ""
 
-#: app/market/models/market.py:45 app/market/models/rate.py:15
+#: app/market/models/market.py:46 app/market/models/rate.py:15
 #: app/users/models.py:154 app/users/models.py:205
 msgid "score"
 msgstr ""
 
-#: app/market/models/market.py:47
+#: app/market/models/market.py:48
 msgid "receive notifications"
 msgstr ""
 
-#: app/market/models/market.py:48
+#: app/market/models/market.py:49
 msgid "Tweet Permission"
 msgstr ""
 
-#: app/market/models/market.py:50 app/reporting/admin/incident.py:89
+#: app/market/models/market.py:51 app/reporting/admin/incident.py:89
 msgid "status"
 msgstr ""
 
-#: app/market/models/market.py:53
+#: app/market/models/market.py:54
 msgid "closed date"
 msgstr ""
 
-#: app/market/models/market.py:55
+#: app/market/models/market.py:56
 msgid "feedback response"
 msgstr ""
 
-#: app/market/models/market.py:56
+#: app/market/models/market.py:57
 msgid "is featured"
 msgstr ""
 
-#: app/market/models/market.py:156 app/market/models/market.py:171
-#: app/market/models/market.py:187 app/market/models/report.py:47
-#: app/market/models/report.py:76
+#: app/market/models/market.py:163 app/market/models/market.py:178
+#: app/market/models/market.py:194 app/market/models/market.py:207
+#: app/market/models/report.py:47 app/market/models/report.py:76
 msgid "market item"
 msgstr ""
 
-#: app/market/models/market.py:157
+#: app/market/models/market.py:164
 msgid "action"
 msgstr ""
 
-#: app/market/models/market.py:158 app/market/models/market.py:173
+#: app/market/models/market.py:165 app/market/models/market.py:180
 msgid "date of action"
 msgstr ""
 
-#: app/market/models/market.py:162 app/market/models/market.py:163
+#: app/market/models/market.py:169 app/market/models/market.py:170
 msgid "actions of market item"
 msgstr ""
 
-#: app/market/models/market.py:172
+#: app/market/models/market.py:179
 msgid "next step"
 msgstr ""
 
-#: app/market/models/market.py:174
+#: app/market/models/market.py:181
 msgid "completed"
 msgstr ""
 
-#: app/market/models/market.py:178
+#: app/market/models/market.py:185
 msgid "next step of market item"
 msgstr ""
 
-#: app/market/models/market.py:179
+#: app/market/models/market.py:186
 msgid "next steps of market item"
 msgstr ""
 
-#: app/market/models/market.py:188 app/users/models.py:78
+#: app/market/models/market.py:195 app/users/models.py:78
 msgid "language"
 msgstr ""
 
-#: app/market/models/market.py:189
+#: app/market/models/market.py:196
 msgid "source language"
 msgstr "始发语言"
 
-#: app/market/models/market.py:190
+#: app/market/models/market.py:197
 msgid "title translated"
 msgstr ""
 
-#: app/market/models/market.py:191
+#: app/market/models/market.py:198
 msgid "details translated"
 msgstr ""
 
-#: app/market/models/market.py:192
+#: app/market/models/market.py:199
 msgid "date generated"
+msgstr ""
+
+#: app/market/models/market.py:211
+msgid "interaction date"
 msgstr ""
 
 #: app/market/models/notification.py:16
@@ -1472,6 +1480,42 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
+#: templates/account/email/email_confirmation_message.html:7
+#: templates/account/email/email_confirmation_message.txt:5
+msgid ""
+"Thank you for registering on Movements.Org, the platform that is "
+"crowdsourcing the fight for human rights."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:11
+#: templates/account/email/email_confirmation_message.txt:7
+msgid ""
+"Please confirm your email address and read an important message by following "
+"the link below. It will take you to the Sign-In page where you will enter "
+"your screen name and the password you created. Then you will be asked to "
+"read our Acceptable Use Policy and indicate that you have read it."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:15
+#: templates/account/email/email_confirmation_message.txt:9
+msgid "This process helps to ensure your security."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:18
+msgid "Confirm your email address"
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:20
+#: templates/account/email/email_confirmation_message.txt:13
+msgid ""
+"After you have read the Policy you’ll have full access to Movements.Org."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:21
+#: templates/account/email/email_confirmation_message.txt:14
+msgid "Thanks for joining the fight."
+msgstr ""
+
 #: templates/account/email/password_reset_key_message.html:6
 #, python-format
 msgid ""
@@ -1510,11 +1554,74 @@ msgid ""
 msgstr ""
 
 #: templates/account/email/password_reset_key_subject.txt:3
-msgid "Forget Password on Movements.org"
+msgid "Forgot Password on Movements.org"
+msgstr ""
+
+#: templates/account/email/user_confirmed_email_message.txt:5
+#, python-format
+msgid "User %(user)s at %(site_name)s confirmed his/her email address."
+msgstr ""
+
+#: templates/account/email/user_confirmed_email_message.txt:8
+msgid "This user is already activated, to review the users score go to"
+msgstr ""
+
+#: templates/account/email/user_confirmed_email_message.txt:10
+msgid "To vet this user, go to"
 msgstr ""
 
 #: templates/account/email/user_confirmed_email_subject.txt:3
 msgid "Activate User"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.html:3
+msgid "Dear Admin"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.html:6
+#: templates/account/email/user_vetting_email_message.txt:2
+#, python-format
+msgid ""
+"A new user has signed up to Movements using the details below:\n"
+"\n"
+"First Name : %(form.data.first_name)s\n"
+"Last Name  : %(form.data.last_name)s\n"
+"Username   : %(user.username)s\n"
+"Email      : %(user.email)s\n"
+"Linked In  : %(form.data.linkedin_url)s\n"
+"Facebook   : %(form.data.fb_url)s\n"
+"Twitter    : %(form.data.tweet_url)s\n"
+"Website    : %(form.data.web_url)s\n"
+"\n"
+"Please vet this user by clicking on the link below:"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.html:22
+msgid ""
+"Once the user has confirmed their email address you will receive another "
+"email\n"
+"to let you know. From the list above <strong>only</strong> the username and "
+"email are currently \n"
+"stored on the server. Once you have  vetted the user, the user will then be "
+"able \n"
+"to fill out all their profile information. Sharing via their settings what\n"
+"personal information they feel comfortable with."
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.txt:17
+msgid ""
+"Once the user has confirmed their email address you will receive another "
+"email\n"
+"to let you know. From the list above only the username and email are "
+"currently\n"
+"stored on the server. Once you have  vetted the user, the user will then be "
+"able\n"
+"to fill out all their profile information. Sharing via their settings what\n"
+"personal information they feel comfortable with."
+msgstr ""
+
+#: templates/account/email/user_vetting_email_subject.txt:3
+msgid "New User for Vetting on Movements"
 msgstr ""
 
 #: templates/account/messages/cannot_delete_primary_email.txt:2
@@ -1726,6 +1833,222 @@ msgid ""
 "liberties."
 msgstr ""
 "如果您想帮助人权活动家，这是一个机会。人人都有用得上的技能来促进基本自由。"
+
+#: templates/emails/base_email.html:4 templates/emails/base_email.txt:3
+msgid "Hello Movements.Org user,"
+msgstr ""
+
+#: templates/emails/base_email.html:12 templates/emails/base_email.txt:11
+msgid "The Movements.Org Team"
+msgstr ""
+
+#: templates/emails/base_email.html:13 templates/emails/base_email.txt:12
+msgid ""
+"Movements are made up of individuals. Movements.Org brings them together."
+msgstr ""
+
+#: templates/emails/base_email.html:17 templates/emails/base_email.txt:14
+msgid "You can update your notification preferences in "
+msgstr ""
+
+#: templates/emails/base_email.html:18 templates/emails/base_email.txt:14
+msgid "your settings page."
+msgstr ""
+
+#: templates/emails/getstarted.html:3
+msgid "Dear"
+msgstr ""
+
+#: templates/emails/getstarted.html:6
+#, python-format
+msgid ""
+"Thank you for signing up to be part of Movements, a new innovative platform\n"
+"that is crowd-sourcing the fight for human rights. We are writing to confirm "
+"that \n"
+"you are now approved to use the site as an Member. To get started, \n"
+"log-in <a href=\"%(login_url)s\">here</a> (using the username and password "
+"you signed up with) \n"
+"and create a user profile. Once you're finished, you can begin posting on "
+"the Exchange!"
+msgstr ""
+
+#: templates/emails/getstarted.html:14 templates/emails/notready.html:8
+#: templates/emails/securityalert.html:11
+msgid "Thanks"
+msgstr ""
+
+#: templates/emails/getstarted.html:15 templates/emails/notready.html:9
+#: templates/emails/securityalert.html:12
+msgid "The Movements Team"
+msgstr ""
+
+#: templates/emails/getstarted_subject.html:3
+msgid ""
+"You can now get started on Movements. Your Username and Password is now "
+"active."
+msgstr ""
+
+#: templates/emails/itemreport.html:3
+msgid "User message:"
+msgstr ""
+
+#: templates/emails/itemreport.html:7
+msgid "Link to post:"
+msgstr ""
+
+#: templates/emails/itemreport_subject.html:3
+#, python-format
+msgid ""
+"User \"%(user)s\" reported the %(item_type)s \"%(item_title)s\" by "
+"\"%(item_owner)s\""
+msgstr ""
+
+#: templates/emails/notification_email.html:5
+msgid "You have the following new notifications."
+msgstr ""
+
+#: templates/emails/notification_email.html:10
+#: templates/emails/notification_email.html:13
+#: templates/emails/notification_email.html:17
+msgid "On"
+msgstr ""
+
+#: templates/emails/notification_email.html:10
+msgid "commented on a post titled"
+msgstr ""
+
+#: templates/emails/notification_email.html:14
+#: templates/market/notifications.html:39
+#: templates/market/clientside/notifications.html:12
+msgid "updated"
+msgstr "更新"
+
+#: templates/emails/notification_email.html:14
+msgid "created"
+msgstr ""
+
+#: templates/emails/notification_email.html:14
+#: templates/market/notifications.html:40
+msgid "the"
+msgstr "这个"
+
+#: templates/emails/notification_email.html:17
+msgid "sent you"
+msgstr ""
+
+#: templates/emails/notification_email.html:17
+msgid "a private message"
+msgstr ""
+
+#: templates/emails/notification_email.html:18
+msgid "with the subject"
+msgstr ""
+
+#: templates/emails/notready.html:4
+msgid ""
+"You or someone recently tried to register on Movements using your email "
+"address.\n"
+"This account is currently being vetted for approval. Please be patient, and "
+"contact us\n"
+"if you have any concerns."
+msgstr ""
+
+#: templates/emails/notready_subject.html:3
+msgid "Not quite ready yet"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:5
+msgid "A message from Movements.Org,"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:14
+#, python-format
+msgid ""
+"This email was sent to you by %(screen_name)s, a registered user on "
+"Movements.org.\n"
+"    Movements helps activists in need connect directly with the people who "
+"have the skills and\n"
+"    expertise that can help."
+msgstr ""
+
+#: templates/emails/recommendation_message.html:19
+#, python-format
+msgid ""
+"All personal information on Movements.org is confidential. To view the full "
+"post that they\n"
+"    have recommended to you please go to %(post_link)s. If you wish to "
+"respond to the post please\n"
+"    <a href=\"%(registration_link)s\">register</a>. The registration process "
+"is designed to help protect the security and privacy of all users."
+msgstr ""
+
+#: templates/emails/recommendation_message.html:24
+msgid "Post Title:"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:27
+msgid "Post URL:"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:30
+msgid "Date of Post:"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:33
+#, python-format
+msgid ""
+"This email was automatically created by Movements.org. You cannot reply to "
+"this email but can reply\n"
+"    to %(screen_name)s on Movements.org once you register."
+msgstr ""
+
+#: templates/emails/recommendation_message.html:37
+msgid "Thank you,"
+msgstr ""
+
+#: templates/emails/securityalert.html:4
+msgid ""
+"You or someone recently tried to register on Movements using your email "
+"address.\n"
+"If this was not you and you did not make this request, it's likely that "
+"another user entered\n"
+"your email address by mistake. If you believe an unauthorised person has "
+"accessed your account\n"
+"we advise that you change your password for both your email account and "
+"Movements.\n"
+"Movements did not reveal that you are registered with the site or any of "
+"your personal\n"
+"Information. We are sending this email as a precautionary measure only."
+msgstr ""
+
+#: templates/emails/unread_messages_email.html:7
+msgid "You have an unread message on Movements.Org."
+msgstr ""
+
+#: templates/emails/unread_messages_email.html:9
+msgid "You have {{ number_unread }} unread messages on Movements.Org."
+msgstr ""
+
+#: templates/emails/unread_messages_email.html:12
+msgid "Login now"
+msgstr ""
+
+#: templates/emails/unread_messages_email.html:12
+msgid "to read your messages."
+msgstr ""
+
+#: templates/emails/userreport.html:3
+msgid "User message"
+msgstr ""
+
+#: templates/emails/userreport.html:5
+msgid "Link to user:"
+msgstr ""
+
+#: templates/emails/userreport_subject.html:3
+#, python-format
+msgid "User \"%(user)s\" reported user \"%(another_user)s\""
+msgstr ""
 
 #: templates/market/create_offer.html:11
 msgid "Offer a service"
@@ -1948,17 +2271,8 @@ msgstr "请求"
 
 #: templates/market/notifications.html:39
 #: templates/market/clientside/notifications.html:12
-msgid "updated"
-msgstr "更新"
-
-#: templates/market/notifications.html:39
-#: templates/market/clientside/notifications.html:12
 msgid "posted"
 msgstr "发帖"
-
-#: templates/market/notifications.html:40
-msgid "the"
-msgstr "这个"
 
 #: templates/market/notifications.html:50
 msgid "sent you a private "
@@ -2053,12 +2367,12 @@ msgstr ""
 msgid ""
 "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
-"a>."
+"            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
+"collaborators</a>."
 msgstr ""
 "由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
 "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>            <a "
-"href=\"/market/<%%- pk %%>\"><%%- commentcount %%> 评论</a>."
+"href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 合作者</a>."
 
 #: templates/market/clientside/marketitem.html:68
 msgid "FEATURED OFFER"
@@ -2073,11 +2387,12 @@ msgstr "请求帮助精选"
 msgid ""
 "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
 "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</a>."
+"        <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
+"collaborators</a>."
 msgstr ""
 "由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
 "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>        <a href="
-"\"/market/<%%- pk %%>\"><%%- commentcount %%> 评论</a>."
+"\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 合作者</a>."
 
 #: templates/market/clientside/marketitem.html:88
 msgid "Hide"
@@ -2643,3 +2958,23 @@ msgstr ""
 "                   3 星：确定所有社交网账户和简历<br>\n"
 "                   4 星：明确确定网络身份<br>\n"
 "                   5 星：'运动'组织了解此人<br>"
+
+#~ msgid ""
+#~ "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+#~ "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+#~ "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> "
+#~ "comments</a>."
+#~ msgstr ""
+#~ "由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
+#~ "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>            "
+#~ "<a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> 评论</a>."
+
+#~ msgid ""
+#~ "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+#~ "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+#~ "        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
+#~ "a>."
+#~ msgstr ""
+#~ "由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
+#~ "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>        <a "
+#~ "href=\"/market/<%%- pk %%>\"><%%- commentcount %%> 评论</a>."

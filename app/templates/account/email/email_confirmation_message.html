@@ -1,25 +1,23 @@
 {% extends 'emails/base_email.html' %}
+{% load i18n avatar_tags %}
 
 {% block body %}
 
   <p>
-    Thank you for registering on Movements.Org, the platform that is crowdsourcing the fight for human
-    rights.
+    {% trans "Thank you for registering on Movements.Org, the platform that is crowdsourcing the fight for human rights."%}
   </p>
 
   <p>
-    Please confirm your email address and read an important message by following the link below.
-    It will take you to the Sign-In page where you will enter your screen name and the password you created.
-    Then you will be asked to read our Acceptable Use Policy and indicate that you have read it.
+    {% trans "Please confirm your email address and read an important message by following the link below. It will take you to the Sign-In page where you will enter your screen name and the password you created. Then you will be asked to read our Acceptable Use Policy and indicate that you have read it."%}
   </p>
 
   <p>
-    This process helps to ensure your security.
+    {% trans "This process helps to ensure your security."%}
   </p>
 
-  <p><a href="{{ activate_url }}">Confirm your email address</a></p>
+  <p><a href="{{ activate_url }}">{% trans "Confirm your email address"%}</a></p>
 
-  <p>After you have read the Policy you’ll have full access to Movements.Org.</p>
-  <p>Thanks for joining the fight.</p>
+  <p>{% trans "After you have read the Policy you’ll have full access to Movements.Org."%}</p>
+  <p>{% trans "Thanks for joining the fight."%}</p>
 
 {% endblock %}
