@@ -59,6 +59,14 @@ class OfferForm(forms.ModelForm):
         specific_skill = self.cleaned_data['specific_skill']
         if len(data) == 0 and not specific_skill:
             raise forms.ValidationError(_("You must add at least one skill"))
+        if len(data) > 4 or (len(data) > 3 and specific_skill):
+            raise forms.ValidationError(_("Please select a maximum of 4 skills"))
+        return data
+
+    def clean_title(self):
+        data = self.cleaned_data['title']
+        if len(data) > 120:
+            raise forms.ValidationError(_("Please enter a maximum of 120 characters"))
         return data
 
 
@@ -93,6 +101,14 @@ class RequestForm(forms.ModelForm):
         specific_skill = self.cleaned_data['specific_skill']
         if len(data) == 0 and not specific_skill:
             raise forms.ValidationError(_("You must add at least one skill"))
+        if len(data) > 4 or (len(data) > 3 and specific_skill):
+            raise forms.ValidationError(_("Please select a maximum of 4 skills"))
+        return data
+
+    def clean_title(self):
+        data = self.cleaned_data['title']
+        if len(data) > 120:
+            raise forms.ValidationError(_("Please enter a maximum of 120 characters"))
         return data
 
 
