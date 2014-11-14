@@ -124,6 +124,7 @@ class UserProfile(models.Model):
         ('en', 'English'),
         ('ar', 'Arabic'),
         ('zh-cn', 'Chinese'),
+        ('uk', 'Ukrainian'),
     )
 
     user = models.OneToOneField(User)
