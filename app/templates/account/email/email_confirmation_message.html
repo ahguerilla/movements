@@ -8,16 +8,19 @@
   </p>
 
   <p>
-    {% trans "Please confirm your email address and read an important message by following the link below. It will take you to the Sign-In page where you will enter your screen name and the password you created. Then you will be asked to read our Acceptable Use Policy and indicate that you have read it."%}
+    {% trans "Please confirm your email address by following the link below. It will take you to the Sign-In page where you will enter your screen name and the password you created."%}
   </p>
 
   <p>
     {% trans "This process helps to ensure your security."%}
   </p>
 
+  <p>
+    {% trans "By creating an account you are agreeing to all of our terms and conditions."%}
+  </p>
+
   <p><a href="{{ activate_url }}">{% trans "Confirm your email address"%}</a></p>
 
-  <p>{% trans "After you have read the Policy you’ll have full access to Movements.Org."%}</p>
   <p>{% trans "Thanks for joining the fight."%}</p>
 
 {% endblock %}

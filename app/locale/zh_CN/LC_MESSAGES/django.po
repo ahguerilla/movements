@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-28 13:46-0500\n"
+"POT-Creation-Date: 2014-11-14 10:30-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,8 +75,16 @@ msgid ""
 "Make sure you trust the site that you are being redirected to."
 msgstr ""
 
-#: app/market/forms.py:61 app/market/forms.py:95
+#: app/market/forms.py:61 app/market/forms.py:103
 msgid "You must add at least one skill"
+msgstr ""
+
+#: app/market/forms.py:63 app/market/forms.py:105
+msgid "Please select a maximum of 4 skills"
+msgstr ""
+
+#: app/market/forms.py:69 app/market/forms.py:111
+msgid "Please enter a maximum of 120 characters"
 msgstr ""
 
 #: app/market/admin/report.py:40
@@ -729,10 +737,6 @@ msgstr ""
 msgid "Rated by AHR"
 msgstr ""
 
-#: app/users/views.py:441
-msgid "You have not accepted terms and conditions"
-msgstr ""
-
 #: avatar/admin.py:19
 msgid "Avatar"
 msgstr "虚拟头像"
@@ -1064,19 +1068,30 @@ msgstr ""
 msgid ""
 "Before confirming that <a href=\"mailto:%(email)s\">%(email)s</a> is the e-"
 "mail address you provided for the user %(user_display)s, please read and "
-"accept the <a class=\"terms\" href=\"%(terms_url)s\">acceptable use policy</"
-"a>."
+"accept the "
 msgstr ""
 
-#: templates/account/email_confirm.html:35
+#: templates/account/email_confirm.html:28
+msgid "acceptable use policy"
+msgstr ""
+
+#: templates/account/email_confirm.html:29
+msgid "By continuing, you are agreeing to all of our "
+msgstr ""
+
+#: templates/account/email_confirm.html:29
+msgid "terms and conditions"
+msgstr "条款和条件"
+
+#: templates/account/email_confirm.html:37
 msgid "Confirm"
 msgstr ""
 
-#: templates/account/email_confirm.html:41
+#: templates/account/email_confirm.html:43
 msgid "This e-mail confirmation link expired or is invalid."
 msgstr ""
 
-#: templates/account/email_confirm.html:51
+#: templates/account/email_confirm.html:53
 msgid "I have read and accepted the acceptable use policy"
 msgstr ""
 
@@ -1490,10 +1505,9 @@ msgstr ""
 #: templates/account/email/email_confirmation_message.html:11
 #: templates/account/email/email_confirmation_message.txt:7
 msgid ""
-"Please confirm your email address and read an important message by following "
-"the link below. It will take you to the Sign-In page where you will enter "
-"your screen name and the password you created. Then you will be asked to "
-"read our Acceptable Use Policy and indicate that you have read it."
+"Please confirm your email address by following the link below. It will take "
+"you to the Sign-In page where you will enter your screen name and the "
+"password you created."
 msgstr ""
 
 #: templates/account/email/email_confirmation_message.html:15
@@ -1501,18 +1515,18 @@ msgstr ""
 msgid "This process helps to ensure your security."
 msgstr ""
 
-#: templates/account/email/email_confirmation_message.html:18
+#: templates/account/email/email_confirmation_message.html:19
+#: templates/account/email/email_confirmation_message.txt:11
+msgid ""
+"By creating an account you are agreeing to all of our terms and conditions."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:22
 msgid "Confirm your email address"
 msgstr ""
 
-#: templates/account/email/email_confirmation_message.html:20
-#: templates/account/email/email_confirmation_message.txt:13
-msgid ""
-"After you have read the Policy you’ll have full access to Movements.Org."
-msgstr ""
-
-#: templates/account/email/email_confirmation_message.html:21
-#: templates/account/email/email_confirmation_message.txt:14
+#: templates/account/email/email_confirmation_message.html:24
+#: templates/account/email/email_confirmation_message.txt:15
 msgid "Thanks for joining the fight."
 msgstr ""
 
