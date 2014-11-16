@@ -15,7 +15,7 @@
     </div>
     <div>
       <div class="form-sub-title"><h2>{% trans "1. What skills can you offer?" %}</h2></div>
-      <div class="form-select-multi">
+      <div id="skills-select" class="form-select-multi">
         {{ form.interests }}
       </div>
       <label for="{{ form.specific_skill.auto_id }}">{% trans 'Other' %}</label>
@@ -39,7 +39,7 @@
       <p>{% trans "Be specific and clear."%}</p>
       <div class="form-group">
         <div class="col-xs-12">
-          {% render_field form.title class="form-control input-sm" required="true" placeholder="" %}
+          {% render_field form.title class="form-control input-sm" required="true" placeholder="" maxlength="120" %}
           {{ form.title.errors }}
         </div>
       </div>
@@ -88,5 +88,16 @@
   <script type="text/javascript">
     window.ahr.initCreatePost();
     window.ahr.widgets.initAccordionView();
+
+    $(document).ready(function() {
+      $("#skills-select").find(".select-checkbox").on("click", function () {
+        if ($(this).hasClass('checked') == false) {
+          var checkedItems = $('#skills-select').find('input[type="checkbox"]:checked').length;
+          if (checkedItems >= 4 || (checkedItems >= 3 && $('#id_specific_skill').val()) ) {
+            alert("Please limit to selecting only four skills");
+          }
+        }
+      });
+    });
   </script>
 {% endblock %}

@@ -435,10 +435,13 @@ def email_vet_user(request, user_id):
 class ConfirmEmailView(BaseConfirmEmailView):
     def post(self, *args, **kwargs):
         self.object = self.get_object()
-        if 'accept_terms' in self.request.POST:
-            return super(ConfirmEmailView, self).post(*args, **kwargs)
 
-        messages.warning(self.request, _('You have not accepted terms and conditions'))
-        return HttpResponseRedirect(reverse('account_confirm_email', args=[self.get_object().key]))
+        # Confirmation of T&C is no longer required to be explicit, so always succeed.
+
+        # if 'accept_terms' in self.request.POST:
+        return super(ConfirmEmailView, self).post(*args, **kwargs)
+
+        # messages.warning(self.request, _('You have not accepted terms and conditions'))
+        # return HttpResponseRedirect(reverse('account_confirm_email', args=[self.get_object().key]))
 
 confirm_email = ConfirmEmailView.as_view()
