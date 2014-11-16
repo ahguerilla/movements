@@ -36,7 +36,7 @@
     <div>
       <p style="margin-top: 15px;">{% trans "Movements.org provides access to skills and experts. Please describe your skills, abilities, or services below. Be as explicit and clear as possible."%}</p>
       <div class="form-sub-title"><h2>{% trans "3. How can you help?" %}</h2></div>
-      <p>{% trans "Be specific and clear."%}</p>
+      <p>{% trans "Be specific and clear."%}&nbsp;{% trans "(max 120 characters)" %}</p>
       <div class="form-group">
         <div class="col-xs-12">
           {% render_field form.title class="form-control input-sm" required="true" placeholder="" maxlength="120" %}
@@ -88,16 +88,5 @@
   <script type="text/javascript">
     window.ahr.initCreatePost();
     window.ahr.widgets.initAccordionView();
-
-    $(document).ready(function() {
-      $("#skills-select").find(".select-checkbox").on("click", function () {
-        if ($(this).hasClass('checked') == false) {
-          var checkedItems = $('#skills-select').find('input[type="checkbox"]:checked').length;
-          if (checkedItems >= 4 || (checkedItems >= 3 && $('#id_specific_skill').val()) ) {
-            alert("Please limit to selecting only four skills");
-          }
-        }
-      });
-    });
   </script>
 {% endblock %}
