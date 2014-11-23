@@ -23,7 +23,7 @@
         <div class="details">
           <%- item_type_display %>
             {% blocktrans with user_name="<%- owner %>"%}by <a href="/user/profile/<%- owner %>">{{ user_name }}</a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>, </span>
-            <a href="/market/<%- pk %>"><%- collaboratorcount %> contributors</a>.{% endblocktrans %}
+            <a href="/market/<%- pk %>"></a>.{% endblocktrans %}
         </div>
       </div>
       <% if (!is_safe) { %>
