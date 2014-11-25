@@ -1,29 +1,4 @@
 @media (max-width: 767px) {
-  #NavLeftMenus {
-    margin-top: 40px;
-    margin-bottom: 10px;
-  }
-  #NavRightLoggedIn {
-    margin-top: 40px;
-    margin-bottom: 10px;
-  }
-  #NavRightLoggedOut {
-    margin-top: 40px;
-    margin-bottom: 10px;
-  }
-  #view-content-menu {
-    width: 41px;
-  }
-  #view-content-menu .action-font {
-    display: none;
-  }
-  #view-profile-menu {
-    width: 41px;
-    left: 45px;
-  }
-  #view-profile-menu .action-font {
-    display: none;
-  }
   footer #FooterSocialMedia_Big {
     display: none;
   }
