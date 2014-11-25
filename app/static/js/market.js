@@ -450,8 +450,8 @@ $(function () {
         if (this.filterView) {
           var that = this;
           this.filterView.on('filter', function () {
-            that.paginationView.init();
-            //that.initInfiniteScroll();
+//            that.paginationView.init();
+            that.initInfiniteScroll();
           });
         }
       }
@@ -493,8 +493,8 @@ $(function () {
 
     refresh: function() {
       if (this.paginationView) {
-        this.paginationView.init();
-        //this.initInfiniteScroll();
+//        this.paginationView.init();
+        this.initInfiniteScroll();
       } else {
         this.initNoPagination();
       }
@@ -613,6 +613,7 @@ $(function () {
       }
       this.allItemsLoaded = false;
       this.currentItem = 0;
+      this.currentPage = 1;
       this.loadingScrollElements = false;
       this.loadedOnce = false;
 
@@ -662,10 +663,7 @@ $(function () {
 
         that.$el.find('.ajaxloader').show();
 
-        var dfrd = that.getItemsFromTo(
-          that.currentItem,
-          that.currentItem + that.itemsPerCall
-        );
+        var dfrd = this.getItems(this.currentPage);
 
         this.currentCall = dfrd;
 
@@ -673,12 +671,15 @@ $(function () {
           that.currentCall = null;
           that.render(data);
 
-          if (data.length === 0) {
+          if (data.length === 1) {
             that.allItemsLoaded = true;
           }
 
-          that.currentItem = that.currentItem + that.itemsPerCall;
+          that.currentPage = that.currentPage + 1;
           that.loadingScrollElements = false;
+
+          // Gets more results if not enough to fill tall screens.
+          that.loadScrollElements();
         });
         return dfrd;
       }
@@ -794,7 +795,7 @@ $(function () {
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (options) {
     filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills});
-    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold"></div>';
+    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">All posts loaded for current filter</div>';
     var market = new MarketView({
       el: '#market-main',
       filterView: filterView,
@@ -819,7 +820,7 @@ $(function () {
 
   window.ahr.market.initProfile = function(userId){
     filterView = new ProfileFilterView()
-    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">No posts available<div>';
+    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">All posts loaded for current user<div>';
     var marketUrl = ahr.app_urls.getMarketItemsUser;
 
     if(userId) {
