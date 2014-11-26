@@ -359,9 +359,9 @@ body {
 }
 .header-nav .navbar-left-top .nav-twitter img {
   position: absolute;
-  height: 36px;
-  clip: rect(18px, 30px, 60px, 0px);
-  margin-top: -15px;
+  height: 37px;
+  clip: rect(19px, 30px, 60px, 0px);
+  margin-top: -16px;
 }
 .header-nav .navbar-left-top .nav-twitter img:hover {
   clip: rect(0px, 30px, 18px, 0px);
