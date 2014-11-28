@@ -239,6 +239,7 @@ body {
   font-size: 14px;
   padding: 4px 12px;
   margin-top: 7px;
+  float: right;
 }
 .header-nav {
   -webkit-border-radius: 0;
@@ -249,6 +250,9 @@ body {
   border: 0;
   border-bottom: 4px solid #e0d7d8;
   margin-bottom: 0;
+}
+.header-nav .container {
+  min-width: 790px;
 }
 .header-nav .menu-selector .menu-icon {
   background-image: url("../images/v2/hamburger.png");
@@ -266,8 +270,27 @@ body {
 .header-nav .header-nav-wrapper .main-logo {
   padding-top: 15px;
 }
+.header-nav .header-nav-text {
+  position: absolute;
+  left: 50%;
+  margin-left: -180px;
+  top: 36px;
+  width: 360px;
+  height: 40px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 40px;
+  color: #777;
+}
+.header-nav .header-nav-text p {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  margin: 0;
+}
 .header-nav .navbar-left {
   position: absolute;
+  width: 500px;
 }
 .header-nav .navbar-left .menu-selector {
   position: absolute;
@@ -324,8 +347,85 @@ body {
 .header-nav .navbar-left .nav-messages #main-nav-message-count.notification-count {
   top: -5px;
 }
+.header-nav .navbar-left-top {
+  position: absolute;
+  width: 150px;
+  top: 2px;
+}
+.header-nav .navbar-left-top .nav-twitter {
+  float: left;
+  margin-top: 6px;
+  width: 40px;
+}
+.header-nav .navbar-left-top .nav-twitter img {
+  position: absolute;
+  height: 37px;
+  clip: rect(19px, 30px, 60px, 0px);
+  margin-top: -16px;
+}
+.header-nav .navbar-left-top .nav-twitter img:hover {
+  clip: rect(0px, 30px, 18px, 0px);
+  margin-top: 3px;
+}
+.header-nav .navbar-left-top .nav-facebook {
+  float: left;
+  margin-top: 5px;
+  width: 40px;
+}
+.header-nav .navbar-left-top .nav-facebook img {
+  position: absolute;
+  height: 44px;
+  clip: rect(22px, 30px, 60px, 0px);
+  margin-top: -21px;
+}
+.header-nav .navbar-left-top .nav-facebook img:hover {
+  clip: rect(0px, 30px, 22px, 0px);
+  margin-top: 1px;
+}
+.header-nav .navbar-left-top .nav-ahr {
+  float: left;
+  margin-top: 9px;
+  width: 40px;
+}
+.header-nav .navbar-left-top .nav-ahr img {
+  position: absolute;
+  height: 44px;
+  clip: rect(22px, 30px, 60px, 0px);
+  margin-top: -25px;
+}
+.header-nav .navbar-left-top .nav-ahr img:hover {
+  clip: rect(0px, 30px, 22px, 0px);
+  margin-top: -3px;
+}
 .header-nav .navbar-right {
   float: right !important;
+}
+.header-nav .navbar-right .nav-flags {
+  height: 30px;
+  width: 300px;
+  margin-top: 4px;
+}
+.header-nav .navbar-right .nav-flags img {
+  width: 40px;
+  float: right;
+  margin: 5px 0 0 10px;
+}
+.header-nav .navbar-right .nav-flags p {
+  text-align: right;
+  padding-top: 7px;
+  font-size: 10pt;
+  color: #756b65;
+  font-weight: bold;
+}
+.header-nav .navbar-right #add-post {
+  margin-top: 11px;
+  margin-bottom: 4px;
+}
+.navbar-logged-in .navbar-left {
+  top: 34px;
+}
+.navbar-logged-out .header-nav-text {
+  display: none;
 }
 .home-page-nav {
   height: 85px;
@@ -731,6 +831,7 @@ h6 {
   cursor: pointer;
 }
 .auto-translated-text {
+  font-size: 13px;
   color: #808080;
 }
 .language-selector ul {
@@ -1455,9 +1556,9 @@ input.borderless-control:focus:invalid:focus {
   color: #756b65;
 }
 .featured {
-  min-height: 150px;
-  padding: 10px 15px;
-  margin-bottom: 10px;
+  min-height: 112px;
+  padding: 8px 12px;
+  margin-bottom: 5px;
   color: #fff;
 }
 .featured a,
@@ -1480,10 +1581,11 @@ input.borderless-control:focus:invalid:focus {
 }
 .featured .title {
   font-family: "HurmeGeometricSans3-SemiBold";
+  font-size: 14px;
   margin: 2px 0;
 }
 .featured .details {
-  font-size: 14px;
+  font-size: 13px;
 }
 .featured .auto-translated-text {
   color: #faf0e6;
@@ -1504,8 +1606,9 @@ input.borderless-control:focus:invalid:focus {
 #stuck-marketitems .market-place-item {
   position: relative;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding-left: 50px;
+  line-height: 1.3;
 }
 #marketitems .market-place-item a,
 #stuck-marketitems .market-place-item a,
@@ -1516,17 +1619,18 @@ input.borderless-control:focus:invalid:focus {
 #marketitems .market-place-item .item-type,
 #stuck-marketitems .market-place-item .item-type {
   font-family: "HurmeGeometricSans3-SemiBold";
-  font-size: 14px;
+  font-size: 13px;
 }
 #marketitems .market-place-item .title,
 #stuck-marketitems .market-place-item .title {
   color: #262626;
   font-family: "HurmeGeometricSans3-SemiBold";
+  font-size: 14px;
 }
 #marketitems .market-place-item .details,
 #stuck-marketitems .market-place-item .details {
   color: #756b65;
-  font-size: 14px;
+  font-size: 13px;
 }
 #marketitems .market-place-item .details a,
 #stuck-marketitems .market-place-item .details a,
@@ -1541,7 +1645,7 @@ input.borderless-control:focus:invalid:focus {
 #marketitems .market-place-item .market-item-card,
 #stuck-marketitems .market-place-item .market-item-card {
   background-color: #fff;
-  padding: 10px 50px 10px 10px;
+  padding: 8px 50px 8px 10px;
 }
 #marketitems .market-place-item .market-item-card .item-menu-container .popover,
 #stuck-marketitems .market-place-item .market-item-card .item-menu-container .popover {
@@ -2259,31 +2363,6 @@ input.borderless-control:focus:invalid:focus {
 
 
 @media (max-width: 767px) {
-  #NavLeftMenus {
-    margin-top: 40px;
-    margin-bottom: 10px;
-  }
-  #NavRightLoggedIn {
-    margin-top: 40px;
-    margin-bottom: 10px;
-  }
-  #NavRightLoggedOut {
-    margin-top: 40px;
-    margin-bottom: 10px;
-  }
-  #view-content-menu {
-    width: 41px;
-  }
-  #view-content-menu .action-font {
-    display: none;
-  }
-  #view-profile-menu {
-    width: 41px;
-    left: 45px;
-  }
-  #view-profile-menu .action-font {
-    display: none;
-  }
   footer #FooterSocialMedia_Big {
     display: none;
   }

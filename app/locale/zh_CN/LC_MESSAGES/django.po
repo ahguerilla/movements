@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-14 10:30-0600\n"
+"POT-Creation-Date: 2014-11-25 15:36-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,7 +99,7 @@ msgstr ""
 #: app/market/models/comment.py:15 app/market/models/market.py:41
 #: app/market/models/notification.py:18 app/market/models/rate.py:13
 #: app/market/models/report.py:21 app/market/models/report.py:38
-#: app/users/models.py:203
+#: app/users/models.py:204
 msgid "publish date"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgid "without type"
 msgstr ""
 
 #: app/market/models/feedback.py:33 app/market/models/market.py:34
-#: app/market/models/rate.py:14 app/users/models.py:204
+#: app/market/models/rate.py:14 app/users/models.py:205
 msgid "title"
 msgstr ""
 
@@ -185,11 +185,11 @@ msgstr ""
 msgid "Closed By User"
 msgstr ""
 
-#: app/market/models/market.py:26 templates/base_v2.html:198
+#: app/market/models/market.py:26 templates/base_v2.html:228
 msgid "Request"
 msgstr "请求"
 
-#: app/market/models/market.py:27 templates/base_v2.html:199
+#: app/market/models/market.py:27 templates/base_v2.html:229
 msgid "Offer"
 msgstr "提供帮助"
 
@@ -217,7 +217,7 @@ msgstr ""
 msgid "collaboratorcount"
 msgstr ""
 
-#: app/market/models/market.py:44 app/users/models.py:153
+#: app/market/models/market.py:44 app/users/models.py:154
 msgid "ratecount"
 msgstr ""
 
@@ -226,7 +226,7 @@ msgid "reportcount"
 msgstr ""
 
 #: app/market/models/market.py:46 app/market/models/rate.py:15
-#: app/users/models.py:154 app/users/models.py:205
+#: app/users/models.py:155 app/users/models.py:206
 msgid "score"
 msgstr ""
 
@@ -563,6 +563,10 @@ msgstr "英语"
 msgid "Chinese"
 msgstr "中文"
 
+#: app/settings/base.py:76
+msgid "Ukrainian"
+msgstr ""
+
 #: app/users/forms.py:28
 msgid "This email is used already"
 msgstr "此电邮已在使用"
@@ -665,75 +669,75 @@ msgstr "每日"
 msgid "Instantly"
 msgstr "马上"
 
-#: app/users/models.py:130
+#: app/users/models.py:131
 msgid "bio"
 msgstr ""
 
-#: app/users/models.py:131
+#: app/users/models.py:132
 msgid "tag line"
 msgstr ""
 
-#: app/users/models.py:132
+#: app/users/models.py:133
 msgid "website url"
 msgstr ""
 
-#: app/users/models.py:133
+#: app/users/models.py:134
 msgid "facebook page"
 msgstr ""
 
-#: app/users/models.py:134
+#: app/users/models.py:135
 msgid "linkedin page"
 msgstr ""
 
-#: app/users/models.py:135
+#: app/users/models.py:136
 msgid "twitter page"
 msgstr ""
 
-#: app/users/models.py:136
+#: app/users/models.py:137
 msgid "occupation"
 msgstr ""
 
-#: app/users/models.py:137
+#: app/users/models.py:138
 msgid "area of expertise"
 msgstr ""
 
-#: app/users/models.py:138
+#: app/users/models.py:139
 msgid "privacy settings"
 msgstr ""
 
-#: app/users/models.py:149
+#: app/users/models.py:150
 msgid "organisation"
 msgstr ""
 
-#: app/users/models.py:150
+#: app/users/models.py:151
 msgid "individual"
 msgstr ""
 
-#: app/users/models.py:151
+#: app/users/models.py:152
 msgid "journalist"
 msgstr ""
 
-#: app/users/models.py:152
+#: app/users/models.py:153
 msgid "recieves newsletter"
 msgstr ""
 
-#: app/users/models.py:155
+#: app/users/models.py:156
 msgid "Interface language"
 msgstr "界面语言"
 
-#: app/users/models.py:157
+#: app/users/models.py:158
 msgid "first login"
 msgstr ""
 
-#: app/users/models.py:159
+#: app/users/models.py:160
 msgid "profile visibility"
 msgstr ""
 
-#: app/users/models.py:162
+#: app/users/models.py:163
 msgid "notification frequency"
 msgstr ""
 
-#: app/users/models.py:197
+#: app/users/models.py:198
 msgid "Rated by AHR"
 msgstr ""
 
@@ -891,7 +895,7 @@ msgid "Notifications"
 msgstr "通知"
 
 #: templates/base.html:100 templates/base.html.py:109
-#: templates/base_v2.html:211 templates/users/user_settings_v2.html:16
+#: templates/base_v2.html:241 templates/users/user_settings_v2.html:16
 #: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
 msgstr "设置"
@@ -921,67 +925,81 @@ msgstr "登录"
 msgid "Sign Up"
 msgstr "注册"
 
-#: templates/base_v2.html:90
+#: templates/base_v2.html:91 templates/base_v2.html.py:181
+#: templates/account/signup_start.html:51
+msgid "Connect with Twitter"
+msgstr "使用推特连接"
+
+#: templates/base_v2.html:96 templates/base_v2.html.py:184
+#: templates/account/signup_start.html:48
+msgid "Connect with Facebook"
+msgstr "使用脸书连接"
+
+#: templates/base_v2.html:101
+msgid "AHR"
+msgstr ""
+
+#: templates/base_v2.html:115
 msgid "Add Post"
 msgstr "添加帖文"
 
-#: templates/base_v2.html:95 templates/ahr/home_v2.html:13
+#: templates/base_v2.html:120 templates/ahr/home_v2.html:13
 msgid "Login"
 msgstr "登入"
 
-#: templates/base_v2.html:110
+#: templates/base_v2.html:127 templates/ahr/home_v2.html:34
+msgid "Crowdsourcing the fight for human rights."
+msgstr "通过众包维护人权。"
+
+#: templates/base_v2.html:127
+msgid "The online platform that is opening closed societies."
+msgstr "对封闭社会开放的网上平台。"
+
+#: templates/base_v2.html:138
 msgid "Sign up"
 msgstr "注册"
 
-#: templates/base_v2.html:114
+#: templates/base_v2.html:142
 msgid "Visit market"
 msgstr "光顾市场"
 
-#: templates/base_v2.html:139
+#: templates/base_v2.html:168
 msgid "Get updates"
 msgstr "获得更新信息"
 
-#: templates/base_v2.html:142
+#: templates/base_v2.html:171
 msgid "Enter your e-mail..."
 msgstr "输入电邮地址"
 
-#: templates/base_v2.html:146
+#: templates/base_v2.html:175
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr "获取所有最新的更新，包括精选文章，以及安全提示！"
 
-#: templates/base_v2.html:149 templates/base_v2.html.py:183
+#: templates/base_v2.html:178 templates/base_v2.html.py:212
 msgid "Connect with us"
 msgstr "与我们连接"
 
-#: templates/base_v2.html:152 templates/account/signup_start.html:51
-msgid "Connect with Twitter"
-msgstr "使用推特连接"
-
-#: templates/base_v2.html:155 templates/account/signup_start.html:48
-msgid "Connect with Facebook"
-msgstr "使用脸书连接"
-
-#: templates/base_v2.html:163 templates/ahr/home_v2.html:99
+#: templates/base_v2.html:192 templates/ahr/home_v2.html:100
 msgid "About MOVEMENTS"
 msgstr "关于\"运动\" 网站"
 
-#: templates/base_v2.html:164
+#: templates/base_v2.html:193
 msgid ""
 "Crowdsourcing the fight for human rights. The online platform that is "
 "opening closed societies."
 msgstr "通过众包维护人权。对封闭社会开放的网上平台。"
 
-#: templates/base_v2.html:170 templates/base_v2.html.py:181
+#: templates/base_v2.html:199 templates/base_v2.html.py:210
 msgid "Copyright &copy; 2014 Advancing Human Rights"
 msgstr "版权所有 &copy; 2014 推进人权"
 
-#: templates/base_v2.html:205
+#: templates/base_v2.html:235
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
 msgstr "个人资料"
 
-#: templates/base_v2.html:219
+#: templates/base_v2.html:249
 msgid "Logout"
 msgstr ""
 
@@ -1759,10 +1777,6 @@ msgstr ""
 msgid "Already have an account?"
 msgstr "已经建立了账户吗？"
 
-#: templates/ahr/home_v2.html:34
-msgid "Crowdsourcing the fight for human rights."
-msgstr "通过众包维护人权"
-
 #: templates/ahr/home_v2.html:37
 msgid ""
 "Movements is crowdsourcing the fight for human rights. It connects human "
@@ -1773,12 +1787,12 @@ msgstr ""
 "专长的专家连接在一起的平台。请即刻加入，帮助有需要的持不同政见者。"
 
 #: templates/ahr/home_v2.html:41 templates/ahr/home_v2.html.py:63
-#: templates/ahr/home_v2.html:122
+#: templates/ahr/home_v2.html:123
 msgid "Sign up now"
 msgstr "立即注册"
 
 #: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:68
-#: templates/ahr/home_v2.html:101
+#: templates/ahr/home_v2.html:102
 msgid "Find out more"
 msgstr "请了解更多信息。"
 
@@ -1795,7 +1809,7 @@ msgstr ""
 "无论是新闻工作者，艺术家，科技人员，决策者或公关代理 – 有技能的每一个人都能推"
 "动人权进步。请了解更多信息。"
 
-#: templates/ahr/home_v2.html:100
+#: templates/ahr/home_v2.html:101
 msgid ""
 "In closed societies around the world, brave human rights defenders face "
 "enormous hurdles to advance human rights.  Movements.org is a new platform "
@@ -1811,11 +1825,11 @@ msgstr ""
 "作者，政治家，社会活动人士，艺术家，科技人员，还是能说几门外语的人士，都可以"
 "发挥作用。"
 
-#: templates/ahr/home_v2.html:110 templates/users/more_about_you.html:41
+#: templates/ahr/home_v2.html:111 templates/users/more_about_you.html:41
 msgid "Create a Request"
 msgstr "提交请求"
 
-#: templates/ahr/home_v2.html:111 templates/users/more_about_you.html:43
+#: templates/ahr/home_v2.html:112 templates/users/more_about_you.html:43
 msgid ""
 "Are you an activist in need of help? Movements.org leverages technology to "
 "help those in closed societies find the assistance they need to amplify "
@@ -1824,11 +1838,11 @@ msgstr ""
 "您是需要帮助的人权活动人士吗？ 利用技术来帮助那些在封闭的社会中维权人士找到他"
 "们需要的帮助，来放大他们的声音，扩大他们的影响。"
 
-#: templates/ahr/home_v2.html:120
+#: templates/ahr/home_v2.html:121
 msgid "Getting Started"
 msgstr "开始使用"
 
-#: templates/ahr/home_v2.html:121
+#: templates/ahr/home_v2.html:122
 msgid ""
 "The Movements platform enables dissidents who need help to connect to "
 "activists and others who can provide it. Get started by joining today."
@@ -1836,11 +1850,11 @@ msgstr ""
 "\"运动\"网站平台让需要帮助的持不同政见者和可以提供帮助的活动家和其他人士实现"
 "对接。即刻加入，即刻使用"
 
-#: templates/ahr/home_v2.html:131
+#: templates/ahr/home_v2.html:132
 msgid "Offer your Services"
 msgstr "提供服务"
 
-#: templates/ahr/home_v2.html:132 templates/users/more_about_you.html:47
+#: templates/ahr/home_v2.html:133 templates/users/more_about_you.html:47
 msgid ""
 "If you’ve ever wanted to help a human rights activist, here’s your "
 "opportunity. All of us have skills that can be put to use to advance basic "
@@ -2111,6 +2125,11 @@ msgstr "3.您提供什么样的服务？ "
 msgid "Be specific and clear."
 msgstr "请具体和清楚地介绍"
 
+#: templates/market/create_offer.html:39
+#: templates/market/create_request.html:43
+msgid "(max 120 characters)"
+msgstr ""
+
 #: templates/market/create_offer.html:48
 #: templates/market/create_request.html:52
 msgid "4. Please write your post"
@@ -2368,7 +2387,7 @@ msgid "CLOSE AN OFFER"
 msgstr ""
 
 #: templates/market/clientside/closemarketitemdialog.html:32
-#: templates/market/clientside/marketitem.html:91
+#: templates/market/clientside/marketitem.html:89
 msgid "Close"
 msgstr "关闭"
 
@@ -2377,50 +2396,37 @@ msgid "Please enter your answer"
 msgstr ""
 
 #: templates/market/clientside/marketitem.html:25
-#, python-format
+#: templates/market/clientside/marketitem.html:79
+#, fuzzy, python-format
 msgid ""
 "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
-"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
-"collaborators</a>."
-msgstr ""
-"由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
-"moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>            <a "
-"href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 合作者</a>."
-
-#: templates/market/clientside/marketitem.html:68
-msgid "FEATURED OFFER"
-msgstr "可提供的帮助精选"
-
-#: templates/market/clientside/marketitem.html:70
-msgid "FEATURED REQUEST"
-msgstr "请求帮助精选"
-
-#: templates/market/clientside/marketitem.html:80
-#, python-format
-msgid ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
-"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"        <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
-"collaborators</a>."
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>."
 msgstr ""
 "由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
 "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>        <a href="
-"\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 合作者</a>."
+"\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 贡献者</a>."
 
-#: templates/market/clientside/marketitem.html:88
+#: templates/market/clientside/marketitem.html:67
+msgid "FEATURED OFFER"
+msgstr "可提供的帮助精选"
+
+#: templates/market/clientside/marketitem.html:69
+msgid "FEATURED REQUEST"
+msgstr "请求帮助精选"
+
+#: templates/market/clientside/marketitem.html:86
 msgid "Hide"
 msgstr "隐匿"
 
-#: templates/market/clientside/marketitem.html:89
+#: templates/market/clientside/marketitem.html:87
 msgid "Stick"
 msgstr "顶置"
 
-#: templates/market/clientside/marketitem.html:90
+#: templates/market/clientside/marketitem.html:88
 msgid "Edit"
 msgstr "编辑"
 
-#: templates/market/clientside/marketitem.html:92
+#: templates/market/clientside/marketitem.html:90
 msgid "Report"
 msgstr "举报"
 
@@ -2976,19 +2982,9 @@ msgstr ""
 #~ msgid ""
 #~ "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
 #~ "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-#~ "            <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> "
-#~ "comments</a>."
+#~ "            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
+#~ "contributors</a>."
 #~ msgstr ""
 #~ "由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
 #~ "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>            "
-#~ "<a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> 评论</a>."
-
-#~ msgid ""
-#~ "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
-#~ "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-#~ "        <a href=\"/market/<%%- pk %%>\"><%%- commentcount %%> comments</"
-#~ "a>."
-#~ msgstr ""
-#~ "由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
-#~ "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>        <a "
-#~ "href=\"/market/<%%- pk %%>\"><%%- commentcount %%> 评论</a>."
+#~ "<a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 贡献者</a>."

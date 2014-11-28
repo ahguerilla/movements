@@ -59,33 +59,58 @@
 {% endif %}
 
 {% block header_nav %}
-<nav class="navbar navbar-default header-nav {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}" role="navigation">
+<nav class="navbar navbar-default header-nav {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %} {% if user.is_authenticated %}navbar-logged-in {% else %}navbar-logged-out {% endif %}" role="navigation">
   <div class="container" style="position:relative;">
       <div id="NavLeftMenus" class="navbar-left">
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
         </div>
         {% if user.is_authenticated and not user.userprofile.first_login %}
-        <div class="nav-avatar" id="view-profile-menu">
-          <div class="menu-icon-profile"></div>
-          <div id="content-menu-container"></div>
-        </div>
-        <a href="{% url 'show_notifications' %}">
-          <div class="nav-notification">
-            <div style="display: none;" id="main-nav-count" class="notification-count"></div>
-            <div class="menu-icon-bell"></div>
+          <div class="nav-avatar" id="view-profile-menu">
+            <div class="menu-icon-profile"></div>
+            <div id="content-menu-container"></div>
           </div>
-        </a>
-        <a href="{% url 'postman_inbox' %}">
-          <div class="nav-messages">
-            <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>
-            <div class="menu-icon-message"></div>
-          </div>
-        </a>
+          <a href="{% url 'show_notifications' %}">
+            <div class="nav-notification">
+              <div style="display: none;" id="main-nav-count" class="notification-count"></div>
+              <div class="menu-icon-bell"></div>
+            </div>
+          </a>
+          <a href="{% url 'postman_inbox' %}">
+            <div class="nav-messages">
+              <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>
+              <div class="menu-icon-message"></div>
+            </div>
+          </a>
+        {% endif %}
+      </div>
+      <div class="navbar-left-top">
+        {% if user.is_authenticated and not user.userprofile.first_login %}
+          <a href="https://twitter.com/movements_org" target="_blank">
+            <div class="nav-twitter">
+              <img src="{{ STATIC_URL }}images/v2/twitter-dualstate.png" alt="{%trans "Connect with Twitter"%}">
+            </div>
+          </a>
+          <a target="_blank" href="https://www.facebook.com/Movements.org">
+            <div class="nav-facebook">
+              <img src="{{ STATIC_URL }}images/v2/facebook-dualstate.png" alt="{%trans "Connect with Facebook"%}" >
+            </div>
+          </a>
+          <a href="http://advancinghumanrights.org/" target="_blank">
+            <div class="nav-ahr">
+              <img src="{{ STATIC_URL }}images/v2/ahr-dualstate.png" alt="{%trans "AHR"%}">
+            </div>
+          </a>
         {% endif %}
       </div>
     {% if user.is_authenticated and not user.userprofile.first_login %}
       <div id="NavRightLoggedIn" class="navbar-right">
+        <div class="nav-flags">
+          <a data-language="zh-cn" class="set-lang" href="#"><img src="/static/images/v2/flag_chinese.png"></a>
+          <a data-language="ar" class="set-lang" href="#"><img src="/static/images/v2/flag_arabic.png"></a>
+          <a data-language="en" class="set-lang" href="#"><img src="/static/images/v2/flag_uk.png"></a>
+          <p>Language:</p>
+        </div>
         <a id="add-post" class="btn btn-action"><img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
             <span id="AddPostText"> {%trans "Add Post"%}</span></a>
         <div id="add-post-popup-container"></div>
@@ -97,6 +122,9 @@
     {% endif %}
     <div class="header-nav-wrapper">
       <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>
+    </div>
+    <div class="header-nav-text">
+      <p>{% trans "Crowdsourcing the fight for human rights."%}<br/>{%  trans "The online platform that is opening closed societies."%}</p>
     </div>
   </div>
 </nav>
@@ -131,6 +159,7 @@
 {% endblock %}
 
 {% block footer_padding %}<div style="height: 30px"></div>{% endblock %}
+{% if not user.is_authenticated %}
 <footer>
   <div id="FooterSocialMedia_Big" class="footer">
     <div class="container">
@@ -193,6 +222,7 @@
     </div>
   </div>
 </footer>
+{% endif %}
 <div id="modal-placeholder"></div>
 <script type="text/template" id="add-post-template">
   <a class="btn btn-request" href="{% url 'create_request' %}"><img src="{{ STATIC_URL }}images/v2/request_icon.png"/>{%trans "Request"%}</a>
@@ -261,6 +291,27 @@
     });
   })();
 </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('.set-lang').click(function(ev){
+        ev.preventDefault();
+        var lang = $(ev.currentTarget).data('language');
+        $.ajax({
+          url: '/set-language',
+          type: 'POST',
+          dataType: 'json',
+          data: {
+            language_code: lang
+          },
+          success: function(ev){
+            if(ev.result === 'success'){
+              window.location.reload();
+            }
+          }
+        });
+      });
+  });
+  </script>
 
 </body>
 </html>
