@@ -795,7 +795,7 @@ $(function () {
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (options) {
     filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills});
-    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">All posts loaded for current filter</div>';
+    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Finished loading posts</div>';
     var market = new MarketView({
       el: '#market-main',
       filterView: filterView,
@@ -820,7 +820,7 @@ $(function () {
 
   window.ahr.market.initProfile = function(userId){
     filterView = new ProfileFilterView()
-    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">All posts loaded for current user<div>';
+    var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Finished loading posts<div>';
     var marketUrl = ahr.app_urls.getMarketItemsUser;
 
     if(userId) {
