@@ -79,10 +79,17 @@ def create_request(request):
     if form.is_valid():
         save_market_item(form, request.user)
         # TODO This needs to be the new view request page
-        return redirect('/')
+        return redirect(reverse('request_posted'))
     return render_to_response('market/create_request.html', {'form': form},
                               context_instance=RequestContext(request))
 
+
+@login_required
+def request_posted(request):
+    if request.POST:
+        return redirect(reverse('show_market'))
+    return render_to_response('market/request_posted.html', {},
+                              context_instance=RequestContext(request))
 
 @login_required
 def edit_offer(request, post_id):
