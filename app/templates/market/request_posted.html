@@ -1,0 +1,43 @@
+{% extends "base_form.html" %}
+
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block public-content-message %}
+  <form class="form-horizontal" method="post">
+    {% csrf_token %}
+    <div class="dialog movements-form request-posted">
+      <div>
+        <div class="form-title"><h1>{% trans "Request Posted" %}</h1></div>
+        <p>
+          Thanks for creating your request on Movements.   Here’s what you can expect.
+          <ul>
+            <li style="margin-bottom: 6px;">Anyone who has asked to get an alert on your topic will get an email about your request.  If they are interested they will message you back either with a public comment or a Direct Message.</li>
+            <li>Movements will look for people or organizations that might be helpful.  If you’re looking for media coverage they may try to pitch your story.  If you need help with refugee status they’ll contact legal organizations.</li>
+          </ul>
+        </p>
+        <p>
+        There are no guarantees.   The journalists who follow Movements may not be able to use your story this month.  But they may be able to use some other story that you suggest in the future.   The lawyers on Movements may not have the time to get involved this week.  But they may have time next month.
+        </p>
+        <p>
+        A journalist may read your post and then wait to see if you communicate with others on Movements (which would make you more interesting to them).  A lawyer might want to see the same thing.
+        </p>
+        <p>
+        Please read <a href="https://www.movements.org/en/movements/resources/getting-the-best-response-to-your-offerrequest">How to make a good post on Movements</a> for tips on making your request interesting to other users.
+        </p>
+        <p>
+        Movements is not a magic wand.  (We wish it were!)   It’s just like any other social media – the more you participate the more benefit you’ll get.
+        </p>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <div class="form-group">
+          <div class="col-xs-12">
+            <button class="btn btn-action pull-right">{% trans "Return to Market"%}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
