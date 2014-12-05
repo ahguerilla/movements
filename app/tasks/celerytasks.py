@@ -29,8 +29,7 @@ def get_notification_comment_text(obj, username, comment):
 
 def find_people_interested_in(obj):
     interests = [interest.id for interest in obj.interests.all()]
-    countries = [country.id for country in obj.countries.all()]
-    query = Q(interests__in=interests) | Q(countries__in=countries)
+    query = Q(interests__in=interests)
     query = query & ~Q(user=obj.owner)
     profiles = UserProfile.objects.filter(query).distinct('id').only('user').all()
     return profiles
