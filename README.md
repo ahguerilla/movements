@@ -84,7 +84,7 @@ django-admin.py runserver --settings=app.settings.production
 
 ##Translation
 
-After you applied south migration 0018 on user app run the below command to copy the existing values to the english column:
+After you applied south migration 0018 on user app run the below command to copy the existing valnues to the english column:
 ./manage.py  update_translation_fields --setting=app.settings.foo
 
 Substitude -l no with -l <your language code>
