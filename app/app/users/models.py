@@ -113,11 +113,23 @@ class UserProfile(models.Model):
         SECURE=(1, _('Secure - only your screen name, skills and country is shared')),
         PUBLIC=(2, _('Public - all your profile information is shared')),
     )
+
     NOTIFICATION_FREQUENCY = EnumChoices(
         NEVER=(0, _('Never')),
         WEEKLY=(1, _('Weekly')),
         DAILY=(2, _('Daily')),
         INSTANTLY=(3, _('Instantly')),
+    )
+
+    REFERRAL_CHOICES = EnumChoices(
+        UNKNOWN=(0, _('Unknown')),
+        SOCIAL_MEDIA=(1, _('Social Media')),
+        STAFF_CONTACT=(2, _('Staff Contact')),
+        GENERAL_MEDIA=(3, _('General Media')),
+        REFERRED_BY_MOVEMENTS_USER=(4, _('Referred by Movements User')),
+        EVENT=(5, _('Event')),
+        OTHER=(6, _('Other')),
+        PREFER_NOT_TO_SAY=(7, _('Prefer not to say')),
     )
 
     INTERFACE_LANGUAGE = (
@@ -139,6 +151,8 @@ class UserProfile(models.Model):
     privacy_settings = JSONField(_('privacy settings'), null=True, blank=True)
     nationality = models.ForeignKey(Nationality, null=True, blank=True)
     resident_country = models.ForeignKey(Residence, null=True, blank=True)
+    referred_by = models.PositiveSmallIntegerField(choices=REFERRAL_CHOICES,
+                                                   default=REFERRAL_CHOICES.UNKNOWN)
 
     skills = models.ManyToManyField(Skills, blank=True, null=True)
     issues = models.ManyToManyField(Issues, blank=True, null=True)
