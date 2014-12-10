@@ -55,6 +55,7 @@ class MarketItem(models.Model):
     feedback_response = models.TextField(
         _('feedback response'), blank=True, default='')
     is_featured = models.BooleanField(_('is featured'), default=False)
+    featured_order_hint = models.CharField(max_length=5, default='c')
 
     def __unicode__(self):
         return self.details

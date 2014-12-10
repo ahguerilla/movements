@@ -168,7 +168,8 @@ def get_market_items(request, user_id=None, filter_by_user=False):
 def get_featured_market_items(request):
     featured_posts = market.models.MarketItem.objects.exclude(
         status__in=[market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
-                    market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN]).filter(is_featured=True)
+                    market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN])\
+        .filter(is_featured=True).order_by('featured_order_hint')
 
     is_safe = True
     if request.user.is_authenticated():
@@ -228,6 +229,7 @@ def get_marketitems_fromto(request, sfrom, to, rtype):
         *get_raw(request, filter_by_owner=False))[int(sfrom):int(to)]
     retval = return_item_list(market_items, rtype, request, is_safe=False)
     return retval
+
 
 @login_required
 def get_user_marketitem_fromto(request, sfrom, to, rtype):
