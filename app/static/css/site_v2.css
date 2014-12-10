@@ -397,6 +397,20 @@ body {
   clip: rect(0px, 30px, 22px, 0px);
   margin-top: -3px;
 }
+.header-nav .navbar-left-top .nav-blog {
+  float: left;
+  width: 80px;
+  color: #fff;
+  background-color: #005d86;
+  text-align: center;
+  margin-left: 115px;
+  margin-top: -3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
 .header-nav .navbar-right {
   float: right !important;
 }
@@ -917,12 +931,12 @@ h6 {
 .page-banner .carousel-inner .carousel-content .carousel-button {
   position: absolute;
   top: 365px;
-  width: 60%;
+  width: 50%;
   margin-left: 20%;
   margin-right: 20%;
 }
 .page-banner .carousel-inner .carousel-content .carousel-button button {
-  width: 40%;
+  width: 50%;
   height: 50px;
   font-size: 22px;
 }
