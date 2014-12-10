@@ -899,7 +899,7 @@ h6 {
   padding-right: 15%;
   width: 100%;
   position: absolute;
-  top: 150px;
+  top: 120px;
   color: #fff;
   font-size: 36px;
   font-family: "HurmeGeometricSans3-SemiBold";
@@ -911,12 +911,12 @@ h6 {
   padding-right: 20%;
   width: 100%;
   position: absolute;
-  top: 295px;
+  top: 265px;
   font-size: 18px;
 }
 .page-banner .carousel-inner .carousel-content .carousel-button {
   position: absolute;
-  top: 400px;
+  top: 365px;
   width: 60%;
   margin-left: 20%;
   margin-right: 20%;
@@ -927,10 +927,13 @@ h6 {
   font-size: 22px;
 }
 .page-banner .carousel-inner .carousel-content #FindOutMoreButton {
-  top: 465px;
+  top: 425px;
 }
 .page-banner .carousel-inner .carousel-content #FindOutMoreButton button {
   background-color: #227da6;
+}
+.page-banner .carousel-inner .carousel-content #BlogButton {
+  top: 485px;
 }
 .page-banner .left-control {
   position: absolute;
@@ -2376,7 +2379,7 @@ input.borderless-control:focus:invalid:focus {
     top: 225px;
   }
   .page-banner .carousel-inner .carousel-content .carousel-button button {
-    width: 180px;
+    width: 200px;
   }
 }
 @media (max-width: 579px) {
