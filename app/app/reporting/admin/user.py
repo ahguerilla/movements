@@ -89,9 +89,9 @@ class UserAdmin(TrackingAdmin):
     get_full_name.short_description = _('Full Name')
 
     def get_nationality(self, obj):
-        if hasattr(obj, 'userprofile'):
-            return obj.userprofile.nationality
-        return ''
+        if not hasattr(obj, 'userprofile'):
+            return _('No profile')
+        return obj.userprofile.nationality
     get_nationality.short_description = _('Nationality')
 
     def get_resident_country(self, obj):
@@ -153,6 +153,8 @@ class UserAdmin(TrackingAdmin):
     get_bio.short_description = _('Bio')
 
     def get_vet_info_count(self, obj):
+        if not hasattr(obj, 'userprofile'):
+            return 0
         count = 0
         if obj.userprofile.fb_url:
             count = count + 1
