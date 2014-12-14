@@ -120,8 +120,10 @@
           <a data-language="en" class="set-lang" href="#"><img src="/static/images/v2/flag_uk.png"></a>
           <p>Language:</p>
         </div>
-        <a id="add-post" class="btn btn-action"><img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
-            <span id="AddPostText"> {%trans "Add Post"%}</span></a>
+        <a id="add-post" class="btn btn-action" onClick="_gaq.push(['_trackEvent', 'Add Post', 'Top Right', 'Add Post']);">
+          <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
+          <span id="AddPostText"> {%trans "Add Post"%}</span>
+        </a>
         <div id="add-post-popup-container"></div>
       </div>
     {% else %}
@@ -234,8 +236,12 @@
 {% endif %}
 <div id="modal-placeholder"></div>
 <script type="text/template" id="add-post-template">
-  <a class="btn btn-request" href="{% url 'create_request' %}"><img src="{{ STATIC_URL }}images/v2/request_icon.png"/>{%trans "Request"%}</a>
-  <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>{%trans "Offer"%}</a>
+  <a onClick="_gaq.push(['_trackEvent', 'Add Post', 'Top Right', 'Request']);" class="btn btn-request" href="{% url 'create_request' %}">
+    <img src="{{ STATIC_URL }}images/v2/request_icon.png"/>{%trans "Request"%}
+  </a>
+  <a onClick="_gaq.push(['_trackEvent', 'Add Post', 'Top Right', 'Offer']);" class="btn btn-offer" href="{% url 'create_offer' %}">
+    <img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>{%trans "Offer"%}
+  </a>
 </script>
 <script type="text/template" id="content-menu-template">
   <ul><li><a href="{% url 'user_profile' %}">

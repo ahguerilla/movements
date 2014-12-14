@@ -474,6 +474,7 @@ body {
   left: inherit;
   right: 14px;
   width: 136px;
+  height: 90px;
 }
 #add-post-popup-container .popover-content {
   width: 132px;

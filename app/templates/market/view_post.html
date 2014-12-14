@@ -48,20 +48,24 @@
           <li><a
               obj_id="{{ post.id }}"
               rec_type="market_item"
+              onClick="_gaq.push(['_trackEvent', 'Add Post', 'Body', 'Recommend']);"
               class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
           {% if post.tweet_permission %}
             <li><a
               obj_id="{{ post.id }}"
               rec_type="market_item"
+              onClick="_gaq.push(['_trackEvent', 'Add Post', 'Body', 'Tweet']);"
               class="tweet" href='#' alt="tweet post">{% trans 'Tweet' %}</a></li>
           {% endif %}
           <li><a
                 username="{{ post.owner.username }}"
                 subject="RE: {{ post.title }}"
                 readonlysub="1"
+                onClick="_gaq.push(['_trackEvent', 'Add Post', 'Body', 'Direct message']);"
                 class="message private-message" href='#' alt="direct message author">{% trans 'Direct message' %}</a></li>
           <li><a
               report_url="{{ report_url }}"
+              onClick="_gaq.push(['_trackEvent', 'Add Post', 'Body', 'Report this post']);"
               class="report" href='#' alt="report post">{% trans 'Report this post' %}</a></li>
         </ul>
       </div>
