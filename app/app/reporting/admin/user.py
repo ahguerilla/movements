@@ -239,6 +239,8 @@ class UserAdmin(TrackingAdmin):
         users = get_user_model().objects.filter(emailaddress__verified=False).all()
         for u in users:
             email_address = u.emailaddress_set.filter(primary=True).first()
+            if not email_address:
+                continue
             confirmation = EmailConfirmation.create(email_address)
             confirmation.sent = timezone.now()
             confirmation.save()
