@@ -246,7 +246,7 @@ class UserAdmin(TrackingAdmin):
             confirmation.save()
             activate_url = reverse("account_confirm_email", args=[confirmation.key])
             activate_uri = request.build_absolute_uri(activate_url)
-            writer.writerow([u.get_full_name(), u.email, u.date_joined, activate_uri])
+            writer.writerow([unicode(u.get_full_name()).encode('utf-8'), u.email, u.date_joined, activate_uri])
         return response
 
 admin.site.register(UserTracking, UserAdmin)
