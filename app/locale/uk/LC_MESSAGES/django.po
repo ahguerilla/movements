@@ -2,752 +2,759 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-14 11:41-0600\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-01-08 22:49+0000\n"
+"Last-Translator: Adriana Luhovy <aluhovy@advancinghumanrights.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Translated-Using: django-rosetta 0.7.4\n"
 
 #: app/cms_toolbar.py:43
 msgid "Menu Settings"
-msgstr ""
+msgstr "Меню Налаштування"
 
 #: app/context_processors.py:7
 msgid "Exchange"
-msgstr ""
+msgstr "Обмін"
 
 #: app/context_processors.py:8
 msgid "Members"
-msgstr ""
+msgstr "Користувачі"
 
 #: app/context_processors.py:9
 msgid "Recommendation"
-msgstr ""
+msgstr "Рекомендація"
 
 #: app/context_processors.py:10
 msgid "more..."
-msgstr ""
+msgstr "більше..."
 
 #: app/context_processors.py:11
 msgid "Click here to view the recommendation"
-msgstr ""
+msgstr "Натисніть тут, щоб подивитись рекомендації"
 
 #: app/context_processors.py:12
 msgid "Offering"
-msgstr ""
+msgstr "Пропозиція"
 
 #: app/context_processors.py:13
 msgid "Requesting"
-msgstr ""
+msgstr "Запитуючий"
 
 #: app/context_processors.py:14
 msgid "Search by keyword or username for Members"
-msgstr ""
+msgstr "Пошук за ключовими словами або іменем користувача для членів"
 
 #: app/context_processors.py:15
 msgid "Your search did not match any market item."
-msgstr ""
+msgstr "За Вашим запитом нічого не знайдено."
 
 #: app/context_processors.py:16
 msgid "Search again without any filters"
-msgstr ""
+msgstr "Шукати знову без будь-яких фільтрів"
 
 #: app/context_processors.py:17
 msgid "or"
-msgstr ""
+msgstr "або"
 
 #: app/context_processors.py:18
 msgid "search again with your default filters"
-msgstr ""
+msgstr "шукати знову з Вашими фільтрами за замовчуванням"
 
 #: app/context_processors.py:19
 msgid ""
 "This link will take you off the Movements site.\n"
 "Make sure you trust the site that you are being redirected to."
 msgstr ""
+"Це посилання перенаправить Вас за межі сайту Movements. Переконайтеся, що Ви"
+" довіряєте сайту, на який Вас буде перенаправлено."
 
 #: app/market/forms.py:61 app/market/forms.py:103
 msgid "You must add at least one skill"
-msgstr ""
+msgstr "Ви повинні додати принаймні одине вміння"
 
 #: app/market/forms.py:63 app/market/forms.py:105
 msgid "Please select a maximum of 4 skills"
-msgstr ""
+msgstr "Будь ласка, виберіть максимум 4 вміння"
 
 #: app/market/forms.py:69 app/market/forms.py:111
 msgid "Please enter a maximum of 120 characters"
-msgstr ""
+msgstr "Будь ласка, введіть максимум 120 символів"
 
 #: app/market/admin/report.py:40
 msgid "Additional properties"
-msgstr ""
+msgstr "Додаткові властивості"
 
 #: app/market/models/comment.py:14 app/market/models/report.py:19
 #: app/market/models/report.py:36
 msgid "contents"
-msgstr ""
+msgstr "контент"
 
 #: app/market/models/comment.py:15 app/market/models/market.py:41
 #: app/market/models/notification.py:18 app/market/models/rate.py:13
 #: app/market/models/report.py:21 app/market/models/report.py:38
 #: app/users/models.py:204
 msgid "publish date"
-msgstr ""
+msgstr "дата публікації"
 
 #: app/market/models/comment.py:17 app/market/models/market.py:40
 #: app/market/models/report.py:22
 msgid "is published?"
-msgstr ""
+msgstr "опубліковано?"
 
 #: app/market/models/comment.py:18 app/market/models/market.py:47
 msgid "deleted"
-msgstr ""
+msgstr "видалено"
 
 #: app/market/models/feedback.py:11
 msgid "Yes/No"
-msgstr ""
+msgstr "Так/Ні"
 
 #: app/market/models/feedback.py:12
 msgid "Range (1-5)"
-msgstr ""
+msgstr "Діапазон (1-5)"
 
 #: app/market/models/feedback.py:13
 msgid "Free Text Long"
-msgstr ""
+msgstr "Вільний текст. Довгий."
 
 #: app/market/models/feedback.py:17
 msgid "question"
-msgstr ""
+msgstr "питання"
 
 #: app/market/models/feedback.py:19
 msgid "question type"
-msgstr ""
+msgstr "тип питання"
 
 #: app/market/models/feedback.py:23
 msgid "question configuration"
-msgstr ""
+msgstr "конфігурація питання"
 
 #: app/market/models/feedback.py:24
 msgid "question configurations"
-msgstr ""
+msgstr "конфігурації питання"
 
 #: app/market/models/feedback.py:29
 msgid "without type"
-msgstr ""
+msgstr "без типу"
 
 #: app/market/models/feedback.py:33 app/market/models/market.py:34
 #: app/market/models/rate.py:14 app/users/models.py:205
 msgid "title"
-msgstr ""
+msgstr "назва"
 
 #: app/market/models/feedback.py:35
 msgid "questions"
-msgstr ""
+msgstr "питання"
 
 #: app/market/models/feedback.py:37
 msgid "Market item type"
-msgstr ""
+msgstr "Тип елементу громадського майданчику"
 
 #: app/market/models/feedback.py:42
 msgid "questionnaire"
-msgstr ""
+msgstr "анкета"
 
 #: app/market/models/feedback.py:43
 msgid "questionnaires"
-msgstr ""
+msgstr "анкети"
 
 #: app/market/models/market.py:19
 msgid "Open"
-msgstr ""
+msgstr "Відкрити"
 
 #: app/market/models/market.py:20
 msgid "Watch"
-msgstr ""
+msgstr "Слідкувати"
 
 #: app/market/models/market.py:21
 msgid "Urgent"
-msgstr ""
+msgstr "Терміново"
 
 #: app/market/models/market.py:22
 msgid "Closed By Admin"
-msgstr ""
+msgstr "Закрито адміністратором"
 
 #: app/market/models/market.py:23
 msgid "Closed By User"
-msgstr ""
+msgstr "Закрито користувачем"
 
 #: app/market/models/market.py:26 templates/base_v2.html:198
 msgid "Request"
-msgstr ""
+msgstr "Запит"
 
 #: app/market/models/market.py:27 templates/base_v2.html:199
 msgid "Offer"
-msgstr ""
+msgstr "Пропозиція"
 
 #: app/market/models/market.py:30 app/market/models/market.py:210
 msgid "item_type"
-msgstr ""
+msgstr "тип_елемента"
 
 #: app/market/models/market.py:35
 msgid "details"
-msgstr ""
+msgstr "деталі"
 
 #: app/market/models/market.py:38
 msgid "Specific skill"
-msgstr ""
+msgstr "Особливі вміння"
 
 #: app/market/models/market.py:39
 msgid "URL Link"
-msgstr ""
+msgstr "Посилання на URL-адресу"
 
 #: app/market/models/market.py:42
 msgid "commentcount"
-msgstr ""
+msgstr "кількість коментарів"
 
 #: app/market/models/market.py:43
 msgid "collaboratorcount"
-msgstr ""
+msgstr "кількість співробітників"
 
 #: app/market/models/market.py:44 app/users/models.py:154
 msgid "ratecount"
-msgstr ""
+msgstr "облік рейтингу"
 
 #: app/market/models/market.py:45
 msgid "reportcount"
-msgstr ""
+msgstr "кількість звітів"
 
 #: app/market/models/market.py:46 app/market/models/rate.py:15
 #: app/users/models.py:155 app/users/models.py:206
 msgid "score"
-msgstr ""
+msgstr "рахунок"
 
 #: app/market/models/market.py:48
 msgid "receive notifications"
-msgstr ""
+msgstr "отримувати повідомлення"
 
 #: app/market/models/market.py:49
 msgid "Tweet Permission"
-msgstr ""
+msgstr "Дозвіл поширювання за допомогою Twitter"
 
 #: app/market/models/market.py:51 app/reporting/admin/incident.py:89
 msgid "status"
-msgstr ""
+msgstr "статус"
 
 #: app/market/models/market.py:54
 msgid "closed date"
-msgstr ""
+msgstr "дата закриття"
 
 #: app/market/models/market.py:56
 msgid "feedback response"
-msgstr ""
+msgstr "зворотня відповідь"
 
 #: app/market/models/market.py:57
 msgid "is featured"
-msgstr ""
+msgstr "є популярним"
 
 #: app/market/models/market.py:163 app/market/models/market.py:178
 #: app/market/models/market.py:194 app/market/models/market.py:207
 #: app/market/models/report.py:47 app/market/models/report.py:76
 msgid "market item"
-msgstr ""
+msgstr "елемент громадського майданчику"
 
 #: app/market/models/market.py:164
 msgid "action"
-msgstr ""
+msgstr "дія"
 
 #: app/market/models/market.py:165 app/market/models/market.py:180
 msgid "date of action"
-msgstr ""
+msgstr "дата дії"
 
 #: app/market/models/market.py:169 app/market/models/market.py:170
 msgid "actions of market item"
-msgstr ""
+msgstr "дії елементу громадського майданчику"
 
 #: app/market/models/market.py:179
 msgid "next step"
-msgstr ""
+msgstr "наступний крок"
 
 #: app/market/models/market.py:181
 msgid "completed"
-msgstr ""
+msgstr "завершено"
 
 #: app/market/models/market.py:185
 msgid "next step of market item"
-msgstr ""
+msgstr "наступний крок елементу громадського майданчику"
 
 #: app/market/models/market.py:186
 msgid "next steps of market item"
-msgstr ""
+msgstr "наступні кроки елементу громадського майданчику"
 
 #: app/market/models/market.py:195 app/users/models.py:78
 msgid "language"
-msgstr ""
+msgstr "мова"
 
 #: app/market/models/market.py:196
 msgid "source language"
-msgstr ""
+msgstr "мова оригіналу"
 
 #: app/market/models/market.py:197
 msgid "title translated"
-msgstr ""
+msgstr "перекладена назва"
 
 #: app/market/models/market.py:198
 msgid "details translated"
-msgstr ""
+msgstr "перекладені деталі"
 
 #: app/market/models/market.py:199
 msgid "date generated"
-msgstr ""
+msgstr "згенерована дата"
 
 #: app/market/models/market.py:211
 msgid "interaction date"
-msgstr ""
+msgstr "дата взаємодії"
 
 #: app/market/models/notification.py:16
 msgid "avatar user"
-msgstr ""
+msgstr "аватар користувача"
 
 #: app/market/models/report.py:20 app/market/models/report.py:37
 msgid "is resolved"
-msgstr ""
+msgstr "вирішено"
 
 #: app/market/models/report.py:48
 msgid "e-mail"
-msgstr ""
+msgstr "адреса електронної пошти"
 
 #: app/market/models/report.py:50
 msgid "date of recommendation"
-msgstr ""
+msgstr "дата рекомендації"
 
 #: app/market/models/report.py:54
 msgid "email recommendation"
-msgstr ""
+msgstr "е-mail рекомендація"
 
 #: app/market/models/report.py:55
 msgid "email recommendations"
-msgstr ""
+msgstr "е-mail рекомендації"
 
 #: app/market/models/report.py:72
 msgid "is post recommendation"
-msgstr ""
+msgstr "рекомендований пост"
 
 #: app/market/models/report.py:74
 msgid "is user recommendation"
-msgstr ""
+msgstr "рекомендований користувач"
 
 #: app/market/models/report.py:80 app/market/models/report.py:118
 #: templates/market/notifications.html:50
 msgid "message"
-msgstr ""
+msgstr "повідомлення"
 
 #: app/market/models/report.py:81 app/market/models/report.py:119
 msgid "messages"
-msgstr ""
+msgstr "повідомлення"
 
 #: app/reporting/models.py:21
 msgid "incident"
-msgstr ""
+msgstr "інцидент"
 
 #: app/reporting/models.py:22
 msgid "incident tracking"
-msgstr ""
+msgstr "відстеження інциденту"
 
 #: app/reporting/models.py:31 app/reporting/models.py:32
 msgid "user tracking"
-msgstr ""
+msgstr "відстеження користувача"
 
 #: app/reporting/models.py:43
 msgid "addition"
-msgstr ""
+msgstr "додатково"
 
 #: app/reporting/models.py:44
 msgid "change"
-msgstr ""
+msgstr "зміна"
 
 #: app/reporting/models.py:45
 msgid "deletion"
-msgstr ""
+msgstr "видалення"
 
 #: app/reporting/models.py:46
 msgid "user logged in"
-msgstr ""
+msgstr "користувач увійшов"
 
 #: app/reporting/models.py:52
 msgid "action flag"
-msgstr ""
+msgstr "прапорець дії"
 
 #: app/reporting/models.py:57 app/reporting/models.py:58
 msgid "user activity"
-msgstr ""
+msgstr "активність користувача"
 
 #: app/reporting/admin/incident.py:45
 msgid "number of email recommendations"
-msgstr ""
+msgstr "кількість e-mail рекомендацій"
 
 #: app/reporting/admin/incident.py:57
 msgid "number of views"
-msgstr ""
+msgstr "кількість переглядів"
 
 #: app/reporting/admin/incident.py:61
 msgid "total messages count"
-msgstr ""
+msgstr "загальна кількість повідомлень"
 
 #: app/reporting/admin/incident.py:65
 msgid "Screen name"
-msgstr ""
+msgstr "Ім'я користувача"
 
 #: app/reporting/admin/incident.py:70
 msgid "date of post"
-msgstr ""
+msgstr "дата поста"
 
 #: app/reporting/admin/incident.py:75
 msgid "owner"
-msgstr ""
+msgstr "власник"
 
 #: app/reporting/admin/incident.py:84
 msgid "Aging"
-msgstr ""
+msgstr "Старіння"
 
 #: app/reporting/admin/user.py:14 app/reporting/admin/user.py:133
 msgid "Movements Rating"
-msgstr ""
+msgstr "Рейтинг Movements "
 
 #: app/reporting/admin/user.py:19
 msgid "Unassigned"
-msgstr ""
+msgstr "Не призначено"
 
 #: app/reporting/admin/user.py:20
 msgid "0 Stars"
-msgstr ""
+msgstr "0 Зірок"
 
 #: app/reporting/admin/user.py:21
 msgid "1 Star"
-msgstr ""
+msgstr "1 Зірка"
 
 #: app/reporting/admin/user.py:22
 msgid "2 Stars"
-msgstr ""
+msgstr "2 Зірки"
 
 #: app/reporting/admin/user.py:23
 msgid "3 Stars"
-msgstr ""
+msgstr "3 Зірки"
 
 #: app/reporting/admin/user.py:24
 msgid "4 Stars"
-msgstr ""
+msgstr "4 Зірки"
 
 #: app/reporting/admin/user.py:25
 msgid "5 Stars"
-msgstr ""
+msgstr "5 Зірок"
 
 #: app/reporting/admin/user.py:36
 msgid "Email Verified"
-msgstr ""
+msgstr "Email перевірено"
 
 #: app/reporting/admin/user.py:41
 msgid "true"
-msgstr ""
+msgstr "вірно"
 
 #: app/reporting/admin/user.py:42
 msgid "false"
-msgstr ""
+msgstr "помилковий"
 
 #: app/reporting/admin/user.py:81
 msgid "Screen Name"
-msgstr ""
+msgstr "Ім'я користувача"
 
 #: app/reporting/admin/user.py:85
 msgid "Signup Date"
-msgstr ""
+msgstr "Дата реєстрації"
 
 #: app/reporting/admin/user.py:89
 msgid "Full Name"
-msgstr ""
+msgstr "Повне ім'я"
 
 #: app/reporting/admin/user.py:95
 #: templates/market/clientside/userprofile.html:34
 msgid "Nationality"
-msgstr ""
+msgstr "Національність"
 
 #: app/reporting/admin/user.py:101 templates/account/signup.html:52
 #: templates/users/user_settings_v2.html:69
 msgid "Country of Residence"
-msgstr ""
+msgstr "Країна проживання"
 
 #: app/reporting/admin/user.py:105
 msgid "Is Admin"
-msgstr ""
+msgstr "Адміністратор"
 
 #: app/reporting/admin/user.py:109
 msgid "Request Count"
-msgstr ""
+msgstr "Кількість запитів"
 
 #: app/reporting/admin/user.py:113
 msgid "Offer Count"
-msgstr ""
+msgstr "Кількість пропозицій"
 
 #: app/reporting/admin/user.py:117
 msgid "Comment Count"
-msgstr ""
+msgstr "Кількість коментарів"
 
 #: app/reporting/admin/user.py:123 app/reporting/admin/user.py:132
 msgid "unassigned"
-msgstr ""
+msgstr "не призначено"
 
 #: app/reporting/admin/user.py:125
 msgid "Rate user"
-msgstr ""
+msgstr "Оцінити користувача"
 
 #: app/reporting/admin/user.py:127
 msgid "Movements rating"
-msgstr ""
+msgstr "рейтинг Movements "
 
 #: app/reporting/admin/user.py:136 app/reporting/admin/user.py:140
 #: app/reporting/admin/user.py:144 app/reporting/admin/user.py:148
 #: app/reporting/admin/user.py:152
 msgid "Not supplied"
-msgstr ""
+msgstr "Не постачається"
 
 #: app/reporting/admin/user.py:137 templates/account/signup.html:87
 #: templates/users/user_settings_v2.html:108
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: app/reporting/admin/user.py:141 templates/account/signup.html:80
 #: templates/users/user_settings_v2.html:101
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: app/reporting/admin/user.py:145
 msgid "Linked in"
-msgstr ""
+msgstr "Linked in"
 
 #: app/reporting/admin/user.py:149
 msgid "Website/blog"
-msgstr ""
+msgstr "Вебсайт/блоґ"
 
 #: app/reporting/admin/user.py:153 templates/users/user_profile_v2.html:57
 msgid "Bio"
-msgstr ""
+msgstr "Біографія"
 
 #: app/reporting/admin/user.py:168
 msgid "Count social"
-msgstr ""
+msgstr "Кількість соціальних мереж"
 
 #: app/reporting/admin/user.py:174
 msgid "Email verified"
-msgstr ""
+msgstr "Email перевірено"
 
 #: app/reporting/admin/user_activity.py:22
 msgid "Staff status"
-msgstr ""
+msgstr "Статус співробітника"
 
 #: app/settings/base.py:73
 msgid "Arabic"
-msgstr ""
+msgstr "Арабська"
 
 #: app/settings/base.py:74
 msgid "English"
-msgstr ""
+msgstr "Англійська"
 
 #: app/settings/base.py:75
 msgid "Chinese"
-msgstr ""
+msgstr "Китайська"
 
 #: app/settings/base.py:76
 msgid "Ukrainian"
-msgstr ""
+msgstr "Українська"
 
 #: app/users/forms.py:28
 msgid "This email is used already"
-msgstr ""
+msgstr "Цей email вже використовується"
 
 #: app/users/forms.py:35
 msgid "Passwords must match"
-msgstr ""
+msgstr "Паролі повинні співпадати"
 
 #: app/users/forms.py:70 app/users/forms.py:93
 msgid "This username is already in use"
-msgstr ""
+msgstr "Це ім'я користувача вже використовується"
 
 #: app/users/forms.py:72 app/users/forms.py:95
 msgid ""
 "Username must contain only letters, numbers - and _. White space is not "
 "allowed"
 msgstr ""
+"Ім'я користувача має містити тільки букви, цифри - і _. Пропуски не "
+"допускаються"
 
 #: app/users/forms.py:74 app/users/forms.py:97
 msgid ""
 "Username must be greater that 2 characters and less than 30 contain only "
 "letters, numbers - and _. White space is not allowed"
 msgstr ""
+"Ім'я користувача повинно бути більшим ніж 2 символи і меншим ніж 30 "
+"символів, містити  тільки букви, цифри - і _. Пропуски не допускаються"
 
 #: app/users/models.py:14
 msgid "skill set"
-msgstr ""
+msgstr "набір навичок"
 
 #: app/users/models.py:24
 msgid "issues of interest"
-msgstr ""
+msgstr "тематика інтересу"
 
 #: app/users/models.py:34
 msgid "countries of interest"
-msgstr ""
+msgstr "країни зацікавлення"
 
 #: app/users/models.py:45
 msgid "nationality"
-msgstr ""
+msgstr "національність"
 
 #: app/users/models.py:55
 msgid "country of residence"
-msgstr ""
+msgstr "країна проживання"
 
 #: app/users/models.py:65
 msgid "name"
-msgstr ""
+msgstr "ім'я"
 
 #: app/users/models.py:76
 msgid "language code"
-msgstr ""
+msgstr "код мови"
 
 #: app/users/models.py:79
 msgid "languages"
-msgstr ""
+msgstr "мови"
 
 #: app/users/models.py:87
 msgid "region"
-msgstr ""
+msgstr "область"
 
 #: app/users/models.py:88
 msgid "regions"
-msgstr ""
+msgstr "області"
 
 #: app/users/models.py:93
 msgid "interest"
-msgstr ""
+msgstr "інтерес"
 
 #: app/users/models.py:94
 msgid "interests"
-msgstr ""
+msgstr "інтереси"
 
 #: app/users/models.py:112
 msgid "Hidden - only your screen name and avatar is shared"
-msgstr ""
+msgstr "Приховано - тільки Ваш псевдонім і аватар є загально доступні"
 
 #: app/users/models.py:113
 msgid "Secure - only your screen name, skills and country is shared"
-msgstr ""
+msgstr "Безпечно - тільки Ваш псевдонім, вміння і країна є загально доступні"
 
 #: app/users/models.py:114
 msgid "Public - all your profile information is shared"
 msgstr ""
+"Публічний доступ - вся інформація Вашого профілю  є загально доступною"
 
 #: app/users/models.py:117
 msgid "Never"
-msgstr ""
+msgstr "Ніколи"
 
 #: app/users/models.py:118
 msgid "Weekly"
-msgstr ""
+msgstr "Щотижня"
 
 #: app/users/models.py:119
 msgid "Daily"
-msgstr ""
+msgstr "Щодня"
 
 #: app/users/models.py:120
 msgid "Instantly"
-msgstr ""
+msgstr "Негайно"
 
 #: app/users/models.py:131
 msgid "bio"
-msgstr ""
+msgstr "біо"
 
 #: app/users/models.py:132
 msgid "tag line"
-msgstr ""
+msgstr "слоган"
 
 #: app/users/models.py:133
 msgid "website url"
-msgstr ""
+msgstr "посилання на сайт"
 
 #: app/users/models.py:134
 msgid "facebook page"
-msgstr ""
+msgstr "facebook сторінка"
 
 #: app/users/models.py:135
 msgid "linkedin page"
-msgstr ""
+msgstr "linkedin сторінка"
 
 #: app/users/models.py:136
 msgid "twitter page"
-msgstr ""
+msgstr "twitter сторінка "
 
 #: app/users/models.py:137
 msgid "occupation"
-msgstr ""
+msgstr "професія"
 
 #: app/users/models.py:138
 msgid "area of expertise"
-msgstr ""
+msgstr "сфера досвіду"
 
 #: app/users/models.py:139
 msgid "privacy settings"
-msgstr ""
+msgstr "налаштування конфіденційності"
 
 #: app/users/models.py:150
 msgid "organisation"
-msgstr ""
+msgstr "організація"
 
 #: app/users/models.py:151
 msgid "individual"
-msgstr ""
+msgstr "особистий"
 
 #: app/users/models.py:152
 msgid "journalist"
-msgstr ""
+msgstr "журналіст"
 
 #: app/users/models.py:153
 msgid "recieves newsletter"
-msgstr ""
+msgstr "отримувати новини"
 
 #: app/users/models.py:156
 msgid "Interface language"
-msgstr ""
+msgstr "Мова інтерфейсу"
 
 #: app/users/models.py:158
 msgid "first login"
-msgstr ""
+msgstr "перший логін"
 
 #: app/users/models.py:160
 msgid "profile visibility"
-msgstr ""
+msgstr "видимість профілю"
 
 #: app/users/models.py:163
 msgid "notification frequency"
-msgstr ""
+msgstr "частота сповіщення"
 
 #: app/users/models.py:198
 msgid "Rated by AHR"
-msgstr ""
+msgstr "Оцінено AHR"
 
 #: avatar/admin.py:19
 msgid "Avatar"
-msgstr ""
+msgstr "Аватар"
 
 #: avatar/forms.py:24
 msgid "avatar"
-msgstr ""
+msgstr "аватар"
 
 #: avatar/forms.py:37
 #, python-format
@@ -755,6 +762,8 @@ msgid ""
 "%(ext)s is an invalid file extension. Authorized extensions are : "
 "%(valid_exts_list)s"
 msgstr ""
+"%(ext)s це неправильне розширення файлу. Визначені розширення: "
+"%(valid_exts_list)s"
 
 #: avatar/forms.py:44
 #, python-format
@@ -762,6 +771,8 @@ msgid ""
 "Your file is too big (%(size)s), the maximum allowed size is "
 "%(max_valid_size)s"
 msgstr ""
+"Ваш файл є занадто великий (%(size)s), максимально допустимий розмір "
+"становить %(max_valid_size)s"
 
 #: avatar/forms.py:54
 #, python-format
@@ -769,59 +780,63 @@ msgid ""
 "You already have %(nb_avatars)d avatars, and the maximum allowed is "
 "%(nb_max_avatars)d."
 msgstr ""
+"У вас вже є %(nb_avatars)d аватари, і максимально дозволено "
+"%(nb_max_avatars)d."
 
 #: avatar/forms.py:71 avatar/forms.py:84
 msgid "Choices"
-msgstr ""
+msgstr "Вибір"
 
 #: avatar/views.py:74
 msgid "Successfully uploaded a new avatar."
-msgstr ""
+msgstr "Успішно завантажено новий аватар."
 
 #: avatar/views.py:110
 msgid "Successfully updated your avatar."
-msgstr ""
+msgstr "Успішно оновлено Ваш аватар."
 
 #: avatar/views.py:148
 msgid "Successfully deleted the requested avatars."
-msgstr ""
+msgstr "Успішно видалені запитувані аватари."
 
 #: avatar/templates/avatar/add.html:6 avatar/templates/avatar/change.html:6
 #: templates/avatar/add.html:6 templates/avatar/change.html:8
 msgid "Your current avatar: "
-msgstr ""
+msgstr "Ваш поточний аватар:"
 
 #: avatar/templates/avatar/add.html:9 avatar/templates/avatar/change.html:9
 #: templates/avatar/add.html:9 templates/avatar/change.html:11
 msgid "You haven't uploaded an avatar yet. Please upload one now."
-msgstr ""
+msgstr "Ви ще не завантажили аватар. Будь ласка, завантажте його прямо зараз."
 
 #: avatar/templates/avatar/add.html:13 avatar/templates/avatar/change.html:20
 #: templates/avatar/add.html:13 templates/avatar/change.html:25
 msgid "Upload New Image"
-msgstr ""
+msgstr "Завантажити нове зображення"
 
 #: avatar/templates/avatar/change.html:15 templates/avatar/change.html:19
 msgid "Choose new Default"
-msgstr ""
+msgstr "Виберіть нове значення за замовчуванням"
 
 #: avatar/templates/avatar/confirm_delete.html:6
 #: templates/avatar/confirm_delete.html:6
 msgid "Please select the avatars that you would like to delete."
-msgstr ""
+msgstr "Будь ласка, виберіть аватари, які Ви хотіли б видалити."
 
 #: avatar/templates/avatar/confirm_delete.html:9
 #: templates/avatar/confirm_delete.html:9
 #, python-format
 msgid ""
-"You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
-"\">upload one</a> now."
+"You have no avatars to delete. Please <a "
+"href=\"%(avatar_change_url)s\">upload one</a> now."
 msgstr ""
+"У вас немає аватарів для видалення. Будь ласка, <a "
+"href=\"%(avatar_change_url)s\">завантажте його </a> зараз."
 
 #: avatar/templates/avatar/confirm_delete.html:15
 #: templates/avatar/confirm_delete.html:15
 msgid "Delete These"
-msgstr ""
+msgstr "видалити ці"
 
 #: avatar/templates/notification/avatar_friend_updated/full.txt:1
 #, python-format
@@ -830,6 +845,9 @@ msgid ""
 "\n"
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
+"%(avatar_creator)s  оновив(ла) свій аватар %(avatar)s.\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s\n"
 
 #: avatar/templates/notification/avatar_friend_updated/notice.html:2
 #, python-format
@@ -837,6 +855,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
 "href=\"%(avatar_url)s\">%(avatar)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(avatar_creator)s</a> оновив(ла) свій аватар <a "
+"href=\"%(avatar_url)s\">%(avatar)s</a>."
 
 #: avatar/templates/notification/avatar_updated/full.txt:1
 #, python-format
@@ -845,143 +865,150 @@ msgid ""
 "\n"
 "http://%(current_site)s%(avatar_url)s\n"
 msgstr ""
+"Ваш аватар був оновлений. %(avatar)s\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s\n"
 
 #: avatar/templates/notification/avatar_updated/notice.html:2
 #, python-format
 msgid "You have updated your avatar <a href=\"%(avatar_url)s\">%(avatar)s</a>."
-msgstr ""
+msgstr "Ви оновили свій аватар <a href=\"%(avatar_url)s\">%(avatar)s</a>."
 
 #: avatar/templatetags/avatar_tags.py:51
 msgid "Default Avatar"
-msgstr ""
+msgstr "Аватар за замовчуванням"
 
 #: templates/404.html:5 templates/404.html.py:10
 msgid "404"
-msgstr ""
+msgstr "404"
 
 #: templates/404.html:11
 msgid "The page you are trying to visit does not exist."
-msgstr ""
+msgstr "Сторінка, яку Ви намагаєтеся відвідати не існує."
 
 #: templates/500.html:5 templates/500.html.py:10
 msgid "500"
-msgstr ""
+msgstr "500"
 
 #: templates/500.html:11
 msgid "Server error - we're on it."
-msgstr ""
+msgstr "Помилка сервера - ми працюємо над цим."
 
 #: templates/base.html:65
 msgid "Toggle navigation"
-msgstr ""
+msgstr "Переключатель навігації"
 
 #: templates/base.html:85
 msgid "Messages"
-msgstr ""
+msgstr "Повідомлення"
 
 #: templates/base.html:92 templates/users/user_settings_v2.html:157
 msgid "Notifications"
-msgstr ""
+msgstr "Сповіщення"
 
 #: templates/base.html:100 templates/base.html.py:109
 #: templates/base_v2.html:211 templates/users/user_settings_v2.html:16
 #: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
-msgstr ""
+msgstr "Налаштування"
 
 #: templates/base.html:105
 msgid "My Posts"
-msgstr ""
+msgstr "Мої повідомлення"
 
 #: templates/base.html:108
 msgid "My Profile"
-msgstr ""
+msgstr "Мій профіль"
 
 #: templates/base.html:113 templates/account/logout.html:6
 #: templates/account/logout.html.py:11 templates/account/logout.html:19
 msgid "Sign Out"
-msgstr ""
+msgstr "Вийти"
 
 #: templates/base.html:120 templates/account/login.html:9
 #: templates/account/login.html.py:15 templates/account/login.html:48
 #: templates/openid/login.html:16
 msgid "Sign In"
-msgstr ""
+msgstr "Увійти"
 
 #: templates/base.html:122 templates/base_private_settings.html:6
 #: templates/base_public.html:6 templates/account/signup_old.html:30
 #: templates/account/signup_old.html:112
 msgid "Sign Up"
-msgstr ""
+msgstr "Зареєструватися"
 
 #: templates/base_v2.html:90
 msgid "Add Post"
-msgstr ""
+msgstr "Додати повідомлення"
 
 #: templates/base_v2.html:95 templates/ahr/home_v2.html:13
 msgid "Login"
-msgstr ""
+msgstr "Увійти"
 
 #: templates/base_v2.html:110
 msgid "Sign up"
-msgstr ""
+msgstr "Зареєструватися"
 
 #: templates/base_v2.html:114
 msgid "Visit market"
-msgstr ""
+msgstr "Відвідати громадський майданчик"
 
 #: templates/base_v2.html:139
 msgid "Get updates"
-msgstr ""
+msgstr "Отримуйте оновлення"
 
 #: templates/base_v2.html:142
 msgid "Enter your e-mail..."
-msgstr ""
+msgstr "Введіть свій e-mail..."
 
 #: templates/base_v2.html:146
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr ""
+"Отримати всі останні оновлення, у тому числі популярні пости, і поради з "
+"безпеки!"
 
 #: templates/base_v2.html:149 templates/base_v2.html.py:183
 msgid "Connect with us"
-msgstr ""
+msgstr "Зв'язатися з нами"
 
 #: templates/base_v2.html:152 templates/account/signup_start.html:51
 msgid "Connect with Twitter"
-msgstr ""
+msgstr "Зв'язатися через Twitter"
 
 #: templates/base_v2.html:155 templates/account/signup_start.html:48
 msgid "Connect with Facebook"
-msgstr ""
+msgstr "Зв'язатися через Facebook"
 
 #: templates/base_v2.html:163 templates/ahr/home_v2.html:100
 msgid "About MOVEMENTS"
-msgstr ""
+msgstr "Про MOVEMENTS"
 
 #: templates/base_v2.html:164
 msgid ""
 "Crowdsourcing the fight for human rights. The online platform that is "
 "opening closed societies."
 msgstr ""
+"Збір коштів на боротьбу за права людини. Онлайн-платформа, яка відкриває "
+"\"закриті суспільства\"."
 
 #: templates/base_v2.html:170 templates/base_v2.html.py:181
 msgid "Copyright &copy; 2014 Advancing Human Rights"
-msgstr ""
+msgstr "Copyright &copy; 2014 Advancing Human Rights"
 
 #: templates/base_v2.html:205
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
-msgstr ""
+msgstr "Профіль"
 
 #: templates/base_v2.html:219
 msgid "Logout"
-msgstr ""
+msgstr "Вихід"
 
 #: templates/account/account_inactive.html:5
 #: templates/account/account_inactive.html:9
 msgid "Account Inactive"
-msgstr ""
+msgstr "Обліковий запис неактивний"
 
 #: templates/account/account_inactive.html:10
 msgid ""
@@ -989,64 +1016,72 @@ msgid ""
 "be contacted by a member of Advancing Human Rights as part of this vetting "
 "process."
 msgstr ""
+"Цей обліковий запис є не активний. Рахунки повинні бути індивідуально "
+"перевірені, з Вами зв'яжеться представник Advancing Human Rights, це є "
+"частиною процесу перевірки."
 
 #: templates/account/email.html:6
 msgid "Account"
-msgstr ""
+msgstr "Рахунок"
 
 #: templates/account/email.html:9
 msgid "E-mail Addresses"
-msgstr ""
+msgstr "Адреса електронної пошти"
 
 #: templates/account/email.html:11
 msgid "The following e-mail addresses are associated with your account:"
 msgstr ""
+"Наступна адреса електронної пошти є пов'язана з Вашим обліковим записом:"
 
 #: templates/account/email.html:25
 msgid "Verified"
-msgstr ""
+msgstr "Перевірений"
 
 #: templates/account/email.html:27
 msgid "Unverified"
-msgstr ""
+msgstr "Неперевірений"
 
 #: templates/account/email.html:29
 msgid "Primary"
-msgstr ""
+msgstr "Основний"
 
 #: templates/account/email.html:35
 msgid "Make Primary"
-msgstr ""
+msgstr "Зробити основним"
 
 #: templates/account/email.html:36
 msgid "Re-send Verification"
-msgstr ""
+msgstr "Вислати повторно перевірку"
 
 #: templates/account/email.html:37 templates/socialaccount/connections.html:35
 msgid "Remove"
-msgstr ""
+msgstr "Видалити"
 
 #: templates/account/email.html:44
 msgid "Warning:"
-msgstr ""
+msgstr "Попередження:"
 
 #: templates/account/email.html:44
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
-"an e-mail address so you can receive notifications, reset your password, etc."
+"an e-mail address so you can receive notifications, reset your password, "
+"etc."
 msgstr ""
+"В даний момент Ви не маєте доданої ніякої адреси електронної пошти. Ви "
+"повинні додати адресу електронної пошти, для того аби Ви могли отримувати "
+"повідомлення, відновлювати пароль і т.д."
 
 #: templates/account/email.html:49
 msgid "Add E-mail Address"
-msgstr ""
+msgstr "Додати адресу електронної пошти"
 
 #: templates/account/email.html:54
 msgid "Add E-mail"
-msgstr ""
+msgstr "Додати e-mail"
 
 #: templates/account/email.html:63
 msgid "Do you really want to remove the selected e-mail address?"
-msgstr ""
+msgstr "Ви дійсно хочете видалити вибрану адресу електронної пошти?"
 
 #: templates/account/email_confirm.html:10
 #: templates/account/email_confirm.html:15
@@ -1054,84 +1089,91 @@ msgstr ""
 #: templates/account/email_confirmed.html:11
 #: templates/account/email/email_confirmation_subject.txt:3
 msgid "Confirm E-mail Address"
-msgstr ""
+msgstr "Підтвердіть адресу електронної пошти"
 
 #: templates/account/email_confirm.html:27
 #, python-format
 msgid ""
-"Before confirming that <a href=\"mailto:%(email)s\">%(email)s</a> is the e-"
-"mail address you provided for the user %(user_display)s, please read and "
+"Before confirming that <a href=\"mailto:%(email)s\">%(email)s</a> is the "
+"e-mail address you provided for the user %(user_display)s, please read and "
 "accept the "
 msgstr ""
+"Перед підтвердженням того що <a href=\"mailto:%(email)s\">%(email)s</a> є "
+"адреса електронної пошти, яку Ви вказуєте для користувача %(user_display)s, "
+"будь-ласка прочитайте і прийміть"
 
 #: templates/account/email_confirm.html:28
 msgid "acceptable use policy"
-msgstr ""
+msgstr "політика прийнятного використання"
 
 #: templates/account/email_confirm.html:29
 msgid "By continuing, you are agreeing to all of our "
-msgstr ""
+msgstr "Продовжуючи, Ви погоджуєтеся на всі наші"
 
 #: templates/account/email_confirm.html:29
 msgid "terms and conditions"
-msgstr ""
+msgstr "терміни і умови"
 
 #: templates/account/email_confirm.html:37
 msgid "Confirm"
-msgstr ""
+msgstr "Підтвердити"
 
 #: templates/account/email_confirm.html:43
 msgid "This e-mail confirmation link expired or is invalid."
 msgstr ""
+"Це посилання підтвердження електронної пошти є протермінованим або "
+"недійсним."
 
 #: templates/account/email_confirm.html:53
 msgid "I have read and accepted the acceptable use policy"
-msgstr ""
+msgstr "Я прочитав і прийняв політику прийнятного використання"
 
 #: templates/account/email_confirmed.html:15
 #, python-format
 msgid ""
-"You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-"
-"mail address for user %(user_display)s."
+"You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an "
+"e-mail address for user %(user_display)s."
 msgstr ""
+"Ви підтвердили, що <a href=\"mailto:%(email)s\">%(email)s</a>  є адресою "
+"електронної пошти для користувача %(user_display)s."
 
 #: templates/account/login.html:18
 #, python-format
 msgid ""
 "\n"
-"      Welcome to Movements, please sign in below. If you don't have an "
-"account yet, please sign up <a href=\"%(home_url)s\" alt=\"sign up\">here</"
-"a>\n"
+"      Welcome to Movements, please sign in below. If you don't have an account yet, please sign up <a href=\"%(home_url)s\" alt=\"sign up\">here</a>\n"
 "      "
 msgstr ""
+"\n"
+"Ласкаво просимо до Movements, будь ласка, увійдіть нижче. Якщо у Вас немає акаунта, будь ласка, зареєструйтесь <a href=\"%(home_url)s\" alt=\"sign up\">here</a>"
 
 #: templates/account/login.html:26
 msgid "Email or Username"
-msgstr ""
+msgstr "Email або Ім'я користувача"
 
 #: templates/account/login.html:33 templates/account/signup_start.html:25
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: templates/account/login.html:45
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Забули пароль?"
 
 #: templates/account/login.html:57
 msgid "Sign In with Facebook"
-msgstr ""
+msgstr "Увійти через Facebook"
 
 #: templates/account/login.html:60
 msgid "Sign In with Twitter"
-msgstr ""
+msgstr "Увійти через Twitter"
 
 #: templates/account/logout.html:12
 msgid "Are you sure you want to sign out?"
-msgstr ""
+msgstr "Ви впевнені, що хочете вийти?"
 
 #: templates/account/password_change.html:12
 msgid "Password changed successfully"
-msgstr ""
+msgstr "Пароль успішно змінений"
 
 #: templates/account/password_change.html:26
 #: templates/account/password_reset_from_key.html:7
@@ -1141,108 +1183,117 @@ msgstr ""
 #: templates/users/user_settings_v2.html:167
 #: templates/users/user_settings_v2.html:209
 msgid "Change Password"
-msgstr ""
+msgstr "Змінити пароль"
 
 #: templates/account/password_delete.html:5
 #: templates/account/password_delete.html:8
 msgid "Delete Password"
-msgstr ""
+msgstr "Видалити пароль"
 
 #: templates/account/password_delete.html:9
 msgid ""
 "You may delete your password since you are currently logged in using OpenID."
 msgstr ""
+"Ви можете видалити свій пароль, так як Ви в даний момент увійшли "
+"використовуючи OpenID."
 
 #: templates/account/password_delete.html:12
 msgid "delete my password"
-msgstr ""
+msgstr "Видалити мій пароль"
 
 #: templates/account/password_delete_done.html:5
 #: templates/account/password_delete_done.html:8
 msgid "Password Deleted"
-msgstr ""
+msgstr "Пароль видалено"
 
 #: templates/account/password_delete_done.html:9
 msgid "Your password has been deleted."
-msgstr ""
+msgstr "Ваш пароль був видалений."
 
 #: templates/account/password_reset.html:7
 #: templates/account/password_reset_done.html:5
 #: templates/account/password_reset_done.html:10
 msgid "Password Reset"
-msgstr ""
+msgstr "Скидання пароля"
 
 #: templates/account/password_reset.html:12
 msgid "Forgotten Password"
-msgstr ""
+msgstr "Забули пароль"
 
 #: templates/account/password_reset.html:16
 msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll send you "
-"an e-mail allowing you to reset it."
+"Forgotten your password? Enter your e-mail address below, and we'll send you"
+" an e-mail allowing you to reset it."
 msgstr ""
+"Забули пароль? Введіть адресу електронної пошти нижче, і ми надішлемо Вам "
+"листа який дозволить скинути його."
 
 #: templates/account/password_reset.html:21 templates/account/signup.html:31
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: templates/account/password_reset.html:30
 #, python-format
 msgid ""
 "\n"
-"          Please <a href=\"%(contactus_url)s\">contact us</a> if you have "
-"any trouble resetting your password.\n"
+"          Please <a href=\"%(contactus_url)s\">contact us</a> if you have any trouble resetting your password.\n"
 "          "
 msgstr ""
+"\n"
+"Будь ласка, <a href=\"%(contactus_url)s\">зв'яжіться з нами</a> якщо у вас є які-небудь проблеми з відновленням пароля."
 
 #: templates/account/password_reset.html:38
 msgid "Reset My Password"
-msgstr ""
+msgstr "Змінити пароль"
 
 #: templates/account/password_reset_done.html:18
 #, python-format
 msgid ""
 "\n"
-"      We have sent you an e-mail. Please <a href=\"%(contactus_url)s"
-"\">contact us</a> if you do not receive it within a few minutes.\n"
+"      We have sent you an e-mail. Please <a href=\"%(contactus_url)s\">contact us</a> if you do not receive it within a few minutes.\n"
 "      "
 msgstr ""
+"\n"
+"Ми відправили Вам листа. Будь ласка, <a href=\"%(contactus_url)s\">зв'яжіться з нами</a> якщо Ви не отримуєте його протягом декількох хвилин."
 
 #: templates/account/password_reset_from_key.html:14
 msgid "Bad Token"
-msgstr ""
+msgstr "Поганий токен"
 
 #: templates/account/password_reset_from_key.html:16
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
-"a>."
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password "
+"reset</a>."
 msgstr ""
+"Посилання на скидання пароля є недійсним, можливо, тому що воно вже було "
+"використано. Відправити запит <a href=\"%(passwd_reset_url)s\">на скидання "
+"нового пароля</a>."
 
 #: templates/account/password_reset_from_key.html:24
 msgid "New Password"
-msgstr ""
+msgstr "Новий пароль"
 
 #: templates/account/password_reset_from_key.html:31
 msgid "New Password (again)"
-msgstr ""
+msgstr "Новий пароль (ще раз)"
 
 #: templates/account/password_reset_from_key.html:43
 #: templates/account/password_reset_from_key_done.html:10
 msgid "Your password has been changed."
-msgstr ""
+msgstr "Ваш пароль було змінено."
 
 #: templates/account/password_set.html:6
 #: templates/account/password_set.html:13
 #: templates/account/password_set.html:25
 #: templates/users/user_settings_v2.html:171
 msgid "Set Password"
-msgstr ""
+msgstr "Встановити пароль"
 
 #: templates/account/signup.html:11
 msgid "About you"
-msgstr ""
+msgstr "Про Вас"
 
 #: templates/account/signup.html:14
 #, python-format
@@ -1250,59 +1301,73 @@ msgid ""
 "You are about to use your %(provider_name)s account to login. We first need "
 "a few more details before you get started."
 msgstr ""
+"Ви збираєтеся використати %(provider_name)s акаунт аби увійти. Спочатку "
+"потрібно дещо більше інформації, перш ніж почати."
 
 #: templates/account/signup.html:16
 msgid "First we would like to know a little more about you."
-msgstr ""
+msgstr "По-перше, ми хотіли б дізнатись трохи більше інформації про Вас."
 
 #: templates/account/signup.html:22
 msgid "Username (We recommend that you do not use your real name)"
 msgstr ""
+"Ім'я користувача (Ми рекомендуємо Вам не використовувати своє справжнє ім'я)"
 
 #: templates/account/signup.html:37
 msgid ""
-"All the following information is optional but will help Movements.org ensure "
-"that you see the postings that are most relevant to your needs and interests."
+"All the following information is optional but will help Movements.org ensure"
+" that you see the postings that are most relevant to your needs and "
+"interests."
 msgstr ""
+"Вся нижча інформація є необов'язковою, але допоможе Movements.org "
+"переконатися, що Ви бачите статті, які є найбільше актуальні для Ваших потеб"
+" та інтересів."
 
 #: templates/account/signup.html:40 templates/users/user_settings_v2.html:57
 msgid "First Name"
-msgstr ""
+msgstr "Ім'я"
 
 #: templates/account/signup.html:45 templates/users/user_settings_v2.html:62
 msgid "Last Name"
-msgstr ""
+msgstr "Прізвище"
 
 #: templates/account/signup.html:59 templates/users/user_settings_v2.html:83
 msgid "Biography"
-msgstr ""
+msgstr "Біографія"
 
 #: templates/account/signup.html:60
 msgid ""
 "If you want other users to know something about you. You can control how "
 "much if any information to make public."
 msgstr ""
+"Якщо Ви хочете, щоб інші користувачі знали, деяку інформацію про Вас. Ви "
+"можете контролювати, скільки та якої інформації оприлюднювати."
 
 #: templates/account/signup.html:67
 msgid "Social Vetting"
-msgstr ""
+msgstr "Соціальна перевірка:"
 
 #: templates/account/signup.html:68
 msgid ""
 "To protect the safety of our members we attempt to vet all applicants to "
-"make sure that their intentions are in accord with our <a href=\"/movements/"
-"terms-and-conditions\" target=\"_blank\">terms &amp; conditions</a>. This "
+"make sure that their intentions are in accord with our <a href=\"/movements"
+"/terms-and-conditions\" target=\"_blank\">terms &amp; conditions</a>. This "
 "information is optional but the more you provide the easier it will be for "
 "others to trust you."
 msgstr ""
+"Для гарантування безпеки наших користувачів ми намагаємося перевіряти всіх "
+"заявників, щоб переконатися, що їхні цілі відповідні нашим <a "
+"href=\"/movements/terms-and-conditions\" target=\"_blank\">правилам та "
+"умовам</a>. Ця інформація не є обов'язковою, але чим більше інформації "
+"вкажите тим легше буде для інших довіряти Вам."
 
 #: templates/account/signup.html:73 templates/users/user_settings_v2.html:94
 msgid "Linked In"
-msgstr ""
+msgstr "Linked In"
 
 #: templates/account/signup.html:94 templates/users/user_settings_v2.html:115
 msgid "Website or Blog"
-msgstr ""
+msgstr "Вебсайт або блог"
 
 #: templates/account/signup.html:104
 #: templates/market/clientside/closemarketitemdialog.html:29
@@ -1312,27 +1377,27 @@ msgstr ""
 #: templates/market/clientside/reportuserdialog.html:21
 #: templates/users/user_settings_v2.html:178
 msgid "Cancel"
-msgstr ""
+msgstr "Скасувати"
 
 #: templates/account/signup.html:107 templates/users/more_about_you.html:55
 #: templates/users/more_about_you.html:73
 #: templates/users/more_about_you.html:91
 #: templates/users/more_about_you.html:109
 msgid "Next"
-msgstr ""
+msgstr "Наступний"
 
 #: templates/account/signup_closed.html:6
 #: templates/account/signup_closed.html:12
 msgid "Sign Up Closed"
-msgstr ""
+msgstr "Реєстрація закрита"
 
 #: templates/account/signup_closed.html:14
 msgid "We are sorry, but the sign up is currently closed."
-msgstr ""
+msgstr "Нам дуже шкода, але реєстрація в даний час є закрита."
 
 #: templates/account/signup_old.html:11
 msgid "Movements BETA"
-msgstr ""
+msgstr "Movements BETA"
 
 #: templates/account/signup_old.html:12
 msgid ""
@@ -1340,35 +1405,30 @@ msgid ""
 "    <p>Movements is currently in <strong>beta</strong></p>\n"
 "    <div class=\"alert alert-danger\">\n"
 "      <p>\n"
-"        Movements is currently in <strong>beta</strong> and has not "
-"undergone a full risk threat assessment.\n"
+"        Movements is currently in <strong>beta</strong> and has not undergone a full risk threat assessment.\n"
 "      </p>\n"
 "      <p>\n"
-"        Although we have done our best to ensure any information stored in "
-"Movements is secure, we cannot guarantee this until the first full version "
-"of the system is released later this year. Before you can sign up to "
-"Movements you will need to go through a vetting system so Advancing Human "
-"Rights/ Movements.org can confirm your identity. This process is used for "
-"anyone wanting to actively use the site.No information other than you're "
-"username, email and either a hash of your password or data needed to "
-"authenticate your social login will be stored on the system until the "
-"vetting process is complete. The information you provide below will be sent "
-"to Advancing Human Rights in an email via a secure email service. This email "
-"will be deleted once the vetting process is complete.\n"
+"        Although we have done our best to ensure any information stored in Movements is secure, we cannot guarantee this until the first full version of the system is released later this year. Before you can sign up to Movements you will need to go through a vetting system so Advancing Human Rights/ Movements.org can confirm your identity. This process is used for anyone wanting to actively use the site.No information other than you're username, email and either a hash of your password or data needed to authenticate your social login will be stored on the system until the vetting process is complete. The information you provide below will be sent to Advancing Human Rights in an email via a secure email service. This email will be deleted once the vetting process is complete.\n"
 "      </p>\n"
 "      <p>\n"
-"        While Movements.org and Advancing Human Rights have taken all "
-"possible steps to protect your privacy and security, there are still risks "
-"associated with your use of the Movements platform. Your internet use may be "
-"tracked and traced back to you and AHR and its associated organizations "
-"cannot guarantee your safety. Additionally, Movements is based on trust and "
-"we do our best to ensure that all community members are who they say they "
-"are and are participating with the best and most honest intentions. However "
-"we cannot guarantee the privacy, security, or anonymity of users.\n"
+"        While Movements.org and Advancing Human Rights have taken all possible steps to protect your privacy and security, there are still risks associated with your use of the Movements platform. Your internet use may be tracked and traced back to you and AHR and its associated organizations cannot guarantee your safety. Additionally, Movements is based on trust and we do our best to ensure that all community members are who they say they are and are participating with the best and most honest intentions. However we cannot guarantee the privacy, security, or anonymity of users.\n"
 "      </p>\n"
 "    </div>\n"
 "    "
 msgstr ""
+"\n"
+"<p>Movements в даний момент є у <strong>beta версії</strong></p>\n"
+"<div class=\"alert alert-danger\">\n"
+"<p>\n"
+"Movements в даний момент є у<strong>beta версії</strong> і не піддавався повній оцінці загроз і ризиків.\n"
+"</p>\n"
+"<p>\n"
+"Ми зробили все можливе, щоб гарантувати, що будь-яка інформація, що зберігається на Movements є надійно захищеною, але ми не можемо гарантувати це, поки не буде запроваджено перший повний варіант системи цього року. Перш ніж Ви зможете зареєструватися на Movements  Вам потрібно буде пройти через систему перевірки аби Advancing Human Rights/ Movements.org зміг підтвердити Вашу особу. Цей процес використовується для всіх хто хоче активно використовувати вебсайт. В системі буде зберігатися тільки  ім'я користувача, електронна пошта, пароль чи інформація необхідна для аутентифікації Вашого входу за допомогою соціальної мережі, до поки процес перевірки не буде завершено. Надана Вами інформація нижче буде відправлена до Advancing Human Rights на електронну пошту через безпечний сервіс відправки електронної пошти. Цей лист буде видалений після того як перевірка буде завершена.\n"
+"</p>\n"
+"<p>\n"
+"У той час як Movements.org і Advancing Human Rights вжили всі можливі заходи, щоб захистити Вашу конфіденційність і безпеку, все ще залишаються ризики, пов'язані з використанням платформи Movements. Ваше користування Інтернетом може відстежуватись і AHR, а також пов'язані з нею організацій, не можуть гарантувати Вашу безпеку. Все ж таки Movements заснована на довірі і ми робимо все можливе абигарантувати те, що всі учасники громади є ті ким вони себе називають і мають щирі наміри. Однак ми не можемо гарантувати конфіденційність, безпеку чи анонімність користувачів.\n"
+"</p>\n"
+"</div>"
 
 #: templates/account/signup_old.html:33
 #, python-format
@@ -1376,53 +1436,60 @@ msgid ""
 "You are about to use your %(provider_name)s account to login. We first need "
 "a few more details for vetting."
 msgstr ""
+"Ви збираєтеся використовувати %(provider_name)s обліковий запис щоб увійти. "
+"Спочатку потрібно уточнити кілька деталей для  перевірки."
 
 #: templates/account/signup_old.html:35
 msgid ""
 "Already have an account? Then please <a href=\"/accounts/login\">sign in "
 "here</a>."
 msgstr ""
+"Вже є аккаунт? Тоді, будь ласка, <a href=\"/accounts/login\">увійдіть "
+"тут</a>."
 
 #: templates/account/signup_start.html:11
 #: templates/users/more_about_you.html:36
 msgid "Welcome to Movements"
-msgstr ""
+msgstr "Ласкаво просимо до Movements"
 
 #: templates/account/signup_start.html:12
 msgid ""
-"Sign up to connect to human rights defenders and activist. Let’s get started."
+"Sign up to connect to human rights defenders and activist. Let’s get "
+"started."
 msgstr ""
+"Зареєструйтеся для того аби мати можливість контактувати із захисниками та "
+"активістами, які боряться за права людини. Давайте розпочнемо!"
 
 #: templates/account/signup_start.html:18
 msgid "Email (we will never reveal this)"
-msgstr ""
+msgstr "E-mail (він ніколи не буде розголошений)"
 
 #: templates/account/signup_start.html:30
 msgid "Retype password"
-msgstr ""
+msgstr "Введіть пароль ще раз"
 
 #: templates/account/signup_start.html:36
 msgid "By registering with us you agree to our"
-msgstr ""
+msgstr "При реєстрації, Ви погоджуєтеся з"
 
 #: templates/account/signup_start.html:36
 msgid "terms &amp; conditions"
-msgstr ""
+msgstr "Правилами та умовами"
 
 #: templates/account/signup_start.html:38
 msgid "Register"
-msgstr ""
+msgstr "Реєстрація"
 
 #: templates/account/signup_start.html:45
 msgid "Use your Facebook details to sign in."
-msgstr ""
+msgstr "Використовуйте Ваші деталі Facebook, щоб увійти."
 
 #: templates/account/verification_sent.html:4
 #: templates/account/verification_sent.html:9
 #: templates/account/verified_email_required.html:7
 #: templates/account/verified_email_required.html:12
 msgid "Verify Your E-mail Address"
-msgstr ""
+msgstr "Підтвердіть Ваш E-mail"
 
 #: templates/account/verification_sent.html:10
 msgid ""
@@ -1430,6 +1497,9 @@ msgid ""
 "address, once you've done this you will have full access to the Movements "
 "platform."
 msgstr ""
+"Тепер Ви створили обліковий запис. Ми відправили Вам лист, щоб підтвердити "
+"адресу електронної пошти, як тільки Ви зробите це, Ви будете мати повний "
+"доступ до платформи Movements."
 
 #: templates/account/verification_sent.html:12
 #, python-format
@@ -1437,6 +1507,8 @@ msgid ""
 "Please <a href=\"%(contactUrl)s\">contact us</a> if you do not receive an "
 "email within a few minutes."
 msgstr ""
+"Будь ласка, <a href=\"%(contactUrl)s\">зв'яжіться з нами</a> якщо Ви не "
+"отримаєте листа протягом декількох хвилин."
 
 #: templates/account/verified_email_required.html:19
 msgid ""
@@ -1444,6 +1516,9 @@ msgid ""
 "    you are who you claim to be. For this purpose, we require that you\n"
 "    verify ownership of your e-mail address. "
 msgstr ""
+"Ця частина сайту вимагає перевірити те що \n"
+"Ви є той, хто Ви стверджуєте Ви є. Для цього, ми вимагаємо, щоб Ви\n"
+"підтвердили свою адресу електронної пошти."
 
 #: templates/account/verified_email_required.html:23
 msgid ""
@@ -1451,13 +1526,18 @@ msgid ""
 "    verification. Please click on the link inside this e-mail. Please\n"
 "    contact us if you do not receive it within a few minutes."
 msgstr ""
+"Ми послали листа до Вас для\n"
+"перевірка. Будь ласка, натисніть на посилання всередині цього листа. Будь ласка,\n"
+"зв'яжіться з нами, якщо Ви не отримали його протягом декількох хвилин."
 
 #: templates/account/verified_email_required.html:27
 #, python-format
 msgid ""
-"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
-"mail address</a>."
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your "
+"e-mail address</a>."
 msgstr ""
+"<strong>Примітка:</strong> Ви можете <a href=\"%(email_url)s\">змінити вашу "
+"адресу електронної пошти</a>."
 
 #: templates/account/email/email_confirmation_message.html:7
 #: templates/account/email/email_confirmation_message.txt:5
@@ -1465,6 +1545,8 @@ msgid ""
 "Thank you for registering on Movements.Org, the platform that is "
 "crowdsourcing the fight for human rights."
 msgstr ""
+"Дякуємо за реєстрацію на Movements.Org, платформі, яка є краудсорсингом "
+"боротьби за права людини."
 
 #: templates/account/email/email_confirmation_message.html:11
 #: templates/account/email/email_confirmation_message.txt:7
@@ -1473,26 +1555,31 @@ msgid ""
 "you to the Sign-In page where you will enter your screen name and the "
 "password you created."
 msgstr ""
+"Будь ласка, підтвердіть свою адресу електронної пошти, перейшовши за "
+"посиланням нижче. Воно перенаправить Вас на сторінку для входу, де Ви "
+"зможете ввести своє ім'я користувача і пароль, який Ви створили."
 
 #: templates/account/email/email_confirmation_message.html:15
 #: templates/account/email/email_confirmation_message.txt:9
 msgid "This process helps to ensure your security."
-msgstr ""
+msgstr "Цей процес допомагає забезпечити Вашу безпеку."
 
 #: templates/account/email/email_confirmation_message.html:19
 #: templates/account/email/email_confirmation_message.txt:11
 msgid ""
 "By creating an account you are agreeing to all of our terms and conditions."
 msgstr ""
+"Створивши обліковий запис, Ви погоджуєтеся з усіма нашими правилами та "
+"умовами."
 
 #: templates/account/email/email_confirmation_message.html:22
 msgid "Confirm your email address"
-msgstr ""
+msgstr "Підтвердіть Ваш email "
 
 #: templates/account/email/email_confirmation_message.html:24
 #: templates/account/email/email_confirmation_message.txt:15
 msgid "Thanks for joining the fight."
-msgstr ""
+msgstr "Дякуємо, що приєдналися до боротьби."
 
 #: templates/account/email/password_reset_key_message.html:6
 #, python-format
@@ -1500,14 +1587,12 @@ msgid ""
 "\n"
 "\n"
 "  <p>\n"
-"    A registered member of Movements.Org using this email address has made a "
-"request to reset their\n"
+"    A registered member of Movements.Org using this email address has made a request to reset their\n"
 "    password. You can reset your password by following the link below.\n"
 "  </p>\n"
 "\n"
 "  <p>\n"
-"    If you did not request this reset please forward this message to <a href="
-"\" mailto:security@movements.org\">security@movements.org</a> as we may\n"
+"    If you did not request this reset please forward this message to <a href=\" mailto:security@movements.org\">security@movements.org</a> as we may\n"
 "    want to double check the security of your information.\n"
 "  </p>\n"
 "\n"
@@ -1515,46 +1600,63 @@ msgid ""
 "\n"
 "  "
 msgstr ""
+"\n"
+"<p>\n"
+"Зареєстрований користувач Movements.org за допомогою цієї адреси електронної пошти зробив запит на скидання свого\n"
+"паролю. Ви можете відновити свій пароль, перейшовши за посиланням нижче.\n"
+"</p>\n"
+"\n"
+"<p>\n"
+"Якщо Ви не запитували скидання будь ласка, перешліть це повідомлення на адресу <a href=\" mailto:security@movements.org\">security@movements.org</a> ми можемо\n"
+"запросити додаткову перевірку Вашої інформації.\n"
+"</p>\n"
+"\n"
+"<p><a href=\"%(password_reset_url)s\">Скинути пароль тут</a></p>"
 
 #: templates/account/email/password_reset_key_message.txt:5
 #, python-format
 msgid ""
 "\n"
-"A registered member of Movements.Org using this email address has made a "
-"request to reset their password. You can reset you’re your password by "
-"following the link below.\n"
+"A registered member of Movements.Org using this email address has made a request to reset their password. You can reset you’re your password by following the link below.\n"
 "\n"
-"If you did not request this reset please forward this message to "
-"security@movements.org as we may want to double check the security of your "
-"information.\n"
+"If you did not request this reset please forward this message to security@movements.org as we may want to double check the security of your information.\n"
 "\n"
 "%(password_reset_url)s\n"
 msgstr ""
+"\n"
+"Зареєстрований користувач Movements.org за допомогою цієї адреси електронної пошти зробив запит на скидання свого паролю. Ви можете відновити свій пароль, перейшовши за посиланням нижче.\n"
+"\n"
+"Якщо Ви не запитували скидання будь ласка, перешліть це повідомлення на адресу security@movements.org, ми можемо запросити додаткову перевірку Вашої інформації.\n"
+"\n"
+"%(password_reset_url)s\n"
 
 #: templates/account/email/password_reset_key_subject.txt:3
 msgid "Forgot Password on Movements.org"
-msgstr ""
+msgstr "Забули пароль на Movements.org"
 
 #: templates/account/email/user_confirmed_email_message.txt:5
 #, python-format
 msgid "User %(user)s at %(site_name)s confirmed his/her email address."
 msgstr ""
+"Користувач %(user)s на %(site_name)s підтвердив/ла свою адресу електронної "
+"пошти."
 
 #: templates/account/email/user_confirmed_email_message.txt:8
 msgid "This user is already activated, to review the users score go to"
 msgstr ""
+"Користувач вже активований, щоб переглянути рейтинг користувача  перейди до"
 
 #: templates/account/email/user_confirmed_email_message.txt:10
 msgid "To vet this user, go to"
-msgstr ""
+msgstr "Щоб перевірити користувача, перейдіть"
 
 #: templates/account/email/user_confirmed_email_subject.txt:3
 msgid "Activate User"
-msgstr ""
+msgstr "Активуйте користувача"
 
 #: templates/account/email/user_vetting_email_message.html:3
 msgid "Dear Admin"
-msgstr ""
+msgstr "Шановний Адмін"
 
 #: templates/account/email/user_vetting_email_message.html:6
 #: templates/account/email/user_vetting_email_message.txt:2
@@ -1573,159 +1675,178 @@ msgid ""
 "\n"
 "Please vet this user by clicking on the link below:"
 msgstr ""
+"Новий користувач зареєструвався на Movements використовуючи наступні деталі:\n"
+"\n"
+"Ім'я: %(form.data.first_name)s\n"
+"Прізвище: %(form.data.last_name)s\n"
+"Ім'я користувача: %(user.username)s\n"
+"Адреса електронної пошти: %(user.email)s\n"
+"Linked In: %(form.data.linkedin_url)s\n"
+"Facebook: %(form.data.fb_url)s\n"
+"Twitter: %(form.data.tweet_url)s\n"
+"Сайт: %(form.data.web_url)s\n"
+"\n"
+"Будь-ласка, підтвердіть цього користувача натиснувши на посилання нижче:"
 
 #: templates/account/email/user_vetting_email_message.html:22
 msgid ""
-"Once the user has confirmed their email address you will receive another "
-"email\n"
-"to let you know. From the list above <strong>only</strong> the username and "
-"email are currently \n"
-"stored on the server. Once you have  vetted the user, the user will then be "
-"able \n"
+"Once the user has confirmed their email address you will receive another email\n"
+"to let you know. From the list above <strong>only</strong> the username and email are currently \n"
+"stored on the server. Once you have  vetted the user, the user will then be able \n"
 "to fill out all their profile information. Sharing via their settings what\n"
 "personal information they feel comfortable with."
 msgstr ""
+"Після того, як користувач підтверджує свою адресу електронної пошти, Вас "
+"буде повідомлено ще одиним листом.  З наведеного вище списку "
+"<strong>тільки</strong>  ім'я користувача та адреса електронної пошти "
+"зберігаються на сервері. Після того як Ви перевірите користувача, користувач"
+" матиме змогу заповнити всі свої дані. За допомогою своїх налаштувань вони "
+"діляться тією інформацією яку самі вважають за потрібне."
 
 #: templates/account/email/user_vetting_email_message.txt:17
 msgid ""
-"Once the user has confirmed their email address you will receive another "
-"email\n"
-"to let you know. From the list above only the username and email are "
-"currently\n"
-"stored on the server. Once you have  vetted the user, the user will then be "
-"able\n"
+"Once the user has confirmed their email address you will receive another email\n"
+"to let you know. From the list above only the username and email are currently\n"
+"stored on the server. Once you have  vetted the user, the user will then be able\n"
 "to fill out all their profile information. Sharing via their settings what\n"
 "personal information they feel comfortable with."
 msgstr ""
+"Після того, як користувач підтверджує свою адресу електронної пошти, Вас "
+"буде повідомлено ще одиним листом.  З наведеного вище списку тільки ім'я "
+"користувача та адреса електронної пошти зберігаються на сервері. Після того "
+"як Ви перевірите користувача, користувач матиме змогу заповнити всі свої "
+"дані. За допомогою своїх налаштувань вони діляться тією інформацією яку самі"
+" вважають за потрібне."
 
 #: templates/account/email/user_vetting_email_subject.txt:3
 msgid "New User for Vetting on Movements"
-msgstr ""
+msgstr "Новий користувач для перевірки на Movements"
 
 #: templates/account/messages/cannot_delete_primary_email.txt:2
 #, python-format
 msgid "You cannot remove your primary e-mail address (%(email)s)."
 msgstr ""
+"Ви не можете видалити свій основний адрес електронної пошти (%(email)s)."
 
 #: templates/account/messages/email_confirmation_sent.txt:2
 #, python-format
 msgid "Confirmation e-mail sent to %(email)s."
-msgstr ""
+msgstr "Лист для підтвердження відправлений на %(email)s."
 
 #: templates/account/messages/email_confirmed.txt:2
 #, python-format
 msgid "You have confirmed %(email)s."
-msgstr ""
+msgstr "Ви підтвердили %(email)s."
 
 #: templates/account/messages/email_deleted.txt:2
 #, python-format
 msgid "Removed e-mail address %(email)s."
-msgstr ""
+msgstr "Вилучені адреси електронних скриньок %(email)s."
 
 #: templates/account/messages/logged_in.txt:4
 #, python-format
 msgid "Successfully signed in as %(name)s."
-msgstr ""
+msgstr "Успішно увійшли як %(name)s."
 
 #: templates/account/messages/logged_out.txt:2
 msgid "You have signed out."
-msgstr ""
+msgstr "Ви вийшли."
 
 #: templates/account/messages/password_changed.txt:2
 msgid "Password successfully changed."
-msgstr ""
+msgstr "Пароль успішно змінений."
 
 #: templates/account/messages/password_set.txt:2
 msgid "Password successfully set."
-msgstr ""
+msgstr "Пароль успішно встановлений."
 
 #: templates/account/messages/primary_email_set.txt:2
 msgid "Primary e-mail address set."
-msgstr ""
+msgstr "Основну адресу електронної скриньки встано."
 
 #: templates/account/messages/unverified_primary_email.txt:2
 msgid "Your primary e-mail address must be verified."
-msgstr ""
+msgstr "Ваша основна адреса електронної пошти повинна бути перевірена."
 
 #: templates/account/snippets/already_logged_in.html:5
 msgid "Note"
-msgstr ""
+msgstr "Замітка"
 
 #: templates/account/snippets/already_logged_in.html:5
 #, python-format
 msgid "you are already logged in as %(user_display)s."
-msgstr ""
+msgstr "Ви вже увійшли як %(user_display)s."
 
 #: templates/admin/incident_change_form.html:7
 msgid "Community"
-msgstr ""
+msgstr "Спільнота"
 
 #: templates/admin/incident_change_form.html:10
 msgid "Post creator"
-msgstr ""
+msgstr "Автор поста"
 
 #: templates/admin/incident_change_form.html:13
 msgid "Staff owner"
-msgstr ""
+msgstr "Власник"
 
 #: templates/admin/incident_change_form.html:17
 msgid "Post commenters"
-msgstr ""
+msgstr "Коментатори повідомлення"
 
 #: templates/admin/incident_change_form.html:27
 msgid "People that have private messages regarding the post"
-msgstr ""
+msgstr "Люди, які мають приватні повідомлення щодо поста"
 
 #: templates/admin/incident_change_form.html:39
 msgid "Feedback"
-msgstr ""
+msgstr "Зворотній зв'язок"
 
 #: templates/admin/incident_change_list.html:14
 #: templates/admin/user_tracking_change_list.html:18
 msgid "Export as CSV"
-msgstr ""
+msgstr "Експорт в CSV"
 
 #: templates/admin/user_tracking_change_form.html:11
 msgid "User details"
-msgstr ""
+msgstr "Дані користувача"
 
 #: templates/admin/user_tracking_change_form.html:30
 msgid "Request List"
-msgstr ""
+msgstr "Список запитів"
 
 #: templates/admin/user_tracking_change_form.html:44
 msgid "Offer List"
-msgstr ""
+msgstr "Список пропозицій"
 
 #: templates/admin/user_tracking_change_list.html:23
 msgid "Export as CSV in safe mode"
-msgstr ""
+msgstr "Експорт в CSV в безпечному режимі"
 
 #: templates/admin/auth/user/vet_user.html:7
 msgid "Home"
-msgstr ""
+msgstr "Домівка"
 
 #: templates/admin/auth/user/vet_user.html:11
 msgid "Vet User"
-msgstr ""
+msgstr "Перевірити користувача"
 
 #: templates/admin/auth/user/vet_user.html:22
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Будь ласка, виправте помилки, зазначені нижче."
+msgstr[1] "Будь ласка, виправте помилки, зазначені нижче."
 
 #: templates/admin/auth/user/vet_user.html:44
 msgid "Update"
-msgstr ""
+msgstr "Оновлення"
 
 #: templates/ahr/home_v2.html:13
 msgid "Already have an account?"
-msgstr ""
+msgstr "Вже є аккаунт?"
 
 #: templates/ahr/home_v2.html:34
 msgid "Crowdsourcing the fight for human rights."
-msgstr ""
+msgstr "Краудсорсинг боротьби за права людини."
 
 #: templates/ahr/home_v2.html:37
 msgid ""
@@ -1733,42 +1854,58 @@ msgid ""
 "rights activists in closed societies with those with skills to help them "
 "around the world. Join today and help a dissident in need."
 msgstr ""
+"Movements це краудсорсинг боротьби за права людини. Він з'єднує активістів "
+"із захисту прав людини в закритих суспільствах з тими хто володіє "
+"відповідними вміннями по цілому світу. Приєднуйтесь сьогодні і допоможіть "
+"десидентам в їх потребах."
 
 #: templates/ahr/home_v2.html:41 templates/ahr/home_v2.html.py:63
 #: templates/ahr/home_v2.html:123
 msgid "Sign up now"
-msgstr ""
+msgstr "Зареєструйтеся зараз"
 
 #: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:68
 #: templates/ahr/home_v2.html:102
 msgid "Find out more"
-msgstr ""
+msgstr "Дізнайтеся більше"
 
 #: templates/ahr/home_v2.html:56
 msgid ""
-"Request help from people across the globe, offer help to an activist in need."
+"Request help from people across the globe, offer help to an activist in "
+"need."
 msgstr ""
+"Запит допомоги від людей по всьому світу, пропозиція допомоги активістам в "
+"разі потреби."
 
 #: templates/ahr/home_v2.html:59
 msgid ""
-"Whether you’re a journalist, artist, technologist, policy-maker, linguist or "
-"PR agent - everyone has skills that can advance human rights."
+"Whether you’re a journalist, artist, technologist, policy-maker, linguist or"
+" PR agent - everyone has skills that can advance human rights."
 msgstr ""
+"Чи Ви журналіст, художник, технолог, політ-мейкер, лінгвіст або PR агент - "
+"кожен має вміння, які можуть сприяти зміцненню прав людини."
 
 #: templates/ahr/home_v2.html:101
 msgid ""
 "In closed societies around the world, brave human rights defenders face "
 "enormous hurdles to advance human rights.  Movements.org is a new platform "
 "that allows people everywhere to help protect basic freedoms.  This online "
-"platform connects activists in closed societies with people around the globe "
-"with skills to help. Whether you’re a journalist, politician, activist, "
+"platform connects activists in closed societies with people around the globe"
+" with skills to help. Whether you’re a journalist, politician, activist, "
 "artist, technologist or you speak a few languages, everyone has a role to "
 "play."
 msgstr ""
+"У закритих суспільствах по всьому світу, хоробрі захисники прав людини "
+"стикаються з величезними перешкодами для просування прав людини. "
+"Movements.org є новою платформою, яка дозволяє людям у всьому світі "
+"допомогти захистити основні свободи. Ця он-лайн платформа з'єднує активістів"
+" у закритих суспільствах з людьми які мають відповідні вміння по всьому "
+"світу, щоб допомогти. Чи Ви журналіст, політик, діяч, художник, технолог або"
+" Ви розмовляєте на декількох мовах, кожен має свою роль."
 
 #: templates/ahr/home_v2.html:111 templates/users/more_about_you.html:41
 msgid "Create a Request"
-msgstr ""
+msgstr "Створення запиту"
 
 #: templates/ahr/home_v2.html:112 templates/users/more_about_you.html:43
 msgid ""
@@ -1776,20 +1913,26 @@ msgid ""
 "help those in closed societies find the assistance they need to amplify "
 "their voice and expand their influence."
 msgstr ""
+"Ви активіст який потребує допомоги? Movements.org використовує технології, "
+"щоб допомогти знайти допомогу в закритих суспільствах, активісти повинні "
+"посилювати свій голос і розширювати свій вплив."
 
 #: templates/ahr/home_v2.html:121
 msgid "Getting Started"
-msgstr ""
+msgstr "Починаючи"
 
 #: templates/ahr/home_v2.html:122
 msgid ""
 "The Movements platform enables dissidents who need help to connect to "
 "activists and others who can provide it. Get started by joining today."
 msgstr ""
+"Платформа Movements дозволяє дисидентам, які потребують допомоги, "
+"сконтактувати з активістами та іншими, які можуть надати її. Почніть "
+"приєднавшись сьогодні."
 
 #: templates/ahr/home_v2.html:132
 msgid "Offer your Services"
-msgstr ""
+msgstr "Запропонувати свої послуги"
 
 #: templates/ahr/home_v2.html:133 templates/users/more_about_you.html:47
 msgid ""
@@ -1797,68 +1940,75 @@ msgid ""
 "opportunity. All of us have skills that can be put to use to advance basic "
 "liberties."
 msgstr ""
+"Якщо Ви коли-небудь хотіли допомогти активістам з прав людини, ось Ваш шанс."
+" У всіх нас є вміння, які можуть бути використані для просування основних "
+"свобод."
 
 #: templates/emails/base_email.html:4 templates/emails/base_email.txt:3
 msgid "Hello Movements.Org user,"
-msgstr ""
+msgstr "Шановний користувач сервісу Movements.Org,"
 
 #: templates/emails/base_email.html:12 templates/emails/base_email.txt:11
 msgid "The Movements.Org Team"
-msgstr ""
+msgstr "Команда Movements.Org"
 
 #: templates/emails/base_email.html:13 templates/emails/base_email.txt:12
 msgid ""
 "Movements are made up of individuals. Movements.Org brings them together."
-msgstr ""
+msgstr "Movements складаються з окремих ідивідів. Movements.Org їх об'єднує."
 
 #: templates/emails/base_email.html:17 templates/emails/base_email.txt:14
 msgid "You can update your notification preferences in "
-msgstr ""
+msgstr "Ви можете оновити свої налаштування повідомлень у"
 
 #: templates/emails/base_email.html:18 templates/emails/base_email.txt:14
 msgid "your settings page."
-msgstr ""
+msgstr "Вашій сторінці налаштувань."
 
 #: templates/emails/getstarted.html:3
 msgid "Dear"
-msgstr ""
+msgstr "Шановний(на)"
 
 #: templates/emails/getstarted.html:6
 #, python-format
 msgid ""
 "Thank you for signing up to be part of Movements, a new innovative platform\n"
-"that is crowd-sourcing the fight for human rights. We are writing to confirm "
-"that \n"
+"that is crowd-sourcing the fight for human rights. We are writing to confirm that \n"
 "you are now approved to use the site as an Member. To get started, \n"
-"log-in <a href=\"%(login_url)s\">here</a> (using the username and password "
-"you signed up with) \n"
-"and create a user profile. Once you're finished, you can begin posting on "
-"the Exchange!"
+"log-in <a href=\"%(login_url)s\">here</a> (using the username and password you signed up with) \n"
+"and create a user profile. Once you're finished, you can begin posting on the Exchange!"
 msgstr ""
+"Дякуємо за реєстрацію, тепер Ви є частиною Movements, нової інноваційної платформи\n"
+"з краудсорсінгу боротьби за права людини. Ми повідомляємо, що\n"
+"Ви в даний момент є підтвердженим користувачем і можете використовувати сайт. Для початку, \n"
+"увійдіть <a href=\"%(login_url)s\">тут </a> (використовуючи ім'я користувача та пароль які Ви зареєстрували)\n"
+"і створити профіль користувача. Після того, як Ви закінчите, Ви можете почати розміщувати повідомлення на біржі!"
 
 #: templates/emails/getstarted.html:14 templates/emails/notready.html:8
 #: templates/emails/securityalert.html:11
 msgid "Thanks"
-msgstr ""
+msgstr "Дякуємо"
 
 #: templates/emails/getstarted.html:15 templates/emails/notready.html:9
 #: templates/emails/securityalert.html:12
 msgid "The Movements Team"
-msgstr ""
+msgstr "Команда Movements "
 
 #: templates/emails/getstarted_subject.html:3
 msgid ""
 "You can now get started on Movements. Your Username and Password is now "
 "active."
 msgstr ""
+"Тепер Ви можете розпочати на Movements. Ім'я користувача і пароль тепер "
+"активні."
 
 #: templates/emails/itemreport.html:3
 msgid "User message:"
-msgstr ""
+msgstr "Повідомлення користувача:"
 
 #: templates/emails/itemreport.html:7
 msgid "Link to post:"
-msgstr ""
+msgstr "Посилання на повідомлення:"
 
 #: templates/emails/itemreport_subject.html:3
 #, python-format
@@ -1866,30 +2016,32 @@ msgid ""
 "User \"%(user)s\" reported the %(item_type)s \"%(item_title)s\" by "
 "\"%(item_owner)s\""
 msgstr ""
+"Користувач \"%(user)s\" повідомив про %(item_type)s \"%(item_title)s\" від "
+"\"%(item_owner)s\""
 
 #: templates/emails/notification_email.html:5
 msgid "You have the following new notifications."
-msgstr ""
+msgstr "Ви маєте наступні нові повідомлення."
 
 #: templates/emails/notification_email.html:10
 #: templates/emails/notification_email.html:13
 #: templates/emails/notification_email.html:17
 msgid "On"
-msgstr ""
+msgstr "На"
 
 #: templates/emails/notification_email.html:10
 msgid "commented on a post titled"
-msgstr ""
+msgstr "прокоментував пост під назвою"
 
 #: templates/emails/notification_email.html:14
 #: templates/market/notifications.html:39
 #: templates/market/clientside/notifications.html:12
 msgid "updated"
-msgstr ""
+msgstr "оновлений"
 
 #: templates/emails/notification_email.html:14
 msgid "created"
-msgstr ""
+msgstr "створений"
 
 #: templates/emails/notification_email.html:14
 #: templates/market/notifications.html:40
@@ -1899,128 +2051,131 @@ msgstr ""
 #: templates/emails/notification_email.html:17
 msgid "sent you"
 msgstr ""
+"надісланий\n"
+"Вам"
 
 #: templates/emails/notification_email.html:17
 msgid "a private message"
-msgstr ""
+msgstr "приватне повідомлення"
 
 #: templates/emails/notification_email.html:18
 msgid "with the subject"
-msgstr ""
+msgstr "з предметом"
 
 #: templates/emails/notready.html:4
 msgid ""
-"You or someone recently tried to register on Movements using your email "
-"address.\n"
-"This account is currently being vetted for approval. Please be patient, and "
-"contact us\n"
+"You or someone recently tried to register on Movements using your email address.\n"
+"This account is currently being vetted for approval. Please be patient, and contact us\n"
 "if you have any concerns."
 msgstr ""
+"Ви або хтось недавно намагався зареєструватися на Movements, використовуючи Вашу адресу електронної пошти.\n"
+"Цей обліковий запис в даний час був переданий на затвердження. Будь ласка, будьте терплячі, і, зв'яжіться з нами\n"
+"якщо у Вас є які-небудь проблеми."
 
 #: templates/emails/notready_subject.html:3
 msgid "Not quite ready yet"
-msgstr ""
+msgstr "Не зовсім готовий"
 
 #: templates/emails/recommendation_message.html:5
 msgid "A message from Movements.Org,"
-msgstr ""
+msgstr "Повідомлення від Movements.Org,"
 
 #: templates/emails/recommendation_message.html:14
 #, python-format
 msgid ""
-"This email was sent to you by %(screen_name)s, a registered user on "
-"Movements.org.\n"
-"    Movements helps activists in need connect directly with the people who "
-"have the skills and\n"
+"This email was sent to you by %(screen_name)s, a registered user on Movements.org.\n"
+"    Movements helps activists in need connect directly with the people who have the skills and\n"
 "    expertise that can help."
 msgstr ""
+"Цей лист був відправлений Вам від %(screen_name)s, зареєстрованого користувача на Movements.org.\n"
+"Movements допомагає активістам в разі потреби безпосередньо контактувати з людьми, які мають вміння та досвід, який може допомогти."
 
 #: templates/emails/recommendation_message.html:19
 #, python-format
 msgid ""
-"All personal information on Movements.org is confidential. To view the full "
-"post that they\n"
-"    have recommended to you please go to %(post_link)s. If you wish to "
-"respond to the post please\n"
-"    <a href=\"%(registration_link)s\">register</a>. The registration process "
-"is designed to help protect the security and privacy of all users."
+"All personal information on Movements.org is confidential. To view the full post that they\n"
+"    have recommended to you please go to %(post_link)s. If you wish to respond to the post please\n"
+"    <a href=\"%(registration_link)s\">register</a>. The registration process is designed to help protect the security and privacy of all users."
 msgstr ""
+"Вся особиста інформація на Movements.org є конфіденційною. Для перегляду повного поста, що був порекомендуваний Вам, перейдіть за посиланням %(post_link)s.  Якщо Ви хочете відповісти на цей пост, будь ласка,\n"
+"<a href=\"%(registration_link)s\">зареєструйтеся</a>. Процес реєстрації є розроблений так, щоб допомогти захистити безпеку і конфіденційність всіх користувачів."
 
 #: templates/emails/recommendation_message.html:24
 msgid "Post Title:"
-msgstr ""
+msgstr "Тема повідомлення:"
 
 #: templates/emails/recommendation_message.html:27
 msgid "Post URL:"
-msgstr ""
+msgstr "URL повідомлення:"
 
 #: templates/emails/recommendation_message.html:30
 msgid "Date of Post:"
-msgstr ""
+msgstr "Дата повідомлення:"
 
 #: templates/emails/recommendation_message.html:33
 #, python-format
 msgid ""
-"This email was automatically created by Movements.org. You cannot reply to "
-"this email but can reply\n"
+"This email was automatically created by Movements.org. You cannot reply to this email but can reply\n"
 "    to %(screen_name)s on Movements.org once you register."
 msgstr ""
+"Цей лист був автоматично створений Movements.org. Ви не можете відповіcти на"
+" цей лист, але може писати на %(screen_name)s на Movements.org після "
+"реєстрації."
 
 #: templates/emails/recommendation_message.html:37
 msgid "Thank you,"
-msgstr ""
+msgstr "Дякую,"
 
 #: templates/emails/securityalert.html:4
 msgid ""
-"You or someone recently tried to register on Movements using your email "
-"address.\n"
-"If this was not you and you did not make this request, it's likely that "
-"another user entered\n"
-"your email address by mistake. If you believe an unauthorised person has "
-"accessed your account\n"
-"we advise that you change your password for both your email account and "
-"Movements.\n"
-"Movements did not reveal that you are registered with the site or any of "
-"your personal\n"
+"You or someone recently tried to register on Movements using your email address.\n"
+"If this was not you and you did not make this request, it's likely that another user entered\n"
+"your email address by mistake. If you believe an unauthorised person has accessed your account\n"
+"we advise that you change your password for both your email account and Movements.\n"
+"Movements did not reveal that you are registered with the site or any of your personal\n"
 "Information. We are sending this email as a precautionary measure only."
 msgstr ""
+"Ви або хтось інший недавно намагався зареєструватися на Movements, використовуючи Вашу адресу електронної пошти.\n"
+"Якщо це були не Ви, і Ви не робили цей запит, то, швидше за все, інший користувач ввів Вашу адресу електронної пошти помилково. Якщо Ви вважаєте, що хтось сторонній отримав доступ до Вашого профілю, то ми рекомендуємо Вам змінити Ваш пароль і для облікового запису електронної пошти і для Movements теж.\n"
+"Movements не показує, що Ви зареєстровані на сайті з будь-якою Вашою особистою інформацією. Ми посилаємо цей лист тільки як запобіжний захід."
 
 #: templates/emails/unread_messages_email.html:7
 msgid "You have an unread message on Movements.Org."
-msgstr ""
+msgstr "У вас є непрочитані повідомлення на Movements.Org."
 
 #: templates/emails/unread_messages_email.html:9
 msgid "You have {{ number_unread }} unread messages on Movements.Org."
 msgstr ""
+"Ви маєте{{ number_unread }} непрочитаних повідомлень на Movements.Org."
 
 #: templates/emails/unread_messages_email.html:12
 msgid "Login now"
-msgstr ""
+msgstr "Увійти зараз"
 
 #: templates/emails/unread_messages_email.html:12
 msgid "to read your messages."
-msgstr ""
+msgstr "щоб прочитати Ваші повідомлення."
 
 #: templates/emails/userreport.html:3
 msgid "User message"
-msgstr ""
+msgstr "Повідомлення користувача"
 
 #: templates/emails/userreport.html:5
 msgid "Link to user:"
-msgstr ""
+msgstr "Посилання на користувача:"
 
 #: templates/emails/userreport_subject.html:3
 #, python-format
 msgid "User \"%(user)s\" reported user \"%(another_user)s\""
-msgstr ""
+msgstr "Користувач \"%(user)s\" повідомив користувача \"%(another_user)s\""
 
 #: templates/market/create_offer.html:11
 msgid "Offer a service"
-msgstr ""
+msgstr "Пропозиції"
 
 #: templates/market/create_offer.html:12
 msgid "Do you have expertise to offer?"
-msgstr ""
+msgstr "Чи є у Вас досвід, для того  аби запропонувати?"
 
 #: templates/market/create_offer.html:13
 msgid ""
@@ -2028,88 +2183,99 @@ msgid ""
 "a story, or any skill that may be of help to others. Your Offer will be "
 "posted on Movements and will be seen by all members."
 msgstr ""
+"Пропозиція може бути технічні або професійні вміння, можливість публікувати "
+"історії, або будь-які вміння, які можуть виявитися корисним для інших. Ваша "
+"пропозиція буде розміщено на Movements і буде доступна всім."
 
 #: templates/market/create_offer.html:17
 msgid "1. What skills can you offer?"
-msgstr ""
+msgstr "1. Які вміння Ви можете запропонувати?"
 
 #: templates/market/create_offer.html:21
 #: templates/market/create_request.html:22
 msgid "Other"
-msgstr ""
+msgstr "Інше"
 
 #: templates/market/create_offer.html:31
 msgid "2. Which countries are you interested in helping?"
-msgstr ""
+msgstr "2. Яким країнам Ви зацікавлені в допомозі?"
 
 #: templates/market/create_offer.html:37
 msgid ""
 "Movements.org provides access to skills and experts. Please describe your "
 "skills, abilities, or services below. Be as explicit and clear as possible."
 msgstr ""
+"Movements.org забезпечує доступ до бази даних вмінь та експертів. Будь "
+"ласка, опишіть Ваші вміння, здібності, або послуги нижче. Вказуйте точно і "
+"зрозуміло, настільки на скільки це можливо."
 
 #: templates/market/create_offer.html:38
 msgid "3. How can you help?"
-msgstr ""
+msgstr "3. Як Ви можете допомогти?"
 
 #: templates/market/create_offer.html:39
 #: templates/market/create_request.html:43
 msgid "Be specific and clear."
-msgstr ""
+msgstr "Будьте конкретні і зрозумілі."
 
 #: templates/market/create_offer.html:48
 #: templates/market/create_request.html:52
 msgid "4. Please write your post"
-msgstr ""
+msgstr "4. Будь ласка, напишіть пост"
 
 #: templates/market/create_offer.html:49
 msgid "Tell a compelling story."
-msgstr ""
+msgstr "Опишіть свою історію."
 
 #: templates/market/create_offer.html:59
 #: templates/market/create_request.html:63
 msgid "May we tweet this request?"
-msgstr ""
+msgstr "Чи ми можемо поширити цей запит задопомогою Twitter?"
 
 #: templates/market/create_offer.html:62
 #: templates/market/create_request.html:66
 msgid "We won’t use your name or any identifying information"
-msgstr ""
+msgstr "Ми не будемо використовувати Ваше ім'я або будь-яку іншу інформацію"
 
 #: templates/market/create_offer.html:69
 #: templates/market/create_request.html:73
 msgid "Receive notifications"
-msgstr ""
+msgstr "Отримувати повідомлення"
 
 #: templates/market/create_offer.html:79
 #: templates/market/create_request.html:82
 msgid "Post now"
-msgstr ""
+msgstr "Опублікувати"
 
 #: templates/market/create_request.html:11
 msgid "Request a service"
-msgstr ""
+msgstr "Подати запит"
 
 #: templates/market/create_request.html:13
 msgid ""
-"A Request is a way to ask for help from experts on Movements. Be as specific "
-"and clear as possible about what you need.  If you need a lawyer tell us "
+"A Request is a way to ask for help from experts on Movements. Be as specific"
+" and clear as possible about what you need.  If you need a lawyer tell us "
 "what kind (asylum or civil?) Where do you need that lawyer (In the UK,  US "
 "or China?)  The more you explain your need, the easier it will be for "
 "someone to help."
 msgstr ""
+"Запит є спосіб просити допомоги у фахівців на Movements. Будьте конкретними "
+"і чіткими, наскільки це можливо, про те що Вам потрібно. Якщо Вам потрібен "
+"адвокат, повідомте нам, який вид? Де саме потрібно адвоката (у "
+"Великобританії, США чи Китаї?) Чим більше Ви пояснити Вашу потребу, тим "
+"легше буде для когось Вам допомогти."
 
 #: templates/market/create_request.html:18
 msgid "1. What skills do you need?"
-msgstr ""
+msgstr "1. Які вміння Вам потрібно?"
 
 #: templates/market/create_request.html:32
 msgid "2. What countries does this request apply to?"
-msgstr ""
+msgstr "2. До яких країн цей запит відноситься?"
 
 #: templates/market/create_request.html:33
 msgid "Indicate the region and/or specific country."
-msgstr ""
+msgstr "Вкажіть регіон та/або конкретну країну."
 
 #: templates/market/create_request.html:40
 msgid ""
@@ -2118,388 +2284,409 @@ msgid ""
 "href=\"/movements/resources/\">Resources</a> page. What might be available "
 "is a proposal writer to help you secure funding from a different source. "
 msgstr ""
+"Movements.org забезпечує доступ до бази даних вмінь та експертів. У цей час,"
+" ми не можемо забезпечити фінансування чи обладнання. Якщо Вам все таки "
+"потрібно вищезазначене, то перегляньте <a "
+"href=\"/movements/resources/\">сторінку ресурсів </a>. Те що може бути "
+"доступно так це письмова пропозиція, щоб допомогти Вам забезпечити "
+"фінансування з іншого джерела."
 
 #: templates/market/create_request.html:41
 msgid ""
 "Please describe your request below. Be as explicit and clear as possible."
 msgstr ""
+"Будь ласка, опишіть Ваш запит нижче. Пишіть якомога чіткіше і зрозуміліше на"
+" скільки це можливо."
 
 #: templates/market/create_request.html:42
 msgid "3. What do you need?"
-msgstr ""
+msgstr "3. Що Вам потрібно?"
 
 #: templates/market/create_request.html:53
 msgid "Tell a compelling story and state your needs."
-msgstr ""
+msgstr "Розкажіть Вашу історію і потреби."
 
 #: templates/market/market.html:15
 msgid "See all"
-msgstr ""
+msgstr "Переглянути всі"
 
 #: templates/market/market.html:16
 msgid "Requests"
-msgstr ""
+msgstr "Запити"
 
 #: templates/market/market.html:17
 msgid "Offers"
-msgstr ""
+msgstr "Пропозиції"
 
 #: templates/market/market.html:26
 msgid "Hide/Show"
-msgstr ""
+msgstr "Сховати/Показати"
 
 #: templates/market/market.html:33 templates/users/more_about_you.html:26
 #: templates/users/more_about_you.html:97
 #: templates/users/user_profile_v2.html:62
 msgid "Skills"
-msgstr ""
+msgstr "Навички"
 
 #: templates/market/market.html:39 templates/users/more_about_you.html:79
 msgid "Countries"
-msgstr ""
+msgstr "Країни"
 
 #: templates/market/market.html:45
 msgid "Search"
-msgstr ""
+msgstr "Пошук"
 
 #: templates/market/market.html:58
 msgid "Press enter to search"
-msgstr ""
+msgstr "Натисніть \"Еnter\" для пошуку"
 
 #: templates/market/market.html:59
 msgid "Click \"Search\" above to close"
-msgstr ""
+msgstr "Натисніть \"Пошук\" вище, щоб закрити"
 
 #: templates/market/market.html:72
 msgid "Featured posts"
-msgstr ""
+msgstr "Популярні повідомлення"
 
 #: templates/market/market.html:81
 msgid "Sticky posts"
-msgstr ""
+msgstr "Нотатки"
 
 #: templates/market/market.html:107
 msgid "Show hidden"
-msgstr ""
+msgstr "Показати приховані"
 
 #: templates/market/market.html:112 templates/market/market.html.py:120
 #: templates/market/market.html:126
 msgid "Select all"
-msgstr ""
+msgstr "Вибрати всі"
 
 #: templates/market/market.html:125
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #: templates/market/notifications.html:13
 msgid "Alert History"
-msgstr ""
+msgstr "Журнал попереджень"
 
 #: templates/market/notifications.html:16
 msgid "All notifications loaded"
-msgstr ""
+msgstr "Усі повідомлення завантажені"
 
 #: templates/market/notifications.html:17
 msgid "More"
-msgstr ""
+msgstr "Більше"
 
 #: templates/market/notifications.html:30
 msgid "commented on"
-msgstr ""
+msgstr "прокоментував"
 
 #: templates/market/notifications.html:30
 #: templates/market/clientside/notifications.html:15
 msgid "your"
-msgstr ""
+msgstr "Ваш"
 
 #: templates/market/notifications.html:32
 #: templates/market/notifications.html:42
 msgid "offer"
-msgstr ""
+msgstr "пропозиція"
 
 #: templates/market/notifications.html:34
 #: templates/market/notifications.html:44
 msgid "request"
-msgstr ""
+msgstr "запит"
 
 #: templates/market/notifications.html:39
 #: templates/market/clientside/notifications.html:12
 msgid "posted"
-msgstr ""
+msgstr "опубліковано"
 
 #: templates/market/notifications.html:50
 msgid "sent you a private "
-msgstr ""
+msgstr "відправив Вам приватне"
 
 #: templates/market/view_post.html:12
 msgid "on"
-msgstr ""
+msgstr "на"
 
 #: templates/market/view_post.html:20
 msgid "Posted by"
-msgstr ""
+msgstr "Повідомлення від"
 
 #: templates/market/view_post.html:31
 msgid "Translate this post"
-msgstr ""
+msgstr "Перекласти цей пост"
 
 #: templates/market/view_post.html:51
 msgid "Recommend"
-msgstr ""
+msgstr "Рекомендувати"
 
 #: templates/market/view_post.html:56
 msgid "Tweet"
-msgstr ""
+msgstr "Твітнути"
 
 #: templates/market/view_post.html:62
 msgid "Direct message"
-msgstr ""
+msgstr "Приватне повідомлення"
 
 #: templates/market/view_post.html:65
 msgid "Report this post"
-msgstr ""
+msgstr "Поскаржитись на це повідомлення"
 
 #: templates/market/view_post.html:74
 msgid "Leave a comment"
-msgstr ""
+msgstr "Залишити коментар"
 
 #: templates/market/view_post.html:78
 msgid "Please do not post any personally identifying information."
-msgstr ""
+msgstr "Будь ласка, не розміщуйте будь-яку особисту інформацію."
 
 #: templates/market/view_post.html:79
 msgid "Don't use your real name or email address when leaving a comment."
 msgstr ""
+"Не використовуйте Ваше справжнє ім'я або адресу електронної пошти, залишаючи"
+" коментар."
 
 #: templates/market/view_post.html:82
 msgid "Post comment"
-msgstr ""
+msgstr "Залишити коментар"
 
 #: templates/market/view_post.html:95
 #, python-format
 msgid ""
-"Please <a href=\"%(accountUrl)s\">Login</a> or <a href=\"%(signupUrl)s"
-"\">Sign up</a> to view more about this post. Once you've done this you will "
-"be able to send messages to the author, comment and rate this post."
+"Please <a href=\"%(accountUrl)s\">Login</a> or <a "
+"href=\"%(signupUrl)s\">Sign up</a> to view more about this post. Once you've"
+" done this you will be able to send messages to the author, comment and rate"
+" this post."
 msgstr ""
+"Будь ласка, <a href=\"%(accountUrl)s\">Увійдіть</a> або <a "
+"href=\"%(signupUrl)s\">Зареєструйтеся</a> щоб дізнатися більше про це "
+"повідомлення. Після того як Ви зробите це, Ви зможете відправляти "
+"повідомлення автору, коментувати і оцінювати цей пост."
 
 #: templates/market/view_post.html:119
 #, python-format
 msgid ""
-"You don't have any languages selected. Please add some in your <a href="
-"\"%(settingsUrl)s#skills\">settings</a>"
+"You don't have any languages selected. Please add some in your <a "
+"href=\"%(settingsUrl)s#skills\">settings</a>"
 msgstr ""
+"Ви не маєте вибраної ніякої мови. Будь ласка, додайте ті якими Ви володієте "
+"до Ваших<a href=\"%(settingsUrl)s#skills\">налаштувань</a>"
 
 #: templates/market/view_post.html:136
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 #: templates/market/clientside/closemarketitemdialog.html:10
 msgid "CLOSE A REQUEST"
-msgstr ""
+msgstr "ЗАКРИТИ ЗАПИТ"
 
 #: templates/market/clientside/closemarketitemdialog.html:11
 msgid "CLOSE AN OFFER"
-msgstr ""
+msgstr "ЗАКРИТИ ПРОПОЗИЦІЮ"
 
 #: templates/market/clientside/closemarketitemdialog.html:32
 #: templates/market/clientside/marketitem.html:91
 msgid "Close"
-msgstr ""
+msgstr "Закрити"
 
 #: templates/market/clientside/closemarketitemdialog.html:111
 msgid "Please enter your answer"
-msgstr ""
+msgstr "Будь ласка, введіть Вашу відповідь"
 
 #: templates/market/clientside/marketitem.html:25
 #, python-format
 msgid ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
-"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
-"collaborators</a>."
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> collaborators</a>."
 msgstr ""
+"<a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, розміщеного <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"<a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> співробітники</a>."
 
 #: templates/market/clientside/marketitem.html:68
 msgid "FEATURED OFFER"
-msgstr ""
+msgstr "РЕКОМЕНДОВАНІ ПРОПОЗИЦІЇ"
 
 #: templates/market/clientside/marketitem.html:70
 msgid "FEATURED REQUEST"
-msgstr ""
+msgstr "РЕКОМЕНДОВАНІ ЗАПИТИ"
 
 #: templates/market/clientside/marketitem.html:80
 #, python-format
 msgid ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
-"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"        <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
-"collaborators</a>."
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"        <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> collaborators</a>."
 msgstr ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, розміщеного <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+"<a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> співробітники</a>."
 
 #: templates/market/clientside/marketitem.html:88
 msgid "Hide"
-msgstr ""
+msgstr "Приховати"
 
 #: templates/market/clientside/marketitem.html:89
 msgid "Stick"
-msgstr ""
+msgstr "Зазначити"
 
 #: templates/market/clientside/marketitem.html:90
 msgid "Edit"
-msgstr ""
+msgstr "Редагувати"
 
 #: templates/market/clientside/marketitem.html:92
 msgid "Report"
-msgstr ""
+msgstr "Звіт"
 
 #: templates/market/clientside/messagedialog.html:8
 msgid "New message to "
-msgstr ""
+msgstr "Нове повідомлення до "
 
 #: templates/market/clientside/messagedialog.html:12
 #: templates/market/clientside/recommenddialog.html:16
 msgid "Subject"
-msgstr ""
+msgstr "Тема"
 
 #: templates/market/clientside/messagedialog.html:16
 #: templates/market/clientside/recommenddialog.html:20
 #: templates/market/clientside/reportdialog.html:13
 #: templates/market/clientside/reportuserdialog.html:14
 msgid "Message"
-msgstr ""
+msgstr "Повідомлення"
 
 #: templates/market/clientside/messagedialog.html:26
 #: templates/market/clientside/recommenddialog.html:30
 #: templates/market/clientside/reportdialog.html:23
 #: templates/market/clientside/reportuserdialog.html:24
 msgid "Send"
-msgstr ""
+msgstr "Послати"
 
 #: templates/market/clientside/messagedialog.html:85
 msgid ". Please try again."
-msgstr ""
+msgstr ". Будь ласка, спробуйте ще раз."
 
 #: templates/market/clientside/messagedialog.html:89
 msgid "Please provide a subject and message."
-msgstr ""
+msgstr "Будь ласка, вкажіть тему і повідомлення."
 
 #: templates/market/clientside/notifications.html:15
 msgid "commented on "
-msgstr ""
+msgstr "прокоментував"
 
 #: templates/market/clientside/recommenddialog.html:7
 msgid "Recommend this"
-msgstr ""
+msgstr "Рекомендувати"
 
 #: templates/market/clientside/recommenddialog.html:11
 msgid "To: username or email address"
-msgstr ""
+msgstr "Кому: ім'я користувача або адреса електронної пошти"
 
 #: templates/market/clientside/recommenddialog.html:13
 msgid "Start typing a username or enter an email address"
-msgstr ""
+msgstr "Почніть вводити ім'я користувача або введіть адресу електронної пошти"
 
 #: templates/market/clientside/recommenddialog.html:60
 msgid "user"
-msgstr ""
+msgstr "користувач"
 
 #: templates/market/clientside/recommenddialog.html:62
 msgid "post"
-msgstr ""
+msgstr "пост"
 
 #: templates/market/clientside/recommenddialog.html:86
 msgid "Please enter both a subject and a message."
-msgstr ""
+msgstr "Будь ласка, введіть і тему, і повідомлення."
 
 #: templates/market/clientside/recommenddialog.html:91
 msgid "Please enter a valid username and/or email address. "
-msgstr ""
+msgstr "Будь ласка, введіть дійсне ім'я користувача та/або поштову адресу."
 
 #: templates/market/clientside/recommenddialog.html:118
 msgid "Failed to send message to user:"
-msgstr ""
+msgstr "Не вдалося відправити повідомлення користувачу:"
 
 #: templates/market/clientside/recommenddialog.html:121
 msgid "Failed to send message to users:"
-msgstr ""
+msgstr "Не вдалося відправити повідомлення користувачам:"
 
 #: templates/market/clientside/recommenddialog.html:127
 msgid "Failed to send message"
-msgstr ""
+msgstr "Не вдалося відправити повідомлення"
 
 #: templates/market/clientside/reportdialog.html:8
 msgid "Report Post"
-msgstr ""
+msgstr "Поскаржитись на пост"
 
 #: templates/market/clientside/reportuserdialog.html:9
 msgid "Report User "
-msgstr ""
+msgstr "Поскаржитись на користувача"
 
 #: templates/market/clientside/userprofile.html:13
 msgid "AHR rating"
-msgstr ""
+msgstr "AHR рейтинг"
 
 #: templates/market/clientside/userprofile.html:16
 msgid "Community rating:"
-msgstr ""
+msgstr "Рейтинг спільноти:"
 
 #: templates/market/clientside/userprofile.html:26
 msgid "Stars"
-msgstr ""
+msgstr "Зірки"
 
 #: templates/market/clientside/userprofile.html:27
 msgid "votes"
-msgstr ""
+msgstr "голосів"
 
 #: templates/market/clientside/userprofile.html:37
 msgid "Country of residence"
-msgstr ""
+msgstr "Країна проживання"
 
 #: templates/market/clientside/userprofile.html:44
 msgid ""
 "\n"
-"          For your own safety and security, do not share personal contact "
-"information\n"
-"          (such as your phone number, address, email address, etc.) with "
-"other users.\n"
+"          For your own safety and security, do not share personal contact information\n"
+"          (such as your phone number, address, email address, etc.) with other users.\n"
 "          Movements also prohibits abusive language or harassment.\n"
 "          To report an abusive user,\n"
 "          "
 msgstr ""
+"\n"
+"Для вашої власної безпеки, не надавайте особисту контактну інформацію\n"
+"(Наприклад, свій номер телефону, адресу, адресу електронної пошти тощо) іншим користувачам.\n"
+"Movements також забороняє ненормативну лексику чи домагання.\n"
+"Щоб повідомити про користувача, який порушив ці правила"
 
 #: templates/market/clientside/userprofile.html:50
 msgid "click here"
-msgstr ""
+msgstr "натисніть тут"
 
 #: templates/openid/login.html:6 templates/openid/login.html.py:10
 msgid "OpenID Sign In"
-msgstr ""
+msgstr "Вхід за допомогою OpenID"
 
 #: templates/postman/base_folder.html:31 templates/postman/inbox.html:5
 #: templates/users/snippets/profile_navigation.html:9
 msgid "Inbox"
-msgstr ""
+msgstr "Вхідні"
 
 #: templates/postman/base_folder.html:32 templates/postman/sent.html:10
 msgid "Sent"
-msgstr ""
+msgstr "Надіслані"
 
 #: templates/postman/base_folder.html:43
+#, fuzzy
 msgid "g:i A,M j,n/j/y"
 msgstr ""
 
 #: templates/postman/base_folder.html:64
 msgid "No messages."
-msgstr ""
+msgstr "Немає повідомлень."
 
 #: templates/postman/base_folder.html:73
 msgid "Sorry, this page number is invalid."
-msgstr ""
+msgstr "Вибачте, цей номер сторінки є невірним."
 
 #: templates/postman/email_user.txt:3
 msgid "Dear Member,"
-msgstr ""
+msgstr "Шановний користувач,"
 
 #: templates/postman/email_user.txt:5
 #, python-format
@@ -2508,14 +2695,16 @@ msgid ""
 "    On %(date)s, you asked to send a message to the user '%(recipient)s'.\n"
 "    "
 msgstr ""
+"\n"
+"%(date)s, Ви запросили надісилання повідомлення користувачу '%(recipient)s'."
 
 #: templates/postman/email_user.txt:8 templates/postman/email_visitor.txt:5
 msgid "Your message has been rejected by the moderator"
-msgstr ""
+msgstr "Ваше повідомлення було відхилено модератором"
 
 #: templates/postman/email_user.txt:10 templates/postman/email_visitor.txt:5
 msgid ", for the following reason:"
-msgstr ""
+msgstr ", з таких причин:"
 
 #: templates/postman/email_user.txt:18 templates/postman/email_user.txt:26
 #, python-format
@@ -2523,10 +2712,12 @@ msgid ""
 "'%(sender)s' has sent you a message. To view your message please login to "
 "Movements."
 msgstr ""
+"'%(sender)s' відправив Вам повідомлення. Для перегляду повідомлення, будь "
+"ласка, увійдіть на Movements."
 
 #: templates/postman/email_user.txt:19
 msgid "Your correspondent has given you an answer."
-msgstr ""
+msgstr "Ваш кореспондент дав Вам відповідь."
 
 #: templates/postman/email_user.txt:21
 #, python-format
@@ -2534,179 +2725,201 @@ msgid ""
 "\n"
 "You have received a copy of a response from the user '%(sender)s'.\n"
 msgstr ""
+"\n"
+"Ви отримали копію відповіді від користувача '%(sender)s'.\n"
 
 #: templates/postman/email_user.txt:29 templates/postman/email_visitor.txt:14
 msgid "Note: This message is issued by an automated system. Do not reply."
 msgstr ""
+"Примітка: Це повідомлення генерується автоматизованою системою. Не "
+"відповідайте."
 
 #: templates/postman/email_user_subject.txt:1
 #: templates/postman/email_visitor_subject.txt:1
 #, python-format
 msgid "Message \"%(subject)s\" on the site %(sitename)s"
-msgstr ""
+msgstr "Повідомлення \"%(subject)s\" на сайті %(sitename)s"
 
 #: templates/postman/email_visitor.txt:1
 msgid "Dear visitor,"
-msgstr ""
+msgstr "Шановний відвідувач,"
 
 #: templates/postman/email_visitor.txt:3
 #, python-format
 msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
 msgstr ""
+"%(date)s, Ви попросили надіслати повідомлення користувачу '%(recipient)s'."
 
 #: templates/postman/email_visitor.txt:8
 msgid "As a reminder, please find below the content of your message."
-msgstr ""
+msgstr "Як нагадування, будь ласка, знайдіть нижче вміст Вашого повідомлення."
 
 #: templates/postman/email_visitor.txt:10
 #, python-format
 msgid "On %(date)s, you sent a message to the user '%(sender)s'."
-msgstr ""
+msgstr "%(date)s, Ви послали повідомлення для користувача '%(sender)s'."
 
 #: templates/postman/email_visitor.txt:11
 msgid "Please find below the answer from your correspondent."
-msgstr ""
+msgstr "Нижче Ви знайдете відповідь від Вашого кореспондента."
 
 #: templates/postman/inbox.html:9
 msgid "Received"
-msgstr ""
+msgstr "Отримано"
 
 #: templates/postman/sent.html:6
 msgid "Sent Messages"
-msgstr ""
+msgstr "Надіслані повідомлення"
 
 #: templates/postman/view.html:17
 msgid "Reply"
-msgstr ""
+msgstr "Відповісти"
 
 #: templates/postman/view.html:28
 msgid "to"
-msgstr ""
+msgstr "до"
 
 #: templates/socialaccount/authentication_error.html:5
 #: templates/socialaccount/authentication_error.html:10
 msgid "Social Network Login Failure"
-msgstr ""
+msgstr "Вхід у соціальну мережу відхилено"
 
 #: templates/socialaccount/authentication_error.html:11
 msgid ""
 "An error occurred while attempting to login via your social network account."
-msgstr ""
+msgstr "Сталася помилка при спробі увійти через акаунт у соціальній мережі."
 
 #: templates/socialaccount/connections.html:5
 #: templates/socialaccount/connections.html:8
 msgid "Account Connections"
-msgstr ""
+msgstr "Зв'язки облікового запису"
 
 #: templates/socialaccount/connections.html:11
 msgid ""
 "You can sign in to your account using any of the following third party "
 "accounts:"
 msgstr ""
+"Ви можете увійти в свій обліковий запис, використовуючи будь-який з "
+"наступних облікових записів:"
 
 #: templates/socialaccount/connections.html:43
 msgid ""
 "You currently have no social network accounts connected to this account."
 msgstr ""
+"В даний час Ви не маєте облікових записів соціальних мереж підключених до "
+"цього облікового запису."
 
 #: templates/socialaccount/connections.html:46
 msgid "Add a 3rd Party Account"
-msgstr ""
+msgstr "Додати інші облікові записи"
 
 #: templates/socialaccount/login_cancelled.html:6
 #: templates/socialaccount/login_cancelled.html:11
 msgid "Login Cancelled"
-msgstr ""
+msgstr "Вхід скасовано"
 
 #: templates/socialaccount/login_cancelled.html:13
 #, python-format
 msgid ""
 "You decided to cancel logging in to our site using one of your existing "
-"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
-"\">sign in</a>."
+"accounts. If this was a mistake, please proceed to <a "
+"href=\"%(login_url)s\">sign in</a>."
 msgstr ""
+"Ви вирішили скасувати вхід на наш сайт, використовуючи один з існуючих "
+"облікових записів. Якщо це помилка, будь ласка, перейдіть до <a "
+"href=\"%(login_url)s\">увійти</a>."
 
 #: templates/socialaccount/messages/account_connected.txt:2
 msgid "The social account has been connected."
-msgstr ""
+msgstr "Обліковий запис соціальної мережі підключено."
 
 #: templates/socialaccount/messages/account_connected_other.txt:2
 msgid "The social account is already connected to a different account."
 msgstr ""
+"Обліковий запис соціальної мережі вже підключено до іншого облікового "
+"запису."
 
 #: templates/socialaccount/messages/account_disconnected.txt:2
 msgid "The social account has been disconnected."
-msgstr ""
+msgstr "Обліковий запис соціальної мережі був відключений."
 
 #: templates/users/more_about_you.html:14
 msgid "Start"
-msgstr ""
+msgstr "Початок"
 
 #: templates/users/more_about_you.html:18
 #: templates/users/more_about_you.html:61
 #: templates/users/user_profile_v2.html:73
 #: templates/users/user_settings_v2.html:136
 msgid "Languages"
-msgstr ""
+msgstr "Мови"
 
 #: templates/users/more_about_you.html:22
 msgid "Regions"
-msgstr ""
+msgstr "Області"
 
 #: templates/users/more_about_you.html:30
 #: templates/users/more_about_you.html:130
 msgid "Finish"
-msgstr ""
+msgstr "Фініш"
 
 #: templates/users/more_about_you.html:39
 msgid ""
-"Your account is now fully active. Fill out additional profile details now or "
-"you can skip this step and do it later in your settings page."
+"Your account is now fully active. Fill out additional profile details now or"
+" you can skip this step and do it later in your settings page."
 msgstr ""
+"Ваш обліковий запис тепер повністю активний. Заповніть додаткові дані "
+"профілю в даний час або Ви можете пропустити цей крок і зробити це пізніше "
+"на сторінці налаштувань."
 
 #: templates/users/more_about_you.html:45
 msgid "Create an Offer"
-msgstr ""
+msgstr "Створити пропозицію"
 
 #: templates/users/more_about_you.html:52
 #: templates/users/more_about_you.html:70
 #: templates/users/more_about_you.html:88
 #: templates/users/more_about_you.html:106
 msgid "Skip"
-msgstr ""
+msgstr "Пропустити"
 
 #: templates/users/more_about_you.html:64
 msgid ""
 "Please indicate which languages you speak. Google Translate is also "
 "available, but it is not fully accurate."
 msgstr ""
+"Прохання вказати, якими мовами Ви володієте. Перекладач Google теж є "
+"доступний, але це не зовсім точно."
 
 #: templates/users/more_about_you.html:82
 msgid ""
 "Please indicate which regions and countries you are interested in helping."
 msgstr ""
+"Будь ласка, вкажіть, яким регіонам і країнам Ви зацікавлені допомогти."
 
 #: templates/users/more_about_you.html:100
 msgid "Please indicate your skill set."
-msgstr ""
+msgstr "Будь ласка, вкажіть свій набір вмінь."
 
 #: templates/users/more_about_you.html:115
 msgid "Done"
-msgstr ""
+msgstr "Готово"
 
 #: templates/users/more_about_you.html:118
 msgid "Thank You! You are one step closer to opening a closed society!"
-msgstr ""
+msgstr "Дякуємо! Ви на один крок ближче до відкриття закритого суспільства!"
 
 #: templates/users/more_about_you.html:121
 msgid ""
 "If you would like to update this details at any time, this can be done in "
 "easily in your settings panel."
 msgstr ""
+"Якщо Ви хочете оновити ці деталі, в будь-який час це можна легко зробити в "
+"панелі налаштувань."
 
 #: templates/users/more_about_you.html:123
 msgid "Your Safety"
-msgstr ""
+msgstr "Ваша безпека"
 
 #: templates/users/more_about_you.html:125
 #, python-format
@@ -2714,89 +2927,99 @@ msgid ""
 "Please remember that no online platform is 100%% secure. We have gone to "
 "great lengths to try and protect your personal privacy and are working with "
 "some of the best experts in the field who share and appreciate your concern "
-"for digital security. However it is important to always stay safe online and "
-"only share personal information with people you trust. Please see our "
+"for digital security. However it is important to always stay safe online and"
+" only share personal information with people you trust. Please see our "
 "Security and Privacy pages for more information."
 msgstr ""
+"Будь ласка, пам'ятайте, що ні одна онлайн-платформа не є 100% безпечна. Ми "
+"зробили багато чого, щоб захистити Вашу особисту інформацію і працюємо з "
+"кращими фахівцями в даній області, які поділяють і цінують Ваше право на "
+"цифрову безпеку. Однак важливо завжди залишатися на осторожі в Інтернеті і "
+"ділитися особистою інформацією тільки з людьми, яким Ви довіряєте. Будь "
+"ласка, дивіться наші сторінки з безпеки та конфіденційності для більш "
+"докладної інформації."
 
 #: templates/users/thanksforactivation.html:7
 #: templates/users/thanksforactivation.html:12
 #: templates/users/waitforactivation.html:7
 #: templates/users/waitforactivation.html:12
 msgid "Email Confirmed"
-msgstr ""
+msgstr "Email підтверджено"
 
 #: templates/users/thanksforactivation.html:13
 msgid "Your account is now activated."
-msgstr ""
+msgstr "Ваш аккаунт активовано."
 
 #: templates/users/user_profile_v2.html:27
 msgid "View Public Profile"
-msgstr ""
+msgstr "Переглянути профіль"
 
 #: templates/users/user_profile_v2.html:34
 msgid "Direct Message"
-msgstr ""
+msgstr "Приватне повідомлення"
 
 #: templates/users/user_profile_v2.html:38
 msgid "Report User"
-msgstr ""
+msgstr "Поскаржитись на користувача"
 
 #: templates/users/user_profile_v2.html:46
 msgid "About"
-msgstr ""
+msgstr "Про"
 
 #: templates/users/user_profile_v2.html:48
 msgid "Name:"
-msgstr ""
+msgstr "Ім'я:"
 
 #: templates/users/user_profile_v2.html:50
 msgid "Nationality:"
-msgstr ""
+msgstr "Національність:"
 
 #: templates/users/user_profile_v2.html:52
 msgid "Residence:"
-msgstr ""
+msgstr "Місце проживання:"
 
 #: templates/users/user_profile_v2.html:70
 msgid "No interests specified"
-msgstr ""
+msgstr "Інтересів не вказано "
 
 #: templates/users/user_profile_v2.html:81
 msgid "No languages specified"
-msgstr ""
+msgstr "Мови не вказані "
 
 #: templates/users/user_settings_v2.html:25
 msgid "Change picture"
-msgstr ""
+msgstr "Змінити зображення"
 
 #: templates/users/user_settings_v2.html:31
 msgid "Personal Details"
-msgstr ""
+msgstr "Особисті дані"
 
 #: templates/users/user_settings_v2.html:32
 msgid "Skills & Interests"
-msgstr ""
+msgstr "Навики та інтереси"
 
 #: templates/users/user_settings_v2.html:33
 msgid "Security & Alerts"
-msgstr ""
+msgstr "Безпека та попередження"
 
 #: templates/users/user_settings_v2.html:47
 msgid "Username"
-msgstr ""
+msgstr "Ім'я користувача"
 
 #: templates/users/user_settings_v2.html:53
 msgid ""
 "This information is optional but the more you provide the more trusted "
 "you’ll be by other users."
 msgstr ""
+"Ця інформація не є обов'язковою, але чим більше Ви вкажете про себе, тим "
+"більше довіряти Вам будуть інші користувачі."
 
 #: templates/users/user_settings_v2.html:76
 msgid "Interface Language"
-msgstr ""
+msgstr "Мова інтерфейсу"
 
 #: templates/users/user_settings_v2.html:88
+#, fuzzy
 msgid "Digital Presence"
 msgstr ""
 
@@ -2805,10 +3028,13 @@ msgid ""
 "The more links you provide, the higher your star rating will be. Link to "
 "Twitter, LinkedIn, and Facebook to help verify your identity."
 msgstr ""
+"Чим більше посилань Ви надаєте, тим буде вищим Ваш рейтинг. Вкажіть "
+"посилання на Twitter, LinkedIn і Facebook, щоб допомогти підтвердити Вашу "
+"особу."
 
 #: templates/users/user_settings_v2.html:122
 msgid "Skills/Interests"
-msgstr ""
+msgstr "Навики/Інтереси"
 
 #: templates/users/user_settings_v2.html:124
 msgid ""
@@ -2816,15 +3042,18 @@ msgid ""
 "expertise for you. This will also help us to show the postings that are the "
 "most relevant for you."
 msgstr ""
+"Навики та інтереси, які Ви зазначаєте допоможуть іншим знайти те в чому Ви "
+"експерт. Це також допоможе нам показати пости, які найбільш актуальні для "
+"Вас."
 
 #: templates/users/user_settings_v2.html:128
 msgid "Regions/Countries"
-msgstr ""
+msgstr "Області/Країни"
 
 #: templates/users/user_settings_v2.html:130
 msgid ""
 "Where do you need help and/or where would you like to be able to help out?"
-msgstr ""
+msgstr "В чому Вам потрібна допомога і/або де б Ви були в змозі допомогти?"
 
 #: templates/users/user_settings_v2.html:138
 #, python-format
@@ -2832,48 +3061,57 @@ msgid ""
 "Please indicate which languages you are able to communicate in. Google "
 "Translate is also available however it is not 100%% accurate."
 msgstr ""
+"Прохання вказати на яких мовах Ви можете спілкуватися. Google Translate "
+"також доступний однак це не 100% точний переклад."
 
 #: templates/users/user_settings_v2.html:144
 msgid "Control the visibility of your profile and notifications."
-msgstr ""
+msgstr "Управління видимістю Вашого профілю та повідомлень."
 
 #: templates/users/user_settings_v2.html:148
 msgid "Profile Visibility"
-msgstr ""
+msgstr "Видимість профілю "
 
 #: templates/users/user_settings_v2.html:150
 msgid ""
 "How much information do you want to make public? So as to help protect your "
 "security and privacy, you may not want to expose your email address."
 msgstr ""
+"Скільки інформації Ви хочете зробити загально доступною? Таким чином, щоб "
+"допомогти захистити Вашу безпеку і конфіденційність, Ви не можете відкривати"
+" свою адресу електронної пошти."
 
 #: templates/users/user_settings_v2.html:159
 msgid ""
 "When would you like to receive a notification if someone responds to your "
 "post or creates one that matches your interest?"
 msgstr ""
+"Коли Ви хотіли б отримувати повідомлення, якщо хтось відповідає на Ваш пост "
+"чи створює такий, який відповідає Вашим інтересам?"
 
 #: templates/users/user_settings_v2.html:181
 msgid "Save"
-msgstr ""
+msgstr "Зберегти"
 
 #: templates/users/user_settings_v2.html:192
 msgid "Upload Avatar"
-msgstr ""
+msgstr "Завантажити аватар"
 
 #: templates/users/waitforactivation.html:13
 msgid ""
 "Someone will be in contact with you shortly to help you activate your "
 "account."
 msgstr ""
+"З Вами найближчим часом зконтактують, щоб допомогти Вам активувати Ваш "
+"аккаунт."
 
 #: templates/users/snippets/profile_navigation.html:16
 msgid "Alerts"
-msgstr ""
+msgstr "Попередження"
 
 #: templates/users/snippets/star_rating.html:11
 msgid "MOVEMENTS STAR RATING"
-msgstr ""
+msgstr "ЗІРКОВИЙ РЕЙТИНГ MOVEMENTS "
 
 #: templates/users/snippets/star_rating.html:12
 msgid ""
@@ -2884,3 +3122,9 @@ msgid ""
 "                   4 Stars: Confirmed significant online presence<br>\n"
 "                   5 Stars: Personally known by Movements.org<br>"
 msgstr ""
+"0 Зірок: Підтверджений еmail<br>\n"
+"1 Зірка: Підтверджений 1 профіль в соціальних мережах<br>\n"
+"2 Зірки: Підтверджено 2 профілі в соціальних мережах<br>\n"
+"3 Зірки: Підтверджено всі профілі в соціальних мережах і біографія<br>\n"
+"4 Зірки: Підтверджено значну онлайн присутність<br>\n"
+"5 Зірок: Персонально знайомі з командою Movements.org<br>"
