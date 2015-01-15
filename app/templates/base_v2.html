@@ -115,6 +115,7 @@
     {% if user.is_authenticated and not user.userprofile.first_login %}
       <div id="NavRightLoggedIn" class="navbar-right">
         <div class="nav-flags">
+          <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png"></a>
           <a data-language="uk" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png" ></a>
           <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png"></a>
           <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png"></a>
