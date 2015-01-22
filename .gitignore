@@ -8,6 +8,8 @@ app/media/
 app/static/admin/
 app/static/tiny_mce/
 app/static/.webassets-cache/
+app/db.sqlite3
+app/celerybeat-schedule
 bin/
 include/
 local/
