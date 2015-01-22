@@ -70,7 +70,7 @@ market_item_patterns = patterns('',
         'app.market.api.views.market.set_item_attributes_for_user',
         name="set_item_attributes_for_user"),
 
-    url(r'item/translate/(?P<item_id>\d+)/(?P<lang_code>\S+)$',
+    url(r'item/translate/(?P<item_id>\d+)/(?P<lang_code>\S+)/$',
         'app.market.api.views.market.translate_market_item',
         name="translate_market_item"),
 )
@@ -120,6 +120,32 @@ market_heartbeat_patters = patterns('',
         name="heartbeat"),
 )
 
+market_translation_patterns = patterns('',
+    url(r'item/translation/(?P<item_id>\d+)/(?P<lang_code>\S+)/init/$',
+        'app.market.api.views.market.translate_market_item_init',
+        name="translate_market_item_init"),
+    url(r'item/translation/(?P<item_id>\d+)/(?P<lang_code>\S+)/take-in/$',
+        'app.market.api.views.market.take_in_translation',
+        name="take_in_translate_item"),
+    url(r'item/translation/(?P<item_id>\d+)/(?P<lang_code>\S+)/take-off/$',
+        'app.market.api.views.market.take_off',
+        name="take_off_translate_item"),
+    url(r'item/translation/(?P<item_id>\d+)/(?P<lang_code>\S+)/mark-done/$',
+        'app.market.api.views.market.mark_as_done',
+        name="mark_as_done"),
+    url(r'item/translation/(?P<item_id>\d+)/(?P<lang_code>\S+)/approve/$',
+        'app.market.api.views.market.approve_translation',
+        name="approve_translation"),
+    url(r'item/translation/(?P<item_id>\d+)/(?P<lang_code>\S+)/revoke/$',
+        'app.market.api.views.market.revoke_translation',
+        name="revoke_translation"),
+    url(r'item/translation/(?P<item_id>\d+)/(?P<lang_code>\S+)/correct/$',
+        'app.market.api.views.market.request_corrections_translation',
+        name="request_corrections"),
+    )
+
+
+
 
 urlpatterns = patterns('',
     url(r'', include(market_item_patterns)),
@@ -128,4 +154,5 @@ urlpatterns = patterns('',
     url(r'', include(market_notification_patterns)),
     url(r'', include(report_patterns)),
     url(r'', include(market_heartbeat_patters)),
+    url(r'', include(market_translation_patterns)),
 )

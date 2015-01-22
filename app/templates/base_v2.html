@@ -26,12 +26,6 @@
   <meta name="description" content="">
 {#  <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
   <meta name="viewport" content="width=1050">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Movements.Org">
-  <meta property="og:description" content="Crowdsourcing the fight for human rights.">
-  <meta property="og:url" content="https://www.movements.org/">
-  <meta property="og:site_name" content="Movements.Org">
-  <meta property="og:image" content="https://www.movements.org/static/images/logos/logo_large.png">
 
   {% assets "css_all_v2" %}
     <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
@@ -107,25 +101,18 @@
               <img src="{{ STATIC_URL }}images/v2/ahr-dualstate.png" alt="{%trans "AHR"%}">
             </div>
           </a>
-          <a href="{{ config.BLOG_URL }}" target="_blank">
-            <div class="nav-blog">{% trans "Blog" %}</div>
-          </a>
         {% endif %}
       </div>
     {% if user.is_authenticated and not user.userprofile.first_login %}
       <div id="NavRightLoggedIn" class="navbar-right">
         <div class="nav-flags">
-{#          <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png"></a>#}
-          <a data-language="uk" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png" ></a>
-          <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png"></a>
-          <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png"></a>
-          <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png"></a>
+          <a data-language="zh-cn" class="set-lang" href="#"><img src="/static/images/v2/flag_chinese.png"></a>
+          <a data-language="ar" class="set-lang" href="#"><img src="/static/images/v2/flag_arabic.png"></a>
+          <a data-language="en" class="set-lang" href="#"><img src="/static/images/v2/flag_uk.png"></a>
           <p>Language:</p>
         </div>
-        <a id="add-post" class="btn btn-action" onClick="ga('send', 'event', 'button', 'click', 'add-post');">
-          <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
-          <span id="AddPostText"> {%trans "Add Post"%}</span>
-        </a>
+        <a id="add-post" class="btn btn-action"><img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
+            <span id="AddPostText"> {%trans "Add Post"%}</span></a>
         <div id="add-post-popup-container"></div>
       </div>
     {% else %}
@@ -238,12 +225,8 @@
 {% endif %}
 <div id="modal-placeholder"></div>
 <script type="text/template" id="add-post-template">
-  <a onClick="ga('send', 'event', 'button', 'click', 'create-request');" class="btn btn-request" href="{% url 'create_request' %}">
-    <img src="{{ STATIC_URL }}images/v2/request_icon.png"/>{%trans "Request"%}
-  </a>
-  <a onClick="ga('send', 'event', 'button', 'click', 'create-offer');" class="btn btn-offer" href="{% url 'create_offer' %}">
-    <img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>{%trans "Offer"%}
-  </a>
+  <a class="btn btn-request" href="{% url 'create_request' %}"><img src="{{ STATIC_URL }}images/v2/request_icon.png"/>{%trans "Request"%}</a>
+  <a class="btn btn-offer" href="{% url 'create_offer' %}"><img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>{%trans "Offer"%}</a>
 </script>
 <script type="text/template" id="content-menu-template">
   <ul><li><a href="{% url 'user_profile' %}">

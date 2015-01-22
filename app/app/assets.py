@@ -11,6 +11,7 @@ js = Bundle(
         './js/lib/typeahead.js',
         './js/lib/jquery.cookie.js',
         './js/lib/Autolinker.js',
+        './js/lib/diff.js',
         './colorbox/jquery.colorbox-min.js',
         './js/app_common.js',
         './js/base.js',

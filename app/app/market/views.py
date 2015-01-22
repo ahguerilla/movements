@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 
-from app.users.models import Interest, Countries
+from app.users.models import Interest, Countries, Skills
 from forms import RequestForm, OfferForm, save_market_item
 from models.market import MarketItem, MarketItemViewCounter
 

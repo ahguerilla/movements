@@ -3,7 +3,6 @@ from menu import invalidate_menu_cache
 
 from cms.extensions import PageExtension
 from cms.extensions.extension_pool import extension_pool
-from cms.models.pluginmodel import CMSPlugin
 from django.db import models
 
 
@@ -34,9 +33,3 @@ class NewsletterSignups(models.Model):
 
     def __unicode__(self):
         return self.email
-
-
-class SafeVPNLink(CMSPlugin):
-    link_text = models.CharField(max_length=500)
-    base_url = models.CharField(max_length=200)
-    key = models.CharField(max_length=10)

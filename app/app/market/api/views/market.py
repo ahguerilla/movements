@@ -3,7 +3,10 @@ import math
 from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 from django.db import connection
 from django.db.models import Q
 from haystack.query import SearchQuerySet
@@ -15,6 +18,7 @@ from app.market.forms import QuestionnaireForm
 from tasks.celerytasks import update_notifications
 from app.market.api.utils import translate_text
 import bleach
+
 
 def get_market_json(items, request=None, extra_data=None, is_safe=True):
     if is_safe:
@@ -168,8 +172,7 @@ def get_market_items(request, user_id=None, filter_by_user=False):
 def get_featured_market_items(request):
     featured_posts = market.models.MarketItem.objects.exclude(
         status__in=[market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
-                    market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN])\
-        .filter(is_featured=True).order_by('featured_order_hint')
+                    market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN]).filter(is_featured=True)
 
     is_safe = True
     if request.user.is_authenticated():
@@ -223,6 +226,7 @@ def close_market_item(request, obj_id):
                 mimetype="application/json")
 
     return HttpResponse(json.dumps(data), mimetype="application/json")
+
 
 def get_marketitems_fromto(request, sfrom, to, rtype):
     market_items = market.models.MarketItem.objects.raw(
@@ -313,31 +317,61 @@ def set_stuck(user_id, item_id, stick):
         market.models.MarketItemStick.objects.filter(viewer_id=user_id, item_id=item_id).delete()
 
 
+def get_or_create_item_translation(item_id, lang_code):
+    translation = market.models.MarketItemTranslation.objects.filter(
+            status=market.models.MarketItemTranslation.STATUS_CHOICES.GOOGLE,
+            market_item_id=item_id, language=lang_code).first()
+    if translation:
+        return translation
+
+    item = market.models.MarketItem.objects.get(id=item_id)
+    if item:
+        success, title_translation, source_lang = translate_text(item.title, lang_code)
+        if success:
+            success, details_translation, source_lang = translate_text(item.details, lang_code)
+        if success:
+            translation = market.models.MarketItemTranslation.objects.create(
+            market_item=item,
+            title_translated=title_translation,
+            details_translated = details_translation,
+            language = lang_code,
+            source_language = source_lang)
+            return translation
+    return False
+
+
 @login_required
 def translate_market_item(request, item_id, lang_code):
     # find out if the translation already exists
-    translation = market.models.MarketItemTranslation.objects.filter(market_item_id=item_id, language=lang_code).first()
+    # by default is looking for human translation
+    params = {'market_item_id': item_id, 'language': lang_code}
+    states = market.models.MarketItemTranslation.STATUS_CHOICES
+    translation = None
     title_translation = ""
     details_translation = ""
+    status = states.GOOGLE
+    human_aviable = False
     source_lang = ""
     success = False
 
-    if not translation:
-        item = market.models.MarketItem.objects.get(id=item_id)
-        if item:
-            success, title_translation, source_lang = translate_text(item.title, lang_code)
-            if success:
-                success, details_translation, source_lang = translate_text(item.details, lang_code)
-            if success:
-                market_translation = market.models.MarketItemTranslation()
-                market_translation.market_item = item
-                market_translation.title_translated = title_translation
-                market_translation.details_translated = details_translation
-                market_translation.language = lang_code
-                market_translation.source_language = source_lang
-                market_translation.save()
+    if request.GET.get('human', True) == True:
+        try:
+            translation = market.models.MarketItemTranslation.objects.get(
+                status__gt=states.PENDING,
+                **params)
+            status = translation.status
+            human_aviable = True
+        except Exception as e:
+            print(e)
+    elif market.models.MarketItemTranslation.objects.filter(
+       status=states.DONE,
+       **params).exists():
+        human_aviable = True
 
-    else:
+    if status < states.DONE:
+        translation = get_or_create_item_translation(item_id, lang_code)
+
+    if translation:
         title_translation = translation.title_translated
         details_translation = translation.details_translated
         source_lang = translation.source_language
@@ -349,5 +383,210 @@ def translate_market_item(request, item_id, lang_code):
         'details': bleach.clean(details_translation, strip=True),
         'source_language': source_lang,
         'itemid': item_id,
+        'status': status,
+        'human_aviable': human_aviable,
+        'username': translation.owner.username if status == states.DONE else 'Google'
     }
+    return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@require_http_methods(['GET'])
+@login_required
+def translate_market_item_init(request, item_id, lang_code):
+    # market.models.MarketItemTranslation.objects.all().delete()
+    # market.models.TraslationCandidade.objects.all().delete()
+
+    translation = None
+    result = {
+        'response': 'success',
+        'active': False,
+        'status': False,
+        'owner': None,
+        'take_in_url': reverse('take_in_translate_item', args=(item_id, lang_code)),
+        'take_off_url': None,
+        }
+
+    try:
+        translation = market.models.MarketItemTranslation.objects.get(
+            status__gte=market.models.MarketItemTranslation.STATUS_CHOICES.PENDING,
+            market_item_id=item_id, language=lang_code)
+        result.update({
+            'correction': translation.is_done(),
+            })
+    except:
+        pass
+
+    if translation:
+        result.update({
+            'prev_title': translation.title_translated,
+            'prev_text': translation.details_translated})
+
+        try:
+            candidate = market.models.TraslationCandidade.objects.get(
+                translation=translation, market_item_id=item_id)
+            active = candidate.is_active(request.user)
+            result.update({
+                'active': active,
+                'owner': candidate.owner.username,
+                'status': candidate.status,
+                'details_translated': candidate.details_translated,
+                'title_translated': candidate.title_translated,
+                'take_off': candidate.take_off_url() if active else None,
+                'done_url': candidate.done_url() if active else None,
+                'take_in_url': None,
+                })
+
+            if candidate.status == candidate.STATUS_CHOICES.APPROVAL and\
+               request.user.userprofile.is_cm:
+                result.update(candidate.cm_urls_dict())
+        except Exception as e:
+            pass
+
+    return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@require_http_methods(['GET'])
+@login_required
+def take_in_translation(request, item_id, lang_code):
+    candidate, created = market.models.TraslationCandidade.objects.get_or_create(
+        market_item_id=item_id, language=lang_code,
+        defaults={'owner': request.user, })
+
+    result = {'response': 'error', 'error': 'Translation is busy'}
+    if created:
+        candidate.status = market.models.TraslationCandidade.STATUS_CHOICES.ACTIVE
+        translation, created = market.models.MarketItemTranslation.objects.get_or_create(
+            status__gt=market.models.MarketItemTranslation.STATUS_CHOICES.GOOGLE,
+            market_item_id=item_id, language=lang_code,
+            defaults={'status': market.models.MarketItemTranslation.STATUS_CHOICES.TRANSLATION})
+        if created:
+            g_translation = get_or_create_item_translation(item_id, lang_code)
+            translation.details_translated = g_translation.details_translated
+            translation.title_translated = g_translation.title_translated
+            translation.source_language = g_translation.source_language
+            translation.save()
+        candidate.details_translated = translation.details_translated
+        candidate.title_translated = translation.title_translated
+        candidate.translation = translation
+        candidate.save()
+        if not translation.is_done():
+            translation.owner = request.user
+            translation.status = market.models.MarketItemTranslation.STATUS_CHOICES.TRANSLATION
+            translation.save()
+    active = candidate.is_active(request.user)
+
+    if active:
+        result = {
+            'response': 'success',
+            'active': active,
+            'owner': candidate.owner.username,
+            'details_translated': translation.details_translated,
+            'title_translated': translation.title_translated,
+            'status': candidate.status,
+            'take_off': candidate.take_off_url() if active else None,
+            'done_url': candidate.done_url() if active else None,
+            }
+
+    return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@login_required
+def take_off(request, item_id, lang_code):
+    market.models.TraslationCandidade.objects.filter(
+        market_item_id=item_id, language=lang_code,
+        owner=request.user).delete()
+    result = {
+        'response': 'success',
+        'take_in_url': reverse('take_in_translate_item', args=(item_id, lang_code)),
+        }
+    return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@require_http_methods(['POST'])
+@login_required
+def mark_as_done(request, item_id, lang_code):
+    try:
+        candidate = market.models.TraslationCandidade.objects.get(
+            status__lt=market.models.TraslationCandidade.STATUS_CHOICES.APPROVAL,
+            market_item_id=item_id, language=lang_code,
+            owner=request.user)
+        candidate.details_translated = request.POST.get('details_translated')
+        candidate.title_translated = request.POST.get('title_translated')
+        candidate.mark_to_approval()
+        result = {'response': 'success',}
+
+        if request.user.userprofile.is_cm:
+            result.update(candidate.cm_urls_dict())
+    except Exception as e:
+        result = {'response': 'error'}
+    return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@require_http_methods(['POST'])
+@login_required
+def approve_translation(request, item_id, lang_code):
+    if not request.user.userprofile.is_cm:
+        return HttpResponseForbiden()
+    try:
+        candidate = market.models.TraslationCandidade.objects.get(
+            status=market.models.TraslationCandidade.STATUS_CHOICES.APPROVAL,
+            market_item_id=item_id, language=lang_code
+            )
+        candidate.translation.details_translated = request.POST.get(
+            'details_translated', candidate.details_translated)
+        candidate.translation.title_translated = request.POST.get(
+            'title_translated', candidate.title_translated)
+        candidate.translation.status = market.models.MarketItemTranslation.STATUS_CHOICES.DONE
+        candidate.translation.save()
+        candidate.delete()
+        status = True
+    except Exception as e:
+        print(e)
+        status = False
+
+    result = {'response': 'success' if status else 'error'}
+
+    return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@require_http_methods(['GET'])
+@login_required
+def revoke_translation(request, item_id, lang_code):
+    if not request.user.userprofile.is_cm:
+        return HttpResponseForbiden()
+    try:
+        candidate = market.models.TraslationCandidade.objects.get(
+            status=market.models.TraslationCandidade.STATUS_CHOICES.APPROVAL,
+            market_item_id=item_id, language=lang_code
+            )
+        candidate.translation.set_done_or_pending()
+        status = True
+    except Exception as e:
+        print(e)
+        status = False
+
+    result = {'response': 'success' if status else 'error'}
+
+    return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@require_http_methods(['POST'])
+@login_required
+def request_corrections_translation(request, item_id, lang_code):
+    if not request.user.userprofile.is_cm:
+        return HttpResponseForbiden()
+    try:
+        candidate = market.models.TraslationCandidade.objects.get(
+            status=market.models.TraslationCandidade.STATUS_CHOICES.APPROVAL,
+            market_item_id=item_id, language=lang_code
+            )
+        candidate.status = candidate.STATUS_CHOICES.CORRECTION
+        candidate.save()
+        status = True
+    except Exception as e:
+        print(e)
+        status = False
+
+    result = {'response': 'success' if status else 'error'}
+
     return HttpResponse(json.dumps(result), mimetype="application/json")

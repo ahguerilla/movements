@@ -1,7 +1,10 @@
 from app.users.models import UserProfile
-from app.market.models import Notification
+from app.market.models import Notification, TraslationCandidade
 from django.db.models import Q
 from django.conf import settings
+from django.utils.timezone import timedelta, now
+
+from datetime import datetime
 import json
 
 import logging
@@ -9,8 +12,8 @@ logger= logging.getLogger(__name__)
 
 if not '_app' in dir():
     from celery import Celery
+    from celery.task import periodic_task
     _app = Celery('celerytasks', broker=settings.CELERY_BROKER)
-
 
 def get_notification_text(obj, update=False):
     return json.dumps({
@@ -108,3 +111,55 @@ def new_postman_message(self, message):
     })
     notification.avatar_user = message.sender.username
     notification.save()
+
+
+# TODO move timings to settings
+# defaults days=1 and hours=12
+post_translation_time = timedelta(minutes=2)
+post_correction_time = timedelta(minutes=1)
+
+
+# TODO
+@periodic_task(run_every=timedelta(minutes=1))
+def check_translation_timings():
+    translations = None
+    translations = TraslationCandidade.objects.filter(
+        status=TraslationCandidade.STATUS_CHOICES.ACTIVE,
+        edited__lt=now() - post_translation_time/2,
+        reminder=False).select_related('owner')
+    # for translation in translations:
+        # need to create notifications here
+    translations.update(reminder=True)
+
+    translations = None
+    translations = TraslationCandidade.objects.filter(
+        status=TraslationCandidade.STATUS_CHOICES.ACTIVE,
+        edited__lt=now() - post_translation_time/2,
+        ).select_related('owner', 'translation')
+    for translation in translations:
+        # need to create notifications here
+
+        # updating translation status
+        translation.translation.set_done_or_pending()
+    translations.delete()
+
+    corrections = None
+    corrections = TraslationCandidade.objects.filter(
+        status=TraslationCandidade.STATUS_CHOICES.CORRECTION,
+        edited__lt=now() - post_correction_time/2,
+        reminder=False).select_related('owner')
+    # for correction in corrections:
+        # need to create notifications here
+    corrections.update(reminder=True)
+
+    corrections = None
+    corrections = TraslationCandidade.objects.filter(
+        status=TraslationCandidade.STATUS_CHOICES.ACTIVE,
+        edited__lt=now() - post_correction_time,
+        ).select_related('owner', 'translation')
+    for correction in corrections:
+        # need to create notifications here
+
+        # updating translation status
+        translation.translation.set_done_or_pending()
+    corrections.delete()

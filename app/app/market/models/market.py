@@ -4,6 +4,7 @@ import app.users.models as user_models
 from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
 from tinymce import models as tinymodels
 
 import django.contrib.auth as auth
@@ -55,7 +56,7 @@ class MarketItem(models.Model):
     feedback_response = models.TextField(
         _('feedback response'), blank=True, default='')
     is_featured = models.BooleanField(_('is featured'), default=False)
-    featured_order_hint = models.CharField(max_length=5, default='c')
+    language = models.CharField(_('source language'), max_length=10, blank=False, default='en')
 
     def __unicode__(self):
         return self.details
@@ -191,6 +192,13 @@ class MarketItemNextSteps(models.Model):
 
 
 class MarketItemTranslation(models.Model):
+    STATUS_CHOICES = EnumChoices(
+        GOOGLE=(1, _('In translation')),
+        PENDING=(2, _('Pending a translator')),
+        TRANSLATION=(3, _('In correction')),
+        DONE=(4, _('Waiting for approval')),
+    )
+
     market_item = models.ForeignKey(
         MarketItem, verbose_name=_('market item'))
     language = models.CharField(_('language'), max_length=10, blank=False)
@@ -198,10 +206,23 @@ class MarketItemTranslation(models.Model):
     title_translated = models.TextField(_('title translated'), blank=False)
     details_translated = models.TextField(_('details translated'), blank=False)
     generated_at = models.DateField(_('date generated'), auto_now_add=True)
+    status = models.PositiveSmallIntegerField(
+        _('status'), max_length=1,
+        default=STATUS_CHOICES.GOOGLE, choices=STATUS_CHOICES)
+    owner = models.ForeignKey(
+        auth.models.User, blank=True, null=True)
 
     class Meta:
         app_label = 'market'
 
+    def is_done(self):
+        return self.status == self.STATUS_CHOICES.DONE
+
+    def set_done_or_pending(self, save=True):
+        if not self.is_done():
+            self.status = self.STATUS_CHOICES.PENDING
+        if save:
+            self.save()
 
 class MarketItemCollaborators(models.Model):
     market_item = models.ForeignKey(
@@ -213,3 +234,66 @@ class MarketItemCollaborators(models.Model):
 
     class Meta:
         app_label = 'market'
+
+
+class TranslationMixin(models.Model):
+    STATUS_CHOICES = EnumChoices(
+        ACTIVE=(1, _('In translation')),
+        CORRECTION=(2, _('In correction')),
+        APPROVAL=(3, _('Waiting for approval')),
+    )
+
+    class Meta:
+        app_label = 'market'
+        abstract = True
+
+    details_translated = models.TextField(_('details translated'), blank=False)
+    language = models.CharField(_('language'), max_length=10, blank=False)
+    status = models.PositiveSmallIntegerField(
+        _('status'), max_length=1,
+        default=STATUS_CHOICES.ACTIVE, choices=STATUS_CHOICES)
+    created = models.DateTimeField(_('date generated'), auto_now_add=True)
+    edited = models.DateTimeField(_('date edited'), auto_now=True)
+    owner = models.ForeignKey(
+        auth.models.User, blank=True, null=True)
+    reminder = models.BooleanField(_('Reminder status'), default=False)
+
+    def __unicode__(self):
+        return u'%s' % self.created.strftime('%H:%M on %d %b %Y')
+
+    def is_active(self, user):
+        return user == self.owner and self.status != self.STATUS_CHOICES.APPROVAL
+
+    def mark_to_approval(self, save=True):
+        self.status = self.STATUS_CHOICES.APPROVAL
+        if save:
+            self.save()
+
+
+class TraslationCandidade(TranslationMixin):
+    translation = models.ForeignKey(
+        MarketItemTranslation, verbose_name=_('translation'), null=True)
+    market_item = models.ForeignKey(
+        MarketItem, verbose_name=_('market item'))
+    title_translated = models.TextField(_('title translated'), blank=False)
+
+    def take_off_url(self):
+        return reverse('take_off_translate_item', args=(self.market_item_id, self.language))
+
+    def done_url(self):
+        return reverse('mark_as_done', args=(self.market_item_id, self.language))
+
+    def approval_url(self):
+        return reverse('approve_translation', args=(self.market_item_id, self.language))
+
+    def revoke_url(self):
+        return reverse('revoke_translation', args=(self.market_item_id, self.language))
+
+    def correction_url(self):
+        return reverse('request_corrections', args=(self.market_item_id, self.language))
+
+    def cm_urls_dict(self):
+        return {'approval_url': self.approval_url(),
+                'revoke_url': self.revoke_url(),
+                'correction_url': self.correction_url(),
+                }

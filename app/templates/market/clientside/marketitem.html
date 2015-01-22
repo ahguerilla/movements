@@ -19,7 +19,8 @@
           <div class="item-type"><%- item_type_display %></div>
           <div class="title"><%- title %></div>
         </a>
-        <div class="auto-translated-text" style="display:none">Auto translated by Google Translate</div>
+        <div class="auto-translated-text" style="display:none">{% trans 'Auto translated by Google Translate.' %}<span style="display:none;"> {% trans 'In translation now.' %}</span></div>
+        <div class="user-translated-text" style="display:none">{% trans 'Translated by' %} <span></span></div>
         <div class="details">
           <%- item_type_display %>
             {% blocktrans with user_name="<%- owner %>"%}by <a href="/user/profile/<%- owner %>">{{ user_name }}</a>, posted on <%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %>.{% endblocktrans %}
@@ -72,7 +73,7 @@
     <a href="/market/<%- pk %>" alt="Open post">
       <div class="title"><%- title %></div>
     </a>
-    <div class="auto-translated-text" style="display:none">Auto translated by Google Translate</div>
+    <div class="auto-translated-text" style="display:none">{% trans 'Auto translated by Google Translate' %}</div>
     <a href="/market/<%- pk %>" alt="Open post">
       <div class="details">
         <%- item_type_display %>

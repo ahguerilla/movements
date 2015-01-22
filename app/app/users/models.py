@@ -137,7 +137,6 @@ class UserProfile(models.Model):
         ('ar', 'Arabic'),
         ('zh-cn', 'Chinese'),
         ('uk', 'Ukrainian'),
-        ('ru', 'Russian'),
     )
 
     user = models.OneToOneField(User)
@@ -162,6 +161,7 @@ class UserProfile(models.Model):
     regions = models.ManyToManyField(Region, blank=True, null=True)
     interests = models.ManyToManyField(Interest, blank=True, null=True)
 
+    is_cm = models.BooleanField(_('community manager'), default=False)
     is_organisation = models.BooleanField(_('organisation'), default=False)
     is_individual = models.BooleanField(_('individual'), default=True)
     is_journalist = models.BooleanField(_('journalist'), default=False)
@@ -207,6 +207,11 @@ class UserProfile(models.Model):
         finish = kwargs.get('finish', None)
         return cls.objects.filter(query).filter(user__is_active=True).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
 
+    @property
+    def is_translator(self):
+        if self.skills.filter(skills_en__iexact='translation'):
+            return True
+        return False
 
 class OrganisationalRating(models.Model):
     user = models.ForeignKey(auth.models.User, null=False, blank=False)

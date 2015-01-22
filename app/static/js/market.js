@@ -772,10 +772,19 @@ $(function () {
                 if(data.response === "success") {
                   var post = $('.market-place-item[data-item-id="' + data.itemid + '"]');
                   if(post){
-                    var langCode = theItem.fields.translate_language_url.slice(-2);
+                    var langCode = theItem.fields.translate_language_url.slice(-3, -1);
                     if(langCode != data.source_language){
                       post.find('.title').text(data.title);
-                      post.find('.auto-translated-text').show();
+                      console.log(data.status);
+                      if (data.status == 4) {
+                        post.find('.user-translated-text span').html(data.username);
+                        post.find('.user-translated-text').show();
+                      } else {
+                        if (data.status == 3) {
+                          post.find('.auto-translated-text span').show();
+                        }
+                        post.find('.auto-translated-text').show();
+                      }
                     }
                   }
                 }

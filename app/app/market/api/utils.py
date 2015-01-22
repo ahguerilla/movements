@@ -95,3 +95,20 @@ def translate_text(original_text, language):
         pass
 
     return success, translation, source_language
+
+
+def detect_language(text):
+    language = ""
+    try:
+        url = [
+        settings.GOOGLE_DETECT_API_URL, "key=", settings.GOOGLE_TRANSLATE_API_KEY,
+        "&", "q=", strip_tags(text)
+        ]
+        r = requests.get(''.join(url))
+        if r.status_code == 200:
+            data = json.loads(r.content)
+            data = data.get("data", {}).get("detections", [])
+            language = data[0][0].get("language", "")
+    except Exception as e:
+        print(e)
+    return language

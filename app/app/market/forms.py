@@ -4,6 +4,7 @@ from tasks.celerytasks import create_notification, update_notifications
 from django.utils.translation import ugettext_lazy as _
 
 import app.market as market
+from app.market.api.utils import detect_language
 from app.users.forms import CheckboxSelectMultiple, RegionAccordionSelectMultiple
 
 
@@ -131,10 +132,18 @@ def save_market_item(form, owner):
     new_item = form.instance.id is None
     obj = form.save(owner=owner)
     if new_item:
-        create_notification.delay(obj)
+        # create_notification.delay(obj)
+
+        # detect language
+        language = detect_language(obj.details)
+        if language:
+            obj.language = language
+            obj.save()
     else:
         # delete the translations
-        obj.marketitemtranslation_set.all().delete()
+        obj.marketitemtranslation_set.filter(
+            status__lte=market.models.MarketItemTranslation.STATUS_CHOICES.PENDING
+            ).delete()
         update_notifications.delay(obj)
     return obj
 

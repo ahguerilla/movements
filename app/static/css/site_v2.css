@@ -397,30 +397,16 @@ body {
   clip: rect(0px, 30px, 22px, 0px);
   margin-top: -3px;
 }
-.header-nav .navbar-left-top .nav-blog {
-  float: left;
-  width: 80px;
-  color: #fff;
-  background-color: #005d86;
-  text-align: center;
-  margin-left: 115px;
-  margin-top: -3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-}
 .header-nav .navbar-right {
   float: right !important;
 }
 .header-nav .navbar-right .nav-flags {
   height: 30px;
-  width: 312px;
+  width: 300px;
   margin-top: 4px;
 }
 .header-nav .navbar-right .nav-flags img {
-  width: 35px;
+  width: 40px;
   float: right;
   margin: 5px 0 0 10px;
 }
@@ -474,7 +460,6 @@ body {
   left: inherit;
   right: 14px;
   width: 136px;
-  height: 90px;
 }
 #add-post-popup-container .popover-content {
   width: 132px;
@@ -845,7 +830,7 @@ h6 {
   text-decoration: underline;
   cursor: pointer;
 }
-.auto-translated-text {
+.auto-translated-text, .user-translated-text, .user-translated-text span {
   font-size: 13px;
   color: #808080;
 }
@@ -914,7 +899,7 @@ h6 {
   padding-right: 15%;
   width: 100%;
   position: absolute;
-  top: 120px;
+  top: 150px;
   color: #fff;
   font-size: 36px;
   font-family: "HurmeGeometricSans3-SemiBold";
@@ -926,29 +911,26 @@ h6 {
   padding-right: 20%;
   width: 100%;
   position: absolute;
-  top: 265px;
+  top: 295px;
   font-size: 18px;
 }
 .page-banner .carousel-inner .carousel-content .carousel-button {
   position: absolute;
-  top: 365px;
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
+  top: 400px;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 .page-banner .carousel-inner .carousel-content .carousel-button button {
-  width: 50%;
+  width: 40%;
   height: 50px;
   font-size: 22px;
 }
 .page-banner .carousel-inner .carousel-content #FindOutMoreButton {
-  top: 425px;
+  top: 465px;
 }
 .page-banner .carousel-inner .carousel-content #FindOutMoreButton button {
   background-color: #227da6;
-}
-.page-banner .carousel-inner .carousel-content #BlogButton {
-  top: 485px;
 }
 .page-banner .left-control {
   position: absolute;
@@ -1862,6 +1844,10 @@ input.borderless-control:focus:invalid:focus {
   font-weight: bold;
   margin-top: 20px;
 }
+.view-post .post .translated_by {
+  font-weight: bold;
+  margin-top: 20px;
+}
 .view-post .post-actions a {
   font-family: "HurmeGeometricSans3-SemiBold";
   padding: 5px 0;
@@ -2394,7 +2380,7 @@ input.borderless-control:focus:invalid:focus {
     top: 225px;
   }
   .page-banner .carousel-inner .carousel-content .carousel-button button {
-    width: 200px;
+    width: 180px;
   }
 }
 @media (max-width: 579px) {
