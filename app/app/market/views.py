@@ -5,13 +5,14 @@ from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 
-from app.users.models import Interest, Countries
+from app.users.models import Interest, Countries, Issues
 from forms import RequestForm, OfferForm, save_market_item
 from models.market import MarketItem, MarketItemViewCounter
 
 
 def index(request):
     interests = Interest.objects.all()
+    issues = Issues.objects.all()
     countries = Countries.objects.all()
     region_dict = {}
     for country in countries:
@@ -27,6 +28,7 @@ def index(request):
     return render_to_response('market/market.html',
                               {
                                   'interests': serializers.serialize('json', interests),
+                                  'issues': serializers.serialize('json', issues),
                                   'regions': regions,
                                   'countries': countries,
                                   'is_logged_in': request.user.is_authenticated()

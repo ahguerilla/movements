@@ -34,6 +34,12 @@
               </a>
               <div class="popover-container"></div>
             </li>
+            <li class="issues">
+              <a href="#" alt="filter by issues" class="issues">
+                <div>{% trans "Issues" %} <span class="count" style="display: none;">(0)</span> <span class="toggle"/></div>
+              </a>
+              <div class="popover-container"></div>
+            </li>
             <li class="regions">
               <a href="#" alt="filter by countries" class="regions" data-country-count="{{ countries|length }}">
                 <div>{% trans "Countries"%} <span class="count" style="display: none;">(0)</span> <span class="toggle"/></div>
@@ -115,6 +121,14 @@
       <% }); %>
     </ul>
   </script>
+  <script type="text/template" id="issue-filter-list-template">
+    <ul class="issue-filter">
+      <li><a href="#" class="skill-all no-icon text-center" data-filter="all">{% trans "Select all" %}</a></li>
+      <% _.each(skills, function(skill) { %>
+      <li><a href="#" class="skill-normal" data-filter="<%- skill.pk %>"><%- skill.fields.issues %></a></li>
+      <% }); %>
+    </ul>
+  </script>
   <script type="text/template" id="region-filter-list-template">
     <ul class="region-filter">
       <li><a href="#" class="region-all no-icon text-center" data-filter="all">{% trans "Select all"%}</a></li>
@@ -145,7 +159,8 @@
   <script type="text/javascript">
     $(document).ready(function(){
       window.ahr.market.initMarket({
-        skills: {{ interests|safe }}
+        skills: {{ interests|safe }},
+        issues: {{ issues|safe }}
       });
     });
   </script>
