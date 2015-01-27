@@ -1,5 +1,4 @@
--r base.txt
-selenium==2.40.0
-ipython==1.0.0
-django-debug-toolbar==1.0.1
+selenium
+ipython
+django-debug-toolbar
 

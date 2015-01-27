@@ -32,7 +32,7 @@ class IncidentAdmin(TrackingAdmin):
         'get_total_msg_count', 'get_screen_name', 'get_create_date',
         'get_owner', 'get_aging', 'get_status', 'is_featured', 'tweet_permission'
     )
-    list_filter = ('status',)
+    list_filter = ('status', 'issues')
     # Prevents duplicates.
     csv_field_exclude = ('owner', 'pub_date', 'status')
     actions = None
