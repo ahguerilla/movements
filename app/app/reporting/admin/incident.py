@@ -3,12 +3,18 @@ import ast
 
 from django.contrib import admin
 from django.db.models import Count
+from django.shortcuts import render
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from ...market.models import MarketItemActions, MarketItemNextSteps
 from ..models import IncidentTracking
 from .base import TrackingAdmin
+
+
+@admin.site.register_view('reporting/posts/by-issue', urlname='reporting_posts_by_issue')
+def post_by_issue(request):
+    return render(request, 'admin/reports/posts_by_issue.html', {})
 
 
 class ActionsInline(admin.TabularInline):
