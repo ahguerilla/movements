@@ -3,18 +3,12 @@ import ast
 
 from django.contrib import admin
 from django.db.models import Count
-from django.shortcuts import render
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from ...market.models import MarketItemActions, MarketItemNextSteps
 from ..models import IncidentTracking
 from .base import TrackingAdmin
-
-
-@admin.site.register_view('reporting/posts/by-issue', urlname='reporting_posts_by_issue')
-def post_by_issue(request):
-    return render(request, 'admin/reports/posts_by_issue.html', {})
 
 
 class ActionsInline(admin.TabularInline):
@@ -38,7 +32,7 @@ class IncidentAdmin(TrackingAdmin):
         'get_total_msg_count', 'get_screen_name', 'get_create_date',
         'get_owner', 'get_aging', 'get_status', 'is_featured', 'tweet_permission'
     )
-    list_filter = ('status',)
+    list_filter = ('status', 'issues')
     # Prevents duplicates.
     csv_field_exclude = ('owner', 'pub_date', 'status')
     actions = None

@@ -181,7 +181,7 @@ class UserAdmin(TrackingAdmin):
 
     # Overridden methods.
     def changelist_view(self, request, extra_context=None):
-        if request.method == 'POST' and '_safe_export' in request.POST:
+        if request.method == 'POST' and '_safe_export' in request.GET:
             return self.export_as_csv(request, safe_mode=True)
         if request.method == 'POST' and '_export_unverified' in request.POST:
             return self.export_unverified(request)
