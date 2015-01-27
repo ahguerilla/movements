@@ -85,7 +85,7 @@ class OfferForm(MarketItemBaseForm):
     ITEM_TYPE = market.models.MarketItem.TYPE_CHOICES.OFFER
 
 
-class RequestForm(forms.ModelForm):
+class RequestForm(MarketItemBaseForm):
     ITEM_TYPE = market.models.MarketItem.TYPE_CHOICES.REQUEST
 
 
