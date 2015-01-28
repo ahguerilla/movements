@@ -1,13 +1,28 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from .market import MarketItem
+from .market import MarketItem, TraslationCandidade
 from .comment import Comment
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from json_field import JSONField
+from app.utils import EnumChoices
 
 
 class Notification(models.Model):
+    STATUSES = EnumChoices(
+        PENDING=(1, _('Waiting for translator')),
+        TRANSLATION=(2, _('In translation')),
+        CORRECTION=(3, _('In correction')),
+        REVOKED=(4, _('Translation revoked')),
+        APPROVAL=(5, _('Waiting for approval')),
+        APPROVED=(6, _('Approved')),
+    )
+
+    translation = models.PositiveSmallIntegerField(
+        _('Translation status'), max_length=1, default=0, choices=STATUSES)
+
+    timeto = models.DateTimeField(_('The time to completion'), null=True)
+    reminder = models.BooleanField(_('Reminder'), default=False)
     user = models.ForeignKey(User)
     item = models.ForeignKey(MarketItem, null=True, blank=True)
     comment = models.ForeignKey(Comment, null=True, blank=True)
@@ -33,6 +48,14 @@ class Notification(models.Model):
                                   self.avatar_user if self.avatar_user is not None else self.item.owner.username,
                                   30]),
         }
+        if self.translation:
+            adict.update({
+                'translation': self.translation,
+                'get_translation_display': self.get_translation_display(),
+                'timeto': self.timeto.strftime('%H:%M on %d %b %Y') if self.timeto else False,
+                'language': self.item.language,
+                'reminder': self.reminder,
+            })
         if self.item:
             adict.update({
                 'item_title': self.item.title,

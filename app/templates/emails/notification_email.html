@@ -6,7 +6,25 @@
 
   {% for notification in notifications %}
     <p>
-      {% if notification.comment %}
+      {% if notification.translation %}
+        {% trans 'The object translate status changed to' %} {{ notification.get_translation_display }}
+        {% if notification.reminder %}
+          {% trans 'It is a reminder. The object status is' %}
+        {% else %}
+          {% trans 'The object translation status changed to' %}
+        {% endif %}
+        - {{ notification.get_translation_display }} ({{ notification.language }})
+        {% if notification.item_type %}
+          <br>
+          {{ notification.item.item_type|capfirst }}
+          <a href="{{ base_url }}/market/{{ notificationication.item.id }}">
+            <em>{{ notification.text.title }}</em>
+          </a>
+          {% if notification.timeto %}
+            {% trans 'The time to completion' %} {{ notification.timeto }}
+          {% endif %}
+        {% endif %}
+      {% elif notification.comment %}
           {% trans "On"%} {{ notification.pub_date }} {{ notification.comment.owner.username}} {% trans "commented on a post titled"%}
           <a href="{{ base_url }}/market/{{ notification.item.id }}"><em>{{ notification.text.title}}</em></a>.
       {% elif notification.item %}

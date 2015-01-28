@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.utils import translation
+from django.utils.timezone import timedelta
 import app.users.models as user_models
 from django.db import models
 
@@ -268,6 +269,14 @@ class TranslationMixin(models.Model):
         self.status = self.STATUS_CHOICES.APPROVAL
         if save:
             self.save()
+
+    def endtime(self):
+        # TODO need to move timings to settings
+        if self.status == self.STATUS_CHOICES.ACTIVE:
+            return self.edited + timedelta(minutes=2)
+        elif self.status == self.STATUS_CHOICES.CORRECTION:
+            return self.edited + timedelta(minutes=1)
+        return None
 
 
 class TraslationCandidade(TranslationMixin):

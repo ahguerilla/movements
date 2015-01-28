@@ -1,5 +1,5 @@
-from app.users.models import UserProfile
-from app.market.models import Notification, TraslationCandidade
+from app.users.models import UserProfile, Language
+from app.market.models import Notification, TraslationCandidade, MarketItem
 from django.db.models import Q
 from django.conf import settings
 from django.utils.timezone import timedelta, now
@@ -48,6 +48,9 @@ def create_notification(self, obj):
         notification.avatar_user = obj.owner.username
         notification.text = get_notification_text(obj)
         notification.save()
+    create_translators_notifications(
+        obj, Notification.STATUSES.PENDING,
+        lang_code=Language.objects.exclude(launguage_code__iexact=obj.language))
 
 
 @_app.task(name="createCommentNotification", bind=True)
@@ -113,34 +116,143 @@ def new_postman_message(self, message):
     notification.save()
 
 
+def find_translators(lang_code):
+    params = {'skills__skills_en__iexact': 'translation'}
+    if isinstance(lang_code, (str, unicode)):
+        params['languages__launguage_code__iexact'] = lang_code
+    else:
+        params['languages__in'] = lang_code
+    return UserProfile.objects.filter(**params)
+
+
+def find_CMs(lang_code=None):
+    params = {'is_cm': True}
+    if lang_code is not None:
+        if isinstance(lang_code, (str, unicode)):
+            params['languages__launguage_code__iexact'] = lang_code
+        else:
+            params['languages__in'] = lang_code
+    return UserProfile.objects.filter(**params)
+
+
+def create_translation_notification(obj, status, user=None, reminder=False, save=True):
+    notification = Notification()
+    if type(obj) == MarketItem and user:
+        notification.user = user
+        notification.item = obj
+        notification.avatar_user = obj.owner.username
+        notification.text = get_notification_text(obj)
+    else:
+        notification.user = obj.owner
+        notification.item = obj.market_item
+        notification.avatar_user = obj.market_item.owner.username
+        notification.text = get_notification_text(obj.market_item)
+        notification.timeto = obj.endtime()
+    notification.translation = status
+    notification.reminder = reminder
+    if save:
+        notification.save()
+    return notification
+
+
+def create_translators_notifications(market_item, status, lang_code=None, save=True):
+    if lang_code is None:
+        lang_code = Language.objects.exclude(launguage_code__iexact=market_item.language)
+
+    notifications = []
+    for userprofile in find_translators(lang_code):
+        notifications.append(
+            create_translation_notification(
+                market_item, status, user=userprofile.user, save=False))
+    if save:
+        Notification.objects.bulk_create(notifications)
+    return notifications
+
+
+def create_CMs_notifications(market_item, status, lang_code=None, save=True):
+    notifications = []
+    for userprofile in find_CMs(lang_code):
+        notifications.append(
+            create_translation_notification(
+                market_item, status,
+                user=userprofile.user, save=False))
+    if save:
+        Notification.objects.bulk_create(notifications)
+    return notifications
+
+
+@_app.task(name="TakeinNotification", bind=True)
+def takein_notification(self, obj, correction=False):
+    if correction:
+        create_translation_notification(obj, Notification.STATUSES.CORRECTION)
+    else:
+        create_translation_notification(obj, Notification.STATUSES.TRANSLATION)
+
+
+@_app.task(name="CorrectionNotification", bind=True)
+def correction_notification(self, obj):
+    create_translation_notification(obj, Notification.STATUSES.CORRECTION)
+
+
+@_app.task(name="ApprovedNotification", bind=True)
+def approved_notification(self, obj):
+    create_translation_notification(obj, Notification.STATUSES.APPROVED)
+    create_translation_notification(
+        obj.market_item, Notification.STATUSES.APPROVED, user=obj.market_item.owner)
+
+
+@_app.task(name="ApproveNotification", bind=True)
+def approve_notification(self, obj):
+    create_CMs_notifications(
+        obj.market_item, Notification.STATUSES.APPROVAL, lang_code=obj.language)
+
+
+@_app.task(name="TakeoffNotification", bind=True)
+def takeoff_notification(self, market_item, lang_code):
+    notifications = []
+    notifications += create_translators_notifications(
+        market_item, Notification.STATUSES.PENDING,
+        lang_code, save=False)
+    notifications += create_CMs_notifications(
+        market_item, Notification.STATUSES.PENDING,
+        lang_code=lang_code, save=False)
+    Notification.objects.bulk_create(notifications)
+
+
 # TODO move timings to settings
 # defaults days=1 and hours=12
-post_translation_time = timedelta(minutes=2)
-post_correction_time = timedelta(minutes=1)
+post_translation_time = timedelta(minutes=4)
+post_correction_time = timedelta(minutes=2)
 
 
-# TODO
 @periodic_task(run_every=timedelta(minutes=1))
 def check_translation_timings():
+    notifications = []
     translations = None
     translations = TraslationCandidade.objects.filter(
         status=TraslationCandidade.STATUS_CHOICES.ACTIVE,
         edited__lt=now() - post_translation_time/2,
         reminder=False).select_related('owner')
-    # for translation in translations:
-        # need to create notifications here
+    # creating notifications
+    for translation in translations:
+        notifications.append(
+            create_translation_notification(
+                translation, Notification.STATUSES.TRANSLATION, reminder=True, save=False))
     translations.update(reminder=True)
 
     translations = None
     translations = TraslationCandidade.objects.filter(
         status=TraslationCandidade.STATUS_CHOICES.ACTIVE,
-        edited__lt=now() - post_translation_time/2,
+        edited__lt=now() - post_translation_time,
         ).select_related('owner', 'translation')
     for translation in translations:
-        # need to create notifications here
-
         # updating translation status
         translation.translation.set_done_or_pending()
+
+        # creating notifications
+        notifications += create_translators_notifications(
+            translation.market_item, Notification.STATUSES.PENDING,
+            lang_code=translation.language, save=False)
     translations.delete()
 
     corrections = None
@@ -148,9 +260,13 @@ def check_translation_timings():
         status=TraslationCandidade.STATUS_CHOICES.CORRECTION,
         edited__lt=now() - post_correction_time/2,
         reminder=False).select_related('owner')
-    # for correction in corrections:
-        # need to create notifications here
+    # creating notifications
+    for correction in corrections:
+        notifications.append(
+            create_translation_notification(
+                correction, Notification.STATUSES.CORRECTION, reminder=True, save=False))
     corrections.update(reminder=True)
+
 
     corrections = None
     corrections = TraslationCandidade.objects.filter(
@@ -158,8 +274,14 @@ def check_translation_timings():
         edited__lt=now() - post_correction_time,
         ).select_related('owner', 'translation')
     for correction in corrections:
-        # need to create notifications here
-
         # updating translation status
-        translation.translation.set_done_or_pending()
+        correction.translation.set_done_or_pending()
+        # creating notifications
+        notifications += create_translators_notifications(
+            correction.market_item, Notification.STATUSES.PENDING,
+            lang_code=correction.language, save=False)
     corrections.delete()
+
+    # save notifications
+    print(notifications)
+    Notification.objects.bulk_create(notifications)

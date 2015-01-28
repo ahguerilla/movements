@@ -15,7 +15,9 @@ from app.market.api.utils import *
 import app.market as market
 from app.market.models import Questionnaire
 from app.market.forms import QuestionnaireForm
-from tasks.celerytasks import update_notifications
+from tasks.celerytasks import (
+    update_notifications, takein_notification, takeoff_notification,
+    correction_notification, approved_notification, approve_notification)
 from app.market.api.utils import translate_text
 import bleach
 
@@ -465,14 +467,19 @@ def take_in_translation(request, item_id, lang_code):
             translation.title_translated = g_translation.title_translated
             translation.source_language = g_translation.source_language
             translation.save()
+        elif translation.is_done():
+            translation.owner = request.user
+            translation.status = market.models.MarketItemTranslation.STATUS_CHOICES.TRANSLATION
+            translation.save()
+            candidate.status = market.models.TraslationCandidade.STATUS_CHOICES.CORRECTION
         candidate.details_translated = translation.details_translated
         candidate.title_translated = translation.title_translated
         candidate.translation = translation
         candidate.save()
-        if not translation.is_done():
-            translation.owner = request.user
-            translation.status = market.models.MarketItemTranslation.STATUS_CHOICES.TRANSLATION
-            translation.save()
+
+        # create "take in" notifications
+        takein_notification.delay(candidate, translation.is_done())
+
     active = candidate.is_active(request.user)
 
     if active:
@@ -492,9 +499,12 @@ def take_in_translation(request, item_id, lang_code):
 
 @login_required
 def take_off(request, item_id, lang_code):
-    market.models.TraslationCandidade.objects.filter(
+    obj = market.models.TraslationCandidade.objects.filter(
         market_item_id=item_id, language=lang_code,
-        owner=request.user).delete()
+        owner=request.user)
+    takeoff_notification.delay(obj.market_item, lang_code)
+    obj.delete()
+
     result = {
         'response': 'success',
         'take_in_url': reverse('take_in_translate_item', args=(item_id, lang_code)),
@@ -517,6 +527,8 @@ def mark_as_done(request, item_id, lang_code):
 
         if request.user.userprofile.is_cm:
             result.update(candidate.cm_urls_dict())
+        approve_notification.delay(candidate)
+
     except Exception as e:
         result = {'response': 'error'}
     return HttpResponse(json.dumps(result), mimetype="application/json")
@@ -538,6 +550,7 @@ def approve_translation(request, item_id, lang_code):
             'title_translated', candidate.title_translated)
         candidate.translation.status = market.models.MarketItemTranslation.STATUS_CHOICES.DONE
         candidate.translation.save()
+        approved_notification.delay(candidate)
         candidate.delete()
         status = True
     except Exception as e:
@@ -560,6 +573,8 @@ def revoke_translation(request, item_id, lang_code):
             market_item_id=item_id, language=lang_code
             )
         candidate.translation.set_done_or_pending()
+        takeoff_notification.delay(candidate.market_item, lang_code)
+        candidate.delete()
         status = True
     except Exception as e:
         print(e)
@@ -582,6 +597,7 @@ def request_corrections_translation(request, item_id, lang_code):
             )
         candidate.status = candidate.STATUS_CHOICES.CORRECTION
         candidate.save()
+        correction_notification.delay(candidate)
         status = True
     except Exception as e:
         print(e)

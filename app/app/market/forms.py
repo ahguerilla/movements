@@ -132,7 +132,7 @@ def save_market_item(form, owner):
     new_item = form.instance.id is None
     obj = form.save(owner=owner)
     if new_item:
-        # create_notification.delay(obj)
+        create_notification.delay(obj)
 
         # detect language
         language = detect_language(obj.details)

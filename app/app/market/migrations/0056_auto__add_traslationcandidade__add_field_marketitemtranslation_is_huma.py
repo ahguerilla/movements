@@ -34,6 +34,21 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True),
                       keep_default=False)
 
+        # Adding field 'Notification.translation'
+        db.add_column(u'market_notification', 'translation',
+                      self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0, max_length=1),
+                      keep_default=False)
+
+        # Adding field 'Notification.timeto'
+        db.add_column(u'market_notification', 'timeto',
+                      self.gf('django.db.models.fields.DateTimeField')(null=True),
+                      keep_default=False)
+
+        # Adding field 'Notification.reminder'
+        db.add_column(u'market_notification', 'reminder',
+                      self.gf('django.db.models.fields.BooleanField')(default=False),
+                      keep_default=False)
+
         # Adding field 'MarketItem.language'
         db.add_column(u'market_marketitem', 'language',
                       self.gf('django.db.models.fields.CharField')(default='en', max_length=10),
@@ -49,6 +64,15 @@ class Migration(SchemaMigration):
 
         # Deleting field 'MarketItemTranslation.owner'
         db.delete_column(u'market_marketitemtranslation', 'owner_id')
+
+        # Deleting field 'Notification.translation'
+        db.delete_column(u'market_notification', 'translation')
+
+        # Deleting field 'Notification.timeto'
+        db.delete_column(u'market_notification', 'timeto')
+
+        # Deleting field 'Notification.reminder'
+        db.delete_column(u'market_notification', 'reminder')
 
         # Deleting field 'MarketItem.language'
         db.delete_column(u'market_marketitem', 'language')
@@ -223,8 +247,11 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']", 'null': 'True', 'blank': 'True'}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'reminder': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'seen': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'text': ('json_field.fields.JSONField', [], {'default': "u'null'"}),
+            'timeto': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'translation': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'max_length': '1'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         },
         'market.question': {

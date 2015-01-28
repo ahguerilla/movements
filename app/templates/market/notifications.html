@@ -25,29 +25,52 @@
         <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
       </div>
       <div class="details<% if (!notif.seen) { %> new<% } %>">
-        <a class="user" href="<%- notif.profile_link %>"><%- notif.user %></a>
-        <% if (notif.comment) { %>
-          {% trans "commented on" %} <% if (notif.owner_id == window.ahr.user_id) { %>{% trans "your" %}<% } %>
-          <% if (notif.item_type == "offer") { %>
-            {% trans "offer" %}
+        <% if (notif.translation) { %>
+          <% if (notif.reminder == true) { %>
+            {% trans 'It is a reminder. The object status is' %}
           <% } else { %>
-            {% trans "request" %}
+            {% trans 'The object translation status changed to' %}
           <% } %>
-        <a href="/market/<%- notif.item_id %>" style="display:inline-block;">"<%- notif.text.title %>"
-          </a>
-        <% } else if (notif.item_type) { %>
-          <% if (notif.text.update) { %>{% trans "updated" %}<% } else { %> {% trans "posted" %} <% } %>
-          {% trans "the" %}
-          <% if (notif.item_type == "offer") { %>
-            {% trans "offer" %}
-          <% } else { %>
-            {% trans "request" %}
+          - <%- notif.get_translation_display %> (<%- notif.language %>)
+          <% if (notif.item_type) { %>
+            <br>
+            <% if (notif.item_type == "offer") { %>
+              {% trans "Offer" %}
+            <% } else { %>
+              {% trans "Request" %}
+            <% } %>
+            <a href="/market/<%- notif.item_id %>">
+              "<%- notif.text.title %>"
+            </a>
+            <% if (notif.timeto) { %>
+              {% trans 'The time to completion' %} <%- notif.timeto %>
+            <% } %>
           <% } %>
-          <a href="/market/<%- notif.item_id %>">
-            "<%- notif.text.title %>"
-          </a>
-        <% } else if (notif.text.type == "message") { %>
-            {% trans "sent you a private " %} <a href="{% url 'postman_inbox' %}"> {% trans "message" %} </a>
+        <% } else { %>
+          <a class="user" href="<%- notif.profile_link %>"><%- notif.user %></a>
+          <% if (notif.comment) { %>
+            {% trans "commented on" %} <% if (notif.owner_id == window.ahr.user_id) { %>{% trans "your" %}<% } %>
+            <% if (notif.item_type == "offer") { %>
+              {% trans "offer" %}
+            <% } else { %>
+              {% trans "request" %}
+            <% } %>
+          <a href="/market/<%- notif.item_id %>" style="display:inline-block;">"<%- notif.text.title %>"
+            </a>
+          <% } else if (notif.item_type) { %>
+            <% if (notif.text.update) { %>{% trans "updated" %}<% } else { %> {% trans "posted" %} <% } %>
+            {% trans "the" %}
+            <% if (notif.item_type == "offer") { %>
+              {% trans "offer" %}
+            <% } else { %>
+              {% trans "request" %}
+            <% } %>
+            <a href="/market/<%- notif.item_id %>">
+              "<%- notif.text.title %>"
+            </a>
+          <% } else if (notif.text.type == "message") { %>
+              {% trans "sent you a private " %} <a href="{% url 'postman_inbox' %}"> {% trans "message" %} </a>
+          <% } %>
         <% } %>
       </div>
     </div>
