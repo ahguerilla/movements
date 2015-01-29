@@ -29,31 +29,27 @@ class MarketWriteForm(WriteForm):
         }
 
 
-class OfferForm(forms.ModelForm):
+class MarketItemBaseForm(forms.ModelForm):
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details', 'specific_skill', 'receive_notifications', 'interests', 'countries',
-                  'tweet_permission']
+        fields = ['title', 'details', 'specific_skill', 'specific_issue',
+                  'receive_notifications', 'interests', 'issues',
+                  'countries', 'tweet_permission']
         widgets = {
             'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
             'interests': CheckboxSelectMultiple(),
+            'issues': CheckboxSelectMultiple(),
             'countries': RegionAccordionSelectMultiple()
         }
 
     def __init__(self, *args, **kwargs):
         user_skills = kwargs.pop('user_skills', None)
         user_countries = kwargs.pop('user_countries', None)
-        super(OfferForm, self).__init__(*args, **kwargs)
+        super(MarketItemBaseForm, self).__init__(*args, **kwargs)
         if user_skills:
             self.fields['interests'].initial = user_skills
         if user_countries:
             self.fields['countries'].initial = user_countries
-
-    def save(self, commit=True, *args, **kwargs):
-        self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.OFFER
-        if self.instance.id is None:
-            self.instance.owner = kwargs['owner']
-        return super(OfferForm, self).save(commit=commit)
 
     def clean_interests(self):
         data = self.cleaned_data['interests']
@@ -64,53 +60,34 @@ class OfferForm(forms.ModelForm):
             raise forms.ValidationError(_("Please select a maximum of 4 skills"))
         return data
 
+    def clean_issues(self):
+        data = self.cleaned_data['issues']
+        specific_issue = self.cleaned_data['specific_issue']
+        if len(data) == 0 and not specific_issue:
+            raise forms.ValidationError(_("You must add at least one issue"))
+        if len(data) >= 4 or (len(data) >= 3 and specific_issue):
+            raise forms.ValidationError(_("Please select a maximum of 3 issues"))
+        return data
+
     def clean_title(self):
         data = self.cleaned_data['title']
         if len(data) > 120:
             raise forms.ValidationError(_("Please enter a maximum of 120 characters"))
         return data
-
-
-class RequestForm(forms.ModelForm):
-    class Meta:
-        model = market.models.MarketItem
-        fields = ['title', 'details', 'specific_skill',
-                  'receive_notifications', 'interests', 'countries', 'tweet_permission']
-        widgets = {
-            'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
-            'interests': CheckboxSelectMultiple(),
-            'countries': RegionAccordionSelectMultiple()
-        }
-
-    def __init__(self, *args, **kwargs):
-        user_skills = kwargs.pop('user_skills', None)
-        user_countries = kwargs.pop('user_countries', None)
-        super(RequestForm, self).__init__(*args, **kwargs)
-        if user_skills:
-            self.fields['interests'].initial = user_skills
-        if user_countries:
-            self.fields['countries'].initial = user_countries
 
     def save(self, commit=True, *args, **kwargs):
-        self.instance.item_type = market.models.MarketItem.TYPE_CHOICES.REQUEST
+        self.instance.item_type = self.ITEM_TYPE
         if self.instance.id is None:
             self.instance.owner = kwargs['owner']
-        return super(RequestForm, self).save(commit=commit)
+        return super(MarketItemBaseForm, self).save(commit=commit)
 
-    def clean_interests(self):
-        data = self.cleaned_data['interests']
-        specific_skill = self.cleaned_data['specific_skill']
-        if len(data) == 0 and not specific_skill:
-            raise forms.ValidationError(_("You must add at least one skill"))
-        if len(data) > 4 or (len(data) > 3 and specific_skill):
-            raise forms.ValidationError(_("Please select a maximum of 4 skills"))
-        return data
 
-    def clean_title(self):
-        data = self.cleaned_data['title']
-        if len(data) > 120:
-            raise forms.ValidationError(_("Please enter a maximum of 120 characters"))
-        return data
+class OfferForm(MarketItemBaseForm):
+    ITEM_TYPE = market.models.MarketItem.TYPE_CHOICES.OFFER
+
+
+class RequestForm(MarketItemBaseForm):
+    ITEM_TYPE = market.models.MarketItem.TYPE_CHOICES.REQUEST
 
 
 class CommentForm(forms.ModelForm):

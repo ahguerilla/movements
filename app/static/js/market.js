@@ -2,7 +2,8 @@ $(function () {
   var MarketFilterView = Backbone.View.extend({
     type: '',
     regions: [],
-    skills: [],
+    skills: {selected: [], rootClass: 'skill-filter'},
+    issues: {selected: [], rootClass: 'issue-filter'},
     showHidden: false,
 
     events: {
@@ -13,6 +14,7 @@ $(function () {
       'click .country-list a.country': 'setRegionFilter',
       'click .country-list a.country-all': 'setRegionFilter',
       'click .skill-filter a': 'setSkillsFilter',
+      'click .issue-filter a': 'setIssuesFilter',
       'click a.search': 'toggleSearchControls',
       'click .run-search': 'triggerFilter',
       'keydown input[name=query]': 'checkForEnter',
@@ -23,15 +25,30 @@ $(function () {
 
     initialize: function(options) {
       var $skills = this.$el.find('a.skills');
-      this.$skillsContainer = $skills.parent().find('.popover-container');
-      this.skillsContent = _.template($('#skill-filter-list-template').html(), {skills: options.skills});
-      this.skillsCount = options.skills.length;
-      this.$skillCount = $skills.find('.count');
+      this.skills.$container = $skills.parent().find('.popover-container');
+      this.skills.content = _.template($('#skill-filter-list-template').html(), {skills: options.skills});
+      this.skills.count = options.skills.length;
+      this.skills.$count = $skills.find('.count');
+
       $skills.popover({
         title: '',
         html: true,
-        content: this.skillsContent,
-        container: this.$skillsContainer,
+        content: this.skills.content,
+        container: this.skills.$container,
+        placement: 'bottom'
+      });
+
+      var $issues = this.$el.find('a.issues');
+      this.issues.$container = $issues.parent().find('.popover-container');
+      this.issues.content = _.template($('#issue-filter-list-template').html(), {skills: options.issues});
+      this.issues.count = options.issues.length;
+      this.issues.$count = $issues.find('.count');
+
+      $issues.popover({
+        title: '',
+        html: true,
+        content: this.issues.content,
+        container: this.issues.$container,
         placement: 'bottom'
       });
 
@@ -70,8 +87,10 @@ $(function () {
     setPopoverContent: function(ev) {
       var $currentTarget = $(ev.currentTarget);
       if ($currentTarget.hasClass('skills')) {
-        this.$skillsContainer.find('.popover-content').html(this.skillsContent);
-      } else if ($currentTarget.hasClass('regions')) {
+        this.skills.$container.find('.popover-content').html(this.skills.content);
+      } else if ($currentTarget.hasClass('issues')) {
+        this.issues.$container.find('.popover-content').html(this.issues.content);
+      }else if ($currentTarget.hasClass('regions')) {
         this.$regionContainer.find('.popover-content').html(this.regionsContent);
       } else {
         this.$hiddenContainer.find('.popover-content').html(this.hiddenContent);
@@ -82,7 +101,9 @@ $(function () {
       var $currentTarget = $(ev.currentTarget);
       $currentTarget.parents('li').removeClass('active');
       if ($currentTarget.hasClass('skills')) {
-        this.skillsContent = this.$skillsContainer.find('.popover-content').html();
+        this.skills.content = this.skills.$container.find('.popover-content').html();
+      } else if ($currentTarget.hasClass('issues')) {
+        this.issues.content = this.issues.$container.find('.popover-content').html();
       } else if ($currentTarget.hasClass('regions')) {
         this.regionsContent = this.$regionContainer.find('.popover-content').html();
       } else {
@@ -145,41 +166,83 @@ $(function () {
       };
     },
 
-    setSkillsFilter: function (ev) {
-      var skill = this.toggleFilterState(ev);
-      if (skill.value == 'all') {
-        if (this.skills.length == this.skillsCount) {
-          this.skills = [];
-          this.$el.find('.skill-filter a').removeClass('selected');
+    setFlatFilter: function(ev, data) {
+      var item = this.toggleFilterState(ev);
+      if (item.value == 'all') {
+        if (data.selected.length == data.count) {
+          data.selected = [];
+          this.$el.find(data.rootClass + ' a').removeClass('selected');
         } else {
-          this.skills = [];
-          skill.$target.addClass('selected');
-          _.each(this.$el.find('.skill-filter a.skill-normal'), function(elem) {
+          data.selected = [];
+          item.$target.addClass('selected');
+          _.each(this.$el.find(data.rootClass + ' a.skill-normal'), function (elem) {
             var $elem = $(elem);
-            this.skills.push($elem.data('filter'))
+            data.selected.push($elem.data('filter'))
             $elem.addClass('selected');
           }, this);
         }
       } else {
-        if (skill.selected) {
-          this.skills.push(skill.value);
-          if (this.skills.length == this.skillsCount) {
-            this.$el.find('.skill-filter .skill-all').addClass('selected');
+        if (item.selected) {
+          data.selected.push(item.value);
+          if (data.selected.length == data.count) {
+            this.$el.find(data.rootClass + ' .skill-all').addClass('selected');
           }
         } else {
-          this.$el.find('.skill-filter .skill-all').removeClass('selected');
-          this.skills = $.grep(this.skills, function (value) {
-            return value != skill.value;
+          this.$el.find(data.rootClass + ' .skill-all').removeClass('selected');
+          data.selected = $.grep(data.selected, function (value) {
+            return value != item.value;
           });
         }
       }
-      if (this.skills.length) {
-        this.$skillCount.html('(' + this.skills.length + ')');
-        this.$skillCount.show();
+      if (data.selected.length) {
+        data.$count.html('(' + data.selected.length + ')');
+        data.$count.show();
       } else {
-        this.$skillCount.hide();
+        data.$count.hide();
       }
       this.trigger('filter');
+    },
+
+    setIssuesFilter: function (ev) {
+      this.setFlatFilter(ev, this.issues);
+    },
+
+    setSkillsFilter: function (ev) {
+      this.setFlatFilter(ev, this.skills);
+      //var skill = this.toggleFilterState(ev);
+      //if (skill.value == 'all') {
+      //  if (this.skills.length == this.skillsCount) {
+      //    this.skills = [];
+      //    this.$el.find('.skill-filter a').removeClass('selected');
+      //  } else {
+      //    this.skills = [];
+      //    skill.$target.addClass('selected');
+      //    _.each(this.$el.find('.skill-filter a.skill-normal'), function(elem) {
+      //      var $elem = $(elem);
+      //      this.skills.push($elem.data('filter'))
+      //      $elem.addClass('selected');
+      //    }, this);
+      //  }
+      //} else {
+      //  if (skill.selected) {
+      //    this.skills.push(skill.value);
+      //    if (this.skills.length == this.skillsCount) {
+      //      this.$el.find('.skill-filter .skill-all').addClass('selected');
+      //    }
+      //  } else {
+      //    this.$el.find('.skill-filter .skill-all').removeClass('selected');
+      //    this.skills = $.grep(this.skills, function (value) {
+      //      return value != skill.value;
+      //    });
+      //  }
+      //}
+      //if (this.skills.length) {
+      //  this.$skillCount.html('(' + this.skills.length + ')');
+      //  this.$skillCount.show();
+      //} else {
+      //  this.$skillCount.hide();
+      //}
+      //this.trigger('filter');
     },
 
     setRegion: function(region) {
@@ -283,8 +346,11 @@ $(function () {
       if (this.type) {
         data.types = this.type;
       }
-      if (this.skills) {
-        data.skills = this.skills;
+      if (this.skills.selected) {
+        data.skills = this.skills.selected;
+      }
+      if (this.issues.selected) {
+        data.issues = this.issues.selected;
       }
       if (this.regions) {
         data.countries = this.regions;
@@ -803,7 +869,7 @@ $(function () {
   var filterView = null;
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (options) {
-    filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills});
+    filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills, issues: options.issues});
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Finished loading posts</div>';
     var market = new MarketView({
       el: '#market-main',

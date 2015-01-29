@@ -17,6 +17,7 @@ class Skills(models.Model):
         return self.skills
 
     class Meta:
+        verbose_name_plural = 'Skills'
         ordering = ['skills']
 
 
@@ -27,6 +28,7 @@ class Issues(models.Model):
         return self.issues
 
     class Meta:
+        verbose_name_plural = 'Issues'
         ordering = ['issues']
 
 
@@ -38,6 +40,7 @@ class Countries(models.Model):
         return self.countries
 
     class Meta:
+        verbose_name_plural = 'Countries'
         ordering = ['countries']
 
 
@@ -48,6 +51,7 @@ class Nationality(models.Model):
         return self.nationality
 
     class Meta:
+        verbose_name_plural = 'Nationalities'
         ordering = ['nationality']
 
 

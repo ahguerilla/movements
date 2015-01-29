@@ -149,10 +149,12 @@ class Migration(SchemaMigration):
             'countries': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['users.Countries']", 'null': 'True', 'blank': 'True'}),
             'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'details': ('tinymce.models.HTMLField', [], {}),
+            'featured_order_hint': ('django.db.models.fields.CharField', [], {'default': "'c'", 'max_length': '5'}),
             'feedback_response': ('django.db.models.fields.TextField', [], {'default': "''", 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'interests': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['users.Interest']", 'null': 'True', 'blank': 'True'}),
             'is_featured': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'issues': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['users.Issues']", 'null': 'True', 'blank': 'True'}),
             'item_type': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'language': ('django.db.models.fields.CharField', [], {'default': "'en'", 'max_length': '10'}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'blank': 'True'}),
@@ -162,6 +164,7 @@ class Migration(SchemaMigration):
             'receive_notifications': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'reportcount': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'score': ('django.db.models.fields.FloatField', [], {'default': '0'}),
+            'specific_issue': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'}),
             'specific_skill': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'}),
             'staff_owner': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'marketitems'", 'null': 'True', 'to': u"orm['auth.User']"}),
             'status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'max_length': '1'}),
@@ -317,6 +320,7 @@ class Migration(SchemaMigration):
             'countries': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'}),
             'countries_ar': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'countries_en': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'countries_ru': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'countries_uk': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'countries_zh_cn': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -328,8 +332,19 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255'}),
             'name_ar': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_en': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'name_ru': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_uk': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_zh_cn': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'})
+        },
+        u'users.issues': {
+            'Meta': {'ordering': "['issues']", 'object_name': 'Issues'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'issues': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'}),
+            'issues_ar': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'issues_en': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'issues_ru': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'issues_uk': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'issues_zh_cn': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
         },
         u'users.region': {
             'Meta': {'object_name': 'Region'},
@@ -337,6 +352,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255'}),
             'name_ar': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_en': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'name_ru': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_uk': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_zh_cn': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'})
         }

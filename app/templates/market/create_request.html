@@ -29,7 +29,22 @@
         </div>
       </div>
       <div>
-        <div class="form-sub-title"><h2>{% trans "2. What countries does this request apply to?" %}</h2></div>
+        <div class="form-sub-title"><h2>{% trans "2. What issues does this relate to?" %}</h2></div>
+        <div id="issues-select" class="form-select-multi">
+          {{ form.issues }}
+        </div>
+        <label for="{{ form.specific_issue.auto_id }}">{% trans 'Other' %}</label>
+
+        <div class="form-group">
+          <div class="col-xs-12">
+            {% render_field form.specific_issue class="form-control" placeholder="" maxlength="30" %}
+            {{ form.specific_issue.errors }}
+            {{ form.issues.errors }}
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-sub-title"><h2>{% trans "3. What countries does this request apply to?" %}</h2></div>
         <p>{% trans "Indicate the region and/or specific country."%}</p>
         <div class="form-select-multi">
           {{ form.countries }}
@@ -39,7 +54,7 @@
       <div>
         <p style="margin-top: 15px;">{% blocktrans %} Movements.org provides access to skills and experts. At this time, we cannot provide funding or equipment. If you need either please see the <a href="/movements/resources/">Resources</a> page. What might be available is a proposal writer to help you secure funding from a different source. {% endblocktrans %}</p>
         <p>{% trans "Please describe your request below. Be as explicit and clear as possible."%}</p>
-        <div class="form-sub-title"><h2>{% trans "3. What do you need?" %}</h2></div>
+        <div class="form-sub-title"><h2>{% trans "4. What do you need?" %}</h2></div>
         <p>{% trans "Be specific and clear."%}&nbsp;{% trans "(max 120 characters)" %}</p>
         <div class="form-group">
           <div class="col-xs-12">
@@ -49,14 +64,11 @@
         </div>
       </div>
       <div>
-        <div class="form-sub-title"><h2>{% trans "4. Please write your post" %}</h2></div>
+        <div class="form-sub-title"><h2>{% trans "5. Please write your post" %}</h2></div>
         <p>{% trans "Tell a compelling story and state your needs."%}</p>
         {% render_field form.details class="form-control input-sm" required="true" placeholder="" %}
         {{ form.details.errors }}
       </div>
-{#      <div>#}
-{#        <div class="form-sub-title"><h2>{% trans "4. Tag your post" %}</h2></div>#}
-{#      </div>#}
       <div>
         <div class="form-group">
           <div class="col-xs-12">
