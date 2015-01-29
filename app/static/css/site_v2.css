@@ -397,16 +397,30 @@ body {
   clip: rect(0px, 30px, 22px, 0px);
   margin-top: -3px;
 }
+.header-nav .navbar-left-top .nav-blog {
+  float: left;
+  width: 80px;
+  color: #fff;
+  background-color: #005d86;
+  text-align: center;
+  margin-left: 115px;
+  margin-top: -3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
 .header-nav .navbar-right {
   float: right !important;
 }
 .header-nav .navbar-right .nav-flags {
   height: 30px;
-  width: 300px;
+  width: 312px;
   margin-top: 4px;
 }
 .header-nav .navbar-right .nav-flags img {
-  width: 40px;
+  width: 35px;
   float: right;
   margin: 5px 0 0 10px;
 }
@@ -460,6 +474,7 @@ body {
   left: inherit;
   right: 14px;
   width: 136px;
+  height: 90px;
 }
 #add-post-popup-container .popover-content {
   width: 132px;
@@ -899,7 +914,7 @@ h6 {
   padding-right: 15%;
   width: 100%;
   position: absolute;
-  top: 150px;
+  top: 120px;
   color: #fff;
   font-size: 36px;
   font-family: "HurmeGeometricSans3-SemiBold";
@@ -931,6 +946,9 @@ h6 {
 }
 .page-banner .carousel-inner .carousel-content #FindOutMoreButton button {
   background-color: #227da6;
+}
+.page-banner .carousel-inner .carousel-content #BlogButton {
+  top: 485px;
 }
 .page-banner .left-control {
   position: absolute;

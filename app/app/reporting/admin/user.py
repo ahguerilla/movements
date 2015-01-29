@@ -3,11 +3,15 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.db.models import Count, Sum
 from django.utils.translation import ugettext_lazy as _
-from allauth.account.models import EmailAddress
+from allauth.account.models import EmailAddress, EmailConfirmation
+import csv
 
 from ...market.models import MarketItemViewCounter
 from ..models import UserTracking
 from .base import TrackingAdmin
+from django.contrib.auth import get_user_model
+from django.http import HttpResponse
+from django.utils import timezone
 
 
 class StarRatingListFilter(admin.SimpleListFilter):
@@ -89,9 +93,9 @@ class UserAdmin(TrackingAdmin):
     get_full_name.short_description = _('Full Name')
 
     def get_nationality(self, obj):
-        if hasattr(obj, 'userprofile'):
-            return obj.userprofile.nationality
-        return ''
+        if not hasattr(obj, 'userprofile'):
+            return _('No profile')
+        return obj.userprofile.nationality
     get_nationality.short_description = _('Nationality')
 
     def get_resident_country(self, obj):
@@ -153,6 +157,8 @@ class UserAdmin(TrackingAdmin):
     get_bio.short_description = _('Bio')
 
     def get_vet_info_count(self, obj):
+        if not hasattr(obj, 'userprofile'):
+            return 0
         count = 0
         if obj.userprofile.fb_url:
             count = count + 1
@@ -173,12 +179,12 @@ class UserAdmin(TrackingAdmin):
         return 'false'
     get_email_status.short_description = _('Email verified')
 
-
     # Overridden methods.
-
     def changelist_view(self, request, extra_context=None):
         if request.method == 'POST' and '_safe_export' in request.POST:
                 return self.export_as_csv(request, safe_mode=True)
+        if request.method == 'POST' and '_export_unverified' in request.POST:
+            return self.export_unverified(request)
         return super(UserAdmin, self).changelist_view(request, extra_context)
 
     def render_change_form(self, request, context, add=False, change=False,
@@ -202,7 +208,6 @@ class UserAdmin(TrackingAdmin):
         return queryset
 
     # Utils.
-
     @staticmethod
     def make_tracking_queryset(orig_queryset):
         return orig_queryset
@@ -223,5 +228,25 @@ class UserAdmin(TrackingAdmin):
         #     user.request_count = request_count_dict.get(user.id, 0)
         #     user.offer_count = offer_count_dict.get(user.id, 0)
         # return users
+
+    @staticmethod
+    def export_unverified(request):
+        response = HttpResponse(mimetype='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=unverified.csv'
+        writer = csv.writer(response, delimiter=';')
+        writer.writerow(['Name', 'email', 'Date Joined', 'Activation Link'])
+
+        users = get_user_model().objects.filter(emailaddress__verified=False).all()
+        for u in users:
+            email_address = u.emailaddress_set.filter(primary=True).first()
+            if not email_address:
+                continue
+            confirmation = EmailConfirmation.create(email_address)
+            confirmation.sent = timezone.now()
+            confirmation.save()
+            activate_url = reverse("account_confirm_email", args=[confirmation.key])
+            activate_uri = request.build_absolute_uri(activate_url)
+            writer.writerow([unicode(u.get_full_name()).encode('utf-8'), u.email, u.date_joined, activate_uri])
+        return response
 
 admin.site.register(UserTracking, UserAdmin)

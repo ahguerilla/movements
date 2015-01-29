@@ -48,20 +48,24 @@
           <li><a
               obj_id="{{ post.id }}"
               rec_type="market_item"
+              onClick="ga('send', 'event', 'button', 'click', 'recommend');"
               class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
           {% if post.tweet_permission %}
             <li><a
               obj_id="{{ post.id }}"
               rec_type="market_item"
+              onClick="ga('send', 'event', 'button', 'click', 'tweet');"
               class="tweet" href='#' alt="tweet post">{% trans 'Tweet' %}</a></li>
           {% endif %}
           <li><a
                 username="{{ post.owner.username }}"
                 subject="RE: {{ post.title }}"
                 readonlysub="1"
+                onClick="ga('send', 'event', 'button', 'click', 'direct-message');"
                 class="message private-message" href='#' alt="direct message author">{% trans 'Direct message' %}</a></li>
           <li><a
               report_url="{{ report_url }}"
+              onClick="ga('send', 'event', 'button', 'click', 'report-post');"
               class="report" href='#' alt="report post">{% trans 'Report this post' %}</a></li>
           {% if request.user.userprofile.is_translator or request.user.userprofile.is_cm %}
           <li><a
@@ -188,15 +192,15 @@
       <% if (status != 3) { %>
         <button type="button" class="btn btn-primary<% if (!take_in_url) { %> disabled<% } %>" id="take_in" >
           <% if (!correction) { %>
-            {% trans 'Take in' %}
+            {% trans 'Translate this post' %}
           <% } else { %>
-            {% trans 'Take in correction' %}
+            {% trans 'Correct this post' %}
           <% } %>
         </button>
         
         <% if (active == true) { %>
-          <button type="button" class="btn btn-success" id="done" >{% trans 'Mark as done' %}</button>
-          <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Take off' %}</button>
+          <button type="button" class="btn btn-success" id="done" >{% trans 'Translation completed' %}</button>
+          <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Cancel translation' %}</button>
         <% } %>
       <% } %>
 

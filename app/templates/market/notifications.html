@@ -43,7 +43,7 @@
               "<%- notif.text.title %>"
             </a>
             <% if (notif.timeto) { %>
-              {% trans 'The time to completion' %} <%- notif.timeto %>
+              {% trans 'You have until' %} <%- notif.timeto %> {% trans 'to complete this translation.' %}
             <% } %>
           <% } %>
         <% } else { %>

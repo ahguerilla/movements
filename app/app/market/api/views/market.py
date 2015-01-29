@@ -174,7 +174,8 @@ def get_market_items(request, user_id=None, filter_by_user=False):
 def get_featured_market_items(request):
     featured_posts = market.models.MarketItem.objects.exclude(
         status__in=[market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
-                    market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN]).filter(is_featured=True)
+                    market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN])\
+        .filter(is_featured=True).order_by('featured_order_hint')
 
     is_safe = True
     if request.user.is_authenticated():
@@ -499,7 +500,7 @@ def take_in_translation(request, item_id, lang_code):
 
 @login_required
 def take_off(request, item_id, lang_code):
-    obj = market.models.TraslationCandidade.objects.filter(
+    obj = market.models.TraslationCandidade.objects.get(
         market_item_id=item_id, language=lang_code,
         owner=request.user)
     takeoff_notification.delay(obj.market_item, lang_code)

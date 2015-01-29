@@ -10,7 +10,7 @@ from app.utils import EnumChoices
 
 class Notification(models.Model):
     STATUSES = EnumChoices(
-        PENDING=(1, _('Waiting for translator')),
+        PENDING=(1, _('Needs Translation')),
         TRANSLATION=(2, _('In translation')),
         CORRECTION=(3, _('In correction')),
         REVOKED=(4, _('Translation revoked')),
