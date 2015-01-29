@@ -399,7 +399,7 @@ def translate_market_item(request, item_id, lang_code):
         'itemid': item_id,
         'status': status,
         'human_aviable': human_aviable,
-        'username': translation.owner.username if status == states.DONE else 'Google'
+        'username': translation.owner.username if success and status == states.DONE else 'Google'
     }
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
@@ -474,14 +474,13 @@ def take_in_translation(request, item_id, lang_code):
             market_item_id=item_id, language=lang_code,
             defaults={'status': market.models.MarketItemTranslation.STATUS_CHOICES.TRANSLATION})
         if created:
-            g_translation = get_or_create_item_translation(item_id, lang_code)
-            translation.details_translated = g_translation.details_translated
-            translation.title_translated = g_translation.title_translated
-            translation.source_language = g_translation.source_language
+            _translation = get_or_create_item_translation(item_id, lang_code)
+            translation.details_translated = _translation.details_translated
+            translation.title_translated = _translation.title_translated
+            translation.source_language = _translation.source_language
             translation.save()
         elif translation.is_done():
             translation.owner = request.user
-            translation.status = market.models.MarketItemTranslation.STATUS_CHOICES.TRANSLATION
             translation.save()
             candidate.status = market.models.TraslationCandidade.STATUS_CHOICES.CORRECTION
         candidate.details_translated = translation.details_translated
