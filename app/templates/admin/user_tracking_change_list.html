@@ -11,6 +11,10 @@
     {% csrf_token %}
     <input type="hidden" name="_safe_export">
   </form>
+  <form id="export_unverified" action="." method="post">
+    {% csrf_token %}
+    <input type="hidden" name="_export_unverified" >
+  </form>
 
   <ul class="object-tools">
     <li>
@@ -21,6 +25,11 @@
     <li>
       <a class="addlink" onclick="getElementById('safe_export_form').submit();" href="javascript:void(0);">
         {% trans 'Export as CSV in safe mode' %}
+      </a>
+    </li>
+    <li>
+      <a class="addlink" onclick="getElementById('export_unverified').submit();" href="javascript:void(0);">
+        {% trans 'Export Unverified' %}
       </a>
     </li>
   </ul>
