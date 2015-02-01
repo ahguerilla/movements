@@ -2,8 +2,8 @@ $(function () {
   var MarketFilterView = Backbone.View.extend({
     type: '',
     regions: [],
-    skills: {selected: [], rootClass: 'skill-filter'},
-    issues: {selected: [], rootClass: 'issue-filter'},
+    skills: {selected: [], rootClass: '.skill-filter'},
+    issues: {selected: [], rootClass: '.issue-filter'},
     showHidden: false,
 
     events: {
