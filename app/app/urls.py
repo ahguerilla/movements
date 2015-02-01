@@ -3,9 +3,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 
-
-# Uncomment the next two lines to enable the admin:
+from adminplus.sites import AdminSitePlus
 from django.contrib import admin
+
+admin.site = AdminSitePlus()
 admin.autodiscover()
 
 js_info_dict = {

@@ -779,20 +779,27 @@ h6 {
 .tags {
   margin-left: -5px;
 }
-.tags .tag {
+.tags .tag,
+.tags .issue {
   float: left;
   margin-left: 5px;
   margin-bottom: 5px;
-  color: #005d86;
   font-size: 14px;
   font-weight: bold;
   padding: 5px 8px 5px 8px;
-  border: 2px solid #005d86;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
+}
+.tags .tag {
+  border: 2px solid #005d86;
+  color: #005d86;
+}
+.tags .issue {
+  border: 2px solid #fe6d50;
+  color: #fe6d50;
 }
 .content-wrap {
   min-height: 500px;
@@ -1298,7 +1305,8 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .categories ul.category-menu > li a.showhide {
   background: url("../images/v2/market-hide-show-icon.png") no-repeat center 10px;
 }
-.exchange-filters .categories ul.category-menu > li a.skills {
+.exchange-filters .categories ul.category-menu > li a.skills,
+.exchange-filters .categories ul.category-menu > li a.issues {
   width: 90px;
   background: url("../images/v2/market-filter-icon.png") no-repeat center 10px;
 }
@@ -1324,7 +1332,8 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .categories ul.category-menu > li.active a.showhide {
   background: url("../images/v2/market-hide-show-icon-toggled.png") no-repeat center 10px;
 }
-.exchange-filters .categories ul.category-menu > li.active a.skills {
+.exchange-filters .categories ul.category-menu > li.active a.skills,
+.exchange-filters .categories ul.category-menu > li.active a.issues {
   background: url("../images/v2/market-filter-icon-toggled.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li.active a.regions {
@@ -1380,27 +1389,34 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .categories ul.category-menu > li.showhide .popover-content ul li a.plain {
   background-image: none;
 }
-.exchange-filters .categories ul.category-menu > li.skills .popover-content {
+.exchange-filters .categories ul.category-menu > li.skills .popover-content,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content {
   padding: 0;
 }
-.exchange-filters .categories ul.category-menu > li.skills .popover-content ul {
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li:first-child {
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li:first-child,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul li:first-child {
   border-top: none;
 }
-.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li {
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul li {
   display: block;
   border-top: 1px solid #e0d7d8;
   padding: 4px;
 }
 .exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.no-icon,
-.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.no-icon:hover {
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul li a.no-icon,
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.no-icon:hover,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul li a.no-icon:hover {
   background-image: none;
 }
-.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a {
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul li a {
   background: url("../images/v2/select_plus.png") 210px center no-repeat;
   margin: 0;
   padding: 10px;
@@ -1410,21 +1426,25 @@ input.borderless-control:focus:invalid:focus {
   text-decoration: none;
   color: #000;
 }
-.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a:hover {
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a:hover,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul li a:hover {
   color: #fff;
   background: url("../images/v2/select_plus_hover.png") 210px center no-repeat;
   background-color: #beb4ae;
 }
-.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.selected {
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.selected,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul li a.selected {
   background: url("../images/v2/select_tick.png") 210px center no-repeat;
   background-color: #fff;
   color: #ff6d50;
 }
-.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.selected:hover {
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.selected:hover,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul li a.selected:hover {
   background: url("../images/v2/select_tick.png") 210px center no-repeat;
   background-color: #beb4ae;
 }
-.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.plain {
+.exchange-filters .categories ul.category-menu > li.skills .popover-content ul li a.plain,
+.exchange-filters .categories ul.category-menu > li.issues .popover-content ul li a.plain {
   background-image: none;
 }
 .exchange-filters .categories ul.category-menu > li.regions .popover-content {

@@ -35,9 +35,11 @@ def return_item_list(obj, rtype='json', request=None, is_safe=True):
 def get_raw(request, from_item=0, to_item=None,
             filter_by_owner=False, count=False, user_id=None):
     skills = map(int, request.GET.getlist('skills', []))
+    issues = map(int, request.GET.getlist('issues', []))
     countries = map(int, request.GET.getlist('countries', []))
     params = {
         'interests': tuple(skills),
+        'issues': tuple(issues),
         'countries': tuple(countries),
         'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
         'user_id': user_id if user_id else request.user.id,
@@ -80,6 +82,15 @@ def get_raw(request, from_item=0, to_item=None,
                 SELECT * FROM market_marketitem_interests
                 WHERE market_marketitem_interests.marketitem_id = mi.id AND
                       market_marketitem_interests.interest_id IN %(interests)s
+            )
+        """
+
+    if issues:
+        additional_filter += """
+            AND EXISTS (
+                SELECT * FROM market_marketitem_issues
+                WHERE market_marketitem_issues.marketitem_id = mi.id AND
+                      market_marketitem_issues.issues_id IN %(issues)s
             )
         """
 
