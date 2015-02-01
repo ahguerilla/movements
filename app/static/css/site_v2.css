@@ -1305,10 +1305,13 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .categories ul.category-menu > li a.showhide {
   background: url("../images/v2/market-hide-show-icon.png") no-repeat center 10px;
 }
-.exchange-filters .categories ul.category-menu > li a.skills,
-.exchange-filters .categories ul.category-menu > li a.issues {
+.exchange-filters .categories ul.category-menu > li a.skills {
   width: 90px;
   background: url("../images/v2/market-filter-icon.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li a.issues {
+  width: 90px;
+  background: url("../images/v2/market-issues-icon.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li a.regions {
   width: 118px;
@@ -1332,9 +1335,11 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .categories ul.category-menu > li.active a.showhide {
   background: url("../images/v2/market-hide-show-icon-toggled.png") no-repeat center 10px;
 }
-.exchange-filters .categories ul.category-menu > li.active a.skills,
-.exchange-filters .categories ul.category-menu > li.active a.issues {
+.exchange-filters .categories ul.category-menu > li.active a.skills {
   background: url("../images/v2/market-filter-icon-toggled.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li.active a.issues {
+  background: url("../images/v2/market-issues-icon-toggled.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li.active a.regions {
   background: url("../images/v2/market-countries-icon-toggled.png") no-repeat center 10px;
