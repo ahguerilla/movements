@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-15 08:59-0600\n"
-"PO-Revision-Date: 2015-01-30 08:41+0000\n"
-"Last-Translator: Adriana Luhovy <aluhovy@advancinghumanrights.org>\n"
+"POT-Creation-Date: 2015-02-01 18:55+0000\n"
+"PO-Revision-Date: 2015-02-01 19:21+0000\n"
+"Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,15 +83,23 @@ msgstr ""
 "Эта ссылка перенаправит вас из сайта Movements.\n"
 "Убедитесь, что вы доверяете сайту, на который вас будет перенаправлено."
 
-#: app/market/forms.py:61 app/market/forms.py:103
+#: app/market/forms.py:57
 msgid "You must add at least one skill"
 msgstr "Вы должны добавить по крайней мере, один навык"
 
-#: app/market/forms.py:63 app/market/forms.py:105
+#: app/market/forms.py:59
 msgid "Please select a maximum of 4 skills"
 msgstr "Пожалуйста, выберите максимум 4 навыка"
 
-#: app/market/forms.py:69 app/market/forms.py:111
+#: app/market/forms.py:66
+msgid "You must add at least one issue"
+msgstr "Пожалуйста, выберите хотя бы один"
+
+#: app/market/forms.py:68
+msgid "Please select a maximum of 3 issues"
+msgstr ""
+
+#: app/market/forms.py:74
 msgid "Please enter a maximum of 120 characters"
 msgstr "Пожалуйста, введите максимум 120 символов"
 
@@ -104,19 +112,19 @@ msgstr "Дополнительные свойства"
 msgid "contents"
 msgstr "содержимое"
 
-#: app/market/models/comment.py:15 app/market/models/market.py:41
+#: app/market/models/comment.py:15 app/market/models/market.py:43
 #: app/market/models/notification.py:18 app/market/models/rate.py:13
 #: app/market/models/report.py:21 app/market/models/report.py:38
-#: app/users/models.py:219
+#: app/users/models.py:223
 msgid "publish date"
 msgstr "дата публикации"
 
-#: app/market/models/comment.py:17 app/market/models/market.py:40
+#: app/market/models/comment.py:17 app/market/models/market.py:42
 #: app/market/models/report.py:22
 msgid "is published?"
 msgstr "опубликовано?"
 
-#: app/market/models/comment.py:18 app/market/models/market.py:47
+#: app/market/models/comment.py:18 app/market/models/market.py:49
 msgid "deleted"
 msgstr "удалено"
 
@@ -153,7 +161,7 @@ msgid "without type"
 msgstr "без типа"
 
 #: app/market/models/feedback.py:33 app/market/models/market.py:34
-#: app/market/models/rate.py:14 app/users/models.py:220
+#: app/market/models/rate.py:14 app/users/models.py:224
 msgid "title"
 msgstr "название"
 
@@ -201,7 +209,7 @@ msgstr "Запрос"
 msgid "Offer"
 msgstr "Предложение"
 
-#: app/market/models/market.py:30 app/market/models/market.py:211
+#: app/market/models/market.py:30 app/market/models/market.py:213
 msgid "item_type"
 msgstr "тип_элемента"
 
@@ -209,114 +217,118 @@ msgstr "тип_элемента"
 msgid "details"
 msgstr "детали"
 
-#: app/market/models/market.py:38
+#: app/market/models/market.py:37
 msgid "Specific skill"
 msgstr "Особенные навыки"
 
-#: app/market/models/market.py:39
+#: app/market/models/market.py:40
+msgid "Specific issue"
+msgstr ""
+
+#: app/market/models/market.py:41
 msgid "URL Link"
 msgstr "Ссылка на URL-адрес"
 
-#: app/market/models/market.py:42
+#: app/market/models/market.py:44
 msgid "commentcount"
 msgstr "количество комментариев"
 
-#: app/market/models/market.py:43
+#: app/market/models/market.py:45
 msgid "collaboratorcount"
 msgstr "количество сотрудников"
 
-#: app/market/models/market.py:44 app/users/models.py:169
+#: app/market/models/market.py:46 app/users/models.py:173
 msgid "ratecount"
 msgstr "учет рейтинга"
 
-#: app/market/models/market.py:45
+#: app/market/models/market.py:47
 msgid "reportcount"
 msgstr "количество отчетов"
 
-#: app/market/models/market.py:46 app/market/models/rate.py:15
-#: app/users/models.py:170 app/users/models.py:221
+#: app/market/models/market.py:48 app/market/models/rate.py:15
+#: app/users/models.py:174 app/users/models.py:225
 msgid "score"
 msgstr "счет"
 
-#: app/market/models/market.py:48
+#: app/market/models/market.py:50
 msgid "receive notifications"
 msgstr "получать уведомления"
 
-#: app/market/models/market.py:49
+#: app/market/models/market.py:51
 msgid "Tweet Permission"
 msgstr "Разрешение распространения с помощью Twitter"
 
-#: app/market/models/market.py:51 app/reporting/admin/incident.py:89
+#: app/market/models/market.py:53 app/reporting/admin/incident.py:89
 msgid "status"
 msgstr "статус"
 
-#: app/market/models/market.py:54
+#: app/market/models/market.py:56
 msgid "closed date"
 msgstr "дата закрытия"
 
-#: app/market/models/market.py:56
+#: app/market/models/market.py:58
 msgid "feedback response"
 msgstr "обратный ответ"
 
-#: app/market/models/market.py:57
+#: app/market/models/market.py:59
 msgid "is featured"
 msgstr "является популярным"
 
-#: app/market/models/market.py:164 app/market/models/market.py:179
-#: app/market/models/market.py:195 app/market/models/market.py:208
+#: app/market/models/market.py:166 app/market/models/market.py:181
+#: app/market/models/market.py:197 app/market/models/market.py:210
 #: app/market/models/report.py:47 app/market/models/report.py:76
 msgid "market item"
 msgstr "элемент общественной площадки"
 
-#: app/market/models/market.py:165
+#: app/market/models/market.py:167
 msgid "action"
 msgstr "действие"
 
-#: app/market/models/market.py:166 app/market/models/market.py:181
+#: app/market/models/market.py:168 app/market/models/market.py:183
 msgid "date of action"
 msgstr "дата действия"
 
-#: app/market/models/market.py:170 app/market/models/market.py:171
+#: app/market/models/market.py:172 app/market/models/market.py:173
 msgid "actions of market item"
 msgstr "действия элемента общественной площадки"
 
-#: app/market/models/market.py:180
+#: app/market/models/market.py:182
 msgid "next step"
 msgstr "следующий шаг"
 
-#: app/market/models/market.py:182
+#: app/market/models/market.py:184
 msgid "completed"
 msgstr "завершено"
 
-#: app/market/models/market.py:186
+#: app/market/models/market.py:188
 msgid "next step of market item"
 msgstr "следующий шаг элемента общественной площадки"
 
-#: app/market/models/market.py:187
+#: app/market/models/market.py:189
 msgid "next steps of market item"
 msgstr "следующие шаги элемента общественной площадки"
 
-#: app/market/models/market.py:196 app/users/models.py:78
+#: app/market/models/market.py:198 app/users/models.py:82
 msgid "language"
 msgstr "язык"
 
-#: app/market/models/market.py:197
+#: app/market/models/market.py:199
 msgid "source language"
 msgstr "язык оригинала"
 
-#: app/market/models/market.py:198
+#: app/market/models/market.py:200
 msgid "title translated"
 msgstr "переведенное название"
 
-#: app/market/models/market.py:199
+#: app/market/models/market.py:201
 msgid "details translated"
 msgstr "переведенные детали"
 
-#: app/market/models/market.py:200
+#: app/market/models/market.py:202
 msgid "date generated"
 msgstr "сгенерирована дата"
 
-#: app/market/models/market.py:212
+#: app/market/models/market.py:214
 msgid "interaction date"
 msgstr "дата взаимодействия"
 
@@ -615,182 +627,184 @@ msgstr ""
 msgid "skill set"
 msgstr "набор навыков"
 
-#: app/users/models.py:24
+#: app/users/models.py:25
 msgid "issues of interest"
 msgstr "тематика интереса"
 
-#: app/users/models.py:34
+#: app/users/models.py:36
 msgid "countries of interest"
 msgstr "страны интереса"
 
-#: app/users/models.py:45
+#: app/users/models.py:48
 msgid "nationality"
 msgstr "национальность"
 
-#: app/users/models.py:55
+#: app/users/models.py:59
 msgid "country of residence"
 msgstr "страна проживания"
 
-#: app/users/models.py:65
+#: app/users/models.py:69
 msgid "name"
 msgstr "имя"
 
-#: app/users/models.py:76
+#: app/users/models.py:80
 msgid "language code"
 msgstr "код языка"
 
-#: app/users/models.py:79
+#: app/users/models.py:83
 msgid "languages"
 msgstr "языки"
 
-#: app/users/models.py:87
+#: app/users/models.py:91
 msgid "region"
 msgstr "область"
 
-#: app/users/models.py:88
+#: app/users/models.py:92
 msgid "regions"
 msgstr "области"
 
-#: app/users/models.py:93
+#: app/users/models.py:97
 msgid "interest"
 msgstr "интерес"
 
-#: app/users/models.py:94
+#: app/users/models.py:98
 msgid "interests"
 msgstr "интересы"
 
-#: app/users/models.py:112
+#: app/users/models.py:116
 msgid "Hidden - only your screen name and avatar is shared"
 msgstr "Скрыто - только ваш псевдоним и аватар являются общедоступными"
 
-#: app/users/models.py:113
+#: app/users/models.py:117
 msgid "Secure - only your screen name, skills and country is shared"
 msgstr ""
 "Безопасно - только ваш псевдоним, умения и страна являются общедоступными"
 
-#: app/users/models.py:114
+#: app/users/models.py:118
 msgid "Public - all your profile information is shared"
 msgstr ""
 "Публичный доступ - вся информация вашего профиля является общедоступной"
 
-#: app/users/models.py:118
+#: app/users/models.py:122
 msgid "Never"
 msgstr "Никогда"
 
-#: app/users/models.py:119
+#: app/users/models.py:123
 msgid "Weekly"
 msgstr "Еженедельно"
 
-#: app/users/models.py:120
+#: app/users/models.py:124
 msgid "Daily"
 msgstr "Ежедневно"
 
-#: app/users/models.py:121
+#: app/users/models.py:125
 msgid "Instantly"
 msgstr "Немедленно"
 
-#: app/users/models.py:125
+#: app/users/models.py:129
 msgid "Unknown"
 msgstr "Неизвестный"
 
-#: app/users/models.py:126
+#: app/users/models.py:130
 msgid "Social Media"
 msgstr "Социальные медиа"
 
-#: app/users/models.py:127
+#: app/users/models.py:131
 msgid "Staff Contact"
 msgstr "Контактное лицо"
 
-#: app/users/models.py:128
+#: app/users/models.py:132
 msgid "General Media"
 msgstr "Генеральные медиа"
 
-#: app/users/models.py:129
+#: app/users/models.py:133
 msgid "Referred by Movements User"
 msgstr "Приглашен пользователем Movements "
 
-#: app/users/models.py:130
+#: app/users/models.py:134
 msgid "Event"
 msgstr "Событие"
 
-#: app/users/models.py:131 templates/market/create_offer.html:21
+#: app/users/models.py:135 templates/market/create_offer.html:22
+#: templates/market/create_offer.html:37
 #: templates/market/create_request.html:22
+#: templates/market/create_request.html:36
 msgid "Other"
 msgstr "Другой"
 
-#: app/users/models.py:132
+#: app/users/models.py:136
 msgid "Prefer not to say"
 msgstr "Предпочитаю не говорить"
 
-#: app/users/models.py:144
+#: app/users/models.py:148
 msgid "bio"
 msgstr "биография"
 
-#: app/users/models.py:145
+#: app/users/models.py:149
 msgid "tag line"
 msgstr "слоган"
 
-#: app/users/models.py:146
+#: app/users/models.py:150
 msgid "website url"
 msgstr "ссылка на сайт"
 
-#: app/users/models.py:147
+#: app/users/models.py:151
 msgid "facebook page"
 msgstr "facebook страница"
 
-#: app/users/models.py:148
+#: app/users/models.py:152
 msgid "linkedin page"
 msgstr "linkedin страница"
 
-#: app/users/models.py:149
+#: app/users/models.py:153
 msgid "twitter page"
 msgstr "twitter страница"
 
-#: app/users/models.py:150
+#: app/users/models.py:154
 msgid "occupation"
 msgstr "профессия"
 
-#: app/users/models.py:151
+#: app/users/models.py:155
 msgid "area of expertise"
 msgstr "область опыта"
 
-#: app/users/models.py:152
+#: app/users/models.py:156
 msgid "privacy settings"
 msgstr "настройки конфиденциальности"
 
-#: app/users/models.py:165
+#: app/users/models.py:169
 msgid "organisation"
 msgstr "организация"
 
-#: app/users/models.py:166
+#: app/users/models.py:170
 msgid "individual"
 msgstr "личный"
 
-#: app/users/models.py:167
+#: app/users/models.py:171
 msgid "journalist"
 msgstr "журналист"
 
-#: app/users/models.py:168
+#: app/users/models.py:172
 msgid "recieves newsletter"
 msgstr "получать новости"
 
-#: app/users/models.py:171
+#: app/users/models.py:175
 msgid "Interface language"
 msgstr "Язык интерфейса"
 
-#: app/users/models.py:173
+#: app/users/models.py:177
 msgid "first login"
 msgstr "первый логин"
 
-#: app/users/models.py:175
+#: app/users/models.py:179
 msgid "profile visibility"
 msgstr "видимость профиля"
 
-#: app/users/models.py:178
+#: app/users/models.py:182
 msgid "notification frequency"
 msgstr "частота уведомление"
 
-#: app/users/models.py:213
+#: app/users/models.py:217
 msgid "Rated by AHR"
 msgstr "Оценено AHR"
 
@@ -1863,7 +1877,7 @@ msgstr "Люди, которые имеют личные сообщения от
 msgid "Feedback"
 msgstr "Обратная связь"
 
-#: templates/admin/incident_change_list.html:14
+#: templates/admin/incident_change_list.html:17
 #: templates/admin/user_tracking_change_list.html:22
 msgid "Export as CSV"
 msgstr "Экспорт в CSV"
@@ -2258,15 +2272,20 @@ msgstr ""
 "для других. Ваше предложение будет размещена на Movements и будет доступна "
 "всем."
 
-#: templates/market/create_offer.html:17
+#: templates/market/create_offer.html:18
 msgid "1. What skills can you offer?"
 msgstr "1. Какие навыки вы можете предложить?"
 
-#: templates/market/create_offer.html:31
-msgid "2. Which countries are you interested in helping?"
-msgstr "2. Каким странам вы заинтересованы в помощи?"
+#: templates/market/create_offer.html:33
+#: templates/market/create_request.html:32
+msgid "2. What issues does this relate to?"
+msgstr ""
 
-#: templates/market/create_offer.html:37
+#: templates/market/create_offer.html:49
+msgid "3. Which countries are you interested in helping?"
+msgstr "3. Каким странам вы заинтересованы в помощи?"
+
+#: templates/market/create_offer.html:55
 msgid ""
 "Movements.org provides access to skills and experts. Please describe your "
 "skills, abilities, or services below. Be as explicit and clear as possible."
@@ -2275,46 +2294,46 @@ msgstr ""
 "Пожалуйста, опишите ваши умения, способности, или услуги ниже. Указывайте "
 "точно и понятно, на сколько это возможно."
 
-#: templates/market/create_offer.html:38
-msgid "3. How can you help?"
-msgstr "3. Как Вы можете помочь?"
+#: templates/market/create_offer.html:56
+msgid "4. How can you help?"
+msgstr "4. Как Вы можете помочь?"
 
-#: templates/market/create_offer.html:39
-#: templates/market/create_request.html:43
+#: templates/market/create_offer.html:57
+#: templates/market/create_request.html:58
 msgid "Be specific and clear."
 msgstr "Будьте конкретны и понятны."
 
-#: templates/market/create_offer.html:39
-#: templates/market/create_request.html:43
+#: templates/market/create_offer.html:57
+#: templates/market/create_request.html:58
 msgid "(max 120 characters)"
 msgstr "(максимум 120 символов)"
 
-#: templates/market/create_offer.html:48
-#: templates/market/create_request.html:52
-msgid "4. Please write your post"
-msgstr "4. Пожалуйста, напишите пост"
+#: templates/market/create_offer.html:66
+#: templates/market/create_request.html:67
+msgid "5. Please write your post"
+msgstr "5. Пожалуйста, напишите пост"
 
-#: templates/market/create_offer.html:49
+#: templates/market/create_offer.html:67
 msgid "Tell a compelling story."
 msgstr "Опишите свою историю."
 
-#: templates/market/create_offer.html:59
-#: templates/market/create_request.html:63
+#: templates/market/create_offer.html:75
+#: templates/market/create_request.html:75
 msgid "May we tweet this request?"
 msgstr "Можем ли мы распространить этот запрос с помощью Twitter?"
 
-#: templates/market/create_offer.html:62
-#: templates/market/create_request.html:66
+#: templates/market/create_offer.html:78
+#: templates/market/create_request.html:78
 msgid "We won’t use your name or any identifying information"
 msgstr "Мы не будем использовать ваше имя или любую другую информацию"
 
-#: templates/market/create_offer.html:69
-#: templates/market/create_request.html:73
+#: templates/market/create_offer.html:85
+#: templates/market/create_request.html:85
 msgid "Receive notifications"
 msgstr "Получать уведомления"
 
-#: templates/market/create_offer.html:79
-#: templates/market/create_request.html:82
+#: templates/market/create_offer.html:95
+#: templates/market/create_request.html:94
 msgid "Post now"
 msgstr "Опубликовать"
 
@@ -2340,15 +2359,15 @@ msgstr ""
 msgid "1. What skills do you need?"
 msgstr "1. Какие навыки Вам нужно?"
 
-#: templates/market/create_request.html:32
-msgid "2. What countries does this request apply to?"
-msgstr "2. До каких стран этот запрос относится?"
+#: templates/market/create_request.html:47
+msgid "3. What countries does this request apply to?"
+msgstr "3. До каких стран этот запрос относится?"
 
-#: templates/market/create_request.html:33
+#: templates/market/create_request.html:48
 msgid "Indicate the region and/or specific country."
 msgstr "Укажите регион и/или конкретную страну."
 
-#: templates/market/create_request.html:40
+#: templates/market/create_request.html:55
 msgid ""
 " Movements.org provides access to skills and experts. At this time, we "
 "cannot provide funding or equipment. If you need either please see the <a "
@@ -2362,18 +2381,18 @@ msgstr ""
 "доступно, так это письменное предложение, чтобы помочь вам обеспечить "
 "финансирование из другого источника."
 
-#: templates/market/create_request.html:41
+#: templates/market/create_request.html:56
 msgid ""
 "Please describe your request below. Be as explicit and clear as possible."
 msgstr ""
 "Пожалуйста, опишите ваш запрос ниже. Пишите как можно четче и понятнее на "
 "сколько это возможно."
 
-#: templates/market/create_request.html:42
-msgid "3. What do you need?"
-msgstr "3. Что вам нужно?"
+#: templates/market/create_request.html:57
+msgid "4. What do you need?"
+msgstr "4. Что вам нужно?"
 
-#: templates/market/create_request.html:53
+#: templates/market/create_request.html:68
 msgid "Tell a compelling story and state your needs."
 msgstr "Расскажите вашу историю и потребности."
 
@@ -2399,40 +2418,44 @@ msgstr "Скрыть/Показать"
 msgid "Skills"
 msgstr "Навыки"
 
-#: templates/market/market.html:39 templates/users/more_about_you.html:79
+#: templates/market/market.html:39
+msgid "Issues"
+msgstr ""
+
+#: templates/market/market.html:45 templates/users/more_about_you.html:79
 msgid "Countries"
 msgstr "Страны"
 
-#: templates/market/market.html:45
+#: templates/market/market.html:51
 msgid "Search"
 msgstr "Поиск"
 
-#: templates/market/market.html:58
+#: templates/market/market.html:64
 msgid "Press enter to search"
 msgstr "Нажмите \"Еnter\" для поиска"
 
-#: templates/market/market.html:59
+#: templates/market/market.html:65
 msgid "Click \"Search\" above to close"
 msgstr "Нажмите \"Поиск\" выше, чтобы закрыть"
 
-#: templates/market/market.html:72
+#: templates/market/market.html:78
 msgid "Featured posts"
 msgstr "Популярные сообщения"
 
-#: templates/market/market.html:81
+#: templates/market/market.html:87
 msgid "Sticky posts"
 msgstr "Заметки"
 
-#: templates/market/market.html:107
+#: templates/market/market.html:113
 msgid "Show hidden"
 msgstr "Показать скрытые"
 
-#: templates/market/market.html:112 templates/market/market.html.py:120
-#: templates/market/market.html:126
+#: templates/market/market.html:118 templates/market/market.html.py:126
+#: templates/market/market.html:134 templates/market/market.html.py:140
 msgid "Select all"
 msgstr "Выбрать все"
 
-#: templates/market/market.html:125
+#: templates/market/market.html:139
 msgid "Back"
 msgstr "Назад"
 
@@ -2556,40 +2579,40 @@ msgstr "Сообщение от"
 msgid "Translate this post"
 msgstr "Перевести это сообщение"
 
-#: templates/market/view_post.html:52
+#: templates/market/view_post.html:58
 msgid "Recommend"
 msgstr "Рекомендовать"
 
-#: templates/market/view_post.html:58
+#: templates/market/view_post.html:64
 msgid "Tweet"
 msgstr "Твитнуть"
 
-#: templates/market/view_post.html:65
+#: templates/market/view_post.html:71
 msgid "Direct message"
 msgstr "Личное сообщение"
 
-#: templates/market/view_post.html:69
+#: templates/market/view_post.html:75
 msgid "Report this post"
 msgstr "Пожаловаться на это сообщение"
 
-#: templates/market/view_post.html:78
+#: templates/market/view_post.html:84
 msgid "Leave a comment"
 msgstr "Оставить комментарий"
 
-#: templates/market/view_post.html:82
+#: templates/market/view_post.html:88
 msgid "Please do not post any personally identifying information."
 msgstr "Пожалуйста, не оставляйте любую личную информацию."
 
-#: templates/market/view_post.html:83
+#: templates/market/view_post.html:89
 msgid "Don't use your real name or email address when leaving a comment."
 msgstr ""
 "Не используйте ваше Имя или адрес электронной почты, оставляя комментарий."
 
-#: templates/market/view_post.html:86
+#: templates/market/view_post.html:92
 msgid "Post comment"
 msgstr "Оставить комментарий"
 
-#: templates/market/view_post.html:99
+#: templates/market/view_post.html:105
 #, python-format
 msgid ""
 "Please <a href=\"%(accountUrl)s\">Login</a> or <a "
@@ -2602,7 +2625,7 @@ msgstr ""
 "уведомление. После того как вы сделаете это, вы сможете отправлять сообщения"
 " автору, комментировать и оценивать этот пост."
 
-#: templates/market/view_post.html:123
+#: templates/market/view_post.html:129
 #, python-format
 msgid ""
 "You don't have any languages selected. Please add some in your <a "
@@ -2611,7 +2634,7 @@ msgstr ""
 "У вас нет никакого выбранного языка. Пожалуйста, добавьте те которыми вы "
 "владеете к вашим <a href=\"%(settingsUrl)s#skills\">настройкам </a>"
 
-#: templates/market/view_post.html:140
+#: templates/market/view_post.html:146
 msgid "Delete"
 msgstr "Удалить"
 

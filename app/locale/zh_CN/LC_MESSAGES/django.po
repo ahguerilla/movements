@@ -2,20 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-12 09:31-0600\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-02-01 18:55+0000\n"
+"PO-Revision-Date: 2015-02-01 19:17+0000\n"
+"Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: django-rosetta 0.7.4\n"
 
 #: app/cms_plugins.py:10
 msgid "Safe VPN Link"
@@ -79,15 +80,23 @@ msgid ""
 "Make sure you trust the site that you are being redirected to."
 msgstr ""
 
-#: app/market/forms.py:61 app/market/forms.py:103
+#: app/market/forms.py:57
 msgid "You must add at least one skill"
 msgstr ""
 
-#: app/market/forms.py:63 app/market/forms.py:105
+#: app/market/forms.py:59
 msgid "Please select a maximum of 4 skills"
 msgstr ""
 
-#: app/market/forms.py:69 app/market/forms.py:111
+#: app/market/forms.py:66
+msgid "You must add at least one issue"
+msgstr ""
+
+#: app/market/forms.py:68
+msgid "Please select a maximum of 3 issues"
+msgstr ""
+
+#: app/market/forms.py:74
 msgid "Please enter a maximum of 120 characters"
 msgstr ""
 
@@ -100,19 +109,19 @@ msgstr ""
 msgid "contents"
 msgstr ""
 
-#: app/market/models/comment.py:15 app/market/models/market.py:41
+#: app/market/models/comment.py:15 app/market/models/market.py:43
 #: app/market/models/notification.py:18 app/market/models/rate.py:13
 #: app/market/models/report.py:21 app/market/models/report.py:38
-#: app/users/models.py:218
+#: app/users/models.py:223
 msgid "publish date"
 msgstr ""
 
-#: app/market/models/comment.py:17 app/market/models/market.py:40
+#: app/market/models/comment.py:17 app/market/models/market.py:42
 #: app/market/models/report.py:22
 msgid "is published?"
 msgstr ""
 
-#: app/market/models/comment.py:18 app/market/models/market.py:47
+#: app/market/models/comment.py:18 app/market/models/market.py:49
 msgid "deleted"
 msgstr ""
 
@@ -149,7 +158,7 @@ msgid "without type"
 msgstr ""
 
 #: app/market/models/feedback.py:33 app/market/models/market.py:34
-#: app/market/models/rate.py:14 app/users/models.py:219
+#: app/market/models/rate.py:14 app/users/models.py:224
 msgid "title"
 msgstr ""
 
@@ -189,15 +198,15 @@ msgstr ""
 msgid "Closed By User"
 msgstr ""
 
-#: app/market/models/market.py:26 templates/base_v2.html:237
+#: app/market/models/market.py:26 templates/base_v2.html:242
 msgid "Request"
 msgstr "请求"
 
-#: app/market/models/market.py:27 templates/base_v2.html:238
+#: app/market/models/market.py:27 templates/base_v2.html:245
 msgid "Offer"
 msgstr "提供帮助"
 
-#: app/market/models/market.py:30 app/market/models/market.py:211
+#: app/market/models/market.py:30 app/market/models/market.py:213
 msgid "item_type"
 msgstr ""
 
@@ -205,114 +214,118 @@ msgstr ""
 msgid "details"
 msgstr ""
 
-#: app/market/models/market.py:38
+#: app/market/models/market.py:37
 msgid "Specific skill"
 msgstr ""
 
-#: app/market/models/market.py:39
+#: app/market/models/market.py:40
+msgid "Specific issue"
+msgstr ""
+
+#: app/market/models/market.py:41
 msgid "URL Link"
 msgstr ""
 
-#: app/market/models/market.py:42
+#: app/market/models/market.py:44
 msgid "commentcount"
 msgstr ""
 
-#: app/market/models/market.py:43
+#: app/market/models/market.py:45
 msgid "collaboratorcount"
 msgstr ""
 
-#: app/market/models/market.py:44 app/users/models.py:168
+#: app/market/models/market.py:46 app/users/models.py:173
 msgid "ratecount"
 msgstr ""
 
-#: app/market/models/market.py:45
+#: app/market/models/market.py:47
 msgid "reportcount"
 msgstr ""
 
-#: app/market/models/market.py:46 app/market/models/rate.py:15
-#: app/users/models.py:169 app/users/models.py:220
+#: app/market/models/market.py:48 app/market/models/rate.py:15
+#: app/users/models.py:174 app/users/models.py:225
 msgid "score"
 msgstr ""
 
-#: app/market/models/market.py:48
+#: app/market/models/market.py:50
 msgid "receive notifications"
 msgstr ""
 
-#: app/market/models/market.py:49
+#: app/market/models/market.py:51
 msgid "Tweet Permission"
 msgstr ""
 
-#: app/market/models/market.py:51 app/reporting/admin/incident.py:89
+#: app/market/models/market.py:53 app/reporting/admin/incident.py:89
 msgid "status"
 msgstr ""
 
-#: app/market/models/market.py:54
+#: app/market/models/market.py:56
 msgid "closed date"
 msgstr ""
 
-#: app/market/models/market.py:56
+#: app/market/models/market.py:58
 msgid "feedback response"
 msgstr ""
 
-#: app/market/models/market.py:57
+#: app/market/models/market.py:59
 msgid "is featured"
 msgstr ""
 
-#: app/market/models/market.py:164 app/market/models/market.py:179
-#: app/market/models/market.py:195 app/market/models/market.py:208
+#: app/market/models/market.py:166 app/market/models/market.py:181
+#: app/market/models/market.py:197 app/market/models/market.py:210
 #: app/market/models/report.py:47 app/market/models/report.py:76
 msgid "market item"
 msgstr ""
 
-#: app/market/models/market.py:165
+#: app/market/models/market.py:167
 msgid "action"
 msgstr ""
 
-#: app/market/models/market.py:166 app/market/models/market.py:181
+#: app/market/models/market.py:168 app/market/models/market.py:183
 msgid "date of action"
 msgstr ""
 
-#: app/market/models/market.py:170 app/market/models/market.py:171
+#: app/market/models/market.py:172 app/market/models/market.py:173
 msgid "actions of market item"
 msgstr ""
 
-#: app/market/models/market.py:180
+#: app/market/models/market.py:182
 msgid "next step"
 msgstr ""
 
-#: app/market/models/market.py:182
+#: app/market/models/market.py:184
 msgid "completed"
 msgstr ""
 
-#: app/market/models/market.py:186
+#: app/market/models/market.py:188
 msgid "next step of market item"
 msgstr ""
 
-#: app/market/models/market.py:187
+#: app/market/models/market.py:189
 msgid "next steps of market item"
 msgstr ""
 
-#: app/market/models/market.py:196 app/users/models.py:78
+#: app/market/models/market.py:198 app/users/models.py:82
 msgid "language"
 msgstr ""
 
-#: app/market/models/market.py:197
+#: app/market/models/market.py:199
 msgid "source language"
 msgstr "始发语言"
 
-#: app/market/models/market.py:198
+#: app/market/models/market.py:200
 msgid "title translated"
 msgstr ""
 
-#: app/market/models/market.py:199
+#: app/market/models/market.py:201
 msgid "details translated"
 msgstr ""
 
-#: app/market/models/market.py:200
+#: app/market/models/market.py:202
 msgid "date generated"
 msgstr ""
 
-#: app/market/models/market.py:212
+#: app/market/models/market.py:214
 msgid "interaction date"
 msgstr ""
 
@@ -421,138 +434,138 @@ msgstr ""
 msgid "Aging"
 msgstr ""
 
-#: app/reporting/admin/user.py:14 app/reporting/admin/user.py:133
+#: app/reporting/admin/user.py:18 app/reporting/admin/user.py:137
 msgid "Movements Rating"
 msgstr ""
 
-#: app/reporting/admin/user.py:19
+#: app/reporting/admin/user.py:23
 msgid "Unassigned"
 msgstr ""
 
-#: app/reporting/admin/user.py:20
+#: app/reporting/admin/user.py:24
 msgid "0 Stars"
 msgstr ""
 
-#: app/reporting/admin/user.py:21
+#: app/reporting/admin/user.py:25
 msgid "1 Star"
 msgstr ""
 
-#: app/reporting/admin/user.py:22
+#: app/reporting/admin/user.py:26
 msgid "2 Stars"
 msgstr ""
 
-#: app/reporting/admin/user.py:23
+#: app/reporting/admin/user.py:27
 msgid "3 Stars"
 msgstr ""
 
-#: app/reporting/admin/user.py:24
+#: app/reporting/admin/user.py:28
 msgid "4 Stars"
 msgstr ""
 
-#: app/reporting/admin/user.py:25
+#: app/reporting/admin/user.py:29
 msgid "5 Stars"
 msgstr ""
 
-#: app/reporting/admin/user.py:36
+#: app/reporting/admin/user.py:40
 msgid "Email Verified"
 msgstr ""
 
-#: app/reporting/admin/user.py:41
+#: app/reporting/admin/user.py:45
 msgid "true"
 msgstr ""
 
-#: app/reporting/admin/user.py:42
+#: app/reporting/admin/user.py:46
 msgid "false"
 msgstr ""
 
-#: app/reporting/admin/user.py:81
+#: app/reporting/admin/user.py:85
 msgid "Screen Name"
 msgstr ""
 
-#: app/reporting/admin/user.py:85
+#: app/reporting/admin/user.py:89
 msgid "Signup Date"
 msgstr ""
 
-#: app/reporting/admin/user.py:89
+#: app/reporting/admin/user.py:93
 msgid "Full Name"
 msgstr ""
 
-#: app/reporting/admin/user.py:93
+#: app/reporting/admin/user.py:97
 #, fuzzy
 msgid "No profile"
 msgstr "个人资料"
 
-#: app/reporting/admin/user.py:95
+#: app/reporting/admin/user.py:99
 #: templates/market/clientside/userprofile.html:34
 msgid "Nationality"
 msgstr ""
 
-#: app/reporting/admin/user.py:101 templates/account/signup.html:52
+#: app/reporting/admin/user.py:105 templates/account/signup.html:52
 #: templates/users/user_settings_v2.html:69
 msgid "Country of Residence"
 msgstr "居住国"
 
-#: app/reporting/admin/user.py:105
+#: app/reporting/admin/user.py:109
 msgid "Is Admin"
 msgstr ""
 
-#: app/reporting/admin/user.py:109
+#: app/reporting/admin/user.py:113
 msgid "Request Count"
 msgstr ""
 
-#: app/reporting/admin/user.py:113
+#: app/reporting/admin/user.py:117
 msgid "Offer Count"
 msgstr ""
 
-#: app/reporting/admin/user.py:117
+#: app/reporting/admin/user.py:121
 msgid "Comment Count"
 msgstr ""
 
-#: app/reporting/admin/user.py:123 app/reporting/admin/user.py:132
+#: app/reporting/admin/user.py:127 app/reporting/admin/user.py:136
 msgid "unassigned"
 msgstr ""
 
-#: app/reporting/admin/user.py:125
+#: app/reporting/admin/user.py:129
 msgid "Rate user"
 msgstr ""
 
-#: app/reporting/admin/user.py:127
+#: app/reporting/admin/user.py:131
 msgid "Movements rating"
 msgstr ""
 
-#: app/reporting/admin/user.py:136 app/reporting/admin/user.py:140
-#: app/reporting/admin/user.py:144 app/reporting/admin/user.py:148
-#: app/reporting/admin/user.py:152
+#: app/reporting/admin/user.py:140 app/reporting/admin/user.py:144
+#: app/reporting/admin/user.py:148 app/reporting/admin/user.py:152
+#: app/reporting/admin/user.py:156
 msgid "Not supplied"
 msgstr ""
 
-#: app/reporting/admin/user.py:137 templates/account/signup.html:87
+#: app/reporting/admin/user.py:141 templates/account/signup.html:87
 #: templates/users/user_settings_v2.html:108
 msgid "Facebook"
 msgstr "脸书"
 
-#: app/reporting/admin/user.py:141 templates/account/signup.html:80
+#: app/reporting/admin/user.py:145 templates/account/signup.html:80
 #: templates/users/user_settings_v2.html:101
 msgid "Twitter"
 msgstr "推特"
 
-#: app/reporting/admin/user.py:145
+#: app/reporting/admin/user.py:149
 msgid "Linked in"
 msgstr "邻客音"
 
-#: app/reporting/admin/user.py:149
+#: app/reporting/admin/user.py:153
 msgid "Website/blog"
 msgstr "网站/博客"
 
-#: app/reporting/admin/user.py:153 templates/users/user_profile_v2.html:57
+#: app/reporting/admin/user.py:157 templates/users/user_profile_v2.html:57
 msgid "Bio"
 msgstr "简历"
 
-#: app/reporting/admin/user.py:170
+#: app/reporting/admin/user.py:174
 msgid "Count social"
 msgstr ""
 
-#: app/reporting/admin/user.py:176
+#: app/reporting/admin/user.py:180
 msgid "Email verified"
 msgstr ""
 
@@ -574,6 +587,10 @@ msgstr "中文"
 
 #: app/settings/base.py:76
 msgid "Ukrainian"
+msgstr ""
+
+#: app/settings/base.py:77
+msgid "Russian"
 msgstr ""
 
 #: app/users/forms.py:28
@@ -598,190 +615,190 @@ msgstr "用户名必须只包含字母、数字、“- ” 和“_ ”，中间�
 msgid ""
 "Username must be greater that 2 characters and less than 30 contain only "
 "letters, numbers - and _. White space is not allowed"
-msgstr ""
-"用户名必须大于2个字符以上，最多不得超过30字符，只含有数字、“ - ” 和 “_ ”。不"
-"得空格。"
+msgstr "用户名必须大于2个字符以上，最多不得超过30字符，只含有数字、“ - ” 和 “_ ”。不得空格。"
 
 #: app/users/models.py:14
 msgid "skill set"
 msgstr ""
 
-#: app/users/models.py:24
+#: app/users/models.py:25
 msgid "issues of interest"
 msgstr ""
 
-#: app/users/models.py:34
+#: app/users/models.py:36
 msgid "countries of interest"
 msgstr ""
 
-#: app/users/models.py:45
+#: app/users/models.py:48
 msgid "nationality"
 msgstr ""
 
-#: app/users/models.py:55
+#: app/users/models.py:59
 msgid "country of residence"
 msgstr ""
 
-#: app/users/models.py:65
+#: app/users/models.py:69
 msgid "name"
 msgstr ""
 
-#: app/users/models.py:76
+#: app/users/models.py:80
 msgid "language code"
 msgstr ""
 
-#: app/users/models.py:79
+#: app/users/models.py:83
 msgid "languages"
 msgstr "语言"
 
-#: app/users/models.py:87
+#: app/users/models.py:91
 msgid "region"
 msgstr ""
 
-#: app/users/models.py:88
+#: app/users/models.py:92
 msgid "regions"
 msgstr ""
 
-#: app/users/models.py:93
+#: app/users/models.py:97
 msgid "interest"
 msgstr ""
 
-#: app/users/models.py:94
+#: app/users/models.py:98
 msgid "interests"
 msgstr ""
 
-#: app/users/models.py:112
+#: app/users/models.py:116
 msgid "Hidden - only your screen name and avatar is shared"
 msgstr "隐匿 - 只显示网名和虚拟头像"
 
-#: app/users/models.py:113
+#: app/users/models.py:117
 msgid "Secure - only your screen name, skills and country is shared"
 msgstr "安全 - 只显示网名、技能和所在国家"
 
-#: app/users/models.py:114
+#: app/users/models.py:118
 msgid "Public - all your profile information is shared"
 msgstr "公共 - 显示个人所有资料信息"
 
-#: app/users/models.py:118
+#: app/users/models.py:122
 msgid "Never"
 msgstr "永不"
 
-#: app/users/models.py:119
+#: app/users/models.py:123
 msgid "Weekly"
 msgstr "每周"
 
-#: app/users/models.py:120
+#: app/users/models.py:124
 msgid "Daily"
 msgstr "每日"
 
-#: app/users/models.py:121
+#: app/users/models.py:125
 msgid "Instantly"
 msgstr "马上"
 
-#: app/users/models.py:125
+#: app/users/models.py:129
 msgid "Unknown"
 msgstr ""
 
-#: app/users/models.py:126
+#: app/users/models.py:130
 #, fuzzy
 msgid "Social Media"
 msgstr "社会审查"
 
-#: app/users/models.py:127
+#: app/users/models.py:131
 msgid "Staff Contact"
 msgstr ""
 
-#: app/users/models.py:128
+#: app/users/models.py:132
 msgid "General Media"
 msgstr ""
 
-#: app/users/models.py:129
+#: app/users/models.py:133
 msgid "Referred by Movements User"
 msgstr ""
 
-#: app/users/models.py:130
+#: app/users/models.py:134
 msgid "Event"
 msgstr ""
 
-#: app/users/models.py:131 templates/market/create_offer.html:21
+#: app/users/models.py:135 templates/market/create_offer.html:22
+#: templates/market/create_offer.html:37
 #: templates/market/create_request.html:22
+#: templates/market/create_request.html:36
 msgid "Other"
 msgstr "其他"
 
-#: app/users/models.py:132
+#: app/users/models.py:136
 #, fuzzy
 msgid "Prefer not to say"
 msgstr "按输入键开始搜索"
 
-#: app/users/models.py:143
+#: app/users/models.py:148
 msgid "bio"
 msgstr ""
 
-#: app/users/models.py:144
+#: app/users/models.py:149
 msgid "tag line"
 msgstr ""
 
-#: app/users/models.py:145
+#: app/users/models.py:150
 msgid "website url"
 msgstr ""
 
-#: app/users/models.py:146
+#: app/users/models.py:151
 msgid "facebook page"
 msgstr ""
 
-#: app/users/models.py:147
+#: app/users/models.py:152
 msgid "linkedin page"
 msgstr ""
 
-#: app/users/models.py:148
+#: app/users/models.py:153
 msgid "twitter page"
 msgstr ""
 
-#: app/users/models.py:149
+#: app/users/models.py:154
 msgid "occupation"
 msgstr ""
 
-#: app/users/models.py:150
+#: app/users/models.py:155
 msgid "area of expertise"
 msgstr ""
 
-#: app/users/models.py:151
+#: app/users/models.py:156
 msgid "privacy settings"
 msgstr ""
 
-#: app/users/models.py:164
+#: app/users/models.py:169
 msgid "organisation"
 msgstr ""
 
-#: app/users/models.py:165
+#: app/users/models.py:170
 msgid "individual"
 msgstr ""
 
-#: app/users/models.py:166
+#: app/users/models.py:171
 msgid "journalist"
 msgstr ""
 
-#: app/users/models.py:167
+#: app/users/models.py:172
 msgid "recieves newsletter"
 msgstr ""
 
-#: app/users/models.py:170
+#: app/users/models.py:175
 msgid "Interface language"
 msgstr "界面语言"
 
-#: app/users/models.py:172
+#: app/users/models.py:177
 msgid "first login"
 msgstr ""
 
-#: app/users/models.py:174
+#: app/users/models.py:179
 msgid "profile visibility"
 msgstr ""
 
-#: app/users/models.py:177
+#: app/users/models.py:182
 msgid "notification frequency"
 msgstr ""
 
-#: app/users/models.py:212
+#: app/users/models.py:217
 msgid "Rated by AHR"
 msgstr ""
 
@@ -812,8 +829,7 @@ msgstr "您的文件太大 (%(size)s)，允许的最大文件尺寸为%(max_vali
 msgid ""
 "You already have %(nb_avatars)d avatars, and the maximum allowed is "
 "%(nb_max_avatars)d."
-msgstr ""
-"您已经使用了%(nb_avatars)d的虚拟头像，允许的最大尺寸为%(nb_max_avatars)d。"
+msgstr "您已经使用了%(nb_avatars)d的虚拟头像，允许的最大尺寸为%(nb_max_avatars)d。"
 
 #: avatar/forms.py:71 avatar/forms.py:84
 msgid "Choices"
@@ -859,11 +875,9 @@ msgstr "请选择您要删除的虚拟头像。"
 #: templates/avatar/confirm_delete.html:9
 #, python-format
 msgid ""
-"You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
-"\">upload one</a> now."
-msgstr ""
-"您没有虚拟头像可以删除，请即刻<a href=\"%(avatar_change_url)s\">上传</a>一个"
-"虚拟头像"
+"You have no avatars to delete. Please <a "
+"href=\"%(avatar_change_url)s\">upload one</a> now."
+msgstr "您没有虚拟头像可以删除，请即刻<a href=\"%(avatar_change_url)s\">上传</a>一个虚拟头像"
 
 #: avatar/templates/avatar/confirm_delete.html:15
 #: templates/avatar/confirm_delete.html:15
@@ -887,8 +901,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
 "href=\"%(avatar_url)s\">%(avatar)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(avatar_creator)s</a> 以及更新了其虚拟头像 <a href="
-"\"%(avatar_url)s\">%(avatar)s</a>."
+"<a href=\"%(user_url)s\">%(avatar_creator)s</a> 以及更新了其虚拟头像 <a "
+"href=\"%(avatar_url)s\">%(avatar)s</a>."
 
 #: avatar/templates/notification/avatar_updated/full.txt:1
 #, python-format
@@ -939,7 +953,7 @@ msgid "Notifications"
 msgstr "通知"
 
 #: templates/base.html:100 templates/base.html.py:109
-#: templates/base_v2.html:250 templates/users/user_settings_v2.html:16
+#: templates/base_v2.html:258 templates/users/user_settings_v2.html:16
 #: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
 msgstr "设置"
@@ -969,12 +983,12 @@ msgstr "登录"
 msgid "Sign Up"
 msgstr "注册"
 
-#: templates/base_v2.html:97 templates/base_v2.html.py:190
+#: templates/base_v2.html:97 templates/base_v2.html.py:194
 #: templates/account/signup_start.html:51
 msgid "Connect with Twitter"
 msgstr "使用推特连接"
 
-#: templates/base_v2.html:102 templates/base_v2.html.py:193
+#: templates/base_v2.html:102 templates/base_v2.html.py:197
 #: templates/account/signup_start.html:48
 msgid "Connect with Facebook"
 msgstr "使用脸书连接"
@@ -987,67 +1001,67 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: templates/base_v2.html:124
+#: templates/base_v2.html:127
 msgid "Add Post"
 msgstr "添加帖文"
 
-#: templates/base_v2.html:129 templates/ahr/home_v2.html:13
+#: templates/base_v2.html:133 templates/ahr/home_v2.html:13
 msgid "Login"
 msgstr "登入"
 
-#: templates/base_v2.html:136 templates/ahr/home_v2.html:34
+#: templates/base_v2.html:140 templates/ahr/home_v2.html:34
 msgid "Crowdsourcing the fight for human rights."
 msgstr "通过众包维护人权。"
 
-#: templates/base_v2.html:136
+#: templates/base_v2.html:140
 msgid "The online platform that is opening closed societies."
 msgstr "对封闭社会开放的网上平台。"
 
-#: templates/base_v2.html:147
+#: templates/base_v2.html:151
 msgid "Sign up"
 msgstr "注册"
 
-#: templates/base_v2.html:151
+#: templates/base_v2.html:155
 msgid "Visit market"
 msgstr "光顾市场"
 
-#: templates/base_v2.html:177
+#: templates/base_v2.html:181
 msgid "Get updates"
 msgstr "获得更新信息"
 
-#: templates/base_v2.html:180
+#: templates/base_v2.html:184
 msgid "Enter your e-mail..."
 msgstr "输入电邮地址"
 
-#: templates/base_v2.html:184
+#: templates/base_v2.html:188
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr "获取所有最新的更新，包括精选文章，以及安全提示！"
 
-#: templates/base_v2.html:187 templates/base_v2.html.py:221
+#: templates/base_v2.html:191 templates/base_v2.html.py:225
 msgid "Connect with us"
 msgstr "与我们连接"
 
-#: templates/base_v2.html:201 templates/ahr/home_v2.html:110
+#: templates/base_v2.html:205 templates/ahr/home_v2.html:111
 msgid "About MOVEMENTS"
 msgstr "关于\"运动\" 网站"
 
-#: templates/base_v2.html:202
+#: templates/base_v2.html:206
 msgid ""
 "Crowdsourcing the fight for human rights. The online platform that is "
 "opening closed societies."
 msgstr "通过众包维护人权。对封闭社会开放的网上平台。"
 
-#: templates/base_v2.html:208 templates/base_v2.html.py:219
+#: templates/base_v2.html:212 templates/base_v2.html.py:223
 msgid "Copyright &copy; 2014 Advancing Human Rights"
 msgstr "版权所有 &copy; 2014 推进人权"
 
-#: templates/base_v2.html:244
+#: templates/base_v2.html:252
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
 msgstr "个人资料"
 
-#: templates/base_v2.html:258
+#: templates/base_v2.html:266
 msgid "Logout"
 msgstr ""
 
@@ -1106,7 +1120,8 @@ msgstr ""
 #: templates/account/email.html:44
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
-"an e-mail address so you can receive notifications, reset your password, etc."
+"an e-mail address so you can receive notifications, reset your password, "
+"etc."
 msgstr ""
 
 #: templates/account/email.html:49
@@ -1132,8 +1147,8 @@ msgstr ""
 #: templates/account/email_confirm.html:27
 #, python-format
 msgid ""
-"Before confirming that <a href=\"mailto:%(email)s\">%(email)s</a> is the e-"
-"mail address you provided for the user %(user_display)s, please read and "
+"Before confirming that <a href=\"mailto:%(email)s\">%(email)s</a> is the "
+"e-mail address you provided for the user %(user_display)s, please read and "
 "accept the "
 msgstr ""
 
@@ -1164,22 +1179,19 @@ msgstr ""
 #: templates/account/email_confirmed.html:15
 #, python-format
 msgid ""
-"You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-"
-"mail address for user %(user_display)s."
+"You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an "
+"e-mail address for user %(user_display)s."
 msgstr ""
 
 #: templates/account/login.html:18
 #, python-format
 msgid ""
 "\n"
-"      Welcome to Movements, please sign in below. If you don't have an "
-"account yet, please sign up <a href=\"%(home_url)s\" alt=\"sign up\">here</"
-"a>\n"
+"      Welcome to Movements, please sign in below. If you don't have an account yet, please sign up <a href=\"%(home_url)s\" alt=\"sign up\">here</a>\n"
 "      "
 msgstr ""
 "\n"
-"      欢迎光临“运动”网站，请在下面登录。如果您还没有账户，请立即<a href="
-"\"%(home_url)s\" alt=\"sign up\">在此</a>注册\n"
+"      欢迎光临“运动”网站，请在下面登录。如果您还没有账户，请立即<a href=\"%(home_url)s\" alt=\"sign up\">在此</a>注册\n"
 "      "
 
 #: templates/account/login.html:26
@@ -1255,11 +1267,9 @@ msgstr "忘记密码"
 
 #: templates/account/password_reset.html:16
 msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll send you "
-"an e-mail allowing you to reset it."
-msgstr ""
-"忘记密码了吗？请在以下栏目中输入您的电邮地址，我们会发送电子邮件，让您重置密"
-"码。"
+"Forgotten your password? Enter your e-mail address below, and we'll send you"
+" an e-mail allowing you to reset it."
+msgstr "忘记密码了吗？请在以下栏目中输入您的电邮地址，我们会发送电子邮件，让您重置密码。"
 
 #: templates/account/password_reset.html:21 templates/account/signup.html:31
 msgid "Email"
@@ -1269,13 +1279,11 @@ msgstr "电邮"
 #, python-format
 msgid ""
 "\n"
-"          Please <a href=\"%(contactus_url)s\">contact us</a> if you have "
-"any trouble resetting your password.\n"
+"          Please <a href=\"%(contactus_url)s\">contact us</a> if you have any trouble resetting your password.\n"
 "          "
 msgstr ""
 "\n"
-"          如果重新设置密码碰到困难，请与 <a href=\"%(contactus_url)s\">我们联"
-"系</a> 。\n"
+"          如果重新设置密码碰到困难，请与 <a href=\"%(contactus_url)s\">我们联系</a> 。\n"
 "          "
 
 #: templates/account/password_reset.html:38
@@ -1286,13 +1294,11 @@ msgstr "重新设置我的密码"
 #, python-format
 msgid ""
 "\n"
-"      We have sent you an e-mail. Please <a href=\"%(contactus_url)s"
-"\">contact us</a> if you do not receive it within a few minutes.\n"
+"      We have sent you an e-mail. Please <a href=\"%(contactus_url)s\">contact us</a> if you do not receive it within a few minutes.\n"
 "      "
 msgstr ""
 "\n"
-"      我们已经给您发了电邮。如果您在几分中之内没有收到，请与 <a href="
-"\"%(contactus_url)s\">我们联系</a> 。\n"
+"      我们已经给您发了电邮。如果您在几分中之内没有收到，请与 <a href=\"%(contactus_url)s\">我们联系</a> 。\n"
 "      "
 
 #: templates/account/password_reset_from_key.html:14
@@ -1303,11 +1309,10 @@ msgstr "坏令牌"
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
-"a>."
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password "
+"reset</a>."
 msgstr ""
-"重置密码的连接无效，可能是已被使用的原因造成。请重新提出 <a href="
-"\"%(passwd_reset_url)s\">重置密码</a>的要求。"
+"重置密码的连接无效，可能是已被使用的原因造成。请重新提出 <a href=\"%(passwd_reset_url)s\">重置密码</a>的要求。"
 
 #: templates/account/password_reset_from_key.html:24
 msgid "New Password"
@@ -1338,9 +1343,7 @@ msgstr "关于您自己"
 msgid ""
 "You are about to use your %(provider_name)s account to login. We first need "
 "a few more details before you get started."
-msgstr ""
-"您即将使用 %(provider_name)s 账户登录。在开始之前，我们先要您提供一些更具体的"
-"信息。"
+msgstr "您即将使用 %(provider_name)s 账户登录。在开始之前，我们先要您提供一些更具体的信息。"
 
 #: templates/account/signup.html:16
 msgid "First we would like to know a little more about you."
@@ -1352,11 +1355,10 @@ msgstr "账号（建议不要使用使用真名）"
 
 #: templates/account/signup.html:37
 msgid ""
-"All the following information is optional but will help Movements.org ensure "
-"that you see the postings that are most relevant to your needs and interests."
-msgstr ""
-"以下所有信息可以任选填入，但这些信息将有助于“运动”网站确保您能看到最适合您需"
-"要和您关注的贴子。"
+"All the following information is optional but will help Movements.org ensure"
+" that you see the postings that are most relevant to your needs and "
+"interests."
+msgstr "以下所有信息可以任选填入，但这些信息将有助于“运动”网站确保您能看到最适合您需要和您关注的贴子。"
 
 #: templates/account/signup.html:40 templates/users/user_settings_v2.html:57
 msgid "First Name"
@@ -1375,8 +1377,7 @@ msgid ""
 "If you want other users to know something about you. You can control how "
 "much if any information to make public."
 msgstr ""
-"请提供便于用户了解您的个人资料。例如，可以列举出您是哪里人，以及一些个人兴"
-"趣，职业等。您可以控制这些信息公开程度。 （最多字数：300-500）"
+"请提供便于用户了解您的个人资料。例如，可以列举出您是哪里人，以及一些个人兴趣，职业等。您可以控制这些信息公开程度。 （最多字数：300-500）"
 
 #: templates/account/signup.html:67
 msgid "Social Vetting"
@@ -1385,14 +1386,13 @@ msgstr "社会审查"
 #: templates/account/signup.html:68
 msgid ""
 "To protect the safety of our members we attempt to vet all applicants to "
-"make sure that their intentions are in accord with our <a href=\"/movements/"
-"terms-and-conditions\" target=\"_blank\">terms &amp; conditions</a>. This "
+"make sure that their intentions are in accord with our <a href=\"/movements"
+"/terms-and-conditions\" target=\"_blank\">terms &amp; conditions</a>. This "
 "information is optional but the more you provide the easier it will be for "
 "others to trust you."
 msgstr ""
-"为了保护网站成员的安全，我们会审查所有申请，确保其符合使用<a href=\"/"
-"movements/terms-and-conditions\" target=\"_blank\">条款和条件</a>。此信息可以"
-"任选，但是您提供的信息越多，就越容易为他人信任。"
+"为了保护网站成员的安全，我们会审查所有申请，确保其符合使用<a href=\"/movements/terms-and-conditions\" "
+"target=\"_blank\">条款和条件</a>。此信息可以任选，但是您提供的信息越多，就越容易为他人信任。"
 
 #: templates/account/signup.html:73 templates/users/user_settings_v2.html:94
 msgid "Linked In"
@@ -1438,31 +1438,13 @@ msgid ""
 "    <p>Movements is currently in <strong>beta</strong></p>\n"
 "    <div class=\"alert alert-danger\">\n"
 "      <p>\n"
-"        Movements is currently in <strong>beta</strong> and has not "
-"undergone a full risk threat assessment.\n"
+"        Movements is currently in <strong>beta</strong> and has not undergone a full risk threat assessment.\n"
 "      </p>\n"
 "      <p>\n"
-"        Although we have done our best to ensure any information stored in "
-"Movements is secure, we cannot guarantee this until the first full version "
-"of the system is released later this year. Before you can sign up to "
-"Movements you will need to go through a vetting system so Advancing Human "
-"Rights/ Movements.org can confirm your identity. This process is used for "
-"anyone wanting to actively use the site.No information other than you're "
-"username, email and either a hash of your password or data needed to "
-"authenticate your social login will be stored on the system until the "
-"vetting process is complete. The information you provide below will be sent "
-"to Advancing Human Rights in an email via a secure email service. This email "
-"will be deleted once the vetting process is complete.\n"
+"        Although we have done our best to ensure any information stored in Movements is secure, we cannot guarantee this until the first full version of the system is released later this year. Before you can sign up to Movements you will need to go through a vetting system so Advancing Human Rights/ Movements.org can confirm your identity. This process is used for anyone wanting to actively use the site.No information other than you're username, email and either a hash of your password or data needed to authenticate your social login will be stored on the system until the vetting process is complete. The information you provide below will be sent to Advancing Human Rights in an email via a secure email service. This email will be deleted once the vetting process is complete.\n"
 "      </p>\n"
 "      <p>\n"
-"        While Movements.org and Advancing Human Rights have taken all "
-"possible steps to protect your privacy and security, there are still risks "
-"associated with your use of the Movements platform. Your internet use may be "
-"tracked and traced back to you and AHR and its associated organizations "
-"cannot guarantee your safety. Additionally, Movements is based on trust and "
-"we do our best to ensure that all community members are who they say they "
-"are and are participating with the best and most honest intentions. However "
-"we cannot guarantee the privacy, security, or anonymity of users.\n"
+"        While Movements.org and Advancing Human Rights have taken all possible steps to protect your privacy and security, there are still risks associated with your use of the Movements platform. Your internet use may be tracked and traced back to you and AHR and its associated organizations cannot guarantee your safety. Additionally, Movements is based on trust and we do our best to ensure that all community members are who they say they are and are participating with the best and most honest intentions. However we cannot guarantee the privacy, security, or anonymity of users.\n"
 "      </p>\n"
 "    </div>\n"
 "    "
@@ -1488,7 +1470,8 @@ msgstr "欢迎来到\"运动\"平台"
 
 #: templates/account/signup_start.html:12
 msgid ""
-"Sign up to connect to human rights defenders and activist. Let’s get started."
+"Sign up to connect to human rights defenders and activist. Let’s get "
+"started."
 msgstr "注册连接维权人士和活动家。"
 
 #: templates/account/signup_start.html:18
@@ -1527,9 +1510,7 @@ msgid ""
 "You've now created an account. We've sent you an email to verify your email "
 "address, once you've done this you will have full access to the Movements "
 "platform."
-msgstr ""
-"您现在已经创建了帐户。我们已经向您发送了一封电子邮件，确认您的电子邮箱；一经"
-"完成这一步骤，您即可拥有充分权限使用“运动”平台。"
+msgstr "您现在已经创建了帐户。我们已经向您发送了一封电子邮件，确认您的电子邮箱；一经完成这一步骤，您即可拥有充分权限使用“运动”平台。"
 
 #: templates/account/verification_sent.html:12
 #, python-format
@@ -1537,8 +1518,8 @@ msgid ""
 "Please <a href=\"%(contactUrl)s\">contact us</a> if you do not receive an "
 "email within a few minutes."
 msgstr ""
-"如果您在几分钟之内未收到确认邮件，请通过以下电子邮箱与我们联系：<a href="
-"\"%(contactUrl)s\">info@movements.org</a>"
+"如果您在几分钟之内未收到确认邮件，请通过以下电子邮箱与我们联系：<a "
+"href=\"%(contactUrl)s\">info@movements.org</a>"
 
 #: templates/account/verified_email_required.html:19
 msgid ""
@@ -1557,8 +1538,8 @@ msgstr ""
 #: templates/account/verified_email_required.html:27
 #, python-format
 msgid ""
-"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
-"mail address</a>."
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your "
+"e-mail address</a>."
 msgstr ""
 
 #: templates/account/email/email_confirmation_message.html:7
@@ -1602,14 +1583,12 @@ msgid ""
 "\n"
 "\n"
 "  <p>\n"
-"    A registered member of Movements.Org using this email address has made a "
-"request to reset their\n"
+"    A registered member of Movements.Org using this email address has made a request to reset their\n"
 "    password. You can reset your password by following the link below.\n"
 "  </p>\n"
 "\n"
 "  <p>\n"
-"    If you did not request this reset please forward this message to <a href="
-"\" mailto:security@movements.org\">security@movements.org</a> as we may\n"
+"    If you did not request this reset please forward this message to <a href=\" mailto:security@movements.org\">security@movements.org</a> as we may\n"
 "    want to double check the security of your information.\n"
 "  </p>\n"
 "\n"
@@ -1622,13 +1601,9 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A registered member of Movements.Org using this email address has made a "
-"request to reset their password. You can reset you’re your password by "
-"following the link below.\n"
+"A registered member of Movements.Org using this email address has made a request to reset their password. You can reset you’re your password by following the link below.\n"
 "\n"
-"If you did not request this reset please forward this message to "
-"security@movements.org as we may want to double check the security of your "
-"information.\n"
+"If you did not request this reset please forward this message to security@movements.org as we may want to double check the security of your information.\n"
 "\n"
 "%(password_reset_url)s\n"
 msgstr ""
@@ -1678,24 +1653,18 @@ msgstr ""
 
 #: templates/account/email/user_vetting_email_message.html:22
 msgid ""
-"Once the user has confirmed their email address you will receive another "
-"email\n"
-"to let you know. From the list above <strong>only</strong> the username and "
-"email are currently \n"
-"stored on the server. Once you have  vetted the user, the user will then be "
-"able \n"
+"Once the user has confirmed their email address you will receive another email\n"
+"to let you know. From the list above <strong>only</strong> the username and email are currently \n"
+"stored on the server. Once you have  vetted the user, the user will then be able \n"
 "to fill out all their profile information. Sharing via their settings what\n"
 "personal information they feel comfortable with."
 msgstr ""
 
 #: templates/account/email/user_vetting_email_message.txt:17
 msgid ""
-"Once the user has confirmed their email address you will receive another "
-"email\n"
-"to let you know. From the list above only the username and email are "
-"currently\n"
-"stored on the server. Once you have  vetted the user, the user will then be "
-"able\n"
+"Once the user has confirmed their email address you will receive another email\n"
+"to let you know. From the list above only the username and email are currently\n"
+"stored on the server. Once you have  vetted the user, the user will then be able\n"
 "to fill out all their profile information. Sharing via their settings what\n"
 "personal information they feel comfortable with."
 msgstr ""
@@ -1782,8 +1751,8 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
-#: templates/admin/incident_change_list.html:14
-#: templates/admin/user_tracking_change_list.html:18
+#: templates/admin/incident_change_list.html:17
+#: templates/admin/user_tracking_change_list.html:22
 msgid "Export as CSV"
 msgstr ""
 
@@ -1799,8 +1768,12 @@ msgstr ""
 msgid "Offer List"
 msgstr ""
 
-#: templates/admin/user_tracking_change_list.html:23
+#: templates/admin/user_tracking_change_list.html:27
 msgid "Export as CSV in safe mode"
+msgstr ""
+
+#: templates/admin/user_tracking_change_list.html:32
+msgid "Export Unverified"
 msgstr ""
 
 #: templates/admin/auth/user/vet_user.html:7
@@ -1831,16 +1804,15 @@ msgid ""
 "rights activists in closed societies with those with skills to help them "
 "around the world. Join today and help a dissident in need."
 msgstr ""
-"运动网站通过群智众包维护人权。这是将封闭社会的维权人士与世界各地拥有不同技能"
-"专长的专家连接在一起的平台。请即刻加入，帮助有需要的持不同政见者。"
+"运动网站通过群智众包维护人权。这是将封闭社会的维权人士与世界各地拥有不同技能专长的专家连接在一起的平台。请即刻加入，帮助有需要的持不同政见者。"
 
 #: templates/ahr/home_v2.html:41 templates/ahr/home_v2.html.py:68
-#: templates/ahr/home_v2.html:133
+#: templates/ahr/home_v2.html:134
 msgid "Sign up now"
 msgstr "立即注册"
 
 #: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:73
-#: templates/ahr/home_v2.html:112
+#: templates/ahr/home_v2.html:113
 msgid "Find out more"
 msgstr "请了解更多信息。"
 
@@ -1850,69 +1822,60 @@ msgstr ""
 
 #: templates/ahr/home_v2.html:61
 msgid ""
-"Request help from people across the globe, offer help to an activist in need."
+"Request help from people across the globe, offer help to an activist in "
+"need."
 msgstr "请求世界人民提供帮助；向有需要的维权人士提供帮助。"
 
 #: templates/ahr/home_v2.html:64
 msgid ""
-"Whether you’re a journalist, artist, technologist, policy-maker, linguist or "
-"PR agent - everyone has skills that can advance human rights."
-msgstr ""
-"无论是新闻工作者，艺术家，科技人员，决策者或公关代理 – 有技能的每一个人都能推"
-"动人权进步。请了解更多信息。"
+"Whether you’re a journalist, artist, technologist, policy-maker, linguist or"
+" PR agent - everyone has skills that can advance human rights."
+msgstr "无论是新闻工作者，艺术家，科技人员，决策者或公关代理 – 有技能的每一个人都能推动人权进步。请了解更多信息。"
 
-#: templates/ahr/home_v2.html:111
+#: templates/ahr/home_v2.html:112
 msgid ""
 "In closed societies around the world, brave human rights defenders face "
 "enormous hurdles to advance human rights.  Movements.org is a new platform "
 "that allows people everywhere to help protect basic freedoms.  This online "
-"platform connects activists in closed societies with people around the globe "
-"with skills to help. Whether you’re a journalist, politician, activist, "
+"platform connects activists in closed societies with people around the globe"
+" with skills to help. Whether you’re a journalist, politician, activist, "
 "artist, technologist or you speak a few languages, everyone has a role to "
 "play."
 msgstr ""
-"在世界各地的封闭社会中，勇敢的维权人士面对重重障碍，坚持推动人权。“运动” 网站"
-"是一个新平台，让世界人民共同参与帮助捍卫基本自由。这个网络平台将封闭社会的维"
-"权活动家与与世界各地有专业技能、愿意提供帮助的人们连接在一起。无论您是新闻工"
-"作者，政治家，社会活动人士，艺术家，科技人员，还是能说几门外语的人士，都可以"
-"发挥作用。"
+"在世界各地的封闭社会中，勇敢的维权人士面对重重障碍，坚持推动人权。“运动” "
+"网站是一个新平台，让世界人民共同参与帮助捍卫基本自由。这个网络平台将封闭社会的维权活动家与与世界各地有专业技能、愿意提供帮助的人们连接在一起。无论您是新闻工作者，政治家，社会活动人士，艺术家，科技人员，还是能说几门外语的人士，都可以发挥作用。"
 
-#: templates/ahr/home_v2.html:121 templates/users/more_about_you.html:41
+#: templates/ahr/home_v2.html:122 templates/users/more_about_you.html:41
 msgid "Create a Request"
 msgstr "提交请求"
 
-#: templates/ahr/home_v2.html:122 templates/users/more_about_you.html:43
+#: templates/ahr/home_v2.html:123 templates/users/more_about_you.html:43
 msgid ""
 "Are you an activist in need of help? Movements.org leverages technology to "
 "help those in closed societies find the assistance they need to amplify "
 "their voice and expand their influence."
-msgstr ""
-"您是需要帮助的人权活动人士吗？ 利用技术来帮助那些在封闭的社会中维权人士找到他"
-"们需要的帮助，来放大他们的声音，扩大他们的影响。"
+msgstr "您是需要帮助的人权活动人士吗？ 利用技术来帮助那些在封闭的社会中维权人士找到他们需要的帮助，来放大他们的声音，扩大他们的影响。"
 
-#: templates/ahr/home_v2.html:131
+#: templates/ahr/home_v2.html:132
 msgid "Getting Started"
 msgstr "开始使用"
 
-#: templates/ahr/home_v2.html:132
+#: templates/ahr/home_v2.html:133
 msgid ""
 "The Movements platform enables dissidents who need help to connect to "
 "activists and others who can provide it. Get started by joining today."
-msgstr ""
-"\"运动\"网站平台让需要帮助的持不同政见者和可以提供帮助的活动家和其他人士实现"
-"对接。即刻加入，即刻使用"
+msgstr "\"运动\"网站平台让需要帮助的持不同政见者和可以提供帮助的活动家和其他人士实现对接。即刻加入，即刻使用"
 
-#: templates/ahr/home_v2.html:142
+#: templates/ahr/home_v2.html:143
 msgid "Offer your Services"
 msgstr "提供服务"
 
-#: templates/ahr/home_v2.html:143 templates/users/more_about_you.html:47
+#: templates/ahr/home_v2.html:144 templates/users/more_about_you.html:47
 msgid ""
 "If you’ve ever wanted to help a human rights activist, here’s your "
 "opportunity. All of us have skills that can be put to use to advance basic "
 "liberties."
-msgstr ""
-"如果您想帮助人权活动家，这是一个机会。人人都有用得上的技能来促进基本自由。"
+msgstr "如果您想帮助人权活动家，这是一个机会。人人都有用得上的技能来促进基本自由。"
 
 #: templates/emails/base_email.html:4 templates/emails/base_email.txt:3
 msgid "Hello Movements.Org user,"
@@ -1943,13 +1906,10 @@ msgstr ""
 #, python-format
 msgid ""
 "Thank you for signing up to be part of Movements, a new innovative platform\n"
-"that is crowd-sourcing the fight for human rights. We are writing to confirm "
-"that \n"
+"that is crowd-sourcing the fight for human rights. We are writing to confirm that \n"
 "you are now approved to use the site as an Member. To get started, \n"
-"log-in <a href=\"%(login_url)s\">here</a> (using the username and password "
-"you signed up with) \n"
-"and create a user profile. Once you're finished, you can begin posting on "
-"the Exchange!"
+"log-in <a href=\"%(login_url)s\">here</a> (using the username and password you signed up with) \n"
+"and create a user profile. Once you're finished, you can begin posting on the Exchange!"
 msgstr ""
 
 #: templates/emails/getstarted.html:14 templates/emails/notready.html:8
@@ -2026,10 +1986,8 @@ msgstr ""
 
 #: templates/emails/notready.html:4
 msgid ""
-"You or someone recently tried to register on Movements using your email "
-"address.\n"
-"This account is currently being vetted for approval. Please be patient, and "
-"contact us\n"
+"You or someone recently tried to register on Movements using your email address.\n"
+"This account is currently being vetted for approval. Please be patient, and contact us\n"
 "if you have any concerns."
 msgstr ""
 
@@ -2044,22 +2002,17 @@ msgstr ""
 #: templates/emails/recommendation_message.html:14
 #, python-format
 msgid ""
-"This email was sent to you by %(screen_name)s, a registered user on "
-"Movements.org.\n"
-"    Movements helps activists in need connect directly with the people who "
-"have the skills and\n"
+"This email was sent to you by %(screen_name)s, a registered user on Movements.org.\n"
+"    Movements helps activists in need connect directly with the people who have the skills and\n"
 "    expertise that can help."
 msgstr ""
 
 #: templates/emails/recommendation_message.html:19
 #, python-format
 msgid ""
-"All personal information on Movements.org is confidential. To view the full "
-"post that they\n"
-"    have recommended to you please go to %(post_link)s. If you wish to "
-"respond to the post please\n"
-"    <a href=\"%(registration_link)s\">register</a>. The registration process "
-"is designed to help protect the security and privacy of all users."
+"All personal information on Movements.org is confidential. To view the full post that they\n"
+"    have recommended to you please go to %(post_link)s. If you wish to respond to the post please\n"
+"    <a href=\"%(registration_link)s\">register</a>. The registration process is designed to help protect the security and privacy of all users."
 msgstr ""
 
 #: templates/emails/recommendation_message.html:24
@@ -2077,8 +2030,7 @@ msgstr ""
 #: templates/emails/recommendation_message.html:33
 #, python-format
 msgid ""
-"This email was automatically created by Movements.org. You cannot reply to "
-"this email but can reply\n"
+"This email was automatically created by Movements.org. You cannot reply to this email but can reply\n"
 "    to %(screen_name)s on Movements.org once you register."
 msgstr ""
 
@@ -2088,16 +2040,11 @@ msgstr ""
 
 #: templates/emails/securityalert.html:4
 msgid ""
-"You or someone recently tried to register on Movements using your email "
-"address.\n"
-"If this was not you and you did not make this request, it's likely that "
-"another user entered\n"
-"your email address by mistake. If you believe an unauthorised person has "
-"accessed your account\n"
-"we advise that you change your password for both your email account and "
-"Movements.\n"
-"Movements did not reveal that you are registered with the site or any of "
-"your personal\n"
+"You or someone recently tried to register on Movements using your email address.\n"
+"If this was not you and you did not make this request, it's likely that another user entered\n"
+"your email address by mistake. If you believe an unauthorised person has accessed your account\n"
+"we advise that you change your password for both your email account and Movements.\n"
+"Movements did not reveal that you are registered with the site or any of your personal\n"
 "Information. We are sending this email as a precautionary measure only."
 msgstr ""
 
@@ -2144,65 +2091,67 @@ msgid ""
 "a story, or any skill that may be of help to others. Your Offer will be "
 "posted on Movements and will be seen by all members."
 msgstr ""
-"提供帮助服务可以是技术或专业技能，也可以帮助发表新闻消息的技能，或者任何能帮"
-"助他人的技能。您提供的服务将被张贴在本平台上，所有用户都会看到。 "
+"提供帮助服务可以是技术或专业技能，也可以帮助发表新闻消息的技能，或者任何能帮助他人的技能。您提供的服务将被张贴在本平台上，所有用户都会看到。 "
 
-#: templates/market/create_offer.html:17
+#: templates/market/create_offer.html:18
 msgid "1. What skills can you offer?"
 msgstr "1.您能提供什么样的技能？"
 
-#: templates/market/create_offer.html:31
-msgid "2. Which countries are you interested in helping?"
-msgstr "2.您希望帮助哪些国家？"
+#: templates/market/create_offer.html:33
+#: templates/market/create_request.html:32
+msgid "2. What issues does this relate to?"
+msgstr "2.涉及什么问题？"
 
-#: templates/market/create_offer.html:37
+#: templates/market/create_offer.html:49
+msgid "3. Which countries are you interested in helping?"
+msgstr "3.您希望帮助哪些国家？"
+
+#: templates/market/create_offer.html:55
 msgid ""
 "Movements.org provides access to skills and experts. Please describe your "
 "skills, abilities, or services below. Be as explicit and clear as possible."
-msgstr ""
-"“运动”组织提供技能和专家。请在下面介绍您的专长，能力或服务。请尽可能明确和清"
-"晰地表述。"
+msgstr "“运动”组织提供技能和专家。请在下面介绍您的专长，能力或服务。请尽可能明确和清晰地表述。"
 
-#: templates/market/create_offer.html:38
-msgid "3. How can you help?"
-msgstr "3.您提供什么样的服务？ "
+#: templates/market/create_offer.html:56
+msgid "4. How can you help?"
+msgstr "4.您提供什么样的服务？ "
 
-#: templates/market/create_offer.html:39
-#: templates/market/create_request.html:43
+#: templates/market/create_offer.html:57
+#: templates/market/create_request.html:58
 msgid "Be specific and clear."
 msgstr "请具体和清楚地介绍"
 
-#: templates/market/create_offer.html:39
-#: templates/market/create_request.html:43
+#: templates/market/create_offer.html:57
+#: templates/market/create_request.html:58
 msgid "(max 120 characters)"
 msgstr ""
 
-#: templates/market/create_offer.html:48
-#: templates/market/create_request.html:52
-msgid "4. Please write your post"
-msgstr "4.请详细说明您提供的服务（我们建议用一个段落）（最多500字）"
+#: templates/market/create_offer.html:66
+#: templates/market/create_request.html:67
+msgid "5. Please write your post"
+msgstr "5.请详细说明您提供的服务（我们建议用一个段落）（最多500字）"
 
-#: templates/market/create_offer.html:49
+#: templates/market/create_offer.html:67
 msgid "Tell a compelling story."
 msgstr "请讲述一个令人信服的实例。"
 
-#: templates/market/create_offer.html:59
-#: templates/market/create_request.html:63
+#: templates/market/create_offer.html:75
+#: templates/market/create_request.html:75
 msgid "May we tweet this request?"
 msgstr "我们可以在网络上推送这一请求吗？"
 
-#: templates/market/create_offer.html:62
-#: templates/market/create_request.html:66
+#: templates/market/create_offer.html:78
+#: templates/market/create_request.html:78
 msgid "We won’t use your name or any identifying information"
 msgstr "我们不会使用您的姓名或任何身份识别信息。 "
 
-#: templates/market/create_offer.html:69
-#: templates/market/create_request.html:73
+#: templates/market/create_offer.html:85
+#: templates/market/create_request.html:85
 msgid "Receive notifications"
 msgstr ""
 
-#: templates/market/create_offer.html:79
-#: templates/market/create_request.html:82
+#: templates/market/create_offer.html:95
+#: templates/market/create_request.html:94
 msgid "Post now"
 msgstr "发帖"
 
@@ -2212,50 +2161,47 @@ msgstr "请求服务"
 
 #: templates/market/create_request.html:13
 msgid ""
-"A Request is a way to ask for help from experts on Movements. Be as specific "
-"and clear as possible about what you need.  If you need a lawyer tell us "
+"A Request is a way to ask for help from experts on Movements. Be as specific"
+" and clear as possible about what you need.  If you need a lawyer tell us "
 "what kind (asylum or civil?) Where do you need that lawyer (In the UK,  US "
 "or China?)  The more you explain your need, the easier it will be for "
 "someone to help."
 msgstr ""
-"提交请求是要求“运动”网站专家提供帮助的方式之一。请将请求具体化，明确提出您所"
-"需要什么。如果需要一位律师，请告诉我们需要什么样的律师（庇护或民事律师）？需"
-"要哪个国家的律师（英国，美国还是中国）？您解释得越具体，就越容易让人来提供帮"
-"忙。 "
+"提交请求是要求“运动”网站专家提供帮助的方式之一。请将请求具体化，明确提出您所需要什么。如果需要一位律师，请告诉我们需要什么样的律师（庇护或民事律师）？需要哪个国家的律师（英国，美国还是中国）？您解释得越具体，就越容易让人来提供帮忙。"
+" "
 
 #: templates/market/create_request.html:18
 msgid "1. What skills do you need?"
 msgstr "1.您需要哪方面的专长？ （必填） "
 
-#: templates/market/create_request.html:32
-msgid "2. What countries does this request apply to?"
-msgstr "2.这一请求适用于哪些国家？ "
+#: templates/market/create_request.html:47
+msgid "3. What countries does this request apply to?"
+msgstr "3.这一请求适用于哪些国家？ "
 
-#: templates/market/create_request.html:33
+#: templates/market/create_request.html:48
 msgid "Indicate the region and/or specific country."
 msgstr "注明区域和/或特定的国家。 "
 
-#: templates/market/create_request.html:40
+#: templates/market/create_request.html:55
 msgid ""
 " Movements.org provides access to skills and experts. At this time, we "
 "cannot provide funding or equipment. If you need either please see the <a "
 "href=\"/movements/resources/\">Resources</a> page. What might be available "
 "is a proposal writer to help you secure funding from a different source. "
 msgstr ""
-" \"运动\"网站使您能获得拥有技能和专长的人士的帮助。目前，我们不能提供资金或设"
-"备。如果您需要这两项帮助，请参阅<a href=\"/movements/resources/\">资源</a>页"
-"面。资助基金申请专家可能会帮助您从不同渠道获得所需资金。 "
+" \"运动\"网站使您能获得拥有技能和专长的人士的帮助。目前，我们不能提供资金或设备。如果您需要这两项帮助，请参阅<a "
+"href=\"/movements/resources/\">资源</a>页面。资助基金申请专家可能会帮助您从不同渠道获得所需资金。 "
 
-#: templates/market/create_request.html:41
+#: templates/market/create_request.html:56
 msgid ""
 "Please describe your request below. Be as explicit and clear as possible."
 msgstr "请在下面说明您的请求。请尽可能明确和清晰。 "
 
-#: templates/market/create_request.html:42
-msgid "3. What do you need?"
-msgstr "3.标题：您需要什么？ （限字）"
+#: templates/market/create_request.html:57
+msgid "4. What do you need?"
+msgstr "4.标题：您需要什么？ （限字）"
 
-#: templates/market/create_request.html:53
+#: templates/market/create_request.html:68
 msgid "Tell a compelling story and state your needs."
 msgstr "请讲述一个令人信服的实例，以及告诉大家您的需要。"
 
@@ -2281,40 +2227,44 @@ msgstr "隐匿/显示"
 msgid "Skills"
 msgstr "技能"
 
-#: templates/market/market.html:39 templates/users/more_about_you.html:79
+#: templates/market/market.html:39
+msgid "Issues"
+msgstr ""
+
+#: templates/market/market.html:45 templates/users/more_about_you.html:79
 msgid "Countries"
 msgstr "国家"
 
-#: templates/market/market.html:45
+#: templates/market/market.html:51
 msgid "Search"
 msgstr "搜索"
 
-#: templates/market/market.html:58
+#: templates/market/market.html:64
 msgid "Press enter to search"
 msgstr "按输入键开始搜索"
 
-#: templates/market/market.html:59
+#: templates/market/market.html:65
 msgid "Click \"Search\" above to close"
 msgstr "点击上方\"搜索\"来关闭"
 
-#: templates/market/market.html:72
+#: templates/market/market.html:78
 msgid "Featured posts"
 msgstr "精选文章"
 
-#: templates/market/market.html:81
+#: templates/market/market.html:87
 msgid "Sticky posts"
 msgstr "顶置文章"
 
-#: templates/market/market.html:107
+#: templates/market/market.html:113
 msgid "Show hidden"
 msgstr "显示隐匿内容"
 
-#: templates/market/market.html:112 templates/market/market.html.py:120
-#: templates/market/market.html:126
+#: templates/market/market.html:118 templates/market/market.html.py:126
+#: templates/market/market.html:134 templates/market/market.html.py:140
 msgid "Select all"
 msgstr "选择所有选项"
 
-#: templates/market/market.html:125
+#: templates/market/market.html:139
 msgid "Back"
 msgstr "回"
 
@@ -2370,16 +2320,18 @@ msgstr "感谢您使用“运动”网站提交请求。您的请求会引发下
 #: templates/market/request_posted.html:15
 msgid ""
 "Anyone who has asked to get an alert on your topic will get an email about "
-"your request.  If they are interested they will message you back either with "
-"a public comment or a Direct Message."
-msgstr "那些要求接收您所请求主题之下发帖通知的人士会收到有关您请求的电子邮件。如果他们对您的案子感兴趣，会通过公众评论栏目或直接留言的方式与您联系。"
+"your request.  If they are interested they will message you back either with"
+" a public comment or a Direct Message."
+msgstr ""
+"那些要求接收您所请求主题之下发帖通知的人士会收到有关您请求的电子邮件。如果他们对您的案子感兴趣，会通过公众评论栏目或直接留言的方式与您联系。"
 
 #: templates/market/request_posted.html:16
 msgid ""
 "Movements will look for people or organizations that might be helpful.  If "
 "you’re looking for media coverage they may try to pitch your story.  If you "
 "need help with refugee status they’ll contact legal organizations."
-msgstr "“运动”网站将寻找可能帮助您个人或组织。如果您需要媒体报道您的遭遇，这些个人和组织可能会帮助您向媒体强力推荐。如果您需要帮助获得难民身份，他们会与法律机构联络。"
+msgstr ""
+"“运动”网站将寻找可能帮助您个人或组织。如果您需要媒体报道您的遭遇，这些个人和组织可能会帮助您向媒体强力推荐。如果您需要帮助获得难民身份，他们会与法律机构联络。"
 
 #: templates/market/request_posted.html:20
 msgid ""
@@ -2387,12 +2339,13 @@ msgid ""
 "able to use your story this month.  But they may be able to use some other "
 "story that you suggest in the future.   The lawyers on Movements may not "
 "have the time to get involved this week.  But they may have time next month."
-msgstr "我们不能担保事情可以办成。虽然追踪“运动”网站的新闻记者可能本月无法使用您所讲述的事情，但他们可能在未来使用您所讲述的一些其他事情。参与“运动”网站活动的律师本星期没有时间去处理您的案件，但他们或许下个月有时间受理。"
+msgstr ""
+"我们不能担保事情可以办成。虽然追踪“运动”网站的新闻记者可能本月无法使用您所讲述的事情，但他们可能在未来使用您所讲述的一些其他事情。参与“运动”网站活动的律师本星期没有时间去处理您的案件，但他们或许下个月有时间受理。"
 
 #: templates/market/request_posted.html:23
 msgid ""
-"A journalist may read your post and then wait to see if you communicate with "
-"others on Movements (which would make you more interesting to them).  A "
+"A journalist may read your post and then wait to see if you communicate with"
+" others on Movements (which would make you more interesting to them).  A "
 "lawyer might want to see the same thing."
 msgstr "有的记者可能看了您的发帖后希望等等，看看您与“运动”网站其他人沟通变互动的情况（这会使他们对您更感兴趣）。律师可能也持同样态度。"
 
@@ -2410,8 +2363,8 @@ msgstr "学习一些窍门和技巧，让其他用户对您的请求感兴趣。
 
 #: templates/market/request_posted.html:29
 msgid ""
-"Movements is not a magic wand.  (We wish it were!)  It’s just like any other "
-"social media – the more you participate the more benefit you’ll get."
+"Movements is not a magic wand.  (We wish it were!)  It’s just like any other"
+" social media – the more you participate the more benefit you’ll get."
 msgstr "“运动”网站不是一根可以挥舞的魔杖。 （我们希望它是！）像其他社交媒体一样，您参与得越多，受惠就越大。"
 
 #: templates/market/request_posted.html:36
@@ -2430,58 +2383,57 @@ msgstr "由…发帖"
 msgid "Translate this post"
 msgstr "翻译此帖"
 
-#: templates/market/view_post.html:51
+#: templates/market/view_post.html:58
 msgid "Recommend"
 msgstr "建议"
 
-#: templates/market/view_post.html:56
+#: templates/market/view_post.html:64
 msgid "Tweet"
 msgstr "推文"
 
-#: templates/market/view_post.html:62
+#: templates/market/view_post.html:71
 msgid "Direct message"
 msgstr "直接信息"
 
-#: templates/market/view_post.html:65
+#: templates/market/view_post.html:75
 msgid "Report this post"
 msgstr "举报此帖"
 
-#: templates/market/view_post.html:74
+#: templates/market/view_post.html:84
 msgid "Leave a comment"
 msgstr "发表评论"
 
-#: templates/market/view_post.html:78
+#: templates/market/view_post.html:88
 msgid "Please do not post any personally identifying information."
 msgstr "请不要发布任何可能暴露个人身份的信息。"
 
-#: templates/market/view_post.html:79
+#: templates/market/view_post.html:89
 msgid "Don't use your real name or email address when leaving a comment."
 msgstr "发表评论时，请不要使用您的真实姓名或电子邮件地址。"
 
-#: templates/market/view_post.html:82
+#: templates/market/view_post.html:92
 msgid "Post comment"
 msgstr "发表评论"
 
-#: templates/market/view_post.html:95
+#: templates/market/view_post.html:105
 #, python-format
 msgid ""
-"Please <a href=\"%(accountUrl)s\">Login</a> or <a href=\"%(signupUrl)s"
-"\">Sign up</a> to view more about this post. Once you've done this you will "
-"be able to send messages to the author, comment and rate this post."
+"Please <a href=\"%(accountUrl)s\">Login</a> or <a "
+"href=\"%(signupUrl)s\">Sign up</a> to view more about this post. Once you've"
+" done this you will be able to send messages to the author, comment and rate"
+" this post."
 msgstr ""
-"請<a href=\"%(accountUrl)s\">登錄</a>或<a href=\"%(signupUrl)s\">報名</a>查看"
-"更多關於這個職位。一旦你做到了這一點，你就可以將消息發送給作者，評論和這個職"
-"位。 "
+"請<a href=\"%(accountUrl)s\">登錄</a>或<a "
+"href=\"%(signupUrl)s\">報名</a>查看更多關於這個職位。一旦你做到了這一點，你就可以將消息發送給作者，評論和這個職位。 "
 
-#: templates/market/view_post.html:119
+#: templates/market/view_post.html:129
 #, python-format
 msgid ""
-"You don't have any languages selected. Please add some in your <a href="
-"\"%(settingsUrl)s#skills\">settings</a>"
-msgstr ""
-"您沒有選擇任何語言。請添加一些你 <a href=\"%(settingsUrl)s#skills\">設置</a>"
+"You don't have any languages selected. Please add some in your <a "
+"href=\"%(settingsUrl)s#skills\">settings</a>"
+msgstr "您沒有選擇任何語言。請添加一些你 <a href=\"%(settingsUrl)s#skills\">設置</a>"
 
-#: templates/market/view_post.html:136
+#: templates/market/view_post.html:146
 msgid "Delete"
 msgstr "删除"
 
@@ -2506,12 +2458,12 @@ msgstr ""
 #: templates/market/clientside/marketitem.html:79
 #, fuzzy, python-format
 msgid ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
-"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>."
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on "
+"<%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>."
 msgstr ""
 "由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
-"moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>        <a href="
-"\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 贡献者</a>."
+"moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>        <a "
+"href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 贡献者</a>."
 
 #: templates/market/clientside/marketitem.html:67
 msgid "FEATURED OFFER"
@@ -2643,10 +2595,8 @@ msgstr "居住国"
 #: templates/market/clientside/userprofile.html:44
 msgid ""
 "\n"
-"          For your own safety and security, do not share personal contact "
-"information\n"
-"          (such as your phone number, address, email address, etc.) with "
-"other users.\n"
+"          For your own safety and security, do not share personal contact information\n"
+"          (such as your phone number, address, email address, etc.) with other users.\n"
 "          Movements also prohibits abusive language or harassment.\n"
 "          To report an abusive user,\n"
 "          "
@@ -2806,8 +2756,8 @@ msgstr ""
 #, python-format
 msgid ""
 "You decided to cancel logging in to our site using one of your existing "
-"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
-"\">sign in</a>."
+"accounts. If this was a mistake, please proceed to <a "
+"href=\"%(login_url)s\">sign in</a>."
 msgstr ""
 
 #: templates/socialaccount/messages/account_connected.txt:2
@@ -2844,11 +2794,9 @@ msgstr "完成"
 
 #: templates/users/more_about_you.html:39
 msgid ""
-"Your account is now fully active. Fill out additional profile details now or "
-"you can skip this step and do it later in your settings page."
-msgstr ""
-"您的帐户现已全面激活。现在可以填写更多的个人资料，也可以跳过这一步，以后在设"
-"置页面中填入。"
+"Your account is now fully active. Fill out additional profile details now or"
+" you can skip this step and do it later in your settings page."
+msgstr "您的帐户现已全面激活。现在可以填写更多的个人资料，也可以跳过这一步，以后在设置页面中填入。"
 
 #: templates/users/more_about_you.html:45
 msgid "Create an Offer"
@@ -2900,14 +2848,11 @@ msgid ""
 "Please remember that no online platform is 100%% secure. We have gone to "
 "great lengths to try and protect your personal privacy and are working with "
 "some of the best experts in the field who share and appreciate your concern "
-"for digital security. However it is important to always stay safe online and "
-"only share personal information with people you trust. Please see our "
+"for digital security. However it is important to always stay safe online and"
+" only share personal information with people you trust. Please see our "
 "Security and Privacy pages for more information."
 msgstr ""
-"请牢记，没有任何在线平台是100％安全的。我们已尽力来保护您的个人隐私，并正与一"
-"些同样担心网络数据安全的业界顶尖专家一起加强这方面的安全。然而，不懈地注意在"
-"线安全，只与所信任的人分享个人信息尤为重要。欲了解此方面更多信息，请参阅我们"
-"的安全和隐私网页。"
+"请牢记，没有任何在线平台是100％安全的。我们已尽力来保护您的个人隐私，并正与一些同样担心网络数据安全的业界顶尖专家一起加强这方面的安全。然而，不懈地注意在线安全，只与所信任的人分享个人信息尤为重要。欲了解此方面更多信息，请参阅我们的安全和隐私网页。"
 
 #: templates/users/thanksforactivation.html:7
 #: templates/users/thanksforactivation.html:12
@@ -2994,9 +2939,7 @@ msgstr "数字足迹"
 msgid ""
 "The more links you provide, the higher your star rating will be. Link to "
 "Twitter, LinkedIn, and Facebook to help verify your identity."
-msgstr ""
-"您所提供的链接越多，星级评分就会越高。通过推特、邻客音、脸书来帮助验证您的身"
-"份。"
+msgstr "您所提供的链接越多，星级评分就会越高。通过推特、邻客音、脸书来帮助验证您的身份。"
 
 #: templates/users/user_settings_v2.html:122
 msgid "Skills/Interests"
@@ -3007,9 +2950,7 @@ msgid ""
 "The skills and interests you provide will help others find the right "
 "expertise for you. This will also help us to show the postings that are the "
 "most relevant for you."
-msgstr ""
-"您所注明专长技能和兴趣会帮助别人为您找到合适的专长技能为您服务。这也会帮助我"
-"们提供与您帖子最相关的发帖。"
+msgstr "您所注明专长技能和兴趣会帮助别人为您找到合适的专长技能为您服务。这也会帮助我们提供与您帖子最相关的发帖。"
 
 #: templates/users/user_settings_v2.html:128
 msgid "Regions/Countries"
@@ -3039,8 +2980,7 @@ msgstr "个人资料的公开度"
 msgid ""
 "How much information do you want to make public? So as to help protect your "
 "security and privacy, you may not want to expose your email address."
-msgstr ""
-"您希望公开多少信息？为了帮助保护您的安全和隐私，可以不公开您的电子邮件地址。"
+msgstr "您希望公开多少信息？为了帮助保护您的安全和隐私，可以不公开您的电子邮件地址。"
 
 #: templates/users/user_settings_v2.html:159
 msgid ""
@@ -3087,11 +3027,9 @@ msgstr ""
 "                   5 星：'运动'组织了解此人<br>"
 
 #~ msgid ""
-#~ "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
-#~ "%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-#~ "            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> "
-#~ "contributors</a>."
+#~ "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+#~ "            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> contributors</a>."
 #~ msgstr ""
 #~ "由 <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, 发表 <%%- "
-#~ "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>            "
-#~ "<a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 贡献者</a>."
+#~ "moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>            <a "
+#~ "href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> 贡献者</a>."
