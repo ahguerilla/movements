@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 10:12+0000\n"
-"PO-Revision-Date: 2015-02-06 10:19+0000\n"
+"POT-Creation-Date: 2015-02-06 10:28+0000\n"
+"PO-Revision-Date: 2015-02-06 10:28+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1021,7 +1021,7 @@ msgstr "اضافة منشور "
 msgid "Login"
 msgstr "تسجيل دخول"
 
-#: templates/base_v2.html:152
+#: templates/base_v2.html:152 templates/ahr/home_v2.html:34
 msgid "Crowdsourcing human rights."
 msgstr "تعهد جماعي بالمحاربة من أجل حقوق الانسان."
 
@@ -1829,15 +1829,11 @@ msgstr ""
 msgid "Already have an account?"
 msgstr "تملك حساب مسبقاً ؟"
 
-#: templates/ahr/home_v2.html:34
-msgid "Crowdsourcing the fight for human rights."
-msgstr "تعهد جماعي بالمحاربة من أجل حقوق الانسان."
-
 #: templates/ahr/home_v2.html:37
 msgid ""
-"Movements is crowdsourcing the fight for human rights. It connects human "
-"rights activists in closed societies with those with skills to help them "
-"around the world. Join today and help a dissident in need."
+"Movements is crowdsourcing human rights. It connects human rights activists "
+"in closed societies with those with skills to help them around the world. "
+"Join today and help a dissident in need."
 msgstr ""
 "موفمنتس هي منظمة تقوم على حشد الطاقات الفاعلة من اجل الدفاع عن حقوق الإنسان."
 " تقوم المنظمة بوصل نشطاء حقوق الإنسان في المجتمعات المغلقة مع خبراء يتمتعون "
@@ -3144,6 +3140,9 @@ msgstr ""
 "٢ نجمة: حسابين تواصل اجتماعي<br>\n"
 "٣ نجمة: تأكيد كل حسابات التواصل الاجتماعي مع سيرة ذاتية<br>\n"
 "٤ نجمة : معلوم شخصياً من قبل موفمينتس<br>"
+
+#~ msgid "Crowdsourcing the fight for human rights."
+#~ msgstr "تعهد جماعي بالمحاربة من أجل حقوق الانسان."
 
 #~ msgid ""
 #~ "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"

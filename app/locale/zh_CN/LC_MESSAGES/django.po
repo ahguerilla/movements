@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 10:12+0000\n"
-"PO-Revision-Date: 2015-02-06 10:19+0000\n"
+"POT-Creation-Date: 2015-02-06 10:28+0000\n"
+"PO-Revision-Date: 2015-02-06 10:29+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1009,7 +1009,7 @@ msgstr "添加帖文"
 msgid "Login"
 msgstr "登入"
 
-#: templates/base_v2.html:152
+#: templates/base_v2.html:152 templates/ahr/home_v2.html:34
 msgid "Crowdsourcing human rights."
 msgstr "通过众包维护人权。"
 
@@ -1802,15 +1802,11 @@ msgstr ""
 msgid "Already have an account?"
 msgstr "已经建立了账户吗？"
 
-#: templates/ahr/home_v2.html:34
-msgid "Crowdsourcing the fight for human rights."
-msgstr "通过众包维护人权。"
-
 #: templates/ahr/home_v2.html:37
 msgid ""
-"Movements is crowdsourcing the fight for human rights. It connects human "
-"rights activists in closed societies with those with skills to help them "
-"around the world. Join today and help a dissident in need."
+"Movements is crowdsourcing human rights. It connects human rights activists "
+"in closed societies with those with skills to help them around the world. "
+"Join today and help a dissident in need."
 msgstr ""
 "运动网站通过群智众包维护人权。这是将封闭社会的维权人士与世界各地拥有不同技能专长的专家连接在一起的平台。请即刻加入，帮助有需要的持不同政见者。"
 
@@ -3061,6 +3057,9 @@ msgstr ""
 "                   3 星：确定所有社交网账户和简历<br>\n"
 "                   4 星：明确确定网络身份<br>\n"
 "                   5 星：'运动'组织了解此人<br>"
+
+#~ msgid "Crowdsourcing the fight for human rights."
+#~ msgstr "通过众包维护人权。"
 
 #~ msgid ""
 #~ "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"

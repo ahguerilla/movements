@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 10:12+0000\n"
-"PO-Revision-Date: 2015-02-06 10:17+0000\n"
+"POT-Creation-Date: 2015-02-06 10:28+0000\n"
+"PO-Revision-Date: 2015-02-06 10:29+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1023,7 +1023,7 @@ msgstr "Добавить сообщение"
 msgid "Login"
 msgstr "Войти"
 
-#: templates/base_v2.html:152
+#: templates/base_v2.html:152 templates/ahr/home_v2.html:34
 msgid "Crowdsourcing human rights."
 msgstr "Краудсорсинг борьбы за права человека."
 
@@ -1928,15 +1928,11 @@ msgstr "Обновления"
 msgid "Already have an account?"
 msgstr "Уже есть аккаунт?"
 
-#: templates/ahr/home_v2.html:34
-msgid "Crowdsourcing the fight for human rights."
-msgstr "Краудсорсинг борьбы за права человека."
-
 #: templates/ahr/home_v2.html:37
 msgid ""
-"Movements is crowdsourcing the fight for human rights. It connects human "
-"rights activists in closed societies with those with skills to help them "
-"around the world. Join today and help a dissident in need."
+"Movements is crowdsourcing human rights. It connects human rights activists "
+"in closed societies with those with skills to help them around the world. "
+"Join today and help a dissident in need."
 msgstr ""
 "Movements это краудсорсинг борьбы за права человека. Он соединяет активистов"
 " по защите прав человека в закрытых обществах с теми, кто обладает "
@@ -3325,3 +3321,6 @@ msgstr ""
 "3 Звезды: Подтверждено все профили в социальных сетях и биография <br>\n"
 "4 Звезды: Подтверждено значительное онлайн присутствие <br>\n"
 "5 Звезд: Персонально знакомы с командой Movements.org <br>"
+
+#~ msgid "Crowdsourcing the fight for human rights."
+#~ msgstr "Краудсорсинг борьбы за права человека."
