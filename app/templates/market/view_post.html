@@ -33,21 +33,29 @@
       </div>
       <div class="clearfix"></div>
       {% endif %}
-      <div class="tags" style="margin-bottom: 15px; margin-top: 10px;">
-        {% for tag in post.interests.all %}
-          <div class="tag">{{ tag }}</div>
-        {% endfor %}
-        {% if post.specific_skill %}
-          <div class="tag">{{ post.specific_skill }}</div>
-        {% endif %}
-        {% for tag in post.issues.all %}
-          <div class="issue">{{ tag }}</div>
-        {% endfor %}
-        {% if post.specific_issue%}
-          <div class="issue">{{ post.specific_issue }}</div>
-        {% endif %}
-        <div class="clearfix"></div>
-      </div>
+        <div style="margin-bottom: 15px; margin-top: 10px;">
+          <div class="tags clearfix">
+            {% for tag in post.interests.all %}
+              <div class="tag">{{ tag }}</div>
+            {% endfor %}
+            {% if post.specific_skill %}
+              <div class="tag">{{ post.specific_skill }}</div>
+            {% endif %}
+            {% for tag in post.issues.all %}
+              <div class="issue">{{ tag }}</div>
+            {% endfor %}
+            {% if post.specific_issue%}
+              <div class="issue">{{ post.specific_issue }}</div>
+            {% endif %}
+          </div>
+          {% if countries_to_render %}
+            <div class="tags clearfix">
+            {% for country in countries_to_render %}
+              <div class="country">{{ country }}</div>
+            {% endfor %}
+            </div>
+          {% endif %}
+        </div>
       {% if is_logged_in %}
       <div class="post-actions">
         <ul>
