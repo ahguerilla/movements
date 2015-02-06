@@ -65,8 +65,15 @@
 {% endif %}
 
 {% block header_nav %}
-<nav class="navbar navbar-default header-nav {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %} {% if user.is_authenticated %}navbar-logged-in {% else %}navbar-logged-out {% endif %}" role="navigation">
+<nav class="navbar navbar-default header-nav
+  {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}
+  {% if user.is_authenticated and not user.userprofile.first_login %}
+    navbar-logged-in
+  {% else %}
+    navbar-logged-out
+  {% endif %}" role="navigation">
   <div class="container" style="position:relative;">
+      {% if not user.userprofile.first_login %}
       <div id="NavLeftMenus" class="navbar-left">
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
@@ -90,6 +97,9 @@
           </a>
         {% endif %}
       </div>
+      {% endif %}
+
+
       <div class="navbar-left-top">
         {% if user.is_authenticated and not user.userprofile.first_login %}
           <a href="https://twitter.com/movements_org" target="_blank">
@@ -129,15 +139,17 @@
         <div id="add-post-popup-container"></div>
       </div>
     {% else %}
+      {% if not user.userprofile.first_login %}
       <div id="NavRightLoggedOut" class="navbar-right">
         <a href="{% url 'account_login' %}" class="btn btn-action">{%trans "Login"%}</a>
       </div>
+       {% endif %}
     {% endif %}
     <div class="header-nav-wrapper">
       <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>
     </div>
     <div class="header-nav-text">
-      <p>{% trans "Crowdsourcing the fight for human rights."%}<br/>{%  trans "The online platform that is opening closed societies."%}</p>
+      <p>{% trans "Crowdsourcing human rights."%}<br/>{%  trans "The online platform that is opening closed societies."%}</p>
     </div>
   </div>
 </nav>
@@ -172,7 +184,7 @@
 {% endblock %}
 
 {% block footer_padding %}<div style="height: 30px"></div>{% endblock %}
-{% if not user.is_authenticated %}
+{% if not user.is_authenticated or user.userprofile.first_login %}
 <footer>
   <div id="FooterSocialMedia_Big" class="footer">
     <div class="container">
@@ -203,13 +215,13 @@
         </div>
         <div class="col-xs-5">
           <h4>{% trans "About MOVEMENTS"  %}</h4>
-          <p>{% blocktrans %}Crowdsourcing the fight for human rights. The online platform that is opening closed societies.{% endblocktrans %}</p>
+          <p>{% blocktrans %}Crowdsourcing human rights. The online platform that is opening closed societies.{% endblocktrans %}</p>
         </div>
       </div>
       <hr>
       <div class="row">
         <div class="col-xs-6">
-          <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
+          <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2015 Advancing Human Rights{% endblocktrans %}</div>
         </div>
         <div class="col-xs-6">
           <div class="footer-nav-content">
