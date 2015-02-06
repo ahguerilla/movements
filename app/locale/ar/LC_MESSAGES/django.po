@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-01 18:55+0000\n"
-"PO-Revision-Date: 2015-02-01 19:28+0000\n"
+"POT-Creation-Date: 2015-02-06 10:12+0000\n"
+"PO-Revision-Date: 2015-02-06 10:19+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -199,11 +199,11 @@ msgstr ""
 msgid "Closed By User"
 msgstr ""
 
-#: app/market/models/market.py:26 templates/base_v2.html:242
+#: app/market/models/market.py:26 templates/base_v2.html:254
 msgid "Request"
 msgstr "طلب"
 
-#: app/market/models/market.py:27 templates/base_v2.html:245
+#: app/market/models/market.py:27 templates/base_v2.html:257
 msgid "Offer"
 msgstr "عرض"
 
@@ -965,7 +965,7 @@ msgid "Notifications"
 msgstr "اشعارات"
 
 #: templates/base.html:100 templates/base.html.py:109
-#: templates/base_v2.html:258 templates/users/user_settings_v2.html:16
+#: templates/base_v2.html:270 templates/users/user_settings_v2.html:16
 #: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
 msgstr "خيارات"
@@ -995,87 +995,91 @@ msgstr "تسجيل الدخول"
 msgid "Sign Up"
 msgstr "سجل الأن"
 
-#: templates/base_v2.html:97 templates/base_v2.html.py:194
+#: templates/base_v2.html:107 templates/base_v2.html.py:206
 #: templates/account/signup_start.html:51
 msgid "Connect with Twitter"
 msgstr "إتصل عبر التويتر"
 
-#: templates/base_v2.html:102 templates/base_v2.html.py:197
+#: templates/base_v2.html:112 templates/base_v2.html.py:209
 #: templates/account/signup_start.html:48
 msgid "Connect with Facebook"
 msgstr "إتصل عبر الفيس بوك"
 
-#: templates/base_v2.html:107
+#: templates/base_v2.html:117
 msgid "AHR"
 msgstr ""
 
-#: templates/base_v2.html:111
+#: templates/base_v2.html:121
 msgid "Blog"
 msgstr ""
 
-#: templates/base_v2.html:127
+#: templates/base_v2.html:137
 msgid "Add Post"
 msgstr "اضافة منشور "
 
-#: templates/base_v2.html:133 templates/ahr/home_v2.html:13
+#: templates/base_v2.html:144 templates/ahr/home_v2.html:13
 msgid "Login"
 msgstr "تسجيل دخول"
 
-#: templates/base_v2.html:140 templates/ahr/home_v2.html:34
-msgid "Crowdsourcing the fight for human rights."
+#: templates/base_v2.html:152
+msgid "Crowdsourcing human rights."
 msgstr "تعهد جماعي بالمحاربة من أجل حقوق الانسان."
 
-#: templates/base_v2.html:140
+#: templates/base_v2.html:152
 msgid "The online platform that is opening closed societies."
 msgstr "المنصة الالكترونية تساعد المجتمعات المغلق على الانفتاح."
 
-#: templates/base_v2.html:151
+#: templates/base_v2.html:163
 msgid "Sign up"
 msgstr "سجل الأن"
 
-#: templates/base_v2.html:155
+#: templates/base_v2.html:167
 msgid "Visit market"
 msgstr "زيارة السوق"
 
-#: templates/base_v2.html:181
+#: templates/base_v2.html:193
 msgid "Get updates"
 msgstr "احصل على تحديثات"
 
-#: templates/base_v2.html:184
+#: templates/base_v2.html:196
 msgid "Enter your e-mail..."
 msgstr "ادخل بريدك الالكتروني"
 
-#: templates/base_v2.html:188
+#: templates/base_v2.html:200
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr "احصل على اخر التحديثات , بما قيها المنشورات الجديدة و النصائح الأمنية"
 
-#: templates/base_v2.html:191 templates/base_v2.html.py:225
+#: templates/base_v2.html:203 templates/base_v2.html.py:237
 msgid "Connect with us"
 msgstr "اتصل بنا"
 
-#: templates/base_v2.html:205 templates/ahr/home_v2.html:111
+#: templates/base_v2.html:217 templates/ahr/home_v2.html:111
 msgid "About MOVEMENTS"
 msgstr "من نحن"
 
-#: templates/base_v2.html:206
+#: templates/base_v2.html:218
 msgid ""
-"Crowdsourcing the fight for human rights. The online platform that is "
-"opening closed societies."
+"Crowdsourcing human rights. The online platform that is opening closed "
+"societies."
 msgstr ""
 "تعهد جماعي بالمحاربة من أجل حقوق الانسان،المنصة الالكترونية تساعد المجتمعات "
 "المغلق على الانفتاح"
 
-#: templates/base_v2.html:212 templates/base_v2.html.py:223
+#: templates/base_v2.html:224
+msgid "Copyright &copy; 2015 Advancing Human Rights"
+msgstr "حقوق النشر محفوظة &copy;  :٢٠١٤ أدفانسينغ هيومان رايتس"
+
+#: templates/base_v2.html:235
 msgid "Copyright &copy; 2014 Advancing Human Rights"
 msgstr "حقوق النشر محفوظة &copy;  :٢٠١٤ أدفانسينغ هيومان رايتس"
 
-#: templates/base_v2.html:252
+#: templates/base_v2.html:264
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
 msgstr "صفحة شخصية "
 
-#: templates/base_v2.html:266
+#: templates/base_v2.html:278
 msgid "Logout"
 msgstr ""
 
@@ -1824,6 +1828,10 @@ msgstr ""
 #: templates/ahr/home_v2.html:13
 msgid "Already have an account?"
 msgstr "تملك حساب مسبقاً ؟"
+
+#: templates/ahr/home_v2.html:34
+msgid "Crowdsourcing the fight for human rights."
+msgstr "تعهد جماعي بالمحاربة من أجل حقوق الانسان."
 
 #: templates/ahr/home_v2.html:37
 msgid ""
@@ -2852,7 +2860,7 @@ msgid "Regions"
 msgstr "مناطق"
 
 #: templates/users/more_about_you.html:30
-#: templates/users/more_about_you.html:130
+#: templates/users/more_about_you.html:154
 msgid "Finish"
 msgstr "انهاء"
 
@@ -2893,26 +2901,54 @@ msgid "Please indicate your skill set."
 msgstr "الرجاء تحديد قائمة المهارات"
 
 #: templates/users/more_about_you.html:115
+msgid "How you can help"
+msgstr ""
+
+#: templates/users/more_about_you.html:117
+msgid ""
+"\n"
+"          <p>\n"
+"              While there are certain skills that are particularly in demand from our activist users — namely,\n"
+"              legal assistance, media coverage — there are plenty of ways you can be involved if you do not fall into\n"
+"              those categories.\n"
+"          </p>\n"
+"          <ul>\n"
+"            <li>\n"
+"              <strong>Social media.</strong> Share Movements’ posts across your social media platforms. For example,\n"
+"              you can share Movements’ users’ requests with your representatives.\n"
+"            </li>\n"
+"            <li>\n"
+"              <strong>Tweet</strong> the posts that most interest you. There’s a button on almost every post.\n"
+"            </li>\n"
+"            <li>\n"
+"              <strong>Recommend a friend.</strong> If you have a friend with the skills in demand on our network, tell\n"
+"              them about us!\n"
+"            </li>\n"
+"          </ul>\n"
+"          "
+msgstr ""
+
+#: templates/users/more_about_you.html:139
 msgid "Done"
 msgstr "تم"
 
-#: templates/users/more_about_you.html:118
+#: templates/users/more_about_you.html:142
 msgid "Thank You! You are one step closer to opening a closed society!"
 msgstr "شكرا لك! انت على خطوة واحدة من المساهمة في إنفتاح المجتمعات المغلقة"
 
-#: templates/users/more_about_you.html:121
+#: templates/users/more_about_you.html:145
 msgid ""
-"If you would like to update this details at any time, this can be done in "
+"If you would like to update these details at any time, this can be done in "
 "easily in your settings panel."
 msgstr ""
 "في حال أردت القيام بتحديث التفاصيل التي أدخلت في أي وقت، تستطيع القيام بهذا "
 "بسهولة وذلك عبر لائحة الإعدادات"
 
-#: templates/users/more_about_you.html:123
+#: templates/users/more_about_you.html:147
 msgid "Your Safety"
 msgstr "سلامتك"
 
-#: templates/users/more_about_you.html:125
+#: templates/users/more_about_you.html:149
 #, python-format
 msgid ""
 "Please remember that no online platform is 100%% secure. We have gone to "
