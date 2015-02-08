@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-01 18:55+0000\n"
-"PO-Revision-Date: 2015-02-01 19:21+0000\n"
+"POT-Creation-Date: 2015-02-06 10:28+0000\n"
+"PO-Revision-Date: 2015-02-06 10:29+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgstr "Пожалуйста, выберите хотя бы один"
 
 #: app/market/forms.py:68
 msgid "Please select a maximum of 3 issues"
-msgstr ""
+msgstr "Пожалуйста, выберите максимум 3 проблемы"
 
 #: app/market/forms.py:74
 msgid "Please enter a maximum of 120 characters"
@@ -201,11 +201,11 @@ msgstr "Закрыт администратором"
 msgid "Closed By User"
 msgstr "Закрыт пользователем"
 
-#: app/market/models/market.py:26 templates/base_v2.html:242
+#: app/market/models/market.py:26 templates/base_v2.html:254
 msgid "Request"
 msgstr "Запрос"
 
-#: app/market/models/market.py:27 templates/base_v2.html:245
+#: app/market/models/market.py:27 templates/base_v2.html:257
 msgid "Offer"
 msgstr "Предложение"
 
@@ -223,7 +223,7 @@ msgstr "Особенные навыки"
 
 #: app/market/models/market.py:40
 msgid "Specific issue"
-msgstr ""
+msgstr "Специфическая проблема"
 
 #: app/market/models/market.py:41
 msgid "URL Link"
@@ -967,7 +967,7 @@ msgid "Notifications"
 msgstr "Уведомления"
 
 #: templates/base.html:100 templates/base.html.py:109
-#: templates/base_v2.html:258 templates/users/user_settings_v2.html:16
+#: templates/base_v2.html:270 templates/users/user_settings_v2.html:16
 #: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
 msgstr "Настройки"
@@ -997,89 +997,93 @@ msgstr "Вход"
 msgid "Sign Up"
 msgstr "Зарегистрироваться"
 
-#: templates/base_v2.html:97 templates/base_v2.html.py:194
+#: templates/base_v2.html:107 templates/base_v2.html.py:206
 #: templates/account/signup_start.html:51
 msgid "Connect with Twitter"
 msgstr "Присоединяйтесь к нам в Twitter"
 
-#: templates/base_v2.html:102 templates/base_v2.html.py:197
+#: templates/base_v2.html:112 templates/base_v2.html.py:209
 #: templates/account/signup_start.html:48
 msgid "Connect with Facebook"
 msgstr "Присоединяйтесь к нам в Facebook"
 
-#: templates/base_v2.html:107
+#: templates/base_v2.html:117
 msgid "AHR"
 msgstr "AHR"
 
-#: templates/base_v2.html:111
+#: templates/base_v2.html:121
 msgid "Blog"
 msgstr "Блог"
 
-#: templates/base_v2.html:127
+#: templates/base_v2.html:137
 msgid "Add Post"
 msgstr "Добавить сообщение"
 
-#: templates/base_v2.html:133 templates/ahr/home_v2.html:13
+#: templates/base_v2.html:144 templates/ahr/home_v2.html:13
 msgid "Login"
 msgstr "Войти"
 
-#: templates/base_v2.html:140 templates/ahr/home_v2.html:34
-msgid "Crowdsourcing the fight for human rights."
+#: templates/base_v2.html:152 templates/ahr/home_v2.html:34
+msgid "Crowdsourcing human rights."
 msgstr "Краудсорсинг борьбы за права человека."
 
-#: templates/base_v2.html:140
+#: templates/base_v2.html:152
 msgid "The online platform that is opening closed societies."
 msgstr "Онлайн-платформа, которая открывает \"закрытые общества\"."
 
-#: templates/base_v2.html:151
+#: templates/base_v2.html:163
 msgid "Sign up"
 msgstr "Регистрация"
 
-#: templates/base_v2.html:155
+#: templates/base_v2.html:167
 msgid "Visit market"
 msgstr "Посетить общественную площадку"
 
-#: templates/base_v2.html:181
+#: templates/base_v2.html:193
 msgid "Get updates"
 msgstr "Получайте обновления"
 
-#: templates/base_v2.html:184
+#: templates/base_v2.html:196
 msgid "Enter your e-mail..."
 msgstr "Введите ваш e-mail ..."
 
-#: templates/base_v2.html:188
+#: templates/base_v2.html:200
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr ""
 "Получить все последние обновления, в том числе популярные посты и советы по "
 "безопасности!"
 
-#: templates/base_v2.html:191 templates/base_v2.html.py:225
+#: templates/base_v2.html:203 templates/base_v2.html.py:237
 msgid "Connect with us"
 msgstr "Связаться с нами"
 
-#: templates/base_v2.html:205 templates/ahr/home_v2.html:111
+#: templates/base_v2.html:217 templates/ahr/home_v2.html:111
 msgid "About MOVEMENTS"
 msgstr "Об MOVEMENTS"
 
-#: templates/base_v2.html:206
+#: templates/base_v2.html:218
 msgid ""
-"Crowdsourcing the fight for human rights. The online platform that is "
-"opening closed societies."
+"Crowdsourcing human rights. The online platform that is opening closed "
+"societies."
 msgstr ""
 "Краудсорсинг борьбы за права человека. Онлайн-платформа, которая открывает "
 "\"закрытые общества\"."
 
-#: templates/base_v2.html:212 templates/base_v2.html.py:223
+#: templates/base_v2.html:224
+msgid "Copyright &copy; 2015 Advancing Human Rights"
+msgstr "Copyright &copy; 2015 Advancing Human Rights"
+
+#: templates/base_v2.html:235
 msgid "Copyright &copy; 2014 Advancing Human Rights"
 msgstr "Copyright &copy; 2014 Advancing Human Rights"
 
-#: templates/base_v2.html:252
+#: templates/base_v2.html:264
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
 msgstr "Профиль"
 
-#: templates/base_v2.html:266
+#: templates/base_v2.html:278
 msgid "Logout"
 msgstr "Выход"
 
@@ -1926,9 +1930,9 @@ msgstr "Уже есть аккаунт?"
 
 #: templates/ahr/home_v2.html:37
 msgid ""
-"Movements is crowdsourcing the fight for human rights. It connects human "
-"rights activists in closed societies with those with skills to help them "
-"around the world. Join today and help a dissident in need."
+"Movements is crowdsourcing human rights. It connects human rights activists "
+"in closed societies with those with skills to help them around the world. "
+"Join today and help a dissident in need."
 msgstr ""
 "Movements это краудсорсинг борьбы за права человека. Он соединяет активистов"
 " по защите прав человека в закрытых обществах с теми, кто обладает "
@@ -2279,7 +2283,7 @@ msgstr "1. Какие навыки вы можете предложить?"
 #: templates/market/create_offer.html:33
 #: templates/market/create_request.html:32
 msgid "2. What issues does this relate to?"
-msgstr ""
+msgstr "2. К каким темам это имеет отношение?"
 
 #: templates/market/create_offer.html:49
 msgid "3. Which countries are you interested in helping?"
@@ -2420,7 +2424,7 @@ msgstr "Навыки"
 
 #: templates/market/market.html:39
 msgid "Issues"
-msgstr ""
+msgstr "Проблемы"
 
 #: templates/market/market.html:45 templates/users/more_about_you.html:79
 msgid "Countries"
@@ -2537,6 +2541,11 @@ msgid ""
 "story that you suggest in the future.   The lawyers on Movements may not "
 "have the time to get involved this week.  But they may have time next month."
 msgstr ""
+"Там нет никаких гарантий. Журналисты, которые следуют за Movements могут не "
+"иметь возможности использовать вашу историю в этом месяце. Но они могут "
+"иметь возможность использовать какую-то другую историю, которую вы "
+"предложите в будущем. Адвокаты на Movements могут не иметь времени, чтобы "
+"взяться за дело на этой неделе. Но они могут иметь время в следующем месяце."
 
 #: templates/market/request_posted.html:23
 msgid ""
@@ -2544,32 +2553,38 @@ msgid ""
 " others on Movements (which would make you more interesting to them).  A "
 "lawyer might want to see the same thing."
 msgstr ""
+"Журналист может прочитать ваш пост, а затем ждать, чтобы увидеть, общаетесь "
+"ли вы с другими на Movements (что сделает вас более интересным для них). "
+"Адвокат может увидеть то же самое."
 
 #: templates/market/request_posted.html:26
 msgid "Please read "
-msgstr ""
+msgstr "Пожалуйста, ознакомьтесь"
 
 #: templates/market/request_posted.html:26
 msgid "How to make a good post on Movements"
-msgstr ""
+msgstr "Как сделать хорошее сообщение на Movements"
 
 #: templates/market/request_posted.html:26
 msgid " for tips on making your request interesting to other users."
-msgstr ""
+msgstr "советы о том, что делает ваш запрос интересным другим пользователям."
 
 #: templates/market/request_posted.html:29
 msgid ""
 "Movements is not a magic wand.  (We wish it were!)  It’s just like any other"
 " social media – the more you participate the more benefit you’ll get."
 msgstr ""
+"Movements не волшебная палочка. (Мы бы хотели, чтобы так было!) Это то же, "
+"что и любые другие социальные медиа - чем больше вы принимаете участие, тем "
+"больше пользы вы получите."
 
 #: templates/market/request_posted.html:36
 msgid "Return to Market"
-msgstr ""
+msgstr "Вернуться к майданчику"
 
 #: templates/market/view_post.html:12
 msgid "on"
-msgstr ""
+msgstr "на"
 
 #: templates/market/view_post.html:20
 msgid "Posted by"
@@ -3010,7 +3025,7 @@ msgid "Regions"
 msgstr "Области"
 
 #: templates/users/more_about_you.html:30
-#: templates/users/more_about_you.html:130
+#: templates/users/more_about_you.html:154
 msgid "Finish"
 msgstr "Финиш"
 
@@ -3019,52 +3034,88 @@ msgid ""
 "Your account is now fully active. Fill out additional profile details now or"
 " you can skip this step and do it later in your settings page."
 msgstr ""
+"Ваш аккаунт теперь полностью активный. Заполните дополнительные данные "
+"профиля в настоящее время или Вы можете пропустить этот шаг и сделать это "
+"позже на странице настроек."
 
 #: templates/users/more_about_you.html:45
 msgid "Create an Offer"
-msgstr ""
+msgstr "Создать предложение"
 
 #: templates/users/more_about_you.html:52
 #: templates/users/more_about_you.html:70
 #: templates/users/more_about_you.html:88
 #: templates/users/more_about_you.html:106
 msgid "Skip"
-msgstr ""
+msgstr "Пропустить"
 
 #: templates/users/more_about_you.html:64
 msgid ""
 "Please indicate which languages you speak. Google Translate is also "
 "available, but it is not fully accurate."
 msgstr ""
+"Просьба указать, какими языками вы владеете. Переводчик Google тоже "
+"доступен, но это не совсем точный перевод."
 
 #: templates/users/more_about_you.html:82
 msgid ""
 "Please indicate which regions and countries you are interested in helping."
 msgstr ""
+"Пожалуйста, укажите, каким регионам и странам вы заинтересованы помочь."
 
 #: templates/users/more_about_you.html:100
 msgid "Please indicate your skill set."
-msgstr ""
+msgstr "Пожалуйста, укажите свой набор навыков."
 
 #: templates/users/more_about_you.html:115
-msgid "Done"
+msgid "How you can help"
 msgstr ""
 
-#: templates/users/more_about_you.html:118
-msgid "Thank You! You are one step closer to opening a closed society!"
-msgstr ""
-
-#: templates/users/more_about_you.html:121
+#: templates/users/more_about_you.html:117
 msgid ""
-"If you would like to update this details at any time, this can be done in "
+"\n"
+"          <p>\n"
+"              While there are certain skills that are particularly in demand from our activist users — namely,\n"
+"              legal assistance, media coverage — there are plenty of ways you can be involved if you do not fall into\n"
+"              those categories.\n"
+"          </p>\n"
+"          <ul>\n"
+"            <li>\n"
+"              <strong>Social media.</strong> Share Movements’ posts across your social media platforms. For example,\n"
+"              you can share Movements’ users’ requests with your representatives.\n"
+"            </li>\n"
+"            <li>\n"
+"              <strong>Tweet</strong> the posts that most interest you. There’s a button on almost every post.\n"
+"            </li>\n"
+"            <li>\n"
+"              <strong>Recommend a friend.</strong> If you have a friend with the skills in demand on our network, tell\n"
+"              them about us!\n"
+"            </li>\n"
+"          </ul>\n"
+"          "
+msgstr ""
+
+#: templates/users/more_about_you.html:139
+msgid "Done"
+msgstr "Готово"
+
+#: templates/users/more_about_you.html:142
+msgid "Thank You! You are one step closer to opening a closed society!"
+msgstr "Спасибо! Вы на один шаг ближе к открытию \"закрытого общества\"!"
+
+#: templates/users/more_about_you.html:145
+msgid ""
+"If you would like to update these details at any time, this can be done in "
 "easily in your settings panel."
 msgstr ""
+"Если вы хотите обновить эти детали, в любое время это можно легко сделать в "
+"панели настроек."
 
-#: templates/users/more_about_you.html:123
+#: templates/users/more_about_you.html:147
 msgid "Your Safety"
-msgstr ""
+msgstr "Ваша безопасность"
 
-#: templates/users/more_about_you.html:125
+#: templates/users/more_about_you.html:149
 #, python-format
 msgid ""
 "Please remember that no online platform is 100%% secure. We have gone to "
@@ -3074,83 +3125,92 @@ msgid ""
 " only share personal information with people you trust. Please see our "
 "Security and Privacy pages for more information."
 msgstr ""
+"Пожалуйста, помните, что ни одна онлайн-платформа не является 100% "
+"безопасна. Мы сделали многое, чтобы защитить вашу личную информацию и "
+"работаем с лучшими специалистами в данной области, которые разделяют и ценят"
+" ваше право на цифровую безопасность. Однако важно всегда оставаться "
+"бдительным в Интернете и делиться личной информацией только с людьми, "
+"которым вы доверяете. Пожалуйста, ознакомьтесь с нашими страницами по "
+"безопасности и конфиденциальности для более подробной информации."
 
 #: templates/users/thanksforactivation.html:7
 #: templates/users/thanksforactivation.html:12
 #: templates/users/waitforactivation.html:7
 #: templates/users/waitforactivation.html:12
 msgid "Email Confirmed"
-msgstr ""
+msgstr "Email подтверждено"
 
 #: templates/users/thanksforactivation.html:13
 msgid "Your account is now activated."
-msgstr ""
+msgstr "Ваш аккаунт активирован."
 
 #: templates/users/user_profile_v2.html:27
 msgid "View Public Profile"
-msgstr ""
+msgstr "Посмотреть профиль"
 
 #: templates/users/user_profile_v2.html:34
 msgid "Direct Message"
-msgstr ""
+msgstr "Личное сообщение"
 
 #: templates/users/user_profile_v2.html:38
 msgid "Report User"
-msgstr ""
+msgstr "Пожаловаться на пользователя"
 
 #: templates/users/user_profile_v2.html:46
 msgid "About"
-msgstr ""
+msgstr "О"
 
 #: templates/users/user_profile_v2.html:48
 msgid "Name:"
-msgstr ""
+msgstr "Имя:"
 
 #: templates/users/user_profile_v2.html:50
 msgid "Nationality:"
-msgstr ""
+msgstr "Национальность:"
 
 #: templates/users/user_profile_v2.html:52
 msgid "Residence:"
-msgstr ""
+msgstr "Место жительства:"
 
 #: templates/users/user_profile_v2.html:70
 msgid "No interests specified"
-msgstr ""
+msgstr "Интересы не указаны"
 
 #: templates/users/user_profile_v2.html:81
 msgid "No languages specified"
-msgstr ""
+msgstr "Языки не указаны"
 
 #: templates/users/user_settings_v2.html:25
 msgid "Change picture"
-msgstr ""
+msgstr "Изменить изображение"
 
 #: templates/users/user_settings_v2.html:31
 msgid "Personal Details"
-msgstr ""
+msgstr "Личные данные"
 
 #: templates/users/user_settings_v2.html:32
 msgid "Skills & Interests"
-msgstr ""
+msgstr "Навыки и интересы"
 
 #: templates/users/user_settings_v2.html:33
 msgid "Security & Alerts"
-msgstr ""
+msgstr "Безопасность и предупреждения"
 
 #: templates/users/user_settings_v2.html:47
 msgid "Username"
-msgstr ""
+msgstr "Имя пользователя"
 
 #: templates/users/user_settings_v2.html:53
 msgid ""
 "This information is optional but the more you provide the more trusted "
 "you’ll be by other users."
 msgstr ""
+"Эта информация не является обязательной, но чем больше вы укажете о себе, "
+"тем больше доверять вам будут другие пользователи."
 
 #: templates/users/user_settings_v2.html:76
 msgid "Interface Language"
-msgstr ""
+msgstr "Язык интерфейса"
 
 #: templates/users/user_settings_v2.html:88
 msgid "Digital Presence"
@@ -3161,10 +3221,13 @@ msgid ""
 "The more links you provide, the higher your star rating will be. Link to "
 "Twitter, LinkedIn, and Facebook to help verify your identity."
 msgstr ""
+"Чем больше ссылок вы предоставляете, тем будет выше ваш рейтинг. Укажите "
+"ссылку на Twitter, LinkedIn и Facebook, чтобы помочь подтвердить вашу "
+"личность."
 
 #: templates/users/user_settings_v2.html:122
 msgid "Skills/Interests"
-msgstr ""
+msgstr "Навыки / Интересы"
 
 #: templates/users/user_settings_v2.html:124
 msgid ""
@@ -3172,15 +3235,18 @@ msgid ""
 "expertise for you. This will also help us to show the postings that are the "
 "most relevant for you."
 msgstr ""
+"Навыки и интересы, которые Вы указываете помогут другим найти то в чем вы "
+"эксперт. Это также поможет нам показать посты, которые наиболее актуальны "
+"для вас."
 
 #: templates/users/user_settings_v2.html:128
 msgid "Regions/Countries"
-msgstr ""
+msgstr "Области/Страны"
 
 #: templates/users/user_settings_v2.html:130
 msgid ""
 "Where do you need help and/or where would you like to be able to help out?"
-msgstr ""
+msgstr "В чем вам нужна помощь и / или где бы вы были в состоянии помочь?"
 
 #: templates/users/user_settings_v2.html:138
 #, python-format
@@ -3188,48 +3254,57 @@ msgid ""
 "Please indicate which languages you are able to communicate in. Google "
 "Translate is also available however it is not 100%% accurate."
 msgstr ""
+"Просьба указать на каких языках Вы можете общаться. Google Translate также "
+"доступен однако это не 100% точный перевод."
 
 #: templates/users/user_settings_v2.html:144
 msgid "Control the visibility of your profile and notifications."
-msgstr ""
+msgstr "Управление видимостью вашего профиля и сообщений."
 
 #: templates/users/user_settings_v2.html:148
 msgid "Profile Visibility"
-msgstr ""
+msgstr "Видимость профиля"
 
 #: templates/users/user_settings_v2.html:150
 msgid ""
 "How much information do you want to make public? So as to help protect your "
 "security and privacy, you may not want to expose your email address."
 msgstr ""
+"Сколько информации вы хотите сделать обще доступной? Таким образом, чтобы "
+"помочь защитить вашу безопасность и конфиденциальность, вы не можете "
+"открывать свой адрес электронной почты."
 
 #: templates/users/user_settings_v2.html:159
 msgid ""
 "When would you like to receive a notification if someone responds to your "
 "post or creates one that matches your interest?"
 msgstr ""
+"Когда вы хотели бы получать уведомления, если кто-то отвечает на ваш пост "
+"или создает такой, который соответствует вашим интересам?"
 
 #: templates/users/user_settings_v2.html:181
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: templates/users/user_settings_v2.html:192
 msgid "Upload Avatar"
-msgstr ""
+msgstr "Загрузить аватар"
 
 #: templates/users/waitforactivation.html:13
 msgid ""
 "Someone will be in contact with you shortly to help you activate your "
 "account."
 msgstr ""
+"С вами в ближайшее время свяжитесь, чтобы помочь вам активировать ваш "
+"аккаунт."
 
 #: templates/users/snippets/profile_navigation.html:16
 msgid "Alerts"
-msgstr ""
+msgstr "Предупреждение"
 
 #: templates/users/snippets/star_rating.html:11
 msgid "MOVEMENTS STAR RATING"
-msgstr ""
+msgstr "ЗВЕЗДНЫЙ РЕЙТИНГ MOVEMENTS"
 
 #: templates/users/snippets/star_rating.html:12
 msgid ""
@@ -3240,3 +3315,12 @@ msgid ""
 "                   4 Stars: Confirmed significant online presence<br>\n"
 "                   5 Stars: Personally known by Movements.org<br>"
 msgstr ""
+"0 Звезд: Подтвержденный еmail <br>\n"
+"1 Звезда: Подтвержденный 1 профиль в социальных сетях <br>\n"
+"2 Звезды: Подтверждено 2 профили в социальных сетях <br>\n"
+"3 Звезды: Подтверждено все профили в социальных сетях и биография <br>\n"
+"4 Звезды: Подтверждено значительное онлайн присутствие <br>\n"
+"5 Звезд: Персонально знакомы с командой Movements.org <br>"
+
+#~ msgid "Crowdsourcing the fight for human rights."
+#~ msgstr "Краудсорсинг борьбы за права человека."
