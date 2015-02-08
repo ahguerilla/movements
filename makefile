@@ -50,7 +50,6 @@ runprodext:
 clean:
 	rm -rf app/static/.webassets-cache/
 
-
 fixtures:
 	cd app && \
 	python manage.py loaddata users_nationalityfixtures --settings=app.settings.local && \

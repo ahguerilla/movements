@@ -1,16 +1,18 @@
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, render
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.utils.translation import ugettext_lazy as _
+from ratelimit.decorators import ratelimit
 from models import (
     UserProfile, OrganisationalRating, Language, Interest, Region)
 from forms import (
     SettingsForm, UserForm, VettingForm, SignUpStartForm, SignupForm,
     MoreAboutYouForm)
 from form_overrides import ResetPasswordFormSilent
-from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
+from allauth.account.forms import LoginForm
+from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView, LoginView
 from allauth.socialaccount.views import SignupView as SocialSignupView
 from allauth.account.views import ConfirmEmailView as BaseConfirmEmailView
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
@@ -445,3 +447,19 @@ class ConfirmEmailView(BaseConfirmEmailView):
         # return HttpResponseRedirect(reverse('account_confirm_email', args=[self.get_object().key]))
 
 confirm_email = ConfirmEmailView.as_view()
+
+
+class RatelimitedLoginForm(LoginForm):
+    @ratelimit(key='post:login', rate='3/m', method=['POST'])
+    @ratelimit(key='ip', rate='20/m', method=['POST'])
+    def login(self, request, redirect_url=None):
+        if request.limited:
+            return render(request, 'account/ratelimit_triggered.html', {})
+        return super(RatelimitedLoginForm, self).login(request, redirect_url)
+
+
+class RatelimitedLoginView(LoginView):
+    form_class = RatelimitedLoginForm
+
+
+ratelimited_login = RatelimitedLoginView.as_view()

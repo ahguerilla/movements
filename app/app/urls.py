@@ -30,6 +30,7 @@ urlpatterns = patterns('',
     url(r'^avatar/render_primary/(?P<user>[\w\@\d\.\-_]{1,30})/(?P<size>[\d]+)/$', 'avatar.views.render_primary', name='avatar_render_primary'),
     url(r'^avatar/', include('avatar.urls')),
     # Account View Overrides
+    url(r'^accounts/login/+$', 'app.users.views.ratelimited_login', name="account_login"),
     url(r'^accounts/social/signup/+$', 'app.users.views.ahr_social_signup', name="social_sign_up"),
     url(r'^accounts/password/reset/+$', 'app.users.views.password_reset', name="password_reset"),
     url(r"^accounts/password/change/$", 'app.users.views.password_change', name="account_change_password"),
