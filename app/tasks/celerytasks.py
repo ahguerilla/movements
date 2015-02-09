@@ -1,5 +1,6 @@
 import constance
 from django.core.mail import EmailMessage
+from app.models import NotificationPing
 from app.users.models import UserProfile
 from app.market.models import Notification
 from django.db.models import Q
@@ -112,12 +113,7 @@ def new_postman_message(self, message):
     notification.save()
 
 
-@_app.task(name="test_email_process", bind=True)
-def test_email_process(self, email_to, message):
-    email = EmailMessage(
-        'You have new notifications on Movements.Org',
-        message,
-        constance.config.NO_REPLY_EMAIL,
-        [email_to]
-    )
-    email.send()
+@_app.task(name="notification_ping", bind=True)
+def notification_ping(self, email_to):
+    ping = NotificationPing(send_email_to=email_to)
+    ping.save()
