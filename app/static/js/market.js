@@ -169,7 +169,7 @@ $(function () {
     setFlatFilter: function(ev, data) {
       var item = this.toggleFilterState(ev);
       if (item.value == 'all') {
-        if (data.selected.length == data.count) {
+        if (data.selected.length == (data.count + 1)) {
           data.selected = [];
           this.$el.find(data.rootClass + ' a').removeClass('selected');
         } else {
@@ -209,40 +209,6 @@ $(function () {
 
     setSkillsFilter: function (ev) {
       this.setFlatFilter(ev, this.skills);
-      //var skill = this.toggleFilterState(ev);
-      //if (skill.value == 'all') {
-      //  if (this.skills.length == this.skillsCount) {
-      //    this.skills = [];
-      //    this.$el.find('.skill-filter a').removeClass('selected');
-      //  } else {
-      //    this.skills = [];
-      //    skill.$target.addClass('selected');
-      //    _.each(this.$el.find('.skill-filter a.skill-normal'), function(elem) {
-      //      var $elem = $(elem);
-      //      this.skills.push($elem.data('filter'))
-      //      $elem.addClass('selected');
-      //    }, this);
-      //  }
-      //} else {
-      //  if (skill.selected) {
-      //    this.skills.push(skill.value);
-      //    if (this.skills.length == this.skillsCount) {
-      //      this.$el.find('.skill-filter .skill-all').addClass('selected');
-      //    }
-      //  } else {
-      //    this.$el.find('.skill-filter .skill-all').removeClass('selected');
-      //    this.skills = $.grep(this.skills, function (value) {
-      //      return value != skill.value;
-      //    });
-      //  }
-      //}
-      //if (this.skills.length) {
-      //  this.$skillCount.html('(' + this.skills.length + ')');
-      //  this.$skillCount.show();
-      //} else {
-      //  this.$skillCount.hide();
-      //}
-      //this.trigger('filter');
     },
 
     setRegion: function(region) {

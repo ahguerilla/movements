@@ -36,6 +36,9 @@ def get_raw(request, from_item=0, to_item=None,
             filter_by_owner=False, count=False, user_id=None):
     skills = map(int, request.GET.getlist('skills', []))
     issues = map(int, request.GET.getlist('issues', []))
+    show_other_skills = -1 in skills
+    show_other_issues = -1 in issues
+
     countries = map(int, request.GET.getlist('countries', []))
     params = {
         'interests': tuple(skills),
@@ -87,12 +90,18 @@ def get_raw(request, from_item=0, to_item=None,
 
     if issues:
         additional_filter += """
-            AND EXISTS (
-                SELECT * FROM market_marketitem_issues
-                WHERE market_marketitem_issues.marketitem_id = mi.id AND
+            AND (EXISTS
+                (SELECT * FROM market_marketitem_issues
+                 WHERE market_marketitem_issues.marketitem_id = mi.id AND
                       market_marketitem_issues.issues_id IN %(issues)s
-            )
+                 )
         """
+        if show_other_issues:
+            additional_filter += """
+                OR (mi.specific_issue IS NOT NULL AND length(mi.specific_issue) > 0))
+            """
+        else:
+            additional_filter += ')'
 
     if countries:
         additional_filter += """

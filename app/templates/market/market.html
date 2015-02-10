@@ -119,6 +119,7 @@
       <% _.each(skills, function(skill) { %>
       <li><a href="#" class="skill-normal" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
       <% }); %>
+      <li><a href="#" class="skill-normal" data-filter="-1">{% trans "Other skills" %}</a></li>
     </ul>
   </script>
   <script type="text/template" id="issue-filter-list-template">
@@ -127,6 +128,7 @@
       <% _.each(skills, function(skill) { %>
       <li><a href="#" class="skill-normal" data-filter="<%- skill.pk %>"><%- skill.fields.issues %></a></li>
       <% }); %>
+      <li><a href="#" class="skill-normal" data-filter="-1">{% trans "Other issues" %}</a></li>
     </ul>
   </script>
   <script type="text/template" id="region-filter-list-template">
