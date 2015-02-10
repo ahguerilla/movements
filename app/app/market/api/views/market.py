@@ -81,20 +81,26 @@ def get_raw(request, from_item=0, to_item=None,
 
     if skills:
         additional_filter += """
-            AND EXISTS (
-                SELECT * FROM market_marketitem_interests
-                WHERE market_marketitem_interests.marketitem_id = mi.id AND
-                      market_marketitem_interests.interest_id IN %(interests)s
-            )
+            AND (EXISTS
+                    (SELECT * FROM market_marketitem_interests
+                     WHERE market_marketitem_interests.marketitem_id = mi.id AND
+                          market_marketitem_interests.interest_id IN %(interests)s
+                     )
         """
+        if show_other_skills:
+            additional_filter += """
+                        OR (mi.specific_skill IS NOT NULL AND length(mi.specific_skill) > 0))
+                    """
+        else:
+            additional_filter += ')'
 
     if issues:
         additional_filter += """
             AND (EXISTS
-                (SELECT * FROM market_marketitem_issues
-                 WHERE market_marketitem_issues.marketitem_id = mi.id AND
-                      market_marketitem_issues.issues_id IN %(issues)s
-                 )
+                    (SELECT * FROM market_marketitem_issues
+                     WHERE market_marketitem_issues.marketitem_id = mi.id AND
+                          market_marketitem_issues.issues_id IN %(issues)s
+                     )
         """
         if show_other_issues:
             additional_filter += """
