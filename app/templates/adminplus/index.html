@@ -1,0 +1,14 @@
+{% extends "admin/index.html" %}
+
+{% block extra_sidebar %}
+
+  {% if custom_list %}
+    <div class="module">
+      <h2>System Actions</h2>
+      <ul>
+          <li><a href="{% url 'admin:notification_ping' %}">Notification ping</a></li>
+      </ul>
+    </div>
+  {% endif %}
+
+{% endblock extra_sidebar %}

@@ -1,3 +1,6 @@
+import constance
+from django.core.mail import EmailMessage
+from app.models import NotificationPing
 from app.users.models import UserProfile
 from app.market.models import Notification
 from django.db.models import Q
@@ -108,3 +111,9 @@ def new_postman_message(self, message):
     })
     notification.avatar_user = message.sender.username
     notification.save()
+
+
+@_app.task(name="notification_ping", bind=True)
+def notification_ping(self, email_to):
+    ping = NotificationPing(send_email_to=email_to)
+    ping.save()

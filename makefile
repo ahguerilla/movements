@@ -26,6 +26,9 @@ mfs:
 showurls:
 	cd app && python manage.py show_urls --settings=app.settings.local
 
+notifications:
+	cd app && python manage.py notifications --settings=app.settings.local
+
 translations:
 	cd app && python manage.py makemessages --all --settings=app.settings.local
 
@@ -49,7 +52,6 @@ runprodext:
 
 clean:
 	rm -rf app/static/.webassets-cache/
-
 
 fixtures:
 	cd app && \

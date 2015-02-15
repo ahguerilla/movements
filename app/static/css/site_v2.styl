@@ -683,7 +683,7 @@ h1,h2,h3,h4,h5,h6
 
 .tags
   margin-left -5px
-  .tag, .issue
+  .tag, .issue, .country
     float left
     margin-left 5px
     margin-bottom 5px
@@ -697,6 +697,9 @@ h1,h2,h3,h4,h5,h6
   .issue
     border 2px solid $primary-color
     color $primary-color
+  .country
+    border 2px solid $inactive-font
+    color $inactive-font
 
 .content-wrap
   min-height 500px
@@ -1177,7 +1180,7 @@ popoverDropdown(width, showIcon = true)
           width 90px
           background url('../images/v2/market-filter-icon.png') no-repeat center 10px
         a.issues
-          width 90px
+          width 95px
           background url('../images/v2/market-issues-icon.png') no-repeat center 10px
         a.regions
           width 118px

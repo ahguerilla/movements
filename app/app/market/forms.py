@@ -59,15 +59,6 @@ class MarketItemBaseForm(forms.ModelForm):
             raise forms.ValidationError(_("Please select a maximum of 4 skills"))
         return data
 
-    def clean_issues(self):
-        data = self.cleaned_data['issues']
-        specific_issue = self.cleaned_data['specific_issue']
-        if len(data) == 0 and not specific_issue:
-            raise forms.ValidationError(_("You must add at least one issue"))
-        if len(data) >= 4 or (len(data) >= 3 and specific_issue):
-            raise forms.ValidationError(_("Please select a maximum of 3 issues"))
-        return data
-
     def clean_title(self):
         data = self.cleaned_data['title']
         if len(data) > 120:
@@ -84,9 +75,25 @@ class MarketItemBaseForm(forms.ModelForm):
 class OfferForm(MarketItemBaseForm):
     ITEM_TYPE = market.models.MarketItem.TYPE_CHOICES.OFFER
 
+    def clean_issues(self):
+        data = self.cleaned_data['issues']
+        specific_issue = self.cleaned_data['specific_issue']
+        if len(data) == 0 and not specific_issue:
+            raise forms.ValidationError(_("You must add at least one issue"))
+        return data
+
 
 class RequestForm(MarketItemBaseForm):
     ITEM_TYPE = market.models.MarketItem.TYPE_CHOICES.REQUEST
+
+    def clean_issues(self):
+        data = self.cleaned_data['issues']
+        specific_issue = self.cleaned_data['specific_issue']
+        if len(data) == 0 and not specific_issue:
+            raise forms.ValidationError(_("You must add at least one issue"))
+        if len(data) >= 4 or (len(data) >= 3 and specific_issue):
+            raise forms.ValidationError(_("Please select a maximum of 3 issues"))
+        return data
 
 
 class CommentForm(forms.ModelForm):

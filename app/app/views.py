@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -66,3 +66,7 @@ def newsletter_signup(request):
             'message': 'Not a valid request'
         }
     return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
+def admin_login(request):
+    raise Http404

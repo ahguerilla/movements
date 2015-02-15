@@ -1,3 +1,4 @@
+from collections import defaultdict
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.core.urlresolvers import reverse
@@ -5,7 +6,7 @@ from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 
-from app.users.models import Interest, Countries, Issues
+from app.users.models import Interest, Countries, Issues, Region
 from forms import RequestForm, OfferForm, save_market_item
 from models.market import MarketItem, MarketItemViewCounter
 
@@ -13,7 +14,7 @@ from models.market import MarketItem, MarketItemViewCounter
 def index(request):
     interests = Interest.objects.all()
     issues = Issues.objects.all()
-    countries = Countries.objects.all()
+    countries = Countries.objects.select_related('region').all()
     region_dict = {}
     for country in countries:
         if country.region:
@@ -37,7 +38,8 @@ def index(request):
 
 
 def show_post(request, post_id):
-    post = get_object_or_404(MarketItem.objects.defer('comments'),
+    prefetch_list = ['interests', 'issues', 'countries']
+    post = get_object_or_404(MarketItem.objects.defer('comments').prefetch_related(*prefetch_list),
                              pk=post_id,
                              deleted=False,
                              owner__is_active=True)
@@ -45,6 +47,29 @@ def show_post(request, post_id):
     if post.is_closed():
         raise Http404('No post matches the given query.')
 
+    countries_to_render = []
+
+    countries = Countries.objects.exclude(region=None).select_related('region').all()
+    by_region = defaultdict(list)
+    for country in countries:
+        by_region[country.region_id].append(country)
+
+    post_countries = post.countries.all()
+
+    if len(post_countries) == len(countries):
+        countries_to_render.append('Global')
+    else:
+        post_countries_by_region = defaultdict(list)
+        for country in post_countries:
+            post_countries_by_region[country.region_id].append(country)
+        for region_id in post_countries_by_region:
+            post_region_countries = post_countries_by_region[region_id]
+            region_countries = by_region[region_id]
+            if len(post_region_countries) == len(region_countries):
+                countries_to_render.append(region_countries[0].region.name)
+            else:
+                for country in post_region_countries:
+                    countries_to_render.append(country)
     language_list = []
     if request.user.is_authenticated():
         MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
@@ -55,6 +80,7 @@ def show_post(request, post_id):
         'report_url': reverse('report_post', args=[post.id]),
         'is_logged_in': request.user.is_authenticated(),
         'language_list': language_list,
+        'countries_to_render': countries_to_render,
     }
 
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))

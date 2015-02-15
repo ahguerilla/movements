@@ -40,3 +40,12 @@ class SafeVPNLink(CMSPlugin):
     link_text = models.CharField(max_length=500)
     base_url = models.CharField(max_length=200)
     key = models.CharField(max_length=10)
+
+
+class NotificationPing(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    send_email_to = models.EmailField()
+    completed = models.DateTimeField(null=True, blank=True)
+
+    def __unicode__(self):
+        return u'Created: {0}, Completed: {1}'.format(self.created, self.completed)

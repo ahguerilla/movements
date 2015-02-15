@@ -3,7 +3,7 @@
 <h4>{% trans "Dear Admin"%}</h4>
 
 <pre>
-{% blocktrans %}A new user has signed up to Movements using the details below:
+{% blocktrans %}A new user has signed up to Movements using the details below:{% endblocktrans %}
 
 First Name : {{ form.data.first_name }}
 Last Name  : {{ form.data.last_name }}
@@ -14,7 +14,7 @@ Facebook   : {{ form.data.fb_url }}
 Twitter    : {{ form.data.tweet_url }}
 Website    : {{ form.data.web_url }}
 
-Please vet this user by clicking on the link below:{% endblocktrans %}
+{% blocktrans %}Please vet this user by clicking on the link below:{% endblocktrans %}
 <a href="{{vet_url}}" target="_blank">{{vet_url}}</a>
 
 </pre>
