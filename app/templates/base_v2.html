@@ -125,12 +125,12 @@
     {% if user.is_authenticated and not user.userprofile.first_login %}
       <div id="NavRightLoggedIn" class="navbar-right">
         <div class="nav-flags">
+          <a data-language="fa" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_persian.png"></a>
           <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png"></a>
           <a data-language="uk" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png" ></a>
           <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png"></a>
           <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png"></a>
           <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png"></a>
-          <p>Language:</p>
         </div>
         <a id="add-post" class="btn btn-action" onClick="ga('send', 'event', 'button', 'click', 'add-post');">
           <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
