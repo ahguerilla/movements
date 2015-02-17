@@ -231,6 +231,11 @@ ahr_social_signup = AhrSocialSignupView.as_view()
 class AhrSignupView(SignupView):
     form_class = SignupForm
 
+    def dispatch(self, request, *args, **kwargs):
+        if 'email' not in request.session:
+            return HttpResponseRedirect(reverse('signup_start'))
+        return super(AhrSignupView, self).dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         ret = super(SignupView, self).get_context_data(**kwargs)
         context_data = {
