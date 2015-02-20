@@ -71,7 +71,7 @@ staging-social:
 
 celery:
 	cd app && \
-	celery -A tasks.celeryworker worker
+	celery -A app worker -l info
 
 fixturesJune14:
 	cd app && \

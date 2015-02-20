@@ -6,6 +6,9 @@ from django.views.decorators.cache import never_cache
 from ratelimit.decorators import ratelimit
 
 
+from .celery import app as celery_app
+
+
 class MovementsAdminSite(AdminSitePlus):
     @never_cache
     @ratelimit(key='ip', rate='3/m', method=['POST'])

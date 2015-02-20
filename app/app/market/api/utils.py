@@ -4,7 +4,7 @@ from functools import wraps
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from postman.models import Message, STATUS_ACCEPTED
-from tasks.celerytasks import new_postman_message
+from app.celery import new_postman_message
 import requests
 import json
 from django.utils.html import strip_tags

@@ -1,16 +1,19 @@
+from __future__ import absolute_import
+
+import json
+
+from celery import Celery
+from django.db.models import Q
+from django.conf import settings
+
 from app.models import NotificationPing
 from app.users.models import UserProfile
 from app.market.models import Notification
-from django.db.models import Q
-from django.conf import settings
-import json
 
-import logging
-logger = logging.getLogger(__name__)
 
-if '_app' not in dir():
-    from celery import Celery
-    _app = Celery('celerytasks', broker=settings.CELERY_BROKER)
+app = Celery('celerytasks', broker=settings.CELERY_BROKER)
+app.config_from_object('django.conf:settings')
+app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 
 def get_notification_text(obj, update=False):
@@ -36,8 +39,13 @@ def find_people_interested_in(obj):
     return profiles
 
 
-@_app.task(name="createNotification", bind=True)
-def create_notification(self, obj):
+@app.task()
+def on_market_item_creation(market_item):
+    create_notification(market_item)
+
+
+@app.task(name="createNotification")
+def create_notification(obj):
     profiles = find_people_interested_in(obj)
     for profile in profiles:
         notification = Notification()
@@ -48,8 +56,8 @@ def create_notification(self, obj):
         notification.save()
 
 
-@_app.task(name="createCommentNotification", bind=True)
-def create_comment_notification(self, obj, comment, username):
+@app.task(name="createCommentNotification")
+def create_comment_notification(obj, comment, username):
     created = set()
     if obj.owner.username != username:
         notification = Notification()
@@ -72,8 +80,8 @@ def create_comment_notification(self, obj, comment, username):
             created.add(cmnt.owner.id)
 
 
-@_app.task(name="updateNotifications", bind=True)
-def update_notifications(self, obj):
+@app.task(name="updateNotifications")
+def update_notifications(obj):
     notification_objs = Notification.objects.filter(item=obj.id).only('user').all()
     notification_userids = set(notification.user.id for notification in notification_objs)
     profiles = find_people_interested_in(obj)
@@ -98,8 +106,8 @@ def update_notifications(self, obj):
         notification.save()
 
 
-@_app.task(name="new_postman_message", bind=True)
-def new_postman_message(self, message):
+@app.task(name="new_postman_message")
+def new_postman_message(message):
     notification = Notification()
     notification.user_id = message.recipient.id
     notification.text = json.dumps({
@@ -111,7 +119,7 @@ def new_postman_message(self, message):
     notification.save()
 
 
-@_app.task(name="notification_ping", bind=True)
-def notification_ping(self, email_to):
+@app.task(name="notification_ping")
+def notification_ping(email_to):
     ping = NotificationPing(send_email_to=email_to)
     ping.save()
