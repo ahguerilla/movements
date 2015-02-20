@@ -1,5 +1,3 @@
-import constance
-from django.core.mail import EmailMessage
 from app.models import NotificationPing
 from app.users.models import UserProfile
 from app.market.models import Notification
@@ -8,9 +6,9 @@ from django.conf import settings
 import json
 
 import logging
-logger= logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
-if not '_app' in dir():
+if '_app' not in dir():
     from celery import Celery
     _app = Celery('celerytasks', broker=settings.CELERY_BROKER)
 

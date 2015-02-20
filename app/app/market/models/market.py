@@ -137,6 +137,16 @@ class MarketItem(models.Model):
         return adict
 
 
+class MarketItemSalesforceRecord(models.Model):
+    item = models.OneToOneField(MarketItem, related_name='salesforce')
+    salesforce_record_id = models.CharField(max_length=64)
+    last_updated = models.DateTimeField()
+    needs_updating = models.BooleanField()
+
+    class Meta:
+        app_label = "market"
+
+
 class MarketItemHidden(models.Model):
     item = models.ForeignKey(MarketItem)
     viewer = models.ForeignKey(user_models.User)

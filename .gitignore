@@ -25,3 +25,4 @@ setenv.sh
 .elasticbeanstalk/aws_credential_file
 
 dump.rdb
+scratch.py
