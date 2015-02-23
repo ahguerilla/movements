@@ -71,12 +71,12 @@ staging-social:
 
 celery:
 	cd app && \
-	celery -A tasks.celeryworker worker
+	celery -A app worker -l info -B
 
 fixturesJune14:
 	cd app && \
 	python manage.py loaddata questionnaires.json --settings=app.settings.local && \
-	python manage.py loaddata users_interests.json --settings=app.settings.local && \
+	python manage.py loaddata users_interests.json --settings=app.settings.local & \
 	python manage.py loaddata users_languages.json --settings=app.settings.local && \
 	python manage.py loaddata users_regions.json --settings=app.settings.local && \
 	python manage.py loaddata users_country_region.json --settings=app.settings.local

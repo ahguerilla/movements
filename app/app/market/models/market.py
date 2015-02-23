@@ -1,5 +1,4 @@
-from datetime import datetime
-from django.utils import translation
+from django.utils import translation, timezone
 import app.users.models as user_models
 from django.db import models
 
@@ -7,9 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from tinymce import models as tinymodels
 
 import django.contrib.auth as auth
-
 from django.core.urlresolvers import reverse
-from django.utils.timezone import now
 
 from app.utils import EnumChoices
 
@@ -40,7 +37,7 @@ class MarketItem(models.Model):
     specific_issue = models.CharField(_('Specific issue'), max_length=30, blank=True, null=True)
     url = models.CharField(_('URL Link'), max_length=500, blank=True)
     published = models.BooleanField(_('is published?'), default=True)
-    pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
+    pub_date = models.DateTimeField(_('publish date'), auto_now_add=True)
     commentcount = models.IntegerField(_('commentcount'), default=0)
     collaboratorcount = models.IntegerField(_('collaboratorcount'), default=0)
     ratecount = models.IntegerField(_('ratecount'), default=0)
@@ -74,7 +71,7 @@ class MarketItem(models.Model):
         if not self.closed_date and (
                 self.status == self.STATUS_CHOICES.CLOSED_BY_USER or
                 self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN):
-            self.closed_date = now()
+            self.closed_date = timezone.now()
         super(MarketItem, self).save(*args, **kwargs)
 
     @property
@@ -137,6 +134,22 @@ class MarketItem(models.Model):
         return adict
 
 
+class MarketItemSalesforceRecord(models.Model):
+    item = models.OneToOneField(MarketItem, related_name='salesforce')
+    salesforce_record_id = models.CharField(max_length=64)
+    last_updated = models.DateTimeField()
+    needs_updating = models.BooleanField()
+
+    class Meta:
+        app_label = "market"
+
+    @classmethod
+    def mark_for_update(cls, market_id):
+        MarketItemSalesforceRecord.objects \
+            .filter(item_id=market_id) \
+            .update(needs_updating=True)
+
+
 class MarketItemHidden(models.Model):
     item = models.ForeignKey(MarketItem)
     viewer = models.ForeignKey(user_models.User)
@@ -165,7 +178,7 @@ class MarketItemActions(models.Model):
     market_item = models.ForeignKey(
         MarketItem, verbose_name=_('market item'))
     action = models.TextField(_('action'))
-    date_of_action = models.DateTimeField(_('date of action'), default=now)
+    date_of_action = models.DateTimeField(_('date of action'), auto_now_add=True)
 
     class Meta:
         app_label = 'market'
@@ -180,7 +193,7 @@ class MarketItemNextSteps(models.Model):
     market_item = models.ForeignKey(
         MarketItem, verbose_name=_('market item'))
     next_step = models.TextField(_('next step'))
-    date_of_action = models.DateTimeField(_('date of action'), default=now)
+    date_of_action = models.DateTimeField(_('date of action'), auto_now_add=True)
     completed = models.BooleanField(_('completed'), default=False)
 
     class Meta:
