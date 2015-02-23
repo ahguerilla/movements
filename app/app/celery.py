@@ -131,3 +131,8 @@ def new_postman_message(message):
 def notification_ping(email_to):
     ping = NotificationPing(send_email_to=email_to)
     ping.save()
+
+
+@app.task(name='update_salesforce')
+def update_salesforce():
+    print 'updating salesforce'

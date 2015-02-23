@@ -26,3 +26,4 @@ setenv.sh
 
 dump.rdb
 scratch.py
+celerybeat-schedule
