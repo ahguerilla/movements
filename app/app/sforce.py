@@ -5,7 +5,10 @@ from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.utils import timezone
 
+import logging
 import salesforce
+
+_logger = logging.getLogger('movements-alerts')
 
 from app.market.models import MarketItem, MarketItemSalesforceRecord
 
@@ -94,14 +97,17 @@ def _find_and_update_case(sfdc, market_item):
 
 
 def add_market_item_to_salesforce(market_item):
-    with transaction.atomic():
-        market_item = _get_market_item(market_item.id)
-        sfdc = _authenticate()
-        if sfdc is None:
-            return
-        try:
-            if market_item.salesforce:
-                _update_case(sfdc, market_item, market_item.salesforce.salesforce_record_id)
-        except ObjectDoesNotExist:
-            if not _find_and_update_case(sfdc, market_item):
-                _create_case(sfdc, market_item)
+    try:
+        with transaction.atomic():
+            market_item = _get_market_item(market_item.id)
+            sfdc = _authenticate()
+            if sfdc is None:
+                return
+            try:
+                if market_item.salesforce:
+                    _update_case(sfdc, market_item, market_item.salesforce.salesforce_record_id)
+            except ObjectDoesNotExist:
+                if not _find_and_update_case(sfdc, market_item):
+                    _create_case(sfdc, market_item)
+    except Exception as ex:
+        _logger.exception(ex)
