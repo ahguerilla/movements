@@ -1,6 +1,7 @@
 from collections import defaultdict
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
@@ -8,7 +9,7 @@ from django.http import Http404
 
 from app.users.models import Interest, Countries, Issues, Region
 from forms import RequestForm, OfferForm, save_market_item
-from models.market import MarketItem, MarketItemViewCounter
+from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforceRecord
 
 
 def index(request):
@@ -72,7 +73,9 @@ def show_post(request, post_id):
                     countries_to_render.append(country)
     language_list = []
     if request.user.is_authenticated():
-        MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
+        _, created = MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
+        if created:
+            MarketItemSalesforceRecord.mark_for_update(post_id)
         language_list = request.user.userprofile.languages.all()
 
     post_data = {

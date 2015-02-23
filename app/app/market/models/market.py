@@ -1,5 +1,4 @@
-from datetime import datetime
-from django.utils import translation
+from django.utils import translation, timezone
 import app.users.models as user_models
 from django.db import models
 
@@ -7,9 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from tinymce import models as tinymodels
 
 import django.contrib.auth as auth
-
 from django.core.urlresolvers import reverse
-from django.utils.timezone import now
 
 from app.utils import EnumChoices
 
@@ -74,7 +71,7 @@ class MarketItem(models.Model):
         if not self.closed_date and (
                 self.status == self.STATUS_CHOICES.CLOSED_BY_USER or
                 self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN):
-            self.closed_date = now()
+            self.closed_date = timezone.now()
         super(MarketItem, self).save(*args, **kwargs)
 
     @property
@@ -146,6 +143,12 @@ class MarketItemSalesforceRecord(models.Model):
     class Meta:
         app_label = "market"
 
+    @classmethod
+    def mark_for_update(cls, market_id):
+        MarketItemSalesforceRecord.objects \
+            .filter(item_id=market_id) \
+            .update(needs_updating=True)
+
 
 class MarketItemHidden(models.Model):
     item = models.ForeignKey(MarketItem)
@@ -175,7 +178,7 @@ class MarketItemActions(models.Model):
     market_item = models.ForeignKey(
         MarketItem, verbose_name=_('market item'))
     action = models.TextField(_('action'))
-    date_of_action = models.DateTimeField(_('date of action'), default=now)
+    date_of_action = models.DateTimeField(_('date of action'), auto_now_add=True)
 
     class Meta:
         app_label = 'market'
@@ -190,7 +193,7 @@ class MarketItemNextSteps(models.Model):
     market_item = models.ForeignKey(
         MarketItem, verbose_name=_('market item'))
     next_step = models.TextField(_('next step'))
-    date_of_action = models.DateTimeField(_('date of action'), default=now)
+    date_of_action = models.DateTimeField(_('date of action'), auto_now_add=True)
     completed = models.BooleanField(_('completed'), default=False)
 
     class Meta:

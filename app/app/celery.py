@@ -7,9 +7,9 @@ from django.db.models import Q
 from django.conf import settings
 
 from app.models import NotificationPing
-from app.sforce import add_market_item_to_salesforce
+from app.sforce import add_market_item_to_salesforce, update_market_item_stats
 from app.users.models import UserProfile
-from app.market.models import Notification
+from app.market.models import Notification, MarketItemSalesforceRecord
 
 
 app = Celery('celerytasks', broker=settings.CELERY_BROKER)
@@ -60,6 +60,7 @@ def create_notification(obj):
 
 @app.task(name="createCommentNotification")
 def create_comment_notification(obj, comment, username):
+    MarketItemSalesforceRecord.mark_for_update(obj.id)
     created = set()
     if obj.owner.username != username:
         notification = Notification()
@@ -135,4 +136,5 @@ def notification_ping(email_to):
 
 @app.task(name='update_salesforce')
 def update_salesforce():
-    print 'updating salesforce'
+    update_market_item_stats()
+

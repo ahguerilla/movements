@@ -71,6 +71,9 @@ def _update_case(sfdc, market_item, record_id):
     except ValueError:
         # The salesforce API returns a value error on success as it tries to parse the response as JSON and it isn't
         pass
+    MarketItemSalesforceRecord.objects \
+        .filter(item=market_item) \
+        .update(needs_updating=False, last_updated=timezone.now())
 
 
 def _create_case(sfdc, market_item):
@@ -111,3 +114,9 @@ def add_market_item_to_salesforce(market_item):
                     _create_case(sfdc, market_item)
     except Exception as ex:
         _logger.exception(ex)
+
+
+def update_market_item_stats():
+    for record in MarketItemSalesforceRecord.objects.filter(needs_updating=True):
+        _logger.info('Updating stats in salesforce for market item {0}'.format(record.item.id))
+        add_market_item_to_salesforce(record.item)
