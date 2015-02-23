@@ -73,7 +73,7 @@ def show_post(request, post_id):
                     countries_to_render.append(country)
     language_list = []
     if request.user.is_authenticated():
-        _, created = MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
+        __, created = MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
         if created:
             MarketItemSalesforceRecord.mark_for_update(post_id)
         language_list = request.user.userprofile.languages.all()
