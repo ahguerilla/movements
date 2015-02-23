@@ -14,17 +14,12 @@ from app.market.models import MarketItem, MarketItemSalesforceRecord
 
 
 def _dict_for_salesforce(market_item):
-
-    def concatonate_issues():
-        issues = [market_item.specific_issue] + [i.issues for i in market_item.issues.all()]
-        return ';'.join(issues)
-
     return {
         'Movements_Number__c': market_item.id,
         'Movements_Title__c': market_item.title,
         'Movements_URL__c': settings.BASE_URL + reverse('show_post', args=[market_item.id]),
         'Request_Offer__c': market_item.item_type,
-        'Request_Summary__c': market_item.details,
+        'Request_Summary__c': market_item.details[:200],
         'Resolution_Type__c': '',
         'Screen_Name__c': market_item.owner.username,
         'Case_Comment__c': market_item.commentcount,
@@ -32,7 +27,8 @@ def _dict_for_salesforce(market_item):
         'Case_Messages__c': market_item.total_msg_count,
         'Case_Views__c': market_item.total_view_count,
         'Date_Posted__c': market_item.pub_date.date().isoformat(),
-        'Issues__c': concatonate_issues(),
+        'Skill__c': ';'.join([market_item.specific_skill] + [i.name for i in market_item.interests.all()]),
+        'Issues__c': ';'.join([market_item.specific_issue] + [i.issues for i in market_item.issues.all()]),
         'Location__c': ';'.join([x.countries for x in market_item.countries.all()]),
     }
 
