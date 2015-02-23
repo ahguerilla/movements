@@ -40,7 +40,7 @@ class MarketItem(models.Model):
     specific_issue = models.CharField(_('Specific issue'), max_length=30, blank=True, null=True)
     url = models.CharField(_('URL Link'), max_length=500, blank=True)
     published = models.BooleanField(_('is published?'), default=True)
-    pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
+    pub_date = models.DateTimeField(_('publish date'), auto_now_add=True)
     commentcount = models.IntegerField(_('commentcount'), default=0)
     collaboratorcount = models.IntegerField(_('collaboratorcount'), default=0)
     ratecount = models.IntegerField(_('ratecount'), default=0)

@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.conf import settings
 
 from app.models import NotificationPing
+from app.sforce import add_market_item_to_salesforce
 from app.users.models import UserProfile
 from app.market.models import Notification
 
@@ -42,6 +43,7 @@ def find_people_interested_in(obj):
 @app.task()
 def on_market_item_creation(market_item):
     create_notification(market_item)
+    add_market_item_to_salesforce(market_item)
 
 
 @app.task(name="createNotification")
@@ -78,6 +80,12 @@ def create_comment_notification(obj, comment, username):
             notification.text = get_notification_comment_text(obj, username, comment)
             notification.save()
             created.add(cmnt.owner.id)
+
+
+@app.task()
+def on_market_item_update(market_item):
+    update_notifications(market_item)
+    add_market_item_to_salesforce(market_item)
 
 
 @app.task(name="updateNotifications")

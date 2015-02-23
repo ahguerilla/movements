@@ -1,6 +1,6 @@
 from django import forms
 from postman.forms import WriteForm, FullReplyForm, QuickReplyForm
-from app.celery import create_notification, update_notifications
+from app.celery import on_market_item_creation, update_notifications, on_market_item_update
 from django.utils.translation import ugettext_lazy as _
 
 import app.market as market
@@ -115,11 +115,10 @@ def save_market_item(form, owner):
     new_item = form.instance.id is None
     obj = form.save(owner=owner)
     if new_item:
-        create_notification.delay(obj)
+        on_market_item_creation.delay(obj)
     else:
-        # delete the translations
         obj.marketitemtranslation_set.all().delete()
-        update_notifications.delay(obj)
+        on_market_item_update.delay(obj)
     return obj
 
 
