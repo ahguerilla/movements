@@ -42,7 +42,7 @@ def find_people_interested_in(obj):
     return profiles
 
 
-@app.task()
+@app.task(name='app.celery.on_market_item_creation')
 def on_market_item_creation(market_item):
     create_notification(market_item)
     add_market_item_to_salesforce(market_item)
@@ -85,7 +85,7 @@ def create_comment_notification(obj, comment, username):
             created.add(cmnt.owner.id)
 
 
-@app.task()
+@app.task(name='app.celery.on_market_item_update')
 def on_market_item_update(market_item):
     update_notifications(market_item)
     add_market_item_to_salesforce(market_item)
