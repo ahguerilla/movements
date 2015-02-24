@@ -16,6 +16,8 @@ app = Celery('celerytasks', broker=settings.CELERY_BROKER)
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
+from djcelery_email.tasks import send_email
+
 
 def get_notification_text(obj, update=False):
     return json.dumps({
