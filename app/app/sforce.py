@@ -83,7 +83,7 @@ def _create_case(sfdc, market_item):
 
 def _find_and_update_case(sfdc, market_item):
     result = sfdc.query("SELECT ID FROM Case WHERE Movements_Number__c={0}".format(market_item.id))
-    if not result['total_size']:
+    if not result['totalSize']:
         return False
     record_id = result['records'][0]['Id']
     _update_case(sfdc, market_item, record_id)
