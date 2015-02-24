@@ -56,3 +56,5 @@ if settings.DEBUG:
     urlpatterns += patterns('',
                             url(r'^__debug__/', include(debug_toolbar.urls)),
                             )
+
+from .celery import app as celery_app
