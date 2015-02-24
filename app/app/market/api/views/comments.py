@@ -2,7 +2,7 @@ from app.market.forms import CommentForm
 import app.market as market
 from app.market.api.utils import *
 from django.contrib.auth.decorators import login_required
-from app.celery import create_comment_notification
+from app.celerytasks import create_comment_notification
 from django.views.decorators.http import require_http_methods
 from app.market.models import Comment, MarketItemCollaborators
 

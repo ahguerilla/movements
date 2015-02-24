@@ -57,4 +57,4 @@ if settings.DEBUG:
                             url(r'^__debug__/', include(debug_toolbar.urls)),
                             )
 
-from .celery import app as celery_app
+from .celerytasks import app as celery_app

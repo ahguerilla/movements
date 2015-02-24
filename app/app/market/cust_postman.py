@@ -5,7 +5,7 @@ from postman.forms import FullReplyForm
 from postman.views import ConversationView
 from postman.models import Message
 
-from app.celery import new_postman_message
+from app.celerytasks import new_postman_message
 
 
 class MovementsReplyForm(FullReplyForm):

@@ -12,7 +12,7 @@ from app.market.api.utils import *
 import app.market as market
 from app.market.models import Questionnaire
 from app.market.forms import QuestionnaireForm
-from app.celery import update_notifications
+from app.celerytasks import update_notifications
 from app.market.api.utils import translate_text
 import bleach
 

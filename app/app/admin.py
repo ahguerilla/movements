@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from cms.extensions import PageExtensionAdmin
 
 from .models import NewsletterSignups, MenuExtension, NotificationPing
-from .celery import notification_ping
+from .celerytasks import notification_ping
 
 
 class MenuExtensionAdmin(PageExtensionAdmin):

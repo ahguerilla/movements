@@ -1,6 +1,6 @@
 from django import forms
 from postman.forms import WriteForm, FullReplyForm, QuickReplyForm
-from app.celery import on_market_item_creation, update_notifications, on_market_item_update
+from app.celerytasks import on_market_item_creation, update_notifications, on_market_item_update
 from django.utils.translation import ugettext_lazy as _
 
 import app.market as market
