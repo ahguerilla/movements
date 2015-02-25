@@ -20,7 +20,7 @@ def _dict_for_salesforce(market_item):
         'Movements_URL__c': settings.BASE_URL + reverse('show_post', args=[market_item.id]),
         'Request_Offer__c': market_item.item_type,
         'Request_Summary__c': market_item.details[:200],
-        'Resolution_Type__c': '',
+        'Resolution_Type__c': market_item.get_status_display(),
         'Screen_Name__c': market_item.owner.username,
         'Case_Comment__c': market_item.commentcount,
         'Case_Emails__c': market_item.email_rec_count,
