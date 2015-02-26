@@ -38,7 +38,7 @@
   {% endassets %}
 
 
-  {% if LANGUAGE_CODE == 'ar' %}
+  {% if LANGUAGE_CODE == 'ar' or LANGUAGE_CODE == 'fa' %}
     {% assets "css_language_ar" %}
       <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
     {% endassets %}

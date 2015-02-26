@@ -1016,7 +1016,7 @@ msgstr "کمک‌رسانی به مبارزه برای حقوق بشر."
 
 #: templates/base_v2.html:153
 msgid "The online platform that is opening closed societies."
-msgstr ""
+msgstr "بنیادی که در حال باز کردن جوامع بسته است."
 
 #: templates/base_v2.html:164
 msgid "Sign up"
@@ -2488,7 +2488,7 @@ msgstr ""
 #: templates/market/request_posted.html:13
 msgid ""
 "Thanks for creating your request on Movements.  Here’s what you can expect."
-msgstr ""
+msgstr "ممنون از ایجاد درخواستتان در «جنبش‌ها.» اینها مواردی هستند که می‌توانید انتظار داشته باشید."
 
 #: templates/market/request_posted.html:15
 msgid ""
@@ -2496,6 +2496,7 @@ msgid ""
 "your request.  If they are interested they will message you back either with "
 "a public comment or a Direct Message."
 msgstr ""
+"          هر شخصی که درخواست دریافت اخطارک در مورد موضوع مورد نظر شما کرده باشد ایمیلی دریافت خواهد کرد. اگر علاقه‌مند باشد با استفاده از کامنت عمومی یا «پیغام مستقیم» به شما پیغام خواهد فرستاد."
 
 #: templates/market/request_posted.html:16
 msgid ""
@@ -2503,6 +2504,7 @@ msgid ""
 "you’re looking for media coverage they may try to pitch your story.  If you "
 "need help with refugee status they’ll contact legal organizations."
 msgstr ""
+"          وبسایت «جنبش‌ها» به دنبال افراد یا مؤسساتی که می‌توانند مفید باشند خواهد بود. اگر شما به دنبال پوشش خبری هستید آنها ممکن است سعی در انتشار گزارش شما بکنند. اگر به پناهندگی احتیاج دارید آنها با مؤسسات حقوقی تماس خواهند گرفت."
 
 #: templates/market/request_posted.html:20
 msgid ""
@@ -2511,6 +2513,7 @@ msgid ""
 "story that you suggest in the future.   The lawyers on Movements may not "
 "have the time to get involved this week.  But they may have time next month."
 msgstr ""
+"هیچ‌گونه ضمانتی وجود ندارد. روزنامه‌نگارهایی که «جنبش‌ها» را دنبال می‌کنند ممکن است این ماه قادر به استفاده از گزارش شما نباشند اما بتوانند از دیگر داستان‌های شما در آینده استفاده کنند. وکلای حاضر در وبسایت «جنبش‌ها» ممکن است این هفته قادر به کمک نباشند اما ماه آینده زمان داشته باشند."
 
 #: templates/market/request_posted.html:23
 msgid ""
@@ -2518,24 +2521,25 @@ msgid ""
 "others on Movements (which would make you more interesting to them).  A "
 "lawyer might want to see the same thing."
 msgstr ""
+"یک روزنامه‌نگار ممکن است گزارش شما را بخواند و منتظر بماند تا ببیند آیا شما با دیگران در «جنبش‌ها» ارتباط برقرار می‌کنید یا خیر (که می‌تواند شما را برای آنها جالب‌تر بکند). یک وکیل ممکن است بخواهد چیزی مشابه با این ببیند."
 
 #: templates/market/request_posted.html:26
 msgid "Please read "
-msgstr ""
+msgstr "لطفاً "
 
 #: templates/market/request_posted.html:26
 msgid "How to make a good post on Movements"
-msgstr ""
+msgstr "چگونگی ایجاد یک پست خوب در جنبش‌ها"
 
 #: templates/market/request_posted.html:26
 msgid " for tips on making your request interesting to other users."
-msgstr ""
+msgstr " را مطالعه کنید تا به نکاتی در مورد جالب کردن درخواست خود برای دیگران پی ببرید."
 
 #: templates/market/request_posted.html:29
 msgid ""
 "Movements is not a magic wand.  (We wish it were!)  It’s just like any other "
 "social media – the more you participate the more benefit you’ll get."
-msgstr ""
+msgstr "وبسایت «جنبش‌ها» چوب جادو نیست (ای کاش بود!). این وبسایت مانند دیگر وبسایت‌ها است – هر چه بیشتر مشارکت کنید استفاده‌ی بیشتری می‌برید."
 
 #: templates/market/request_posted.html:36
 msgid "Return to Market"
