@@ -20,15 +20,15 @@ def _dict_for_salesforce(market_item):
         'Movements_URL__c': settings.BASE_URL + reverse('show_post', args=[market_item.id]),
         'Request_Offer__c': market_item.item_type,
         'Request_Summary__c': market_item.details[:200],
-        'Resolution_Type__c': '',
+        'Resolution_Type__c': market_item.get_status_display(),
         'Screen_Name__c': market_item.owner.username,
         'Case_Comment__c': market_item.commentcount,
         'Case_Emails__c': market_item.email_rec_count,
         'Case_Messages__c': market_item.total_msg_count,
         'Case_Views__c': market_item.total_view_count,
         'Date_Posted__c': market_item.pub_date.date().isoformat(),
-        'Skill__c': ';'.join([market_item.specific_skill] + [i.name for i in market_item.interests.all()]),
-        'Issues__c': ';'.join([market_item.specific_issue] + [i.issues for i in market_item.issues.all()]),
+        'Skill__c': ';'.join([market_item.specific_skill or ''] + [i.name for i in market_item.interests.all()]),
+        'Issues__c': ';'.join([market_item.specific_issue or ''] + [i.issues for i in market_item.issues.all()]),
         'Location__c': ';'.join([x.countries for x in market_item.countries.all()]),
     }
 
@@ -116,3 +116,9 @@ def update_market_item_stats():
     for record in MarketItemSalesforceRecord.objects.filter(needs_updating=True):
         _logger.info('Updating stats in salesforce for market item {0}'.format(record.item.id))
         add_market_item_to_salesforce(record.item)
+
+
+def run_backport():
+    items = MarketItem.objects.filter(salesforce=None)
+    for market_item in items:
+        add_market_item_to_salesforce(market_item)
