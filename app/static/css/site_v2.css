@@ -857,6 +857,9 @@ h6 {
   color: #808080;
 }
 .language-selector ul {
+  display: inline;
+  font-family: "LinotypeUnivers-330Light";
+  font-style: normal;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1882,7 +1885,8 @@ input.borderless-control:focus:invalid:focus {
   font-weight: bold;
   margin-top: 20px;
 }
-.view-post .post .translated_by {
+.translated_by {
+  cursor: pointer;
   font-weight: bold;
   margin-top: 20px;
 }

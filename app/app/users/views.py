@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from django.utils.translation import ugettext_lazy as _
 from models import (
-    UserProfile, OrganisationalRating, Language, Interest, Region)
+    UserProfile, OrganisationalRating, Language, Interest, Region, LanguageRating)
 from forms import (
     SettingsForm, UserForm, VettingForm, SignUpStartForm, SignupForm,
-    MoreAboutYouForm)
+    MoreAboutYouForm, LanguageRateForm)
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView
 from allauth.socialaccount.views import SignupView as SocialSignupView
@@ -102,7 +102,6 @@ def profile(request, user_name=None):
         user = User.objects.get(pk=request.user.id)
     else:
         user = get_object_or_404(User, username=user_name)
-
     # if the user isn't active, return a 404
     if not user.is_active:
         raise Http404
@@ -128,7 +127,8 @@ def profile(request, user_name=None):
                                   'is_self': is_self,
                                   'is_public': is_public,
                                   'visibility_settings': visibility_settings,
-                                  'ahr_rating': orate
+                                  'ahr_rating': orate,
+                                  'is_cm': request.user.userprofile.is_cm,
                               },
                               context_instance=RequestContext(request))
 
@@ -408,6 +408,39 @@ def vet_user(request, user_id):
         'vetted': user.is_active
     }
     return render_to_response('admin/auth/user/vet_user.html', ctx, context_instance=RequestContext(request))
+
+
+@staff_member_required
+def set_translation_rate(request, user_id):
+    user = User.objects.get(pk=user_id)
+    form = LanguageRateForm(request.POST or None, languages=user.userprofile.languages.all())
+
+    msg = ''
+    if request.method == 'POST' and form.is_valid():
+            try:
+                rating = LanguageRating.objects.get(
+                    language=form.cleaned_data.get('language'),
+                    user=user)
+            except:
+                rating = LanguageRating(user=user, language=form.cleaned_data.get('language'))
+            rating.rate = form.cleaned_data.get('rate')
+            rating.save()
+            log = LogEntry(user_id=request.user.id,
+                           content_type= ContentType.objects.get_for_model(User),
+                           object_id=user.id,
+                           object_repr=user.username,
+                           action_flag=2,
+                           change_message="lang rated")
+            log.save()
+            msg = 'User language rating updated'
+    ctx = {
+        'original': user,
+        'user': user,
+        'form': form,
+        'msg': msg,
+        'rates': LanguageRating.objects.filter(user=user)
+    }
+    return render_to_response('admin/auth/user/rate_lang.html', ctx, context_instance=RequestContext(request))
 
 
 @staff_member_required

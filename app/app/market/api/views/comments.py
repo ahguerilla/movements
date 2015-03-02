@@ -12,7 +12,7 @@ from app.market.models import Comment, MarketItemCollaborators
 def add_comment(request, obj_id, rtype):
     m_obj = get_object_or_404(market.models.MarketItem.objects.only('pk'), pk=obj_id)
     form = CommentForm(request.POST)
-    if form.is_valid():        
+    if form.is_valid():
         obj = form.save(request.user, m_obj)
         create_comment_notification.delay(m_obj, obj, request.user.username)
 
@@ -43,7 +43,7 @@ def get_comments(request, obj_id, count, rtype):
     retval = HttpResponse(json.dumps([c.getdict() for c in comments]),
                           mimetype="application" + rtype)
     return retval
-    
+
 
 @login_required
 def edit_comment(request, obj_id, rtype):

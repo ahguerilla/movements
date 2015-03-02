@@ -14,6 +14,11 @@ collectstatic:
 sm:
 	cd app && python manage.py schemamigration $(app) --auto --settings=app.settings.local
 
+smm:
+	cd app && \
+	python manage.py schemamigration $(app) --auto --settings=app.settings.local && \
+	python manage.py migrate --settings=app.settings.local
+
 smi:
 	cd app && python manage.py schemamigration $(app) --initial --settings=app.settings.local
 
@@ -33,10 +38,10 @@ runlocal:
 	cd app && python manage.py runserver --settings=app.settings.local
 
 runlocalext:
-	cd app && python manage.py runserver 0.0.0.0:8000 --settings=app.settings.local
+	cd app && python manage.py runserver 0.0.0.0:8000 --settings=app.settings.local_settings
 
 shell:
-	cd app && python manage.py shell --settings=app.settings.local
+	cd app && python manage.py shell --settings=app.settings.local_settings
 
 runprod:
 	cd app && python manage.py runserver --settings=app.settings.production
@@ -53,7 +58,11 @@ fixtures:
 	python manage.py loaddata users_countriesfixtures --settings=app.settings.local && \
 	python manage.py loaddata users_issuesfixtures --settings=app.settings.local && \
 	python manage.py loaddata users_residencefixtures --settings=app.settings.local && \
-	python manage.py loaddata users_skillsfixtures --settings=app.settings.local
+	python manage.py loaddata users_skillsfixtures --settings=app.settings.local && \
+	python manage.py loaddata questionnaires --settings=app.settings.local && \
+	python manage.py loaddata social_local_settings --settings=app.settings.local && \
+	python manage.py loaddata users_languages --settings=app.settings.local && \
+	python manage.py loaddata users_regions --settings=app.settings.local
 
 dev-social:
 	cd app && \
@@ -65,7 +74,7 @@ staging-social:
 
 celery:
 	cd app && \
-	celery -A tasks.celeryworker worker
+	celery -A tasks.celeryworker worker -B
 
 fixturesJune14:
 	cd app && \
@@ -74,3 +83,10 @@ fixturesJune14:
 	python manage.py loaddata users_languages.json --settings=app.settings.local && \
 	python manage.py loaddata users_regions.json --settings=app.settings.local && \
 	python manage.py loaddata users_country_region.json --settings=app.settings.local
+
+market:
+	cd app && \
+	python manage.py migrate market 0055 --settings=app.settings.local_settings && \
+	python manage.py schemamigration market --auto --update --settings=app.settings.local_settings && \
+	python manage.py migrate market --settings=app.settings.local_settings
+

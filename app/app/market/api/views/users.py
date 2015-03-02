@@ -4,6 +4,8 @@ import re
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.models import LogEntry
+from django.contrib.contenttypes.models import ContentType
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
@@ -195,3 +197,40 @@ def get_user_details(username):
         raise Http404
     orate = users.models.OrganisationalRating.objects.filter(user=user).all()
     return (user, user_profile, orate)
+
+
+def user_language_rate(request, user_id):
+    result = {}
+    if not request.user.userprofile.is_cm:
+        result.update({'error': 'Has no permission. Only CMs are allowed.'})
+    else:
+        try:
+            userprofile = users.models.UserProfile.objects.get(user_id=user_id)
+        except users.models.UserProfile.DoesNotExist:
+            result.update({'error': 'Invalid user ID or profile DoesNotExist.'})
+        else:
+            result.update({'languages': list(userprofile.languages.values('name', 'pk'))})
+            form = users.forms.LanguageRateForm(request.POST or None, languages=userprofile.languages.all())
+            if request.method == 'POST' and form.is_valid():
+                try:
+                    rating = users.models.LanguageRating.objects.get(
+                        language=form.cleaned_data.get('language'),
+                        user_id=user_id)
+                except users.models.LanguageRating.DoesNotExist:
+                    rating = users.models.LanguageRating(user_id=user_id, language=form.cleaned_data.get('language'))
+                rating.rate = form.cleaned_data.get('rate')
+                rating.save()
+                log = LogEntry(user_id=request.user.id,
+                               content_type= ContentType.objects.get_for_model(users.models.User),
+                               object_id=user_id,
+                               object_repr=userprofile.user.username,
+                               action_flag=2,
+                               change_message="user language rated")
+                log.save()
+                result.update({'msg': 'User language rating updated'})
+            result.update({
+                'errors': form.errors,
+                'rates': list(users.models.LanguageRating.objects.filter(
+                    user_id=user_id).values('rate', 'language__name', 'language_id')),
+                })
+    return HttpResponse(json.dumps(result), mimetype="application/json")

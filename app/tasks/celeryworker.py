@@ -10,7 +10,7 @@ from celery import Celery
 from threading import Thread
 from django.conf import settings
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings.local')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings.local_settings')
 _app = Celery('celerytasks', broker='amqp://guest@localhost//')
 _app.config_from_object('django.conf:settings')
 _app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)

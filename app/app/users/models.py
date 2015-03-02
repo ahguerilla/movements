@@ -166,6 +166,7 @@ class UserProfile(models.Model):
     regions = models.ManyToManyField(Region, blank=True, null=True)
     interests = models.ManyToManyField(Interest, blank=True, null=True)
 
+    trans_rating = models.FloatField(_('Rated by AHR'), default=0)
     is_cm = models.BooleanField(_('community manager'), default=False)
     is_organisation = models.BooleanField(_('organisation'), default=False)
     is_individual = models.BooleanField(_('individual'), default=True)
@@ -223,6 +224,15 @@ class OrganisationalRating(models.Model):
     rated_by_ahr = models.IntegerField(_('Rated by AHR'), default=0, choices=ahr_rating)
 
 
+lang_rating = [
+    (1, '1 star'),
+    (2, '2 stars'),
+    (3, '3 stars'),
+    (4, '4 stars'),
+    (5, '5 stars'),
+]
+
+
 class UserRate(models.Model):
     owner = models.ForeignKey(auth.models.User, blank=True)
     user = models.ForeignKey(auth.models.User, null=True, blank=True, related_name='rates')
@@ -241,3 +251,17 @@ class UserRate(models.Model):
             self.user.userprofile.score = (int(self.score) + sum([rate.score for rate in rates]))/float(self.user.userprofile.ratecount)
         self.user.userprofile.save_base()
         super(UserRate,self).save(*args,**kwargs)
+
+
+class LanguageRating(models.Model):
+    user = models.ForeignKey(User)
+    language = models.ForeignKey(Language)
+    rate = models.IntegerField(_('Rated by AHR'), default=0, choices=lang_rating)
+
+    def __unicode__(self):
+        return u'%s' % self.language
+
+    def save(self, *args, **kwargs):
+        super(LanguageRating, self).save(*args,**kwargs)
+        self.user.userprofile.trans_rating = LanguageRating.objects.filter(user=self.user).aggregate(models.Max('rate')).get('rate__max', 0)
+        self.user.userprofile.save()

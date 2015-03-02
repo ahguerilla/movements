@@ -1,0 +1,59 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label='auth' %}">Auth</a>
+&rsaquo; <a href="/admin/auth/user">{{ 'Users'|capfirst }}</a>
+&rsaquo; <a href="/admin/auth/user/{{ original.pk }}">{{ original|truncatewords:"18" }}</a>
+&rsaquo; {% trans 'Vet User' %}
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <form action="" method="post">
+    {% csrf_token %}{% block form_top %}{% endblock %}
+    <div>
+      {% if form.errors %}
+        <p class="errornote">
+        {% blocktrans count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+        </p>
+      {% endif %}
+      <p>{% trans "This is where you can verify a translator's language skills by Movements.org, the star ratings mean this:" %}</p>
+      <ul>
+        <li>{% trans "1 Star: Beginner - Has a basic understanding of this language. User can not translate on the Movements.org website." %}</li>
+        <li>{% trans "2 Stars: Intermediate - Has a good understanding of this language. User can not translate on the Movemetns.org website." %}</li>
+        <li>{% trans "3 Stars: Advanced -  Can make translations. Is fluent in this language." %}</li>
+        <li>{% trans "4 Stars: Trusted Translator - Has experience in translation work. Can make translations and corrections." %}</li>
+        <li>{% trans "5 Stars: Personally known by Movements.org and is a Trusted Translator. Can make translations and corrections." %}</li>
+      </ul>
+      <p>You are changing  <strong>{{ original }}</strong> language rating, who provided the email <strong>{{ original.email }}</strong> which they <strong>have {% if not email_verified %}not{% endif %} verified</strong> through the system.</p>
+      {% if rates %}
+        <p>Current user language ratings are:</p>
+        {% for rate in rates %}
+          <p>{{ rate.language }}: {{ rate.get_rate_display }}</p> 
+        {% endfor %}
+      {% endif %}
+      <p>Current overall user raing is - {{ original.userprofile.trans_rating }}</p>
+      <div>
+        <p>Chose language: {{ form.language }}</p>
+        <p>{{ form.language.errors }}</p>
+        <p>Rate language: {{ form.rate }}</p>
+        <p>{{ form.rate.errors }}</p>
+      </div>
+      {% if msg %}
+      <div style="border: 1px solid teal; padding: 10px; font-size: 1.2em; color: teal; margin-bottom: 5px;">
+        {{ msg }}
+      </div>
+      {% endif %}
+      <div>
+        <input type="submit" value="{% trans 'Update' %}"  />
+      </div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript" src='/static/js/lib/jquery-1.11.0.min.js'></script>
+{% endblock %}

@@ -6,13 +6,15 @@
       'click .report': 'showReportForm',
       'click .delete-comment': 'deleteComment',
       'click .tweet': 'shareTwitter',
-      'click .translated_by a': 'changeTranslation',
+      // 'click .translated_by a': 'changeTranslation',
+      'click div.post .translated_by a': 'changePostTranslation',
+      'click div.comment-body .translated_by a': 'changeCommentTranslation',
     },
     initialize: function(options) {
       this.options = options;
       this.$commentsLoading = this.$el.find('.comment-list .loader');
       this.$commentListContent = this.$el.find('.comment-list .content');
-      this.$commentListTemplate = _.template($('#comment-list-template').html());
+      this.$commentTemplate = _.template($('#comment-template').html());
       this.$commentText = this.$el.find('.comments form textarea');
       this.$submitButton = this.$el.find('.comments form button');
       this.loadComments();
@@ -24,37 +26,39 @@
       // Auto-Google-Translate the post title and body.
       var translate_url = $(".view-post").data('default_translate_url');
       if (translate_url) {
-        $.ajax({
-          url: translate_url,
-          type: 'GET',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response === "success") {
-              var user_lang = translate_url.replace('?human=false', '').slice(-3, -1);
-              if(user_lang === data.source_language){
-                $('#post-body-translated').text('');
-                $('div.translated_by').hide();
-              } else {
-                $('#post-title').text(data.title);
-                $('#post-body-translated').text(data.details);
-                if (data.status == 4) {
-                  $('div.translated_by a.user').html(data.username).attr('data-translate_url', translate_url);
-                  $('div.translated_by a.google').attr('data-translate_url', translate_url + '?human=false');
-                  $('div.translated_by span').show();
-                } else {
-                  $('div.translated_by span').hide();
-                  $('div.translated_by a.google').attr('data-translate_url', '');
-                }
-                $('div.translated_by').show();
-              }
-            } else {
-              $('#post-body-translated').html('<p><span style="color:red">Unable to provide translation</span></p>');
-            }
-          },
-          error: function (){
-            $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
-          }
-        });
+        this.translate(translate_url);
+
+        // $.ajax({
+        //   url: translate_url,
+        //   type: 'GET',
+        //   dataType: 'json',
+        //   success: function (data) {
+        //     if(data.response === "success") {
+        //       var user_lang = translate_url.replace('?human=false', '').slice(-3, -1);
+        //       if(user_lang === data.source_language){
+        //         $('#post-body-translated').text('');
+        //         $('div.translated_by').hide();
+        //       } else {
+        //         $('#post-title').text(data.title);
+        //         $('#post-body-translated').text(data.details);
+        //         if (data.status == 4) {
+        //           $('div.translated_by a.user').html(data.username).attr('data-translate_url', translate_url);
+        //           $('div.translated_by a.google').attr('data-translate_url', translate_url + '?human=false');
+        //           $('div.translated_by span').show();
+        //         } else {
+        //           $('div.translated_by span').hide();
+        //           $('div.translated_by a.google').attr('data-translate_url', '');
+        //         }
+        //         $('div.translated_by').show();
+        //       }
+        //     } else {
+        //       $('#post-body-translated').html('<p><span style="color:red">Unable to provide translation</span></p>');
+        //     }
+        //   },
+        //   error: function (){
+        //     $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+        //   }
+        // });
       }
     },
     linkifyContent: function(){
@@ -79,17 +83,22 @@
       });
       var self = this;
       $('.translate span').on('shown.bs.popover', function() {
-        $('.language-selector ul li').click(function () {
-          var translate_url = $(this).data("translate_url");
-          if (translate_url) {
-            self.translate(translate_url);
+        $('#translate-menu-container .language-selector ul li').click(function () {
+          var url = $(this).data("translate_url");
+          if (url) {
+            self.translate(url);
           }
+          var lang = url.replace('?human=false', '').slice(-3);
+          _.each($('.comment'), function (comment) {
+            self.translateComment($(comment).data('translate-language-url').slice(0, -3) + lang, $(comment));
+          });
         });
       });
     },
 
     translate: function(translate_url) {
       var self = this;
+      var post = $(".post");
       $.ajax({
         url: translate_url,
         type: 'GET',
@@ -97,41 +106,85 @@
         success: function (data) {
           if(data.response === "success") {
             var trans_lang = translate_url.replace('?human=false', '').slice(-3, -1);
-            $('#post-title').text(data.title);
+            $('#post-title').text(data.title_translated);
             if(trans_lang === data.source_language){
-              $('#post-body-translated').text("");
-              $('div.translated_by').hide();
+              post.find('#post-body-translated').text("").hide();
+              post.find('div.translated_by').hide();
             } else {
-              $('#post-body-translated').text(data.details);
+              post.find('#post-body-translated').text(data.details_translated).show();
               if (data.status == 4) {
-                $('div.translated_by a.user').html(data.username).attr('data-translate_url', translate_url);
-                $('div.translated_by a.google').attr('data-translate_url', translate_url + '?human=false');
-                $('div.translated_by span').show();
+                post.find('div.translated_by a.user').html(data.username).attr('data-translate_url', translate_url);
+                post.find('div.translated_by a.google').attr('data-translate_url', translate_url.replace('?human=false', '') + '?human=false');
+                post.find('div.translated_by span').show();
               } else if (!data.human_aviable) {
-                $('div.translated_by span').hide();
-                $('div.translated_by a.user').attr('data-translate_url', '');
+                post.find('div.translated_by span').hide();
+                post.find('div.translated_by a.user').attr('data-translate_url', '');
               }
-              $('div.translated_by').show();
+              post.find('div.translated_by').show();
             }
             self.linkifyContent();
           } else {
-            $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+            post.find('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>').show();
           }
           $('.translate span').popover('hide');
         },
         error: function (){
-          $('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+          post.find('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>').show();
           $('.translate span').popover('hide');
         }
       });
     },
 
-    changeTranslation: function(ev) {
+    changePostTranslation: function(ev) {
       ev.preventDefault();
       var url = $(ev.currentTarget).data('translate_url');
       if (url) {
         this.translate(url);
       }
+    },
+
+    changeCommentTranslation: function(ev) {
+      ev.preventDefault();
+      var url = $(ev.currentTarget).data('translate_url');
+      var comment = $(ev.currentTarget).parents('div.comment');
+      if (url) {
+        this.translateComment(url, comment);
+      }
+    },
+
+    translateComment: function(url, object) {
+      $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+          if(data.response === "success") {
+              var _url = url.replace('?human=false', '');
+              if(_url.slice(-3, -1) === data.source_language){
+                object.find('#comment-body-translated').text('').hide();
+                object.find('div.translated_by').hide();
+              } else {
+                object.find('#comment-body-translated').text(data.details_translated).show();
+                if (data.status == 4) {
+                  object.find('div.translated_by a.user').html(data.username).attr('data-translate_url', _url);
+                  object.find('div.translated_by a.google').attr('data-translate_url', _url + '?human=false');
+                  object.find('div.translated_by span').show();
+                } else if (!data.human_aviable) {
+                  object.find('div.translated_by span').hide();
+                  object.find('div.translated_by a.user').attr('data-translate_url', '');
+                }
+                object.find('div.translated_by').show();
+              }
+            } else {
+              object.find('#comment-body-translated').text('').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+              object.find('div.translated_by').hide();
+            }
+          },
+        error: function (){
+          object.find('#comment-body-translated').text('').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+          object.find('div.translated_by').hide();
+        }
+      });
     },
 
     shareTwitter: function(ev) {
@@ -168,6 +221,7 @@
       ev.preventDefault();
       this.report_widget.showReport(ev.currentTarget.getAttribute('report_url'));
     },
+
     loadComments: function() {
       this.$submitButton.removeAttr('disabled');
       this.$commentsLoading.show();
@@ -179,15 +233,27 @@
         error: this.problemFetchingComments
       });
     },
+
     renderCommentList: function(comments) {
-      var rendered  = this.$commentListTemplate({comments: comments});
-      this.$commentListContent.html(rendered)
+      var self = this;
+      self.$commentListContent.html('');
+      _.each(comments, function(item) {
+        var comment_html = self.$commentTemplate(item.fields);
+        self.$commentListContent.append(comment_html);
+        // Auto-Google-Translate the post title for each item.
+        var comment = $('.comment[comment_id="' + item.pk + '"]');
+        if (item.fields.translate_language_url && item.fields.source_lang != item.fields.translate_language_url.slice(-3, -1)) {
+          self.translateComment(item.fields.translate_language_url, comment);
+        }
+      });
       this.$commentsLoading.hide();
     },
+
     problemFetchingComments: function() {
       this.$commentsLoading.hide();
       this.$commentListContent.html('There was a problem fetching the comments');
     },
+
     submitComment: function(ev) {
       ev.preventDefault();
       var contents = this.$commentText.val();
@@ -204,6 +270,7 @@
         success: this.loadComments
       })
     },
+
     deleteComment: function(ev) {
       var $comment = $(ev.currentTarget);
       ev.preventDefault();
@@ -225,14 +292,15 @@
           }
         }
       })
-    }
+    },
   });
 
   TranslationData = Backbone.Model.extend({
+    idAttribute: "id",
 
     defaults: {
-      is_translator: false,
-      is_cm: false,
+      is_translator: true,
+      is_cm: true,
       active: false,
       status: null,
       correction: false,
@@ -248,33 +316,38 @@
       prev_text: null,
       display_title: null,
       display_text: null,
+      id: null,
     },
   });
 
   TranslateView = Backbone.View.extend({
-    el: $('#translation-container'),
+    // el: $('#post-translation-container'),
+    el: $('div.view-post'),
 
     events: {
-        "click button#take_in": "TakeIn",
-        "click button#done": "Done",
-        "click button#take_off": "Take_off",
-        "click button#confirm": "Confirm",
-        "click button#revoke": "Revoke",
-        "click button#edit": "Edit",
-        "click button#correction": "Correction",
+        "click a.post-pre-init": "preInit",
+        "click div.post-actions div.language-selector li": "Init",
+        "click #post-translation-container button#take_in": "TakeIn",
+        "click #post-translation-container button#done": "Done",
+        "click #post-translation-container button#take_off": "Take_off",
+        "click #post-translation-container button#confirm": "Confirm",
+        "click #post-translation-container button#revoke": "Revoke",
+        "click #post-translation-container button#edit": "Edit",
+        "click #post-translation-container button#correction": "Correction",
     },
 
     initialize: function(options){
+      this.$MenuTemplate = _.template($('#init-languages-menu-template').html());
       this.$areaTemplate = _.template($('#translation-area').html());
+      this.$areaContainer = this.$el.find('#post-translation-container');
+      this.$PostinitMenuarea = $('div.post-languages-menu');
       this.data = new TranslationData();
       this.data.set(options);
-      this.initTranslationPopup();
       this.render();
     },
 
     render: function(){
       var self = this;
-      console.log(this.data.attributes);
       if (this.data.get('status') == 3) {
 
         // title
@@ -297,49 +370,94 @@
         });
         self.data.set('display_text', display_text);
       }
-      this.$el.html( this.$areaTemplate(this.data.attributes) );
-      this.$form = this.$el.find('form');
+      this.$areaContainer.html( this.$areaTemplate(this.data.attributes) );
+      this.$form = this.$areaContainer.find('form');
     },
 
-    initTranslationPopup: function(){
-      var popup_element = $('li .translate');
-      popup_element.popover({
-        title: '',
-        html: true,
-        content: $('#translator-menu-template').html(),  // using simple as translate, but need urls to be changed
-        container: '#translation-menu-container',
-        placement: 'top'
-      });
+    preInit: function(ev){
+      ev.preventDefault();
       var self = this;
-      popup_element.on('shown.bs.popover', function() {
-        $('.language-selector ul li').click(function () {
-          var url = $(this).data("init-url");
-          // alert(url);
-          if (url) {
-            $.ajax({
-              url: url,
-              type: 'GET',
-              dataType: 'json',
-              success: function (data) {
-                if(data.response == "success") {
-                  self.data.set(data);
-                }
-                self.render();
-                self.$el.show();
-                popup_element.popover('hide');
-              },
-              error: function (){
-                popup_element.popover('hide');
-              }
+      var popup_element = self.$PostinitMenuarea.find('span');
+      var container = self.$PostinitMenuarea.find('#post-languages-menu-container');
+      if (container.html() == '') {
+        $.ajax({
+          url: $(ev.currentTarget).attr('href'),
+          data: {'object_id': $(ev.currentTarget).attr('obj_id')},
+          type: 'POST',
+          dataType: 'json',
+          success: function (data) {
+            popup_element.popover({
+              trigger: 'manual',
+              title: '',
+              html: true,
+              content: self.$MenuTemplate(data),
+              container: container,
+              placement: 'top'
             });
-          }
+            popup_element.popover('show');
+          },
         });
-      });
+      } else {
+        popup_element.popover('toggle')
+      }
     },
+
+    Init: function(ev) {
+      this.$PostinitMenuarea.find('span').popover('toggle'); // toggle popover
+      var self = this;
+      $.ajax({
+        url: $(ev.currentTarget).data('api-url'),
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+          if(data.response == "success") {
+            self.data.set(data);
+          }
+          self.render();
+          self.$areaContainer.show();
+          self.$PostinitMenuarea.find('span').popover('hide');
+        },
+      });
+
+    },
+
+
+    // initTranslationPopup: function(){
+    //   var popup_element = $('li .translate');
+    //   popup_element.popover({
+    //     title: '',
+    //     html: true,
+    //     content: $('#translator-menu-template').html(),  // using simple as translate, but need urls to be changed
+    //     container: '#post-languages-menu-container',
+    //     placement: 'top'
+    //   });
+    //   var self = this;
+    //   popup_element.on('shown.bs.popover', function() {
+    //     $('#post-languages-menu-container .language-selector ul li').click(function () {
+    //       var url = $(this).data("init-url");
+    //       if (url) {
+    //         $.ajax({
+    //           url: url,
+    //           type: 'GET',
+    //           dataType: 'json',
+    //           success: function (data) {
+    //             if(data.response == "success") {
+    //               self.data.set(data);
+    //             }
+    //             self.render();
+    //             self.$el.show();
+    //             popup_element.popover('hide');
+    //           },
+    //           error: function (){
+    //             popup_element.popover('hide');
+    //           }
+    //         });
+    //       }
+    //     });
+    //   });
+    // },
 
     TakeIn: function( event ){
-      // event.preventDefault();
-      // Button clicked, you can access the element that was clicked with event.currentTarget
       var url = this.data.get('take_in_url');
       var self = this;
       if (url) {
@@ -361,10 +479,8 @@
     },
 
     Done: function( event ){
-      // event.preventDefault();
       var self = this;
       var url = self.data.get('done_url');
-      // var form = $(event.currentTarget).parents('form');
       var data = self.$form.serialize();
       if (url) {
         $.ajax({
@@ -389,8 +505,6 @@
     },
 
     Take_off: function( event ){
-      // event.preventDefault();
-      // Button clicked, you can access the element that was clicked with event.currentTarget
       var url = this.data.get('take_off');
       var self = this;
       if (url) {
@@ -411,8 +525,6 @@
     },
 
     Confirm: function( event ){
-      // event.preventDefault();
-      // Button clicked, you can access the element that was clicked with event.currentTarget
       var self = this;
       var url = self.data.get('approval_url');
       var data = [];
@@ -428,17 +540,15 @@
           success: function (data) {
             if(data.response == "success") {
               location.reload();
-            } else if (data.response == "error") {
-              alert('Error: something is bad. Please reload the page and try again.');
+            } else {
+              alert(data.error);
             }
           },
         });
       }
     },
 
-    Revoke: function( event ){
-      // event.preventDefault();
-      // Button clicked, you can access the element that was clicked with event.currentTarget
+    Revoke: function(ev){
       var url = this.data.get('revoke_url');
       var self = this;
       if (url) {
@@ -458,9 +568,7 @@
       this.render();
     },
 
-    Correction: function( event ){
-      // event.preventDefault();
-      // Button clicked, you can access the element that was clicked with event.currentTarget
+    Correction: function(ev){
       var url = this.data.get('correction_url');
       var self = this;
       if (url) {
@@ -472,7 +580,7 @@
             if(data.response == "success") {
               location.reload();
             } else if (data.response == "error") {
-              alert('Error: something is bad');
+              alert(data.error);
             }
           },
         });
@@ -493,12 +601,268 @@
 
   });
 
+  commentsTranslateView = Backbone.View.extend({
+    el: $('div.comment-list'),
+
+    events: {
+        "click a.comment-pre-init": "preInit",
+        "click div.comment div.language-selector li": "Init",
+        "click div.comment button#take_in": "TakeIn",
+        "click div.comment button#done": "Done",
+        "click div.comment button#take_off": "Take_off",
+        "click div.comment button#confirm": "Confirm",
+        "click div.comment button#revoke": "Revoke",
+        "click div.comment button#edit": "Edit",
+        "click div.comment button#correction": "Correction",
+    },
+
+    getComment: function(ev){
+      this.comment = $(ev.currentTarget).parents('div.comment');
+      this.comment_id = this.comment.attr('comment_id');
+      this.comment_data = this.dataStorage.get(this.comment_id);
+      this.$form = this.comment.find('form');
+    },
+
+    preInit: function(ev){
+      ev.preventDefault();
+      this.getComment(ev);
+      var self = this;
+      var popup_element = self.comment.find('div.comment-languages-menu span');
+      if (self.comment.find('#comment-languages-menu-container').html() == '') {
+        $.ajax({
+          url: $(ev.currentTarget).attr('href'),
+          data: {'object_id': self.comment_id},
+          type: 'POST',
+          dataType: 'json',
+          success: function (data) {
+            var menu = self.$MenuTemplate(data)
+            popup_element.popover({
+              trigger: 'manual',
+              title: '',
+              html: true,
+              content: menu,
+              container: self.comment.find('#comment-languages-menu-container'),
+              placement: 'top'
+            });
+            popup_element.popover('show');
+          },
+        });
+      } else {
+        popup_element.popover('toggle')
+      }
+    },
+
+    Init: function(ev) {
+      this.getComment(ev);
+      this.comment.find('div.comment-languages-menu span').popover('toggle'); // toggle popover
+      var self = this;
+      $.ajax({
+        url: $(ev.currentTarget).data('api-url'),
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+          if (data.response == 'success') {
+            self.dataStorage.set(data);
+            self.render(self.comment_id);
+          } else {
+            alert('Failed to fetch translation record. The object DoesNotExist or DB is to busy.');
+          }
+        },
+        error: function () {
+            alert('Failed to fetch record. The object DoesNotExist or DB is to busy.');
+        }
+      });
+
+    },
+
+    initialize: function(options){
+      this.$MenuTemplate = _.template($('#init-languages-menu-template').html());
+      this.$areaTemplate = _.template($('#comment-translation-area').html());
+      var collection = Backbone.Collection.extend({model: TranslationData});
+      this.dataStorage = new collection;
+    },
+
+    render: function(comment_id){
+      this.comment = $('div.comment[comment_id="' + comment_id + '"]');
+      this.comment_id = comment_id
+      this.comment_data = this.dataStorage.get(this.comment_id);
+      if (this.comment_data.get('status') == 3) {
+        var diff = JsDiff.diffChars(this.comment_data.get('prev_text'), this.comment_data.get('details_translated'));
+        var display_text= '';
+        diff.forEach(function(part){
+          var color = part.added ? 'green' :
+            part.removed ? 'red' : 'grey';
+          display_text += '<span style="color:' + color + ';">' + part.value + '</span>'
+        });
+        this.comment_data.set('display_text', display_text);
+        this.dataStorage.set(this.comment_data);
+      }
+      this.comment.find('#comment-translation-container').html( this.$areaTemplate(this.comment_data.attributes) ).show();
+    },
+
+    TakeIn: function(ev){
+      this.getComment(ev);
+      var url = this.comment_data.get('take_in_url');
+      var self = this;
+      if (url) {
+        $.ajax({
+          url: url,
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+            if(data.response == "success") {
+              self.comment_data.set(data);
+              self.comment_data.set({take_in_url: null});
+              self.dataStorage.set(self.comment_data);
+            } else if (data.response == "error") {
+              alert(data.error);
+            }
+            self.render(self.comment_id);
+          },
+        });
+      }
+    },
+
+    Done: function(ev){
+      this.getComment(ev);
+      var self = this;
+      var url = self.comment_data.get('done_url');
+      if (url) {
+        $.ajax({
+          url: url,
+          data: self.$form.serialize(),
+          type: 'POST',
+          dataType: 'json',
+          success: function (data) {
+            if(data.response == "success") {
+              self.comment_data.set(data);
+              self.comment_data.set({
+                active: false,
+                status: 3,
+                details_translated: self.$form.find('textarea[name="details_translated"]').val(),
+              });
+              self.dataStorage.set(self.comment_data);
+              self.render(self.comment_id);
+            } else {
+              alert(data.error);
+            }
+          },
+        });
+      }
+    },
+
+    Take_off: function(ev){
+      this.getComment(ev);
+      var self = this;
+      var url = self.comment_data.get('take_off');
+      if (url) {
+        $.ajax({
+          url: url,
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+            if (data.response == 'success') {
+              self.comment_data.set({
+                active: false,
+                status: 0,
+                take_in_url: data.take_in_url
+              });
+              self.render(self.comment_id);
+              } else {
+                alert(data.error);
+              }
+          },
+        });
+      }
+    },
+
+    Confirm: function(ev){
+      this.getComment(ev);
+      var url = this.comment_data.get('approval_url');
+      var data = [];
+      if (this.comment_data.get('active') && this.comment_data.get('status') == 3) {
+        data = this.$form.serialize();
+      }
+      if (url) {
+        $.ajax({
+          url: url,
+          data: data,
+          type: 'POST',
+          dataType: 'json',
+          success: function (data) {
+            if(data.response == "success") {
+              location.reload();
+            } else {
+              alert(data.error);
+            }
+          },
+        });
+      }
+    },
+
+    Edit: function(ev){
+      this.getComment(ev);
+      var active = this.comment_data.get('active');
+      if (active && confirm('Are you sure you wish to cancel your edit? This translation will revert to it\'s original post.')) {
+        this.comment_data.set({active: !active});
+      } else if (!active) {
+        this.comment_data.set({active: !active});
+      }
+      this.dataStorage.set(this.comment_data);
+      this.render(this.comment_id);
+    },
+
+    Revoke: function(ev){
+      this.getComment(ev);
+      var url = this.comment_data.get('revoke_url');
+      if (url) {
+        $.ajax({
+          url: url,
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+            if(data.response == "success") {
+              location.reload();
+            } else {
+              alert(data.error);
+            }
+          },
+        });
+      }
+    },
+
+    Correction: function(ev){
+      this.getComment(ev);
+      var url = this.comment_data.get('correction_url');
+      if (url) {
+        $.ajax({
+          url: url,
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+            if(data.response == "success") {
+              location.reload();
+            } else {
+              alert(data.error);
+            }
+          },
+        });
+      }
+    },
+
+  });
+
+
   global.ahr.initViewPost = function (options) {
     new PostView({el: '.view-post', getCommentsUrl: options.getCommentsUrl, addCommentUrl: options.addCommentUrl, deleteCommentUrl: options.deleteCommentUrl});
   };
 
   global.ahr.initViewPostTranslation = function (options) {
     new TranslateView(options);
+  };
+
+  global.ahr.commentsTranslateView = function (options) {
+    new commentsTranslateView(options);
   };
 
 })(window);

@@ -4,7 +4,7 @@ from tasks.celerytasks import create_notification, update_notifications
 from django.utils.translation import ugettext_lazy as _
 
 import app.market as market
-from app.market.api.utils import detect_language
+from app.market.models.translation import detect_language
 from app.users.forms import CheckboxSelectMultiple, RegionAccordionSelectMultiple
 
 
@@ -98,6 +98,9 @@ class CommentForm(forms.ModelForm):
     def save(self, owner, item, commit=True):
         self.instance.owner = owner
         self.instance.item = item
+        lang = detect_language(self.instance.contents)
+        if lang:
+            self.instance.language = lang
         return super(CommentForm, self).save(commit=commit)
 
 

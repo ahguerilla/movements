@@ -18,7 +18,8 @@ class UserProfileInline(admin.StackedInline):
 
 class UserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
-    list_display = ('username', 'email', 'first_name', 'last_name', 'star_rating', 'rated_by')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'lang_rating', 'star_rating', 'rated_by')
+    list_filter = UserAdmin.list_filter + ('userprofile__skills',)
 
     def star_rating(self, obj):
         try:
@@ -38,12 +39,22 @@ class UserAdmin(UserAdmin):
     vetting.process = 'Process'
     vetting.allow_tags = True
 
-    def rated_by(self,obj):
+    def rated_by(self, obj):
         log = LogEntry.objects.filter(object_id = obj.id).all()
         if len(log) > 0:
             return log[0].user.username
         else:
             return ''
+
+    def lang_rating(self, obj):
+        try:
+            rating = obj.userprofile.trans_rating
+            rate_url = reverse('set_translation_rate', args=(obj.id,))
+            return u'{0} (<a href="{1}" target="_blank" alt="rate">Rate</a>)'.format(rating, rate_url)
+        except:
+            return 'No profile'
+    lang_rating.allow_tags = True
+
 
 class SkillsAdmin(TranslationAdmin):
     list_display = ('skills',)

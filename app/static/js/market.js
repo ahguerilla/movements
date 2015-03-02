@@ -841,7 +841,6 @@ $(function () {
                     var langCode = theItem.fields.translate_language_url.slice(-3, -1);
                     if(langCode != data.source_language){
                       post.find('.title').text(data.title);
-                      console.log(data.status);
                       if (data.status == 4) {
                         post.find('.user-translated-text span').html(data.username);
                         post.find('.user-translated-text').show();

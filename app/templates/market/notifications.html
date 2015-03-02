@@ -25,14 +25,28 @@
         <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
       </div>
       <div class="details<% if (!notif.seen) { %> new<% } %>">
+        {# translation notification #}
         <% if (notif.translation) { %>
+          {# translation object status #}
           <% if (notif.reminder == true) { %>
             {% trans 'It is a reminder. The object status is' %}
           <% } else { %>
             {% trans 'The object translation status changed to' %}
           <% } %>
           - <%- notif.get_translation_display %> (<%- notif.language %>)
-          <% if (notif.item_type) { %>
+          
+          <% if (notif.comment) { %>
+            {# comment attached #}
+            {% trans "Comment" %}: "<%- notif.comment_contents %>" to 
+            <% if (notif.item_type == "offer") { %>
+              {% trans "offer" %}
+            <% } else { %>
+              {% trans "request" %}
+            <% } %>
+          <a href="/market/<%- notif.item_id %>" style="display:inline-block;">"<%- notif.text.title %>"
+            </a>
+          <% } else if (notif.item_type) { %>
+            {# post attached #}
             <br>
             <% if (notif.item_type == "offer") { %>
               {% trans "Offer" %}
@@ -42,13 +56,17 @@
             <a href="/market/<%- notif.item_id %>">
               "<%- notif.text.title %>"
             </a>
-            <% if (notif.timeto) { %>
-              {% trans 'You have until' %} <%- notif.timeto %> {% trans 'to complete this translation.' %}
-            <% } %>
+          <% } %>
+
+          {# translation time until complete #}
+          <% if (notif.timeto) { %>
+            {% trans 'You have until' %} <%- notif.timeto %> {% trans 'to complete this task.' %}
           <% } %>
         <% } else { %>
+          {# comment or post notification #}        
           <a class="user" href="<%- notif.profile_link %>"><%- notif.user %></a>
           <% if (notif.comment) { %>
+            {# comment #}
             {% trans "commented on" %} <% if (notif.owner_id == window.ahr.user_id) { %>{% trans "your" %}<% } %>
             <% if (notif.item_type == "offer") { %>
               {% trans "offer" %}
@@ -58,6 +76,7 @@
           <a href="/market/<%- notif.item_id %>" style="display:inline-block;">"<%- notif.text.title %>"
             </a>
           <% } else if (notif.item_type) { %>
+            {# post #}
             <% if (notif.text.update) { %>{% trans "updated" %}<% } else { %> {% trans "posted" %} <% } %>
             {% trans "the" %}
             <% if (notif.item_type == "offer") { %>

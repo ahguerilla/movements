@@ -8,30 +8,74 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'TraslationCandidade'
-        db.create_table(u'market_traslationcandidade', (
+        # Adding model 'CommentTranslation'
+        db.create_table(u'market_commenttranslation', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('details_translated', self.gf('django.db.models.fields.TextField')()),
             ('language', self.gf('django.db.models.fields.CharField')(max_length=10)),
+            ('source_language', self.gf('django.db.models.fields.CharField')(default='en', max_length=10)),
+            ('details_translated', self.gf('django.db.models.fields.TextField')()),
+            ('details_candidate', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('generated_at', self.gf('django.db.models.fields.DateField')(auto_now_add=True, blank=True)),
             ('status', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=1, max_length=1)),
+            ('c_status', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0, max_length=1)),
+            ('owner', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
+            ('owner_candidate', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='commenttranslation_candidate', null=True, to=orm['auth.User'])),
             ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('edited', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('owner', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
+            ('timer', self.gf('django.db.models.fields.DateTimeField')(null=True)),
             ('reminder', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('translation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['market.MarketItemTranslation'], null=True)),
-            ('market_item', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['market.MarketItem'])),
-            ('title_translated', self.gf('django.db.models.fields.TextField')()),
+            ('comment', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['market.Comment'])),
         ))
-        db.send_create_signal('market', ['TraslationCandidade'])
+        db.send_create_signal('market', ['CommentTranslation'])
+
+        # Adding field 'MarketItemTranslation.details_candidate'
+        db.add_column(u'market_marketitemtranslation', 'details_candidate',
+                      self.gf('django.db.models.fields.TextField')(default='', blank=True),
+                      keep_default=False)
 
         # Adding field 'MarketItemTranslation.status'
         db.add_column(u'market_marketitemtranslation', 'status',
                       self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=1, max_length=1),
                       keep_default=False)
 
+        # Adding field 'MarketItemTranslation.c_status'
+        db.add_column(u'market_marketitemtranslation', 'c_status',
+                      self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0, max_length=1),
+                      keep_default=False)
+
         # Adding field 'MarketItemTranslation.owner'
         db.add_column(u'market_marketitemtranslation', 'owner',
                       self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'MarketItemTranslation.owner_candidate'
+        db.add_column(u'market_marketitemtranslation', 'owner_candidate',
+                      self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='marketitemtranslation_candidate', null=True, to=orm['auth.User']),
+                      keep_default=False)
+
+        # Adding field 'MarketItemTranslation.created'
+        db.add_column(u'market_marketitemtranslation', 'created',
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default=datetime.datetime(2015, 2, 25, 0, 0), blank=True),
+                      keep_default=False)
+
+        # Adding field 'MarketItemTranslation.edited'
+        db.add_column(u'market_marketitemtranslation', 'edited',
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now=True, default=datetime.datetime(2015, 2, 25, 0, 0), blank=True),
+                      keep_default=False)
+
+        # Adding field 'MarketItemTranslation.timer'
+        db.add_column(u'market_marketitemtranslation', 'timer',
+                      self.gf('django.db.models.fields.DateTimeField')(null=True),
+                      keep_default=False)
+
+        # Adding field 'MarketItemTranslation.reminder'
+        db.add_column(u'market_marketitemtranslation', 'reminder',
+                      self.gf('django.db.models.fields.BooleanField')(default=False),
+                      keep_default=False)
+
+        # Adding field 'MarketItemTranslation.title_candidate'
+        db.add_column(u'market_marketitemtranslation', 'title_candidate',
+                      self.gf('django.db.models.fields.TextField')(default='', blank=True),
                       keep_default=False)
 
         # Adding field 'Notification.translation'
@@ -54,16 +98,45 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.CharField')(default='en', max_length=10),
                       keep_default=False)
 
+        # Adding field 'Comment.language'
+        db.add_column(u'market_comment', 'language',
+                      self.gf('django.db.models.fields.CharField')(default='en', max_length=10),
+                      keep_default=False)
+
 
     def backwards(self, orm):
-        # Deleting model 'TraslationCandidade'
-        db.delete_table(u'market_traslationcandidade')
+        # Deleting model 'CommentTranslation'
+        db.delete_table(u'market_commenttranslation')
+
+        # Deleting field 'MarketItemTranslation.details_candidate'
+        db.delete_column(u'market_marketitemtranslation', 'details_candidate')
 
         # Deleting field 'MarketItemTranslation.status'
         db.delete_column(u'market_marketitemtranslation', 'status')
 
+        # Deleting field 'MarketItemTranslation.c_status'
+        db.delete_column(u'market_marketitemtranslation', 'c_status')
+
         # Deleting field 'MarketItemTranslation.owner'
         db.delete_column(u'market_marketitemtranslation', 'owner_id')
+
+        # Deleting field 'MarketItemTranslation.owner_candidate'
+        db.delete_column(u'market_marketitemtranslation', 'owner_candidate_id')
+
+        # Deleting field 'MarketItemTranslation.created'
+        db.delete_column(u'market_marketitemtranslation', 'created')
+
+        # Deleting field 'MarketItemTranslation.edited'
+        db.delete_column(u'market_marketitemtranslation', 'edited')
+
+        # Deleting field 'MarketItemTranslation.timer'
+        db.delete_column(u'market_marketitemtranslation', 'timer')
+
+        # Deleting field 'MarketItemTranslation.reminder'
+        db.delete_column(u'market_marketitemtranslation', 'reminder')
+
+        # Deleting field 'MarketItemTranslation.title_candidate'
+        db.delete_column(u'market_marketitemtranslation', 'title_candidate')
 
         # Deleting field 'Notification.translation'
         db.delete_column(u'market_notification', 'translation')
@@ -76,6 +149,9 @@ class Migration(SchemaMigration):
 
         # Deleting field 'MarketItem.language'
         db.delete_column(u'market_marketitem', 'language')
+
+        # Deleting field 'Comment.language'
+        db.delete_column(u'market_comment', 'language')
 
 
     models = {
@@ -121,9 +197,28 @@ class Migration(SchemaMigration):
             'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'item': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'comments'", 'null': 'True', 'to': "orm['market.MarketItem']"}),
+            'language': ('django.db.models.fields.CharField', [], {'default': "'en'", 'max_length': '10'}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'blank': 'True'}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'})
+        },
+        'market.commenttranslation': {
+            'Meta': {'object_name': 'CommentTranslation'},
+            'c_status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'max_length': '1'}),
+            'comment': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.Comment']"}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'details_candidate': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'details_translated': ('django.db.models.fields.TextField', [], {}),
+            'edited': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'generated_at': ('django.db.models.fields.DateField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'language': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
+            'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'}),
+            'owner_candidate': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'commenttranslation_candidate'", 'null': 'True', 'to': u"orm['auth.User']"}),
+            'reminder': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'source_language': ('django.db.models.fields.CharField', [], {'default': "'en'", 'max_length': '10'}),
+            'status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '1', 'max_length': '1'}),
+            'timer': ('django.db.models.fields.DateTimeField', [], {'null': 'True'})
         },
         'market.emailrecommendation': {
             'Meta': {'object_name': 'EmailRecommendation'},
@@ -219,14 +314,22 @@ class Migration(SchemaMigration):
         },
         'market.marketitemtranslation': {
             'Meta': {'object_name': 'MarketItemTranslation'},
+            'c_status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'max_length': '1'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'details_candidate': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'details_translated': ('django.db.models.fields.TextField', [], {}),
+            'edited': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'generated_at': ('django.db.models.fields.DateField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'language': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'market_item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']"}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'}),
+            'owner_candidate': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'marketitemtranslation_candidate'", 'null': 'True', 'to': u"orm['auth.User']"}),
+            'reminder': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'source_language': ('django.db.models.fields.CharField', [], {'default': "'en'", 'max_length': '10'}),
             'status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '1', 'max_length': '1'}),
+            'timer': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'title_candidate': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'title_translated': ('django.db.models.fields.TextField', [], {})
         },
         'market.marketitemviewcounter': {
@@ -269,20 +372,6 @@ class Migration(SchemaMigration):
             'market_type': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '200', 'blank': 'True'}),
             'questions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['market.Question']", 'symmetrical': 'False'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
-        },
-        'market.traslationcandidade': {
-            'Meta': {'object_name': 'TraslationCandidade'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'details_translated': ('django.db.models.fields.TextField', [], {}),
-            'edited': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'language': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'market_item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']"}),
-            'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'}),
-            'reminder': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '1', 'max_length': '1'}),
-            'title_translated': ('django.db.models.fields.TextField', [], {}),
-            'translation': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItemTranslation']", 'null': 'True'})
         },
         'market.userreport': {
             'Meta': {'ordering': "['-resolved', '-pub_date']", 'object_name': 'UserReport'},
