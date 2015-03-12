@@ -118,7 +118,10 @@
             </div>
           </a>
           <a href="{{ config.BLOG_URL }}" target="_blank">
-            <div class="nav-blog">{% trans "Blog" %}</div>
+            <div class="top-left-nav-button nav-blog">{% trans "Blog" %}</div>
+          </a>
+          <a href="{% page_url 'success_stories' %}" target="_blank">
+            <div class="top-left-nav-button nav-success">{% trans "Sucess Stories" %}</div>
           </a>
         {% endif %}
       </div>
