@@ -92,6 +92,7 @@
           _.each($('.comment'), function (comment) {
             self.translateComment($(comment).data('translate-language-url').slice(0, -3) + lang, $(comment));
           });
+          $('.translate span').popover('toggle');
         });
       });
     },
@@ -126,11 +127,11 @@
           } else {
             post.find('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>').show();
           }
-          $('.translate span').popover('toggle');
+          //$('.translate span').popover('toggle');
         },
         error: function (){
           post.find('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>').show();
-          $('.translate span').popover('toggle');
+          //$('.translate span').popover('toggle');
         }
       });
     },
@@ -395,7 +396,7 @@
               placement: 'top'
             });
             popup_element.popover('show');
-          }
+          },
         });
       } else {
         popup_element.popover('toggle')
@@ -403,7 +404,7 @@
     },
 
     Init: function(ev) {
-      this.$PostinitMenuarea.find('span').popover('toggle'); // toggle popover
+      //this.$PostinitMenuarea.find('span').popover('toggle'); // toggle popover
       var self = this;
       $.ajax({
         url: $(ev.currentTarget).data('api-url'),
@@ -415,8 +416,8 @@
           }
           self.render();
           self.$areaContainer.show();
-          self.$PostinitMenuarea.find('span').popover('toggle');
-        },
+          //self.$PostinitMenuarea.find('span').popover('toggle');
+        }
       });
 
     },

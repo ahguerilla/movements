@@ -62,24 +62,24 @@
           <li><a
               obj_id="{{ post.id }}"
               rec_type="market_item"
-              onClick="ga('send', 'event', 'button', 'click', 'recommend');"
+              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'recommend');}"
               class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
           {% if post.tweet_permission %}
             <li><a
               obj_id="{{ post.id }}"
               rec_type="market_item"
-              onClick="ga('send', 'event', 'button', 'click', 'tweet');"
+              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'tweet');}"
               class="tweet" href='#' alt="tweet post">{% trans 'Tweet' %}</a></li>
           {% endif %}
           <li><a
                 username="{{ post.owner.username }}"
                 subject="RE: {{ post.title }}"
                 readonlysub="1"
-                onClick="ga('send', 'event', 'button', 'click', 'direct-message');"
+                onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-message');}"
                 class="message private-message" href='#' alt="direct message author">{% trans 'Direct message' %}</a></li>
           <li><a
               report_url="{{ report_url }}"
-              onClick="ga('send', 'event', 'button', 'click', 'report-post');"
+              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'report-post');}"
               class="report" href='#' alt="report post">{% trans 'Report this post' %}</a></li>
           {% if request.user.userprofile.is_translator or request.user.userprofile.is_cm %}
           <li>
