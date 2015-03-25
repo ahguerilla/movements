@@ -112,13 +112,37 @@
       </div>   <!-- End Interests -->
 
       <div id="step5" class="step" style="display: none;">
+        <div class="form-title"><h1>{% trans "How you can help" %}</h1></div>
+        <div class="form-select-multi">
+          {% blocktrans %}
+          <p>
+              While there are certain skills that are particularly in demand from our activist users — namely,
+              legal assistance, media coverage — there are plenty of ways you can be involved if you do not fall into
+              those categories.
+          </p>
+          <ul>
+            <li>
+              <strong>Social media.</strong> Share Movements’ posts across your social media platforms. For example,
+              you can share Movements’ users’ requests with your representatives.
+            </li>
+            <li>
+              <strong>Tweet</strong> the posts that most interest you. There’s a button on almost every post.
+            </li>
+            <li>
+              <strong>Recommend a friend.</strong> If you have a friend with the skills in demand on our network, tell
+              them about us!
+            </li>
+          </ul>
+          {% endblocktrans %}
+        </div>
+
         <div class="form-title"><h1>{% trans "Done" %}</h1></div>
         <div class="form-select-multi">
           <p>
             {% blocktrans %}Thank You! You are one step closer to opening a closed society!{% endblocktrans %}
           </p>
           <p>
-            {% blocktrans %}If you would like to update this details at any time, this can be done in easily in your settings panel.{% endblocktrans %}
+            {% blocktrans %}If you would like to update these details at any time, this can be done in easily in your settings panel.{% endblocktrans %}
           </p>
           <h3>{% trans "Your Safety" %}</h3>
           <p>

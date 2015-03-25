@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-14 11:41-0600\n"
-"PO-Revision-Date: 2015-01-08 22:49+0000\n"
-"Last-Translator: Adriana Luhovy <aluhovy@advancinghumanrights.org>\n"
+"POT-Creation-Date: 2015-02-06 10:28+0000\n"
+"PO-Revision-Date: 2015-02-06 10:29+0000\n"
+"Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Language: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Translated-Using: django-rosetta 0.7.4\n"
+
+#: app/cms_plugins.py:10
+msgid "Safe VPN Link"
+msgstr "Безпечне VPN посилання"
 
 #: app/cms_toolbar.py:43
 msgid "Menu Settings"
@@ -79,15 +83,23 @@ msgstr ""
 "Це посилання перенаправить Вас за межі сайту Movements. Переконайтеся, що Ви"
 " довіряєте сайту, на який Вас буде перенаправлено."
 
-#: app/market/forms.py:61 app/market/forms.py:103
+#: app/market/forms.py:57
 msgid "You must add at least one skill"
 msgstr "Ви повинні додати принаймні одине вміння"
 
-#: app/market/forms.py:63 app/market/forms.py:105
+#: app/market/forms.py:59
 msgid "Please select a maximum of 4 skills"
 msgstr "Будь ласка, виберіть максимум 4 вміння"
 
-#: app/market/forms.py:69 app/market/forms.py:111
+#: app/market/forms.py:66
+msgid "You must add at least one issue"
+msgstr "Будь ласка, виберіть принаймні один"
+
+#: app/market/forms.py:68
+msgid "Please select a maximum of 3 issues"
+msgstr "Будь ласка, виберіть максимум 3 проблеми"
+
+#: app/market/forms.py:74
 msgid "Please enter a maximum of 120 characters"
 msgstr "Будь ласка, введіть максимум 120 символів"
 
@@ -100,19 +112,19 @@ msgstr "Додаткові властивості"
 msgid "contents"
 msgstr "контент"
 
-#: app/market/models/comment.py:15 app/market/models/market.py:41
+#: app/market/models/comment.py:15 app/market/models/market.py:43
 #: app/market/models/notification.py:18 app/market/models/rate.py:13
 #: app/market/models/report.py:21 app/market/models/report.py:38
-#: app/users/models.py:204
+#: app/users/models.py:223
 msgid "publish date"
 msgstr "дата публікації"
 
-#: app/market/models/comment.py:17 app/market/models/market.py:40
+#: app/market/models/comment.py:17 app/market/models/market.py:42
 #: app/market/models/report.py:22
 msgid "is published?"
 msgstr "опубліковано?"
 
-#: app/market/models/comment.py:18 app/market/models/market.py:47
+#: app/market/models/comment.py:18 app/market/models/market.py:49
 msgid "deleted"
 msgstr "видалено"
 
@@ -126,7 +138,7 @@ msgstr "Діапазон (1-5)"
 
 #: app/market/models/feedback.py:13
 msgid "Free Text Long"
-msgstr "Вільний текст. Довгий."
+msgstr "Обширний довільний текст"
 
 #: app/market/models/feedback.py:17
 msgid "question"
@@ -149,7 +161,7 @@ msgid "without type"
 msgstr "без типу"
 
 #: app/market/models/feedback.py:33 app/market/models/market.py:34
-#: app/market/models/rate.py:14 app/users/models.py:205
+#: app/market/models/rate.py:14 app/users/models.py:224
 msgid "title"
 msgstr "назва"
 
@@ -189,130 +201,134 @@ msgstr "Закрито адміністратором"
 msgid "Closed By User"
 msgstr "Закрито користувачем"
 
-#: app/market/models/market.py:26 templates/base_v2.html:198
+#: app/market/models/market.py:26 templates/base_v2.html:254
 msgid "Request"
 msgstr "Запит"
 
-#: app/market/models/market.py:27 templates/base_v2.html:199
+#: app/market/models/market.py:27 templates/base_v2.html:257
 msgid "Offer"
 msgstr "Пропозиція"
 
-#: app/market/models/market.py:30 app/market/models/market.py:210
+#: app/market/models/market.py:30 app/market/models/market.py:213
 msgid "item_type"
-msgstr "тип_елемента"
+msgstr "тип_елементу"
 
 #: app/market/models/market.py:35
 msgid "details"
 msgstr "деталі"
 
-#: app/market/models/market.py:38
+#: app/market/models/market.py:37
 msgid "Specific skill"
 msgstr "Особливі вміння"
 
-#: app/market/models/market.py:39
+#: app/market/models/market.py:40
+msgid "Specific issue"
+msgstr "Специфічна проблема"
+
+#: app/market/models/market.py:41
 msgid "URL Link"
 msgstr "Посилання на URL-адресу"
 
-#: app/market/models/market.py:42
+#: app/market/models/market.py:44
 msgid "commentcount"
 msgstr "кількість коментарів"
 
-#: app/market/models/market.py:43
+#: app/market/models/market.py:45
 msgid "collaboratorcount"
 msgstr "кількість співробітників"
 
-#: app/market/models/market.py:44 app/users/models.py:154
+#: app/market/models/market.py:46 app/users/models.py:173
 msgid "ratecount"
 msgstr "облік рейтингу"
 
-#: app/market/models/market.py:45
+#: app/market/models/market.py:47
 msgid "reportcount"
 msgstr "кількість звітів"
 
-#: app/market/models/market.py:46 app/market/models/rate.py:15
-#: app/users/models.py:155 app/users/models.py:206
+#: app/market/models/market.py:48 app/market/models/rate.py:15
+#: app/users/models.py:174 app/users/models.py:225
 msgid "score"
 msgstr "рахунок"
 
-#: app/market/models/market.py:48
+#: app/market/models/market.py:50
 msgid "receive notifications"
 msgstr "отримувати повідомлення"
 
-#: app/market/models/market.py:49
+#: app/market/models/market.py:51
 msgid "Tweet Permission"
 msgstr "Дозвіл поширювання за допомогою Twitter"
 
-#: app/market/models/market.py:51 app/reporting/admin/incident.py:89
+#: app/market/models/market.py:53 app/reporting/admin/incident.py:89
 msgid "status"
 msgstr "статус"
 
-#: app/market/models/market.py:54
+#: app/market/models/market.py:56
 msgid "closed date"
 msgstr "дата закриття"
 
-#: app/market/models/market.py:56
+#: app/market/models/market.py:58
 msgid "feedback response"
 msgstr "зворотня відповідь"
 
-#: app/market/models/market.py:57
+#: app/market/models/market.py:59
 msgid "is featured"
 msgstr "є популярним"
 
-#: app/market/models/market.py:163 app/market/models/market.py:178
-#: app/market/models/market.py:194 app/market/models/market.py:207
+#: app/market/models/market.py:166 app/market/models/market.py:181
+#: app/market/models/market.py:197 app/market/models/market.py:210
 #: app/market/models/report.py:47 app/market/models/report.py:76
 msgid "market item"
 msgstr "елемент громадського майданчику"
 
-#: app/market/models/market.py:164
+#: app/market/models/market.py:167
 msgid "action"
 msgstr "дія"
 
-#: app/market/models/market.py:165 app/market/models/market.py:180
+#: app/market/models/market.py:168 app/market/models/market.py:183
 msgid "date of action"
 msgstr "дата дії"
 
-#: app/market/models/market.py:169 app/market/models/market.py:170
+#: app/market/models/market.py:172 app/market/models/market.py:173
 msgid "actions of market item"
 msgstr "дії елементу громадського майданчику"
 
-#: app/market/models/market.py:179
+#: app/market/models/market.py:182
 msgid "next step"
 msgstr "наступний крок"
 
-#: app/market/models/market.py:181
+#: app/market/models/market.py:184
 msgid "completed"
 msgstr "завершено"
 
-#: app/market/models/market.py:185
+#: app/market/models/market.py:188
 msgid "next step of market item"
 msgstr "наступний крок елементу громадського майданчику"
 
-#: app/market/models/market.py:186
+#: app/market/models/market.py:189
 msgid "next steps of market item"
 msgstr "наступні кроки елементу громадського майданчику"
 
-#: app/market/models/market.py:195 app/users/models.py:78
+#: app/market/models/market.py:198 app/users/models.py:82
 msgid "language"
 msgstr "мова"
 
-#: app/market/models/market.py:196
+#: app/market/models/market.py:199
 msgid "source language"
 msgstr "мова оригіналу"
 
-#: app/market/models/market.py:197
+#: app/market/models/market.py:200
 msgid "title translated"
 msgstr "перекладена назва"
 
-#: app/market/models/market.py:198
+#: app/market/models/market.py:201
 msgid "details translated"
 msgstr "перекладені деталі"
 
-#: app/market/models/market.py:199
+#: app/market/models/market.py:202
 msgid "date generated"
 msgstr "згенерована дата"
 
-#: app/market/models/market.py:211
+#: app/market/models/market.py:214
 msgid "interaction date"
 msgstr "дата взаємодії"
 
@@ -421,133 +437,137 @@ msgstr "власник"
 msgid "Aging"
 msgstr "Старіння"
 
-#: app/reporting/admin/user.py:14 app/reporting/admin/user.py:133
+#: app/reporting/admin/user.py:18 app/reporting/admin/user.py:137
 msgid "Movements Rating"
 msgstr "Рейтинг Movements "
 
-#: app/reporting/admin/user.py:19
+#: app/reporting/admin/user.py:23
 msgid "Unassigned"
 msgstr "Не призначено"
 
-#: app/reporting/admin/user.py:20
+#: app/reporting/admin/user.py:24
 msgid "0 Stars"
 msgstr "0 Зірок"
 
-#: app/reporting/admin/user.py:21
+#: app/reporting/admin/user.py:25
 msgid "1 Star"
 msgstr "1 Зірка"
 
-#: app/reporting/admin/user.py:22
+#: app/reporting/admin/user.py:26
 msgid "2 Stars"
 msgstr "2 Зірки"
 
-#: app/reporting/admin/user.py:23
+#: app/reporting/admin/user.py:27
 msgid "3 Stars"
 msgstr "3 Зірки"
 
-#: app/reporting/admin/user.py:24
+#: app/reporting/admin/user.py:28
 msgid "4 Stars"
 msgstr "4 Зірки"
 
-#: app/reporting/admin/user.py:25
+#: app/reporting/admin/user.py:29
 msgid "5 Stars"
 msgstr "5 Зірок"
 
-#: app/reporting/admin/user.py:36
+#: app/reporting/admin/user.py:40
 msgid "Email Verified"
 msgstr "Email перевірено"
 
-#: app/reporting/admin/user.py:41
+#: app/reporting/admin/user.py:45
 msgid "true"
-msgstr "вірно"
+msgstr "вірний"
 
-#: app/reporting/admin/user.py:42
+#: app/reporting/admin/user.py:46
 msgid "false"
 msgstr "помилковий"
 
-#: app/reporting/admin/user.py:81
+#: app/reporting/admin/user.py:85
 msgid "Screen Name"
 msgstr "Ім'я користувача"
 
-#: app/reporting/admin/user.py:85
+#: app/reporting/admin/user.py:89
 msgid "Signup Date"
 msgstr "Дата реєстрації"
 
-#: app/reporting/admin/user.py:89
+#: app/reporting/admin/user.py:93
 msgid "Full Name"
 msgstr "Повне ім'я"
 
-#: app/reporting/admin/user.py:95
+#: app/reporting/admin/user.py:97
+msgid "No profile"
+msgstr "Немає профілю"
+
+#: app/reporting/admin/user.py:99
 #: templates/market/clientside/userprofile.html:34
 msgid "Nationality"
 msgstr "Національність"
 
-#: app/reporting/admin/user.py:101 templates/account/signup.html:52
+#: app/reporting/admin/user.py:105 templates/account/signup.html:52
 #: templates/users/user_settings_v2.html:69
 msgid "Country of Residence"
 msgstr "Країна проживання"
 
-#: app/reporting/admin/user.py:105
+#: app/reporting/admin/user.py:109
 msgid "Is Admin"
 msgstr "Адміністратор"
 
-#: app/reporting/admin/user.py:109
+#: app/reporting/admin/user.py:113
 msgid "Request Count"
 msgstr "Кількість запитів"
 
-#: app/reporting/admin/user.py:113
+#: app/reporting/admin/user.py:117
 msgid "Offer Count"
 msgstr "Кількість пропозицій"
 
-#: app/reporting/admin/user.py:117
+#: app/reporting/admin/user.py:121
 msgid "Comment Count"
 msgstr "Кількість коментарів"
 
-#: app/reporting/admin/user.py:123 app/reporting/admin/user.py:132
+#: app/reporting/admin/user.py:127 app/reporting/admin/user.py:136
 msgid "unassigned"
 msgstr "не призначено"
 
-#: app/reporting/admin/user.py:125
+#: app/reporting/admin/user.py:129
 msgid "Rate user"
 msgstr "Оцінити користувача"
 
-#: app/reporting/admin/user.py:127
+#: app/reporting/admin/user.py:131
 msgid "Movements rating"
 msgstr "рейтинг Movements "
 
-#: app/reporting/admin/user.py:136 app/reporting/admin/user.py:140
-#: app/reporting/admin/user.py:144 app/reporting/admin/user.py:148
-#: app/reporting/admin/user.py:152
+#: app/reporting/admin/user.py:140 app/reporting/admin/user.py:144
+#: app/reporting/admin/user.py:148 app/reporting/admin/user.py:152
+#: app/reporting/admin/user.py:156
 msgid "Not supplied"
-msgstr "Не постачається"
+msgstr "Не надається"
 
-#: app/reporting/admin/user.py:137 templates/account/signup.html:87
+#: app/reporting/admin/user.py:141 templates/account/signup.html:87
 #: templates/users/user_settings_v2.html:108
 msgid "Facebook"
 msgstr "Facebook"
 
-#: app/reporting/admin/user.py:141 templates/account/signup.html:80
+#: app/reporting/admin/user.py:145 templates/account/signup.html:80
 #: templates/users/user_settings_v2.html:101
 msgid "Twitter"
 msgstr "Twitter"
 
-#: app/reporting/admin/user.py:145
+#: app/reporting/admin/user.py:149
 msgid "Linked in"
 msgstr "Linked in"
 
-#: app/reporting/admin/user.py:149
+#: app/reporting/admin/user.py:153
 msgid "Website/blog"
 msgstr "Вебсайт/блоґ"
 
-#: app/reporting/admin/user.py:153 templates/users/user_profile_v2.html:57
+#: app/reporting/admin/user.py:157 templates/users/user_profile_v2.html:57
 msgid "Bio"
 msgstr "Біографія"
 
-#: app/reporting/admin/user.py:168
+#: app/reporting/admin/user.py:174
 msgid "Count social"
 msgstr "Кількість соціальних мереж"
 
-#: app/reporting/admin/user.py:174
+#: app/reporting/admin/user.py:180
 msgid "Email verified"
 msgstr "Email перевірено"
 
@@ -571,6 +591,10 @@ msgstr "Китайська"
 msgid "Ukrainian"
 msgstr "Українська"
 
+#: app/settings/base.py:77
+msgid "Russian"
+msgstr "Російська"
+
 #: app/users/forms.py:28
 msgid "This email is used already"
 msgstr "Цей email вже використовується"
@@ -588,7 +612,7 @@ msgid ""
 "Username must contain only letters, numbers - and _. White space is not "
 "allowed"
 msgstr ""
-"Ім'я користувача має містити тільки букви, цифри - і _. Пропуски не "
+"Ім'я користувача має містити тільки букви, цифри, \"-\" і \"_\". Пробіли не "
 "допускаються"
 
 #: app/users/forms.py:74 app/users/forms.py:97
@@ -597,154 +621,190 @@ msgid ""
 "letters, numbers - and _. White space is not allowed"
 msgstr ""
 "Ім'я користувача повинно бути більшим ніж 2 символи і меншим ніж 30 "
-"символів, містити  тільки букви, цифри - і _. Пропуски не допускаються"
+"символів, містити  тільки букви, цифри, \"-\" і \"_\". Пробіли не "
+"допускаються"
 
 #: app/users/models.py:14
 msgid "skill set"
 msgstr "набір навичок"
 
-#: app/users/models.py:24
+#: app/users/models.py:25
 msgid "issues of interest"
 msgstr "тематика інтересу"
 
-#: app/users/models.py:34
+#: app/users/models.py:36
 msgid "countries of interest"
 msgstr "країни зацікавлення"
 
-#: app/users/models.py:45
+#: app/users/models.py:48
 msgid "nationality"
 msgstr "національність"
 
-#: app/users/models.py:55
+#: app/users/models.py:59
 msgid "country of residence"
 msgstr "країна проживання"
 
-#: app/users/models.py:65
+#: app/users/models.py:69
 msgid "name"
 msgstr "ім'я"
 
-#: app/users/models.py:76
+#: app/users/models.py:80
 msgid "language code"
 msgstr "код мови"
 
-#: app/users/models.py:79
+#: app/users/models.py:83
 msgid "languages"
 msgstr "мови"
 
-#: app/users/models.py:87
+#: app/users/models.py:91
 msgid "region"
 msgstr "область"
 
-#: app/users/models.py:88
+#: app/users/models.py:92
 msgid "regions"
 msgstr "області"
 
-#: app/users/models.py:93
+#: app/users/models.py:97
 msgid "interest"
 msgstr "інтерес"
 
-#: app/users/models.py:94
+#: app/users/models.py:98
 msgid "interests"
 msgstr "інтереси"
 
-#: app/users/models.py:112
+#: app/users/models.py:116
 msgid "Hidden - only your screen name and avatar is shared"
 msgstr "Приховано - тільки Ваш псевдонім і аватар є загально доступні"
 
-#: app/users/models.py:113
+#: app/users/models.py:117
 msgid "Secure - only your screen name, skills and country is shared"
 msgstr "Безпечно - тільки Ваш псевдонім, вміння і країна є загально доступні"
 
-#: app/users/models.py:114
+#: app/users/models.py:118
 msgid "Public - all your profile information is shared"
 msgstr ""
 "Публічний доступ - вся інформація Вашого профілю  є загально доступною"
 
-#: app/users/models.py:117
+#: app/users/models.py:122
 msgid "Never"
 msgstr "Ніколи"
 
-#: app/users/models.py:118
+#: app/users/models.py:123
 msgid "Weekly"
 msgstr "Щотижня"
 
-#: app/users/models.py:119
+#: app/users/models.py:124
 msgid "Daily"
 msgstr "Щодня"
 
-#: app/users/models.py:120
+#: app/users/models.py:125
 msgid "Instantly"
 msgstr "Негайно"
 
+#: app/users/models.py:129
+msgid "Unknown"
+msgstr "Невідомий"
+
+#: app/users/models.py:130
+msgid "Social Media"
+msgstr "Соціальні медіа"
+
 #: app/users/models.py:131
-msgid "bio"
-msgstr "біо"
+msgid "Staff Contact"
+msgstr "Контактна особа"
 
 #: app/users/models.py:132
+msgid "General Media"
+msgstr "Генеральні медіа"
+
+#: app/users/models.py:133
+msgid "Referred by Movements User"
+msgstr "Запрошений користувачем Movements"
+
+#: app/users/models.py:134
+msgid "Event"
+msgstr "Подія"
+
+#: app/users/models.py:135 templates/market/create_offer.html:22
+#: templates/market/create_offer.html:37
+#: templates/market/create_request.html:22
+#: templates/market/create_request.html:36
+msgid "Other"
+msgstr "Інше"
+
+#: app/users/models.py:136
+msgid "Prefer not to say"
+msgstr "Волію не говорити"
+
+#: app/users/models.py:148
+msgid "bio"
+msgstr "біографія"
+
+#: app/users/models.py:149
 msgid "tag line"
 msgstr "слоган"
 
-#: app/users/models.py:133
+#: app/users/models.py:150
 msgid "website url"
 msgstr "посилання на сайт"
 
-#: app/users/models.py:134
+#: app/users/models.py:151
 msgid "facebook page"
 msgstr "facebook сторінка"
 
-#: app/users/models.py:135
+#: app/users/models.py:152
 msgid "linkedin page"
 msgstr "linkedin сторінка"
 
-#: app/users/models.py:136
+#: app/users/models.py:153
 msgid "twitter page"
 msgstr "twitter сторінка "
 
-#: app/users/models.py:137
+#: app/users/models.py:154
 msgid "occupation"
 msgstr "професія"
 
-#: app/users/models.py:138
+#: app/users/models.py:155
 msgid "area of expertise"
 msgstr "сфера досвіду"
 
-#: app/users/models.py:139
+#: app/users/models.py:156
 msgid "privacy settings"
 msgstr "налаштування конфіденційності"
 
-#: app/users/models.py:150
+#: app/users/models.py:169
 msgid "organisation"
 msgstr "організація"
 
-#: app/users/models.py:151
+#: app/users/models.py:170
 msgid "individual"
 msgstr "особистий"
 
-#: app/users/models.py:152
+#: app/users/models.py:171
 msgid "journalist"
 msgstr "журналіст"
 
-#: app/users/models.py:153
+#: app/users/models.py:172
 msgid "recieves newsletter"
 msgstr "отримувати новини"
 
-#: app/users/models.py:156
+#: app/users/models.py:175
 msgid "Interface language"
 msgstr "Мова інтерфейсу"
 
-#: app/users/models.py:158
+#: app/users/models.py:177
 msgid "first login"
 msgstr "перший логін"
 
-#: app/users/models.py:160
+#: app/users/models.py:179
 msgid "profile visibility"
 msgstr "видимість профілю"
 
-#: app/users/models.py:163
+#: app/users/models.py:182
 msgid "notification frequency"
 msgstr "частота сповіщення"
 
-#: app/users/models.py:198
+#: app/users/models.py:217
 msgid "Rated by AHR"
 msgstr "Оцінено AHR"
 
@@ -836,7 +896,7 @@ msgstr ""
 #: avatar/templates/avatar/confirm_delete.html:15
 #: templates/avatar/confirm_delete.html:15
 msgid "Delete These"
-msgstr "видалити ці"
+msgstr "Видалити ці"
 
 #: avatar/templates/notification/avatar_friend_updated/full.txt:1
 #, python-format
@@ -907,7 +967,7 @@ msgid "Notifications"
 msgstr "Сповіщення"
 
 #: templates/base.html:100 templates/base.html.py:109
-#: templates/base_v2.html:211 templates/users/user_settings_v2.html:16
+#: templates/base_v2.html:270 templates/users/user_settings_v2.html:16
 #: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
 msgstr "Налаштування"
@@ -937,78 +997,100 @@ msgstr "Увійти"
 msgid "Sign Up"
 msgstr "Зареєструватися"
 
-#: templates/base_v2.html:90
+#: templates/base_v2.html:107 templates/base_v2.html.py:206
+#: templates/account/signup_start.html:51
+msgid "Connect with Twitter"
+msgstr "Приєднуйтесь до нас в Twitter"
+
+#: templates/base_v2.html:112 templates/base_v2.html.py:209
+#: templates/account/signup_start.html:48
+msgid "Connect with Facebook"
+msgstr "Приєднуйтесь до нас в Facebook"
+
+#: templates/base_v2.html:117
+msgid "AHR"
+msgstr "AHR"
+
+#: templates/base_v2.html:121
+msgid "Blog"
+msgstr "Блог"
+
+#: templates/base_v2.html:137
 msgid "Add Post"
 msgstr "Додати повідомлення"
 
-#: templates/base_v2.html:95 templates/ahr/home_v2.html:13
+#: templates/base_v2.html:144 templates/ahr/home_v2.html:13
 msgid "Login"
 msgstr "Увійти"
 
-#: templates/base_v2.html:110
+#: templates/base_v2.html:152 templates/ahr/home_v2.html:34
+msgid "Crowdsourcing human rights."
+msgstr "Краудсорсинг боротьби за права людини."
+
+#: templates/base_v2.html:152
+msgid "The online platform that is opening closed societies."
+msgstr "Онлайн-платформа, яка відкриває \"закриті суспільства\"."
+
+#: templates/base_v2.html:163
 msgid "Sign up"
 msgstr "Зареєструватися"
 
-#: templates/base_v2.html:114
+#: templates/base_v2.html:167
 msgid "Visit market"
 msgstr "Відвідати громадський майданчик"
 
-#: templates/base_v2.html:139
+#: templates/base_v2.html:193
 msgid "Get updates"
 msgstr "Отримуйте оновлення"
 
-#: templates/base_v2.html:142
+#: templates/base_v2.html:196
 msgid "Enter your e-mail..."
 msgstr "Введіть свій e-mail..."
 
-#: templates/base_v2.html:146
+#: templates/base_v2.html:200
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr ""
-"Отримати всі останні оновлення, у тому числі популярні пости, і поради з "
+"Отримати всі останні оновлення, у тому числі популярні пости і поради з "
 "безпеки!"
 
-#: templates/base_v2.html:149 templates/base_v2.html.py:183
+#: templates/base_v2.html:203 templates/base_v2.html.py:237
 msgid "Connect with us"
 msgstr "Зв'язатися з нами"
 
-#: templates/base_v2.html:152 templates/account/signup_start.html:51
-msgid "Connect with Twitter"
-msgstr "Зв'язатися через Twitter"
-
-#: templates/base_v2.html:155 templates/account/signup_start.html:48
-msgid "Connect with Facebook"
-msgstr "Зв'язатися через Facebook"
-
-#: templates/base_v2.html:163 templates/ahr/home_v2.html:100
+#: templates/base_v2.html:217 templates/ahr/home_v2.html:111
 msgid "About MOVEMENTS"
 msgstr "Про MOVEMENTS"
 
-#: templates/base_v2.html:164
+#: templates/base_v2.html:218
 msgid ""
-"Crowdsourcing the fight for human rights. The online platform that is "
-"opening closed societies."
+"Crowdsourcing human rights. The online platform that is opening closed "
+"societies."
 msgstr ""
 "Збір коштів на боротьбу за права людини. Онлайн-платформа, яка відкриває "
 "\"закриті суспільства\"."
 
-#: templates/base_v2.html:170 templates/base_v2.html.py:181
+#: templates/base_v2.html:224
+msgid "Copyright &copy; 2015 Advancing Human Rights"
+msgstr "Copyright &copy; 2015 Advancing Human Rights"
+
+#: templates/base_v2.html:235
 msgid "Copyright &copy; 2014 Advancing Human Rights"
 msgstr "Copyright &copy; 2014 Advancing Human Rights"
 
-#: templates/base_v2.html:205
+#: templates/base_v2.html:264
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
 msgstr "Профіль"
 
-#: templates/base_v2.html:219
+#: templates/base_v2.html:278
 msgid "Logout"
 msgstr "Вихід"
 
 #: templates/account/account_inactive.html:5
 #: templates/account/account_inactive.html:9
 msgid "Account Inactive"
-msgstr "Обліковий запис неактивний"
+msgstr "Обліковий запис не активний"
 
 #: templates/account/account_inactive.html:10
 msgid ""
@@ -1016,9 +1098,9 @@ msgid ""
 "be contacted by a member of Advancing Human Rights as part of this vetting "
 "process."
 msgstr ""
-"Цей обліковий запис є не активний. Рахунки повинні бути індивідуально "
-"перевірені, з Вами зв'яжеться представник Advancing Human Rights, це є "
-"частиною процесу перевірки."
+"Цей обліковий запис є не активний. Облікові записи повинні бути "
+"індивідуально перевірені, з Вами зв'яжеться представник Advancing Human "
+"Rights, це є частиною процесу перевірки."
 
 #: templates/account/email.html:6
 msgid "Account"
@@ -1244,7 +1326,7 @@ msgstr ""
 
 #: templates/account/password_reset.html:38
 msgid "Reset My Password"
-msgstr "Змінити пароль"
+msgstr "Змінити мій пароль"
 
 #: templates/account/password_reset_done.html:18
 #, python-format
@@ -1320,8 +1402,8 @@ msgid ""
 "interests."
 msgstr ""
 "Вся нижча інформація є необов'язковою, але допоможе Movements.org "
-"переконатися, що Ви бачите статті, які є найбільше актуальні для Ваших потеб"
-" та інтересів."
+"переконатися, що Ви бачите статті, які є найбільше актуальні для Ваших "
+"потреб та інтересів."
 
 #: templates/account/signup.html:40 templates/users/user_settings_v2.html:57
 msgid "First Name"
@@ -1340,8 +1422,8 @@ msgid ""
 "If you want other users to know something about you. You can control how "
 "much if any information to make public."
 msgstr ""
-"Якщо Ви хочете, щоб інші користувачі знали, деяку інформацію про Вас. Ви "
-"можете контролювати, скільки та якої інформації оприлюднювати."
+"Якщо Ви хочете, щоб інші користувачі знали вибіркову інформацію про Вас, то "
+"Ви можете контролювати, скільки та якої інформації оприлюднювати."
 
 #: templates/account/signup.html:67
 msgid "Social Vetting"
@@ -1426,7 +1508,7 @@ msgstr ""
 "Ми зробили все можливе, щоб гарантувати, що будь-яка інформація, що зберігається на Movements є надійно захищеною, але ми не можемо гарантувати це, поки не буде запроваджено перший повний варіант системи цього року. Перш ніж Ви зможете зареєструватися на Movements  Вам потрібно буде пройти через систему перевірки аби Advancing Human Rights/ Movements.org зміг підтвердити Вашу особу. Цей процес використовується для всіх хто хоче активно використовувати вебсайт. В системі буде зберігатися тільки  ім'я користувача, електронна пошта, пароль чи інформація необхідна для аутентифікації Вашого входу за допомогою соціальної мережі, до поки процес перевірки не буде завершено. Надана Вами інформація нижче буде відправлена до Advancing Human Rights на електронну пошту через безпечний сервіс відправки електронної пошти. Цей лист буде видалений після того як перевірка буде завершена.\n"
 "</p>\n"
 "<p>\n"
-"У той час як Movements.org і Advancing Human Rights вжили всі можливі заходи, щоб захистити Вашу конфіденційність і безпеку, все ще залишаються ризики, пов'язані з використанням платформи Movements. Ваше користування Інтернетом може відстежуватись і AHR, а також пов'язані з нею організацій, не можуть гарантувати Вашу безпеку. Все ж таки Movements заснована на довірі і ми робимо все можливе абигарантувати те, що всі учасники громади є ті ким вони себе називають і мають щирі наміри. Однак ми не можемо гарантувати конфіденційність, безпеку чи анонімність користувачів.\n"
+"У той час як Movements.org і Advancing Human Rights вжили всі можливі заходи, щоб захистити Вашу конфіденційність і безпеку, все ще залишаються ризики, пов'язані з використанням платформи Movements. Ваше користування Інтернетом може відстежуватись і AHR, а також пов'язані з нею організацій, не можуть гарантувати Вашу безпеку. Все ж таки Movements заснована на довірі і ми робимо все можливе аби гарантувати те, що всі учасники громади є ті ким вони себе називають і мають щирі наміри. Однак ми не можемо гарантувати конфіденційність, безпеку чи анонімність користувачів.\n"
 "</p>\n"
 "</div>"
 
@@ -1474,7 +1556,7 @@ msgstr "При реєстрації, Ви погоджуєтеся з"
 
 #: templates/account/signup_start.html:36
 msgid "terms &amp; conditions"
-msgstr "Правилами та умовами"
+msgstr "правилами та умовами"
 
 #: templates/account/signup_start.html:38
 msgid "Register"
@@ -1516,8 +1598,7 @@ msgid ""
 "    you are who you claim to be. For this purpose, we require that you\n"
 "    verify ownership of your e-mail address. "
 msgstr ""
-"Ця частина сайту вимагає перевірити те що \n"
-"Ви є той, хто Ви стверджуєте Ви є. Для цього, ми вимагаємо, щоб Ви\n"
+"Ця частина сайту вимагає перевірити те що Ви є той, хто Ви стверджуєте Ви є. Для цього, ми вимагаємо, щоб Ви\n"
 "підтвердили свою адресу електронної пошти."
 
 #: templates/account/verified_email_required.html:23
@@ -1527,8 +1608,7 @@ msgid ""
 "    contact us if you do not receive it within a few minutes."
 msgstr ""
 "Ми послали листа до Вас для\n"
-"перевірка. Будь ласка, натисніть на посилання всередині цього листа. Будь ласка,\n"
-"зв'яжіться з нами, якщо Ви не отримали його протягом декількох хвилин."
+"перевірки. Будь ласка, натисніть на посилання всередині цього листа. Будь ласка, зв'яжіться з нами, якщо Ви не отримали його протягом декількох хвилин."
 
 #: templates/account/verified_email_required.html:27
 #, python-format
@@ -1536,7 +1616,7 @@ msgid ""
 "<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your "
 "e-mail address</a>."
 msgstr ""
-"<strong>Примітка:</strong> Ви можете <a href=\"%(email_url)s\">змінити вашу "
+"<strong>Примітка:</strong> Ви можете <a href=\"%(email_url)s\">змінити Вашу "
 "адресу електронної пошти</a>."
 
 #: templates/account/email/email_confirmation_message.html:7
@@ -1602,8 +1682,7 @@ msgid ""
 msgstr ""
 "\n"
 "<p>\n"
-"Зареєстрований користувач Movements.org за допомогою цієї адреси електронної пошти зробив запит на скидання свого\n"
-"паролю. Ви можете відновити свій пароль, перейшовши за посиланням нижче.\n"
+"Зареєстрований користувач Movements.org за допомогою цієї адреси електронної пошти зробив запит на скидання свого паролю. Ви можете відновити свій пароль, перейшовши за посиланням нижче.\n"
 "</p>\n"
 "\n"
 "<p>\n"
@@ -1644,7 +1723,7 @@ msgstr ""
 #: templates/account/email/user_confirmed_email_message.txt:8
 msgid "This user is already activated, to review the users score go to"
 msgstr ""
-"Користувач вже активований, щоб переглянути рейтинг користувача  перейди до"
+"Користувач вже активований, щоб переглянути рейтинг користувача  перейдіть"
 
 #: templates/account/email/user_confirmed_email_message.txt:10
 msgid "To vet this user, go to"
@@ -1656,7 +1735,7 @@ msgstr "Активуйте користувача"
 
 #: templates/account/email/user_vetting_email_message.html:3
 msgid "Dear Admin"
-msgstr "Шановний Адмін"
+msgstr "Шановний Адміністратор"
 
 #: templates/account/email/user_vetting_email_message.html:6
 #: templates/account/email/user_vetting_email_message.txt:2
@@ -1762,7 +1841,7 @@ msgstr "Пароль успішно встановлений."
 
 #: templates/account/messages/primary_email_set.txt:2
 msgid "Primary e-mail address set."
-msgstr "Основну адресу електронної скриньки встано."
+msgstr "Основну адресу електронної скриньки встановлено."
 
 #: templates/account/messages/unverified_primary_email.txt:2
 msgid "Your primary e-mail address must be verified."
@@ -1783,7 +1862,7 @@ msgstr "Спільнота"
 
 #: templates/admin/incident_change_form.html:10
 msgid "Post creator"
-msgstr "Автор поста"
+msgstr "Автор повідомлення"
 
 #: templates/admin/incident_change_form.html:13
 msgid "Staff owner"
@@ -1801,8 +1880,8 @@ msgstr "Люди, які мають приватні повідомлення щ
 msgid "Feedback"
 msgstr "Зворотній зв'язок"
 
-#: templates/admin/incident_change_list.html:14
-#: templates/admin/user_tracking_change_list.html:18
+#: templates/admin/incident_change_list.html:17
+#: templates/admin/user_tracking_change_list.html:22
 msgid "Export as CSV"
 msgstr "Експорт в CSV"
 
@@ -1818,9 +1897,13 @@ msgstr "Список запитів"
 msgid "Offer List"
 msgstr "Список пропозицій"
 
-#: templates/admin/user_tracking_change_list.html:23
+#: templates/admin/user_tracking_change_list.html:27
 msgid "Export as CSV in safe mode"
 msgstr "Експорт в CSV в безпечному режимі"
+
+#: templates/admin/user_tracking_change_list.html:32
+msgid "Export Unverified"
+msgstr "Експорт неперевіреного"
 
 #: templates/admin/auth/user/vet_user.html:7
 msgid "Home"
@@ -1844,32 +1927,32 @@ msgstr "Оновлення"
 msgid "Already have an account?"
 msgstr "Вже є аккаунт?"
 
-#: templates/ahr/home_v2.html:34
-msgid "Crowdsourcing the fight for human rights."
-msgstr "Краудсорсинг боротьби за права людини."
-
 #: templates/ahr/home_v2.html:37
 msgid ""
-"Movements is crowdsourcing the fight for human rights. It connects human "
-"rights activists in closed societies with those with skills to help them "
-"around the world. Join today and help a dissident in need."
+"Movements is crowdsourcing human rights. It connects human rights activists "
+"in closed societies with those with skills to help them around the world. "
+"Join today and help a dissident in need."
 msgstr ""
 "Movements це краудсорсинг боротьби за права людини. Він з'єднує активістів "
 "із захисту прав людини в закритих суспільствах з тими хто володіє "
 "відповідними вміннями по цілому світу. Приєднуйтесь сьогодні і допоможіть "
 "десидентам в їх потребах."
 
-#: templates/ahr/home_v2.html:41 templates/ahr/home_v2.html.py:63
-#: templates/ahr/home_v2.html:123
+#: templates/ahr/home_v2.html:41 templates/ahr/home_v2.html.py:68
+#: templates/ahr/home_v2.html:134
 msgid "Sign up now"
 msgstr "Зареєструйтеся зараз"
 
-#: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:68
-#: templates/ahr/home_v2.html:102
+#: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:73
+#: templates/ahr/home_v2.html:113
 msgid "Find out more"
 msgstr "Дізнайтеся більше"
 
-#: templates/ahr/home_v2.html:56
+#: templates/ahr/home_v2.html:51 templates/ahr/home_v2.html.py:78
+msgid "Movements Blog"
+msgstr "Блог Movements "
+
+#: templates/ahr/home_v2.html:61
 msgid ""
 "Request help from people across the globe, offer help to an activist in "
 "need."
@@ -1877,15 +1960,15 @@ msgstr ""
 "Запит допомоги від людей по всьому світу, пропозиція допомоги активістам в "
 "разі потреби."
 
-#: templates/ahr/home_v2.html:59
+#: templates/ahr/home_v2.html:64
 msgid ""
 "Whether you’re a journalist, artist, technologist, policy-maker, linguist or"
 " PR agent - everyone has skills that can advance human rights."
 msgstr ""
-"Чи Ви журналіст, художник, технолог, політ-мейкер, лінгвіст або PR агент - "
-"кожен має вміння, які можуть сприяти зміцненню прав людини."
+"Чи то Ви журналіст, художник, технолог, політ-мейкер, лінгвіст або PR агент "
+"- кожен має вміння, які можуть сприяти зміцненню прав людини."
 
-#: templates/ahr/home_v2.html:101
+#: templates/ahr/home_v2.html:112
 msgid ""
 "In closed societies around the world, brave human rights defenders face "
 "enormous hurdles to advance human rights.  Movements.org is a new platform "
@@ -1895,33 +1978,33 @@ msgid ""
 "artist, technologist or you speak a few languages, everyone has a role to "
 "play."
 msgstr ""
-"У закритих суспільствах по всьому світу, хоробрі захисники прав людини "
-"стикаються з величезними перешкодами для просування прав людини. "
-"Movements.org є новою платформою, яка дозволяє людям у всьому світі "
-"допомогти захистити основні свободи. Ця он-лайн платформа з'єднує активістів"
-" у закритих суспільствах з людьми які мають відповідні вміння по всьому "
-"світу, щоб допомогти. Чи Ви журналіст, політик, діяч, художник, технолог або"
-" Ви розмовляєте на декількох мовах, кожен має свою роль."
+"У закритих суспільствах по всьому світу, хоробрі захисники з прав людини "
+"стикаються з величезними перешкодами для просування цих прав. Movements.org "
+"є новою платформою, яка дозволяє людям у всьому світі допомогти захистити "
+"основні свободи. Ця он-лайн платформа з'єднує активістів у \"закритих "
+"суспільствах\" з людьми які мають відповідні вміння по всьому світу, щоб "
+"допомогти. Чи то Ви журналіст, політик, діяч, художник, технолог або Ви "
+"розмовляєте на декількох мовах, кожен має свою роль."
 
-#: templates/ahr/home_v2.html:111 templates/users/more_about_you.html:41
+#: templates/ahr/home_v2.html:122 templates/users/more_about_you.html:41
 msgid "Create a Request"
 msgstr "Створення запиту"
 
-#: templates/ahr/home_v2.html:112 templates/users/more_about_you.html:43
+#: templates/ahr/home_v2.html:123 templates/users/more_about_you.html:43
 msgid ""
 "Are you an activist in need of help? Movements.org leverages technology to "
 "help those in closed societies find the assistance they need to amplify "
 "their voice and expand their influence."
 msgstr ""
 "Ви активіст який потребує допомоги? Movements.org використовує технології, "
-"щоб допомогти знайти допомогу в закритих суспільствах, активісти повинні "
-"посилювати свій голос і розширювати свій вплив."
+"щоб допомогти знайти необхідні контакти в \"закритих суспільствах\", аби "
+"активісти посилювали свій голос і розширювали свій вплив."
 
-#: templates/ahr/home_v2.html:121
+#: templates/ahr/home_v2.html:132
 msgid "Getting Started"
-msgstr "Починаючи"
+msgstr "Починаємо"
 
-#: templates/ahr/home_v2.html:122
+#: templates/ahr/home_v2.html:133
 msgid ""
 "The Movements platform enables dissidents who need help to connect to "
 "activists and others who can provide it. Get started by joining today."
@@ -1930,11 +2013,11 @@ msgstr ""
 "сконтактувати з активістами та іншими, які можуть надати її. Почніть "
 "приєднавшись сьогодні."
 
-#: templates/ahr/home_v2.html:132
+#: templates/ahr/home_v2.html:143
 msgid "Offer your Services"
 msgstr "Запропонувати свої послуги"
 
-#: templates/ahr/home_v2.html:133 templates/users/more_about_you.html:47
+#: templates/ahr/home_v2.html:144 templates/users/more_about_you.html:47
 msgid ""
 "If you’ve ever wanted to help a human rights activist, here’s your "
 "opportunity. All of us have skills that can be put to use to advance basic "
@@ -1946,7 +2029,7 @@ msgstr ""
 
 #: templates/emails/base_email.html:4 templates/emails/base_email.txt:3
 msgid "Hello Movements.Org user,"
-msgstr "Шановний користувач сервісу Movements.Org,"
+msgstr "Привіт користувач сервісу Movements.Org,"
 
 #: templates/emails/base_email.html:12 templates/emails/base_email.txt:11
 msgid "The Movements.Org Team"
@@ -1955,7 +2038,7 @@ msgstr "Команда Movements.Org"
 #: templates/emails/base_email.html:13 templates/emails/base_email.txt:12
 msgid ""
 "Movements are made up of individuals. Movements.Org brings them together."
-msgstr "Movements складаються з окремих ідивідів. Movements.Org їх об'єднує."
+msgstr "Movements складаються з окремих індивідів. Movements.Org їх об'єднує."
 
 #: templates/emails/base_email.html:17 templates/emails/base_email.txt:14
 msgid "You can update your notification preferences in "
@@ -1978,11 +2061,8 @@ msgid ""
 "log-in <a href=\"%(login_url)s\">here</a> (using the username and password you signed up with) \n"
 "and create a user profile. Once you're finished, you can begin posting on the Exchange!"
 msgstr ""
-"Дякуємо за реєстрацію, тепер Ви є частиною Movements, нової інноваційної платформи\n"
-"з краудсорсінгу боротьби за права людини. Ми повідомляємо, що\n"
-"Ви в даний момент є підтвердженим користувачем і можете використовувати сайт. Для початку, \n"
-"увійдіть <a href=\"%(login_url)s\">тут </a> (використовуючи ім'я користувача та пароль які Ви зареєстрували)\n"
-"і створити профіль користувача. Після того, як Ви закінчите, Ви можете почати розміщувати повідомлення на біржі!"
+"Дякуємо за реєстрацію, тепер Ви є частиною Movements, нової інноваційної платформи з краудсорсингу боротьби за права людини. Ми повідомляємо, що\n"
+"Ви в даний момент є підтвердженим користувачем і можете використовувати сайт. Для початку, увійдіть <a href=\"%(login_url)s\">тут </a> (використовуючи ім'я користувача та пароль які Ви зареєстрували) і створіть профіль користувача. Після того, як Ви закінчите, Ви можете почати розміщувати повідомлення на сайті!"
 
 #: templates/emails/getstarted.html:14 templates/emails/notready.html:8
 #: templates/emails/securityalert.html:11
@@ -1999,8 +2079,8 @@ msgid ""
 "You can now get started on Movements. Your Username and Password is now "
 "active."
 msgstr ""
-"Тепер Ви можете розпочати на Movements. Ім'я користувача і пароль тепер "
-"активні."
+"Тепер Ви можете розпочати свою діяльність на Movements. Ім'я користувача і "
+"пароль тепер активні."
 
 #: templates/emails/itemreport.html:3
 msgid "User message:"
@@ -2069,8 +2149,7 @@ msgid ""
 "if you have any concerns."
 msgstr ""
 "Ви або хтось недавно намагався зареєструватися на Movements, використовуючи Вашу адресу електронної пошти.\n"
-"Цей обліковий запис в даний час був переданий на затвердження. Будь ласка, будьте терплячі, і, зв'яжіться з нами\n"
-"якщо у Вас є які-небудь проблеми."
+"Цей обліковий запис в даний час був переданий на затвердження. Будь ласка, будьте терплячі, і, зв'яжіться з нами, якщо у Вас є які-небудь проблеми."
 
 #: templates/emails/notready_subject.html:3
 msgid "Not quite ready yet"
@@ -2097,7 +2176,7 @@ msgid ""
 "    have recommended to you please go to %(post_link)s. If you wish to respond to the post please\n"
 "    <a href=\"%(registration_link)s\">register</a>. The registration process is designed to help protect the security and privacy of all users."
 msgstr ""
-"Вся особиста інформація на Movements.org є конфіденційною. Для перегляду повного поста, що був порекомендуваний Вам, перейдіть за посиланням %(post_link)s.  Якщо Ви хочете відповісти на цей пост, будь ласка,\n"
+"Вся особиста інформація на Movements.org є конфіденційною. Для перегляду повного поста, що був порекомендований Вам, перейдіть за посиланням %(post_link)s.  Якщо Ви хочете відповісти на цей пост, будь ласка,\n"
 "<a href=\"%(registration_link)s\">зареєструйтеся</a>. Процес реєстрації є розроблений так, щоб допомогти захистити безпеку і конфіденційність всіх користувачів."
 
 #: templates/emails/recommendation_message.html:24
@@ -2171,11 +2250,11 @@ msgstr "Користувач \"%(user)s\" повідомив користува�
 
 #: templates/market/create_offer.html:11
 msgid "Offer a service"
-msgstr "Пропозиції"
+msgstr "Пропозиція послуг"
 
 #: templates/market/create_offer.html:12
 msgid "Do you have expertise to offer?"
-msgstr "Чи є у Вас досвід, для того  аби запропонувати?"
+msgstr "Який у Вас є досвід аби запропонувати його?"
 
 #: templates/market/create_offer.html:13
 msgid ""
@@ -2183,24 +2262,24 @@ msgid ""
 "a story, or any skill that may be of help to others. Your Offer will be "
 "posted on Movements and will be seen by all members."
 msgstr ""
-"Пропозиція може бути технічні або професійні вміння, можливість публікувати "
-"історії, або будь-які вміння, які можуть виявитися корисним для інших. Ваша "
-"пропозиція буде розміщено на Movements і буде доступна всім."
+"Пропозицією можуть бути технічні або професійні вміння, можливість "
+"публікувати історії, або будь-які вміння, які можуть виявитися корисними для"
+" інших. Ваша пропозиція буде розміщена на Movements і буде доступна всім."
 
-#: templates/market/create_offer.html:17
+#: templates/market/create_offer.html:18
 msgid "1. What skills can you offer?"
 msgstr "1. Які вміння Ви можете запропонувати?"
 
-#: templates/market/create_offer.html:21
-#: templates/market/create_request.html:22
-msgid "Other"
-msgstr "Інше"
+#: templates/market/create_offer.html:33
+#: templates/market/create_request.html:32
+msgid "2. What issues does this relate to?"
+msgstr "2. До яких тем це має відношення?"
 
-#: templates/market/create_offer.html:31
-msgid "2. Which countries are you interested in helping?"
-msgstr "2. Яким країнам Ви зацікавлені в допомозі?"
+#: templates/market/create_offer.html:49
+msgid "3. Which countries are you interested in helping?"
+msgstr "3. Яким країнам Ви зацікавлені в допомозі?"
 
-#: templates/market/create_offer.html:37
+#: templates/market/create_offer.html:55
 msgid ""
 "Movements.org provides access to skills and experts. Please describe your "
 "skills, abilities, or services below. Be as explicit and clear as possible."
@@ -2209,41 +2288,46 @@ msgstr ""
 "ласка, опишіть Ваші вміння, здібності, або послуги нижче. Вказуйте точно і "
 "зрозуміло, настільки на скільки це можливо."
 
-#: templates/market/create_offer.html:38
-msgid "3. How can you help?"
-msgstr "3. Як Ви можете допомогти?"
+#: templates/market/create_offer.html:56
+msgid "4. How can you help?"
+msgstr "4. Як Ви можете допомогти?"
 
-#: templates/market/create_offer.html:39
-#: templates/market/create_request.html:43
+#: templates/market/create_offer.html:57
+#: templates/market/create_request.html:58
 msgid "Be specific and clear."
 msgstr "Будьте конкретні і зрозумілі."
 
-#: templates/market/create_offer.html:48
-#: templates/market/create_request.html:52
-msgid "4. Please write your post"
-msgstr "4. Будь ласка, напишіть пост"
+#: templates/market/create_offer.html:57
+#: templates/market/create_request.html:58
+msgid "(max 120 characters)"
+msgstr "(максимум 120 символів)"
 
-#: templates/market/create_offer.html:49
+#: templates/market/create_offer.html:66
+#: templates/market/create_request.html:67
+msgid "5. Please write your post"
+msgstr "5. Будь ласка, напишіть пост"
+
+#: templates/market/create_offer.html:67
 msgid "Tell a compelling story."
 msgstr "Опишіть свою історію."
 
-#: templates/market/create_offer.html:59
-#: templates/market/create_request.html:63
+#: templates/market/create_offer.html:75
+#: templates/market/create_request.html:75
 msgid "May we tweet this request?"
-msgstr "Чи ми можемо поширити цей запит задопомогою Twitter?"
+msgstr "Чи ми можемо поширити цей запит за допомогою Twitter?"
 
-#: templates/market/create_offer.html:62
-#: templates/market/create_request.html:66
+#: templates/market/create_offer.html:78
+#: templates/market/create_request.html:78
 msgid "We won’t use your name or any identifying information"
 msgstr "Ми не будемо використовувати Ваше ім'я або будь-яку іншу інформацію"
 
-#: templates/market/create_offer.html:69
-#: templates/market/create_request.html:73
+#: templates/market/create_offer.html:85
+#: templates/market/create_request.html:85
 msgid "Receive notifications"
 msgstr "Отримувати повідомлення"
 
-#: templates/market/create_offer.html:79
-#: templates/market/create_request.html:82
+#: templates/market/create_offer.html:95
+#: templates/market/create_request.html:94
 msgid "Post now"
 msgstr "Опублікувати"
 
@@ -2259,25 +2343,25 @@ msgid ""
 "or China?)  The more you explain your need, the easier it will be for "
 "someone to help."
 msgstr ""
-"Запит є спосіб просити допомоги у фахівців на Movements. Будьте конкретними "
-"і чіткими, наскільки це можливо, про те що Вам потрібно. Якщо Вам потрібен "
-"адвокат, повідомте нам, який вид? Де саме потрібно адвоката (у "
-"Великобританії, США чи Китаї?) Чим більше Ви пояснити Вашу потребу, тим "
-"легше буде для когось Вам допомогти."
+"Просити допомоги у фахівців на Movements Ви можете сформувавши відповідний "
+"запит. Будьте конкретними і чіткими, наскільки це можливо, про те що Вам "
+"потрібно. Якщо Вам потрібен адвокат, то повідомте нам, якого напрямку? Де "
+"саме потрібно адвоката (у Великобританії, США чи Китаї)? Чим більше Ви "
+"опишите Вашу потребу, тим легше буде комусь Вам допомогти."
 
 #: templates/market/create_request.html:18
 msgid "1. What skills do you need?"
 msgstr "1. Які вміння Вам потрібно?"
 
-#: templates/market/create_request.html:32
-msgid "2. What countries does this request apply to?"
-msgstr "2. До яких країн цей запит відноситься?"
+#: templates/market/create_request.html:47
+msgid "3. What countries does this request apply to?"
+msgstr "3. До яких країн цей запит відноситься?"
 
-#: templates/market/create_request.html:33
+#: templates/market/create_request.html:48
 msgid "Indicate the region and/or specific country."
 msgstr "Вкажіть регіон та/або конкретну країну."
 
-#: templates/market/create_request.html:40
+#: templates/market/create_request.html:55
 msgid ""
 " Movements.org provides access to skills and experts. At this time, we "
 "cannot provide funding or equipment. If you need either please see the <a "
@@ -2291,18 +2375,18 @@ msgstr ""
 "доступно так це письмова пропозиція, щоб допомогти Вам забезпечити "
 "фінансування з іншого джерела."
 
-#: templates/market/create_request.html:41
+#: templates/market/create_request.html:56
 msgid ""
 "Please describe your request below. Be as explicit and clear as possible."
 msgstr ""
 "Будь ласка, опишіть Ваш запит нижче. Пишіть якомога чіткіше і зрозуміліше на"
 " скільки це можливо."
 
-#: templates/market/create_request.html:42
-msgid "3. What do you need?"
-msgstr "3. Що Вам потрібно?"
+#: templates/market/create_request.html:57
+msgid "4. What do you need?"
+msgstr "4. Що Вам потрібно?"
 
-#: templates/market/create_request.html:53
+#: templates/market/create_request.html:68
 msgid "Tell a compelling story and state your needs."
 msgstr "Розкажіть Вашу історію і потреби."
 
@@ -2328,40 +2412,44 @@ msgstr "Сховати/Показати"
 msgid "Skills"
 msgstr "Навички"
 
-#: templates/market/market.html:39 templates/users/more_about_you.html:79
+#: templates/market/market.html:39
+msgid "Issues"
+msgstr "Проблеми"
+
+#: templates/market/market.html:45 templates/users/more_about_you.html:79
 msgid "Countries"
 msgstr "Країни"
 
-#: templates/market/market.html:45
+#: templates/market/market.html:51
 msgid "Search"
 msgstr "Пошук"
 
-#: templates/market/market.html:58
+#: templates/market/market.html:64
 msgid "Press enter to search"
 msgstr "Натисніть \"Еnter\" для пошуку"
 
-#: templates/market/market.html:59
+#: templates/market/market.html:65
 msgid "Click \"Search\" above to close"
 msgstr "Натисніть \"Пошук\" вище, щоб закрити"
 
-#: templates/market/market.html:72
+#: templates/market/market.html:78
 msgid "Featured posts"
 msgstr "Популярні повідомлення"
 
-#: templates/market/market.html:81
+#: templates/market/market.html:87
 msgid "Sticky posts"
 msgstr "Нотатки"
 
-#: templates/market/market.html:107
+#: templates/market/market.html:113
 msgid "Show hidden"
 msgstr "Показати приховані"
 
-#: templates/market/market.html:112 templates/market/market.html.py:120
-#: templates/market/market.html:126
+#: templates/market/market.html:118 templates/market/market.html.py:126
+#: templates/market/market.html:134 templates/market/market.html.py:140
 msgid "Select all"
 msgstr "Вибрати всі"
 
-#: templates/market/market.html:125
+#: templates/market/market.html:139
 msgid "Back"
 msgstr "Назад"
 
@@ -2405,6 +2493,85 @@ msgstr "опубліковано"
 msgid "sent you a private "
 msgstr "відправив Вам приватне"
 
+#: templates/market/request_posted.html:11
+msgid "Request Posted"
+msgstr "Запит опубліковано"
+
+#: templates/market/request_posted.html:13
+msgid ""
+"Thanks for creating your request on Movements.  Here’s what you can expect."
+msgstr ""
+"Дякуємо за створення запиту на Movements. Ось те, що Ви можете очікувати."
+
+#: templates/market/request_posted.html:15
+msgid ""
+"Anyone who has asked to get an alert on your topic will get an email about "
+"your request.  If they are interested they will message you back either with"
+" a public comment or a Direct Message."
+msgstr ""
+"Ті, хто підписався на повідомлення по Вашій темі, будуть отримувати їх "
+"електронною поштою. Якщо вони будуть зацікавлені, то відправлять Вам "
+"приватне або публічне повідомлення."
+
+#: templates/market/request_posted.html:16
+msgid ""
+"Movements will look for people or organizations that might be helpful.  If "
+"you’re looking for media coverage they may try to pitch your story.  If you "
+"need help with refugee status they’ll contact legal organizations."
+msgstr ""
+"Movements шукає людей або організації, які можуть бути корисні. Якщо Ви "
+"шукаєте засоби масової інформації, вони можуть спробувати передати їм Вашу "
+"історію. Якщо Вам потрібна допомога зі статусом біженця вони зв'яжуться з "
+"юридичними організаціями."
+
+#: templates/market/request_posted.html:20
+msgid ""
+"There are no guarantees.  The journalists who follow Movements may not be "
+"able to use your story this month.  But they may be able to use some other "
+"story that you suggest in the future.   The lawyers on Movements may not "
+"have the time to get involved this week.  But they may have time next month."
+msgstr ""
+"Там немає ніяких гарантій. Журналісти, які слідують за Movements можуть не "
+"мати змоги використати Вашу історію в цьому місяці. Але вони можуть мати "
+"можливість використати якусь іншу історію, яку Ви запропонуєте в "
+"майбутньому. Адвокати на Movements можуть не мати часу, аби взятися за "
+"справу на цьому тижні. Але вони можуть мати час в наступному місяці."
+
+#: templates/market/request_posted.html:23
+msgid ""
+"A journalist may read your post and then wait to see if you communicate with"
+" others on Movements (which would make you more interesting to them).  A "
+"lawyer might want to see the same thing."
+msgstr ""
+"Журналіст може прочитати Ваш пост, а потім чекати, щоб побачити, чи Ви "
+"спілкуєтеся з іншими на Movements (що зробить Вас більш цікавим для них). "
+"Адвокат може побачити те ж саме."
+
+#: templates/market/request_posted.html:26
+msgid "Please read "
+msgstr "Будь ласка, ознайомтеся"
+
+#: templates/market/request_posted.html:26
+msgid "How to make a good post on Movements"
+msgstr "Як зробити хороше повідомлення на Movements"
+
+#: templates/market/request_posted.html:26
+msgid " for tips on making your request interesting to other users."
+msgstr "поради про те, що робить Ваш запит цікавим іншим користувачам."
+
+#: templates/market/request_posted.html:29
+msgid ""
+"Movements is not a magic wand.  (We wish it were!)  It’s just like any other"
+" social media – the more you participate the more benefit you’ll get."
+msgstr ""
+"Movements не чарівна паличка. (Ми б хотіли щоб так було!) Це є те саме, що і"
+" будь-які інші соціальні медіа - чим більше Ви приймаєте участь, тим більше "
+"користі Ви отримаєте."
+
+#: templates/market/request_posted.html:36
+msgid "Return to Market"
+msgstr "Повернутися до майданчика"
+
 #: templates/market/view_post.html:12
 msgid "on"
 msgstr "на"
@@ -2417,41 +2584,41 @@ msgstr "Повідомлення від"
 msgid "Translate this post"
 msgstr "Перекласти цей пост"
 
-#: templates/market/view_post.html:51
+#: templates/market/view_post.html:58
 msgid "Recommend"
 msgstr "Рекомендувати"
 
-#: templates/market/view_post.html:56
+#: templates/market/view_post.html:64
 msgid "Tweet"
 msgstr "Твітнути"
 
-#: templates/market/view_post.html:62
+#: templates/market/view_post.html:71
 msgid "Direct message"
 msgstr "Приватне повідомлення"
 
-#: templates/market/view_post.html:65
+#: templates/market/view_post.html:75
 msgid "Report this post"
 msgstr "Поскаржитись на це повідомлення"
 
-#: templates/market/view_post.html:74
+#: templates/market/view_post.html:84
 msgid "Leave a comment"
 msgstr "Залишити коментар"
 
-#: templates/market/view_post.html:78
+#: templates/market/view_post.html:88
 msgid "Please do not post any personally identifying information."
 msgstr "Будь ласка, не розміщуйте будь-яку особисту інформацію."
 
-#: templates/market/view_post.html:79
+#: templates/market/view_post.html:89
 msgid "Don't use your real name or email address when leaving a comment."
 msgstr ""
 "Не використовуйте Ваше справжнє ім'я або адресу електронної пошти, залишаючи"
 " коментар."
 
-#: templates/market/view_post.html:82
+#: templates/market/view_post.html:92
 msgid "Post comment"
 msgstr "Залишити коментар"
 
-#: templates/market/view_post.html:95
+#: templates/market/view_post.html:105
 #, python-format
 msgid ""
 "Please <a href=\"%(accountUrl)s\">Login</a> or <a "
@@ -2464,7 +2631,7 @@ msgstr ""
 "повідомлення. Після того як Ви зробите це, Ви зможете відправляти "
 "повідомлення автору, коментувати і оцінювати цей пост."
 
-#: templates/market/view_post.html:119
+#: templates/market/view_post.html:129
 #, python-format
 msgid ""
 "You don't have any languages selected. Please add some in your <a "
@@ -2473,7 +2640,7 @@ msgstr ""
 "Ви не маєте вибраної ніякої мови. Будь ласка, додайте ті якими Ви володієте "
 "до Ваших<a href=\"%(settingsUrl)s#skills\">налаштувань</a>"
 
-#: templates/market/view_post.html:136
+#: templates/market/view_post.html:146
 msgid "Delete"
 msgstr "Видалити"
 
@@ -2486,7 +2653,7 @@ msgid "CLOSE AN OFFER"
 msgstr "ЗАКРИТИ ПРОПОЗИЦІЮ"
 
 #: templates/market/clientside/closemarketitemdialog.html:32
-#: templates/market/clientside/marketitem.html:91
+#: templates/market/clientside/marketitem.html:89
 msgid "Close"
 msgstr "Закрити"
 
@@ -2495,44 +2662,36 @@ msgid "Please enter your answer"
 msgstr "Будь ласка, введіть Вашу відповідь"
 
 #: templates/market/clientside/marketitem.html:25
+#: templates/market/clientside/marketitem.html:79
 #, python-format
 msgid ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> collaborators</a>."
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on "
+"<%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>."
 msgstr ""
-"<a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, розміщеного <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"<a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> співробітники</a>."
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, розміщеного  "
+"<%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>."
 
-#: templates/market/clientside/marketitem.html:68
+#: templates/market/clientside/marketitem.html:67
 msgid "FEATURED OFFER"
 msgstr "РЕКОМЕНДОВАНІ ПРОПОЗИЦІЇ"
 
-#: templates/market/clientside/marketitem.html:70
+#: templates/market/clientside/marketitem.html:69
 msgid "FEATURED REQUEST"
 msgstr "РЕКОМЕНДОВАНІ ЗАПИТИ"
 
-#: templates/market/clientside/marketitem.html:80
-#, python-format
-msgid ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"        <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> collaborators</a>."
-msgstr ""
-"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, розміщеного <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
-"<a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> співробітники</a>."
-
-#: templates/market/clientside/marketitem.html:88
+#: templates/market/clientside/marketitem.html:86
 msgid "Hide"
 msgstr "Приховати"
 
-#: templates/market/clientside/marketitem.html:89
+#: templates/market/clientside/marketitem.html:87
 msgid "Stick"
 msgstr "Зазначити"
 
-#: templates/market/clientside/marketitem.html:90
+#: templates/market/clientside/marketitem.html:88
 msgid "Edit"
 msgstr "Редагувати"
 
-#: templates/market/clientside/marketitem.html:92
+#: templates/market/clientside/marketitem.html:90
 msgid "Report"
 msgstr "Звіт"
 
@@ -2557,7 +2716,7 @@ msgstr "Повідомлення"
 #: templates/market/clientside/reportdialog.html:23
 #: templates/market/clientside/reportuserdialog.html:24
 msgid "Send"
-msgstr "Послати"
+msgstr "Відправити"
 
 #: templates/market/clientside/messagedialog.html:85
 msgid ". Please try again."
@@ -2589,7 +2748,7 @@ msgstr "користувач"
 
 #: templates/market/clientside/recommenddialog.html:62
 msgid "post"
-msgstr "пост"
+msgstr "повідомлення"
 
 #: templates/market/clientside/recommenddialog.html:86
 msgid "Please enter both a subject and a message."
@@ -2672,7 +2831,6 @@ msgid "Sent"
 msgstr "Надіслані"
 
 #: templates/postman/base_folder.html:43
-#, fuzzy
 msgid "g:i A,M j,n/j/y"
 msgstr ""
 
@@ -2696,7 +2854,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"%(date)s, Ви запросили надісилання повідомлення користувачу '%(recipient)s'."
+"%(date)s, Ви запросили надсилання повідомлення користувачу '%(recipient)s'."
 
 #: templates/postman/email_user.txt:8 templates/postman/email_visitor.txt:5
 msgid "Your message has been rejected by the moderator"
@@ -2782,7 +2940,7 @@ msgstr "до"
 #: templates/socialaccount/authentication_error.html:5
 #: templates/socialaccount/authentication_error.html:10
 msgid "Social Network Login Failure"
-msgstr "Вхід у соціальну мережу відхилено"
+msgstr "Вхід за допомогою соціальної мережі відхилено"
 
 #: templates/socialaccount/authentication_error.html:11
 msgid ""
@@ -2859,7 +3017,7 @@ msgid "Regions"
 msgstr "Області"
 
 #: templates/users/more_about_you.html:30
-#: templates/users/more_about_you.html:130
+#: templates/users/more_about_you.html:154
 msgid "Finish"
 msgstr "Фініш"
 
@@ -2889,7 +3047,7 @@ msgid ""
 "available, but it is not fully accurate."
 msgstr ""
 "Прохання вказати, якими мовами Ви володієте. Перекладач Google теж є "
-"доступний, але це не зовсім точно."
+"доступний, але це не зовсім точний переклад."
 
 #: templates/users/more_about_you.html:82
 msgid ""
@@ -2902,26 +3060,54 @@ msgid "Please indicate your skill set."
 msgstr "Будь ласка, вкажіть свій набір вмінь."
 
 #: templates/users/more_about_you.html:115
+msgid "How you can help"
+msgstr ""
+
+#: templates/users/more_about_you.html:117
+msgid ""
+"\n"
+"          <p>\n"
+"              While there are certain skills that are particularly in demand from our activist users — namely,\n"
+"              legal assistance, media coverage — there are plenty of ways you can be involved if you do not fall into\n"
+"              those categories.\n"
+"          </p>\n"
+"          <ul>\n"
+"            <li>\n"
+"              <strong>Social media.</strong> Share Movements’ posts across your social media platforms. For example,\n"
+"              you can share Movements’ users’ requests with your representatives.\n"
+"            </li>\n"
+"            <li>\n"
+"              <strong>Tweet</strong> the posts that most interest you. There’s a button on almost every post.\n"
+"            </li>\n"
+"            <li>\n"
+"              <strong>Recommend a friend.</strong> If you have a friend with the skills in demand on our network, tell\n"
+"              them about us!\n"
+"            </li>\n"
+"          </ul>\n"
+"          "
+msgstr ""
+
+#: templates/users/more_about_you.html:139
 msgid "Done"
 msgstr "Готово"
 
-#: templates/users/more_about_you.html:118
+#: templates/users/more_about_you.html:142
 msgid "Thank You! You are one step closer to opening a closed society!"
-msgstr "Дякуємо! Ви на один крок ближче до відкриття закритого суспільства!"
+msgstr "Дякуємо! Ви на один крок ближче до відкриття \"закритого суспільства\"!"
 
-#: templates/users/more_about_you.html:121
+#: templates/users/more_about_you.html:145
 msgid ""
-"If you would like to update this details at any time, this can be done in "
+"If you would like to update these details at any time, this can be done in "
 "easily in your settings panel."
 msgstr ""
 "Якщо Ви хочете оновити ці деталі, в будь-який час це можна легко зробити в "
 "панелі налаштувань."
 
-#: templates/users/more_about_you.html:123
+#: templates/users/more_about_you.html:147
 msgid "Your Safety"
 msgstr "Ваша безпека"
 
-#: templates/users/more_about_you.html:125
+#: templates/users/more_about_you.html:149
 #, python-format
 msgid ""
 "Please remember that no online platform is 100%% secure. We have gone to "
@@ -2934,10 +3120,10 @@ msgstr ""
 "Будь ласка, пам'ятайте, що ні одна онлайн-платформа не є 100% безпечна. Ми "
 "зробили багато чого, щоб захистити Вашу особисту інформацію і працюємо з "
 "кращими фахівцями в даній області, які поділяють і цінують Ваше право на "
-"цифрову безпеку. Однак важливо завжди залишатися на осторожі в Інтернеті і "
+"цифрову безпеку. Однак важливо завжди залишатися пильним в Інтернеті і "
 "ділитися особистою інформацією тільки з людьми, яким Ви довіряєте. Будь "
-"ласка, дивіться наші сторінки з безпеки та конфіденційності для більш "
-"докладної інформації."
+"ласка, ознайомтесь із нашими сторінками з безпеки та конфіденційності для "
+"більш докладної інформації."
 
 #: templates/users/thanksforactivation.html:7
 #: templates/users/thanksforactivation.html:12
@@ -3019,7 +3205,6 @@ msgid "Interface Language"
 msgstr "Мова інтерфейсу"
 
 #: templates/users/user_settings_v2.html:88
-#, fuzzy
 msgid "Digital Presence"
 msgstr ""
 
@@ -3128,3 +3313,13 @@ msgstr ""
 "3 Зірки: Підтверджено всі профілі в соціальних мережах і біографія<br>\n"
 "4 Зірки: Підтверджено значну онлайн присутність<br>\n"
 "5 Зірок: Персонально знайомі з командою Movements.org<br>"
+
+#~ msgid "Crowdsourcing the fight for human rights."
+#~ msgstr "Краудсорсинг боротьби за права людини."
+
+#~ msgid ""
+#~ "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+#~ "            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> collaborators</a>."
+#~ msgstr ""
+#~ "<a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, розміщеного <%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>, </span>\n"
+#~ "<a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> співробітники</a>."

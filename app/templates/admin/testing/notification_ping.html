@@ -1,0 +1,28 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; {% trans 'Notification Ping' %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div id="content-main">
+    <form action="" method="post">
+      {% csrf_token %}{% block form_top %}{% endblock %}
+      <div>
+        <p>{% blocktrans %}Send a ping via the notifications process to test that it's all running.{% endblocktrans %}</p>
+        <div>
+          <label for="email_to">Send ping to email:</label>
+          <input type="text" value="" name="email_to" id="email_to"/>
+        </div>
+        <div>
+          <input type="submit" value="{% trans 'SEND PING' %}"/>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

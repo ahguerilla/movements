@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from app.users.models import LanguageRating
 from app.market.models import (
     TranslationBase, CommentTranslation, MarketItemTranslation)
-from tasks.celerytasks import (
+from app.celerytasks import (
     takein_notification, approved_notification, approve_notification,
     revoke_notification, takeoff_notification
     )

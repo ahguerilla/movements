@@ -57,9 +57,12 @@ class UserAdmin(TrackingAdmin):
     list_select_related = ('userprofile', 'organisationalrating', 'emailaddress')
     list_display_links = ('id', 'get_screen_name')
     list_display = (
-        'id', 'get_screen_name', 'get_star_rating', 'get_email_status',  'get_full_name',
-        'get_vet_info_count', 'get_nationality', 'get_resident_country',
-        'get_signup_date', 'last_login', 'email', 'is_admin',
+        'id', 'get_screen_name', 'get_star_rating',
+        'get_email_status',  'get_full_name',
+        'get_vet_info_count', 'get_resident_country',
+        'get_signup_date', 'get_last_login', 'email',
+        'get_bio', 'get_fb', 'get_twitter', 'get_linkedin', 'get_website',
+        'is_admin',
         #'get_request_count', 'get_offer_count', 'get_comment_count',
 
     )
@@ -84,8 +87,12 @@ class UserAdmin(TrackingAdmin):
         return obj.username
     get_screen_name.short_description = _('Screen Name')
 
+    def get_last_login(self, obj):
+        return obj.last_login.strftime(self.EXPORT_DATE_FORMAT)
+    get_last_login.short_description = _('Last Login')
+
     def get_signup_date(self, obj):
-        return obj.date_joined
+        return obj.date_joined.strftime(self.EXPORT_DATE_FORMAT)
     get_signup_date.short_description = _('Signup Date')
 
     def get_full_name(self, obj):

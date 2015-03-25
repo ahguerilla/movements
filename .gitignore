@@ -9,7 +9,6 @@ app/static/admin/
 app/static/tiny_mce/
 app/static/.webassets-cache/
 app/db.sqlite3
-app/celerybeat-schedule
 bin/
 include/
 local/
@@ -27,4 +26,4 @@ setenv.sh
 .elasticbeanstalk/aws_credential_file
 
 dump.rdb
-_makefile
+celerybeat-schedule

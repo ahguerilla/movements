@@ -1,22 +1,30 @@
-from app.users.models import UserProfile, Language, LanguageRating
-from app.market.models import (
-    Notification, MarketItem, Comment,
-    MarketItemTranslation, CommentTranslation
-)
+from __future__ import absolute_import
+
+import json
+
+
+from celery import Celery
 from django.db.models import Q
 from django.conf import settings
 from django.utils.timezone import timedelta, now
 
-from datetime import datetime
-import json
 
-import logging
-logger= logging.getLogger(__name__)
+from app.models import NotificationPing
+from app.sforce import add_market_item_to_salesforce, update_market_item_stats
+from app.users.models import UserProfile, LanguageRating
+from app.market.models import (
+    Notification, MarketItem, Comment,
+    MarketItemTranslation, CommentTranslation,
+    MarketItemSalesforceRecord
+)
 
-if not '_app' in dir():
-    from celery import Celery
-    from celery.task import periodic_task
-    _app = Celery('celerytasks', broker=settings.CELERY_BROKER)
+
+app = Celery('celerytasks', broker=settings.CELERY_BROKER)
+app.config_from_object('django.conf:settings')
+app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
+
+from celery.task import periodic_task
+from djcelery_email.tasks import send_email
 
 
 def get_notification_text(obj, update=False):
@@ -42,8 +50,14 @@ def find_people_interested_in(obj):
     return profiles
 
 
-@_app.task(name="createNotification", bind=True)
-def create_notification(self, obj):
+@app.task(name='app.celery.on_market_item_creation')
+def on_market_item_creation(market_item):
+    create_notification(market_item)
+    add_market_item_to_salesforce(market_item)
+
+
+@app.task(name="createNotification")
+def create_notification(obj):
     profiles = find_people_interested_in(obj)
     for profile in profiles:
         notification = Notification()
@@ -56,8 +70,9 @@ def create_notification(self, obj):
         obj, Notification.STATUSES.PENDING)
 
 
-@_app.task(name="createCommentNotification", bind=True)
-def create_comment_notification(self, obj, comment, username):
+@app.task(name="createCommentNotification")
+def create_comment_notification(obj, comment, username):
+    MarketItemSalesforceRecord.mark_for_update(obj.id)
     created = set()
     if obj.owner.username != username:
         notification = Notification()
@@ -82,8 +97,14 @@ def create_comment_notification(self, obj, comment, username):
         comment, Notification.STATUSES.PENDING)
 
 
-@_app.task(name="updateNotifications", bind=True)
-def update_notifications(self, obj):
+@app.task(name='app.celery.on_market_item_update')
+def on_market_item_update(market_item):
+    update_notifications(market_item)
+    add_market_item_to_salesforce(market_item)
+
+
+@app.task(name="updateNotifications")
+def update_notifications(obj):
     notification_objs = Notification.objects.filter(item=obj.id).only('user').all()
     notification_userids = set(notification.user.id for notification in notification_objs)
     profiles = find_people_interested_in(obj)
@@ -108,8 +129,8 @@ def update_notifications(self, obj):
         notification.save()
 
 
-@_app.task(name="new_postman_message", bind=True)
-def new_postman_message(self, message):
+@app.task(name="new_postman_message")
+def new_postman_message(message):
     notification = Notification()
     notification.user_id = message.recipient.id
     notification.text = json.dumps({
@@ -119,6 +140,17 @@ def new_postman_message(self, message):
     })
     notification.avatar_user = message.sender.username
     notification.save()
+
+
+@app.task(name="notification_ping")
+def notification_ping(email_to):
+    ping = NotificationPing(send_email_to=email_to)
+    ping.save()
+
+
+@app.task(name='update_salesforce')
+def update_salesforce():
+    update_market_item_stats()
 
 
 def find_translators(lang_codes):
@@ -212,16 +244,16 @@ def create_CMs_notifications(obj, status, lang_code=None, reminder=False, save=T
     return notifications
 
 
-@_app.task(name="TakeinNotification", bind=True)
-def takein_notification(self, obj, correction=False):
+@app.task(name="TakeinNotification")
+def takein_notification(obj, correction=False):
     if correction:
         create_translation_notification(obj, Notification.STATUSES.CORRECTION)
     else:
         create_translation_notification(obj, Notification.STATUSES.TRANSLATION)
 
 
-@_app.task(name="ApprovedNotification", bind=True)
-def approved_notification(self, obj):
+@app.task(name="ApprovedNotification")
+def approved_notification(obj):
     create_translation_notification(obj, Notification.STATUSES.APPROVED)
 
     if isinstance(obj, MarketItemTranslation):
@@ -232,15 +264,15 @@ def approved_notification(self, obj):
         obj, Notification.STATUSES.APPROVED, user_id=obj.owner_id)
 
 
-@_app.task(name="ApproveNotification", bind=True)
-def approve_notification(self, obj):
+@app.task(name="ApproveNotification")
+def approve_notification(obj):
     create_CMs_notifications(
         obj, Notification.STATUSES.APPROVAL,
         lang_code=[obj.language, obj.source_language])
 
 
-@_app.task(name="TakeoffNotification", bind=True)
-def takeoff_notification(self, translation):
+@app.task(name="TakeoffNotification")
+def takeoff_notification(translation):
     notifications = []
 
     # to translators
@@ -264,8 +296,8 @@ def takeoff_notification(self, translation):
     Notification.objects.bulk_create(notifications)
 
 
-@_app.task(name="RevokeNotification", bind=True)
-def revoke_notification(self, translation):
+@app.task(name="RevokeNotification")
+def revoke_notification(translation):
     notifications = []
     notifications.append(
         create_translation_notification(

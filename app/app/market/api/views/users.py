@@ -13,7 +13,7 @@ import constance
 from django.http import Http404
 
 from app.market.api.utils import *
-from app.market.models import MarketItem, EmailRecommendation, MarketItemCollaborators
+from app.market.models import MarketItem, EmailRecommendation, MarketItemCollaborators, MarketItemSalesforceRecord
 from app import users
 
 
@@ -74,6 +74,7 @@ def send_recommendation(request, rec_type, obj_id, rtype):
     if rec_type == 'item':
         market_item = MarketItem.objects.get(pk=obj_id)
         additionals = market_item.title
+        MarketItemSalesforceRecord.mark_for_update(obj_id)
     else:
         additionals = obj_id
 

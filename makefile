@@ -31,6 +31,12 @@ mfs:
 showurls:
 	cd app && python manage.py show_urls --settings=app.settings.local
 
+notifications:
+	cd app && python manage.py notifications --settings=app.settings.local
+
+translations:
+	cd app && python manage.py makemessages --all --settings=app.settings.local
+
 loaddata:
 	cd app && python manage.py loaddata $(fixture) --settings=app.settings.local
 
@@ -74,12 +80,12 @@ staging-social:
 
 celery:
 	cd app && \
-	celery -A tasks.celeryworker worker -B
+	celery -A app.celerytasks worker -l info -B
 
 fixturesJune14:
 	cd app && \
 	python manage.py loaddata questionnaires.json --settings=app.settings.local && \
-	python manage.py loaddata users_interests.json --settings=app.settings.local && \
+	python manage.py loaddata users_interests.json --settings=app.settings.local & \
 	python manage.py loaddata users_languages.json --settings=app.settings.local && \
 	python manage.py loaddata users_regions.json --settings=app.settings.local && \
 	python manage.py loaddata users_country_region.json --settings=app.settings.local

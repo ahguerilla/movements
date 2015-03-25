@@ -15,7 +15,7 @@ from app.market.api.utils import *
 import app.market as market
 from app.market.models import Questionnaire
 from app.market.forms import QuestionnaireForm
-from tasks.celerytasks import update_notifications
+from app.celerytasks import update_notifications
 
 
 def get_market_json(items, request=None, extra_data=None, is_safe=True):
@@ -38,6 +38,9 @@ def get_raw(request, from_item=0, to_item=None,
             filter_by_owner=False, count=False, user_id=None):
     skills = map(int, request.GET.getlist('skills', []))
     issues = map(int, request.GET.getlist('issues', []))
+    show_other_skills = -1 in skills
+    show_other_issues = -1 in issues
+
     countries = map(int, request.GET.getlist('countries', []))
     params = {
         'interests': tuple(skills),
@@ -80,21 +83,33 @@ def get_raw(request, from_item=0, to_item=None,
 
     if skills:
         additional_filter += """
-            AND EXISTS (
-                SELECT * FROM market_marketitem_interests
-                WHERE market_marketitem_interests.marketitem_id = mi.id AND
-                      market_marketitem_interests.interest_id IN %(interests)s
-            )
+            AND (EXISTS
+                    (SELECT * FROM market_marketitem_interests
+                     WHERE market_marketitem_interests.marketitem_id = mi.id AND
+                          market_marketitem_interests.interest_id IN %(interests)s
+                     )
         """
+        if show_other_skills:
+            additional_filter += """
+                        OR (mi.specific_skill IS NOT NULL AND length(mi.specific_skill) > 0))
+                    """
+        else:
+            additional_filter += ')'
 
     if issues:
         additional_filter += """
-            AND EXISTS (
-                SELECT * FROM market_marketitem_issues
-                WHERE market_marketitem_issues.marketitem_id = mi.id AND
-                      market_marketitem_issues.issues_id IN %(issues)s
-            )
+            AND (EXISTS
+                    (SELECT * FROM market_marketitem_issues
+                     WHERE market_marketitem_issues.marketitem_id = mi.id AND
+                          market_marketitem_issues.issues_id IN %(issues)s
+                     )
         """
+        if show_other_issues:
+            additional_filter += """
+                OR (mi.specific_issue IS NOT NULL AND length(mi.specific_issue) > 0))
+            """
+        else:
+            additional_filter += ')'
 
     if countries:
         additional_filter += """

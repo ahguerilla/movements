@@ -349,7 +349,6 @@ body {
 }
 .header-nav .navbar-left-top {
   position: absolute;
-  width: 150px;
   top: 2px;
 }
 .header-nav .navbar-left-top .nav-twitter {
@@ -397,19 +396,24 @@ body {
   clip: rect(0px, 30px, 22px, 0px);
   margin-top: -3px;
 }
-.header-nav .navbar-left-top .nav-blog {
+.header-nav .navbar-left-top .top-left-nav-button {
   float: left;
-  width: 80px;
   color: #fff;
   background-color: #005d86;
   text-align: center;
-  margin-left: 115px;
-  margin-top: -3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
+  margin-top: 6px;
+}
+.header-nav .navbar-left-top .nav-blog {
+  width: 80px;
+}
+.header-nav .navbar-left-top .nav-success {
+  width: 120px;
+  margin-left: 10px;
 }
 .header-nav .navbar-right {
   float: right !important;
@@ -780,7 +784,8 @@ h6 {
   margin-left: -5px;
 }
 .tags .tag,
-.tags .issue {
+.tags .issue,
+.tags .country {
   float: left;
   margin-left: 5px;
   margin-bottom: 5px;
@@ -800,6 +805,10 @@ h6 {
 .tags .issue {
   border: 2px solid #fe6d50;
   color: #fe6d50;
+}
+.tags .country {
+  border: 2px solid #756b65;
+  color: #756b65;
 }
 .content-wrap {
   min-height: 500px;
@@ -1308,10 +1317,13 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .categories ul.category-menu > li a.showhide {
   background: url("../images/v2/market-hide-show-icon.png") no-repeat center 10px;
 }
-.exchange-filters .categories ul.category-menu > li a.skills,
-.exchange-filters .categories ul.category-menu > li a.issues {
+.exchange-filters .categories ul.category-menu > li a.skills {
   width: 90px;
   background: url("../images/v2/market-filter-icon.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li a.issues {
+  width: 95px;
+  background: url("../images/v2/market-issues-icon.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li a.regions {
   width: 118px;
@@ -1335,9 +1347,11 @@ input.borderless-control:focus:invalid:focus {
 .exchange-filters .categories ul.category-menu > li.active a.showhide {
   background: url("../images/v2/market-hide-show-icon-toggled.png") no-repeat center 10px;
 }
-.exchange-filters .categories ul.category-menu > li.active a.skills,
-.exchange-filters .categories ul.category-menu > li.active a.issues {
+.exchange-filters .categories ul.category-menu > li.active a.skills {
   background: url("../images/v2/market-filter-icon-toggled.png") no-repeat center 10px;
+}
+.exchange-filters .categories ul.category-menu > li.active a.issues {
+  background: url("../images/v2/market-issues-icon-toggled.png") no-repeat center 10px;
 }
 .exchange-filters .categories ul.category-menu > li.active a.regions {
   background: url("../images/v2/market-countries-icon-toggled.png") no-repeat center 10px;

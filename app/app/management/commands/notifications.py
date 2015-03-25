@@ -12,6 +12,7 @@ from django.core.management.base import BaseCommand
 from django.template.loader import render_to_string
 
 import constance
+from app.models import NotificationPing
 from app.users.models import UserProfile
 from app.market.models.notification import Notification
 
@@ -70,6 +71,20 @@ class Command(BaseCommand):
         seconds_since_full_check = full_check_seconds
         while True:
             logger.info('Running the notification process')
+
+            try:
+                for ping in NotificationPing.objects.filter(completed=None):
+                    email = EmailMessage(
+                        'Notification ping',
+                        'This is the requested notification ping',
+                        constance.config.NO_REPLY_EMAIL,
+                        [ping.send_email_to]
+                    )
+                    email.send()
+                    ping.completed = timezone.now()
+                    ping.save()
+            except Exception as ex:
+                logger.exception(ex)
 
             # For each user, send an email notifying of Direct Messages if there are any (every 1 second).
             try:

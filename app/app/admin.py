@@ -1,41 +1,35 @@
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry, DELETION
+from django.shortcuts import render, redirect
 from django.utils.html import escape
 from django.core.urlresolvers import reverse
 
 from cms.extensions import PageExtensionAdmin
 
-from .models import NewsletterSignups
-
-from .models import MenuExtension
+from .models import NewsletterSignups, MenuExtension, NotificationPing
+from .celerytasks import notification_ping
 
 
 class MenuExtensionAdmin(PageExtensionAdmin):
     pass
 
 admin.site.register(MenuExtension, MenuExtensionAdmin)
-
 admin.site.register(NewsletterSignups)
+admin.site.register(NotificationPing)
 
 
 class LogEntryAdmin(admin.ModelAdmin):
-
     date_hierarchy = 'action_time'
-
     readonly_fields = LogEntry._meta.get_all_field_names()
-
     list_filter = [
         'user',
         'content_type',
         'action_flag'
     ]
-
     search_fields = [
         'object_repr',
         'change_message'
     ]
-
-
     list_display = [
         'action_time',
         'user',
@@ -78,3 +72,13 @@ class LogEntryAdmin(admin.ModelAdmin):
 
 admin.site.register(LogEntry, LogEntryAdmin)
 
+
+@admin.site.register_view('market/testing/notification_ping', urlname="notification_ping")
+def process_buy_orders(request):
+    if request.method == 'POST':
+        email_to = request.POST.get('email_to', None)
+        if not email_to:
+            email_to = request.user.email
+        notification_ping.delay(email_to)
+        return redirect(reverse('admin:app_notificationping_changelist'))
+    return render(request, 'admin/testing/notification_ping.html', {})

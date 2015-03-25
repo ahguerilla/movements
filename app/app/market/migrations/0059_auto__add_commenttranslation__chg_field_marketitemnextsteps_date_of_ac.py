@@ -28,6 +28,9 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('market', ['CommentTranslation'])
 
+
+        # Changing field 'MarketItemNextSteps.date_of_action'
+        db.alter_column(u'market_marketitemnextsteps', 'date_of_action', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True))
         # Adding field 'MarketItemTranslation.details_candidate'
         db.add_column(u'market_marketitemtranslation', 'details_candidate',
                       self.gf('django.db.models.fields.TextField')(default='', blank=True),
@@ -55,12 +58,12 @@ class Migration(SchemaMigration):
 
         # Adding field 'MarketItemTranslation.created'
         db.add_column(u'market_marketitemtranslation', 'created',
-                      self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default=datetime.datetime(2015, 2, 25, 0, 0), blank=True),
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default=datetime.datetime(2015, 3, 25, 0, 0), blank=True),
                       keep_default=False)
 
         # Adding field 'MarketItemTranslation.edited'
         db.add_column(u'market_marketitemtranslation', 'edited',
-                      self.gf('django.db.models.fields.DateTimeField')(auto_now=True, default=datetime.datetime(2015, 2, 25, 0, 0), blank=True),
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now=True, default=datetime.datetime(2015, 3, 25, 0, 0), blank=True),
                       keep_default=False)
 
         # Adding field 'MarketItemTranslation.timer'
@@ -80,7 +83,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'Notification.translation'
         db.add_column(u'market_notification', 'translation',
-                      self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0, max_length=1),
+                      self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=None, max_length=1, null=True),
                       keep_default=False)
 
         # Adding field 'Notification.timeto'
@@ -93,11 +96,17 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.BooleanField')(default=False),
                       keep_default=False)
 
+
+        # Changing field 'MarketItemActions.date_of_action'
+        db.alter_column(u'market_marketitemactions', 'date_of_action', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True))
         # Adding field 'MarketItem.language'
         db.add_column(u'market_marketitem', 'language',
                       self.gf('django.db.models.fields.CharField')(default='en', max_length=10),
                       keep_default=False)
 
+
+        # Changing field 'MarketItem.pub_date'
+        db.alter_column(u'market_marketitem', 'pub_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True))
         # Adding field 'Comment.language'
         db.add_column(u'market_comment', 'language',
                       self.gf('django.db.models.fields.CharField')(default='en', max_length=10),
@@ -108,6 +117,9 @@ class Migration(SchemaMigration):
         # Deleting model 'CommentTranslation'
         db.delete_table(u'market_commenttranslation')
 
+
+        # Changing field 'MarketItemNextSteps.date_of_action'
+        db.alter_column(u'market_marketitemnextsteps', 'date_of_action', self.gf('django.db.models.fields.DateTimeField')())
         # Deleting field 'MarketItemTranslation.details_candidate'
         db.delete_column(u'market_marketitemtranslation', 'details_candidate')
 
@@ -147,9 +159,15 @@ class Migration(SchemaMigration):
         # Deleting field 'Notification.reminder'
         db.delete_column(u'market_notification', 'reminder')
 
+
+        # Changing field 'MarketItemActions.date_of_action'
+        db.alter_column(u'market_marketitemactions', 'date_of_action', self.gf('django.db.models.fields.DateTimeField')())
         # Deleting field 'MarketItem.language'
         db.delete_column(u'market_marketitem', 'language')
 
+
+        # Changing field 'MarketItem.pub_date'
+        db.alter_column(u'market_marketitem', 'pub_date', self.gf('django.db.models.fields.DateTimeField')())
         # Deleting field 'Comment.language'
         db.delete_column(u'market_comment', 'language')
 
@@ -253,7 +271,7 @@ class Migration(SchemaMigration):
             'item_type': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'language': ('django.db.models.fields.CharField', [], {'default': "'en'", 'max_length': '10'}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'blank': 'True'}),
-            'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'ratecount': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'receive_notifications': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
@@ -270,7 +288,7 @@ class Migration(SchemaMigration):
         'market.marketitemactions': {
             'Meta': {'object_name': 'MarketItemActions'},
             'action': ('django.db.models.fields.TextField', [], {}),
-            'date_of_action': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'date_of_action': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'market_item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']"})
         },
@@ -291,7 +309,7 @@ class Migration(SchemaMigration):
         'market.marketitemnextsteps': {
             'Meta': {'object_name': 'MarketItemNextSteps'},
             'completed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'date_of_action': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'date_of_action': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'market_item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['market.MarketItem']"}),
             'next_step': ('django.db.models.fields.TextField', [], {})
@@ -305,6 +323,14 @@ class Migration(SchemaMigration):
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'resolved': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
+        },
+        'market.marketitemsalesforcerecord': {
+            'Meta': {'object_name': 'MarketItemSalesforceRecord'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'item': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'salesforce'", 'unique': 'True', 'to': "orm['market.MarketItem']"}),
+            'last_updated': ('django.db.models.fields.DateTimeField', [], {}),
+            'needs_updating': ('django.db.models.fields.BooleanField', [], {}),
+            'salesforce_record_id': ('django.db.models.fields.CharField', [], {'max_length': '64'})
         },
         'market.marketitemstick': {
             'Meta': {'object_name': 'MarketItemStick'},
@@ -357,7 +383,7 @@ class Migration(SchemaMigration):
             'seen': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'text': ('json_field.fields.JSONField', [], {'default': "u'null'"}),
             'timeto': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
-            'translation': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'max_length': '1'}),
+            'translation': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': 'None', 'max_length': '1', 'null': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         },
         'market.question': {
@@ -409,6 +435,7 @@ class Migration(SchemaMigration):
             'countries': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'}),
             'countries_ar': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'countries_en': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'countries_fa': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'countries_ru': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'countries_uk': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'countries_zh_cn': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
@@ -421,6 +448,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255'}),
             'name_ar': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_en': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'name_fa': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_ru': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_uk': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_zh_cn': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'})
@@ -431,6 +459,7 @@ class Migration(SchemaMigration):
             'issues': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True'}),
             'issues_ar': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'issues_en': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'issues_fa': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'issues_ru': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'issues_uk': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'issues_zh_cn': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
@@ -441,6 +470,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255'}),
             'name_ar': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_en': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'name_fa': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_ru': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_uk': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name_zh_cn': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'})
