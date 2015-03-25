@@ -126,11 +126,11 @@
           } else {
             post.find('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>').show();
           }
-          $('.translate span').popover('hide');
+          $('.translate span').popover('toggle');
         },
         error: function (){
           post.find('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>').show();
-          $('.translate span').popover('hide');
+          $('.translate span').popover('toggle');
         }
       });
     },
@@ -395,7 +395,7 @@
               placement: 'top'
             });
             popup_element.popover('show');
-          },
+          }
         });
       } else {
         popup_element.popover('toggle')
@@ -415,7 +415,7 @@
           }
           self.render();
           self.$areaContainer.show();
-          self.$PostinitMenuarea.find('span').popover('hide');
+          self.$PostinitMenuarea.find('span').popover('toggle');
         },
       });
 
