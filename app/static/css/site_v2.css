@@ -861,14 +861,11 @@ h6 {
   text-decoration: underline;
   cursor: pointer;
 }
-.auto-translated-text, .user-translated-text, .user-translated-text span {
+.auto-translated-text {
   font-size: 13px;
   color: #808080;
 }
 .language-selector ul {
-  display: inline;
-  font-family: "LinotypeUnivers-330Light";
-  font-style: normal;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -945,23 +942,23 @@ h6 {
   padding-right: 20%;
   width: 100%;
   position: absolute;
-  top: 295px;
+  top: 265px;
   font-size: 18px;
 }
 .page-banner .carousel-inner .carousel-content .carousel-button {
   position: absolute;
-  top: 400px;
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
+  top: 365px;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 .page-banner .carousel-inner .carousel-content .carousel-button button {
-  width: 40%;
+  width: 50%;
   height: 50px;
   font-size: 22px;
 }
 .page-banner .carousel-inner .carousel-content #FindOutMoreButton {
-  top: 465px;
+  top: 425px;
 }
 .page-banner .carousel-inner .carousel-content #FindOutMoreButton button {
   background-color: #227da6;
@@ -1899,11 +1896,6 @@ input.borderless-control:focus:invalid:focus {
   font-weight: bold;
   margin-top: 20px;
 }
-.translated_by {
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 20px;
-}
 .view-post .post-actions a {
   font-family: "HurmeGeometricSans3-SemiBold";
   padding: 5px 0;
@@ -2436,7 +2428,7 @@ input.borderless-control:focus:invalid:focus {
     top: 225px;
   }
   .page-banner .carousel-inner .carousel-content .carousel-button button {
-    width: 180px;
+    width: 200px;
   }
 }
 @media (max-width: 579px) {
