@@ -1,21 +1,18 @@
 import bleach
 import requests
 import json
-import tinymce
 from datetime import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 
 from app.utils import EnumChoices
-# from app.market.api.utils import translate_text
 from app.market.models.market import MarketItem
 from app.market.models.comment import Comment
-from app.users.models import LanguageRating
 
 
 def translate_text(original_text, language):
@@ -236,11 +233,11 @@ class MarketItemTranslation(TranslationBase):
                 success, details_translation, source_lang = translate_text(market_item.details, lang_code)
             if success:
                 translation = MarketItemTranslation.objects.create(
-                market_item=market_item,
-                title_translated=title_translation,
-                details_translated=details_translation,
-                language=lang_code,
-                source_language=source_lang)
+                    market_item=market_item,
+                    title_translated=title_translation,
+                    details_translated=details_translation,
+                    language=lang_code,
+                    source_language=source_lang)
                 return translation
         return None
 

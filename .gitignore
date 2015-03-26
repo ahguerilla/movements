@@ -27,3 +27,4 @@ setenv.sh
 
 dump.rdb
 celerybeat-schedule
+.directory

@@ -1,15 +1,13 @@
 import json
-# import bleach
 from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy as _
 
 from app.users.models import LanguageRating
 from app.market.models import (
-    TranslationBase, CommentTranslation, MarketItemTranslation)
+    TranslationBase)
 from app.celerytasks import (
     takein_notification, approved_notification, approve_notification,
     revoke_notification, takeoff_notification
@@ -17,8 +15,6 @@ from app.celerytasks import (
 
 
 def get_or_create_translation(object_id, lang_code, model):
-    # model must be TranslationBase class or child
-    translation = None
     try:
         translation = model.objects.get(
             status=model.global_state.GOOGLE,
@@ -29,7 +25,6 @@ def get_or_create_translation(object_id, lang_code, model):
 
 
 def get_or_create_user_translation(object_id, lang_code, model):
-    # model must be TranslationBase class or child
     try:
         translation = model.objects.get(
             status__gte=model.global_state.PENDING,
@@ -45,9 +40,6 @@ def get_or_create_user_translation(object_id, lang_code, model):
 
 @login_required
 def translate(request, object_id, lang_code, model):
-    # model must be TranslationBase class or child
-    # find out if the translation already exists
-    # by default is looking for human translation
     translation = None
     result = {'response': 'error',
               'status': model.global_state.GOOGLE,
@@ -60,13 +52,10 @@ def translate(request, object_id, lang_code, model):
             translation = model.objects.get(
                 status__gt=model.global_state.PENDING,
                 **model.get_params(object_id, lang_code))
-            result.update({'status': translation.status,
-                           'human_aviable': True})
+            result.update({'status': translation.status, 'human_aviable': True})
         except model.DoesNotExist:
             pass
-    elif model.objects.filter(
-       status=model.global_state.DONE,
-       **model.get_params(object_id, lang_code)).exists():
+    elif model.objects.filter(status=model.global_state.DONE, **model.get_params(object_id, lang_code)).exists():
         result.update({'human_aviable': True})
 
     if result.get('status') < model.global_state.DONE:
@@ -132,8 +121,6 @@ def pre_init(request, model):
 @require_http_methods(['GET'])
 @login_required
 def init(request, object_id, lang_code, model):
-    # model must be TranslationBase class or child
-    translation = None
     result = {'response': 'error',
               'id': object_id}
 
@@ -156,8 +143,6 @@ def init(request, object_id, lang_code, model):
 @require_http_methods(['GET'])
 @login_required
 def take_in(request, object_id, lang_code, model):
-    # model must be TranslationBase class or child
-    translation = None
     result = {'response': 'error',
               'id': object_id}
 

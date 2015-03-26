@@ -78,11 +78,10 @@ class NamedObject(models.Model):
 
 class Language(NamedObject):
     launguage_code = models.CharField(_('language code'), max_length=10, blank=True, null=True)
+
     class Meta:
         verbose_name = _('language')
         verbose_name_plural = _('languages')
-
-    class Meta:
         ordering = ['name']
 
 
@@ -96,8 +95,6 @@ class Interest(NamedObject):
     class Meta:
         verbose_name = _('interest')
         verbose_name_plural = _('interests')
-
-    class Meta:
         ordering = ['name']
 
 
@@ -167,7 +164,6 @@ class UserProfile(models.Model):
     regions = models.ManyToManyField(Region, blank=True, null=True)
     interests = models.ManyToManyField(Interest, blank=True, null=True)
 
-    trans_rating = models.FloatField(_('Rated by AHR'), default=0)
     is_cm = models.BooleanField(_('community manager'), default=False)
     is_organisation = models.BooleanField(_('organisation'), default=False)
     is_individual = models.BooleanField(_('individual'), default=True)
@@ -245,25 +241,20 @@ class UserRate(models.Model):
     def save(self, *args, **kwargs):
         model = self.__class__
         rates = UserRate.objects.filter(user=self.user).filter(~Q(owner=self.owner))
-        if self.id == None:
-            self.user.userprofile.ratecount+=1
+        if self.id is None:
+            self.user.userprofile.ratecount += 1
         if len(rates) == 0:
             self.user.userprofile.score = int(self.score)
         else:
             self.user.userprofile.score = (int(self.score) + sum([rate.score for rate in rates]))/float(self.user.userprofile.ratecount)
         self.user.userprofile.save_base()
-        super(UserRate,self).save(*args,**kwargs)
+        super(UserRate, self).save(*args, **kwargs)
 
 
-class LanguageRating(models.Model):
+class TrustedTranslator(models.Model):
     user = models.ForeignKey(User)
     language = models.ForeignKey(Language)
-    rate = models.IntegerField(_('Rated by AHR'), default=0, choices=lang_rating)
 
-    def __unicode__(self):
-        return u'%s' % self.language
-
-    def save(self, *args, **kwargs):
-        super(LanguageRating, self).save(*args,**kwargs)
-        self.user.userprofile.trans_rating = LanguageRating.objects.filter(user=self.user).aggregate(models.Max('rate')).get('rate__max', 0)
-        self.user.userprofile.save()
+    class Meta:
+        verbose_name = 'Trusted translation language'
+        verbose_name_plural = 'Trusted translation languages'
