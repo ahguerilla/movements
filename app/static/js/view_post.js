@@ -6,9 +6,8 @@
       'click .report': 'showReportForm',
       'click .delete-comment': 'deleteComment',
       'click .tweet': 'shareTwitter',
-      // 'click .translated_by a': 'changeTranslation',
       'click div.post .translated_by a': 'changePostTranslation',
-      'click div.comment-body .translated_by a': 'changeCommentTranslation',
+      'click div.comment-body .translated_by a': 'changeCommentTranslation'
     },
     initialize: function(options) {
       this.options = options;
@@ -317,8 +316,8 @@
       prev_text: null,
       display_title: null,
       display_text: null,
-      id: null,
-    },
+      id: null
+    }
   });
 
   TranslateView = Backbone.View.extend({
@@ -602,7 +601,7 @@
 
   });
 
-  commentsTranslateView = Backbone.View.extend({
+  var CommentsTranslationView = Backbone.View.extend({
     el: $('div.comment-list'),
 
     events: {
@@ -862,8 +861,8 @@
     new TranslateView(options);
   };
 
-  global.ahr.commentsTranslateView = function (options) {
-    new commentsTranslateView(options);
+  global.ahr.initCommentTranslationView = function (options) {
+    new CommentsTranslationView(options);
   };
 
 })(window);

@@ -1,3 +1,5 @@
+import json
+
 from app.market.forms import CommentForm
 import app.market as market
 from app.market.api.utils import *

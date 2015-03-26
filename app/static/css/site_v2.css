@@ -1901,20 +1901,24 @@ input.borderless-control:focus:invalid:focus {
   padding: 5px 0;
   padding-left: 30px;
   color: #756b65;
-  margin-left: 40px;
+  margin-right: 15px;
 }
 .view-post .post-actions a.recommend {
-  margin-left: 0;
   background: url("../images/v2/recommend_off.png") no-repeat left 1px;
 }
 .view-post .post-actions a.tweet {
   background: url("../images/v2/twitter_gray.png") no-repeat left 1px top 4px;
+  padding-left: 28px;
 }
 .view-post .post-actions a.message {
   background: url("../images/v2/direct_message_icon.PNG") no-repeat left 4px;
 }
 .view-post .post-actions a.report {
   background: url("../images/v2/flag_icon_gray.png") no-repeat left 1px;
+}
+.view-post .post-actions a.provide-translation {
+  background: url("../images/v2/translate-icon.png") no-repeat left center;
+  padding-left: 28px;
 }
 .view-post .post-actions ul {
   list-style: none;

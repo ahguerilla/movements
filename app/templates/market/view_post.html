@@ -47,14 +47,12 @@
             {% if post.specific_issue%}
               <div class="issue">{{ post.specific_issue }}</div>
             {% endif %}
+            {% if countries_to_render %}
+              {% for country in countries_to_render %}
+                <div class="country">{{ country }}</div>
+              {% endfor %}
+            {% endif %}
           </div>
-          {% if countries_to_render %}
-            <div class="tags clearfix">
-            {% for country in countries_to_render %}
-              <div class="country">{{ country }}</div>
-            {% endfor %}
-            </div>
-          {% endif %}
         </div>
       {% if is_logged_in %}
       <div class="post-actions">
@@ -84,9 +82,9 @@
           {% if request.user.userprofile.is_translator or request.user.userprofile.is_cm %}
           <li>
             <div class="post-languages-menu">
-              <a
-                obj_id="{{ post.id }}"
-                class="post-pre-init" href="{% url 'translation:market:pre_init' %}"><span>{% trans 'Translate this post' %}</span></a>
+              <a obj_id="{{ post.id }}" class="post-pre-init provide-translation" href="{% url 'translation:market:pre_init' %}">
+                <span>{% trans 'Provide a translation' %}</span>
+              </a>
               <div id="post-languages-menu-container"></div>
             </div>
   {% comment %}
@@ -355,7 +353,7 @@
         is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }},
       });
       {% if request.user.userprofile.is_translator or request.user.userprofile.is_cm %}
-        ahr.commentsTranslateView({});
+        ahr.initCommentTranslationView({});
       {% endif %}
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar', {{ post.id }});
       this.recommend_widget = window.ahr.recommend_widget.initWidget(window.ahr.username);

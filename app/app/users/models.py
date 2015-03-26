@@ -216,9 +216,10 @@ class UserProfile(models.Model):
 
     @property
     def is_translator(self):
-        if self.skills.filter(skills_en__iexact='translation'):
+        if self.interests.filter(name_en__iexact='translator'):
             return True
         return False
+
 
 class OrganisationalRating(models.Model):
     user = models.ForeignKey(auth.models.User, null=False, blank=False)

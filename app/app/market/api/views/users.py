@@ -222,7 +222,7 @@ def user_language_rate(request, user_id):
                 rating.rate = form.cleaned_data.get('rate')
                 rating.save()
                 log = LogEntry(user_id=request.user.id,
-                               content_type= ContentType.objects.get_for_model(users.models.User),
+                               content_type=ContentType.objects.get_for_model(users.models.User),
                                object_id=user_id,
                                object_repr=userprofile.user.username,
                                action_flag=2,
