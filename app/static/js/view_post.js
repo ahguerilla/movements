@@ -350,26 +350,16 @@
       var popup_element = self.$PostinitMenuarea.find('span');
       var container = self.$PostinitMenuarea.find('#post-languages-menu-container');
       if (container.html() == '') {
-        $.ajax({
-          url: $(ev.currentTarget).attr('href'),
-          data: {'object_id': $(ev.currentTarget).attr('obj_id')},
-          type: 'POST',
-          dataType: 'json',
-          success: function (data) {
-            popup_element.popover({
-              trigger: 'manual',
-              title: '',
-              html: true,
-              content: self.$MenuTemplate(data),
-              container: container,
-              placement: 'top'
-            });
-            popup_element.popover('show');
-          }
+        popup_element.popover({
+          trigger: 'manual',
+          title: '',
+          html: true,
+          content: self.$MenuTemplate(),
+          container: container,
+          placement: 'top'
         });
-      } else {
-        popup_element.popover('show')
       }
+      popup_element.popover('toggle')
     },
 
     Init: function(ev) {

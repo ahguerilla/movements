@@ -4,6 +4,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
+from django.utils import translation as django_translation
 
 from app.market.models import (
     TranslationBase)
@@ -38,7 +39,8 @@ def get_or_create_user_translation(object_id, lang_code, model):
 
 
 @login_required
-def translate(request, object_id, lang_code, model):
+def translate(request, object_id, model):
+    lang_code = request.GET.get('lang_code', django_translation.get_language())
     translation = None
     result = {'response': 'error',
               'status': model.global_state.GOOGLE,
@@ -46,7 +48,7 @@ def translate(request, object_id, lang_code, model):
               'human_aviable': False,
               'itemid': object_id}
 
-    if request.GET.get('human', True) == True:
+    if request.GET.get('human', True):
         try:
             translation = model.objects.get(
                 status__gt=model.global_state.PENDING,
@@ -66,75 +68,73 @@ def translate(request, object_id, lang_code, model):
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
+# @require_http_methods(['POST'])
+# @login_required
+# def pre_init(request, model):
+#     result = {
+#         'response': 'error',
+#         'error': 'There are no languages that you can currently translate this in to',
+#     }
+#     languages = []
+#     item = model.objects.get(pk=request.POST.get('object_id', None))
+#     if request.user.userprofile.is_cm:
+#         for language in request.user.userprofile.languages.exclude(launguage_code=item.language):
+#             languages.append({
+#                 'name': language.name,
+#                 'url': item.init_url(language.launguage_code)
+#             })
+#     else:
+#         trusted_languages = request.user.userprofile.translation_languages.all()
+#         has_source_language = False
+#         for l in trusted_languages:
+#             if l.launguage_code == item.language:
+#                 has_source_language = True
+#             else:
+#                 languages.append({
+#                     'name': l.name,
+#                     'url': item.init_url(l.launguage_code)
+#                 })
+#         if not has_source_language:
+#             languages = []
+#     if len(languages) > 0:
+#         del result['error']
+#         result.update({'response': 'success', 'languages': languages})
+#     return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+# @require_http_methods(['GET'])
+# @login_required
+# def init(request, object_id, lang_code, model):
+#     result = {'response': 'error',
+#               'id': object_id}
+#
+#     translation = get_or_create_user_translation(object_id, lang_code, model)
+#     if not translation:
+#         return HttpResponse(json.dumps(result), mimetype="application/json")
+#
+#     if translation.has_perm(request.user, lang_code) and \
+#                     translation.c_status == translation.inner_state.NONE:
+#         result.update({'take_in_url': translation.take_in_url(lang_code)})
+#
+#     result.update(translation.get_init_data(request.user))
+#     result.update({'response': 'success'})
+#
+#     if request.user.userprofile.is_cm:
+#         result.update(translation.cm_urls_dict())
+#     return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
 @require_http_methods(['POST'])
 @login_required
-def pre_init(request, model):
-    result = {
-        'response': 'error',
-        'error': 'There are no languages that you can currently translate this in to',
-    }
-    languages = []
-    item = model.objects.get(pk=request.POST.get('object_id', None))
-    if request.user.userprofile.is_cm:
-        for language in request.user.userprofile.languages.exclude(launguage_code=item.language):
-            languages.append({
-                'name': language.name,
-                'url': item.init_url(language.launguage_code)
-            })
-    else:
-        trusted_languages = request.user.userprofile.translation_languages.all()
-        has_source_language = False
-        for l in trusted_languages:
-            if l.launguage_code == item.language:
-                has_source_language = True
-            else:
-                languages.append({
-                    'name': l.name,
-                    'url': item.init_url(l.launguage_code)
-                })
-        if not has_source_language:
-            languages = []
-    if len(languages) > 0:
-        del result['error']
-        result.update({'response': 'success', 'languages': languages})
-    return HttpResponse(json.dumps(result), mimetype="application/json")
-
-
-@require_http_methods(['GET'])
-@login_required
-def init(request, object_id, lang_code, model):
-    result = {'response': 'error',
-              'id': object_id}
-
-    translation = get_or_create_user_translation(object_id, lang_code, model)
-    if not translation:
-        return HttpResponse(json.dumps(result), mimetype="application/json")
-
-    if translation.has_perm(request.user, lang_code) and \
-                    translation.c_status == translation.inner_state.NONE:
-        result.update({'take_in_url': translation.take_in_url(lang_code)})
-
-    result.update(translation.get_init_data(request.user))
-    result.update({'response': 'success'})
-
-    if request.user.userprofile.is_cm:
-        result.update(translation.cm_urls_dict())
-    return HttpResponse(json.dumps(result), mimetype="application/json")
-
-
-@require_http_methods(['GET'])
-@login_required
-def take_in(request, object_id, lang_code, model):
-    result = {'response': 'error',
-              'id': object_id}
-
+def take_in(request, object_id, model):
+    lang_code = request.POST['lang_code']
+    result = {'response': 'error', 'id': object_id}
     translation = get_or_create_user_translation(object_id, lang_code, model)
     if not translation:
         result.update({'error': 'Translation is busy.'})
         return HttpResponse(json.dumps(result), mimetype="application/json")
 
-    if translation.has_perm(request.user, lang_code) and \
-                    translation.c_status == translation.inner_state.NONE:
+    if translation.has_perm(request.user, lang_code) and translation.c_status == translation.inner_state.NONE:
         translation.take_in(request.user)
         result.update(translation.get_init_data(request.user))
 
@@ -145,11 +145,9 @@ def take_in(request, object_id, lang_code, model):
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
-@require_http_methods(['GET'])
+@require_http_methods(['POST'])
 @login_required
 def take_off(request, object_id, lang_code, model):
-    # model must be TranslationBase class or child
-    translation = None
     result = {'response': 'error',
               'error': 'Translation is busy.'}
     try:
@@ -171,8 +169,6 @@ def take_off(request, object_id, lang_code, model):
 @require_http_methods(['POST'])
 @login_required
 def done(request, object_id, lang_code, model):
-    # model must be TranslationBase class or child
-    translation = None
     result = {'response': 'error',
               'error': 'Translation is busy.'}
     try:

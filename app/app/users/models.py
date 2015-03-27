@@ -79,6 +79,10 @@ class NamedObject(models.Model):
 class Language(NamedObject):
     launguage_code = models.CharField(_('language code'), max_length=10, blank=True, null=True)
 
+    @property
+    def language_code(self):
+        return self.launguage_code
+
     class Meta:
         verbose_name = _('language')
         verbose_name_plural = _('languages')

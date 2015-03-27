@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
-from django.utils import translation
 import django.contrib.auth as auth
 import tinymce
 
@@ -42,7 +41,7 @@ class Comment(models.Model):
         adict['fields']['profile_url'] = reverse('user_profile_for_user', args=[self.owner.username])
         adict['fields']['delete_url'] = reverse('delete_comment')
         adict['fields']['translate_language_url'] = \
-            reverse('translation:comment:translate', args=[self.id, translation.get_language()])
+            reverse('translation:comment:translate', args=[self.id])
         adict['fields']['source_lang'] = self.language
         adict['score'] = self.owner.userprofile.score
         adict['ratecount'] = self.owner.userprofile.ratecount

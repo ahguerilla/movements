@@ -4,7 +4,7 @@
 {% block content %}
 <div class="row">
   <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-    <div class="view-post" data-default_translate_url="{% url 'translation:market:translate' post.id LANGUAGE_CODE %}">
+    <div class="view-post" data-default_translate_url="{% url 'translation:market:translate' post.id %}">
       <div class="post-header {{ post.item_type|lower }} %>">
         <span>{{ post.item_type_display }}</span>
       </div>
@@ -79,10 +79,10 @@
               report_url="{{ report_url }}"
               onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'report-post');}"
               class="report" href='#' alt="report post">{% trans 'Report this post' %}</a></li>
-          {% if request.user.userprofile.is_translator or request.user.userprofile.is_cm %}
+          {% if translator or request.user.userprofile.is_cm %}
           <li>
             <div class="post-languages-menu">
-              <a obj_id="{{ post.id }}" class="post-pre-init provide-translation" href="{% url 'translation:market:pre_init' %}">
+              <a obj_id="{{ post.id }}" class="post-pre-init provide-translation" href="#">
                 <span>{% trans 'Provide a translation' %}</span>
               </a>
               <div id="post-languages-menu-container"></div>
@@ -146,7 +146,7 @@
       {% if language_list.count > 0 %}
       <ul>
         {% for l in language_list %}
-          <li data-translate_url="{% url 'translation:market:translate' post.id l.launguage_code %}">{{ l.name }}</li>
+          <li data-translate_url="{% url 'translation:market:translate' post.id %}?lang_code={{ l.language_code }}">{{ l.name }}</li>
         {% endfor %}
       </ul>
       {% else %}
@@ -177,15 +177,11 @@
 
   <script type="text/template" id="init-languages-menu-template">
     <div class="language-selector">
-      <% if (response == 'success') { %>
-        <ul>
-          <% _.each(languages, function(language) { %>
-            <li data-api-url="<%= language.url %>"><%- language.name %></li>
-          <% }); %>
-        </ul>
-      <% } else { %>
-        <p><%- error %></p>
-      <% } %>
+    <ul>
+      {% for language in translation_languages %}
+        <li>{{ language.name }}</li>
+      {% endfor %}
+    </ul>
     </div>
   </script>
 
@@ -212,14 +208,12 @@
 {% endcomment %}
 
   <script type="text/template" id="comment-template">
-      <div class="comment"
-           comment_id="<%- pk %>"
-           data-translate-language-url="<%- translate_language_url %>">
-        <div class="avatar"><img src="<%- avatar %>"></div>
-        <div class="comment-header">
-          <a href="<%- profile_url %>" alt="poster profile"><%- username %></a>
-          <%- pub_date_formatted %>
-        </div>
+    <div class="comment" comment_id="<%- pk %>" data-translate-language-url="<%- translate_language_url %>">
+      <div class="avatar"><img src="<%- avatar %>"></div>
+      <div class="comment-header">
+        <a href="<%- profile_url %>" alt="poster profile"><%- username %></a>
+        <%- pub_date_formatted %>
+      </div>
         <div class="comment-body">
           <pre><%- contents %></pre>
           <div class="translated_by" style="display:none;"><a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> | {% trans 'via'%} <a class="user" data-translate_url=""></a></span></div>
@@ -227,9 +221,9 @@
           {# <div class="user-translated-text" style="display:none">{% trans 'Translated by' %} <span></span></div> #}
           <pre id="comment-body-translated" style="display: none;"></pre>
 
-          {% if request.user.userprofile.is_translator or request.user.userprofile.is_cm %}
+          {% if translator or request.user.userprofile.is_cm %}
           <div id="CommentButtons" class='comment-languages-menu'>
-            <a class="comment-pre-init" href="{% url 'translation:comment:pre_init' %}"><span>{% trans 'Translate this comment' %}</span></a>
+            <a class="comment-pre-init"><span>{% trans 'Translate this comment' %}</span></a>
             <div id="comment-languages-menu-container"></div>
           </div>
           {% endif %}
@@ -239,8 +233,8 @@
           </div>
           <% } %>
         </div>
-        <div id="comment-translation-container" class="comments"></div>
-      </div>
+      <div id="comment-translation-container" class="comments"></div>
+    </div>
   </script>
 
   <script type="text/template" id="comment-translation-area">
@@ -349,10 +343,10 @@
         deleteCommentUrl: "{% url 'delete_comment' %}"
       });
       ahr.initViewPostTranslation({
-        is_translator: {{ user.userprofile.is_translator|yesno:"true,false" }},
+        is_translator: {{ translator|yesno:"true,false" }},
         is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }},
       });
-      {% if request.user.userprofile.is_translator or request.user.userprofile.is_cm %}
+      {% if translator or request.user.userprofile.is_cm %}
         ahr.initCommentTranslationView({});
       {% endif %}
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar', {{ post.id }});

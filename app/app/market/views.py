@@ -72,11 +72,23 @@ def show_post(request, post_id):
                 for country in post_region_countries:
                     countries_to_render.append(country)
     language_list = []
+    translation_languages = []
+    translator = False
     if request.user.is_authenticated():
         __, created = MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
         if created:
             MarketItemSalesforceRecord.mark_for_update(post_id)
         language_list = request.user.userprofile.languages.all()
+        if request.user.userprofile.is_cm:
+            translation_languages = language_list
+        else:
+            translation_languages = request.user.userprofile.translation_languages.all()
+    if len(translation_languages) > 1:
+        for l in translation_languages:
+            if l.language_code == post.language:
+                translator = True
+    if not translator:
+        translation_languages = []
 
     post_data = {
         'post': post,
@@ -84,6 +96,8 @@ def show_post(request, post_id):
         'is_logged_in': request.user.is_authenticated(),
         'language_list': language_list,
         'countries_to_render': countries_to_render,
+        'translator': translator,
+        'translation_languages': translation_languages,
     }
 
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))

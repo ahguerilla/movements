@@ -118,70 +118,36 @@ market_heartbeat_patters = patterns('',
         name="heartbeat"),
 )
 
-post_translation_patterns = patterns('app.market.api.views.translation',
-    url(r'^pre-init/$',
-        'pre_init', {'model': MarketItem}, name="pre_init"),
+post_translation_patterns = patterns(
+    'app.market.api.views.translation',
+    url(r'^(?P<object_id>\d+)/take-in/$', 'take_in', {'model': MarketItemTranslation}, name="take_in"),
+    url(r'^(?P<object_id>\d+)/take-off/$', 'take_off', {'model': MarketItemTranslation}, name="take_off"),
+    url(r'^(?P<object_id>\d+)/mark-done/$', 'done', {'model': MarketItemTranslation}, name="done"),
+    url(r'^(?P<object_id>\d+)/approve/$', 'approve', {'model': MarketItemTranslation}, name="approve"),
+    url(r'^(?P<object_id>\d+)/revoke/$', 'revoke', {'model': MarketItemTranslation}, name="revoke"),
+    url(r'^(?P<object_id>\d+)/correct/$', 'corrections', {'model': MarketItemTranslation}, name="corrections"),
+    url(r'^(?P<object_id>\d+)/$', 'translate', {'model': MarketItemTranslation}, name="translate"),
+)
 
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/init/$',
-        'init', {'model': MarketItemTranslation}, name="init"),
+comment_translation_patterns = patterns(
+    'app.market.api.views.translation',
+    url(r'^(?P<object_id>\d+)/take-in/$', 'take_in', {'model': CommentTranslation}, name="take_in"),
+    url(r'^(?P<object_id>\d+)/take-off/$', 'take_off', {'model': CommentTranslation}, name="take_off"),
+    url(r'^(?P<object_id>\d+)/mark-done/$', 'done', {'model': CommentTranslation}, name="done"),
+    url(r'^(?P<object_id>\d+)/approve/$', 'approve', {'model': CommentTranslation}, name="approve"),
+    url(r'^(?P<object_id>\d+)/revoke/$', 'revoke', {'model': CommentTranslation}, name="revoke"),
+    url(r'^(?P<object_id>\d+)/correct/$', 'corrections', {'model': CommentTranslation}, name="corrections"),
+    url(r'^(?P<object_id>\d+)/$', 'translate', {'model': CommentTranslation}, name="translate"),
+)
 
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/take-in/$',
-        'take_in', {'model': MarketItemTranslation}, name="take_in"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/take-off/$',
-        'take_off', {'model': MarketItemTranslation}, name="take_off"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/mark-done/$',
-        'done', {'model': MarketItemTranslation}, name="done"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/approve/$',
-        'approve', {'model': MarketItemTranslation}, name="approve"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/revoke/$',
-        'revoke', {'model': MarketItemTranslation}, name="revoke"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/correct/$',
-        'corrections', {'model': MarketItemTranslation}, name="corrections"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/$',
-        'translate', {'model': MarketItemTranslation}, name="translate"),
-    )
-
-comment_translation_patterns = patterns('app.market.api.views.translation',
-    url(r'^pre-init/$',
-        'pre_init', {'model': Comment}, name="pre_init"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/init/$',
-        'init', {'model': CommentTranslation}, name="init"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/take-in/$',
-        'take_in', {'model': CommentTranslation}, name="take_in"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/take-off/$',
-        'take_off', {'model': CommentTranslation}, name="take_off"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/mark-done/$',
-        'done', {'model': CommentTranslation}, name="done"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/approve/$',
-        'approve', {'model': CommentTranslation}, name="approve"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/revoke/$',
-        'revoke', {'model': CommentTranslation}, name="revoke"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/correct/$',
-        'corrections', {'model': CommentTranslation}, name="corrections"),
-
-    url(r'^(?P<object_id>\d+)/(?P<lang_code>\S+)/$',
-        'translate', {'model': CommentTranslation}, name="translate"),
-    )
-
-market_translation_patterns = patterns('',
+market_translation_patterns = patterns(
+    '',
     url(r'^item/translation/', include(post_translation_patterns, namespace='market')),
     url(r'^comment/translation/', include(comment_translation_patterns, namespace='comment')),
-    )
+)
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'', include(market_item_patterns)),
     url(r'', include(market_comment_patterns)),
     url(r'', include(market_user_patterns)),

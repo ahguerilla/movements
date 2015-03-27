@@ -1,4 +1,4 @@
-from django.utils import translation, timezone
+from django.utils import timezone
 from django.utils.timezone import timedelta
 import app.users.models as user_models
 from django.db import models
@@ -120,7 +120,7 @@ class MarketItem(models.Model):
         adict['fields']['report_url'] = reverse('report_post', args=[self.id])
         adict['fields']['attributes_url'] = reverse('set_item_attributes_for_user', args=[self.id])
         adict['fields']['translate_language_url'] = \
-            reverse('translation:market:translate', args=[self.id, translation.get_language()])
+            reverse('translation:market:translate', args=[self.id])
         adict['fields']['usercore'] = self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['userratecount'] = self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['ratecount'] = self.ratecount
