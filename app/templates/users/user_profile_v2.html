@@ -21,9 +21,6 @@
       <div class="poster-details">
         <div class="poster-name">{{ user_profile.user.username }}</div>
         {% include "users/snippets/star_rating.html" with rating=ahr_rating %}
-        {% if user_profile.is_translator %}
-          {% include "users/snippets/trans_rating.html" with rating=user_profile.trans_rating %}
-        {% endif %}
       </div>
     </div>
     {% if is_self and not is_public %}
@@ -111,9 +108,6 @@
 
   {% include "market/clientside/messagedialog.html" %}
   {% include 'market/clientside/reportuserdialog.html' %}
-  {% if is_cm and user_profile.is_translator %}
-    {% include 'market/clientside/ratetranslatordialog.html' %}
-  {% endif %}
   {% include "market/clientside/pagination_template.html"%}
 
   <script type="text/javascript">
@@ -135,16 +129,9 @@
   <script type="text/javascript">
   $(function(){
     var ProfileView = Backbone.View.extend({
-      resetitemrate: function (username, rate) {
-        window.location.reload();
-      },
-
       initialize: function(){
         this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
         this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');
-        {% if is_cm and user_profile.is_translator %}
-          this.rateUserLanguageWidget = window.ahr.rateUserLanguageWidget.initWidget('body');
-        {% endif %}
       }
     });
     var profileView = new ProfileView();

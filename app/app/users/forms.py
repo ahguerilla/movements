@@ -8,8 +8,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from models import (
-    UserProfile, OrganisationalRating, Residence, Countries, Region,
-    LanguageRating,
+    UserProfile, OrganisationalRating, Residence, Countries, Region
     )
 from django.utils.translation import ugettext_lazy as _
 import constance
@@ -222,14 +221,3 @@ class VettingForm(forms.ModelForm):
     class Meta:
         model = OrganisationalRating
         fields = ['rated_by_ahr']
-
-
-class LanguageRateForm(forms.ModelForm):
-    class Meta:
-        model = LanguageRating
-        fields = ['language', 'rate']
-
-    def __init__(self, *args, **kwargs):
-        languages = kwargs.pop('languages')
-        super(LanguageRateForm, self).__init__(*args, **kwargs)
-        self.fields['language'].queryset = languages

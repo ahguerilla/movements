@@ -4,10 +4,6 @@ from app.market.models import Comment, MarketItem, MarketItemTranslation, Commen
 
 market_user_patterns = patterns('',
 
-    url(r'^users/set/languagerate/(?P<user_id>\d+)/$',
-        'app.market.api.views.users.user_language_rate',
-        name="user_language_rate"),
-
     # Secured entry points
     url(r'(?P<rtype>\S+)/avatar/get/(?P<obj_id>\d+)/(?P<size>\d+)$',
         'app.market.api.views.users.get_avatar',

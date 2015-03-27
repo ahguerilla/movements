@@ -167,15 +167,10 @@ class TranslationBase(models.Model):
         self.save()
 
     def has_perm(self, user, target_lang):
-        if not user.userprofile.is_cm:
-            rates = LanguageRating.objects.filter(
-                user_id=user.pk, language__launguage_code__in=[self.source_language, target_lang])
-            if rates.count() == 2:
-                rate = round(rates.aggregate(models.Avg('rate')).get('rate__avg'))
-                if (self.is_done() and rate >= 4) or (not self.is_done() and rate >= 3):
-                   return True
-            return False
-        return True
+        if user.userprofile.is_cm:
+            return True
+        rates = user.userprofile.translation_languages.filter(launguage_code__in=[self.source_language, target_lang])
+        return rates.count() == 2
 
     def make_url(self, key, lang_code=None):
         return reverse('translation:comment:' + key, args=(self.comment_id, lang_code or self.language))

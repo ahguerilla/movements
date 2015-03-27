@@ -16,9 +16,9 @@ class UserProfileInline(admin.StackedInline):
     verbose_name_plural = 'userprofile'
 
 
-class UserAdmin(UserAdmin):
+class MovementsUserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
-    list_display = ('username', 'email', 'first_name', 'last_name', 'lang_rating', 'star_rating', 'rated_by')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'star_rating', 'rated_by')
     list_filter = UserAdmin.list_filter + ('userprofile__skills',)
 
     def star_rating(self, obj):
@@ -46,24 +46,18 @@ class UserAdmin(UserAdmin):
         else:
             return ''
 
-    def lang_rating(self, obj):
-        try:
-            rating = obj.userprofile.trans_rating
-            rate_url = reverse('set_translation_rate', args=(obj.id,))
-            return u'{0} (<a href="{1}" target="_blank" alt="rate">Rate</a>)'.format(rating, rate_url)
-        except:
-            return 'No profile'
-    lang_rating.allow_tags = True
-
 
 class SkillsAdmin(TranslationAdmin):
     list_display = ('skills',)
 
+
 class CountriesAdmin(TranslationAdmin):
     list_display = ('countries',)
 
+
 class IssuesAdmin(TranslationAdmin):
     list_display = ('issues',)
+
 
 class NationalityAdmin(TranslationAdmin):
     list_display = ('nationality',)
@@ -74,9 +68,8 @@ class NamedObjectAdmin(TranslationAdmin):
     list_display_links = list_display
 
 
-# Re-register UserAdmin
 admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+admin.site.register(User, MovementsUserAdmin)
 admin.site.register(Countries, CountriesAdmin)
 admin.site.register(Skills, SkillsAdmin)
 admin.site.register(Issues, IssuesAdmin)

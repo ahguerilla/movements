@@ -11,7 +11,7 @@ from django.utils.timezone import timedelta, now
 
 from app.models import NotificationPing
 from app.sforce import add_market_item_to_salesforce, update_market_item_stats
-from app.users.models import UserProfile, LanguageRating
+from app.users.models import UserProfile
 from app.market.models import (
     Notification, MarketItem, Comment,
     MarketItemTranslation, CommentTranslation,
@@ -155,24 +155,24 @@ def update_salesforce():
 
 def find_translators(lang_codes):
     users = set()
-    if isinstance(lang_codes, (list, set, tuple)):
-        rates = LanguageRating.objects\
-            .filter(language__launguage_code__in=lang_codes, rate__gte=1)\
-            .values('rate', 'user_id')
-        candidate_users = {}
-        for rate in rates:
-            candidate_users.setdefault(rate['user_id'], []).append(rate['rate'])
-            item = candidate_users.get(rate['user_id'])
-            if len(item) == 2 and sum(item) / 2 >= 3:
-                users.add(rate['user_id'])
-        users = set(UserProfile.objects\
-            .filter(user_id__in=users,
-                    skills__skills_en__iexact='translation')\
-            .values_list('user_id', flat=True))
-    elif isinstance(lang_codes, (str, unicode)):
-        users = set(LanguageRating.objects\
-            .filter(language__launguage_code=lang_codes, rate__gt=2)\
-            .values_list('user_id', flat=True))
+    # if isinstance(lang_codes, (list, set, tuple)):
+    #     rates = LanguageRating.objects\
+    #         .filter(language__launguage_code__in=lang_codes, rate__gte=1)\
+    #         .values('rate', 'user_id')
+    #     candidate_users = {}
+    #     for rate in rates:
+    #         candidate_users.setdefault(rate['user_id'], []).append(rate['rate'])
+    #         item = candidate_users.get(rate['user_id'])
+    #         if len(item) == 2 and sum(item) / 2 >= 3:
+    #             users.add(rate['user_id'])
+    #     users = set(UserProfile.objects\
+    #         .filter(user_id__in=users,
+    #                 skills__skills_en__iexact='translation')\
+    #         .values_list('user_id', flat=True))
+    # elif isinstance(lang_codes, (str, unicode)):
+    #     users = set(LanguageRating.objects\
+    #         .filter(language__launguage_code=lang_codes, rate__gt=2)\
+    #         .values_list('user_id', flat=True))
     return users
 
 
@@ -222,12 +222,9 @@ def create_translation_notification(obj, status, user_id=None, reminder=False, s
 def create_translators_notifications(obj, status, lang_code=None, save=True):
     if lang_code is None:
         lang_code = obj.language
-
     notifications = []
     for user_id in find_translators(lang_code):
-        notifications.append(
-            create_translation_notification(
-                obj, status, user_id=user_id, save=False))
+        notifications.append(create_translation_notification(obj, status, user_id=user_id, save=False))
     if save:
         Notification.objects.bulk_create(notifications)
     return notifications

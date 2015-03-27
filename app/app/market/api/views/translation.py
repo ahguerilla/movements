@@ -5,13 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 
-from app.users.models import LanguageRating
 from app.market.models import (
     TranslationBase)
 from app.celerytasks import (
     takein_notification, approved_notification, approve_notification,
     revoke_notification, takeoff_notification
-    )
+)
 
 
 def get_or_create_translation(object_id, lang_code, model):
@@ -70,51 +69,34 @@ def translate(request, object_id, lang_code, model):
 @require_http_methods(['POST'])
 @login_required
 def pre_init(request, model):
-    # model must be Comment or MarketItem class
-    # returns list of aviable languages to init translation
     result = {
         'response': 'error',
-        'error': 'has no permission',
+        'error': 'There are no languages that you can currently translate this in to',
     }
     languages = []
-    try:
-        object_id = request.POST.get('object_id', None)
-        if object_id is None:
-            raise model.DoesNotExist
-        _object = model.objects.get(pk=object_id)
-    except model.DoesNotExist:
-        result.update({'error': 'invalid object_id ID'})
+    item = model.objects.get(pk=request.POST.get('object_id', None))
+    if request.user.userprofile.is_cm:
+        for language in request.user.userprofile.languages.exclude(launguage_code=item.language):
+            languages.append({
+                'name': language.name,
+                'url': item.init_url(language.launguage_code)
+            })
     else:
-        if request.user.userprofile.is_cm:
-            for language in request.user.userprofile.languages.exclude(launguage_code=_object.language):
-                languages.append({
-                    'name': language.name,
-                    'url': _object.init_url(language.launguage_code)
-                    })
-        else:
-            try:
-                source_rate = LanguageRating.objects.get(
-                    user_id=request.user.pk, language__launguage_code=_object.language
-                    )
-            except LanguageRating.DoesNotExist:
-                print(_object.language)
+        trusted_languages = request.user.userprofile.translation_languages.all()
+        has_source_language = False
+        for l in trusted_languages:
+            if l.launguage_code == item.language:
+                has_source_language = True
             else:
-                rates = LanguageRating.objects\
-                    .filter(user_id=request.user.pk)\
-                    .exclude(pk=source_rate.pk)\
-                    .values('rate', 'language__launguage_code', 'language__name')
-                if rates:
-                    for rate in rates:
-                        if rate['rate'] + source_rate.rate > 3:
-                            languages.append({
-                                'name': rate['language__name'],
-                                'url': _object.init_url(rate['language__launguage_code'])
-                                })
+                languages.append({
+                    'name': l.name,
+                    'url': item.init_url(l.launguage_code)
+                })
+        if not has_source_language:
+            languages = []
     if len(languages) > 0:
         del result['error']
-        result.update({'response': 'success',
-                       'languages': languages})
-
+        result.update({'response': 'success', 'languages': languages})
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
@@ -129,7 +111,7 @@ def init(request, object_id, lang_code, model):
         return HttpResponse(json.dumps(result), mimetype="application/json")
 
     if translation.has_perm(request.user, lang_code) and \
-       translation.c_status == translation.inner_state.NONE:
+                    translation.c_status == translation.inner_state.NONE:
         result.update({'take_in_url': translation.take_in_url(lang_code)})
 
     result.update(translation.get_init_data(request.user))
@@ -152,7 +134,7 @@ def take_in(request, object_id, lang_code, model):
         return HttpResponse(json.dumps(result), mimetype="application/json")
 
     if translation.has_perm(request.user, lang_code) and \
-       translation.c_status == translation.inner_state.NONE:
+                    translation.c_status == translation.inner_state.NONE:
         translation.take_in(request.user)
         result.update(translation.get_init_data(request.user))
 
@@ -202,8 +184,8 @@ def done(request, object_id, lang_code, model):
         result.update({'error': 'Translation record not found.'})
     else:
         if translation.has_perm(request.user, lang_code) and \
-           translation.c_status in [translation.inner_state.TRANSLATION,
-                                    translation.inner_state.CORRECTION]:
+                        translation.c_status in [translation.inner_state.TRANSLATION,
+                                                 translation.inner_state.CORRECTION]:
             translation.set_done(request.POST)
             approve_notification.delay(translation)
             result.update({'response': 'success'})

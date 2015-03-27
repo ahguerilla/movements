@@ -6,10 +6,10 @@ from django.db import transaction
 from django.utils.translation import ugettext_lazy as _
 from ratelimit.decorators import ratelimit
 from models import (
-    UserProfile, OrganisationalRating, Language, Interest, Region, LanguageRating)
+    UserProfile, OrganisationalRating, Language, Interest, Region)
 from forms import (
     SettingsForm, UserForm, VettingForm, SignUpStartForm, SignupForm,
-    MoreAboutYouForm, LanguageRateForm)
+    MoreAboutYouForm)
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.forms import LoginForm
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView, LoginView
@@ -415,39 +415,6 @@ def vet_user(request, user_id):
         'vetted': user.is_active
     }
     return render_to_response('admin/auth/user/vet_user.html', ctx, context_instance=RequestContext(request))
-
-
-@staff_member_required
-def set_translation_rate(request, user_id):
-    user = User.objects.get(pk=user_id)
-    form = LanguageRateForm(request.POST or None, languages=user.userprofile.languages.all())
-
-    msg = ''
-    if request.method == 'POST' and form.is_valid():
-            try:
-                rating = LanguageRating.objects.get(
-                    language=form.cleaned_data.get('language'),
-                    user=user)
-            except:
-                rating = LanguageRating(user=user, language=form.cleaned_data.get('language'))
-            rating.rate = form.cleaned_data.get('rate')
-            rating.save()
-            log = LogEntry(user_id=request.user.id,
-                           content_type= ContentType.objects.get_for_model(User),
-                           object_id=user.id,
-                           object_repr=user.username,
-                           action_flag=2,
-                           change_message="lang rated")
-            log.save()
-            msg = 'User language rating updated'
-    ctx = {
-        'original': user,
-        'user': user,
-        'form': form,
-        'msg': msg,
-        'rates': LanguageRating.objects.filter(user=user)
-    }
-    return render_to_response('admin/auth/user/rate_lang.html', ctx, context_instance=RequestContext(request))
 
 
 @staff_member_required

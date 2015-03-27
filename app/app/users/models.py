@@ -161,6 +161,12 @@ class UserProfile(models.Model):
     issues = models.ManyToManyField(Issues, blank=True, null=True)
     countries = models.ManyToManyField(Countries, blank=True, null=True)
     languages = models.ManyToManyField(Language, blank=True, null=True)
+    translation_languages = models.ManyToManyField(Language,
+                                                   verbose_name=_('Trusted translation language'),
+                                                   help_text='Marks a user as being trusted to provide translations in a given language. At least two languages should be marked if any.',
+                                                   blank=True,
+                                                   null=True,
+                                                   related_name='translators')
     regions = models.ManyToManyField(Region, blank=True, null=True)
     interests = models.ManyToManyField(Interest, blank=True, null=True)
 
@@ -212,23 +218,12 @@ class UserProfile(models.Model):
 
     @property
     def is_translator(self):
-        if self.interests.filter(name_en__iexact='translator'):
-            return True
-        return False
+        return self.translation_languages.exists()
 
 
 class OrganisationalRating(models.Model):
     user = models.ForeignKey(auth.models.User, null=False, blank=False)
     rated_by_ahr = models.IntegerField(_('Rated by AHR'), default=0, choices=ahr_rating)
-
-
-lang_rating = [
-    (1, '1 star'),
-    (2, '2 stars'),
-    (3, '3 stars'),
-    (4, '4 stars'),
-    (5, '5 stars'),
-]
 
 
 class UserRate(models.Model):
@@ -239,8 +234,7 @@ class UserRate(models.Model):
     score = models.IntegerField(_('score'),default=0)
 
     def save(self, *args, **kwargs):
-        model = self.__class__
-        rates = UserRate.objects.filter(user=self.user).filter(~Q(owner=self.owner))
+        rates = UserRate.objects.filter(user=self.user).exclude(owner=self.owner)
         if self.id is None:
             self.user.userprofile.ratecount += 1
         if len(rates) == 0:
@@ -249,12 +243,3 @@ class UserRate(models.Model):
             self.user.userprofile.score = (int(self.score) + sum([rate.score for rate in rates]))/float(self.user.userprofile.ratecount)
         self.user.userprofile.save_base()
         super(UserRate, self).save(*args, **kwargs)
-
-
-class TrustedTranslator(models.Model):
-    user = models.ForeignKey(User)
-    language = models.ForeignKey(Language)
-
-    class Meta:
-        verbose_name = 'Trusted translation language'
-        verbose_name_plural = 'Trusted translation languages'
