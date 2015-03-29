@@ -82,17 +82,16 @@ def take_in(request, object_id, model):
         translation.take_in(request.user)
         takein_notification.delay(translation, translation.is_done())
         result.update({'response': 'success'})
+    elif translation.c_status == translation.inner_state.APPROVAL and request.user.userprofile.is_cm:
+        result.update({'response': 'success'})
     elif translation.owner_candidate == request.user:
-        if translation.c_status == translation.inner_state.TRANSLATION:
-            result.update({'response': 'success'})
-        elif translation.c_status == translation.inner_state.CORRECTION:
-            result.update({'error': ugettext('Your translation is currently undergoing correction')})
-        elif translation.c_status == translation.inner_state.APPROVAL:
-            result.update({'error': ugettext('Your translation is currently pending approval')})
+        result.update({'response': 'success'})
     else:
         result.update({'error': ugettext('Another user is currently translating this item')})
     if result['response'] == 'success':
         result.update(translation.get_init_data(request.user))
+    if request.user.userprofile.is_cm:
+        result.update(translation.cm_urls_dict())
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 

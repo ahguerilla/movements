@@ -446,68 +446,61 @@
       }
     },
 
-    Confirm: function( event ){
+    Confirm: function(event) {
       var self = this;
-      var url = self.data.get('approval_url');
       var data = [];
       if (self.data.get('active') && self.data.get('status') == 3) {
         data = self.$form.serialize();
+      } else {
+        data = {
+          lang_code: this.lang_code
+        }
       }
-      if (url) {
-        $.ajax({
-          url: url,
-          data: data,
-          type: 'POST',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              location.reload();
-            } else {
-              alert(data.error);
-            }
-          },
-        });
-      }
+      $.ajax({
+        url: self.data.get('approval_url'),
+        data: data,
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+          if(data.response == "success") {
+            location.reload();
+          } else {
+            alert(data.error);
+          }
+        }
+      });
     },
 
-    Revoke: function(ev){
-      var url = this.data.get('revoke_url');
-      var self = this;
-      if (url) {
-        $.ajax({
-          url: url,
-          type: 'GET',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              location.reload();
-            } else if (data.response == "error") {
-              alert('Error: something is bad');
-            }
-          },
-        });
-      }
-      this.render();
+    Revoke: function(ev) {
+      $.ajax({
+        url: this.data.get('revoke_url'),
+        type: 'post',
+        data: {lang_code: this.lang_code},
+        dataType: 'json',
+        success: function (data) {
+          if(data.response == "success") {
+            location.reload();
+          } else if (data.response == "error") {
+            console.log(data);
+          }
+        }
+      });
     },
 
-    Correction: function(ev){
-      var url = this.data.get('correction_url');
-      var self = this;
-      if (url) {
-        $.ajax({
-          url: url,
-          type: 'POST',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              location.reload();
-            } else if (data.response == "error") {
-              alert(data.error);
-            }
-          },
-        });
-      }
-      this.render();
+    Correction: function(ev) {
+      $.ajax({
+        url: this.data.get('correction_url'),
+        type: 'post',
+        data: {lang_code: this.lang_code},
+        dataType: 'json',
+        success: function (data) {
+          if(data.response == "success") {
+            location.reload();
+          } else if (data.response == "error") {
+            console.log(data);
+          }
+        }
+      });
     },
 
     Edit: function( event ){

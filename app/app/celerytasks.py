@@ -385,6 +385,4 @@ def check_translation_timings():
             model.inner_state.CORRECTION,
             now() - model._time / 2)
 
-    # save notifications
-    print(notifications)
     Notification.objects.bulk_create(notifications)
