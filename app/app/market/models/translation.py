@@ -256,7 +256,7 @@ class MarketItemTranslation(TranslationBase):
     def get_init_data(self, user):
         data = super(MarketItemTranslation, self).get_init_data(user)
         data.update({'prev_title': self.title_translated,
-                     'title_translated': self.title_translated})
+                     'title_translated': self.title_candidate})
         return data
 
     def set_done(self, data):
