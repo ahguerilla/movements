@@ -248,20 +248,20 @@
         {% trans 'In translation now. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
       <% } %>
 
-      <% if (active == true) { %>
-      <textarea class="form-control" name="details_translated"><%= details_translated %></textarea>
+      <% if (active) { %>
+        <textarea class="form-control" name="details_translated"><%= details_translated %></textarea>
       <% } %>
 
       <% if (status != 3) { %>
-        <% if (active == true) { %>
+        <% if (active) { %>
           <button type="button" class="btn btn-success" id="done" >{% trans 'Translation completed' %}</button>
           <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Cancel translation' %}</button>
         <% } %>
       <% } %>
-      <% if (is_cm == true) { %>
+      <% if (is_cm) { %>
         <hr>
         <button type="button" class="btn btn-warning<% if (!approval_url) { %> disabled<% } %>" id="edit" >
-        <% if (status == 3 && active == true) { %>
+        <% if (status == 3 && active) { %>
           {% trans 'Cancel editing' %}
         <% } else { %>
           {% trans 'Edit' %}
@@ -277,6 +277,7 @@
 
   <script type="text/template" id="translation-area">
     <form>
+      <input type="hidden" name="lang_code" value="<%- lang_code %>"/>
       <% if (status == 3) { %>
         {% trans 'Waiting for approval. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
         <pre id="approve-title"><%= display_title %></pre>
@@ -287,30 +288,22 @@
         {% trans 'In translation now. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
       <% } %>
 
-      <% if (active == true) { %>
+      <% if (active) { %>
       <input class="form-control" name="title_translated" type="text" value="<%= title_translated %>">
       <textarea class="form-control" name="details_translated"><%= details_translated %></textarea>
       <% } %>
 
       <% if (status != 3) { %>
-        <button type="button" class="btn btn-primary<% if (!take_in_url) { %> disabled<% } %>" id="take_in" >
-          <% if (!correction) { %>
-            {% trans 'Translate this post' %}
-          <% } else { %>
-            {% trans 'Correct this post' %}
-          <% } %>
-        </button>
-        
-        <% if (active == true) { %>
+        <% if (active) { %>
           <button type="button" class="btn btn-success" id="done" >{% trans 'Translation completed' %}</button>
           <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Cancel translation' %}</button>
         <% } %>
       <% } %>
 
-      <% if (is_cm == true) { %>
+      <% if (is_cm) { %>
         <hr>
         <button type="button" class="btn btn-warning<% if (!approval_url) { %> disabled<% } %>" id="edit" >
-        <% if (status == 3 && active == true) { %>
+        <% if (status == 3 && active) { %>
           {% trans 'Cancel editing' %}
         <% } else { %>
           {% trans 'Edit' %}

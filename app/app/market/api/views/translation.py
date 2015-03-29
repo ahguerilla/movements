@@ -98,7 +98,8 @@ def take_in(request, object_id, model):
 
 @require_http_methods(['POST'])
 @login_required
-def take_off(request, object_id, lang_code, model):
+def take_off(request, object_id, model):
+    lang_code = request.POST['lang_code']
     result = {'response': 'error',
               'error': 'Translation is busy.'}
     try:
@@ -107,7 +108,7 @@ def take_off(request, object_id, lang_code, model):
             owner_candidate=request.user,
             **model.get_params(object_id, lang_code))
     except model.DoesNotExist:
-        result.update({'error': 'Translation record not found.'})
+        result.update({'error': ugettext('No pending translation found to cancel.')})
     else:
         takeoff_notification.delay(translation)
         translation.clear_state()
@@ -118,7 +119,8 @@ def take_off(request, object_id, lang_code, model):
 
 @require_http_methods(['POST'])
 @login_required
-def done(request, object_id, lang_code, model):
+def done(request, object_id, model):
+    lang_code = request.POST['lang_code']
     result = {'response': 'error',
               'error': 'Translation is busy.'}
     try:
@@ -158,9 +160,8 @@ def _approve_correct_revoke(request, object_id, lang_code, model, params):
 
 @require_http_methods(['POST'])
 @login_required
-def approve(request, object_id, lang_code, model):
-    # request, object_id, lang_code, model
-    # model must be TranslationBase class or child
+def approve(request, object_id, model):
+    lang_code = request.POST['lang_code']
     params = {'status__gte': TranslationBase.global_state.PENDING,
               'c_status': TranslationBase.inner_state.APPROVAL}
     result, translation = _approve_correct_revoke(request, object_id, lang_code, model, params)
@@ -172,11 +173,10 @@ def approve(request, object_id, lang_code, model):
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
-@require_http_methods(['GET'])
+@require_http_methods(['POST'])
 @login_required
-def corrections(request, object_id, lang_code, model):
-    # request, object_id, lang_code, model
-    # model must be TranslationBase class or child
+def corrections(request, object_id, model):
+    lang_code = request.POST['lang_code']
     params = {'status__gte': TranslationBase.global_state.PENDING,
               'c_status': TranslationBase.inner_state.APPROVAL}
     result, translation = _approve_correct_revoke(request, object_id, lang_code, model, params)
@@ -190,11 +190,10 @@ def corrections(request, object_id, lang_code, model):
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
-@require_http_methods(['GET'])
+@require_http_methods(['POST'])
 @login_required
-def revoke(request, object_id, lang_code, model):
-    # request, object_id, lang_code, model
-    # model must be TranslationBase class or child
+def revoke(request, object_id, model):
+    lang_code = request.POST['lang_code']
     params = {'status__gte': TranslationBase.global_state.PENDING,
               'c_status__gt': TranslationBase.inner_state.NONE}
     result, translation = _approve_correct_revoke(request, object_id, lang_code, model, params)

@@ -272,6 +272,7 @@
       is_translator: true,
       is_cm: true,
       active: false,
+      lang_code: '',
       status: null,
       correction: false,
       take_in_url: null,
@@ -300,6 +301,7 @@
   var TranslateView = Backbone.View.extend({
     el: $('div.view-post'),
     $langaugesPopover: null,
+    lang_code: null,
 
     events: {
         "click a.post-pre-init": "preInit",
@@ -374,11 +376,13 @@
 
     TakeIn: function(event) {
       var $currentTarget = $(event.currentTarget);
+      this.lang_code = $currentTarget.data('lang-code');
+      this.data.set({'lang_code': this.lang_code});
       $.ajax({
         url: this.$el.data('takein-url'),
         context: this,
         data: {
-          lang_code: $currentTarget.data('lang-code')
+          lang_code: this.lang_code
         },
         type: 'post',
         dataType: 'json',
@@ -394,7 +398,7 @@
       this.$langaugesPopover.popover('toggle');
     },
 
-    completeTranslation: function( event ){
+    completeTranslation: function(event){
       var self = this;
       var url = self.data.get('done_url');
       var data = self.$form.serialize();
@@ -426,7 +430,10 @@
       if (url) {
         $.ajax({
           url: url,
-          type: 'GET',
+          type: 'post',
+          data: {
+            lang_code: this.lang_code
+          },
           dataType: 'json',
           success: function (data) {
             self.data.set({
