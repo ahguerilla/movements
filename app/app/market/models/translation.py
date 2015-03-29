@@ -101,7 +101,7 @@ class TranslationBase(models.Model):
     reminder = models.BooleanField(_('Reminder status'), default=False)
 
     def is_active(self, user):
-        return user == self.owner_candidate and\
+        return user == self.owner_candidate and \
             self.c_status in (self.inner_state.TRANSLATION, self.inner_state.CORRECTION)
 
     def is_done(self):
@@ -248,12 +248,8 @@ class MarketItemTranslation(TranslationBase):
                      'title_translated': self.title_translated})
         return data
 
-    def clear_state(self, save=True):
-        self.title_candidate = ''
-        super(MarketItemTranslation, self).clear_state(save)
-
     def set_done(self, data):
-        self.title_translated = data.get('title_translated', '')
+        self.title_candidate = data.get('title_translated', '')
         super(MarketItemTranslation, self).set_done(data)
 
     def approve(self, data):

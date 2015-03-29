@@ -143,7 +143,6 @@ def done(request, object_id, model):
 
 
 def _approve_correct_revoke(request, object_id, lang_code, model, params):
-    # model must be TranslationBase class or child
     params.update(model.get_params(object_id, lang_code))
     translation = None
     result = {'response': 'error'}
