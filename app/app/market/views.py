@@ -82,11 +82,13 @@ def show_post(request, post_id):
         if request.user.userprofile.is_cm:
             translation_languages = language_list
         else:
-            translation_languages = request.user.userprofile.translation_languages.all()
+            translation_languages = list(request.user.userprofile.translation_languages.all())
     if len(translation_languages) > 1:
         for l in translation_languages:
             if l.language_code == post.language:
                 translator = True
+                translation_languages.remove(l)
+                break
     if not translator:
         translation_languages = []
 

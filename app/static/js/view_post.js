@@ -291,19 +291,18 @@
   });
 
   var TranslateView = Backbone.View.extend({
-    // el: $('#post-translation-container'),
     el: $('div.view-post'),
+    $langaugesPopover: null,
 
     events: {
         "click a.post-pre-init": "preInit",
-        "click div.post-actions div.language-selector li": "Init",
-        "click #post-translation-container button#take_in": "TakeIn",
+        "click div.post-actions div.language-selector li": "TakeIn",
         "click #post-translation-container button#done": "Done",
         "click #post-translation-container button#take_off": "Take_off",
         "click #post-translation-container button#confirm": "Confirm",
         "click #post-translation-container button#revoke": "Revoke",
         "click #post-translation-container button#edit": "Edit",
-        "click #post-translation-container button#correction": "Correction",
+        "click #post-translation-container button#correction": "Correction"
     },
 
     initialize: function(options){
@@ -319,7 +318,6 @@
     render: function(){
       var self = this;
       if (this.data.get('status') == 3) {
-
         // title
         var diff = JsDiff.diffChars(self.data.get('prev_title'), self.data.get('title_translated'));
         var display_title= '';
@@ -331,7 +329,7 @@
         self.data.set('display_title', display_title);
 
         // description
-        var diff = JsDiff.diffChars(self.data.get('prev_text'), self.data.get('details_translated'));
+        diff = JsDiff.diffChars(self.data.get('prev_text'), self.data.get('details_translated'));
         var display_text= '';
         diff.forEach(function(part){
           var color = part.added ? 'green' :
@@ -340,17 +338,18 @@
         });
         self.data.set('display_text', display_text);
       }
-      this.$areaContainer.html( this.$areaTemplate(this.data.attributes) );
+      this.$areaContainer.html( this.$areaTemplate(this.data.attributes));
+      this.$areaContainer.show();
       this.$form = this.$areaContainer.find('form');
     },
 
     preInit: function(ev){
       ev.preventDefault();
       var self = this;
-      var popup_element = self.$PostinitMenuarea.find('span');
+      this.$langaugesPopover = self.$PostinitMenuarea.find('span');
       var container = self.$PostinitMenuarea.find('#post-languages-menu-container');
       if (container.html() == '') {
-        popup_element.popover({
+        this.$langaugesPopover.popover({
           trigger: 'manual',
           title: '',
           html: true,
@@ -359,45 +358,32 @@
           placement: 'top'
         });
       }
-      popup_element.popover('toggle')
+      this.$langaugesPopover.popover('toggle');
     },
 
-    Init: function(ev) {
-      var self = this;
-      $.ajax({
-        url: $(ev.currentTarget).data('api-url'),
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-          if(data.response == "success") {
-            self.data.set(data);
-          }
-          self.render();
-          self.$areaContainer.show();
-          self.$PostinitMenuarea.find('span').popover('toggle');
-        }
-      });
-    },
-
-    TakeIn: function( event ){
-      var url = this.data.get('take_in_url');
-      var self = this;
+    TakeIn: function(event) {
+      var $currentTarget = $(event.currentTarget);
+      var url = this.$el.data('takein-url');
       if (url) {
         $.ajax({
           url: url,
-          type: 'GET',
+          context: this,
+          data: {
+            lang_code: $currentTarget.data('lang-code')
+          },
+          type: 'post',
           dataType: 'json',
           success: function (data) {
             if(data.response == "success") {
-              self.data.set(data);
-              self.data.set({take_in_url: null});
+              this.data.set(data);
             } else if (data.response == "error") {
-              alert(data.error);
+              console.log(data.error);
             }
-            self.render();
-          },
+            this.render();
+          }
         });
       }
+      this.$langaugesPopover.popover('toggle');
     },
 
     Done: function( event ){
@@ -421,7 +407,7 @@
               });
               self.render();
             }
-          },
+          }
         });
       }
     },
@@ -437,11 +423,10 @@
           success: function (data) {
             self.data.set({
               active: false,
-              status: 0,
-              take_in_url: data.take_in_url
+              status: 0
             });
             self.render();
-          },
+          }
         });
       }
     },
@@ -511,7 +496,6 @@
     },
 
     Edit: function( event ){
-      // event.preventDefault();
       if (this.data.get('active') && confirm('Are you sure you wish to cancel your edit? This translation will revert to it\'s original post.')) {
         this.data.set({active: !this.data.get('active')});
         this.render();
@@ -519,8 +503,7 @@
         this.data.set({active: !this.data.get('active')});
         this.render();
       }
-    },
-
+    }
   });
 
   var CommentsTranslationView = Backbone.View.extend({

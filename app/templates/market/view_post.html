@@ -4,7 +4,7 @@
 {% block content %}
 <div class="row">
   <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-    <div class="view-post" data-default_translate_url="{% url 'translation:market:translate' post.id %}">
+    <div class="view-post" data-default_translate_url="{% url 'translation:market:translate' post.id %}" data-takein-url="{% url 'translation:market:take_in' post.id %}">
       <div class="post-header {{ post.item_type|lower }} %>">
         <span>{{ post.item_type_display }}</span>
       </div>
@@ -163,7 +163,7 @@
       <ul>
         {% for l in language_list %}
           {% if l.launguage_code != post.language %}
-          <li data-init-url="{% url 'translation:market_init' post.id l.launguage_code %}">{{ l.name }}</li>
+            <li data-init-url="{% url 'translation:market_init' post.id l.launguage_code %}">{{ l.name }}</li>
           {% endif %}
         {% endfor %}
       </ul>
@@ -179,7 +179,7 @@
     <div class="language-selector">
     <ul>
       {% for language in translation_languages %}
-        <li>{{ language.name }}</li>
+        <li data-lang-code="{{ language.launguage_code }}">{{ language.name }}</li>
       {% endfor %}
     </ul>
     </div>
@@ -253,14 +253,6 @@
       <% } %>
 
       <% if (status != 3) { %>
-        <button type="button" class="btn btn-primary<% if (!take_in_url) { %> disabled<% } %>" id="take_in" >
-          <% if (!correction) { %>
-            {% trans 'Translate this comment' %}
-          <% } else { %>
-            {% trans 'Correct this comment' %}
-          <% } %>
-        </button>
-        
         <% if (active == true) { %>
           <button type="button" class="btn btn-success" id="done" >{% trans 'Translation completed' %}</button>
           <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Cancel translation' %}</button>

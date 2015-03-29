@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 from django.utils import translation as django_translation
+from django.utils.translation import ugettext_lazy as _
 
 from app.market.models import (
     TranslationBase)
@@ -68,80 +69,30 @@ def translate(request, object_id, model):
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
-# @require_http_methods(['POST'])
-# @login_required
-# def pre_init(request, model):
-#     result = {
-#         'response': 'error',
-#         'error': 'There are no languages that you can currently translate this in to',
-#     }
-#     languages = []
-#     item = model.objects.get(pk=request.POST.get('object_id', None))
-#     if request.user.userprofile.is_cm:
-#         for language in request.user.userprofile.languages.exclude(launguage_code=item.language):
-#             languages.append({
-#                 'name': language.name,
-#                 'url': item.init_url(language.launguage_code)
-#             })
-#     else:
-#         trusted_languages = request.user.userprofile.translation_languages.all()
-#         has_source_language = False
-#         for l in trusted_languages:
-#             if l.launguage_code == item.language:
-#                 has_source_language = True
-#             else:
-#                 languages.append({
-#                     'name': l.name,
-#                     'url': item.init_url(l.launguage_code)
-#                 })
-#         if not has_source_language:
-#             languages = []
-#     if len(languages) > 0:
-#         del result['error']
-#         result.update({'response': 'success', 'languages': languages})
-#     return HttpResponse(json.dumps(result), mimetype="application/json")
-
-
-# @require_http_methods(['GET'])
-# @login_required
-# def init(request, object_id, lang_code, model):
-#     result = {'response': 'error',
-#               'id': object_id}
-#
-#     translation = get_or_create_user_translation(object_id, lang_code, model)
-#     if not translation:
-#         return HttpResponse(json.dumps(result), mimetype="application/json")
-#
-#     if translation.has_perm(request.user, lang_code) and \
-#                     translation.c_status == translation.inner_state.NONE:
-#         result.update({'take_in_url': translation.take_in_url(lang_code)})
-#
-#     result.update(translation.get_init_data(request.user))
-#     result.update({'response': 'success'})
-#
-#     if request.user.userprofile.is_cm:
-#         result.update(translation.cm_urls_dict())
-#     return HttpResponse(json.dumps(result), mimetype="application/json")
-
-
 @require_http_methods(['POST'])
 @login_required
 def take_in(request, object_id, model):
     lang_code = request.POST['lang_code']
     result = {'response': 'error', 'id': object_id}
     translation = get_or_create_user_translation(object_id, lang_code, model)
-    if not translation:
-        result.update({'error': 'Translation is busy.'})
+    if not translation.has_perm(request.user, lang_code):
+        result.update({'error': _('You do not currently have permissions to translate this item')})
         return HttpResponse(json.dumps(result), mimetype="application/json")
-
-    if translation.has_perm(request.user, lang_code) and translation.c_status == translation.inner_state.NONE:
+    if translation.c_status == translation.inner_state.NONE:
         translation.take_in(request.user)
-        result.update(translation.get_init_data(request.user))
-
         takein_notification.delay(translation, translation.is_done())
         result.update({'response': 'success'})
+    elif translation.owner_candidate == request.user:
+        if translation.c_status == translation.inner_state.TRANSLATION:
+            result.update({'response': 'success'})
+        elif translation.c_status == translation.inner_state.CORRECTION:
+            result.update({'error': _('Your translation is currently undergoing correction')})
+        elif translation.c_status == translation.inner_state.APPROVAL:
+            result.update({'error': _('Your translation is currently pending approval')})
     else:
-        result.update({'error': 'Has no permission'})
+        result.update({'error': _('Another user is currently translating this item')})
+    if result['response'] == 'success':
+        result.update(translation.get_init_data(request.user))
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
@@ -161,8 +112,7 @@ def take_off(request, object_id, lang_code, model):
         takeoff_notification.delay(translation)
         translation.clear_state()
         del result['error']
-        result.update({'response': 'success',
-                       'take_in_url': translation.take_in_url(lang_code)})
+        result.update({'response': 'success', })
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 

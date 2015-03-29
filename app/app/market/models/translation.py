@@ -172,11 +172,11 @@ class TranslationBase(models.Model):
         rates = user.userprofile.translation_languages.filter(launguage_code__in=[self.source_language, target_lang])
         return rates.count() == 2
 
-    def make_url(self, key, lang_code=None):
-        return reverse('translation:comment:' + key, args=(self.comment_id, lang_code or self.language))
+    def make_url(self, key):
+        return reverse('translation:comment:' + key, args=[self.comment_id])
 
-    def take_in_url(self, lang_code):
-        return self.make_url('take_in', lang_code)
+    def take_in_url(self):
+        return self.make_url('take_in')
 
     def take_off_url(self):
         return self.make_url('take_off')
@@ -264,9 +264,8 @@ class MarketItemTranslation(TranslationBase):
         self.title_candidate = self.title_translated
         super(MarketItemTranslation, self).take_in(user)
 
-
-    def make_url(self, key, lang_code=None):
-        return reverse('translation:market:' + key, args=(self.market_item_id, lang_code or self.language))
+    def make_url(self, key):
+        return reverse('translation:market:' + key, args=[self.market_item_id])
 
 
 class CommentTranslation(TranslationBase):
