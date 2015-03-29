@@ -217,6 +217,17 @@ class MarketItemTranslation(TranslationBase):
         return {'market_item_id': object_id, 'language': lang_code}
 
     @staticmethod
+    def get_object(object_id):
+        return MarketItem.objects.get(pk=object_id)
+
+    @staticmethod
+    def get_original(item):
+        return {
+            'title_translated': bleach.clean(item.title, strip=True),
+            'details_translated': bleach.clean(item.details, strip=True),
+        }
+
+    @staticmethod
     def create_translation(object_id, lang_code):
         try:
             market_item = MarketItem.objects.get(pk=object_id)
@@ -270,6 +281,16 @@ class CommentTranslation(TranslationBase):
     @staticmethod
     def get_params(object_id, lang_code):
         return {'comment_id': object_id, 'language': lang_code}
+
+    @staticmethod
+    def get_object(object_id):
+        return Comment.objects.get(pk=object_id)
+
+    @staticmethod
+    def get_original(item):
+        return {
+            'details_translated': bleach.clean(item.contents, strip=True),
+        }
 
     @staticmethod
     def create_translation(object_id, lang_code):

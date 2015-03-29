@@ -49,6 +49,15 @@ def translate(request, object_id, model):
               'human_aviable': False,
               'itemid': object_id}
 
+    item = model.get_object(object_id)
+    if item.language == lang_code:
+        result.update(model.get_original(item))
+        result.update({
+            'response': 'success',
+            'source_language': lang_code,
+        })
+        return HttpResponse(json.dumps(result), mimetype="application/json")
+
     if request.GET.get('human', True):
         try:
             translation = model.objects.get(
