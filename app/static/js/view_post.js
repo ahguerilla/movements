@@ -290,6 +290,13 @@
     }
   });
 
+  var errorTemplate = _.template(
+      '<div class="alert alert-warning">' +
+      '  <button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+      '    <span aria-hidden="true">&times;</span>' +
+      '  </button><%- message %>' +
+      '</div>');
+
   var TranslateView = Backbone.View.extend({
     el: $('div.view-post'),
     $langaugesPopover: null,
@@ -297,8 +304,8 @@
     events: {
         "click a.post-pre-init": "preInit",
         "click div.post-actions div.language-selector li": "TakeIn",
-        "click #post-translation-container button#done": "Done",
-        "click #post-translation-container button#take_off": "Take_off",
+        "click #post-translation-container button#done": "completeTranslation",
+        "click #post-translation-container button#take_off": "cancelTranslation",
         "click #post-translation-container button#confirm": "Confirm",
         "click #post-translation-container button#revoke": "Revoke",
         "click #post-translation-container button#edit": "Edit",
@@ -312,7 +319,6 @@
       this.$PostinitMenuarea = $('div.post-languages-menu');
       this.data = new TranslationData();
       this.data.set(options);
-      this.render();
     },
 
     render: function(){
@@ -338,9 +344,14 @@
         });
         self.data.set('display_text', display_text);
       }
-      this.$areaContainer.html( this.$areaTemplate(this.data.attributes));
+      this.$areaContainer.html(this.$areaTemplate(this.data.attributes));
       this.$areaContainer.show();
       this.$form = this.$areaContainer.find('form');
+    },
+
+    renderError: function(message) {
+      this.$areaContainer.html(errorTemplate({message: message}));
+      this.$areaContainer.show();
     },
 
     preInit: function(ev){
@@ -363,30 +374,27 @@
 
     TakeIn: function(event) {
       var $currentTarget = $(event.currentTarget);
-      var url = this.$el.data('takein-url');
-      if (url) {
-        $.ajax({
-          url: url,
-          context: this,
-          data: {
-            lang_code: $currentTarget.data('lang-code')
-          },
-          type: 'post',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              this.data.set(data);
-            } else if (data.response == "error") {
-              console.log(data.error);
-            }
+      $.ajax({
+        url: this.$el.data('takein-url'),
+        context: this,
+        data: {
+          lang_code: $currentTarget.data('lang-code')
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function (data) {
+          if(data.response == "success") {
+            this.data.set(data);
             this.render();
+          } else if (data.response == "error") {
+            this.renderError(data.error);
           }
-        });
-      }
+        }
+      });
       this.$langaugesPopover.popover('toggle');
     },
 
-    Done: function( event ){
+    completeTranslation: function( event ){
       var self = this;
       var url = self.data.get('done_url');
       var data = self.$form.serialize();
@@ -412,7 +420,7 @@
       }
     },
 
-    Take_off: function( event ){
+    cancelTranslation: function( event ){
       var url = this.data.get('take_off');
       var self = this;
       if (url) {
@@ -513,8 +521,8 @@
         "click a.comment-pre-init": "preInit",
         "click div.comment div.language-selector li": "Init",
         "click div.comment button#take_in": "TakeIn",
-        "click div.comment button#done": "Done",
-        "click div.comment button#take_off": "Take_off",
+        "click div.comment button#done": "completeTranslation",
+        "click div.comment button#take_off": "cancelTranslation",
         "click div.comment button#confirm": "Confirm",
         "click div.comment button#revoke": "Revoke",
         "click div.comment button#edit": "Edit",
@@ -628,7 +636,7 @@
       }
     },
 
-    Done: function(ev){
+    completeTranslation: function(ev){
       this.getComment(ev);
       var self = this;
       var url = self.comment_data.get('done_url');
@@ -656,7 +664,7 @@
       }
     },
 
-    Take_off: function(ev){
+    cancelTranslation: function(ev){
       this.getComment(ev);
       var self = this;
       var url = self.comment_data.get('take_off');

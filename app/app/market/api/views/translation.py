@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 from django.utils import translation as django_translation
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext
 
 from app.market.models import (
     TranslationBase)
@@ -76,7 +76,7 @@ def take_in(request, object_id, model):
     result = {'response': 'error', 'id': object_id}
     translation = get_or_create_user_translation(object_id, lang_code, model)
     if not translation.has_perm(request.user, lang_code):
-        result.update({'error': _('You do not currently have permissions to translate this item')})
+        result.update({'error': ugettext('You do not currently have permissions to translate this item')})
         return HttpResponse(json.dumps(result), mimetype="application/json")
     if translation.c_status == translation.inner_state.NONE:
         translation.take_in(request.user)
@@ -86,11 +86,11 @@ def take_in(request, object_id, model):
         if translation.c_status == translation.inner_state.TRANSLATION:
             result.update({'response': 'success'})
         elif translation.c_status == translation.inner_state.CORRECTION:
-            result.update({'error': _('Your translation is currently undergoing correction')})
+            result.update({'error': ugettext('Your translation is currently undergoing correction')})
         elif translation.c_status == translation.inner_state.APPROVAL:
-            result.update({'error': _('Your translation is currently pending approval')})
+            result.update({'error': ugettext('Your translation is currently pending approval')})
     else:
-        result.update({'error': _('Another user is currently translating this item')})
+        result.update({'error': ugettext('Another user is currently translating this item')})
     if result['response'] == 'success':
         result.update(translation.get_init_data(request.user))
     return HttpResponse(json.dumps(result), mimetype="application/json")
