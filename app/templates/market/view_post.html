@@ -24,7 +24,7 @@
       {% if is_logged_in %}
       <div class="post">
         <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
-        <div class="translated_by"><a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> | {% trans 'via'%} <a class="user" data-translate_url=""></a></span></div>
+        <div class="translated_by" style="display: none;"><a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> | {% trans 'via'%} <a class="user" data-translate_url=""></a></span></div>
         <pre id="post-body-translated" style="display: none;"></pre>
       </div>
       <div class="post-translate">
@@ -325,7 +325,9 @@
       ahr.initViewPost({
         getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}',
         addCommentUrl: "{% url 'add_comment' 'json' post.id %}",
-        deleteCommentUrl: "{% url 'delete_comment' %}"
+        deleteCommentUrl: "{% url 'delete_comment' %}",
+        userDefaultLangage: '{{ LANGUAGE_CODE }}',
+        postLanguage: '{{ post.language }}'
       });
       ahr.initViewPostTranslation({
         is_translator: {{ translator|yesno:"true,false" }},

@@ -24,7 +24,7 @@
 
       this.initTranslatePopup();
       var translate_url = $(".view-post").data('default_translate_url');
-      if (translate_url) {
+      if (translate_url && (this.options.postLanguage != this.options.userDefaultLangage)) {
         this.translate(translate_url);
       }
     },
@@ -75,9 +75,9 @@
         dataType: 'json',
         success: function (data) {
           if(data.response === "success") {
-            var trans_lang = translate_url.replace('?human=false', '').slice(-3, -1);
+            var trans_lang = translate_url.split('lang_code=')[1];
             $('#post-title').text(data.title_translated);
-            if(trans_lang === data.source_language){
+            if (trans_lang === data.source_language){
               post.find('#post-body-translated').text("").hide();
               post.find('div.translated_by').hide();
             } else {
@@ -96,11 +96,9 @@
           } else {
             post.find('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>').show();
           }
-          //$('.translate span').popover('toggle');
         },
         error: function (){
           post.find('#post-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>').show();
-          //$('.translate span').popover('toggle');
         }
       });
     },
@@ -767,7 +765,14 @@
 
 
   global.ahr.initViewPost = function (options) {
-    new PostView({el: '.view-post', getCommentsUrl: options.getCommentsUrl, addCommentUrl: options.addCommentUrl, deleteCommentUrl: options.deleteCommentUrl});
+    new PostView({
+      el: '.view-post',
+      getCommentsUrl: options.getCommentsUrl,
+      addCommentUrl: options.addCommentUrl,
+      deleteCommentUrl: options.deleteCommentUrl,
+      postLanguage: options.postLanguage,
+      userDefaultLangage: options.userDefaultLangage
+    });
   };
 
   global.ahr.initViewPostTranslation = function (options) {
