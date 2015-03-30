@@ -96,7 +96,7 @@ def take_in(request, object_id, model):
         return HttpResponse(json.dumps(result), mimetype="application/json")
     if translation.c_status == translation.inner_state.NONE:
         translation.take_in(request.user)
-        takein_notification.delay(translation, translation.is_done())
+        takein_notification(translation, translation.is_done())
         result.update({'response': 'success'})
     elif translation.c_status == translation.inner_state.APPROVAL and request.user.userprofile.is_cm:
         result.update({'response': 'success'})
@@ -208,7 +208,7 @@ def corrections(request, object_id, model):
     result, translation = _approve_correct_revoke(request, object_id, lang_code, model, params)
     if translation:
         translation.c_status = translation.inner_state.CORRECTION
-        translation.timer = datetime.now()
+        translation.timer = datetime.utcnow()
         translation.save()
         takein_notification.delay(translation, True)
         result.update({'response': 'success'})

@@ -48,7 +48,7 @@ def get_raw(request, from_item=0, to_item=None,
         'countries': tuple(countries),
         'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
         'user_id': user_id if user_id else request.user.id,
-        'date_now': datetime.now(),
+        'date_now': datetime.utcnow(),
         'closed_statuses': (
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN),

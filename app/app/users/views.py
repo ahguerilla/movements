@@ -173,7 +173,6 @@ def email_doublesignup_upret(self, ret):
         ret['form'].errors.has_key('email') and
         ret['form'].errors['email'][0] == u'A user is already registered with this e-mail address.'):
         confem = EmailAddress.objects.filter(email=ret['form'].data['email']).all()
-        print confem
 
         if len(ret['form'].errors)==1:
             self.template_name = "account/verification_sent.html"

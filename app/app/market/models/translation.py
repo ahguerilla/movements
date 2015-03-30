@@ -158,7 +158,7 @@ class TranslationBase(models.Model):
 
     def take_in(self, user):
         self.owner_candidate = user
-        self.timer = datetime.now()
+        self.timer = datetime.utcnow()
         if not self.is_done():
             self.status = self.global_state.TRANSLATION
             self.c_status = self.inner_state.TRANSLATION

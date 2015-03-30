@@ -28,7 +28,7 @@
         {# translation notification #}
         <% if (notif.translation) { %>
           {# translation object status #}
-          <% if (notif.reminder == true) { %>
+          <% if (notif.reminder) { %>
             {% trans 'It is a reminder. The object status is' %}
           <% } else { %>
             {% trans 'The object translation status changed to' %}

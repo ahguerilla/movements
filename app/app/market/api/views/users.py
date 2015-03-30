@@ -110,7 +110,6 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                         msg.messageext.is_user_recommendation = True
                     msg.messageext.save()
                 except Exception as e:
-                    print "Exception sending to %s: %s %s:" % (recipient, type(e), e)
                     badrecipients.append(recipient + " (unknown user)")
 
     if len(emlrecips) > 0:
@@ -132,7 +131,6 @@ def send_recommendation(request, rec_type, obj_id, rtype):
             email.send()
             _update_email_recommendations(market_item, emlrecips)
         except Exception as e:
-            print "Exception sending to %s: %s %s:" % (recipient, type(e), e)
             badrecipients.extend(emlrecips)
 
     if len(badrecipients) > 0:
