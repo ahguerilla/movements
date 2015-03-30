@@ -305,8 +305,8 @@
         "click #post-translation-container button#revoke": "Revoke",
         "click #post-translation-container button#edit": "Edit",
         "click #post-translation-container button#correction": "Correction",
-        "click #take_over": 'takeOver',
-        "click #cancel_take_over": 'cancelTakeOver'
+        "click #post-translation-container #take_over": 'takeOver',
+        "click #post-translation-container #cancel_take_over": 'cancelTakeOver'
     },
 
     initialize: function(options){
@@ -400,50 +400,44 @@
 
     completeTranslation: function(event){
       var self = this;
-      var url = self.data.get('done_url');
       var data = self.$form.serialize();
-      if (url) {
-        $.ajax({
-          url: url,
-          data: data,
-          type: 'POST',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              self.data.set(data);
-              self.data.set({
-                active: false,
-                status: 3,
-                title_translated: self.$form.find('input[name="title_translated"]').val(),
-                details_translated: self.$form.find('textarea[name="details_translated"]').val()
-              });
-              self.render();
-            }
-          }
-        });
-      }
-    },
-
-    cancelTranslation: function( event ){
-      var url = this.data.get('take_off');
-      var self = this;
-      if (url) {
-        $.ajax({
-          url: url,
-          type: 'post',
-          data: {
-            lang_code: this.lang_code
-          },
-          dataType: 'json',
-          success: function (data) {
+      $.ajax({
+        url: self.data.get('done_url'),
+        data: data,
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+          self.data.set(data);
+          if (data.response == "success") {
             self.data.set({
               active: false,
-              status: 0
+              status: 3,
+              title_translated: self.$form.find('input[name="title_translated"]').val(),
+              details_translated: self.$form.find('textarea[name="details_translated"]').val()
             });
-            self.render();
           }
-        });
-      }
+          self.render();
+        }
+      });
+    },
+
+    cancelTranslation: function(event) {
+      var self = this;
+      $.ajax({
+        url: this.data.get('take_off'),
+        type: 'post',
+        data: {
+          lang_code: this.lang_code
+        },
+        dataType: 'json',
+        success: function (data) {
+          self.data.set({
+            active: false,
+            status: 0
+          });
+          self.render();
+        }
+      });
     },
 
     Confirm: function(event) {
@@ -525,19 +519,28 @@
         "click div.comment button#confirm": "Confirm",
         "click div.comment button#revoke": "Revoke",
         "click div.comment button#edit": "Edit",
-        "click div.comment button#correction": "Correction"
+        "click div.comment button#correction": "Correction",
+        "click div.comment #take_over": 'takeOver',
+        "click div.comment #cancel_take_over": 'cancelTakeOver'
     },
 
     getComment: function(ev){
       this.comment = $(ev.currentTarget).parents('div.comment');
       this.comment_id = this.comment.attr('comment_id');
       this.$form = this.comment.find('form');
+      var data = this.commentDataCache[this.comment_id];
+      if (!data) {
+        data = new TranslationData();
+        this.commentDataCache[this.comment_id] = data;
+      }
+      this.data = data;
     },
 
     initialize: function (options) {
       this.$MenuTemplate = _.template($('#init-languages-menu-template').html());
       this.$areaTemplate = _.template($('#comment-translation-area').html());
       this.options = options;
+      this.commentDataCache = {};
     },
 
     render: function (comment_id) {
@@ -579,14 +582,12 @@
     TakeIn: function(ev, force){
       this.getComment(ev);
       if (ev) {
-        this.data = new TranslationData();
         this.data.set(this.options)
         var $currentTarget = $(ev.currentTarget);
-        this.lang_code = $currentTarget.data('lang-code');
-        this.data.set({'lang_code': this.lang_code});
+        this.data.set({'lang_code': $currentTarget.data('lang-code')});
       }
       var data = {
-        lang_code: this.lang_code
+        lang_code: this.data.get('lang_code')
       };
       if (force) {
         data['force'] = '1';
@@ -608,131 +609,127 @@
       }
     },
 
+    takeOver: function (ev) {
+      this.TakeIn(ev, true);
+    },
+
+    cancelTakeOver: function (ev) {
+      this.getComment(ev);
+      this.comment.find('#comment-translation-container')
+          .hide();
+    },
+
     completeTranslation: function(ev){
       this.getComment(ev);
       var self = this;
-      var url = self.comment_data.get('done_url');
-      if (url) {
-        $.ajax({
-          url: url,
-          data: self.$form.serialize(),
-          type: 'POST',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              self.comment_data.set(data);
-              self.comment_data.set({
-                active: false,
-                status: 3,
-                details_translated: self.$form.find('textarea[name="details_translated"]').val()
-              });
-              self.data.set(self.comment_data);
-              self.render(self.comment_id);
-            } else {
-              alert(data.error);
-            }
+      $.ajax({
+        url: self.data.get('done_url'),
+        data: self.$form.serialize(),
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+          self.data.set(data);
+          if (data.response == "success") {
+            self.data.set({
+              active: false,
+              status: 3,
+              details_translated: self.$form.find('textarea[name="details_translated"]').val()
+            });
           }
-        });
-      }
+          self.render(self.comment_id);
+        }
+      });
     },
 
     cancelTranslation: function(ev){
       this.getComment(ev);
       var self = this;
-      var url = self.comment_data.get('take_off');
-      if (url) {
-        $.ajax({
-          url: url,
-          type: 'GET',
-          dataType: 'json',
-          success: function (data) {
-            if (data.response == 'success') {
-              self.comment_data.set({
-                active: false,
-                status: 0,
-                take_in_url: data.take_in_url
-              });
-              self.render(self.comment_id);
-              } else {
-                alert(data.error);
-              }
-          }
-        });
-      }
+      $.ajax({
+        url: self.data.get('take_off'),
+        type: 'post',
+        data: {
+          lang_code: this.data.get('lang_code')
+        },
+        dataType: 'json',
+        success: function (data) {
+          self.data.set({
+            active: false,
+            status: 0,
+            take_in_url: data.take_in_url
+          });
+          self.render(self.comment_id);
+        }
+      });
     },
 
     Confirm: function(ev){
       this.getComment(ev);
-      var url = this.comment_data.get('approval_url');
       var data = [];
-      if (this.comment_data.get('active') && this.comment_data.get('status') == 3) {
+      if (this.data.get('active') && this.data.get('status') == 3) {
         data = this.$form.serialize();
+      } else {
+        data = {
+          lang_code: this.data.get('lang_code')
+        }
       }
-      if (url) {
-        $.ajax({
-          url: url,
-          data: data,
-          type: 'POST',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              location.reload();
-            } else {
-              alert(data.error);
-            }
+      $.ajax({
+        url: this.data.get('approval_url'),
+        data: data,
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+          if(data.response == "success") {
+            location.reload();
+          } else {
+            console.log(data);
           }
-        });
-      }
+        }
+      });
     },
 
     Edit: function(ev){
       this.getComment(ev);
-      var active = this.comment_data.get('active');
+      var active = this.data.get('active');
       if (active && confirm('Are you sure you wish to cancel your edit? This translation will revert to it\'s original post.')) {
-        this.comment_data.set({active: !active});
+        this.data.set({active: !active});
       } else if (!active) {
-        this.comment_data.set({active: !active});
+        this.data.set({active: !active});
       }
-      this.data.set(this.comment_data);
       this.render(this.comment_id);
     },
 
     Revoke: function(ev){
       this.getComment(ev);
-      var url = this.comment_data.get('revoke_url');
-      if (url) {
-        $.ajax({
-          url: url,
-          type: 'GET',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              location.reload();
-            } else {
-              alert(data.error);
-            }
+      $.ajax({
+        url: this.data.get('revoke_url'),
+        type: 'post',
+        data: {lang_code: this.data.get('lang_code')},
+        dataType: 'json',
+        success: function (data) {
+          if(data.response == "success") {
+            location.reload();
+          } else {
+            console.log(data);
           }
-        });
-      }
+        }
+      });
     },
 
-    Correction: function(ev){
+    Correction: function(ev) {
       this.getComment(ev);
-      var url = this.comment_data.get('correction_url');
-      if (url) {
-        $.ajax({
-          url: url,
-          type: 'GET',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              location.reload();
-            } else {
-              alert(data.error);
-            }
+      $.ajax({
+        url: this.data.get('correction_url'),
+        type: 'post',
+        data: {lang_code: this.data.get('lang_code')},
+        dataType: 'json',
+        success: function (data) {
+          if(data.response == "success") {
+            location.reload();
+          } else {
+            console.log(data);
           }
-        });
-      }
+        }
+      });
     }
   });
 

@@ -149,8 +149,7 @@ def take_off(request, object_id, model):
 @login_required
 def done(request, object_id, model):
     lang_code = request.POST['lang_code']
-    result = {'response': 'error',
-              'error': 'Translation is busy.'}
+    result = {'response': 'error', 'error': ''}
     try:
         translation = model.objects.get(
             c_status__in=[model.inner_state.TRANSLATION, model.inner_state.CORRECTION],
