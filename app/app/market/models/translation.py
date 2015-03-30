@@ -128,6 +128,8 @@ class TranslationBase(models.Model):
         return {'correction': self.is_done(),
                 'prev_text': self.details_translated,
                 'active': active,
+                'error': None,
+                'other_user_editing': False,
                 'owner': self.owner_candidate.username if self.owner_candidate else None,
                 'owner_url': reverse('user_profile_for_user', args=(self.owner_candidate.username,)) if self.owner_candidate else None,
                 'status': self.c_status,

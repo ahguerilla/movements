@@ -103,11 +103,24 @@ def take_in(request, object_id, model):
     elif translation.owner_candidate == request.user:
         result.update({'response': 'success'})
     else:
-        result.update({'error': ugettext('Another user is currently translating this item')})
+        force = request.POST.get('force', None)
+        if request.user.userprofile.is_cm and force == '1':
+            translation.take_in(request.user)
+            result.update({'response': 'success'})
+        else:
+            result.update({
+                'error': ugettext('Another user is currently translating this item'),
+                'other_user_editing': True
+            })
     if result['response'] == 'success':
         result.update(translation.get_init_data(request.user))
-    if request.user.userprofile.is_cm:
-        result.update(translation.cm_urls_dict())
+        if request.user.userprofile.is_cm:
+            result.update(translation.cm_urls_dict())
+    else:
+        result.update({
+            'status': 0,
+            'active': False,
+        })
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 

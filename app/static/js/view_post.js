@@ -285,16 +285,11 @@
       prev_text: null,
       display_title: null,
       display_text: null,
+      other_user_editing: false,
+      error: '',
       id: null
     }
   });
-
-  var errorTemplate = _.template(
-      '<div class="alert alert-warning">' +
-      '  <button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-      '    <span aria-hidden="true">&times;</span>' +
-      '  </button><%- message %>' +
-      '</div>');
 
   var TranslateView = Backbone.View.extend({
     el: $('div.view-post'),
@@ -309,7 +304,9 @@
         "click #post-translation-container button#confirm": "Confirm",
         "click #post-translation-container button#revoke": "Revoke",
         "click #post-translation-container button#edit": "Edit",
-        "click #post-translation-container button#correction": "Correction"
+        "click #post-translation-container button#correction": "Correction",
+        "click #take_over": 'takeOver',
+        "click #cancel_take_over": 'cancelTakeOver'
     },
 
     initialize: function(options){
@@ -349,11 +346,6 @@
       this.$form = this.$areaContainer.find('form');
     },
 
-    renderError: function(message) {
-      this.$areaContainer.html(errorTemplate({message: message}));
-      this.$areaContainer.show();
-    },
-
     preInit: function(ev){
       ev.preventDefault();
       var self = this;
@@ -372,28 +364,38 @@
       this.$langaugesPopover.popover('toggle');
     },
 
-    TakeIn: function(event) {
-      var $currentTarget = $(event.currentTarget);
-      this.lang_code = $currentTarget.data('lang-code');
-      this.data.set({'lang_code': this.lang_code});
+    TakeIn: function(event, force) {
+      if (event) {
+        var $currentTarget = $(event.currentTarget);
+        this.lang_code = $currentTarget.data('lang-code');
+        this.data.set({'lang_code': this.lang_code});
+      }
+      var data = {
+        lang_code: this.lang_code
+      };
+      if (force) {
+        data['force'] = '1';
+      }
       $.ajax({
         url: this.$el.data('takein-url'),
         context: this,
-        data: {
-          lang_code: this.lang_code
-        },
+        data: data,
         type: 'post',
         dataType: 'json',
         success: function (data) {
-          if(data.response == "success") {
-            this.data.set(data);
-            this.render();
-          } else if (data.response == "error") {
-            this.renderError(data.error);
-          }
+          this.data.set(data);
+          this.render();
         }
       });
-      this.$langaugesPopover.popover('toggle');
+      if (event) this.$langaugesPopover.popover('toggle');
+    },
+
+    takeOver: function () {
+      this.TakeIn(null, true);
+    },
+
+    cancelTakeOver: function() {
+      this.$areaContainer.hide();
     },
 
     completeTranslation: function(event){

@@ -314,6 +314,20 @@
         <button type="button" class="btn btn-danger<% if (!revoke_url) { %> disabled<% } %>" id="revoke" >{% trans 'Discard' %}</button>
       <% } %>
 
+      <% if (error) { %>
+        <div class="alert alert-warning">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button><%- error %>
+        </div>
+      <% } %>
+
+      <% if (other_user_editing && is_cm) { %>
+        <div>{% trans 'If you want to take over the translation from another user you can do so below by clicking on the confirm button. That will make you the current owner of the translation and the existing owner will not be able to complete their translation.' %}</div>
+        <button style="margin-top: 10px;" type="button" class="btn btn-danger" id="take_over" >{% trans 'Confirm' %}</button>
+        <button style="margin-top: 10px;" type="button" class="btn" id="cancel_take_over" >{% trans 'Cancel' %}</button>
+      <% } %>
+
     </form>
   </script>
 
