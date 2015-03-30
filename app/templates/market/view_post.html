@@ -219,7 +219,7 @@
       </div>
         <div class="comment-body">
           <pre><%- contents %></pre>
-          <div class="translated_by" style="display:none;"><a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> | {% trans 'via'%} <a class="user" data-translate_url=""></a></span></div>
+          <div class="translated_by" style="display:none;"><a class="google" data-translate-human="false">{% trans 'via Google Translate' %}</a><span style="display:none;"> | {% trans 'via'%} <a class="user" data-translate-human="true"></a></span></div>
           <pre id="comment-body-translated" style="display: none;"></pre>
           {% if translator or request.user.userprofile.is_cm %}
           <div id="CommentButtons" class='comment-languages-menu'>

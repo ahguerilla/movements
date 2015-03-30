@@ -113,11 +113,11 @@
 
     changeCommentTranslation: function(ev) {
       ev.preventDefault();
-      var url = $(ev.currentTarget).data('translate_url');
       var comment = $(ev.currentTarget).parents('div.comment');
-      if (url) {
-        this.translateComment(url, comment);
-      }
+      var translateUrl = comment.data('translate-language-url');
+      var human = $(ev.currentTarget).data('translate-human');
+      translateUrl += '?lang_code=' + this.currentLanguage + '&human=' + human;
+      this.translateComment(translateUrl, comment);
     },
 
     translateComment: function(url, object) {
