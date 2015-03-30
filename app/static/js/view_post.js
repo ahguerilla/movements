@@ -497,7 +497,7 @@
       });
     },
 
-    Edit: function( event ){
+    Edit: function(event) {
       if (this.data.get('active') && confirm('Are you sure you wish to cancel your edit? This translation will revert to it\'s original post.')) {
         this.data.set({active: !this.data.get('active')});
         this.render();
@@ -580,18 +580,21 @@
     },
 
     TakeIn: function(ev, force){
-      this.getComment(ev);
       if (ev) {
-        this.data.set(this.options)
+        this.getComment(ev);
+        this.data.set(this.options);
         var $currentTarget = $(ev.currentTarget);
         this.data.set({'lang_code': $currentTarget.data('lang-code')});
       }
+
       var data = {
         lang_code: this.data.get('lang_code')
       };
+
       if (force) {
         data['force'] = '1';
       }
+
       var self = this;
       $.ajax({
         url: this.comment.data('take-in-url'),
@@ -603,6 +606,7 @@
           self.render(self.comment_id);
         }
       });
+
       if (ev) {
         var popup_element = self.comment.find('div.comment-languages-menu span');
         popup_element.popover('toggle');
@@ -610,7 +614,8 @@
     },
 
     takeOver: function (ev) {
-      this.TakeIn(ev, true);
+      this.getComment(ev);
+      this.TakeIn(null, true);
     },
 
     cancelTakeOver: function (ev) {
