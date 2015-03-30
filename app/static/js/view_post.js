@@ -54,13 +54,10 @@
       var self = this;
       $('.translate span').on('shown.bs.popover', function() {
         $('#translate-menu-container .language-selector ul li').click(function () {
-          var url = $(this).data("translate_url");
-          if (url) {
-            self.translate(url);
-          }
-          var lang = url.replace('?human=false', '').slice(-3);
+          self.translate($(this).data("translate_url"));
           _.each($('.comment'), function (comment) {
-            self.translateComment($(comment).data('translate-language-url').slice(0, -3) + lang, $(comment));
+            var commentTranslateUrl = $(comment).data('translate-language-url') + '?lang_code=' + self.currentLanguage;
+            self.translateComment(commentTranslateUrl, $(comment));
           });
           $('.translate span').popover('toggle');
         });
