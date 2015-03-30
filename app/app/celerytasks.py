@@ -66,7 +66,7 @@ def create_notification(obj):
         notification.avatar_user = obj.owner.username
         notification.text = get_notification_text(obj)
         notification.save()
-    create_translators_notifications(
+    _create_translators_notifications(
         obj, Notification.STATUSES.PENDING)
 
 
@@ -93,7 +93,7 @@ def create_comment_notification(obj, comment, username):
             notification.text = get_notification_comment_text(obj, username, comment)
             notification.save()
             created.add(cmnt.owner.id)
-    create_translators_notifications(
+    _create_translators_notifications(
         comment, Notification.STATUSES.PENDING)
 
 
@@ -153,30 +153,19 @@ def update_salesforce():
     update_market_item_stats()
 
 
-def find_translators(lang_codes):
-    users = set()
-    # if isinstance(lang_codes, (list, set, tuple)):
-    #     rates = LanguageRating.objects\
-    #         .filter(language__launguage_code__in=lang_codes, rate__gte=1)\
-    #         .values('rate', 'user_id')
-    #     candidate_users = {}
-    #     for rate in rates:
-    #         candidate_users.setdefault(rate['user_id'], []).append(rate['rate'])
-    #         item = candidate_users.get(rate['user_id'])
-    #         if len(item) == 2 and sum(item) / 2 >= 3:
-    #             users.add(rate['user_id'])
-    #     users = set(UserProfile.objects\
-    #         .filter(user_id__in=users,
-    #                 skills__skills_en__iexact='translation')\
-    #         .values_list('user_id', flat=True))
-    # elif isinstance(lang_codes, (str, unicode)):
-    #     users = set(LanguageRating.objects\
-    #         .filter(language__launguage_code=lang_codes, rate__gt=2)\
-    #         .values_list('user_id', flat=True))
-    return users
+def _find_translators(lang_codes):
+    if isinstance(lang_codes, (list, set, tuple)):
+        users = UserProfile.objects
+        for lang_code in lang_codes:
+            users = users.filter(translation_languages__launguage_code=lang_code)
+        return users.values_list('user_id', flat=True)
+    else:
+        return UserProfile.objects \
+            .filter(translation_languages__launguage_code=lang_codes) \
+            .values_list('user_id', flat=True)
 
 
-def find_CMs(lang_code=None):
+def _find_cms(lang_code=None):
     params = {'is_cm': True}
     if lang_code is not None:
         if isinstance(lang_code, (str, unicode)):
@@ -186,7 +175,15 @@ def find_CMs(lang_code=None):
     return set(UserProfile.objects.filter(**params).values_list('user_id', flat=True))
 
 
-def create_translation_notification(obj, status, user_id=None, reminder=False, save=True):
+def _get_item_from_translation(translation):
+    if isinstance(translation, MarketItemTranslation):
+        return translation.market_item
+    elif isinstance(translation, CommentTranslation):
+        return translation.comment
+    ValueError('translation must be a valid translation type')
+
+
+def _create_translation_notification(obj, status, user_id=None, reminder=False, save=True):
     notification = Notification()
     if isinstance(obj, MarketItem) and user_id:
         notification.user_id = user_id
@@ -219,22 +216,22 @@ def create_translation_notification(obj, status, user_id=None, reminder=False, s
     return notification
 
 
-def create_translators_notifications(obj, status, lang_code=None, save=True):
+def _create_translators_notifications(obj, status, lang_code=None, save=True):
     if lang_code is None:
         lang_code = obj.language
     notifications = []
-    for user_id in find_translators(lang_code):
-        notifications.append(create_translation_notification(obj, status, user_id=user_id, save=False))
+    for user_id in _find_translators(lang_code):
+        notifications.append(_create_translation_notification(obj, status, user_id=user_id, save=False))
     if save:
         Notification.objects.bulk_create(notifications)
     return notifications
 
 
-def create_CMs_notifications(obj, status, lang_code=None, reminder=False, save=True):
+def _create_cm_notifications(obj, status, lang_code=None, reminder=False, save=True):
     notifications = []
-    for user_id in find_CMs(lang_code):
+    for user_id in _find_cms(lang_code):
         notifications.append(
-            create_translation_notification(
+            _create_translation_notification(
                 obj, status, user_id=user_id, reminder=False, save=False))
     if save:
         Notification.objects.bulk_create(notifications)
@@ -244,47 +241,33 @@ def create_CMs_notifications(obj, status, lang_code=None, reminder=False, save=T
 @app.task(name="TakeinNotification")
 def takein_notification(obj, correction=False):
     if correction:
-        create_translation_notification(obj, Notification.STATUSES.CORRECTION)
+        _create_translation_notification(obj, Notification.STATUSES.CORRECTION)
     else:
-        create_translation_notification(obj, Notification.STATUSES.TRANSLATION)
+        _create_translation_notification(obj, Notification.STATUSES.TRANSLATION)
 
 
 @app.task(name="ApprovedNotification")
 def approved_notification(obj):
-    create_translation_notification(obj, Notification.STATUSES.APPROVED)
-
-    if isinstance(obj, MarketItemTranslation):
-        obj = obj.market_item
-    elif isinstance(obj, CommentTranslation):
-        obj = obj.comment
-    create_translation_notification(
-        obj, Notification.STATUSES.APPROVED, user_id=obj.owner_id)
+    _create_translation_notification(obj, Notification.STATUSES.APPROVED)
+    item = _get_item_from_translation(obj)
+    _create_translation_notification(item, Notification.STATUSES.APPROVED, user_id=obj.owner_id)
 
 
 @app.task(name="ApproveNotification")
 def approve_notification(obj):
-    create_CMs_notifications(
-        obj, Notification.STATUSES.APPROVAL,
-        lang_code=[obj.language, obj.source_language])
+    _create_cm_notifications(obj, Notification.STATUSES.APPROVAL, lang_code=[obj.language, obj.source_language])
 
 
 @app.task(name="TakeoffNotification")
 def takeoff_notification(translation):
-    notifications = []
-
-    # to translators
-    if isinstance(translation, MarketItemTranslation):
-        obj = translation.market_item
-    elif isinstance(translation, CommentTranslation):
-        obj = translation.comment
-    notifications += create_translators_notifications(
-        obj,
+    item = _get_item_from_translation(translation)
+    notifications = _create_translators_notifications(
+        item,
         Notification.STATUSES.PENDING,
         lang_code=[translation.language, translation.source_language],
         save=False)
 
-    # to CMs
-    notifications += create_CMs_notifications(
+    notifications += _create_cm_notifications(
         translation,
         Notification.STATUSES.PENDING,
         [translation.language, translation.source_language],
@@ -295,24 +278,20 @@ def takeoff_notification(translation):
 
 @app.task(name="RevokeNotification")
 def revoke_notification(translation):
-    notifications = []
-    notifications.append(
-        create_translation_notification(
-            translation, Notification.STATUSES.REVOKED, save=False))
+    notifications = [
+        _create_translation_notification(translation, Notification.STATUSES.REVOKED, save=False)
+    ]
 
-    if isinstance(translation, MarketItemTranslation):
-        obj = translation.market_item
-    elif isinstance(translation, CommentTranslation):
-        obj = translation.comment
-    notifications += create_translators_notifications(
-        obj,
+    item = _get_item_from_translation(translation)
+    notifications += _create_translators_notifications(
+        item,
         Notification.STATUSES.PENDING,
         lang_code=[translation.language, translation.source_language],
         save=False)
     Notification.objects.bulk_create(notifications)
 
 
-def create_reminder_notifications(model, c_status, time, n_status, save=False):
+def _create_reminder_notifications(model, c_status, time, n_status, save=False):
     notifications = []
     translations = model.objects.filter(
         status__gt=model.global_state.PENDING,
@@ -321,10 +300,10 @@ def create_reminder_notifications(model, c_status, time, n_status, save=False):
         reminder=False).select_related('owner_candidate')
     for translation in translations:
         notifications.append(
-            create_translation_notification(
+            _create_translation_notification(
                 translation, n_status, reminder=True, save=save))
 
-        notifications += create_CMs_notifications(
+        notifications += _create_cm_notifications(
             translation,
             n_status,
             [translation.language, translation.source_language],
@@ -334,7 +313,7 @@ def create_reminder_notifications(model, c_status, time, n_status, save=False):
     return notifications
 
 
-def create_revoked_notifications(model, c_status, time, save=False):
+def _create_revoked_notifications(model, c_status, time, save=False):
     notifications = []
     translations = model.objects.filter(
         status__gt=model.global_state.PENDING,
@@ -342,16 +321,12 @@ def create_revoked_notifications(model, c_status, time, save=False):
         timer__lt=time).select_related('owner_candidate')
     for translation in translations:
         notifications.append(
-            create_translation_notification(
+            _create_translation_notification(
                 translation, Notification.STATUSES.REVOKED, save=save))
         translation.clear_state()
-
-        if isinstance(translation, MarketItemTranslation):
-            obj = translation.market_item
-        elif isinstance(translation, CommentTranslation):
-            obj = translation.comment
-        notifications += create_translators_notifications(
-            obj,
+        item = _get_item_from_translation(translation)
+        notifications += _create_translators_notifications(
+            item,
             Notification.STATUSES.PENDING,
             lang_code=[translation.language, translation.source_language],
             save=False)
@@ -362,27 +337,24 @@ def create_revoked_notifications(model, c_status, time, save=False):
 @periodic_task(run_every=timedelta(minutes=1))
 def check_translation_timings():
     notifications = []
-    translations = None
 
     for model in [MarketItemTranslation, CommentTranslation]:
-        notifications += create_reminder_notifications(
+        notifications += _create_reminder_notifications(
             model,
             model.inner_state.TRANSLATION,
             now() - model._time / 2,
             Notification.STATUSES.TRANSLATION)
-        notifications += create_reminder_notifications(
+        notifications += _create_reminder_notifications(
             model,
             model.inner_state.CORRECTION,
             now() - model._time / 4,
             Notification.STATUSES.CORRECTION)
-
-        notifications += create_revoked_notifications(
+        notifications += _create_revoked_notifications(
             model,
             model.inner_state.TRANSLATION,
             now() - model._time)
-        notifications += create_revoked_notifications(
+        notifications += _create_revoked_notifications(
             model,
             model.inner_state.CORRECTION,
             now() - model._time / 2)
-
     Notification.objects.bulk_create(notifications)
