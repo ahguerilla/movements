@@ -268,7 +268,7 @@
 
     defaults: {
       is_translator: true,
-      is_cm: true,
+      is_cm: false,
       active: false,
       lang_code: '',
       status: null,
@@ -537,6 +537,7 @@
     initialize: function (options) {
       this.$MenuTemplate = _.template($('#init-languages-menu-template').html());
       this.$areaTemplate = _.template($('#comment-translation-area').html());
+      this.options = options;
     },
 
     render: function (comment_id) {
@@ -579,6 +580,7 @@
       this.getComment(ev);
       if (ev) {
         this.data = new TranslationData();
+        this.data.set(this.options)
         var $currentTarget = $(ev.currentTarget);
         this.lang_code = $currentTarget.data('lang-code');
         this.data.set({'lang_code': this.lang_code});

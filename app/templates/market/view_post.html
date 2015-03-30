@@ -239,6 +239,7 @@
 
   <script type="text/template" id="comment-translation-area">
     <form>
+      <input type="hidden" name="lang_code" value="<%- lang_code %>"/>
       <% if (status == 3) { %>
         {% trans 'Waiting for approval. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
         <pre id="approve-details"><%= display_text %></pre>
@@ -258,7 +259,8 @@
           <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Cancel translation' %}</button>
         <% } %>
       <% } %>
-      <% if (is_cm) { %>
+
+      <% if (is_cm  && status != 0) { %>
         <hr>
         <button type="button" class="btn btn-warning<% if (!approval_url) { %> disabled<% } %>" id="edit" >
         <% if (status == 3 && active) { %>
@@ -271,6 +273,22 @@
         <button type="button" class="btn btn-success<% if (!approval_url) { %> disabled<% } %>" id="confirm" >{% trans 'Confirm' %}</button>
         <button type="button" class="btn btn-danger<% if (!revoke_url) { %> disabled<% } %>" id="revoke" >{% trans 'Cancel' %}</button>
       <% } %>
+
+
+      <% if (error) { %>
+        <div class="alert alert-warning">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button><%- error %>
+        </div>
+      <% } %>
+
+      <% if (other_user_editing && is_cm) { %>
+        <div>{% trans 'If you want to take over the translation from another user you can do so below by clicking on the confirm button. That will make you the current owner of the translation and the existing owner will not be able to complete their translation.' %}</div>
+        <button style="margin-top: 10px;" type="button" class="btn btn-danger" id="take_over" >{% trans 'Confirm' %}</button>
+        <button style="margin-top: 10px;" type="button" class="btn" id="cancel_take_over" >{% trans 'Cancel' %}</button>
+      <% } %>
+
 
     </form>
   </script>
@@ -345,10 +363,13 @@
       });
       ahr.initViewPostTranslation({
         is_translator: {{ translator|yesno:"true,false" }},
-        is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }},
+        is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }}
       });
       {% if translator or request.user.userprofile.is_cm %}
-        ahr.initCommentTranslationView({});
+        ahr.initCommentTranslationView({
+            is_translator: {{ translator|yesno:"true,false" }},
+            is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }}
+        });
       {% endif %}
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar', {{ post.id }});
       this.recommend_widget = window.ahr.recommend_widget.initWidget(window.ahr.username);
