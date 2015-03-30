@@ -47,7 +47,7 @@ runlocalext:
 	cd app && python manage.py runserver 0.0.0.0:8000 --settings=app.settings.local_settings
 
 shell:
-	cd app && python manage.py shell --settings=app.settings.local_settings
+	cd app && python manage.py shell
 
 runprod:
 	cd app && python manage.py runserver --settings=app.settings.production

@@ -221,6 +221,10 @@ class MarketItemTranslation(TranslationBase):
         return MarketItem.objects.get(pk=object_id)
 
     @staticmethod
+    def get_object_manager():
+        return MarketItem.objects
+
+    @staticmethod
     def get_original(item):
         return {
             'title_translated': bleach.clean(item.title, strip=True),
@@ -285,6 +289,10 @@ class CommentTranslation(TranslationBase):
     @staticmethod
     def get_object(object_id):
         return Comment.objects.get(pk=object_id)
+
+    @staticmethod
+    def get_object_manager():
+        return Comment.objects
 
     @staticmethod
     def get_original(item):

@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 from django.utils import translation as django_translation
@@ -16,27 +17,33 @@ from app.celerytasks import (
 
 
 def get_or_create_translation(object_id, lang_code, model):
-    try:
-        translation = model.objects.get(
-            status=model.global_state.GOOGLE,
-            **model.get_params(object_id, lang_code))
-    except model.DoesNotExist:
-        translation = model.create_translation(object_id, lang_code)
-    return translation
+    q = model.objects.filter(status=model.global_state.GOOGLE, **model.get_params(object_id, lang_code))
+    translation = q.first()
+    if translation is not None:
+        return translation
+    with transaction.atomic():
+        model.get_object_manager().select_for_update().get(pk=object_id)
+        translation = q.first()
+        if translation is not None:
+            return translation
+        return model.create_translation(object_id, lang_code)
 
 
 def get_or_create_user_translation(object_id, lang_code, model):
-    try:
-        translation = model.objects.get(
-            status__gte=model.global_state.PENDING,
-            **model.get_params(object_id, lang_code))
-    except model.DoesNotExist:
-        translation = get_or_create_translation(object_id, lang_code, model)
+    q = model.objects.filter(status__gte=model.global_state.PENDING, **model.get_params(object_id, lang_code))
+    translation = q.first()
+    if translation is not None:
+        return translation
+    google_translation = get_or_create_translation(object_id, lang_code, model)
+    with transaction.atomic():
+        model.get_object_manager().select_for_update().get(pk=object_id)
+        translation = q.first()
         if translation:
-            translation.pk = None
-            translation.status = model.global_state.PENDING
-            translation.save()
-    return translation
+            return translation
+        google_translation.pk = None
+        google_translation.status = model.global_state.PENDING
+        google_translation.save()
+        return google_translation
 
 
 @login_required
