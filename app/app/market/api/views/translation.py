@@ -65,7 +65,7 @@ def translate(request, object_id, model):
         })
         return HttpResponse(json.dumps(result), mimetype="application/json")
 
-    if request.GET.get('human', True):
+    if request.GET.get('human', 'true') != 'false':
         try:
             translation = model.objects.get(
                 status__gt=model.global_state.PENDING,

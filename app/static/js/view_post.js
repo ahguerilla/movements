@@ -83,7 +83,8 @@
               post.find('#post-body-translated').text(data.details_translated).show();
               if (data.status == 4) {
                 post.find('div.translated_by a.user').html(data.username).attr('data-translate_url', translate_url);
-                post.find('div.translated_by a.google').attr('data-translate_url', translate_url.replace('?human=false', '') + '?human=false');
+                var googleUrl = translate_url + '&human=false';
+                post.find('div.translated_by a.google').attr('data-translate_url', googleUrl);
                 post.find('div.translated_by span').show();
               } else if (!data.human_aviable) {
                 post.find('div.translated_by span').hide();
