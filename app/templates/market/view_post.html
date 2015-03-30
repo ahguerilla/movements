@@ -260,18 +260,18 @@
         <% } %>
       <% } %>
 
-      <% if (is_cm  && status != 0) { %>
+      <% if (is_cm && status == 3) { %>
         <hr>
         <button type="button" class="btn btn-warning<% if (!approval_url) { %> disabled<% } %>" id="edit" >
-        <% if (status == 3 && active) { %>
+        <% if (active) { %>
           {% trans 'Cancel editing' %}
         <% } else { %>
           {% trans 'Edit' %}
         <% } %>
         </button>
         <button type="button" class="btn btn-danger<% if (!correction_url) { %> disabled<% } %>" id="correction" >{% trans 'Request a correction' %}</button>
-        <button type="button" class="btn btn-success<% if (!approval_url) { %> disabled<% } %>" id="confirm" >{% trans 'Confirm' %}</button>
-        <button type="button" class="btn btn-danger<% if (!revoke_url) { %> disabled<% } %>" id="revoke" >{% trans 'Cancel' %}</button>
+        <button type="button" class="btn btn-success<% if (!approval_url) { %> disabled<% } %>" id="confirm" >{% trans 'Approve' %}</button>
+        <button type="button" class="btn btn-danger<% if (!revoke_url) { %> disabled<% } %>" id="revoke" >{% trans 'Discard' %}</button>
       <% } %>
 
 
@@ -318,10 +318,10 @@
         <% } %>
       <% } %>
 
-      <% if (is_cm && status != 0) { %>
+      <% if (is_cm && status == 3) { %>
         <hr>
         <button type="button" class="btn btn-warning<% if (!approval_url) { %> disabled<% } %>" id="edit" >
-        <% if (status == 3 && active) { %>
+        <% if (active) { %>
           {% trans 'Cancel editing' %}
         <% } else { %>
           {% trans 'Edit' %}
