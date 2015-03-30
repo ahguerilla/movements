@@ -24,6 +24,7 @@
 
       this.initTranslatePopup();
       var translate_url = $(".view-post").data('default_translate_url');
+      this.currentLanguage = this.options.userDefaultLangage;
       if (translate_url && (this.options.postLanguage != this.options.userDefaultLangage)) {
         this.translate(translate_url);
       }
@@ -69,13 +70,14 @@
     translate: function(translate_url) {
       var self = this;
       var post = $(".post");
+      var trans_lang = translate_url.split('lang_code=')[1];
+      this.currentLanguage = trans_lang;
       $.ajax({
         url: translate_url,
         type: 'GET',
         dataType: 'json',
         success: function (data) {
           if(data.response === "success") {
-            var trans_lang = translate_url.split('lang_code=')[1];
             $('#post-title').text(data.title_translated);
             if (trans_lang === data.source_language){
               post.find('#post-body-translated').text("").hide();
@@ -208,9 +210,9 @@
       _.each(comments, function(item) {
         var comment_html = self.$commentTemplate(item.fields);
         self.$commentListContent.append(comment_html);
-        // Auto-Google-Translate the post title for each item.
+
         var comment = $('.comment[comment_id="' + item.pk + '"]');
-        if (item.fields.translate_language_url && item.fields.source_lang != item.fields.translate_language_url.slice(-3, -1)) {
+        if (item.fields.translate_language_url && (item.fields.source_lang != self.currentLanguage)) {
           self.translateComment(item.fields.translate_language_url, comment);
         }
       });
@@ -260,7 +262,7 @@
           }
         }
       })
-    },
+    }
   });
 
   var TranslationData = Backbone.Model.extend({
@@ -415,7 +417,7 @@
                 active: false,
                 status: 3,
                 title_translated: self.$form.find('input[name="title_translated"]').val(),
-                details_translated: self.$form.find('textarea[name="details_translated"]').val(),
+                details_translated: self.$form.find('textarea[name="details_translated"]').val()
               });
               self.render();
             }
@@ -519,120 +521,90 @@
 
     events: {
         "click a.comment-pre-init": "preInit",
-        "click div.comment div.language-selector li": "Init",
-        "click div.comment button#take_in": "TakeIn",
+        "click div.comment div.language-selector li": "TakeIn",
         "click div.comment button#done": "completeTranslation",
         "click div.comment button#take_off": "cancelTranslation",
         "click div.comment button#confirm": "Confirm",
         "click div.comment button#revoke": "Revoke",
         "click div.comment button#edit": "Edit",
-        "click div.comment button#correction": "Correction",
+        "click div.comment button#correction": "Correction"
     },
 
     getComment: function(ev){
       this.comment = $(ev.currentTarget).parents('div.comment');
       this.comment_id = this.comment.attr('comment_id');
-      this.comment_data = this.dataStorage.get(this.comment_id);
       this.$form = this.comment.find('form');
     },
 
-    preInit: function(ev){
+    initialize: function (options) {
+      this.$MenuTemplate = _.template($('#init-languages-menu-template').html());
+      this.$areaTemplate = _.template($('#comment-translation-area').html());
+    },
+
+    render: function (comment_id) {
+      this.comment = $('div.comment[comment_id="' + comment_id + '"]');
+      this.comment_id = comment_id;
+      if (this.data.get('status') == 3) {
+        var diff = JsDiff.diffChars(this.data.get('prev_text'), this.data.get('details_translated'));
+        var display_text = '';
+        diff.forEach(function (part) {
+          var color = part.added ? 'green' :
+              part.removed ? 'red' : 'grey';
+          display_text += '<span style="color:' + color + ';">' + part.value + '</span>'
+        });
+        this.data.set('display_text', display_text);
+      }
+      this.comment.find('#comment-translation-container')
+          .html(this.$areaTemplate(this.data.attributes))
+          .show();
+    },
+
+    preInit: function(ev) {
       ev.preventDefault();
       this.getComment(ev);
       var self = this;
       var popup_element = self.comment.find('div.comment-languages-menu span');
       if (self.comment.find('#comment-languages-menu-container').html() == '') {
-        $.ajax({
-          url: $(ev.currentTarget).attr('href'),
-          data: {'object_id': self.comment_id},
-          type: 'POST',
-          dataType: 'json',
-          success: function (data) {
-            var menu = self.$MenuTemplate(data)
-            popup_element.popover({
-              trigger: 'manual',
-              title: '',
-              html: true,
-              content: menu,
-              container: self.comment.find('#comment-languages-menu-container'),
-              placement: 'top'
-            });
-            popup_element.popover('show');
-          },
+        popup_element.popover({
+          trigger: 'manual',
+          title: '',
+          html: true,
+          content: self.$MenuTemplate(),
+          container: self.comment.find('#comment-languages-menu-container'),
+          placement: 'top'
         });
-      } else {
-        popup_element.popover('toggle')
       }
+      popup_element.popover('toggle');
     },
 
-    Init: function(ev) {
+    TakeIn: function(ev, force){
       this.getComment(ev);
-      this.comment.find('div.comment-languages-menu span').popover('toggle'); // toggle popover
+      if (ev) {
+        this.data = new TranslationData();
+        var $currentTarget = $(ev.currentTarget);
+        this.lang_code = $currentTarget.data('lang-code');
+        this.data.set({'lang_code': this.lang_code});
+      }
+      var data = {
+        lang_code: this.lang_code
+      };
+      if (force) {
+        data['force'] = '1';
+      }
       var self = this;
       $.ajax({
-        url: $(ev.currentTarget).data('api-url'),
-        type: 'GET',
+        url: this.comment.data('take-in-url'),
+        data: data,
+        type: 'post',
         dataType: 'json',
         success: function (data) {
-          if (data.response == 'success') {
-            self.dataStorage.set(data);
-            self.render(self.comment_id);
-          } else {
-            alert('Failed to fetch translation record. The object DoesNotExist or DB is to busy.');
-          }
-        },
-        error: function () {
-            alert('Failed to fetch record. The object DoesNotExist or DB is to busy.');
+          self.data.set(data);
+          self.render(self.comment_id);
         }
       });
-
-    },
-
-    initialize: function(options){
-      this.$MenuTemplate = _.template($('#init-languages-menu-template').html());
-      this.$areaTemplate = _.template($('#comment-translation-area').html());
-      var collection = Backbone.Collection.extend({model: TranslationData});
-      this.dataStorage = new collection;
-    },
-
-    render: function(comment_id){
-      this.comment = $('div.comment[comment_id="' + comment_id + '"]');
-      this.comment_id = comment_id
-      this.comment_data = this.dataStorage.get(this.comment_id);
-      if (this.comment_data.get('status') == 3) {
-        var diff = JsDiff.diffChars(this.comment_data.get('prev_text'), this.comment_data.get('details_translated'));
-        var display_text= '';
-        diff.forEach(function(part){
-          var color = part.added ? 'green' :
-            part.removed ? 'red' : 'grey';
-          display_text += '<span style="color:' + color + ';">' + part.value + '</span>'
-        });
-        this.comment_data.set('display_text', display_text);
-        this.dataStorage.set(this.comment_data);
-      }
-      this.comment.find('#comment-translation-container').html( this.$areaTemplate(this.comment_data.attributes) ).show();
-    },
-
-    TakeIn: function(ev){
-      this.getComment(ev);
-      var url = this.comment_data.get('take_in_url');
-      var self = this;
-      if (url) {
-        $.ajax({
-          url: url,
-          type: 'GET',
-          dataType: 'json',
-          success: function (data) {
-            if(data.response == "success") {
-              self.comment_data.set(data);
-              self.comment_data.set({take_in_url: null});
-              self.dataStorage.set(self.comment_data);
-            } else if (data.response == "error") {
-              alert(data.error);
-            }
-            self.render(self.comment_id);
-          }
-        });
+      if (ev) {
+        var popup_element = self.comment.find('div.comment-languages-menu span');
+        popup_element.popover('toggle');
       }
     },
 
@@ -654,7 +626,7 @@
                 status: 3,
                 details_translated: self.$form.find('textarea[name="details_translated"]').val()
               });
-              self.dataStorage.set(self.comment_data);
+              self.data.set(self.comment_data);
               self.render(self.comment_id);
             } else {
               alert(data.error);
@@ -708,7 +680,7 @@
             } else {
               alert(data.error);
             }
-          },
+          }
         });
       }
     },
@@ -721,7 +693,7 @@
       } else if (!active) {
         this.comment_data.set({active: !active});
       }
-      this.dataStorage.set(this.comment_data);
+      this.data.set(this.comment_data);
       this.render(this.comment_id);
     },
 
@@ -739,7 +711,7 @@
             } else {
               alert(data.error);
             }
-          },
+          }
         });
       }
     },
@@ -758,11 +730,10 @@
             } else {
               alert(data.error);
             }
-          },
+          }
         });
       }
-    },
-
+    }
   });
 
 

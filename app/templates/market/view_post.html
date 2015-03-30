@@ -208,7 +208,10 @@
 {% endcomment %}
 
   <script type="text/template" id="comment-template">
-    <div class="comment" comment_id="<%- pk %>" data-translate-language-url="<%- translate_language_url %>">
+    <div class="comment"
+         comment_id="<%- pk %>"
+         data-translate-language-url="<%- translate_language_url %>"
+         data-take-in-url="<%- take_in_url %>">
       <div class="avatar"><img src="<%- avatar %>"></div>
       <div class="comment-header">
         <a href="<%- profile_url %>" alt="poster profile"><%- username %></a>
@@ -217,10 +220,7 @@
         <div class="comment-body">
           <pre><%- contents %></pre>
           <div class="translated_by" style="display:none;"><a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> | {% trans 'via'%} <a class="user" data-translate_url=""></a></span></div>
-          {# <div class="auto-translated-text" style="display:none">{% trans 'Auto translated by Google Translate.' %}<span style="display:none;"> {% trans 'In translation now.' %}</span></div> #}
-          {# <div class="user-translated-text" style="display:none">{% trans 'Translated by' %} <span></span></div> #}
           <pre id="comment-body-translated" style="display: none;"></pre>
-
           {% if translator or request.user.userprofile.is_cm %}
           <div id="CommentButtons" class='comment-languages-menu'>
             <a class="comment-pre-init"><span>{% trans 'Translate this comment' %}</span></a>
