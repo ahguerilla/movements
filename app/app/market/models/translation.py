@@ -1,5 +1,6 @@
 import bleach
 import requests
+import urllib
 import json
 from datetime import datetime
 
@@ -22,10 +23,10 @@ def translate_text(original_text, language):
     try:
         api_key = settings.GOOGLE_TRANSLATE_API_KEY
         base_url = settings.GOOGLE_TRANSLATE_BASE
-        key = "key=" + api_key
-        query = "q=" + strip_tags(original_text)
-        target = "target=" + language
-        query_string = base_url + key + "&" + query + "&" + target
+        key = ("key", api_key,)
+        query = ("q", strip_tags(original_text),)
+        target = ("target", language)
+        query_string = base_url + urllib.urlencode([key, query, target])
         r = requests.get(query_string)
         if r.status_code == 200:
             data = json.loads(r.content)
@@ -37,7 +38,7 @@ def translate_text(original_text, language):
                     success = True
                     if source_language == language:
                         translation = original_text
-    except:
+    except Exception as ex:
         pass
 
     return success, translation, source_language
