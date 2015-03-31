@@ -334,6 +334,7 @@ $(function () {
     pageSize: null,
     pageRange: null,
     pageActive: null,
+
     events: {
       "click .prev-page": "getPage",
       "click .page": "getPage",
@@ -436,6 +437,8 @@ $(function () {
     is_featured: false,
     $itemContainer: null,
     paginationView: null,
+    userDefaultLangage: 'en',
+    autoTranslate: true,
 
     types: {
       "Offers": "offer",
@@ -469,6 +472,7 @@ $(function () {
       this.item_menu_template = _.template($(options.item_menu_template).html());
       this.closeDialog = new ahr.CloseItemDialogView();
       this.reportDialog = new ahr.ReportPostView();
+      this.userDefaultLangage = options.userDefaultLangage;
 
       var $pagination = this.$el.find('.pagination');
       if ($pagination.length) {
@@ -794,8 +798,7 @@ $(function () {
             $('.tag-button:contains(' + txt + ')').css('background-color', '#cccccc');
           });
           var theItem = item;
-          // Auto-Google-Translate the post title for each item.
-          if (item.fields.translate_language_url) {
+          if (that.autoTranslate && item.fields.translate_language_url && (item.fields.language != that.userDefaultLangage)) {
             $.ajax({
               url: item.fields.translate_language_url,
               type: 'GET',
@@ -803,19 +806,16 @@ $(function () {
               success: function (data) {
                 if(data.response === "success") {
                   var post = $('.market-place-item[data-item-id="' + data.itemid + '"]');
-                  if(post){
-                    var langCode = theItem.fields.translate_language_url.slice(-3, -1);
-                    if(langCode != data.source_language){
-                      post.find('.title').text(data.title);
-                      if (data.status == 4) {
-                        post.find('.user-translated-text span').html(data.username);
-                        post.find('.user-translated-text').show();
-                      } else {
-                        if (data.status == 3) {
-                          post.find('.auto-translated-text span').show();
-                        }
-                        post.find('.auto-translated-text').show();
+                  if (post) {
+                    post.find('.title').text(data.title_translated);
+                    if (data.status == 4) {
+                      post.find('.user-translated-text span').html(data.username);
+                      post.find('.user-translated-text').show();
+                    } else {
+                      if (data.status == 3) {
+                        post.find('.auto-translated-text span').show();
                       }
+                      post.find('.auto-translated-text').show();
                     }
                   }
                 }
@@ -840,7 +840,8 @@ $(function () {
       el: '#market-main',
       filterView: filterView,
       marketUrl: ahr.app_urls.getMarketItems,
-      noResultsString: noResultsString
+      noResultsString: noResultsString,
+      userDefaultLangage: options.userDefaultLangage
     });
 
     new MarketView({
@@ -848,13 +849,15 @@ $(function () {
       marketUrl: ahr.app_urls.getFeaturedMarketItems,
       noResultsString: '<div style="font-size: 16px; font-weight:bold">No featured items</div>',
       item_tmp: '#featured_item_template',
+      userDefaultLangage: options.userDefaultLangage,
       showHide: false
     });
 
     stickyView = new MarketView({
       el: '#stuck-marketitems',
       marketUrl: ahr.app_urls.getStickyMarketItems,
-      noResultsString: '<div style="font-size: 16px; font-weight:bold">You have no sticky items</div>'
+      noResultsString: '<div style="font-size: 16px; font-weight:bold">You have no sticky items</div>',
+      userDefaultLangage: options.userDefaultLangage
     });
   };
 
@@ -872,6 +875,8 @@ $(function () {
       filterView: filterView,
       marketUrl: marketUrl,
       noResultsString: noResultsString,
+      userDefaultLangage: options.userDefaultLangage,
+      autoTranslate: false,
       showSticky: false
     });
   }

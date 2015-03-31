@@ -22,7 +22,7 @@
   <script type="text/template" id="notificationspage_template">
     <div class="clearfix">
       <div class="dates pull-right">
-        <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
+        <%- moment(notif.pub_date, "YYYY-MM-DD h:mm").fromNow() %>
       </div>
       <div class="details<% if (!notif.seen) { %> new<% } %>">
         {# translation notification #}
