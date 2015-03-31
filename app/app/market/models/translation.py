@@ -137,8 +137,9 @@ class TranslationBase(models.Model):
                 'owner_url': reverse('user_profile_for_user', args=(self.owner_candidate.username,)) if self.owner_candidate else None,
                 'status': self.c_status,
                 'details_translated': self.details_candidate,
-                'take_off': self.take_off_url() if active else None,
-                'done_url': self.done_url() if active else None}
+                'save_draft_url': self.save_draft_url(),
+                'take_off': self.take_off_url(),
+                'done_url': self.done_url()}
 
     def get_endtime(self):
         # TODO need to move timings to settings
@@ -147,6 +148,10 @@ class TranslationBase(models.Model):
         elif self.c_status == self.inner_state.CORRECTION:
             return self.edited + self._time / 2
         return None
+
+    def save_draft(self, data):
+        self.details_candidate = data.get('details_translated', '')
+        self.save()
 
     def set_done(self, data):
         self.details_candidate = data.get('details_translated', '')
@@ -182,6 +187,9 @@ class TranslationBase(models.Model):
 
     def take_in_url(self):
         return self.make_url('take_in')
+
+    def save_draft_url(self):
+        return self.make_url('save_draft')
 
     def take_off_url(self):
         return self.make_url('take_off')
@@ -271,6 +279,10 @@ class MarketItemTranslation(TranslationBase):
     def set_done(self, data):
         self.title_candidate = data.get('title_translated', '')
         super(MarketItemTranslation, self).set_done(data)
+
+    def save_draft(self, data):
+        self.title_candidate = data.get('title_translated', '')
+        super(MarketItemTranslation, self).save_draft(data)
 
     def approve(self, data):
         self.title_translated = data.get('title_translated', self.title_candidate)

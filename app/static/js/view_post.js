@@ -291,6 +291,7 @@
       display_text: null,
       other_user_editing: false,
       error: '',
+      message: '',
       id: null
     }
   });
@@ -303,6 +304,7 @@
     events: {
         "click a.post-pre-init": "preInit",
         "click div.post-actions div.language-selector li": "TakeIn",
+        "click #post-translation-container button#save_draft": "saveDraft",
         "click #post-translation-container button#done": "completeTranslation",
         "click #post-translation-container button#take_off": "cancelTranslation",
         "click #post-translation-container button#confirm": "Confirm",
@@ -324,7 +326,11 @@
       this.data.set(options);
     },
 
-    render: function(){
+    clearMessages: function() {
+      //this.data.set({'error': null, 'message': null});
+    },
+
+    render: function() {
       var self = this;
       if (this.data.get('status') == 3) {
         // title
@@ -352,7 +358,7 @@
       this.$form = this.$areaContainer.find('form');
     },
 
-    preInit: function(ev){
+    preInit: function(ev) {
       ev.preventDefault();
       var self = this;
       this.$langaugesPopover = self.$PostinitMenuarea.find('span');
@@ -389,6 +395,7 @@
         type: 'post',
         dataType: 'json',
         success: function (data) {
+          this.clearMessages();
           this.data.set(data);
           this.render();
         }
@@ -404,32 +411,49 @@
       this.$areaContainer.hide();
     },
 
-    completeTranslation: function(event){
-      var self = this;
-      var data = self.$form.serialize();
+    saveDraft: function() {
+      var data = this.$form.serialize();
       $.ajax({
-        url: self.data.get('done_url'),
+        url: this.data.get('save_draft_url'),
+        context: this,
         data: data,
         type: 'POST',
         dataType: 'json',
         success: function (data) {
-          self.data.set(data);
+          this.clearMessages();
+          this.data.set(data);
+          this.render();
+        }
+      });
+    },
+
+    completeTranslation: function() {
+      var data = this.$form.serialize();
+      $.ajax({
+        url: this.data.get('done_url'),
+        context: this,
+        data: data,
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+          this.clearMessages();
+          this.data.set(data);
           if (data.response == "success") {
-            self.data.set({
+            this.data.set({
               active: false,
               status: 3,
-              title_translated: self.$form.find('input[name="title_translated"]').val(),
-              details_translated: self.$form.find('textarea[name="details_translated"]').val()
+              title_translated: this.$form.find('input[name="title_translated"]').val(),
+              details_translated: this.$form.find('textarea[name="details_translated"]').val()
             });
           }
-          self.render();
+          this.render();
         }
       });
     },
 
     cancelTranslation: function(event) {
-      var self = this;
       $.ajax({
+        context: this,
         url: this.data.get('take_off'),
         type: 'post',
         data: {
@@ -437,27 +461,28 @@
         },
         dataType: 'json',
         success: function (data) {
-          self.data.set({
+          this.clearMessages();
+          this.data.set({
             active: false,
             status: 0
           });
-          self.render();
+          this.render();
         }
       });
     },
 
-    Confirm: function(event) {
-      var self = this;
+    Confirm: function() {
       var data = [];
-      if (self.data.get('active') && self.data.get('status') == 3) {
-        data = self.$form.serialize();
+      if (this.data.get('active') && this.data.get('status') == 3) {
+        data = this.$form.serialize();
       } else {
         data = {
           lang_code: this.lang_code
         }
       }
       $.ajax({
-        url: self.data.get('approval_url'),
+        context: this,
+        url: this.data.get('approval_url'),
         data: data,
         type: 'POST',
         dataType: 'json',
@@ -471,7 +496,7 @@
       });
     },
 
-    Revoke: function(ev) {
+    Revoke: function() {
       $.ajax({
         url: this.data.get('revoke_url'),
         type: 'post',
@@ -503,7 +528,7 @@
       });
     },
 
-    Edit: function(event) {
+    Edit: function() {
       if (this.data.get('active') && confirm('Are you sure you wish to cancel your edit? This translation will revert to it\'s original post.')) {
         this.data.set({active: !this.data.get('active')});
         this.render();

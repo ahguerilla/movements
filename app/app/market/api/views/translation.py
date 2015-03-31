@@ -127,22 +127,38 @@ def take_in(request, object_id, model):
 
 @require_http_methods(['POST'])
 @login_required
-def take_off(request, object_id, model):
+def save_draft(request, object_id, model):
     lang_code = request.POST['lang_code']
-    result = {'response': 'error',
-              'error': 'Translation is busy.'}
+    result = {'response': 'error'}
     try:
         translation = model.objects.get(
             c_status__in=[model.inner_state.TRANSLATION, model.inner_state.CORRECTION],
             owner_candidate=request.user,
             **model.get_params(object_id, lang_code))
+        translation.save_draft(request.POST)
+        result.update({'response': 'success',
+                       'message': ugettext('Draft saved successfully.')})
+        result.update(translation.get_init_data(request.user))
     except model.DoesNotExist:
-        result.update({'error': ugettext('No pending translation found to cancel.')})
-    else:
+        result['error'] = ugettext('This post is not currently locked for translation.')
+    return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@require_http_methods(['POST'])
+@login_required
+def take_off(request, object_id, model):
+    lang_code = request.POST['lang_code']
+    result = {'response': 'error'}
+    try:
+        translation = model.objects.get(
+            c_status__in=[model.inner_state.TRANSLATION, model.inner_state.CORRECTION],
+            owner_candidate=request.user,
+            **model.get_params(object_id, lang_code))
         takeoff_notification.delay(translation)
         translation.clear_state()
-        del result['error']
-        result.update({'response': 'success', })
+        result.update({'response': 'success'})
+    except model.DoesNotExist:
+        result.update({'error': ugettext('No pending translation found to cancel.')})
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
@@ -150,24 +166,19 @@ def take_off(request, object_id, model):
 @login_required
 def done(request, object_id, model):
     lang_code = request.POST['lang_code']
-    result = {'response': 'error', 'error': ''}
+    result = {'response': 'error'}
     try:
         translation = model.objects.get(
             c_status__in=[model.inner_state.TRANSLATION, model.inner_state.CORRECTION],
             owner_candidate=request.user,
             **model.get_params(object_id, lang_code))
-    except model.DoesNotExist:
-        result.update({'error': 'Translation record not found.'})
-    else:
-        if translation.has_perm(request.user, lang_code) and \
-                        translation.c_status in [translation.inner_state.TRANSLATION,
-                                                 translation.inner_state.CORRECTION]:
-            translation.set_done(request.POST)
-            approve_notification.delay(translation)
-            result.update({'response': 'success'})
-
+        translation.set_done(request.POST)
+        approve_notification.delay(translation)
+        result.update({'response': 'success'})
         if request.user.userprofile.is_cm:
             result.update(translation.cm_urls_dict())
+    except model.DoesNotExist:
+        result.update({'error': ugettext('This post is not currently locked for translation.')})
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
@@ -176,7 +187,7 @@ def _approve_correct_revoke(request, object_id, lang_code, model, params):
     translation = None
     result = {'response': 'error'}
     if not request.user.userprofile.is_cm:
-        result.update({'error': 'Has no permission. Only CMs are allowed.'})
+        result.update({'error': ugettext('You do not have permission to complete this action.')})
     else:
         try:
             translation = model.objects.get(**params)

@@ -4,7 +4,9 @@
 {% block content %}
 <div class="row">
   <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-    <div class="view-post" data-default_translate_url="{% url 'translation:market:translate' post.id %}" data-takein-url="{% url 'translation:market:take_in' post.id %}">
+    <div class="view-post"
+        data-default_translate_url="{% url 'translation:market:translate' post.id %}"
+        data-takein-url="{% url 'translation:market:take_in' post.id %}">
       <div class="post-header {{ post.item_type|lower }} %>">
         <span>{{ post.item_type_display }}</span>
       </div>
@@ -258,6 +260,7 @@
       <% if (status != 3) { %>
         <% if (active) { %>
           <button type="button" class="btn btn-success" id="done" >{% trans 'Translation completed' %}</button>
+          <button type="button" class="btn" id="save_draft" >{% trans 'Save draft' %}</button>
           <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Cancel translation' %}</button>
         <% } %>
       <% } %>
@@ -271,7 +274,7 @@
           {% trans 'Edit' %}
         <% } %>
         </button>
-        <button type="button" class="btn btn-danger<% if (!correction_url) { %> disabled<% } %>" id="correction" >{% trans 'Request a correction' %}</button>
+{#        <button type="button" class="btn btn-danger<% if (!correction_url) { %> disabled<% } %>" id="correction" >{% trans 'Request a correction' %}</button>#}
         <button type="button" class="btn btn-success<% if (!approval_url) { %> disabled<% } %>" id="confirm" >{% trans 'Approve' %}</button>
         <button type="button" class="btn btn-danger<% if (!revoke_url) { %> disabled<% } %>" id="revoke" >{% trans 'Discard' %}</button>
       <% } %>
@@ -282,6 +285,14 @@
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button><%- error %>
+        </div>
+      <% } %>
+
+     <% if (message) { %>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button><%- message %>
         </div>
       <% } %>
 
@@ -316,6 +327,7 @@
       <% if (status != 3) { %>
         <% if (active) { %>
           <button type="button" class="btn btn-success" id="done" >{% trans 'Translation completed' %}</button>
+          <button type="button" class="btn" id="save_draft" >{% trans 'Save draft' %}</button>
           <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Cancel translation' %}</button>
         <% } %>
       <% } %>
@@ -329,16 +341,24 @@
           {% trans 'Edit' %}
         <% } %>
         </button>
-        <button type="button" class="btn btn-danger<% if (!correction_url) { %> disabled<% } %>" id="correction" >{% trans 'Request a correction' %}</button>
+{#        <button type="button" class="btn btn-danger<% if (!correction_url) { %> disabled<% } %>" id="correction" >{% trans 'Request a correction' %}</button>#}
         <button type="button" class="btn btn-success<% if (!approval_url) { %> disabled<% } %>" id="confirm" >{% trans 'Approve' %}</button>
         <button type="button" class="btn btn-danger<% if (!revoke_url) { %> disabled<% } %>" id="revoke" >{% trans 'Discard' %}</button>
       <% } %>
 
       <% if (error) { %>
-        <div class="alert alert-warning">
+        <div class="alert alert-warning" style="margin-top: 15px;">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button><%- error %>
+        </div>
+      <% } %>
+
+     <% if (message) { %>
+        <div class="alert alert-success" style="margin-top: 15px;">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button><%- message %>
         </div>
       <% } %>
 
