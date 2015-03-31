@@ -42,6 +42,7 @@ class Comment(models.Model):
         adict['fields']['delete_url'] = reverse('delete_comment')
         adict['fields']['take_in_url'] = reverse('translation:comment:take_in', args=[self.id])
         adict['fields']['translate_language_url'] = reverse('translation:comment:translate', args=[self.id])
+        adict['fields']['language'] = self.language
         adict['fields']['source_lang'] = self.language
         adict['score'] = self.owner.userprofile.score
         adict['ratecount'] = self.owner.userprofile.ratecount

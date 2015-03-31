@@ -83,7 +83,12 @@
               post.find('#post-body-translated').text(data.details_translated).show();
               if (data.status == 4) {
                 post.find('div.translated_by a.user').html(data.username).attr('data-translate_url', translate_url);
-                var googleUrl = translate_url + '&human=false';
+                var googleUrl;
+                if (translate_url.indexOf('?') > 0) {
+                  googleUrl = translate_url + '&human=false';
+                } else {
+                  googleUrl = translate_url + '?human=false';
+                }
                 post.find('div.translated_by a.google').attr('data-translate_url', googleUrl);
                 post.find('div.translated_by span').show();
               } else if (!data.human_aviable) {
@@ -314,6 +319,8 @@
       this.$areaTemplate = _.template($('#translation-area').html());
       this.$areaContainer = this.$el.find('#post-translation-container');
       this.$PostinitMenuarea = $('div.post-languages-menu');
+      this.translationLanguages = options.translationLanguages;
+      this.postLanguage = options.postLanguage;
       this.data = new TranslationData();
       this.data.set(options);
     },
@@ -356,7 +363,7 @@
           trigger: 'manual',
           title: '',
           html: true,
-          content: self.$MenuTemplate(),
+          content: self.$MenuTemplate({languages: this.translationLanguages, itemLanguage: this.postLanguage}),
           container: container,
           placement: 'top'
         });
@@ -531,6 +538,7 @@
       var data = this.commentDataCache[this.comment_id];
       if (!data) {
         data = new TranslationData();
+        data.set('lang_code', this.comment.data('language'));
         this.commentDataCache[this.comment_id] = data;
       }
       this.data = data;
@@ -540,6 +548,7 @@
       this.$MenuTemplate = _.template($('#init-languages-menu-template').html());
       this.$areaTemplate = _.template($('#comment-translation-area').html());
       this.options = options;
+      this.translationLanguages = options.translationLanguages;
       this.commentDataCache = {};
     },
 
@@ -571,7 +580,7 @@
           trigger: 'manual',
           title: '',
           html: true,
-          content: self.$MenuTemplate(),
+          content: self.$MenuTemplate({languages: this.translationLanguages, itemLanguage: this.data.get('lang_code')}),
           container: self.comment.find('#comment-languages-menu-container'),
           placement: 'top'
         });

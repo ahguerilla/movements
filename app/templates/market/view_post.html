@@ -178,9 +178,10 @@
   <script type="text/template" id="init-languages-menu-template">
     <div class="language-selector">
     <ul>
-      {% for language in translation_languages %}
-        <li data-lang-code="{{ language.launguage_code }}">{{ language.name }}</li>
-      {% endfor %}
+      <% _.each(languages, function(language) {
+       if (language.code != itemLanguage) { %>
+        <li data-lang-code="<%- language.code %>"><%- language.name %></li>
+      <% }}); %>
     </ul>
     </div>
   </script>
@@ -362,14 +363,17 @@
         userDefaultLangage: '{{ LANGUAGE_CODE }}',
         postLanguage: '{{ post.language }}'
       });
-      ahr.initViewPostTranslation({
-        is_translator: {{ translator|yesno:"true,false" }},
-        is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }}
-      });
       {% if translator or request.user.userprofile.is_cm %}
-        ahr.initCommentTranslationView({
+          ahr.initViewPostTranslation({
             is_translator: {{ translator|yesno:"true,false" }},
-            is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }}
+            is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }},
+            postLanguage: '{{ post.language }}',
+            translationLanguages: {{ translation_languages|safe }}
+          });
+         ahr.initCommentTranslationView({
+            is_translator: {{ translator|yesno:"true,false" }},
+            is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }},
+            translationLanguages: {{ translation_languages|safe }}
         });
       {% endif %}
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar', {{ post.id }});

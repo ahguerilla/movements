@@ -1,3 +1,5 @@
+import json
+
 from collections import defaultdict
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
@@ -87,7 +89,6 @@ def show_post(request, post_id):
         for l in translation_languages:
             if l.language_code == post.language:
                 translator = True
-                translation_languages.remove(l)
                 break
     if not translator:
         translation_languages = []
@@ -99,7 +100,7 @@ def show_post(request, post_id):
         'language_list': language_list,
         'countries_to_render': countries_to_render,
         'translator': translator,
-        'translation_languages': translation_languages,
+        'translation_languages': json.dumps([{'code': l.language_code, 'name': l.name} for l in translation_languages]),
     }
 
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))
