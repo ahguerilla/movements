@@ -53,6 +53,7 @@ def translate(request, object_id, model):
     result = {'response': 'error',
               'status': model.global_state.GOOGLE,
               'source_language': '',
+              'lang_code': lang_code,
               'human_aviable': False,
               'itemid': object_id}
 

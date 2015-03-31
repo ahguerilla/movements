@@ -132,8 +132,7 @@
         dataType: 'json',
         success: function (data) {
           if(data.response === "success") {
-              var _url = url.replace('?human=false', '');
-              if(_url.slice(-3, -1) === data.source_language){
+              if(data.source_language === data.lang_code){
                 object.find('#comment-body-translated').text('').hide();
                 object.find('div.translated_by').hide();
               } else {
