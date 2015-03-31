@@ -50,19 +50,19 @@ def get_or_create_user_translation(object_id, lang_code, model):
 def translate(request, object_id, model):
     lang_code = request.GET.get('lang_code', django_translation.get_language())
     translation = None
+
+    item = model.get_object(object_id)
     result = {'response': 'error',
               'status': model.global_state.GOOGLE,
-              'source_language': '',
+              'source_language': item.language,
               'lang_code': lang_code,
               'human_aviable': False,
               'itemid': object_id}
 
-    item = model.get_object(object_id)
     if item.language == lang_code:
         result.update(model.get_original(item))
         result.update({
             'response': 'success',
-            'source_language': lang_code,
         })
         return HttpResponse(json.dumps(result), mimetype="application/json")
 
