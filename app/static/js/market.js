@@ -438,7 +438,6 @@ $(function () {
     $itemContainer: null,
     paginationView: null,
     userDefaultLangage: 'en',
-    autoTranslate: true,
 
     types: {
       "Offers": "offer",
@@ -798,7 +797,7 @@ $(function () {
             $('.tag-button:contains(' + txt + ')').css('background-color', '#cccccc');
           });
           var theItem = item;
-          if (that.autoTranslate && item.fields.translate_language_url && (item.fields.language != that.userDefaultLangage)) {
+          if (item.fields.translate_language_url && (item.fields.language != that.userDefaultLangage)) {
             $.ajax({
               url: item.fields.translate_language_url,
               type: 'GET',
@@ -861,13 +860,13 @@ $(function () {
     });
   };
 
-  window.ahr.market.initProfile = function(userId){
+  window.ahr.market.initProfile = function(options){
     filterView = new ProfileFilterView()
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Finished loading posts<div>';
     var marketUrl = ahr.app_urls.getMarketItemsUser;
 
-    if(userId) {
-      marketUrl =  ahr.app_urls.getMarketItemsUser + userId;
+    if(options.userId) {
+      marketUrl =  ahr.app_urls.getMarketItemsUser + options.userId;
     }
 
     new MarketView({
@@ -875,9 +874,8 @@ $(function () {
       filterView: filterView,
       marketUrl: marketUrl,
       noResultsString: noResultsString,
-      userDefaultLangage: options.userDefaultLangage,
-      autoTranslate: false,
-      showSticky: false
+      showSticky: false,
+      userDefaultLangage: options.userDefaultLangage
     });
   }
 });

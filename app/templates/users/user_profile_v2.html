@@ -116,7 +116,7 @@
       {% if not is_self %}
       userId = {{ user_details.id }};
       {% endif %}
-      window.ahr.market.initProfile(userId);
+      window.ahr.market.initProfile({userId: userId, userDefaultLangage: '{{ LANGUAGE_CODE }}'});
       $('.gpopover').popover({
         html: true
       });
