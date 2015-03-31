@@ -1,4 +1,5 @@
 import bleach
+import logging
 import requests
 import urllib
 import json
@@ -7,13 +8,15 @@ from datetime import datetime
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.db import models, transaction
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 
 from app.utils import EnumChoices
 from app.market.models.market import MarketItem
 from app.market.models.comment import Comment
+
+_logger = logging.getLogger('movements-alerts')
 
 
 def translate_text(original_text, language):
@@ -39,25 +42,24 @@ def translate_text(original_text, language):
                     if source_language == language:
                         translation = original_text
     except Exception as ex:
-        pass
-
+        _logger.exception(ex)
     return success, translation, source_language
 
 
 def detect_language(text):
-    language = ""
+    language = "en"
     try:
-        url = [
-        settings.GOOGLE_DETECT_API_URL, "key=", settings.GOOGLE_TRANSLATE_API_KEY,
-        "&", "q=", strip_tags(text)
-        ]
-        r = requests.get(''.join(url))
+        key = ("key", settings.GOOGLE_TRANSLATE_API_KEY,)
+        query = ("q", strip_tags(text),)
+        query_string = urllib.urlencode([key, query])
+        url = settings.GOOGLE_DETECT_API_URL + query_string
+        r = requests.get(url)
         if r.status_code == 200:
             data = json.loads(r.content)
             data = data.get("data", {}).get("detections", [])
             language = data[0][0].get("language", "")
-    except Exception as e:
-        print(e)
+    except Exception as ex:
+        _logger.exception(ex)
     return language
 
 
