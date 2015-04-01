@@ -2,9 +2,9 @@ from django.conf.urls import patterns, url, include
 from app.market.models import Comment, MarketItem, MarketItemTranslation, CommentTranslation
 
 
-market_user_patterns = patterns('',
+market_user_patterns = patterns(
+    '',
 
-    # Secured entry points
     url(r'(?P<rtype>\S+)/avatar/get/(?P<obj_id>\d+)/(?P<size>\d+)$',
         'app.market.api.views.users.get_avatar',
         name="get_avatar"),
@@ -27,7 +27,9 @@ market_user_patterns = patterns('',
 )
 
 
-market_item_patterns = patterns('',
+market_item_patterns = patterns(
+    '',
+
     url(r'^items/get/$',
         'app.market.api.views.market.get_market_items',
         name="get_market_items"),
@@ -74,7 +76,9 @@ market_item_patterns = patterns('',
 )
 
 
-market_comment_patterns = patterns('',
+market_comment_patterns = patterns(
+    '',
+
     url(r'(?P<rtype>\S+)/comment/add/(?P<obj_id>\d+)$',
         'app.market.api.views.comments.add_comment',
         name="add_comment"),
@@ -92,30 +96,24 @@ market_comment_patterns = patterns('',
         name="delete_comment"),
 )
 
-report_patterns = patterns('',
-    url(r'report/(?P<obj_id>\d+)',
-        'app.market.api.views.report.report_marketitem',
-        name="report_post"),
-
-    url(r'(?P<rtype>\S+)/report/user/(?P<username>\S+)$',
-        'app.market.api.views.report.report_user',
+report_patterns = patterns(
+    '',
+    url(r'report/(?P<obj_id>\d+)', 'app.market.api.views.report.report_marketitem', name="report_post"),
+    url(r'(?P<rtype>\S+)/report/user/(?P<username>\S+)$', 'app.market.api.views.report.report_user',
         name="report_user"),
 )
 
-market_notification_patterns = patterns('',
-    url(r'notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$',
-        'app.market.api.views.market.get_notifications_fromto',
+market_notification_patterns = patterns(
+    '',
+    url(r'notifications/get/(?P<sfrom>\d+)/(?P<to>\d+)$', 'app.market.api.views.market.get_notifications_fromto',
         name="get_notifications_fromto"),
-
-    url(r'notifications/get/notseen$',
-        'app.market.api.views.market.get_notseen_notifications',
+    url(r'notifications/get/notseen$', 'app.market.api.views.market.get_notseen_notifications',
         name="get_notseen_notif"),
 )
 
-market_heartbeat_patters = patterns('',
-    url(r'heartbeat/get/counts$',
-        'app.market.api.views.heartbeat.get_counts',
-        name="heartbeat"),
+market_heartbeat_patters = patterns(
+    '',
+    url(r'heartbeat/get/counts$', 'app.market.api.views.heartbeat.get_counts', name="heartbeat"),
 )
 
 post_translation_patterns = patterns(
@@ -146,10 +144,16 @@ comment_translation_patterns = patterns(
     url(r'^(?P<object_id>\d+)/$', 'translate', {'model': CommentTranslation}, name="translate"),
 )
 
+translator_patterns = patterns(
+    'app.market.api.views.translation',
+    url(r'^claimed-translations$', 'claimed_translations', name='claimed_translations'),
+    url(r'^available-translations$', 'available_translations',  name='available_translations')
+)
+
 market_translation_patterns = patterns(
-    '',
     url(r'^item/translation/', include(post_translation_patterns, namespace='market')),
     url(r'^comment/translation/', include(comment_translation_patterns, namespace='comment')),
+    url(r'^translator/', include(translator_patterns, namespace='translator')),
 )
 
 urlpatterns = patterns(

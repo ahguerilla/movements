@@ -243,3 +243,16 @@ def revoke(request, object_id, model):
         translation.clear_state()
         result.update({'response': 'success'})
     return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@require_http_methods(['GET'])
+@login_required
+def claimed_translations(request):
+    return HttpResponse(json.dumps({'translations': []}), mimetype="application/json")
+
+
+@require_http_methods(['GET'])
+@login_required
+def available_translations(request):
+    return HttpResponse(json.dumps({'translations': []}), mimetype="application/json")
+

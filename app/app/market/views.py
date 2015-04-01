@@ -174,5 +174,8 @@ def permanent_delete_postman(request):
 def translations(request):
     if not request.user.userprofile.is_translator:
         return redirect(reverse('home'))
-    return render_to_response('market/translations.html', {},
-                              context_instance=RequestContext(request))
+    translation_languages = list(request.user.userprofile.translation_languages.all())
+    ctx = {
+        'translation_languages': json.dumps([{'code': l.language_code, 'name': l.name} for l in translation_languages]),
+    }
+    return render_to_response('market/translations.html', ctx, context_instance=RequestContext(request))

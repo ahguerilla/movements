@@ -5,5 +5,51 @@
 
 {% block content %}
   <div id="translations">
-    <h2>{% trans 'Translations Needed' %}</h2></div>
+    <div class="in-progress">
+      <h3>{% trans 'Your Translations in Progress' %}</h3>
+      <div class="list">
+        <div class="ajaxloader">
+          <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
+        </div>
+      </div>
+    </div>
+    <div class="needed">
+        <h3>{% trans 'Translations Needed' %}</h3>
+        <div class="list">
+          <div class="ajaxloader">
+            <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
+          </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block endjavascript %}
+  <script type="text/template" id="user-translations-template">
+    <% if (translations.length == 0) { %>
+        <em>{% trans 'You are not currently working on any translations.' %}</em>
+    <% } %>
+    <% _.each(translations, function(translation) { %>
+        TRANSLATION
+    <% }); %>
+  </script>
+  <script type="text/template" id="available-translations-template">
+    <% if (translations.length == 0) { %>
+    <em>{% trans 'There is nothing that currently needs translating.' %}</em>
+    <% } %>
+    <% _.each(translations, function(translation) { %>
+    TRANSLATION
+    <% }); %>
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      new ahr.translations.TranslationsView({
+        el: '#translations',
+        translationLanguages: {{ translation_languages|safe }},
+        is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }},
+        getUserTranslationsUrl: '{% url 'translation:translator:claimed_translations' %}',
+        getAvailableTranslationsUrl: '{% url 'translation:translator:available_translations' %}'
+      });
+    });
+  </script>
 {% endblock %}
