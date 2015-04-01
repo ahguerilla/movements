@@ -138,6 +138,7 @@ class TranslationBase(models.Model):
                 'status': self.c_status,
                 'details_translated': self.details_candidate,
                 'save_draft_url': self.save_draft_url(),
+                'put_back_to_edit_url': self.put_back_to_edit_url(),
                 'take_off': self.take_off_url(),
                 'done_url': self.done_url()}
 
@@ -176,6 +177,14 @@ class TranslationBase(models.Model):
         self.reminder = False
         self.save()
 
+    def set_to_edit(self):
+        if not self.is_done():
+            self.status = self.global_state.TRANSLATION
+            self.c_status = self.inner_state.TRANSLATION
+        else:
+            self.c_status = self.inner_state.CORRECTION
+        self.save()
+
     def has_perm(self, user, target_lang):
         if user.userprofile.is_cm:
             return True
@@ -190,6 +199,9 @@ class TranslationBase(models.Model):
 
     def save_draft_url(self):
         return self.make_url('save_draft')
+
+    def put_back_to_edit_url(self):
+        return self.make_url('put_back_to_edit')
 
     def take_off_url(self):
         return self.make_url('take_off')

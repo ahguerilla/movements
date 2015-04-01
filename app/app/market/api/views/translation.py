@@ -113,6 +113,10 @@ def take_in(request, object_id, model):
                 'error': ugettext('Another user is currently translating this item'),
                 'other_user_editing': True
             })
+    result.update({
+        'user_is_owner': request.user.id == translation.owner_candidate.id,
+    })
+
     if result['response'] == 'success':
         result.update(translation.get_init_data(request.user))
         if request.user.userprofile.is_cm:
@@ -135,6 +139,9 @@ def save_draft(request, object_id, model):
             c_status__in=[model.inner_state.TRANSLATION, model.inner_state.CORRECTION],
             owner_candidate=request.user,
             **model.get_params(object_id, lang_code))
+        if not translation.has_perm(request.user, lang_code):
+            result.update({'error': ugettext('You do not currently have permissions to translate this item')})
+            return HttpResponse(json.dumps(result), mimetype="application/json")
         translation.save_draft(request.POST)
         result.update({'response': 'success',
                        'message': ugettext('Draft saved successfully.')})
@@ -177,6 +184,27 @@ def done(request, object_id, model):
         result.update({'response': 'success'})
         if request.user.userprofile.is_cm:
             result.update(translation.cm_urls_dict())
+    except model.DoesNotExist:
+        result.update({'error': ugettext('This post is not currently locked for translation.')})
+    return HttpResponse(json.dumps(result), mimetype="application/json")
+
+
+@require_http_methods(['POST'])
+@login_required
+def put_back_to_edit(request, object_id, model):
+    lang_code = request.POST['lang_code']
+    result = {'response': 'error'}
+    try:
+        translation = model.objects.get(
+            c_status__in=[model.inner_state.APPROVAL, model.inner_state.CORRECTION, model.inner_state.TRANSLATION],
+            owner_candidate=request.user,
+            **model.get_params(object_id, lang_code))
+        if not translation.has_perm(request.user, lang_code):
+            result.update({'error': ugettext('You do not currently have permissions to translate this item')})
+            return HttpResponse(json.dumps(result), mimetype="application/json")
+        translation.set_to_edit()
+        result.update(translation.get_init_data(request.user))
+        result.update({'response': 'success'})
     except model.DoesNotExist:
         result.update({'error': ugettext('This post is not currently locked for translation.')})
     return HttpResponse(json.dumps(result), mimetype="application/json")

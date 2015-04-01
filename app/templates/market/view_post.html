@@ -245,16 +245,16 @@
     <form>
       <input type="hidden" name="lang_code" value="<%- lang_code %>"/>
       <% if (status == 3) { %>
-        {% trans 'Waiting for approval. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
-        <pre id="approve-details"><%= display_text %></pre>
+        {% trans 'Waiting for approval. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
+        <pre id="approve-details"><%- display_text %></pre>
       <% } else if (status == 2 && !active) { %>
-        {% trans 'In correction now. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
+        {% trans 'In correction now. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
       <% } else if (status == 1 && !active) { %>
-        {% trans 'In translation now. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
+        {% trans 'In translation now. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
       <% } %>
 
       <% if (active) { %>
-        <textarea class="form-control" name="details_translated"><%= details_translated %></textarea>
+        <textarea class="form-control" name="details_translated"><%- details_translated %></textarea>
       <% } %>
 
       <% if (status != 3) { %>
@@ -310,18 +310,19 @@
     <form>
       <input type="hidden" name="lang_code" value="<%- lang_code %>"/>
       <% if (status == 3) { %>
-        {% trans 'Waiting for approval. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
+        {% trans 'Waiting for approval. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
+        <% if (user_is_owner) { %> <a href="#" class="back-to-edit">edit</a> <% } %>
         <pre id="approve-title"><%= display_title %></pre>
         <pre id="approve-details"><%= display_text %></pre>
       <% } else if (status == 2 && !active) { %>
-        {% trans 'In correction now. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
+        {% trans 'In correction now. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
       <% } else if (status == 1 && !active) { %>
-        {% trans 'In translation now. Translator - ' %}<a href="<%= owner_url %>"><%= owner %></a>
+        {% trans 'In translation now. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
       <% } %>
 
       <% if (active) { %>
-      <input class="form-control" name="title_translated" type="text" value="<%= title_translated %>">
-      <textarea class="form-control" name="details_translated"><%= details_translated %></textarea>
+      <input class="form-control" name="title_translated" type="text" value="<%- title_translated %>">
+      <textarea class="form-control" name="details_translated"><%- details_translated %></textarea>
       <% } %>
 
       <% if (status != 3) { %>

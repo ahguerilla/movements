@@ -283,6 +283,8 @@
       approval_url: null,
       revoke_url: null,
       correction_url: null,
+      put_back_to_edit_url: null,
+      save_draft_url: null,
       details_translated: '',
       title_translated: '',
       prev_title: null,
@@ -292,6 +294,7 @@
       other_user_editing: false,
       error: '',
       message: '',
+      user_is_owner: false,
       id: null
     }
   });
@@ -307,6 +310,7 @@
         "click #post-translation-container button#save_draft": "saveDraft",
         "click #post-translation-container button#done": "completeTranslation",
         "click #post-translation-container button#take_off": "cancelTranslation",
+        "click #post-translation-container a.back-to-edit": "backToEdit",
         "click #post-translation-container button#confirm": "Confirm",
         "click #post-translation-container button#revoke": "Revoke",
         "click #post-translation-container button#edit": "Edit",
@@ -327,7 +331,7 @@
     },
 
     clearMessages: function() {
-      //this.data.set({'error': null, 'message': null});
+      this.data.set({'error': null, 'message': null});
     },
 
     render: function() {
@@ -446,6 +450,24 @@
               details_translated: this.$form.find('textarea[name="details_translated"]').val()
             });
           }
+          this.render();
+        }
+      });
+    },
+
+    backToEdit: function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: this.data.get('put_back_to_edit_url'),
+        context: this,
+        data: {
+          lang_code: this.lang_code
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function (data) {
+          this.clearMessages();
+          this.data.set(data);
           this.render();
         }
       });
