@@ -26,7 +26,9 @@
       {% if is_logged_in %}
       <div class="post">
         <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
-        <div class="translated_by" style="display: none;"><a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> | {% trans 'via'%} <a class="user" data-translate_url=""></a></span></div>
+        <div class="translated_by" style="display: none;">
+            <a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> |
+            {% trans 'via'%} <a class="user" data-translate_url=""></a></span></div>
         <pre id="post-body-translated" style="display: none;"></pre>
       </div>
       <div class="post-translate">
@@ -246,7 +248,8 @@
       <input type="hidden" name="lang_code" value="<%- lang_code %>"/>
       <% if (status == 3) { %>
         {% trans 'Waiting for approval. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
-        <pre id="approve-details"><%- display_text %></pre>
+        <% if (user_is_owner) { %> <a href="#" class="back-to-edit">edit</a> <% } %>
+        <pre id="approve-details"><%= display_text %></pre>
       <% } else if (status == 2 && !active) { %>
         {% trans 'In correction now. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
       <% } else if (status == 1 && !active) { %>
@@ -289,7 +292,7 @@
       <% } %>
 
      <% if (message) { %>
-        <div class="alert alert-success">
+        <div class="alert alert-success" style="margin-top: 15px;">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button><%- message %>

@@ -416,11 +416,10 @@
     },
 
     saveDraft: function() {
-      var data = this.$form.serialize();
       $.ajax({
         url: this.data.get('save_draft_url'),
         context: this,
-        data: data,
+        data: this.$form.serialize(),
         type: 'POST',
         dataType: 'json',
         success: function (data) {
@@ -432,11 +431,10 @@
     },
 
     completeTranslation: function() {
-      var data = this.$form.serialize();
       $.ajax({
         url: this.data.get('done_url'),
         context: this,
-        data: data,
+        data: this.$form.serialize(),
         type: 'POST',
         dataType: 'json',
         success: function (data) {
@@ -473,7 +471,7 @@
       });
     },
 
-    cancelTranslation: function(event) {
+    cancelTranslation: function() {
       $.ajax({
         context: this,
         url: this.data.get('take_off'),
@@ -482,7 +480,7 @@
           lang_code: this.lang_code
         },
         dataType: 'json',
-        success: function (data) {
+        success: function () {
           this.clearMessages();
           this.data.set({
             active: false,
@@ -567,8 +565,10 @@
     events: {
         "click a.comment-pre-init": "preInit",
         "click div.comment div.language-selector li": "TakeIn",
+        "click div.comment  button#save_draft": "saveDraft",
         "click div.comment button#done": "completeTranslation",
         "click div.comment button#take_off": "cancelTranslation",
+        "click div.comment  a.back-to-edit": "backToEdit",
         "click div.comment button#confirm": "Confirm",
         "click div.comment button#revoke": "Revoke",
         "click div.comment button#edit": "Edit",
@@ -588,6 +588,7 @@
         this.commentDataCache[this.comment_id] = data;
       }
       this.data = data;
+      this.data.set({'error': null, 'message': null});
     },
 
     initialize: function (options) {
@@ -598,9 +599,9 @@
       this.commentDataCache = {};
     },
 
-    render: function (comment_id) {
-      this.comment = $('div.comment[comment_id="' + comment_id + '"]');
-      this.comment_id = comment_id;
+    render: function () {
+      this.comment = $('div.comment[comment_id="' + this.comment_id + '"]');
+      this.comment_id = this.comment_id;
       if (this.data.get('status') == 3) {
         var diff = JsDiff.diffChars(this.data.get('prev_text'), this.data.get('details_translated'));
         var display_text = '';
@@ -658,7 +659,7 @@
         dataType: 'json',
         success: function (data) {
           self.data.set(data);
-          self.render(self.comment_id);
+          self.render();
         }
       });
 
@@ -679,6 +680,21 @@
           .hide();
     },
 
+    saveDraft: function (ev) {
+      this.getComment(ev);
+      $.ajax({
+        url: this.data.get('save_draft_url'),
+        context: this,
+        data: this.$form.serialize(),
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+          this.data.set(data);
+          this.render();
+        }
+      });
+    },
+
     completeTranslation: function(ev){
       this.getComment(ev);
       var self = this;
@@ -696,7 +712,25 @@
               details_translated: self.$form.find('textarea[name="details_translated"]').val()
             });
           }
-          self.render(self.comment_id);
+          self.render();
+        }
+      });
+    },
+
+    backToEdit: function (ev) {
+      this.getComment(ev);
+      ev.preventDefault();
+      $.ajax({
+        url: this.data.get('put_back_to_edit_url'),
+        context: this,
+        data: {
+          lang_code: this.data.get('lang_code')
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function (data) {
+          this.data.set(data);
+          this.render();
         }
       });
     },
@@ -717,7 +751,7 @@
             status: 0,
             take_in_url: data.take_in_url
           });
-          self.render(self.comment_id);
+          self.render();
         }
       });
     },
@@ -755,7 +789,7 @@
       } else if (!active) {
         this.data.set({active: !active});
       }
-      this.render(this.comment_id);
+      this.render();
     },
 
     Revoke: function(ev){
