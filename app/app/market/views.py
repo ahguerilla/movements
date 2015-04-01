@@ -81,10 +81,7 @@ def show_post(request, post_id):
         if created:
             MarketItemSalesforceRecord.mark_for_update(post_id)
         language_list = request.user.userprofile.languages.all()
-        if request.user.userprofile.is_cm:
-            translation_languages = list(language_list)
-        else:
-            translation_languages = list(request.user.userprofile.translation_languages.all())
+        translation_languages = list(request.user.userprofile.translation_languages.all())
     if len(translation_languages) > 1:
         for l in translation_languages:
             if l.language_code == post.language:
@@ -139,6 +136,7 @@ def request_posted(request):
     return render_to_response('market/request_posted.html', {},
                               context_instance=RequestContext(request))
 
+
 @login_required
 def edit_offer(request, post_id):
     market_item = get_object_or_404(MarketItem, pk=post_id)
@@ -166,6 +164,15 @@ def notifications(request):
     return render_to_response('market/notifications.html', {},
                               context_instance=RequestContext(request))
 
+
 @login_required
 def permanent_delete_postman(request):
     return redirect(reverse('postman_trash'))
+
+
+@login_required
+def translations(request):
+    if not request.user.userprofile.is_translator:
+        return redirect(reverse('home'))
+    return render_to_response('market/translations.html', {},
+                              context_instance=RequestContext(request))

@@ -552,6 +552,9 @@ body {
 #content-menu-container .nav-menu-item-wrap.settings:hover .nav-menu-item {
   background: url("../images/v2/profile-settings-icon.png ") center 0 no-repeat;
 }
+#content-menu-container .translations .nav-menu-item {
+  background: url("../images/v2/translate-icon.png") center 5px no-repeat;
+}
 #content-menu-container .logout .nav-menu-item {
   height: 24px;
   margin-top: 5px;
@@ -2116,6 +2119,10 @@ input.borderless-control:focus:invalid:focus {
 .settings-bar .nav-icon.settings.selected .nav-menu-item,
 .settings-bar .nav-icon.settings:hover .nav-menu-item {
   background: url("../images/v2/profile-settings-icon.png") center -30px no-repeat;
+}
+.settings-bar .translations .nav-menu-item {
+  height: 30px;
+  background: url("../images/v2/profile-settings-icon.png") center 0 no-repeat;
 }
 .setting-page {
   margin-top: 20px;

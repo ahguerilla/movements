@@ -222,7 +222,10 @@ class UserProfile(models.Model):
 
     @property
     def is_translator(self):
-        return self.translation_languages.exists()
+        if hasattr(self, '_is_translator'):
+            return self._is_translator
+        self._is_translator = self.is_cm or self.translation_languages.exists()
+        return self._is_translator
 
 
 class OrganisationalRating(models.Model):

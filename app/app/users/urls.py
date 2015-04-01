@@ -9,7 +9,6 @@ urlpatterns = patterns("",
     url(r'^waitforactivation$', views.waitforactivation, name="waitforactivation"),
     url(r'^thanksforactivation$', views.thanksforactivation, name="thanksforactivation"),
     url(r"^confirm_email/(?P<key>\w+)/$", views.confirm_email, name="users_confirm_email"),
-
 )
 
 
