@@ -27,7 +27,7 @@ def translate_text(original_text, language):
         api_key = settings.GOOGLE_TRANSLATE_API_KEY
         base_url = settings.GOOGLE_TRANSLATE_BASE
         key = ("key", api_key,)
-        query = ("q", strip_tags(original_text),)
+        query = ("q", unicode(strip_tags(original_text)).encode('utf-8'),)
         target = ("target", language)
         query_string = base_url + urllib.urlencode([key, query, target])
         r = requests.get(query_string)
@@ -50,7 +50,7 @@ def detect_language(text):
     language = "en"
     try:
         key = ("key", settings.GOOGLE_TRANSLATE_API_KEY,)
-        query = ("q", strip_tags(text),)
+        query = ("q", unicode(strip_tags(text)).encode('utf-8'),)
         query_string = urllib.urlencode([key, query])
         url = settings.GOOGLE_DETECT_API_URL + query_string
         r = requests.get(url)
