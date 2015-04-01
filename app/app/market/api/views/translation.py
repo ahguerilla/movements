@@ -66,18 +66,22 @@ def translate(request, object_id, model):
         })
         return HttpResponse(json.dumps(result), mimetype="application/json")
 
-    if request.GET.get('human', 'true') != 'false':
-        try:
-            translation = model.objects.get(
-                status__gt=model.global_state.PENDING,
-                **model.get_params(object_id, lang_code))
-            result.update({'status': translation.status, 'human_aviable': True})
-        except model.DoesNotExist:
-            pass
-    elif model.objects.filter(status=model.global_state.DONE, **model.get_params(object_id, lang_code)).exists():
-        result.update({'human_aviable': True})
+    try:
+        human_translation = model.objects.get(status=model.global_state.DONE, **model.get_params(object_id, lang_code))
+    except model.DoesNotExist:
+        human_translation = None
 
-    if result.get('status') < model.global_state.DONE:
+    if human_translation:
+        result.update({
+            'human_aviable': True,
+            'human_translator': human_translation.owner.username,
+        })
+
+    if request.GET.get('human', 'true') != 'false' and human_translation is not None:
+        result.update({'status': human_translation.status})
+        translation = human_translation
+
+    if translation is None:
         translation = get_or_create_translation(object_id, lang_code, model)
 
     if translation:

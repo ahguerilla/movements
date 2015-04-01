@@ -28,7 +28,8 @@
         <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
         <div class="translated_by" style="display: none;">
             <a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> |
-            {% trans 'via'%} <a class="user" data-translate_url=""></a></span></div>
+            {% trans 'via'%} <a class="user" data-translate_url=""></a></span>
+         </div>
         <pre id="post-body-translated" style="display: none;"></pre>
       </div>
       <div class="post-translate">
@@ -91,12 +92,7 @@
               </a>
               <div id="post-languages-menu-container"></div>
             </div>
-  {% comment %}
-          <a
-              class="translate" alt="translate post">{% trans 'Translate this post' %}</a>
-              <div id="translation-menu-container"></div>
-  {% endcomment %}
-              </li>
+          </li>
           {% endif %}
         </ul>
       </div>
@@ -160,25 +156,6 @@
     </div>
   </script>
 
-{% comment %}
-  <script type="text/template" id="translator-menu-template">
-    <div class="language-selector">
-      {% if language_list.count > 0 %}
-      <ul>
-        {% for l in language_list %}
-          {% if l.launguage_code != post.language %}
-            <li data-init-url="{% url 'translation:market_init' post.id l.launguage_code %}">{{ l.name }}</li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-      {% else %}
-        {% url 'user_settings' as settingsUrl %}
-        <p class="content-page">{% blocktrans %}You don't have any languages selected. Please add some in your <a href="{{ settingsUrl }}#skills">settings</a>{% endblocktrans %}</p>
-      {% endif %}
-    </div>
-  </script>
-{% endcomment %}
-
   <script type="text/template" id="init-languages-menu-template">
     <div class="language-selector">
     <ul>
@@ -190,27 +167,19 @@
     </div>
   </script>
 
-{% comment %}
-  <script type="text/template" id="comment-list-template">
-    <% _.each(comments, function(comment) { %>
-      <div comment_id="<%- comment.pk %>" class="comment">
-        <div class="avatar"><img src="<%- comment.fields.avatar %>"></div>
-        <div class="comment-header">
-          <a href="<%- comment.fields.profile_url %>" alt="poster profile"><%- comment.fields.username %></a>
-          <%- comment.fields.pub_date_formatted %>
-        </div>
-        <div class="comment-body">
-          <pre><%- comment.fields.contents %></pre>
-          <% if (comment.fields.username == document.getElementById('currentusername').innerHTML) { %>
-          <div id="CommentButtons">
-            <a class="delete-comment" href="<%- comment.fields.delete_url %>">{% trans "Delete"%}</a>
-          </div>
-          <% } %>
-        </div>
-      </div>
-    <% }); %>
+  <script type="text/template" id="translated-by-template">
+    <% if (humanTranslation) { %>
+        <a data-human="false" data-translate_url="<%- translateUrl %>" href="#">{% trans 'via Google Translate' %}</a>
+        <% if (humanAvailable) { %>
+          | <strong>{% trans 'via'%} <%- username %></strong>
+        <% } %>
+   <% } else { %>
+        <strong>{% trans 'via Google Translate' %}</strong>
+        <% if (humanAvailable) { %>
+          | <a data-human="true" data-translate_url="<%- translateUrl %>" href="#">{% trans 'via'%} <%- username %></a>
+        <% } %>
+   <% } %>
   </script>
-{% endcomment %}
 
   <script type="text/template" id="comment-template">
     <div class="comment"

@@ -17,6 +17,7 @@
       this.$commentTemplate = _.template($('#comment-template').html());
       this.$commentText = this.$el.find('.comments form textarea');
       this.$submitButton = this.$el.find('.comments form button');
+      this.translatedByTemplate = _.template($('#translated-by-template').html());
       this.loadComments();
 
       this.report_widget = new window.ahr.ReportPostView();
@@ -26,7 +27,7 @@
       var translate_url = $(".view-post").data('default_translate_url');
       this.currentLanguage = this.options.userDefaultLangage;
       if (translate_url && (this.options.postLanguage != this.options.userDefaultLangage)) {
-        this.translate(translate_url);
+        this.translate(translate_url, true);
       }
     },
 
@@ -54,7 +55,7 @@
       var self = this;
       $('.translate span').on('shown.bs.popover', function() {
         $('#translate-menu-container .language-selector ul li').click(function () {
-          self.translate($(this).data("translate_url"));
+          self.translate($(this).data("translate_url"), true);
           _.each($('.comment'), function (comment) {
             var commentTranslateUrl = $(comment).data('translate-language-url') + '?lang_code=' + self.currentLanguage;
             self.translateComment(commentTranslateUrl, $(comment));
@@ -64,13 +65,23 @@
       });
     },
 
-    translate: function(translate_url) {
+    translate: function(translate_url, human) {
       var self = this;
       var post = $(".post");
       var trans_lang = translate_url.split('lang_code=')[1];
       this.currentLanguage = trans_lang;
+
+      var actualUrl = translate_url;
+      if (!human) {
+        if (translate_url.indexOf('?') > 0) {
+          actualUrl = translate_url + '&human=false';
+        } else {
+          actualUrl = translate_url + '?human=false';
+        }
+      }
+
       $.ajax({
-        url: translate_url,
+        url: actualUrl,
         type: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -81,20 +92,14 @@
               post.find('div.translated_by').hide();
             } else {
               post.find('#post-body-translated').text(data.details_translated).show();
-              if (data.status == 4) {
-                post.find('div.translated_by a.user').html(data.username).attr('data-translate_url', translate_url);
-                var googleUrl;
-                if (translate_url.indexOf('?') > 0) {
-                  googleUrl = translate_url + '&human=false';
-                } else {
-                  googleUrl = translate_url + '?human=false';
-                }
-                post.find('div.translated_by a.google').attr('data-translate_url', googleUrl);
-                post.find('div.translated_by span').show();
-              } else if (!data.human_aviable) {
-                post.find('div.translated_by span').hide();
-                post.find('div.translated_by a.user').attr('data-translate_url', '');
-              }
+              post.find('div.translated_by')
+                  .html(self.translatedByTemplate({
+                    humanTranslation: data.status == 4,
+                    humanAvailable: data.human_aviable,
+                    translateUrl: translate_url,
+                    username: data.human_translator
+                  }))
+                  .show();
               post.find('div.translated_by').show();
             }
             self.linkifyContent();
@@ -110,10 +115,8 @@
 
     changePostTranslation: function(ev) {
       ev.preventDefault();
-      var url = $(ev.currentTarget).data('translate_url');
-      if (url) {
-        this.translate(url);
-      }
+      var $currentTarget = $(ev.currentTarget);
+      this.translate($currentTarget.data('translate_url'), $currentTarget.data('human'));
     },
 
     changeCommentTranslation: function(ev) {
