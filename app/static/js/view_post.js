@@ -58,7 +58,7 @@
           self.translate($(this).data("translate_url"), true);
           _.each($('.comment'), function (comment) {
             var commentTranslateUrl = $(comment).data('translate-language-url') + '?lang_code=' + self.currentLanguage;
-            self.translateComment(commentTranslateUrl, $(comment));
+            self.translateComment(commentTranslateUrl, $(comment), true);
           });
           $('.translate span').popover('toggle');
         });
@@ -123,14 +123,23 @@
       ev.preventDefault();
       var comment = $(ev.currentTarget).parents('div.comment');
       var translateUrl = comment.data('translate-language-url');
-      var human = $(ev.currentTarget).data('translate-human');
-      translateUrl += '?lang_code=' + this.currentLanguage + '&human=' + human;
-      this.translateComment(translateUrl, comment);
+      translateUrl += '?lang_code=' + this.currentLanguage;
+      this.translateComment(translateUrl, comment, $(ev.currentTarget).data('human'));
     },
 
-    translateComment: function(url, object) {
+    translateComment: function(url, object, human) {
+      var self = this;
+      var actualUrl = url;
+      if (!human) {
+        if (url.indexOf('?') > 0) {
+          actualUrl = url + '&human=false';
+        } else {
+          actualUrl = url + '?human=false';
+        }
+      }
+
       $.ajax({
-        url: url,
+        url: actualUrl,
         type: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -140,23 +149,22 @@
                 object.find('div.translated_by').hide();
               } else {
                 object.find('#comment-body-translated').text(data.details_translated).show();
-                if (data.status == 4) {
-                  object.find('div.translated_by a.user').html(data.username).attr('data-translate_url', _url);
-                  object.find('div.translated_by a.google').attr('data-translate_url', _url + '?human=false');
-                  object.find('div.translated_by span').show();
-                } else if (!data.human_aviable) {
-                  object.find('div.translated_by span').hide();
-                  object.find('div.translated_by a.user').attr('data-translate_url', '');
-                }
-                object.find('div.translated_by').show();
+                object.find('div.translated_by')
+                      .html(self.translatedByTemplate({
+                        humanTranslation: data.status == 4,
+                        humanAvailable: data.human_aviable,
+                        translateUrl: url,
+                        username: data.human_translator
+                      }))
+                      .show();
               }
             } else {
-              object.find('#comment-body-translated').text('').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+              object.find('#comment-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
               object.find('div.translated_by').hide();
             }
           },
         error: function (){
-          object.find('#comment-body-translated').text('').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
+          object.find('#comment-body-translated').html('<p><span style="color:red">Unable to provide translations at this time</span></p>');
           object.find('div.translated_by').hide();
         }
       });
@@ -218,7 +226,7 @@
 
         var comment = $('.comment[comment_id="' + item.pk + '"]');
         if (item.fields.translate_language_url && (item.fields.source_lang != self.currentLanguage)) {
-          self.translateComment(item.fields.translate_language_url, comment);
+          self.translateComment(item.fields.translate_language_url, comment, true);
         }
       });
       this.$commentsLoading.hide();
