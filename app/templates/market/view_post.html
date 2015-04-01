@@ -110,11 +110,11 @@
         </div>
         <form>
           <div class="alert alert-danger">
-            <h4>{% trans "Please do not post any personally identifying information." %}</h4>
-            <p>{% trans "Don't use your real name or email address when leaving a comment." %}</p>
+            <h4>{% trans "Be cautious about posting personally identifying information." %}</h4>
+            <p>{% trans "Please be cautious before using your real name or including any personally identifying information when creating post or leaving a comment." %}</p>
           </div>
           <textarea class="form-control" name="comment"></textarea>
-          <button class="btn btn-action" type="submit">{% trans "Post comment"%}</button>
+          <button class="btn btn-action" type="submit" onClick="ga('send', 'event', 'button', 'click', 'post-comment');">{% trans "Post comment"%}</button>
         </form>
 
         <div class="comment-list">
