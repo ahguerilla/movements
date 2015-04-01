@@ -20,11 +20,11 @@ class Command(BaseCommand):
                 item.save()
             except Exception as ex:
                 _logger.exception(ex)
-        # for comment in Comment.objects.all():
-        #     try:
-        #         comment.language = detect_language(comment.contents)
-        #         comment.save()
-        #     except Exception as ex:
-        #         _logger.exception(ex)
+        for comment in Comment.objects.all():
+            try:
+                comment.language = detect_language(comment.contents)
+                comment.save()
+            except Exception as ex:
+                _logger.exception(ex)
 
 
