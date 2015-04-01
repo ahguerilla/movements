@@ -97,7 +97,7 @@
             <p>{% trans "Don't use your real name or email address when leaving a comment." %}</p>
           </div>
           <textarea class="form-control" name="comment"></textarea>
-          <button class="btn btn-action" type="submit">{% trans "Post comment"%}</button>
+          <button class="btn btn-action" type="submit" onClick="ga('send', 'event', 'button', 'click', 'post-comment');">{% trans "Post comment"%}</button>
         </form>
 
         <div class="comment-list">
