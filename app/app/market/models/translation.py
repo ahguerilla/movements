@@ -8,7 +8,7 @@ from datetime import datetime
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 
@@ -17,6 +17,36 @@ from app.market.models.market import MarketItem
 from app.market.models.comment import Comment
 
 _logger = logging.getLogger('movements-alerts')
+
+
+def get_or_create_translation(object_id, lang_code, model):
+    q = model.objects.filter(status=model.global_state.GOOGLE, **model.get_params(object_id, lang_code))
+    translation = q.first()
+    if translation is not None:
+        return translation
+    with transaction.atomic():
+        model.get_object_manager().select_for_update().get(pk=object_id)
+        translation = q.first()
+        if translation is not None:
+            return translation
+        return model.create_translation(object_id, lang_code)
+
+
+def get_or_create_user_translation(object_id, lang_code, model):
+    q = model.objects.filter(status__gte=model.global_state.PENDING, **model.get_params(object_id, lang_code))
+    translation = q.first()
+    if translation is not None:
+        return translation
+    google_translation = get_or_create_translation(object_id, lang_code, model)
+    with transaction.atomic():
+        model.get_object_manager().select_for_update().get(pk=object_id)
+        translation = q.first()
+        if translation:
+            return translation
+        google_translation.pk = None
+        google_translation.status = model.global_state.PENDING
+        google_translation.save()
+        return google_translation
 
 
 def translate_text(original_text, language):
