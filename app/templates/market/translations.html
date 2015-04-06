@@ -5,8 +5,18 @@
 
 {% block content %}
   <div id="translations">
-    <div class="in-progress">
-      <h3>{% trans 'Your Translations in Progress' %}</h3>
+    {% if request.user.userprofile.is_cm %}
+    <div class="for-approval section">
+      <h4>{% trans 'Translations for approval' %}</h4>
+      <div class="list">
+        <div class="ajaxloader">
+          <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="in-progress section">
+      <h4>{% trans 'Your translations in progress' %}</h4>
       <div class="list">
         <div class="ajaxloader">
           <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
@@ -14,7 +24,7 @@
       </div>
     </div>
     <div class="needed">
-        <h3>{% trans 'Translations Needed' %}</h3>
+        <h4>{% trans 'Translations needed' %}</h4>
         <div class="list">
           <div class="ajaxloader">
             <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
@@ -62,6 +72,15 @@
     </div>
     <% if (ix < (translations.length - 1)) print('<hr/>'); }); %>
   </script>
+  <script type="text/template" id="translations-for-approval-template">
+    <% if (translations.length == 0) { %>
+    <em>{% trans 'There are no translations waiting approval.' %}</em>
+    <% } %>
+    <% _.each(translations, function(translation, ix) { %>
+    <div>APPROVAL</div>
+    <% if (ix < (translations.length - 1)) print('<hr/>'); }); %>
+    <div></div>
+  </script>
   <script type="text/javascript">
     $(document).ready(function () {
       new ahr.translations.TranslationsView({
@@ -69,7 +88,8 @@
         translationLanguages: {{ translation_languages|safe }},
         is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }},
         getUserTranslationsUrl: '{% url 'translation:translator:claimed_translations' %}',
-        getAvailableTranslationsUrl: '{% url 'translation:translator:available_translations' %}'
+        getAvailableTranslationsUrl: '{% url 'translation:translator:available_translations' %}',
+        getTranslationsForApprovalUrl: '{% url 'translation:translator:translations_for_approval' %}'
       });
     });
   </script>

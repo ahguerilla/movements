@@ -1,4 +1,5 @@
 import bleach
+import itertools
 import logging
 import requests
 import urllib
@@ -9,6 +10,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.db import models, transaction
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 
@@ -17,6 +19,16 @@ from app.market.models.market import MarketItem
 from app.market.models.comment import Comment
 
 _logger = logging.getLogger('movements-alerts')
+
+
+def get_language_pairing_filter(languages):
+    pairings = []
+    for permutation in itertools.permutations(languages, 2):
+        pairings.append(Q(source_language=permutation[0].language_code) & Q(language=permutation[1].language_code))
+    language_filter = pairings[0]
+    for ix in xrange(1, len(pairings)):
+        language_filter = language_filter | pairings[ix]
+    return language_filter
 
 
 def get_or_create_translation(object_id, lang_code, model):

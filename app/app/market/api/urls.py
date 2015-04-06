@@ -147,7 +147,8 @@ comment_translation_patterns = patterns(
 translator_patterns = patterns(
     'app.market.api.views.translation',
     url(r'^claimed-translations$', 'claimed_translations', name='claimed_translations'),
-    url(r'^available-translations$', 'available_translations',  name='available_translations')
+    url(r'^available-translations$', 'available_translations',  name='available_translations'),
+    url(r'^translations-for-approval', 'translations_for_approval', name='translations_for_approval'),
 )
 
 market_translation_patterns = patterns(

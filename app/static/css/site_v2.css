@@ -2414,6 +2414,11 @@ input.borderless-control:focus:invalid:focus {
 #cboxOverlay {
   background: #000;
 }
+#translations .section {
+  margin-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dad8d9;
+}
 #translations .translation strong {
   font-size: 14px;
 }

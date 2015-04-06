@@ -5,6 +5,9 @@
       this.options = options;
       this.getUserTranslations();
       this.getAvailableTranslations();
+      if (options.is_cm) {
+        this.getTranslationsForApproval();
+      }
     },
 
     getUserTranslations: function() {
@@ -33,6 +36,20 @@
     renderAvailableTranslations: function(data) {
       var tpl = _.template($('#available-translations-template').html());
       this.$el.find('.needed .list').html(tpl(data));
+    },
+
+    getTranslationsForApproval: function () {
+      $.ajax({
+        context: this,
+        dataType: 'json',
+        url: this.options.getTranslationsForApprovalUrl,
+        success: this.renderTranslationsForApproval
+      });
+    },
+
+    renderTranslationsForApproval: function (data) {
+      var tpl = _.template($('#translations-for-approval-template').html());
+      this.$el.find('.for-approval .list').html(tpl(data));
     }
   });
 

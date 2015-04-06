@@ -1,17 +1,17 @@
 import json
 from datetime import datetime
-import itertools
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.http import HttpResponse
 from django.utils import translation as django_translation
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_http_methods
 
 from app.market.models import TranslationBase, MarketItemTranslation
-from app.market.models.translation import get_or_create_translation, get_or_create_user_translation
+from app.market.models.translation import (
+    get_or_create_translation, get_or_create_user_translation, get_language_pairing_filter
+)
 from app.celerytasks import (
     takein_notification, approved_notification, approve_notification,
     revoke_notification, takeoff_notification
@@ -254,6 +254,8 @@ def _market_translation_for_json(item):
         'type': 'post',
         'from_code': item.source_language,
         'to_code': item.language,
+        'c_status': item.c_status,
+        'status': item.status,
         'title_candidate': item.title_candidate,
         'item_url': reverse('show_post', args=[item.market_item.id]),
     }
@@ -281,17 +283,26 @@ def available_translations(request):
     if not request.user.userprofile.is_translator:
         raise ValueError
     languages = request.user.userprofile.translation_languages.all()
-    pairings = []
-    for permutation in itertools.permutations(languages, 2):
-        pairings.append(Q(source_language=permutation[0].language_code) & Q(language=permutation[1].language_code))
-    language_filter = pairings[0]
-    for ix in xrange(1, len(pairings)):
-        language_filter = language_filter | pairings[ix]
     market_item_translations = MarketItemTranslation \
         .objects \
         .select_related('market_item') \
-        .filter(language_filter,
+        .filter(get_language_pairing_filter(languages),
                 c_status=TranslationBase.inner_state.NONE,
                 status=TranslationBase.global_state.PENDING)
+    translations = [_market_translation_for_json(t) for t in market_item_translations]
+    return HttpResponse(json.dumps({'translations': translations}), mimetype="application/json")
+
+
+@require_http_methods(['GET'])
+@login_required
+def translations_for_approval(request):
+    if not request.user.userprofile.is_cm:
+        raise ValueError
+    languages = request.user.userprofile.translation_languages.all()
+    market_item_translations = MarketItemTranslation \
+        .objects \
+        .select_related('market_item') \
+        .filter(get_language_pairing_filter(languages),
+                c_status=TranslationBase.inner_state.APPROVAL)
     translations = [_market_translation_for_json(t) for t in market_item_translations]
     return HttpResponse(json.dumps({'translations': translations}), mimetype="application/json")
