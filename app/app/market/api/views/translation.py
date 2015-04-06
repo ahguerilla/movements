@@ -4,10 +4,11 @@ import itertools
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.views.decorators.http import require_http_methods
+from django.db.models import Q
 from django.http import HttpResponse
 from django.utils import translation as django_translation
 from django.utils.translation import ugettext
+from django.views.decorators.http import require_http_methods
 
 from app.market.models import TranslationBase, MarketItemTranslation
 from app.market.models.translation import get_or_create_translation, get_or_create_user_translation
@@ -279,14 +280,18 @@ def claimed_translations(request):
 def available_translations(request):
     if not request.user.userprofile.is_translator:
         raise ValueError
+    languages = request.user.userprofile.translation_languages.all()
+    pairings = []
+    for permutation in itertools.permutations(languages, 2):
+        pairings.append(Q(source_language=permutation[0].language_code) & Q(language=permutation[1].language_code))
+    language_filter = pairings[0]
+    for ix in xrange(1, len(pairings)):
+        language_filter = language_filter | pairings[ix]
     market_item_translations = MarketItemTranslation \
         .objects \
         .select_related('market_item') \
-        .filter(c_status=TranslationBase.inner_state.NONE,
+        .filter(language_filter,
+                c_status=TranslationBase.inner_state.NONE,
                 status=TranslationBase.global_state.PENDING)
-    languages = request.user.userprofile.translation_languages.all()
-    for permutation in itertools.permutations(languages, 2):
-        market_item_translations = market_item_translations.filter(source_language=permutation[0],
-                                                                   language=permutation[1])
     translations = [_market_translation_for_json(t) for t in market_item_translations]
     return HttpResponse(json.dumps({'translations': translations}), mimetype="application/json")
