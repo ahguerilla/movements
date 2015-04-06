@@ -29,9 +29,23 @@
     <% if (translations.length == 0) { %>
         <em>{% trans 'You are not currently working on any translations.' %}</em>
     <% } %>
-    <% _.each(translations, function(translation) { %>
-        TRANSLATION
-    <% }); %>
+    <% _.each(translations, function(translation, ix) { %>
+       <div class="translation">
+         <% if (translation.type == 'post') %>
+         <div><a href="<%- translation.item_url %>" alt="Go to translation item" target="_blank">
+             {% trans 'Translating post from ' %}
+             <%- translation.from_code %>
+             {% trans ' to ' %}
+             <%- translation.to_code %>
+           {% trans ' - go to item' %}
+           </a></div>
+         <div><strong>{% trans 'Original' %}</strong></div>
+         <pre><%= translation.title %></pre>
+         <div><strong>{% trans 'Candidate translation' %}</strong></div>
+         <pre><%= translation.title_candidate %></pre>
+       </div>
+    <% if (ix < (translations.length - 1)) print('<hr/>');
+       }); %>
   </script>
   <script type="text/template" id="available-translations-template">
     <% if (translations.length == 0) { %>

@@ -2,12 +2,13 @@ import json
 from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 from django.utils import translation as django_translation
 from django.utils.translation import ugettext
 
-from app.market.models import TranslationBase
+from app.market.models import TranslationBase, MarketItemTranslation
 from app.market.models.translation import get_or_create_translation, get_or_create_user_translation
 from app.celerytasks import (
     takein_notification, approved_notification, approve_notification,
@@ -248,11 +249,27 @@ def revoke(request, object_id, model):
 @require_http_methods(['GET'])
 @login_required
 def claimed_translations(request):
-    return HttpResponse(json.dumps({'translations': []}), mimetype="application/json")
+    market_item_translations = MarketItemTranslation \
+        .objects \
+        .select_related('market_item') \
+        .filter(owner_candidate=request.user,
+                c_status__in=[TranslationBase.inner_state.TRANSLATION,
+                                 TranslationBase.inner_state.APPROVAL,
+                                 TranslationBase.inner_state.CORRECTION])
+    translations = [
+        {
+            'title': t.market_item.title,
+            'type': 'post',
+            'from_code': t.source_language,
+            'to_code': t.language,
+            'title_candidate': t.title_candidate,
+            'item_url': reverse('show_post', args=[t.market_item.id]),
+        } for t in market_item_translations
+    ]
+    return HttpResponse(json.dumps({'translations': translations}), mimetype="application/json")
 
 
 @require_http_methods(['GET'])
 @login_required
 def available_translations(request):
     return HttpResponse(json.dumps({'translations': []}), mimetype="application/json")
-

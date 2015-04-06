@@ -151,6 +151,7 @@ translator_patterns = patterns(
 )
 
 market_translation_patterns = patterns(
+    '',
     url(r'^item/translation/', include(post_translation_patterns, namespace='market')),
     url(r'^comment/translation/', include(comment_translation_patterns, namespace='comment')),
     url(r'^translator/', include(translator_patterns, namespace='translator')),
