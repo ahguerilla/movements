@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import itertools
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -246,30 +247,46 @@ def revoke(request, object_id, model):
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
 
+def _market_translation_for_json(item):
+    return {
+        'title': item.market_item.title,
+        'type': 'post',
+        'from_code': item.source_language,
+        'to_code': item.language,
+        'title_candidate': item.title_candidate,
+        'item_url': reverse('show_post', args=[item.market_item.id]),
+    }
+
+
 @require_http_methods(['GET'])
 @login_required
 def claimed_translations(request):
+    if not request.user.userprofile.is_translator:
+        raise ValueError
     market_item_translations = MarketItemTranslation \
         .objects \
         .select_related('market_item') \
         .filter(owner_candidate=request.user,
                 c_status__in=[TranslationBase.inner_state.TRANSLATION,
-                                 TranslationBase.inner_state.APPROVAL,
-                                 TranslationBase.inner_state.CORRECTION])
-    translations = [
-        {
-            'title': t.market_item.title,
-            'type': 'post',
-            'from_code': t.source_language,
-            'to_code': t.language,
-            'title_candidate': t.title_candidate,
-            'item_url': reverse('show_post', args=[t.market_item.id]),
-        } for t in market_item_translations
-    ]
+                              TranslationBase.inner_state.APPROVAL,
+                              TranslationBase.inner_state.CORRECTION])
+    translations = [_market_translation_for_json(t) for t in market_item_translations]
     return HttpResponse(json.dumps({'translations': translations}), mimetype="application/json")
 
 
 @require_http_methods(['GET'])
 @login_required
 def available_translations(request):
-    return HttpResponse(json.dumps({'translations': []}), mimetype="application/json")
+    if not request.user.userprofile.is_translator:
+        raise ValueError
+    market_item_translations = MarketItemTranslation \
+        .objects \
+        .select_related('market_item') \
+        .filter(c_status=TranslationBase.inner_state.NONE,
+                status=TranslationBase.global_state.PENDING)
+    languages = request.user.userprofile.translation_languages.all()
+    for permutation in itertools.permutations(languages, 2):
+        market_item_translations = market_item_translations.filter(source_language=permutation[0],
+                                                                   language=permutation[1])
+    translations = [_market_translation_for_json(t) for t in market_item_translations]
+    return HttpResponse(json.dumps({'translations': translations}), mimetype="application/json")
