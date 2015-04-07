@@ -40,7 +40,7 @@ class Notification(models.Model):
     def get_dict(self):
         adict = {
             'seen': self.seen,
-            'text': self.text,
+            'text': self.text or {},
             'pub_date': str(self.pub_date)[0:16],
             'user': self.avatar_user,
             'profile_link': reverse('user_profile_for_user', args=[self.avatar_user]),

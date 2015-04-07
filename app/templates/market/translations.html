@@ -78,6 +78,11 @@
     <% } %>
     <% _.each(translations, function(translation, ix) { %>
     <div class="translation" data-code="<%- translation.to_code %>">
+      <div><strong>{% trans 'Translator' %}</strong>
+        <a href="<%- translation.owner_candidate_profile %>" alt="translator profile" target="_blank">
+          <%- translation.owner_candidate_username %>
+        </a>
+      </div>
       <div><strong>{% trans 'Original title' %}</strong>
         <a href="<%- translation.item_url %>" alt="Go to translation item" target="_blank">
           <em><%- translation.title %></em>

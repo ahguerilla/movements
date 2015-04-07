@@ -23,6 +23,14 @@
               {% trans "There are " %}{{ notification.text.total }}{% trans " translations that need your approval." %}
             {% endif %}
           </a>
+        {% elif notification.translation == notification.STATUSES.APPROVED %}
+          {% trans 'Your translation for' %}
+          <a href="{{ base_url }}/market/{{ notification.item.id }}" style="display:inline-block;">"{{ notification.item.title }}"</a>
+          {% trans 'has been approved' %} ({{ notification.text.source }} - {{ notification.text.dest }})
+        {% elif notification.translation == notification.STATUSES.REVOKED %}
+          {% trans 'Your translation for' %}
+          <a href="{{ base_url }}/market/{{ notification.item.id }}" style="display:inline-block;">"{{ notification.item.title }}"</a>
+          {% trans 'has been rejected' %} ({{ notification.text.source }} - {{ notification.text.dest }})
         {% endif %}
       {% elif notification.comment %}
           {% trans "On"%} {{ notification.pub_date }} {{ notification.comment.owner.username}} {% trans "commented on a post titled"%}

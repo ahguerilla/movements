@@ -14,11 +14,9 @@ from app.market.models.translation import (
     get_approvable_items_for_profile
 )
 from app.celerytasks import (
-    takein_notification, approved_notification, approve_notification,
-    revoke_notification, takeoff_notification
+    translation_started_notification, translation_approved_notification, translation_submitted_notification,
+    translation_rejected_notification, translation_cancelled_notification
 )
-
-
 
 
 @login_required
@@ -76,7 +74,7 @@ def take_in(request, object_id, model):
         return HttpResponse(json.dumps(result), mimetype="application/json")
     if translation.c_status == translation.inner_state.NONE:
         translation.take_in(request.user)
-        takein_notification.delay(translation, translation.is_done())
+        translation_started_notification.delay(translation)
         result.update({'response': 'success'})
     elif translation.c_status == translation.inner_state.APPROVAL and request.user.userprofile.is_cm:
         result.update({'response': 'success'})
@@ -140,7 +138,7 @@ def take_off(request, object_id, model):
             c_status__in=[model.inner_state.TRANSLATION, model.inner_state.CORRECTION],
             owner_candidate=request.user,
             **model.get_params(object_id, lang_code))
-        takeoff_notification.delay(translation)
+        translation_cancelled_notification.delay(translation)
         translation.clear_state()
         result.update({'response': 'success'})
     except model.DoesNotExist:
@@ -159,7 +157,7 @@ def done(request, object_id, model):
             owner_candidate=request.user,
             **model.get_params(object_id, lang_code))
         translation.set_done(request.POST)
-        approve_notification.delay(translation)
+        translation_submitted_notification.delay(translation)
         result.update({'response': 'success'})
         if request.user.userprofile.is_cm:
             result.update(translation.cm_urls_dict())
@@ -212,8 +210,8 @@ def approve(request, object_id, model):
     result, translation = _approve_correct_revoke(request, object_id, lang_code, model, params)
     if translation:
         translation.approve(request.POST)
-        approved_notification.delay(translation)
         translation.clear_state()
+        translation_approved_notification.delay(translation, request.user)
         result.update({'response': 'success'})
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
@@ -229,7 +227,7 @@ def corrections(request, object_id, model):
         translation.c_status = translation.inner_state.CORRECTION
         translation.timer = datetime.utcnow()
         translation.save()
-        takein_notification.delay(translation, True)
+        translation_started_notification.delay(translation)
         result.update({'response': 'success'})
 
     return HttpResponse(json.dumps(result), mimetype="application/json")
@@ -243,8 +241,9 @@ def revoke(request, object_id, model):
               'c_status__gt': TranslationBase.inner_state.NONE}
     result, translation = _approve_correct_revoke(request, object_id, lang_code, model, params)
     if translation:
-        revoke_notification.delay(translation)
+        candidate = translation.owner_candidate
         translation.clear_state()
+        translation_rejected_notification.delay(translation, candidate, request.user)
         result.update({'response': 'success'})
     return HttpResponse(json.dumps(result), mimetype="application/json")
 
@@ -260,10 +259,15 @@ def _market_translation_for_json(item):
         'title_candidate': item.title_candidate,
         'item_url': reverse('show_post', args=[item.market_item.id]),
     }
+    if item.owner_candidate is not None:
+        t.update({
+            'owner_candidate_username': item.owner_candidate.username,
+            'owner_candidate_profile': reverse('user_profile_for_user', args=[item.owner_candidate.username]),
+        })
     if item.c_status == TranslationBase.inner_state.APPROVAL:
         t.update({
             'approve_url': item.approval_url(),
-            'reject_url': item.approval_url(),
+            'reject_url': item.revoke_url(),
             'title_translated': item.title_translated,
             'details_translated': item.details_translated,
             'details_candidate': item.details_candidate,

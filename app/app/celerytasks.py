@@ -4,30 +4,21 @@ import json
 
 
 from celery import Celery
-from django.db.models import Q, Count
+from django.db.models import Q
 from django.conf import settings
-from django.utils.timezone import timedelta
 
 
 from app.models import NotificationPing
 from app.sforce import add_market_item_to_salesforce, update_market_item_stats
-from app.users.models import UserProfile
-from app.market.tasks.translations import (
-    create_translations_for_item, mark_translations_for_update, aggregate_translation_notification
-)
-from app.market.models import (
-    Notification, MarketItem, Comment,
-    MarketItemTranslation, CommentTranslation,
-    MarketItemSalesforceRecord
-)
+from app.market.models import CommentTranslation, MarketItemSalesforceRecord
 
 
 app = Celery('celerytasks', broker=settings.CELERY_BROKER)
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
-from celery.task import periodic_task
 from djcelery_email.tasks import send_email
+from app.market.tasks.translations import *
 
 
 def get_notification_text(obj, update=False):
@@ -153,33 +144,3 @@ def notification_ping(email_to):
 @app.task(name='update_salesforce')
 def update_salesforce():
     update_market_item_stats()
-
-
-@app.task(name="TakeinNotification")
-def takein_notification(obj, correction=False):
-    pass
-
-
-@app.task(name="ApprovedNotification")
-def approved_notification(obj):
-    pass
-
-
-@app.task(name="ApproveNotification")
-def approve_notification(obj):
-    pass
-
-
-@app.task(name="TakeoffNotification")
-def takeoff_notification(translation):
-    pass
-
-
-@app.task(name="RevokeNotification")
-def revoke_notification(translation):
-    pass
-
-
-@periodic_task(run_every=timedelta(days=1))
-def generate_translation_notification():
-    aggregate_translation_notification()
