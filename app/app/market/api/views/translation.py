@@ -249,7 +249,7 @@ def revoke(request, object_id, model):
 
 
 def _market_translation_for_json(item):
-    return {
+    t = {
         'title': item.market_item.title,
         'type': 'post',
         'from_code': item.source_language,
@@ -259,6 +259,12 @@ def _market_translation_for_json(item):
         'title_candidate': item.title_candidate,
         'item_url': reverse('show_post', args=[item.market_item.id]),
     }
+    if item.c_status == TranslationBase.inner_state.APPROVAL:
+        t.update({
+            'approve_url': item.approval_url(),
+            'reject_url': item.approval_url(),
+        })
+    return t
 
 
 @require_http_methods(['GET'])

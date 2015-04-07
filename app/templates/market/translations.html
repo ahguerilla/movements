@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="needed">
+    <div class="needed section">
         <h4>{% trans 'Translations needed' %}</h4>
         <div class="list">
           <div class="ajaxloader">
@@ -77,9 +77,19 @@
     <em>{% trans 'There are no translations waiting approval.' %}</em>
     <% } %>
     <% _.each(translations, function(translation, ix) { %>
-    <div>APPROVAL</div>
+    <div class="translation" data-code="<%- translation.to_code %>">
+      <div><strong>{% trans 'Original title' %}</strong>
+        <a href="<%- translation.item_url %>" alt="Go to translation item" target="_blank">
+          <em><%- translation.title %></em>
+        </a>
+      </div>
+      <pre id="approve-title"><%= translation.display_title %></pre>
+      <div><strong>{% trans 'Original body' %}</strong> <em><%- translation.details %></em></div>
+      <pre id="approve-details"><%= translation.display_text %></pre>
+      <button type="button" class="btn btn-success accept-translation" data-url="<%- translation.approve_url %>">{% trans 'Approve' %}</button>
+      <button type="button" class="btn btn-danger reject-translation" data-url="<%- translation.reject_url %>">{% trans 'Discard' %}</button>
+    </div>
     <% if (ix < (translations.length - 1)) print('<hr/>'); }); %>
-    <div></div>
   </script>
   <script type="text/javascript">
     $(document).ready(function () {
