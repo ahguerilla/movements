@@ -55,6 +55,22 @@
 
     renderTranslationsForApproval: function (data) {
       var tpl = _.template($('#translations-for-approval-template').html());
+      _.each(data.translations, function(translation) {
+        var diff = JsDiff.diffChars(translation.details_translated, translation.details_candidate);
+        var display_text = '';
+        var fnTag = function (part) {
+          var color = part.added ? 'green' :
+              part.removed ? 'red' : 'grey';
+          display_text += '<span style="color:' + color + ';">' + _.escape(part.value) + '</span>'
+        };
+        diff.forEach(fnTag);
+        translation.display_text = display_text;
+
+        diff = JsDiff.diffChars(translation.title_translated, translation.title_candidate);
+        display_text = '';
+        diff.forEach(fnTag);
+        translation.display_title = display_text;
+      });
       this.$el.find('.for-approval .list').html(tpl(data));
     },
 

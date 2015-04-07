@@ -83,8 +83,10 @@
           <em><%- translation.title %></em>
         </a>
       </div>
-      <pre id="approve-title"><%= translation.display_title %></pre>
-      <div><strong>{% trans 'Original body' %}</strong> <em><%- translation.details %></em></div>
+      <div><strong>{% trans 'Translated title' %}</strong> <%= translation.display_title %></div>
+      <div><strong>{% trans 'Original body' %}</strong>
+        <pre><%- translation.details_original %></pre></div>
+      <div><strong>{% trans 'Translated body' %}</strong>
       <pre id="approve-details"><%= translation.display_text %></pre>
       <button type="button" class="btn btn-success accept-translation" data-url="<%- translation.approve_url %>">{% trans 'Approve' %}</button>
       <button type="button" class="btn btn-danger reject-translation" data-url="<%- translation.reject_url %>">{% trans 'Discard' %}</button>

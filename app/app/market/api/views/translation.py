@@ -263,6 +263,10 @@ def _market_translation_for_json(item):
         t.update({
             'approve_url': item.approval_url(),
             'reject_url': item.approval_url(),
+            'title_translated': item.title_translated,
+            'details_translated': item.details_translated,
+            'details_candidate': item.details_candidate,
+            'details_original': item.market_item.details,
         })
     return t
 

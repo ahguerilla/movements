@@ -619,7 +619,7 @@
         diff.forEach(function (part) {
           var color = part.added ? 'green' :
               part.removed ? 'red' : 'grey';
-          display_text += '<span style="color:' + color + ';">' + part.value + '</span>'
+          display_text += '<span style="color:' + color + ';">' + _.escape(part.value) + '</span>'
         });
         this.data.set('display_text', display_text);
       }
@@ -837,7 +837,6 @@
       });
     }
   });
-
 
   global.ahr.initViewPost = function (options) {
     new PostView({
