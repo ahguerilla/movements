@@ -127,9 +127,6 @@ def save_market_item(form, owner):
             obj.language = language
             obj.save()
     else:
-        obj.marketitemtranslation_set.filter(
-            status__lte=market.models.MarketItemTranslation.global_state.PENDING
-            ).delete()
         on_market_item_update.delay(obj)
     return obj
 

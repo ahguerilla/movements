@@ -21,6 +21,17 @@ from app.market.models.comment import Comment
 _logger = logging.getLogger('movements-alerts')
 
 
+def get_translatable_items_for_profile(profile):
+    languages = profile.translation_languages.all()
+    status_filter = Q(c_status=TranslationBase.inner_state.NONE) & Q(status=TranslationBase.global_state.PENDING)
+    market_item_translations = MarketItemTranslation \
+        .objects \
+        .select_related('market_item') \
+        .filter(get_language_pairing_filter(languages),
+                Q(status_filter) | Q(needs_update=True))
+    return market_item_translations
+
+
 def get_language_pairing_filter(languages):
     pairings = []
     for permutation in itertools.permutations(languages, 2):
@@ -143,7 +154,7 @@ class TranslationBase(models.Model):
     created = models.DateTimeField(_('date generated'), auto_now_add=True)
     edited = models.DateTimeField(_('date edited'), auto_now=True)
     timer = models.DateTimeField(_('date edited'), null=True)
-    reminder = models.BooleanField(_('Reminder status'), default=False)
+    needs_update = models.BooleanField(_('Needs update'), default=False)
 
     def is_active(self, user):
         return user == self.owner_candidate and \
@@ -159,7 +170,6 @@ class TranslationBase(models.Model):
         self.owner_candidate = None
         self.timer = None
         self.details_candidate = ''
-        self.reminder = False
         if save:
             self.save()
 
@@ -216,7 +226,6 @@ class TranslationBase(models.Model):
         else:
             self.c_status = self.inner_state.CORRECTION
         self.details_candidate = self.details_translated
-        self.reminder = False
         self.save()
 
     def set_to_edit(self):

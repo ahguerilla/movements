@@ -1,5 +1,9 @@
-from app.users.models import Language
-from app.market.models.translation import get_or_create_user_translation
+from django.db.models import Count
+from app.users.models import Language, UserProfile
+from app.market.models.notification import Notification
+from app.market.models.translation import (
+    get_or_create_user_translation, MarketItemTranslation, get_translatable_items_for_profile
+)
 
 
 def create_translations_for_item(item, model):
@@ -9,6 +13,23 @@ def create_translations_for_item(item, model):
             get_or_create_user_translation(item.id, code, model)
 
 
-def mark_translations_for_update(item, model):
-    pass
+def mark_translations_for_update(item):
+    MarketItemTranslation.objects.filter(status=MarketItemTranslation.global_state.GOOGLE,
+                                         market_item=item).delete()
+    MarketItemTranslation.objects.filter(market_item=item).update(needs_update=True)
 
+
+def aggregate_translation_notification():
+    """
+    We get everyone who has more than one translation language and then generate a notification with the number of
+    translations items that exist that we need their help with.
+    """
+    for up in UserProfile.objects.annotate(ttl_count=Count('translation_languages')).filter(ttl_count__gte=2):
+        Notification.objects \
+                    .filter(translation=Notification.STATUSES.TRANSLATION_COUNT) \
+                    .update(seen=True, emailed=True)
+        notification = Notification(user=up.user,
+                                    avatar_user=up.user.username,
+                                    translation=Notification.STATUSES.TRANSLATION_COUNT,
+                                    text={'total': get_translatable_items_for_profile(up).count()})
+        notification.save()

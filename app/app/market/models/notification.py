@@ -16,13 +16,13 @@ class Notification(models.Model):
         REVOKED=(4, _('Translation revoked')),
         APPROVAL=(5, _('Waiting for approval')),
         APPROVED=(6, _('Approved')),
+        TRANSLATION_COUNT=(7, _('Translation item count notification')),
     )
 
     translation = models.PositiveSmallIntegerField(
         _('Translation status'), max_length=1, default=None, choices=STATUSES, null=True)
+    translation_count = models.IntegerField(default=None, null=True, blank=True)
 
-    timeto = models.DateTimeField(_('The time to completion'), null=True)
-    reminder = models.BooleanField(_('Reminder'), default=False)
     user = models.ForeignKey(User)
     item = models.ForeignKey(MarketItem, null=True, blank=True)
     comment = models.ForeignKey(Comment, null=True, blank=True)
@@ -43,6 +43,7 @@ class Notification(models.Model):
             'pub_date': str(self.pub_date)[0:16],
             'user': self.avatar_user,
             'profile_link': reverse('user_profile_for_user', args=[self.avatar_user]),
+            'translation': 0,
             'avatar': reverse('avatar_render_primary',
                               args=[
                                   self.avatar_user if self.avatar_user is not None else self.item.owner.username,
@@ -52,8 +53,6 @@ class Notification(models.Model):
             adict.update({
                 'translation': self.translation,
                 'get_translation_display': self.get_translation_display(),
-                'timeto': self.timeto.strftime('%H:%M on %d %b %Y') if self.timeto else False,
-                'reminder': self.reminder,
             })
         if self.item:
             adict.update({
