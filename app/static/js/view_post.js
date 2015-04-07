@@ -354,7 +354,7 @@
         diff.forEach(function(part){
           var color = part.added ? 'green' :
             part.removed ? 'red' : 'grey';
-          display_title += '<span style="color:' + color + ';">' + part.value + '</span>'
+          display_title += '<span style="color:' + color + ';">' + _.escape(part.value) + '</span>';
         });
         self.data.set('display_title', display_title);
 
@@ -364,7 +364,7 @@
         diff.forEach(function(part){
           var color = part.added ? 'green' :
             part.removed ? 'red' : 'grey';
-          display_text += '<span style="color:' + color + ';">' + part.value + '</span>'
+          display_text += '<span style="color:' + color + ';">' + _.escape(part.value) + '</span>';
         });
         self.data.set('display_text', display_text);
       }
