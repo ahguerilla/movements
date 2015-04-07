@@ -47,18 +47,6 @@ def get_comments(request, obj_id, count, rtype):
 
 
 @login_required
-def edit_comment(request, obj_id, rtype):
-    obj = get_object_or_404(market.models.Comment, pk=obj_id, deleted=False)
-    form = CommentForm(request.POST, instance=obj)
-    if form.is_valid():
-        form.save(request.user, obj)
-    else:
-        return HttpResponse(json.dumps(get_validation_errors(form)), mimetype="application/"+rtype)
-    return HttpResponse(json.dumps({'success': True}),
-                        mimetype="application"+rtype)
-
-
-@login_required
 @require_http_methods(["POST"])
 def delete_comment(request):
     is_success = False
@@ -76,5 +64,4 @@ def delete_comment(request):
             comment.item.save()
             comment.save_base()
 
-    return HttpResponse(json.dumps({'success': is_success}),
-                        mimetype="application/json")
+    return HttpResponse(json.dumps({'success': is_success}), mimetype="application/json")

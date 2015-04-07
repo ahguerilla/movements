@@ -87,10 +87,6 @@ market_comment_patterns = patterns(
         'app.market.api.views.comments.get_comments',
         name="get_comments_last"),
 
-    url(r'(?P<rtype>\S+)/comment/edit/(?P<obj_id>\d+)$',
-        'app.market.api.views.comments.edit_comment',
-        name="edit_comment"),
-
     url(r'comment/delete$',
         'app.market.api.views.comments.delete_comment',
         name="delete_comment"),
