@@ -10,7 +10,7 @@
         {% if notification.translation == notification.STATUSES.TRANSLATION_COUNT %}
           <a href="{{ base_url }}{% url 'show_translations' %}">
             {% trans "There are " %}{{ notification.text.total }}{% trans " item(s) that we need your help translating." %}
-          </a>.
+          </a>
         {% endif %}
       {% elif notification.comment %}
           {% trans "On"%} {{ notification.pub_date }} {{ notification.comment.owner.username}} {% trans "commented on a post titled"%}
