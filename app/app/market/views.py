@@ -125,6 +125,8 @@ def request_posted(request):
 @login_required
 def edit_offer(request, post_id):
     market_item = get_object_or_404(MarketItem, pk=post_id)
+    if market_item.owner != request.user:
+        raise Http404
     form = OfferForm(request.POST or None, instance=market_item)
     if form.is_valid():
         save_market_item(form, request.user)
@@ -136,6 +138,8 @@ def edit_offer(request, post_id):
 @login_required
 def edit_request(request, post_id):
     market_item = get_object_or_404(MarketItem, pk=post_id)
+    if market_item.owner != request.user:
+        raise Http404
     form = RequestForm(request.POST or None, instance=market_item)
     if form.is_valid():
         save_market_item(form, request.user)
