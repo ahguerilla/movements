@@ -21,6 +21,16 @@ from app.market.models.comment import Comment
 _logger = logging.getLogger('movements-alerts')
 
 
+def get_approvable_items_for_profile(profile):
+    languages = profile.translation_languages.all()
+    market_item_translations = MarketItemTranslation \
+        .objects \
+        .select_related('market_item') \
+        .filter(get_language_pairing_filter(languages),
+                c_status=TranslationBase.inner_state.APPROVAL)
+    return market_item_translations
+
+
 def get_translatable_items_for_profile(profile):
     languages = profile.translation_languages.all()
     status_filter = Q(c_status=TranslationBase.inner_state.NONE) & Q(status=TranslationBase.global_state.PENDING)

@@ -10,8 +10,8 @@ from django.views.decorators.http import require_http_methods
 
 from app.market.models import TranslationBase, MarketItemTranslation
 from app.market.models.translation import (
-    get_or_create_translation, get_or_create_user_translation, get_language_pairing_filter,
-    get_translatable_items_for_profile
+    get_or_create_translation, get_or_create_user_translation, get_translatable_items_for_profile,
+    get_approvable_items_for_profile
 )
 from app.celerytasks import (
     takein_notification, approved_notification, approve_notification,
@@ -303,11 +303,6 @@ def available_translations(request):
 def translations_for_approval(request):
     if not request.user.userprofile.is_cm:
         raise ValueError
-    languages = request.user.userprofile.translation_languages.all()
-    market_item_translations = MarketItemTranslation \
-        .objects \
-        .select_related('market_item') \
-        .filter(get_language_pairing_filter(languages),
-                c_status=TranslationBase.inner_state.APPROVAL)
+    market_item_translations = get_approvable_items_for_profile(request.user.userprofile)
     translations = [_market_translation_for_json(t) for t in market_item_translations]
     return HttpResponse(json.dumps({'translations': translations}), mimetype="application/json")

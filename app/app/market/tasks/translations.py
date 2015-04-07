@@ -2,7 +2,8 @@ from django.db.models import Count
 from app.users.models import Language, UserProfile
 from app.market.models.notification import Notification
 from app.market.models.translation import (
-    get_or_create_user_translation, MarketItemTranslation, get_translatable_items_for_profile
+    get_or_create_user_translation, MarketItemTranslation, get_translatable_items_for_profile,
+    get_approvable_items_for_profile
 )
 
 
@@ -26,10 +27,18 @@ def aggregate_translation_notification():
     """
     for up in UserProfile.objects.annotate(ttl_count=Count('translation_languages')).filter(ttl_count__gte=2):
         Notification.objects \
-                    .filter(translation=Notification.STATUSES.TRANSLATION_COUNT) \
+                    .filter(translation__in=[Notification.STATUSES.TRANSLATION_COUNT,
+                                             Notification.STATUSES.APPROVAL_COUNT]) \
                     .update(seen=True, emailed=True)
         notification = Notification(user=up.user,
                                     avatar_user=up.user.username,
                                     translation=Notification.STATUSES.TRANSLATION_COUNT,
                                     text={'total': get_translatable_items_for_profile(up).count()})
         notification.save()
+        if up.is_cm:
+            notification = Notification(user=up.user,
+                                        avatar_user=up.user.username,
+                                        translation=Notification.STATUSES.APPROVAL_COUNT,
+                                        text={'total': get_approvable_items_for_profile(up).count()})
+            notification.save()
+

@@ -9,7 +9,19 @@
       {% if notification.translation %}
         {% if notification.translation == notification.STATUSES.TRANSLATION_COUNT %}
           <a href="{{ base_url }}{% url 'show_translations' %}">
-            {% trans "There are " %}{{ notification.text.total }}{% trans " item(s) that we need your help translating." %}
+            {% if notification.text.total == 1 %}
+              {% trans "There is 1 item that we need your help translating." %}
+            {% else %}
+                {% trans "There are " %}{{ notification.text.total }}{% trans " items that we need your help translating." %}
+            {% endif %}
+          </a>
+        {% elif notification.translation == notification.STATUSES.APPROVAL_COUNT %}
+          <a href="{{ base_url }}{% url 'show_translations' %}">
+            {% if notification.text.total == 1 %}
+              {% trans "There is 1 translation that needs your approval." %}
+            {% else %}
+              {% trans "There are " %}{{ notification.text.total }}{% trans " translations that need your approval." %}
+            {% endif %}
           </a>
         {% endif %}
       {% elif notification.comment %}

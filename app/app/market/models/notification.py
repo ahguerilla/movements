@@ -17,6 +17,7 @@ class Notification(models.Model):
         APPROVAL=(5, _('Waiting for approval')),
         APPROVED=(6, _('Approved')),
         TRANSLATION_COUNT=(7, _('Translation item count notification')),
+        APPROVAL_COUNT=(8, _('Translation approval count notification')),
     )
 
     translation = models.PositiveSmallIntegerField(

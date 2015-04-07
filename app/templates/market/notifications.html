@@ -29,7 +29,19 @@
         <% if (notif.translation) {
             if (notif.translation == 7) { %>
                 <a href="{% url 'show_translations' %}" href="translations dashboard">
-                    {% trans "There are " %}<%- notif.text.total %>{% trans " item(s) that we need your help translating." %}
+                  <% if (notif.text.total == 1) { %>
+                    {% trans "There is 1 item that we need your help translating." %}
+                  <% } else { %>
+                    {% trans "There are " %}<%- notif.text.total %>{% trans " item that we need your help translating." %}
+                  <% } %>
+                </a>
+            <% } else if (notif.translation == 8) { %>
+                <a href="{% url 'show_translations' %}" href="translations dashboard">
+                  <% if (notif.text.total == 1) { %>
+                    {% trans "There is 1 translation that needs your approval." %}
+                  <% } else { %>
+                    {% trans "There are " %}<%- notif.text.total %>{% trans " translations that need your approval." %}
+                  <% } %>
                 </a>
             <% } %>
         <% } else { %>
