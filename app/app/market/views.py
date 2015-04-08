@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
+from app.market.api.utils import HttpResponseForbiden
 
 from app.users.models import Interest, Countries, Issues, Skills, Region
 from forms import RequestForm, OfferForm, save_market_item
@@ -137,29 +138,21 @@ def request_posted(request):
 
 
 @login_required
-def edit_offer(request, post_id):
+def edit_post(request, post_id):
     market_item = get_object_or_404(MarketItem, pk=post_id)
     if market_item.owner != request.user:
-        raise Http404
-    form = OfferForm(request.POST or None, instance=market_item)
+        return HttpResponseForbiden()
+    if market_item.item_type == MarketItem.TYPE_CHOICES.OFFER:
+        form_class = OfferForm
+        tpl = 'market/create_offer.html'
+    else:
+        form_class = RequestForm
+        tpl = 'market/create_request.html'
+    form = form_class(request.POST or None, instance=market_item)
     if form.is_valid():
         save_market_item(form, request.user)
-        return redirect(reverse('home'))
-    return render_to_response('market/create_offer.html', {'form': form},
-                              context_instance=RequestContext(request))
-
-
-@login_required
-def edit_request(request, post_id):
-    market_item = get_object_or_404(MarketItem, pk=post_id)
-    if market_item.owner != request.user:
-        raise Http404
-    form = RequestForm(request.POST or None, instance=market_item)
-    if form.is_valid():
-        save_market_item(form, request.user)
-        return redirect(reverse('home'))
-    return render_to_response('market/create_request.html', {'form': form},
-                              context_instance=RequestContext(request))
+        return redirect(reverse('show_post', args=[post_id]))
+    return render_to_response(tpl, {'form': form}, context_instance=RequestContext(request))
 
 
 @login_required
