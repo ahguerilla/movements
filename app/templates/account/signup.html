@@ -70,28 +70,28 @@
       </div>
       <div class="form-group">
         <div class="col-xs-12">
-          <label for="{{ form.linkedin_url.auto_id }}">{%trans "Linked In"%}</label>
-          {% render_field form.linkedin_url class="form-control input-sm" placeholder="" %}
+          <label for="{{ form.linkedin_url.auto_id }}">{%trans "Linked In Profile Url"%}</label>
+          {% render_field form.linkedin_url class="form-control input-sm" placeholder="https://www.linkedin.com/in/username" %}
           {{ form.linkedin_url.errors }}
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-12">
-          <label for="{{ form.tweet_url.auto_id }}">{%trans "Twitter"%}</label>
-          {% render_field form.tweet_url class="form-control input-sm" placeholder="" %}
+          <label for="{{ form.tweet_url.auto_id }}">{%trans "Twitter Handle"%}</label>
+          {% render_field form.tweet_url class="form-control input-sm" placeholder="@username" %}
           {{ form.tweet_url.errors }}
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-12">
-          <label for="{{ form.fb_url.auto_id }}">{%trans "Facebook"%}</label>
-          {% render_field form.fb_url class="form-control input-sm" placeholder="" %}
+          <label for="{{ form.fb_url.auto_id }}">{%trans "Facebook Profile Url"%}</label>
+          {% render_field form.fb_url class="form-control input-sm" placeholder="https://www.facebook.com/username" %}
           {{ form.fb_url.errors }}
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-12">
-          <label for="{{ form.web_url.auto_id }}">{%trans "Website or Blog"%}</label>
+          <label for="{{ form.web_url.auto_id }}">{%trans "Website or Blog Url"%}</label>
           {% render_field form.web_url class="form-control input-sm" placeholder="" %}
           {{ form.web_url.errors }}
         </div>
