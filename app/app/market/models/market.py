@@ -116,8 +116,7 @@ class MarketItem(models.Model):
         adict['fields']['is_safe'] = False
         adict['fields']['details'] = self.details
         adict['fields']['close_url'] = reverse('close_marketitem', args=[self.id])
-        reverse_name = 'edit_request' if self.item_type == MarketItem.TYPE_CHOICES.REQUEST else 'edit_offer'
-        adict['fields']['edit_url'] = reverse(reverse_name, args=[self.id])
+        adict['fields']['edit_url'] = reverse('edit_post', args=[self.id])
         adict['fields']['report_url'] = reverse('report_post', args=[self.id])
         adict['fields']['attributes_url'] = reverse('set_item_attributes_for_user', args=[self.id])
         adict['fields']['translate_language_url'] = \

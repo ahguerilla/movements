@@ -10,6 +10,13 @@
       <div class="post-header {{ post.item_type|lower }} %>">
         <span>{{ post.item_type_display }}</span>
       </div>
+      {% if request.user == post.owner %}
+        <div class="pull-right">
+          <a href="{% url 'edit_post' post.id %}" alt="edit post" class="btn btn-action" style="padding: 4px 8px 1px; margin-top: 10px;"/>
+            {% trans 'Edit Post' %}
+          </a>
+        </div>
+      {% endif %}
       <div class="post-date">
         {{ post.pub_date|date:"G:i"}} {%  trans 'on' %} {{ post.pub_date|date:"d M Y" }}
       </div>

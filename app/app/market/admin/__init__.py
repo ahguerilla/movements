@@ -1,5 +1,4 @@
 from .comment import *
-from .offer import *
-from .request import *
+from .post import *
 from .report import *
 from .feedback import *
