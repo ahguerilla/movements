@@ -4,6 +4,7 @@ from app.celerytasks import on_market_item_creation, update_notifications, on_ma
 from django.utils.translation import ugettext_lazy as _
 
 import app.market as market
+from app.market.models.translation import detect_language
 from app.users.forms import CheckboxSelectMultiple, RegionAccordionSelectMultiple
 
 
@@ -104,6 +105,9 @@ class CommentForm(forms.ModelForm):
     def save(self, owner, item, commit=True):
         self.instance.owner = owner
         self.instance.item = item
+        lang = detect_language(self.instance.contents)
+        if lang:
+            self.instance.language = lang
         return super(CommentForm, self).save(commit=commit)
 
 
@@ -116,8 +120,13 @@ def save_market_item(form, owner):
     obj = form.save(owner=owner)
     if new_item:
         on_market_item_creation.delay(obj)
+
+        # detect language
+        language = detect_language(obj.details)
+        if language:
+            obj.language = language
+            obj.save()
     else:
-        obj.marketitemtranslation_set.all().delete()
         on_market_item_update.delay(obj)
     return obj
 

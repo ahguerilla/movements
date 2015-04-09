@@ -78,11 +78,14 @@ class NamedObject(models.Model):
 
 class Language(NamedObject):
     launguage_code = models.CharField(_('language code'), max_length=10, blank=True, null=True)
+
+    @property
+    def language_code(self):
+        return self.launguage_code
+
     class Meta:
         verbose_name = _('language')
         verbose_name_plural = _('languages')
-
-    class Meta:
         ordering = ['name']
 
 
@@ -96,8 +99,6 @@ class Interest(NamedObject):
     class Meta:
         verbose_name = _('interest')
         verbose_name_plural = _('interests')
-
-    class Meta:
         ordering = ['name']
 
 
@@ -164,9 +165,16 @@ class UserProfile(models.Model):
     issues = models.ManyToManyField(Issues, blank=True, null=True)
     countries = models.ManyToManyField(Countries, blank=True, null=True)
     languages = models.ManyToManyField(Language, blank=True, null=True)
+    translation_languages = models.ManyToManyField(Language,
+                                                   verbose_name=_('Trusted translation language'),
+                                                   help_text='Marks a user as being trusted to provide translations in a given language. At least two languages should be marked if any.',
+                                                   blank=True,
+                                                   null=True,
+                                                   related_name='translators')
     regions = models.ManyToManyField(Region, blank=True, null=True)
     interests = models.ManyToManyField(Interest, blank=True, null=True)
 
+    is_cm = models.BooleanField(_('community manager'), default=False)
     is_organisation = models.BooleanField(_('organisation'), default=False)
     is_individual = models.BooleanField(_('individual'), default=True)
     is_journalist = models.BooleanField(_('journalist'), default=False)
@@ -212,6 +220,13 @@ class UserProfile(models.Model):
         finish = kwargs.get('finish', None)
         return cls.objects.filter(query).filter(user__is_active=True).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
 
+    @property
+    def is_translator(self):
+        if hasattr(self, '_is_translator'):
+            return self._is_translator
+        self._is_translator = self.is_cm or self.translation_languages.exists()
+        return self._is_translator
+
 
 class OrganisationalRating(models.Model):
     user = models.ForeignKey(auth.models.User, null=False, blank=False)
@@ -226,13 +241,12 @@ class UserRate(models.Model):
     score = models.IntegerField(_('score'),default=0)
 
     def save(self, *args, **kwargs):
-        model = self.__class__
-        rates = UserRate.objects.filter(user=self.user).filter(~Q(owner=self.owner))
-        if self.id == None:
-            self.user.userprofile.ratecount+=1
+        rates = UserRate.objects.filter(user=self.user).exclude(owner=self.owner)
+        if self.id is None:
+            self.user.userprofile.ratecount += 1
         if len(rates) == 0:
             self.user.userprofile.score = int(self.score)
         else:
             self.user.userprofile.score = (int(self.score) + sum([rate.score for rate in rates]))/float(self.user.userprofile.ratecount)
         self.user.userprofile.save_base()
-        super(UserRate,self).save(*args,**kwargs)
+        super(UserRate, self).save(*args, **kwargs)

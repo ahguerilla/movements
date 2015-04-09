@@ -11,6 +11,7 @@ js = Bundle(
         './js/lib/typeahead.js',
         './js/lib/jquery.cookie.js',
         './js/lib/Autolinker.js',
+        './js/lib/diff.js',
         './colorbox/jquery.colorbox-min.js',
         './js/app_common.js',
         './js/base.js',
@@ -20,6 +21,7 @@ js = Bundle(
         './js/user_settings.js',
         './js/create_post.js',
         './js/view_post.js',
+        './js/translations.js',
         './js/region_accordion_select.js',
         './js/lib/jquery.rateit.min.js',
         './js/email_confirmation.js',
@@ -27,23 +29,6 @@ js = Bundle(
     ),
     filters='jsmin',
     output='./js/packed.js'
-)
-
-css = Bundle(
-    Bundle(
-        './css/lib/bootstrap.css',
-        './css/lib/typeahead.css',
-        './css/lib/rateit.css'
-    ),
-    Bundle(
-        './css/site.styl',
-        './css/site-sm.styl',
-        './css/site-xs.styl',
-        filters='stylus',
-        output='./css/site.css'
-    ),
-    filters='cssmin',
-    output='./css/packed.css',
 )
 
 css_v2 = Bundle(
@@ -76,6 +61,5 @@ language_ar = Bundle(
 )
 
 register('js_all', js)
-register('css_all', css)
 register('css_all_v2', css_v2)
 register('css_language_ar', language_ar)

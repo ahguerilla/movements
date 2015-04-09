@@ -4,6 +4,8 @@ import re
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.models import LogEntry
+from django.contrib.contenttypes.models import ContentType
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
@@ -108,7 +110,6 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                         msg.messageext.is_user_recommendation = True
                     msg.messageext.save()
                 except Exception as e:
-                    print "Exception sending to %s: %s %s:" % (recipient, type(e), e)
                     badrecipients.append(recipient + " (unknown user)")
 
     if len(emlrecips) > 0:
@@ -130,7 +131,6 @@ def send_recommendation(request, rec_type, obj_id, rtype):
             email.send()
             _update_email_recommendations(market_item, emlrecips)
         except Exception as e:
-            print "Exception sending to %s: %s %s:" % (recipient, type(e), e)
             badrecipients.extend(emlrecips)
 
     if len(badrecipients) > 0:

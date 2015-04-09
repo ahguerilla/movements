@@ -7,7 +7,9 @@ from django.forms.widgets import (
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text
 from django.utils.html import format_html
-from models import UserProfile, OrganisationalRating, Residence, Countries, Region
+from models import (
+    UserProfile, OrganisationalRating, Residence, Countries, Region
+    )
 from django.utils.translation import ugettext_lazy as _
 import constance
 from django.conf.global_settings import LANGUAGES

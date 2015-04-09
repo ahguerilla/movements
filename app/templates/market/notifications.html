@@ -22,32 +22,64 @@
   <script type="text/template" id="notificationspage_template">
     <div class="clearfix">
       <div class="dates pull-right">
-        <%- moment(notif.pub_date,"YYYY-MM-DD h:mm").fromNow() %>
+        <%- moment(notif.pub_date, "YYYY-MM-DD h:mm").fromNow() %>
       </div>
       <div class="details<% if (!notif.seen) { %> new<% } %>">
-        <a class="user" href="<%- notif.profile_link %>"><%- notif.user %></a>
-        <% if (notif.comment) { %>
-          {% trans "commented on" %} <% if (notif.owner_id == window.ahr.user_id) { %>{% trans "your" %}<% } %>
-          <% if (notif.item_type == "offer") { %>
-            {% trans "offer" %}
-          <% } else { %>
-            {% trans "request" %}
+        {# translation notification #}
+        <% if (notif.translation) {
+            if (notif.translation == 7) { %>
+                <a href="{% url 'show_translations' %}" href="translations dashboard">
+                  <% if (notif.text.total == 1) { %>
+                    {% trans "There is 1 item that we need your help translating." %}
+                  <% } else { %>
+                    {% trans "There are " %}<%- notif.text.total %>{% trans " item that we need your help translating." %}
+                  <% } %>
+                </a>
+            <% } else if (notif.translation == 8) { %>
+                <a href="{% url 'show_translations' %}" href="translations dashboard">
+                  <% if (notif.text.total == 1) { %>
+                    {% trans "There is 1 translation that needs your approval." %}
+                  <% } else { %>
+                    {% trans "There are " %}<%- notif.text.total %>{% trans " translations that need your approval." %}
+                  <% } %>
+                </a>
+            <% } else if (notif.translation == 6) { %>
+                {% trans 'Your translation for' %}
+                <a href="/market/<%- notif.item_id %>" style="display:inline-block;">"<%- notif.item_title %>"</a>
+                {% trans 'has been approved' %} (<%- notif.text.source %> - <%- notif.text.dest %>)
+            <% } else if (notif.translation == 4) { %>
+                {% trans 'Your translation for' %}
+                <a href="/market/<%- notif.item_id %>" style="display:inline-block;">"<%- notif.item_title %>"</a>
+                {% trans 'has been rejected' %} (<%- notif.text.source %> - <%- notif.text.dest %>)
+            <% } %>
+        <% } else { %>
+          {# comment or post notification #}        
+          <a class="user" href="<%- notif.profile_link %>"><%- notif.user %></a>
+          <% if (notif.comment) { %>
+            {# comment #}
+            {% trans "commented on" %} <% if (notif.owner_id == window.ahr.user_id) { %>{% trans "your" %}<% } %>
+            <% if (notif.item_type == "offer") { %>
+              {% trans "offer" %}
+            <% } else { %>
+              {% trans "request" %}
+            <% } %>
+          <a href="/market/<%- notif.item_id %>" style="display:inline-block;">"<%- notif.text.title %>"
+            </a>
+          <% } else if (notif.item_type) { %>
+            {# post #}
+            <% if (notif.text.update) { %>{% trans "updated" %}<% } else { %> {% trans "posted" %} <% } %>
+            {% trans "the" %}
+            <% if (notif.item_type == "offer") { %>
+              {% trans "offer" %}
+            <% } else { %>
+              {% trans "request" %}
+            <% } %>
+            <a href="/market/<%- notif.item_id %>">
+              "<%- notif.text.title %>"
+            </a>
+          <% } else if (notif.text.type == "message") { %>
+              {% trans "sent you a private " %} <a href="{% url 'postman_inbox' %}"> {% trans "message" %} </a>
           <% } %>
-        <a href="/market/<%- notif.item_id %>" style="display:inline-block;">"<%- notif.text.title %>"
-          </a>
-        <% } else if (notif.item_type) { %>
-          <% if (notif.text.update) { %>{% trans "updated" %}<% } else { %> {% trans "posted" %} <% } %>
-          {% trans "the" %}
-          <% if (notif.item_type == "offer") { %>
-            {% trans "offer" %}
-          <% } else { %>
-            {% trans "request" %}
-          <% } %>
-          <a href="/market/<%- notif.item_id %>">
-            "<%- notif.text.title %>"
-          </a>
-        <% } else if (notif.text.type == "message") { %>
-            {% trans "sent you a private " %} <a href="{% url 'postman_inbox' %}"> {% trans "message" %} </a>
         <% } %>
       </div>
     </div>

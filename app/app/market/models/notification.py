@@ -5,9 +5,25 @@ from .comment import Comment
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from json_field import JSONField
+from app.utils import EnumChoices
 
 
 class Notification(models.Model):
+    STATUSES = EnumChoices(
+        PENDING=(1, _('Needs Translation')),
+        TRANSLATION=(2, _('In translation')),
+        CORRECTION=(3, _('In correction')),
+        REVOKED=(4, _('Translation revoked')),
+        APPROVAL=(5, _('Waiting for approval')),
+        APPROVED=(6, _('Approved')),
+        TRANSLATION_COUNT=(7, _('Translation item count notification')),
+        APPROVAL_COUNT=(8, _('Translation approval count notification')),
+    )
+
+    translation = models.PositiveSmallIntegerField(
+        _('Translation status'), max_length=1, default=None, choices=STATUSES, null=True)
+    translation_count = models.IntegerField(default=None, null=True, blank=True)
+
     user = models.ForeignKey(User)
     item = models.ForeignKey(MarketItem, null=True, blank=True)
     comment = models.ForeignKey(Comment, null=True, blank=True)
@@ -24,15 +40,21 @@ class Notification(models.Model):
     def get_dict(self):
         adict = {
             'seen': self.seen,
-            'text': self.text,
+            'text': self.text or {},
             'pub_date': str(self.pub_date)[0:16],
             'user': self.avatar_user,
             'profile_link': reverse('user_profile_for_user', args=[self.avatar_user]),
+            'translation': 0,
             'avatar': reverse('avatar_render_primary',
                               args=[
                                   self.avatar_user if self.avatar_user is not None else self.item.owner.username,
                                   30]),
         }
+        if self.translation is not None:
+            adict.update({
+                'translation': self.translation,
+                'get_translation_display': self.get_translation_display(),
+            })
         if self.item:
             adict.update({
                 'item_title': self.item.title,
@@ -40,12 +62,14 @@ class Notification(models.Model):
                 'item_id': self.item.id,
                 'owner': self.item.owner.username,
                 'owner_id': self.item.owner.id,
+                'language': self.item.language,
             })
         if self.comment:
             adict.update({
                 'comment': self.comment.id,
                 'comment_user': self.comment.owner.username,
-                'comment_user_id': self.comment.owner.id
+                'comment_user_id': self.comment.owner.id,
+                'comment_contents': self.comment.contents,
             })
 
         return adict

@@ -1,13 +1,14 @@
+import json
+
 from collections import defaultdict
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 
-from app.users.models import Interest, Countries, Issues, Region
+from app.users.models import Interest, Countries, Issues, Skills, Region
 from forms import RequestForm, OfferForm, save_market_item
 from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforceRecord
 
@@ -72,11 +73,21 @@ def show_post(request, post_id):
                 for country in post_region_countries:
                     countries_to_render.append(country)
     language_list = []
+    translation_languages = []
+    translator = False
     if request.user.is_authenticated():
         __, created = MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
         if created:
             MarketItemSalesforceRecord.mark_for_update(post_id)
         language_list = request.user.userprofile.languages.all()
+        translation_languages = list(request.user.userprofile.translation_languages.all())
+    if len(translation_languages) > 1:
+        for l in translation_languages:
+            if l.language_code == post.language:
+                translator = True
+                break
+    if not translator:
+        translation_languages = []
 
     post_data = {
         'post': post,
@@ -84,6 +95,8 @@ def show_post(request, post_id):
         'is_logged_in': request.user.is_authenticated(),
         'language_list': language_list,
         'countries_to_render': countries_to_render,
+        'translator': translator,
+        'translation_languages': json.dumps([{'code': l.language_code, 'name': l.name} for l in translation_languages]),
     }
 
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))
@@ -122,6 +135,7 @@ def request_posted(request):
     return render_to_response('market/request_posted.html', {},
                               context_instance=RequestContext(request))
 
+
 @login_required
 def edit_offer(request, post_id):
     market_item = get_object_or_404(MarketItem, pk=post_id)
@@ -153,6 +167,18 @@ def notifications(request):
     return render_to_response('market/notifications.html', {},
                               context_instance=RequestContext(request))
 
+
 @login_required
 def permanent_delete_postman(request):
     return redirect(reverse('postman_trash'))
+
+
+@login_required
+def translations(request):
+    if not request.user.userprofile.is_translator:
+        return redirect(reverse('home'))
+    translation_languages = list(request.user.userprofile.translation_languages.all())
+    ctx = {
+        'translation_languages': json.dumps([{'code': l.language_code, 'name': l.name} for l in translation_languages]),
+    }
+    return render_to_response('market/translations.html', ctx, context_instance=RequestContext(request))

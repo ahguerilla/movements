@@ -104,7 +104,6 @@ def profile(request, user_name=None):
         user = User.objects.get(pk=request.user.id)
     else:
         user = get_object_or_404(User, username=user_name)
-
     # if the user isn't active, return a 404
     if not user.is_active:
         raise Http404
@@ -130,7 +129,8 @@ def profile(request, user_name=None):
                                   'is_self': is_self,
                                   'is_public': is_public,
                                   'visibility_settings': visibility_settings,
-                                  'ahr_rating': orate
+                                  'ahr_rating': orate,
+                                  'is_cm': request.user.userprofile.is_cm,
                               },
                               context_instance=RequestContext(request))
 
@@ -173,7 +173,6 @@ def email_doublesignup_upret(self, ret):
         ret['form'].errors.has_key('email') and
         ret['form'].errors['email'][0] == u'A user is already registered with this e-mail address.'):
         confem = EmailAddress.objects.filter(email=ret['form'].data['email']).all()
-        print confem
 
         if len(ret['form'].errors)==1:
             self.template_name = "account/verification_sent.html"

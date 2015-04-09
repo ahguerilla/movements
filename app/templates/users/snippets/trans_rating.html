@@ -1,0 +1,19 @@
+{% load i18n %}
+<div class="poster-rating"><span class="rateit"
+      data-rateit-readonly="true"
+      data-rateit-value="{{ rating }}"
+      data-rateit-min="0"
+      data-rateit-starwidth="22"
+      data-rateit-starheight="17"
+      data-rateit-max="5"></span>
+  <i class="tpopover glyphicon glyphicon-question-sign"
+     data-toggle="popover"
+     title="{% trans "MOVEMENTS TRANSLATOR RATING" %}"
+     data-content="
+     {% trans '1 Star: Beginner - Has a basic understanding of this language. User can not translate on the Movements.org website.' %}<br>
+     {% trans '2 Stars: Intermediate - Has a good understanding of this language. User can not translate on the Movemetns.org website.' %}<br>
+     {% trans '3 Stars: Advanced -  Can make translations. Is fluent in this language.' %}<br>
+     {% trans '4 Stars: Trusted Translator - Has experience in translation work. Can make translations and corrections.' %}<br>
+     {% trans '5 Stars: Personally known by Movements.org and is a Trusted Translator. Can make translations and corrections.' %}<br>
+     "></i>
+</div>
