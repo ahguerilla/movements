@@ -1369,6 +1369,7 @@ popoverDropdown(width, showIcon = true)
     .popover-content
       popoverDropdown(140px)
 
+
 .view-post
   .post-header
     padding 10px 0
@@ -1825,9 +1826,28 @@ popoverDropdown(width, showIcon = true)
   background #000000
 
 
-///
-///
-///
+// **************************************
+// Dropzone styles
+// **************************************
+.dz-preview-container
+  padding 10px
+  border-radius 5px
+  border solid 1px $border-color
+  .dz-success-mark, .dz-error-mark
+    display none
+  .dz-image-preview
+    display inline-block
+    width 120px
+    float left
+  .dz-filename
+    text-overflow ellipsis
+    white-space nowrap
+    overflow hidden
+
+
+// **************************************
+// Translations styles
+// **************************************
 #translations
   .section
     margin-top 20px

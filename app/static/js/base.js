@@ -195,6 +195,25 @@
     });
   });
 
+  function applyErrorsToForm(form, response, $messageOutput) {
+    var genericMessage = response.detail;
+    if (response.errors) {
+      for (var inputName in response.errors) {
+        var input = form.find('input[name="' + inputName + '"]');
+        var msg = response.errors[inputName].join(' ');
+        $(errorLabel.format("inputName", msg)).insertAfter(input);
+      }
+    }
+    if (genericMessage) {
+      $messageOutput.html(JST.userMessage({
+        message: genericMessage,
+        dismissable: true,
+        level: 'danger'
+      }));
+    }
+  }
+  window.ahr.applyErrorsToForm = applyErrorsToForm;
+
 
   window.ahr.BaseView = Backbone.View.extend({
     events: {},
