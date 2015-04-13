@@ -137,8 +137,9 @@
         </div>
         <a id="add-post" class="btn btn-action" onClick="ga('send', 'event', 'button', 'click', 'add-post');">
           <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
-          <span id="AddPostText"> {%trans "Add Post"%}</span>
+          <span id="AddPostText"> {% trans "Add Post" %}</span>
         </a>
+        {% if config.DONATE_BUTTON_LOGGED_IN %}{{ config.DONATE_BUTTON_LOGGED_IN|safe }}{% endif %}
         <div id="add-post-popup-container"></div>
       </div>
     {% else %}
