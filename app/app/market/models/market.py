@@ -1,15 +1,14 @@
-from django.utils import timezone
-from django.utils.timezone import timedelta
-import app.users.models as user_models
-from django.db import models
-
-from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
-from tinymce import models as tinymodels
-
 import django.contrib.auth as auth
 from django.core.urlresolvers import reverse
+from django.db import models
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
+from json_field import JSONField
+from sorl.thumbnail import ImageField
+from tinymce import models as tinymodels
+
+import app.users.models as user_models
 from app.utils import EnumChoices
 
 
@@ -139,6 +138,13 @@ class MarketItem(models.Model):
             adict['fields']['avatar'] = False
             adict['fields']['hasEdit'] = False
         return adict
+
+
+class MarketItemImage(models.Model):
+    post = models.ForeignKey(MarketItem)
+    image = ImageField()
+    original = ImageField()
+    original_metadata = JSONField()
 
 
 class MarketItemSalesforceRecord(models.Model):
