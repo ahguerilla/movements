@@ -779,6 +779,9 @@ h6 {
 .ajaxloader {
   text-align: center;
 }
+.error {
+  color: #f00;
+}
 .errorlist {
   padding: 0;
 }

@@ -104,35 +104,30 @@ def show_post(request, post_id):
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))
 
 
-@login_required
-def create_offer(request):
+def _create_post(request, template, form_class, build_redir_url):
     user_skills = request.user.userprofile.interests.values_list('id', flat=True)
     user_countries = request.user.userprofile.countries.values_list('id', flat=True)
-    form = OfferForm(request.POST or None, user_skills=user_skills, user_countries=user_countries)
+    form = form_class(request.POST or None, user_skills=user_skills, user_countries=user_countries)
     if form.is_valid():
         post = save_market_item(form, request.user)
-        post_url = reverse('show_post', args=post.id)
+        redir_url = build_redir_url(post)
         if request.is_ajax():
-            return HttpResponse(json.dumps({'success': True, 'post_url': post_url}), mimetype="application/json")
-        return redirect(post_url)
+            return HttpResponse(json.dumps({'success': True, 'redir_url': redir_url}), mimetype="application/json")
+        return redirect(redir_url)
     if request.is_ajax():
         errors = form_errors_as_dict(form)
         return HttpResponse(json.dumps({'success': False, 'errors': errors}), mimetype="application/json")
-    return render_to_response('market/create_offer.html', {'form': form},
+    return render_to_response(template, {'form': form},
                               context_instance=RequestContext(request))
+
+@login_required
+def create_offer(request):
+    return _create_post(request, 'market/create_offer.html', OfferForm, lambda x: reverse('show_post', args=x.id))
 
 
 @login_required
 def create_request(request):
-    user_skills = request.user.userprofile.interests.values_list('id', flat=True)
-    user_countries = request.user.userprofile.countries.values_list('id', flat=True)
-    form = RequestForm(request.POST or None, user_skills=user_skills, user_countries=user_countries)
-    if form.is_valid():
-        save_market_item(form, request.user)
-        # TODO This needs to be the new view request page
-        return redirect(reverse('request_posted'))
-    return render_to_response('market/create_request.html', {'form': form},
-                              context_instance=RequestContext(request))
+    return _create_post(request, 'market/create_request.html', RequestForm, lambda x: reverse('request_posted'))
 
 
 @login_required

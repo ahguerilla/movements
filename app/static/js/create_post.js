@@ -39,11 +39,16 @@
       }, this);
       $.ajax({
         type: 'post',
+        context: this,
         data: formData,
         cache: false,
         contentType: false,
         processData: false,
         success: function(resp) {
+          if (resp.success) {
+            return;
+          }
+          ahr.applyErrorsToForm(this.$el, resp);
         }
       });
     }
