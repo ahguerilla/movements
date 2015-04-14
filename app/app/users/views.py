@@ -395,7 +395,7 @@ def vet_user(request, user_id):
             user.save()
             typeuser = ContentType.objects.filter(name='user').all()[0]
             log = LogEntry(user_id=request.user.id,
-                           content_type= typeuser,
+                           content_type=typeuser,
                            object_id=user.id,
                            object_repr=user.username,
                            action_flag=2,
