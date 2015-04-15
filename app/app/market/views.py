@@ -9,10 +9,10 @@ from django.template import RequestContext
 from django.http import Http404, HttpResponse
 from app.market.api.utils import HttpResponseForbiden
 
-from app.users.models import Interest, Countries, Issues, Skills, Region
+from app.users.models import Interest, Countries, Issues
 from app.utils import form_errors_as_dict
 from forms import RequestForm, OfferForm, save_market_item
-from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforceRecord
+from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforceRecord, MarketItemImage
 
 
 def index(request):
@@ -110,6 +110,8 @@ def _create_post(request, template, form_class, build_redir_url):
     form = form_class(request.POST or None, user_skills=user_skills, user_countries=user_countries)
     if form.is_valid():
         post = save_market_item(form, request.user)
+        for image in request.FILES:
+            MarketItemImage.save_image(post, request.FILES[image])
         redir_url = build_redir_url(post)
         if request.is_ajax():
             return HttpResponse(json.dumps({'success': True, 'redir_url': redir_url}), mimetype="application/json")
@@ -122,7 +124,7 @@ def _create_post(request, template, form_class, build_redir_url):
 
 @login_required
 def create_offer(request):
-    return _create_post(request, 'market/create_offer.html', OfferForm, lambda x: reverse('show_post', args=x.id))
+    return _create_post(request, 'market/create_offer.html', OfferForm, lambda x: reverse('show_post', args=[x.id]))
 
 
 @login_required
