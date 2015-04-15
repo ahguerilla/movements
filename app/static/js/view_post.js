@@ -847,6 +847,7 @@
       postLanguage: options.postLanguage,
       userDefaultLangage: options.userDefaultLangage
     });
+    $('a.gallery').colorbox({rel: 'gal', scalePhotos: true, maxWidth: '100%', maxHeight: '100%'});
   };
 
   global.ahr.initViewPostTranslation = function (options) {

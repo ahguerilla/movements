@@ -169,7 +169,8 @@ class MarketItemImage(models.Model):
     def _set_thumbnail(self, filename, data):
         pil_image = Image.open(data)
         with BytesIO() as thumb:
-            pil_image.convert('RGB')
+            if pil_image.mode != "RGB":
+                pil_image.convert('RGB')
             pil_image.thumbnail(pil_image.size)
             pil_image.save(thumb, 'JPEG')
             thumb.seek(0)

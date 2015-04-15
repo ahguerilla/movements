@@ -1,6 +1,9 @@
 {% extends "base_v2.html" %}
+
 {% load avatar_tags %}
 {% load i18n %}
+{% load thumbnail %}
+
 {% block content %}
 <div class="row">
   <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
@@ -44,6 +47,16 @@
         <div id="translate-menu-container"></div>
       </div>
       <div class="clearfix"></div>
+        {% if images %}
+          <div class="post-images">
+            {% for image in images %}
+              {% thumbnail image.image 120x120 upscale as thumb %}
+              <a class="gallery" href="{{ image.image.url }}">
+                <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" />
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
       {% endif %}
         <div style="margin-bottom: 15px; margin-top: 10px;">
           <div class="tags clearfix">

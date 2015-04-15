@@ -42,7 +42,7 @@ def index(request):
 
 
 def show_post(request, post_id):
-    prefetch_list = ['interests', 'issues', 'countries']
+    prefetch_list = ['interests', 'issues', 'countries', 'marketitemimage_set', ]
     post = get_object_or_404(MarketItem.objects.defer('comments').prefetch_related(*prefetch_list),
                              pk=post_id,
                              deleted=False,
@@ -93,6 +93,7 @@ def show_post(request, post_id):
 
     post_data = {
         'post': post,
+        'images': post.marketitemimage_set.all(),
         'report_url': reverse('report_post', args=[post.id]),
         'is_logged_in': request.user.is_authenticated(),
         'language_list': language_list,
