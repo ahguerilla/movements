@@ -106,14 +106,21 @@ def show_post(request, post_id):
 
 
 def _create_or_update_post(request, template, form_class, build_redir_url, market_item):
-    user_skills = request.user.userprofile.interests.values_list('id', flat=True)
-    user_countries = request.user.userprofile.countries.values_list('id', flat=True)
     if market_item:
         form = form_class(request.POST or None, instance=market_item)
     else:
+        user_skills = request.user.userprofile.interests.values_list('id', flat=True)
+        user_countries = request.user.userprofile.countries.values_list('id', flat=True)
         form = form_class(request.POST or None, user_skills=user_skills, user_countries=user_countries)
     if form.is_valid():
         post = save_market_item(form, request.user)
+        if market_item:
+            del_ids = []
+            for item in request.POST:
+                if item.startswith('delete_image_'):
+                    img_id = int(item.replace('delete_image_', ''))
+                    del_ids.append(img_id)
+            MarketItemImage.objects.filter(item=market_item, id__in=del_ids).delete()
         for image in request.FILES:
             MarketItemImage.save_image(post, request.FILES[image])
         redir_url = build_redir_url(post)
@@ -123,8 +130,13 @@ def _create_or_update_post(request, template, form_class, build_redir_url, marke
     if request.is_ajax():
         errors = form_errors_as_dict(form)
         return HttpResponse(json.dumps({'success': False, 'errors': errors}), mimetype="application/json")
-    return render_to_response(template, {'form': form},
-                              context_instance=RequestContext(request))
+    ctx = {
+        'form': form,
+        'images': None,
+    }
+    if market_item:
+        ctx['images'] = market_item.marketitemimage_set.all()
+    return render_to_response(template, ctx, context_instance=RequestContext(request))
 
 
 @login_required
@@ -155,7 +167,8 @@ def request_posted(request):
 
 @login_required
 def edit_post(request, post_id):
-    market_item = get_object_or_404(MarketItem, pk=post_id)
+    market_item = get_object_or_404(MarketItem.objects.defer('comments').prefetch_related('marketitemimage_set'),
+                                    pk=post_id)
     if market_item.owner != request.user:
         return HttpResponseForbiden()
     if market_item.item_type == MarketItem.TYPE_CHOICES.OFFER:

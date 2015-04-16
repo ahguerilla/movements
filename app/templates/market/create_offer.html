@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load widget_tweaks %}
+{% load thumbnail %}
 
 {% block public-content-message %}
 <form class="form-horizontal"  method="post" enctype="multipart/form-data" id="create-post-form">
@@ -71,6 +72,16 @@
 
     <div>
       <div class="form-sub-title"><h2>{% trans "6. Add images to your post" %}</h2></div>
+      {% if images %}
+        {% for image in images %}
+          {% thumbnail image.image 0x120 upscale as thumb %}
+            <div><img src="{{ thumb.url }}" width="{{ thumb.width }}" style="max-width: 100%;"/></div>
+            <div style="margin-bottom: 10px;"><input type="checkbox" name="delete_image_{{ image.id }}" /> Delete? </div>
+          {% if not forloop.last %}
+            <hr/>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
       <div class="dz-clickable dz-preview-container clearfix">
         <div>{% trans "Click here or drag files into this box in order to add an image into your post." %}</div>
       </div>
