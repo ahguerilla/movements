@@ -1325,6 +1325,9 @@ popoverDropdown(width, showIcon = true)
     line-height 1.3
     a, a:hover
       text-decoration none
+    .post-image
+      position absolute
+      left 18px
     .item-type
       font-family "HurmeGeometricSans3-SemiBold"
       font-size 13px
@@ -1363,6 +1366,12 @@ popoverDropdown(width, showIcon = true)
     background $offer-color url('../images/v2/offer_icon.png') no-repeat 10px center
     .item-type
       color $offer-color
+  .market-place-item.with-image
+    padding-left 81px
+  .market-place-item.with-image.request
+    background #FFFFFF url('../images/v2/request_with_image.png') no-repeat left center
+  .market-place-item.with-image.offer
+    background #FFFFFF url('../images/v2/offer_with_image.png') no-repeat left center
 
 #marketitems
   .market-place-item.request.item-hidden
@@ -1414,6 +1423,10 @@ popoverDropdown(width, showIcon = true)
     #via-google-translate
       font-weight bold
       margin-top 20px
+  .post-images
+    background-color #EFEFEF
+    padding 10px
+    border-radius 5px
   .post-actions
     a
       font-family "HurmeGeometricSans3-SemiBold"

@@ -4,7 +4,7 @@
 {% load widget_tweaks %}
 
 {% block public-content-message %}
-  <form class="form-horizontal" method="post">
+<form class="form-horizontal"  method="post" enctype="multipart/form-data" id="create-post-form">
     {% csrf_token %}
     <div class="dialog movements-form new-post">
       <div>

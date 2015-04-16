@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.db import connection
 from django.db.models import Q
+
 from haystack.query import SearchQuerySet
 
 from app.market.api.utils import *
@@ -120,12 +121,14 @@ def get_raw(request, from_item=0, to_item=None,
             )
         """
 
+    select = """SELECT mi.*,
+                (SELECT image
+                 FROM market_marketitemimage
+                 WHERE market_marketitemimage.item_id = mi.id ORDER BY id DESC limit 1) AS image_url"""
     if filter_by_owner:
-        select = 'SELECT mi.* '
         order_by = ' ORDER BY id DESC , pub_date DESC'
         additional_filter += 'AND auth_user.id = %(user_id)s'
     else:
-        select = """SELECT mi.*"""
         order_by = ' ORDER BY pub_date DESC'
 
     if count:

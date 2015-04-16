@@ -9,6 +9,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
+from easy_thumbnails.files import get_thumbnailer
 from pexif import JpegFile
 from PIL import Image
 from sorl.thumbnail import ImageField
@@ -116,6 +117,14 @@ class MarketItem(models.Model):
         adict['fields']['attributes_url'] = ""
         adict['fields']['translate_language_url'] = ""
         adict['fields']['tweet_permission'] = self.tweet_permission
+        if hasattr(self, 'image_url') and self.image_url is not None:
+            thumbnailer = get_thumbnailer(self.image_url)
+            adict['fields']['image_url'] = thumbnailer.get_thumbnail({'size': (66, 66),
+                                                                      'upscale': True,
+                                                                      'crop': '0, 0',
+                                                                      'background': '#FFFFFF'}).url
+        else:
+            adict['fields']['image_url'] = False
         return adict
 
     def getdict(self, request=None):
