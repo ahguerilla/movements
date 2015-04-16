@@ -105,10 +105,13 @@ def show_post(request, post_id):
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))
 
 
-def _create_post(request, template, form_class, build_redir_url):
+def _create_or_update_post(request, template, form_class, build_redir_url, market_item):
     user_skills = request.user.userprofile.interests.values_list('id', flat=True)
     user_countries = request.user.userprofile.countries.values_list('id', flat=True)
-    form = form_class(request.POST or None, user_skills=user_skills, user_countries=user_countries)
+    if market_item:
+        form = form_class(request.POST or None, instance=market_item)
+    else:
+        form = form_class(request.POST or None, user_skills=user_skills, user_countries=user_countries)
     if form.is_valid():
         post = save_market_item(form, request.user)
         for image in request.FILES:
@@ -123,14 +126,23 @@ def _create_post(request, template, form_class, build_redir_url):
     return render_to_response(template, {'form': form},
                               context_instance=RequestContext(request))
 
+
 @login_required
 def create_offer(request):
-    return _create_post(request, 'market/create_offer.html', OfferForm, lambda x: reverse('show_post', args=[x.id]))
+    return _create_or_update_post(request,
+                                  'market/create_offer.html',
+                                  OfferForm,
+                                  lambda x: reverse('show_post', args=[x.id]),
+                                  None)
 
 
 @login_required
 def create_request(request):
-    return _create_post(request, 'market/create_request.html', RequestForm, lambda x: reverse('request_posted'))
+    return _create_or_update_post(request,
+                                  'market/create_request.html',
+                                  RequestForm,
+                                  lambda x: reverse('request_posted'),
+                                  None)
 
 
 @login_required
@@ -152,11 +164,11 @@ def edit_post(request, post_id):
     else:
         form_class = RequestForm
         tpl = 'market/create_request.html'
-    form = form_class(request.POST or None, instance=market_item)
-    if form.is_valid():
-        save_market_item(form, request.user)
-        return redirect(reverse('show_post', args=[post_id]))
-    return render_to_response(tpl, {'form': form}, context_instance=RequestContext(request))
+    return _create_or_update_post(request,
+                                  tpl,
+                                  form_class,
+                                  lambda x: reverse('show_post', args=[x.id]),
+                                  market_item)
 
 
 @login_required
