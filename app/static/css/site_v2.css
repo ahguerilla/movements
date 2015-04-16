@@ -792,7 +792,8 @@ h6 {
   position: relative;
   top: 50%;
 }
-.error {
+.error,
+.dz-error-message {
   color: #f00;
 }
 .errorlist {

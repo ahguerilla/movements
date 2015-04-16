@@ -1,6 +1,8 @@
 (function (global) {
 
   var CreatePostView = Backbone.View.extend({
+    MAX_FILESIZE: 3,
+    UPLOAD_MIMETYPES: 'image/png,image/jpg,image/jpeg',
     events: {
       'click .select-checkbox': 'checkClick',
       'submit': 'submitForm'
@@ -12,13 +14,12 @@
       this.dz = new Dropzone(this.el, {
         paramName: "images",
         url: document.location.pathname,
-        maxFilesize: 2, // MB
+        maxFilesize: this.MAX_FILESIZE,
         uploadMultiple: true,
         autoProcessQueue: false,
         clickable: '.dz-clickable',
         previewsContainer: '.dz-preview-container',
-        acceptedFile: "image/png,image/jpg,image/jpeg",
-        //forceFallback: true,
+        acceptedFiles: this.UPLOAD_MIMETYPES,
         fallback: function () {
           that.$el.find('.fallback').show();
           that.$el.find('.dz-clickable,.dz-preview').hide();
@@ -42,11 +43,14 @@
     submitForm: function(ev) {
       if (this.fallback) return;
       ev.preventDefault();
-      this.addLoader();
+      var hasErrors = false;
       var formData = new FormData(this.$el.get(0));
       _.each(this.dz.files, function(file, ix) {
+        if (file.status == 'error') hasErrors = true;
         formData.append('image-' + ix, file);
       }, this);
+      if (hasErrors) return;
+      this.addLoader();
       $.ajax({
         type: 'post',
         context: this,
