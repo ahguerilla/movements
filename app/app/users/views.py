@@ -477,7 +477,7 @@ def one_click_unsubscribe(request, uuid):
         request.user.userprofile.save(update_fields=['notification_frequency'])
     else:
         if uuid:
-            uuid_profile = UserProfile.objects.filter(unsubscribe_uuid=uuid)
+            uuid_profile = UserProfile.objects.filter(unsubscribe_uuid=uuid).first()
             error_message = None
         else:
             uuid_profile = None
@@ -485,7 +485,7 @@ def one_click_unsubscribe(request, uuid):
                 error_message = ugettext('This unsubscribe link does not map to a valid user.')
             else:
                 error_message = ugettext('To unsubscribe click on on the button below.')
-        if not error_message and request.user != uuid_profile:
+        if not error_message and request.user.is_authenticated() and request.user != uuid_profile:
             error_message = ugettext('You are logged in as a different user to the link followed')
         if not error_message and uuid_profile:
             uuid_profile.notification_frequency = UserProfile.NOTIFICATION_FREQUENCY.NEVER

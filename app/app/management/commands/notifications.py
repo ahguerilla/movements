@@ -48,6 +48,7 @@ def send_user_notification_email(profile, items, set_last_notification_date=True
     template_args = {
         'notifications': notifs_to_include,
         'base_url': settings.BASE_URL,
+        'unsub_uuid': profile.get_unsubscribe_uuid(),
     }
     message = render_to_string('emails/notification_email.html', template_args)
     email = EmailMessage(

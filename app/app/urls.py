@@ -26,6 +26,8 @@ urlpatterns = patterns(
     url(r'^sign-up/more-about-you$', 'app.users.views.more_about_you', name="more_about_you"),
     url(r'^', include('app.market.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^unsubscribe$', 'app.users.views.one_click_unsubscribe', {'uuid': None}, name='one_click_unsubscribe'),
+    url(r'^unsubscribe/(?P<uuid>.+)$', 'app.users.views.one_click_unsubscribe', name='one_click_unsubscribe'),
     url(r'^user/', include('app.users.urls')),
     url(r'^exchange', 'app.views.exchange', name='exchange'),
     url(r'^avatar/render_primary/(?P<user>[\w\@\d\.\-_]{1,30})/(?P<size>[\d]+)/$', 'avatar.views.render_primary',
