@@ -1,0 +1,32 @@
+{% extends "base_v2.html" %}
+{% load cms_tags sekizai_tags placeholder_tags %}
+{% load i18n %}
+
+{% block head_title %}
+  Movements: Unsubscribe
+{% endblock %}
+
+{% block content %}
+    <div style="height:30px;"></div>
+    <div class="content-page">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 cms-body-content">
+                <h1>{% trans "Unsubscribe from notifications" %}</h1>
+              {% if not error_message %}
+                  {% trans 'You have been unsubscribed from notifications from movements.org. These can be enabled again from your ' %}
+                  <a href='{% url 'user_settings' %}#security'>{% trans 'profile settings page.' %}</a>
+              {% else %}
+                  {{ error_message }}
+                  {% if request.user.is_authenticated %}
+                      <form method="post">
+                        {% csrf_token %}
+                        <div><button class="btn btn-action" type="submit" style="margin-top: 5px;">{% trans 'Unsubscribe' %}</button></div>
+                      </form>
+                  {% else %}
+                    {% trans 'You can log in and unsubscribe from your ' %} <a href='{% url 'user_settings' %}#security'>{% trans 'profile settings page.' %}</a>
+                  {% endif %}
+              {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

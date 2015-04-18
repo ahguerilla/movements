@@ -1,3 +1,4 @@
+import uuid
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -191,6 +192,13 @@ class UserProfile(models.Model):
         _('notification frequency'), choices=NOTIFICATION_FREQUENCY,
         default=NOTIFICATION_FREQUENCY.DAILY)
     last_notification_email = models.DateTimeField(null=True, blank=True)
+    unsubscribe_uuid = models.CharField(max_length=50, null=True, blank=True)
+
+    def get_unsubscribe_uuid(self):
+        if self.unsubscribe_uuid is None:
+            self.unsubscribe_uuid = str(uuid.uuid4())
+            self.save(update_fields=['unsubscribe_uuid'])
+        return self.unsubscribe_uuid
 
     @property
     def ahr_rating(self):

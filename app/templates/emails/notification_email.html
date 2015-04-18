@@ -46,3 +46,9 @@
     </p>
   {% endfor %}
 {% endblock %}
+
+{% block update_settings %}
+  <p style="font-size: 10px;">{% trans "You can update your notification preferences in " %}
+    <a href="{{ base_url }}{% url 'user_settings' %}#security">{% trans "your settings page." %}</a>,
+    to stop all notification emails you can <a href="{{ base_url }}{% url 'user_settings' %}#security">click here.</a></p>
+{% endblock %}
