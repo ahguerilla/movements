@@ -1,16 +1,24 @@
-from django.utils import timezone
-from django.utils.timezone import timedelta
-import app.users.models as user_models
-from django.db import models
-
-from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
-from tinymce import models as tinymodels
+import logging
+import uuid
+from io import BytesIO, StringIO
 
 import django.contrib.auth as auth
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
+from django.db import models
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
+from easy_thumbnails.files import get_thumbnailer
+from pexif import JpegFile
+from PIL import Image
+from sorl.thumbnail import ImageField
+from tinymce import models as tinymodels
+
+import app.users.models as user_models
 from app.utils import EnumChoices
+
+_logger = logging.getLogger('movements-alerts')
 
 
 class MarketItem(models.Model):
@@ -109,6 +117,14 @@ class MarketItem(models.Model):
         adict['fields']['attributes_url'] = ""
         adict['fields']['translate_language_url'] = ""
         adict['fields']['tweet_permission'] = self.tweet_permission
+        if hasattr(self, 'image_url') and self.image_url is not None:
+            thumbnailer = get_thumbnailer(self.image_url)
+            adict['fields']['image_url'] = thumbnailer.get_thumbnail({'size': (66, 66),
+                                                                      'upscale': True,
+                                                                      'crop': '0, 0',
+                                                                      'background': '#FFFFFF'}).url
+        else:
+            adict['fields']['image_url'] = False
         return adict
 
     def getdict(self, request=None):
@@ -139,6 +155,77 @@ class MarketItem(models.Model):
             adict['fields']['avatar'] = False
             adict['fields']['hasEdit'] = False
         return adict
+
+
+def market_image_upload_handler(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return "post/{0}/images/{1}".format(instance.item.id, filename)
+
+
+class MarketItemImage(models.Model):
+    VALID_EXTENSIONS = ['jpg', 'jpeg', 'png']
+    MAX_SIZE = 5000000
+
+    item = models.ForeignKey(MarketItem)
+    image = ImageField(upload_to=market_image_upload_handler)
+    original = ImageField(upload_to=market_image_upload_handler)
+    original_metadata = models.TextField()
+
+    class Meta:
+        app_label = "market"
+
+    def _set_thumbnail(self, filename, data):
+        pil_image = Image.open(data)
+        with BytesIO() as thumb:
+            if pil_image.mode != "RGB":
+                pil_image.convert('RGB')
+            pil_image.thumbnail(pil_image.size)
+            pil_image.save(thumb, 'JPEG')
+            thumb.seek(0)
+            self.image = SimpleUploadedFile(filename, thumb.getvalue(), content_type='image/jpeg')
+
+    @staticmethod
+    def validate_image(image_data):
+        try:
+            if image_data.size > MarketItemImage.MAX_SIZE:
+                raise ValueError(u'Uploaded image greater than max size of 5MB, size uploaded was: ' +
+                                 unicode(image_data.size))
+            ext = image_data.name.split('.')[-1]
+            if ext.lower() not in MarketItemImage.VALID_EXTENSIONS:
+                raise ValueError(u'Image upload with invalid extension: ' + ext)
+        except Exception as ex:
+            _logger.exception(ex)
+            return False
+        return True
+
+    @staticmethod
+    def save_image(market_item, image_data):
+        if not MarketItemImage.validate_image(image_data):
+            return False
+        image = MarketItemImage(item=market_item)
+        try:
+            with BytesIO() as data:
+                data.write(image_data.read())
+                data.seek(0)
+                ext = image_data.name.split('.')[-1]
+                if ext.lower() in ['jpg', 'jpeg']:
+                    with BytesIO() as output:
+                        ef = JpegFile(data, "posted_file")
+                        ef.dump(output)
+                        image.original_metadata = output.getvalue()
+                        ef.remove_metadata(paranoid=True)
+                    with BytesIO() as sanitised:
+                        ef.writeFd(sanitised)
+                        sanitised.seek(0)
+                        image._set_thumbnail(image_data.name, sanitised)
+                else:
+                    image._set_thumbnail(image_data.name, data)
+            image.original = image_data
+            image.save()
+        except Exception as ex:
+            _logger.exception(ex)
+            return False
 
 
 class MarketItemSalesforceRecord(models.Model):

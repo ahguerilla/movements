@@ -6,12 +6,13 @@ from django.core import serializers
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from app.market.api.utils import HttpResponseForbiden
 
-from app.users.models import Interest, Countries, Issues, Skills, Region
+from app.users.models import Interest, Countries, Issues
+from app.utils import form_errors_as_dict
 from forms import RequestForm, OfferForm, save_market_item
-from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforceRecord
+from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforceRecord, MarketItemImage
 
 
 def index(request):
@@ -41,7 +42,7 @@ def index(request):
 
 
 def show_post(request, post_id):
-    prefetch_list = ['interests', 'issues', 'countries']
+    prefetch_list = ['interests', 'issues', 'countries', 'marketitemimage_set', ]
     post = get_object_or_404(MarketItem.objects.defer('comments').prefetch_related(*prefetch_list),
                              pk=post_id,
                              deleted=False,
@@ -92,6 +93,7 @@ def show_post(request, post_id):
 
     post_data = {
         'post': post,
+        'images': post.marketitemimage_set.all(),
         'report_url': reverse('report_post', args=[post.id]),
         'is_logged_in': request.user.is_authenticated(),
         'language_list': language_list,
@@ -103,30 +105,56 @@ def show_post(request, post_id):
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))
 
 
+def _create_or_update_post(request, template, form_class, build_redir_url, market_item):
+    if market_item:
+        form = form_class(request.POST or None, instance=market_item)
+    else:
+        user_skills = request.user.userprofile.interests.values_list('id', flat=True)
+        user_countries = request.user.userprofile.countries.values_list('id', flat=True)
+        form = form_class(request.POST or None, user_skills=user_skills, user_countries=user_countries)
+    if form.is_valid():
+        post = save_market_item(form, request.user)
+        if market_item:
+            del_ids = []
+            for item in request.POST:
+                if item.startswith('delete_image_'):
+                    img_id = int(item.replace('delete_image_', ''))
+                    del_ids.append(img_id)
+            MarketItemImage.objects.filter(item=market_item, id__in=del_ids).delete()
+        for image in request.FILES:
+            MarketItemImage.save_image(post, request.FILES[image])
+        redir_url = build_redir_url(post)
+        if request.is_ajax():
+            return HttpResponse(json.dumps({'success': True, 'redir_url': redir_url}), mimetype="application/json")
+        return redirect(redir_url)
+    if request.is_ajax():
+        errors = form_errors_as_dict(form)
+        return HttpResponse(json.dumps({'success': False, 'errors': errors}), mimetype="application/json")
+    ctx = {
+        'form': form,
+        'images': None,
+    }
+    if market_item:
+        ctx['images'] = market_item.marketitemimage_set.all()
+    return render_to_response(template, ctx, context_instance=RequestContext(request))
+
+
 @login_required
 def create_offer(request):
-    user_skills = request.user.userprofile.interests.values_list('id', flat=True)
-    user_countries = request.user.userprofile.countries.values_list('id', flat=True)
-    form = OfferForm(request.POST or None, user_skills=user_skills, user_countries=user_countries)
-    if form.is_valid():
-        save_market_item(form, request.user)
-        # TODO This needs to be the new view offer page
-        return redirect('/')
-    return render_to_response('market/create_offer.html', {'form': form},
-                              context_instance=RequestContext(request))
+    return _create_or_update_post(request,
+                                  'market/create_offer.html',
+                                  OfferForm,
+                                  lambda x: reverse('show_post', args=[x.id]),
+                                  None)
 
 
 @login_required
 def create_request(request):
-    user_skills = request.user.userprofile.interests.values_list('id', flat=True)
-    user_countries = request.user.userprofile.countries.values_list('id', flat=True)
-    form = RequestForm(request.POST or None, user_skills=user_skills, user_countries=user_countries)
-    if form.is_valid():
-        save_market_item(form, request.user)
-        # TODO This needs to be the new view request page
-        return redirect(reverse('request_posted'))
-    return render_to_response('market/create_request.html', {'form': form},
-                              context_instance=RequestContext(request))
+    return _create_or_update_post(request,
+                                  'market/create_request.html',
+                                  RequestForm,
+                                  lambda x: reverse('request_posted'),
+                                  None)
 
 
 @login_required
@@ -139,7 +167,8 @@ def request_posted(request):
 
 @login_required
 def edit_post(request, post_id):
-    market_item = get_object_or_404(MarketItem, pk=post_id)
+    market_item = get_object_or_404(MarketItem.objects.defer('comments').prefetch_related('marketitemimage_set'),
+                                    pk=post_id)
     if market_item.owner != request.user:
         return HttpResponseForbiden()
     if market_item.item_type == MarketItem.TYPE_CHOICES.OFFER:
@@ -148,11 +177,11 @@ def edit_post(request, post_id):
     else:
         form_class = RequestForm
         tpl = 'market/create_request.html'
-    form = form_class(request.POST or None, instance=market_item)
-    if form.is_valid():
-        save_market_item(form, request.user)
-        return redirect(reverse('show_post', args=[post_id]))
-    return render_to_response(tpl, {'form': form}, context_instance=RequestContext(request))
+    return _create_or_update_post(request,
+                                  tpl,
+                                  form_class,
+                                  lambda x: reverse('show_post', args=[x.id]),
+                                  market_item)
 
 
 @login_required

@@ -3,7 +3,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, render
 from django.contrib.auth.models import User
 from django.db import transaction
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext
+
 from ratelimit.decorators import ratelimit
 from models import (
     UserProfile, OrganisationalRating, Language, Interest, Region)
@@ -395,7 +396,7 @@ def vet_user(request, user_id):
             user.save()
             typeuser = ContentType.objects.filter(name='user').all()[0]
             log = LogEntry(user_id=request.user.id,
-                           content_type= typeuser,
+                           content_type=typeuser,
                            object_id=user.id,
                            object_repr=user.username,
                            action_flag=2,
@@ -467,3 +468,30 @@ class RatelimitedLoginView(LoginView):
 
 
 ratelimited_login = RatelimitedLoginView.as_view()
+
+
+def one_click_unsubscribe(request, uuid):
+    if request.method == 'POST' and request.user.is_authenticated():
+        error_message = None
+        request.user.userprofile.notification_frequency = UserProfile.NOTIFICATION_FREQUENCY.NEVER
+        request.user.userprofile.save(update_fields=['notification_frequency'])
+    else:
+        if uuid:
+            uuid_profile = UserProfile.objects.filter(unsubscribe_uuid=uuid).first()
+            error_message = None
+        else:
+            uuid_profile = None
+            if not request.user.is_authenticated():
+                error_message = ugettext('This unsubscribe link does not map to a valid user.')
+            else:
+                error_message = ugettext('To unsubscribe click on on the button below.')
+        if not error_message and request.user.is_authenticated() and request.user != uuid_profile:
+            error_message = ugettext('You are logged in as a different user to the link followed')
+        if not error_message and uuid_profile:
+            uuid_profile.notification_frequency = UserProfile.NOTIFICATION_FREQUENCY.NEVER
+            uuid_profile.save(update_fields=['notification_frequency'])
+    return render_to_response('account/unsubscribe.html',
+                              {
+                                  'error_message': error_message,
+                              },
+                              context_instance=RequestContext(request))

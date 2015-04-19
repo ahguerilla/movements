@@ -1,6 +1,10 @@
 from operator import itemgetter
 
 
+def form_errors_as_dict(form):
+    return dict((k, map(unicode, v)) for (k, v) in form.errors.iteritems())
+
+
 class EnumChoices(list):
     """
     A helper to create constants from choices tuples.

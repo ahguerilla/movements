@@ -10,8 +10,10 @@ js = Bundle(
         './js/lib/bootstrap.min.js',
         './js/lib/typeahead.js',
         './js/lib/jquery.cookie.js',
+        './js/lib/jquery.colorbox.js',
         './js/lib/Autolinker.js',
         './js/lib/diff.js',
+        './js/lib/dropzone.js',
         './colorbox/jquery.colorbox-min.js',
         './js/app_common.js',
         './js/base.js',
@@ -35,6 +37,7 @@ css_v2 = Bundle(
     Bundle(
         './css/lib/bootstrap.css',
         './css/lib/typeahead.css',
+        './css/lib/colorbox.css',
         './css/lib/rateit.css',
         './css/fonts.css',
         './colorbox/example1/colorbox.css',

@@ -40,9 +40,11 @@ class MovementsUserAdmin(UserAdmin):
     vetting.allow_tags = True
 
     def rated_by(self, obj):
-        log = LogEntry.objects.filter(object_id = obj.id).all()
-        if len(log) > 0:
-            return log[0].user.username
+        log = LogEntry.objects.filter(object_id=obj.id,
+                                      change_message="vetted",
+                                      action_flag=2).first()
+        if log is not None:
+            return log.user.username
         else:
             return ''
 

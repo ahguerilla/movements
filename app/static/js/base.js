@@ -6,6 +6,15 @@
  * Licensed under the MIT license.
  */
 
+if (!String.prototype.format) {
+  String.prototype.format = function () {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function (match, number) {
+      return typeof args[number] != 'undefined' ? args[number] : match;
+    });
+  };
+}
+
 (function($) {
 
   var o = $({});
@@ -194,6 +203,36 @@
       doHeartBeat();
     });
   });
+
+
+
+  function applyErrorsToForm(form, response, $messageOutput) {
+    var errorLabelFmt = '<label for="id_{0}" class="error">{1}</label>';
+    var genericMessage = response.detail;
+    var msg, errorDiv, input, errorLabel = null;
+    if (response.errors) {
+      for (var inputName in response.errors) {
+        msg = response.errors[inputName].join(' ');
+        errorLabel = errorLabelFmt.format("inputName", msg);
+        errorDiv = form.find('.' + inputName + '-errors');
+        if (errorDiv.length) {
+          errorDiv.html(errorLabel);
+        } else {
+          input = form.find('input[name="' + inputName + '"]');
+          $(errorLabel).insertAfter(input);
+        }
+
+      }
+    }
+    if (genericMessage) {
+      $messageOutput.html(JST.userMessage({
+        message: genericMessage,
+        dismissable: true,
+        level: 'danger'
+      }));
+    }
+  }
+  window.ahr.applyErrorsToForm = applyErrorsToForm;
 
 
   window.ahr.BaseView = Backbone.View.extend({

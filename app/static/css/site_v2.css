@@ -779,6 +779,23 @@ h6 {
 .ajaxloader {
   text-align: center;
 }
+.blocker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #f8f6f7;
+  opacity: 0.5;
+}
+.blocker .ajaxloader {
+  position: relative;
+  top: 50%;
+}
+.error,
+.dz-error-message {
+  color: #f00;
+}
 .errorlist {
   padding: 0;
 }
@@ -1675,6 +1692,11 @@ input.borderless-control:focus:invalid:focus {
 #stuck-marketitems .market-place-item a:hover {
   text-decoration: none;
 }
+#marketitems .market-place-item .post-image,
+#stuck-marketitems .market-place-item .post-image {
+  position: absolute;
+  left: 18px;
+}
 #marketitems .market-place-item .item-type,
 #stuck-marketitems .market-place-item .item-type {
   font-family: "HurmeGeometricSans3-SemiBold";
@@ -1800,6 +1822,18 @@ input.borderless-control:focus:invalid:focus {
 #stuck-marketitems .market-place-item.offer .item-type {
   color: #005d86;
 }
+#marketitems .market-place-item.with-image,
+#stuck-marketitems .market-place-item.with-image {
+  padding-left: 81px;
+}
+#marketitems .market-place-item.with-image.request,
+#stuck-marketitems .market-place-item.with-image.request {
+  background: #fff url("../images/v2/request_with_image.png") no-repeat left center;
+}
+#marketitems .market-place-item.with-image.offer,
+#stuck-marketitems .market-place-item.with-image.offer {
+  background: #fff url("../images/v2/offer_with_image.png") no-repeat left center;
+}
 #marketitems .market-place-item.request.item-hidden .item-type {
   color: #fb9d9e;
 }
@@ -1902,6 +1936,15 @@ input.borderless-control:focus:invalid:focus {
 .view-post .post #via-google-translate {
   font-weight: bold;
   margin-top: 20px;
+}
+.view-post .post-images {
+  background-color: #efefef;
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
 }
 .view-post .post-actions a {
   font-family: "HurmeGeometricSans3-SemiBold";
@@ -2416,6 +2459,29 @@ input.borderless-control:focus:invalid:focus {
 }
 #cboxOverlay {
   background: #000;
+}
+.dz-preview-container {
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  border: solid 1px #e0d7d8;
+}
+.dz-preview-container .dz-success-mark,
+.dz-preview-container .dz-error-mark {
+  display: none;
+}
+.dz-preview-container .dz-image-preview {
+  display: inline-block;
+  width: 120px;
+  float: left;
+}
+.dz-preview-container .dz-filename {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 #translations .section {
   margin-top: 20px;

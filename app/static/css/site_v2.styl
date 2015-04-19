@@ -684,6 +684,21 @@ h1,h2,h3,h4,h5,h6
 .ajaxloader
   text-align center
 
+.blocker
+  position absolute
+  width 100%
+  height 100%
+  left 0
+  top 0
+  background-color $background-color
+  opacity .5
+  .ajaxloader
+    position relative
+    top 50%
+
+.error, .dz-error-message
+  color $warn-color
+
 .errorlist
   padding 0
   li
@@ -1310,6 +1325,9 @@ popoverDropdown(width, showIcon = true)
     line-height 1.3
     a, a:hover
       text-decoration none
+    .post-image
+      position absolute
+      left 18px
     .item-type
       font-family "HurmeGeometricSans3-SemiBold"
       font-size 13px
@@ -1348,6 +1366,12 @@ popoverDropdown(width, showIcon = true)
     background $offer-color url('../images/v2/offer_icon.png') no-repeat 10px center
     .item-type
       color $offer-color
+  .market-place-item.with-image
+    padding-left 81px
+  .market-place-item.with-image.request
+    background #FFFFFF url('../images/v2/request_with_image.png') no-repeat left center
+  .market-place-item.with-image.offer
+    background #FFFFFF url('../images/v2/offer_with_image.png') no-repeat left center
 
 #marketitems
   .market-place-item.request.item-hidden
@@ -1368,6 +1392,7 @@ popoverDropdown(width, showIcon = true)
       border-radius 0
     .popover-content
       popoverDropdown(140px)
+
 
 .view-post
   .post-header
@@ -1398,6 +1423,10 @@ popoverDropdown(width, showIcon = true)
     #via-google-translate
       font-weight bold
       margin-top 20px
+  .post-images
+    background-color #EFEFEF
+    padding 10px
+    border-radius 5px
   .post-actions
     a
       font-family "HurmeGeometricSans3-SemiBold"
@@ -1825,9 +1854,28 @@ popoverDropdown(width, showIcon = true)
   background #000000
 
 
-///
-///
-///
+// **************************************
+// Dropzone styles
+// **************************************
+.dz-preview-container
+  padding 10px
+  border-radius 5px
+  border solid 1px $border-color
+  .dz-success-mark, .dz-error-mark
+    display none
+  .dz-image-preview
+    display inline-block
+    width 120px
+    float left
+  .dz-filename
+    text-overflow ellipsis
+    white-space nowrap
+    overflow hidden
+
+
+// **************************************
+// Translations styles
+// **************************************
 #translations
   .section
     margin-top 20px
