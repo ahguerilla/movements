@@ -12,10 +12,10 @@ admin.autodiscover()
 js_info_dict = {
     'packages': ('app',),
 }
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', 'app.views.home', name='home'),
     url(r'^set-language', 'app.views.set_language', name='set_lang'),
-
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
     url(r'^contact-us$', 'app.views.contact_us', name='contact_us'),
     url(r'^newsletter-signup$', 'app.views.newsletter_signup', name='newsletter_signup'),
@@ -28,14 +28,16 @@ urlpatterns = patterns('',
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^user/', include('app.users.urls')),
     url(r'^exchange', 'app.views.exchange', name='exchange'),
-    url(r'^avatar/render_primary/(?P<user>[\w\@\d\.\-_]{1,30})/(?P<size>[\d]+)/$', 'avatar.views.render_primary', name='avatar_render_primary'),
+    url(r'^avatar/render_primary/(?P<user>[\w\@\d\.\-_]{1,30})/(?P<size>[\d]+)/$', 'avatar.views.render_primary',
+        name='avatar_render_primary'),
     url(r'^avatar/', include('avatar.urls')),
     # Account View Overrides
     url(r'^accounts/login/+$', 'app.users.views.ratelimited_login', name="account_login"),
     url(r'^accounts/social/signup/+$', 'app.users.views.ahr_social_signup', name="social_sign_up"),
     url(r'^accounts/password/reset/+$', 'app.users.views.password_reset', name="password_reset"),
     url(r"^accounts/password/change/$", 'app.users.views.password_change', name="account_change_password"),
-    url(r"^accounts/password/change_done$", 'app.users.views.password_change_done', name="account_change_password_success"),
+    url(r"^accounts/password/change_done$", 'app.users.views.password_change_done',
+        name="account_change_password_success"),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/auth/user/(?P<user_id>\d+)/vet$', 'app.users.views.vet_user', name='vet_user'),
     url(r'^admin/auth/user/(?P<user_id>\d+)/emailvetted$', 'app.users.views.email_vet_user', name='email_vet_user'),
@@ -45,7 +47,8 @@ urlpatterns = patterns('',
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += i18n_patterns('',
+urlpatterns += i18n_patterns(
+    '',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^movements/', include('cms.urls')),
 )

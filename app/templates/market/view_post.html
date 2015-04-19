@@ -4,10 +4,19 @@
 {% block content %}
 <div class="row">
   <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-    <div class="view-post" data-default_translate_url="{% url 'translate_market_item' post.id LANGUAGE_CODE %}">
+    <div class="view-post"
+        data-default_translate_url="{% url 'translation:market:translate' post.id %}"
+        data-takein-url="{% url 'translation:market:take_in' post.id %}">
       <div class="post-header {{ post.item_type|lower }} %>">
         <span>{{ post.item_type_display }}</span>
       </div>
+      {% if request.user == post.owner %}
+        <div class="pull-right">
+          <a href="{% url 'edit_post' post.id %}" alt="edit post" class="btn btn-action" style="padding: 4px 8px 1px; margin-top: 10px;"/>
+            {% trans 'Edit Post' %}
+          </a>
+        </div>
+      {% endif %}
       <div class="post-date">
         {{ post.pub_date|date:"G:i"}} {%  trans 'on' %} {{ post.pub_date|date:"d M Y" }}
       </div>
@@ -24,8 +33,11 @@
       {% if is_logged_in %}
       <div class="post">
         <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
-        <pre id="via-google-translate" style="display: none;">via Google Translate</pre>
-        <pre id="post-body-translated"></pre>
+        <div class="translated_by" style="display: none;">
+            <a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> |
+            {% trans 'via'%} <a class="user" data-translate_url=""></a></span>
+         </div>
+        <pre id="post-body-translated" style="display: none;"></pre>
       </div>
       <div class="post-translate">
         <div class="translate"><span>{% trans 'Translate this post' %}</span></div>
@@ -47,14 +59,12 @@
             {% if post.specific_issue%}
               <div class="issue">{{ post.specific_issue }}</div>
             {% endif %}
+            {% if countries_to_render %}
+              {% for country in countries_to_render %}
+                <div class="country">{{ country }}</div>
+              {% endfor %}
+            {% endif %}
           </div>
-          {% if countries_to_render %}
-            <div class="tags clearfix">
-            {% for country in countries_to_render %}
-              <div class="country">{{ country }}</div>
-            {% endfor %}
-            </div>
-          {% endif %}
         </div>
       {% if is_logged_in %}
       <div class="post-actions">
@@ -62,27 +72,41 @@
           <li><a
               obj_id="{{ post.id }}"
               rec_type="market_item"
-              onClick="ga('send', 'event', 'button', 'click', 'recommend');"
+              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'recommend');}"
               class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
           {% if post.tweet_permission %}
             <li><a
               obj_id="{{ post.id }}"
               rec_type="market_item"
-              onClick="ga('send', 'event', 'button', 'click', 'tweet');"
+              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'tweet');}"
               class="tweet" href='#' alt="tweet post">{% trans 'Tweet' %}</a></li>
           {% endif %}
           <li><a
                 username="{{ post.owner.username }}"
                 subject="RE: {{ post.title }}"
                 readonlysub="1"
-                onClick="ga('send', 'event', 'button', 'click', 'direct-message');"
+                onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-message');}"
                 class="message private-message" href='#' alt="direct message author">{% trans 'Direct message' %}</a></li>
           <li><a
               report_url="{{ report_url }}"
-              onClick="ga('send', 'event', 'button', 'click', 'report-post');"
+              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'report-post');}"
               class="report" href='#' alt="report post">{% trans 'Report this post' %}</a></li>
+          {% if translator or request.user.userprofile.is_cm %}
+          <li>
+            <div class="post-languages-menu">
+              <a obj_id="{{ post.id }}" class="post-pre-init provide-translation" href="#">
+                <span>{% trans 'Provide a translation' %}</span>
+              </a>
+              <div id="post-languages-menu-container"></div>
+            </div>
+          </li>
+          {% endif %}
         </ul>
       </div>
+
+      <div id="post-translation-container" class="comments" style="display: none;">
+      </div>
+
       <div class="comments">
         <div class="comments-header">
           <div class="comment-count">
@@ -129,7 +153,7 @@
       {% if language_list.count > 0 %}
       <ul>
         {% for l in language_list %}
-        <li data-translate_url="{% url 'translate_market_item' post.id l.launguage_code %}">{{ l.name }}</li>
+          <li data-translate_url="{% url 'translation:market:translate' post.id %}?lang_code={{ l.language_code }}">{{ l.name }}</li>
         {% endfor %}
       </ul>
       {% else %}
@@ -139,25 +163,194 @@
     </div>
   </script>
 
-  <script type="text/template" id="comment-list-template">
-    <% _.each(comments, function(comment) { %>
-      <div comment_id="<%- comment.pk %>" class="comment">
-        <div class="avatar"><img src="<%- comment.fields.avatar %>"></div>
-        <div class="comment-header">
-          <a href="<%- comment.fields.profile_url %>" alt="poster profile"><%- comment.fields.username %></a>
-          <%- comment.fields.pub_date_formatted %>
-        </div>
+  <script type="text/template" id="init-languages-menu-template">
+    <div class="language-selector">
+    <ul>
+      <% _.each(languages, function(language) {
+       if (language.code != itemLanguage) { %>
+        <li data-lang-code="<%- language.code %>"><%- language.name %></li>
+      <% }}); %>
+    </ul>
+    </div>
+  </script>
+
+  <script type="text/template" id="translated-by-template">
+    <% if (humanTranslation) { %>
+        <a data-human="false" data-translate_url="<%- translateUrl %>" href="#">{% trans 'via Google Translate' %}</a>
+        <% if (humanAvailable) { %>
+          | <strong>{% trans 'via'%} <%- username %></strong>
+        <% } %>
+   <% } else { %>
+        <strong>{% trans 'via Google Translate' %}</strong>
+        <% if (humanAvailable) { %>
+          | <a data-human="true" data-translate_url="<%- translateUrl %>" href="#">{% trans 'via'%} <%- username %></a>
+        <% } %>
+   <% } %>
+  </script>
+
+  <script type="text/template" id="comment-template">
+    <div class="comment"
+         comment_id="<%- pk %>"
+         data-translate-language-url="<%- translate_language_url %>"
+         data-language="<%- language %>"
+         data-take-in-url="<%- take_in_url %>">
+      <div class="avatar"><img src="<%- avatar %>"></div>
+      <div class="comment-header">
+        <a href="<%- profile_url %>" alt="poster profile"><%- username %></a>
+        <%- pub_date_formatted %>
+      </div>
         <div class="comment-body">
-          <pre><%- comment.fields.contents %></pre>
-          <% if (comment.fields.username == document.getElementById('currentusername').innerHTML) { %>
+          <pre><%- contents %></pre>
+          <div class="translated_by" style="display:none;"></div>
+          <pre id="comment-body-translated" style="display: none;"></pre>
+          {% if translator or request.user.userprofile.is_cm %}
+          <div id="CommentButtons" class='comment-languages-menu'>
+            <a class="comment-pre-init"><span>{% trans 'Provide a translation' %}</span></a>
+            <div id="comment-languages-menu-container"></div>
+          </div>
+          {% endif %}
+          <% if (username == document.getElementById('currentusername').innerHTML) { %>
           <div id="CommentButtons">
-            <a class="delete-comment" href="<%- comment.fields.delete_url %>">{% trans "Delete"%}</a>
+            <a class="delete-comment" href="<%- delete_url %>">{% trans "Delete"%}</a>
           </div>
           <% } %>
         </div>
-      </div>
-    <% }); %>
+      <div id="comment-translation-container" class="comments"></div>
+    </div>
   </script>
+
+  <script type="text/template" id="comment-translation-area">
+    <form>
+      <input type="hidden" name="lang_code" value="<%- lang_code %>"/>
+      <% if (status == 3) { %>
+        {% trans 'Waiting for approval. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
+        <% if (user_is_owner) { %> <a href="#" class="back-to-edit">edit</a> <% } %>
+        <pre id="approve-details"><%= display_text %></pre>
+      <% } else if (status == 2 && !active) { %>
+        {% trans 'In correction now. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
+      <% } else if (status == 1 && !active) { %>
+        {% trans 'In translation now. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
+      <% } %>
+
+      <% if (active) { %>
+        <textarea class="form-control" name="details_translated"><%- details_translated %></textarea>
+      <% } %>
+
+      <% if (status != 3) { %>
+        <% if (active) { %>
+          <button type="button" class="btn btn-success" id="done" >{% trans 'Translation completed' %}</button>
+          <button type="button" class="btn" id="save_draft" >{% trans 'Save draft' %}</button>
+          <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Cancel translation' %}</button>
+        <% } %>
+      <% } %>
+
+      <% if (is_cm && status == 3) { %>
+        <hr>
+        <button type="button" class="btn btn-warning<% if (!approval_url) { %> disabled<% } %>" id="edit" >
+        <% if (active) { %>
+          {% trans 'Cancel editing' %}
+        <% } else { %>
+          {% trans 'Edit' %}
+        <% } %>
+        </button>
+{#        <button type="button" class="btn btn-danger<% if (!correction_url) { %> disabled<% } %>" id="correction" >{% trans 'Request a correction' %}</button>#}
+        <button type="button" class="btn btn-success<% if (!approval_url) { %> disabled<% } %>" id="confirm" >{% trans 'Approve' %}</button>
+        <button type="button" class="btn btn-danger<% if (!revoke_url) { %> disabled<% } %>" id="revoke" >{% trans 'Discard' %}</button>
+      <% } %>
+
+
+      <% if (error) { %>
+        <div class="alert alert-warning">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button><%- error %>
+        </div>
+      <% } %>
+
+     <% if (message) { %>
+        <div class="alert alert-success" style="margin-top: 15px;">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button><%- message %>
+        </div>
+      <% } %>
+
+      <% if (other_user_editing && is_cm) { %>
+        <div>{% trans 'If you want to take over the translation from another user you can do so below by clicking on the confirm button. That will make you the current owner of the translation and the existing owner will not be able to complete their translation.' %}</div>
+        <button style="margin-top: 10px;" type="button" class="btn btn-danger" id="take_over" >{% trans 'Confirm' %}</button>
+        <button style="margin-top: 10px;" type="button" class="btn" id="cancel_take_over" >{% trans 'Cancel' %}</button>
+      <% } %>
+
+
+    </form>
+  </script>
+
+  <script type="text/template" id="translation-area">
+    <form>
+      <input type="hidden" name="lang_code" value="<%- lang_code %>"/>
+      <% if (status == 3) { %>
+        {% trans 'Waiting for approval. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
+        <% if (user_is_owner) { %> <a href="#" class="back-to-edit">edit</a> <% } %>
+        <pre id="approve-title"><%= display_title %></pre>
+        <pre id="approve-details"><%= display_text %></pre>
+      <% } else if (status == 2 && !active) { %>
+        {% trans 'In correction now. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
+      <% } else if (status == 1 && !active) { %>
+        {% trans 'In translation now. Translator - ' %}<a href="<%- owner_url %>"><%- owner %></a>
+      <% } %>
+
+      <% if (active) { %>
+      <input class="form-control" name="title_translated" type="text" value="<%- title_translated %>">
+      <textarea class="form-control" name="details_translated"><%- details_translated %></textarea>
+      <% } %>
+
+      <% if (status != 3) { %>
+        <% if (active) { %>
+          <button type="button" class="btn btn-success" id="done" >{% trans 'Translation completed' %}</button>
+          <button type="button" class="btn" id="save_draft" >{% trans 'Save draft' %}</button>
+          <button type="button" class="btn btn-danger" id="take_off" >{% trans 'Cancel translation' %}</button>
+        <% } %>
+      <% } %>
+
+      <% if (is_cm && status == 3) { %>
+        <hr>
+        <button type="button" class="btn btn-warning<% if (!approval_url) { %> disabled<% } %>" id="edit" >
+        <% if (active) { %>
+          {% trans 'Cancel editing' %}
+        <% } else { %>
+          {% trans 'Edit' %}
+        <% } %>
+        </button>
+{#        <button type="button" class="btn btn-danger<% if (!correction_url) { %> disabled<% } %>" id="correction" >{% trans 'Request a correction' %}</button>#}
+        <button type="button" class="btn btn-success<% if (!approval_url) { %> disabled<% } %>" id="confirm" >{% trans 'Approve' %}</button>
+        <button type="button" class="btn btn-danger<% if (!revoke_url) { %> disabled<% } %>" id="revoke" >{% trans 'Discard' %}</button>
+      <% } %>
+
+      <% if (error) { %>
+        <div class="alert alert-warning" style="margin-top: 15px;">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button><%- error %>
+        </div>
+      <% } %>
+
+     <% if (message) { %>
+        <div class="alert alert-success" style="margin-top: 15px;">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button><%- message %>
+        </div>
+      <% } %>
+
+      <% if (other_user_editing && is_cm) { %>
+        <div>{% trans 'If you want to take over the translation from another user you can do so below by clicking on the confirm button. That will make you the current owner of the translation and the existing owner will not be able to complete their translation.' %}</div>
+        <button style="margin-top: 10px;" type="button" class="btn btn-danger" id="take_over" >{% trans 'Confirm' %}</button>
+        <button style="margin-top: 10px;" type="button" class="btn" id="cancel_take_over" >{% trans 'Cancel' %}</button>
+      <% } %>
+
+    </form>
+  </script>
+
   <script type="text/javascript">
     (function() {
       $('.gpopover').popover({
@@ -166,11 +359,27 @@
       ahr.initViewPost({
         getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}',
         addCommentUrl: "{% url 'add_comment' 'json' post.id %}",
-        deleteCommentUrl: "{% url 'delete_comment' %}"
+        deleteCommentUrl: "{% url 'delete_comment' %}",
+        userDefaultLangage: '{{ LANGUAGE_CODE }}',
+        postLanguage: '{{ post.language }}'
       });
+      {% if translator or request.user.userprofile.is_cm %}
+          ahr.initViewPostTranslation({
+            is_translator: {{ translator|yesno:"true,false" }},
+            is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }},
+            postLanguage: '{{ post.language }}',
+            translationLanguages: {{ translation_languages|safe }}
+          });
+         ahr.initCommentTranslationView({
+            is_translator: {{ translator|yesno:"true,false" }},
+            is_cm: {{ user.userprofile.is_cm|yesno:"true,false" }},
+            translationLanguages: {{ translation_languages|safe }}
+        });
+      {% endif %}
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar', {{ post.id }});
       this.recommend_widget = window.ahr.recommend_widget.initWidget(window.ahr.username);
     })();
   </script>
+
   {% endif %}
 {% endblock %}

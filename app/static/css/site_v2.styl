@@ -12,6 +12,7 @@ $border-color = #E0D7D8
 $border-color-alpha = rgba(224, 215, 216, 0.8)
 $facebook-blue = #3C5A9A
 $twitter-blue = #4099FF
+$linkedin-blue = #1f88bd
 $google-red = #DD4B39
 $separator-color = #ded8d6
 $footer-color = #B6ABA5
@@ -174,6 +175,9 @@ box-shadow()
 
 .btn-social-google
   background-color $google-red
+
+.btn-social-linkedin
+  background-color $linkedin-blue
 
 .btn-social
   margin-bottom 15px
@@ -504,6 +508,9 @@ $home-head-height = 85px
   .nav-menu-item-wrap.settings:hover
     .nav-menu-item
       background url("../images/v2/profile-settings-icon.png ") center 0 no-repeat
+  .translations
+    .nav-menu-item
+      background url("../images/v2/translate-icon.png") center 5px no-repeat
   .logout
     .nav-menu-item
       height 24px
@@ -691,7 +698,7 @@ h1,h2,h3,h4,h5,h6
     margin-bottom 5px
     font-size 14px
     font-weight bold
-    padding 5px 8px 5px 8px
+    padding 5px 8px 2px 8px
     border-radius 3px
   .tag
     border 2px solid $third-color
@@ -760,6 +767,7 @@ h1,h2,h3,h4,h5,h6
     min-width 150px
   li
     height 40px
+    width 100%
     line-height 40px
     padding-left 5px
     padding-right 5px
@@ -1396,16 +1404,19 @@ popoverDropdown(width, showIcon = true)
       padding 5px 0
       padding-left 30px
       color $inactive-font
-      margin-left 40px
+      margin-right 15px
     a.recommend
-      margin-left 0
       background url('../images/v2/recommend_off.png') no-repeat left 1px
     a.tweet
       background url('../images/v2/twitter_gray.png') no-repeat left 1px top 4px
+      padding-left 28px
     a.message
       background url('../images/v2/direct_message_icon.PNG') no-repeat left 4px
     a.report
       background url('../images/v2/flag_icon_gray.png') no-repeat left 1px
+    a.provide-translation
+      background url('../images/v2/translate-icon.png') no-repeat left center
+      padding-left 28px
     ul
       list-style none
       margin 0
@@ -1565,6 +1576,11 @@ popoverDropdown(width, showIcon = true)
   .nav-icon.settings:hover
     .nav-menu-item
       background url("../images/v2/profile-settings-icon.png") center -30px no-repeat
+  .translations
+    .nav-menu-item
+      height 30px
+      background url("../images/v2/profile-settings-icon.png") center 0 no-repeat
+
 
 .setting-page
   margin-top 20px
@@ -1807,3 +1823,15 @@ popoverDropdown(width, showIcon = true)
 // **************************************
 #cboxOverlay
   background #000000
+
+
+///
+///
+///
+#translations
+  .section
+    margin-top 20px
+    padding-bottom 10px
+    border-bottom 1px solid $hr-separator-color
+  .translation strong
+    font-size 14px

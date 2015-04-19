@@ -262,7 +262,8 @@
   </a>
 </script>
 <script type="text/template" id="content-menu-template">
-  <ul><li><a href="{% url 'user_profile' %}">
+  <ul>
+  <li><a href="{% url 'user_profile' %}">
     <div class="nav-menu-item-wrap profile">
       <div class="nav-menu-item"></div>
       {% trans "Profile"%}
@@ -274,6 +275,14 @@
       {% trans "Settings"%}
     </div>
   </a></li>
+  {% if request.user.userprofile.is_translator %}
+  <li><a href="{% url 'show_translations' %}">
+    <div class="nav-menu-item-wrap translations">
+      <div class="nav-menu-item"></div>
+      {% trans "Translations"%}
+    </div>
+  </a></li>
+  {% endif %}
   <li><form method="post" action="{% url 'account_logout' %}">
     {% csrf_token %}
     <a href="#" onclick="parentNode.submit();">
@@ -284,6 +293,12 @@
     </a>
   </form></li></ul>
   <div class="clearfix"></div>
+</script>
+
+<script type="text/template" id="loader-template">
+  <div class="ajaxloader">
+    <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
+  </div>
 </script>
 
 {% assets "js_all" %}

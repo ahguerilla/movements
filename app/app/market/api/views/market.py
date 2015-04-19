@@ -3,7 +3,10 @@ import math
 from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 from django.db import connection
 from django.db.models import Q
 from haystack.query import SearchQuerySet
@@ -13,8 +16,7 @@ import app.market as market
 from app.market.models import Questionnaire
 from app.market.forms import QuestionnaireForm
 from app.celerytasks import update_notifications
-from app.market.api.utils import translate_text
-import bleach
+
 
 def get_market_json(items, request=None, extra_data=None, is_safe=True):
     if is_safe:
@@ -46,7 +48,7 @@ def get_raw(request, from_item=0, to_item=None,
         'countries': tuple(countries),
         'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
         'user_id': user_id if user_id else request.user.id,
-        'date_now': datetime.now(),
+        'date_now': datetime.utcnow(),
         'closed_statuses': (
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_USER,
             market.models.MarketItem.STATUS_CHOICES.CLOSED_BY_ADMIN),
@@ -250,6 +252,7 @@ def close_market_item(request, obj_id):
 
     return HttpResponse(json.dumps(data), mimetype="application/json")
 
+
 def get_marketitems_fromto(request, sfrom, to, rtype):
     market_items = market.models.MarketItem.objects.raw(
         *get_raw(request, filter_by_owner=False))[int(sfrom):int(to)]
@@ -337,43 +340,3 @@ def set_stuck(user_id, item_id, stick):
         market.models.MarketItemStick.objects.get_or_create(viewer_id=user_id, item_id=item_id)
     else:
         market.models.MarketItemStick.objects.filter(viewer_id=user_id, item_id=item_id).delete()
-
-
-@login_required
-def translate_market_item(request, item_id, lang_code):
-    # find out if the translation already exists
-    translation = market.models.MarketItemTranslation.objects.filter(market_item_id=item_id, language=lang_code).first()
-    title_translation = ""
-    details_translation = ""
-    source_lang = ""
-    success = False
-
-    if not translation:
-        item = market.models.MarketItem.objects.get(id=item_id)
-        if item:
-            success, title_translation, source_lang = translate_text(item.title, lang_code)
-            if success:
-                success, details_translation, source_lang = translate_text(item.details, lang_code)
-            if success:
-                market_translation = market.models.MarketItemTranslation()
-                market_translation.market_item = item
-                market_translation.title_translated = title_translation
-                market_translation.details_translated = details_translation
-                market_translation.language = lang_code
-                market_translation.source_language = source_lang
-                market_translation.save()
-
-    else:
-        title_translation = translation.title_translated
-        details_translation = translation.details_translated
-        source_lang = translation.source_language
-        success = True
-
-    result = {
-        'response': "success" if success else "failed",
-        'title': bleach.clean(title_translation, strip=True),
-        'details': bleach.clean(details_translation, strip=True),
-        'source_language': source_lang,
-        'itemid': item_id,
-    }
-    return HttpResponse(json.dumps(result), mimetype="application/json")

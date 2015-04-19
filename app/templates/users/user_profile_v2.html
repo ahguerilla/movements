@@ -37,6 +37,12 @@
         <div class="profile-action-icon report-icon"></div>
         <div class="profile-action-text">{% trans "Report User"%}</div>
       </div>
+      {% if is_cm %}
+       <div username="{{ user_profile.user.username }}" class="rate-user rate_user">
+        <div class="profile-action-icon rate-icon"></div>
+        <div class="profile-action-text">{% trans "Rate user language skills"%}</div>
+      </div>
+      {% endif %}
     </div>
     {% endif %}
 
@@ -110,8 +116,11 @@
       {% if not is_self %}
       userId = {{ user_details.id }};
       {% endif %}
-      window.ahr.market.initProfile(userId);
+      window.ahr.market.initProfile({userId: userId, userDefaultLangage: '{{ LANGUAGE_CODE }}'});
       $('.gpopover').popover({
+        html: true
+      });
+      $('.tpopover').popover({
         html: true
       });
     });
@@ -120,10 +129,6 @@
   <script type="text/javascript">
   $(function(){
     var ProfileView = Backbone.View.extend({
-      resetitemrate: function (username, rate) {
-        window.location.reload();
-      },
-
       initialize: function(){
         this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar');
         this.reportUserWidget = window.ahr.reportUserDialog.initWidget('body');

@@ -1,8 +1,10 @@
-from django.utils import translation, timezone
+from django.utils import timezone
+from django.utils.timezone import timedelta
 import app.users.models as user_models
 from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
 from tinymce import models as tinymodels
 
 import django.contrib.auth as auth
@@ -56,12 +58,16 @@ class MarketItem(models.Model):
         _('feedback response'), blank=True, default='')
     is_featured = models.BooleanField(_('is featured'), default=False)
     featured_order_hint = models.CharField(max_length=5, default='c')
+    language = models.CharField(_('source language'), max_length=10, blank=False, default='en')
 
     def __unicode__(self):
         return self.details
 
     class Meta:
         app_label = "market"
+
+    def init_url(self, lang):
+        return reverse('translation:market:init', args=(self.pk, lang))
 
     def is_closed(self):
         if self.status == self.STATUS_CHOICES.CLOSED_BY_USER or self.status == self.STATUS_CHOICES.CLOSED_BY_ADMIN:
@@ -110,12 +116,12 @@ class MarketItem(models.Model):
         adict['fields']['is_safe'] = False
         adict['fields']['details'] = self.details
         adict['fields']['close_url'] = reverse('close_marketitem', args=[self.id])
-        reverse_name = 'edit_request' if self.item_type == MarketItem.TYPE_CHOICES.REQUEST else 'edit_offer'
-        adict['fields']['edit_url'] = reverse(reverse_name, args=[self.id])
+        adict['fields']['edit_url'] = reverse('edit_post', args=[self.id])
         adict['fields']['report_url'] = reverse('report_post', args=[self.id])
         adict['fields']['attributes_url'] = reverse('set_item_attributes_for_user', args=[self.id])
         adict['fields']['translate_language_url'] = \
-            reverse('translate_market_item', args=[self.id, translation.get_language()])
+            reverse('translation:market:translate', args=[self.id])
+        adict['fields']['language'] = self.language
         adict['fields']['usercore'] = self.owner.userprofile.score if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['userratecount'] = self.owner.userprofile.ratecount if hasattr(self.owner, 'userprofile') else 0
         adict['fields']['ratecount'] = self.ratecount
@@ -204,19 +210,6 @@ class MarketItemNextSteps(models.Model):
 
     def __unicode__(self):
         return u'%s / %s' % (self.next_step, self.date_of_action)
-
-
-class MarketItemTranslation(models.Model):
-    market_item = models.ForeignKey(
-        MarketItem, verbose_name=_('market item'))
-    language = models.CharField(_('language'), max_length=10, blank=False)
-    source_language = models.CharField(_('source language'), max_length=10, blank=False, default='en')
-    title_translated = models.TextField(_('title translated'), blank=False)
-    details_translated = models.TextField(_('details translated'), blank=False)
-    generated_at = models.DateField(_('date generated'), auto_now_add=True)
-
-    class Meta:
-        app_label = 'market'
 
 
 class MarketItemCollaborators(models.Model):

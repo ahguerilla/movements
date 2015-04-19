@@ -2,14 +2,15 @@ from __future__ import absolute_import
 
 import json
 
+
 from celery import Celery
 from django.db.models import Q
 from django.conf import settings
 
+
 from app.models import NotificationPing
 from app.sforce import add_market_item_to_salesforce, update_market_item_stats
-from app.users.models import UserProfile
-from app.market.models import Notification, MarketItemSalesforceRecord
+from app.market.models import CommentTranslation, MarketItemSalesforceRecord
 
 
 app = Celery('celerytasks', broker=settings.CELERY_BROKER)
@@ -17,6 +18,7 @@ app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 from djcelery_email.tasks import send_email
+from app.market.tasks.translations import *
 
 
 def get_notification_text(obj, update=False):
@@ -46,17 +48,18 @@ def find_people_interested_in(obj):
 def on_market_item_creation(market_item):
     create_notification(market_item)
     add_market_item_to_salesforce(market_item)
+    create_translations_for_item(market_item, MarketItemTranslation)
 
 
 @app.task(name="createNotification")
-def create_notification(obj):
-    profiles = find_people_interested_in(obj)
+def create_notification(market_item):
+    profiles = find_people_interested_in(market_item)
     for profile in profiles:
         notification = Notification()
         notification.user = profile.user
-        notification.item = obj
-        notification.avatar_user = obj.owner.username
-        notification.text = get_notification_text(obj)
+        notification.item = market_item
+        notification.avatar_user = market_item.owner.username
+        notification.text = get_notification_text(market_item)
         notification.save()
 
 
@@ -83,12 +86,14 @@ def create_comment_notification(obj, comment, username):
             notification.text = get_notification_comment_text(obj, username, comment)
             notification.save()
             created.add(cmnt.owner.id)
+    create_translations_for_item(comment, CommentTranslation)
 
 
 @app.task(name='app.celery.on_market_item_update')
 def on_market_item_update(market_item):
     update_notifications(market_item)
     add_market_item_to_salesforce(market_item)
+    mark_translations_for_update(market_item)
 
 
 @app.task(name="updateNotifications")
@@ -139,4 +144,3 @@ def notification_ping(email_to):
 @app.task(name='update_salesforce')
 def update_salesforce():
     update_market_item_stats()
-

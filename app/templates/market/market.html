@@ -162,7 +162,8 @@
     $(document).ready(function(){
       window.ahr.market.initMarket({
         skills: {{ interests|safe }},
-        issues: {{ issues|safe }}
+        issues: {{ issues|safe }},
+        userDefaultLangage: '{{ LANGUAGE_CODE }}'
       });
     });
   </script>
