@@ -1692,10 +1692,27 @@ input.borderless-control:focus:invalid:focus {
 #stuck-marketitems .market-place-item a:hover {
   text-decoration: none;
 }
+#marketitems .market-place-item .market-place-card-bg,
+#stuck-marketitems .market-place-item .market-place-card-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 14px;
+  background-color: #ff4545;
+}
+#marketitems .market-place-item .market-place-card-bg .inner,
+#stuck-marketitems .market-place-item .market-place-card-bg .inner {
+  background: url("../images/v2/request_with_image.png") no-repeat left center;
+  height: 100%;
+  width: 17px;
+}
 #marketitems .market-place-item .post-image,
 #stuck-marketitems .market-place-item .post-image {
   position: absolute;
-  left: 18px;
+  left: 15px;
+  height: 100%;
+  width: 66px;
 }
 #marketitems .market-place-item .item-type,
 #stuck-marketitems .market-place-item .item-type {
@@ -1818,6 +1835,14 @@ input.borderless-control:focus:invalid:focus {
 #stuck-marketitems .market-place-item.offer {
   background: #005d86 url("../images/v2/offer_icon.png") no-repeat 10px center;
 }
+#marketitems .market-place-item.offer .market-place-card-bg,
+#stuck-marketitems .market-place-item.offer .market-place-card-bg {
+  background-color: #005d86;
+}
+#marketitems .market-place-item.offer .market-place-card-bg .inner,
+#stuck-marketitems .market-place-item.offer .market-place-card-bg .inner {
+  background: url("../images/v2/offer_with_image.png") no-repeat left center;
+}
 #marketitems .market-place-item.offer .item-type,
 #stuck-marketitems .market-place-item.offer .item-type {
   color: #005d86;
@@ -1825,14 +1850,7 @@ input.borderless-control:focus:invalid:focus {
 #marketitems .market-place-item.with-image,
 #stuck-marketitems .market-place-item.with-image {
   padding-left: 81px;
-}
-#marketitems .market-place-item.with-image.request,
-#stuck-marketitems .market-place-item.with-image.request {
-  background: #fff url("../images/v2/request_with_image.png") no-repeat left center;
-}
-#marketitems .market-place-item.with-image.offer,
-#stuck-marketitems .market-place-item.with-image.offer {
-  background: #fff url("../images/v2/offer_with_image.png") no-repeat left center;
+  background: #fff;
 }
 #marketitems .market-place-item.request.item-hidden .item-type {
   color: #fb9d9e;
