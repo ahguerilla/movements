@@ -26,6 +26,7 @@ $hidden-item-color = #FBFAFB
 $hidden-offer-color = #7CA9BF
 $hidden-request-color = #FB9D9E
 $hr-separator-color = #dad8d9
+$post-section-bg = #e6e4e5
 
 // **************************************
 // font colors
@@ -1424,6 +1425,42 @@ popoverDropdown(width, showIcon = true)
     font-size 14px
     font-weight bold
     margin 20px 0
+  .how-you-can-help
+    background-color $post-section-bg
+    margin-top 10px
+    border-radius 5px
+    padding 2px 8px
+    box-shadow 0 1px 2px 0 #b4b2b3
+    font-size 12px
+    width 280px
+    position relative
+    .title
+      font-weight bold
+    div.title
+      cursor pointer
+    .expand
+      float right
+    ul
+      display none
+      list-style none
+      padding 5px
+      position absolute
+      left 0
+      width 280px
+      border-bottom-left-radius 5px
+      border-bottom-right-radius 5px
+      background-color $post-section-bg
+      li
+        margin-bottom 5px
+      li:last-child
+        margin-bottom 0
+  .how-you-can-help:hover
+    box-shadow 0 0 2px 0 #b4b2b3
+  .how-you-can-help.expanded
+    background-color #d4d2d3
+    ul
+      display block
+      margin-top 2px
   h1
     margin-top 0
   .post
@@ -1438,7 +1475,8 @@ popoverDropdown(width, showIcon = true)
       font-weight bold
       margin-top 20px
   .post-images
-    background-color #EFEFEF
+    background-color $post-section-bg
+    box-shadow 0 1px 2px 0 #b4b2b3
     padding 10px
     border-radius 5px
   .post-actions

@@ -28,14 +28,20 @@ class Offer(models.MarketItem):
     objects = PostManager('offer')
 
 
+class MarketItemHowCanYouHelpInline(admin.TabularInline):
+    model = models.MarketItemHowCanYouHelp
+    extra = 1
+
+
 class MarketItemImageInline(admin.TabularInline):
     model = models.MarketItemImage
+    extra = 0
 
 
 class PostAdmin(admin.ModelAdmin):
     exclude = ('item_type',)
     list_display = ('title', 'owner', 'pub_date', 'published')
-    inlines = (MarketItemImageInline, )
+    inlines = (MarketItemImageInline, MarketItemHowCanYouHelpInline, )
 
     def get_readonly_fields(self, request, obj=None):
         if obj:

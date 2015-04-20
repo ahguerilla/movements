@@ -7,7 +7,8 @@
       'click .delete-comment': 'deleteComment',
       'click .tweet': 'shareTwitter',
       'click div.post .translated_by a': 'changePostTranslation',
-      'click div.comment-body .translated_by a': 'changeCommentTranslation'
+      'click div.comment-body .translated_by a': 'changeCommentTranslation',
+      'click .how-you-can-help': 'toggleHowYouCanHelp'
     },
 
     initialize: function(options) {
@@ -275,6 +276,11 @@
           }
         }
       })
+    },
+
+    toggleHowYouCanHelp: function () {
+      var $howYouCanHelp = this.$el.find('.how-you-can-help');
+      $howYouCanHelp.toggleClass('expanded');
     }
   });
 
