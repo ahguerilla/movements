@@ -157,6 +157,17 @@ class MarketItem(models.Model):
         return adict
 
 
+class MarketItemHowCanYouHelp(models.Model):
+    item = models.ForeignKey(MarketItem)
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+
+    class Meta:
+        app_label = "market"
+        verbose_name_plural = "Extra how you can help entries"
+        verbose_name = "How you can help entry"
+
+
 def market_image_upload_handler(instance, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)

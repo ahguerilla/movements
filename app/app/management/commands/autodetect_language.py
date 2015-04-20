@@ -17,13 +17,13 @@ class Command(BaseCommand):
         for item in MarketItem.objects.all():
             try:
                 item.language = detect_language(item.details)
-                item.save()
+                item.save(update_fields=['language'])
             except Exception as ex:
                 _logger.exception(ex)
         for comment in Comment.objects.all():
             try:
                 comment.language = detect_language(comment.contents)
-                comment.save()
+                comment.save(update_fields=['language'])
             except Exception as ex:
                 _logger.exception(ex)
 

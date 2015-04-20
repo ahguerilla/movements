@@ -13,13 +13,27 @@
       <div class="post-header {{ post.item_type|lower }} %>">
         <span>{{ post.item_type_display }}</span>
       </div>
-      {% if request.user == post.owner %}
-        <div class="pull-right">
-          <a href="{% url 'edit_post' post.id %}" alt="edit post" class="btn btn-action" style="padding: 4px 8px 1px; margin-top: 10px;"/>
-            {% trans 'Edit Post' %}
-          </a>
-        </div>
-      {% endif %}
+      <div class="pull-right">
+        {% if request.user == post.owner %}
+            <a href="{% url 'edit_post' post.id %}" alt="edit post" class="btn btn-action" style="padding: 4px 8px 1px; margin-top: 10px;"/>
+              {% trans 'Edit Post' %}
+            </a>
+        {% else %}
+          <div class="how-you-can-help">
+            <div class="title">{% trans 'How you can Help' %} <span class="expand">+</span></div>
+            <ul>
+              <li><span class="title">{% trans 'Social Media' %} - </span>{% trans "Share Movements' posts across your social media platforms. For example, you can share Movements' users' requests with your representatives." %}</li>
+              <li><span class="title">{% trans 'Tweet' %} - </span>{% trans "posts that interest you." %}</li>
+              <li><span class="title">{% trans 'Recommend a Friend' %} - </span>{% trans "If you have a friend with the skills in demand on our network, tell them about us!" %}</li>
+              {% for item in post.marketitemhowcanyouhelp_set.all %}
+                <li>
+                  <span class="title">{{ item.title }} - </span> {{ item.text }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
       <div class="post-date">
         {{ post.pub_date|date:"G:i"}} {%  trans 'on' %} {{ post.pub_date|date:"d M Y" }}
       </div>

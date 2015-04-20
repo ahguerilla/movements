@@ -14,6 +14,14 @@ from app.market.models import MarketItem, MarketItemSalesforceRecord
 
 
 def _dict_for_salesforce(market_item):
+    countries = market_item.countries.all()
+    region_dict = {}
+    for c in countries:
+        if c.region_id not in region_dict:
+            region_dict[c.region_id] = c.region.name
+    regions = region_dict.values()
+    if len(regions) >= 3:
+        regions.append('Global')
     return {
         'Movements_Number__c': market_item.id,
         'Movements_Title__c': market_item.title,
@@ -29,7 +37,8 @@ def _dict_for_salesforce(market_item):
         'Date_Posted__c': market_item.pub_date.date().isoformat(),
         'Skill__c': ';'.join([market_item.specific_skill or ''] + [i.name for i in market_item.interests.all()]),
         'Issues__c': ';'.join([market_item.specific_issue or ''] + [i.issues for i in market_item.issues.all()]),
-        'Location__c': ';'.join([x.countries for x in market_item.countries.all()]),
+        'Location__c': ';'.join([x.countries for x in countries]),
+        'Region__c': ';'.join(regions),
     }
 
 
