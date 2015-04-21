@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from .models import NewsletterSignups
+from .models import NewsletterSignups, Partner
 from django.utils import translation
 import json
 import re
@@ -11,7 +11,8 @@ import re
 def home(request):
     if request.user.is_authenticated() and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('exchange'))
-    view_dict = {'sign_up': True}
+    partners = Partner.objects.filter(enabled=True).all()
+    view_dict = {'partners': partners}
     return render_to_response('ahr/home_v2.html', view_dict, context_instance=RequestContext(request))
 
 

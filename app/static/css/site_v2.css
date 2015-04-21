@@ -1011,6 +1011,31 @@ h6 {
   width: 66px;
   margin: 20px 0 0 15px;
 }
+.landing-page .partners {
+  background-color: #fff;
+  padding: 5px 0 20px 0;
+}
+.landing-page .partners .title {
+  color: #756b65;
+  font-size: 24px;
+  font-weight: bold;
+}
+.landing-page .partners .list {
+  text-align: center;
+}
+.landing-page .partners .list .partner {
+  display: inline-block;
+  margin-right: 15px;
+}
+.landing-page .partners .list .partner img {
+  vertical-align: baseline;
+}
+.landing-page .partners .list .partner .popover {
+  margin-top: 10px;
+}
+.landing-page .partners .list .partner .popover-title {
+  color: #262626;
+}
 .landing-page .landing-content {
   color: #fff;
   height: 499px;

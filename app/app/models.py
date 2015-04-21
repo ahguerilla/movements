@@ -1,3 +1,4 @@
+import uuid
 from django.db.models.signals import post_save
 from menu import invalidate_menu_cache
 
@@ -34,6 +35,23 @@ class NewsletterSignups(models.Model):
 
     def __unicode__(self):
         return self.email
+
+
+def partner_image_upload_handler(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return "partner/images/{0}".format(filename)
+
+
+class Partner(models.Model):
+    logo = models.ImageField(upload_to=partner_image_upload_handler)
+    title = models.CharField(max_length=100)
+    text = models.TextField()
+    enabled = models.BooleanField(default=True, blank=True)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    class Meta(object):
+        ordering = ('order',)
 
 
 class SafeVPNLink(CMSPlugin):
