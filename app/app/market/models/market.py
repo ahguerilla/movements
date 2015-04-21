@@ -118,11 +118,15 @@ class MarketItem(models.Model):
         adict['fields']['translate_language_url'] = ""
         adict['fields']['tweet_permission'] = self.tweet_permission
         if hasattr(self, 'image_url') and self.image_url is not None:
-            thumbnailer = get_thumbnailer(self.image_url)
-            adict['fields']['image_url'] = thumbnailer.get_thumbnail({'size': (66, 66),
-                                                                      'upscale': True,
-                                                                      'crop': '0, 0',
-                                                                      'background': '#FFFFFF'}).url
+            try:
+                thumbnailer = get_thumbnailer(self.image_url)
+                adict['fields']['image_url'] = thumbnailer.get_thumbnail({'size': (66, 66),
+                                                                          'upscale': True,
+                                                                          'crop': '0, 0',
+                                                                          'background': '#FFFFFF'}).url
+            except Exception as ex:
+                _logger.exception(ex)
+                adict['fields']['image_url'] = False
         else:
             adict['fields']['image_url'] = False
         return adict
