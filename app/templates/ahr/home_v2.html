@@ -3,6 +3,7 @@
 {% load url from future %}
 {% load i18n %}
 {% load cms_tags %}
+{% load thumbnail %}
 
 {% block header_nav %}
 <nav class="navbar navbar-default header-nav home-page-nav" role="navigation">
@@ -106,6 +107,27 @@
     </div>
   </div>
   <div class="landing-page">
+    {% if partners %}
+      <div class="partners">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-offset-1 col-sm-10">
+              <div class="title">{% trans 'Our Partners' %}</div>
+              <div class="list">
+                {% for partner in partners %}
+                  {% thumbnail partner.logo 0x40 upscale as thumb %}
+                  <div class="partner">
+                    <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+                       title="{{ partner.title }}" data-content="{{ partner.text }}">
+                      <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}"/></a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
     <div class="container">
       <div class="testimonial">
         <div class="row">
@@ -158,24 +180,25 @@
 {% block javascript %}
   <script type="text/javascript">
   $(document).ready(function(){
-      $("#home-page-carousel").carousel({interval: 8000, pause: 'hover'});
-      $('.set-lang').click(function(ev){
-        ev.preventDefault();
-        var lang = $(ev.currentTarget).data('language');
-        $.ajax({
-          url: '{% url 'set_lang' %}',
-          type: 'POST',
-          dataType: 'json',
-          data: {
-            language_code: lang
-          },
-          success: function(ev){
-            if(ev.result === 'success'){
-              window.location.reload();
-            }
+    $("#home-page-carousel").carousel({interval: 8000, pause: 'hover'});
+    $('.partners a').popover();
+    $('.set-lang').click(function(ev){
+      ev.preventDefault();
+      var lang = $(ev.currentTarget).data('language');
+      $.ajax({
+        url: '{% url 'set_lang' %}',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          language_code: lang
+        },
+        success: function(ev){
+          if(ev.result === 'success'){
+            window.location.reload();
           }
-        });
+        }
       });
+    });
   });
   </script>
 {% endblock %}

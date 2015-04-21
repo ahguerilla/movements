@@ -4,18 +4,15 @@ from django.shortcuts import render, redirect
 from django.utils.html import escape
 from django.core.urlresolvers import reverse
 
+from adminsortable2.admin import SortableAdminMixin
 from cms.extensions import PageExtensionAdmin
 
-from .models import NewsletterSignups, MenuExtension, NotificationPing
+from .models import NewsletterSignups, MenuExtension, NotificationPing, Partner
 from .celerytasks import notification_ping
 
 
 class MenuExtensionAdmin(PageExtensionAdmin):
     pass
-
-admin.site.register(MenuExtension, MenuExtensionAdmin)
-admin.site.register(NewsletterSignups)
-admin.site.register(NotificationPing)
 
 
 class LogEntryAdmin(admin.ModelAdmin):
@@ -70,8 +67,6 @@ class LogEntryAdmin(admin.ModelAdmin):
             .prefetch_related('content_type')
 
 
-admin.site.register(LogEntry, LogEntryAdmin)
-
 
 @admin.site.register_view('market/testing/notification_ping', urlname="notification_ping")
 def process_buy_orders(request):
@@ -82,3 +77,14 @@ def process_buy_orders(request):
         notification_ping.delay(email_to)
         return redirect(reverse('admin:app_notificationping_changelist'))
     return render(request, 'admin/testing/notification_ping.html', {})
+
+
+class SortableAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+
+admin.site.register(MenuExtension, MenuExtensionAdmin)
+admin.site.register(NewsletterSignups)
+admin.site.register(NotificationPing)
+admin.site.register(Partner, SortableAdmin)
+admin.site.register(LogEntry, LogEntryAdmin)
