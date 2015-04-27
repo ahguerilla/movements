@@ -26,6 +26,7 @@ def get_approvable_items_for_profile(profile):
     market_item_translations = MarketItemTranslation \
         .objects \
         .select_related('market_item') \
+        .order_by('-market_item__pub_date', 'language') \
         .filter(get_language_pairing_filter(languages),
                 c_status=TranslationBase.inner_state.APPROVAL)
     return market_item_translations
@@ -37,6 +38,7 @@ def get_translatable_items_for_profile(profile):
     market_item_translations = MarketItemTranslation \
         .objects \
         .select_related('market_item') \
+        .order_by('-market_item__pub_date', 'language') \
         .filter(get_language_pairing_filter(languages),
                 Q(status_filter) | Q(needs_update=True))
     return market_item_translations
