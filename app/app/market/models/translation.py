@@ -5,6 +5,7 @@ import requests
 import urllib
 import json
 from datetime import datetime
+from HTMLParser import HTMLParser
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -106,6 +107,8 @@ def translate_text(original_text, language):
                     success = True
                     if source_language == language:
                         translation = original_text
+                    else:
+                        translation = HTMLParser.unescape.__func__(HTMLParser, translation)
     except Exception as ex:
         _logger.exception(ex)
     return success, translation, source_language
