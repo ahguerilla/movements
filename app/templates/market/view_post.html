@@ -27,7 +27,7 @@
               <li><span class="title">{% trans 'Recommend a Friend' %} - </span>{% trans "If you have a friend with the skills in demand on our network, tell them about us!" %}</li>
               {% for item in post.marketitemhowcanyouhelp_set.all %}
                 <li>
-                  <span class="title">{{ item.title }} - </span> {{ item.text }}
+                  <span class="title">{{ item.title }} - </span> {{ item.text|safe }}
                 </li>
               {% endfor %}
             </ul>

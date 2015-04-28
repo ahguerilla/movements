@@ -53,6 +53,9 @@ class Partner(models.Model):
     class Meta(object):
         ordering = ('order',)
 
+    def __unicode__(self):
+        return self.title
+
 
 class SafeVPNLink(CMSPlugin):
     link_text = models.CharField(max_length=500)

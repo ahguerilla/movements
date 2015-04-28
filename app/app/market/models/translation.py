@@ -5,6 +5,7 @@ import requests
 import urllib
 import json
 from datetime import datetime
+from HTMLParser import HTMLParser
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -26,6 +27,7 @@ def get_approvable_items_for_profile(profile):
     market_item_translations = MarketItemTranslation \
         .objects \
         .select_related('market_item') \
+        .order_by('-market_item__pub_date', 'language') \
         .filter(get_language_pairing_filter(languages),
                 c_status=TranslationBase.inner_state.APPROVAL)
     return market_item_translations
@@ -37,6 +39,7 @@ def get_translatable_items_for_profile(profile):
     market_item_translations = MarketItemTranslation \
         .objects \
         .select_related('market_item') \
+        .order_by('-market_item__pub_date', 'language') \
         .filter(get_language_pairing_filter(languages),
                 Q(status_filter) | Q(needs_update=True))
     return market_item_translations
@@ -104,6 +107,8 @@ def translate_text(original_text, language):
                     success = True
                     if source_language == language:
                         translation = original_text
+                    else:
+                        translation = HTMLParser.unescape.__func__(HTMLParser, translation)
     except Exception as ex:
         _logger.exception(ex)
     return success, translation, source_language

@@ -14,14 +14,16 @@
        data-attributes-url="<%- attributes_url %>"
        data-translate-language-url="<%- translate_language_url %>">
     <% if (image_url) { %>
-      <img src="<%- image_url %>" class="post-image" />
-      <div class="market-place-card-bg">
-          <div class="inner"></div>
-      </div>
+      <a href="/market/<%- pk %>" title="Open post">
+          <img src="<%- image_url %>" class="post-image" />
+          <div class="market-place-card-bg">
+              <div class="inner"></div>
+          </div>
+      </a>
     <% } %>
     <div class="market-item-card">
       <div class="body">
-        <a href="/market/<%- pk %>" alt="Open post">
+        <a href="/market/<%- pk %>" title="Open post">
           <div class="item-type"><%- item_type_display %></div>
           <div class="title"><%- title %></div>
         </a>

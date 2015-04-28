@@ -8,7 +8,7 @@
       'click .tweet': 'shareTwitter',
       'click div.post .translated_by a': 'changePostTranslation',
       'click div.comment-body .translated_by a': 'changeCommentTranslation',
-      'click .how-you-can-help': 'toggleHowYouCanHelp'
+      'click .how-you-can-help .title': 'toggleHowYouCanHelp'
     },
 
     initialize: function(options) {
