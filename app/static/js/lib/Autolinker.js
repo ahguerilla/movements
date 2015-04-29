@@ -209,6 +209,31 @@
 				')'
 			].join( "" ), 'gi' );
 		} )(),
+
+		videoPatterns: [ //www.youtube-nocookie.com
+			{provider: 'youtube', pattern: /youtube(?:-nocookie)?.com(?:.+)v=([^&]+)/},
+			{provider: 'youtube', pattern: /youtu.be\/([a-z1-9.-_]+)/},
+			{provider: 'vimeo', pattern: /vimeo.com\/(?:.*\/)*([1-9.-_]+)/}
+		],
+
+		videoEmbedDefaults: {
+			width: '100%',
+			height: ''
+		},
+
+		createVideoEmbed: function (options) {
+			options = $.extend({}, this.videoEmbedDefaults, options);
+			if (options.provider == 'youtube') {
+				return "<div class='embed-container'>" +
+						'<iframe src="//www.youtube.com/embed/' + options.id +
+						'?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe></div>';
+			} else if (options.provider == 'vimeo') {
+				return "<div class='embed-container'>" +
+						"<iframe src='https://player.vimeo.com/video/" + options.id +
+						"' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>";
+			}
+			return '';
+		},
 		
 		/**
 		 * @private
@@ -459,10 +484,25 @@
 		 * @return {String} The full HTML for the anchor tag.
 		 */
 		createAnchorTag : function( linkType, anchorHref, anchorText ) {
-			var attributesStr = this.createAnchorAttrsStr( linkType, anchorHref );
-			anchorText = this.processAnchorText( anchorText );
-			
-			return '<a ' + attributesStr + '>' + anchorText + '</a>';
+			var videoInfo = null;
+			if (linkType === 'url') {
+				for (var ixPattern = 0; (ixPattern < this.videoPatterns.length) && videoInfo == null; ixPattern++) {
+					var match = this.videoPatterns[ixPattern].pattern.exec(anchorHref);
+					if (!match) continue;
+					videoInfo = {
+						provider: this.videoPatterns[ixPattern].provider,
+						id: match[1]
+					}
+				}
+			}
+
+			if (videoInfo) {
+				return this.createVideoEmbed(videoInfo);
+			} else {
+				var attributesStr = this.createAnchorAttrsStr(linkType, anchorHref);
+				anchorText = this.processAnchorText(anchorText);
+				return '<a ' + attributesStr + '>' + anchorText + '</a>';
+			}
 		},
 		
 		
