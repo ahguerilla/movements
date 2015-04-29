@@ -210,7 +210,7 @@
 			].join( "" ), 'gi' );
 		} )(),
 
-		videoPatterns: [ //www.youtube-nocookie.com
+		videoPatterns: [
 			{provider: 'youtube', pattern: /youtube(?:-nocookie)?.com(?:.+)v=([^&]+)/},
 			{provider: 'youtube', pattern: /youtu.be\/([a-z1-9.-_]+)/},
 			{provider: 'vimeo', pattern: /vimeo.com\/(?:.*\/)*([1-9.-_]+)/}
