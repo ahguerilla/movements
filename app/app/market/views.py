@@ -3,6 +3,7 @@ import json
 from collections import defaultdict
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.core.exceptions import MultipleObjectsReturned
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
@@ -78,9 +79,12 @@ def show_post(request, post_id):
     translation_languages = []
     translator = False
     if request.user.is_authenticated():
-        __, created = MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
-        if created:
-            MarketItemSalesforceRecord.mark_for_update(post_id)
+        try:
+            __, created = MarketItemViewCounter.objects.get_or_create(viewer_id=request.user.id, item_id=post_id)
+            if created:
+                MarketItemSalesforceRecord.mark_for_update(post_id)
+        except MultipleObjectsReturned:
+            pass
         language_list = request.user.userprofile.languages.all()
         translation_languages = list(request.user.userprofile.translation_languages.all())
     if len(translation_languages) > 1:
