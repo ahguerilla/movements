@@ -195,7 +195,7 @@ class UserProfile(models.Model):
     unsubscribe_uuid = models.CharField(max_length=50, null=True, blank=True)
 
     def get_unsubscribe_uuid(self):
-        if self.unsubscribe_uuid is None:
+        if not self.unsubscribe_uuid:
             self.unsubscribe_uuid = str(uuid.uuid4())
             self.save(update_fields=['unsubscribe_uuid'])
         return self.unsubscribe_uuid
