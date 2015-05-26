@@ -17,7 +17,7 @@ def home(request):
 
 
 def youtube_verification(request):
-    return render_to_response('google6f0eedc5c58aa2b7.html')
+    return render_to_response('google73f6a199341a73ff.html')
 
 
 def terms_and_conditions(request):
