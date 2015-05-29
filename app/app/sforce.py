@@ -45,7 +45,7 @@ def _dict_for_salesforce(market_item):
 def _authenticate():
     if not settings.SALESFORCE_INTEGRATION_ENABLED:
         return None
-    sfdc = salesforce.Salesforce(sandbox=settings.SALESFORCE_USE_SANDBOX)
+    sfdc = salesforce.Salesforce(sandbox=settings.SALESFORCE_USE_SANDBOX, version=31.0)
     sfdc.authenticate(username=settings.SALESFORCE_USERNAME,
                       password=settings.SALESFORCE_PASSWORD,
                       client_id=settings.SALESFORCE_CLIENT_ID,
