@@ -862,6 +862,13 @@ h6 {
 .cms-left-column ul li:last-child {
   border-bottom: none;
 }
+.cms-body-content .success-stories p {
+  clear: both;
+}
+.cms-body-content .success-stories img {
+  float: left;
+  margin-right: 10px;
+}
 .notification-count {
   position: absolute;
   right: -8px;

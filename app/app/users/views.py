@@ -36,6 +36,7 @@ from django.core.mail import EmailMessage
 import constance
 from django.template.loader import render_to_string
 from django.utils import translation
+from two_factor.utils import default_device
 
 
 def render_settings(request):
@@ -458,6 +459,11 @@ class RatelimitedLoginForm(LoginForm):
     @ratelimit(key='post:login', rate='3/m', method=['POST'])
     @ratelimit(key='ip', rate='20/m', method=['POST'])
     def login(self, request, redirect_url=None):
+        # prevent admin users hijacking this login page to circumvent
+        # two factor authentication
+        if default_device(self.user):
+            raise Http404
+
         if request.limited:
             return render(request, 'account/ratelimit_triggered.html', {})
         return super(RatelimitedLoginForm, self).login(request, redirect_url)

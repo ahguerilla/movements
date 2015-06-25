@@ -1,0 +1,23 @@
+{% extends "adminplus/base.html" %}
+{% load future %}
+
+{% block extrahead %}
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">Home</a> &rsaquo;
+    Authentication
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3 panel panel-default" style="padding-bottom: 20px;">
+        {% block content_two_factor %}{% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

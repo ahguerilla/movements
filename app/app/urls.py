@@ -15,6 +15,7 @@ js_info_dict = {
 urlpatterns = patterns(
     '',
     url(r'^$', 'app.views.home', name='home'),
+    url(r'', include('two_factor.urls', 'two_factor')),
     url(r'^google73f6a199341a73ff.html$', 'app.views.youtube_verification', name='youtube_verification'),
     url(r'^set-language', 'app.views.set_language', name='set_lang'),
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
