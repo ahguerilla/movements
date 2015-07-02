@@ -213,7 +213,9 @@
 		videoPatterns: [
 			{provider: 'youtube', pattern: /youtube(?:-nocookie)?.com(?:.+)v=([^&]+)/},
 			{provider: 'youtube', pattern: /youtu.be\/([a-z1-9.-_]+)/},
-			{provider: 'vimeo', pattern: /vimeo.com\/(?:.*\/)*([1-9.-_]+)/}
+			{provider: 'vimeo', pattern: /vimeo.com\/(?:.*\/)*([1-9.-_]+)/},
+			{provider: 'facebook', pattern: /facebook.com\/video.php\?v=*([1-9.-_]+)/},
+			{provider: 'facebook', pattern: /facebook.com\/(.*)?\/videos\/(.*)?/}
 		],
 
 		videoEmbedDefaults: {
@@ -231,6 +233,9 @@
 				return "<div class='embed-container'>" +
 						"<iframe src='https://player.vimeo.com/video/" + options.id +
 						"' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>";
+			} else if (options.provider == 'facebook') {
+				return "<div class='fb-video' data-href='" + options.videoUrl + "' " +
+						"data-allowfullscreen='true' data-width='100%'></div>";
 			}
 			return '';
 		},
@@ -491,7 +496,8 @@
 					if (!match) continue;
 					videoInfo = {
 						provider: this.videoPatterns[ixPattern].provider,
-						id: match[1]
+						id: match[1],
+						videoUrl: anchorHref
 					}
 				}
 			}
