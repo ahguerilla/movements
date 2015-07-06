@@ -1026,13 +1026,15 @@ h6 {
   color: #756b65;
   font-size: 24px;
   font-weight: bold;
+  margin: 5px 0;
 }
 .landing-page .partners .list {
   text-align: center;
 }
 .landing-page .partners .list .partner {
   display: inline-block;
-  margin-right: 15px;
+  margin: 10px 15px;
+  min-width: 140px;
 }
 .landing-page .partners .list .partner img {
   vertical-align: baseline;

@@ -124,6 +124,9 @@
                  title="{{ partner.title }}" data-content="{{ partner.text }}">
                 <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}"/></a>
             </div>
+            {% if forloop.counter|divisibleby:5 %}
+            <br />
+            {% endif %}
           {% endfor %}
         </div>
       </div>
