@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from two_factor.utils import default_device
 
 
 class FirstLoginMiddleware(object):
@@ -15,6 +16,20 @@ class FirstLoginMiddleware(object):
                 request.user.is_staff]):
             return HttpResponseRedirect(
                 '%s?next=%s' % (target_url, current_url))
+
+
+class ForceTwoFactorForStaffMiddleware(object):
+    """ Force admin to have 2 factor enabled """
+
+    def process_request(self, request):
+        allowed_urls = [reverse('admin:logout')]
+        requested_url = request.get_full_path()
+        two_factor_base = reverse('two_factor:profile')
+        if two_factor_base not in requested_url \
+           and requested_url not in allowed_urls \
+           and request.user and any([request.user.is_superuser, request.user.is_staff]) \
+           and not default_device(request.user):
+                return HttpResponseRedirect(reverse('two_factor:setup'))
 
 
 class CsrfLoginMiddleware(object):
