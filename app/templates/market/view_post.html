@@ -8,9 +8,11 @@
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="{{ post.pub_date }}" />
 <meta property="article:modified_time" content="{{ post.pub_date }}" />
+<meta property="article:author" content="{{ post.owner }}" />
 <meta property="og:title" content="{{ post.title }}">
 <meta property="og:description" content="Crowdsourcing human rights.">
-<meta property="og:url" content="https://www.movements.org/market/{{ post.pk }}/{{ post.title|slugify }}">
+{#<meta property="og:url" content="https://www.movements.org/market/{{ post.pk }}/{{ post.title|slugify }}">#}
+<meta property="og:url" content="https://www.movements.org/market/{{ post.pk }}">
 <meta property="og:site_name" content="Movements.Org">
   {% if images %}
     {% thumbnail images.0.image 1200x630 upscale as thumb %}
