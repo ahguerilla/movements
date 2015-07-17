@@ -4,6 +4,13 @@
 
   {% if custom_list %}
     <div class="module">
+      <h2>Group Management</h2>
+      <ul>
+          <li><a href="{% url 'admin:app_groupuser_changelist' %}">Groups and Users</a></li>
+      </ul>
+    </div>
+
+    <div class="module">
       <h2>Security</h2>
       <ul>
           <li><a href="{% url 'two_factor:setup' %}">2 Factor Setup</a></li>

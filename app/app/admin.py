@@ -10,6 +10,10 @@ from cms.extensions import PageExtensionAdmin
 from .models import NewsletterSignups, MenuExtension, NotificationPing, Partner
 from .celerytasks import notification_ping
 
+from django.contrib.auth.models import User
+import django.db as db
+
+
 
 class MenuExtensionAdmin(PageExtensionAdmin):
     pass
@@ -88,3 +92,39 @@ admin.site.register(NewsletterSignups)
 admin.site.register(NotificationPing)
 admin.site.register(Partner, SortableAdmin)
 admin.site.register(LogEntry, LogEntryAdmin)
+
+
+class GroupUserManager(db.models.Manager):
+    def __init__(self):
+        super(GroupUserManager, self).__init__()
+
+    def get_query_set(self):
+        return super(GroupUserManager, self).get_query_set()
+
+
+class GroupUser(User):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Groups and Users'
+    objects = GroupUserManager()
+
+
+class GroupUserAdmin(admin.ModelAdmin):
+    list_display = ('username', 'first_name', 'last_name', 'email', 'user_groups')
+    list_filter = ('groups',)
+
+    def __init__(self, *args, **kwargs):
+        super(GroupUserAdmin, self).__init__(*args, **kwargs)
+        self.list_display_links = (None, )
+
+    def user_groups(self, obj):
+        return u", ".join([g.name for g in obj.groups.all()])
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_edit_permission(self, request):
+        return False
+
+
+admin.site.register(GroupUser, GroupUserAdmin)

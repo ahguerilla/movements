@@ -8,6 +8,7 @@ from app.users.models import (
     Interest)
 from django.contrib.admin.models import LogEntry
 from modeltranslation.admin import TranslationAdmin
+import django.db as db
 
 
 class UserProfileInline(admin.StackedInline):
