@@ -65,7 +65,7 @@
           {% include "users/snippets/star_rating.html" with rating=post.owner.userprofile.ahr_rating %}
         </div>
       </div>
-      {% if is_logged_in %}
+
       <div class="post">
         <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
         <div class="translated_by" style="display: none;">
@@ -74,43 +74,46 @@
          </div>
         <pre id="post-body-translated" style="display: none;"></pre>
       </div>
+      {% if is_logged_in %}
       <div class="post-translate">
         <div class="translate"><span>{% trans 'Translate this post' %}</span></div>
         <div id="translate-menu-container"></div>
       </div>
-      <div class="clearfix"></div>
-        {% if images %}
-          <div class="post-images">
-            {% for image in images %}
-              {% thumbnail image.image 120x120 upscale as thumb %}
-              <a class="gallery" href="{{ image.image.url }}">
-                <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" />
-              </a>
-            {% endfor %}
-          </div>
-        {% endif %}
       {% endif %}
-        <div style="margin-bottom: 15px; margin-top: 10px;">
-          <div class="tags clearfix">
-            {% for tag in post.interests.all %}
-              <div class="tag">{{ tag }}</div>
+      <div class="clearfix"></div>
+      {% if images %}
+      <div class="post-images">
+        {% for image in images %}
+          {% thumbnail image.image 120x120 upscale as thumb %}
+          <a class="gallery" href="{{ image.image.url }}">
+            <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" />
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+
+      <div style="margin-bottom: 15px; margin-top: 10px;">
+        <div class="tags clearfix">
+          {% for tag in post.interests.all %}
+            <div class="tag">{{ tag }}</div>
+          {% endfor %}
+          {% if post.specific_skill %}
+            <div class="tag">{{ post.specific_skill }}</div>
+          {% endif %}
+          {% for tag in post.issues.all %}
+            <div class="issue">{{ tag }}</div>
+          {% endfor %}
+          {% if post.specific_issue%}
+            <div class="issue">{{ post.specific_issue }}</div>
+          {% endif %}
+          {% if countries_to_render %}
+            {% for country in countries_to_render %}
+              <div class="country">{{ country }}</div>
             {% endfor %}
-            {% if post.specific_skill %}
-              <div class="tag">{{ post.specific_skill }}</div>
-            {% endif %}
-            {% for tag in post.issues.all %}
-              <div class="issue">{{ tag }}</div>
-            {% endfor %}
-            {% if post.specific_issue%}
-              <div class="issue">{{ post.specific_issue }}</div>
-            {% endif %}
-            {% if countries_to_render %}
-              {% for country in countries_to_render %}
-                <div class="country">{{ country }}</div>
-              {% endfor %}
-            {% endif %}
-          </div>
+          {% endif %}
         </div>
+      </div>
       {% if is_logged_in %}
       <div class="post-actions">
         <ul>
@@ -180,6 +183,16 @@
         {% url 'account_login' as accountUrl %}
         {% url 'signup_start' as signupUrl %}
         <p>{% blocktrans %}Please <a href="{{ accountUrl }}">Login</a> or <a href="{{ signupUrl }}">Sign up</a> to view more about this post. Once you've done this you will be able to send messages to the author, comment and rate this post.{% endblocktrans %}</p>
+
+        <div class="comments">
+          <div class="comment-list">
+            <div class="loader text-center"><img src="{{ STATIC_URL }}images/ajax-loader.gif" alt="loading comments"/>
+            </div>
+            <div class="content"></div>
+          </div>
+        </div>
+
+
       </div>
       {% endif %}
     </div>
@@ -232,6 +245,8 @@
         <% } %>
    <% } %>
   </script>
+  {% endif %}
+
 
   <script type="text/template" id="comment-template">
     <div class="comment"
@@ -264,6 +279,7 @@
     </div>
   </script>
 
+  {% if is_logged_in %}
   <script type="text/template" id="comment-translation-area">
     <form>
       <input type="hidden" name="lang_code" value="<%- lang_code %>"/>
@@ -406,7 +422,8 @@
         addCommentUrl: "{% url 'add_comment' 'json' post.id %}",
         deleteCommentUrl: "{% url 'delete_comment' %}",
         userDefaultLangage: '{{ LANGUAGE_CODE }}',
-        postLanguage: '{{ post.language }}'
+        postLanguage: '{{ post.language }}',
+        loggedIn: true
       });
       {% if translator or request.user.userprofile.is_cm %}
           ahr.initViewPostTranslation({
@@ -423,6 +440,15 @@
       {% endif %}
       this.message_widget = window.ahr.messagedialog_widget.initWidget('body', '#infobar', {{ post.id }});
       this.recommend_widget = window.ahr.recommend_widget.initWidget(window.ahr.username);
+    })();
+  </script>
+  {% else %}
+  <script type="text/javascript">
+    (function() {
+      ahr.initViewPost({
+        getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}',
+        loggedIn: false
+      });
     })();
   </script>
 

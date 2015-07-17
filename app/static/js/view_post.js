@@ -18,17 +18,17 @@
       this.$commentTemplate = _.template($('#comment-template').html());
       this.$commentText = this.$el.find('.comments form textarea');
       this.$submitButton = this.$el.find('.comments form button');
-      this.translatedByTemplate = _.template($('#translated-by-template').html());
       this.loadComments();
-
-      this.report_widget = new window.ahr.ReportPostView();
       this.linkifyContent();
-
-      this.initTranslatePopup();
-      var translate_url = $(".view-post").data('default_translate_url');
-      this.currentLanguage = this.options.userDefaultLangage;
-      if (translate_url && (this.options.postLanguage != this.options.userDefaultLangage)) {
-        this.translate(translate_url, true);
+      if(this.options.loggedIn){
+        this.translatedByTemplate = _.template($('#translated-by-template').html());
+        this.report_widget = new window.ahr.ReportPostView();
+        this.initTranslatePopup();
+        var translate_url = $(".view-post").data('default_translate_url');
+        this.currentLanguage = this.options.userDefaultLangage;
+        if (translate_url && (this.options.postLanguage != this.options.userDefaultLangage)) {
+          this.translate(translate_url, true);
+        }
       }
     },
 
@@ -845,14 +845,22 @@
   });
 
   global.ahr.initViewPost = function (options) {
-    new PostView({
+    var loggedIn = options.loggedIn || false;
+    var args = {
       el: '.view-post',
-      getCommentsUrl: options.getCommentsUrl,
-      addCommentUrl: options.addCommentUrl,
-      deleteCommentUrl: options.deleteCommentUrl,
-      postLanguage: options.postLanguage,
-      userDefaultLangage: options.userDefaultLangage
-    });
+      loggedIn: loggedIn,
+      getCommentsUrl: options.getCommentsUrl
+    };
+    if (loggedIn) {
+        args = $.extend(args, {
+                  addCommentUrl: options.addCommentUrl,
+                  deleteCommentUrl: options.deleteCommentUrl,
+                  postLanguage: options.postLanguage,
+                  userDefaultLangage: options.userDefaultLangage
+               });
+    }
+
+    new PostView(args);
     $('a.gallery').colorbox({rel: 'gal', scalePhotos: true, maxWidth: '100%', maxHeight: '100%'});
   };
 
