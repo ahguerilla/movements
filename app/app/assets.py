@@ -28,6 +28,7 @@ js = Bundle(
         './js/lib/jquery.rateit.min.js',
         './js/email_confirmation.js',
         './js/signup.js',
+        './js/home.js',
     ),
     filters='jsmin',
     output='./js/packed.js'

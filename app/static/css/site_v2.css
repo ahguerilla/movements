@@ -1108,7 +1108,7 @@ h6 {
 .testimonial .author {
   font-size: 24px;
 }
-.stats-notification {
+.stats-banner {
   position: absolute;
   bottom: 12px;
   right: 63px;
@@ -1124,10 +1124,12 @@ h6 {
   line-height: normal;
   color: #fff;
   font-family: "HurmeGeometricSans3-SemiBold";
+  max-width: 27%;
   font-weight: normal;
 }
-.stats-notification h3 {
+.stats-banner h3 {
   margin: 0;
+  color: #fe6d50;
 }
 .progress-counter {
   border-top: 2px solid #e0d7d8;
