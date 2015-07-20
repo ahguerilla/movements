@@ -25,7 +25,7 @@ def get_stats(request):
     response_data = {
         'connections': total_connections,
         'user': User.objects.count(),
-        'countries': Countries.objects.count(),
+        'countries': '153',
     }
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
