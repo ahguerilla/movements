@@ -5,7 +5,17 @@
     events: {
       'click .next-button': 'clickNextButton',
       'click .select-checkbox': 'checkClick',
-      'click .skip-link': 'skipAction'
+      'click .skip-link': 'skipAction',
+      'click #create-offer-button': 'clickCreateOfferButton',
+      'click #create-request-button': 'clickCreateRequestButton'
+    },
+
+    clickCreateOfferButton: function(ev){
+      this.clickNextButton(ev);
+    },
+
+    clickCreateRequestButton: function(ev) {
+      this.clickNextButton(ev);
     },
 
     clickNextButton: function(ev){

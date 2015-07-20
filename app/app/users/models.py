@@ -147,6 +147,12 @@ class UserProfile(models.Model):
         ('fa', 'Persian'),
     )
 
+    USER_TYPE_PREFERENCE = EnumChoices(
+        UNKNOWN=(0, _('Unknown')),
+        REQUEST=(1, _('Request User')),
+        OFFER=(2, _('Offer User')),
+    )
+
     user = models.OneToOneField(User)
     bio = models.TextField(_('bio'), null=True, blank=True)
     tag_ling = models.CharField(_('tag line'), max_length=255, null=True, blank=True)
@@ -193,6 +199,8 @@ class UserProfile(models.Model):
         default=NOTIFICATION_FREQUENCY.DAILY)
     last_notification_email = models.DateTimeField(null=True, blank=True)
     unsubscribe_uuid = models.CharField(max_length=50, null=True, blank=True)
+    user_preference_type = models.PositiveSmallIntegerField(choices=USER_TYPE_PREFERENCE,
+                                                            default=USER_TYPE_PREFERENCE.UNKNOWN)
 
     def get_unsubscribe_uuid(self):
         if not self.unsubscribe_uuid:

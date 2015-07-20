@@ -35,24 +35,22 @@
       <div id="step1" class="step" >
         <div class="form-title"><h1>{% trans "Welcome to Movements" %}</h1></div>
         <div class="form-select-multi">
-          <p>
-            {% blocktrans %}Your account is now fully active. Fill out additional profile details now or you can skip this step and do it later in your settings page.{% endblocktrans %}
-          </p>
-          <h3>{% trans "Create a Request"%}</h3>
-          <p>
-            {% blocktrans %}Are you an activist in need of help? Movements.org leverages technology to help those in closed societies find the assistance they need to amplify their voice and expand their influence.{% endblocktrans %}
-          </p>
-          <h3>{% trans "Create an Offer"%}</h3>
-          <p>
-            {% blocktrans %}If you’ve ever wanted to help a human rights activist, here’s your opportunity. All of us have skills that can be put to use to advance basic liberties.{% endblocktrans %}
-          </p>
+          <p>{% blocktrans %}Your account is now fully active.{% endblocktrans %}</p>
+          <p>{% blocktrans %}As a new user you should either <strong>Request</strong> support or <strong>Offer</strong>
+            your skills. After you enter some basic information you can create your first post.{% endblocktrans %}
+          <p>{% blocktrans %}You can skip this step but you’ll be mostly invisible to the people you would want to connect
+            with. {% endblocktrans %}</p>
+
+          <div class="col-sm-12 form-main-button">
+            <button id="create-request-button" class="btn btn-action full-width">{% trans "Create a Request" %}&nbsp;>></button>
+          </div>
+          <div class="col-sm-12 form-main-button">
+            <button id="create-offer-button" class="btn btn-action full-width">{% trans "Create an Offer" %}&nbsp;>></button>
+          </div>
         </div>
         <div class="row action-text">
-          <div class="col-sm-offset-2 col-sm-2 form-main-button">
-            <a class="action-link skip-link" href="">{% trans "Skip" %}</a>
-          </div>
-          <div class="col-sm-6 form-main-button">
-            <button class="btn btn-action full-width next-button">{% trans "Next" %}</button>
+          <div class="col-sm-12 form-main-button">
+            <a class="action-link skip-link" href="">{% trans "I'll create a post later" %}</a>
           </div>
         </div>
       </div>
