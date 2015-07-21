@@ -195,19 +195,30 @@ class SettingsForm(forms.ModelForm):
 
 
 class MoreAboutYouForm(forms.ModelForm):
+    USER_TYPE_PREFERENCE = ((0, _("I will offer my skills")),
+                            (1, _("I will Request help")),
+                            (2, _("I'll decide later")),)
+    user_preference_type = forms.ChoiceField(widget=forms.RadioSelect, choices=USER_TYPE_PREFERENCE)
+    CREATE_POST = ((0, _("None")),
+                   (1, _("Offer")),
+                   (2, _("Request")),)
+    post_type = forms.ChoiceField(choices=CREATE_POST)
+
     def __init__(self, *args, **kwargs):
         super(MoreAboutYouForm, self).__init__(*args, **kwargs)
         self.fields['languages'].required = False
         self.fields['interests'].required = False
         self.fields['countries'].required = False
+        self.fields['user_preference_type'].required = True
 
     class Meta:
         model = UserProfile
         fields = ('languages', 'interests', 'countries')
+
         widgets = {
             'languages': CheckboxSelectMultiple(),
             'interests': CheckboxSelectMultiple(),
-            'countries': RegionAccordionSelectMultiple()
+            'countries': RegionAccordionSelectMultiple(),
         }
 
     def save(self, commit=True):

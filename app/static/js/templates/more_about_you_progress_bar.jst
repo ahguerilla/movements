@@ -1,0 +1,6 @@
+<% _.each(stepsOrder, function(item, index) { %>
+<div id="step-id-<%- steps[item].id %>" class="progress-item step<%- index %> <% if(index == 0){ %> current <%  } else { %> outstanding <% } %>">
+  <div class="complete-state"><span>&#8226;</span></div>
+  <div class="progress-item-description"><%- steps[item].title %></div>
+</div>
+<% }) %>
