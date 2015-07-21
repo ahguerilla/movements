@@ -294,9 +294,12 @@ def more_about_you(request):
     form = MoreAboutYouForm(request.POST or None,
                             instance=request.user.userprofile)
     if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(
-            request.GET.get('next', reverse('show_market')))
+        post_type = form.cleaned_data.get('post_type', 0)
+        redirect_url = reverse('create_offer') if post_type == u'1' else reverse('create_request') \
+            if post_type == u'2' else request.GET.get('next', reverse('show_market'))
+        keep_first_logged_in = True if post_type in [u'1', u'2'] else False
+        form.save(keep_first_login=keep_first_logged_in)
+        return HttpResponseRedirect(redirect_url)
     return render_to_response(
         "users/more_about_you.html",
         {

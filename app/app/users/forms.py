@@ -209,7 +209,7 @@ class MoreAboutYouForm(forms.ModelForm):
         self.fields['languages'].required = False
         self.fields['interests'].required = False
         self.fields['countries'].required = False
-        self.fields['user_preference_type'].required = True
+        self.fields['user_preference_type'].required = False
 
     class Meta:
         model = UserProfile
@@ -221,9 +221,20 @@ class MoreAboutYouForm(forms.ModelForm):
             'countries': RegionAccordionSelectMultiple(),
         }
 
-    def save(self, commit=True):
+    def save(self, commit=True, keep_first_login=False):
         user_profile = super(MoreAboutYouForm, self).save(commit)
-        user_profile.first_login = False
+        # map user_preference_type
+        u_pref = self.cleaned_data.get('user_preference_type', u'2')
+        if u_pref == u'0':
+            user_profile.user_preference_type = UserProfile.USER_TYPE_PREFERENCE.OFFER
+        elif u_pref == u'1':
+            user_profile.user_preference_type = UserProfile.USER_TYPE_PREFERENCE.REQUEST
+        else:
+            user_profile.user_preference_type = UserProfile.USER_TYPE_PREFERENCE.UNKNOWN
+
+        if not keep_first_login:
+            user_profile.first_login = False
+
         user_profile.save()
         return user_profile
 

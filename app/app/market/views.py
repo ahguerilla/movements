@@ -127,6 +127,15 @@ def _create_or_update_post(request, template, form_class, build_redir_url, marke
             MarketItemImage.objects.filter(item=market_item, id__in=del_ids).delete()
         for image in request.FILES:
             MarketItemImage.save_image(post, request.FILES[image])
+
+        # if the user has come directly from the more about you section, then lets save his defaults
+        if request.user.userprofile.first_login:
+            request.user.userprofile.interests = form.cleaned_data.get('interests')
+            request.user.userprofile.countries = form.cleaned_data.get('countries')
+            request.user.userprofile.first_login = False
+            request.user.userprofile.save()
+            request.user.save()
+
         redir_url = build_redir_url(post)
         if request.is_ajax():
             return HttpResponse(json.dumps({'success': True, 'redir_url': redir_url}), mimetype="application/json")
