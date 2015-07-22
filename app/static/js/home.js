@@ -20,7 +20,7 @@
     buildStatsBanner: function(data) {
       var banner = '<h3>Stats</h3>' +
                    '<div class="stat">Human Rights Connections Made: <span>' + data.connections + '</span></div>' +
-                   '<div class="stat">Active User: <span>' + data.user + '</span></div>' +
+                   '<div class="stat">Active Users: <span>' + data.user + '</span></div>' +
                    '<div class="stat">Countries Represented: <span>' + data.countries + '</span></div>';
 
       return banner;
