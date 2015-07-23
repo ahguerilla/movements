@@ -30,12 +30,6 @@
           this.translate(translate_url, true);
         }
       }
-      // update the OG content
-      var content = $('meta[property="og:image"]').attr('content');
-      var content_split = content.split('?');
-      if (content_split.length > 1) {
-        $('meta[property="og:image"]').attr('content', content_split[0]);
-      }
     },
 
     linkifyContent: function(){
