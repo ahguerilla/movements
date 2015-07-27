@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.forms.widgets import (
     CheckboxFieldRenderer as BaseCheckboxFieldRenderer,
     CheckboxChoiceInput as BaseCheckboxChoiceInput,
@@ -243,3 +243,9 @@ class VettingForm(forms.ModelForm):
     class Meta:
         model = OrganisationalRating
         fields = ['rated_by_ahr']
+
+
+class UserGroupForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['groups']
