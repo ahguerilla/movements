@@ -14,7 +14,8 @@
 <meta property="og:url" content="https://www.movements.org/market/{{ post.pk }}">
 <meta property="og:site_name" content="Movements.Org">
   {% if images %}
-    <meta property="og:image" content="https://exhangivist-testing-media.s3.amazonaws.com/{{ images.0.image }}">
+    {% thumbnail images.0.image 1200x630 upscale as thumb %}
+    <meta property="og:image" content="{{ thumb.url }}">
   {% else %}
     <meta property="og:image" content="https://www.movements.org/static/images/logos/logo_large.png">
   {% endif %}
