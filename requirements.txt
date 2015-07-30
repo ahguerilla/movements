@@ -8,7 +8,7 @@ amqp==1.4.3
 anyjson==0.3.3
 billiard==3.3.0.16
 celery==3.1.9
-cmsplugin-filer==0.9.5
+cmsplugin-filer==0.10.2
 cssmin==0.2.0
 cssselect==0.9.1
 distribute==0.7.3
@@ -19,16 +19,16 @@ django-avatar==2.0
 django-celery==3.1.9
 django-celery-email==1.0.4
 django-classy-tags==0.5.1
-django-cms==3.0
+django-cms==3.1.2
 django-compressor==1.3
 -e git://github.com/comoga/django-constance@dc89ec294f67ae620ca2dc6d4019e1ecbe339917#egg=django_constance-master
-django-filer==0.9.5
+django-filer==0.9.12
 -e git://github.com/davedash/django-fixture-magic@5e3da5f0c587ca255ac2e508d3fb65a00f8159b0#egg=django_fixture_magic-master
+django-debug-toolbar==1.3.2
 django-extensions==1.5.0
 django-haystack==2.1.0
 django-json-field==0.5.5
 django-modeltranslation==0.7.3
-django-mptt==0.6.0
 django-pagination==1.0.7
 django-picklefield==0.3.1
 django-polymorphic==0.5.4
@@ -36,10 +36,11 @@ django-postman==3.0.2
 django-reversion==1.8.0
 django-rosetta==0.7.4
 django-sekizai==0.7
+django-treebeard==3.0
 django-tinymce==1.5.2
 django-widget-tweaks==1.3
 djangocms-admin-style==0.2.2
-djangocms-text-ckeditor==2.1.4
+djangocms-text-ckeditor==2.5
 djangocms-column==1.3
 djangocms-file==0.0.1
 djangocms-flash==0.0.2
