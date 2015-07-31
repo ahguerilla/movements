@@ -96,3 +96,6 @@ market:
 	python manage.py schemamigration market --auto --update --settings=app.settings.local_settings && \
 	python manage.py migrate market --settings=app.settings.local_settings
 
+
+sanitisedb:
+	cd app && python manage.py sanitise_live --settings=app.settings.local
