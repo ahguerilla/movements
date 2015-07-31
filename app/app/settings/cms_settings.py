@@ -27,3 +27,6 @@ CMS_PLACEHOLDER_CONF = {
 
 # Reverse id for cms pages.
 CMS_PAGE_TERMS = 'terms-and-conditions'
+
+# Don't allow the CMS Toolbar to display when not logged in
+CMS_TOOLBAR_ANONYMOUS_ON = False

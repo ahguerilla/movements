@@ -10,7 +10,7 @@ from models import (
     UserProfile, OrganisationalRating, Language, Interest, Region)
 from forms import (
     SettingsForm, UserForm, VettingForm, SignUpStartForm, SignupForm,
-    MoreAboutYouForm)
+    MoreAboutYouForm, UserGroupForm)
 from form_overrides import ResetPasswordFormSilent
 from allauth.account.forms import LoginForm
 from allauth.account.views import SignupView, PasswordResetView, PasswordChangeView, LoginView
@@ -294,9 +294,12 @@ def more_about_you(request):
     form = MoreAboutYouForm(request.POST or None,
                             instance=request.user.userprofile)
     if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(
-            request.GET.get('next', reverse('show_market')))
+        post_type = form.cleaned_data.get('post_type', 0)
+        redirect_url = reverse('create_offer') if post_type == u'1' else reverse('create_request') \
+            if post_type == u'2' else request.GET.get('next', reverse('show_market'))
+        keep_first_logged_in = True if post_type in [u'1', u'2'] else False
+        form.save(keep_first_login=keep_first_logged_in)
+        return HttpResponseRedirect(redirect_url)
     return render_to_response(
         "users/more_about_you.html",
         {
@@ -386,14 +389,16 @@ def vet_user(request, user_id):
     msg = ''
     if request.method == 'POST':
         form = VettingForm(request.POST, instance=rating)
+        group_form = UserGroupForm(request.POST, instance=user)
         msg = None
-        if form.is_valid():
+        if form.is_valid() and group_form.is_valid():
             if not rating:
                 rating = form.save(commit=False)
                 rating.user_id = user.id
                 rating.save()
             else:
                 form.save()
+            group_form.save()
             user.save()
             typeuser = ContentType.objects.filter(name='user').all()[0]
             log = LogEntry(user_id=request.user.id,
@@ -406,12 +411,14 @@ def vet_user(request, user_id):
             msg = 'User updated'
     else:
         form = VettingForm(instance=rating)
+        group_form = UserGroupForm(instance=user)
     email_verified = EmailAddress.objects.filter(user=user, verified=True).exists()
     ctx = {
         'email_verified': email_verified,
         'original': user,
         'user': user,
         'form': form,
+        'group_form': group_form,
         'msg': msg,
         'vetted': user.is_active
     }

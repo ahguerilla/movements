@@ -965,6 +965,24 @@ $page-banner-height = 550px
     font-size 24px
 
 
+.stats-banner
+  position absolute
+  bottom 36px
+  right 63px
+  z-index 1000000
+  background-color #333
+  border-radius 3px
+  padding 8px 15px 5px 15px
+  font-size 16px
+  line-height normal
+  color #ffffff
+  font-family "HurmeGeometricSans3-SemiBold"
+  max-width 27%
+  font-weight normal
+  h3
+    margin 0
+    color $primary-color
+
 // **************************************
 // Sign up styles
 // **************************************
@@ -985,15 +1003,15 @@ $page-banner-height = 550px
       background-color #ffffff
       padding-left 3px
       padding-right 3px
-  .step1
+  .step0
     left -20px
+  .step1
+    left 18%
   .step2
-    left 15%
+    left 41%
   .step3
-    left 42%
-  .step4
     left 70%
-  .step5
+  .step4
     right -20px
   .complete
     color $title-font
@@ -1006,6 +1024,16 @@ $page-banner-height = 550px
 .more-about-you-widget
   .form-select-multi
     min-height 250px
+  #create-request-button
+    background-color $request-color
+  #create-offer-button
+    background-color $offer-color
+  .select-user-type
+    ul
+      padding 0
+      margin 0
+    li
+      list-style none
 
 .form-select-multi
   .row

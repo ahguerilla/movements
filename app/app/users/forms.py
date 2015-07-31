@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.forms.widgets import (
     CheckboxFieldRenderer as BaseCheckboxFieldRenderer,
     CheckboxChoiceInput as BaseCheckboxChoiceInput,
@@ -195,24 +195,46 @@ class SettingsForm(forms.ModelForm):
 
 
 class MoreAboutYouForm(forms.ModelForm):
+    USER_TYPE_PREFERENCE = ((0, _("I will offer my skills")),
+                            (1, _("I will Request help")),
+                            (2, _("I'll decide later")),)
+    user_preference_type = forms.ChoiceField(widget=forms.RadioSelect, choices=USER_TYPE_PREFERENCE)
+    CREATE_POST = ((0, _("None")),
+                   (1, _("Offer")),
+                   (2, _("Request")),)
+    post_type = forms.ChoiceField(choices=CREATE_POST)
+
     def __init__(self, *args, **kwargs):
         super(MoreAboutYouForm, self).__init__(*args, **kwargs)
         self.fields['languages'].required = False
         self.fields['interests'].required = False
         self.fields['countries'].required = False
+        self.fields['user_preference_type'].required = False
 
     class Meta:
         model = UserProfile
         fields = ('languages', 'interests', 'countries')
+
         widgets = {
             'languages': CheckboxSelectMultiple(),
             'interests': CheckboxSelectMultiple(),
-            'countries': RegionAccordionSelectMultiple()
+            'countries': RegionAccordionSelectMultiple(),
         }
 
-    def save(self, commit=True):
+    def save(self, commit=True, keep_first_login=False):
         user_profile = super(MoreAboutYouForm, self).save(commit)
-        user_profile.first_login = False
+        # map user_preference_type
+        u_pref = self.cleaned_data.get('user_preference_type', u'2')
+        if u_pref == u'0':
+            user_profile.user_preference_type = UserProfile.USER_TYPE_PREFERENCE.OFFER
+        elif u_pref == u'1':
+            user_profile.user_preference_type = UserProfile.USER_TYPE_PREFERENCE.REQUEST
+        else:
+            user_profile.user_preference_type = UserProfile.USER_TYPE_PREFERENCE.UNKNOWN
+
+        if not keep_first_login:
+            user_profile.first_login = False
+
         user_profile.save()
         return user_profile
 
@@ -221,3 +243,9 @@ class VettingForm(forms.ModelForm):
     class Meta:
         model = OrganisationalRating
         fields = ['rated_by_ahr']
+
+
+class UserGroupForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['groups']

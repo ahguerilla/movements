@@ -4,6 +4,9 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from .models import NewsletterSignups, Partner
 from django.utils import translation
+from market.models import MarketItem, Comment, EmailRecommendation
+from postman.models import Message
+from users.models import User, Countries
 import json
 import re
 
@@ -14,6 +17,17 @@ def home(request):
     partners = Partner.objects.filter(enabled=True).all()
     view_dict = {'partners': partners}
     return render_to_response('ahr/home_v2.html', view_dict, context_instance=RequestContext(request))
+
+
+def get_stats(request):
+    total_connections = MarketItem.objects.count() + Comment.objects.count() + \
+                        Message.objects.count() + EmailRecommendation.objects.count()
+    response_data = {
+        'connections': total_connections,
+        'user': User.objects.count(),
+        'countries': '153',
+    }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
 def youtube_verification(request):

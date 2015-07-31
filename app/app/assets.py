@@ -1,5 +1,9 @@
 from django_assets import register, Bundle
 
+from webassets.filter.jst import JST
+
+jstFilter = JST(template_function='_.template')
+
 js = Bundle(
     Bundle(
         './js/lib/jquery-1.11.0.min.js',
@@ -28,6 +32,12 @@ js = Bundle(
         './js/lib/jquery.rateit.min.js',
         './js/email_confirmation.js',
         './js/signup.js',
+        './js/home.js',
+        Bundle(
+            './js/templates/more_about_you_progress_bar.jst',
+            filters=(jstFilter,),
+            output='./js/templates.js'
+        ),
     ),
     filters='jsmin',
     output='./js/packed.js'

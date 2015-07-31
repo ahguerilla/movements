@@ -31,9 +31,32 @@
         <li>4 Stars - Movements.org knows user/significant online present</li>
         <li>5 Stars - Personally known by Movements.org</li>
       </ul>
-      <p>You are vetting <strong>{{original}}</strong>, who provided the email <strong>{{original.email}}</strong> which they <strong>have {% if not email_verified %}not{% endif %} verified</strong> through the system.</p>
+      <p>You are vetting <strong>{{ original }}</strong>, who provided the email <strong>{{ original.email }}</strong> which they <strong>have {% if not email_verified %}not{% endif %} verified</strong> through the system.</p>
       <div>
         <p>Rate User: {{ form.rated_by_ahr }}</p>
+      </div>
+      <div>
+        <p>Add user to groups:</p>
+        {% if original.userprofile %}
+          <p><strong>Skills</strong>:
+          {% for i in original.userprofile.interests.all %}
+            {{ i.name }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+          </p>
+          <p><strong>Languages</strong>:
+          {% for i in original.userprofile.languages.all %}
+            {{ i.name }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+          </p>
+          <p><strong>Countries</strong>:
+          {% for i in original.userprofile.countries.all %}
+            {{ i }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+          </p>
+        {% endif %}
+
+        {{ group_form.groups }} <br >
+        {{ group_form.groups.help_text }}
       </div>
       {% if msg %}
       <div style="border: 1px solid teal; padding: 10px; font-size: 1.2em; color: teal; margin-bottom: 5px;">

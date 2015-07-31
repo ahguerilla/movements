@@ -1108,6 +1108,29 @@ h6 {
 .testimonial .author {
   font-size: 24px;
 }
+.stats-banner {
+  position: absolute;
+  bottom: 36px;
+  right: 63px;
+  z-index: 1000000;
+  background-color: #333;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 8px 15px 5px 15px;
+  font-size: 16px;
+  line-height: normal;
+  color: #fff;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  max-width: 27%;
+  font-weight: normal;
+}
+.stats-banner h3 {
+  margin: 0;
+  color: #fe6d50;
+}
 .progress-counter {
   border-top: 2px solid #e0d7d8;
   margin-bottom: 60px;
@@ -1130,19 +1153,19 @@ h6 {
   padding-left: 3px;
   padding-right: 3px;
 }
-.progress-counter .step1 {
+.progress-counter .step0 {
   left: -20px;
 }
+.progress-counter .step1 {
+  left: 18%;
+}
 .progress-counter .step2 {
-  left: 15%;
+  left: 41%;
 }
 .progress-counter .step3 {
-  left: 42%;
-}
-.progress-counter .step4 {
   left: 70%;
 }
-.progress-counter .step5 {
+.progress-counter .step4 {
   right: -20px;
 }
 .progress-counter .complete {
@@ -1156,6 +1179,19 @@ h6 {
 }
 .more-about-you-widget .form-select-multi {
   min-height: 250px;
+}
+.more-about-you-widget #create-request-button {
+  background-color: #ff4545;
+}
+.more-about-you-widget #create-offer-button {
+  background-color: #005d86;
+}
+.more-about-you-widget .select-user-type ul {
+  padding: 0;
+  margin: 0;
+}
+.more-about-you-widget .select-user-type li {
+  list-style: none;
 }
 .form-select-multi .row {
   margin-top: 10px;
