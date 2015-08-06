@@ -36,6 +36,8 @@ urlpatterns = patterns(
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^unsubscribe$', 'app.users.views.one_click_unsubscribe', {'uuid': None}, name='one_click_unsubscribe'),
     url(r'^unsubscribe/(?P<uuid>.+)$', 'app.users.views.one_click_unsubscribe', name='one_click_unsubscribe'),
+    url(r'^unsubscribe-group/(?P<group_id>\d+)$', 'app.users.views.one_click_group_unsubscribe', {'uuid': None}, name='one_click_group_unsubscribe'),
+    url(r'^unsubscribe-group/(?P<group_id>\d+)/(?P<uuid>.+)$', 'app.users.views.one_click_group_unsubscribe', name='one_click_group_unsubscribe'),
     url(r'^user/', include('app.users.urls')),
     url(r'^exchange', 'app.views.exchange', name='exchange'),
     url(r'^avatar/render_primary/(?P<user>[\w\@\d\.\-_]{1,30})/(?P<size>[\d]+)/$', 'avatar.views.render_primary',

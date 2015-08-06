@@ -508,3 +508,11 @@ def one_click_unsubscribe(request, uuid):
                                   'error_message': error_message,
                               },
                               context_instance=RequestContext(request))
+
+
+def one_click_group_unsubscribe(request, group_id, uuid):
+    return render_to_response('account/unsubscribe.html',
+                              {
+                                  'error_message': "wooooooooooop",
+                              },
+                              context_instance=RequestContext(request))
