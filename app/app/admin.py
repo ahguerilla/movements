@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import csv
 import json
+import re
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry, DELETION
 from django.shortcuts import render, redirect
@@ -21,6 +22,7 @@ import django.db as db
 from django.conf import settings
 from django.template.loader import render_to_string
 from app.users.models import UserProfile
+from app.market.models import MarketItem
 import constance
 
 
@@ -260,6 +262,16 @@ def construct_email(message, user, group):
     message = message.replace(u'##FIRST_NAME##', first_name)
     message = message.replace(u'##LAST_NAME##', last_name)
     profile = UserProfile.objects.get(user=user)
+    posts_matched = re.findall(r'##POST_ID=\d+##', message)
+    for post in posts_matched:
+        post_id = post.split(u'=')[1][:-2]
+        try:
+            market_item = MarketItem.objects.get(pk=post_id)
+        except Exception as ex:
+            raise ValueError("Invalid post id specified {0}".format(post_id))
+        url = settings.BASE_URL + reverse('show_post', args=[post_id])
+        html_url = '<a href="' + url + '">' + url + '</a>'
+        message = message.replace(post, html_url)
     template_args = {
         'base_url': settings.BASE_URL,
         'unsub_uuid': profile.get_unsubscribe_uuid(),
