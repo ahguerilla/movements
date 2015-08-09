@@ -158,8 +158,9 @@ def send_group_message(message, group):
             message = construct_email(message, u, group)
             send_group_email(message, u)
             success_count += 1
-        except:
+        except Exception as ex:
             error_count += 1
+            logger.exception(ex.message)
     success_message = 'successfully sent message to {0} users and skipped {1} error count {2}'.format(success_count,
                                                                                                       skip_count,
                                                                                                       error_count)
