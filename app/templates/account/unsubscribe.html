@@ -13,7 +13,11 @@
             <div class="col-md-offset-2 col-md-8 cms-body-content">
                 <h1>{% trans "Unsubscribe from notifications" %}</h1>
               {% if not error_message %}
+                {% if group %}
+                  {% trans 'You have unsubscribed from notifications for the group ' %} {{ group.name }}. {% trans 'These can be enabled again from your ' %}
+                {% else %}
                   {% trans 'You have been unsubscribed from notifications from movements.org. These can be enabled again from your ' %}
+                {% endif %}
                   <a href='{% url 'user_settings' %}#security'>{% trans 'profile settings page.' %}</a>
               {% else %}
                   {{ error_message }}

@@ -2,7 +2,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from json_field import JSONField
+from django_extensions.db.fields.json import JSONField
 import django.contrib.auth as auth
 from datetime import datetime
 from django.db.models import Q
@@ -162,7 +162,6 @@ class UserProfile(models.Model):
     tweet_url = models.CharField(_('twitter page'), max_length=255, null=True, blank=True)
     occupation = models.CharField(_('occupation'), max_length=255, null=True, blank=True)
     expertise = models.CharField(_('area of expertise'), max_length=255, null=True, blank=True)
-    privacy_settings = JSONField(_('privacy settings'), null=True, blank=True)
     nationality = models.ForeignKey(Nationality, null=True, blank=True)
     resident_country = models.ForeignKey(Residence, null=True, blank=True)
     referred_by = models.PositiveSmallIntegerField(choices=REFERRAL_CHOICES,
@@ -201,6 +200,7 @@ class UserProfile(models.Model):
     unsubscribe_uuid = models.CharField(max_length=50, null=True, blank=True)
     user_preference_type = models.PositiveSmallIntegerField(choices=USER_TYPE_PREFERENCE,
                                                             default=USER_TYPE_PREFERENCE.UNKNOWN)
+    group_notification_preference = JSONField(blank=True)
 
     def get_unsubscribe_uuid(self):
         if not self.unsubscribe_uuid:
@@ -226,6 +226,18 @@ class UserProfile(models.Model):
 
     def has_full_access(self):
         return not self.userprofile.first_login
+
+    def receives_group_mail(self, group_id):
+        if self.notification_frequency == self.NOTIFICATION_FREQUENCY.NEVER:
+            return False
+        return self.get_group_notification_preference(group_id)
+
+    def set_group_notification_preference(self, key, value):
+        self.group_notification_preference[str(key)] = value
+        self.save()
+
+    def get_group_notification_preference(self, key):
+        return self.group_notification_preference.get(str(key), True)
 
     @classmethod
     def get_application_users(cls, **kwargs):

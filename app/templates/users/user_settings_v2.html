@@ -161,6 +161,25 @@
           {% render_field settings_form.notification_frequency class="form-control input-sm" %}
         </div>
       </div>
+    {% if group_list %}
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="id_group_notifications">{% trans 'Group Notifications' %}</label>
+          <p>
+            {% blocktrans %}Movements.Org has assigned you to the following groups. Here you can choose to disable occasional group updates from the Movements.Org admins.{% endblocktrans %}
+          </p>
+          {% for g in group_list %}
+          <div class="checkbox">
+            <label>
+              <input class="form-group" type="checkbox" name="group_notif_{{ g.id }}"
+                     id="id_group_notif_{{ g.id }}" {% if g.receive_updates %}checked{% endif %}>
+                {% trans 'Receive updates from the group' %} {{ g.name }}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
       <div style="margin-top:30px;">
         {% if has_password %}
         <a id="changepassword" form_class="password_change" href="{% url 'account_change_password' %}">

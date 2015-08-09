@@ -1,17 +1,14 @@
 from __future__ import absolute_import
-
 import json
-
 
 from celery import Celery
 from django.db.models import Q
 from django.conf import settings
 
-
 from app.models import NotificationPing
 from app.sforce import add_market_item_to_salesforce, update_market_item_stats
 from app.market.models import CommentTranslation, MarketItemSalesforceRecord
-
+from app.users.actions import check_user_notification_settings, construct_email, send_group_email
 
 app = Celery('celerytasks', broker=settings.CELERY_BROKER)
 app.config_from_object('django.conf:settings')
@@ -19,6 +16,8 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 from djcelery_email.tasks import send_email
 from app.market.tasks.translations import *
+import logging
+logger = logging.getLogger('notifications')
 
 
 def get_notification_text(obj, update=False):
@@ -144,3 +143,24 @@ def notification_ping(email_to):
 @app.task(name='update_salesforce')
 def update_salesforce():
     update_market_item_stats()
+
+
+@app.task(name='send_group_message')
+def send_group_message(message, group):
+    success_count = 0
+    skip_count = 0
+    error_count = 0
+    for u in group.user_set.all():
+        try:
+            if not check_user_notification_settings(u, group):
+                skip_count += 1
+                continue
+            message = construct_email(message, u, group)
+            send_group_email(message, u)
+            success_count += 1
+        except:
+            error_count += 1
+    success_message = 'successfully sent message to {0} users and skipped {1} error count {2}'.format(success_count,
+                                                                                                      skip_count,
+                                                                                                      error_count)
+    logger.debug(success_message)

@@ -37,13 +37,22 @@ import constance
 from django.template.loader import render_to_string
 from django.utils import translation
 from two_factor.utils import default_device
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import Group
 
 
 def render_settings(request):
-    template = 'users/user_settings_v2.html'
     user = User.objects.get(pk=request.user.id)
     try:
         settings = UserProfile.objects.get(user=user)
+        user_groups = user.groups.all()
+        group_list = []
+        for g in user_groups:
+            group_list.append({
+                'id': g.id,
+                'name': g.name,
+                'receive_updates': settings.get_group_notification_preference(g.id)
+            })
     except UserProfile.DoesNotExist:
         settings = None
     if request.method == 'POST':
@@ -63,6 +72,12 @@ def render_settings(request):
                 translation.activate(settings.interface_lang)
                 request.LANGUAGE_CODE = translation.get_language()
 
+            # get group update settings
+            for g in group_list:
+                gets_notif = True if request.POST.get('group_notif_' + str(g.get('id'))) else False
+                settings.set_group_notification_preference(g.get('id'), gets_notif)
+                g['receive_updates'] = gets_notif
+
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successful.')
     else:
         user_form = UserForm(instance=request.user)
@@ -75,15 +90,13 @@ def render_settings(request):
                       'interests': [(interest.id, interest.name) for interest in Interest.objects.all()],
                       'regions': [(region.id, region.name) for region in Region.objects.all()]}
 
-    return render_to_response(template,
+    return render_to_response('users/user_settings_v2.html',
                               {
                                 'settings_form': settings_form,
                                 'user_form': user_form,
+                                'group_list': group_list,
                                 'interest_types': interest_types,
                                 'has_password': user.has_usable_password(),
-                                'skills': value('json', users.models.Skills.objects.all()),
-                                'issues': value('json', users.models.Issues.objects.all()),
-                                'countries': value('json', users.models.Countries.objects.all()),
                                 'errors': errors,
                               },
                               context_instance=RequestContext(request))
@@ -511,8 +524,16 @@ def one_click_unsubscribe(request, uuid):
 
 
 def one_click_group_unsubscribe(request, group_id, uuid):
+    error_message = None
+    try:
+        user_profile = UserProfile.objects.get(unsubscribe_uuid=uuid)
+        group = Group.objects.get(pk=group_id)
+        user_profile.set_group_notification_preference(group.id, False)
+    except ObjectDoesNotExist:
+        error_message = _("Invalid unsubscribe link.")
     return render_to_response('account/unsubscribe.html',
                               {
-                                  'error_message': "wooooooooooop",
+                                  'group': group,
+                                  'error_message': error_message,
                               },
                               context_instance=RequestContext(request))
