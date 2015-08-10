@@ -1,5 +1,5 @@
 import uuid
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields.json import JSONField
@@ -238,6 +238,34 @@ class UserProfile(models.Model):
 
     def get_group_notification_preference(self, key):
         return self.group_notification_preference.get(str(key), True)
+
+    def assign_group_based_on_skills(self, is_provider, is_requester):
+        skill_group_match = (
+            (u'Technology', 'Technical'),
+        )
+        user_interests = [i[0] for i in self.interests.values_list('name')]
+        for s in skill_group_match:
+            if s[0] in user_interests:
+                try:
+                    g = Group.objects.get(name=s[1])
+                    self.user.groups.add(g)
+                    self.user.save()
+                except:
+                    pass
+        if is_provider:
+            try:
+                pg = Group.objects.get(name='Provider')
+                self.user.groups.add(pg)
+                self.user.save()
+            except:
+                pass
+        if is_requester:
+            try:
+                rg = Group.objects.get(name='Requester')
+                self.user.groups.add(rg)
+                self.user.save()
+            except:
+                pass
 
     @classmethod
     def get_application_users(cls, **kwargs):

@@ -18,6 +18,6 @@ class Command(BaseCommand):
                 profile = None
             if not profile:
                 continue
-            has_request = MarketItem.objects.filter(owner=u, item_type='request')
-            has_offer = MarketItem.objects.filter(owner=u, item_type='offer')
-            profile.assign_group_based_on_skills()
+            has_request = MarketItem.objects.filter(owner=u, item_type='request').count() > 0
+            has_offer = MarketItem.objects.filter(owner=u, item_type='offer').count() > 0
+            profile.assign_group_based_on_skills(has_offer, has_request)
