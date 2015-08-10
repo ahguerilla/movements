@@ -4,7 +4,7 @@
   {% blocktrans %}You are receiving this message because you are a member of the group {{ group_name }}.{% endblocktrans %}
   {% trans "You can update your notification preferences in " %}
   <a href="{{ base_url }}{% url 'user_settings' %}#security">{% trans "your settings page" %}</a>.
-  {% trans "To stop getting notifications from this group, you can" %}
+  {% trans "To stop getting notifications from this group you can" %}
   <a href="{{ base_url }}{% url 'one_click_group_unsubscribe' group_id=group_id uuid=unsub_uuid  %}">{% trans "click here" %}</a>.
   {% trans "To stop all notification emails you can" %}
   <a href="{{ base_url }}{% url 'one_click_unsubscribe' uuid=unsub_uuid  %}">{% trans "click here" %}</a>.

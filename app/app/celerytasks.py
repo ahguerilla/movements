@@ -155,8 +155,8 @@ def send_group_message(message, group):
             if not check_user_notification_settings(u, group):
                 skip_count += 1
                 continue
-            message = construct_email(message, u, group)
-            send_group_email(message, u)
+            message_to_send = construct_email(message, u, group)
+            send_group_email(message_to_send, u)
             success_count += 1
         except Exception as ex:
             error_count += 1

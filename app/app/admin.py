@@ -114,14 +114,21 @@ class GroupUser(User):
 
 
 class GroupUserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'first_name', 'last_name', 'email', 'user_groups')
+    list_display = ('username', 'first_name', 'last_name', 'email', 'user_groups', 'manage',)
     list_filter = ('groups',)
+    fields = ('groups',)
     change_list_template = 'admin/group_user_management_list.html'
     search_fields = ('username', 'first_name', 'last_name', 'email')
 
     def __init__(self, *args, **kwargs):
         super(GroupUserAdmin, self).__init__(*args, **kwargs)
         self.list_display_links = (None, )
+
+    def manage(self, obj):
+        update_link = u'<a href="{0}">update >></a>'.format(
+            reverse('admin:app_groupuser_change', args=(obj.id,)))
+        return update_link
+    manage.allow_tags = True
 
     def user_groups(self, obj):
         return u", ".join([g.name for g in obj.groups.all()])

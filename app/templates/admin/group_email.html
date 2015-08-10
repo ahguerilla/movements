@@ -85,6 +85,7 @@ Movements are made up of individuals. Movements.Org brings them together.
             'message': this.$el.find('#email_context').val(),
             'email_to': this.$el.find('#email_to').val()
           };
+          this.disableControls();
           this.sendEmail(this.emailTestUrl, data)
         },
         sendGroupEmail: function(ev){
@@ -92,6 +93,7 @@ Movements are made up of individuals. Movements.Org brings them together.
           var data = {
             'message': this.$el.find('#email_context').val()
           };
+          this.disableControls();
           this.sendEmail(this.emailGroupUrl, data)
         },
         sendEmail: function(url, data){
@@ -103,11 +105,22 @@ Movements are made up of individuals. Movements.Org brings them together.
             data: data,
             success: function(data) {
               this.$el.find('#result').html(data.message + ' at ' + new Date());
+              this.enableControls();
             },
             error: function() {
               this.$el.find('#result').html('Problem');
+              this.enableControls();
             }
           });
+        },
+        disableControls: function() {
+          $('#send-test').prop('disabled', true);
+          $('#send-group').prop('disabled', true);
+          this.$el.find('#result').html('Sending message, please wait ...');
+        },
+        enableControls: function() {
+          $('#send-test').prop('disabled', false);
+          $('#send-group').prop('disabled', false);
         }
       });
       new TestomaticView({el: '#group-email-sender'});
