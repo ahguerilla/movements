@@ -241,7 +241,17 @@ class UserProfile(models.Model):
 
     def assign_group_based_on_skills(self, is_provider, is_requester):
         skill_group_match = (
-            (u'Technology', 'Technical'),
+            (u'NGO Employee', 'NGO'),
+            (u'Policy Expert', 'Policy Experts'),
+            (u'Student', 'Students'),
+            (u'Artist', 'Arts-Media'),
+            (u'Public Relations', 'Public Relations'),
+            (u'Social Media', 'Social Media'),
+            (u'Writer/Editor', 'Editors'),
+            (u'Technology', 'Technical Experts'),
+            (u'Translator', 'Translators'),
+            (u'Lawyer', 'Lawyers'),
+            (u'Journalist', 'Journalists'),
         )
         user_interests = [i[0] for i in self.interests.values_list('name')]
         for s in skill_group_match:
