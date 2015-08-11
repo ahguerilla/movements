@@ -340,7 +340,13 @@ class MarketItemTranslation(TranslationBase):
                     language=lang_code,
                     source_language=source_lang)
                 return translation
-        return None
+        return MarketItemTranslation.objects.create(
+            market_item=market_item,
+            title_translated=market_item.title,
+            details_translated=u'Google Translation Failed',
+            language=lang_code,
+            source_language=lang_code)
+
 
     def get_translated_data(self):
         data = super(MarketItemTranslation, self).get_translated_data()
