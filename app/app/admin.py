@@ -77,7 +77,7 @@ class LogEntryAdmin(admin.ModelAdmin):
 
 
 @admin.site.register_view('market/testing/notification_ping', urlname="notification_ping")
-def notification_ping(request):
+def do_notification_ping(request):
     if request.method == 'POST':
         email_to = request.POST.get('email_to', None)
         if not email_to:
