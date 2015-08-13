@@ -17,6 +17,17 @@ def check_user_notification_settings(user, group):
     return profile.receives_group_mail(group.id)
 
 
+def check_user_type(user, user_type):
+    if user_type == 'all':
+        return True
+    profile = UserProfile.objects.get(user=user)
+    if user_type == 'requesters':
+        return profile.is_requester()
+    if user_type == 'providers':
+        return profile.is_provider()
+    return False
+
+
 def construct_email(message, user, group):
     full_name = (user.first_name + u' ' + user.last_name).strip()
     full_name = full_name if full_name else u'Movements.Org user'

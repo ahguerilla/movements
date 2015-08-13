@@ -241,7 +241,8 @@ def group_email_send(request, group_id):
             message = request.POST.get('message')
             if not message:
                 raise ValueError("Please enter a valid message")
-            send_group_message.delay(message, group)
+            user_type = request.POST.get('additional_filter')
+            send_group_message.delay(message, group, user_type)
         except Exception as ex:
             return HttpResponse(json.dumps({'success': False, 'message': ex.message}), mimetype="application/json")
         success_message = 'Message queued for sending'

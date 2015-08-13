@@ -8,7 +8,7 @@ from django.conf import settings
 from app.models import NotificationPing
 from app.sforce import add_market_item_to_salesforce, update_market_item_stats
 from app.market.models import CommentTranslation, MarketItemSalesforceRecord
-from app.users.actions import check_user_notification_settings, construct_email, send_group_email
+from app.users.actions import check_user_notification_settings, check_user_type, construct_email, send_group_email
 
 app = Celery('celerytasks', broker=settings.CELERY_BROKER)
 app.config_from_object('django.conf:settings')
@@ -146,7 +146,7 @@ def update_salesforce():
 
 
 @app.task(name='send_group_message')
-def send_group_message(message, group):
+def send_group_message(message, group, user_type=None):
     success_count = 0
     skip_count = 0
     error_count = 0
@@ -155,6 +155,9 @@ def send_group_message(message, group):
             if not check_user_notification_settings(u, group):
                 skip_count += 1
                 continue
+            if user_type and not check_user_type(u, user_type):
+                continue
+
             message_to_send = construct_email(message, u, group)
             send_group_email(message_to_send, u)
             success_count += 1

@@ -232,6 +232,12 @@ class UserProfile(models.Model):
             return False
         return self.get_group_notification_preference(group_id)
 
+    def is_provider(self):
+        return self.user.marketitem_set.filter(item_type='offer').count() > 0
+
+    def is_requester(self):
+        return self.user.marketitem_set.filter(item_type='request').count() > 0
+
     def set_group_notification_preference(self, key, value):
         self.group_notification_preference[str(key)] = value
         self.save()

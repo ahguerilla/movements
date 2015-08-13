@@ -23,6 +23,10 @@
     font-weight: bold;
     font-size: 18px;
   }
+  .type-radio {
+    display: inline-block;
+    width: 100px;
+  }
   </style>
 {% endblock %}
 
@@ -61,6 +65,13 @@ Movements are made up of individuals. Movements.Org brings them together.
 
 ##NOTIFICATION_PREFERENCES##
       </textarea></div>
+
+      <div style="margin: 10px 0">
+        <label>Filter by:</label><br>
+        <div class="type-radio"><input checked type="radio" name="additional_filter" value="providers">Providers</div>
+        <div class="type-radio"><input type="radio" name="additional_filter" value="requesters">Requesters</div>
+        <div class="type-radio"><input type="radio" name="additional_filter" value="all">All</div>
+      </div>
       <div><input type="text" id="email_to" name="email_to" value="{{ request.user.email }}"/>&nbsp;&nbsp;
         <button id="send-test">SEND TEST EMAIL</button>&nbsp;&nbsp;
         <button id="send-group">SEND GROUP EMAIL</button>
@@ -75,6 +86,7 @@ Movements are made up of individuals. Movements.Org brings them together.
       var TestomaticView = Backbone.View.extend({
         emailTestUrl: '{% url 'admin:group_email_test' group.pk %}',
         emailGroupUrl: '{% url 'admin:group_email_send' group.pk %}',
+        groupName: '{{ group.name }}',
         events: {
           'click #send-test': 'sendTestEmail',
           'click #send-group': 'sendGroupEmail'
@@ -90,8 +102,23 @@ Movements are made up of individuals. Movements.Org brings them together.
         },
         sendGroupEmail: function(ev){
           ev.preventDefault();
+          var selected = $('input[name=additional_filter]:checked').val();
+          var group_filter = '';
+          if (selected === 'providers') {
+            group_filter = 'all providers in the group ';
+          } else if (selected === 'requesters') {
+            group_filter = 'all requesters in the group ';
+          } else {
+            group_filter = 'all members of the group ';
+          }
+          var confirmMessage = 'You are about to send a message to ' + group_filter + this.groupName + '.\n\n';
+          confirmMessage += 'Are you sure you want to proceed?';
+          if(!window.confirm(confirmMessage)){
+            return;
+          }
           var data = {
-            'message': this.$el.find('#email_context').val()
+            'message': this.$el.find('#email_context').val(),
+            'additional_filter': selected
           };
           this.disableControls();
           this.sendEmail(this.emailGroupUrl, data)
