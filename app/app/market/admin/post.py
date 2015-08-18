@@ -60,6 +60,7 @@ class PostAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.save()
         mark_translations_for_update(obj)
+        models.MarketItemSalesforceRecord.mark_for_update(obj.id)
 
     def save_formset(self, request, form, formset, change):
         if formset.model == models.MarketItemHowCanYouHelp:

@@ -6,7 +6,7 @@ from django.db.models import Count
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
-from ...market.models import MarketItemActions, MarketItemNextSteps
+from ...market.models import MarketItemActions, MarketItemNextSteps, MarketItemSalesforceRecord
 from ..models import IncidentTracking
 from .base import TrackingAdmin
 
@@ -90,6 +90,9 @@ class IncidentAdmin(TrackingAdmin):
     get_status.admin_order_field = 'status'
 
     # Overridden methods.
+    def save_model(self, request, obj, form, change):
+        obj.save()
+        MarketItemSalesforceRecord.mark_for_update(obj.id)
 
     def render_change_form(self, request, context, add=False, change=False,
                            form_url='', obj=None):
