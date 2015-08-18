@@ -4,7 +4,8 @@ from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 import django.contrib.auth as auth
-import tinymce
+from django.utils.html import strip_tags
+
 
 from .market import MarketItem
 # from app.utils import EnumChoices
@@ -12,7 +13,7 @@ from .market import MarketItem
 
 class Comment(models.Model):
     owner = models.ForeignKey(auth.models.User, blank=True)
-    contents = tinymce.models.HTMLField(_('contents'), blank=False)
+    contents = models.TextField(_('contents'), blank=False)
     pub_date = models.DateTimeField(_('publish date'), default=datetime.now)
     item = models.ForeignKey(MarketItem, null=True, blank=True, related_name='comments')
     published = models.BooleanField(_('is published?'), default=True)
@@ -32,7 +33,7 @@ class Comment(models.Model):
         adict = {'fields': {}}
         adict['fields']['pub_date'] = str(self.pub_date)
         adict['fields']['pub_date_formatted'] = self.pub_date.strftime('%H:%M on %d %b %Y')
-        adict['fields']['contents'] = self.contents
+        adict['fields']['contents'] = strip_tags(self.contents)
         adict['pk'] = self.id
         adict['fields']['pk'] = self.id
         adict['fields']['ownerid'] = self.owner.id

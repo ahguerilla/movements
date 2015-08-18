@@ -259,7 +259,7 @@
         <%- pub_date_formatted %>
       </div>
         <div class="comment-body">
-          <pre><%- contents %></pre>
+          <pre><%= contents %></pre>
           <div class="translated_by" style="display:none;"></div>
           <pre id="comment-body-translated" style="display: none;"></pre>
           {% if translator or request.user.userprofile.is_cm %}

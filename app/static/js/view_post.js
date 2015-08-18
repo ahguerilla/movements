@@ -1,6 +1,7 @@
 (function (global) {
 
   var PostView = Backbone.View.extend({
+    autoLinker: null,
     events: {
       'submit .comments form': 'submitComment',
       'click .report': 'showReportForm',
@@ -19,6 +20,11 @@
       this.$commentText = this.$el.find('.comments form textarea');
       this.$submitButton = this.$el.find('.comments form button');
       this.loadComments();
+      this.autoLinker = new Autolinker({
+                              newWindow: true,
+                              stripPrefix: false,
+                              truncate: 50
+                            });
       this.linkifyContent();
       if(this.options.loggedIn){
         this.translatedByTemplate = _.template($('#translated-by-template').html());
@@ -34,11 +40,7 @@
 
     linkifyContent: function(){
       var toLinkify = $('.linkify');
-      var autolinker = new Autolinker({
-        newWindow: true,
-        stripPrefix: false,
-        truncate: 50
-      });
+      var autolinker = this.autoLinker;
       _.each(toLinkify, function(item) {
         var textToLink = $(item).text();
         $(item).html(autolinker.link(textToLink));
@@ -222,6 +224,7 @@
       var self = this;
       self.$commentListContent.html('');
       _.each(comments, function(item) {
+        item.fields.contents = self.autoLinker.link(item.fields.contents);
         var comment_html = self.$commentTemplate(item.fields);
         self.$commentListContent.append(comment_html);
 
