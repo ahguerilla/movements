@@ -37,6 +37,7 @@ class MarketItemHowCanYouHelpInline(admin.TabularInline):
 
 class MarketItemImageInline(admin.TabularInline):
     model = models.MarketItemImage
+    exclude = ('original_metadata',)
     extra = 0
 
 
