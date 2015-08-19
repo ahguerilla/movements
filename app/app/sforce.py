@@ -30,6 +30,7 @@ def _dict_for_salesforce(market_item):
         'Request_Summary__c': market_item.details[:200],
         'Resolution_Type__c': market_item.get_status_display(),
         'Screen_Name__c': market_item.owner.username,
+        'Manager__c': market_item.staff_owner.username if market_item.staff_owner else '',
         'Case_Comment__c': market_item.commentcount,
         'Case_Emails__c': market_item.email_rec_count,
         'Case_Messages__c': market_item.total_msg_count,
