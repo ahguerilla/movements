@@ -6,6 +6,7 @@
       viewuserprofile: "{% url 'user_profile_for_user' 'a' %}".slice(0,-1),
       setuserrate: "{% url 'user_set_rate' 'json' 'a' %}".slice(0,-1),
       getusernames: "{% url 'user_get_usernames' 'json' %}",
+      getGroupNames: "{% url 'user_get_group_names' %}",
       changepassword : "{% url 'account_change_password' %}",
       setpassword: "{% url 'account_set_password' %}",
       market: "{% url 'show_market' %}",
@@ -16,8 +17,7 @@
       getusermarketitemsfromto : "{% url 'get_usermarketitems_fromto' 'json' 0 0 %}".slice(0,-1),
       getusermarketitemsforuserfromto: "{% url 'get_usermarketitems_for_user_fromto' 'json' 0 0 0 %}".slice(0,-1),
       sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
-      senditemrecommendation: "{% url 'send_recommendation' 'json' 'item' 0 %}".slice(0,-1),
-      senduserrecommendation: "{% url 'send_recommendation' 'json' 'user' 0 %}".slice(0,-1),
+      senditemrecommendation: "{% url 'send_recommendation' 'json' 0 %}".slice(0,-1),
       marketsetrate: "{% url 'market_set_rate' 'json' 0 %}".slice(0,-1),
 
       reportuser: "{% url 'report_user' 'json' 0 %}".slice(0,-1),

@@ -1,0 +1,26 @@
+A message from Movements.Org,
+
+Dear ##FIRST_NAME##,
+
+{{ message }}
+
+This email was sent to you by {{ screen_name }}, a registered user on Movements.org. Movements helps activists in need connect directly with the people who have the skills and expertise that can help.
+
+All personal information on Movements.org is confidential. To view the full post that they have recommended to you please go to {{ post_link }}.
+
+{% if post_title %}
+Post Title: {{ post_title }}
+{% endif %}
+
+{% if post_link %}
+Post URL: {{ post_link }}
+{% endif %}
+
+{% if post_date %}
+Date of Post: {{ post_date }}</p>
+{% endif %}
+
+This email was automatically created by Movements.org. You cannot reply to this email but can reply to {{ screen_name }}
+on Movements.org once you register.
+
+##NOTIFICATION_PREFERENCES##

@@ -4,16 +4,17 @@ import re
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.models import LogEntry
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.models import Group
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext_lazy as _
 import constance
 from django.http import Http404
 
 from app.market.api.utils import *
 from app.market.models import MarketItem, EmailRecommendation, MarketItemCollaborators, MarketItemSalesforceRecord
+from app.celerytasks import send_group_message
 from app import users
 
 
@@ -69,33 +70,28 @@ def send_message(request, to_user, rtype):
 
 
 @login_required
-def send_recommendation(request, rec_type, obj_id, rtype):
-    market_item = None
-    if rec_type == 'item':
-        market_item = MarketItem.objects.get(pk=obj_id)
-        additionals = market_item.title
-        MarketItemSalesforceRecord.mark_for_update(obj_id)
-    else:
-        additionals = obj_id
+def send_recommendation(request, obj_id, rtype):
+    market_item = MarketItem.objects.get(pk=obj_id)
+    MarketItemSalesforceRecord.mark_for_update(obj_id)
 
     recipients = re.split("\s*[;,]\s*", request.POST['recipients'])
     recipients = [x.strip() for x in recipients]
-    badrecipients = []
-    msgcontext = {'message': request.POST['message'],
-                  'additionals': additionals,
-                  'rec_type': rec_type,
-                  'obj_id': obj_id,
-                  'url': request.build_absolute_uri(reverse('show_post', args=[obj_id]))}
+    bad_recipients = []
+    msg_context = {'message': request.POST['message'],
+                   'additionals': market_item.title,
+                   'obj_id': obj_id,
+                   'url': request.build_absolute_uri(reverse('show_post', args=[obj_id]))}
 
     subject = request.POST['subject']
-    if len(subject) > 120: subject = subject[:120]
-    body = render_to_string('emails/recommendmessage.txt', msgcontext)
-    emlrecips = []
+    if len(subject) > 120:
+        subject = subject[:120]
+    body = render_to_string('emails/recommendmessage.txt', msg_context)
+    email_recipients = []
 
     for recipient in recipients:
         if len(recipient) > 0:
             if EMAILRE.match(recipient):
-                emlrecips.append(recipient)
+                email_recipients.append(recipient)
             else:
                 try:
                     msg = pm_write(
@@ -103,16 +99,13 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                         recipient=users.models.User.objects.filter(username=recipient)[0],
                         subject=subject,
                         body=body, truncate=True)
-                    if rec_type == 'item':
-                        msg.messageext.is_post_recommendation = True
-                        msg.messageext.market_item = market_item
-                    else:
-                        msg.messageext.is_user_recommendation = True
+                    msg.messageext.is_post_recommendation = True
+                    msg.messageext.market_item = market_item
                     msg.messageext.save()
-                except Exception as e:
-                    badrecipients.append(recipient + " (unknown user)")
+                except:
+                    bad_recipients.append(recipient + " (unknown user)")
 
-    if len(emlrecips) > 0:
+    if len(email_recipients) > 0:
         context = {
             'message': request.POST['message'],
             'screen_name': request.user.username,
@@ -125,18 +118,43 @@ def send_recommendation(request, rec_type, obj_id, rtype):
                 subject,
                 render_to_string('emails/recommendation_message.html', context),
                 constance.config.NO_REPLY_EMAIL,
-                emlrecips
+                email_recipients
             )
             email.content_subtype = "html"
             email.send()
-            _update_email_recommendations(market_item, emlrecips)
-        except Exception as e:
-            badrecipients.extend(emlrecips)
+            _update_email_recommendations(market_item, email_recipients)
+        except:
+            bad_recipients.extend(email_recipients)
 
-    if len(badrecipients) > 0:
+    if request.user.is_staff:
+        groups = re.split("\s*[;,]\s*", request.POST.get('groups', ''))
+        groups = [g.strip() for g in groups]
+        group_recipients = []
+        for g in groups:
+            if not g:
+                continue
+            try:
+                group = Group.objects.get(name=g)
+                group_recipients.append(group)
+            except ObjectDoesNotExist:
+                bad_recipients.append(g + " (unknown group)")
+
+        if group_recipients:
+            group_context = {
+                'message': request.POST['message'],
+                'screen_name': request.user.username,
+                'post_link': request.build_absolute_uri(reverse('show_post', args=[obj_id])),
+                'post_title': market_item.title if market_item else '',
+                'post_date': market_item.pub_date if market_item else ''}
+            group_filter = request.POST.get('groupFilter')
+            group_message = render_to_string('emails/recommendation_group.txt', group_context)
+            for g in group_recipients:
+                send_group_message(group_message, g, user_type=group_filter, subject=subject)
+
+    if len(bad_recipients) > 0:
         return HttpResponse(
             json.dumps({'success': 'false',
-                        'badrecipients': badrecipients}),
+                        'badrecipients': bad_recipients}),
             mimetype="application/" + rtype)
 
     return HttpResponse(
@@ -184,6 +202,16 @@ def get_usernames(request, rtype):
             [user.username for user in usernames if hasattr(user, 'userprofile')]
         ),
         mimetype="application/" + rtype)
+
+
+@staff_member_required
+def get_group_names(request):
+    groups = Group.objects.filter(name__icontains=request.GET.get('groupname')).only('name')[:10]
+    return HttpResponse(
+        json.dumps(
+            [g.name for g in groups]
+        ),
+        mimetype="application/json")
 
 
 def get_user_details(username):

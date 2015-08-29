@@ -1,6 +1,6 @@
-{{message}}
+{{ message }}
 
 ----------------------------------------
 
-{{additionals}}
-<!--{{rec_type}}="{{obj_id}}"-->
+{{ additionals }}
+<!--item="{{ obj_id }}"-->

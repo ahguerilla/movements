@@ -146,7 +146,7 @@ def update_salesforce():
 
 
 @app.task(name='send_group_message')
-def send_group_message(message, group, user_type=None):
+def send_group_message(message, group, user_type=None, subject=None):
     success_count = 0
     skip_count = 0
     error_count = 0
@@ -159,7 +159,7 @@ def send_group_message(message, group, user_type=None):
                 continue
 
             message_to_send = construct_email(message, u, group)
-            send_group_email(message_to_send, u)
+            send_group_email(message_to_send, u, subject=subject)
             success_count += 1
         except Exception as ex:
             error_count += 1

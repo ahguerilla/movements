@@ -76,10 +76,11 @@ def construct_email(message, user, group):
     return message
 
 
-def send_group_email(message, user, email_to=''):
+def send_group_email(message, user, email_to='', subject=None):
     to_address = email_to if email_to else user.email
+    subject = subject if subject else 'Group message from Movements.Org'
     email = EmailMessage(
-        'Group message from Movements.Org',
+        subject,
         message,
         constance.config.NO_REPLY_EMAIL,
         [to_address]

@@ -10,9 +10,21 @@
       <div class="modal-body">
         <label for="touser">{%trans "To: username or email address"%}</label>
         <div style="margin-bottom:5px;">
-          <input  class="form-control" id="touser" type="text" name="subject" required="true" placeholder="{%trans "Start typing a username or enter an email address"%}"/>
+          <input  class="form-control" id="touser" type="text" required="true" placeholder="{%trans "Start typing a username or enter an email address"%}"/>
         </div>
-
+        {% if user.is_staff %}
+        <label for="to-group">{%trans "To: Group"%}</label>
+        <div style="margin-bottom:5px;">
+          <input  class="form-control" id="to-group" type="text" placeholder="{%trans "Start typing a group names"%}"/>
+        </div>
+        <div style="margin-bottom:5px;">
+          <select class="form-control" id="group-filter">
+            <option value="all">All</option>
+            <option value="requesters">Requesters Only</option>
+            <option value="providers">Providers Only</option>
+          </select>
+        </div>
+        {% endif %}
         <label for="recsub">{%trans "Subject"%}</label>
         <div style="margin-bottom:5px;">
           <input  class="form-control" id="recsub" type="text" name="subject" required="true"/>
@@ -40,71 +52,91 @@
  (function () {
    var RecommendDialog = window.ahr.BaseView.extend({
      el: 'body',
+     allowGroups: {% if user.is_staff %}true{% else %}false{% endif %},
+     postType: '',
      events: {
        'click .sendrec': 'send',
        'click .recommend': 'show'
      },
 
      show: function(ev){
-      var subject = ev.currentTarget.getAttribute('subject'),
-        message = ev.currentTarget.getAttribute('message'),
-        obj_id = ev.currentTarget.getAttribute('obj_id'),
-        rec_type = ev.currentTarget.getAttribute('rec_type');
-      this.setup(rec_type, obj_id, subject, message);
-      this.clearalert('#recerror');
+       var subject = ev.currentTarget.getAttribute('subject'),
+          message = ev.currentTarget.getAttribute('message'),
+          obj_id = ev.currentTarget.getAttribute('obj_id');
+       this.setup(obj_id, subject, message);
+       this.clearalert('#recerror');
      },
 
-     setHeader: function(rec_type){
-      var dialog_header;
-      if(rec_type === "user"){
-        dialog_header = ' {%trans "user"%}';
-      }else{
-        dialog_header = ' {%trans "post"%}';
-      }
-      $('#rec-thing').text(dialog_header);
-     },
-
-     setup: function (rec_type, obj_id, subject, message) {
-       $('#touser').typeahead({
+     setup: function (obj_id, subject, message) {
+       this.postType = $('.view-post').data('post_type');
+       if(this.postType === 'request') {
+         this.$el.find('#group-filter').val('providers');
+       } else if (this.postType === 'offer') {
+         this.$el.find('#group-filter').val('requesters');
+       } else {
+         this.$el.find('#group-filter').val('all');
+       }
+       var $toUser = this.$el.find('#touser');
+       $toUser.typeahead({
          remote: window.ahr.app_urls['getusernames'] + '?username=%QUERY'
        });
+       var $toGroup = this.$el.find('#to-group');
+       $toGroup.typeahead({
+         remote: window.ahr.app_urls['getGroupNames'] + '?groupname=%QUERY'
+       });
+
+       var $recMessage = this.$el.find('#recmessage');
+       var $recSubject = this.$el.find('#recsub');
        $('.sendrec').prop('disabled', false);
-       this.rec_type = rec_type;
        this.obj_id = obj_id;
-       $('#recsub').val(subject);
-       $('#recsub').attr('readonly', false);
-       $('#recmessage').val(message);
-       $('#touser').val('');
-       $('#recmessage').height(130);
-       this.setHeader(rec_type);
+       $recSubject.val(subject);
+       $recSubject.attr('readonly', false);
+       $recMessage.val(message);
+       $toUser.val('');
+       $toGroup.val('');
+       $recMessage.height(130);
+       $('#rec-thing').text(' {%trans "post"%}');
        $('#recommenddialog').modal('show');
      },
 
      send: function () {
        var that = this;
-       if ($('#recsub').val() === '' || $('#recmessage').val() === '') {
+       var subject = this.$el.find('#recsub').val();
+       var message = this.$el.find('#recmessage').val();
+       var toUser = this.$el.find('#touser').val();
+       var toGroup = this.$el.find('#to-group').val();
+
+       if (!subject || !message) {
          this.alert('{%trans "Please enter both a subject and a message."%}', '#recerror');
          return;
        }
-       if ($('#touser').val() === '') {
-         // Need proper address validation here.
-         this.alert('{%trans "Please enter a valid username and/or email address. "%}', '#recerror');
-         return
-       }
-       $('.sendrec').prop('disabled', true);
-       if (this.rec_type == 'user') {
-         this.url = window.ahr.app_urls.senduserrecommendation + this.obj_id;
+       // generally needs better validation
+       var errorMessage = "";
+       if (this.allowGroups) {
+         if(!toUser && !toGroup) {
+           errorMessage = '{%trans "Please enter a valid username, email address or group. "%}';
+         }
        } else {
-         this.url = window.ahr.app_urls.senditemrecommendation + this.obj_id;
+         if(!toUser){
+            errorMessage = '{%trans "Please enter a valid username and or email address. "%}';
+         }
        }
+       if (errorMessage) {
+         this.alert(errorMessage, '#recerror');
+         return;
+       }
+
+       $('.sendrec').prop('disabled', true);
        var dfrd = $.ajax({
-         url: that.url,
+         url: window.ahr.app_urls.senditemrecommendation + this.obj_id,
          type: 'POST',
          dataType: 'json',
          data: {
-           recipients:  $('#touser').val(),
-           subject:     $('#recsub').val(),
-           message:     $('#recmessage').val()
+           recipients: toUser,
+           groupFilter: that.$el.find('#group-filter').val(),
+           groups: toGroup,
+           subject: subject,
+           message: message
          }
        });
        dfrd.done(function (data) {
@@ -129,7 +161,6 @@
      },
 
      initialize: function (data) {
-       var that = this;
        this.item = data.item;
        this.url = data.url;
        window.ahr.expandTextarea('#recmessage');
