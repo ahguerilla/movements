@@ -2236,6 +2236,9 @@ input.borderless-control:focus:invalid:focus {
   width: 260px;
   font-size: 10px;
 }
+.poster .post-direct-action {
+  float: right;
+}
 .settings-bar {
   background-color: #b6aba5;
   border-bottom: 4px solid #e0d7d8;
