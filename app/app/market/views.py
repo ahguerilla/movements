@@ -136,6 +136,12 @@ def _create_or_update_post(request, template, form_class, build_redir_url, marke
             request.user.userprofile.save()
             request.user.save()
 
+        # user should be added to the requester/provider group depending on the post type
+        if post.item_type == MarketItem.TYPE_CHOICES.REQUEST:
+            request.user.userprofile.add_to_requesters()
+        else:
+            request.user.userprofile.add_to_providers()
+
         redir_url = build_redir_url(post)
         if request.is_ajax():
             return HttpResponse(json.dumps({'success': True, 'redir_url': redir_url}), mimetype="application/json")

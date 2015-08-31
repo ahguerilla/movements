@@ -1,5 +1,6 @@
 import uuid
 from django.contrib.auth.models import User, Group
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields.json import JSONField
@@ -237,6 +238,22 @@ class UserProfile(models.Model):
 
     def is_requester(self):
         return self.user.marketitem_set.filter(item_type='request').count() > 0
+
+    def add_to_providers(self):
+        try:
+            pg = Group.objects.get(name='Provider')
+            self.user.groups.add(pg)
+            self.user.save()
+        except ObjectDoesNotExist:
+            pass
+
+    def add_to_requesters(self):
+        try:
+            pg = Group.objects.get(name='Requester')
+            self.user.groups.add(pg)
+            self.user.save()
+        except ObjectDoesNotExist:
+            pass
 
     def set_group_notification_preference(self, key, value):
         self.group_notification_preference[str(key)] = value
