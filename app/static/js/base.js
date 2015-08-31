@@ -210,6 +210,7 @@ if (!String.prototype.format) {
     var errorLabelFmt = '<label for="id_{0}" class="error">{1}</label>';
     var genericMessage = response.detail;
     var msg, errorDiv, input, errorLabel = null;
+    form.find('.error').hide();
     if (response.errors) {
       for (var inputName in response.errors) {
         msg = response.errors[inputName].join(' ');

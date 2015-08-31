@@ -64,6 +64,14 @@ class MarketItemBaseForm(forms.ModelForm):
         data = self.cleaned_data['title']
         if len(data) > 120:
             raise forms.ValidationError(_("Please enter a maximum of 120 characters"))
+        if len(data) < 25:
+            raise forms.ValidationError(_("Please enter at least 25 characters"))
+        return data
+
+    def clean_details(self):
+        data = self.cleaned_data['details']
+        if len(data) < 250:
+            raise forms.ValidationError(_("To help others understand a little better, please provide a few more details (at least 250 characters)"))
         return data
 
     def save(self, commit=True, *args, **kwargs):
