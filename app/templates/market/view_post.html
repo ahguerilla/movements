@@ -69,12 +69,22 @@
           <a username="{{ post.owner.username }}"
              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-action');}"
              subject="I saw your Movements post and want to help."
-             class="btn btn-action private-message" href="#" >{% trans 'I want to help' %}&nbsp;>></a>
+             {% if user.is_authenticated %}
+             href="#"
+             {% else %}
+             href="{% url 'account_login' %}"
+             {% endif %}
+             class="btn btn-action private-message" >{% trans 'I want to help' %}&nbsp;>></a>
           {% else %}
           <a username="{{ post.owner.username }}"
              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-action');}"
              subject="I saw your Movements post and I need your help."
-             class="btn btn-action private-message" href="#" >{% trans 'I need your help' %}&nbsp;>></a>
+             {% if user.is_authenticated %}
+             href="#"
+             {% else %}
+             href="{% url 'account_login' %}"
+             {% endif %}
+             class="btn btn-action private-message" >{% trans 'I need your help' %}&nbsp;>></a>
           {% endif %}
         </div>
       </div>
