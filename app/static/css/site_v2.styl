@@ -289,7 +289,8 @@ $navigation-font-size = 18px
     color #fff
   .navbar-main
     font-size $navigation-font-size
-  .navbar-main > li > a:hover
+  .navbar-main > li > a:hover,
+  .navbar-main > li > a:focus
     background-color $primary-color
     color #ffffff
   .navbar-right > li
@@ -341,11 +342,60 @@ $navigation-font-size = 18px
   .nav .open > a:focus
     background-color $primary-color
     color $white-font
+  .dropdown-menu
+    background-color #f8f6f7
+  .dropdown-menu > li > a
+    color $font-color
   .dropdown-menu > li > a:hover,
   .dropdown-menu > li > a:focus
     color $white-font
     text-decoration none
     background-color $primary-color
+  .dropdown-menu > .image-item > a:hover
+      color $font-color
+      background-color inherit
+  .nav-twitter
+    width 100%
+    img
+      position absolute
+      height 37px
+      clip rect(19px,30px,60px,0px)
+      margin-top -16px
+    span
+      margin-left 30px
+      line-height 26px
+  .nav-twitter:hover
+    img
+      clip rect(0px,30px,18px,0px)
+      margin-top 3px
+  .nav-facebook
+    width 100%
+    img
+      position absolute
+      height 44px
+      clip rect(22px,30px,60px,0px)
+      margin-top -21px
+    span
+      margin-left 30px
+      line-height 26px
+  .nav-facebook:hover
+    img
+      clip rect(0px,30px,22px,0px)
+      margin-top 1px
+  .nav-ahr
+    width 100%
+    img
+      position absolute
+      height 44px
+      clip rect(23px,30px,60px,0px)
+      margin-top -23px
+    span
+      margin-left 30px
+      line-height 26px
+   .nav-ahr:hover
+    img
+      clip rect(0px,30px,23px,0px)
+      margin-top -1px
 
 #main-cms-nav
   position fixed

@@ -121,27 +121,36 @@
               <span>{%trans "Find out more"%}</span>
             </a>
           </li>
-          <li class="">
-            <a href="#">
-              <span>{%trans "Connect"%}</span>
-            </a>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Connect" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="image-item"><a target="_blank" href="https://twitter.com/movements_org">
+                <div class="nav-twitter">
+                  <img src="{{ STATIC_URL }}images/v2/twitter-dualstate.png" alt="Connect with Twitter">
+                  <span>{% trans "Twitter" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="https://www.facebook.com/Movements.org">
+                <div class="nav-facebook">
+                  <img src="{{ STATIC_URL }}images/v2/facebook-dualstate.png" alt="Connect with Facebook">
+                  <span>{% trans "Facebook" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="http://www.advancinghumanrights.org/">
+                <div class="nav-ahr">
+                  <img src="{{ STATIC_URL }}images/v2/ahr-dualstate.png" alt="Advancing human rights">
+                  <span>{% trans "Advancing Human Rights" %}</span>
+                </div>
+              </a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="{{ config.BLOG_URL }}" target="_blank">{% trans "Movements Blog" %}</a></li>
+              <li><a href="{% page_url 'success_stories' %}" target="_blank">{% trans "Success Stories" %}</a></li>
+            </ul>
           </li>
           <li class="">
             <a href="#">
               <span>{%trans "Language"%}</span>
             </a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
