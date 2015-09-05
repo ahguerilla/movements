@@ -24,8 +24,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>{% block head_title %}Movements{% endblock %}</title>
   <meta name="description" content="">
-{#  <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
-  <meta name="viewport" content="width=1050">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   {% block open_graph_data %}
   <meta property="og:type" content="website">
@@ -93,6 +92,54 @@
     <div style="display:none;">{{ message }}</div>
   {% endfor %}
 {% endif %}
+
+{% block base_header_nav %}
+  <div class="navbar navbar-header-top navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#collapse-menu">
+          <img src="{{ STATIC_URL }}img/menu-icon.png"/>
+        </button>
+      {% if user.is_authenticated %}
+        <a class="main-logo" href="#">
+      {% else %}
+        <a class="main-logo" href="/">
+      {% endif %}
+         <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
+        </a>
+      </div>
+      <ul class="navbar-right">
+        <div id="view-content-menu" class="menu-selector">
+          <div class="menu-icon"></div>
+        </div>
+      </ul>
+      <div id="collapse-menu" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-main">
+          <li class="">
+            <a href="#">
+              <span>How it works</span>
+            </a>
+          </li>
+          <li class="">
+            <a href="#">
+              <span>Invest</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="nav-button" href="{% url 'signup_start' %}">
+            <button class="btn action-button large-button open-account">{%trans "Sign up now"%}</button>
+          </a></li>
+          <li><a class="nav-button" href="{% url 'account_login' %}">
+            <button class="btn secondary-button large-button-outline">{%trans "Login"%}</button>
+          </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock base_header_nav %}
+
 
 {% block header_nav %}
 <nav class="navbar navbar-default header-nav
@@ -188,6 +235,8 @@
   </div>
 </nav>
 {% endblock %}
+
+
 <div id="main-cms-nav" style="display: none;">
   <div class="container">
     <div class="row">

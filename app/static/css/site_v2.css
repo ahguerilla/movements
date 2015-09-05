@@ -216,6 +216,9 @@ body {
   font-family: "LinotypeUnivers-330Light";
   font-size: 16px;
 }
+ul {
+  padding: 0;
+}
 .glyphicon {
   color: #fe6d50;
   font-size: 22px;
@@ -243,6 +246,96 @@ body {
   padding: 4px 12px;
   margin-top: 7px;
   float: right;
+}
+.navbar-header-top {
+  -webkit-box-shadow: 0px 2px 2px 0px #d8d2d4;
+  -moz-box-shadow: 0px 2px 2px 0px #d8d2d4;
+  -ms-box-shadow: 0px 2px 2px 0px #d8d2d4;
+  -o-box-shadow: 0px 2px 2px 0px #d8d2d4;
+  box-shadow: 0px 2px 2px 0px #d8d2d4;
+  background-color: #f8f6f7;
+  border-bottom: 4px solid #e0d7d8;
+}
+.navbar-header-top .main-logo {
+  display: block;
+  margin: 13px 20px 0 30px;
+}
+.navbar-header-top .main-logo img {
+  width: 151px;
+  height: 50px;
+}
+.navbar-header-top .navbar-nav > li {
+  border-left: solid #d8d2d4 1px;
+}
+.navbar-header-top .navbar-nav > li:last-child {
+  border-right: solid #d8d2d4 1px;
+}
+.navbar-header-top .navbar-nav > li > a {
+  color: #756b65;
+  line-height: 80px;
+  padding: 0 20px 0 20px;
+}
+.navbar-header-top .navbar-nav > li.active > a {
+  background-color: $brand-alt;
+  color: #fff;
+}
+.navbar-header-top .navbar-main {
+  font-size: $navigation-font-size;
+}
+.navbar-header-top .navbar-main > li > a:hover {
+  background-color: $brand-primary;
+  color: $font-color-secondary;
+}
+.navbar-header-top .navbar-right > li {
+  border: 0;
+  margin-right: 15px;
+}
+.navbar-header-top .navbar-right > li:last-child {
+  border: 0;
+  margin-right: 0;
+}
+.navbar-header-top .navbar-right > li > a {
+  display: inline;
+  padding: 0;
+}
+.navbar-header-top .navbar-right > li > a:hover {
+  color: $brand-primary;
+  background-color: #fff;
+}
+.navbar-header-top .navbar-nav.navbar-right:last-child {
+  margin-right: 0;
+}
+.navbar-header-top .user-info {
+  padding-top: 18px;
+}
+.navbar-header-top .user-info .funds {
+  display: block;
+}
+.navbar-header-top .user-info .myaccount {
+  display: block;
+  text-align: right;
+}
+.navbar-header-top .user-info .myaccount form {
+  display: inline;
+}
+.navbar-header-top .user-info .myaccount .btn {
+  color: #756b65;
+  padding: 0 5px 0 0;
+}
+.navbar-header-top .user-info .myaccount a {
+  text-decoration: underline;
+  color: #756b65;
+}
+.navbar-header-top .menu-selector {
+  margin: 21px 15px 0px 18px;
+}
+.navbar-header-top .menu-selector .menu-icon {
+  background-image: url("../images/v2/hamburger.png");
+  width: 50px;
+  height: 40px;
+}
+.navbar-header-top .menu-selector.selected .menu-icon {
+  background-image: url("../images/v2/hamburger-selected.png");
 }
 .header-nav {
   -webkit-border-radius: 0;
