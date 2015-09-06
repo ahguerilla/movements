@@ -445,6 +445,9 @@ ul {
 #main-cms-nav a:hover {
   text-decoration: none;
 }
+#main-cms-nav .main-menu-slider a:hover h3 {
+  color: #fe6d50;
+}
 #main-cms-nav .main-menu-slider ul {
   margin: 0;
   text-align: center;

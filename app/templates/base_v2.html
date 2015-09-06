@@ -172,7 +172,7 @@
           <ul>
             {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
             {% if not user.is_authenticated %}
-              <li><h3><a href="{% url 'show_market' %}">{%trans "Visit market"%}</a></h3></li>
+              <li><a href="{% url 'show_market' %}"><h3>{%trans "Visit market"%}</h3></a></li>
             {% endif %}
           </ul>
         </div>
@@ -429,13 +429,20 @@
 
 <script type="text/javascript">
   (function () {
+    var mainMenuOpen = false;
     $('#view-content-menu').click(function(){
-      if($('#main-cms-nav').is(":visible")){
+      if(!$('#main-cms-nav').is(":visible")){
+        $('#main-cms-nav').slideDown("fast", function(){
+          mainMenuOpen = true;
+        });
+        $('.menu-selector').addClass("selected");
+      }
+    });
+    $('html').click(function(){
+      if(mainMenuOpen) {
         $('#main-cms-nav').slideUp("fast");
         $('.menu-selector').removeClass("selected");
-      } else {
-        $('#main-cms-nav').slideDown("fast");
-        $('.menu-selector').addClass("selected");
+        mainMenuOpen = false;
       }
     });
   })();

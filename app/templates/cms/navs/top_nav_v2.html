@@ -1,6 +1,6 @@
 {% load menu_tags %}
 {% for child in children %}
   {% if child.show_in_top_menu %}
-  <li><h3><a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a></h3></li>
+  <li><a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}"><h3>{{ child.get_menu_title }}</h3></a></li>
   {% endif %}
 {% endfor %}
