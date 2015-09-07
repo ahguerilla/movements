@@ -147,10 +147,46 @@
               <li><a href="{% page_url 'success_stories' %}" target="_blank">{% trans "Success Stories" %}</a></li>
             </ul>
           </li>
-          <li class="">
-            <a href="#">
-              <span>{%trans "Language"%}</span>
-            </a>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Language" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="image-item"><a data-language="en" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_uk.png">
+                  <span>{% trans "English" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ar" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_arabic.png">
+                  <span>{% trans "Arabic" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="zh-cn" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_chinese.png">
+                  <span>{% trans "Chinese" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="uk" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png">
+                  <span>{% trans "Ukrainian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ru" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_russian.png">
+                  <span>{% trans "Russian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="fa" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_iran.png">
+                  <span>{% trans "Iranian" %}</span>
+                </div>
+              </a></li>
+            </ul>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -166,17 +202,13 @@
   </div>
   <div style="height: 80px">&nbsp;</div>
   <div id="main-cms-nav" style="display: none;">
-    <div class="container">
-      <div class="row">
-        <div class="main-menu-slider">
-          <ul>
-            {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
-            {% if not user.is_authenticated %}
-              <li><a href="{% url 'show_market' %}"><h3>{%trans "Visit market"%}</h3></a></li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
+    <div class="main-menu-slider">
+      <ul>
+        {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
+        {% if not user.is_authenticated %}
+          <li><a href="{% url 'show_market' %}"><h3>{%trans "Visit market"%}</h3></a></li>
+        {% endif %}
+      </ul>
     </div>
   </div>
 {% endblock base_header_nav %}
