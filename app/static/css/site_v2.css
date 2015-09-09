@@ -1217,21 +1217,18 @@ h6 {
   font-weight: bold;
   margin: 5px 0;
 }
-.landing-page .partners .list {
+.landing-page .partner-section .partner {
   text-align: center;
+  margin: 15px 0;
 }
-.landing-page .partners .list .partner {
-  display: inline-block;
-  margin: 10px 15px;
-  min-width: 140px;
-}
-.landing-page .partners .list .partner img {
+.landing-page .partner-section .partner img {
   vertical-align: baseline;
 }
-.landing-page .partners .list .partner .popover {
+.landing-page .partner-section .partner .popover {
   margin-top: 10px;
+  width: 520px;
 }
-.landing-page .partners .list .partner .popover-title {
+.landing-page .partner-section .partner .popover-title {
   color: #262626;
 }
 .landing-page .landing-content {

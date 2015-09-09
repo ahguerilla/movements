@@ -15,7 +15,68 @@ def home(request):
     if request.user.is_authenticated() and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('exchange'))
     partners = Partner.objects.filter(enabled=True).all()
-    view_dict = {'partners': partners}
+
+
+    # 3, 3, 3, 3, 3
+    #   4, 4, 4
+    #
+
+    # 4, 4, 4
+
+    partner_list = []
+    if partners:
+        length_partners = len(partners)
+        remainder_4 = length_partners % 4
+        large = 0
+        if remainder_4 == 3:
+            large = 3
+        if remainder_4 == 2:
+            large = 2
+        if remainder_4 == 1:
+            large = 1
+
+        small = 0
+        remainder_3 = length_partners % 3
+        if remainder_3 == 2:
+            small = 2
+        if remainder_3 == 1:
+            small = 1
+
+        xsmall = 0
+        remainder_2 = length_partners % 6
+        if remainder_2 == 1:
+            xsmall = 1
+
+        for i in range(length_partners):
+            css_class = ''
+            if length_partners - i <= large:
+                if large == 3:
+                    css_class += 'col-lg-4 '
+                if large == 2:
+                    css_class += 'col-lg-6 '
+                if large == 1:
+                    css_class += 'col-lg-12 '
+            else:
+                css_class += 'col-lg-3 '
+
+            if length_partners - i <= small:
+                if small == 2:
+                    css_class += 'col-sm-6 '
+                if small == 1:
+                    css_class += 'col-sm-12 '
+            else:
+                css_class += 'col-sm-4 '
+
+            if length_partners - i <= xsmall:
+                if xsmall == 1:
+                    css_class += 'col-xs-12'
+            else:
+                css_class += 'col-xs-6'
+
+            partner_list.append({'title': partners[i].title, 'text': partners[i].text,
+                                 'logo': partners[i].logo, 'css': css_class})
+
+    view_dict = {'partners': partner_list}
     return render_to_response('ahr/home_v2.html', view_dict, context_instance=RequestContext(request))
 
 

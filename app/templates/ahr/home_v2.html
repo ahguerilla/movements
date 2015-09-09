@@ -90,19 +90,16 @@
               <div class="title">{% trans 'Our Partners' %}</div>
             </div>
           </div>
-        </div>
-        <div class="list">
-          {% for partner in partners %}
-            {% thumbnail partner.logo 0x40 upscale as thumb %}
-            <div class="partner">
-              <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom"
-                 title="{{ partner.title }}" data-content="{{ partner.text }}">
-                <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}"/></a>
-            </div>
-            {% if forloop.counter|divisibleby:5 %}
-            <br />
-            {% endif %}
-          {% endfor %}
+          <div class="row partner-section">
+            {% for partner in partners %}
+              {% thumbnail partner.logo 0x40 upscale as thumb %}
+              <div class="{{ partner.css }} partner">
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+                   title="{{ partner.title }}" data-content="{{ partner.text }}">
+                  <img src="{{ thumb.url }}" width="{{ thumb.width }}"/></a>
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     {% endif %}
