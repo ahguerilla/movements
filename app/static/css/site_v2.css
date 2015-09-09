@@ -270,10 +270,10 @@ ul {
   height: 50px;
 }
 .navbar-header-top .navbar-nav > li {
-  border-left: solid #d8d2d4 1px;
-}
-.navbar-header-top .navbar-nav > li:last-child {
   border-right: solid #d8d2d4 1px;
+}
+.navbar-header-top .navbar-nav > li:first-child {
+  border-left: solid #d8d2d4 1px;
 }
 .navbar-header-top .navbar-nav > li > a {
   color: #756b65;
@@ -299,6 +299,9 @@ ul {
 .navbar-header-top .navbar-right > li:last-child {
   border: 0;
   margin-right: 0;
+}
+.navbar-header-top .navbar-right > li:first-child {
+  border: 0;
 }
 .navbar-header-top .navbar-right > li > a {
   display: inline;
@@ -1165,9 +1168,9 @@ h6 {
 .page-banner .carousel-inner .carousel-content .carousel-button {
   position: absolute;
   top: 365px;
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 .page-banner .carousel-inner .carousel-content .carousel-button button {
   width: 50%;
@@ -1316,6 +1319,11 @@ h6 {
 .stats-banner h3 {
   margin: 0;
   color: #fe6d50;
+}
+.carousel-signup {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
 }
 .progress-counter {
   border-top: 2px solid #e0d7d8;
@@ -2861,63 +2869,76 @@ input.borderless-control:focus:invalid:focus {
 
 
 @media (max-width: 767px) {
-  footer #FooterSocialMedia_Big {
-    display: none;
+  .navbar {
+    min-height: 50px;
   }
-  footer #FooterSocialMedia_Small {
-    display: inherit;
+  .navbar-header {
+    height: 75px;
   }
-  .page-banner .carousel-inner .carousel-content .carousel-title {
-    top: 70px;
+  .navbar-header-top .main-logo {
+    margin-top: 8px;
+    margin-left: 15px;
   }
-  .page-banner .carousel-inner .carousel-content .carousel-blurb {
-    top: 225px;
+  .navbar-header-top .navbar-nav > li,
+  .navbar-header-top .navbar-nav > li:last-child {
+    border-left: none;
+    border-right: none;
   }
-  .page-banner .carousel-inner .carousel-content .carousel-button button {
-    width: 200px;
+  .navbar-header-top .navbar-toggle {
+    margin-top: 5px;
   }
-}
-@media (max-width: 579px) {
-  #AlreadyHaveText {
-    display: none;
+  .navbar-header-top .user-info {
+    padding-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
   }
-  .page-banner .carousel-inner .carousel-content .carousel-title {
-    font-size: 28px;
+  #collapse-menu li {
+    text-align: right;
+    margin-right: 0;
   }
-}
-@media (max-width: 530px) {
-  #FilterByType {
-    float: none !important;
-    position: relative;
-    left: 50%;
-    margin-left: -100px;
+  #collapse-menu li a {
+    line-height: 35px;
   }
-  #FilterDropdowns {
-    float: none !important;
-    position: relative;
-    left: 50%;
-    margin-left: -135px;
-    margin-top: 18px;
+  #collapse-menu li .open-account {
+    margin-bottom: 10px;
   }
-  .exchange-filters .search-expanded {
-    position: relative;
-    left: 50%;
-    margin-left: -135px;
-    width: 270px;
+  #collapse-menu li .dropdown-flag img {
+    float: right;
+    margin-left: 20px;
+    padding-top: 6px;
   }
-}
-@media (max-width: 479px) {
-  #AddPostText {
-    display: none;
+  .navbar-collapse {
+    max-height: inherit;
   }
-  #add-post-popup-container .arrow {
-    left: 112px;
+  .page-banner {
+    height: 350px;
+  }
+  .page-banner .carousel-inner .item {
+    height: 350px;
+  }
+  .page-banner .carousel-inner .carousel-content {
+    height: 350px;
   }
   .page-banner .carousel-inner .carousel-content .carousel-title {
     font-size: 24px;
+    padding-left: inherit;
+    padding-right: inherit;
+    width: inherit;
+    top: inherit;
+    bottom: 195px;
+    left: 0;
+    text-align: left;
   }
-  .page-banner .carousel-inner .carousel-content .carousel-blurb {
-    font-size: 16px;
+  .page-banner .stats-banner {
+    max-width: 370px;
+    bottom: 70px;
+    left: 14px;
+  }
+}
+@media (max-width: 991px) {
+  .stats-banner {
+    bottom: 15px;
+    right: 15px;
   }
 }
 

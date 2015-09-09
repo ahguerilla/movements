@@ -1,58 +1,60 @@
+$page-banner-height-xs = 350px
+
 @media (max-width: 767px)
-  footer
-    #FooterSocialMedia_Big
-      display none
-    #FooterSocialMedia_Small
-      display inherit
+  .navbar
+    min-height 50px
+  .navbar-header
+    height 75px
+  .navbar-header-top
+    .main-logo
+      margin-top 8px
+      margin-left 15px
+    .navbar-nav > li, .navbar-nav > li:last-child
+      border-left none
+      border-right none
+    .navbar-toggle
+      margin-top 5px
+    .user-info
+      padding-top 0
+      margin-bottom 10px
+      font-size 16px
+  #collapse-menu
+    li
+      text-align right
+      margin-right 0
+      a
+        line-height 35px
+      .open-account
+        margin-bottom 10px
+      .dropdown-flag
+        img
+          float right
+          margin-left 20px
+          padding-top 6px
+  .navbar-collapse
+    max-height inherit
   .page-banner
+    height $page-banner-height-xs
     .carousel-inner
+      .item
+        height $page-banner-height-xs
       .carousel-content
-        .carousel-title
-          top 70px
-        .carousel-blurb
-          top 225px
-        .carousel-button
-          button
-            width 200px
-
-@media (max-width: 579px)
-  #AlreadyHaveText
-    display none
-  .page-banner
-    .carousel-inner
-      .carousel-content
-        .carousel-title
-          font-size 28px
-
-@media (max-width: 530px)
-  #FilterByType
-    float none !important
-    position relative
-    left: 50%;
-    margin-left: -100px;
-  #FilterDropdowns
-    float none !important
-    position relative
-    left 50%
-    margin-left -135px
-    margin-top 18px
-  .exchange-filters
-    .search-expanded
-      position relative
-      left 50%
-      margin-left -135px
-      width 270px
-
-@media (max-width: 479px)
-  #AddPostText
-    display none
-  #add-post-popup-container
-    .arrow
-      left 112px
-  .page-banner
-    .carousel-inner
-      .carousel-content
+        height $page-banner-height-xs
         .carousel-title
           font-size 24px
-        .carousel-blurb
-          font-size 16px
+          padding-left inherit
+          padding-right inherit
+          width inherit
+          top inherit
+          bottom 195px
+          left 0
+          text-align left
+    .stats-banner
+      max-width 370px
+      bottom 70px
+      left 14px
+
+@media (max-width: 991px)
+  .stats-banner
+    bottom 15px
+    right 15px

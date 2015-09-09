@@ -6,20 +6,15 @@
 {% load thumbnail %}
 
 {% block header_nav %}
-<!--
-<nav class="navbar navbar-default header-nav home-page-nav" role="navigation">
-  <div class="navbar-left">
-    <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
-  </div>
-  <div class="navbar-right">
-    <div class="action-item"><span id="AlreadyHaveText">{%trans "Already have an account?" %}&nbsp;</span><a href="{% url 'account_login' %}">{%trans "Login"%}</a></div>
-    <div id="view-content-menu" class="menu-selector">
-      <div class="menu-icon"></div>
-    </div>
-  </div>
-</nav>
--->
 {% endblock %}
+
+{% block additional_nav %}
+<li class="visible-xs">
+  <a href="{% page_url 'how_it_works' %}">
+    <span>{%trans "Find out more"%}</span>
+  </a>
+</li>
+{% endblock additional_nav %}
 
 {% block header_padding %}{% endblock %}
 {% block footer_padding %}{% endblock %}
@@ -36,24 +31,10 @@
                   <div class="carousel-title">
                     {% blocktrans %}Crowdsourcing human rights.{% endblocktrans %}
                   </div>
-                  <div class="carousel-blurb">
+                  <div class="carousel-blurb hidden-xs">
                     <div>{% blocktrans %}Movements is crowdsourcing human rights. It connects human rights activists in closed societies with those with skills to help them around the world. Join today and help a dissident in need.{% endblocktrans %}</div>
                   </div>
-                  <div class="carousel-button">
-                    <a href="{% url 'signup_start' %}">
-                      <button class="btn btn-action">{%trans "Sign up now"%}</button>
-                    </a>
-                  </div>
-                  <div class="carousel-button" id="FindOutMoreButton">
-                    <a href="{% page_url 'how_it_works' %}">
-                      <button class="btn btn-action">{%trans "Find out more"%}</button>
-                    </a>
-                  </div>
-                  <div class="carousel-button" id="BlogButton">
-                    <a target="_blank" href="{{ config.BLOG_URL }}">
-                      <button class="btn btn-action">{%trans "Movements Blog"%}</button>
-                    </a>
-                  </div>
+                    {% include 'ahr/snippets/_carousel_buttons.html' %}
                 </div>
               </div>
             </div>
@@ -63,39 +44,25 @@
                   <div class="carousel-title">
                     {% blocktrans %}Request help from people across the globe, offer help to an activist in need.{% endblocktrans %}
                   </div>
-                  <div class="carousel-blurb">
+                  <div class="carousel-blurb hidden-xs">
                     <div>{% blocktrans %}Whether you’re a journalist, artist, technologist, policy-maker, linguist or PR agent - everyone has skills that can advance human rights.{% endblocktrans %}</div>
                   </div>
-                  <div class="carousel-button">
-                    <a href="{% url 'signup_start' %}">
-                      <button class="btn btn-action">{%trans "Sign up now"%}</button>
-                    </a>
-                  </div>
-                  <div class="carousel-button" id="FindOutMoreButton">
-                    <a href="{% page_url 'how_it_works' %}">
-                      <button class="btn btn-action">{%trans "Find out more"%}</button>
-                    </a>
-                  </div>
-                  <div class="carousel-button" id="BlogButton">
-                    <a target="_blank" href="{{ config.BLOG_URL }}">
-                      <button class="btn btn-action">{%trans "Movements Blog"%}</button>
-                    </a>
-                  </div>
+                  {% include 'ahr/snippets/_carousel_buttons.html' %}
                 </div>
               </div>
             </div>
           </div>
-          <div class="left-control">
+          <div class="left-control hidden-sm hidden-xs">
             <a href="#home-page-carousel" data-slide="prev">
               <img width="50px;" src="{{ STATIC_URL }}images/v2/carousel_left.jpg" >
             </a>
           </div>
-          <div class="right-control">
+          <div class="right-control hidden-sm hidden-xs">
             <a href="#home-page-carousel" data-slide="next">
               <img width="50px;" src="{{ STATIC_URL }}images/v2/carousel_right.jpg" >
             </a>
           </div>
-          <div id="language-flags">
+          <div id="language-flags" class="hidden-xs">
             <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png" ></a>
             <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png" ></a>
             <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png" ></a>
@@ -105,6 +72,11 @@
           </div>
           {% if config.DONATE_BUTTON_LANDING %}{{ config.DONATE_BUTTON_LANDING|safe }}{% endif %}
           <div class="stats-banner" style="display:none;"></div>
+          <div class="carousel-signup visible-xs">
+            <a href="{% url 'signup_start' %}">
+              <button class="btn btn-action">{%trans "Sign up now"%}</button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
