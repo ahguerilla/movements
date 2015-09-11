@@ -323,7 +323,7 @@
   <div id="FooterSocialMedia_Big" class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-sm-4 hidden-xs">
           <h4>{% trans "Get updates"  %}</h4>
           <form id="sign-up-form" action="{% url 'newsletter_signup' %}">
             <div class="form-group">
@@ -333,7 +333,7 @@
           <p id="newsletter-conf"></p>
           <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>
         </div>
-        <div class="col-xs-3">
+        <div class="col-sm-3 hidden-xs">
           <h4>{% trans "Connect with us"  %}</h4>
           <div class="social-icons">
             <a target="_blank" href="https://twitter.com/movements_org">
@@ -342,42 +342,24 @@
             <a target="_blank" href="https://www.facebook.com/Movements.org">
               <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="{%trans "Connect with Facebook"%}" >
             </a>
-{#            <a href="">#}
-{#              <img src="{{ STATIC_URL }}images/v2/gplus-bigger.png" alt="Connect with Google Plus" >#}
-{#            </a>#}
           </div>
         </div>
-        <div class="col-xs-5">
+        <div class="col-sm-5">
           <h4>{% trans "About MOVEMENTS"  %}</h4>
           <p>{% blocktrans %}Crowdsourcing human rights. The online platform that is opening closed societies.{% endblocktrans %}</p>
         </div>
       </div>
       <hr>
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2015 Advancing Human Rights{% endblocktrans %}</div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <div class="footer-nav-content">
             {% show_menu 0 100 100 100 "cms/navs/bottom_nav_v2.html" %}
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div id="FooterSocialMedia_Small" class="footer">
-    <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
-    <div class="social-icons">
-        {% trans "Connect with us"  %}
-        <a target="_blank" href="https://twitter.com/movements_org">
-          <img src="{{ STATIC_URL }}images/v2/twitter.png" alt="Twitter" >
-        </a>
-        <a target="_blank" href="https://www.facebook.com/Movements.org">
-          <img src="{{ STATIC_URL }}images/v2/facebook.png" alt="Facebook" >
-        </a>
-        <a href="">
-          <img src="{{ STATIC_URL }}images/v2/gplus.png" alt="Google Plus" >
-        </a>
     </div>
   </div>
 </footer>

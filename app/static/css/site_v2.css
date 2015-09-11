@@ -851,24 +851,6 @@ footer .footer-nav-content li:first-child {
 footer .footer-nav-content li:last-child a {
   margin-right: 0;
 }
-#FooterSocialMedia_Small {
-  display: none;
-  font-size: 10pt;
-}
-#FooterSocialMedia_Small .footer-copyright {
-  margin-top: 15px;
-  text-align: center;
-}
-#FooterSocialMedia_Small .social-icons {
-  position: relative;
-  margin-top: 10px;
-  left: 50%;
-  margin-left: -108px;
-}
-#FooterSocialMedia_Small .social-icons img {
-  margin-left: 15px;
-  margin-right: 0;
-}
 .footer-navbar {
   background-color: #b7aba5;
   min-height: 35px;
@@ -2962,6 +2944,13 @@ input.borderless-control:focus:invalid:focus {
   .testimonial {
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+  footer .footer-copyright {
+    text-align: center;
+  }
+  footer .footer-nav-content {
+    text-align: center;
+    margin-top: 15px;
   }
 }
 @media (min-width: 767px) {
