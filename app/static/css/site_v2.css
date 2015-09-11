@@ -2939,6 +2939,30 @@ input.borderless-control:focus:invalid:focus {
     bottom: 70px;
     left: 14px;
   }
+  .landing-page .landing-content {
+    height: auto;
+  }
+  .landing-page .landing-content .container {
+    height: auto;
+  }
+  .landing-page .request-background {
+    background: url("../images/v2/request_background_mobile.jpg");
+    background-repeat: repeat;
+  }
+  .landing-page .request-background .container div {
+    padding: 10px 0;
+  }
+  .landing-page .offer-background {
+    background: url("../images/v2/offer_background_mobile.jpg");
+    background-repeat: repeat;
+  }
+  .landing-page .offer-background .container div {
+    padding: 10px 0;
+  }
+  .testimonial {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 @media (min-width: 767px) {
   .partner-section .collapse-non-xs {
