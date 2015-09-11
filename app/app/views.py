@@ -15,14 +15,6 @@ def home(request):
     if request.user.is_authenticated() and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('exchange'))
     partners = Partner.objects.filter(enabled=True).all()
-
-
-    # 3, 3, 3, 3, 3
-    #   4, 4, 4
-    #
-
-    # 4, 4, 4
-
     partner_list = []
     if partners:
         length_partners = len(partners)
@@ -76,7 +68,15 @@ def home(request):
             partner_list.append({'title': partners[i].title, 'text': partners[i].text,
                                  'logo': partners[i].logo, 'css': css_class})
 
-    view_dict = {'partners': partner_list}
+    partners_first = None
+    partners_rest = None
+    if partner_list:
+        if len(partner_list) > 2:
+            partners_first = partner_list[:2]
+            partners_rest = partner_list[2:]
+        else:
+            partners_first = partner_list
+    view_dict = {'partners_first': partners_first, 'partners_rest': partners_rest}
     return render_to_response('ahr/home_v2.html', view_dict, context_instance=RequestContext(request))
 
 

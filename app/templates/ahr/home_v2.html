@@ -82,7 +82,7 @@
     </div>
   </div>
   <div class="landing-page">
-    {% if partners %}
+    {% if partners_first %}
       <div class="partners">
         <div class="container">
           <div class="row">
@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="row partner-section">
-            {% for partner in partners %}
+            {% for partner in partners_first %}
               {% thumbnail partner.logo 0x40 upscale as thumb %}
               <div class="{{ partner.css }} partner">
                 <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom"
@@ -99,6 +99,23 @@
                   <img src="{{ thumb.url }}" width="{{ thumb.width }}"/></a>
               </div>
             {% endfor %}
+            {% if partners_rest %}
+              <div class="col-sm-offset-1 col-sm-10 visible-xs statement statement-font">
+                <a data-toggle="collapse"
+                   href="#collasePartners"
+                   aria-expanded="false"
+                   aria-controls="collasePartners">{% trans 'more' %}&nbsp;<span class="caret"></span></a></div>
+              <div  class="collapse collapse-non-xs" id="collasePartners">
+              {% for partner in partners_rest %}
+                {% thumbnail partner.logo 0x40 upscale as thumb %}
+                <div class="{{ partner.css }} partner">
+                  <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+                     title="{{ partner.title }}" data-content="{{ partner.text }}">
+                    <img src="{{ thumb.url }}" width="{{ thumb.width }}"/></a>
+                </div>
+              {% endfor %}
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>

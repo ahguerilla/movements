@@ -1220,8 +1220,10 @@ h6 {
 .landing-page .partner-section .partner {
   text-align: center;
   margin: 15px 0;
+  overflow: hidden;
 }
 .landing-page .partner-section .partner img {
+  max-width: 100%;
   vertical-align: baseline;
 }
 .landing-page .partner-section .partner .popover {
@@ -1230,6 +1232,12 @@ h6 {
 }
 .landing-page .partner-section .partner .popover-title {
   color: #262626;
+}
+.landing-page .partner-section .collapse-non-xs {
+  height: 0;
+}
+.landing-page .partner-section .collapse-non-xs.collapsing {
+  display: block;
 }
 .landing-page .landing-content {
   color: #fff;
@@ -2930,6 +2938,12 @@ input.borderless-control:focus:invalid:focus {
     max-width: 370px;
     bottom: 70px;
     left: 14px;
+  }
+}
+@media (min-width: 767px) {
+  .partner-section .collapse-non-xs {
+    height: auto;
+    display: block;
   }
 }
 @media (max-width: 991px) {

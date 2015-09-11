@@ -1042,8 +1042,6 @@ $page-banner-height = 550px
       width 66px
       margin 20px 0 0 15px
 
-
-
 .landing-page
   .partners
     background-color #FFF
@@ -1057,14 +1055,19 @@ $page-banner-height = 550px
     .partner
       text-align center
       margin 15px 0
+      overflow hidden
       img
+        max-width 100%
         vertical-align baseline
       .popover
         margin-top 10px
         width 520px
       .popover-title
         color $main-font
-
+    .collapse-non-xs
+        height 0
+    .collapse-non-xs.collapsing
+        display block
   .landing-content
     color #fff
     height 499px
@@ -2153,8 +2156,6 @@ popoverDropdown(width, showIcon = true)
     border-bottom 1px solid $hr-separator-color
   .translation strong
     font-size 14px
-
-
 
 .embed-container
   position relative
