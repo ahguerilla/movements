@@ -212,98 +212,101 @@
 
 
 {% block header_nav %}
-<nav class="navbar navbar-default header-nav
-  {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}
-  {% if user.is_authenticated and not user.userprofile.first_login %}
-    navbar-logged-in
-  {% else %}
-    navbar-logged-out
-  {% endif %}" role="navigation">
-  <div class="container" style="position:relative;">
-      {% if not user.userprofile.first_login %}
-      <div id="NavLeftMenus" class="navbar-left">
-        <div id="view-content-menu" class="menu-selector">
-          <div class="menu-icon"></div>
-        </div>
-        {% if user.is_authenticated and not user.userprofile.first_login %}
-          <div class="nav-avatar" id="view-profile-menu">
-            <div class="menu-icon-profile"></div>
-            <div id="content-menu-container"></div>
-          </div>
-          <a href="{% url 'show_notifications' %}">
-            <div class="nav-notification">
-              <div style="display: none;" id="main-nav-count" class="notification-count"></div>
-              <div class="menu-icon-bell"></div>
-            </div>
-          </a>
-          <a href="{% url 'postman_inbox' %}">
-            <div class="nav-messages">
-              <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>
-              <div class="menu-icon-message"></div>
-            </div>
-          </a>
-        {% endif %}
-      </div>
-      {% endif %}
+
+{#<nav class="navbar navbar-default header-nav#}
+{#  {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}#}
+{#  {% if user.is_authenticated and not user.userprofile.first_login %}#}
+{#    navbar-logged-in#}
+{#  {% else %}#}
+{#    navbar-logged-out#}
+{#  {% endif %}" role="navigation">#}
+{#  <div class="container" style="position:relative;">#}
+{#      {% if not user.userprofile.first_login %}#}
+{#      <div id="NavLeftMenus" class="navbar-left">#}
+{#        <div id="view-content-menu" class="menu-selector">#}
+{#          <div class="menu-icon"></div>#}
+{#        </div>#}
+{#        {% if user.is_authenticated and not user.userprofile.first_login %}#}
+{#          <div class="nav-avatar" id="view-profile-menu">#}
+{#            <div class="menu-icon-profile"></div>#}
+{#            <div id="content-menu-container"></div>#}
+{#          </div>#}
+{#          <a href="{% url 'show_notifications' %}">#}
+{#            <div class="nav-notification">#}
+{#              <div style="display: none;" id="main-nav-count" class="notification-count"></div>#}
+{#              <div class="menu-icon-bell"></div>#}
+{#            </div>#}
+{#          </a>#}
+{#          <a href="{% url 'postman_inbox' %}">#}
+{#            <div class="nav-messages">#}
+{#              <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>#}
+{#              <div class="menu-icon-message"></div>#}
+{#            </div>#}
+{#          </a>#}
+{#        {% endif %}#}
+{#      </div>#}
+{#      {% endif %}#}
+{##}
+{##}
+{#      <div class="navbar-left-top">#}
+{#        {% if user.is_authenticated and not user.userprofile.first_login %}#}
+{#          <a href="https://twitter.com/movements_org" target="_blank">#}
+{#            <div class="nav-twitter">#}
+{#              <img src="{{ STATIC_URL }}images/v2/twitter-dualstate.png" alt="{%trans "Connect with Twitter"%}">#}
+{#            </div>#}
+{#          </a>#}
+{#          <a target="_blank" href="https://www.facebook.com/Movements.org">#}
+{#            <div class="nav-facebook">#}
+{#              <img src="{{ STATIC_URL }}images/v2/facebook-dualstate.png" alt="{%trans "Connect with Facebook"%}" >#}
+{#            </div>#}
+{#          </a>#}
+{#          <a href="http://www.advancinghumanrights.org/" target="_blank">#}
+{#            <div class="nav-ahr">#}
+{#              <img src="{{ STATIC_URL }}images/v2/ahr-dualstate.png" alt="{%trans "AHR"%}">#}
+{#            </div>#}
+{#          </a>#}
+{#          <a href="{{ config.BLOG_URL }}" target="_blank">#}
+{#            <div class="top-left-nav-button nav-blog">{% trans "Blog" %}</div>#}
+{#          </a>#}
+{#          <a href="{% page_url 'success_stories' %}" target="_blank">#}
+{#            <div class="top-left-nav-button nav-success">{% trans "Success Stories" %}</div>#}
+{#          </a>#}
+{#        {% endif %}#}
+{#      </div>#}
+{#    {% if user.is_authenticated and not user.userprofile.first_login %}#}
+{#      <div id="NavRightLoggedIn" class="navbar-right">#}
+{#        <div class="nav-flags">#}
+{#          <a data-language="fa" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_iran.png"></a>#}
+{#          <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png"></a>#}
+{#          <a data-language="uk" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png" ></a>#}
+{#          <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png"></a>#}
+{#          <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png"></a>#}
+{#          <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png"></a>#}
+{#        </div>#}
+{#        <a id="add-post" class="btn btn-action" onClick="ga('send', 'event', 'button', 'click', 'add-post');">#}
+{#          <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>#}
+{#          <span id="AddPostText"> {% trans "Add Post" %}</span>#}
+{#        </a>#}
+{#        {% if config.DONATE_BUTTON_LOGGED_IN %}{{ config.DONATE_BUTTON_LOGGED_IN|safe }}{% endif %}#}
+{#        <div id="add-post-popup-container"></div>#}
+{#      </div>#}
+{#    {% else %}#}
+{#      {% if not user.userprofile.first_login %}#}
+{#      <div id="NavRightLoggedOut" class="navbar-right">#}
+{#        <a href="{% url 'account_login' %}" class="btn btn-action">{%trans "Login"%}</a>#}
+{#      </div>#}
+{#       {% endif %}#}
+{#    {% endif %}#}
+{#    <div class="header-nav-wrapper">#}
+{#      <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>#}
+{#    </div>#}
+{#    <div class="header-nav-text">#}
+{#      <p>{% trans "Crowdsourcing human rights."%}<br/>{%  trans "The online platform that is opening closed societies."%}</p>#}
+{#    </div>#}
+{#  </div>#}
+{#</nav>#}
 
 
-      <div class="navbar-left-top">
-        {% if user.is_authenticated and not user.userprofile.first_login %}
-          <a href="https://twitter.com/movements_org" target="_blank">
-            <div class="nav-twitter">
-              <img src="{{ STATIC_URL }}images/v2/twitter-dualstate.png" alt="{%trans "Connect with Twitter"%}">
-            </div>
-          </a>
-          <a target="_blank" href="https://www.facebook.com/Movements.org">
-            <div class="nav-facebook">
-              <img src="{{ STATIC_URL }}images/v2/facebook-dualstate.png" alt="{%trans "Connect with Facebook"%}" >
-            </div>
-          </a>
-          <a href="http://www.advancinghumanrights.org/" target="_blank">
-            <div class="nav-ahr">
-              <img src="{{ STATIC_URL }}images/v2/ahr-dualstate.png" alt="{%trans "AHR"%}">
-            </div>
-          </a>
-          <a href="{{ config.BLOG_URL }}" target="_blank">
-            <div class="top-left-nav-button nav-blog">{% trans "Blog" %}</div>
-          </a>
-          <a href="{% page_url 'success_stories' %}" target="_blank">
-            <div class="top-left-nav-button nav-success">{% trans "Success Stories" %}</div>
-          </a>
-        {% endif %}
-      </div>
-    {% if user.is_authenticated and not user.userprofile.first_login %}
-      <div id="NavRightLoggedIn" class="navbar-right">
-        <div class="nav-flags">
-          <a data-language="fa" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_iran.png"></a>
-          <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png"></a>
-          <a data-language="uk" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png" ></a>
-          <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png"></a>
-          <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png"></a>
-          <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png"></a>
-        </div>
-        <a id="add-post" class="btn btn-action" onClick="ga('send', 'event', 'button', 'click', 'add-post');">
-          <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
-          <span id="AddPostText"> {% trans "Add Post" %}</span>
-        </a>
-        {% if config.DONATE_BUTTON_LOGGED_IN %}{{ config.DONATE_BUTTON_LOGGED_IN|safe }}{% endif %}
-        <div id="add-post-popup-container"></div>
-      </div>
-    {% else %}
-      {% if not user.userprofile.first_login %}
-      <div id="NavRightLoggedOut" class="navbar-right">
-        <a href="{% url 'account_login' %}" class="btn btn-action">{%trans "Login"%}</a>
-      </div>
-       {% endif %}
-    {% endif %}
-    <div class="header-nav-wrapper">
-      <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>
-    </div>
-    <div class="header-nav-text">
-      <p>{% trans "Crowdsourcing human rights."%}<br/>{%  trans "The online platform that is opening closed societies."%}</p>
-    </div>
-  </div>
-</nav>
 {% endblock %}
 
 {% block header_padding %}<div style="height: 20px;"></div>{% endblock %}

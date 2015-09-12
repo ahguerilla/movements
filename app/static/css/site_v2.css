@@ -1203,6 +1203,8 @@ h6 {
   text-align: center;
   margin: 15px 0;
   overflow: hidden;
+  z-index: 10;
+  position: static;
 }
 .landing-page .partner-section .partner img {
   max-width: 100%;
@@ -1211,6 +1213,7 @@ h6 {
 .landing-page .partner-section .partner .popover {
   margin-top: 10px;
   width: 520px;
+  z-index: 10;
 }
 .landing-page .partner-section .partner .popover-title {
   color: #262626;
