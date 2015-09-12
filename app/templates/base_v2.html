@@ -116,7 +116,13 @@
       </ul>
       <div id="collapse-menu" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-main">
-          <li class="dropdown">
+          <li class="dropdown visible-xs">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Navigate" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              {% show_menu 0 100 100 100 "cms/navs/top_nav_responsive.html" %}
+            </ul>
+          </li>
+          <li class="dropdown navbar-add-border">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Connect" %} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li class="image-item"><a target="_blank" href="https://twitter.com/movements_org">

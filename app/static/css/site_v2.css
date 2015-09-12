@@ -275,6 +275,9 @@ ul {
 .navbar-header-top .navbar-nav > li:first-child {
   border-left: solid #d8d2d4 1px;
 }
+.navbar-header-top .navbar-add-border {
+  border-left: solid #d8d2d4 1px;
+}
 .navbar-header-top .navbar-nav > li > a {
   color: #756b65;
   line-height: 80px;
@@ -2896,6 +2899,9 @@ input.borderless-control:focus:invalid:focus {
     float: right;
     margin-left: 20px;
     padding-top: 6px;
+  }
+  #collapse-menu .dropdown-menu li a {
+    line-height: 30px;
   }
   .navbar-collapse {
     max-height: inherit;
