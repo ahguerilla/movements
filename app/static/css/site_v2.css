@@ -1384,11 +1384,17 @@ h6 {
 .more-about-you-widget .select-user-type li {
   list-style: none;
 }
-.form-select-multi .row {
+.form-select-multi .select-checkbox {
   margin-top: 10px;
 }
 .form-select-multi input[type=checkbox] {
   display: none;
+}
+.form-select-multi .select-multi-checkbox {
+  margin-bottom: 10px;
+}
+.form-select-multi .select-multi-checkbox.selected {
+  margin-bottom: 0;
 }
 .form-select-multi .select-multi-checkbox,
 .form-select-multi .select-checkbox {
@@ -1409,6 +1415,7 @@ h6 {
   border-radius: 3px;
   color: #756b65;
   cursor: pointer;
+  overflow: hidden;
 }
 .form-select-multi .select-multi-checkbox.checked,
 .form-select-multi .select-checkbox.checked {
@@ -1496,6 +1503,9 @@ h6 {
 }
 .form-select-multi .select-multi-checkbox.selected .select-arrow {
   background: url("../images/v2/multi-select-arrow.png") 0 -10px;
+}
+.form-select-multi .select-multi-items {
+  margin-bottom: 10px;
 }
 input.borderless-control {
   border: none;
@@ -2964,6 +2974,9 @@ input.borderless-control:focus:invalid:focus {
   footer .footer-nav-content {
     text-align: center;
     margin-top: 15px;
+  }
+  .progress-counter .step2 {
+    left: 39%;
   }
 }
 @media (min-width: 767px) {

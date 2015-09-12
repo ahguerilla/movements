@@ -1192,10 +1192,14 @@ $page-banner-height = 550px
       list-style none
 
 .form-select-multi
-  .row
+  .select-checkbox
     margin-top 10px
   input[type=checkbox]
     display none
+  .select-multi-checkbox
+    margin-bottom 10px
+  .select-multi-checkbox.selected
+    margin-bottom 0
 
   .select-multi-checkbox
   .select-checkbox
@@ -1208,6 +1212,7 @@ $page-banner-height = 550px
     border-radius 3px
     color $inactive-font
     cursor pointer
+    overflow hidden
 
   .select-multi-checkbox.checked
   .select-checkbox.checked
@@ -1292,6 +1297,8 @@ $page-banner-height = 550px
     .select-arrow
       background url("../images/v2/multi-select-arrow.png") 0 -10px
 
+  .select-multi-items
+    margin-bottom 10px
 
 // **************************************
 // exchange page

@@ -11,16 +11,12 @@
     </div>
   </div>
   <div class="select-multi-items" style="display: none;">
+    <div class="row">
   {% for country in region.country_list %}
-    {% if forloop.counter0|divisibleby:3 %}
-      <div class="row">
-    {% endif %}
-    <div class="col-xs-4">
-      {{ country }}
-    </div>
-    {% if forloop.last or forloop.counter|divisibleby:3 %}
+      <div class="col-xs-6 col-sm-4">
+        {{ country }}
       </div>
-    {% endif %}
   {% endfor %}
+    </div>
   </div>
 {% endfor %}
