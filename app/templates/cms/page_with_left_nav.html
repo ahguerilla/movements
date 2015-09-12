@@ -7,13 +7,16 @@ Movements: {% page_attribute "page_title" %}
 {% endblock %}
 
 {% block content %}
-<div style="height:30px;"></div>
+<div class="hidden-xs hidden-sm" style="height:30px;"></div>
 <div class="content-page">
   <div class="row">
     <div class="col-md-4 cms-left-column">
-      <ul class="left-navigation">
+      <ul class="left-navigation toggled">
       {% show_menu 1 1 0 100 "cms/navs/left_nav.html" %}
       </ul>
+      <div class="toggle-menu text-center visible-xs visible-sm">
+        SHOW MENU
+      </div>
     </div>
     <div class="col-md-8 cms-body-content">
       <h1>{% placeholder "title" %}</h1>
@@ -21,4 +24,18 @@ Movements: {% page_attribute "page_title" %}
     </div>
   </div>
 </div>
+{% endblock %}
+
+
+{% block endjavascript %}
+  <script type="text/javascript">
+    (function() {
+      var $leftNavigation = $('.cms-left-column .left-navigation');
+      var $toggle = $('.cms-left-column .toggle-menu');
+      $toggle.click(function(ev) {
+        $leftNavigation.toggleClass('toggled');
+        $toggle.html($leftNavigation.hasClass('toggled') ? 'SHOW MENU' : 'HIDE MENU');
+      });
+    })();
+  </script>
 {% endblock %}

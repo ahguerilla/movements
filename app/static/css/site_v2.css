@@ -1036,6 +1036,10 @@ h6 {
 .cms-left-column ul li:last-child {
   border-bottom: none;
 }
+.cms-left-column .toggle-menu {
+  cursor: pointer;
+  color: #fe6d50;
+}
 .cms-body-content .success-stories p {
   clear: both;
 }
@@ -2972,6 +2976,12 @@ input.borderless-control:focus:invalid:focus {
   .stats-banner {
     bottom: 15px;
     right: 15px;
+  }
+  .cms-left-column {
+    padding-top: 0;
+  }
+  .cms-left-column .left-navigation.toggled {
+    display: none;
   }
 }
 
