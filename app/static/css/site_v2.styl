@@ -264,18 +264,39 @@ ul
 
 $divider-color = #d8d2d4
 $font-color = #756b65
-$navigation-font-size = 18px
+$navigation-font-size = 16px
 
 .navbar-header-top
   box-shadow  0px 2px 2px 0px $divider-color
   background-color #f8f6f7
   border-bottom 4px solid $border-color
+  .header-nav-wrapper
+    position  absolute
+    left 50%
+    top 0
+    margin-left -86px
   .main-logo
     display block
     margin 13px 20px 0 30px
     img
       width 151px
       height 50px
+  .header-nav-text
+    position absolute
+    left 50%
+    margin-left -160px
+    top 36px
+    width 360px
+    height 40px
+    text-align center
+    font-size 12px
+    line-height 40px
+    color #777
+    p
+      display inline-block
+      vertical-align middle
+      line-height normal
+      margin 0
   .navbar-nav > li
     border-right solid $divider-color 1px
   .navbar-nav > li:first-child
@@ -404,6 +425,79 @@ $navigation-font-size = 18px
     img
       width 45px
       margin-right 15px
+  .navbar-right
+    .btn
+      font-size 14px
+      padding 4px 12px
+    #add-post
+      margin-top 6px
+  .navbar-user-controls
+    float right
+    margin-top 1px
+    .nav-avatar
+      float right
+      position relative
+      width 46px
+      height 40px
+      border-radius 4px
+      padding 5px 0 0 8px
+      .menu-icon-profile
+        background url("../images/v2/profile-profile-icon.png") center -30px no-repeat
+        height 30px
+        width 30px
+    .nav-avatar.active
+      background-color $dropdown-hover-bg
+      .menu-icon-profile
+        background url("../images/v2/profile-profile-icon.png") center 0px no-repeat
+    .nav-notification
+      float right
+      position relative
+      margin-top 5px
+      margin-right 15px
+      .menu-icon-bell
+        background url("../images/v2/profile-notifications-icon.png") center -30px no-repeat
+        height 30px
+        width 30px
+    .nav-messages
+      float right
+      position relative
+      margin-top 12px
+      margin-right 25px
+      .menu-icon-message
+        background url("../images/v2/profile-message-icon.png") center -19px no-repeat
+        height 19px
+        width 30px
+      #main-nav-message-count.notification-count
+        top -5px
+  #add-post-popup-container
+    .popover
+      left inherit
+      right 63px
+      width 136px
+      height 90px
+      z-index 1000000
+    .popover-content
+      width 132px
+      padding 9px
+    .btn
+      width 115px
+      margin-top 7px
+      img
+        margin-right 5px
+    .btn-request
+      margin-top 0
+    .navbar-left
+      position absolute
+      width 500px
+      .menu-selector
+        position absolute
+        top 3px
+        left -10px
+        .action-font
+          padding-top 3px
+
+
+
 
 
 #main-cms-nav
@@ -625,21 +719,7 @@ $home-head-height = 85px
     color $filter-font
     text-decoration underline
 
-#add-post-popup-container
-  .popover
-    left inherit
-    right 14px
-    width 136px
-    height 90px
-  .popover-content
-    width 132px
-    padding 9px
-  .btn
-    width 115px
-    img
-      margin-right 5px
-  .btn-request
-    margin-top 0
+
 
 #view-content-menu
   line-height 45px

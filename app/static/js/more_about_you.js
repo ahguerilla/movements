@@ -39,6 +39,7 @@
       this.$el.find('#id_post_type').val('0');
       $(ev.currentTarget).closest(".step").hide();
       $(ev.currentTarget).closest(".step").next(".step").show();
+      window.scrollTo(0, 0);
     },
 
     renderSteps: function() {
@@ -81,6 +82,7 @@
       // show the correct step
       var currentId = nextItem.attr('id').split('-')[2];
       $('#step' + currentId).show();
+      window.scrollTo(0, 0);
 
     },
 

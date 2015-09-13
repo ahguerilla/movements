@@ -3,6 +3,8 @@ $page-banner-height-xs = 350px
 @media (max-width: 767px)
   .navbar
     min-height 50px
+    .hiddenxs
+      display none
   .navbar-header
     height 75px
   .navbar-header-top
@@ -85,6 +87,8 @@ $page-banner-height-xs = 350px
       margin-top 15px
   .progress-counter .step2
     left 39%
+  .progress-counter .step3
+    left 67%
 
 @media (min-width: 767px)
   .partner-section
@@ -100,3 +104,19 @@ $page-banner-height-xs = 350px
     padding-top 0
     .left-navigation.toggled
       display none
+
+@media(max-width: 440px)
+  body
+    font-size 14px
+  footer
+    font-size 12px
+  h1
+    font-size 26px
+  .progress-counter
+    .progress-item-description
+      font-size 11px
+  .form-select-multi .select-label
+    font-size 11px
+  .form-select-multi .select-multi-checkbox .select-label,
+  .form-select-multi .select-multi-checkbox.checked .select-label
+    font-size 14px

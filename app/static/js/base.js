@@ -150,7 +150,8 @@ if (!String.prototype.format) {
   }
 
   function setupProfileMenuPopover() {
-     $('#view-profile-menu').popover({
+    var $viewProfileMenu = $('#view-profile-menu');
+     $viewProfileMenu.popover({
        title: '',
        html: true,
        content: $('#content-menu-template').html(),
@@ -158,13 +159,13 @@ if (!String.prototype.format) {
        placement: 'bottom'
      });
 
-    $('#view-profile-menu').on('shown.bs.popover', function(){
+    $viewProfileMenu.on('shown.bs.popover', function(){
       $('#view-profile-menu').addClass("active");
-      $('#content-menu-container .popover').css("left", "-7px");
-      $('#content-menu-container .arrow').css("left", "28px");
+      $('#content-menu-container .popover').css("left", "-150px");
+      $('#content-menu-container .arrow').css("left", "172px");
     });
 
-    $('#view-profile-menu').on('hidden.bs.popover', function(){
+    $viewProfileMenu.on('hidden.bs.popover', function(){
       $('#view-profile-menu').removeClass("active");
     });
   }
