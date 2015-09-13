@@ -107,6 +107,9 @@
 .twitter-typeahead .tt-hint {
   font-size: 16px;
 }
+.right-align {
+  text-align: right;
+}
 .btn {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2086,7 +2089,7 @@ input.borderless-control:focus:invalid:focus {
 }
 .view-post .how-you-can-help {
   background-color: #e6e4e5;
-  margin-top: 10px;
+  margin-top: 15px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -2101,6 +2104,7 @@ input.borderless-control:focus:invalid:focus {
   font-size: 12px;
   width: 280px;
   position: relative;
+  float: right;
 }
 .view-post .how-you-can-help .title {
   font-weight: bold;
@@ -2121,6 +2125,7 @@ input.borderless-control:focus:invalid:focus {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   background-color: #e6e4e5;
+  z-index: 2;
 }
 .view-post .how-you-can-help ul li {
   margin-bottom: 5px;
@@ -2173,6 +2178,9 @@ input.borderless-control:focus:invalid:focus {
   -o-border-radius: 5px;
   border-radius: 5px;
 }
+.view-post .post-images img {
+  margin-bottom: 10px;
+}
 .view-post .post-actions a {
   font-family: "HurmeGeometricSans3-SemiBold";
   padding: 5px 0;
@@ -2204,6 +2212,7 @@ input.borderless-control:focus:invalid:focus {
 }
 .view-post .post-actions ul li {
   display: inline-block;
+  margin-bottom: 12px;
 }
 .view-post .post-translate {
   margin-bottom: 15px;
@@ -2313,7 +2322,8 @@ input.borderless-control:focus:invalid:focus {
   font-size: 10px;
 }
 .poster .post-direct-action {
-  float: right;
+  text-align: right;
+  margin-top: 8px;
 }
 .settings-bar {
   background-color: #b6aba5;
@@ -2861,6 +2871,16 @@ input.borderless-control:focus:invalid:focus {
   }
   .progress-counter .step3 {
     left: 67%;
+  }
+  .view-post .post-date {
+    margin: 10px 0;
+  }
+  .view-post .how-you-can-help {
+    float: left;
+    margin: 0 0 10px 0;
+  }
+  .poster .post-direct-action {
+    text-align: left;
   }
 }
 @media (min-width: 767px) {

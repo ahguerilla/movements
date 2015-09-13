@@ -128,6 +128,9 @@ box-shadow()
 .twitter-typeahead .tt-hint
   font-size 16px
 
+.right-align
+  text-align right
+
 // **************************************
 // button styles
 // **************************************
@@ -1544,13 +1547,14 @@ popoverDropdown(width, showIcon = true)
     margin 20px 0
   .how-you-can-help
     background-color $post-section-bg
-    margin-top 10px
+    margin-top 15px
     border-radius 5px
     padding 2px 8px
     box-shadow 0 1px 2px 0 #b4b2b3
     font-size 12px
     width 280px
     position relative
+    float right
     .title
       font-weight bold
     div.title
@@ -1567,6 +1571,7 @@ popoverDropdown(width, showIcon = true)
       border-bottom-left-radius 5px
       border-bottom-right-radius 5px
       background-color $post-section-bg
+      z-index 2
       li
         margin-bottom 5px
       li:last-child
@@ -1596,6 +1601,8 @@ popoverDropdown(width, showIcon = true)
     box-shadow 0 1px 2px 0 #b4b2b3
     padding 10px
     border-radius 5px
+    img
+      margin-bottom 10px
   .post-actions
     a
       font-family "HurmeGeometricSans3-SemiBold"
@@ -1621,6 +1628,7 @@ popoverDropdown(width, showIcon = true)
       padding 0
       li
         display inline-block
+        margin-bottom 12px
   .post-translate
     margin-bottom 15px
     .translate
@@ -1701,7 +1709,8 @@ popoverDropdown(width, showIcon = true)
         width 260px
         font-size 10px
   .post-direct-action
-    float right
+    text-align right
+    margin-top 8px
 
 // **************************************
 // exchange page
