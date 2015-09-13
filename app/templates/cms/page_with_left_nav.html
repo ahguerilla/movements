@@ -10,7 +10,7 @@ Movements: {% page_attribute "page_title" %}
 <div class="hidden-xs hidden-sm" style="height:30px;"></div>
 <div class="content-page">
   <div class="row">
-    <div class="col-md-4 cms-left-column">
+    <div class="col-md-4 cms-left-column toggle-menu-container">
       <ul class="left-navigation toggled">
       {% show_menu 1 1 0 100 "cms/navs/left_nav.html" %}
       </ul>
@@ -30,8 +30,8 @@ Movements: {% page_attribute "page_title" %}
 {% block endjavascript %}
   <script type="text/javascript">
     (function() {
-      var $leftNavigation = $('.cms-left-column .left-navigation');
-      var $toggle = $('.cms-left-column .toggle-menu');
+      var $leftNavigation = $('.toggle-menu-container .left-navigation');
+      var $toggle = $('.toggle-menu-container .toggle-menu');
       $toggle.click(function(ev) {
         $leftNavigation.toggleClass('toggled');
         $toggle.html($leftNavigation.hasClass('toggled') ? 'SHOW MENU' : 'HIDE MENU');

@@ -555,6 +555,10 @@ ul {
 .navbar-header-top #add-post-popup-container .navbar-left .menu-selector .action-font {
   padding-top: 3px;
 }
+.toggle-menu-container .toggle-menu {
+  cursor: pointer;
+  color: #fe6d50;
+}
 #main-cms-nav {
   position: fixed;
   top: 85px;
@@ -904,10 +908,6 @@ h6 {
 }
 .cms-left-column ul li:last-child {
   border-bottom: none;
-}
-.cms-left-column .toggle-menu {
-  cursor: pointer;
-  color: #fe6d50;
 }
 .cms-body-content .success-stories p {
   clear: both;
@@ -1425,6 +1425,12 @@ input.borderless-control:focus:invalid:focus {
 }
 .exchange-filters .search-expanded button.btn {
   padding: 4px 12px;
+}
+.exchange-filters .filter-post-types {
+  text-align: left;
+}
+.exchange-filters .categories {
+  text-align: right;
 }
 .exchange-filters .categories h4 {
   color: #756b65;
@@ -2871,11 +2877,20 @@ input.borderless-control:focus:invalid:focus {
     bottom: 15px;
     right: 15px;
   }
-  .cms-left-column {
+  .toggle-menu-container {
     padding-top: 0;
   }
-  .cms-left-column .left-navigation.toggled {
+  .toggle-menu-container .left-navigation.toggled {
     display: none;
+  }
+  .exchange-filters .filter-post-types {
+    text-align: center;
+  }
+  .exchange-filters .filter-post-types .type-menu {
+    margin: 15px 0;
+  }
+  .exchange-filters .categories {
+    text-align: center;
   }
 }
 @media( max-width: 440px) {

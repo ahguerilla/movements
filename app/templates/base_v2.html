@@ -115,8 +115,8 @@
           <li class="dropdown visible-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Add Post" %} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="">{% trans "Request" %}</a></li>
-              <li><a href="">{% trans "Offer" %}</a></li>
+              <li><a href="{% url 'create_request' %}">{% trans "Request" %}</a></li>
+              <li><a href="{% url 'create_offer' %}">{% trans "Offer" %}</a></li>
             </ul>
           </li>
           <li class="dropdown visible-xs">

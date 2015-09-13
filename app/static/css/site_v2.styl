@@ -501,8 +501,10 @@ $navigation-font-size = 16px
         .action-font
           padding-top 3px
 
-
-
+.toggle-menu-container
+  .toggle-menu
+    cursor pointer
+    color $primary-color
 
 
 #main-cms-nav
@@ -788,9 +790,6 @@ h1,h2,h3,h4,h5,h6
         color $active-link
     li:last-child
       border-bottom none
-  .toggle-menu
-    cursor pointer
-    color $primary-color
 
 .cms-body-content
   .success-stories
@@ -1279,7 +1278,10 @@ popoverDropdown(width, showIcon = true)
       background-color $dropdown-hover-bg
     button.btn
       padding 4px 12px
+  .filter-post-types
+    text-align left
   .categories
+    text-align right
     h4
       color $item-footer-font
       font-weight normal
