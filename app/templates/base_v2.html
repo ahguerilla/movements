@@ -213,11 +213,19 @@
             <button class="btn btn-secondary">{%trans "Login"%}</button>
           </a></li>
           {% endif %}
+          {% if user.is_authenticated and not user.userprofile.first_login %}
           <div class="navbar-user-controls">
-            <div class="nav-avatar" id="view-profile-menu">
+            <div class="nav-avatar hidden-xs" id="view-profile-menu">
               <div class="menu-icon-profile"></div>
               <div id="content-menu-container"></div>
             </div>
+
+            <a class="visiblexs" href="{% url 'user_profile' %}">
+              <div class="nav-avatar">
+                <div class="menu-icon-profile"></div>
+              </div>
+            </a>
+
             <a href="{% url 'show_notifications' %}">
               <div class="nav-notification">
                 <div style="display: none;" id="main-nav-count" class="notification-count"></div>
@@ -231,6 +239,7 @@
               </div>
             </a>
           </div>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -255,19 +264,6 @@
     </div>
   </div>
 {% endblock base_header_nav %}
-
-
-{% block header_nav %}
-
-<nav class="navbar navbar-default header-nav
-  {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}
-  {% if user.is_authenticated and not user.userprofile.first_login %}
-    navbar-logged-in
-  {% else %}
-    navbar-logged-out
-  {% endif %}" role="navigation">
-</nav>
-{% endblock %}
 
 {% block header_padding %}<div style="height: 20px;"></div>{% endblock %}
 {% block content_outside_container %}{% endblock %}
