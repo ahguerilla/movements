@@ -252,6 +252,11 @@ ul {
   margin-top: 7px;
   float: right;
 }
+.home-page-donate {
+  position: absolute;
+  top: -2px;
+  right: -3px;
+}
 .navbar-header-top {
   -webkit-box-shadow: 0px 2px 2px 0px #d8d2d4;
   -moz-box-shadow: 0px 2px 2px 0px #d8d2d4;
@@ -265,7 +270,7 @@ ul {
   position: absolute;
   left: 50%;
   top: 0;
-  margin-left: -86px;
+  margin-left: -98px;
 }
 .navbar-header-top .main-logo {
   display: block;
@@ -278,7 +283,7 @@ ul {
 .navbar-header-top .header-nav-text {
   position: absolute;
   left: 50%;
-  margin-left: -160px;
+  margin-left: -177px;
   top: 36px;
   width: 360px;
   height: 40px;
@@ -2743,6 +2748,9 @@ input.borderless-control:focus:invalid:focus {
   .hiddenxs {
     display: none;
   }
+  .home-page-donate {
+    right: -58px;
+  }
   .navbar {
     min-height: 50px;
   }
@@ -2797,7 +2805,7 @@ input.borderless-control:focus:invalid:focus {
     height: 350px;
   }
   .page-banner .carousel-inner .carousel-content .carousel-title {
-    font-size: 24px;
+    font-size: 21px;
     padding-left: inherit;
     padding-right: inherit;
     width: inherit;
