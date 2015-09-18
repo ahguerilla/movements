@@ -2087,6 +2087,11 @@ input.borderless-control:focus:invalid:focus {
   font-weight: bold;
   margin: 20px 0;
 }
+.view-post .edit-post {
+  padding: 4px 8px 1px;
+  margin-top: 10px;
+  float: right;
+}
 .view-post .how-you-can-help {
   background-color: #e6e4e5;
   margin-top: 15px;
@@ -2875,6 +2880,10 @@ input.borderless-control:focus:invalid:focus {
   .view-post .post-date {
     margin: 10px 0;
   }
+  .view-post .edit-post {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
   .view-post .how-you-can-help {
     float: left;
     margin: 0 0 10px 0;
@@ -2911,6 +2920,9 @@ input.borderless-control:focus:invalid:focus {
   }
   .exchange-filters .categories {
     text-align: center;
+  }
+  .view-post .post-images img {
+    max-width: 100%;
   }
 }
 @media( max-width: 440px) {

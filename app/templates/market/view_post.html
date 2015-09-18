@@ -43,7 +43,7 @@
         </div>
         <div class="col-sm-6">
           {% if request.user == post.owner %}
-              <a href="{% url 'edit_post' post.id %}" alt="edit post" class="btn btn-action" style="padding: 4px 8px 1px; margin-top: 10px;"/>
+              <a href="{% url 'edit_post' post.id %}" alt="edit post" class="btn btn-action edit-post" />
                 {% trans 'Edit Post' %}
               </a>
           {% else %}
@@ -75,6 +75,7 @@
           </div>
           <div style="clear: both"></div>
         </div>
+      {% if request.user != post.owner %}
         <div class="col-sm-6 post-direct-action">
           {% if post.item_type == 'request' %}
           <a username="{{ post.owner.username }}"
@@ -98,6 +99,7 @@
              class="btn btn-action private-message" >{% trans 'I need your help' %}&nbsp;>></a>
           {% endif %}
         </div>
+      {% endif %}
       </div>
 
       <div class="post">
@@ -119,9 +121,9 @@
       <div class="post-images clearfix">
         {% for image in images %}
           {% thumbnail image.image 120x120 upscale as thumb %}
-          <div class="col-xs-6 col-sm-2">
+          <div class="col-xs-6 col-sm-3 col-md-2">
             <a class="gallery" href="{{ image.image.url }}">
-              <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" />
+              <img src="{{ thumb.url }}" />
             </a>
           </div>
         {% endfor %}
