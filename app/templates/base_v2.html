@@ -194,6 +194,14 @@
           </li>
           {% block additional_nav %}
           {% endblock additional_nav %}
+          {% if user.is_authenticated %}
+          <li class="visible-xs">
+            <a href="#" id="logout-link">{% trans "Logout" %}</a>
+            <form id="logout-form" method="post" action="{% url 'account_logout' %}">
+              {% csrf_token %}
+            </form>
+          </li>
+          {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
@@ -419,23 +427,26 @@
 </script>
 <script type="text/javascript">
   $(document).ready(function(){
-      $('.set-lang').click(function(ev){
-        ev.preventDefault();
-        var lang = $(ev.currentTarget).data('language');
-        $.ajax({
-          url: '/set-language',
-          type: 'POST',
-          dataType: 'json',
-          data: {
-            language_code: lang
-          },
-          success: function(ev){
-            if(ev.result === 'success'){
-              window.location.reload();
-            }
+    $('.set-lang').click(function(ev){
+      ev.preventDefault();
+      var lang = $(ev.currentTarget).data('language');
+      $.ajax({
+        url: '/set-language',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          language_code: lang
+        },
+        success: function(ev){
+          if(ev.result === 'success'){
+            window.location.reload();
           }
-        });
+        }
       });
+    });
+    $('#logout-link').click(function(){
+      $('#logout-form').submit();
+    })
   });
 </script>
 
