@@ -176,23 +176,6 @@
   $(document).ready(function(){
     $("#home-page-carousel").carousel({interval: 8000, pause: 'hover'});
     $('.partner a').popover();
-    $('.set-lang').click(function(ev){
-      ev.preventDefault();
-      var lang = $(ev.currentTarget).data('language');
-      $.ajax({
-        url: '{% url 'set_lang' %}',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-          language_code: lang
-        },
-        success: function(ev){
-          if(ev.result === 'success'){
-            window.location.reload();
-          }
-        }
-      });
-    });
     window.ahr.widgets.initStats();
   });
   </script>
