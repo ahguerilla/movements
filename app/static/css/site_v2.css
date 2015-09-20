@@ -2899,6 +2899,17 @@ input.borderless-control:focus:invalid:focus {
   .movements-form .action-text {
     margin-top: 0;
   }
+  .settings-bar .nav-menu-item {
+    width: 70px;
+  }
+  .settings-bar .nav-icon {
+    margin-right: 1px;
+    margin-left: 1px;
+    width: 70px;
+  }
+  .settings-form .change-avatar {
+    text-align: center;
+  }
 }
 @media (min-width: 767px) {
   .visiblexs {
@@ -2932,6 +2943,9 @@ input.borderless-control:focus:invalid:focus {
   .view-post .post-images img {
     max-width: 100%;
   }
+  .settings-form .btn-group-settings .btn {
+    font-size: 12px;
+  }
 }
 @media( max-width: 440px) {
   body {
@@ -2952,6 +2966,10 @@ input.borderless-control:focus:invalid:focus {
   .form-select-multi .select-multi-checkbox .select-label,
   .form-select-multi .select-multi-checkbox.checked .select-label {
     font-size: 14px;
+  }
+  .settings-form .btn-group-settings .btn {
+    font-size: 10px;
+    padding: 13px 3px;
   }
 }
 
