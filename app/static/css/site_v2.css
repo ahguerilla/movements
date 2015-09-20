@@ -2915,6 +2915,19 @@ input.borderless-control:focus:invalid:focus {
   .settings-form .change-avatar {
     text-align: center;
   }
+  #marketitems .market-place-item .post-image,
+  #stuck-marketitems .market-place-item .post-image {
+    height: inherit;
+    position: static;
+    float: left;
+    margin-right: 10px;
+  }
+  #marketitems .market-place-item.with-image,
+  #stuck-marketitems .market-place-item.with-image,
+  #marketitems #stuck-marketitems .market-place-item.with-image,
+  #stuck-marketitems #stuck-marketitems .market-place-item.with-image {
+    padding-left: 15px;
+  }
 }
 @media (min-width: 767px) {
   .visiblexs {
