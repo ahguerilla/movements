@@ -116,6 +116,7 @@ def _create_or_update_post(request, template, form_class, build_redir_url, marke
         user_skills = request.user.userprofile.interests.values_list('id', flat=True)
         user_countries = request.user.userprofile.countries.values_list('id', flat=True)
         form = form_class(request.POST or None, user_skills=user_skills, user_countries=user_countries)
+
     if form.is_valid():
         post = save_market_item(form, request.user)
         if market_item:
