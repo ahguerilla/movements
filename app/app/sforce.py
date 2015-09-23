@@ -36,6 +36,7 @@ def _dict_for_salesforce(market_item):
         'Case_Messages__c': market_item.total_msg_count,
         'Case_Views__c': market_item.total_view_count,
         'Date_Posted__c': market_item.pub_date.date().isoformat(),
+        'Published__c': market_item.published,
         'Skill__c': ';'.join([market_item.specific_skill or ''] + [i.name for i in market_item.interests.all()]),
         'Issues__c': ';'.join([market_item.specific_issue or ''] + [i.issues for i in market_item.issues.all()]),
         'Location__c': ';'.join([x.countries for x in countries]),
