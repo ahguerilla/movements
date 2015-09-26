@@ -13,7 +13,7 @@
 
 {% block content %}
 <div id="profile-view" class="row setting-page">
-  <div class="col-xs-4">
+  <div class="col-sm-4">
     <div class="poster clearfix">
       <div class="avatar">
         {% primary_avatar user_details 60 %}
@@ -87,9 +87,15 @@
         {% trans "No languages specified"%}
       {% endif %}
     {% endif %}
+
+    <div class="visible-xs">
+      <div style="clear: both;"></div>
+      <hr />
+      <div class="settings-title">{% trans "Posts"%}</div>
+    </div>
   </div>
 
-  <div class="col-xs-8" id="market-main">
+  <div class="col-sm-8" id="market-main">
     <div id="marketitems" class="item-container"></div>
     <div class="ajaxloader">
       <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>

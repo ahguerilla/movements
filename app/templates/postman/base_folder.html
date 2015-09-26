@@ -26,13 +26,13 @@
 {% with request.get_full_path as path %}
 <div id="postman" data-folder-type="{% if path == sent %}outbox{% endif %}{% if path == inbox %}inbox{% endif %}">
   <div class="row no-gutter">
-    <div class="col-md-4 sidebar">
+    <div class="col-md-4 sidebar toggle-menu-container">
       <div class="btn-group folder-select btn-group-justified btn-group-md" id="messagenav">
         <a type="button" class="btn btn-tab {% if path == inbox %}selected{% endif %}" href="{{inbox}}">{% trans "Inbox"%}</a>
         <a type="button" class="btn btn-tab {% if path == sent %}selected{% endif %}" href="{{sent}}">{% trans "Sent"%}</a>
       </div>
       {% if pm_messages %}
-      <div class="messagelist">
+      <div class="messagelist left-navigation toggled">
         {% for message in pm_messages %}
           <div class="message{% if forloop.counter|divisibleby:2 %} alt{% endif %}{% if message.is_new %} new{% endif %}"
                href="{% if by_conversation and message.thread_id %}{% url 'postman_view_conversation' message.thread_id %}{% else %}{{ message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
@@ -69,10 +69,14 @@
       </div>
 
       {% autopaginate pm_messages %}
-      {% if invalid_page %}
-        <p>{% trans "Sorry, this page number is invalid." %}</p>
-      {% else %}
+        {% if invalid_page %}
+          <p>{% trans "Sorry, this page number is invalid." %}</p>
+        {% else %}
       {% endif %}
+
+      <div style="margin-top: 10px; margin-bottom: 10px;" class="toggle-menu text-center visible-xs visible-sm">
+        SHOW MESSAGES
+      </div>
     </div>
     <div class="col-md-8" id="conversation">
     </div>
@@ -85,5 +89,20 @@
 {% block endjavascript %}
   <script type="text/javascript">
     window.ahr.messages.initInbox();
+  </script>
+  <script type="text/javascript">
+    (function() {
+      var $leftNavigation = $('.toggle-menu-container .left-navigation');
+      var $toggle = $('.toggle-menu-container .toggle-menu');
+      $toggle.click(function(ev) {
+        $leftNavigation.toggleClass('toggled');
+        $toggle.html($leftNavigation.hasClass('toggled') ? 'SHOW MESSAGES' : 'HIDE MESSAGES');
+      });
+      var $message = $('.messagelist .message');
+      $message.click(function(){
+        $leftNavigation.addClass('toggled');
+        $toggle.html('SHOW MESSAGES');
+      });
+    })();
   </script>
 {% endblock %}

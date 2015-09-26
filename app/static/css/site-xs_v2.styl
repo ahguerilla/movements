@@ -1,58 +1,184 @@
+$page-banner-height-xs = 350px
+
 @media (max-width: 767px)
+  .hiddenxs
+    display none
+  .movements-form input,
+  .movements-form select,
+  .movements-form textarea,
+  .twitter-typeahead .tt-hint
+    font-size 14px
+  .home-page-donate
+    right -58px
+  .navbar
+    min-height 50px
+  .navbar-header
+    height 75px
+  .navbar-header-top
+    .main-logo
+      margin-top 8px
+      margin-left 15px
+    .navbar-nav > li, .navbar-nav > li:last-child
+      border-left none
+      border-right none
+    .navbar-toggle
+      margin-top 5px
+    .user-info
+      padding-top 0
+      margin-bottom 10px
+      font-size 16px
+  #collapse-menu
+    li
+      text-align right
+      margin-right 0
+      a
+        line-height 35px
+      .open-account
+        margin-bottom 10px
+      .dropdown-flag
+        img
+          float right
+          margin-left 20px
+          padding-top 6px
+    .dropdown-menu
+      li
+        a
+          line-height 30px
+  .navbar-collapse
+    max-height inherit
+  .page-banner
+    height $page-banner-height-xs
+    .carousel-inner
+      .item
+        height $page-banner-height-xs
+      .carousel-content
+        height $page-banner-height-xs
+        .carousel-title
+          font-size 21px
+          padding-left inherit
+          padding-right inherit
+          width inherit
+          top inherit
+          bottom 195px
+          left 0
+          text-align left
+    .stats-banner
+      max-width 370px
+      bottom 70px
+      left 14px
+  .landing-page
+    .landing-content
+      height auto
+      .container
+        height auto
+    .request-background
+      background url("../images/v2/request_background_mobile.jpg")
+      background-repeat repeat
+      .container
+        div
+          padding 10px 0
+    .offer-background
+      background url("../images/v2/offer_background_mobile.jpg")
+      background-repeat repeat
+      .container
+        div
+          padding 10px 0
+  .testimonial
+    padding-top 20px
+    padding-bottom 20px
   footer
-    #FooterSocialMedia_Big
+    .footer-copyright
+      text-align center
+    .footer-nav-content
+      text-align center
+      margin-top 15px
+  .progress-counter .step2
+    left 39%
+  .progress-counter .step3
+    left 67%
+  .view-post
+    .post-date
+      margin 10px 0
+    .edit-post
+      margin-top 0
+      margin-bottom 10px
+    .how-you-can-help
+      margin 0 0 10px 0
+  .poster
+    .post-direct-action
+      text-align left
+  .movements-form
+    .action-text
+      margin-top 0
+  .settings-bar
+    .nav-menu-item
+      width 70px
+    .nav-icon
+      margin-right 1px
+      margin-left 1px
+      width 70px
+  .settings-form
+    .change-avatar
+      text-align center
+  #marketitems, #stuck-marketitems
+    .market-place-item
+      .post-image
+        height inherit
+        position static
+        float left
+        margin-right 10px
+    .market-place-item.with-image, #stuck-marketitems .market-place-item.with-image
+      padding-left 15px
+
+@media (min-width: 767px)
+  .visiblexs
+    display: none
+  .partner-section
+    .collapse-non-xs
+      height auto
+      display block
+
+@media (max-width: 991px)
+  .stats-banner
+    bottom 15px
+    right 15px
+  .toggle-menu-container
+    padding-top 0
+    .left-navigation.toggled
       display none
-    #FooterSocialMedia_Small
-      display inherit
-  .page-banner
-    .carousel-inner
-      .carousel-content
-        .carousel-title
-          top 70px
-        .carousel-blurb
-          top 225px
-        .carousel-button
-          button
-            width 200px
-
-@media (max-width: 579px)
-  #AlreadyHaveText
-    display none
-  .page-banner
-    .carousel-inner
-      .carousel-content
-        .carousel-title
-          font-size 28px
-
-@media (max-width: 530px)
-  #FilterByType
-    float none !important
-    position relative
-    left: 50%;
-    margin-left: -100px;
-  #FilterDropdowns
-    float none !important
-    position relative
-    left 50%
-    margin-left -135px
-    margin-top 18px
   .exchange-filters
-    .search-expanded
-      position relative
-      left 50%
-      margin-left -135px
-      width 270px
+    .filter-post-types
+      text-align center
+      .type-menu
+        margin 15px 0
+    .categories
+      text-align center
+  .view-post
+    .post-images
+      img
+        max-width 100%
+  .settings-form
+    .btn-group-settings
+      .btn
+        font-size 12px
 
-@media (max-width: 479px)
-  #AddPostText
-    display none
-  #add-post-popup-container
-    .arrow
-      left 112px
-  .page-banner
-    .carousel-inner
-      .carousel-content
-        .carousel-title
-          font-size 24px
-        .carousel-blurb
-          font-size 16px
+@media(max-width: 440px)
+  body
+    font-size 14px
+  footer
+    font-size 12px
+  h1
+    font-size 26px
+  .progress-counter
+    .progress-item-description
+      font-size 11px
+  .form-select-multi .select-label
+    font-size 11px
+  .form-select-multi .select-multi-checkbox .select-label,
+  .form-select-multi .select-multi-checkbox.checked .select-label
+    font-size 14px
+  .settings-form
+    .btn-group-settings
+      .btn
+        font-size 10px
+        padding 13px 3px

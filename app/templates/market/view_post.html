@@ -23,48 +23,60 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+  <div class="col-xs-12 col-md-offset-1 col-md-10">
     <div class="view-post"
         data-post_type="{{ post.item_type|lower }}"
         data-default_translate_url="{% url 'translation:market:translate' post.id %}"
         data-takein-url="{% url 'translation:market:take_in' post.id %}">
-      <div class="post-header {{ post.item_type|lower }} %>">
-        <span>{{ post.item_type_display }}</span>
-      </div>
-      <div class="pull-right">
-        {% if request.user == post.owner %}
-            <a href="{% url 'edit_post' post.id %}" alt="edit post" class="btn btn-action" style="padding: 4px 8px 1px; margin-top: 10px;"/>
-              {% trans 'Edit Post' %}
-            </a>
-        {% else %}
-          <div class="how-you-can-help">
-            <div class="title">{% trans 'How you can Help' %} <span class="expand">+</span></div>
-            <ul>
-              <li><span class="title">{% trans 'Social Media' %} - </span>{% trans "Share Movements' posts across your social media platforms. For example, you can share Movements' users' requests with your representatives." %}</li>
-              <li><span class="title">{% trans 'Tweet' %} - </span>{% trans "posts that interest you." %}</li>
-              <li><span class="title">{% trans 'Recommend a Friend' %} - </span>{% trans "If you have a friend with the skills in demand on our network, tell them about us!" %}</li>
-              {% for item in post.marketitemhowcanyouhelp_set.all %}
-                <li>
-                  <span class="title">{{ item.title }} - </span> {{ item.text|safe }}
-                </li>
-              {% endfor %}
-            </ul>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="post-header {{ post.item_type|lower }} %>">
+            <span>{{ post.item_type_display }}</span>
           </div>
-        {% endif %}
+        </div>
       </div>
-      <div class="post-date">
-        {{ post.pub_date|date:"G:i"}} {%  trans 'on' %} {{ post.pub_date|date:"d M Y" }}
+
+      <div class="row">
+        <div class="col-sm-6 post-date">
+          {{ post.pub_date|date:"G:i"}} {%  trans 'on' %} {{ post.pub_date|date:"d M Y" }}
+        </div>
+        <div class="col-sm-6">
+          {% if request.user == post.owner %}
+              <a href="{% url 'edit_post' post.id %}" alt="edit post" class="btn btn-action edit-post" />
+                {% trans 'Edit Post' %}
+              </a>
+          {% else %}
+            <div class="how-you-can-help">
+              <div class="title">{% trans 'How you can Help' %} <span class="expand">+</span></div>
+              <ul>
+                <li><span class="title">{% trans 'Social Media' %} - </span>{% trans "Share Movements' posts across your social media platforms. For example, you can share Movements' users' requests with your representatives." %}</li>
+                <li><span class="title">{% trans 'Tweet' %} - </span>{% trans "posts that interest you." %}</li>
+                <li><span class="title">{% trans 'Recommend a Friend' %} - </span>{% trans "If you have a friend with the skills in demand on our network, tell them about us!" %}</li>
+                {% for item in post.marketitemhowcanyouhelp_set.all %}
+                  <li>
+                    <span class="title">{{ item.title }} - </span> {{ item.text|safe }}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        </div>
       </div>
       <h1 id="post-title">{{ post.title }}</h1>
-      <div class="poster clearfix">
-        <div class="avatar">
-          {% primary_avatar post.owner 60 %}
+      <div class="row poster clearfix">
+        <div class="col-sm-6">
+          <div class="avatar">
+            {% primary_avatar post.owner 60 %}
+          </div>
+          <div class="poster-details">
+            <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ post.owner }}">{{ post.owner }}</a></div>
+            {% include "users/snippets/star_rating.html" with rating=post.owner.userprofile.ahr_rating %}
+          </div>
+          <div style="clear: both"></div>
         </div>
-        <div class="poster-details">
-          <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ post.owner }}">{{ post.owner }}</a></div>
-          {% include "users/snippets/star_rating.html" with rating=post.owner.userprofile.ahr_rating %}
-        </div>
-        <div class="post-direct-action">
+      {% if request.user != post.owner %}
+        <div class="col-sm-6 post-direct-action">
           {% if post.item_type == 'request' %}
           <a username="{{ post.owner.username }}"
              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-action');}"
@@ -87,6 +99,7 @@
              class="btn btn-action private-message" >{% trans 'I need your help' %}&nbsp;>></a>
           {% endif %}
         </div>
+      {% endif %}
       </div>
 
       <div class="post">
@@ -103,14 +116,16 @@
         <div id="translate-menu-container"></div>
       </div>
       {% endif %}
-      <div class="clearfix"></div>
+
       {% if images %}
-      <div class="post-images">
+      <div class="post-images clearfix">
         {% for image in images %}
           {% thumbnail image.image 120x120 upscale as thumb %}
-          <a class="gallery" href="{{ image.image.url }}">
-            <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" />
-          </a>
+          <div class="col-xs-6 col-sm-3 col-md-2">
+            <a class="gallery" href="{{ image.image.url }}">
+              <img src="{{ thumb.url }}" />
+            </a>
+          </div>
         {% endfor %}
       </div>
       {% endif %}

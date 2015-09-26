@@ -1,11 +1,7 @@
+<div class="row">
 {% for widget in widgets %}
-  {% if forloop.counter0|divisibleby:3 %}
-    <div class="row">
-  {% endif %}
-  <div class="col-xs-4">
+  <div class="col-xs-6 col-sm-4">
     {{ widget }}
   </div>
-  {% if forloop.last or forloop.counter|divisibleby:3 %}
-    </div>
-  {% endif %}
 {% endfor %}
+</div>

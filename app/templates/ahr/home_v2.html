@@ -5,19 +5,18 @@
 {% load cms_tags %}
 {% load thumbnail %}
 
-{% block header_nav %}
-<nav class="navbar navbar-default header-nav home-page-nav" role="navigation">
-  <div class="navbar-left">
-    <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
-  </div>
-  <div class="navbar-right">
-    <div class="action-item"><span id="AlreadyHaveText">{%trans "Already have an account?" %}&nbsp;</span><a href="{% url 'account_login' %}">{%trans "Login"%}</a></div>
-    <div id="view-content-menu" class="menu-selector">
-      <div class="menu-icon"></div>
-    </div>
-  </div>
-</nav>
-{% endblock %}
+{% block additional_nav %}
+<li class="visible-xs">
+  <a href="{% page_url 'how_it_works' %}">
+    <span>{%trans "Find out more"%}</span>
+  </a>
+</li>
+<li class="visible-xs">
+  <a href="{% url 'show_market' %}">
+    <span>{%trans "Visit market"%}</span>
+  </a>
+</li>
+{% endblock additional_nav %}
 
 {% block header_padding %}{% endblock %}
 {% block footer_padding %}{% endblock %}
@@ -34,24 +33,10 @@
                   <div class="carousel-title">
                     {% blocktrans %}Crowdsourcing human rights.{% endblocktrans %}
                   </div>
-                  <div class="carousel-blurb">
+                  <div class="carousel-blurb hidden-xs">
                     <div>{% blocktrans %}Movements is crowdsourcing human rights. It connects human rights activists in closed societies with those with skills to help them around the world. Join today and help a dissident in need.{% endblocktrans %}</div>
                   </div>
-                  <div class="carousel-button">
-                    <a href="{% url 'signup_start' %}">
-                      <button class="btn btn-action">{%trans "Sign up now"%}</button>
-                    </a>
-                  </div>
-                  <div class="carousel-button" id="FindOutMoreButton">
-                    <a href="{% page_url 'how_it_works' %}">
-                      <button class="btn btn-action">{%trans "Find out more"%}</button>
-                    </a>
-                  </div>
-                  <div class="carousel-button" id="BlogButton">
-                    <a target="_blank" href="{{ config.BLOG_URL }}">
-                      <button class="btn btn-action">{%trans "Movements Blog"%}</button>
-                    </a>
-                  </div>
+                    {% include 'ahr/snippets/_carousel_buttons.html' %}
                 </div>
               </div>
             </div>
@@ -61,39 +46,25 @@
                   <div class="carousel-title">
                     {% blocktrans %}Request help from people across the globe, offer help to an activist in need.{% endblocktrans %}
                   </div>
-                  <div class="carousel-blurb">
+                  <div class="carousel-blurb hidden-xs">
                     <div>{% blocktrans %}Whether you’re a journalist, artist, technologist, policy-maker, linguist or PR agent - everyone has skills that can advance human rights.{% endblocktrans %}</div>
                   </div>
-                  <div class="carousel-button">
-                    <a href="{% url 'signup_start' %}">
-                      <button class="btn btn-action">{%trans "Sign up now"%}</button>
-                    </a>
-                  </div>
-                  <div class="carousel-button" id="FindOutMoreButton">
-                    <a href="{% page_url 'how_it_works' %}">
-                      <button class="btn btn-action">{%trans "Find out more"%}</button>
-                    </a>
-                  </div>
-                  <div class="carousel-button" id="BlogButton">
-                    <a target="_blank" href="{{ config.BLOG_URL }}">
-                      <button class="btn btn-action">{%trans "Movements Blog"%}</button>
-                    </a>
-                  </div>
+                  {% include 'ahr/snippets/_carousel_buttons.html' %}
                 </div>
               </div>
             </div>
           </div>
-          <div class="left-control">
+          <div class="left-control hidden-sm hidden-xs">
             <a href="#home-page-carousel" data-slide="prev">
               <img width="50px;" src="{{ STATIC_URL }}images/v2/carousel_left.jpg" >
             </a>
           </div>
-          <div class="right-control">
+          <div class="right-control hidden-sm hidden-xs">
             <a href="#home-page-carousel" data-slide="next">
               <img width="50px;" src="{{ STATIC_URL }}images/v2/carousel_right.jpg" >
             </a>
           </div>
-          <div id="language-flags">
+          <div id="language-flags" class="hidden-xs">
             <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png" ></a>
             <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png" ></a>
             <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png" ></a>
@@ -101,14 +72,38 @@
             <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png" ></a>
             <a data-language="fa" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_iran.png" ></a>
           </div>
-          {% if config.DONATE_BUTTON_LANDING %}{{ config.DONATE_BUTTON_LANDING|safe }}{% endif %}
+{#          {% if config.DONATE_BUTTON_LANDING %}{{ config.DONATE_BUTTON_LANDING|safe }}{% endif %}#}
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="home-page-donate">
+            <input type="hidden" name="cmd" value="_donations">
+            <input type="hidden" name="business" value="clarke@advancinghumanrights.org">
+            <input type="hidden" name="lc" value="US">
+            <input type="hidden" name="item_name" value="Movements Tax Exempt Donation">
+            <input type="hidden" name="page_style" value="MOVEMENTS">
+            <input type="hidden" name="no_note" value="0">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+            <button type="submit" class="btn action-btn" style="top: 20px; position: absolute; right: 75px; color: white; background-color: #005d86;">
+              DONATE
+            </button>
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+          </form>
           <div class="stats-banner" style="display:none;"></div>
+          <div class="carousel-signup visible-xs">
+            <a href="{% url 'signup_start' %}">
+              <button class="btn btn-action">{%trans "Sign up now"%}</button>
+            </a>
+          </div>
+          <div class="carousel-login visible-xs">
+            <a href="{% url 'account_login' %}">
+              <button class="btn btn-secondary">{%trans "Login"%}</button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="landing-page">
-    {% if partners %}
+    {% if partners_first %}
       <div class="partners">
         <div class="container">
           <div class="row">
@@ -116,19 +111,33 @@
               <div class="title">{% trans 'Our Partners' %}</div>
             </div>
           </div>
-        </div>
-        <div class="list">
-          {% for partner in partners %}
-            {% thumbnail partner.logo 0x40 upscale as thumb %}
-            <div class="partner">
-              <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom"
-                 title="{{ partner.title }}" data-content="{{ partner.text }}">
-                <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}"/></a>
-            </div>
-            {% if forloop.counter|divisibleby:5 %}
-            <br />
+          <div class="row partner-section">
+            {% for partner in partners_first %}
+              {% thumbnail partner.logo 0x40 upscale as thumb %}
+              <div class="{{ partner.css }} partner">
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+                   title="{{ partner.title }}" data-content="{{ partner.text }}">
+                  <img src="{{ thumb.url }}" width="{{ thumb.width }}"/></a>
+              </div>
+            {% endfor %}
+            {% if partners_rest %}
+              <div class="col-sm-offset-1 col-sm-10 visible-xs statement statement-font">
+                <a data-toggle="collapse"
+                   href="#collasePartners"
+                   aria-expanded="false"
+                   aria-controls="collasePartners">{% trans 'more' %}&nbsp;<span class="caret"></span></a></div>
+              <div  class="collapse collapse-non-xs" id="collasePartners">
+              {% for partner in partners_rest %}
+                {% thumbnail partner.logo 0x40 upscale as thumb %}
+                <div class="{{ partner.css }} partner">
+                  <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom"
+                     title="{{ partner.title }}" data-content="{{ partner.text }}">
+                    <img src="{{ thumb.url }}" width="{{ thumb.width }}"/></a>
+                </div>
+              {% endfor %}
+              </div>
             {% endif %}
-          {% endfor %}
+          </div>
         </div>
       </div>
     {% endif %}
@@ -185,24 +194,7 @@
   <script type="text/javascript">
   $(document).ready(function(){
     $("#home-page-carousel").carousel({interval: 8000, pause: 'hover'});
-    $('.partners a').popover();
-    $('.set-lang').click(function(ev){
-      ev.preventDefault();
-      var lang = $(ev.currentTarget).data('language');
-      $.ajax({
-        url: '{% url 'set_lang' %}',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-          language_code: lang
-        },
-        success: function(ev){
-          if(ev.result === 'success'){
-            window.location.reload();
-          }
-        }
-      });
-    });
+    $('.partner a').popover();
     window.ahr.widgets.initStats();
   });
   </script>

@@ -16,18 +16,18 @@
     <div class="form-title"><h1>{% trans "Settings" %}</h1></div>
   </div>
   <div class="row">
-    <div class="col-xs-offset-4 col-xs-4">
+    <div class="col-sm-offset-4 col-sm-4">
       <div class="settings-change-avatar">
         <div class="settingavatar">{% primary_avatar user 100 %}</div>
       </div>
     </div>
-    <div class="col-xs-4">
+    <div class="col-sm-4 change-avatar">
       <a id="changeavatar" href="{% url 'avatar_change' %}">{% trans "Change picture"%}</a>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <div class="btn-group folder-select btn-group-justied btn-group-md">
+      <div class="btn-group folder-select btn-group-settings btn-group-md">
         <a href="#personal" id="personal-select" type="button" class="btn btn-tab selected">{% trans "Personal Details" %}</a>
         <a href="#skills" id="skills-select" type="button" class="btn btn-tab" >{% trans "Skills & Interests"%}</a>
         <a href="#security" id="security-select" type="button" class="btn btn-tab" >{% trans "Security & Alerts"%}</a>

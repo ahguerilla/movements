@@ -1,0 +1,20 @@
+{% load cms_tags %}
+{% load i18n %}
+
+<div class="hidden-xs">
+  <div class="carousel-button">
+    <a href="{% url 'signup_start' %}">
+      <button class="btn btn-action">{%trans "Sign up now"%}</button>
+    </a>
+  </div>
+  <div class="carousel-button" id="FindOutMoreButton">
+    <a href="{% page_url 'how_it_works' %}">
+      <button class="btn btn-action">{%trans "Find out more"%}</button>
+    </a>
+  </div>
+  <div class="carousel-button" id="BlogButton">
+    <a target="_blank" href="{{ config.BLOG_URL }}">
+      <button class="btn btn-action">{%trans "Movements Blog"%}</button>
+    </a>
+  </div>
+</div>

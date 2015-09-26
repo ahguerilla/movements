@@ -24,8 +24,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>{% block head_title %}Movements{% endblock %}</title>
   <meta name="description" content="">
-{#  <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
-  <meta name="viewport" content="width=1050">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   {% block open_graph_data %}
   <meta property="og:type" content="website">
@@ -94,117 +93,203 @@
   {% endfor %}
 {% endif %}
 
-{% block header_nav %}
-<nav class="navbar navbar-default header-nav
-  {% if user.is_authenticated and user.is_superuser %}navbar-admin {% endif %}
-  {% if user.is_authenticated and not user.userprofile.first_login %}
-    navbar-logged-in
-  {% else %}
-    navbar-logged-out
-  {% endif %}" role="navigation">
-  <div class="container" style="position:relative;">
-      {% if not user.userprofile.first_login %}
-      <div id="NavLeftMenus" class="navbar-left">
+{% block base_header_nav %}
+  <div class="navbar navbar-header-top navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#collapse-menu">
+          <img src="{{ STATIC_URL }}images/v2/hamburger.png"/>
+        </button>
+        <a class="main-logo" href="/">
+          <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
+        </a>
+      </div>
+      <ul class="navbar-right hidden-xs">
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
         </div>
-        {% if user.is_authenticated and not user.userprofile.first_login %}
-          <div class="nav-avatar" id="view-profile-menu">
-            <div class="menu-icon-profile"></div>
-            <div id="content-menu-container"></div>
-          </div>
-          <a href="{% url 'show_notifications' %}">
-            <div class="nav-notification">
-              <div style="display: none;" id="main-nav-count" class="notification-count"></div>
-              <div class="menu-icon-bell"></div>
-            </div>
-          </a>
-          <a href="{% url 'postman_inbox' %}">
-            <div class="nav-messages">
-              <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>
-              <div class="menu-icon-message"></div>
-            </div>
-          </a>
-        {% endif %}
-      </div>
-      {% endif %}
-
-
-      <div class="navbar-left-top">
-        {% if user.is_authenticated and not user.userprofile.first_login %}
-          <a href="https://twitter.com/movements_org" target="_blank">
-            <div class="nav-twitter">
-              <img src="{{ STATIC_URL }}images/v2/twitter-dualstate.png" alt="{%trans "Connect with Twitter"%}">
-            </div>
-          </a>
-          <a target="_blank" href="https://www.facebook.com/Movements.org">
-            <div class="nav-facebook">
-              <img src="{{ STATIC_URL }}images/v2/facebook-dualstate.png" alt="{%trans "Connect with Facebook"%}" >
-            </div>
-          </a>
-          <a href="http://www.advancinghumanrights.org/" target="_blank">
-            <div class="nav-ahr">
-              <img src="{{ STATIC_URL }}images/v2/ahr-dualstate.png" alt="{%trans "AHR"%}">
-            </div>
-          </a>
-          <a href="{{ config.BLOG_URL }}" target="_blank">
-            <div class="top-left-nav-button nav-blog">{% trans "Blog" %}</div>
-          </a>
-          <a href="{% page_url 'success_stories' %}" target="_blank">
-            <div class="top-left-nav-button nav-success">{% trans "Success Stories" %}</div>
-          </a>
-        {% endif %}
-      </div>
-    {% if user.is_authenticated and not user.userprofile.first_login %}
-      <div id="NavRightLoggedIn" class="navbar-right">
-        <div class="nav-flags">
-          <a data-language="fa" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_iran.png"></a>
-          <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png"></a>
-          <a data-language="uk" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png" ></a>
-          <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png"></a>
-          <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png"></a>
-          <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png"></a>
-        </div>
-        <a id="add-post" class="btn btn-action" onClick="ga('send', 'event', 'button', 'click', 'add-post');">
-          <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
-          <span id="AddPostText"> {% trans "Add Post" %}</span>
-        </a>
-        {% if config.DONATE_BUTTON_LOGGED_IN %}{{ config.DONATE_BUTTON_LOGGED_IN|safe }}{% endif %}
-        <div id="add-post-popup-container"></div>
-      </div>
-    {% else %}
-      {% if not user.userprofile.first_login %}
-      <div id="NavRightLoggedOut" class="navbar-right">
-        <a href="{% url 'account_login' %}" class="btn btn-action">{%trans "Login"%}</a>
-      </div>
-       {% endif %}
-    {% endif %}
-    <div class="header-nav-wrapper">
-      <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>
-    </div>
-    <div class="header-nav-text">
-      <p>{% trans "Crowdsourcing human rights."%}<br/>{%  trans "The online platform that is opening closed societies."%}</p>
-    </div>
-  </div>
-</nav>
-{% endblock %}
-<div id="main-cms-nav" style="display: none;">
-  <div class="container">
-    <div class="row">
-      <div class="main-menu-slider">
-        <ul>
-          {% if not user.is_authenticated %}
-            <li><h3><a href="{% url 'signup_start' %}">{%trans "Sign up"%}</a></h3></li>
+      </ul>
+      <div id="collapse-menu" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-main">
+        {% if user.is_authenticated %}
+          {% if not user.userprofile.first_login %}
+          <li class="dropdown visible-xs">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Add Post" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'create_request' %}">{% trans "Request" %}</a></li>
+              <li><a href="{% url 'create_offer' %}">{% trans "Offer" %}</a></li>
+            </ul>
+          </li>
           {% endif %}
-          {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
-          {% if not user.is_authenticated %}
-            <li><h3><a href="{% url 'show_market' %}">{%trans "Visit market"%}</a></h3></li>
+        {% endif %}
+          <li class="dropdown visible-xs">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Navigate" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              {% show_menu 0 100 100 100 "cms/navs/top_nav_responsive.html" %}
+            </ul>
+          </li>
+          <li class="dropdown navbar-add-border">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Connect" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="image-item"><a target="_blank" href="https://twitter.com/movements_org">
+                <div class="nav-twitter">
+                  <img src="{{ STATIC_URL }}images/v2/twitter-dualstate.png" alt="Connect with Twitter">
+                  <span>{% trans "Twitter" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="https://www.facebook.com/Movements.org">
+                <div class="nav-facebook">
+                  <img src="{{ STATIC_URL }}images/v2/facebook-dualstate.png" alt="Connect with Facebook">
+                  <span>{% trans "Facebook" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="http://www.advancinghumanrights.org/">
+                <div class="nav-ahr">
+                  <img src="{{ STATIC_URL }}images/v2/ahr-dualstate.png" alt="Advancing human rights">
+                  <span>{% trans "Advancing Human Rights" %}</span>
+                </div>
+              </a></li>
+              <li role="separator" class="divider hidden-xs"></li>
+              <li><a href="{{ config.BLOG_URL }}" target="_blank">{% trans "Movements Blog" %}</a></li>
+              <li><a href="{% page_url 'success_stories' %}">{% trans "Success Stories" %}</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Language" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="image-item"><a data-language="en" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_uk.png">
+                  <span>{% trans "English" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ar" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_arabic.png">
+                  <span>{% trans "Arabic" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="zh-cn" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_chinese.png">
+                  <span>{% trans "Chinese" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="uk" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png">
+                  <span>{% trans "Ukrainian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ru" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_russian.png">
+                  <span>{% trans "Russian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="fa" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_iran.png">
+                  <span>{% trans "Iranian" %}</span>
+                </div>
+              </a></li>
+            </ul>
+          </li>
+          {% block additional_nav %}
+          {% endblock additional_nav %}
+          {% if user.is_authenticated %}
+          <li class="visible-xs">
+            <a href="#" id="logout-link">{% trans "Logout" %}</a>
+            <form id="logout-form" method="post" action="{% url 'account_logout' %}">
+              {% csrf_token %}
+            </form>
+          </li>
+          {% endif %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+            {% if not user.userprofile.first_login %}
+              <a id="add-post" class="btn btn-action hiddenxs" onClick="ga('send', 'event', 'button', 'click', 'add-post');">
+                <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
+                <span id="AddPostText"> {% trans "Add Post" %}</span>
+              </a>
+{#              <li class="hidden-xs">{% if config.DONATE_BUTTON_LOGGED_IN %}{{ config.DONATE_BUTTON_LOGGED_IN|safe }}{% endif %}</li>#}
+              <li class="hidden-xs">
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_donations">
+                  <input type="hidden" name="business" value="clarke@advancinghumanrights.org">
+                  <input type="hidden" name="lc" value="US">
+                  <input type="hidden" name="item_name" value="Movements Tax Exempt Donation">
+                  <input type="hidden" name="page_style" value="MOVEMENTS">
+                  <input type="hidden" name="no_note" value="0">
+                  <input type="hidden" name="currency_code" value="USD">
+                  <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+                  <button type="submit" class="btn action-btn" style="float: right; margin-top: 6px; color: white; background-color: #005d86;">DONATE</button>
+                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+              </li>
+              <div id="add-post-popup-container"></div>
+            {% endif %}
+          {% else %}
+          <li><a class="nav-button" href="{% url 'signup_start' %}">
+            <button class="btn btn-action open-account">{%trans "Sign up now"%}</button>
+          </a></li>
+          <li><a class="nav-button" href="{% url 'account_login' %}">
+            <button class="btn btn-secondary">{%trans "Login"%}</button>
+          </a></li>
+          {% endif %}
+          {% if user.is_authenticated and not user.userprofile.first_login %}
+          <div class="navbar-user-controls">
+            <div class="nav-avatar hidden-xs" id="view-profile-menu">
+              <div class="menu-icon-profile"></div>
+              <div id="content-menu-container"></div>
+            </div>
+
+            <a class="visiblexs" href="{% url 'user_profile' %}">
+              <div class="nav-avatar">
+                <div class="menu-icon-profile"></div>
+              </div>
+            </a>
+
+            <a href="{% url 'show_notifications' %}">
+              <div class="nav-notification">
+                <div style="display: none;" id="main-nav-count" class="notification-count"></div>
+                <div class="menu-icon-bell"></div>
+              </div>
+            </a>
+            <a href="{% url 'postman_inbox' %}">
+              <div class="nav-messages">
+                <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>
+                <div class="menu-icon-message"></div>
+              </div>
+            </a>
+          </div>
           {% endif %}
         </ul>
       </div>
     </div>
+    <div class="central-logo hidden-xs hidden-sm hidden-md">
+      <div class="header-nav-wrapper">
+        <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>
+      </div>
+      <div class="header-nav-text">
+        <p>{% trans "Crowdsourcing human rights."%}<br/>{%  trans "Opening closed societies."%}</p>
+      </div>
+    </div>
   </div>
-</div>
+  <div style="height: 80px">&nbsp;</div>
+  <div id="main-cms-nav" style="display: none;">
+    <div class="main-menu-slider">
+      <ul>
+        {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
+        {% if not user.is_authenticated %}
+          <li><a href="{% url 'show_market' %}"><h3>{%trans "Visit market"%}</h3></a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+{% endblock base_header_nav %}
 
 {% block header_padding %}<div style="height: 20px;"></div>{% endblock %}
 {% block content_outside_container %}{% endblock %}
@@ -223,7 +308,7 @@
   <div id="FooterSocialMedia_Big" class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-sm-4 hidden-xs">
           <h4>{% trans "Get updates"  %}</h4>
           <form id="sign-up-form" action="{% url 'newsletter_signup' %}">
             <div class="form-group">
@@ -233,7 +318,7 @@
           <p id="newsletter-conf"></p>
           <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>
         </div>
-        <div class="col-xs-3">
+        <div class="col-sm-3 hidden-xs">
           <h4>{% trans "Connect with us"  %}</h4>
           <div class="social-icons">
             <a target="_blank" href="https://twitter.com/movements_org">
@@ -242,42 +327,24 @@
             <a target="_blank" href="https://www.facebook.com/Movements.org">
               <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="{%trans "Connect with Facebook"%}" >
             </a>
-{#            <a href="">#}
-{#              <img src="{{ STATIC_URL }}images/v2/gplus-bigger.png" alt="Connect with Google Plus" >#}
-{#            </a>#}
           </div>
         </div>
-        <div class="col-xs-5">
+        <div class="col-sm-5">
           <h4>{% trans "About MOVEMENTS"  %}</h4>
           <p>{% blocktrans %}Crowdsourcing human rights. The online platform that is opening closed societies.{% endblocktrans %}</p>
         </div>
       </div>
       <hr>
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2015 Advancing Human Rights{% endblocktrans %}</div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-sm-6">
           <div class="footer-nav-content">
             {% show_menu 0 100 100 100 "cms/navs/bottom_nav_v2.html" %}
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div id="FooterSocialMedia_Small" class="footer">
-    <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2014 Advancing Human Rights{% endblocktrans %}</div>
-    <div class="social-icons">
-        {% trans "Connect with us"  %}
-        <a target="_blank" href="https://twitter.com/movements_org">
-          <img src="{{ STATIC_URL }}images/v2/twitter.png" alt="Twitter" >
-        </a>
-        <a target="_blank" href="https://www.facebook.com/Movements.org">
-          <img src="{{ STATIC_URL }}images/v2/facebook.png" alt="Facebook" >
-        </a>
-        <a href="">
-          <img src="{{ STATIC_URL }}images/v2/gplus.png" alt="Google Plus" >
-        </a>
     </div>
   </div>
 </footer>
@@ -358,38 +425,48 @@
 
 <script type="text/javascript">
   (function () {
+    var mainMenuOpen = false;
     $('#view-content-menu').click(function(){
-      if($('#main-cms-nav').is(":visible")){
+      if(!$('#main-cms-nav').is(":visible")){
+        $('#main-cms-nav').slideDown("fast", function(){
+          mainMenuOpen = true;
+        });
+        $('.menu-selector').addClass("selected");
+      }
+    });
+    $('html').click(function(){
+      if(mainMenuOpen) {
         $('#main-cms-nav').slideUp("fast");
         $('.menu-selector').removeClass("selected");
-      } else {
-        $('#main-cms-nav').slideDown("fast");
-        $('.menu-selector').addClass("selected");
+        mainMenuOpen = false;
       }
     });
   })();
 </script>
 <script type="text/javascript">
   $(document).ready(function(){
-      $('.set-lang').click(function(ev){
-        ev.preventDefault();
-        var lang = $(ev.currentTarget).data('language');
-        $.ajax({
-          url: '/set-language',
-          type: 'POST',
-          dataType: 'json',
-          data: {
-            language_code: lang
-          },
-          success: function(ev){
-            if(ev.result === 'success'){
-              window.location.reload();
-            }
+    $('.set-lang').click(function(ev){
+      ev.preventDefault();
+      var lang = $(ev.currentTarget).data('language');
+      $.ajax({
+        url: '/set-language',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          language_code: lang
+        },
+        success: function(ev){
+          if(ev.result === 'success'){
+            window.location.reload();
           }
-        });
+        }
       });
+    });
+    $('#logout-link').click(function(){
+      $('#logout-form').submit();
+    })
   });
-  </script>
+</script>
 
 </body>
 </html>

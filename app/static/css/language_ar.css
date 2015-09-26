@@ -36,12 +36,6 @@ body {
   margin-right: 20px;
 }
 /* Footers */
-#FooterSocialMedia_Small {
-  direction: ltr;
-}
-#FooterSocialMedia_Small .social-icons {
-  margin-left: -80px;
-}
 .footer-copyright {
   direction: ltr;
 }
@@ -76,3 +70,4 @@ body {
   float: right;
   margin-right: 42px;
 }
+
