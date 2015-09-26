@@ -216,6 +216,9 @@ def group_email_test(request, group_id):
             group = Group.objects.get(pk=group_id)
             if not group:
                 raise ValueError("Invalid group")
+            subject = request.POST.get('subject')
+            if not subject:
+                raise ValueError("Please enter a valid subject")
             message = request.POST.get('message')
             if not message:
                 raise ValueError("Please enter a valid message")
@@ -223,7 +226,7 @@ def group_email_test(request, group_id):
             if not email_to:
                 raise ValueError("Please enter a valid email")
             message = construct_email(message, request.user, group)
-            send_group_email(message, request.user, email_to)
+            send_group_email(message, request.user, email_to, subject=subject)
         except Exception as ex:
             return HttpResponse(json.dumps({'success': False, 'message': ex.message}), mimetype="application/json")
         success_message = 'successfully sent a test message to {0}'.format(email_to)
@@ -238,11 +241,14 @@ def group_email_send(request, group_id):
             group = Group.objects.get(pk=group_id)
             if not group:
                 raise ValueError("Invalid group")
+            subject = request.POST.get('subject')
+            if not subject:
+                raise ValueError("Please enter a valid subject")
             message = request.POST.get('message')
             if not message:
                 raise ValueError("Please enter a valid message")
             user_type = request.POST.get('additional_filter')
-            send_group_message.delay(message, group, user_type)
+            send_group_message.delay(message, group, user_type, subject=subject)
         except Exception as ex:
             return HttpResponse(json.dumps({'success': False, 'message': ex.message}), mimetype="application/json")
         success_message = 'Message queued for sending'
