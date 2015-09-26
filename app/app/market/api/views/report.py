@@ -49,7 +49,8 @@ def report_marketitem(request, obj_id):
         email = EmailMessage(
             subject,
             text,
-            constance.config.NO_REPLY_EMAIL,[constance.config.REPORT_POST_EMAIL]
+            constance.config.NO_REPLY_EMAIL,
+            [constance.config.REPORT_POST_EMAIL]
         )
         email.content_subtype = "html"
         email.send()
