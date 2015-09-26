@@ -10,6 +10,7 @@ from models import UserProfile
 from app.market.models import MarketItem
 
 import constance
+import markdown
 
 
 def check_user_notification_settings(user, group):
@@ -55,25 +56,8 @@ def construct_email(message, user, group):
         'group_name': group.name,
     }
     footer = render_to_string('emails/snippets/_group_email_notification_settings.html', template_args)
-    message_parts = message.split(u'##NOTIFICATION_PREFERENCES##')
-    message_list = []
-    for m in message_parts:
-        paragraphs_list = []
-        paragraphs = m.split('\n')
-        for p in paragraphs:
-            p = p.strip()
-            if p:
-                paragraphs_list.append('<p>' + p + '</p>')
-        message_list.append('\n'.join(paragraphs_list))
-
-    message = ''
-    first = True
-    for i in message_list:
-        if not first:
-            message += '\n' + footer + '\n'
-        first = False
-        message += '\n' + i + '\n'
-    return message
+    html_message = markdown.markdown(message) + footer
+    return html_message
 
 
 def send_group_email(message, user, email_to='', subject=None):
