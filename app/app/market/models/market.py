@@ -37,7 +37,7 @@ class MarketItem(models.Model):
     item_type = models.CharField(_('item_type'), max_length=50, blank=False)
     owner = models.ForeignKey(auth.models.User, blank=True)
     staff_owner = models.ForeignKey(
-        auth.models.User, blank=True, null=True, related_name='marketitems')
+        auth.models.User, blank=True, null=True, related_name='marketitems', verbose_name='Staff Manager')
     title = models.CharField(_('title'), max_length=200, blank=False)
     details = tinymodels.HTMLField(_('details'), blank=False)
     interests = models.ManyToManyField(user_models.Interest, null=True, blank=True)

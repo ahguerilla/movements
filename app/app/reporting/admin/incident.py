@@ -72,7 +72,7 @@ class IncidentAdmin(TrackingAdmin):
 
     def get_owner(self, obj):
         return obj.staff_owner
-    get_owner.short_description = _('owner')
+    get_owner.short_description = _('Staff manager')
     get_owner.admin_order_field = 'staff_owner'
 
     def get_aging(self, obj):

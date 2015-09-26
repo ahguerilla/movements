@@ -10,7 +10,7 @@
         <p><b>{% trans 'Post creator' %}:</b> <a href="{% url 'admin:auth_user_change' owner.id %}">{{ owner }}</a>;</p>
       {% endif %}
       {% if staff_owner %}
-        <p><b>{% trans 'Staff owner' %}:</b> <a href="{% url 'admin:auth_user_change' staff_owner.id %}">{{ staff_owner }}</a>;</p>
+        <p><b>{% trans 'Staff manager' %}:</b> <a href="{% url 'admin:auth_user_change' staff_owner.id %}">{{ staff_owner }}</a>;</p>
       {% endif %}
       {% if commenters %}
         <p>
