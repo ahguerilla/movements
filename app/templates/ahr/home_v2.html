@@ -155,7 +155,13 @@
     <div class="container-fluid">
       <div class="landing-content request-background">
         <div class="container">
-          <div>
+          <a href="{% url 'create_request' %}">
+            <div class="visible-xs">
+              <h3>{%trans "Create a Request"%}</h3>
+              <p>{% blocktrans %}Are you an activist in need of help? Movements.org leverages technology to help those in closed societies find the assistance they need to amplify their voice and expand their influence.{% endblocktrans %}</p>
+            </div>
+          </a>
+          <div class="hiddenxs">
             <h3>{%trans "Create a Request"%}</h3>
             <p>{% blocktrans %}Are you an activist in need of help? Movements.org leverages technology to help those in closed societies find the assistance they need to amplify their voice and expand their influence.{% endblocktrans %}</p>
           </div>
@@ -176,7 +182,13 @@
     <div class="container-fluid">
       <div class="landing-content offer-background">
         <div class="container">
-          <div>
+          <a href="{% url 'create_offer' %}">
+            <div class="visible-xs">
+              <h3>{%trans "Offer your Services"%}</h3>
+              <p>{% blocktrans %}If you’ve ever wanted to help a human rights activist, here’s your opportunity. All of us have skills that can be put to use to advance basic liberties.{% endblocktrans %}</p>
+            </div>
+          </a>
+          <div class="hiddenxs">
             <h3>{%trans "Offer your Services"%}</h3>
             <p>{% blocktrans %}If you’ve ever wanted to help a human rights activist, here’s your opportunity. All of us have skills that can be put to use to advance basic liberties.{% endblocktrans %}</p>
           </div>

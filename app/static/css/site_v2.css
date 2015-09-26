@@ -1084,6 +1084,7 @@ h6 {
   overflow: hidden;
   z-index: 10;
   position: static;
+  height: 40px;
 }
 .landing-page .partner-section .partner img {
   max-width: 100%;
@@ -1139,6 +1140,10 @@ h6 {
   padding-left: 30%;
   padding-right: 10%;
 }
+.landing-page .request-background a {
+  text-decoration: none;
+  color: #fff;
+}
 .landing-page .offer-background {
   background: url("../images/v2/offer_background_v2.jpg");
   background-repeat: no-repeat;
@@ -1152,6 +1157,10 @@ h6 {
 .landing-page .offer-background .container div {
   padding-right: 30%;
   padding-left: 10%;
+}
+.landing-page .offer-background a {
+  text-decoration: none;
+  color: #fff;
 }
 .testimonial {
   padding-bottom: 70px;
@@ -2772,7 +2781,7 @@ input.borderless-control:focus:invalid:focus {
 
 @media (max-width: 767px) {
   .hiddenxs {
-    display: none;
+    display: none !important;
   }
   .movements-form input,
   .movements-form select,
