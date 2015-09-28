@@ -2828,7 +2828,7 @@ input.borderless-control:focus:invalid:focus {
   #collapse-menu li .dropdown-flag img {
     float: right;
     margin-left: 20px;
-    padding-top: 6px;
+    padding-top: 4px;
   }
   #collapse-menu .dropdown-menu li a {
     line-height: 30px;
