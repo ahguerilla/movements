@@ -1,5 +1,6 @@
 import uuid
 from django.db.models.signals import post_save
+from django.utils.html import strip_tags
 from menu import invalidate_menu_cache
 
 from cms.extensions import PageExtension
@@ -80,7 +81,6 @@ def success_stories_image_upload_handler(instance, filename):
     return "success_stories/images/{0}".format(filename)
 
 
-# todo - need to get this todo something
 class SuccessStories(models.Model):
     image = models.ImageField(upload_to=partner_image_upload_handler, blank=True, null=True)
     content = tinymodels.HTMLField()
@@ -90,4 +90,8 @@ class SuccessStories(models.Model):
         ordering = ('order',)
 
     def __unicode__(self):
-        return self.title
+        return strip_tags(self.content)[:50]
+
+
+class SuccessStoriesCMSPlugin(CMSPlugin):
+    title = models.CharField(max_length=20)

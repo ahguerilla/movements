@@ -159,7 +159,6 @@
 {#          {% include 'market/snippets/_post_actions.html' %}#}
 {#        </div>#}
 {#      {% endif %}#}
-
       {% if is_logged_in %}
       {% if translator or request.user.userprofile.is_cm %}
       <div class="row">
@@ -177,10 +176,8 @@
         </div>
       </div>
       {% endif %}
-
       <div id="post-translation-container" class="comments" style="display: none;">
       </div>
-
       <div class="comments">
         <div class="comments-header">
           <div class="comment-count">

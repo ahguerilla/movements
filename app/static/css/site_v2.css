@@ -946,12 +946,15 @@ h6 {
 .cms-left-column ul li:last-child {
   border-bottom: none;
 }
-.cms-body-content .success-stories p {
-  clear: both;
-}
-.cms-body-content .success-stories img {
-  float: left;
-  margin-right: 10px;
+/*.cms-body-content*/
+/*.success-stories*/
+/*p*/
+/*clear both*/
+/*img*/
+/*float left*/
+/*margin-right 10px*/
+.success-stories .success-story-image {
+  max-width: 250px;
 }
 .notification-count {
   position: absolute;
@@ -2998,6 +3001,12 @@ input.borderless-control:focus:invalid:focus {
   #marketitems #stuck-marketitems .market-place-item.with-image,
   #stuck-marketitems #stuck-marketitems .market-place-item.with-image {
     padding-left: 15px;
+  }
+  .success-stories .success-storey {
+    text-align: center;
+  }
+  .success-stories .success-storey .success-story-image {
+    margin-bottom: 15px;
   }
 }
 @media (min-width: 767px) {

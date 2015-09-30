@@ -12,7 +12,7 @@ from django.http import HttpResponse, HttpResponseNotAllowed
 from adminsortable2.admin import SortableAdminMixin
 from cms.extensions import PageExtensionAdmin
 
-from .models import NewsletterSignups, MenuExtension, NotificationPing, Partner
+from .models import NewsletterSignups, MenuExtension, NotificationPing, Partner, SuccessStories
 from app.users.actions import construct_email, send_group_email
 from .celerytasks import notification_ping, send_group_message
 
@@ -95,6 +95,7 @@ admin.site.register(MenuExtension, MenuExtensionAdmin)
 admin.site.register(NewsletterSignups)
 admin.site.register(NotificationPing)
 admin.site.register(Partner, SortableAdmin)
+admin.site.register(SuccessStories, SortableAdmin)
 admin.site.register(LogEntry, LogEntryAdmin)
 
 

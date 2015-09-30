@@ -1,0 +1,19 @@
+{% load sekizai_tags %}
+{% load thumbnail %}
+
+{% for s in success_stories %}
+
+<div class="success-stories">
+  <hr style="height: 2px; margin-top: 20px; margin-bottom: 20px; background-color: rgb(0, 102, 153);">
+  <div class="row">
+    <div class="col-lg-3 col-sm-4 col-xs-12 success-storey">
+      {% thumbnail s.image "250x167" crop="center" as im %}
+      <img class="success-story-image" style="width: 100%" src="{{ im.url }}" alt="success story">
+    </div>
+    <div class="col-lg-9 col-sm-8 col-xs-12">
+      {{ s.content|safe }}
+    </div>
+  </div>
+  <hr style="height: 2px; margin-top: 20px; margin-bottom: 20px; background-color: rgb(0, 102, 153);">
+</div>
+{% endfor %}

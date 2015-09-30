@@ -1,5 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
-from models import SafeVPNLink
+from models import SafeVPNLink, SuccessStoriesCMSPlugin, SuccessStories
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 import hashlib
@@ -23,4 +23,17 @@ class SafeVPNLinkPlugin(CMSPluginBase):
         context['the_link'] = the_link
         return context
 
+
+class SuccessStoriesPlugin(CMSPluginBase):
+    model = SuccessStoriesCMSPlugin
+    name = _("Success Stories")
+    render_template = "cms/plugins/success_stories.html"
+
+    def render(self, context, instance, placeholder):
+        success_stories = SuccessStories.objects.all()
+        context['success_stories'] = success_stories
+        return context
+
+
 plugin_pool.register_plugin(SafeVPNLinkPlugin)
+plugin_pool.register_plugin(SuccessStoriesPlugin)
