@@ -154,16 +154,17 @@
           {% endif %}
         </div>
       </div>
+{#      {% if is_logged_in %}#}
+{#        <div class="post-call-to-action-bottom">#}
+{#          {% include 'market/snippets/_post_actions.html' %}#}
+{#        </div>#}
+{#      {% endif %}#}
+
       {% if is_logged_in %}
-        <div class="post-call-to-action-bottom">
-          {% include 'market/snippets/_post_actions.html' %}
-        </div>
-      {% endif %}
-      {% if is_logged_in %}
+      {% if translator or request.user.userprofile.is_cm %}
       <div class="row">
         <div class="post-actions col-xs-12">
           <ul>
-            {% if translator or request.user.userprofile.is_cm %}
             <li>
               <div class="post-languages-menu">
                 <a obj_id="{{ post.id }}" class="post-pre-init provide-translation" href="#">
@@ -172,10 +173,10 @@
                 <div id="post-languages-menu-container"></div>
               </div>
             </li>
-            {% endif %}
           </ul>
         </div>
       </div>
+      {% endif %}
 
       <div id="post-translation-container" class="comments" style="display: none;">
       </div>
