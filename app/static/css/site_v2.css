@@ -185,6 +185,9 @@
 .btn-social:focus {
   color: #fff;
 }
+.btn-thinner {
+  padding: 4px 12px 2px;
+}
 .full-width {
   width: 100%;
 }
@@ -2333,19 +2336,29 @@ input.borderless-control:focus:invalid:focus {
   color: #756b65;
   padding-right: 10px;
 }
+.view-post .caution-text {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 30px;
+}
+.view-post .post-call-to-action-bottom,
 .view-post .post-call-to-action {
   margin-top: 20px;
   border-top: 1px solid #cdcbcc;
 }
+.view-post .post-call-to-action-bottom a,
 .view-post .post-call-to-action a {
   color: #262626;
 }
+.view-post .post-call-to-action-bottom a:hover,
 .view-post .post-call-to-action a:hover {
   color: #756b65;
 }
+.view-post .post-call-to-action-bottom .post-action img,
 .view-post .post-call-to-action .post-action img {
   float: left;
 }
+.view-post .post-call-to-action-bottom .post-action div,
 .view-post .post-call-to-action .post-action div {
   float: left;
   font-size: 12px;
@@ -2353,6 +2366,9 @@ input.borderless-control:focus:invalid:focus {
   margin-top: 19px;
   margin-left: 5px;
   line-height: 14px;
+}
+.view-post .post-call-to-action-bottom {
+  border: none;
 }
 .poster {
   font-family: "HurmeGeometricSans3-SemiBold";
@@ -2948,6 +2964,10 @@ input.borderless-control:focus:invalid:focus {
   }
   .view-post .how-you-can-help {
     margin: 0 0 10px 0;
+  }
+  .view-post .caution-text {
+    line-height: inherit;
+    margin-right: 10px;
   }
   .poster .post-direct-action {
     text-align: left;

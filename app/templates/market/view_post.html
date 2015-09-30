@@ -86,7 +86,7 @@
              {% else %}
              href="{% url 'account_login' %}"
              {% endif %}
-             class="btn btn-action private-message" >{% trans 'I want to help' %}&nbsp;>></a>
+             class="btn btn-action private-message btn-thinner" >{% trans 'I WANT TO HELP' %}</a>
           {% else %}
           <a username="{{ post.owner.username }}"
              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-action');}"
@@ -96,12 +96,16 @@
              {% else %}
              href="{% url 'account_login' %}"
              {% endif %}
-             class="btn btn-action private-message" >{% trans 'I need your help' %}&nbsp;>></a>
+             class="btn btn-action private-message btn-thinner" >{% trans 'CONTACT THIS OFFER' %}</a>
           {% endif %}
         </div>
       {% endif %}
       </div>
-      {% include 'market/snippets/_post_actions.html' %}
+      {% if is_logged_in %}
+        <div class="post-call-to-action">
+          {% include 'market/snippets/_post_actions.html' %}
+        </div>
+      {% endif %}
       <div class="post">
         <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
         <div class="translated_by" style="display: none;">
@@ -150,7 +154,11 @@
           {% endif %}
         </div>
       </div>
-      {% include 'market/snippets/_post_actions.html' %}
+      {% if is_logged_in %}
+        <div class="post-call-to-action-bottom">
+          {% include 'market/snippets/_post_actions.html' %}
+        </div>
+      {% endif %}
       {% if is_logged_in %}
       <div class="row">
         <div class="post-actions col-xs-12">
@@ -159,7 +167,7 @@
             <li>
               <div class="post-languages-menu">
                 <a obj_id="{{ post.id }}" class="post-pre-init provide-translation" href="#">
-                  <span>{% trans 'Provide a translation' %}</span>
+                  <span>{% blocktrans %}TRANSLATE THIS POST{% endblocktrans %}</span>
                 </a>
                 <div id="post-languages-menu-container"></div>
               </div>
@@ -181,12 +189,13 @@
           {% trans 'Leave a comment' %}
         </div>
         <form>
-          <div class="alert alert-danger">
-            <h4>{% trans "Be cautious about posting personally identifying information." %}</h4>
-            <p>{% trans "Please be cautious before using your real name or including any personally identifying information when creating post or leaving a comment." %}</p>
-          </div>
           <textarea class="form-control" name="comment"></textarea>
-          <button class="btn btn-action" type="submit" onClick="ga('send', 'event', 'button', 'click', 'post-comment');">{% trans "Post comment"%}</button>
+          <div class="row">
+            <div class="col-xs-12">
+              <button class="btn btn-action btn-thinner pull-right" style="margin-left: 15px;" type="submit" onClick="ga('send', 'event', 'button', 'click', 'post-comment');">{% trans "POST COMMENT"%}</button>
+              <p class="caution-text" >CAUTION: Avoid personally identifying information when creating a post or leaving a comment!</p>
+            </div>
+          </div>
         </form>
 
         <div class="comment-list">
@@ -200,7 +209,6 @@
         {% url 'account_login' as accountUrl %}
         {% url 'signup_start' as signupUrl %}
         <p>{% blocktrans %}Please <a href="{{ accountUrl }}">Login</a> or <a href="{{ signupUrl }}">Sign up</a> to view more about this post. Once you've done this you will be able to send messages to the author, comment and rate this post.{% endblocktrans %}</p>
-
         <div class="comments">
           <div class="comment-list">
             <div class="loader text-center"><img src="{{ STATIC_URL }}images/ajax-loader.gif" alt="loading comments"/>
@@ -208,8 +216,6 @@
             <div class="content"></div>
           </div>
         </div>
-
-
       </div>
       {% endif %}
     </div>
