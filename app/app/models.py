@@ -80,6 +80,7 @@ def success_stories_image_upload_handler(instance, filename):
     return "success_stories/images/{0}".format(filename)
 
 
+# todo - need to get this todo something
 class SuccessStories(models.Model):
     image = models.ImageField(upload_to=partner_image_upload_handler, blank=True, null=True)
     content = tinymodels.HTMLField()

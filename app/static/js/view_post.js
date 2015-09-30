@@ -7,6 +7,7 @@
       'click .report': 'showReportForm',
       'click .delete-comment': 'deleteComment',
       'click .tweet': 'shareTwitter',
+      'click .facebook': 'shareFacebook',
       'click div.post .translated_by a': 'changePostTranslation',
       'click div.comment-body .translated_by a': 'changeCommentTranslation',
       'click .how-you-can-help .title': 'toggleHowYouCanHelp'
@@ -175,9 +176,7 @@
 
     shareTwitter: function(ev) {
       ev.preventDefault();
-
       // url is (up to) 23 char, 140 total... 117 left for message, including automatic space separator.
-
       var postUrl = ev.currentTarget.href;
       var preamble = "New on #Movements: \"";
       var postTitle = document.getElementById('post-title').innerText;
@@ -187,6 +186,13 @@
       }
       var twitterUrl = "https://twitter.com/share?url=" + encodeURIComponent(postUrl) + "&text=" + encodeURIComponent(comment);
       this.openTwitterPopup(twitterUrl);
+    },
+
+    shareFacebook: function(ev){
+      ev.preventDefault();
+      var postUrl = ev.currentTarget.href;
+      var facebookUrl = 'http://www.facebook.com/sharer.php?p[url]=' + postUrl;
+      this.openTwitterPopup(facebookUrl);
     },
 
     openTwitterPopup: function(url){

@@ -12,7 +12,7 @@
       </div>
     </a>
   {% endif %}
-    <a obj_id="{{ post.id }}" rec_type="market_item" class="recommend" href='#' alt="recommend post"
+    <a obj_id="{{ post.id }}" rec_type="market_item" class="recommend" href='#'
        onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'recommend');}">
         <div class="col-xs-5ths post-action">
           <img width="32" style="margin-top: 20px;" src="{{ STATIC_URL }}images/v2/airoplane-icon.png" alt="Recomment This Post">
@@ -20,11 +20,14 @@
         </div>
     </a>
   {% if post.tweet_permission %}
-    <div class="col-xs-5ths post-action">
-      <img width="26" style="margin-top: 18px;" src="{{ STATIC_URL }}images/v2/facebook_bigger_grey.png" alt="Share On Facebook">
-      <div>{% blocktrans %}SHARE ON<br>FACEBOOK{% endblocktrans %}</div>
-    </div>
-    <a obj_id="{{ post.id }}" rec_type="market_item" class="tweet" href='#' alt="tweet post"
+    <a obj_id="{{ post.id }}" rec_type="market_item" class="facebook" href='#'
+       onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'facebook-share');}">
+      <div class="col-xs-5ths post-action">
+        <img width="26" style="margin-top: 18px;" src="{{ STATIC_URL }}images/v2/facebook_bigger_grey.png" alt="Share On Facebook">
+        <div>{% blocktrans %}SHARE ON<br>FACEBOOK{% endblocktrans %}</div>
+      </div>
+    </a>
+    <a obj_id="{{ post.id }}" rec_type="market_item" class="tweet" href='#'
        onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'tweet');}">
       <div class="col-xs-5ths post-action">
         <img width="28" style="margin-top: 20px;" src="{{ STATIC_URL }}images/v2/twitter_bigger_grey.png" alt="Share On Twitter">
@@ -33,7 +36,7 @@
     </a>
   {% endif %}
   {% if request.user != post.owner %}
-    <a report_url="{{ report_url }}" class="report" href='#' alt="report post"
+    <a report_url="{{ report_url }}" class="report" href='#'
        onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'report-post');}">
       <div class="col-xs-5ths post-action">
         <img width="28" style="margin-top: 20px;" src="{{ STATIC_URL }}images/v2/flag_icon_gray.png" alt="Share On Twitter">
