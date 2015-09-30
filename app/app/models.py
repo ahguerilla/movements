@@ -7,6 +7,8 @@ from cms.extensions.extension_pool import extension_pool
 from cms.models.pluginmodel import CMSPlugin
 from django.db import models
 
+from tinymce import models as tinymodels
+
 
 class MenuExtension(PageExtension):
     show_on_top_menu = models.BooleanField(default=False)
@@ -70,3 +72,21 @@ class NotificationPing(models.Model):
 
     def __unicode__(self):
         return u'Created: {0}, Completed: {1}'.format(self.created, self.completed)
+
+
+def success_stories_image_upload_handler(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return "success_stories/images/{0}".format(filename)
+
+
+class SuccessStories(models.Model):
+    image = models.ImageField(upload_to=partner_image_upload_handler, blank=True, null=True)
+    content = tinymodels.HTMLField()
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    class Meta(object):
+        ordering = ('order',)
+
+    def __unicode__(self):
+        return self.title

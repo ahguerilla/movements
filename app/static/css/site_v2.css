@@ -213,6 +213,37 @@
 pre {
   word-break: normal;
 }
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.col-xs-5ths {
+  width: 20%;
+  float: left;
+}
+@media (min-width: 768px) {
+  .col-sm-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-5ths {
+    width: 20%;
+    float: left;
+  }
+}
 html {
   background-color: #b6aba5;
   -webkit-font-smoothing: antialiased;
@@ -2200,25 +2231,15 @@ input.borderless-control:focus:invalid:focus {
 .view-post .post-images img {
   margin-bottom: 10px;
 }
+.view-post .post-actions {
+  margin-top: 20px;
+}
 .view-post .post-actions a {
   font-family: "HurmeGeometricSans3-SemiBold";
   padding: 5px 0;
   padding-left: 30px;
   color: #756b65;
   margin-right: 15px;
-}
-.view-post .post-actions a.recommend {
-  background: url("../images/v2/recommend_off.png") no-repeat left 1px;
-}
-.view-post .post-actions a.tweet {
-  background: url("../images/v2/twitter_gray.png") no-repeat left 1px top 4px;
-  padding-left: 28px;
-}
-.view-post .post-actions a.message {
-  background: url("../images/v2/direct_message_icon.PNG") no-repeat left 4px;
-}
-.view-post .post-actions a.report {
-  background: url("../images/v2/flag_icon_gray.png") no-repeat left 1px;
 }
 .view-post .post-actions a.provide-translation {
   background: url("../images/v2/translate-icon.png") no-repeat left center;
@@ -2311,6 +2332,27 @@ input.borderless-control:focus:invalid:focus {
 .view-post .comment .comment-body #CommentButtons a {
   color: #756b65;
   padding-right: 10px;
+}
+.view-post .post-call-to-action {
+  margin-top: 20px;
+  border-top: 1px solid #cdcbcc;
+}
+.view-post .post-call-to-action a {
+  color: #262626;
+}
+.view-post .post-call-to-action a:hover {
+  color: #756b65;
+}
+.view-post .post-call-to-action .post-action img {
+  float: left;
+}
+.view-post .post-call-to-action .post-action div {
+  float: left;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 19px;
+  margin-left: 5px;
+  line-height: 14px;
 }
 .poster {
   font-family: "HurmeGeometricSans3-SemiBold";

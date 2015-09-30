@@ -1,0 +1,46 @@
+{% load i18n %}
+
+{% if is_logged_in %}
+<div class="post-call-to-action">
+  <div class="row">
+  {% if request.user != post.owner %}
+    <a username="{{ post.owner.username }}" subject="RE: {{ post.title }}" readonlysub="1" class="message private-message" href='#'
+       onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-message');}">
+      <div class="col-xs-5ths post-action">
+        <img width="32" style="margin-top: 20px;" src="{{ STATIC_URL }}images/v2/direct_message_icon.PNG" alt="Contact Privately">
+        <div>{% blocktrans %}CONTACT<br>PRIVATELY{% endblocktrans %}</div>
+      </div>
+    </a>
+  {% endif %}
+    <a obj_id="{{ post.id }}" rec_type="market_item" class="recommend" href='#' alt="recommend post"
+       onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'recommend');}">
+        <div class="col-xs-5ths post-action">
+          <img width="32" style="margin-top: 20px;" src="{{ STATIC_URL }}images/v2/airoplane-icon.png" alt="Recomment This Post">
+          <div>{% blocktrans %}RECOMMEND<br>THIS POST{% endblocktrans %}</div>
+        </div>
+    </a>
+  {% if post.tweet_permission %}
+    <div class="col-xs-5ths post-action">
+      <img width="26" style="margin-top: 18px;" src="{{ STATIC_URL }}images/v2/facebook_bigger_grey.png" alt="Share On Facebook">
+      <div>{% blocktrans %}SHARE ON<br>FACEBOOK{% endblocktrans %}</div>
+    </div>
+    <a obj_id="{{ post.id }}" rec_type="market_item" class="tweet" href='#' alt="tweet post"
+       onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'tweet');}">
+      <div class="col-xs-5ths post-action">
+        <img width="28" style="margin-top: 20px;" src="{{ STATIC_URL }}images/v2/twitter_bigger_grey.png" alt="Share On Twitter">
+        <div>{% blocktrans %}SHARE ON<br>TWITTER{% endblocktrans %}</div>
+      </div>
+    </a>
+  {% endif %}
+  {% if request.user != post.owner %}
+    <a report_url="{{ report_url }}" class="report" href='#' alt="report post"
+       onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'report-post');}">
+      <div class="col-xs-5ths post-action">
+        <img width="28" style="margin-top: 20px;" src="{{ STATIC_URL }}images/v2/flag_icon_gray.png" alt="Share On Twitter">
+        <div{% blocktrans %}>REPORT<br>THIS POST{% endblocktrans %}</div>
+      </div>
+    </a>
+  {% endif %}
+  </div>
+</div>
+{% endif %}

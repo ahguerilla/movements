@@ -222,6 +222,42 @@ box-shadow()
 
 pre
   word-break: normal
+
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}
 // **************************************
 // base styles
 // **************************************
@@ -1620,21 +1656,13 @@ popoverDropdown(width, showIcon = true)
     img
       margin-bottom 10px
   .post-actions
+    margin-top 20px
     a
       font-family "HurmeGeometricSans3-SemiBold"
       padding 5px 0
       padding-left 30px
       color $inactive-font
       margin-right 15px
-    a.recommend
-      background url('../images/v2/recommend_off.png') no-repeat left 1px
-    a.tweet
-      background url('../images/v2/twitter_gray.png') no-repeat left 1px top 4px
-      padding-left 28px
-    a.message
-      background url('../images/v2/direct_message_icon.PNG') no-repeat left 4px
-    a.report
-      background url('../images/v2/flag_icon_gray.png') no-repeat left 1px
     a.provide-translation
       background url('../images/v2/translate-icon.png') no-repeat left center
       padding-left 28px
@@ -1703,6 +1731,24 @@ popoverDropdown(width, showIcon = true)
         a
           color: #756b65;
           padding-right: 10px;
+  .post-call-to-action
+    margin-top 20px
+    border-top 1px solid #cdcbcc
+    a
+      color $main-font
+    a:hover
+      color $font-color
+    .post-action
+      img
+        float left
+      div
+        float left
+        font-size 12px
+        font-weight bold
+        margin-top 19px
+        margin-left 5px
+        line-height 14px
+
 
 .poster
   font-family "HurmeGeometricSans3-SemiBold"

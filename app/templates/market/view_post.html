@@ -101,7 +101,7 @@
         </div>
       {% endif %}
       </div>
-
+      {% include 'market/snippets/_post_actions.html' %}
       <div class="post">
         <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
         <div class="translated_by" style="display: none;">
@@ -129,8 +129,6 @@
         {% endfor %}
       </div>
       {% endif %}
-
-
       <div style="margin-bottom: 15px; margin-top: 10px;">
         <div class="tags clearfix">
           {% for tag in post.interests.all %}
@@ -152,42 +150,23 @@
           {% endif %}
         </div>
       </div>
+      {% include 'market/snippets/_post_actions.html' %}
       {% if is_logged_in %}
-      <div class="post-actions">
-        <ul>
-          <li><a
-              obj_id="{{ post.id }}"
-              rec_type="market_item"
-              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'recommend');}"
-              class="recommend" href='#' alt="recommend post">{% trans 'Recommend' %}</a></li>
-          {% if post.tweet_permission %}
-            <li><a
-              obj_id="{{ post.id }}"
-              rec_type="market_item"
-              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'tweet');}"
-              class="tweet" href='#' alt="tweet post">{% trans 'Tweet' %}</a></li>
-          {% endif %}
-          <li><a
-                username="{{ post.owner.username }}"
-                subject="RE: {{ post.title }}"
-                readonlysub="1"
-                onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-message');}"
-                class="message private-message" href='#'>{% trans 'Direct message' %}</a></li>
-          <li><a
-              report_url="{{ report_url }}"
-              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'report-post');}"
-              class="report" href='#' alt="report post">{% trans 'Report this post' %}</a></li>
-          {% if translator or request.user.userprofile.is_cm %}
-          <li>
-            <div class="post-languages-menu">
-              <a obj_id="{{ post.id }}" class="post-pre-init provide-translation" href="#">
-                <span>{% trans 'Provide a translation' %}</span>
-              </a>
-              <div id="post-languages-menu-container"></div>
-            </div>
-          </li>
-          {% endif %}
-        </ul>
+      <div class="row">
+        <div class="post-actions col-xs-12">
+          <ul>
+            {% if translator or request.user.userprofile.is_cm %}
+            <li>
+              <div class="post-languages-menu">
+                <a obj_id="{{ post.id }}" class="post-pre-init provide-translation" href="#">
+                  <span>{% trans 'Provide a translation' %}</span>
+                </a>
+                <div id="post-languages-menu-container"></div>
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
 
       <div id="post-translation-container" class="comments" style="display: none;">
