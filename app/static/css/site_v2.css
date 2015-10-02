@@ -496,6 +496,9 @@ ul {
   clip: rect(0px, 30px, 23px, 0px);
   margin-top: -1px;
 }
+.navbar-header-top .nav-newsletter img {
+  width: 25px;
+}
 .navbar-header-top .dropdown-flag img {
   width: 45px;
   margin-right: 15px;

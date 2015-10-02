@@ -40,7 +40,9 @@
   {% if user and user.is_authenticated and not user.userprofile.first_login and user.id %}
     window.ahr.user_id = {{ user.id }};
     window.ahr.username = "{{ user.username }}";
-    window.ahr.messageCounterWatch();
+
+    // starts the heartbeat for discovering new messages and notifications
+    //window.ahr.messageCounterWatch();
   {% else %}
     window.ahr.user_id = 0;
   {% endif %}
