@@ -101,11 +101,7 @@
         </div>
       {% endif %}
       </div>
-      {% if is_logged_in %}
-        <div class="post-call-to-action">
-          {% include 'market/snippets/_post_actions.html' %}
-        </div>
-      {% endif %}
+      {% include 'market/snippets/_post_actions.html' %}
       <div class="post">
         <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
         <div class="translated_by" style="display: none;">
@@ -154,11 +150,6 @@
           {% endif %}
         </div>
       </div>
-{#      {% if is_logged_in %}#}
-{#        <div class="post-call-to-action-bottom">#}
-{#          {% include 'market/snippets/_post_actions.html' %}#}
-{#        </div>#}
-{#      {% endif %}#}
       {% if is_logged_in %}
       {% if translator or request.user.userprofile.is_cm %}
       <div class="row">
