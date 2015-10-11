@@ -87,7 +87,7 @@
     <div style="margin-top: 10px;">
       <div class="form-group">
         <div class="col-xs-12">
-          <label for="{{ form.tweet_permission.auto_id }}">{% trans "May we tweet this request?" %}</label>
+          <label for="{{ form.tweet_permission.auto_id }}">{% trans "May this be shared on social media?" %}</label>
           {% render_field form.tweet_permission class="" placeholder="" %}
           {{ form.tweet_permission.errors }}
           <p>{% trans "We won’t use your name or any identifying information"%}</p>
