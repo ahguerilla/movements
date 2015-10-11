@@ -92,6 +92,15 @@ class SuccessStories(models.Model):
     def __unicode__(self):
         return strip_tags(self.content)[:50]
 
+    def save(self, *args, **kwargs):
+        if self.id is None:
+            self.order = 1
+            all_success_stories = SuccessStories.objects.all()
+            for success_story in all_success_stories:
+                success_story.order += 1
+                success_story.save()
+        super(SuccessStories, self).save(*args, **kwargs)
+
 
 class SuccessStoriesCMSPlugin(CMSPlugin):
     title = models.CharField(max_length=20)
