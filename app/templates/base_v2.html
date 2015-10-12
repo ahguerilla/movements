@@ -202,14 +202,23 @@
               </a></li>
             </ul>
           </li>
-          {% block additional_nav %}
-          {% endblock additional_nav %}
           {% if user.is_authenticated %}
           <li class="visible-xs">
             <a href="#" id="logout-link">{% trans "Logout" %}</a>
             <form id="logout-form" method="post" action="{% url 'account_logout' %}">
               {% csrf_token %}
             </form>
+          </li>
+          {% else %}
+          <li class="visible-xs">
+            <a href="{% page_url 'how_it_works' %}">
+              <span>{%trans "Find out more"%}</span>
+            </a>
+          </li>
+          <li class="visible-xs">
+            <a href="{% url 'show_market' %}">
+              <span>{%trans "Visit market"%}</span>
+            </a>
           </li>
           {% endif %}
         </ul>
