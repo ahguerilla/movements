@@ -425,6 +425,9 @@
 {% include "market/clientside/app_urls.html" %}
 <script type="text/javascript">
   window.ahr.string_constants = {{ string_constants|safe }};
+  window.ahr.siteData = {
+    isAuthenticated: {% if user.is_authenticated %}true{% else %}false{% endif %},
+  }
 </script>
 
 {% block javascript %}

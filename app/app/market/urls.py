@@ -30,5 +30,4 @@ urlpatterns += patterns('postman.views',
                             MovementsConversationView.as_view(form_class=MarketQuickReplyForm),
                             name='postman_view_conversation'),
                         url(r'^view/(?P<message_id>[\d]+)/$', MessageView.as_view(form_class=MarketQuickReplyForm),
-                            name='postman_view'),
-)
+                            name='postman_view'),)

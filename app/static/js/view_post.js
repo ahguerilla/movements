@@ -37,6 +37,12 @@
           this.translate(translate_url, true);
         }
       }
+      var self = this;
+      $('.comments form textarea').focus(function(ev){
+        if(!window.ahr.siteData.isAuthenticated) {
+          self.$el.find('#comment-not-authenticated').show();
+        }
+      });
     },
 
     linkifyContent: function(){
@@ -249,6 +255,9 @@
 
     submitComment: function(ev) {
       ev.preventDefault();
+      if(!window.ahr.siteData.isAuthenticated){
+        window.location = this.options.loginUrl;
+      }
       var contents = this.$commentText.val();
       this.$commentText.val('');
       this.$submitButton.attr('disabled', 'disabled');
@@ -551,9 +560,7 @@
         success: function (data) {
           if(data.response == "success") {
             location.reload();
-          } else if (data.response == "error") {
-            console.log(data);
-          }
+          } else if (data.response == "error") {}
         }
       });
     },
@@ -861,12 +868,16 @@
       getCommentsUrl: options.getCommentsUrl
     };
     if (loggedIn) {
-        args = $.extend(args, {
-                  addCommentUrl: options.addCommentUrl,
-                  deleteCommentUrl: options.deleteCommentUrl,
-                  postLanguage: options.postLanguage,
-                  userDefaultLangage: options.userDefaultLangage
-               });
+      args = $.extend(args, {
+        addCommentUrl: options.addCommentUrl,
+        deleteCommentUrl: options.deleteCommentUrl,
+        postLanguage: options.postLanguage,
+        userDefaultLangage: options.userDefaultLangage
+      });
+    } else {
+      args = $.extend(args, {
+        loginUrl: options.loginUrl
+      })
     }
 
     new PostView(args);

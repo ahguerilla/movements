@@ -156,7 +156,6 @@
           {% endif %}
         </div>
       </div>
-      {% if is_logged_in %}
       {% if translator or request.user.userprofile.is_cm %}
       <div class="row">
         <div class="post-actions col-xs-12">
@@ -185,34 +184,27 @@
         </div>
         <form>
           <textarea class="form-control" name="comment"></textarea>
+          <div style="display: none;" class="post content-block" id="comment-not-authenticated">
+            {% url 'account_login' as accountUrl %}
+            {% url 'signup_start' as signupUrl %}
+            <p class="error">{% blocktrans %}Please note that you will need to <a href="{{ accountUrl }}">login</a>
+              or <a href="{{ signupUrl }}">sign up</a> before you will be able to contact the author or comment.{% endblocktrans %}</p>
+          </div>
           <div class="row">
             <div class="col-xs-12">
-              <button class="btn btn-action btn-thinner pull-right" style="margin-left: 15px;" type="submit" onClick="ga('send', 'event', 'button', 'click', 'post-comment');">{% trans "POST COMMENT"%}</button>
+              <button class="btn btn-action btn-thinner pull-right"
+                      style="margin-left: 15px;" type="submit"
+                      onClick="ga('send', 'event', 'button', 'click', 'post-comment');">{% trans "POST COMMENT"%}</button>
               <p class="caution-text" >CAUTION: Avoid personally identifying information when creating a post or leaving a comment!</p>
             </div>
           </div>
         </form>
-
         <div class="comment-list">
           <div class="loader text-center"><img src="{{ STATIC_URL }}images/ajax-loader.gif" alt="loading comments"/>
           </div>
           <div class="content"></div>
         </div>
       </div>
-      {% else %}
-      <div class="post content-block">
-        {% url 'account_login' as accountUrl %}
-        {% url 'signup_start' as signupUrl %}
-        <p>{% blocktrans %}Please <a href="{{ accountUrl }}">Login</a> or <a href="{{ signupUrl }}">Sign up</a> to view more about this post. Once you've done this you will be able to send messages to the author, comment and rate this post.{% endblocktrans %}</p>
-        <div class="comments">
-          <div class="comment-list">
-            <div class="loader text-center"><img src="{{ STATIC_URL }}images/ajax-loader.gif" alt="loading comments"/>
-            </div>
-            <div class="content"></div>
-          </div>
-        </div>
-      </div>
-      {% endif %}
     </div>
   </div>
 </div>
@@ -363,7 +355,6 @@
 
     </form>
   </script>
-
   <script type="text/template" id="translation-area">
     <form>
       <input type="hidden" name="lang_code" value="<%- lang_code %>"/>
@@ -429,7 +420,6 @@
 
     </form>
   </script>
-
   <script type="text/javascript">
     (function() {
       $('.gpopover').popover({
@@ -465,10 +455,10 @@
     (function() {
       ahr.initViewPost({
         getCommentsUrl: '{% url 'get_comments_last' 'json' post.id 50 %}',
+        loginUrl: '{% url 'account_login' %}',
         loggedIn: false
       });
     })();
   </script>
-
   {% endif %}
 {% endblock %}

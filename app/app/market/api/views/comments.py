@@ -36,6 +36,7 @@ def add_comment(request, obj_id, rtype):
         return HttpResponse(json.dumps(get_validation_errors(form)),
                             mimetype="application"+rtype)
 
+
 def get_comments(request, obj_id, count, rtype):
     obj = get_object_or_404(market.models.MarketItem, pk=obj_id)
     comments = obj.comments.filter(deleted=False).filter(published=True).order_by('-pub_date').all()[:count]
