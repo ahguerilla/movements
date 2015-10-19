@@ -16,7 +16,7 @@
             <a href='javascript:history.go(-1)'>Back</a>
           </td>
           <td>
-            <button id="rateuser-button" href="/admin/auth/user/{{ obj.id }}/vet">Update movements rating rating</button>
+            <button id="rateuser-button" href="/admin/auth/user/{{ obj.id }}/vet">Update movements rating</button>
           </td>
         </tr>
         {% for label, field in report_fields %}
@@ -62,7 +62,7 @@
          {
            iframe:true,
            innerWidth:750,
-           innerHeight:300,
+           innerHeight:480,
            close: "close",
            onClosed: function(){
              location.reload();
