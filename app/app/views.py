@@ -91,6 +91,11 @@ def get_stats(request):
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
+def success_stories(request, success_story_id):
+    redirect_url = '/en/movements/about-movements/success-stories/#ss' + str(success_story_id)
+    return HttpResponseRedirect(redirect_url)
+
+
 def youtube_verification(request):
     return render_to_response('google73f6a199341a73ff.html')
 

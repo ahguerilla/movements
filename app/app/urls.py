@@ -43,6 +43,8 @@ urlpatterns = patterns(
     url(r'^avatar/render_primary/(?P<user>[\w\@\d\.\-_]{1,30})/(?P<size>[\d]+)/$', 'avatar.views.render_primary',
         name='avatar_render_primary'),
     url(r'^avatar/', include('avatar.urls')),
+    url(r'^en/movements/about-movements/success-stories/(?P<success_story_id>\d+)/$',
+        'app.views.success_stories', name='success_stories'),
     # Account View Overrides
     url(r'^accounts/login/+$', 'app.users.views.ratelimited_login', name="account_login"),
     url(r'^accounts/social/signup/+$', 'app.users.views.ahr_social_signup', name="social_sign_up"),

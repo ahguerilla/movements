@@ -91,11 +91,21 @@ class SortableAdmin(SortableAdminMixin, admin.ModelAdmin):
     pass
 
 
+class SuccessStoriesAdmin(SortableAdmin):
+    list_display = ('success_stories', 'direct_link_id', )
+
+    def success_stories(self, obj):
+        return str(obj)
+
+    def direct_link_id(self, obj):
+        return obj.id
+
+
 admin.site.register(MenuExtension, MenuExtensionAdmin)
 admin.site.register(NewsletterSignups)
 admin.site.register(NotificationPing)
 admin.site.register(Partner, SortableAdmin)
-admin.site.register(SuccessStories, SortableAdmin)
+admin.site.register(SuccessStories, SuccessStoriesAdmin)
 admin.site.register(LogEntry, LogEntryAdmin)
 
 
