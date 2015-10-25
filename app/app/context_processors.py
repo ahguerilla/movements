@@ -1,8 +1,18 @@
 from django.utils.translation import ugettext as _
+from django.conf import settings
 import json
 
+
+def app_settings(context):
+    return {
+        'settings': {
+            'ADMIN_ENABLED': settings.ADMIN_ENABLED,
+        }
+    }
+
+
 def string_constants(context):
-    string_constants = json.dumps(
+    constants = json.dumps(
         {
             'exchange': _('Exchange'),
             'members': _('Members'),
@@ -20,5 +30,5 @@ def string_constants(context):
         })
 
     return {
-        'string_constants': string_constants 
+        'string_constants': constants
     }
