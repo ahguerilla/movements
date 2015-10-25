@@ -58,6 +58,7 @@ def send_message(request, to_user, rtype):
             market_item.save()
 
     except Exception, err:
+        message = err.message if err else 'error sending message'
         if err.message == 'value too long for type character varying(120)\n':
             message = "subject is too long (maximum 120 characters)"
         return HttpResponseError(
