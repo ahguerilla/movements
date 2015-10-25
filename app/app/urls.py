@@ -23,6 +23,7 @@ urlpatterns = patterns(
     url(r'', include('two_factor.urls', 'two_factor')),
     url(r'', include(tf_urls + tf_twilio_urls, 'two_factor')),
     url(r'^google73f6a199341a73ff.html$', 'app.views.youtube_verification', name='youtube_verification'),
+    url(r'^google9e5bfcc08bec3049.html$', 'app.views.project_shield_verification', name='project_shield_verification'),
     url(r'^set-language', 'app.views.set_language', name='set_lang'),
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
     url(r'^contact-us$', 'app.views.contact_us', name='contact_us'),

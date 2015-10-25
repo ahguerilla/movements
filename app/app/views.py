@@ -100,6 +100,10 @@ def youtube_verification(request):
     return render_to_response('google73f6a199341a73ff.html')
 
 
+def project_shield_verification(request):
+    return render_to_response('misc/google9e5bfcc08bec3049.html', {}, context_instance=RequestContext(request))
+
+
 def terms_and_conditions(request):
     return HttpResponseRedirect('/movements/terms-and-conditions/')
 
