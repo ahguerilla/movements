@@ -163,6 +163,9 @@
   <script type="text/javascript">
     $(document).ready(function(){
       window.ahr.market.initMarket({
+        filters: {
+          type: '{{ type_filter }}'
+        },
         skills: {{ interests|safe }},
         issues: {{ issues|safe }},
         userDefaultLangage: '{{ LANGUAGE_CODE }}'

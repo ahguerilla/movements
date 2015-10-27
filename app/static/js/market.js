@@ -29,6 +29,12 @@ $(function () {
       this.skills.content = _.template($('#skill-filter-list-template').html(), {skills: options.skills});
       this.skills.count = options.skills.length;
       this.skills.$count = $skills.find('.count');
+      if(options.defaultFilters){
+        if(options.defaultFilters.type) {
+          this.type = options.defaultFilters.type;
+          this.toggleType(this.type);
+        }
+      }
 
       $skills.popover({
         title: '',
@@ -295,6 +301,11 @@ $(function () {
       $filterLink.parents('li').addClass('active');
       this.type = $filterLink.data('filter');
       this.trigger('filter');
+    },
+
+    toggleType: function(type) {
+      this.$el.find('.type-menu li.active').removeClass('active');
+      this.$el.find('.type-menu a[data-filter="' + type + '"]').parents('li').addClass('active');
     },
 
     checkForEnter: function(ev) {
@@ -833,7 +844,13 @@ $(function () {
   var filterView = null;
   window.ahr.market = window.ahr.market || {};
   window.ahr.market.initMarket = function (options) {
-    filterView = new MarketFilterView({el: '#exchange-filters', skills: options.skills, issues: options.issues});
+    var filterViewArgs = {
+      el: '#exchange-filters',
+      skills: options.skills,
+      issues: options.issues,
+      defaultFilters: options.filters
+    };
+    filterView = new MarketFilterView(filterViewArgs);
     var noResultsString = '<div style="text-align:center; font-size:20px; font-weight:bold">Finished loading posts</div>';
     var market = new MarketView({
       el: '#market-main',

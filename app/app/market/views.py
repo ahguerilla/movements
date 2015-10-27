@@ -17,6 +17,12 @@ from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforc
 
 
 def index(request):
+    return index_filter(request, type_filter=None)
+
+
+def index_filter(request, type_filter):
+    if not type_filter in ['request', 'offer']:
+        type_filter = ''
     interests = Interest.objects.all()
     issues = Issues.objects.all()
     countries = Countries.objects.select_related('region').all()
@@ -37,7 +43,8 @@ def index(request):
                                   'issues': serializers.serialize('json', issues),
                                   'regions': regions,
                                   'countries': countries,
-                                  'is_logged_in': request.user.is_authenticated()
+                                  'is_logged_in': request.user.is_authenticated(),
+                                  'type_filter': type_filter,
                               },
                               context_instance=RequestContext(request))
 
