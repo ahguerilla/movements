@@ -39,6 +39,7 @@ from django.utils import translation
 from two_factor.utils import default_device
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import Group
+from django.conf import settings as site_settings
 
 
 def render_settings(request):
@@ -481,8 +482,9 @@ class RatelimitedLoginForm(LoginForm):
     def login(self, request, redirect_url=None):
         # prevent admin users hijacking this login page to circumvent
         # two factor authentication
-        if default_device(self.user):
-            raise Http404
+        if site_settings.ADMIN_ENABLED:
+            if default_device(self.user):
+                raise Http404
 
         if request.limited:
             return render(request, 'account/ratelimit_triggered.html', {})
