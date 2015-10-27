@@ -216,6 +216,12 @@ class UserProfile(models.Model):
             return ratings[0].rated_by_ahr
         return 0
 
+    @property
+    def is_first_login(self):
+        if self.user.is_superuser or self.user.is_staff:
+            return False
+        return self.first_login
+
     def get_twitter_url(self):
         base_twitter = 'https://twitter.com/'
         if self.tweet_url:

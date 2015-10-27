@@ -113,7 +113,7 @@
       <div id="collapse-menu" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-main">
         {% if user.is_authenticated %}
-          {% if not user.userprofile.first_login %}
+          {% if not user.userprofile.is_first_login %}
           <li class="dropdown visible-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Add Post" %} <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -226,7 +226,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
-            {% if not user.userprofile.first_login %}
+            {% if not user.userprofile.is_first_login %}
               <a id="add-post" class="btn btn-action hiddenxs" onClick="ga('send', 'event', 'button', 'click', 'add-post');">
                 <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
                 <span id="AddPostText"> {% trans "Add Post" %}</span>
@@ -256,7 +256,7 @@
             <button class="btn btn-secondary">{%trans "Login"%}</button>
           </a></li>
           {% endif %}
-          {% if user.is_authenticated and not user.userprofile.first_login %}
+          {% if user.is_authenticated and not user.userprofile.is_first_login %}
           <div class="navbar-user-controls">
             <div class="nav-avatar hidden-xs" id="view-profile-menu">
               <div class="menu-icon-profile"></div>
@@ -438,7 +438,7 @@
 {% render_block "js" %}
 
 {#Commenting this out until we have some sort of design for it and can redo it#}
-{#{% if user.is_authenticated and not user.userprofile.first_login %}#}
+{#{% if user.is_authenticated and not user.userprofile.is_first_login %}#}
 {#  {% include "market/clientside/notifications.html" %}#}
 {#  <script type="text/javascript" id="notifications_view">#}
 {#    (function () {#}
