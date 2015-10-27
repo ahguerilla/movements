@@ -5,7 +5,6 @@ app/static/css/site-xs.css
 app/static/css/packed.css
 app/static/js/packed.js
 app/media/
-app/static/admin/
 app/static/tiny_mce/
 app/static/.webassets-cache/
 app/db.sqlite3
