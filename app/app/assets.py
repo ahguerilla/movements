@@ -40,7 +40,7 @@ js = Bundle(
         ),
     ),
     filters='jsmin',
-    output='./js/packed.js'
+    output='./js/packed.%(version)s.js'
 )
 
 css_v2 = Bundle(
@@ -60,7 +60,7 @@ css_v2 = Bundle(
         output='./css/site_v2.css'
     ),
     filters='cssmin',
-    output='./css/packed_v2.css',
+    output='./css/packed_v2.%(version)s.css',
 )
 
 language_ar = Bundle(
@@ -70,7 +70,7 @@ language_ar = Bundle(
         output='./css/language_ar.css'
     ),
     filters='cssmin',
-    output='./css/packed_language_ar.css',
+    output='./css/packed_language_ar.%(version)s.css',
 )
 
 register('js_all', js)
