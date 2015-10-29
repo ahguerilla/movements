@@ -44,7 +44,7 @@ runlocal:
 	cd app && python manage.py runserver --settings=app.settings.local
 
 runlocalext:
-	cd app && python manage.py runserver 0.0.0.0:8000 --settings=app.settings.local_settings
+	cd app && python manage.py runserver 0.0.0.0:8000 --settings=app.settings.local
 
 shell:
 	cd app && python manage.py shell
@@ -92,9 +92,9 @@ fixturesJune14:
 
 market:
 	cd app && \
-	python manage.py migrate market 0055 --settings=app.settings.local_settings && \
-	python manage.py schemamigration market --auto --update --settings=app.settings.local_settings && \
-	python manage.py migrate market --settings=app.settings.local_settings
+	python manage.py migrate market 0055 --settings=app.settings.local && \
+	python manage.py schemamigration market --auto --update --settings=app.settings.local && \
+	python manage.py migrate market --settings=app.settings.local
 
 
 sanitisedb:

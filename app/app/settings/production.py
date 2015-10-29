@@ -1,7 +1,5 @@
 from base import *
 
-PRODUCTION = True
-
 MEDIA_ROOT = PROJECT_DIR.child("media")
 STATIC_ROOT = PROJECT_DIR.child("static")
 
