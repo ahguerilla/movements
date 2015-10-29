@@ -104,6 +104,10 @@ def project_shield_verification(request):
     return render_to_response('misc/google9e5bfcc08bec3049.html', {}, context_instance=RequestContext(request))
 
 
+def citation(request):
+    return render_to_response('marketing/citation.html', {}, context_instance=RequestContext(request))
+
+
 def terms_and_conditions(request):
     return HttpResponseRedirect('/movements/terms-and-conditions/')
 

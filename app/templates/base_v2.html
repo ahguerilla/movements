@@ -66,7 +66,6 @@
 {#    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/language_ar.css" />#}
   {% endif %}
 
-
   {% block extra_head %}
   {% endblock %}
 
@@ -320,6 +319,7 @@
 {% endblock %}
 
 {% block footer_padding %}<div style="height: 30px"></div>{% endblock %}
+{% block base_footer %}
 <footer>
   <div id="FooterSocialMedia_Big" class="footer">
     <div class="container">
@@ -370,6 +370,7 @@
     </div>
   </div>
 </footer>
+{% endblock %}
 <div id="modal-placeholder"></div>
 <script type="text/template" id="add-post-template">
   <a onClick="ga('send', 'event', 'button', 'click', 'create-request');" class="btn btn-request" href="{% url 'create_request' %}">

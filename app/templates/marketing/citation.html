@@ -1,0 +1,359 @@
+{% extends "base_v2.html" %}
+{% load i18n %}
+
+{% block extra_head %}
+<style>
+  html { background-color: #FFF }
+  body { background-color: #FFF }
+</style>
+{% endblock %}
+
+
+{% block head_title %}Movements: CITATION{% endblock %}
+
+{% block base_header_nav %}{% endblock %}
+
+{% block ext_container %}
+    <div class="container-fluid citation">
+        <div class="col-sm-offset-1 col-sm-10">
+            <hr />
+            <div class="row">
+                <div class="col-xs-4 ahr-logo">
+                    <img src="{{ STATIC_URL }}images/logos/ahr-logo.png" alt="Advancing Human Rights">
+                </div>
+                <div class="col-xs-4">
+                    <h6>28 OCTOBER 2015</h6>
+                </div>
+                <div class="col-xs-4 movements-logo">
+                    <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements.Org">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>CITATION IN RECOGNITION OF</h2>
+                    <h1>SUPPORTING HUMAN RIGHTS</h1>
+                    <h4>ADVANCING HUMAN RIGHTS AND MOVEMENTS.ORG CELEBRATES THE WORK OF THESE ANONYMOUS PRO-BONO HUMAN RIGHTS DEFENDERS.
+                        THEIR EFFORTS HAVE CONTRIBUTED TO THE EMPOWERMENT OF ACTIVISTS AROUND THE WORLD AND HAVE BROUGHT CLOSER THE OPENING
+                        OF CLOSED SOCIETIES.</h4>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+                <!-- row 1 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">SFTheLegendSFIHS</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">whatsworking</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">evanthane</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Verity</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">SenatorKirk</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">BasementCat</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">Snicho</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Vanessa22</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Glenn_Beck</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">khaotic_logic</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">aseemtrivedi</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">labourstart</div>
+                <!-- row 2 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">MaikelnabilJeffB</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">hesham.mashhour1</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">bobongmacoy</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">YazaNation</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Dais</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Dionysus77</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">AAAS_On-call_Sci</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">scd</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">julia_grace</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">videoeditorLA</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Conjukate</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">asad.kashmiri</div>
+                <!-- row 3 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">rln1956</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">klanet05</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">ganselmi2003</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">KTG</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Amplify</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Nasserchian</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">4globalfreedom</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">AkiMuthali</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">dogmadebate</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Gato</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">wecus</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">ckmassie7</div>
+                <!-- row 4 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">EMHK</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">katiefisher</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Secular_Activist</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">JusticeDefenders</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">AidWrite</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Aylaleora.eiseberg</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">hitch4life</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">UnblockTheWeb</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">LinusNaumann</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Black_Cat</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider"><span class="smaller">KennikinsRoarkSullivan</span></div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Afghangirl</div>
+                <!-- row 5 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">uncyc</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">mad_humanist</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Bruha</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">devi_publicist</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">LantosFoundation</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Alex</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">HassanKamal</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">inretreat</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">craigles1144</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">socialforsurvival</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Argiope</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Selene94</div>
+                <!-- row 6 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">Abu-Aaid</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">potato</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Rashmi</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">carrieD</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">strngr12</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">David90</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">techtounge</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">NYCjournalist</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">BruinWriters</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">tajfeaster</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">HumanRightsChamp</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">ChaiyaIzzy</div>
+                <!-- row 7 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">Monzavi</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">edeainfj</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">peace</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">fallenangelsMahfuz</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">AzzamAlazzam</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Shadi1</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">abigriff0504</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">apjanco</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">CANVAS</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">DemocracyLab</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">CalMessageMan</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">pedropizano</div>
+                <!-- row 8 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">hello</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Viktoria</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">iamhass</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Lena</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">tieksbygavrieli</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Leoaugust</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">TheSeeker</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Iconoclast</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">murugan</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Sobak</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">charlie25</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Voltran</div>
+                <!-- row 9 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">Mesopotamianking</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Razom</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider"><span class="smaller">AcousticCheesecake</span></div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">SouthernAtheist</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">flying_saucerJhub31</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Jonker</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">wcullen</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">fasteddie119</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">maya1184</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">TheHereAway</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">FreeThinkingFilms</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">khan999</div>
+                <!-- row 10 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">Kash</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">SyavaJ</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Valerie</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Dare</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Flamel</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">snowman11</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">Postcard</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">cubsfan24</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">S_S_Ali</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs"><span class="xsmaller">SocialAmplificationlikemike0077</span></div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">noctum04</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">bensig</div>
+                <!-- row 11 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">semifrog</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">hrseast</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Tantonee</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">ESW</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">emstyck</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">mdaytonalwash</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">Lady_owl993</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">qbit</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">farolita67</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">freemind</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Centerforinquirypk</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">DataPlease</div>
+                <!-- row 12 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">d3lo</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">aboRoma</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Murad</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">product75</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">dkeyes05</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Quranify_Me</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">GoRights</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">RCS</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">rwnicholson</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Leo</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Nayna</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">SyriaFirst</div>
+                <!-- row 13 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">nhatnam.9615</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">wwshd</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">verbalwizard</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Aufstieg</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">DaveLiberov</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">notopoverty</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm"><span class="smaller">Journeyman_Pictures</span></div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">ThePortuguese</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">grasmarder</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Brooke</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">MichaelDanbyMP</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Humanrights88</div>
+                <!-- row 14 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">TheGadAboutTown</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Lars</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Mahogany</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs"><span class="smaller">alyssa9368SulphuricNinja</span></div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">PrimoLevi</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Hephaestus</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">Weishaupt</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">vbnm</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">sharingthegoodvibes</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Penelope</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">heshan</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">KAS</div>
+                <!-- row 15 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">JoeNAmerica</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">KoNyiNyiTaunggyi</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">danarel</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Hysni</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">devinkosazana</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">smcongregation</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">FranktheMc</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">fakhi0707</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">kerbal</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">ness</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">speakupfashion</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Ibrahim1948</div>
+                <!-- row 16 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">Parchizadeh</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Kaveh-Taheri</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">SecurityFirst</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">krystof</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">mohammedalmidliji</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Brando</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">martinkerrymartin</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">tranbinh</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Ydavoodi</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">dfrancis</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">NourhanBalian</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">cj905</div>
+                <!-- row 17 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">Ronnus</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">wendelbrewers</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">mohsen_behzad_</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">amaya1Rebel</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">jekkgorgor</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Fem15</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">Jahirul</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">meetalks</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">f_-</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">hufenschwinger</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Abhilasha_Singh</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Delbair</div>
+                <!-- row 18 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">KleptocracyInitiative</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">karimi</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">BaphometSatani</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Godmanchester</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">FrescoNews</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Ctanner0527</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">Abic</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Bfdgal</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">peacedirect</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">bluecollar</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">HolyGuacamola</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">EmadDafrawi</div>
+                <!-- row 19 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">SkeptEx</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">fangfang</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">KG19xx</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">djwein</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">BillMyers</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">sicat222</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">D-Dog</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Reminar</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">greatgatsbys</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">ACC94</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Moodymeg</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Pinktruelove</div>
+                <!-- row 20 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">CompadreJ</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">nonameman</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">deeplysecular</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Azemiops</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">EscapingEnnui</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">braunold</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">Bear22</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">0x161</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">HereToHelp</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">lshukla3</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Simko</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Barzul</div>
+                <!-- row 21 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">JimFromBenetech</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">MPIrwinCotler</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">chadocl</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Killerradish</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">kostya</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">JMusa</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">theSANdbOX</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">FidelA</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">syrianamericanpride</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">melekmeryem</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">BelowEquator</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">chartrow</div>
+                <!-- row 22 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">UHCRU</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">NotMyRealName</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">SecularIraqi</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">LucasNorth</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Justice4Avijit</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Sokrat</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">MarcoRubio</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">K75Free</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">ilanberman</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">Parlio</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">TheChameleon</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Nora</div>
+                <!-- row 23 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">karim</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Ballsmalone</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">zwide1973</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">guerillasw</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">OneWorld</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">IntifadaTexas</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">rick</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">germanberlin</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">NAS</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">fadisabra</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Tanitra</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">bader</div>
+                <!-- row 24 -->
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-lg">Induce</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Roktogonga</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">rossiruckus</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">MMu</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">Timdm</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">&nbsp;</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-sm">&nbsp;</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">&nbsp;</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">&nbsp;</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider first-xs">&nbsp;</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">&nbsp;</div>
+                <div class="col-lg-1 col-sm-2 col-xs-4 provider">&nbsp;</div>
+            </div>
+            <hr class="hr-footer" />
+        </div>
+    </div>
+{% endblock %}
+
+{% block base_footer %}{% endblock %}
