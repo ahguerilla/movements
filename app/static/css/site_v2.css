@@ -2837,6 +2837,81 @@ input.borderless-control:focus:invalid:focus {
   width: 100%;
   height: 100%;
 }
+.citation {
+  text-align: center;
+}
+.citation .citation-wrap {
+  padding: 0 40px;
+}
+.citation h1,
+.citation h2,
+.citation h6 {
+  font-family: "LinotypeUnivers-330Light";
+  padding: 0;
+  margin: 0;
+}
+.citation h4 {
+  font-family: "HurmeGeometricSans3-SemiBold";
+  padding: 0;
+  margin: 0;
+}
+.citation h2 {
+  font-size: 35px;
+  line-height: 45px;
+}
+.citation h1 {
+  font-size: 50px;
+  color: #fe6d50;
+  line-height: 60px;
+}
+.citation h4 {
+  font-size: 17px;
+  color: #756b65;
+  line-height: 25px;
+  padding: 0 50px;
+}
+.citation h6 {
+  font-size: 20px;
+  color: #756b65;
+}
+.citation hr {
+  border-top: 20px solid #fe6d50;
+}
+.citation .hr-footer {
+  border-top: 5px solid #005d86;
+}
+.citation .ahr-logo {
+  text-align: left;
+}
+.citation .ahr-logo img {
+  width: 100%;
+  max-width: 250px;
+}
+.citation .movements-logo {
+  text-align: right;
+}
+.citation .movements-logo img {
+  width: 100%;
+  max-width: 140px;
+  margin-top: -10px;
+}
+.citation .provider {
+  font-size: 9px;
+  font-family: "HurmeGeometricSans3-SemiBold";
+  color: #756b65;
+  border-left: 1px solid #005d86;
+  overflow: hidden;
+  padding: 2px 0;
+}
+.citation .provider .smaller {
+  font-size: 7px;
+}
+.citation .provider .xsmaller {
+  font-size: 6px;
+}
+.citation .first-lg {
+  border-left: 0;
+}
 
 
 @media (max-width: 991px) {
@@ -3027,6 +3102,16 @@ input.borderless-control:focus:invalid:focus {
     display: block;
   }
 }
+@media (min-width: 1350px) {
+  .citation .citation-wrap {
+    padding: 0 140px;
+  }
+}
+@media (max-width: 1200px) {
+  .citation .first-sm {
+    border-left: 0;
+  }
+}
 @media (max-width: 991px) {
   .stats-banner {
     bottom: 15px;
@@ -3052,6 +3137,14 @@ input.borderless-control:focus:invalid:focus {
   }
   .settings-form .btn-group-settings .btn {
     font-size: 12px;
+  }
+}
+@media (max-width: 767px) {
+  .citation h4 {
+    padding: 0;
+  }
+  .citation .first-xs {
+    border-left: 0;
   }
 }
 @media( max-width: 440px) {
