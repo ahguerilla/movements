@@ -2840,6 +2840,9 @@ input.borderless-control:focus:invalid:focus {
 .citation {
   text-align: center;
 }
+.citation .citation-wrap {
+  padding: 0 40px;
+}
 .citation h1,
 .citation h2,
 .citation h6 {
@@ -3097,6 +3100,11 @@ input.borderless-control:focus:invalid:focus {
   .partner-section .collapse-non-xs {
     height: auto;
     display: block;
+  }
+}
+@media (min-width: 1350px) {
+  .citation .citation-wrap {
+    padding: 0 140px;
   }
 }
 @media (max-width: 1200px) {
