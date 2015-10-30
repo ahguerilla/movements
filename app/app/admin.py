@@ -189,6 +189,7 @@ class GroupManagementManager(db.models.Manager):
 class GroupManagement(Group):
     class Meta:
         proxy = True
+        ordering = ('name',)
         verbose_name = 'Group'
         verbose_name_plural = 'Groups'
     objects = GroupManagementManager()
