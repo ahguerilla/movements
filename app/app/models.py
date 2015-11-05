@@ -60,6 +60,26 @@ class Partner(models.Model):
         return self.title
 
 
+def banner_image_upload_handler(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return "banner/images/{0}".format(filename)
+
+
+class HomePageBanner(models.Model):
+    main_image = models.ImageField(upload_to=banner_image_upload_handler)
+    title_text = models.CharField(max_length=200)
+    sub_text = models.CharField(max_length=300)
+    enabled = models.BooleanField(default=True, blank=True)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    class Meta(object):
+        ordering = ('order',)
+
+    def __unicode__(self):
+        return self.title_text
+
+
 class SafeVPNLink(CMSPlugin):
     link_text = models.CharField(max_length=500)
     base_url = models.CharField(max_length=200)

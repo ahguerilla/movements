@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from .models import NewsletterSignups, Partner
+from .models import NewsletterSignups, Partner, HomePageBanner
 from django.utils import translation
 from market.models import MarketItem, Comment, EmailRecommendation
 from postman.models import Message
@@ -14,6 +14,7 @@ import re
 def home(request):
     if request.user.is_authenticated() and not request.user.is_superuser:
         return HttpResponseRedirect(reverse('exchange'))
+
     partners = Partner.objects.filter(enabled=True).all()
     partner_list = []
     if partners:
@@ -76,7 +77,8 @@ def home(request):
             partners_rest = partner_list[2:]
         else:
             partners_first = partner_list
-    view_dict = {'partners_first': partners_first, 'partners_rest': partners_rest}
+    view_dict = {'partners_first': partners_first, 'partners_rest': partners_rest,
+                 'banner': HomePageBanner.objects.filter(enabled=True)}
     return render_to_response('ahr/home_v2.html', view_dict, context_instance=RequestContext(request))
 
 
