@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.urlresolvers import reverse
+from django.conf import settings
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from .models import NewsletterSignups, Partner, HomePageBanner
@@ -9,6 +10,7 @@ from postman.models import Message
 from users.models import User, Countries
 import json
 import re
+import os.path
 
 
 def home(request):
@@ -165,3 +167,29 @@ def newsletter_signup(request):
 
 def admin_login(request):
     raise Http404
+
+
+def tinymce_page(request, tinymce_page_detail):
+    base_page = 'admin_static/tinymce_admin/static/tiny_mce/'
+    popup_list = ['tiny_mce_popup.js', 'validate.js', 'mctabs.js', 'form_utils.js']
+    file_name = os.path.basename(tinymce_page_detail)
+    if file_name in popup_list:
+        split_path = tinymce_page_detail.split('/')
+        tinymce_page_detail = '/'.join(split_path[1:])
+
+    if file_name == 'link.js':
+        tinymce_page_detail = 'themes/advanced/js/link.js'
+
+    extension = os.path.splitext(tinymce_page_detail)[1][1:]
+    content_type = None
+    if extension == 'js':
+        content_type = 'application/javascript'
+    if extension == 'css':
+        content_type = 'text/css'
+    if extension == 'html' or extension == 'htm':
+        content_type = 'text/html'
+    if extension == 'gif' or extension == 'png':
+        redirect_url = settings.STATIC_URL + 'images/v2/tinymce/' + os.path.basename(tinymce_page_detail)
+        return HttpResponseRedirect(redirect_url)
+    return render_to_response(base_page + tinymce_page_detail, {},
+                              context_instance=RequestContext(request), content_type=content_type)

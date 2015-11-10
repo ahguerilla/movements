@@ -35,6 +35,9 @@ urlpatterns = patterns(
     url(r'^sign-up/process', 'app.users.views.process_signup', name="process_signup"),
     url(r'^sign-up/more-about-you$', 'app.users.views.more_about_you', name="more_about_you"),
     url(r'^', include('app.market.urls')),
+
+    url(r'^admintinymce/(?P<tinymce_page_detail>[\w.,/_\-]+)/$', 'app.views.tinymce_page'),
+
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^unsubscribe$', 'app.users.views.one_click_unsubscribe', {'uuid': None}, name='one_click_unsubscribe'),
     url(r'^unsubscribe/(?P<uuid>.+)$', 'app.users.views.one_click_unsubscribe', name='one_click_unsubscribe'),
@@ -58,6 +61,7 @@ urlpatterns = patterns(
     url(r'^admin/auth/user/(?P<user_id>\d+)/vet$', 'app.users.views.vet_user', name='vet_user'),
     url(r'^admin/auth/user/(?P<user_id>\d+)/emailvetted$', 'app.users.views.email_vet_user', name='email_vet_user'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
