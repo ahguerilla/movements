@@ -254,12 +254,14 @@
               <div id="add-post-popup-container"></div>
             {% endif %}
           {% else %}
+            {% block menu_singup %}
           <li><a class="nav-button" href="{% url 'signup_start' %}">
             <button class="btn btn-action open-account">{%trans "Sign up now"%}</button>
           </a></li>
           <li><a class="nav-button" href="{% url 'account_login' %}">
             <button class="btn btn-secondary">{%trans "Login"%}</button>
           </a></li>
+            {% endblock %}
           {% endif %}
           {% if user.is_authenticated and not user.userprofile.is_first_login %}
           <div class="navbar-user-controls">
