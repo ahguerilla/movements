@@ -25,14 +25,18 @@ class SignUpStartForm(forms.Form):
     password2 = forms.CharField(widget=forms.PasswordInput())
 
     def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
+        email = self.cleaned_data.get('email', '').strip()
+        if not email:
+            raise forms.ValidationError(_('Please enter a valid email'))
+        if User.objects.filter(email__iexact=email).exists():
             raise forms.ValidationError(_('This email is used already'))
         return email
 
     def clean_password2(self):
-        password1 = self.cleaned_data['password1']
-        password2 = self.cleaned_data['password2']
+        password1 = self.cleaned_data.get('password1', '')
+        password2 = self.cleaned_data.get('password2', '')
+        if not password1 or not password2:
+            raise forms.ValidationError(_('Please enter a password'))
         if password1 != password2:
             raise forms.ValidationError(_('Passwords must match'))
         return password2
@@ -66,9 +70,10 @@ class SignupForm(forms.Form):
         return user
 
     def clean_username(self):
-        username = self.cleaned_data['username']
-        username = username.strip()
-        if User.objects.filter(username=username).exists():
+        username = self.cleaned_data.get('username', '').strip()
+        if not username:
+            raise forms.ValidationError(_('Please enter a username'))
+        if User.objects.filter(username__iexact=username).exists():
             raise forms.ValidationError(_('This username is already in use'))
         if not re.match("^[A-Za-z0-9_-]*$", username):
             raise forms.ValidationError(_('Username must contain only letters, numbers - and _. White space is not allowed'))
@@ -89,9 +94,10 @@ class UserForm(forms.ModelForm):
         return m
 
     def clean_username(self):
-        username = self.cleaned_data['username']
-        username = username.strip()
-        if username != self.instance.username and User.objects.filter(username=username).exists():
+        username = self.cleaned_data.get('username', '').strip()
+        if not username:
+            raise forms.ValidationError(_('Please enter a username'))
+        if User.objects.filter(username__iexact=username).exists():
             raise forms.ValidationError(_('This username is already in use'))
         if not re.match("^[A-Za-z0-9_-]*$", username):
             raise forms.ValidationError(_('Username must contain only letters, numbers - and _. White space is not allowed'))
