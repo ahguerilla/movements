@@ -8,6 +8,8 @@
 
  sudo apt-get install libjpeg-dev libpng12-dev libfreetype6-dev libxml2-dev libxslt1-dev solr-common apache2 nodejs npm postgresql-server-dev-all
 
+ sudo apt-get install python-dev
+
  sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
  sudo ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
  sudo ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
