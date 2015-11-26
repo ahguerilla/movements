@@ -224,7 +224,7 @@
           </li>
           <li class="visible-xs">
             <a href="{% url 'show_market' %}">
-              <span>{%trans "Visit market"%}</span>
+              <span>{%trans "View Requests & Offers"%}</span>
             </a>
           </li>
           {% endif %}
@@ -308,7 +308,7 @@
       <ul>
         {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
         {% if not user.is_authenticated %}
-          <li><a href="{% url 'show_market' %}"><h3>{%trans "Visit market"%}</h3></a></li>
+          <li><a href="{% url 'show_market' %}"><h3>{%trans "View Requests & Offers"%}</h3></a></li>
         {% endif %}
       </ul>
     </div>
