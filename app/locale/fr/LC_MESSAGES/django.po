@@ -1368,8 +1368,8 @@ msgid ""
 "e-mail address you provided for the user %(user_display)s, please read and "
 "accept the "
 msgstr ""
-"Avant de confirmer que <a href=\"mailto:%(email)s\">% (email) s </a> est "
-"l'adresse e-mail que vous avez fourni pour l'utilisateur% (user_display) s, "
+"Avant de confirmer que <a href=\"mailto:%(email)s\">%(email)s</a> est "
+"l'adresse e-mail que vous avez fourni pour l'utilisateur %(user_display)s, "
 "s'il vous plaît lire et accepter la"
 
 #: templates/account/email_confirm.html:28
@@ -1403,8 +1403,8 @@ msgid ""
 "You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an "
 "e-mail address for user %(user_display)s."
 msgstr ""
-"Vous avez confirmé que </a> <a href=\"mailto:%(email)s\">% (e-mail) est une "
-"adresse e-mail de l'utilisateur% (user_display) s."
+"Vous avez confirmé que <a href=\"mailto:%(email)s\">%(email)s</a> est une "
+"adresse e-mail de l'utilisateur %(user_display)s."
 
 #: templates/account/login.html:18
 #, python-format
@@ -1414,7 +1414,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"Bienvenue aux Mouvements, s'il vous plaît vous connecter ci-dessous. Si vous ne possédez pas encore un compte, s'il vous plaît vous inscrire <a href=\"%(home_url)s\" alt=\"sign up\"> ici </a>"
+"Bienvenue aux Mouvements, s'il vous plaît vous connecter ci-dessous. Si vous ne possédez pas encore un compte, s'il vous plaît vous inscrire <a href=\"%(home_url)s\" alt=\"sign up\">ici</a>"
 
 #: templates/account/login.html:26
 msgid "Email or Username"
@@ -1538,9 +1538,7 @@ msgid ""
 "used.  Please request a <a href=\"%(passwd_reset_url)s\">new password "
 "reset</a>."
 msgstr ""
-"Nous vous avons envoyé un courriel. Veuillez <a "
-"href=\"%(contactus_url_s\">nous contacter</a> si vous ne l'avez pas reçu "
-"d'ici quelques minutes."
+""
 
 #: templates/account/password_reset_from_key.html:24
 msgid "New Password"
@@ -1921,10 +1919,23 @@ msgid ""
 "\n"
 "  <p><a href=\"%(password_reset_url)s\">Reset your password here</a></p>\n"
 "\n"
-"  "
+""
 msgstr ""
 "\n"
-"<p> Un membre enregistré de Movements.Org utilisant cette adresse courriel a fait une demande pour changer son mot de passe. Vous pouvez changer le mot de passe en suivant le lien ci-dessous. </p>  <p>  Si vous n'avez pas fait cette demande, veuillez transférer ce message à <a href=\"mailto:security@movements.org\">security@movements.org</a> car nous pourrions vouloir contrevérifier la sécurité de vos informations.  </p>   <p><ahref=%(password_reset_url_s\">Changer votre mot de passe ici</a></p>"
+"\n"
+"  <p>\n"
+"    Un membre enregistré de Movements.Org utilisant cette adresse courriel a fait une demande pour changer\n"
+"    son mot de passe. Vous pouvez changer le mot de passe en suivant le lien ci-dessous.\n"
+"  </p>\n"
+"\n"
+"  <p>\n"
+"    Si vous n'avez pas fait cette demande, veuillez transférer ce message à <a href=\"mailto:security@movements.org\">security@movements.org</a> car\n"
+"    nous pourrions vouloir contrevérifier la sécurité de vos informations.\n"
+"  </p>\n"
+"\n"
+"  <p><a href=%(password_reset_url)s\">Changer votre mot de passe ici</a></p>\n"
+"\n"
+""
 
 #: templates/account/email/password_reset_key_message.txt:5
 #, python-format
@@ -1937,7 +1948,11 @@ msgid ""
 "%(password_reset_url)s\n"
 msgstr ""
 "\n"
-"<p> Un membre enregistré de Movements.Org utilisant cette adresse courriel a fait une demande pour changer son mot de passe. Vous pouvez changer le mot de passe en suivant le lien ci-dessous. </p>  <p>  Si vous n'avez pas fait cette demande, veuillez transférer ce message à <a href=\"mailto:security@movements.org\">security@movements.org</a> car nous pourrions vouloir contrevérifier la sécurité de vos informations.  </p>   <p><ahref=%(password_reset_url_s\">Changer votre mot de passe ici</a></p>\n"
+"Un membre enregistré de Movements.Org utilisant cette adresse courriel a fait une demande pour changer son mot de passe. Vous pouvez changer le mot de passe en suivant le lien ci-dessous.\n"
+"\n"
+"Si vous n'avez pas fait cette demande, veuillez transférer ce message à <a href=\"mailto:security@movements.org\">security@movements.org</a> car nous pourrions vouloir contrevérifier la sécurité de vos informations.\n"
+"\n"
+"%(password_reset_url)s\n"
 
 #: templates/account/email/password_reset_key_subject.txt:3
 msgid "Forgot Password on Movements.org"
@@ -2000,13 +2015,18 @@ msgid ""
 "\n"
 "Please vet this user by clicking on the link below:"
 msgstr ""
-"Un nouvel utilisateur s'est inscrit sur Movements en utilisant les détails "
-"suivants: Prénom: %(form.data.first_name)s  Nom: %(form.data.last_name)s   "
-"Nom d'utilisateur:  %(user.username)s    Courriel    :  %(user.email)s     "
-"Linked In:    %(form.data.linkedin_url)s     Facebook:  %(form.data.fb_url)s"
-"     Twitter     :  %(form.data.tweet.url)s     Site Web    :  "
-"%(form.data.web_url)s       Veuillez vérifier cet utilisateur en utilisant "
-"le lien ci-dessous:"
+"Un nouvel utilisateur s'est inscrit sur Movements en utilisant les détails:\n"
+"\n"
+"suivants            : Prénom: %(form.data.first_name)s\n"
+"Nom                 : %(form.data.last_name)s\n"
+"Nom d'utilisateur   : %(user.username)s\n"
+"Courriel            : %(user.email)s\n"
+"Linked In           : %(form.data.linkedin_url)s\n"
+"Facebook            : %(form.data.fb_url)s\n"
+"Twitter             : %(form.data.tweet_url)s\n"
+"Site Web            : %(form.data.web_url)s\n"
+"\n"
+"Veuillez vérifier cet utilisateur en utilisant le lien ci-dessous:"
 
 #: templates/account/email/user_vetting_email_message.txt:17
 msgid ""
@@ -2024,8 +2044,7 @@ msgstr ""
 #: templates/account/messages/cannot_delete_primary_email.txt:2
 #, python-format
 msgid "You cannot remove your primary e-mail address (%(email)s)."
-msgstr ""
-"Vous ne pouvez pas supprimer votre adresse e-mail primaire (% (email) s)."
+msgstr "Vous ne pouvez pas supprimer votre adresse e-mail primaire (%(email)s)."
 
 #: templates/account/messages/email_confirmation_sent.txt:2
 #, python-format
@@ -2074,7 +2093,7 @@ msgstr "Note"
 #: templates/account/snippets/already_logged_in.html:5
 #, python-format
 msgid "you are already logged in as %(user_display)s."
-msgstr "vous êtes déjà connecté en tant que% (user_display) s."
+msgstr "vous êtes déjà connecté en tant que %(user_display)s."
 
 #: templates/admin/group_user_management_list.html:13
 #: templates/admin/incident_change_list.html:17
@@ -2496,9 +2515,6 @@ msgid ""
 "    have recommended to you please go to %(post_link)s. If you wish to respond to the post please\n"
 "    <a href=\"%(registration_link)s\">register</a>. The registration process is designed to help protect the security and privacy of all users."
 msgstr ""
-"Ce courriel vous a été envoyé par %(screen_name)s, un utilisateur inscrit "
-"sur Movements.org. Movements aide les militants dans le besoin à entrer en "
-"contact avec les gens qui ont les habiletés et l'expertise pour les aider."
 
 #: templates/emails/recommendation_message.html:24
 msgid "Post Title:"
@@ -2519,7 +2535,7 @@ msgid ""
 "    to %(screen_name)s on Movements.org once you register."
 msgstr ""
 "Ce courriel a été créé automatiquement par Movements.org. Vous ne pouvez pas"
-" y répondre mais vous pouvez écrire à %(screen_name_)s sur Movements.org une"
+" y répondre mais vous pouvez écrire à %(screen_name)s sur Movements.org une"
 " fois que vous serez inscrit(e)."
 
 #: templates/emails/recommendation_message.html:37
@@ -2580,8 +2596,8 @@ msgid ""
 "You are receiving this message because you are a member of the group "
 "%(group_name)s."
 msgstr ""
-"Vous recevez ce message parce que vous êtes un membre du groupe% "
-"(nom_groupe) s."
+"Vous recevez ce message parce que vous êtes un membre du groupe "
+"%(group_name)s."
 
 #: templates/emails/snippets/_group_email_notification_settings.html:7
 msgid "To stop getting notifications from this group you can"
@@ -3423,7 +3439,8 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"Sur% (date) s, vous avez demandé d'envoyer un message à l'utilisateur '% (récipiendaire) s »."
+"Sur %(date)s, vous avez demandé d'envoyer un message à l'utilisateur '%(recipient)s'.\n"
+"    "
 
 #: templates/postman/email_user.txt:8 templates/postman/email_visitor.txt:5
 msgid "Your message has been rejected by the moderator"
@@ -3439,7 +3456,7 @@ msgid ""
 "'%(sender)s' has sent you a message. To view your message please login to "
 "Movements."
 msgstr ""
-"'% (expéditeur) s' vous a envoyé un message. Pour afficher votre message "
+"'%(sender)s' vous a envoyé un message. Pour afficher votre message "
 "s'il vous plaît connectez-vous pour mouvements."
 
 #: templates/postman/email_user.txt:19
@@ -3453,7 +3470,7 @@ msgid ""
 "You have received a copy of a response from the user '%(sender)s'.\n"
 msgstr ""
 "\n"
-"Vous avez reçu une copie d'une réponse de l'utilisateur '% (expéditeur) s ».\n"
+"Vous avez reçu une copie d'une réponse de l'utilisateur '%(sender)s'.\n"
 
 #: templates/postman/email_user.txt:29 templates/postman/email_visitor.txt:14
 msgid "Note: This message is issued by an automated system. Do not reply."
@@ -3464,7 +3481,7 @@ msgstr ""
 #: templates/postman/email_visitor_subject.txt:1
 #, python-format
 msgid "Message \"%(subject)s\" on the site %(sitename)s"
-msgstr "Sur le site% (le nom du site) Message \"de% (sous réserve)\" s"
+msgstr ""
 
 #: templates/postman/email_visitor.txt:1
 msgid "Dear visitor,"
@@ -3474,8 +3491,7 @@ msgstr "Cher visiteur,"
 #, python-format
 msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
 msgstr ""
-"Sur% (date) s, vous avez demandé d'envoyer un message à l'utilisateur '% "
-"(récipiendaire) s »."
+"Sur %(date)s, vous avez demandé d'envoyer un message à l'utilisateur '%(recipient)s'."
 
 #: templates/postman/email_visitor.txt:8
 msgid "As a reminder, please find below the content of your message."
@@ -3486,9 +3502,7 @@ msgstr ""
 #: templates/postman/email_visitor.txt:10
 #, python-format
 msgid "On %(date)s, you sent a message to the user '%(sender)s'."
-msgstr ""
-"Sur% (date) s, vous avez envoyé un message à l'utilisateur '% (expéditeur) s"
-" »."
+msgstr "Sur %(date)s, vous avez envoyé un message à l'utilisateur '%(sender)s'."
 
 #: templates/postman/email_visitor.txt:11
 msgid "Please find below the answer from your correspondent."
@@ -3851,7 +3865,7 @@ msgstr ""
 
 #: templates/users/more_about_you.html:23
 msgid "Create an Offer"
-msgstr "créer une offre"
+msgstr "Créer une Offre"
 
 #: templates/users/more_about_you.html:32
 msgid "I'll create a post later"
@@ -3863,8 +3877,7 @@ msgstr "Vos objectifs de Movements.Org"
 
 #: templates/users/more_about_you.html:41
 msgid "Will you be looking to offer your skills or ask for help?"
-msgstr ""
-"Serez-vous cherchez à offrir vos compétences ou de demander de l'aide?"
+msgstr "Serez-vous cherchez à offrir vos compétences ou de demander de l'aide?"
 
 #: templates/users/more_about_you.html:47
 #: templates/users/more_about_you.html:65
@@ -3978,7 +3991,7 @@ msgid ""
 "Security and Privacy pages for more information."
 msgstr ""
 "Veuillez vous rappeler qu'aucune plateforme en ligne n'est sécuritaire à "
-"100%. Nous avons mis beaucoup de mesures en place pour protéger votre "
+"100%%. Nous avons mis beaucoup de mesures en place pour protéger votre "
 "sécurité personnelle et nous travaillons avec quelques-uns des meilleurs "
 "experts dans le domaine qui partagent et apprécient votre inquiétude pour la"
 " sécurité numérique. Toutefois, il est important de toujours rester prudent "
@@ -4136,7 +4149,7 @@ msgid ""
 "Translate is also available however it is not 100%% accurate."
 msgstr ""
 "Veuillez indiquer dans quelle(s) langue(s) vous êtes capable de communiquer."
-" Google Translate est aussi disponible mais n'est pas fiable à 100%."
+" Google Translate est aussi disponible mais n'est pas fiable à 100%%."
 
 #: templates/users/user_settings_v2.html:144
 msgid "Control the visibility of your profile and notifications."
