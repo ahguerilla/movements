@@ -97,7 +97,7 @@ class UserForm(forms.ModelForm):
         username = self.cleaned_data.get('username', '').strip()
         if not username:
             raise forms.ValidationError(_('Please enter a username'))
-        if User.objects.filter(username__iexact=username).exists():
+        if username != self.instance.username and User.objects.filter(username__iexact=username).exists():
             raise forms.ValidationError(_('This username is already in use'))
         if not re.match("^[A-Za-z0-9_-]*$", username):
             raise forms.ValidationError(_('Username must contain only letters, numbers - and _. White space is not allowed'))
