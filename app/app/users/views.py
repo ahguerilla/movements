@@ -332,7 +332,7 @@ class AccAdapter(DefaultAccountAdapter):
         if not config.ACTIVATE_USER_EMAIL:
             raise Exception("Configuration Error: Check that ACTIVATE_USER_EMAIL is set")
         vet_url = reverse('vet_user', args=(user.id,))
-        vet_url = 'http://' + site_settings.BASE_ADMIN_URL + vet_url
+        vet_url = site_settings.BASE_ADMIN_URL + vet_url
         ctx = {
             "user": user,
             "form": form,
