@@ -332,12 +332,11 @@ class AccAdapter(DefaultAccountAdapter):
         if not config.ACTIVATE_USER_EMAIL:
             raise Exception("Configuration Error: Check that ACTIVATE_USER_EMAIL is set")
         vet_url = reverse('vet_user', args=(user.id,))
-        vet_url = 'http://' + Site.objects.get_current().domain + vet_url
+        vet_url = 'http://' + site_settings.BASE_ADMIN_URL + vet_url
         ctx = {
             "user": user,
             "form": form,
             "vet_url": vet_url,
-            "current_site": Site.objects.get_current().domain,
         }
         self.send_mail('account/email/user_vetting_email', config.ACTIVATE_USER_EMAIL, ctx)
 
