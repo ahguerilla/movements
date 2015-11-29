@@ -269,6 +269,10 @@ class UserProfile(models.Model):
     def get_group_notification_preference(self, key):
         return self.group_notification_preference.get(str(key), True)
 
+    def set_active(self, state):
+        self.user.is_active = state
+        self.user.save()
+
     def assign_group_based_on_skills(self, is_provider, is_requester):
         skill_group_match = (
             (u'NGO Employee', 'NGO'),
@@ -314,7 +318,9 @@ class UserProfile(models.Model):
         order = kwargs.get('order', None)
         start = kwargs.get('start', None)
         finish = kwargs.get('finish', None)
-        return cls.objects.filter(query).filter(user__is_active=True).filter(user__is_superuser=False).distinct(distinct).order_by(order)[start:finish]
+        return cls.objects.filter(query).filter(user__is_active=True) \
+                                        .filter(user__is_superuser=False).distinct(distinct) \
+                                        .order_by(order)[start:finish]
 
     @property
     def is_translator(self):

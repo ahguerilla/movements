@@ -90,6 +90,7 @@ def render_settings(request):
             if request.POST.get('delete_account_option') == 'delete':
                 DeleteAccountRequest.objects.create(user=user)
                 delete_account_request = True
+                settings.set_active(False)
                 ctx = {
                     "user": user,
                 }
@@ -104,6 +105,7 @@ def render_settings(request):
                 if delete_account_request:
                     DeleteAccountRequest.objects.filter(user=user).delete()
                     delete_account_request = False
+                    settings.set_active(True)
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successful.')
     else:
         user_form = UserForm(instance=request.user)
@@ -146,17 +148,24 @@ def profile(request, user_name=None):
         user = User.objects.get(pk=request.user.id)
     else:
         user = get_object_or_404(User, username=user_name)
-    # if the user isn't active, return a 404
-    if not user.is_active:
-        raise Http404
+
+    is_self = False
+    if user.id == request.user.id:
+        is_self = True
+
+    # if the user isn't active, return a 404 unless it's yourself
+    if is_self:
+        if is_public and not user.is_active:
+            raise Http404
+    else:
+        if not user.is_active:
+            raise Http404
 
     try:
         user_profile = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
         user_profile = None
-    is_self = False
-    if user.id == request.user.id:
-        is_self = True
+
     orate = users.models.OrganisationalRating.objects.filter(user=user).all()
     if len(orate) > 0:
         orate = orate[0].rated_by_ahr

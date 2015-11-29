@@ -39,7 +39,10 @@ def add_comment(request, obj_id, rtype):
 
 def get_comments(request, obj_id, count, rtype):
     obj = get_object_or_404(market.models.MarketItem, pk=obj_id)
-    comments = obj.comments.filter(deleted=False).filter(published=True).order_by('-pub_date').all()[:count]
+    comments = obj.comments.filter(deleted=False) \
+                           .filter(published=True) \
+                           .filter(owner__is_active=True) \
+                           .order_by('-pub_date').all()[:count]
     retval = HttpResponse(json.dumps([c.getdict() for c in comments]),
                           mimetype="application" + rtype)
     return retval

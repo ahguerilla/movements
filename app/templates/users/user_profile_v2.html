@@ -13,6 +13,9 @@
 
 {% block content %}
 <div id="profile-view" class="row setting-page">
+  {% if not user.is_active %}
+  <div class="col-xs-12" style="text-align: center; font-weight: bold; margin-bottom: 20px;">THIS ACCOUNT IS INACTIVE AND WILL BE DELETED</div>
+  {% endif %}
   <div class="col-sm-4">
     <div class="poster clearfix">
       <div class="avatar">

@@ -195,9 +195,9 @@ def set_rate(request, username, rtype):
 @login_required
 def get_usernames(request, rtype):
     usernames = users.models.User.objects \
-                    .filter(is_active=True) \
-                    .filter(username__icontains=request.GET['username']) \
-                    .filter(~Q(pk=request.user.id) & ~Q(username='admin')).only('username')[:10]
+                     .filter(is_active=True) \
+                     .filter(username__icontains=request.GET['username']) \
+                     .filter(~Q(pk=request.user.id) & ~Q(username='admin')).only('username')[:10]
     return HttpResponse(
         json.dumps(
             [user.username for user in usernames if hasattr(user, 'userprofile')]
@@ -214,14 +214,3 @@ def get_group_names(request):
         ),
         mimetype="application/json")
 
-
-def get_user_details(username):
-    user = get_object_or_404(users.models.User, username=username)
-    if not user.is_active:
-        raise Http404
-    try:
-        user_profile = users.models.UserProfile.objects.get(user=user)
-    except:
-        raise Http404
-    orate = users.models.OrganisationalRating.objects.filter(user=user).all()
-    return (user, user_profile, orate)
