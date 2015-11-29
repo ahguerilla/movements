@@ -601,6 +601,20 @@ $(function () {
       $container.data(attribute, value);
     },
 
+
+    unpublishPost: function(url){
+      $.ajax({
+        url: url,
+        method: 'POST',
+        context: this,
+        success: function(){
+          if(this.filterView){
+            this.filterView.trigger('filter');
+          }
+        }
+      });
+    },
+
     itemAction: function(ev) {
       ev.preventDefault();
       var $link = $(ev.currentTarget);
@@ -631,6 +645,8 @@ $(function () {
         remakePopover = true;
       } else if (action === 'edit') {
         window.location.href = $container.data('edit-url');
+      } else if (action === 'unpublish') {
+        this.unpublishPost($container.data('unpublish-url'));
       }
 
       var $popover = $container.find('.item-menu');

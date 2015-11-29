@@ -3,7 +3,7 @@ import math
 from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_POST
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -207,6 +207,17 @@ def get_featured_market_items(request):
         is_safe = False
 
     return return_item_list(featured_posts, request=request, is_safe=is_safe)
+
+
+@login_required
+@require_POST
+def unpublish_market_item(request, obj_id):
+    market_item = get_object_or_404(market.models.MarketItem, pk=obj_id)
+    if request.user != market_item.owner:
+        return HttpResponseForbiden()
+    market_item.published = False
+    market_item.save()
+    return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
 
 
 @login_required

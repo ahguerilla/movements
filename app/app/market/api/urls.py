@@ -70,6 +70,10 @@ market_item_patterns = patterns(
         'app.market.api.views.market.close_market_item',
         name="close_marketitem"),
 
+    url(r'item/unpublish/(?P<obj_id>\d+)$',
+        'app.market.api.views.market.unpublish_market_item',
+        name="unpublish_marketitem"),
+
     url(r'(?P<rtype>\S+)/item/set/rate/(?P<obj_id>\d+)$',
         'app.market.api.views.market.set_rate',
         name="market_set_rate"),

@@ -5,6 +5,7 @@
        data-item-id="<%- pk %>"
        data-owner-id="<%- ownerid %>"
        data-close-url="<%- close_url %>"
+       data-unpublish-url="<%- unpublish_url %>"
        data-edit-url="<%- edit_url %>"
        data-report-url="<%- report_url %>"
        data-item-type="<%- item_type %>"
@@ -53,6 +54,7 @@
        data-item-id="<%- pk %>"
        data-owner-id="<%- ownerid %>"
        data-close-url="<%- close_url %>"
+       data-unpublish-url="<%- unpublish_url %>"
        data-edit-url="<%- edit_url %>"
        data-report-url="<%- report_url %>"
        data-item-type="<%- item_type %>"
@@ -97,6 +99,7 @@
     {% trans "Edit" as edit_text %}
     {% trans "Close" as close_text %}
     {% trans "Report" as report_text %}
+    {% trans "Unpublish" as unpublish_text %}
 
   <%
      var actions = [];
@@ -109,6 +112,7 @@
      if (hasEdit) {
        actions.push({display: '{{ edit_text }}', value: 'edit'});
        actions.push({display: '{{ close_text }}', value: 'close'});
+       actions.push({display: '{{ unpublish_text }}', value: 'unpublish'});
      } else {
        actions.push({display: '{{ report_text }}', value: 'report'});
      }
