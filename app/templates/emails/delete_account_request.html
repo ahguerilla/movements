@@ -1,0 +1,12 @@
+{% load i18n avatar_tags %}
+
+<h4>{% trans "Dear Admin"%}</h4>
+
+<p>
+  The following user has requested that their account is deleted.<br>
+  user: {{ user }}<br>
+  email: {{ user.email }}
+</p>
+<p>
+  This request should be actioned within 30 days of receiving this message.
+</p>

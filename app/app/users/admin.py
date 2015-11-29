@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from app.users.models import (
     UserProfile, Countries, Skills, Issues, Nationality, Language, Region,
-    Interest)
+    Interest, DeleteAccountRequest)
 from django.contrib.admin.models import LogEntry
 from modeltranslation.admin import TranslationAdmin
 
@@ -70,7 +70,12 @@ class NamedObjectAdmin(TranslationAdmin):
     list_display_links = list_display
 
 
+class DeleteAccountRequestAdmin(admin.ModelAdmin):
+    list_display = ('user', 'date_of_request')
+
+
 admin.site.unregister(User)
+admin.site.register(DeleteAccountRequest, DeleteAccountRequestAdmin)
 admin.site.register(User, MovementsUserAdmin)
 admin.site.register(Countries, CountriesAdmin)
 admin.site.register(Skills, SkillsAdmin)

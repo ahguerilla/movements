@@ -4,7 +4,8 @@
     events:{
       'click #changeavatar': 'ShowAvChange',
       'click #changepassword' : 'ShowChangePass',
-      'click .select-checkbox': 'checkClick'
+      'click .select-checkbox': 'checkClick',
+      'click #toggle-delete-account': 'toggleDeleteAccount'
     },
 
     showPersonal: function(ev) {
@@ -161,6 +162,14 @@
         $('#changepasswordbutton').on('click', func);
       });
       return false;
+    },
+
+    toggleDeleteAccount: function(ev){
+      ev.preventDefault();
+      var actionButton = $(ev.currentTarget).find('.btn-action');
+      var defaultButton = $(ev.currentTarget).find('.btn-default');
+      actionButton.removeClass('btn-action').addClass('btn-default');
+      defaultButton.addClass('btn-action').removeClass('btn-default');
     },
 
     initialize : function(){

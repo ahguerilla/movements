@@ -346,3 +346,13 @@ class UserRate(models.Model):
             self.user.userprofile.score = (int(self.score) + sum([rate.score for rate in rates]))/float(self.user.userprofile.ratecount)
         self.user.userprofile.save_base()
         super(UserRate, self).save(*args, **kwargs)
+
+
+class DeleteAccountRequest(models.Model):
+    user = models.ForeignKey(auth.models.User)
+    date_of_request = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Delete Account Request'
+        verbose_name_plural = 'Delete Account Requests'
+        ordering = ('date_of_request',)

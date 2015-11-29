@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _, ugettext
 
 from ratelimit.decorators import ratelimit
 from models import (
-    UserProfile, OrganisationalRating, Language, Interest, Region)
+    UserProfile, OrganisationalRating, Language, Interest, Region, DeleteAccountRequest)
 from forms import (
     SettingsForm, UserForm, VettingForm, SignUpStartForm, SignupForm,
     MoreAboutYouForm, UserGroupForm)
@@ -44,6 +44,13 @@ from django.conf import settings as site_settings
 
 def render_settings(request):
     user = User.objects.get(pk=request.user.id)
+    delete_account_request = False
+    try:
+        delete_request = DeleteAccountRequest.objects.filter(user=user).first()
+        if delete_request:
+            delete_account_request = True
+    except ObjectDoesNotExist:
+        delete_account_request = False
     try:
         settings = UserProfile.objects.get(user=user)
         user_groups = user.groups.all()
@@ -79,6 +86,24 @@ def render_settings(request):
                 settings.set_group_notification_preference(g.get('id'), gets_notif)
                 g['receive_updates'] = gets_notif
 
+            # check for delete account requests
+            if request.POST.get('delete_account_option') == 'delete':
+                DeleteAccountRequest.objects.create(user=user)
+                delete_account_request = True
+                ctx = {
+                    "user": user,
+                }
+                html = render_to_string('emails/delete_account_request.html', ctx)
+                email = EmailMessage('Delete user account request',
+                                     html,
+                                     constance.config.NO_REPLY_EMAIL,
+                                     [config.ACTIVATE_USER_EMAIL])
+                email.content_subtype = "html"
+                email.send()
+            else:
+                if delete_account_request:
+                    DeleteAccountRequest.objects.filter(user=user).delete()
+                    delete_account_request = False
             messages.add_message(request, messages.SUCCESS, 'Profile Update Successful.')
     else:
         user_form = UserForm(instance=request.user)
@@ -99,6 +124,7 @@ def render_settings(request):
                                 'interest_types': interest_types,
                                 'has_password': user.has_usable_password(),
                                 'errors': errors,
+                                'delete_account_request': delete_account_request,
                               },
                               context_instance=RequestContext(request))
 

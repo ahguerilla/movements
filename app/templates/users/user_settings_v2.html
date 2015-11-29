@@ -191,6 +191,28 @@
         </a>
         {% endif %}
       </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <label for="id_delete_account">{% trans 'Mark Account for Deletion' %}</label>
+          <p>
+            {% blocktrans %}As soon as your account has been marked for deletion your profile, posts and comments will
+              no longer be visible on the Movements.Org platform. The Movements.Org team will also be notified that you
+              wish to delete your account and will look to perminantely delete your Movements.Org footprint over the next
+              30 days after which time you will no longer be able to login or use any of the Movements.Org services.{% endblocktrans %}
+          </p>
+          <div id='toggle-delete-account' class="btn-group " data-toggle="buttons">
+            <label class="btn {% if not delete_account_request %}btn-action active{% else %}btn-default{% endif %}">
+              <input type="radio" name="delete_account_option"
+                     id="delete_account_no" value="active" {% if not delete_account_request %}checked{% endif %}> Active
+            </label>
+            <label class="btn {% if delete_account_request %}btn-action active{% else %}btn-default{% endif %}">
+              <input type="radio" name="delete_account_option"
+                     id="delete_account_yes"  value="delete" {% if delete_account_request %}checked{% endif %}> Delete
+            </label>
+          </div>
+
+        </div>
+      </div>
     </div>
     <div class="row action-text">
       <div class="col-sm-offset-2 col-sm-2 form-main-button">
@@ -213,7 +235,6 @@
       <div class="modal-body">
         <div id="avataralert"></div>
         <div id="profile_change_stuff" style="width:100%;"></div>
-
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
