@@ -112,6 +112,7 @@ class MarketItem(models.Model):
         adict['fields']['avatar'] = False
         adict['fields']['hasEdit'] = False
         adict['fields']['close_url'] = ""
+        adict['fields']['unpublish_url'] = ""
         adict['fields']['edit_url'] = ""
         adict['fields']['report_url'] = ""
         adict['fields']['attributes_url'] = ""
