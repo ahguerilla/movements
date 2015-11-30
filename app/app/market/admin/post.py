@@ -43,7 +43,7 @@ class MarketItemImageInline(admin.TabularInline):
 
 class PostAdmin(admin.ModelAdmin):
     exclude = ('item_type',)
-    list_display = ('title', 'owner', 'pub_date', 'published')
+    list_display = ('title', 'owner', 'staff_owner', 'pub_date', 'published')
     inlines = (MarketItemImageInline, MarketItemHowCanYouHelpInline, )
 
     def get_readonly_fields(self, request, obj=None):
