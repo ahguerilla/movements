@@ -68,7 +68,7 @@ class PostAdmin(admin.ModelAdmin):
             for instance in instances:
                 instance.text = bleach.clean(instance.text,
                                              tags=['a', 'img', 'bold', 'strong', 'i', 'em'],
-                                             attributes=['href', 'title', 'alt', 'src'])
+                                             attributes=['href', 'title', 'alt', 'src'], strip=True)
                 instance.save()
             formset.save_m2m()
             return instances
