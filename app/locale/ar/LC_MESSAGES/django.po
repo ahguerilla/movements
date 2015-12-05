@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 10:28+0000\n"
-"PO-Revision-Date: 2015-02-06 10:28+0000\n"
-"Last-Translator:   <>\n"
+"POT-Creation-Date: 2015-12-05 18:34+0000\n"
+"PO-Revision-Date: 2015-12-05 18:44+0000\n"
+"Last-Translator: Aidan Hamade <aidan@guerillasoftware.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,108 +23,173 @@ msgstr ""
 msgid "Safe VPN Link"
 msgstr ""
 
+#: app/cms_plugins.py:29 templates/base_v2.html:165
+msgid "Success Stories"
+msgstr ""
+
 #: app/cms_toolbar.py:43
 msgid "Menu Settings"
 msgstr ""
 
-#: app/context_processors.py:7
+#: app/context_processors.py:17
 msgid "Exchange"
 msgstr ""
 
-#: app/context_processors.py:8
+#: app/context_processors.py:18
 msgid "Members"
 msgstr ""
 
-#: app/context_processors.py:9
+#: app/context_processors.py:19
 msgid "Recommendation"
 msgstr ""
 
-#: app/context_processors.py:10
+#: app/context_processors.py:20
 msgid "more..."
 msgstr ""
 
-#: app/context_processors.py:11
+#: app/context_processors.py:21
 msgid "Click here to view the recommendation"
 msgstr ""
 
-#: app/context_processors.py:12
+#: app/context_processors.py:22
 msgid "Offering"
 msgstr ""
 
-#: app/context_processors.py:13
+#: app/context_processors.py:23
 msgid "Requesting"
 msgstr ""
 
-#: app/context_processors.py:14
+#: app/context_processors.py:24
 msgid "Search by keyword or username for Members"
 msgstr ""
 
-#: app/context_processors.py:15
+#: app/context_processors.py:25
 msgid "Your search did not match any market item."
 msgstr ""
 
-#: app/context_processors.py:16
+#: app/context_processors.py:26
 msgid "Search again without any filters"
 msgstr ""
 
-#: app/context_processors.py:17
+#: app/context_processors.py:27
 msgid "or"
 msgstr ""
 
-#: app/context_processors.py:18
+#: app/context_processors.py:28
 msgid "search again with your default filters"
 msgstr ""
 
-#: app/context_processors.py:19
+#: app/context_processors.py:29
 msgid ""
 "This link will take you off the Movements site.\n"
 "Make sure you trust the site that you are being redirected to."
 msgstr ""
 
-#: app/market/forms.py:57
+#: app/context_processors.py:30
+msgid "Stats"
+msgstr "الإحصاءات "
+
+#: app/context_processors.py:31
+msgid "Human Rights Connections Made"
+msgstr "القضايا الحقوقية المحلولة عبرنا"
+
+#: app/context_processors.py:32
+msgid "Active Users"
+msgstr "الأعضاء النشطين"
+
+#: app/context_processors.py:33
+msgid "Countries Represented"
+msgstr "البلدان التي نعمل بها"
+
+#: app/market/forms.py:58
 msgid "You must add at least one skill"
 msgstr ""
 
-#: app/market/forms.py:59
+#: app/market/forms.py:60
 msgid "Please select a maximum of 4 skills"
 msgstr ""
 
 #: app/market/forms.py:66
-msgid "You must add at least one issue"
+msgid "Please enter a maximum of 120 characters"
 msgstr ""
 
 #: app/market/forms.py:68
-msgid "Please select a maximum of 3 issues"
+msgid "Please enter at least 25 characters"
 msgstr ""
 
 #: app/market/forms.py:74
-msgid "Please enter a maximum of 120 characters"
+msgid ""
+"To help others understand a little better, please provide a few more details"
+" (at least 250 characters)"
+msgstr ""
+
+#: app/market/forms.py:91 app/market/forms.py:102
+msgid "You must add at least one issue"
+msgstr ""
+
+#: app/market/forms.py:104
+msgid "Please select a maximum of 3 issues"
 msgstr ""
 
 #: app/market/admin/report.py:40
 msgid "Additional properties"
 msgstr ""
 
-#: app/market/models/comment.py:14 app/market/models/report.py:19
+#: app/market/api/views/translation.py:73
+#: app/market/api/views/translation.py:120
+#: app/market/api/views/translation.py:180
+msgid "You do not currently have permissions to translate this item"
+msgstr ""
+
+#: app/market/api/views/translation.py:90
+msgid "Another user is currently translating this item"
+msgstr ""
+
+#: app/market/api/views/translation.py:124
+#, fuzzy
+msgid "Draft saved successfully."
+msgstr "تم تغيير كلمة السر بنجاح"
+
+#: app/market/api/views/translation.py:127
+#: app/market/api/views/translation.py:165
+#: app/market/api/views/translation.py:186
+msgid "This post is not currently locked for translation."
+msgstr ""
+
+#: app/market/api/views/translation.py:145
+msgid "No pending translation found to cancel."
+msgstr ""
+
+#: app/market/api/views/translation.py:195
+msgid "You do not have permission to complete this action."
+msgstr ""
+
+#: app/market/models/comment.py:16 app/market/models/report.py:19
 #: app/market/models/report.py:36
 msgid "contents"
 msgstr ""
 
-#: app/market/models/comment.py:15 app/market/models/market.py:43
-#: app/market/models/notification.py:18 app/market/models/rate.py:13
+#: app/market/models/comment.py:17 app/market/models/market.py:50
+#: app/market/models/notification.py:34 app/market/models/rate.py:13
 #: app/market/models/report.py:21 app/market/models/report.py:38
-#: app/users/models.py:223
+#: app/users/models.py:341
 msgid "publish date"
 msgstr ""
 
-#: app/market/models/comment.py:17 app/market/models/market.py:42
+#: app/market/models/comment.py:19 app/market/models/market.py:49
 #: app/market/models/report.py:22
 msgid "is published?"
 msgstr ""
 
-#: app/market/models/comment.py:18 app/market/models/market.py:49
+#: app/market/models/comment.py:20 app/market/models/market.py:57
 msgid "deleted"
 msgstr ""
+
+#: app/market/models/comment.py:21 app/market/models/market.py:69
+#: app/market/models/translation.py:154
+#, fuzzy
+msgid "source language"
+msgstr "لغة الواجهة"
 
 #: app/market/models/feedback.py:11
 msgid "Yes/No"
@@ -158,8 +223,8 @@ msgstr ""
 msgid "without type"
 msgstr ""
 
-#: app/market/models/feedback.py:33 app/market/models/market.py:34
-#: app/market/models/rate.py:14 app/users/models.py:224
+#: app/market/models/feedback.py:33 app/market/models/market.py:41
+#: app/market/models/rate.py:14 app/users/models.py:342
 msgid "title"
 msgstr ""
 
@@ -179,159 +244,179 @@ msgstr ""
 msgid "questionnaires"
 msgstr ""
 
-#: app/market/models/market.py:19
+#: app/market/models/market.py:26
 msgid "Open"
 msgstr ""
 
-#: app/market/models/market.py:20
+#: app/market/models/market.py:27
 msgid "Watch"
 msgstr ""
 
-#: app/market/models/market.py:21
+#: app/market/models/market.py:28
 msgid "Urgent"
 msgstr ""
 
-#: app/market/models/market.py:22
+#: app/market/models/market.py:29
 msgid "Closed By Admin"
 msgstr ""
 
-#: app/market/models/market.py:23
+#: app/market/models/market.py:30
 msgid "Closed By User"
 msgstr ""
 
-#: app/market/models/market.py:26 templates/base_v2.html:254
+#: app/market/models/market.py:33 app/users/forms.py:210
+#: templates/base_v2.html:122 templates/base_v2.html.py:388
 msgid "Request"
 msgstr "طلب"
 
-#: app/market/models/market.py:27 templates/base_v2.html:257
+#: app/market/models/market.py:34 app/users/forms.py:209
+#: templates/base_v2.html:123 templates/base_v2.html.py:391
 msgid "Offer"
 msgstr "عرض"
 
-#: app/market/models/market.py:30 app/market/models/market.py:213
+#: app/market/models/market.py:37 app/market/models/market.py:324
 msgid "item_type"
 msgstr ""
 
-#: app/market/models/market.py:35
+#: app/market/models/market.py:42
 msgid "details"
 msgstr ""
 
-#: app/market/models/market.py:37
+#: app/market/models/market.py:44
 msgid "Specific skill"
 msgstr ""
 
-#: app/market/models/market.py:40
+#: app/market/models/market.py:47
 msgid "Specific issue"
 msgstr ""
 
-#: app/market/models/market.py:41
+#: app/market/models/market.py:48
 msgid "URL Link"
 msgstr ""
 
-#: app/market/models/market.py:44
+#: app/market/models/market.py:52
 msgid "commentcount"
 msgstr ""
 
-#: app/market/models/market.py:45
+#: app/market/models/market.py:53
 msgid "collaboratorcount"
 msgstr ""
 
-#: app/market/models/market.py:46 app/users/models.py:173
+#: app/market/models/market.py:54 app/users/models.py:190
 msgid "ratecount"
 msgstr ""
 
-#: app/market/models/market.py:47
+#: app/market/models/market.py:55
 msgid "reportcount"
 msgstr ""
 
-#: app/market/models/market.py:48 app/market/models/rate.py:15
-#: app/users/models.py:174 app/users/models.py:225
+#: app/market/models/market.py:56 app/market/models/rate.py:15
+#: app/users/models.py:191 app/users/models.py:343
 msgid "score"
 msgstr ""
 
-#: app/market/models/market.py:50
+#: app/market/models/market.py:58
 msgid "receive notifications"
 msgstr ""
 
-#: app/market/models/market.py:51
+#: app/market/models/market.py:59
 msgid "Tweet Permission"
 msgstr ""
 
-#: app/market/models/market.py:53 app/reporting/admin/incident.py:89
+#: app/market/models/market.py:61 app/market/models/translation.py:160
+#: app/reporting/admin/incident.py:89
 msgid "status"
 msgstr ""
 
-#: app/market/models/market.py:56
+#: app/market/models/market.py:64
 msgid "closed date"
 msgstr ""
 
-#: app/market/models/market.py:58
+#: app/market/models/market.py:66
 msgid "feedback response"
 msgstr ""
 
-#: app/market/models/market.py:59
+#: app/market/models/market.py:67
 msgid "is featured"
 msgstr ""
 
-#: app/market/models/market.py:166 app/market/models/market.py:181
-#: app/market/models/market.py:197 app/market/models/market.py:210
-#: app/market/models/report.py:47 app/market/models/report.py:76
+#: app/market/models/market.py:290 app/market/models/market.py:305
+#: app/market/models/market.py:321 app/market/models/report.py:47
+#: app/market/models/report.py:76 app/market/models/translation.py:298
 msgid "market item"
 msgstr ""
 
-#: app/market/models/market.py:167
+#: app/market/models/market.py:291
 msgid "action"
 msgstr ""
 
-#: app/market/models/market.py:168 app/market/models/market.py:183
+#: app/market/models/market.py:292 app/market/models/market.py:307
 msgid "date of action"
 msgstr ""
 
-#: app/market/models/market.py:172 app/market/models/market.py:173
+#: app/market/models/market.py:296 app/market/models/market.py:297
 msgid "actions of market item"
 msgstr ""
 
-#: app/market/models/market.py:182
+#: app/market/models/market.py:306
 msgid "next step"
 msgstr ""
 
-#: app/market/models/market.py:184
+#: app/market/models/market.py:308
 msgid "completed"
 msgstr ""
 
-#: app/market/models/market.py:188
+#: app/market/models/market.py:312
 msgid "next step of market item"
 msgstr ""
 
-#: app/market/models/market.py:189
+#: app/market/models/market.py:313
 msgid "next steps of market item"
 msgstr ""
 
-#: app/market/models/market.py:198 app/users/models.py:82
-msgid "language"
-msgstr ""
-
-#: app/market/models/market.py:199
-#, fuzzy
-msgid "source language"
-msgstr "لغة الواجهة"
-
-#: app/market/models/market.py:200
-msgid "title translated"
-msgstr ""
-
-#: app/market/models/market.py:201
-msgid "details translated"
-msgstr ""
-
-#: app/market/models/market.py:202
-msgid "date generated"
-msgstr ""
-
-#: app/market/models/market.py:214
+#: app/market/models/market.py:325
 msgid "interaction date"
 msgstr ""
 
+#: app/market/models/notification.py:13
+msgid "Needs Translation"
+msgstr ""
+
+#: app/market/models/notification.py:14 app/market/models/translation.py:143
+#: app/market/models/translation.py:148
+msgid "In translation"
+msgstr ""
+
+#: app/market/models/notification.py:15 app/market/models/translation.py:149
+msgid "In correction"
+msgstr ""
+
 #: app/market/models/notification.py:16
+msgid "Translation revoked"
+msgstr ""
+
+#: app/market/models/notification.py:17 app/market/models/translation.py:150
+msgid "Waiting for approval"
+msgstr ""
+
+#: app/market/models/notification.py:18
+msgid "Approved"
+msgstr ""
+
+#: app/market/models/notification.py:19
+msgid "Translation item count notification"
+msgstr ""
+
+#: app/market/models/notification.py:20
+msgid "Translation approval count notification"
+msgstr ""
+
+#: app/market/models/notification.py:24
+#, fuzzy
+msgid "Translation status"
+msgstr "ترجم هذا المنشور"
+
+#: app/market/models/notification.py:32
 msgid "avatar user"
 msgstr ""
 
@@ -364,13 +449,72 @@ msgid "is user recommendation"
 msgstr ""
 
 #: app/market/models/report.py:80 app/market/models/report.py:118
-#: templates/market/notifications.html:50
+#: templates/market/notifications.html:81
 msgid "message"
 msgstr ""
 
 #: app/market/models/report.py:81 app/market/models/report.py:119
 msgid "messages"
 msgstr ""
+
+#: app/market/models/translation.py:141
+msgid "Google"
+msgstr ""
+
+#: app/market/models/translation.py:142
+msgid "Pending a translator"
+msgstr ""
+
+#: app/market/models/translation.py:144
+#, fuzzy
+msgid "Translated"
+msgstr "ترجم هذا المنشور"
+
+#: app/market/models/translation.py:147 app/users/forms.py:208
+msgid "None"
+msgstr ""
+
+#: app/market/models/translation.py:153 app/users/models.py:89
+msgid "language"
+msgstr ""
+
+#: app/market/models/translation.py:155
+msgid "details translated"
+msgstr ""
+
+#: app/market/models/translation.py:156
+msgid "details translated candidate"
+msgstr ""
+
+#: app/market/models/translation.py:158 app/market/models/translation.py:169
+msgid "date generated"
+msgstr ""
+
+#: app/market/models/translation.py:163
+msgid "candidate status"
+msgstr ""
+
+#: app/market/models/translation.py:170 app/market/models/translation.py:171
+msgid "date edited"
+msgstr ""
+
+#: app/market/models/translation.py:172
+#, fuzzy
+msgid "Needs update"
+msgstr "احصل على تحديثات"
+
+#: app/market/models/translation.py:299
+msgid "title translated"
+msgstr ""
+
+#: app/market/models/translation.py:300
+msgid "title translated candidate"
+msgstr ""
+
+#: app/market/models/translation.py:382
+#, fuzzy
+msgid "comment"
+msgstr "مقترح"
 
 #: app/reporting/models.py:21
 msgid "incident"
@@ -429,14 +573,15 @@ msgid "date of post"
 msgstr ""
 
 #: app/reporting/admin/incident.py:75
-msgid "owner"
+#: templates/admin/incident_change_form.html:13
+msgid "Staff manager"
 msgstr ""
 
 #: app/reporting/admin/incident.py:84
 msgid "Aging"
 msgstr ""
 
-#: app/reporting/admin/user.py:18 app/reporting/admin/user.py:137
+#: app/reporting/admin/user.py:18 app/reporting/admin/user.py:144
 msgid "Movements Rating"
 msgstr ""
 
@@ -480,94 +625,99 @@ msgstr ""
 msgid "false"
 msgstr ""
 
-#: app/reporting/admin/user.py:85
+#: app/reporting/admin/user.py:88
 msgid "Screen Name"
 msgstr ""
 
-#: app/reporting/admin/user.py:89
+#: app/reporting/admin/user.py:92
+#, fuzzy
+msgid "Last Login"
+msgstr "تسجيل دخول"
+
+#: app/reporting/admin/user.py:96
 msgid "Signup Date"
 msgstr ""
 
-#: app/reporting/admin/user.py:93
+#: app/reporting/admin/user.py:100
 msgid "Full Name"
 msgstr ""
 
-#: app/reporting/admin/user.py:97
+#: app/reporting/admin/user.py:104
 #, fuzzy
 msgid "No profile"
 msgstr "صفحة شخصية "
 
-#: app/reporting/admin/user.py:99
+#: app/reporting/admin/user.py:106
 #: templates/market/clientside/userprofile.html:34
 msgid "Nationality"
 msgstr ""
 
-#: app/reporting/admin/user.py:105 templates/account/signup.html:52
+#: app/reporting/admin/user.py:112 templates/account/signup.html:55
 #: templates/users/user_settings_v2.html:69
 msgid "Country of Residence"
 msgstr "بلد الإقامة"
 
-#: app/reporting/admin/user.py:109
+#: app/reporting/admin/user.py:116
 msgid "Is Admin"
 msgstr ""
 
-#: app/reporting/admin/user.py:113
+#: app/reporting/admin/user.py:120
 msgid "Request Count"
 msgstr ""
 
-#: app/reporting/admin/user.py:117
+#: app/reporting/admin/user.py:124
 msgid "Offer Count"
 msgstr ""
 
-#: app/reporting/admin/user.py:121
+#: app/reporting/admin/user.py:128
 msgid "Comment Count"
 msgstr ""
 
-#: app/reporting/admin/user.py:127 app/reporting/admin/user.py:136
+#: app/reporting/admin/user.py:134 app/reporting/admin/user.py:143
 msgid "unassigned"
 msgstr ""
 
-#: app/reporting/admin/user.py:129
+#: app/reporting/admin/user.py:136
 msgid "Rate user"
 msgstr ""
 
-#: app/reporting/admin/user.py:131
+#: app/reporting/admin/user.py:138
 msgid "Movements rating"
 msgstr ""
 
-#: app/reporting/admin/user.py:140 app/reporting/admin/user.py:144
-#: app/reporting/admin/user.py:148 app/reporting/admin/user.py:152
-#: app/reporting/admin/user.py:156
+#: app/reporting/admin/user.py:147 app/reporting/admin/user.py:151
+#: app/reporting/admin/user.py:155 app/reporting/admin/user.py:159
+#: app/reporting/admin/user.py:163
 msgid "Not supplied"
 msgstr ""
 
-#: app/reporting/admin/user.py:141 templates/account/signup.html:87
+#: app/reporting/admin/user.py:148 templates/base_v2.html:146
 #: templates/users/user_settings_v2.html:108
 msgid "Facebook"
 msgstr "الفيس بوك"
 
-#: app/reporting/admin/user.py:145 templates/account/signup.html:80
+#: app/reporting/admin/user.py:152 templates/base_v2.html:140
 #: templates/users/user_settings_v2.html:101
 msgid "Twitter"
 msgstr "التويتر"
 
-#: app/reporting/admin/user.py:149
+#: app/reporting/admin/user.py:156
 msgid "Linked in"
 msgstr "لينكيد اين"
 
-#: app/reporting/admin/user.py:153
+#: app/reporting/admin/user.py:160
 msgid "Website/blog"
 msgstr "موقع/مدونة"
 
-#: app/reporting/admin/user.py:157 templates/users/user_profile_v2.html:57
+#: app/reporting/admin/user.py:164 templates/users/user_profile_v2.html:66
 msgid "Bio"
 msgstr "السيرة الذاتية "
 
-#: app/reporting/admin/user.py:174
+#: app/reporting/admin/user.py:181
 msgid "Count social"
 msgstr ""
 
-#: app/reporting/admin/user.py:180
+#: app/reporting/admin/user.py:187
 msgid "Email verified"
 msgstr ""
 
@@ -575,39 +725,62 @@ msgstr ""
 msgid "Staff status"
 msgstr ""
 
-#: app/settings/base.py:73
+#: app/settings/base.py:100 templates/base_v2.html:180
 msgid "Arabic"
 msgstr "العربية"
 
-#: app/settings/base.py:74
+#: app/settings/base.py:101 templates/base_v2.html:174
 msgid "English"
 msgstr "الإنكليزية"
 
-#: app/settings/base.py:75
+#: app/settings/base.py:102 templates/base_v2.html:186
 msgid "Chinese"
 msgstr "الصينية"
 
-#: app/settings/base.py:76
+#: app/settings/base.py:103 templates/base_v2.html:192
 msgid "Ukrainian"
 msgstr ""
 
-#: app/settings/base.py:77
+#: app/settings/base.py:104 templates/base_v2.html:198
 msgid "Russian"
 msgstr ""
 
-#: app/users/forms.py:28
+#: app/settings/base.py:105
+msgid "Persian"
+msgstr ""
+
+#: app/settings/base.py:106 templates/base_v2.html:210
+msgid "French"
+msgstr ""
+
+#: app/users/forms.py:30
+#, fuzzy
+msgid "Please enter a valid email"
+msgstr "الرجاء ادخال اسم مستخدم و بريد الكتروني صالح"
+
+#: app/users/forms.py:32
 msgid "This email is used already"
 msgstr "هذا الايميل مستخدم سابقاً"
 
-#: app/users/forms.py:35
+#: app/users/forms.py:39
+#, fuzzy
+msgid "Please enter a password"
+msgstr "احذف كلمة سري"
+
+#: app/users/forms.py:41
 msgid "Passwords must match"
 msgstr "يجب تطابق كلمات السر"
 
-#: app/users/forms.py:70 app/users/forms.py:93
+#: app/users/forms.py:75 app/users/forms.py:99
+#, fuzzy
+msgid "Please enter a username"
+msgstr "الرجاء ادخال العنوان و الرسالة"
+
+#: app/users/forms.py:77 app/users/forms.py:101
 msgid "This username is already in use"
 msgstr "اسم المستخدم هذا مستخدم سابقاًذ"
 
-#: app/users/forms.py:72 app/users/forms.py:95
+#: app/users/forms.py:79 app/users/forms.py:103
 msgid ""
 "Username must contain only letters, numbers - and _. White space is not "
 "allowed"
@@ -615,7 +788,7 @@ msgstr ""
 "أسم المستخدم يجب الا يحتوي الا على أحرف , أرقام , الرمز - و ـ و الفراغ غير "
 "مسموح"
 
-#: app/users/forms.py:74 app/users/forms.py:97
+#: app/users/forms.py:81 app/users/forms.py:105
 msgid ""
 "Username must be greater that 2 characters and less than 30 contain only "
 "letters, numbers - and _. White space is not allowed"
@@ -623,189 +796,231 @@ msgstr ""
 "يجب أن يتألف اسم المستخدم من حرفين,رقمين ,أو ـ و - على الأقل و ٣٠ حرف على "
 "الأكثر . و الفراغ غير مسموح "
 
-#: app/users/models.py:14
+#: app/users/forms.py:204
+msgid "I will offer my skills"
+msgstr ""
+
+#: app/users/forms.py:205
+msgid "I will Request help"
+msgstr ""
+
+#: app/users/forms.py:206
+msgid "I'll decide later"
+msgstr ""
+
+#: app/users/models.py:16
 msgid "skill set"
 msgstr ""
 
-#: app/users/models.py:25
+#: app/users/models.py:27
 msgid "issues of interest"
 msgstr ""
 
-#: app/users/models.py:36
+#: app/users/models.py:38
 msgid "countries of interest"
 msgstr ""
 
-#: app/users/models.py:48
+#: app/users/models.py:50
 msgid "nationality"
 msgstr ""
 
-#: app/users/models.py:59
+#: app/users/models.py:61
 msgid "country of residence"
 msgstr ""
 
-#: app/users/models.py:69
+#: app/users/models.py:71
 msgid "name"
 msgstr ""
 
-#: app/users/models.py:80
+#: app/users/models.py:82
 msgid "language code"
 msgstr ""
 
-#: app/users/models.py:83
+#: app/users/models.py:90
 msgid "languages"
 msgstr ""
 
-#: app/users/models.py:91
+#: app/users/models.py:96
 msgid "region"
 msgstr ""
 
-#: app/users/models.py:92
+#: app/users/models.py:97
 msgid "regions"
 msgstr ""
 
-#: app/users/models.py:97
+#: app/users/models.py:102
 msgid "interest"
 msgstr ""
 
-#: app/users/models.py:98
+#: app/users/models.py:103
 msgid "interests"
 msgstr ""
 
-#: app/users/models.py:116
+#: app/users/models.py:119
 msgid "Hidden - only your screen name and avatar is shared"
 msgstr " مخفي : سيظهر اسم العرض الذي اخترته فقط للعامة   "
 
-#: app/users/models.py:117
+#: app/users/models.py:120
 msgid "Secure - only your screen name, skills and country is shared"
 msgstr ".آمن : ستظهر للعامة مهاراتك،اسم العرض الخاص بك،و اللغات  التي تجيدها"
 
-#: app/users/models.py:118
+#: app/users/models.py:121
 msgid "Public - all your profile information is shared"
 msgstr "عام: كل معلوماتك الشخصية ستكون ظاهرة للعامة"
 
-#: app/users/models.py:122
+#: app/users/models.py:125
 msgid "Never"
 msgstr "أبداً"
 
-#: app/users/models.py:123
+#: app/users/models.py:126
 msgid "Weekly"
 msgstr "اسبوعياً"
 
-#: app/users/models.py:124
+#: app/users/models.py:127
 msgid "Daily"
 msgstr "يومياَ"
 
-#: app/users/models.py:125
+#: app/users/models.py:128
 msgid "Instantly"
 msgstr "بشكل مستمر"
 
-#: app/users/models.py:129
+#: app/users/models.py:132 app/users/models.py:153
 msgid "Unknown"
 msgstr ""
 
-#: app/users/models.py:130
+#: app/users/models.py:133 templates/market/view_post.html:52
 #, fuzzy
 msgid "Social Media"
 msgstr "التحقق الإجتماعي"
 
-#: app/users/models.py:131
+#: app/users/models.py:134
 msgid "Staff Contact"
 msgstr ""
 
-#: app/users/models.py:132
+#: app/users/models.py:135
 msgid "General Media"
 msgstr ""
 
-#: app/users/models.py:133
+#: app/users/models.py:136
 msgid "Referred by Movements User"
 msgstr ""
 
-#: app/users/models.py:134
+#: app/users/models.py:137
 msgid "Event"
 msgstr ""
 
-#: app/users/models.py:135 templates/market/create_offer.html:22
-#: templates/market/create_offer.html:37
-#: templates/market/create_request.html:22
-#: templates/market/create_request.html:36
+#: app/users/models.py:138 templates/market/create_offer.html:22
+#: templates/market/create_offer.html:36
+#: templates/market/create_request.html:23
+#: templates/market/create_request.html:37
 msgid "Other"
 msgstr "المزيد"
 
-#: app/users/models.py:136
+#: app/users/models.py:139
 #, fuzzy
 msgid "Prefer not to say"
 msgstr "أضغط ادخال للبحث"
 
-#: app/users/models.py:148
+#: app/users/models.py:154
+#, fuzzy
+msgid "Request User"
+msgstr "طلبات"
+
+#: app/users/models.py:155
+#, fuzzy
+msgid "Offer User"
+msgstr "عروض"
+
+#: app/users/models.py:159
 msgid "bio"
 msgstr ""
 
-#: app/users/models.py:149
+#: app/users/models.py:160
 msgid "tag line"
 msgstr ""
 
-#: app/users/models.py:150
+#: app/users/models.py:161
 msgid "website url"
 msgstr ""
 
-#: app/users/models.py:151
+#: app/users/models.py:162
 msgid "facebook page"
 msgstr ""
 
-#: app/users/models.py:152
+#: app/users/models.py:163
 msgid "linkedin page"
 msgstr ""
 
-#: app/users/models.py:153
+#: app/users/models.py:164
 msgid "twitter page"
 msgstr ""
 
-#: app/users/models.py:154
+#: app/users/models.py:165
 msgid "occupation"
 msgstr ""
 
-#: app/users/models.py:155
+#: app/users/models.py:166
 msgid "area of expertise"
 msgstr ""
 
-#: app/users/models.py:156
-msgid "privacy settings"
+#: app/users/models.py:177
+msgid "Trusted translation language"
 msgstr ""
 
-#: app/users/models.py:169
+#: app/users/models.py:185
+msgid "community manager"
+msgstr ""
+
+#: app/users/models.py:186
 msgid "organisation"
 msgstr ""
 
-#: app/users/models.py:170
+#: app/users/models.py:187
 msgid "individual"
 msgstr ""
 
-#: app/users/models.py:171
+#: app/users/models.py:188
 msgid "journalist"
 msgstr ""
 
-#: app/users/models.py:172
+#: app/users/models.py:189
 msgid "recieves newsletter"
 msgstr ""
 
-#: app/users/models.py:175
+#: app/users/models.py:192
 msgid "Interface language"
 msgstr "لغة الواجهة"
 
-#: app/users/models.py:177
+#: app/users/models.py:194
 msgid "first login"
 msgstr ""
 
-#: app/users/models.py:179
+#: app/users/models.py:196
 msgid "profile visibility"
 msgstr ""
 
-#: app/users/models.py:182
+#: app/users/models.py:199
 msgid "notification frequency"
 msgstr ""
 
-#: app/users/models.py:217
+#: app/users/models.py:335
 msgid "Rated by AHR"
+msgstr ""
+
+#: app/users/views.py:547
+msgid "This unsubscribe link does not map to a valid user."
+msgstr ""
+
+#: app/users/views.py:549
+msgid "To unsubscribe click on on the button below."
+msgstr ""
+
+#: app/users/views.py:551
+msgid "You are logged in as a different user to the link followed"
+msgstr ""
+
+#: app/users/views.py:569
+msgid "Invalid unsubscribe link."
 msgstr ""
 
 #: avatar/admin.py:19
@@ -952,113 +1167,142 @@ msgstr ""
 msgid "Server error - we're on it."
 msgstr ""
 
-#: templates/base.html:65
+#: templates/base.html:56
 msgid "Toggle navigation"
 msgstr ""
 
-#: templates/base.html:85
+#: templates/base.html:76
 msgid "Messages"
 msgstr ""
 
-#: templates/base.html:92 templates/users/user_settings_v2.html:157
+#: templates/base.html:83 templates/users/user_settings_v2.html:157
 msgid "Notifications"
 msgstr "اشعارات"
 
-#: templates/base.html:100 templates/base.html.py:109
-#: templates/base_v2.html:270 templates/users/user_settings_v2.html:16
+#: templates/base.html:91 templates/base.html.py:100
+#: templates/base_v2.html:405 templates/users/user_settings_v2.html:16
 #: templates/users/snippets/profile_navigation.html:30
 msgid "Settings"
 msgstr "خيارات"
 
-#: templates/base.html:105
+#: templates/base.html:96
 msgid "My Posts"
 msgstr ""
 
-#: templates/base.html:108
+#: templates/base.html:99
 msgid "My Profile"
 msgstr ""
 
-#: templates/base.html:113 templates/account/logout.html:6
+#: templates/base.html:104 templates/account/logout.html:6
 #: templates/account/logout.html.py:11 templates/account/logout.html:19
 msgid "Sign Out"
 msgstr ""
 
-#: templates/base.html:120 templates/account/login.html:9
+#: templates/base.html:111 templates/account/login.html:9
 #: templates/account/login.html.py:15 templates/account/login.html:48
 #: templates/openid/login.html:16
 msgid "Sign In"
 msgstr "تسجيل الدخول"
 
-#: templates/base.html:122 templates/base_private_settings.html:6
-#: templates/base_public.html:6 templates/account/signup_old.html:30
-#: templates/account/signup_old.html:112
+#: templates/base.html:113 templates/base_public.html:6
+#: templates/account/signup_old.html:30 templates/account/signup_old.html:112
 msgid "Sign Up"
 msgstr "سجل الأن"
 
-#: templates/base_v2.html:107 templates/base_v2.html.py:206
-#: templates/account/signup_start.html:51
-msgid "Connect with Twitter"
-msgstr "إتصل عبر التويتر"
-
-#: templates/base_v2.html:112 templates/base_v2.html.py:209
-#: templates/account/signup_start.html:48
-msgid "Connect with Facebook"
-msgstr "إتصل عبر الفيس بوك"
-
-#: templates/base_v2.html:117
-msgid "AHR"
-msgstr ""
-
-#: templates/base_v2.html:121
-msgid "Blog"
-msgstr ""
-
-#: templates/base_v2.html:137
+#: templates/base_v2.html:120 templates/base_v2.html.py:240
 msgid "Add Post"
 msgstr "اضافة منشور "
 
-#: templates/base_v2.html:144 templates/ahr/home_v2.html:13
+#: templates/base_v2.html:129
+msgid "Navigate"
+msgstr ""
+
+#: templates/base_v2.html:135
+#, fuzzy
+msgid "Connect"
+msgstr "اتصل بنا"
+
+#: templates/base_v2.html:152
+#, fuzzy
+msgid "Advancing Human Rights"
+msgstr "حقوق النشر محفوظة &copy;  :٢٠١٤ أدفانسينغ هيومان رايتس"
+
+#: templates/base_v2.html:158
+msgid "Newsletter"
+msgstr ""
+
+#: templates/base_v2.html:164
+msgid "Movements Blog"
+msgstr ""
+
+#: templates/base_v2.html:169
+#, fuzzy
+msgid "Language"
+msgstr "لغات"
+
+#: templates/base_v2.html:204
+msgid "Farsi"
+msgstr ""
+
+#: templates/base_v2.html:217 templates/base_v2.html.py:421
+msgid "Logout"
+msgstr ""
+
+#: templates/base_v2.html:225 templates/ahr/home_v2.html:127
+#: templates/ahr/snippets/_carousel_buttons.html:18
+msgid "Find out more"
+msgstr "اكتشف المزيد"
+
+#: templates/base_v2.html:230 templates/base_v2.html.py:314
+msgid "View Requests & Offers"
+msgstr "طلب/عرض"
+
+#: templates/base_v2.html:262 templates/ahr/home_v2.html:70
+#: templates/ahr/home_v2.html.py:154
+#: templates/ahr/snippets/_carousel_buttons.html:13
+msgid "Sign up now"
+msgstr "سجل الأن"
+
+#: templates/base_v2.html:265 templates/ahr/home_v2.html:75
+#: templates/two_factor/core/login.html:5
 msgid "Login"
 msgstr "تسجيل دخول"
 
-#: templates/base_v2.html:152 templates/ahr/home_v2.html:34
+#: templates/base_v2.html:304
 msgid "Crowdsourcing human rights."
 msgstr "تعهد جماعي بالمحاربة من أجل حقوق الانسان."
 
-#: templates/base_v2.html:152
-msgid "The online platform that is opening closed societies."
+#: templates/base_v2.html:304
+#, fuzzy
+msgid "Opening closed societies."
 msgstr "المنصة الالكترونية تساعد المجتمعات المغلق على الانفتاح."
 
-#: templates/base_v2.html:163
-msgid "Sign up"
-msgstr "سجل الأن"
-
-#: templates/base_v2.html:167
-msgid "Visit market"
-msgstr "زيارة السوق"
-
-#: templates/base_v2.html:193
+#: templates/base_v2.html:339
 msgid "Get updates"
 msgstr "احصل على تحديثات"
 
-#: templates/base_v2.html:196
-msgid "Enter your e-mail..."
-msgstr "ادخل بريدك الالكتروني"
-
-#: templates/base_v2.html:200
+#: templates/base_v2.html:344
 msgid ""
 "Get all the latest updates, including featured posts, and security tips!"
 msgstr "احصل على اخر التحديثات , بما قيها المنشورات الجديدة و النصائح الأمنية"
 
-#: templates/base_v2.html:203 templates/base_v2.html.py:237
+#: templates/base_v2.html:347
 msgid "Connect with us"
 msgstr "اتصل بنا"
 
-#: templates/base_v2.html:217 templates/ahr/home_v2.html:111
+#: templates/base_v2.html:350 templates/account/signup_start.html:51
+msgid "Connect with Twitter"
+msgstr "إتصل عبر التويتر"
+
+#: templates/base_v2.html:353 templates/account/signup_start.html:48
+msgid "Connect with Facebook"
+msgstr "إتصل عبر الفيس بوك"
+
+#: templates/base_v2.html:360 templates/ahr/home_v2.html:125
 msgid "About MOVEMENTS"
 msgstr "من نحن"
 
-#: templates/base_v2.html:218
+#: templates/base_v2.html:361
 msgid ""
 "Crowdsourcing human rights. The online platform that is opening closed "
 "societies."
@@ -1066,25 +1310,23 @@ msgstr ""
 "تعهد جماعي بالمحاربة من أجل حقوق الانسان،المنصة الالكترونية تساعد المجتمعات "
 "المغلق على الانفتاح"
 
-#: templates/base_v2.html:224
+#: templates/base_v2.html:373
 msgid "Copyright &copy; 2015 Advancing Human Rights"
 msgstr "حقوق النشر محفوظة &copy;  :٢٠١٤ أدفانسينغ هيومان رايتس"
 
-#: templates/base_v2.html:235
-msgid "Copyright &copy; 2014 Advancing Human Rights"
-msgstr "حقوق النشر محفوظة &copy;  :٢٠١٤ أدفانسينغ هيومان رايتس"
-
-#: templates/base_v2.html:264
+#: templates/base_v2.html:399
 #: templates/users/snippets/profile_navigation.html:23
 msgid "Profile"
 msgstr "صفحة شخصية "
 
-#: templates/base_v2.html:278
-msgid "Logout"
-msgstr ""
+#: templates/base_v2.html:412
+#, fuzzy
+msgid "Translations"
+msgstr "ترجم هذا المنشور"
 
 #: templates/account/account_inactive.html:5
 #: templates/account/account_inactive.html:9
+#: templates/account/ratelimit_triggered.html:5
 msgid "Account Inactive"
 msgstr ""
 
@@ -1182,7 +1424,8 @@ msgstr ""
 msgid "terms and conditions"
 msgstr "بشروط الإنضمام"
 
-#: templates/account/email_confirm.html:37
+#: templates/account/email_confirm.html:37 templates/market/view_post.html:352
+#: templates/market/view_post.html:418
 msgid "Confirm"
 msgstr ""
 
@@ -1232,6 +1475,11 @@ msgstr "إتصل عبر الفيس بوك"
 msgid "Sign In with Twitter"
 msgstr "إتصل عبر التويتر"
 
+#: templates/account/login.html:63
+#, fuzzy
+msgid "Sign In with Linked In"
+msgstr "إتصل عبر التويتر"
+
 #: templates/account/logout.html:12
 msgid "Are you sure you want to sign out?"
 msgstr ""
@@ -1245,8 +1493,8 @@ msgstr "تم تغيير كلمة السر بنجاح"
 #: templates/account/password_reset_from_key.html:19
 #: templates/account/password_reset_from_key.html:38
 #: templates/account/password_reset_from_key_done.html:5
-#: templates/users/user_settings_v2.html:167
-#: templates/users/user_settings_v2.html:209
+#: templates/users/user_settings_v2.html:186
+#: templates/users/user_settings_v2.html:249
 msgid "Change Password"
 msgstr "تغيير كلمة السر"
 
@@ -1291,7 +1539,7 @@ msgstr ""
 "نسيت كلمة السر الخاصة بك؟ادخل بريدك الالكتروني في الأسفل، و سنرسل لك رسالة "
 "الكترونية لتستعيد كلمة السر."
 
-#: templates/account/password_reset.html:21 templates/account/signup.html:31
+#: templates/account/password_reset.html:21 templates/account/signup.html:34
 msgid "Email"
 msgstr "بريد الكتروني"
 
@@ -1351,15 +1599,27 @@ msgstr "لقد تم تغيير كلمة المرور الخاصة بك"
 #: templates/account/password_set.html:6
 #: templates/account/password_set.html:13
 #: templates/account/password_set.html:25
-#: templates/users/user_settings_v2.html:171
+#: templates/users/user_settings_v2.html:190
 msgid "Set Password"
 msgstr "انشأ كلمة مرور"
 
-#: templates/account/signup.html:11
+#: templates/account/ratelimit_triggered.html:11
+msgid "Ratelimit Triggered"
+msgstr ""
+
+#: templates/account/ratelimit_triggered.html:13
+msgid ""
+"\n"
+"          We've detected an unusual number of login attempts and that's triggered this automatic message. Please try again\n"
+"          later or contact support if the problem persists.\n"
+"        "
+msgstr ""
+
+#: templates/account/signup.html:14
 msgid "About you"
 msgstr "نبذة عنك"
 
-#: templates/account/signup.html:14
+#: templates/account/signup.html:17
 #, python-format
 msgid ""
 "You are about to use your %(provider_name)s account to login. We first need "
@@ -1368,15 +1628,15 @@ msgstr ""
 "أنت على وشك استخدام أسم %(provider_name)s مزودك كاسم لحسابك لتسجيل الدخول. "
 "نحتاج أولاً بعض المعلومات قبل البدء "
 
-#: templates/account/signup.html:16
+#: templates/account/signup.html:19
 msgid "First we would like to know a little more about you."
 msgstr "أولاً نرغب بمعرفة المزيد عنك "
 
-#: templates/account/signup.html:22
+#: templates/account/signup.html:25
 msgid "Username (We recommend that you do not use your real name)"
 msgstr "إسم المستخدم ننصح بعد إستخدام الأسم الحقيقي"
 
-#: templates/account/signup.html:37
+#: templates/account/signup.html:40
 msgid ""
 "All the following information is optional but will help Movements.org ensure"
 " that you see the postings that are most relevant to your needs and "
@@ -1385,19 +1645,19 @@ msgstr ""
 "كل المعلومات التالية هي إختيارية، إلا انها ستساعد موفمنتس في تحديد العروض "
 "والطلبات المناسبة لك ولإحتياجاتك"
 
-#: templates/account/signup.html:40 templates/users/user_settings_v2.html:57
+#: templates/account/signup.html:43 templates/users/user_settings_v2.html:57
 msgid "First Name"
 msgstr "الأسم الأول"
 
-#: templates/account/signup.html:45 templates/users/user_settings_v2.html:62
+#: templates/account/signup.html:48 templates/users/user_settings_v2.html:62
 msgid "Last Name"
 msgstr "الإسم لثاني"
 
-#: templates/account/signup.html:59 templates/users/user_settings_v2.html:83
+#: templates/account/signup.html:62 templates/users/user_settings_v2.html:83
 msgid "Biography"
 msgstr "السيرة الذاتية "
 
-#: templates/account/signup.html:60
+#: templates/account/signup.html:63
 msgid ""
 "If you want other users to know something about you. You can control how "
 "much if any information to make public."
@@ -1405,11 +1665,11 @@ msgstr ""
 "اذا كنت ترغب بأن يعرف المسخدمين المزيد عنك بامكانك التحكم بحجم المعلومات "
 "الظاهرة للعامة"
 
-#: templates/account/signup.html:67
+#: templates/account/signup.html:70
 msgid "Social Vetting"
 msgstr "التحقق الإجتماعي"
 
-#: templates/account/signup.html:68
+#: templates/account/signup.html:71
 msgid ""
 "To protect the safety of our members we attempt to vet all applicants to "
 "make sure that their intentions are in accord with our <a href=\"/movements"
@@ -1422,28 +1682,43 @@ msgstr ""
 " المعلومات التي نطلبها هي إختيارية، لكن كلما قدمت معلومات أكثر، سيكون من "
 "الأسهل على الأخرين الثقة بك"
 
-#: templates/account/signup.html:73 templates/users/user_settings_v2.html:94
-msgid "Linked In"
+#: templates/account/signup.html:76
+#, fuzzy
+msgid "Linked In Profile Url"
 msgstr "لينكيد لن"
 
-#: templates/account/signup.html:94 templates/users/user_settings_v2.html:115
-msgid "Website or Blog"
+#: templates/account/signup.html:83
+#, fuzzy
+msgid "Twitter Handle"
+msgstr "التويتر"
+
+#: templates/account/signup.html:90
+msgid "Facebook Profile Url"
+msgstr ""
+
+#: templates/account/signup.html:97
+#, fuzzy
+msgid "Website or Blog Url"
 msgstr "موقع أو مدونة"
 
-#: templates/account/signup.html:104
+#: templates/account/signup.html:107 templates/market/view_post.html:353
+#: templates/market/view_post.html:419
 #: templates/market/clientside/closemarketitemdialog.html:29
 #: templates/market/clientside/messagedialog.html:23
-#: templates/market/clientside/recommenddialog.html:27
+#: templates/market/clientside/recommenddialog.html:39
 #: templates/market/clientside/reportdialog.html:20
 #: templates/market/clientside/reportuserdialog.html:21
-#: templates/users/user_settings_v2.html:178
+#: templates/two_factor/_wizard_actions.html:4
+#: templates/users/user_settings_v2.html:219
 msgid "Cancel"
 msgstr "الغاء"
 
-#: templates/account/signup.html:107 templates/users/more_about_you.html:55
-#: templates/users/more_about_you.html:73
-#: templates/users/more_about_you.html:91
-#: templates/users/more_about_you.html:109
+#: templates/account/signup.html:110
+#: templates/two_factor/_wizard_actions.html:13
+#: templates/users/more_about_you.html:50
+#: templates/users/more_about_you.html:68
+#: templates/users/more_about_you.html:86
+#: templates/users/more_about_you.html:104
 msgid "Next"
 msgstr "التالي"
 
@@ -1492,7 +1767,7 @@ msgid ""
 msgstr ""
 
 #: templates/account/signup_start.html:11
-#: templates/users/more_about_you.html:36
+#: templates/users/more_about_you.html:15
 msgid "Welcome to Movements"
 msgstr "أهلا بكم في موفمنتس"
 
@@ -1523,8 +1798,44 @@ msgid "Register"
 msgstr "سحل"
 
 #: templates/account/signup_start.html:45
-msgid "Use your Facebook details to sign in."
+#, fuzzy
+msgid "Use your social details to sign in."
 msgstr "إستخدم وسائل التواصل الإجتماعي من أجل ان تسجل."
+
+#: templates/account/signup_start.html:54
+#, fuzzy
+msgid "Connect with Linked In"
+msgstr "إتصل عبر التويتر"
+
+#: templates/account/unsubscribe.html:14
+msgid "Unsubscribe from notifications"
+msgstr ""
+
+#: templates/account/unsubscribe.html:17
+msgid "You have unsubscribed from notifications for the group "
+msgstr ""
+
+#: templates/account/unsubscribe.html:17
+msgid "These can be enabled again from your "
+msgstr ""
+
+#: templates/account/unsubscribe.html:19
+msgid ""
+"You have been unsubscribed from notifications from movements.org. These can "
+"be enabled again from your "
+msgstr ""
+
+#: templates/account/unsubscribe.html:21 templates/account/unsubscribe.html:30
+msgid "profile settings page."
+msgstr ""
+
+#: templates/account/unsubscribe.html:27
+msgid "Unsubscribe"
+msgstr ""
+
+#: templates/account/unsubscribe.html:30
+msgid "You can log in and unsubscribe from your "
+msgstr ""
 
 #: templates/account/verification_sent.html:4
 #: templates/account/verification_sent.html:9
@@ -1661,10 +1972,27 @@ msgid "Activate User"
 msgstr ""
 
 #: templates/account/email/user_vetting_email_message.html:3
+#: templates/emails/delete_account_request.html:3
 msgid "Dear Admin"
 msgstr ""
 
 #: templates/account/email/user_vetting_email_message.html:6
+msgid "A new user has signed up to Movements using the details below:"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.html:17
+msgid "Please vet this user by clicking on the link below:"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.html:22
+msgid ""
+"Once the user has confirmed their email address you will receive another email\n"
+"to let you know. From the list above <strong>only</strong> the username and email are currently \n"
+"stored on the server. Once you have  vetted the user, the user will then be able \n"
+"to fill out all their profile information. Sharing via their settings what\n"
+"personal information they feel comfortable with."
+msgstr ""
+
 #: templates/account/email/user_vetting_email_message.txt:2
 #, python-format
 msgid ""
@@ -1680,15 +2008,6 @@ msgid ""
 "Website    : %(form.data.web_url)s\n"
 "\n"
 "Please vet this user by clicking on the link below:"
-msgstr ""
-
-#: templates/account/email/user_vetting_email_message.html:22
-msgid ""
-"Once the user has confirmed their email address you will receive another email\n"
-"to let you know. From the list above <strong>only</strong> the username and email are currently \n"
-"stored on the server. Once you have  vetted the user, the user will then be able \n"
-"to fill out all their profile information. Sharing via their settings what\n"
-"personal information they feel comfortable with."
 msgstr ""
 
 #: templates/account/email/user_vetting_email_message.txt:17
@@ -1758,16 +2077,18 @@ msgstr ""
 msgid "you are already logged in as %(user_display)s."
 msgstr ""
 
+#: templates/admin/group_user_management_list.html:13
+#: templates/admin/incident_change_list.html:17
+#: templates/admin/user_tracking_change_list.html:22
+msgid "Export as CSV"
+msgstr ""
+
 #: templates/admin/incident_change_form.html:7
 msgid "Community"
 msgstr ""
 
 #: templates/admin/incident_change_form.html:10
 msgid "Post creator"
-msgstr ""
-
-#: templates/admin/incident_change_form.html:13
-msgid "Staff owner"
 msgstr ""
 
 #: templates/admin/incident_change_form.html:17
@@ -1782,9 +2103,43 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
-#: templates/admin/incident_change_list.html:17
-#: templates/admin/user_tracking_change_list.html:22
-msgid "Export as CSV"
+#: templates/admin/index.html:22
+#, python-format
+msgid "Models in the %(name)s application"
+msgstr ""
+
+#: templates/admin/index.html:23
+#, python-format
+msgid "%(name)s"
+msgstr ""
+
+#: templates/admin/index.html:35
+msgid "Add"
+msgstr ""
+
+#: templates/admin/index.html:41
+#, fuzzy
+msgid "Change"
+msgstr "تغيير الصورة"
+
+#: templates/admin/index.html:51
+msgid "You don't have permission to edit anything."
+msgstr ""
+
+#: templates/admin/index.html:61
+msgid "Recent Actions"
+msgstr ""
+
+#: templates/admin/index.html:63
+msgid "My Actions"
+msgstr ""
+
+#: templates/admin/index.html:67
+msgid "None available"
+msgstr ""
+
+#: templates/admin/index.html:82
+msgid "Unknown content"
 msgstr ""
 
 #: templates/admin/user_tracking_change_form.html:11
@@ -1807,69 +2162,64 @@ msgstr ""
 msgid "Export Unverified"
 msgstr ""
 
+#: templates/admin/auth/user/rate_lang.html:7
 #: templates/admin/auth/user/vet_user.html:7
+#: templates/admin/testing/notification_ping.html:7
 msgid "Home"
 msgstr ""
 
+#: templates/admin/auth/user/rate_lang.html:11
 #: templates/admin/auth/user/vet_user.html:11
 msgid "Vet User"
 msgstr ""
 
+#: templates/admin/auth/user/rate_lang.html:22
 #: templates/admin/auth/user/vet_user.html:22
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/auth/user/vet_user.html:44
+#: templates/admin/auth/user/rate_lang.html:25
+msgid "Here you can set the user to be a trusted translator for a language."
+msgstr ""
+
+#: templates/admin/auth/user/rate_lang.html:33
+#: templates/admin/auth/user/vet_user.html:67
 msgid "Update"
 msgstr ""
 
-#: templates/ahr/home_v2.html:13
-msgid "Already have an account?"
-msgstr "تملك حساب مسبقاً ؟"
+#: templates/admin/testing/notification_ping.html:8
+#, fuzzy
+msgid "Notification Ping"
+msgstr "اشعارات"
 
-#: templates/ahr/home_v2.html:37
+#: templates/admin/testing/notification_ping.html:17
 msgid ""
-"Movements is crowdsourcing human rights. It connects human rights activists "
-"in closed societies with those with skills to help them around the world. "
-"Join today and help a dissident in need."
-msgstr ""
-"موفمنتس هي منظمة تقوم على حشد الطاقات الفاعلة من اجل الدفاع عن حقوق الإنسان."
-" تقوم المنظمة بوصل نشطاء حقوق الإنسان في المجتمعات المغلقة مع خبراء يتمتعون "
-"بمهارات حول العالم. انضموا إلينا اليوم، وساعدوا النشطاء والمنشقين من هم "
-"بحاجة لمساعدتكم"
-
-#: templates/ahr/home_v2.html:41 templates/ahr/home_v2.html.py:68
-#: templates/ahr/home_v2.html:134
-msgid "Sign up now"
-msgstr "سجل الأن"
-
-#: templates/ahr/home_v2.html:46 templates/ahr/home_v2.html.py:73
-#: templates/ahr/home_v2.html:113
-msgid "Find out more"
-msgstr "اكتشف المزيد"
-
-#: templates/ahr/home_v2.html:51 templates/ahr/home_v2.html.py:78
-msgid "Movements Blog"
+"Send a ping via the notifications process to test that it's all running."
 msgstr ""
 
-#: templates/ahr/home_v2.html:61
-msgid ""
-"Request help from people across the globe, offer help to an activist in "
-"need."
+#: templates/admin/testing/notification_ping.html:23
+msgid "SEND PING"
 msgstr ""
-"طلب خدمة من أفراد مقيمين حول العالم، اعرض مساعدتك على ناشط  بحاجة إليها"
 
-#: templates/ahr/home_v2.html:64
-msgid ""
-"Whether you’re a journalist, artist, technologist, policy-maker, linguist or"
-" PR agent - everyone has skills that can advance human rights."
+#: templates/admin_static/tinymce_admin/views.py:74
+msgid "Error running spellchecker"
 msgstr ""
-"سواء كنت صحفي، فنان، تقني، رجل سياسة، مترجم ، او خبيرعلاقات عامة، لكل منا "
-"خبرات يستطيع تسخيرها لأجل تعزيز حقوق الإنسان.اعرف عنا أكثر "
 
-#: templates/ahr/home_v2.html:112
+#: templates/ahr/home_v2.html:63
+msgid "DONATE"
+msgstr "تبرع"
+
+#: templates/ahr/home_v2.html:88
+msgid "Our Partners"
+msgstr ""
+
+#: templates/ahr/home_v2.html:105
+msgid "more"
+msgstr ""
+
+#: templates/ahr/home_v2.html:126
 msgid ""
 "In closed societies around the world, brave human rights defenders face "
 "enormous hurdles to advance human rights.  Movements.org is a new platform "
@@ -1886,11 +2236,12 @@ msgstr ""
 "يتمتعون بمهارات تؤهلهم لمساعدة النشطاء. سواء كنت صحافي،سياسي، ناشط،فنان، "
 "تقني او تتحدث عدة لغات، سيكون لك دور لتلعبه"
 
-#: templates/ahr/home_v2.html:122 templates/users/more_about_you.html:41
+#: templates/ahr/home_v2.html:137 templates/ahr/home_v2.html.py:142
+#: templates/users/more_about_you.html:26
 msgid "Create a Request"
 msgstr "انشر طلبك"
 
-#: templates/ahr/home_v2.html:123 templates/users/more_about_you.html:43
+#: templates/ahr/home_v2.html:138 templates/ahr/home_v2.html.py:143
 msgid ""
 "Are you an activist in need of help? Movements.org leverages technology to "
 "help those in closed societies find the assistance they need to amplify "
@@ -1900,11 +2251,11 @@ msgstr ""
 "  في المجتمعات المحكومة من أنظمة مغلقة من أجل إيجاد المساعدة التي يبتغون "
 "وبهدف تقوية أصواتهم وتقوية قدرتهم على التأثير ."
 
-#: templates/ahr/home_v2.html:132
+#: templates/ahr/home_v2.html:152
 msgid "Getting Started"
 msgstr "إبدا معنا"
 
-#: templates/ahr/home_v2.html:133
+#: templates/ahr/home_v2.html:153
 msgid ""
 "The Movements platform enables dissidents who need help to connect to "
 "activists and others who can provide it. Get started by joining today."
@@ -1912,11 +2263,11 @@ msgstr ""
 "تقوم منظمة موفمنتس بتمكين النشطاء والمنشقين في الدول الديكتاتورية من هم "
 "بحاجة لمساعدة عبر وصلهم بنشطاء وأشخاص قادرين على المساعدة. انضم إلينا اليوم"
 
-#: templates/ahr/home_v2.html:143
+#: templates/ahr/home_v2.html:164 templates/ahr/home_v2.html.py:169
 msgid "Offer your Services"
 msgstr "أعرض خدمة"
 
-#: templates/ahr/home_v2.html:144 templates/users/more_about_you.html:47
+#: templates/ahr/home_v2.html:165 templates/ahr/home_v2.html.py:170
 msgid ""
 "If you’ve ever wanted to help a human rights activist, here’s your "
 "opportunity. All of us have skills that can be put to use to advance basic "
@@ -1924,6 +2275,10 @@ msgid ""
 msgstr ""
 "لو أردت يوما أن تقوم بمساعدة ناشط حقوق إنسان، موفمنتس تقدم لك الفرصة في ذلك."
 " لكل منا مهارات معينة يمكن إستخدامها من أجل تعزيز الحريات الأساسية"
+
+#: templates/ahr/snippets/_carousel_buttons.html:7
+msgid "Requests & Offers"
+msgstr "طلب/عرض"
 
 #: templates/emails/base_email.html:4 templates/emails/base_email.txt:3
 msgid "Hello Movements.Org user,"
@@ -1939,6 +2294,8 @@ msgid ""
 msgstr ""
 
 #: templates/emails/base_email.html:17 templates/emails/base_email.txt:14
+#: templates/emails/notification_email.html:51
+#: templates/emails/snippets/_group_email_notification_settings.html:5
 msgid "You can update your notification preferences in "
 msgstr ""
 
@@ -1995,41 +2352,89 @@ msgstr ""
 msgid "You have the following new notifications."
 msgstr ""
 
-#: templates/emails/notification_email.html:10
 #: templates/emails/notification_email.html:13
-#: templates/emails/notification_email.html:17
+#: templates/market/notifications.html:33
+msgid "There is 1 item that we need your help translating."
+msgstr ""
+
+#: templates/emails/notification_email.html:15
+#: templates/emails/notification_email.html:23
+#: templates/market/notifications.html:35
+#: templates/market/notifications.html:43
+msgid "There are "
+msgstr ""
+
+#: templates/emails/notification_email.html:15
+msgid " items that we need your help translating."
+msgstr ""
+
+#: templates/emails/notification_email.html:21
+#: templates/market/notifications.html:41
+msgid "There is 1 translation that needs your approval."
+msgstr ""
+
+#: templates/emails/notification_email.html:23
+#: templates/market/notifications.html:43
+msgid " translations that need your approval."
+msgstr ""
+
+#: templates/emails/notification_email.html:27
+#: templates/emails/notification_email.html:31
+#: templates/market/notifications.html:47
+#: templates/market/notifications.html:51
+msgid "Your translation for"
+msgstr ""
+
+#: templates/emails/notification_email.html:29
+#: templates/market/notifications.html:49
+msgid "has been approved"
+msgstr ""
+
+#: templates/emails/notification_email.html:33
+#: templates/market/notifications.html:53
+msgid "has been rejected"
+msgstr ""
+
+#: templates/emails/notification_email.html:36
+#: templates/emails/notification_email.html:39
+#: templates/emails/notification_email.html:43
 msgid "On"
 msgstr ""
 
-#: templates/emails/notification_email.html:10
+#: templates/emails/notification_email.html:36
 msgid "commented on a post titled"
 msgstr ""
 
-#: templates/emails/notification_email.html:14
-#: templates/market/notifications.html:39
+#: templates/emails/notification_email.html:40
+#: templates/market/notifications.html:70
 #: templates/market/clientside/notifications.html:12
 msgid "updated"
 msgstr "محدث"
 
-#: templates/emails/notification_email.html:14
+#: templates/emails/notification_email.html:40
 msgid "created"
 msgstr ""
 
-#: templates/emails/notification_email.html:14
-#: templates/market/notifications.html:40
+#: templates/emails/notification_email.html:40
+#: templates/market/notifications.html:71
 msgid "the"
 msgstr "ال"
 
-#: templates/emails/notification_email.html:17
+#: templates/emails/notification_email.html:43
 msgid "sent you"
 msgstr ""
 
-#: templates/emails/notification_email.html:17
+#: templates/emails/notification_email.html:43
 msgid "a private message"
 msgstr ""
 
-#: templates/emails/notification_email.html:18
+#: templates/emails/notification_email.html:44
 msgid "with the subject"
+msgstr ""
+
+#: templates/emails/notification_email.html:52
+#: templates/emails/snippets/_group_email_notification_settings.html:6
+msgid "your settings page"
 msgstr ""
 
 #: templates/emails/notready.html:4
@@ -2125,15 +2530,37 @@ msgstr ""
 msgid "User \"%(user)s\" reported user \"%(another_user)s\""
 msgstr ""
 
-#: templates/market/create_offer.html:11
+#: templates/emails/snippets/_group_email_notification_settings.html:4
+#, python-format
+msgid ""
+"You are receiving this message because you are a member of the group "
+"%(group_name)s."
+msgstr ""
+
+#: templates/emails/snippets/_group_email_notification_settings.html:7
+msgid "To stop getting notifications from this group you can"
+msgstr ""
+
+#: templates/emails/snippets/_group_email_notification_settings.html:8
+#: templates/emails/snippets/_group_email_notification_settings.html:10
+#: templates/market/clientside/userprofile.html:50
+msgid "click here"
+msgstr ""
+
+#: templates/emails/snippets/_group_email_notification_settings.html:9
+#, fuzzy
+msgid "To stop all notification emails you can"
+msgstr "تم تحميل كل الاشعارات"
+
+#: templates/market/create_offer.html:12
 msgid "Offer a service"
 msgstr "أعرض خدمة"
 
-#: templates/market/create_offer.html:12
+#: templates/market/create_offer.html:13
 msgid "Do you have expertise to offer?"
 msgstr "هل لديك خبرات لتقدمها ؟"
 
-#: templates/market/create_offer.html:13
+#: templates/market/create_offer.html:14
 msgid ""
 "An Offer can be technical or professional skills, an opportunity to publish "
 "a story, or any skill that may be of help to others. Your Offer will be "
@@ -2147,69 +2574,84 @@ msgstr ""
 msgid "1. What skills can you offer?"
 msgstr "1. ما هي المهارات التي بامكانك تقديمها"
 
-#: templates/market/create_offer.html:33
-#: templates/market/create_request.html:32
+#: templates/market/create_offer.html:32
+#: templates/market/create_request.html:33
 msgid "2. What issues does this relate to?"
 msgstr "2. ماذا تربط هذا ألقضية ب؟ "
 
-#: templates/market/create_offer.html:49
+#: templates/market/create_offer.html:46
 msgid "3. Which countries are you interested in helping?"
 msgstr "3. ما هي الدول التي تهتم بمساعدتها"
 
-#: templates/market/create_offer.html:55
+#: templates/market/create_offer.html:52
 msgid ""
 "Movements.org provides access to skills and experts. Please describe your "
 "skills, abilities, or services below. Be as explicit and clear as possible."
 msgstr "موفمينتس.اورغ تمنحك الوسيلة للتواصل مع الخبراء و اصحاب المهارات"
 
-#: templates/market/create_offer.html:56
+#: templates/market/create_offer.html:53
 msgid "4. How can you help?"
 msgstr "4. ؟العنوان : ماذا تعرض"
 
-#: templates/market/create_offer.html:57
-#: templates/market/create_request.html:58
+#: templates/market/create_offer.html:54
+#: templates/market/create_request.html:59
 msgid "Be specific and clear."
 msgstr "كن واضح و محدد"
 
-#: templates/market/create_offer.html:57
-#: templates/market/create_request.html:58
+#: templates/market/create_offer.html:54
+#: templates/market/create_request.html:59
 msgid "(max 120 characters)"
 msgstr ""
 
-#: templates/market/create_offer.html:66
-#: templates/market/create_request.html:67
+#: templates/market/create_offer.html:64
+#: templates/market/create_request.html:69
 msgid "5. Please write your post"
 msgstr "5. رجاءاً أكتب منشورك"
 
-#: templates/market/create_offer.html:67
-msgid "Tell a compelling story."
-msgstr "أخبر قصة قاهرة"
+#: templates/market/create_offer.html:65
+msgid ""
+"Tell a compelling story. Youtube, vimeo and FaceBook video links will show "
+"the respective video players where possible."
+msgstr ""
 
-#: templates/market/create_offer.html:75
-#: templates/market/create_request.html:75
-msgid "May we tweet this request?"
-msgstr "هل بامكاننا نشر الطلب كتغريدة على موقع تويتر (الفراغ يعني موافق)"
+#: templates/market/create_offer.html:71
+#: templates/market/create_request.html:76
+#, fuzzy
+msgid "6. Add images to your post"
+msgstr "5. رجاءاً أكتب منشورك"
 
-#: templates/market/create_offer.html:78
-#: templates/market/create_request.html:78
+#: templates/market/create_offer.html:83
+#: templates/market/create_request.html:89
+msgid ""
+"Click here or drag files into this box in order to add an image into your "
+"post."
+msgstr ""
+
+#: templates/market/create_offer.html:90
+#: templates/market/create_request.html:97
+msgid "May we share this on social media?"
+msgstr ""
+
+#: templates/market/create_offer.html:93
+#: templates/market/create_request.html:100
 msgid "We won’t use your name or any identifying information"
 msgstr "لن نقوم باستخدام اسمك أو أي معلومات شخصية تخصك"
 
-#: templates/market/create_offer.html:85
-#: templates/market/create_request.html:85
+#: templates/market/create_offer.html:100
+#: templates/market/create_request.html:107
 msgid "Receive notifications"
 msgstr ""
 
-#: templates/market/create_offer.html:95
-#: templates/market/create_request.html:94
+#: templates/market/create_offer.html:109
+#: templates/market/create_request.html:116
 msgid "Post now"
 msgstr "انشر الان"
 
-#: templates/market/create_request.html:11
+#: templates/market/create_request.html:12
 msgid "Request a service"
 msgstr "اطلب خدمة"
 
-#: templates/market/create_request.html:13
+#: templates/market/create_request.html:14
 msgid ""
 "A Request is a way to ask for help from experts on Movements. Be as specific"
 " and clear as possible about what you need.  If you need a lawyer tell us "
@@ -2222,19 +2664,19 @@ msgstr ""
 "المحامي (أمريكا، ألمانيا، بريطانيا)اذا كان هناك المزيد لتشرحه فصل بالشرح "
 "فذلك سيجعل مساعدتك أسهل "
 
-#: templates/market/create_request.html:18
+#: templates/market/create_request.html:19
 msgid "1. What skills do you need?"
 msgstr "1. ما المهارات التي تحتاجها ؟ "
 
-#: templates/market/create_request.html:47
+#: templates/market/create_request.html:48
 msgid "3. What countries does this request apply to?"
 msgstr "3. ما هي البلدان التي يقدم هذا الطلب لها"
 
-#: templates/market/create_request.html:48
+#: templates/market/create_request.html:49
 msgid "Indicate the region and/or specific country."
 msgstr "حدد المنطقة و الدولة "
 
-#: templates/market/create_request.html:55
+#: templates/market/create_request.html:56
 msgid ""
 " Movements.org provides access to skills and experts. At this time, we "
 "cannot provide funding or equipment. If you need either please see the <a "
@@ -2246,28 +2688,30 @@ msgstr ""
 "href=\"/movements/resources/\">الموارد</a>. قد يكون كاتب الاقتراح قادر على "
 "مساعدتك في الحصول على تمويل من مصدر مختلف."
 
-#: templates/market/create_request.html:56
+#: templates/market/create_request.html:57
 msgid ""
 "Please describe your request below. Be as explicit and clear as possible."
 msgstr "صف طلبك بالأسفل و كن واضحاً قدر الامكان"
 
-#: templates/market/create_request.html:57
+#: templates/market/create_request.html:58
 msgid "4. What do you need?"
 msgstr "4. العنوان : ماذا تحتاج (مساحة محدودة)"
 
-#: templates/market/create_request.html:68
-msgid "Tell a compelling story and state your needs."
-msgstr "اخبر قصة قاهرة و حدد طلباتك"
+#: templates/market/create_request.html:70
+msgid ""
+"Tell a compelling story and state your needs. Youtube, vimeo and FaceBook "
+"video links will show the respective video players where possible."
+msgstr ""
 
-#: templates/market/market.html:15
+#: templates/market/market.html:16
 msgid "See all"
 msgstr "انظر الكل"
 
-#: templates/market/market.html:16
+#: templates/market/market.html:17
 msgid "Requests"
 msgstr "طلبات"
 
-#: templates/market/market.html:17
+#: templates/market/market.html:18
 msgid "Offers"
 msgstr "عروض"
 
@@ -2275,9 +2719,9 @@ msgstr "عروض"
 msgid "Hide/Show"
 msgstr "أخفي/أظهر"
 
-#: templates/market/market.html:33 templates/users/more_about_you.html:26
-#: templates/users/more_about_you.html:97
-#: templates/users/user_profile_v2.html:62
+#: templates/market/market.html:33 templates/users/more_about_you.html:92
+#: templates/users/more_about_you.html:166
+#: templates/users/user_profile_v2.html:71
 msgid "Skills"
 msgstr "المهارات"
 
@@ -2285,7 +2729,7 @@ msgstr "المهارات"
 msgid "Issues"
 msgstr ""
 
-#: templates/market/market.html:45 templates/users/more_about_you.html:79
+#: templates/market/market.html:45 templates/users/more_about_you.html:74
 msgid "Countries"
 msgstr "البلدان"
 
@@ -2301,24 +2745,39 @@ msgstr "أضغط ادخال للبحث"
 msgid "Click \"Search\" above to close"
 msgstr "اضغط\"بحث\" في الأعلى للاغلاق"
 
-#: templates/market/market.html:78
+#: templates/market/market.html:80
 msgid "Featured posts"
 msgstr "منشورات اخيرة"
 
-#: templates/market/market.html:87
+#: templates/market/market.html:89
 msgid "Sticky posts"
 msgstr "منشورات ملصوقة"
 
-#: templates/market/market.html:113
+#: templates/market/market.html:100
+#, fuzzy
+msgid "Newest Posts"
+msgstr "تم نشر طلبك"
+
+#: templates/market/market.html:115
 msgid "Show hidden"
 msgstr "أظهر المخفي"
 
-#: templates/market/market.html:118 templates/market/market.html.py:126
-#: templates/market/market.html:134 templates/market/market.html.py:140
+#: templates/market/market.html:120 templates/market/market.html.py:129
+#: templates/market/market.html:138 templates/market/market.html.py:144
 msgid "Select all"
 msgstr "اختر الكل"
 
-#: templates/market/market.html:139
+#: templates/market/market.html:124
+msgid "Other skills"
+msgstr ""
+
+#: templates/market/market.html:133
+msgid "Other issues"
+msgstr ""
+
+#: templates/market/market.html:143
+#: templates/two_factor/_wizard_actions.html:8
+#: templates/two_factor/_wizard_actions.html:11
 msgid "Back"
 msgstr "العودة"
 
@@ -2334,31 +2793,35 @@ msgstr "تم تحميل كل الاشعارات"
 msgid "More"
 msgstr "المزيد"
 
-#: templates/market/notifications.html:30
+#: templates/market/notifications.html:35
+msgid " item that we need your help translating."
+msgstr ""
+
+#: templates/market/notifications.html:60
 msgid "commented on"
 msgstr "تعليق على"
 
-#: templates/market/notifications.html:30
+#: templates/market/notifications.html:60
 #: templates/market/clientside/notifications.html:15
 msgid "your"
 msgstr "أنت"
 
-#: templates/market/notifications.html:32
-#: templates/market/notifications.html:42
+#: templates/market/notifications.html:62
+#: templates/market/notifications.html:73
 msgid "offer"
 msgstr "عرض"
 
-#: templates/market/notifications.html:34
-#: templates/market/notifications.html:44
+#: templates/market/notifications.html:64
+#: templates/market/notifications.html:75
 msgid "request"
 msgstr "طلب"
 
-#: templates/market/notifications.html:39
+#: templates/market/notifications.html:70
 #: templates/market/clientside/notifications.html:12
 msgid "posted"
 msgstr "منشور"
 
-#: templates/market/notifications.html:50
+#: templates/market/notifications.html:81
 msgid "sent you a private "
 msgstr "مرسل لك بشكل خاص"
 
@@ -2437,63 +2900,173 @@ msgstr ""
 msgid "Return to Market"
 msgstr "العودة إلى السوق"
 
-#: templates/market/view_post.html:12
+#: templates/market/translations.html:10
+msgid "Translations for approval"
+msgstr ""
+
+#: templates/market/translations.html:19
+msgid "Your translations in progress"
+msgstr ""
+
+#: templates/market/translations.html:27
+msgid "Translations needed"
+msgstr ""
+
+#: templates/market/translations.html:40
+msgid "You are not currently working on any translations."
+msgstr ""
+
+#: templates/market/translations.html:46 templates/market/translations.html:65
+#, fuzzy
+msgid "Translating post from "
+msgstr "ترجم هذا المنشور"
+
+#: templates/market/translations.html:48 templates/market/translations.html:67
+msgid " to "
+msgstr ""
+
+#: templates/market/translations.html:50 templates/market/translations.html:69
+msgid " - go to item"
+msgstr ""
+
+#: templates/market/translations.html:52 templates/market/translations.html:71
+msgid "Original"
+msgstr ""
+
+#: templates/market/translations.html:53
+#, fuzzy
+msgid "Translation"
+msgstr "ترجم هذا المنشور"
+
+#: templates/market/translations.html:59
+msgid "There is nothing that currently needs translating."
+msgstr ""
+
+#: templates/market/translations.html:77
+msgid "There are no translations waiting approval."
+msgstr ""
+
+#: templates/market/translations.html:81
+#, fuzzy
+msgid "Translator"
+msgstr "ترجم هذا المنشور"
+
+#: templates/market/translations.html:86
+msgid "Original title"
+msgstr ""
+
+#: templates/market/translations.html:91
+#, fuzzy
+msgid "Translated title"
+msgstr "ترجم هذا المنشور"
+
+#: templates/market/translations.html:92
+msgid "Original body"
+msgstr ""
+
+#: templates/market/translations.html:94
+#, fuzzy
+msgid "Translated body"
+msgstr "ترجم هذا المنشور"
+
+#: templates/market/translations.html:96 templates/market/view_post.html:329
+#: templates/market/view_post.html:396
+msgid "Approve"
+msgstr ""
+
+#: templates/market/translations.html:97 templates/market/view_post.html:330
+#: templates/market/view_post.html:397
+msgid "Discard"
+msgstr ""
+
+#: templates/market/view_post.html:41
 msgid "on"
 msgstr "على"
 
-#: templates/market/view_post.html:20
-msgid "Posted by"
-msgstr "منشور بواسطة"
+#: templates/market/view_post.html:46
+#, fuzzy
+msgid "Edit Post"
+msgstr "اضافة منشور "
 
-#: templates/market/view_post.html:31
-msgid "Translate this post"
-msgstr "ترجم هذا المنشور"
+#: templates/market/view_post.html:50
+#, fuzzy
+msgid "How you can Help"
+msgstr "4. ؟العنوان : ماذا تعرض"
 
-#: templates/market/view_post.html:58
-msgid "Recommend"
-msgstr "مقترح"
+#: templates/market/view_post.html:52
+msgid ""
+"Share Movements' posts across your social media platforms. For example, you "
+"can share Movements' users' requests with your representatives."
+msgstr ""
 
-#: templates/market/view_post.html:64
+#: templates/market/view_post.html:53
 msgid "Tweet"
 msgstr "تغريدة"
 
-#: templates/market/view_post.html:71
-msgid "Direct message"
-msgstr "رسالة مباشرة"
+#: templates/market/view_post.html:53
+msgid "posts that interest you."
+msgstr ""
 
-#: templates/market/view_post.html:75
-msgid "Report this post"
-msgstr "أخبر عن هذا المنشور"
+#: templates/market/view_post.html:54
+#, fuzzy
+msgid "Recommend a Friend"
+msgstr "أقترح هذا"
 
-#: templates/market/view_post.html:84
+#: templates/market/view_post.html:54
+msgid ""
+"If you have a friend with the skills in demand on our network, tell them "
+"about us!"
+msgstr ""
+
+#: templates/market/view_post.html:72
+msgid "Posted by"
+msgstr "منشور بواسطة"
+
+#: templates/market/view_post.html:88
+msgid "I WANT TO HELP"
+msgstr ""
+
+#: templates/market/view_post.html:98
+msgid "CONTACT THIS OFFER"
+msgstr ""
+
+#: templates/market/view_post.html:107 templates/market/view_post.html:248
+#: templates/market/view_post.html:253
+msgid "via Google Translate"
+msgstr ""
+
+#: templates/market/view_post.html:108 templates/market/view_post.html:250
+#: templates/market/view_post.html:255
+msgid "via"
+msgstr ""
+
+#: templates/market/view_post.html:121
+msgid "Translate this post"
+msgstr "ترجم هذا المنشور"
+
+#: templates/market/view_post.html:166
+msgid "TRANSLATE THIS POST"
+msgstr ""
+
+#: templates/market/view_post.html:183
 msgid "Leave a comment"
 msgstr "اترك تعليق"
 
-#: templates/market/view_post.html:88
-msgid "Please do not post any personally identifying information."
-msgstr "الرجاء عدم نشر أي معلومات شخصية عن الهوية"
-
-#: templates/market/view_post.html:89
-msgid "Don't use your real name or email address when leaving a comment."
-msgstr "لا تترك اسمك الحقيقي أو بريدك الالكتروني عند ترك تعليق"
-
-#: templates/market/view_post.html:92
-msgid "Post comment"
-msgstr "أنشر تعليق"
-
-#: templates/market/view_post.html:105
-#, python-format
+#: templates/market/view_post.html:190
+#, fuzzy, python-format
 msgid ""
-"Please <a href=\"%(accountUrl)s\">Login</a> or <a "
-"href=\"%(signupUrl)s\">Sign up</a> to view more about this post. Once you've"
-" done this you will be able to send messages to the author, comment and rate"
-" this post."
+"Please note that you will need to <a href=\"%(accountUrl)s\">login</a>\n"
+"              or <a href=\"%(signupUrl)s\">sign up</a> before you will be able to contact the author or comment."
 msgstr ""
 "<a href=\"%(accountUrl)s\">الرجاء تسجيل الدخول لعرض</a> المزيد حول هذا "
 "المنشور. عندما <a href=\"%(signupUrl)s\">تتنهي من تسجيل الدخول</a> ستتمكن من"
 " ارسال رسائل لكاتب المنشور و تصنيف المنشور و التعليق عليه"
 
-#: templates/market/view_post.html:129
+#: templates/market/view_post.html:197
+msgid "POST COMMENT"
+msgstr ""
+
+#: templates/market/view_post.html:230
 #, python-format
 msgid ""
 "You don't have any languages selected. Please add some in your <a "
@@ -2502,9 +3075,56 @@ msgstr ""
 "لم تختر أي لغة، الرجاء اضافة اللغة  <a "
 "href=\"%(settingsUrl)s#skills\">لمهاراتك </a>  من قسم الخيارات"
 
-#: templates/market/view_post.html:146
+#: templates/market/view_post.html:279
+msgid "Provide a translation"
+msgstr ""
+
+#: templates/market/view_post.html:285
 msgid "Delete"
 msgstr "حذف"
+
+#: templates/market/view_post.html:298 templates/market/view_post.html:363
+msgid "Waiting for approval. Translator - "
+msgstr ""
+
+#: templates/market/view_post.html:302 templates/market/view_post.html:368
+msgid "In correction now. Translator - "
+msgstr ""
+
+#: templates/market/view_post.html:304 templates/market/view_post.html:370
+msgid "In translation now. Translator - "
+msgstr ""
+
+#: templates/market/view_post.html:313 templates/market/view_post.html:380
+#, fuzzy
+msgid "Translation completed"
+msgstr "ترجم هذا المنشور"
+
+#: templates/market/view_post.html:314 templates/market/view_post.html:381
+msgid "Save draft"
+msgstr ""
+
+#: templates/market/view_post.html:315 templates/market/view_post.html:382
+msgid "Cancel translation"
+msgstr ""
+
+#: templates/market/view_post.html:323 templates/market/view_post.html:390
+#, fuzzy
+msgid "Cancel editing"
+msgstr "الغاء"
+
+#: templates/market/view_post.html:325 templates/market/view_post.html:392
+#: templates/market/clientside/marketitem.html:99
+msgid "Edit"
+msgstr "تحرير"
+
+#: templates/market/view_post.html:351 templates/market/view_post.html:417
+msgid ""
+"If you want to take over the translation from another user you can do so "
+"below by clicking on the confirm button. That will make you the current "
+"owner of the translation and the existing owner will not be able to complete"
+" their translation."
+msgstr ""
 
 #: templates/market/clientside/closemarketitemdialog.html:10
 msgid "CLOSE A REQUEST"
@@ -2515,7 +3135,7 @@ msgid "CLOSE AN OFFER"
 msgstr ""
 
 #: templates/market/clientside/closemarketitemdialog.html:32
-#: templates/market/clientside/marketitem.html:89
+#: templates/market/clientside/marketitem.html:100
 msgid "Close"
 msgstr "اغلاق"
 
@@ -2523,8 +3143,21 @@ msgstr "اغلاق"
 msgid "Please enter your answer"
 msgstr ""
 
-#: templates/market/clientside/marketitem.html:25
-#: templates/market/clientside/marketitem.html:79
+#: templates/market/clientside/marketitem.html:31
+msgid "Auto translated by Google Translate."
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:31
+msgid "In translation now."
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:32
+#, fuzzy
+msgid "Translated by"
+msgstr "منشور بواسطة"
+
+#: templates/market/clientside/marketitem.html:35
+#: templates/market/clientside/marketitem.html:90
 #, fuzzy, python-format
 msgid ""
 "by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on "
@@ -2533,48 +3166,53 @@ msgstr ""
 "كتبها <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, منشور بتاريخ  <%%- moment(pub_date).format('DD/MM/YYYY, HH:mm') %%>, </span>\n"
 "            <a href=\"/market/<%%- pk %%>\"><%%- collaboratorcount %%> المساهمين</a>."
 
-#: templates/market/clientside/marketitem.html:67
+#: templates/market/clientside/marketitem.html:78
 msgid "FEATURED OFFER"
 msgstr "العرض الأخير"
 
-#: templates/market/clientside/marketitem.html:69
+#: templates/market/clientside/marketitem.html:80
 msgid "FEATURED REQUEST"
 msgstr " الطلب الأخير"
 
 #: templates/market/clientside/marketitem.html:86
+msgid "Auto translated by Google Translate"
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:97
 msgid "Hide"
 msgstr "اخفاء"
 
-#: templates/market/clientside/marketitem.html:87
+#: templates/market/clientside/marketitem.html:98
 msgid "Stick"
 msgstr "الصق"
 
-#: templates/market/clientside/marketitem.html:88
-msgid "Edit"
-msgstr "تحرير"
-
-#: templates/market/clientside/marketitem.html:90
+#: templates/market/clientside/marketitem.html:101
 msgid "Report"
 msgstr "تقرير"
+
+#: templates/market/clientside/marketitem.html:102
+#, fuzzy
+msgid "Unpublish"
+msgstr "الإنكليزية"
 
 #: templates/market/clientside/messagedialog.html:8
 msgid "New message to "
 msgstr "رسالة جديدة ل"
 
 #: templates/market/clientside/messagedialog.html:12
-#: templates/market/clientside/recommenddialog.html:16
+#: templates/market/clientside/recommenddialog.html:28
 msgid "Subject"
 msgstr ""
 
 #: templates/market/clientside/messagedialog.html:16
-#: templates/market/clientside/recommenddialog.html:20
+#: templates/market/clientside/recommenddialog.html:32
 #: templates/market/clientside/reportdialog.html:13
 #: templates/market/clientside/reportuserdialog.html:14
 msgid "Message"
 msgstr ""
 
 #: templates/market/clientside/messagedialog.html:26
-#: templates/market/clientside/recommenddialog.html:30
+#: templates/market/clientside/recommenddialog.html:42
 #: templates/market/clientside/reportdialog.html:23
 #: templates/market/clientside/reportuserdialog.html:24
 msgid "Send"
@@ -2604,31 +3242,41 @@ msgstr "الى: اسم المستخدم و البريد الالكتروني"
 msgid "Start typing a username or enter an email address"
 msgstr "ابدأ بكتابة اسم المستخدم و أدخل بريدك الالكتروني"
 
-#: templates/market/clientside/recommenddialog.html:60
-msgid "user"
-msgstr "مستخدم"
+#: templates/market/clientside/recommenddialog.html:16
+msgid "To: Group"
+msgstr ""
 
-#: templates/market/clientside/recommenddialog.html:62
+#: templates/market/clientside/recommenddialog.html:18
+msgid "Start typing a group name"
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:98
 msgid "post"
 msgstr "منشور"
 
-#: templates/market/clientside/recommenddialog.html:86
+#: templates/market/clientside/recommenddialog.html:110
 msgid "Please enter both a subject and a message."
 msgstr "الرجاء ادخال العنوان و الرسالة"
 
-#: templates/market/clientside/recommenddialog.html:91
-msgid "Please enter a valid username and/or email address. "
+#: templates/market/clientside/recommenddialog.html:117
+#, fuzzy
+msgid "Please enter a valid username, email address or group. "
 msgstr "الرجاء ادخال اسم مستخدم و بريد الكتروني صالح"
 
-#: templates/market/clientside/recommenddialog.html:118
+#: templates/market/clientside/recommenddialog.html:121
+#, fuzzy
+msgid "Please enter a valid username and or email address. "
+msgstr "الرجاء ادخال اسم مستخدم و بريد الكتروني صالح"
+
+#: templates/market/clientside/recommenddialog.html:150
 msgid "Failed to send message to user:"
 msgstr "فشل في ارسال الرسالة للمستخدم"
 
-#: templates/market/clientside/recommenddialog.html:121
+#: templates/market/clientside/recommenddialog.html:153
 msgid "Failed to send message to users:"
 msgstr "فشل في ارسال الرسالة للمستخدمين"
 
-#: templates/market/clientside/recommenddialog.html:127
+#: templates/market/clientside/recommenddialog.html:159
 msgid "Failed to send message"
 msgstr "فشل في ارسال الرسالة"
 
@@ -2670,8 +3318,24 @@ msgid ""
 "          "
 msgstr ""
 
-#: templates/market/clientside/userprofile.html:50
-msgid "click here"
+#: templates/market/snippets/_post_actions.html:12
+msgid "CONTACT<br>PRIVATELY"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:20
+msgid "RECOMMEND<br>THIS POST"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:29
+msgid "SHARE ON<br>FACEBOOK"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:36
+msgid "SHARE ON<br>TWITTER"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:46
+msgid ">REPORT<br>THIS POST"
 msgstr ""
 
 #: templates/openid/login.html:6 templates/openid/login.html.py:10
@@ -2815,12 +3479,12 @@ msgstr ""
 msgid "Add a 3rd Party Account"
 msgstr ""
 
-#: templates/socialaccount/login_cancelled.html:6
-#: templates/socialaccount/login_cancelled.html:11
+#: templates/socialaccount/login_cancelled.html:4
+#: templates/socialaccount/login_cancelled.html:9
 msgid "Login Cancelled"
 msgstr ""
 
-#: templates/socialaccount/login_cancelled.html:13
+#: templates/socialaccount/login_cancelled.html:11
 #, python-format
 msgid ""
 "You decided to cancel logging in to our site using one of your existing "
@@ -2840,46 +3504,317 @@ msgstr ""
 msgid "The social account has been disconnected."
 msgstr ""
 
-#: templates/users/more_about_you.html:14
-msgid "Start"
-msgstr "ابدأ"
+#: templates/two_factor/core/backup_tokens.html:5
+#: templates/two_factor/profile/profile.html:35
+#, fuzzy
+msgid "Backup Tokens"
+msgstr "رمز سئ"
+
+#: templates/two_factor/core/backup_tokens.html:6
+msgid ""
+"Backup tokens can be used when your primary and backup\n"
+"      phone numbers aren't available. The backup tokens below can be used\n"
+"      for login verification. If you've used up all your backup tokens, you\n"
+"      can generate a new set of backup tokens. Only the backup tokens shown\n"
+"      below will be valid."
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:18
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:20
+msgid "You don't have any backup codes yet."
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:25
+msgid "Back to Account Security"
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:26
+msgid "Generate Tokens"
+msgstr ""
+
+#: templates/two_factor/core/login.html:8
+#, fuzzy
+msgid "Enter your credentials."
+msgstr "ادخل بريدك الالكتروني"
+
+#: templates/two_factor/core/login.html:11
+#: templates/two_factor/core/setup.html:28
+msgid ""
+"We are calling your phone right now, please enter the\n"
+"        digits you hear."
+msgstr ""
+
+#: templates/two_factor/core/login.html:14
+#: templates/two_factor/core/setup.html:31
+msgid ""
+"We sent you a text message, please enter the tokens we\n"
+"        sent."
+msgstr ""
+
+#: templates/two_factor/core/login.html:17
+msgid ""
+"Please enter the tokens generated by your token\n"
+"        generator."
+msgstr ""
+
+#: templates/two_factor/core/login.html:21
+msgid ""
+"Use this form for entering backup tokens for logging in.\n"
+"      These tokens have been generated for you to print and keep safe. Please\n"
+"      enter one of these backup tokens to login to your account."
+msgstr ""
+
+#: templates/two_factor/core/login.html:33
+msgid "Or, alternatively, use one of your backup phones:"
+msgstr ""
+
+#: templates/two_factor/core/login.html:43
+msgid "As a last resort, you can use a backup token:"
+msgstr ""
+
+#: templates/two_factor/core/login.html:46
+#, fuzzy
+msgid "Use Backup Token"
+msgstr "رمز سئ"
+
+#: templates/two_factor/core/otp_required.html:5
+msgid "Permission Denied"
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:7
+msgid ""
+"The page you requested, enforces users to verify using\n"
+"    two-factor authentication for security reasons. You need to enable these\n"
+"    security features in order to access this page."
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:11
+msgid ""
+"Two-factor authentication is not enabled for your\n"
+"    account. Enable two-factor authentication for enhanced account\n"
+"    security."
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:16
+msgid "Go back"
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:18
+#: templates/two_factor/core/setup.html:5
+#: templates/two_factor/core/setup_complete.html:5
+#: templates/two_factor/profile/profile.html:58
+msgid "Enable Two-Factor Authentication"
+msgstr ""
+
+#: templates/two_factor/core/phone_register.html:5
+msgid "Add Backup Phone"
+msgstr ""
+
+#: templates/two_factor/core/phone_register.html:8
+msgid ""
+"You'll be adding a backup phone number to your\n"
+"        account. This number will be used if your primary method of\n"
+"        registration is not available."
+msgstr ""
+
+#: templates/two_factor/core/phone_register.html:12
+msgid ""
+"We've sent a token to your phone number. Please\n"
+"        enter the token you've received."
+msgstr ""
+
+#: templates/two_factor/core/setup.html:7
+msgid ""
+"You are about to take your account security to the\n"
+"        next level. Follow the steps in this wizard to enable two-factor\n"
+"        authentication."
+msgstr ""
+
+#: templates/two_factor/core/setup.html:11
+#, fuzzy
+msgid ""
+"Please select which authentication method you would\n"
+"        like to use."
+msgstr "الرجاء اختيار الصور الرمزية التي تريد حذفها"
+
+#: templates/two_factor/core/setup.html:14
+msgid ""
+"To start using a token generator, please use your\n"
+"        smartphone to scan the QR code below. For example, use Google\n"
+"        Authenticator. Then, enter the token generated by the app.\n"
+"        "
+msgstr ""
+
+#: templates/two_factor/core/setup.html:20
+msgid ""
+"Please enter the phone number you wish to receive the\n"
+"      text messages on. This number will be validated in the next step.\n"
+"      "
+msgstr ""
+
+#: templates/two_factor/core/setup.html:24
+msgid ""
+"Please enter the phone number you wish to be called on.\n"
+"      This number will be validated in the next step. "
+msgstr ""
+
+#: templates/two_factor/core/setup.html:35
+msgid ""
+"To identify and verify your YubiKey, please insert a\n"
+"      token in the field below. Your YubiKey will be linked to your\n"
+"      account."
+msgstr ""
+
+#: templates/two_factor/core/setup_complete.html:7
+msgid ""
+"Congratulations, you've successfully enabled two-factor\n"
+"      authentication."
+msgstr ""
+
+#: templates/two_factor/core/setup_complete.html:12
+#: templates/two_factor/core/setup_complete.html:19
+#, fuzzy
+msgid "Back to Profile"
+msgstr "صفحة شخصية "
+
+#: templates/two_factor/core/setup_complete.html:14
+msgid ""
+"However, it might happen that you don't have access to\n"
+"      your primary token device. To enable account recovery, add a phone \n"
+"      number."
+msgstr ""
+
+#: templates/two_factor/core/setup_complete.html:21
+msgid "Add Phone Number"
+msgstr ""
+
+#: templates/two_factor/profile/disable.html:5
+msgid "Disable Two-factor Authentication"
+msgstr ""
+
+#: templates/two_factor/profile/disable.html:6
+msgid ""
+"You are about to disable two-factor authentication. This\n"
+"    compromises your account security, are you sure?"
+msgstr ""
+
+#: templates/two_factor/profile/disable.html:12
+msgid "Disable"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:5
+msgid "Account Security"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:9
+msgid "Tokens will be generated by your token generator."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:11
+#, python-format
+msgid "Primary method: %(primary)s"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:13
+msgid "Tokens will be generated by your YubiKey."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:37
+msgid ""
+"If you don't have any device with you, you can access\n"
+"        your account using backup tokens."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:39
+#, python-format
+msgid ""
+"\n"
+"        You have only one backup token remaining.\n"
+"      "
+msgid_plural ""
+"\n"
+"        You have %(counter)s backup tokens remaining.\n"
+"      "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: templates/two_factor/profile/profile.html:46
+#, fuzzy
+msgid "Show Codes"
+msgstr "أظهر المخفي"
+
+#: templates/two_factor/profile/profile.html:48
+#: templates/two_factor/profile/profile.html:52
+msgid "Disable Two-Factor Authentication"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:49
+msgid ""
+"However we strongly discourage you to do so, you can\n"
+"      also disable two-factor authentication for your account."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:54
+msgid ""
+"Two-factor authentication is not enabled for your\n"
+"      account. Enable two-factor authentication for enhanced account\n"
+"      security."
+msgstr ""
+
+#: templates/users/more_about_you.html:17
+msgid "Your account is now fully active."
+msgstr ""
 
 #: templates/users/more_about_you.html:18
-#: templates/users/more_about_you.html:61
-#: templates/users/user_profile_v2.html:73
+msgid ""
+"As a new user you should either <strong>Request</strong> support or <strong>Offer</strong>\n"
+"            your skills. After you enter some basic information you can create your first post."
+msgstr ""
+
+#: templates/users/more_about_you.html:20
+msgid ""
+"You can skip this step but you’ll be mostly invisible to the people you would want to connect\n"
+"            with. "
+msgstr ""
+
+#: templates/users/more_about_you.html:23
+msgid "Create an Offer"
+msgstr "إنشاء عرض"
+
+#: templates/users/more_about_you.html:32
+msgid "I'll create a post later"
+msgstr ""
+
+#: templates/users/more_about_you.html:38
+msgid "Your Movements.Org goals"
+msgstr ""
+
+#: templates/users/more_about_you.html:41
+msgid "Will you be looking to offer your skills or ask for help?"
+msgstr ""
+
+#: templates/users/more_about_you.html:47
+#: templates/users/more_about_you.html:65
+#: templates/users/more_about_you.html:83
+#: templates/users/more_about_you.html:101
+msgid "Skip"
+msgstr "تخطي"
+
+#: templates/users/more_about_you.html:56
+#: templates/users/more_about_you.html:164
+#: templates/users/user_profile_v2.html:82
 #: templates/users/user_settings_v2.html:136
 msgid "Languages"
 msgstr "لغات"
 
-#: templates/users/more_about_you.html:22
-msgid "Regions"
-msgstr "مناطق"
-
-#: templates/users/more_about_you.html:30
-#: templates/users/more_about_you.html:154
-msgid "Finish"
-msgstr "انهاء"
-
-#: templates/users/more_about_you.html:39
-msgid ""
-"Your account is now fully active. Fill out additional profile details now or"
-" you can skip this step and do it later in your settings page."
-msgstr ""
-"حسابك الأن مفعل بشكل كامل. نرجوا ملئ المعلومات الأخرى، وبإستطاعتك أيضاً "
-"تجاوز هذه الخطوة والقيام بها في وقت الاحقا عن طريق إعدادت الصفحة"
-
-#: templates/users/more_about_you.html:45
-msgid "Create an Offer"
-msgstr "إنشاء عرض"
-
-#: templates/users/more_about_you.html:52
-#: templates/users/more_about_you.html:70
-#: templates/users/more_about_you.html:88
-#: templates/users/more_about_you.html:106
-msgid "Skip"
-msgstr "تخطي"
-
-#: templates/users/more_about_you.html:64
+#: templates/users/more_about_you.html:59
 msgid ""
 "Please indicate which languages you speak. Google Translate is also "
 "available, but it is not fully accurate."
@@ -2887,20 +3822,20 @@ msgstr ""
 "يرجى الإشارة الي اللغات التي تتحدثها. الترجمة من غوغل  متاحة أيضا، لكنها "
 "ليست دقيقة تماما."
 
-#: templates/users/more_about_you.html:82
+#: templates/users/more_about_you.html:77
 msgid ""
 "Please indicate which regions and countries you are interested in helping."
 msgstr "يرجى الإشارة إلى المناطق والبلدان التي ترغب في مساعدتها."
 
-#: templates/users/more_about_you.html:100
+#: templates/users/more_about_you.html:95
 msgid "Please indicate your skill set."
 msgstr "الرجاء تحديد قائمة المهارات"
 
-#: templates/users/more_about_you.html:115
+#: templates/users/more_about_you.html:110
 msgid "How you can help"
 msgstr ""
 
-#: templates/users/more_about_you.html:117
+#: templates/users/more_about_you.html:112
 msgid ""
 "\n"
 "          <p>\n"
@@ -2924,15 +3859,15 @@ msgid ""
 "          "
 msgstr ""
 
-#: templates/users/more_about_you.html:139
+#: templates/users/more_about_you.html:134
 msgid "Done"
 msgstr "تم"
 
-#: templates/users/more_about_you.html:142
+#: templates/users/more_about_you.html:137
 msgid "Thank You! You are one step closer to opening a closed society!"
 msgstr "شكرا لك! انت على خطوة واحدة من المساهمة في إنفتاح المجتمعات المغلقة"
 
-#: templates/users/more_about_you.html:145
+#: templates/users/more_about_you.html:140
 msgid ""
 "If you would like to update these details at any time, this can be done in "
 "easily in your settings panel."
@@ -2940,11 +3875,11 @@ msgstr ""
 "في حال أردت القيام بتحديث التفاصيل التي أدخلت في أي وقت، تستطيع القيام بهذا "
 "بسهولة وذلك عبر لائحة الإعدادات"
 
-#: templates/users/more_about_you.html:147
+#: templates/users/more_about_you.html:142
 msgid "Your Safety"
 msgstr "سلامتك"
 
-#: templates/users/more_about_you.html:149
+#: templates/users/more_about_you.html:144
 #, python-format
 msgid ""
 "Please remember that no online platform is 100%% secure. We have gone to "
@@ -2960,6 +3895,19 @@ msgstr ""
 "الناشطة اخذ الحذر الدائم وعدم تبادل المعلومات التي تكشف البيانات الشخصية "
 "للمستخدم إلا  مع الشخص من هم محل ثقة."
 
+#: templates/users/more_about_you.html:149
+#: templates/users/more_about_you.html:167
+msgid "Finish"
+msgstr "انهاء"
+
+#: templates/users/more_about_you.html:163
+msgid "Start"
+msgstr "ابدأ"
+
+#: templates/users/more_about_you.html:165
+msgid "Regions"
+msgstr "مناطق"
+
 #: templates/users/thanksforactivation.html:7
 #: templates/users/thanksforactivation.html:12
 #: templates/users/waitforactivation.html:7
@@ -2971,41 +3919,50 @@ msgstr ""
 msgid "Your account is now activated."
 msgstr ""
 
-#: templates/users/user_profile_v2.html:27
+#: templates/users/user_profile_v2.html:30
 msgid "View Public Profile"
 msgstr "اظهر الصفحة الشخصة العامة"
 
-#: templates/users/user_profile_v2.html:34
+#: templates/users/user_profile_v2.html:37
 msgid "Direct Message"
 msgstr "رسائل فورية"
 
-#: templates/users/user_profile_v2.html:38
+#: templates/users/user_profile_v2.html:41
 msgid "Report User"
 msgstr "أخبر عن مستخدم"
 
 #: templates/users/user_profile_v2.html:46
+msgid "Rate user language skills"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:55
 msgid "About"
 msgstr "حول"
 
-#: templates/users/user_profile_v2.html:48
+#: templates/users/user_profile_v2.html:57
 msgid "Name:"
 msgstr "اسم"
 
-#: templates/users/user_profile_v2.html:50
+#: templates/users/user_profile_v2.html:59
 msgid "Nationality:"
 msgstr "الجنسية"
 
-#: templates/users/user_profile_v2.html:52
+#: templates/users/user_profile_v2.html:61
 msgid "Residence:"
 msgstr "بلد الإقامة"
 
-#: templates/users/user_profile_v2.html:70
+#: templates/users/user_profile_v2.html:79
 msgid "No interests specified"
 msgstr "لا يوجد إهتم"
 
-#: templates/users/user_profile_v2.html:81
+#: templates/users/user_profile_v2.html:90
 msgid "No languages specified"
 msgstr "لا لغات محددة"
+
+#: templates/users/user_profile_v2.html:97
+#, fuzzy
+msgid "Posts"
+msgstr "اضافة منشور "
 
 #: templates/users/user_settings_v2.html:25
 msgid "Change picture"
@@ -3050,6 +4007,14 @@ msgid ""
 msgstr ""
 "كلما قمت بتزويدنا بمعلومات أكثر ستحصل على تصنيف أعلى.روابط "
 "لتويتر،لينكيدلن،فيس بوك، لتساعدنا على التأكد من هويتك"
+
+#: templates/users/user_settings_v2.html:94
+msgid "Linked In"
+msgstr "لينكيد لن"
+
+#: templates/users/user_settings_v2.html:115
+msgid "Website or Blog"
+msgstr "موقع أو مدونة"
 
 #: templates/users/user_settings_v2.html:122
 msgid "Skills/Interests"
@@ -3104,11 +4069,38 @@ msgid ""
 "post or creates one that matches your interest?"
 msgstr "متى تريد أن تتلقى اشعار ااذا استجاب أحد المستخدمين لمنشور لك ؟ "
 
-#: templates/users/user_settings_v2.html:181
+#: templates/users/user_settings_v2.html:167
+#, fuzzy
+msgid "Group Notifications"
+msgstr "اشعارات"
+
+#: templates/users/user_settings_v2.html:169
+msgid ""
+"Movements.Org has assigned you to the following groups. Here you can choose "
+"to disable group updates from the Movements.Org admins."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:176
+msgid "Receive updates from the group"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:196
+msgid "Mark Account for Deletion"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:198
+msgid ""
+"As soon as your account has been marked for deletion your profile, posts and comments will\n"
+"              no longer be visible on the Movements.Org platform. The Movements.Org team will also be notified that you\n"
+"              wish to delete your account and will look to perminantely delete your Movements.Org footprint over the next\n"
+"              30 days after which time you will no longer be able to login or use any of the Movements.Org services."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:222
 msgid "Save"
 msgstr ""
 
-#: templates/users/user_settings_v2.html:192
+#: templates/users/user_settings_v2.html:233
 msgid "Upload Avatar"
 msgstr "تحميل صورة رمزية"
 
@@ -3140,6 +4132,109 @@ msgstr ""
 "٢ نجمة: حسابين تواصل اجتماعي<br>\n"
 "٣ نجمة: تأكيد كل حسابات التواصل الاجتماعي مع سيرة ذاتية<br>\n"
 "٤ نجمة : معلوم شخصياً من قبل موفمينتس<br>"
+
+#: templates/users/snippets/trans_rating.html:11
+#, fuzzy
+msgid "MOVEMENTS TRANSLATOR RATING"
+msgstr "تصنيف موفمينتس\"نجوم\""
+
+#: templates/users/snippets/trans_rating.html:13
+msgid ""
+"1 Star: Beginner - Has a basic understanding of this language. User can not "
+"translate on the Movements.org website."
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:14
+msgid ""
+"2 Stars: Intermediate - Has a good understanding of this language. User can "
+"not translate on the Movemetns.org website."
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:15
+msgid ""
+"3 Stars: Advanced -  Can make translations. Is fluent in this language."
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:16
+msgid ""
+"4 Stars: Trusted Translator - Has experience in translation work. Can make "
+"translations and corrections."
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:17
+msgid ""
+"5 Stars: Personally known by Movements.org and is a Trusted Translator. Can "
+"make translations and corrections."
+msgstr ""
+
+#~ msgid "Sign up"
+#~ msgstr "سجل الأن"
+
+#~ msgid "Visit market"
+#~ msgstr "زيارة السوق"
+
+#~ msgid "Copyright &copy; 2014 Advancing Human Rights"
+#~ msgstr "حقوق النشر محفوظة &copy;  :٢٠١٤ أدفانسينغ هيومان رايتس"
+
+#~ msgid "Already have an account?"
+#~ msgstr "تملك حساب مسبقاً ؟"
+
+#~ msgid ""
+#~ "Movements is crowdsourcing human rights. It connects human rights activists "
+#~ "in closed societies with those with skills to help them around the world. "
+#~ "Join today and help a dissident in need."
+#~ msgstr ""
+#~ "موفمنتس هي منظمة تقوم على حشد الطاقات الفاعلة من اجل الدفاع عن حقوق الإنسان."
+#~ " تقوم المنظمة بوصل نشطاء حقوق الإنسان في المجتمعات المغلقة مع خبراء يتمتعون "
+#~ "بمهارات حول العالم. انضموا إلينا اليوم، وساعدوا النشطاء والمنشقين من هم "
+#~ "بحاجة لمساعدتكم"
+
+#~ msgid ""
+#~ "Request help from people across the globe, offer help to an activist in "
+#~ "need."
+#~ msgstr ""
+#~ "طلب خدمة من أفراد مقيمين حول العالم، اعرض مساعدتك على ناشط  بحاجة إليها"
+
+#~ msgid ""
+#~ "Whether you’re a journalist, artist, technologist, policy-maker, linguist or"
+#~ " PR agent - everyone has skills that can advance human rights."
+#~ msgstr ""
+#~ "سواء كنت صحفي، فنان، تقني، رجل سياسة، مترجم ، او خبيرعلاقات عامة، لكل منا "
+#~ "خبرات يستطيع تسخيرها لأجل تعزيز حقوق الإنسان.اعرف عنا أكثر "
+
+#~ msgid "Tell a compelling story."
+#~ msgstr "أخبر قصة قاهرة"
+
+#~ msgid "May we tweet this request?"
+#~ msgstr "هل بامكاننا نشر الطلب كتغريدة على موقع تويتر (الفراغ يعني موافق)"
+
+#~ msgid "Tell a compelling story and state your needs."
+#~ msgstr "اخبر قصة قاهرة و حدد طلباتك"
+
+#~ msgid "Direct message"
+#~ msgstr "رسالة مباشرة"
+
+#~ msgid "Report this post"
+#~ msgstr "أخبر عن هذا المنشور"
+
+#~ msgid "Please do not post any personally identifying information."
+#~ msgstr "الرجاء عدم نشر أي معلومات شخصية عن الهوية"
+
+#~ msgid "Don't use your real name or email address when leaving a comment."
+#~ msgstr "لا تترك اسمك الحقيقي أو بريدك الالكتروني عند ترك تعليق"
+
+#~ msgid "Post comment"
+#~ msgstr "أنشر تعليق"
+
+#~ msgid "user"
+#~ msgstr "مستخدم"
+
+#~ msgid ""
+#~ "Your account is now fully active. Fill out additional profile details now or"
+#~ " you can skip this step and do it later in your settings page."
+#~ msgstr ""
+#~ "حسابك الأن مفعل بشكل كامل. نرجوا ملئ المعلومات الأخرى، وبإستطاعتك أيضاً "
+#~ "تجاوز هذه الخطوة والقيام بها في وقت الاحقا عن طريق إعدادت الصفحة"
 
 #~ msgid "Crowdsourcing the fight for human rights."
 #~ msgstr "تعهد جماعي بالمحاربة من أجل حقوق الانسان."
