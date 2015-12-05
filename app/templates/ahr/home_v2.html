@@ -47,7 +47,7 @@
             <a data-language="uk" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png" ></a>
             <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png" ></a>
             <a data-language="fa" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_iran.png" ></a>
-{#            <a data-language="fr" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_french.png" ></a>#}
+            <a data-language="fr" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_french.png" ></a>
           </div>
 {#          {% if config.DONATE_BUTTON_LANDING %}{{ config.DONATE_BUTTON_LANDING|safe }}{% endif %}#}
           <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="home-page-donate">
@@ -60,7 +60,7 @@
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
             <button type="submit" class="btn action-btn" style="top: 20px; position: absolute; right: 75px; color: white; background-color: #005d86;">
-              DONATE
+              {%trans "DONATE"%}
             </button>
             <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
           </form>

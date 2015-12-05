@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-05 18:03+0000\n"
+"POT-Creation-Date: 2015-12-05 18:17+0000\n"
 "PO-Revision-Date: 2015-11-20 20:00+0000\n"
 "Last-Translator: Skip Winitsky <winitsky@advancinghumanrights.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2294,6 +2294,10 @@ msgstr ""
 #: templates/admin_static/tinymce_admin/views.py:74
 msgid "Error running spellchecker"
 msgstr ""
+
+#: templates/ahr/home_v2.html:63
+msgid "DONATE"
+msgstr "Faire un don"
 
 #: templates/ahr/home_v2.html:88
 msgid "Our Partners"
