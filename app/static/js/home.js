@@ -18,10 +18,13 @@
       });
     },
     buildStatsBanner: function(data) {
-      var banner = '<h3>Stats</h3>' +
-                   '<div class="stat">Human Rights Connections Made: <span>' + data.connections + '</span></div>' +
-                   '<div class="stat">Active Users: <span>' + data.user + '</span></div>' +
-                   '<div class="stat">Countries Represented: <span>' + data.countries + '</span></div>';
+      var banner = '<h3>' + window.ahr.string_constants.stats_stats + '</h3>' +
+                   '<div class="stat">' + window.ahr.string_constants.stats_connections_made  +
+                   ':&nbsp;<span>' + data.connections + '</span></div>' +
+                   '<div class="stat">' + window.ahr.string_constants.stats_active_users  +
+                   ':&nbsp;<span>' + data.user + '</span></div>' +
+                   '<div class="stat">' + window.ahr.string_constants.stats_countries_represented  +
+                   ':&nbsp;<span>' + data.countries + '</span></div>';
 
       return banner;
     }

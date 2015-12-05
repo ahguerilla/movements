@@ -27,6 +27,10 @@ def string_constants(context):
             'market_search_no_match_c': _('or'),
             'market_search_no_match_d': _('search again with your default filters'),
             'redirect_off_site': _('This link will take you off the Movements site.\nMake sure you trust the site that you are being redirected to.'),
+            'stats_stats': _('Stats'),
+            'stats_connections_made': _('Human Rights Connections Made'),
+            'stats_active_users': _('Active Users'),
+            'stats_countries_represented': _('Countries Represented'),
         })
 
     return {
