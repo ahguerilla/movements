@@ -15,6 +15,7 @@ import constance
 from app.models import NotificationPing
 from app.users.models import UserProfile
 from app.market.models.notification import Notification
+from app.market.models.market import MarketItem
 
 
 logger = logging.getLogger('notifications')
@@ -66,7 +67,9 @@ class Command(BaseCommand):
     help = 'Runs the movements notifications process'
 
     def handle(self, *args, **options):
-        valid_item = Q(item__deleted=False) | Q(item=None)
+        valid_item = Q(item__deleted=False, item__published=True,
+                       item__status__in=[MarketItem.STATUS_OPEN, MarketItem.STATUS_URGENT,
+                                         MarketItem.STATUS_WATCH]) | Q(item=None)
         direct_message_check_seconds = 1
         full_check_seconds = 600
         seconds_since_full_check = full_check_seconds

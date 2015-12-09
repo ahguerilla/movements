@@ -22,6 +22,9 @@ _logger = logging.getLogger('movements-alerts')
 
 
 class MarketItem(models.Model):
+    STATUS_OPEN = 0
+    STATUS_WATCH = 1
+    STATUS_URGENT = 2
     STATUS_CHOICES = EnumChoices(
         OPEN=(0, _('Open')),
         WATCH=(1, _('Watch')),
