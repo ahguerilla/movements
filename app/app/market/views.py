@@ -56,7 +56,7 @@ def show_post(request, post_id):
                              deleted=False,
                              owner__is_active=True)
 
-    if post.is_closed() or not post.published:
+    if post.is_closed() or not post.published or post.deleted:
         raise Http404('No post matches the given query.')
 
     countries_to_render = []
