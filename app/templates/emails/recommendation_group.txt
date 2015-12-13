@@ -21,5 +21,3 @@ Date of Post: {{ post_date }}</p>
 {% endif %}
 
 This email was automatically created by Movements.org. You cannot reply to this email but can reply to {{ screen_name }} on Movements.org once you register.
-
-##NOTIFICATION_PREFERENCES##
