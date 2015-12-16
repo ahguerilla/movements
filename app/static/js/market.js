@@ -701,6 +701,7 @@ $(function () {
     },
 
     showMenuItem: function(ev) {
+      ev.preventDefault();
       var $link = $(ev.currentTarget);
       if ($link.data('popover-made')) {
         return;
