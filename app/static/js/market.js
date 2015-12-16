@@ -29,6 +29,8 @@ $(function () {
       var self = this;
       var $skills = this.$el.find('a.skills');
       this.skills.$container = $skills.parent().find('.popover-container');
+
+      // used to set defaults from query string
       _.each(options.skills, function(skill){
         if(_.contains(self.skills.selected, skill.pk.toString())){
           skill.selected = "selected";
@@ -66,10 +68,32 @@ $(function () {
 
       var $issues = this.$el.find('a.issues');
       this.issues.$container = $issues.parent().find('.popover-container');
-      this.issues.content = _.template($('#issue-filter-list-template').html(), {skills: options.issues});
+
+      // used to set defaults from query string
+      _.each(options.issues, function(issue){
+        if(_.contains(self.issues.selected, issue.pk.toString())){
+          issue.selected = "selected";
+        } else {
+          issue.selected = "";
+        }
+      });
+      var otherIssueSelected = false;
+      if(_.contains(self.issues.selected, "-1" )){
+        otherIssueSelected = true;
+      }
+      var allIssuesSelected = false;
+      if(this.issues.selected.length > options.issues.length){
+        allIssuesSelected = true;
+      }
+      var issuesArgs = {
+        allIssuesSelected: allIssuesSelected,
+        otherIssueSelected: otherIssueSelected,
+        skills: options.issues
+      };
+      this.issues.content = _.template($('#issue-filter-list-template').html(), issuesArgs);
       this.issues.count = options.issues.length;
       this.issues.$count = $issues.find('.count');
-
+      this.updateCount(this.issues);
       $issues.popover({
         title: '',
         html: true,
@@ -408,7 +432,7 @@ $(function () {
         this.skills.selected = queryMap['skills'];
       }
       if ('issues' in queryMap) {
-        this.skills.selected = queryMap['issues'];
+        this.issues.selected = queryMap['issues'];
       }
     }
   });

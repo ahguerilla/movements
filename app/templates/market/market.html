@@ -126,11 +126,11 @@
   </script>
   <script type="text/template" id="issue-filter-list-template">
     <ul class="issue-filter">
-      <li><a href="#" class="skill-all no-icon text-center" data-filter="all">{% trans "Select all" %}</a></li>
+      <li><a href="#" class="skill-all no-icon text-center <% if(allIssuesSelected) { %>selected<% } %>" data-filter="all">{% trans "Select all" %}</a></li>
       <% _.each(skills, function(skill) { %>
-      <li><a href="#" class="skill-normal" data-filter="<%- skill.pk %>"><%- skill.fields.issues %></a></li>
+      <li><a href="#" class="skill-normal <%- skill.selected %>" data-filter="<%- skill.pk %>"><%- skill.fields.issues %></a></li>
       <% }); %>
-      <li><a href="#" class="skill-normal" data-filter="-1">{% trans "Other issues" %}</a></li>
+      <li><a href="#" class="skill-normal <% if(otherIssueSelected) { %>selected<% } %>" data-filter="-1">{% trans "Other issues" %}</a></li>
     </ul>
   </script>
   <script type="text/template" id="region-filter-list-template">
