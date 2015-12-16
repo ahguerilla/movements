@@ -110,6 +110,19 @@ $(function () {
       this.$regionsCount = $regions.find('.count');
       this.regionsCount = parseInt($regions.data('country-count'));
       this.regionsContent = $('#region-filter-list-template').html();
+
+      // update the selected countries
+      var $regionsHtml = $(this.regionsContent);
+      _.each(this.regions, function(r){
+         $regionsHtml.find("[data-filter='" + r + "']").addClass('selected');
+      });
+      var countryLists = $regionsHtml.find('.country-list');
+      _.each(countryLists, function(c){
+        self.setRegionalCounts($(c));
+      });
+      this.setRegionCounts();
+
+      this.regionsContent = "<ul class=\"region-filter\">" + $regionsHtml.html() + "</ul>";
       $regions.popover({
         title: '',
         html: true,
@@ -403,6 +416,7 @@ $(function () {
       }
       this.buildFilterQueryString();
     },
+
     buildFilterQueryString: function(){
       var queryMap = {};
       if (this.type) {
@@ -414,6 +428,9 @@ $(function () {
       if (this.issues.selected) {
         queryMap['issues'] = this.issues.selected;
       }
+      if (this.regions) {
+        queryMap['regions'] = this.regions;
+      }
       var queryString = $.param(queryMap);
       if (queryString) {
         window.location.hash = '#' + queryString;
@@ -421,6 +438,7 @@ $(function () {
         window.location.hash = '';
       }
     },
+
     setFiltersFromQueryString: function(){
       var hash = (window.location.hash).substring(1);
       var queryMap = $.deparam(hash);
@@ -433,6 +451,9 @@ $(function () {
       }
       if ('issues' in queryMap) {
         this.issues.selected = queryMap['issues'];
+      }
+      if ('regions' in queryMap) {
+        this.regions = queryMap['regions'];
       }
     }
   });
