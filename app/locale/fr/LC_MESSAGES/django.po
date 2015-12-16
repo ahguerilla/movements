@@ -1195,7 +1195,7 @@ msgstr "signer"
 
 #: templates/base_v2.html:120 templates/base_v2.html.py:240
 msgid "Add Post"
-msgstr "ajouter un poste"
+msgstr "ajouter une publication"
 
 #: templates/base_v2.html:129
 msgid "Navigate"
@@ -1203,7 +1203,7 @@ msgstr "naviguer"
 
 #: templates/base_v2.html:135
 msgid "Connect"
-msgstr "brancher"
+msgstr "Connecter"
 
 #: templates/base_v2.html:152
 msgid "Advancing Human Rights"
@@ -1219,7 +1219,7 @@ msgstr ""
 
 #: templates/base_v2.html:169
 msgid "Language"
-msgstr "la langue"
+msgstr "Langue"
 
 #: templates/base_v2.html:204
 msgid "Farsi"
@@ -1251,7 +1251,7 @@ msgstr "s'identifier"
 
 #: templates/base_v2.html:304
 msgid "Crowdsourcing human rights."
-msgstr "Crowdsourcing Droits de l'homme"
+msgstr "Droits humains par Crowdsourcing"
 
 #: templates/base_v2.html:304
 msgid "Opening closed societies."
@@ -1288,7 +1288,7 @@ msgstr "Sur Movements"
 msgid ""
 "Crowdsourcing human rights. The online platform that is opening closed "
 "societies."
-msgstr "Crowdsourcing droits de l'homme. Sociétés fermé Ouverture"
+msgstr "Droits humains par Crowdsourcing. Ouvrir des sociétés fermées"
 
 #: templates/base_v2.html:373
 msgid "Copyright &copy; 2015 Advancing Human Rights"
@@ -2297,7 +2297,7 @@ msgstr ""
 
 #: templates/ahr/home_v2.html:63
 msgid "DONATE"
-msgstr "Faire un don"
+msgstr "Donner"
 
 #: templates/ahr/home_v2.html:88
 msgid "Our Partners"
