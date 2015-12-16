@@ -24,24 +24,44 @@ $(function () {
     },
 
     initialize: function(options) {
+      // build the structure from the query string
+      this.setFiltersFromQueryString();
+      var self = this;
       var $skills = this.$el.find('a.skills');
       this.skills.$container = $skills.parent().find('.popover-container');
-      this.skills.content = _.template($('#skill-filter-list-template').html(), {skills: options.skills});
+      _.each(options.skills, function(skill){
+        if(_.contains(self.skills.selected, skill.pk.toString())){
+          skill.selected = "selected";
+        } else {
+          skill.selected = "";
+        }
+      });
+      var otherSkillSelected = false;
+      if(_.contains(self.skills.selected, "-1" )){
+        otherSkillSelected = true;
+      }
+      var allSkillsSelected = false;
+      if(this.skills.selected.length > options.skills.length){
+        allSkillsSelected = true;
+      }
+      var skillArgs = {
+        allSkillsSelected: allSkillsSelected,
+        otherSkillSelected: otherSkillSelected,
+        skills: options.skills
+      };
+      this.skills.content = _.template($('#skill-filter-list-template').html(), skillArgs);
       this.skills.count = options.skills.length;
       this.skills.$count = $skills.find('.count');
-      if(options.defaultFilters){
-        if(options.defaultFilters.type) {
-          this.type = options.defaultFilters.type;
-          this.toggleType(this.type);
-        }
-      }
-
+      this.updateCount(this.skills);
       $skills.popover({
         title: '',
         html: true,
         content: this.skills.content,
         container: this.skills.$container,
         placement: 'bottom'
+      });
+      $skills.click(function(ev){
+        ev.preventDefault();
       });
 
       var $issues = this.$el.find('a.issues');
@@ -57,6 +77,9 @@ $(function () {
         container: this.issues.$container,
         placement: 'bottom'
       });
+      $issues.click(function(ev){
+        ev.preventDefault();
+      });
 
       var $regions = this.$el.find('a.regions');
       this.$regionContainer = $regions.parent().find('.popover-container');
@@ -70,6 +93,9 @@ $(function () {
         container: this.$regionContainer,
         placement: 'bottom'
       });
+      $regions.click(function(ev){
+        ev.preventDefault();
+      });
 
       var $hidden = this.$el.find('a.showhide');
       this.$hiddenContainer = $hidden.parent().find('.popover-container');
@@ -81,8 +107,18 @@ $(function () {
         container: this.$hiddenContainer,
         placement: 'bottom'
       });
+      $hidden.click(function(ev){
+        ev.preventDefault();
+      });
 
       this.$query = this.$el.find('input[name=query]');
+
+      if(options.defaultFilters){
+        if(options.defaultFilters.type) {
+          this.type = options.defaultFilters.type;
+          this.toggleType(this.type);
+        }
+      }
     },
 
     setActive: function(ev) {
@@ -183,7 +219,7 @@ $(function () {
           item.$target.addClass('selected');
           _.each(this.$el.find(data.rootClass + ' a.skill-normal'), function (elem) {
             var $elem = $(elem);
-            data.selected.push($elem.data('filter'))
+            data.selected.push($elem.data('filter'));
             $elem.addClass('selected');
           }, this);
         }
@@ -200,13 +236,17 @@ $(function () {
           });
         }
       }
+      this.updateCount(data);
+      this.trigger('filter');
+    },
+
+    updateCount: function (data){
       if (data.selected.length) {
         data.$count.html('(' + data.selected.length + ')');
         data.$count.show();
       } else {
         data.$count.hide();
       }
-      this.trigger('filter');
     },
 
     setIssuesFilter: function (ev) {
@@ -337,6 +377,39 @@ $(function () {
       if (query) {
         data.search = query;
       }
+      this.buildFilterQueryString();
+    },
+    buildFilterQueryString: function(){
+      var queryMap = {};
+      if (this.type) {
+        queryMap['type'] = this.type;
+      }
+      if (this.skills.selected) {
+        queryMap['skills'] = this.skills.selected;
+      }
+      if (this.issues.selected) {
+        queryMap['issues'] = this.issues.selected;
+      }
+      var queryString = $.param(queryMap);
+      if (queryString) {
+        window.location.hash = '#' + queryString;
+      } else {
+        window.location.hash = '';
+      }
+    },
+    setFiltersFromQueryString: function(){
+      var hash = (window.location.hash).substring(1);
+      var queryMap = $.deparam(hash);
+      if ('type' in queryMap) {
+        this.type = queryMap['type'];
+        this.toggleType(this.type);
+      }
+      if ('skills' in queryMap) {
+        this.skills.selected = queryMap['skills'];
+      }
+      if ('issues' in queryMap) {
+        this.skills.selected = queryMap['issues'];
+      }
     }
   });
 
@@ -435,7 +508,7 @@ $(function () {
      setFilter: function(data) {
       data.showHidden = true;
     }
-  })
+  });
 
   var MarketView = window.ahr.BaseView.extend({
     loadingScrollElements: false,

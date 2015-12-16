@@ -117,11 +117,11 @@
   </script>
   <script type="text/template" id="skill-filter-list-template">
     <ul class="skill-filter">
-      <li><a href="#" class="skill-all no-icon text-center" data-filter="all">{% trans "Select all"%}</a></li>
+      <li><a href="#" class="skill-all no-icon text-center <% if(allSkillsSelected) { %>selected<% } %>" data-filter="all">{% trans "Select all"%}</a></li>
       <% _.each(skills, function(skill) { %>
-      <li><a href="#" class="skill-normal" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
+      <li><a href="#" class="skill-normal <%- skill.selected %>" data-filter="<%- skill.pk %>"><%- skill.fields.name %></a></li>
       <% }); %>
-      <li><a href="#" class="skill-normal" data-filter="-1">{% trans "Other skills" %}</a></li>
+      <li><a href="#" class="skill-normal <% if(otherSkillSelected) { %>selected<% } %>" data-filter="-1">{% trans "Other skills" %}</a></li>
     </ul>
   </script>
   <script type="text/template" id="issue-filter-list-template">

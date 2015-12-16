@@ -18,6 +18,7 @@ js = Bundle(
         './js/lib/Autolinker.js',
         './js/lib/diff.js',
         './js/lib/dropzone.js',
+        './js/lib/jquery.ba-bbq.min.js',
         './colorbox/jquery.colorbox-min.js',
         './js/app_common.js',
         './js/base.js',
