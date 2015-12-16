@@ -96,7 +96,8 @@ class Command(BaseCommand):
                     if profile.notification_frequency == UserProfile.NOTIFICATION_FREQUENCY.NEVER:
                         Notification.objects.filter(user=profile.user, emailed=False).update(emailed=True)
                     else:
-                        items = Notification.objects.filter(valid_item).filter(user=profile.user, emailed=False, text__contains='''message''')
+                        items = Notification.objects.filter(valid_item).filter(user=profile.user, emailed=False,
+                                                                               text__contains='''message''')
                         send_user_notification_email(profile, items, set_last_notification_date=False)
                         items.update(emailed=True)
             except Exception as ex:
@@ -105,7 +106,7 @@ class Command(BaseCommand):
             # Check for all other notifications every 10 minutes.
             if seconds_since_full_check >= full_check_seconds:
                 seconds_since_full_check = 0
-                notification_delay_time = timezone.now() + relativedelta(minutes=-10)
+                notification_delay_time = timezone.now() + relativedelta(hours=-12)
                 a_day_ago = timezone.now() + relativedelta(days=-1)
                 a_week_ago = timezone.now() + relativedelta(days=-7)
                 try:
@@ -117,14 +118,16 @@ class Command(BaseCommand):
                         send_email = False
                         if profile.notification_frequency == UserProfile.NOTIFICATION_FREQUENCY.NEVER:
                             Notification.objects.filter(user=profile.user, emailed=False).update(emailed=True)
-                        elif profile.notification_frequency == UserProfile.NOTIFICATION_FREQUENCY.INSTANTLY or profile.last_notification_email is None:
+                        elif profile.notification_frequency == UserProfile.NOTIFICATION_FREQUENCY.INSTANTLY \
+                                or profile.last_notification_email is None:
                             send_email = True
                         elif profile.notification_frequency == UserProfile.NOTIFICATION_FREQUENCY.DAILY:
                             send_email = profile.last_notification_email < a_day_ago
                         elif profile.notification_frequency == UserProfile.NOTIFICATION_FREQUENCY.WEEKLY:
                             send_email = profile.last_notification_email < a_week_ago
                         if send_email:
-                            items = Notification.objects.filter(valid_item).filter(user=profile.user, emailed=False, pub_date__lt=notification_delay_time)
+                            items = Notification.objects.filter(valid_item).filter(user=profile.user, emailed=False,
+                                                                                   pub_date__lt=notification_delay_time)
                             send_user_notification_email(profile, items)
                             items.update(emailed=True)
                 except Exception as ex:
