@@ -15,7 +15,7 @@ $(function () {
       'click .country-list a.country-all': 'setRegionFilter',
       'click .skill-filter a': 'setSkillsFilter',
       'click .issue-filter a': 'setIssuesFilter',
-      'click a.search': 'toggleSearchControls',
+      'click a.search': 'clickToggleSearch',
       'click .run-search': 'triggerFilter',
       'keydown input[name=query]': 'checkForEnter',
       'show.bs.popover a': 'setActive',
@@ -24,6 +24,7 @@ $(function () {
     },
 
     initialize: function(options) {
+      this.$query = this.$el.find('input[name=query]');
       // build the structure from the query string
       this.setFiltersFromQueryString();
       var self = this;
@@ -148,8 +149,6 @@ $(function () {
         ev.preventDefault();
       });
 
-      this.$query = this.$el.find('input[name=query]');
-
       if(options.defaultFilters){
         if(options.defaultFilters.type) {
           this.type = options.defaultFilters.type;
@@ -190,9 +189,14 @@ $(function () {
       }
     },
 
-    toggleSearchControls: function(ev) {
+    clickToggleSearch: function(ev) {
+      ev.preventDefault();
+      this.toggleSearchControls();
+    },
+
+    toggleSearchControls: function() {
       this.$el.toggleClass('search-expanded');
-      var $currentTarget = $(ev.currentTarget);
+      var $currentTarget = $('a.search');
       $currentTarget.parents('li').toggleClass('active');
       var expand = this.$el.find('.search-expanded');
       this.$el.find('.search-expanded').toggleClass('hide');
@@ -431,6 +435,10 @@ $(function () {
       if (this.regions) {
         queryMap['regions'] = this.regions;
       }
+      var query = this.$query.val();
+      if (query) {
+         queryMap['search'] = query;
+      }
       var queryString = $.param(queryMap);
       if (queryString) {
         window.location.hash = '#' + queryString;
@@ -454,6 +462,10 @@ $(function () {
       }
       if ('regions' in queryMap) {
         this.regions = queryMap['regions'];
+      }
+      if ('search' in queryMap) {
+        this.$query.val(queryMap['search']);
+        this.toggleSearchControls();
       }
     }
   });
