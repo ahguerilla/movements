@@ -21,6 +21,13 @@
           <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
         </a>
       </div>
+{#      <div class="visible-xs navbar-brand">#}
+{#        <ul class="nav navbar-nav navbar-main">#}
+{#          <li class="navbar-hightlight">#}
+{#            <a href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>#}
+{#          </li>#}
+{#        </ul>#}
+{#      </div>#}
       <ul class="navbar-right hidden-xs">
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
@@ -144,10 +151,8 @@
   </div>
 {% endblock base_header_nav %}
 
-
 {% block header_padding %}{% endblock %}
 {% block nav_padding %}{% endblock %}
-
 {% block content_outside_container %}
 
 <div class="landing-page-cover">
@@ -236,11 +241,10 @@
         idx = 0;
       }
       var $bannerTitle = $('#banner_title');
-      $bannerTitle.fadeOut(550, function(){
+      $bannerTitle.fadeOut(450, function(){
         $bannerTitle.text(titleText[idx]);
-        $bannerTitle.fadeIn(550);
+        $bannerTitle.fadeIn(450);
       });
-
     });
 
     window.ahr.widgets.initStats();
