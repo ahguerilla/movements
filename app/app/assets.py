@@ -19,6 +19,7 @@ js = Bundle(
         './js/lib/diff.js',
         './js/lib/dropzone.js',
         './js/lib/jquery.ba-bbq.min.js',
+        './js/lib/jquery.backstretch.min.js',
         './colorbox/jquery.colorbox-min.js',
         './js/app_common.js',
         './js/base.js',

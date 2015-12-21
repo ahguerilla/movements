@@ -1,0 +1,20 @@
+{% load cms_tags %}
+{% load i18n %}
+
+<div>
+  <div class="homepage-button">
+    <a href="/movements/about-movements/success-stories/">
+      <button class="btn btn-secondary">{%trans "SUCESS STORIES"%}</button>
+    </a>
+  </div>
+  <div class="homepage-button">
+    <a href="/market/#type=request">
+      <button class="btn btn-action">{%trans "VIEW REQUESTS"%}</button>
+    </a>
+  </div>
+  <div class="homepage-button" id="hompage-request-button">
+    <a href="/market/#type=offer">
+      <button class="btn btn-action">{%trans "VIEW OFFERS"%}</button>
+    </a>
+  </div>
+</div>

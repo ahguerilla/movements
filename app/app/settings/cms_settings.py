@@ -16,7 +16,6 @@ CMS_CACHE_DURATIONS = {
 CMS_TEMPLATES = (
     ('cms/single_page.html', 'Single Page'),
     ('cms/page_with_left_nav.html', 'Page With Left Nav'),
-    ('cms/empty.html', 'Empty page'),
 )
 
 CMS_PLACEHOLDER_CONF = {

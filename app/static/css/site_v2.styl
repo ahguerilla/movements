@@ -269,12 +269,24 @@ html
   background-color $footer-color
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
+  height 100%
+
+
+.additional-html
+  background-color transparent
+  width 100%
 
 body
   background-color $background-color
   color $main-font
   font-family "LinotypeUnivers-330Light", "Helvetica Neue", Helvetica, Arial, sans-serif
   font-size 16px
+
+.additional-body
+  height 100%
+  width 100%
+  background-color transparent
+  display table
 
 ul
   padding 0
@@ -350,6 +362,10 @@ $navigation-font-size = 16px
     border-left solid $divider-color 1px
   .navbar-add-border
     border-left solid $divider-color 1px
+  .navbar-hightlight
+    background-color $primary-color
+    a
+      color #ffffff !important
   .navbar-nav > li > a
     color $font-color
     line-height 80%px
@@ -713,7 +729,7 @@ h1,h2,h3,h4,h5,h6
   font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
   font-weight normal
 
-.action-font,
+// TO DELETE
 .statement-font
   font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
   font-weight normal
@@ -723,6 +739,14 @@ h1,h2,h3,h4,h5,h6
 
 .statement-font
   color $inactive-font
+  font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-weight normal
+  a
+    color $inactive-font
+    text-decoration underline
+// END TO DELETE
+
+.action-font
   font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
   font-weight normal
   a
@@ -910,6 +934,127 @@ h1,h2,h3,h4,h5,h6
 // **************************************
 // Landing page styles
 // **************************************
+.landing-page-cover
+  background-color rgba(0,0,0,0.3)
+  width 100%
+  height 100%
+
+.landing-page-center-content-wrap
+  height 100%
+  width 100%
+  display table
+  margin 0
+  .landing-page-center-content
+     margin-top 100px
+    /*display table-cell*/
+    /*height 100%*/
+    /*vertical-align middle*/
+    .landing-page-middle
+      margin-top 10px
+      text-align center
+      img
+        margin 0 auto
+        margin-bottom 15px
+      h2
+        font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
+        font-size 24px
+        color #ffffff
+        margin 0
+
+.homepage-button
+  width 60%
+  margin-top 10px
+  margin-left 20%
+  margin-right 20%
+  button
+    width 100%
+    height 45px
+    font-size 16px
+
+#hompage-request-button
+  button
+    background-color $third-color
+
+.language-flags
+  text-align left
+  img
+    margin-bottom 10px
+    display block
+    width 80px
+
+.homepage-footer
+  text-align center
+  min-height inherit
+  color #ffffff
+  a
+    color #ffffff
+  a:hover
+    color #ffffff
+  .footer-nav
+    padding 10px 0
+    font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
+    font-size 20px
+  .footer-nav-1
+    background-color $secondary-color
+  .footer-nav-2
+    background-color $primary-color
+  .footer-nav-3
+    background-color $third-color
+  .footer-nav-4
+    color $main-font-dark
+
+.home-login-form
+  max-width 340px
+  width 100%
+  .form-group
+    margin 0
+  .login-form-title
+    font-size 20px
+    font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
+    text-align center
+    color #ffffff
+  .login-form-title.social
+    margin-top 20px
+    margin-bottom 10px
+  input
+    width 100%
+    margin-bottom 5px
+    border-radius 0
+    padding 17px 9px
+  .home-login-button
+    float left
+    width 48%
+    button
+      border-radius 0
+      padding 6px 0
+  .home-login-button.first
+    margin-right 4%
+  .home-social-signin
+    margin-bottom 20px
+    .circle-container
+      position relative
+      margin 0 auto
+      width 65px
+      height 65px
+      border-radius 50%
+      .fa-twitter,
+      .fa-linkedin,
+      .fa-facebook
+        position absolute
+        top 17px
+        left 20px
+        color #ffffff
+    .circle-container.facebook
+      float right
+      background-color $facebook-blue
+    .circle-container.twitter
+      background-color $twitter-blue
+    .circle-container.linkedin
+      float left
+      background-color $linkedin-blue
+
+
+// TO DELETE
 $page-banner-height = 550px
 .page-banner
   height $page-banner-height
@@ -982,7 +1127,10 @@ $page-banner-height = 550px
     img
       width 66px
       margin 20px 0 0 15px
+// END TO DELETE
 
+
+// TO DELETE
 .landing-page
   .partners
     background-color #FFF
@@ -1071,6 +1219,7 @@ $page-banner-height = 550px
     font-size 18px
   .author
     font-size 24px
+// END TO DELETE
 
 
 .stats-banner

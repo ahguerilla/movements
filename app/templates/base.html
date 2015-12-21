@@ -1,0 +1,506 @@
+{% load cms_tags sekizai_tags%}
+{% load menu_tags %}
+{% load assets %}
+{% load i18n %}
+{% load l10n %}
+{% load url from future %}
+{% load account %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js {% block htmlclass %}{% endblock %}"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{% block head_title %}Movements{% endblock %}</title>
+  <meta name="description" content="The platform that's crowdsourcing human rights and opening closed societies.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% block open_graph_data %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Movements.Org">
+  <meta property="og:description" content="The platform that's crowdsourcing human rights and opening closed societies.">
+  <meta property="og:url" content="https://www.movements.org/">
+  <meta property="og:site_name" content="Movements.Org">
+  <meta property="og:image" content="https://www.movements.org/static/images/logos/logo_large.png">
+  {% endblock %}
+
+  <!-- favicon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="{{ STATIC_URL }}images/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="{{ STATIC_URL }}images/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}images/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ STATIC_URL }}images/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}images/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="{{ STATIC_URL }}images/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="{{ STATIC_URL }}images/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ STATIC_URL }}images/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ STATIC_URL }}images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="{{ STATIC_URL }}images/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ STATIC_URL }}images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ STATIC_URL }}images/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ STATIC_URL }}images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="{{ STATIC_URL }}images/favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="{{ STATIC_URL }}images/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  {% assets "css_all_v2" %}
+    <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
+  {% endassets %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+  {% if LANGUAGE_CODE == 'ar' or LANGUAGE_CODE == 'fa' %}
+    {% assets "css_language_ar" %}
+      <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
+    {% endassets %}
+  {% endif %}
+
+  {% block extra_head %}
+  {% endblock %}
+
+  {% if config.GOOGLE_ANALYTICS %}
+  {{ config.GOOGLE_ANALYTICS|safe }}
+  {% endif %}
+
+  {% render_block "css" %}
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+{% if config.GOOGLE_TAG_MANAGER %}
+{{ config.GOOGLE_TAG_MANAGER|safe }}
+{% endif %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=564720613600351";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+{% cms_toolbar %}
+
+{% if messages %}
+  {% for message in messages %}
+    <div style="display: none;">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+
+{% block base_header_nav %}
+  <div class="navbar navbar-header-top navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#collapse-menu">
+          <img src="{{ STATIC_URL }}images/v2/hamburger.png"/>
+        </button>
+        <a class="main-logo" href="/">
+          <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
+        </a>
+      </div>
+      <ul class="navbar-right hidden-xs">
+        <div id="view-content-menu" class="menu-selector">
+          <div class="menu-icon"></div>
+        </div>
+      </ul>
+      <div id="collapse-menu" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-main">
+        {% if user.is_authenticated %}
+          {% if not user.userprofile.is_first_login %}
+          <li class="dropdown visible-xs">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Add Post" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'create_request' %}">{% trans "Request" %}</a></li>
+              <li><a href="{% url 'create_offer' %}">{% trans "Offer" %}</a></li>
+            </ul>
+          </li>
+          {% endif %}
+        {% endif %}
+          <li class="dropdown visible-xs">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Navigate" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              {% show_menu 0 100 100 100 "cms/navs/top_nav_responsive.html" %}
+            </ul>
+          </li>
+          <li class="dropdown navbar-add-border">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Connect" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="image-item"><a target="_blank" href="https://twitter.com/movements_org">
+                <div class="nav-twitter">
+                  <img src="{{ STATIC_URL }}images/v2/twitter-dualstate.png" alt="Connect with Twitter">
+                  <span>{% trans "Twitter" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="https://www.facebook.com/Movements.org">
+                <div class="nav-facebook">
+                  <img src="{{ STATIC_URL }}images/v2/facebook-dualstate.png" alt="Connect with Facebook">
+                  <span>{% trans "Facebook" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="http://www.advancinghumanrights.org/">
+                <div class="nav-ahr">
+                  <img src="{{ STATIC_URL }}images/v2/ahr-dualstate.png" alt="Advancing human rights">
+                  <span>{% trans "Advancing Human Rights" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="http://visitor.r20.constantcontact.com/d.jsp?llr=wxajvkuab&p=oi&m=1121344324342&sit=9dtkorxjb&f=09ba4864-11fb-4fe6-95cd-46c7867064ca">
+                <div class="nav-newsletter">
+                  <img src="{{ STATIC_URL }}images/v2/newsletter-icon.png" alt="Sign up to our Newsletter">
+                  <span>{% trans "Newsletter" %}</span>
+                </div>
+              </a></li>
+              <li><div style="margin: 10px 0 0 20px;" class="fb-like" data-href="https://www.facebook.com/Movements.org"
+               data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></li>
+              <li role="separator" class="divider hidden-xs"></li>
+              <li><a href="{{ config.BLOG_URL }}" target="_blank">{% trans "Movements Blog" %}</a></li>
+              <li><a href="{% page_url 'success_stories' %}">{% trans "Success Stories" %}</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Language" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="image-item"><a data-language="en" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_uk.png">
+                  <span>{% trans "English" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ar" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_arabic.png">
+                  <span>{% trans "Arabic" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="zh-cn" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_chinese.png">
+                  <span>{% trans "Chinese" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="uk" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png">
+                  <span>{% trans "Ukrainian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ru" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_russian.png">
+                  <span>{% trans "Russian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="fa" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_iran.png">
+                  <span>{% trans "Farsi" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="fr" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_french.png">
+                  <span>{% trans "French" %}</span>
+                </div>
+              </a></li>
+            </ul>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="visible-xs">
+            <a href="#" id="logout-link">{% trans "Logout" %}</a>
+            <form id="logout-form" method="post" action="{% url 'account_logout' %}">
+              {% csrf_token %}
+            </form>
+          </li>
+          {% else %}
+          <li class="visible-xs">
+            <a href="{% page_url 'how_it_works' %}">
+              <span>{%trans "Find out more"%}</span>
+            </a>
+          </li>
+          <li class="visible-xs">
+            <a href="{% url 'show_market' %}">
+              <span>{%trans "View Requests & Offers"%}</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+            {% if not user.userprofile.is_first_login %}
+              <a id="add-post" class="btn btn-action hiddenxs" onClick="ga('send', 'event', 'button', 'click', 'add-post');">
+                <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
+                <span id="AddPostText"> {% trans "Add Post" %}</span>
+              </a>
+{#              <li class="hidden-xs">{% if config.DONATE_BUTTON_LOGGED_IN %}{{ config.DONATE_BUTTON_LOGGED_IN|safe }}{% endif %}</li>#}
+              <li class="hidden-xs">
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_donations">
+                  <input type="hidden" name="business" value="clarke@advancinghumanrights.org">
+                  <input type="hidden" name="lc" value="US">
+                  <input type="hidden" name="item_name" value="Movements Tax Exempt Donation">
+                  <input type="hidden" name="page_style" value="MOVEMENTS">
+                  <input type="hidden" name="no_note" value="0">
+                  <input type="hidden" name="currency_code" value="USD">
+                  <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+                  <button type="submit" class="btn action-btn" style="float: right; margin-top: 6px; color: white; background-color: #005d86;">DONATE</button>
+                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+              </li>
+              <div id="add-post-popup-container"></div>
+            {% endif %}
+          {% else %}
+            {% block menu_singup %}
+          <li><a class="nav-button" href="{% url 'signup_start' %}">
+            <button class="btn btn-action open-account">{%trans "Sign up now"%}</button>
+          </a></li>
+          <li><a class="nav-button" href="{% url 'account_login' %}">
+            <button class="btn btn-secondary">{%trans "Login"%}</button>
+          </a></li>
+            {% endblock %}
+          {% endif %}
+          {% if user.is_authenticated and not user.userprofile.is_first_login %}
+          <div class="navbar-user-controls">
+            <div class="nav-avatar hidden-xs" id="view-profile-menu">
+              <div class="menu-icon-profile"></div>
+              <div id="content-menu-container"></div>
+            </div>
+
+            <a class="visiblexs" href="{% url 'user_profile' %}">
+              <div class="nav-avatar">
+                <div class="menu-icon-profile"></div>
+              </div>
+            </a>
+
+            <a href="{% url 'show_notifications' %}">
+              <div class="nav-notification">
+                <div style="display: none;" id="main-nav-count" class="notification-count"></div>
+                <div class="menu-icon-bell"></div>
+              </div>
+            </a>
+            <a href="{% url 'postman_inbox' %}">
+              <div class="nav-messages">
+                <div style="display: none;" id="main-nav-message-count" class="notification-count"></div>
+                <div class="menu-icon-message"></div>
+              </div>
+            </a>
+          </div>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <div class="central-logo hidden-xs hidden-sm hidden-md">
+      <div class="header-nav-wrapper">
+        <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>
+      </div>
+      <div class="header-nav-text">
+        <p>{% trans "Crowdsourcing human rights."%}<br/>{%  trans "Opening closed societies."%}</p>
+      </div>
+    </div>
+  </div>
+{% block nav_padding %}<div style="height: 80px">&nbsp;</div>{% endblock %}
+  <div id="main-cms-nav" style="display: none;">
+    <div class="main-menu-slider">
+      <ul>
+        {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
+        {% if not user.is_authenticated %}
+          <li><a href="{% url 'show_market' %}"><h3>{%trans "View Requests & Offers"%}</h3></a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+{% endblock base_header_nav %}
+
+{% block header_padding %}<div style="height: 20px;"></div>{% endblock %}
+{% block content_outside_container %}{% endblock %}
+
+{% block ext_container %}
+<div class="container" >
+  <div id="currentusername" class="hidden">{{ user.username }}</div>
+  {% block content %}{% endblock %}
+  {% block extra_body %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block footer_padding %}<div style="height: 30px"></div>{% endblock %}
+{% block base_footer %}
+<footer>
+  <div id="FooterSocialMedia_Big" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 hidden-xs">
+          <h4>{% trans "Get updates"  %}</h4>
+          <!-- BEGIN: Constant Contact Email List Form Button -->
+          <a target="_blank" class="nav-button" href="http://visitor.r20.constantcontact.com/d.jsp?llr=wxajvkuab&amp;p=oi&amp;m=1121344324342&amp;sit=9dtkorxjb&amp;f=09ba4864-11fb-4fe6-95cd-46c7867064ca">
+            <button style="background-color: #005d86; margin-bottom: 5px;" class="btn btn-action btn-thinner">Get Movements.Org Updates</button>
+          </a>
+          <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>
+        </div>
+        <div class="col-sm-3 hidden-xs" style="margin-bottom: 10px;">
+          <h4>{% trans "Connect with us"  %}</h4>
+          <div class="social-icons">
+            <a target="_blank" href="https://twitter.com/movements_org">
+              <img src="{{ STATIC_URL }}images/v2/twitter-bigger.png" alt="{%trans "Connect with Twitter"%}" >
+            </a>
+            <a target="_blank" href="https://www.facebook.com/Movements.org">
+              <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="{%trans "Connect with Facebook"%}" >
+            </a>
+          </div>
+          <div style="margin-top: 15px;" class="fb-like" data-href="https://www.facebook.com/Movements.org"
+               data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+        </div>
+        <div class="col-sm-5">
+          <h4>{% trans "About MOVEMENTS"  %}</h4>
+          <p>{% blocktrans %}Crowdsourcing human rights. The online platform that is opening closed societies.{% endblocktrans %}</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row visible-xs" >
+        <div class="col-xs-12" style="margin-bottom: 15px;">
+          <div class="fb-like" data-href="https://www.facebook.com/Movements.org"
+               data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="footer-copyright">{% blocktrans %}Copyright &copy; 2015 Advancing Human Rights{% endblocktrans %}</div>
+        </div>
+        <div class="col-sm-6">
+          <div class="footer-nav-content">
+            {% show_menu 0 100 100 100 "cms/navs/bottom_nav_v2.html" %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}
+<div id="modal-placeholder"></div>
+<script type="text/template" id="add-post-template">
+  <a onClick="ga('send', 'event', 'button', 'click', 'create-request');" class="btn btn-request" href="{% url 'create_request' %}">
+    <img src="{{ STATIC_URL }}images/v2/request_icon.png"/>{%trans "Request"%}
+  </a>
+  <a onClick="ga('send', 'event', 'button', 'click', 'create-offer');" class="btn btn-offer" href="{% url 'create_offer' %}">
+    <img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>{%trans "Offer"%}
+  </a>
+</script>
+<script type="text/template" id="content-menu-template">
+  <ul>
+  <li><a href="{% url 'user_profile' %}">
+    <div class="nav-menu-item-wrap profile">
+      <div class="nav-menu-item"></div>
+      {% trans "Profile"%}
+    </div>
+  </a></li>
+  <li><a href="{% url 'user_settings' %}">
+    <div class="nav-menu-item-wrap settings">
+      <div class="nav-menu-item"></div>
+      {% trans "Settings"%}
+    </div>
+  </a></li>
+  {% if request.user.userprofile.is_translator %}
+  <li><a href="{% url 'show_translations' %}">
+    <div class="nav-menu-item-wrap translations">
+      <div class="nav-menu-item"></div>
+      {% trans "Translations"%}
+    </div>
+  </a></li>
+  {% endif %}
+  <li><form method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    <a href="#" onclick="parentNode.submit();">
+      <div class="nav-menu-item-wrap logout">
+        <div class="nav-menu-item"></div>
+        {% trans "Logout" %}
+      </div>
+    </a>
+  </form></li></ul>
+  <div class="clearfix"></div>
+</script>
+
+<script type="text/template" id="loader-template">
+  <div class="ajaxloader">
+    <img src="{{ STATIC_URL }}images/ajax-loader.gif"/>
+  </div>
+</script>
+
+{% assets "js_all" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% include "market/clientside/app_urls.html" %}
+<script type="text/javascript">
+  window.ahr.string_constants = {{ string_constants|safe }};
+  window.ahr.siteData = {
+    isAuthenticated: {% if user.is_authenticated %}true{% else %}false{% endif %},
+  }
+</script>
+
+{% block javascript %}
+{% endblock %}
+
+{% block endjavascript %}
+{% endblock %}
+{% render_block "js" %}
+
+{#Commenting this out until we have some sort of design for it and can redo it#}
+{#{% if user.is_authenticated and not user.userprofile.is_first_login %}#}
+{#  {% include "market/clientside/notifications.html" %}#}
+{#  <script type="text/javascript" id="notifications_view">#}
+{#    (function () {#}
+{#      window.ahr.notifications_widget.initWidget()#}
+{#    })();#}
+{#  </script>#}
+{#{% endif %}#}
+
+<script type="text/javascript">
+  (function () {
+    var mainMenuOpen = false;
+    $('#view-content-menu').click(function(){
+      if(!$('#main-cms-nav').is(":visible")){
+        $('#main-cms-nav').slideDown("fast", function(){
+          mainMenuOpen = true;
+        });
+        $('.menu-selector').addClass("selected");
+      }
+    });
+    $('html').click(function(){
+      if(mainMenuOpen) {
+        $('#main-cms-nav').slideUp("fast");
+        $('.menu-selector').removeClass("selected");
+        mainMenuOpen = false;
+      }
+    });
+  })();
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.set-lang').click(function(ev){
+      ev.preventDefault();
+      var lang = $(ev.currentTarget).data('language');
+      $.ajax({
+        url: '/set-language',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          language_code: lang
+        },
+        success: function(ev){
+          if(ev.result === 'success'){
+            window.location.reload();
+          }
+        }
+      });
+    });
+    $('#logout-link').click(function(){
+      $('#logout-form').submit();
+    })
+  });
+</script>
+
+</body>
+</html>

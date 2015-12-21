@@ -14,7 +14,7 @@ import os.path
 
 
 def home(request):
-    if request.user.is_authenticated() and not request.user.is_superuser:
+    if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('exchange'))
 
     partners = Partner.objects.filter(enabled=True).all()
@@ -82,6 +82,13 @@ def home(request):
     view_dict = {'partners_first': partners_first, 'partners_rest': partners_rest,
                  'banner': HomePageBanner.objects.filter(enabled=True)}
     return render_to_response('ahr/home_v2.html', view_dict, context_instance=RequestContext(request))
+
+
+def home_test(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('exchange'))
+    view_dict = {'banner': HomePageBanner.objects.filter(enabled=True)}
+    return render_to_response('ahr/home.html', view_dict, context_instance=RequestContext(request))
 
 
 def get_stats(request):

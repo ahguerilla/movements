@@ -1,0 +1,34 @@
+{% load i18n %}
+
+<div class="home-login-form" style="{% if float_right %}float:right{% else %}margin: 0 auto{% endif %};" >
+  <div class="login-form-title">{%trans "LOGIN OR SIGNUP"%}</div>
+  <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form" autocomplete="off">
+    {% csrf_token %}
+    <div class="form-group">
+      <input class="form-control input-sm" id="id_login" name="login" placeholder="{%trans 'Email' %}" required="true" type="text">
+    </div>
+    <div class="form-group">
+      <input class="form-control input-sm" id="id_password" name="password" placeholder="{%trans 'Password' %}" required="true" type="password">
+    </div>
+    <div class="clearfix">
+      <div class="home-login-button first" style="width: 48%; float: left; margin-right: 4%;">
+        <button id="home_login" type="submit" class="btn btn-secondary full-width">{% trans "Login" %}</button>
+      </div>
+      <div class="home-login-button" style="width: 48%; float: left; ">
+        <button id="home_signup" type="submit" class="btn btn-action full-width">{% trans "Sing up" %}</button>
+      </div>
+    </div>
+  </form>
+  <div class="login-form-title social">{%trans "SIGN IN WITH"%}</div>
+  <div class="home-social-signin clearfix">
+    <div class="col-xs-4">
+      <div class="circle-container facebook"><i class="fa fa-facebook fa-2x"></i></div>
+    </div>
+    <div class="col-xs-4">
+      <div class="circle-container twitter"><i class="fa fa-twitter fa-2x"></i></div>
+    </div>
+    <div class="col-xs-4">
+      <div class="circle-container linkedin"><i class="fa fa-linkedin fa-2x"></i></div>
+    </div>
+  </div>
+</div>

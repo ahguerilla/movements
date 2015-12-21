@@ -19,6 +19,7 @@ js_info_dict = {
 urlpatterns = patterns(
     '',
     url(r'^$', 'app.views.home', name='home'),
+    url(r'^home-test$', 'app.views.home_test', name='home_test'),
     url(r'^get-stats$', 'app.views.get_stats', name='get_stats'),
     url(r'', include('two_factor.urls', 'two_factor')),
     url(r'', include(tf_urls + tf_twilio_urls, 'two_factor')),

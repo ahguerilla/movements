@@ -186,12 +186,6 @@ def profile(request, user_name=None):
                               context_instance=RequestContext(request))
 
 
-def waitforactivation(request):
-    return render_to_response('users/waitforactivation.html',
-                              {},
-                              context_instance=RequestContext(request))
-
-
 def thanksforactivation(request):
     return render_to_response('users/thanksforactivation.html',
                               {},
@@ -405,26 +399,7 @@ class AccAdapter(DefaultAccountAdapter):
 
     def get_email_confirmation_redirect_url(self, request):
         super(AccAdapter, self).get_email_confirmation_redirect_url(request)
-        key = request.path.split('/')[3]
-        conf = EmailConfirmation.objects.filter(key=key)[0]
-        user = conf.email_address.user
-        if user.is_active:
-            return 'http://'+Site.objects.get_current().domain+'/user/thanksforactivation';
-
-        vet_url = reverse('vet_user', args=(user.id,))
-        vet_url = 'http://' + Site.objects.get_current().domain + vet_url
-        ctx = {
-            "user": str(conf.email_address),
-            "activate_url": vet_url,
-            "vetted": user.is_active,
-            "current_site": Site.objects.get_current().domain,
-        }
-
-        if not config.ACTIVATE_USER_EMAIL:
-            raise Exception("Configuration Error: Check that ACTIVATE_USER_EMAIL is set")
-
-        self.send_mail('account/email/user_confirmed_email', config.ACTIVATE_USER_EMAIL, ctx)
-        return 'http://'+Site.objects.get_current().domain+'/user/waitforactivation'
+        return 'http://'+Site.objects.get_current().domain+'/user/thanksforactivation';
 
 
 @staff_member_required

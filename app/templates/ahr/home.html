@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% load cms_tags sekizai_tags%}
+{% load menu_tags %}
+{% load url from future %}
+{% load i18n %}
+{% load cms_tags %}
+{% load thumbnail %}
+
+{% block htmlclass %}additional-html{% endblock %}
+{% block bodyclass %}additional-body{% endblock %}
+
+
+{% block base_header_nav %}
+  <div class="navbar navbar-header-top navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#collapse-menu">
+          <img src="{{ STATIC_URL }}images/v2/hamburger.png"/>
+        </button>
+        <a class="main-logo" href="/">
+          <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
+        </a>
+      </div>
+      <ul class="navbar-right hidden-xs">
+        <div id="view-content-menu" class="menu-selector">
+          <div class="menu-icon"></div>
+        </div>
+      </ul>
+      <div id="collapse-menu" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-main">
+          <li class="dropdown visible-xs">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Navigate" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              {% show_menu 0 100 100 100 "cms/navs/top_nav_responsive.html" %}
+            </ul>
+          </li>
+          <li class="dropdown navbar-add-border">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Connect" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="image-item"><a target="_blank" href="https://twitter.com/movements_org">
+                <div class="nav-twitter">
+                  <img src="{{ STATIC_URL }}images/v2/twitter-dualstate.png" alt="Connect with Twitter">
+                  <span>{% trans "Twitter" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="https://www.facebook.com/Movements.org">
+                <div class="nav-facebook">
+                  <img src="{{ STATIC_URL }}images/v2/facebook-dualstate.png" alt="Connect with Facebook">
+                  <span>{% trans "Facebook" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="http://www.advancinghumanrights.org/">
+                <div class="nav-ahr">
+                  <img src="{{ STATIC_URL }}images/v2/ahr-dualstate.png" alt="Advancing human rights">
+                  <span>{% trans "Advancing Human Rights" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a target="_blank" href="http://visitor.r20.constantcontact.com/d.jsp?llr=wxajvkuab&p=oi&m=1121344324342&sit=9dtkorxjb&f=09ba4864-11fb-4fe6-95cd-46c7867064ca">
+                <div class="nav-newsletter">
+                  <img src="{{ STATIC_URL }}images/v2/newsletter-icon.png" alt="Sign up to our Newsletter">
+                  <span>{% trans "Newsletter" %}</span>
+                </div>
+              </a></li>
+              <li><div style="margin: 10px 0 0 20px;" class="fb-like" data-href="https://www.facebook.com/Movements.org"
+               data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></li>
+              <li role="separator" class="divider hidden-xs"></li>
+              <li><a href="{{ config.BLOG_URL }}" target="_blank">{% trans "Movements Blog" %}</a></li>
+              <li><a href="{% page_url 'success_stories' %}">{% trans "Success Stories" %}</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Language" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="image-item"><a data-language="en" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_uk.png">
+                  <span>{% trans "English" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ar" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_arabic.png">
+                  <span>{% trans "Arabic" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="zh-cn" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_chinese.png">
+                  <span>{% trans "Chinese" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="uk" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png">
+                  <span>{% trans "Ukrainian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ru" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_russian.png">
+                  <span>{% trans "Russian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="fa" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_iran.png">
+                  <span>{% trans "Farsi" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="fr" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_french.png">
+                  <span>{% trans "French" %}</span>
+                </div>
+              </a></li>
+            </ul>
+          </li>
+          <li class="navbar-hightlight">
+            <a href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>
+          </li>
+          <li class="visible-xs">
+            <a href="{% page_url 'how_it_works' %}">
+              <span>{%trans "Find out more"%}</span>
+            </a>
+          </li>
+          <li class="visible-xs">
+            <a href="{% url 'show_market' %}">
+              <span>{%trans "View Requests & Offers"%}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="main-cms-nav" style="display: none;">
+    <div class="main-menu-slider">
+      <ul>
+        {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
+        {% if not user.is_authenticated %}
+          <li><a href="{% url 'show_market' %}"><h3>{%trans "View Requests & Offers"%}</h3></a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+{% endblock base_header_nav %}
+
+
+{% block header_padding %}{% endblock %}
+{% block nav_padding %}{% endblock %}
+
+{% block content_outside_container %}
+
+<div class="landing-page-cover">
+  <div class="landing-page-center-content-wrap">
+    <div class="landing-page-center-content">
+      <div class="container-fluid">
+        <div class="col-lg-4 col-md-3 col-sm-2 hidden-xs">
+          <div class="language-flags">
+            <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png" ></a>
+            <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png" ></a>
+            <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png" ></a>
+            <a data-language="uk" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png" ></a>
+            <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png" ></a>
+            <a data-language="fa" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_iran.png" ></a>
+            <a data-language="fr" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_french.png" ></a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-8 landing-page-middle">
+          <img class="visible-lg" src="{{ STATIC_URL }}images/logos/logo_large_crop.png" width="70%">
+          <h2>{{ banner.0.title_text }}</h2>
+          {% include 'ahr/snippets/_home_page_buttons.html' %}
+          <div class="hidden-lg" style="margin-top: 15px;">
+            {% include 'ahr/snippets/_home_login_form.html' %}
+          </div>
+        </div>
+        <div class="col-lg-offset-1 col-lg-3 col-md-3" style="text-align: right;">
+          <div class="visible-lg">
+            {% include 'ahr/snippets/_home_login_form.html' with float_right=True %}
+          </div>
+          <div class="likebox-wrapper visible-lg visible-md">
+            <div class="fb-page" data-href="https://www.facebook.com/movements.org"
+                 data-tabs="timeline" data-height="210" data-small-header="false"
+                 data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+              <div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/movements.org">
+                <a href="https://www.facebook.com/movements.org">Movements.org</a></blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block content %}{% endblock %}
+{% block footer_padding %}{% endblock %}
+{% block base_footer %}
+<div>
+  <nav class="navbar navbar-default navbar-fixed-bottom homepage-footer">
+    <div class="container-fluid">
+      <a href="{% page_url 'how_it_works' %}">
+        <div class="footer-nav footer-nav-1 col-xs-3">{%trans "Getting Started"%}</div>
+      </a>
+      <a href="/market/#type=request">
+        <div class="footer-nav footer-nav-2 col-xs-3">{%trans "Create a Request"%}</div>
+      </a>
+      <a href="/market/#type=offer">
+        <div class="footer-nav footer-nav-3 col-xs-3">{%trans "Offer your Services"%}</div>
+      </a>
+      <div class="footer-nav footer-nav-4 col-xs-3">{%trans "Our Partners"%}</div>
+    </div>
+  </nav>
+</div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+  (function() {
+    var titleText = [];
+    {% for item in banner %}
+    titleText.push('{{ item.title_text }}');
+    {% endfor %}
+
+    $.backstretch([
+      {% for item in banner %}
+        '{{ item.main_image.url }}'{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ], {duration: 5000, fade: 750});
+
+    $(window).on("backstretch.before", function(){
+      console.log("calling backstretch before");
+    });
+
+    $(window).on("backstretch.after", function(){
+      console.log("calling backstretch after");
+    });
+
+    window.ahr.widgets.initStats();
+
+  })();
+  </script>
+{% endblock %}
