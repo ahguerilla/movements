@@ -1,32 +1,32 @@
 @font-face {
     font-family: 'HurmeGeometricSans3-Bold';
-    src: url('../fonts/HurmeGeometricSans3-Bold.eot');
-    src: url('../fonts/HurmeGeometricSans3-Bold.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/HurmeGeometricSans3-Bold.woff') format('woff'),
-         url('../fonts/HurmeGeometricSans3-Bold.ttf') format('truetype'),
-         url('../fonts/HurmeGeometricSans3-Bold.svg#HurmeGeometricSans3-Bold') format('svg');
+    src: url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-Bold.eot');
+    src: url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-Bold.eot?#iefix') format('embedded-opentype'),
+         url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-Bold.woff') format('woff'),
+         url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-Bold.ttf') format('truetype'),
+         url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-Bold.svg#HurmeGeometricSans3-Bold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'HurmeGeometricSans3-SemiBold';
-    src: url('../fonts/HurmeGeometricSans3-SemiBold.eot');
-    src: url('../fonts/HurmeGeometricSans3-SemiBold.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/HurmeGeometricSans3-SemiBold.woff') format('woff'),
-         url('../fonts/HurmeGeometricSans3-SemiBold.ttf') format('truetype'),
-         url('../fonts/HurmeGeometricSans3-SemiBold.svg#HurmeGeometricSans3-Bold') format('svg');
+    src: url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-SemiBold.eot');
+    src: url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-SemiBold.eot?#iefix') format('embedded-opentype'),
+         url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-SemiBold.woff') format('woff'),
+         url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-SemiBold.ttf') format('truetype'),
+         url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/HurmeGeometricSans3-SemiBold.svg#HurmeGeometricSans3-Bold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'LinotypeUnivers-330Light';
-    src: url('../fonts/LinotypeUnivers-330Light.eot');
-    src: url('../fonts/LinotypeUnivers-330Light.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/LinotypeUnivers-330Light.woff') format('woff'),
-         url('../fonts/LinotypeUnivers-330Light.ttf') format('truetype'),
-         url('../fonts/LinotypeUnivers-330Light.svg#LinotypeUnivers-330Light') format('svg');
+    src: url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/LinotypeUnivers-330Light.eot');
+    src: url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/LinotypeUnivers-330Light.eot?#iefix') format('embedded-opentype'),
+         url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/LinotypeUnivers-330Light.woff') format('woff'),
+         url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/LinotypeUnivers-330Light.ttf') format('truetype'),
+         url('https://s3.amazonaws.com/exhangivist-testing-media/static/fonts/LinotypeUnivers-330Light.svg#LinotypeUnivers-330Light') format('svg');
     font-weight: normal;
     font-style: normal;
 }
