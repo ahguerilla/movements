@@ -21,13 +21,6 @@
           <img src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
         </a>
       </div>
-{#      <div class="visible-xs navbar-brand">#}
-{#        <ul class="nav navbar-nav navbar-main">#}
-{#          <li class="navbar-hightlight">#}
-{#            <a href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>#}
-{#          </li>#}
-{#        </ul>#}
-{#      </div>#}
       <ul class="navbar-right hidden-xs">
         <div id="view-content-menu" class="menu-selector">
           <div class="menu-icon"></div>
@@ -172,7 +165,8 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-8 landing-page-middle">
           <img class="visible-lg" src="{{ STATIC_URL }}images/logos/logo_large_crop.png" width="70%">
-          <h2 id="banner_title">{{ banner.0.title_text }}</h2>
+          <h2 class="visible-xs">{% trans "Crowdsourcing human rights." %}</h2>
+          <h2 class="hidden-xs" id="banner_title">{{ banner.0.title_text }}</h2>
           {% include 'ahr/snippets/_home_page_buttons.html' %}
           <div class="hidden-lg" style="margin-top: 15px;">
             {% include 'ahr/snippets/_home_login_form.html' %}
