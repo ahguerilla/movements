@@ -202,10 +202,10 @@
       <a href="{% page_url 'how_it_works' %}">
         <div class="footer-nav footer-nav-1 col-xs-3"><span>{%trans "Getting Started"%}</span></div>
       </a>
-      <a href="/market/#type=request">
+      <a href="{% url 'create_request' %}">
         <div class="footer-nav footer-nav-2 col-xs-3"><span class="hidden-xs">{%trans "Create a Request"%}</span><span class="visible-xs">{%trans "Create Request"%}</span></div>
       </a>
-      <a href="/market/#type=offer">
+      <a href="{% url 'create_offer' %}">
         <div class="footer-nav footer-nav-3 col-xs-3"><span class="hidden-xs">{%trans "Offer your Services"%}</span><span class="visible-xs">{%trans "Offer Service"%}</span></div>
       </a>
       <div class="footer-nav footer-nav-4 col-xs-3"><span>{%trans "Our Partners"%}</span></div>
