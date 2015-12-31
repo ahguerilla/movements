@@ -11,7 +11,6 @@
       setpassword: "{% url 'account_set_password' %}",
       market: "{% url 'show_market' %}",
       requestposted: "{% url 'request_posted' %}",
-
       getStickyMarketItems: '{% url 'get_user_stickies' %}',
       getMarketItemsUser: '{% url 'get_market_items_user' 0 %}'.slice(0,-1),
       getusermarketitemsfromto : "{% url 'get_usermarketitems_fromto' 'json' 0 0 %}".slice(0,-1),
@@ -19,18 +18,13 @@
       sendmessage: "{% url 'send_message' 'json' 0 %}".slice(0,-1),
       senditemrecommendation: "{% url 'send_recommendation' 'json' 0 %}".slice(0,-1),
       marketsetrate: "{% url 'market_set_rate' 'json' 0 %}".slice(0,-1),
-
       reportuser: "{% url 'report_user' 'json' 0 %}".slice(0,-1),
-
       getmarketnotificationsfromto: "{% url 'get_notifications_fromto' 0 0 %}".slice(0,-1),
-
       getnotseennotif: "{% url 'get_notseen_notif' %}",
       shownotifications: "{% url 'show_notifications' %}",
-
-
       heartbeat: "{% url 'heartbeat' %}",
-
     {% endif %}
+    loginUrl: '{% url 'api_login' %}',
     getStats: '{% url 'get_stats' %}',
     getMarketItems: '{% url 'get_market_items' %}',
     getmarketitemfromto: "{% url 'get_marketitems_fromto' 'json' 0 0 %}".slice(0,-1),

@@ -241,48 +241,7 @@
         $bannerTitle.fadeIn(450);
       });
     });
-    $('.home_login').click(function(ev){
-      ev.preventDefault();
-      var formType = $(ev.currentTarget).data('type');
-      $.ajax({
-        type: 'POST',
-        url: '{% url 'api_login' %}',
-        data: $('#' + formType + '_login').serialize(),
-        success: function(data){
-          if(data.success) {
-            window.location.reload();
-          } else {
-            $('.invalid-login').show();
-          }
-        }
-      });
-
-
-    });
-    $('.home_signup').click(function(ev){
-      ev.preventDefault();
-      var formType = $(ev.currentTarget).data('type');
-      if (formType === 'central') {
-        $('#home_page_buttons').slideUp();
-      }
-      $('.password_repeat').slideDown();
-      $('.login_buttons').slideUp();
-      $('.login_or_signup_text').text('{% trans "SIGNUP"%}');
-      $('.submit_continue').slideDown();
-    });
-    $('.home_cancel').click(function(ev){
-      ev.preventDefault();
-      var formType = $(ev.currentTarget).data('type');
-      if (formType === 'central') {
-        $('#home_page_buttons').slideDown();
-      }
-      $('.password_repeat').slideUp();
-      $('.login_buttons').slideDown();
-      $('.login_or_signup_text').text('{% trans "LOGIN OR SIGNUP"%}');
-      $('.submit_continue').slideUp();
-    });
-
-    window.ahr.widgets.initStats();
+    window.ahr.widgets.initHome();
   })();
   </script>
 {% endblock %}
