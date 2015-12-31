@@ -63,7 +63,7 @@
                   <span>{% trans "Newsletter" %}</span>
                 </div>
               </a></li>
-              <li><div style="margin: 10px 0 0 20px;" class="fb-like" data-href="https://www.facebook.com/Movements.org"
+              <li style="margin: 10px 0 0 20px;" ><div class="fb-like" data-href="https://www.facebook.com/Movements.org"
                data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></li>
               <li role="separator" class="divider hidden-xs"></li>
               <li><a href="{{ config.BLOG_URL }}" target="_blank">{% trans "Movements Blog" %}</a></li>
@@ -118,7 +118,20 @@
             </ul>
           </li>
           <li class="navbar-hightlight">
-            <a href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>
+
+            <a class="donate_button" href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>
+            <form id="donate_form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="home-page-donate">
+              <input type="hidden" name="cmd" value="_donations">
+              <input type="hidden" name="business" value="clarke@advancinghumanrights.org">
+              <input type="hidden" name="lc" value="US">
+              <input type="hidden" name="item_name" value="Movements Tax Exempt Donation">
+              <input type="hidden" name="page_style" value="MOVEMENTS">
+              <input type="hidden" name="no_note" value="0">
+              <input type="hidden" name="currency_code" value="USD">
+              <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+              <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+
           </li>
           <li class="visible-xs">
             <a href="{% page_url 'how_it_works' %}">
@@ -240,6 +253,12 @@
         $bannerTitle.text(titleText[idx]);
         $bannerTitle.fadeIn(450);
       });
+    });
+
+
+    $('.donate_button').click(function(ev){
+      ev.preventDefault();
+      $('#donate_form').submit();
     });
     window.ahr.widgets.initHome();
   })();
