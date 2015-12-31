@@ -210,6 +210,7 @@ class PasswordChangeViewConf(PasswordChangeView):
 
 password_change = login_required(PasswordChangeViewConf.as_view())
 
+
 def password_change_done(request):
     return render_to_response('account/password_change.html',
                               {'message':True},
@@ -333,6 +334,22 @@ def signup_start(request):
     return render_to_response(
         "account/signup_start.html", {'form': form},
         context_instance=RequestContext(request))
+
+
+@require_POST
+def api_signup_start(request):
+    if not request.is_ajax():
+        return HttpResponseBadRequest()
+
+    form = SignUpStartForm(request.POST or None)
+    if form.is_valid():
+        cleaned_data = form.cleaned_data
+        request.session['email'] = cleaned_data['email']
+        request.session['password'] = cleaned_data['password1']
+        return HttpResponse(json.dumps({'success': True, 'next': reverse('sign_up')}), mimetype="application/json")
+    return HttpResponse(json.dumps({'success': False,
+                                    'errors': [v[0] for k, v in form.errors.items()]}),
+                        mimetype="application/json")
 
 
 @login_required
@@ -559,11 +576,12 @@ def one_click_group_unsubscribe(request, group_id, uuid):
 def api_login(request):
     if not request.is_ajax():
         return HttpResponseBadRequest()
-    login = request.POST.get('login')
-    password = request.POST.get('password')
+    login = request.POST.get('email')
+    password = request.POST.get('password1')
     if not request.limited:
         user = authenticate(username=login, password=password)
         if user is not None:
             django_login(request, user)
             return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
-    return HttpResponse(json.dumps({'success': False}), mimetype="application/json")
+    return HttpResponse(json.dumps({'success': False, 'errors': [u'Invalid user or password']}),
+                        mimetype="application/json")

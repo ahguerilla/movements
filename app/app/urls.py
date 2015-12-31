@@ -31,6 +31,7 @@ urlpatterns = patterns(
     url(r'^newsletter-signup$', 'app.views.newsletter_signup', name='newsletter_signup'),
 
     url(r'^api/login$', 'app.users.views.api_login', name='api_login'),
+    url(r'^api/signup-start', 'app.users.views.api_signup_start', name='api_signup_start'),
     url(r'^sign-up-start$', 'app.users.views.signup_start', name="signup_start"),
     url(r'^sign-up$', 'app.users.views.signup_from_home', name="sign_up"),
     url(r'^sign-up/process', 'app.users.views.process_signup', name="process_signup"),

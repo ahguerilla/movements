@@ -4,30 +4,61 @@
     events: {
       'click .home_login': 'clickHomeLogin',
       'click .home_signup': 'clickHomeSignup',
-      'click .home_cancel': 'clickHomeCancel'
+      'click .home_cancel': 'clickHomeCancel',
+      'click .home_continue': 'clickHomeContinueToSignup'
     },
     initialize: function() {
       this.loadStats();
     },
     clickHomeLogin: function(ev) {
       ev.preventDefault();
+      this.clearError();
       var formType = $(ev.currentTarget).data('type');
       $.ajax({
         type: 'POST',
-        url: window.ahr.app_urls.loginUrl,
+        url: window.ahr.app_urls.apiLoginUrl,
         data: this.$el.find('#' + formType + '_login').serialize(),
         context: this,
         success: function(data){
           if(data.success) {
             window.location.reload();
           } else {
-            this.$el.find('.invalid-login').show();
+            this.displayError(data.errors);
           }
         }
       });
     },
+    clickHomeContinueToSignup: function(ev) {
+      ev.preventDefault();
+      this.clearError();
+      var formType = $(ev.currentTarget).data('type');
+      $.ajax({
+        type: 'POST',
+        url: window.ahr.app_urls.apiSignupStart,
+        data: this.$el.find('#' + formType + '_login').serialize(),
+        context: this,
+        success: function(data){
+          if(data.success) {
+            window.location.href = data.next;
+          } else {
+            this.displayError(data.errors);
+          }
+        }
+      });
+    },
+    displayError: function(errorList) {
+      var errorString = "";
+      _.each(errorList, function(error){
+        errorString += error + '<br>';
+      });
+      this.$el.find('.invalid-login').html(errorString).show();
+    },
+    clearError: function(){
+      this.$el.find('.invalid-login').html('&nbsp;').hide();
+    },
     clickHomeSignup: function(ev) {
       ev.preventDefault();
+      this.clearError();
       var formType = $(ev.currentTarget).data('type');
       if (formType === 'central') {
         this.$el.find('#home_page_buttons').slideUp();
@@ -39,6 +70,7 @@
     },
     clickHomeCancel: function(ev) {
       ev.preventDefault();
+      this.clearError();
       var formType = $(ev.currentTarget).data('type');
       if (formType === 'central') {
         this.$el.find('#home_page_buttons').slideDown();
@@ -50,10 +82,10 @@
     },
     loadStats: function() {
       $.ajax({
-        context: this,
         url: window.ahr.app_urls.getStats,
         type: 'GET',
         dataType: 'json',
+        context: this,
         success: function (data){
           this.$el.find('#home_stats').html(this.buildStatsBanner(data));
           this.$el.fadeIn('slow');
