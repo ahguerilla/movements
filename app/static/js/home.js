@@ -14,6 +14,13 @@
       ev.preventDefault();
       this.clearError();
       var formType = $(ev.currentTarget).data('type');
+      var email = this.$el.find('#' + formType + '_login').find('input[name=email]').val();
+      var password = this.$el.find('#' + formType + '_login').find('input[name=password1]').val();
+      if (!email || !password) {
+        this.displayError(["All fields are required."]);
+        return;
+      }
+
       $.ajax({
         type: 'POST',
         url: window.ahr.app_urls.apiLoginUrl,
@@ -32,6 +39,13 @@
       ev.preventDefault();
       this.clearError();
       var formType = $(ev.currentTarget).data('type');
+      var email = this.$el.find('#' + formType + '_login').find('input[name=email]').val();
+      var password1 = this.$el.find('#' + formType + '_login').find('input[name=password1]').val();
+      var password2 = this.$el.find('#' + formType + '_login').find('input[name=password2]').val();
+      if (!email || !password1 || !password2) {
+        this.displayError(["All fields are required."]);
+        return;
+      }
       $.ajax({
         type: 'POST',
         url: window.ahr.app_urls.apiSignupStart,
