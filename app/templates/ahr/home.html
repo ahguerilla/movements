@@ -122,7 +122,7 @@
           </li>
           <li class="visible-xs">
             <a href="{% page_url 'how_it_works' %}">
-              <span>{%trans "Find out more"%}</span>
+              <span>{% trans "Find out more" %}</span>
             </a>
           </li>
           <li class="visible-xs">
@@ -169,12 +169,12 @@
           <h2 class="hidden-xs" id="banner_title">{{ banner.0.title_text }}</h2>
           {% include 'ahr/snippets/_home_page_buttons.html' %}
           <div class="hidden-lg" style="margin-top: 15px;">
-            {% include 'ahr/snippets/_home_login_form.html' %}
+            {% include 'ahr/snippets/_home_login_form.html' with form_type='central' %}
           </div>
         </div>
         <div class="col-lg-offset-1 col-lg-3 col-md-3" style="text-align: right;">
           <div class="visible-lg">
-            {% include 'ahr/snippets/_home_login_form.html' with float_right=True %}
+            {% include 'ahr/snippets/_home_login_form.html' with float_right=True form_type='top' %}
           </div>
           <div class="likebox-wrapper visible-lg visible-md">
             <div class="fb-page" data-href="https://www.facebook.com/movements.org"
@@ -240,9 +240,48 @@
         $bannerTitle.fadeIn(450);
       });
     });
+    $('.home_login').click(function(ev){
+      ev.preventDefault();
+      var formType = $(ev.currentTarget).data('type');
+      $.ajax({
+        type: 'POST',
+        url: '{% url 'api_login' %}',
+        data: $('#' + formType + '_login').serialize(),
+        success: function(data){
+          if(data.success) {
+            window.location.reload();
+          } else {
+            $('.invalid-login').show();
+          }
+        }
+      });
+
+
+    });
+    $('.home_signup').click(function(ev){
+      ev.preventDefault();
+      var formType = $(ev.currentTarget).data('type');
+      if (formType === 'central') {
+        $('#home_page_buttons').slideUp();
+      }
+      $('.password_repeat').slideDown();
+      $('.login_buttons').slideUp();
+      $('.login_or_signup_text').text('{% trans "SIGNUP"%}');
+      $('.submit_continue').slideDown();
+    });
+    $('.home_cancel').click(function(ev){
+      ev.preventDefault();
+      var formType = $(ev.currentTarget).data('type');
+      if (formType === 'central') {
+        $('#home_page_buttons').slideDown();
+      }
+      $('.password_repeat').slideUp();
+      $('.login_buttons').slideDown();
+      $('.login_or_signup_text').text('{% trans "LOGIN OR SIGNUP"%}');
+      $('.submit_continue').slideUp();
+    });
 
     window.ahr.widgets.initStats();
-
   })();
   </script>
 {% endblock %}

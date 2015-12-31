@@ -2,21 +2,35 @@
 {% load socialaccount %}
 
 <div class="home-login-form" style="{% if float_right %}float:right{% else %}margin: 0 auto{% endif %};" >
-  <div class="login-form-title">{%trans "LOGIN OR SIGNUP"%}</div>
-  <form id="login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form" autocomplete="off">
+  <div class="login-form-title login_or_signup_text">{% trans "LOGIN OR SIGNUP"%}</div>
+  <form id="{{ form_type }}_login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form" autocomplete="off">
     {% csrf_token %}
     <div class="form-group">
-      <input class="form-control input-sm" id="id_login" name="login" placeholder="{%trans 'Email' %}" required="true" type="text">
+      <input class="form-control input-sm" name="login" placeholder="{% trans 'Email' %}" required="true" type="text">
     </div>
     <div class="form-group">
-      <input class="form-control input-sm" id="id_password" name="password" placeholder="{%trans 'Password' %}" required="true" type="password">
+      <input class="form-control input-sm" name="password" placeholder="{% trans 'Password' %}" required="true" type="password">
+    </div>
+    <div style="display: none;" class="form-group password_repeat">
+      <input class="form-control input-sm" name="password_repeat" placeholder="{% trans 'Retype Password ' %}" required="true" type="password">
     </div>
     <div class="clearfix">
+      <h4 style="display: none;" class="invalid-login">Invalid user or password</h4>
+    </div>
+    <div class="clearfix login_buttons">
       <div class="home-login-button first" style="width: 48%; float: left; margin-right: 4%;">
-        <button id="home_login" type="submit" class="btn btn-secondary full-width">{% trans "Login" %}</button>
+        <button data-type="{{ form_type }}" type="submit" class="btn btn-secondary full-width home_login">{% trans "Login" %}</button>
       </div>
       <div class="home-login-button" style="width: 48%; float: left; ">
-        <button id="home_signup" type="submit" class="btn btn-action full-width">{% trans "Sign up" %}</button>
+        <button data-type="{{ form_type }}" type="submit" class="btn btn-action full-width home_signup">{% trans "Sign up" %}</button>
+      </div>
+    </div>
+    <div style="display: none;" class="clearfix submit_continue">
+      <div class="home-login-button first" style="width: 48%; float: left; margin-right: 4%;">
+        <button data-type="{{ form_type }}" type="submit" class="btn btn-secondary full-width home_cancel">{% trans "Cancel" %}</button>
+      </div>
+      <div class="home-login-button" style="width: 48%; float: left; ">
+        <button data-type="{{ form_type }}" type="submit" class="btn btn-action full-width home_continue">{% trans "Continue" %}</button>
       </div>
     </div>
   </form>

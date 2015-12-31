@@ -1,7 +1,10 @@
-from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseBadRequest
+from django.views.decorators.http import require_POST
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, render
+from django.contrib.auth import authenticate, login as django_login
 from django.contrib.auth.models import User
+
 from django.db import transaction
 from django.utils.translation import ugettext_lazy as _, ugettext
 
@@ -548,3 +551,19 @@ def one_click_group_unsubscribe(request, group_id, uuid):
                                   'error_message': error_message,
                               },
                               context_instance=RequestContext(request))
+
+
+@require_POST
+@ratelimit(key='post:login', rate='3/m', method=['POST'])
+@ratelimit(key='ip', rate='20/m', method=['POST'])
+def api_login(request):
+    if not request.is_ajax():
+        return HttpResponseBadRequest()
+    login = request.POST.get('login')
+    password = request.POST.get('password')
+    if not request.limited:
+        user = authenticate(username=login, password=password)
+        if user is not None:
+            django_login(request, user)
+            return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
+    return HttpResponse(json.dumps({'success': False}), mimetype="application/json")

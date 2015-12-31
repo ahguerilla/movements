@@ -172,8 +172,19 @@ box-shadow()
   background-color $request-color
   color $white-font
 
-.btn-action:hover, .btn-action:active, .btn-action:focus, .btn-request:hover, .btn-request:focus, .btn-offer:hover, .btn-offer:focus, .btn-secondary:hover
+.btn-action:hover,
+.btn-action:active,
+.btn-action:focus,
+.btn-request:hover,
+.btn-request:focus,
+.btn-offer:hover,
+.btn-offer:focus,
+.btn-secondary:hover,
+.btn-secondary:focus
   color $white-font
+
+.btn-secondary:focus
+  outline none
 
 .btn-social-facebook
   background-color $facebook-blue
@@ -1018,6 +1029,14 @@ h1,h2,h3,h4,h5,h6
   .login-form-title.social
     margin-top 20px
     margin-bottom 10px
+  .invalid-login
+    text-align center
+    color #ff0000
+    background-color rgba(0, 0, 0, 0.6)
+    line-height 30px
+    border-radius 3px
+    margin-top 0
+    margin-bottom 5px
   input
     width 100%
     margin-bottom 5px
