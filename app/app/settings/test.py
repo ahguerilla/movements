@@ -11,6 +11,7 @@ TEST_DISCOVER_PATTERN = "test_*.py"
 SECRET_KEY = 've4&7oc3yk+g-_1ob4n_$vwn_os!=t#zn38p)fw6^q9h1a()-b'
 ASSETS_DEBUG = False
 COOKIE_DOMAIN = None
+BASE_URL = 'http://localhost:8000'
 ########## IN-MEMORY TEST DATABASE
 DATABASES = {
     "default": {

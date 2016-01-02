@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
                        url(r'market/api/', include('app.market.api.urls')),
+                       url(r'market/test/', include('app.market.test.urls')),
                        url(r'^market/$', 'app.market.views.index', name="show_market"),
                        url(r'^market/translations$', 'app.market.views.translations', name="show_translations"),
                        url(r'^market/requestposted$', 'app.market.views.request_posted', name="request_posted"),
@@ -18,8 +19,8 @@ urlpatterns = patterns('',
                        url('^/messages/inbox/m/$', 'app.market.views.index'),
                        url('^messages/permdelete/', 'app.market.views.permanent_delete_postman',
                            name="permanent_delete_postman"),
-                       url(r'^messages/', include('postman.urls')),
-)
+                       url(r'^messages/', include('postman.urls')),)
+
 
 from postman.views import MessageView, ReplyView
 from app.market.forms import MarketQuickReplyForm
