@@ -179,7 +179,7 @@
         <div class="col-lg-4 col-md-6 col-sm-8 landing-page-middle">
           <img class="visible-lg" src="{{ STATIC_URL }}images/logos/logo_large_crop.png" width="70%">
           <h2 class="visible-xs">{% trans "Crowdsourcing human rights." %}</h2>
-          <h2 class="hidden-xs" id="banner_title">{{ banner.0.title_text }}</h2>
+          <h2 class="hiddenxs" id="banner_title">{{ banner.0.title_text }}</h2>
           {% include 'ahr/snippets/_home_page_buttons.html' %}
           <div class="hidden-lg" style="margin-top: 15px;">
             {% include 'ahr/snippets/_home_login_form.html' with form_type='central' %}
@@ -246,9 +246,9 @@
         idx = 0;
       }
       var $bannerTitle = $('#banner_title');
-      $bannerTitle.fadeOut(450, function(){
+      $bannerTitle.fadeOut(350, function(){
         $bannerTitle.text(titleText[idx]);
-        $bannerTitle.fadeIn(450);
+        $bannerTitle.fadeIn(400);
       });
     });
 
