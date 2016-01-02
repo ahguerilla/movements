@@ -6,13 +6,13 @@
   <form id="{{ form_type }}_login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form" autocomplete="off">
     {% csrf_token %}
     <div class="form-group">
-      <input class="form-control input-sm" name="email" placeholder="{% trans 'Email' %}" required="true" type="text">
+      <input class="form-control input-sm" name="email" placeholder="{% trans 'Email' %}" type="text">
     </div>
     <div class="form-group">
-      <input class="form-control input-sm" name="password1" placeholder="{% trans 'Password' %}" required="true" type="password">
+      <input class="form-control input-sm" name="password1" placeholder="{% trans 'Password' %}" type="password">
     </div>
     <div style="display: none;" class="form-group password_repeat">
-      <input class="form-control input-sm" name="password2" placeholder="{% trans 'Retype Password ' %}" required="true" type="password">
+      <input class="form-control input-sm" name="password2" placeholder="{% trans 'Retype Password ' %}" type="password">
     </div>
     <div class="clearfix">
       <h4 style="display: none;" class="invalid-login">&nbsp;</h4>
