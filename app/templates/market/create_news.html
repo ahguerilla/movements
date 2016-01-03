@@ -1,0 +1,58 @@
+{% extends "base_form.html" %}
+
+{% load i18n %}
+{% load widget_tweaks %}
+{% load thumbnail %}
+
+{% block public-content-message %}
+<form class="form-horizontal"  method="post" enctype="multipart/form-data" id="create-post-form">
+  {% csrf_token %}
+  <div class="dialog movements-form new-post">
+    <div>
+      <div class="form-title"><h1>{% trans "News" %}</h1></div>
+      {{ form.non_field_errors }}
+    </div>
+    <div>
+      <p style="margin-top: 15px;">{% trans "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod." %}</p>
+      <div class="form-sub-title"><h2>{% trans "1. Paste the news item link into the box below" %}</h2></div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          {% render_field form.news_url class="form-control input-sm" required="true" placeholder="" %}
+          {{ form.news_url.errors }}
+          <div class="news_url-errors">{{ form.news_url.errors }}</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <button id="parse_news_url" class="btn btn-action pull-right">&nbsp;&nbsp;{% trans "GO" %}&nbsp;&nbsp;</button>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 15px;">
+      <div id="news_item"></div>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/template" id="news-item-card-template">
+    <div class="news-item-card">
+      <h2><a href="<%= url %>"><%- title %></a></h2>
+      <img style="margin-bottom: 10px;" width="100%" src="<%= image %>">
+      <p><a href="<%= url %>"><%- description %></a></p>
+      <div class="row news-card-footer">
+        <% if (published) { %>
+        <div class="col-xs-12" style="margin-bottom: 10px;"><%- published %></div>
+        <% } %>
+        <div class="col-xs-6"><%- site_name %></div>
+        <div style="text-align: right;" class="col-xs-6"><%- author %></div>
+      </div>
+    </div>
+  </script>
+  <script type="text/javascript">
+    window.ahr.initCreateNewsItem();
+  </script>
+{% endblock %}

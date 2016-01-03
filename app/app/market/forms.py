@@ -105,6 +105,15 @@ class RequestForm(MarketItemBaseForm):
         return data
 
 
+class NewsForm(forms.ModelForm):
+    ITEM_TYPE = market.models.MarketItem.TYPE_CHOICES.NEWS
+    news_url = forms.URLField()
+
+    class Meta:
+        model = market.models.MarketItem
+        fields = ['title', 'details']
+
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = market.models.Comment

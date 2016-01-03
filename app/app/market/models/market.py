@@ -38,7 +38,8 @@ class MarketItem(models.Model):
     )
     TYPE_CHOICES = EnumChoices(
         REQUEST=('request', _('Request')),
-        OFFER=('offer', _('Offer'))
+        OFFER=('offer', _('Offer')),
+        NEWS=('news', _('News')),
     )
 
     item_type = models.CharField(_('item_type'), max_length=50, blank=False)

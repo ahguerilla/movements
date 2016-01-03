@@ -28,6 +28,7 @@ js = Bundle(
         './js/more_about_you.js',
         './js/user_settings.js',
         './js/create_post.js',
+        './js/create_news_item.js',
         './js/view_post.js',
         './js/translations.js',
         './js/region_accordion_select.js',
@@ -56,7 +57,6 @@ css_v2 = Bundle(
     ),
     Bundle(
         './css/site_v2.styl',
-        './css/site-sm_v2.styl',
         './css/site-xs_v2.styl',
         filters='stylus',
         output='./css/site_v2.css'

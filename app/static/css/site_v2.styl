@@ -7,6 +7,7 @@ $secondary-color = #B7ABA5
 $third-color = #005D86
 $offer-color = $third-color
 $request-color = #ff4545
+$news-color = #92D050
 $background-color = #F8F6F7
 $border-color = #E0D7D8
 $border-color-alpha = rgba(224, 215, 216, 0.8)
@@ -105,7 +106,7 @@ box-shadow()
     border-color $primary-color-alpha
     box-shadow 0 1px 1px rgba(0, 0, 0, 0.075)// inset, 0 0 8px rgba(254, 109, 80, 0.6)
     outline 0 none
-  input[type=text], input[type=email], input[type=number], input[type=password], select
+  input[type=text], input[type=email], input[type=number], input[type=password], input[type=url], select
     border-radius 3px
     height 40px
   .btn-group
@@ -130,6 +131,20 @@ box-shadow()
 
 .right-align
   text-align right
+
+.news-item-card
+  border 1px solid $border-color
+  border-radius 5px
+  padding 10px 15px
+  h2
+    margin-top 0
+  a
+    font-weight normal
+    text-decoration none
+  a:hover
+    text-decoration underline
+  .news-card-footer
+    font-weight bold
 
 // **************************************
 // button styles
@@ -172,6 +187,11 @@ box-shadow()
   background-color $request-color
   color $white-font
 
+.btn-news
+  background-color $news-color
+  color $white-font
+
+
 .btn-action:hover,
 .btn-action:active,
 .btn-action:focus,
@@ -179,6 +199,8 @@ box-shadow()
 .btn-request:focus,
 .btn-offer:hover,
 .btn-offer:focus,
+.btn-news:hover,
+.btn-news:focus,
 .btn-secondary:hover,
 .btn-secondary:focus
   color $white-font
@@ -551,7 +573,7 @@ $navigation-font-size = 16px
       left inherit
       right 63px
       width 136px
-      height 90px
+      height 126px
       z-index 1000000
     .popover-content
       width 132px
@@ -559,7 +581,7 @@ $navigation-font-size = 16px
     .btn
       width 115px
       margin-top 7px
-      img
+      img, i
         margin-right 5px
     .btn-request
       margin-top 0

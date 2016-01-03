@@ -31,7 +31,7 @@ class OpenGraph(dict):
         return self[name]
 
     def fetch(self, url):
-        raw = urllib2.urlopen(url)
+        raw = urllib2.build_opener(urllib2.HTTPCookieProcessor).open(url)
         html = raw.read()
         return self.parser(html)
 
@@ -46,13 +46,12 @@ class OpenGraph(dict):
                 self[og[u'property'][3:]] = og[u'content']
 
         # Couldn't fetch all attrs from og tags, try scraping body
-        if not self.is_valid() and self.scrape:
-            for attr in self.required_attrs:
-                if not self.valid_attr(attr):
-                    try:
-                        self[attr] = getattr(self, 'scrape_%s' % attr)(doc)
-                    except AttributeError:
-                        pass
+        for attr in self.required_attrs:
+            if not self.valid_attr(attr):
+                try:
+                    self[attr] = getattr(self, 'scrape_%s' % attr)(doc)
+                except AttributeError:
+                    pass
 
         # Get article attrs from og tags
         arts = doc.html.head.findAll(property=re.compile(r'^article'))

@@ -12,7 +12,7 @@ from app.market.api.utils import HttpResponseForbiden
 
 from app.users.models import Interest, Countries, Issues
 from app.utils import form_errors_as_dict
-from forms import RequestForm, OfferForm, save_market_item
+from forms import RequestForm, OfferForm, NewsForm, save_market_item
 from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforceRecord, MarketItemImage
 
 
@@ -182,6 +182,13 @@ def create_request(request):
                                   RequestForm,
                                   lambda x: reverse('request_posted'),
                                   None)
+
+
+@login_required
+def create_news(request):
+    form = NewsForm(request.POST or None)
+    return render_to_response('market/create_news.html', {'form': form},
+                              context_instance=RequestContext(request))
 
 
 @login_required

@@ -175,5 +175,6 @@ urlpatterns = patterns(
     url(r'', include(market_notification_patterns)),
     url(r'', include(report_patterns)),
     url(r'', include(market_heartbeat_patters)),
+    url(r'', include(market_open_graph)),
     url(r'', include(market_translation_patterns, namespace='translation')),
 )
