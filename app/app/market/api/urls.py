@@ -162,6 +162,11 @@ market_translation_patterns = patterns(
     url(r'^translator/', include(translator_patterns, namespace='translator')),
 )
 
+market_open_graph = patterns(
+    'app.market.api.views.open_graph',
+    url(r'^parse-url', 'parse_url', name='parse_url')
+)
+
 urlpatterns = patterns(
     '',
     url(r'', include(market_item_patterns)),

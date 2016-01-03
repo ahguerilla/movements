@@ -17,6 +17,10 @@ from tinymce import models as tinymodels
 
 import app.users.models as user_models
 from app.utils import EnumChoices
+from app.market.utils import fetch_graph_data
+from urllib2 import URLError
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
 
 _logger = logging.getLogger('movements-alerts')
 
@@ -164,6 +168,11 @@ class MarketItem(models.Model):
             adict['fields']['avatar'] = False
             adict['fields']['hasEdit'] = False
         return adict
+
+    def generate_news_item(self, url):
+        news_item = MarketNewsItemData.fetch_news_item(url)
+        news_item.market_item = self
+        news_item.save()
 
 
 class MarketItemHowCanYouHelp(models.Model):
@@ -329,3 +338,66 @@ class MarketItemCollaborators(models.Model):
 
     class Meta:
         app_label = 'market'
+
+
+class MarketNewsItemData(models.Model):
+    market_item = models.OneToOneField(MarketItem, verbose_name=_('market item'))
+    original_url = models.URLField(max_length=500)
+    last_scraped = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=500)
+    url = models.URLField(max_length=500)
+    type = models.CharField(max_length=50)
+    image = models.URLField(max_length=500, null=True, blank=True)
+    description = models.TextField()
+    site_name = models.CharField(max_length=100)
+    published = models.CharField(max_length=50, null=True, blank=True)
+    author_url = models.URLField(max_length=500, null=True, blank=True)
+    author_name = models.CharField(max_length=100, null=True, blank=True)
+
+    class Meta:
+        app_label = 'market'
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.site_name, self.title)
+
+    @classmethod
+    def fetch_news_item(cls, url):
+        try:
+            validate = URLValidator()
+            validate(url)
+            graph_data = fetch_graph_data(url)
+        except ValidationError:
+            raise ValueError
+        except URLError:
+            raise ValueError
+        if not graph_data.is_valid():
+            raise ValueError
+
+        obj = cls(original_url=url,
+                  title=graph_data.title,
+                  url=graph_data.url,
+                  type=graph_data.type,
+                  image=graph_data.image,
+                  description=graph_data.description,
+                  site_name=graph_data.site_name)
+        if hasattr(graph_data, 'published'):
+            obj.published = graph_data.published
+        elif hasattr(graph_data, 'published_time'):
+            obj.published = graph_data.published_time
+        elif hasattr(graph_data, 'published_date'):
+            obj.published = graph_data.published_date
+
+        if hasattr(graph_data, 'author'):
+            obj.author_url = graph_data.author
+            try:
+                validate = URLValidator()
+                validate(graph_data.author)
+                author_graph_data = fetch_graph_data(graph_data.author)
+                if hasattr(author_graph_data, 'title'):
+                    obj.author_name = author_graph_data.title
+            except ValidationError:
+                obj.author_url = None
+                obj.author_name = graph_data.author
+            except URLError:
+                pass
+        return obj
