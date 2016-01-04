@@ -1,15 +1,26 @@
 (function (global) {
   var CreateNewsItemView = Backbone.View.extend({
     events: {
-      'click #parse_news_url': 'parseNewsUrl'
+      'click #parse_news_url': 'clickGo',
+      'click .select-checkbox': 'checkClick'
 
     },
     initialize: function() {
       this.$newsItemTemplate = _.template($('#news-item-card-template').html());
+      var url = this.$el.find('#id_news_url').val();
+      if (url.length > 0) {
+        this.parseNewsUrl();
+      }
     },
-    parseNewsUrl: function(ev) {
+    checkClick: function(ev) {
+      $(ev.currentTarget).find('input[type="checkbox"]').prop("checked", !$(ev.currentTarget).find('input[type="checkbox"]').prop("checked"));
+      $(ev.currentTarget).toggleClass("checked");
+    },
+    clickGo: function(ev) {
       ev.preventDefault();
-
+      this.parseNewsUrl();
+    },
+    parseNewsUrl: function() {
       var self = this;
       var displayError = function(error) {
         if (error) {
@@ -33,6 +44,7 @@
           success: function(data){
             if(data.success) {
               this.$el.find('#news_item').html(this.$newsItemTemplate(data));
+              this.$el.find('#news_item_post_details').show();
             } else {
               displayError('Please enter a valid url');
             }

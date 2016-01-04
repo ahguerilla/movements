@@ -187,6 +187,12 @@ def create_request(request):
 @login_required
 def create_news(request):
     form = NewsForm(request.POST or None)
+    if form.is_valid():
+        post = save_market_item(form, request.user)
+        news_item = post.generate_news_item(form.cleaned_data.get('news_url'))
+        post.title = news_item.title
+        post.save()
+        return redirect(reverse('show_post', args=[post.id]))
     return render_to_response('market/create_news.html', {'form': form},
                               context_instance=RequestContext(request))
 

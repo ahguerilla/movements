@@ -18,7 +18,6 @@
       <div class="form-group">
         <div class="col-xs-12">
           {% render_field form.news_url class="form-control input-sm" required="true" placeholder="" %}
-          {{ form.news_url.errors }}
           <div class="news_url-errors">{{ form.news_url.errors }}</div>
         </div>
       </div>
@@ -32,6 +31,36 @@
     </div>
     <div style="margin-top: 15px;">
       <div id="news_item"></div>
+    </div>
+    <div style="display: none;" id="news_item_post_details">
+      <div>
+        <div class="form-sub-title"><h2>{% trans "2. What issues does this relate to?" %}</h2></div>
+        <div id="issues-select" class="form-select-multi">
+          {{ form.issues }}
+        </div>
+        <label for="{{ form.specific_issue.auto_id }}">{% trans 'Other' %}</label>
+        <div class="form-group">
+          <div class="col-xs-12">
+            {% render_field form.specific_issue class="form-control" placeholder="" maxlength="30" %}
+            {{ form.specific_issue.errors }}
+            <div class="issues-errors">{{ form.issues.errors }}</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-sub-title"><h2>{% trans "3. How can people help?" %}</h2></div>
+        <p>{% trans "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.."%}</p>
+        {% render_field form.details class="form-control input-sm" required="true" placeholder="" %}
+        {{ form.details.errors }}
+        <div class="details-errors">{{ form.details.errors }}</div>
+      </div>
+      <div style="margin-top: 20px;">
+        <div class="form-group">
+          <div class="col-xs-12">
+            <button class="btn btn-action pull-right">{% trans "Post now"%}</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </form>

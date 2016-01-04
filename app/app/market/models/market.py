@@ -21,6 +21,7 @@ from app.market.utils import fetch_graph_data
 from urllib2 import URLError
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from dateutil import parser
 
 _logger = logging.getLogger('movements-alerts')
 
@@ -170,10 +171,12 @@ class MarketItem(models.Model):
             adict['fields']['hasEdit'] = False
         return adict
 
-    def generate_news_item(self, url):
+    def generate_news_item(self, url, save=True):
         news_item = MarketNewsItemData.fetch_news_item(url)
         news_item.market_item = self
-        news_item.save()
+        if save:
+            news_item.save()
+        return news_item
 
 
 class MarketItemHowCanYouHelp(models.Model):
@@ -360,6 +363,18 @@ class MarketNewsItemData(models.Model):
 
     def __unicode__(self):
         return u'%s - %s' % (self.site_name, self.title)
+
+    def format_for_news_card(self):
+        published_date = parser.parse(self.published)
+        return {
+            'title': self.title,
+            'url': self.url,
+            'description': self.description,
+            'site_name': self.site_name,
+            'image': self.image,
+            'author': self.author_name,
+            'published': published_date.strftime('%d %b %Y') if published_date else '',
+        }
 
     @classmethod
     def fetch_news_item(cls, url):

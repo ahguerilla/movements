@@ -59,6 +59,6 @@
   window.ahr = window.ahr || {};
   window.ahr.widgets = window.ahr.widgets || {};
   window.ahr.widgets.initAccordionView = function () {
-    var widget = new AccordionView();
+    new AccordionView();
   };
 })();

@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 import app.market as market
 from app.market.models.translation import detect_language
 from app.users.forms import CheckboxSelectMultiple, RegionAccordionSelectMultiple
+from market.models import MarketNewsItemData
 
 
 class MarketQuickReplyForm(QuickReplyForm):
@@ -111,7 +112,34 @@ class NewsForm(forms.ModelForm):
 
     class Meta:
         model = market.models.MarketItem
-        fields = ['title', 'details']
+        fields = ['details', 'specific_issue', 'issues']
+
+        widgets = {
+            'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
+            'issues': CheckboxSelectMultiple(),
+        }
+
+    def clean_news_url(self):
+        try:
+            MarketNewsItemData.fetch_news_item(self.cleaned_data.get('news_url'))
+        except ValueError:
+            raise forms.ValidationError(_("Invalid Url"))
+        return self.cleaned_data.get('news_url')
+
+    def clean_issues(self):
+        data = self.cleaned_data['issues']
+        specific_issue = self.cleaned_data['specific_issue']
+        if len(data) == 0 and not specific_issue:
+            raise forms.ValidationError(_("You must add at least one issue"))
+        if len(data) >= 4 or (len(data) >= 3 and specific_issue):
+            raise forms.ValidationError(_("Please select a maximum of 3 issues"))
+        return data
+
+    def save(self, commit=True, *args, **kwargs):
+        self.instance.item_type = self.ITEM_TYPE
+        if self.instance.id is None:
+            self.instance.owner = kwargs['owner']
+        return super(NewsForm, self).save(commit=commit)
 
 
 class CommentForm(forms.ModelForm):
