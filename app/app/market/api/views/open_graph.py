@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from app.market.models import MarketNewsItemData
+from dateutil import parser
 
 import json
 
@@ -17,6 +18,9 @@ def parse_url(request):
     except ValueError:
         return HttpResponse(json.dumps({'success': False}), mimetype="application/json")
 
+    published_date = parser.parse(article.published)
+
+
     data = {
         'success': True,
         'title': article.title,
@@ -25,6 +29,6 @@ def parse_url(request):
         'site_name': article.site_name,
         'image': article.image,
         'author': article.author_name,
-        'published': article.published,
+        'published': published_date.strftime('%d %b %Y') if published_date else '',
     }
     return HttpResponse(json.dumps(data), mimetype="application/json")

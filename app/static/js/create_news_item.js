@@ -14,8 +14,10 @@
       var displayError = function(error) {
         if (error) {
           self.$el.find('.news_url-errors').html('<div class="error">' + error + '<div>');
+          self.$el.find('#news_item').html('');
         } else {
           self.$el.find('.news_url-errors').html('');
+          self.$el.find('#news_item').html('');
         }
       };
       displayError();
