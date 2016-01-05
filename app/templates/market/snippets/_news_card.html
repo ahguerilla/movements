@@ -1,0 +1,18 @@
+<div class="news-item-card" style="margin-bottom: 15px;">
+  <div class="row">
+    <div class="col-sm-5">
+      <img width="100%" src="{{ post.marketnewsitemdata.image }}">
+    </div>
+    <div class="col-sm-7 news-item-card-details">
+      <h4>{{ post.marketnewsitemdata.site_name|upper }}</h4>
+      {% if post.marketnewsitemdata.published_date %}
+      <h4>{{ post.marketnewsitemdata.published_date.0 }}</h4>
+      {% endif %}
+      {% if post.marketnewsitemdata.author_name %}
+      <h4>{{ post.marketnewsitemdata.author_name }}</h4>
+      {% endif %}
+      <p>{{ post.marketnewsitemdata.description }}</p>
+    </div>
+    <div class="read-more"><a href="{{ post.marketnewsitemdata.url }}">Read more</a></div>
+  </div>
+</div>

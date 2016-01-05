@@ -358,6 +358,11 @@ class MarketNewsItemData(models.Model):
     author_url = models.URLField(max_length=500, null=True, blank=True)
     author_name = models.CharField(max_length=100, null=True, blank=True)
 
+    @property
+    def published_date(self):
+        d = parser.parse(self.published)
+        return d.strftime('%A, %b %d, %Y') if d else '',
+
     class Meta:
         app_label = 'market'
 
@@ -365,7 +370,6 @@ class MarketNewsItemData(models.Model):
         return u'%s - %s' % (self.site_name, self.title)
 
     def format_for_news_card(self):
-        published_date = parser.parse(self.published)
         return {
             'title': self.title,
             'url': self.url,
@@ -373,7 +377,7 @@ class MarketNewsItemData(models.Model):
             'site_name': self.site_name,
             'image': self.image,
             'author': self.author_name,
-            'published': published_date.strftime('%d %b %Y') if published_date else '',
+            'published': self.published_date
         }
 
     @classmethod

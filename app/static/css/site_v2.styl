@@ -133,7 +133,8 @@ box-shadow()
   text-align right
 
 .news-item-card
-  border 1px solid $border-color
+  position relative
+  border 1px solid $hr-color
   border-radius 5px
   padding 10px 15px
   h2
@@ -145,6 +146,15 @@ box-shadow()
     text-decoration underline
   .news-card-footer
     font-weight bold
+  .news-item-card-details
+    h4
+      color $main-font-dark
+  .read-more
+    position absolute
+    bottom 5px
+    right 15px
+    a
+      color $main-font-dark
 
 // **************************************
 // button styles
@@ -1612,6 +1622,8 @@ popoverDropdown(width, showIcon = true)
     background $offer-color url('../images/v2/offer_icon.png') no-repeat 10px center
   .post-header.request
     background $request-color url('../images/v2/request_icon.png') no-repeat 10px center
+  .post-header.news
+    background $news-color url('../images/v2/news_icon.png') no-repeat 10px center
   .post-date
     font-size 14px
     font-weight bold
@@ -1702,22 +1714,22 @@ popoverDropdown(width, showIcon = true)
       text-align right
   .comments
     margin-top 20px
-    .comments-header
-      font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
-      font-size 18px
-      border-bottom 1px solid $hr-color
-      margin-bottom 15px
-      padding-bottom 4px
-      .comment-count
-        float right
-        color $inactive-font
-        font-size 14px
     form
       margin-bottom 20px
       .alert
         margin-bottom 10px
       textarea
         margin-bottom 10px
+  .comments-header
+    font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
+    font-size 18px
+    border-bottom 1px solid $hr-color
+    margin-bottom 15px
+    padding-bottom 4px
+    .comment-count
+      float right
+      color $inactive-font
+      font-size 14px
   .comment
     min-height 60px
     margin-bottom 30px

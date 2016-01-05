@@ -63,6 +63,9 @@
         </div>
       </div>
       <h1 id="post-title">{{ post.title }}</h1>
+      {% if post.item_type == 'news' %}
+        {% include 'market/snippets/_news_card.html' %}
+      {% endif %}
       <div class="row poster clearfix">
         <div class="col-sm-6">
           <div class="avatar">
@@ -102,6 +105,9 @@
       </div>
       {% include 'market/snippets/_post_actions.html' %}
       <div class="post">
+        {% if post.item_type == 'news' %}
+        <div class="comments-header">{% trans "How can people help?" %}</div>
+        {% endif %}
         <pre class="linkify" id="post-body">{{ post.details|striptags }}</pre>
         <div class="translated_by" style="display: none;">
             <a class="google" data-translate_url="">{% trans 'via Google Translate' %}</a><span style="display:none;"> |
