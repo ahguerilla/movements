@@ -360,8 +360,10 @@ class MarketNewsItemData(models.Model):
 
     @property
     def published_date(self):
-        d = parser.parse(self.published)
-        return d.strftime('%A, %b %d, %Y') if d else '',
+        if self.published:
+            d = parser.parse(self.published)
+            return d.strftime('%A, %b %d, %Y') if d else '',
+        return ''
 
     class Meta:
         app_label = 'market'
