@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 import app.market as market
 from app.market.models.translation import detect_language
 from app.users.forms import CheckboxSelectMultiple, RegionAccordionSelectMultiple
-from market.models import MarketNewsItemData
 
 
 class MarketQuickReplyForm(QuickReplyForm):
@@ -121,7 +120,7 @@ class NewsForm(forms.ModelForm):
 
     def clean_news_url(self):
         try:
-            MarketNewsItemData.fetch_news_item(self.cleaned_data.get('news_url'))
+            market.models.MarketNewsItemData.fetch_news_item(self.cleaned_data.get('news_url'))
         except ValueError:
             raise forms.ValidationError(_("Invalid Url"))
         return self.cleaned_data.get('news_url')
