@@ -197,6 +197,19 @@ def create_news(request):
                               context_instance=RequestContext(request))
 
 
+def edit_news(request, post_id):
+    market_item = get_object_or_404(MarketItem.objects.defer('comments'), pk=post_id)
+    if market_item.owner != request.user:
+        return HttpResponseForbiden()
+    form = NewsForm(request.POST or None, instance=market_item)
+    if request.method == 'POST' and form.is_valid():
+        save_market_item(form, request.user)
+    else:
+        form.fields['news_url'].initial = market_item.marketnewsitemdata.original_url
+    return render_to_response('market/create_news.html', {'form': form, 'news_item': market_item.marketnewsitemdata},
+                              context_instance=RequestContext(request))
+
+
 @login_required
 def request_posted(request):
     if request.POST:
@@ -211,6 +224,8 @@ def edit_post(request, post_id):
                                     pk=post_id)
     if market_item.owner != request.user:
         return HttpResponseForbiden()
+    if market_item.item_type == MarketItem.TYPE_CHOICES.NEWS:
+        return edit_news(request, post_id)
     if market_item.item_type == MarketItem.TYPE_CHOICES.OFFER:
         form_class = OfferForm
         tpl = 'market/create_offer.html'

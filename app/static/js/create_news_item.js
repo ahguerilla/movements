@@ -1,15 +1,22 @@
 (function (global) {
   var CreateNewsItemView = Backbone.View.extend({
+    existing: null,
     events: {
       'click #parse_news_url': 'clickGo',
       'click .select-checkbox': 'checkClick'
-
     },
     initialize: function() {
       this.$newsItemTemplate = _.template($('#news-item-card-template').html());
-      var url = this.$el.find('#id_news_url').val();
-      if (url.length > 0) {
+    },
+    setInitial: function(args) {
+      if (args) {
+        this.existing = args;
         this.parseNewsUrl();
+      } else {
+        var url = this.$el.find('#id_news_url').val();
+        if (url.length > 0) {
+          this.parseNewsUrl();
+        }
       }
     },
     checkClick: function(ev) {
@@ -21,6 +28,11 @@
       this.parseNewsUrl();
     },
     parseNewsUrl: function() {
+      if(this.existing){
+        this.$el.find('#news_item').html(this.$newsItemTemplate(this.existing));
+        this.$el.find('#news_item_post_details').show();
+        return;
+      }
       var self = this;
       var displayError = function(error) {
         if (error) {
@@ -59,8 +71,9 @@
     }
   });
 
-  global.ahr.initCreateNewsItem = function() {
-    new CreateNewsItemView({el: '#create-post-form'});
+  global.ahr.initCreateNewsItem = function(args) {
+    var newsView = new CreateNewsItemView({el: '#create-post-form'});
+    newsView.setInitial(args)
   };
 
 })(window);

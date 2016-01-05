@@ -17,11 +17,16 @@
       <div class="form-sub-title"><h2>{% trans "1. Paste the news item link into the box below" %}</h2></div>
       <div class="form-group">
         <div class="col-xs-12">
-          {% render_field form.news_url class="form-control input-sm" required="true" placeholder="" %}
+          {% if news_item %}
+            {% render_field form.news_url class="form-control input-sm" required="true" placeholder="" readonly="true" %}
+          {% else %}
+            {% render_field form.news_url class="form-control input-sm" required="true" placeholder="" %}
+          {% endif %}
           <div class="news_url-errors">{{ form.news_url.errors }}</div>
         </div>
       </div>
     </div>
+    {% if not news_item %}
     <div>
       <div class="form-group">
         <div class="col-xs-12">
@@ -29,6 +34,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
     <div style="margin-top: 15px;">
       <div id="news_item"></div>
     </div>
@@ -104,6 +110,19 @@
     </div>
   </script>
   <script type="text/javascript">
-    window.ahr.initCreateNewsItem();
+    {% if news_item %}
+      var news_args = {
+        'title': '{{ news_item.title }}',
+        'url': '{{ news_item.url|safe }}',
+        'description': '{{ news_item.description }}',
+        'site_name': '{{ news_item.site_name }}',
+        'image': '{{ news_item.image }}',
+        'published': "{{ news_item.published_date.0 }}",
+        'author': '{{ news_item.author }}'
+      };
+    {% else %}
+      var news_args = null;
+    {% endif %}
+    window.ahr.initCreateNewsItem(news_args);
   </script>
 {% endblock %}
