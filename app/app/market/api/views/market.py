@@ -47,7 +47,7 @@ def get_raw(request, from_item=0, to_item=None,
         'interests': tuple(skills),
         'issues': tuple(issues),
         'countries': tuple(countries),
-        'types': tuple(request.GET.getlist('types', ('offer', 'request'))),
+        'types': tuple(request.GET.getlist('types', ('offer', 'request', 'news'))),
         'user_id': user_id if user_id else request.user.id,
         'date_now': datetime.utcnow(),
         'closed_statuses': (
@@ -179,7 +179,7 @@ def get_market_items(request, user_id=None, filter_by_user=False):
     max_page_num = math.ceil(market_items_count / float(settings.PAGE_SIZE))
     max_page_num = max(max_page_num, 1)
     # page_num = min(page, max_page_num)
-	# Removed for infinite scroll (Now returns zero items once beyond last page)
+    # Removed for infinite scroll (Now returns zero items once beyond last page)
     page_num = page
     from_item = (page_num - 1) * settings.PAGE_SIZE
     to_item = from_item + settings.PAGE_SIZE

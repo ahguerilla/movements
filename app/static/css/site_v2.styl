@@ -1499,6 +1499,11 @@ popoverDropdown(width, showIcon = true)
   .header
     background url('../images/v2/offer_icon.png') no-repeat left center
 
+.featured.featured-news
+  background-color $news-color
+  .header
+    background url('../images/v2/news_icon.png') no-repeat left center
+
 #marketitems, #stuck-marketitems
   .market-place-item
     position relative
@@ -1566,6 +1571,10 @@ popoverDropdown(width, showIcon = true)
         background url('../images/v2/offer_with_image.png') no-repeat left center
     .item-type
       color $offer-color
+  .market-place-item.news
+    background $news-color url('../images/v2/news_icon.png') no-repeat 13px center
+    .item-type
+      color $news-color
   .market-place-item.with-image
     padding-left 81px
     background #FFFFFF

@@ -30,6 +30,13 @@ class Offer(models.MarketItem):
     objects = PostManager('offer')
 
 
+class News(models.MarketItem):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'news'
+    objects = PostManager('news')
+
+
 class MarketItemHowCanYouHelpInline(admin.TabularInline):
     model = models.MarketItemHowCanYouHelp
     extra = 1
@@ -77,3 +84,4 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(Offer, PostAdmin)
 admin.site.register(Request, PostAdmin)
+admin.site.register(News, PostAdmin)
