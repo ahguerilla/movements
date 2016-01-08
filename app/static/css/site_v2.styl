@@ -380,9 +380,8 @@ $navigation-font-size = 16px
   .main-logo
     display block
     margin 13px 20px 0 30px
-    img
-      width 151px
-      height 50px
+  .main-logo.low-nav
+    margin 5px 20px 0 30px
   .header-nav-text
     position absolute
     left 50%
@@ -411,8 +410,10 @@ $navigation-font-size = 16px
       color #ffffff !important
   .navbar-nav > li > a
     color $font-color
-    line-height 80%px
+    line-height 80px
     padding 0 20px 0 20px
+  .navbar-nav.low-nav > li > a
+    line-height 50px
   .navbar-nav > li.active > a
     background-color $brand-alt
     color #fff
@@ -422,6 +423,8 @@ $navigation-font-size = 16px
   .navbar-main > li > a:focus
     background-color $primary-color
     color #ffffff
+  .navbar-right
+    margin-bottom 0
   .navbar-right > li
     border 0
     margin-right 15px
@@ -459,6 +462,8 @@ $navigation-font-size = 16px
       background-image url("../images/v2/hamburger.png")
       width 50px
       height 40px
+  .menu-selector.low-nav
+    margin 5px 15px 0px 13px
   .menu-selector.selected
     .menu-icon
       background-image url("../images/v2/hamburger-selected.png")
@@ -1027,9 +1032,9 @@ h1,h2,h3,h4,h5,h6
   a:hover
     color #ffffff
   .footer-nav
-    padding 10px 0
+    padding 7px 0
     font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
-    font-size 20px
+    font-size 16px
   .footer-nav-1
     background-color $secondary-color
   .footer-nav-2
