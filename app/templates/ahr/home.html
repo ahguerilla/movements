@@ -118,7 +118,6 @@
             </ul>
           </li>
           <li class="navbar-hightlight">
-
             <a class="donate_button" href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>
             <form id="donate_form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="home-page-donate">
               <input type="hidden" name="cmd" value="_donations">
@@ -131,7 +130,6 @@
               <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
               <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
             </form>
-
           </li>
           <li class="visible-xs">
             <a href="{% page_url 'how_it_works' %}">
@@ -156,46 +154,27 @@
     </div>
   </div>
 {% endblock base_header_nav %}
-
 {% block header_padding %}{% endblock %}
 {% block nav_padding %}{% endblock %}
 {% block content_outside_container %}
-
 <div class="landing-page-cover">
   <div class="landing-page-center-content-wrap">
     <div class="landing-page-center-content">
       <div class="container-fluid">
-        <div class="col-lg-4 col-md-3 col-sm-2 hidden-xs" style="direction: ltr;">
-          <div class="language-flags">
-            <a data-language="en" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_uk.png" ></a>
-            <a data-language="ar" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_arabic.png" ></a>
-            <a data-language="zh-cn" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_chinese.png" ></a>
-            <a data-language="uk" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png" ></a>
-            <a data-language="ru" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_russian.png" ></a>
-            <a data-language="fa" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_iran.png" ></a>
-            <a data-language="fr" class="set-lang" href="#"><img src="{{ STATIC_URL }}images/v2/flag_french.png" ></a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-8 landing-page-middle">
+        <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 landing-page-middle">
           <img class="visible-lg" src="{{ STATIC_URL }}images/logos/logo_large_crop.png" width="70%">
           <h2 class="visible-xs">{% trans "Crowdsourcing human rights." %}</h2>
           <h2 class="hiddenxs" id="banner_title">{{ banner.0.title_text }}</h2>
           {% include 'ahr/snippets/_home_page_buttons.html' %}
-          <div class="hidden-lg" style="margin-top: 15px;">
-            {% include 'ahr/snippets/_home_login_form.html' with form_type='central' %}
+          <div style="margin-top: 15px;">
+            {% include 'ahr/snippets/_home_login_form.html' %}
           </div>
           <div id="home_stats" class="home-stats visible-lg"></div>
-        </div>
-        <div class="col-lg-offset-1 col-lg-3 col-md-3" style="text-align: right;">
-          <div class="visible-lg">
-            {% include 'ahr/snippets/_home_login_form.html' with float_right=True form_type='top' %}
-          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 {% endblock %}
 
 {% block content %}{% endblock %}
@@ -245,7 +224,6 @@
         $bannerTitle.fadeIn(400);
       });
     });
-
 
     $('.donate_button').click(function(ev){
       ev.preventDefault();
