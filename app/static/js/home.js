@@ -108,7 +108,12 @@
       });
     },
     buildStatsBanner: function(data) {
-      return data.connections + " Human Rights Connections made Among " + data.user + " Active Users from " + data.countries + " Countries";
+      var ctx = {
+        connections: window.ahr.addCommasToNumber(data.connections),
+        users: window.ahr.addCommasToNumber(data.user),
+        countries:  window.ahr.addCommasToNumber(data.countries)
+      };
+      return JST.home_page_stats(ctx);
     }
 
   });
