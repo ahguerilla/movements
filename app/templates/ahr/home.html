@@ -161,8 +161,8 @@
   <div class="landing-page-center-content-wrap">
     <div class="landing-page-center-content">
       <div class="container-fluid">
-        <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 landing-page-middle">
-          <img class="visible-lg" src="{{ STATIC_URL }}images/logos/logo_large_crop.png" width="70%">
+        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 landing-page-middle">
+          <img class="visible-lg" src="{{ STATIC_URL }}images/logos/logo_large_crop.png" width="50%">
           <h2 class="visible-xs">{% trans "Crowdsourcing human rights." %}</h2>
           <h2 class="hiddenxs" id="banner_title">{{ banner.0.title_text }}</h2>
           {% include 'ahr/snippets/_home_page_buttons.html' %}
@@ -206,14 +206,30 @@
     titleText.push('{{ item.title_text }}');
     {% endfor %}
 
+{#    $.backstretch([#}
+{#      {% for item in banner %}#}
+{#        '{{ item.main_image.url }}'{% if not forloop.last %},{% endif %}#}
+{#      {% endfor %}#}
+{#    ], {duration: 7000, fade: 750});#}
+
     $.backstretch([
-      {% for item in banner %}
-        '{{ item.main_image.url }}'{% if not forloop.last %},{% endif %}
-      {% endfor %}
+      '{{ banner.0.main_image.url }}'
     ], {duration: 7000, fade: 750});
 
     var idx = 0;
-    $(window).on("backstretch.before", function(){
+{#    $(window).on("backstretch.before", function(){#}
+{#      idx++;#}
+{#      if (idx === titleText.length) {#}
+{#        idx = 0;#}
+{#      }#}
+{#      var $bannerTitle = $('#banner_title');#}
+{#      $bannerTitle.fadeOut(350, function(){#}
+{#        $bannerTitle.text(titleText[idx]);#}
+{#        $bannerTitle.fadeIn(400);#}
+{#      });#}
+{#    });#}
+
+    var switchTitle = function(){
       idx++;
       if (idx === titleText.length) {
         idx = 0;
@@ -223,7 +239,8 @@
         $bannerTitle.text(titleText[idx]);
         $bannerTitle.fadeIn(400);
       });
-    });
+    };
+    window.setInterval(switchTitle, 7000);
 
     $('.donate_button').click(function(ev){
       ev.preventDefault();
