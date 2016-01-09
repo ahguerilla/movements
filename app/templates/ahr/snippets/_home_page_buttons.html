@@ -2,19 +2,37 @@
 {% load i18n %}
 
 <div id="home_page_buttons">
-  <div class="homepage-button">
-    <a href="/movements/about-movements/success-stories/">
-      <button class="btn btn-secondary">{%trans "SUCCESS STORIES"%}</button>
-    </a>
+  <div class="row">
+    <div class="col-xs-12 homepage-button">
+      <a href="/movements/about-movements/success-stories/">
+        <button class="btn btn-secondary">{%trans "SUCCESS STORIES"%}</button>
+      </a>
+    </div>
   </div>
-  <div class="homepage-button">
-    <a href="/market/#type=request">
-      <button class="btn btn-action">{%trans "VIEW REQUESTS"%}</button>
-    </a>
-  </div>
-  <div class="homepage-button" id="hompage-request-button">
-    <a href="/market/#type=offer">
-      <button class="btn btn-action">{%trans "VIEW OFFERS"%}</button>
-    </a>
+  <div class="row">
+    <div class="col-xs-4 homepage-button">
+      <a href="/market/#type=request">
+        <button class="btn btn-action">
+          <span class="hidden-xs">{%trans "SEE REQUESTS"%}</span>
+          <span class="visible-xs">{%trans "REQUESTS"%}</span>
+        </button>
+      </a>
+    </div>
+    <div class="col-xs-4 homepage-button">
+      <a href="/market/#type=offer">
+        <button class="btn btn-offer">
+          <span class="hidden-xs">{%trans "SEE OFFERS"%}</span>
+          <span class="visible-xs">{%trans "OFFERS"%}</span>
+        </button>
+      </a>
+    </div>
+    <div class="col-xs-4 homepage-button">
+      <a href="/market/#type=news">
+        <button class="btn btn-news">
+          <span class="hidden-xs">{%trans "SEE NEWS STORIES"%}</span>
+          <span class="visible-xs">{%trans "NEWS"%}</span>
+        </button>
+      </a>
+    </div>
   </div>
 </div>
