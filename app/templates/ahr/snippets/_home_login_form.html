@@ -3,7 +3,7 @@
 
 <div class="home-login-form" style="margin: 0 auto;" >
   <div class="login-form-title login_or_signup_text">{% trans "LOGIN OR SIGNUP"%}</div>
-  <form id="{{ form_type }}_login" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form" autocomplete="off">
+  <form id="home_login_form" action="{% url 'account_login' %}" method="POST" class="form-horizontal" role="form" autocomplete="off">
     {% csrf_token %}
     <div class="form-group">
       <input class="form-control input-sm" name="email" placeholder="{% trans 'Email' %}" type="text">
@@ -19,18 +19,18 @@
     </div>
     <div class="clearfix login_buttons">
       <div class="home-login-button first" style="width: 48%; float: left; margin-right: 4%;">
-        <button data-type="central" type="submit" class="btn btn-secondary full-width home_login">{% trans "Login" %}</button>
+        <button type="submit" class="btn btn-secondary full-width home_login">{% trans "Login" %}</button>
       </div>
       <div class="home-login-button" style="width: 48%; float: left; ">
-        <button data-type="central" type="submit" class="btn btn-action full-width home_signup">{% trans "Sign up" %}</button>
+        <button type="submit" class="btn btn-action full-width home_signup">{% trans "Sign up" %}</button>
       </div>
     </div>
     <div style="display: none;" class="clearfix submit_continue">
       <div class="home-login-button first" style="width: 48%; float: left; margin-right: 4%;">
-        <button data-type="central" type="submit" class="btn btn-secondary full-width home_cancel">{% trans "Cancel" %}</button>
+        <button type="submit" class="btn btn-secondary full-width home_cancel">{% trans "Cancel" %}</button>
       </div>
       <div class="home-login-button" style="width: 48%; float: left; ">
-        <button data-type="central" type="submit" class="btn btn-action full-width home_continue">{% trans "Continue" %}</button>
+        <button type="submit" class="btn btn-action full-width home_continue">{% trans "Continue" %}</button>
       </div>
     </div>
   </form>

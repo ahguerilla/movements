@@ -13,9 +13,8 @@
     clickHomeLogin: function(ev) {
       ev.preventDefault();
       this.clearError();
-      var formType = $(ev.currentTarget).data('type');
-      var email = this.$el.find('#' + formType + '_login').find('input[name=email]').val();
-      var password = this.$el.find('#' + formType + '_login').find('input[name=password1]').val();
+      var email = this.$el.find('#home_login_form').find('input[name=email]').val();
+      var password = this.$el.find('#home_login_form').find('input[name=password1]').val();
       if (!email || !password) {
         this.displayError(["All fields are required."]);
         return;
@@ -24,7 +23,7 @@
       $.ajax({
         type: 'POST',
         url: window.ahr.app_urls.apiLoginUrl,
-        data: this.$el.find('#' + formType + '_login').serialize(),
+        data: this.$el.find('#home_login_form').serialize(),
         context: this,
         success: function(data){
           if(data.success) {
@@ -38,10 +37,9 @@
     clickHomeContinueToSignup: function(ev) {
       ev.preventDefault();
       this.clearError();
-      var formType = $(ev.currentTarget).data('type');
-      var email = this.$el.find('#' + formType + '_login').find('input[name=email]').val();
-      var password1 = this.$el.find('#' + formType + '_login').find('input[name=password1]').val();
-      var password2 = this.$el.find('#' + formType + '_login').find('input[name=password2]').val();
+      var email = this.$el.find('#home_login_form').find('input[name=email]').val();
+      var password1 = this.$el.find('#home_login_form').find('input[name=password1]').val();
+      var password2 = this.$el.find('#home_login_form').find('input[name=password2]').val();
       if (!email || !password1 || !password2) {
         this.displayError(["All fields are required."]);
         return;
@@ -49,7 +47,7 @@
       $.ajax({
         type: 'POST',
         url: window.ahr.app_urls.apiSignupStart,
-        data: this.$el.find('#' + formType + '_login').serialize(),
+        data: this.$el.find('#home_login_form').serialize(),
         context: this,
         success: function(data){
           if(data.success) {
@@ -73,10 +71,7 @@
     clickHomeSignup: function(ev) {
       ev.preventDefault();
       this.clearError();
-      var formType = $(ev.currentTarget).data('type');
-      if (formType === 'central') {
-        this.$el.find('#home_page_buttons').slideUp();
-      }
+      this.$el.find('#home_page_buttons').slideUp();
       this.$el.find('.password_repeat').slideDown();
       this.$el.find('.login_buttons').slideUp();
       this.$el.find('.login_or_signup_text').text(window.ahr.string_constants.signup_text);
@@ -85,10 +80,7 @@
     clickHomeCancel: function(ev) {
       ev.preventDefault();
       this.clearError();
-      var formType = $(ev.currentTarget).data('type');
-      if (formType === 'central') {
-        this.$el.find('#home_page_buttons').slideDown();
-      }
+      this.$el.find('#home_page_buttons').slideDown();
       this.$el.find('.password_repeat').slideUp();
       this.$el.find('.login_buttons').slideDown();
       this.$el.find('.login_or_signup_text').text(window.ahr.string_constants.signup_login_text);
