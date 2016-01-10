@@ -137,8 +137,8 @@
             </a>
           </li>
           <li class="visible-xs">
-            <a href="{% url 'show_market' %}">
-              <span>{%trans "View Requests & Offers"%}</span>
+            <a href="{% page_url 'our_partners' %}">
+              <span>{%trans "Partners"%}</span>
             </a>
           </li>
         </ul>
@@ -185,15 +185,20 @@
   <nav class="navbar navbar-default navbar-fixed-bottom homepage-footer">
     <div class="container-fluid">
       <a href="{% page_url 'how_it_works' %}">
-        <div class="footer-nav footer-nav-1 col-xs-3"><span>{%trans "How it Works"%}</span></div>
+        <div class="footer-nav footer-nav-1 col-sm-5ths col-xs-3"><span>{%trans "How it Works"%}</span></div>
       </a>
       <a href="{% url 'create_request' %}">
-        <div class="footer-nav footer-nav-2 col-xs-3"><span class="hidden-xs">{%trans "Create a Request"%}</span><span class="visible-xs">{%trans "Create Request"%}</span></div>
+        <div class="footer-nav footer-nav-2 col-sm-5ths col-xs-3"><span class="hidden-xs">{%trans "Create a Request"%}</span><span class="visible-xs">{%trans "Create Request"%}</span></div>
       </a>
       <a href="{% url 'create_offer' %}">
-        <div class="footer-nav footer-nav-3 col-xs-3"><span class="hidden-xs">{%trans "Offer your Services"%}</span><span class="visible-xs">{%trans "Offer Service"%}</span></div>
+        <div class="footer-nav footer-nav-3 col-sm-5ths col-xs-3"><span class="hidden-xs">{%trans "Offer your Services"%}</span><span class="visible-xs">{%trans "Offer Service"%}</span></div>
       </a>
-      <div class="footer-nav footer-nav-4 col-xs-3"><span>{%trans "Our Partners"%}</span></div>
+      <a href="{% url 'create_news' %}">
+        <div class="footer-nav footer-nav-4 col-sm-5ths col-xs-3"><span>{%trans "Act on News"%}</span></div>
+      </a>
+      <a href="{% page_url 'our_partners' %}">
+        <div class="hidden-xs footer-nav footer-nav-5 col-sm-5ths col-xs-3"><span>{%trans "Our Partners"%}</span></div>
+      </a>
     </div>
   </nav>
 </div>
