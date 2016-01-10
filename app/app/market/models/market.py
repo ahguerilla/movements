@@ -1,5 +1,7 @@
 import logging
 import uuid
+import os
+import urllib2
 from io import BytesIO, StringIO
 
 import django.contrib.auth as auth
@@ -22,6 +24,9 @@ from urllib2 import URLError
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from dateutil import parser
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
+
 
 _logger = logging.getLogger('movements-alerts')
 
@@ -137,6 +142,19 @@ class MarketItem(models.Model):
             except Exception as ex:
                 _logger.exception(ex)
                 adict['fields']['image_url'] = False
+        elif self.item_type == MarketItem.TYPE_CHOICES.NEWS:
+            if hasattr(self, 'marketnewsitemdata') and self.marketnewsitemdata.image_field:
+                try:
+                    thumb = get_thumbnailer(self.marketnewsitemdata.image_field)
+                    adict['fields']['image_url'] = thumb.get_thumbnail({'size': (66, 66),
+                                                                        'upscale': True,
+                                                                        'crop': '0, 0',
+                                                                        'background': '#FFFFFF'}).url
+                except Exception as ex:
+                    _logger.exception(ex)
+                    adict['fields']['image_url'] = False
+            else:
+                adict['fields']['image_url'] = False
         else:
             adict['fields']['image_url'] = False
         return adict
@@ -193,7 +211,8 @@ class MarketItemHowCanYouHelp(models.Model):
 def market_image_upload_handler(instance, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
-    return "post/{0}/images/{1}".format(instance.item.id, filename)
+    obj = instance.market_item if hasattr(instance, 'market_item') else instance.item
+    return "post/{0}/images/{1}".format(obj.id, filename)
 
 
 class MarketItemImage(models.Model):
@@ -352,11 +371,23 @@ class MarketNewsItemData(models.Model):
     url = models.URLField(max_length=500)
     type = models.CharField(max_length=50)
     image = models.URLField(max_length=500, null=True, blank=True)
+    image_field = models.ImageField(upload_to=market_image_upload_handler, null=True, blank=True)
     description = models.TextField()
     site_name = models.CharField(max_length=100)
     published = models.CharField(max_length=50, null=True, blank=True)
     author_url = models.URLField(max_length=500, null=True, blank=True)
     author_name = models.CharField(max_length=100, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.image and not self.image_field:
+            try:
+                img_temp = NamedTemporaryFile(delete=True)
+                img_temp.write(urllib2.urlopen(self.image).read())
+                img_temp.flush()
+                self.image_field.save(self.image.split('/')[-1].split('#')[0].split('?')[0], File(img_temp))
+            except Exception as ex:
+                pass
+        super(MarketNewsItemData, self).save(*args, **kwargs)
 
     @property
     def published_date(self):
