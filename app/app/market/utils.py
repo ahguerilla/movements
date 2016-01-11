@@ -7,9 +7,8 @@ from bs4 import BeautifulSoup
 
 
 class OpenGraph(dict):
-
     mandatory_attrs = ['title']
-    required_attrs = ['title', 'type', 'image', 'url', 'description', 'site_name']
+    required_attrs = ['title', 'type', 'image', 'url', 'description', 'site_name', 'pubdate']
     article_attrs = ['author', 'published', 'published_time', 'published_date']
 
     def __init__(self, url, **kwargs):
@@ -73,12 +72,9 @@ class OpenGraph(dict):
         return all([self.valid_attr(attr) for attr in self.mandatory_attrs])
 
     def scrape_image(self, doc):
-        images = [dict(img.attrs)['src']
-            for img in doc.html.body.findAll('img')]
-
+        images = [dict(img.attrs)['src'] for img in doc.html.body.findAll('img')]
         if images:
             return images[0]
-
         return u''
 
     def scrape_title(self, doc):
@@ -97,6 +93,16 @@ class OpenGraph(dict):
 
     def scrape_site_name(self, doc):
         return urlparse(self._url).netloc
+
+    def scrape_pubdate(self, doc):
+        date = doc.html.head.findAll('meta', attrs={"name": "date"})
+        if not date:
+            date = doc.html.head.findAll('meta', attrs={"name": "pubdate"})
+        if not date:
+            date = doc.html.head.findAll('meta', attrs={"name": "pdate"})
+        if date:
+            return date[0]['content']
+        return u''
 
 
 def fetch_graph_data(url):

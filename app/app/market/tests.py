@@ -29,9 +29,20 @@ class OpenGraphTestCase(TestCase):
         self.assertEqual(news_item.author_url, settings.BASE_URL + '/market/test/open-graph-author')
         self.assertEqual(news_item.author_name, 'Aidan Hamade')
 
+    def test_date1(self):
+        test_url = settings.BASE_URL + '/market/test/open-graph-date1'
+        news_item = MarketNewsItemData.fetch_news_item(test_url)
+        self.assertEqual(news_item.published, '2016-01-02')
+
+    def test_date2(self):
+        test_url = settings.BASE_URL + '/market/test/open-graph-date2'
+        news_item = MarketNewsItemData.fetch_news_item(test_url)
+        self.assertEqual(news_item.published, '2016-01-04')
+
     def test_create_news_item(self):
         test_url = settings.BASE_URL + '/market/test/open-graph'
         market_item = G(MarketItem)
         market_item.generate_news_item(test_url)
         news_item = MarketNewsItemData.objects.get(pk=market_item.id)
         self.assertIsNotNone(news_item)
+

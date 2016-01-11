@@ -12,3 +12,11 @@ def open_graph(request):
 
 def open_graph_author(request):
     return render_to_response('market/tests/open_graph_author.html', {}, context_instance=RequestContext(request))
+
+
+def open_graph_date1(request):
+    return render_to_response('market/tests/open_graph_date1.html', {}, context_instance=RequestContext(request))
+
+
+def open_graph_date2(request):
+    return render_to_response('market/tests/open_graph_date2.html', {}, context_instance=RequestContext(request))

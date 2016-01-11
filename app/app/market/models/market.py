@@ -433,7 +433,9 @@ class MarketNewsItemData(models.Model):
                   image=graph_data.image,
                   description=graph_data.description,
                   site_name=graph_data.site_name)
-        if hasattr(graph_data, 'published'):
+        if hasattr(graph_data, 'pubdate') and graph_data.pubdate:
+            obj.published = graph_data.pubdate
+        elif hasattr(graph_data, 'published'):
             obj.published = graph_data.published
         elif hasattr(graph_data, 'published_time'):
             obj.published = graph_data.published_time
