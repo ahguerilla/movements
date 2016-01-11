@@ -13,7 +13,7 @@
       {{ form.non_field_errors }}
     </div>
     <div>
-      <p style="margin-top: 15px;">{% trans "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod." %}</p>
+      <p style="margin-top: 15px;">{% trans "Start a discussion about human rights violations in closed societies." %}</p>
       <div class="form-sub-title"><h2>{% trans "1. Paste the news item link into the box below" %}</h2></div>
       <div class="form-group">
         <div class="col-xs-12">
@@ -55,7 +55,7 @@
       </div>
       <div>
         <div class="form-sub-title"><h2>{% trans "3. How can people help?" %}</h2></div>
-        <p>{% trans "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.."%}</p>
+{#        <p>{% trans ""%}</p> #}
         {% render_field form.details class="form-control input-sm" required="true" placeholder="" %}
         {{ form.details.errors }}
         <div class="details-errors">{{ form.details.errors }}</div>
