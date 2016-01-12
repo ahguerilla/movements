@@ -1,5 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
-from models import SafeVPNLink, SuccessStoriesCMSPlugin, SuccessStories
+from models import SafeVPNLink, SuccessStoriesCMSPlugin, SuccessStories, RawText
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 import hashlib
@@ -35,5 +35,15 @@ class SuccessStoriesPlugin(CMSPluginBase):
         return context
 
 
+class RawHtmlPlugin(CMSPluginBase):
+    model = RawText
+    name = _("Raw HTML")
+    render_template = "cms/plugins/raw_html.html"
+
+    def render(self, context, instance, placeholder):
+        context['raw_html'] = instance.content
+        return context
+
 plugin_pool.register_plugin(SafeVPNLinkPlugin)
 plugin_pool.register_plugin(SuccessStoriesPlugin)
+plugin_pool.register_plugin(RawHtmlPlugin)

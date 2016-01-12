@@ -124,3 +124,7 @@ class SuccessStories(models.Model):
 
 class SuccessStoriesCMSPlugin(CMSPlugin):
     title = models.CharField(max_length=20)
+
+
+class RawText(CMSPlugin):
+    content = models.TextField()

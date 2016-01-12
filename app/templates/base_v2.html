@@ -84,6 +84,7 @@
 {% if config.GOOGLE_TAG_MANAGER %}
 {{ config.GOOGLE_TAG_MANAGER|safe }}
 {% endif %}
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -94,6 +95,8 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 {% cms_toolbar %}
+
+{% block extra_body_script %}{% endblock %}
 
 {% if messages %}
   {% for message in messages %}
