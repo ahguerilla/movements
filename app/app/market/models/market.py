@@ -96,6 +96,9 @@ class MarketItem(models.Model):
             return True
         return False
 
+    def get_direct_offers(self):
+        return self.marketitemdirectoffer_set.filter(published=True, deleted=False)
+
     def save(self, *args, **kwargs):
         if not self.closed_date and (
                 self.status == self.STATUS_CHOICES.CLOSED_BY_USER or
@@ -456,3 +459,18 @@ class MarketNewsItemData(models.Model):
             except URLError:
                 pass
         return obj
+
+
+class MarketItemDirectOffer(models.Model):
+    market_item = models.ForeignKey(MarketItem, verbose_name=_('market item'))
+    owner = models.ForeignKey(auth.models.User, blank=True)
+    details = tinymodels.HTMLField(_('details'), blank=False)
+    interests = models.ManyToManyField(user_models.Interest, null=True, blank=True)
+    specific_interest = models.CharField(_('specific interest'), max_length=30, blank=True, null=True)
+    published = models.BooleanField(_('is published?'), default=True)
+    pub_date = models.DateTimeField(_('publish date'), auto_now_add=True)
+    deleted = models.BooleanField(_('deleted'), default=False)
+
+    class Meta:
+        app_label = 'market'
+

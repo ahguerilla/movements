@@ -23,7 +23,7 @@
       </div>
       <div class="poster-details">
         <div class="poster-name">{{ user_profile.user.username }}</div>
-        {% include "users/snippets/star_rating.html" with rating=ahr_rating %}
+        {% include "users/snippets/star_rating.html" with rating=ahr_rating show_rating_help=True %}
       </div>
     </div>
     {% if is_self and not is_public %}

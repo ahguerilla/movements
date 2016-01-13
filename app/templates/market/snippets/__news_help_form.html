@@ -1,0 +1,38 @@
+{% load i18n %}
+{% load widget_tweaks %}
+
+<form class="form-horizontal" method="post" enctype="multipart/form-data" id="create_news_offer">
+  {% csrf_token %}
+  <div class="dialog movements-form new-post">
+    <div>
+      {{ news_form.non_field_errors }}
+    </div>
+    <div>
+      <div class="form-sub-title"><h2>{% trans "I want to help and I'm a" %}</h2></div>
+      <div id="skills-select" class="form-select-multi">
+        {{ news_form.interests }}
+      </div>
+      <label for="{{ form.specific_skill.auto_id }}">{% trans 'Other' %}</label>
+      <div class="form-group">
+        <div class="col-xs-12">
+          {% render_field news_form.specific_interest class="form-control" placeholder="" maxlength="30" %}
+          {{ news_form.specific_interest.errors }}
+          <div class="interests-errors">{{ news_form.interests.errors }}</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="form-sub-title"><h2>{% trans "I can help by" %}</h2></div>
+      {% render_field news_form.details class="form-control input-sm" placeholder="" %}
+      {{ news_form.details.errors }}
+      <div class="details-errors">{{ news_form.details.errors }}</div>
+    </div>
+    <div style="margin-top: 20px;">
+      <div class="form-group">
+        <div class="col-xs-12">
+          <button class="btn btn-action pull-right">{% trans "Post now" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

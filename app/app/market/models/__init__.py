@@ -3,13 +3,11 @@ from .market import (
     MarketItem, MarketItemHidden, MarketItemStick, MarketItemViewCounter,
     MarketItemActions, MarketItemNextSteps, MarketItemCollaborators,
     MarketItemSalesforceRecord, MarketItemImage, MarketItemHowCanYouHelp,
-    MarketNewsItemData
-)
+    MarketNewsItemData, MarketItemDirectOffer,)
 from .rate import ItemRate
 from .report import (
     MarketItemPostReport, UserReport, EmailRecommendation, MessageExt,
-    MessagePresentation
-)
+    MessagePresentation,)
 from .notification import Notification
 from .feedback import Question, Questionnaire
 from .translation import TranslationBase, MarketItemTranslation, CommentTranslation

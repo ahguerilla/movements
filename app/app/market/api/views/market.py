@@ -12,10 +12,11 @@ from django.db.models import Q
 
 from haystack.query import SearchQuerySet
 
+from app.utils import form_errors_as_dict
 from app.market.api.utils import *
 import app.market as market
 from app.market.models import Questionnaire
-from app.market.forms import QuestionnaireForm
+from app.market.forms import QuestionnaireForm, NewsOfferForm
 from app.celerytasks import update_notifications
 
 
@@ -340,6 +341,18 @@ def set_item_attributes_for_user(request, item_id):
     if stick is not None:
         set_stuck(request.user.id, item_id, stick == 'true')
     return HttpResponse(json.dumps({'result': True}))
+
+
+@login_required
+@require_POST
+def offer_help(request, item_id):
+    market_item = get_object_or_404(market.models.MarketItem, pk=item_id)
+    form = NewsOfferForm(request.POST)
+    if form.is_valid():
+        form.save(commit=True, market_item=market_item, owner=request.user)
+        return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
+    errors = form_errors_as_dict(form)
+    return HttpResponse(json.dumps({'success': False, 'errors': errors}), mimetype="application/json")
 
 
 def set_hidden(user_id, item_id, hide):

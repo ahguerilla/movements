@@ -141,6 +141,29 @@ class NewsForm(forms.ModelForm):
         return super(NewsForm, self).save(commit=commit)
 
 
+class NewsOfferForm(forms.ModelForm):
+    class Meta:
+        model = market.models.MarketItemDirectOffer
+        fields = ['details', 'specific_interest', 'interests']
+        widgets = {
+            'details': forms.Textarea(attrs={'cols': 55, 'rows': 5, 'class': "form-control"}),
+            'interests': CheckboxSelectMultiple(),
+        }
+
+    def clean_interests(self):
+        data = self.cleaned_data['interests']
+        specific_interest = self.cleaned_data['specific_interest']
+        if len(data) == 0 and not specific_interest:
+            raise forms.ValidationError(_("You must add at least one skill"))
+        return data
+
+    def save(self, commit=True, *args, **kwargs):
+        if self.instance.id is None:
+            self.instance.owner = kwargs['owner']
+            self.instance.market_item = kwargs['market_item']
+        return super(NewsOfferForm, self).save(commit=commit)
+
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = market.models.Comment

@@ -73,7 +73,7 @@
           </div>
           <div class="poster-details">
             <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ post.owner }}">{{ post.owner }}</a></div>
-            {% include "users/snippets/star_rating.html" with rating=post.owner.userprofile.ahr_rating %}
+            {% include "users/snippets/star_rating.html" with rating=post.owner.userprofile.ahr_rating show_rating_help=True %}
           </div>
           <div style="clear: both"></div>
         </div>
@@ -89,6 +89,15 @@
              href="{% url 'account_login' %}"
              {% endif %}
              class="btn btn-action private-message btn-thinner" >{% trans 'I WANT TO HELP' %}</a>
+          {% elif post.item_type == 'news' %}
+          <a onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-action');}"
+             {% if user.is_authenticated %}
+             id="news_offer_help"
+             href="#"
+             {% else %}
+             href="{% url 'account_login' %}"
+             {% endif %}
+             class="btn btn-action btn-thinner" >{% trans 'I WANT TO HELP' %}</a>
           {% else %}
           <a username="{{ post.owner.username }}"
              onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-action');}"
@@ -178,6 +187,37 @@
         </div>
       </div>
       {% endif %}
+      {% if post.item_type == 'news' %}
+      <div class="row" id="direct_offers">
+        {% for i in news_offers %}
+          <div class="col-md-4 col-sm-6">
+            <div class="direct-offer">
+              <div class="direct-offer-header clearfix">
+                <div class="avatar">{% primary_avatar i.owner 60 %}</div>
+                <div class="poster-details">
+                  <div class="poster-name">{% trans "Posted by" %} <a href="/user/profile/{{ i.owner }}">{{ i.owner }}</a></div>
+                  {% include "users/snippets/star_rating.html" with rating=i.owner.userprofile.ahr_rating %}
+                </div>
+              </div>
+              <div class="direct-offer-details">
+                <div class="tags clearfix">
+                  {% for s in i.interests.all %}
+                  <div class="tag">{{ s }}</div>
+                  {% endfor %}
+                </div>
+                <div>{{ i.details }}</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="inline-reply-form clearfix row">
+        <div class="col-xs-12">
+          {% include 'market/snippets/__news_help_form.html' %}
+        </div>
+      </div>
+      {% endif %}
+
       <div id="post-translation-container" class="comments" style="display: none;">
       </div>
       <div class="comments">
@@ -439,6 +479,10 @@
         userDefaultLangage: '{{ LANGUAGE_CODE }}',
         postLanguage: '{{ post.language }}',
         loggedIn: true
+      });
+
+      ahr.initNewsViewPost({
+        postItemOfferUrl: '{% url 'market_item_offer_help' post.id %}'
       });
       {% if translator or request.user.userprofile.is_cm %}
           ahr.initViewPostTranslation({

@@ -6,6 +6,7 @@
       data-rateit-starwidth="22"
       data-rateit-starheight="17"
       data-rateit-max="5"></span>
+{% if show_rating_help %}
   <i class="gpopover glyphicon glyphicon-question-sign"
      data-toggle="popover"
      title="{% trans "MOVEMENTS STAR RATING" %}"
@@ -15,4 +16,5 @@
                    3 Stars: Confirmed all social media and bio<br>
                    4 Stars: Confirmed significant online presence<br>
                    5 Stars: Personally known by Movements.org<br>{% endblocktrans %}"></i>
+{% endif %}
 </div>

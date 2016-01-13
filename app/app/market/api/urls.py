@@ -81,6 +81,10 @@ market_item_patterns = patterns(
     url(r'item/set/user_attributes/(?P<item_id>\d+)$',
         'app.market.api.views.market.set_item_attributes_for_user',
         name="set_item_attributes_for_user"),
+
+    url(r'item/offer-help/(?P<item_id>\d+)$',
+        'app.market.api.views.market.offer_help',
+        name="market_item_offer_help"),
 )
 
 

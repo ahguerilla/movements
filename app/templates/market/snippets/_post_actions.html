@@ -5,6 +5,15 @@
     <div class="row">
     {% if is_logged_in %}
       {% if request.user != post.owner %}
+        {% if post.item_type == 'news' %}
+        <a class="message news_help" href='#' onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'news-want-to-help');}">
+          <div class="col-sm-5ths col-xs-6 post-action">
+            <i class="fa fa-h-square fa-2x"></i>
+{#            <img width="32" style="margin-top: 20px;" src="{{ STATIC_URL }}images/v2/direct_message_icon.PNG" alt="Contact Privately">#}
+            <div>{% blocktrans %}I WANT<br>TO HELP{% endblocktrans %}</div>
+          </div>
+        </a>
+        {% else %}
         <a username="{{ post.owner.username }}" subject="RE: {{ post.title }}" readonlysub="1" class="message private-message" href='#'
            onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'direct-message');}">
           <div class="col-sm-5ths col-xs-6 post-action">
@@ -12,6 +21,7 @@
             <div>{% blocktrans %}CONTACT<br>PRIVATELY{% endblocktrans %}</div>
           </div>
         </a>
+        {% endif %}
       {% endif %}
       <a obj_id="{{ post.id }}" rec_type="market_item" class="recommend" href='#'
          onClick="if (typeof(ga) != 'undefined') {ga('send', 'event', 'button', 'click', 'recommend');}">

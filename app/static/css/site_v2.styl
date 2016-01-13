@@ -1024,7 +1024,6 @@ h1,h2,h3,h4,h5,h6
     width 100%
     height 40px
     font-size 14px
-    padding 0
 
 .homepage-footer
   text-align center
@@ -1791,6 +1790,10 @@ popoverDropdown(width, showIcon = true)
     a:hover
       color $font-color
     .post-action
+      .fa
+        color $secondary-color
+        float left
+        margin-top 16px
       img
         float left
       div
@@ -1802,6 +1805,19 @@ popoverDropdown(width, showIcon = true)
         line-height 14px
   .post-call-to-action-bottom
     border none
+
+.direct-offer
+  border 1px solid $hr-color
+  border-radius 5px
+  padding 10px 15px
+  margin-bottom 15px
+  font-size 14px
+  .avatar
+    float left
+    margin-right 15px
+  .direct-offer-details
+    margin-top 10px
+
 
 
 .poster

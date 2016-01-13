@@ -12,8 +12,9 @@ from app.market.api.utils import HttpResponseForbiden
 
 from app.users.models import Interest, Countries, Issues
 from app.utils import form_errors_as_dict
-from forms import RequestForm, OfferForm, NewsForm, save_market_item
-from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforceRecord, MarketItemImage
+from forms import RequestForm, OfferForm, NewsForm, NewsOfferForm, save_market_item
+from models.market import MarketItem, MarketItemViewCounter, MarketItemSalesforceRecord, MarketItemImage, \
+    MarketItemDirectOffer
 
 
 def index(request):
@@ -60,7 +61,6 @@ def show_post(request, post_id):
         raise Http404('No post matches the given query.')
 
     countries_to_render = []
-
     countries = Countries.objects.exclude(region=None).select_related('region').all()
     by_region = defaultdict(list)
     for country in countries:
@@ -109,10 +109,17 @@ def show_post(request, post_id):
         'is_logged_in': request.user.is_authenticated(),
         'language_list': language_list,
         'countries_to_render': countries_to_render,
+
         'translator': translator,
         'translation_languages': json.dumps([{'code': l.language_code, 'name': l.name} for l in translation_languages]),
     }
-
+    news_data = {}
+    if post.item_type == MarketItem.TYPE_CHOICES.NEWS:
+        news_data = {
+            'news_form': NewsOfferForm(None),
+            'news_offers': post.get_direct_offers()
+        }
+    post_data.update(news_data)
     return render_to_response('market/view_post.html', post_data, context_instance=RequestContext(request))
 
 
@@ -197,6 +204,7 @@ def create_news(request):
                               context_instance=RequestContext(request))
 
 
+@login_required
 def edit_news(request, post_id):
     market_item = get_object_or_404(MarketItem.objects.defer('comments'), pk=post_id)
     if market_item.owner != request.user:

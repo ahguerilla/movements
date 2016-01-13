@@ -860,6 +860,48 @@
     }
   });
 
+
+  var NewsPostView = Backbone.View.extend({
+    autoLinker: null,
+    events: {
+      'click #news_offer_help': 'clickNewsOfferHelp',
+      'click .news_help': 'clickNewsOfferHelp',
+      'submit #create_news_offer': 'createNewsOffer',
+      'click .select-checkbox': 'checkClick'
+
+    },
+    initialize: function (options) {
+      this.options = options;
+    },
+    clickNewsOfferHelp: function(ev) {
+      ev.preventDefault();
+      console.log("I'm offering help");
+    },
+    createNewsOffer: function(ev) {
+      ev.preventDefault();
+      $.ajax({
+        url: this.options.postItemOfferUrl,
+        context: this,
+        data: $(ev.currentTarget).serialize(),
+        type: 'post',
+        dataType: 'json',
+        success: function (resp) {
+          console.log("success");
+          ahr.applyErrorsToForm(this.$el.find('form'), resp);
+        },
+        error: function (data) {
+          console.log("error");
+
+        }
+      });
+    },
+    checkClick: function(ev) {
+      $(ev.currentTarget).find('input[type="checkbox"]').prop("checked", !$(ev.currentTarget).find('input[type="checkbox"]').prop("checked"));
+      $(ev.currentTarget).toggleClass("checked");
+    }
+  });
+
+
   global.ahr.initViewPost = function (options) {
     var loggedIn = options.loggedIn || false;
     var args = {
@@ -879,9 +921,16 @@
         loginUrl: options.loginUrl
       })
     }
-
     new PostView(args);
     $('a.gallery').colorbox({rel: 'gal', scalePhotos: true, maxWidth: '100%', maxHeight: '100%'});
+  };
+
+  global.ahr.initNewsViewPost = function(options) {
+    var args = {
+      el: '.view-post',
+      postItemOfferUrl: options.postItemOfferUrl
+    };
+    new NewsPostView(args);
   };
 
   global.ahr.initViewPostTranslation = function (options) {
