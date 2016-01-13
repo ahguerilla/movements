@@ -199,6 +199,12 @@ class MarketItem(models.Model):
             news_item.save()
         return news_item
 
+    def add_related_post(self, id, owner):
+        related_post = MarketItem.objects.filter(pk=id).first()
+        if not related_post:
+            return
+        MarketItemRelatedPost.objects.create(market_item=self, related_market_item=related_post, creator=owner)
+
 
 class MarketItemHowCanYouHelp(models.Model):
     item = models.ForeignKey(MarketItem)
@@ -477,3 +483,14 @@ class MarketItemDirectOffer(models.Model):
     @property
     def get_delete_url(self):
         return reverse('market_item_delete_offer_help', args=(self.id,))
+
+
+class MarketItemRelatedPost(models.Model):
+    market_item = models.ForeignKey(MarketItem, verbose_name=_('market item'))
+    related_market_item = models.ForeignKey(MarketItem, verbose_name=_('related market item'),
+                                            related_name='related_market_item')
+    creator = models.ForeignKey(auth.models.User, blank=True)
+    created_date = models.DateTimeField(_('publish date'), auto_now_add=True)
+
+    class Meta:
+        app_label = 'market'

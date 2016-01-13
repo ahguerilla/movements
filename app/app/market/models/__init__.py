@@ -3,7 +3,7 @@ from .market import (
     MarketItem, MarketItemHidden, MarketItemStick, MarketItemViewCounter,
     MarketItemActions, MarketItemNextSteps, MarketItemCollaborators,
     MarketItemSalesforceRecord, MarketItemImage, MarketItemHowCanYouHelp,
-    MarketNewsItemData, MarketItemDirectOffer,)
+    MarketNewsItemData, MarketItemDirectOffer, MarketItemRelatedPost)
 from .rate import ItemRate
 from .report import (
     MarketItemPostReport, UserReport, EmailRecommendation, MessageExt,

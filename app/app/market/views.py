@@ -199,6 +199,10 @@ def create_news(request):
         news_item = post.generate_news_item(form.cleaned_data.get('news_url'))
         post.title = news_item.title
         post.save()
+        related_post_url = form.cleaned_data.get('related_post_url')
+        if related_post_url:
+            post_id = related_post_url.split('/')[-1]
+            post.add_related_post(post_id, request.user)
         return redirect(reverse('show_post', args=[post.id]))
     return render_to_response('market/create_news.html', {'form': form},
                               context_instance=RequestContext(request))

@@ -58,6 +58,8 @@
         {% render_field form.details class="form-control input-sm" placeholder="" %}
         {{ form.details.errors }}
       </div>
+      <div class="form-sub-title"><h2>{% trans "4. Related Movements.Org post" %}</h2></div>
+      {% render_field form.related_post_url class="form-control input-sm" placeholder="" %}
       <div style="margin-top: 20px;">
         <div class="form-group">
           <div class="col-xs-12">

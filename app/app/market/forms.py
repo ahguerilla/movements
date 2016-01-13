@@ -108,6 +108,7 @@ class RequestForm(MarketItemBaseForm):
 class NewsForm(forms.ModelForm):
     ITEM_TYPE = market.models.MarketItem.TYPE_CHOICES.NEWS
     news_url = forms.URLField()
+    related_post_url = forms.URLField()
 
     class Meta:
         model = market.models.MarketItem
@@ -128,6 +129,14 @@ class NewsForm(forms.ModelForm):
         except ValueError:
             raise forms.ValidationError(_("Invalid Url"))
         return self.cleaned_data.get('news_url')
+
+    def clean_related_post_url(self):
+        url = self.cleaned_data['related_post_url']
+        post_id = url.split('/')[-1]
+        related_post = market.models.MarketItem.objects.filter(pk=post_id)
+        if not related_post:
+            raise forms.ValidationError(_("This is not a valid Movements.Org post"))
+        return url
 
     def clean_issues(self):
         data = self.cleaned_data['issues']
