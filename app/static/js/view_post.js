@@ -875,7 +875,20 @@
     },
     clickNewsOfferHelp: function(ev) {
       ev.preventDefault();
-      console.log("I'm offering help");
+      this.$el.find('#no_post_offers').hide();
+      this.$el.find('#post_offers_add_another').hide();
+      var self = this;
+      this.$el.find('#inline_reply').slideDown(function(){
+        var offset = self.$el.find('#inline_reply').offset();
+        var scrollto = offset.top - 50;
+        $('html, body').animate({scrollTop:scrollto});
+      });
+    },
+    clearNewsOfferForm: function() {
+      this.$el.find('#skills-select').find('input[type="checkbox"]').prop("checked", false);
+      this.$el.find('#skills-select').find('.checked').removeClass('checked');
+      this.$el.find('#id_specific_interest').val('');
+      this.$el.find('#id_details').val('');
     },
     createNewsOffer: function(ev) {
       ev.preventDefault();
@@ -890,15 +903,14 @@
             var starRating = JST.star_rating(resp);
             resp['star_rating'] = $(starRating).rateit().html();
             var offerCard = JST.direct_offer(resp);
-            $(offerCard).find('.rateit').rateit();
             this.$el.find('#direct_offers').append(offerCard);
+            this.clearNewsOfferForm();
+            this.$el.find('#inline_reply').slideUp();
+            this.$el.find('#post_offers_add_another').show();
+
           } else {
             ahr.applyErrorsToForm(this.$el.find('form'), resp);
           }
-        },
-        error: function (data) {
-          console.log("error");
-
         }
       });
     },
