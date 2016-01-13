@@ -886,8 +886,15 @@
         type: 'post',
         dataType: 'json',
         success: function (resp) {
-          console.log("success");
-          ahr.applyErrorsToForm(this.$el.find('form'), resp);
+          if(resp.success) {
+            var starRating = JST.star_rating(resp);
+            resp['star_rating'] = $(starRating).rateit().html();
+            var offerCard = JST.direct_offer(resp);
+            $(offerCard).find('.rateit').rateit();
+            this.$el.find('#direct_offers').append(offerCard);
+          } else {
+            ahr.applyErrorsToForm(this.$el.find('form'), resp);
+          }
         },
         error: function (data) {
           console.log("error");

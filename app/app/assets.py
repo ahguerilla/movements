@@ -39,6 +39,8 @@ js = Bundle(
         Bundle(
             './js/templates/more_about_you_progress_bar.jst',
             './js/templates/home_page_stats.jst',
+            './js/templates/direct_offer.jst',
+            './js/templates/star_rating.jst',
             filters=(jstFilter,),
             output='./js/templates.js'
         ),

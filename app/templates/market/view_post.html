@@ -190,7 +190,7 @@
       {% if post.item_type == 'news' %}
       <div class="row" id="direct_offers">
         {% for i in news_offers %}
-          <div class="col-md-4 col-sm-6">
+          <div class="col-lg-4 col-md-6">
             <div class="direct-offer">
               <div class="direct-offer-header clearfix">
                 <div class="avatar">{% primary_avatar i.owner 60 %}</div>
@@ -204,8 +204,11 @@
                   {% for s in i.interests.all %}
                   <div class="tag">{{ s }}</div>
                   {% endfor %}
+                  {% if i.specific_interest %}
+                  <div class="tag">{{ i.specific_interest }}</div>
+                  {% endif %}
                 </div>
-                <div>{{ i.details }}</div>
+                <div>{{ i.details|slice:"80" }}{% if i.details|length > 80 %}...{% endif %}</div>
               </div>
             </div>
           </div>

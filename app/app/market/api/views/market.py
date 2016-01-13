@@ -1,6 +1,7 @@
 import json
 import math
 from datetime import datetime
+import bleach
 
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -349,8 +350,20 @@ def offer_help(request, item_id):
     market_item = get_object_or_404(market.models.MarketItem, pk=item_id)
     form = NewsOfferForm(request.POST)
     if form.is_valid():
-        form.save(commit=True, market_item=market_item, owner=request.user)
-        return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
+        offer = form.save(commit=True, market_item=market_item, owner=request.user)
+        details = bleach.clean(offer.details, tags=['a', 'img', 'bold', 'strong', 'i', 'em'],
+                               attributes=['href', 'title', 'alt', 'src'], strip=True)
+        args = {
+            'success': True,
+            'avatar': reverse('avatar_render_primary', args=(request.user.username, 60)),
+            'owner': request.user.username,
+            'interests': [o.name for o in offer.interests.all()],
+            'specific_interest': offer.specific_interest if offer.specific_interest else '',
+            'details': details[:80] + '<span class="hover">...</span>' if len(details) > 80 else details[:80],
+            'details_complete': details,
+            'rating': offer.owner.userprofile.ahr_rating,
+        }
+        return HttpResponse(json.dumps(args), mimetype="application/json")
     errors = form_errors_as_dict(form)
     return HttpResponse(json.dumps({'success': False, 'errors': errors}), mimetype="application/json")
 

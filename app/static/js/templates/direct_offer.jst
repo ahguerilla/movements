@@ -1,0 +1,30 @@
+<div class="col-lg-4 col-md-6">
+  <div class="direct-offer">
+    <div class="direct-offer-header clearfix">
+      <div class="avatar"><img src="<%= avatar %>" alt="<%- owner %>" width="60" height="60"></div>
+      <div class="poster-details">
+        <div class="poster-name">Posted by<a href="/user/profile/<%- owner %>"><%- owner %></a></div>
+        <div class="poster-rating">
+          <span class="rateit"
+            data-rateit-readonly="true"
+            data-rateit-value="<%- rating %>"
+            data-rateit-min="0"
+            data-rateit-starwidth="22"
+            data-rateit-starheight="17"
+            data-rateit-max="5"><%= star_rating %></span>
+        </div>
+      </div>
+    </div>
+    <div class="direct-offer-details">
+      <div class="tags clearfix">
+        <% _.each(interests, function(interest){ %>
+        <div class="tag"><%- interest %></div>
+        <% }) %>
+        <% if (specific_interest) { %>
+        <div class="tag"><%- i.specific_interest %></div>
+        <% } %>
+      </div>
+      <div><%= details %></div>
+    </div>
+  </div>
+</div>
