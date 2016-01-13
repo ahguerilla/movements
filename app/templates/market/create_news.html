@@ -55,10 +55,8 @@
       </div>
       <div>
         <div class="form-sub-title"><h2>{% trans "3. How can people help?" %}</h2></div>
-{#        <p>{% trans ""%}</p> #}
-        {% render_field form.details class="form-control input-sm" required="true" placeholder="" %}
+        {% render_field form.details class="form-control input-sm" placeholder="" %}
         {{ form.details.errors }}
-        <div class="details-errors">{{ form.details.errors }}</div>
       </div>
       <div style="margin-top: 20px;">
         <div class="form-group">

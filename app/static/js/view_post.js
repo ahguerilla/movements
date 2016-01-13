@@ -867,8 +867,8 @@
       'click #news_offer_help': 'clickNewsOfferHelp',
       'click .news_help': 'clickNewsOfferHelp',
       'submit #create_news_offer': 'createNewsOffer',
-      'click .select-checkbox': 'checkClick'
-
+      'click .select-checkbox': 'checkClick',
+      'click .delete-direct-offer': 'deleteDirectOffer'
     },
     initialize: function (options) {
       this.options = options;
@@ -890,6 +890,22 @@
       this.$el.find('#id_specific_interest').val('');
       this.$el.find('#id_details').val('');
     },
+    deleteDirectOffer: function(ev) {
+      ev.preventDefault();
+      var id = $(ev.currentTarget).data('object_id');
+      var url = '/market/api/item/offer-help/' + id + '/delete';
+      $.ajax({
+        url: url,
+        context: this,
+        type: 'post',
+        dataType: 'json',
+        success: function (resp) {
+          if (resp.success) {
+            this.$el.find('#direct_offer_' + id).remove();
+          }
+        }
+      });
+    },
     createNewsOffer: function(ev) {
       ev.preventDefault();
       $.ajax({
@@ -907,7 +923,6 @@
             this.clearNewsOfferForm();
             this.$el.find('#inline_reply').slideUp();
             this.$el.find('#post_offers_add_another').show();
-
           } else {
             ahr.applyErrorsToForm(this.$el.find('form'), resp);
           }

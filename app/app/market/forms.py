@@ -118,6 +118,10 @@ class NewsForm(forms.ModelForm):
             'issues': CheckboxSelectMultiple(),
         }
 
+    def __init__(self, *args, **kwargs):
+        super(NewsForm, self).__init__(*args, **kwargs)
+        self.fields['details'].required = False
+
     def clean_news_url(self):
         try:
             market.models.MarketNewsItemData.fetch_news_item(self.cleaned_data.get('news_url'))
@@ -187,12 +191,12 @@ def save_market_item(form, owner):
     obj = form.save(owner=owner)
     if new_item:
         on_market_item_creation.delay(obj)
-
         # detect language
-        language = detect_language(obj.details)
-        if language:
-            obj.language = language
-            obj.save()
+        if obj.details:
+            language = detect_language(obj.details)
+            if language:
+                obj.language = language
+                obj.save()
     else:
         on_market_item_update.delay(obj)
     return obj

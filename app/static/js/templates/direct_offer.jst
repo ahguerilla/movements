@@ -1,9 +1,9 @@
 <div class="col-lg-4 col-md-6">
-  <div class="direct-offer">
+  <div id="direct_offer_<%- id %>" class="direct-offer">
     <div class="direct-offer-header clearfix">
       <div class="avatar"><img src="<%= avatar %>" alt="<%- owner %>" width="60" height="60"></div>
       <div class="poster-details">
-        <div class="poster-name">Posted by<a href="/user/profile/<%- owner %>"><%- owner %></a></div>
+        <div class="poster-name">Posted by <a href="/user/profile/<%- owner %>"><%- owner %></a></div>
         <div class="poster-rating">
           <span class="rateit"
             data-rateit-readonly="true"
@@ -25,6 +25,9 @@
         <% } %>
       </div>
       <div><%= details %></div>
+    </div>
+    <div class="direct-offer-actions">
+      <ul><li data-object_id="<%- id %>" class="delete-direct-offer">delete</li></ul>
     </div>
   </div>
 </div>

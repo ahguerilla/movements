@@ -464,7 +464,7 @@ class MarketNewsItemData(models.Model):
 class MarketItemDirectOffer(models.Model):
     market_item = models.ForeignKey(MarketItem, verbose_name=_('market item'))
     owner = models.ForeignKey(auth.models.User, blank=True)
-    details = tinymodels.HTMLField(_('details'), blank=False)
+    details = tinymodels.HTMLField(_('details'))
     interests = models.ManyToManyField(user_models.Interest, null=True, blank=True)
     specific_interest = models.CharField(_('specific interest'), max_length=30, blank=True, null=True)
     published = models.BooleanField(_('is published?'), default=True)
@@ -474,3 +474,6 @@ class MarketItemDirectOffer(models.Model):
     class Meta:
         app_label = 'market'
 
+    @property
+    def get_delete_url(self):
+        return reverse('market_item_delete_offer_help', args=(self.id,))

@@ -5,6 +5,7 @@ import bleach
 
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -357,6 +358,7 @@ def offer_help(request, item_id):
             'success': True,
             'avatar': reverse('avatar_render_primary', args=(request.user.username, 60)),
             'owner': request.user.username,
+            'id': offer.id,
             'interests': [o.name for o in offer.interests.all()],
             'specific_interest': offer.specific_interest if offer.specific_interest else '',
             'details': details[:80] + '<span class="hover">...</span>' if len(details) > 80 else details[:80],
@@ -366,6 +368,17 @@ def offer_help(request, item_id):
         return HttpResponse(json.dumps(args), mimetype="application/json")
     errors = form_errors_as_dict(form)
     return HttpResponse(json.dumps({'success': False, 'errors': errors}), mimetype="application/json")
+
+
+@login_required
+@require_POST
+def delete_offer_help(request, item_id):
+    offer = get_object_or_404(market.models.MarketItemDirectOffer, pk=item_id)
+    if offer.owner != request.user:
+        raise PermissionDenied
+    offer.deleted = True
+    offer.save()
+    return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
 
 
 def set_hidden(user_id, item_id, hide):

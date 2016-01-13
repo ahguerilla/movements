@@ -85,6 +85,9 @@ market_item_patterns = patterns(
     url(r'item/offer-help/(?P<item_id>\d+)$',
         'app.market.api.views.market.offer_help',
         name="market_item_offer_help"),
+    url(r'item/offer-help/(?P<item_id>\d+)/delete$',
+        'app.market.api.views.market.delete_offer_help',
+        name="market_item_delete_offer_help"),
 )
 
 
