@@ -361,7 +361,7 @@ def offer_help(request, item_id):
             'id': offer.id,
             'interests': [o.name for o in offer.interests.all()],
             'specific_interest': offer.specific_interest if offer.specific_interest else '',
-            'details': details[:80] + '<span class="hover">...</span>' if len(details) > 80 else details[:80],
+            'details': details[:70] + '<span class="hover">...</span>' if len(details) > 70 else details[:70],
             'details_complete': details,
             'rating': offer.owner.userprofile.ahr_rating,
         }
