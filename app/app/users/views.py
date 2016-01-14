@@ -582,6 +582,10 @@ def api_login(request):
             return HttpResponseBadRequest()
         login = request.POST.get('email')
         password = request.POST.get('password1')
+        if not login or password:
+            HttpResponse(json.dumps({'success': False, 'errors': [u'User and password are required.']}),
+                         mimetype="application/json")
+        login = login.strip()
         message = 'user attempted to login with u:{0}, p:{1}'.format(login, password)
         _logger.exception(message)
         if not request.limited:
@@ -597,5 +601,5 @@ def api_login(request):
         _logger.exception("An exception was thrown ex: {0}".format(ex))
         HttpResponse(json.dumps({'success': False, 'errors': [u'Exception was thrown during the login phase.']}),
                      mimetype="application/json")
-    return HttpResponse(json.dumps({'success': False, 'errors': [u'Invalid user or password']}),
+    return HttpResponse(json.dumps({'success': False, 'errors': [u'Invalid user or password.']}),
                         mimetype="application/json")
