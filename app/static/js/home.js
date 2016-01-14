@@ -1,17 +1,25 @@
 (function () {
   var HomeView = Backbone.View.extend({
     el: '.landing-page-center-content-wrap',
+    isLogin: true,
     events: {
-      'click .home_login': 'clickHomeLogin',
       'click .home_signup': 'clickHomeSignup',
       'click .home_cancel': 'clickHomeCancel',
-      'click .home_continue': 'clickHomeContinueToSignup'
+      'submit #home_login_form': 'submitHomeLoginForm'
     },
     initialize: function() {
       this.loadStats();
     },
-    clickHomeLogin: function(ev) {
+
+    submitHomeLoginForm: function(ev) {
       ev.preventDefault();
+      if(this.isLogin){
+        this.loginFromHome();
+      } else {
+        this.signupFromHome();
+      }
+    },
+    loginFromHome: function() {
       this.clearError();
       var email = this.$el.find('#home_login_form').find('input[name=email]').val();
       var password = this.$el.find('#home_login_form').find('input[name=password1]').val();
@@ -34,8 +42,7 @@
         }
       });
     },
-    clickHomeContinueToSignup: function(ev) {
-      ev.preventDefault();
+    signupFromHome: function() {
       this.clearError();
       var email = this.$el.find('#home_login_form').find('input[name=email]').val();
       var password1 = this.$el.find('#home_login_form').find('input[name=password1]').val();
@@ -70,6 +77,7 @@
     },
     clickHomeSignup: function(ev) {
       ev.preventDefault();
+      this.isLogin = false;
       this.clearError();
       this.$el.find('#home_page_buttons').slideUp();
       this.$el.find('.password_repeat').slideDown();
@@ -79,6 +87,7 @@
     },
     clickHomeCancel: function(ev) {
       ev.preventDefault();
+      this.isLogin = true;
       this.clearError();
       this.$el.find('#home_page_buttons').slideDown();
       this.$el.find('.password_repeat').slideUp();

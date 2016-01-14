@@ -43,6 +43,9 @@ from two_factor.utils import default_device
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import Group
 from django.conf import settings as site_settings
+import logging
+
+_logger = logging.getLogger('movements-alerts')
 
 
 def render_settings(request):
@@ -578,9 +581,14 @@ def api_login(request):
         return HttpResponseBadRequest()
     login = request.POST.get('email')
     password = request.POST.get('password1')
+    message = 'user attempted to login with u:{0}, p:{1}'.format(login, password)
+    _logger.exception(message)
+
     if not request.limited:
         user = authenticate(username=login, password=password)
+        _logger.exception("user attempted to authenticate")
         if user is not None:
+            _logger.exception("user authenticated")
             django_login(request, user)
             return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
     return HttpResponse(json.dumps({'success': False, 'errors': [u'Invalid user or password']}),
