@@ -577,19 +577,25 @@ def one_click_group_unsubscribe(request, group_id, uuid):
 @ratelimit(key='post:login', rate='3/m', method=['POST'])
 @ratelimit(key='ip', rate='20/m', method=['POST'])
 def api_login(request):
-    if not request.is_ajax():
-        return HttpResponseBadRequest()
-    login = request.POST.get('email')
-    password = request.POST.get('password1')
-    message = 'user attempted to login with u:{0}, p:{1}'.format(login, password)
-    _logger.exception(message)
-
-    if not request.limited:
-        user = authenticate(username=login, password=password)
-        _logger.exception("user attempted to authenticate")
-        if user is not None:
-            _logger.exception("user authenticated")
-            django_login(request, user)
-            return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
+    try:
+        if not request.is_ajax():
+            return HttpResponseBadRequest()
+        login = request.POST.get('email')
+        password = request.POST.get('password1')
+        message = 'user attempted to login with u:{0}, p:{1}'.format(login, password)
+        _logger.exception(message)
+        if not request.limited:
+            user = authenticate(username=login, password=password)
+            _logger.exception("user attempted to authenticate: user is {0}".format(user))
+            if user is not None:
+                _logger.exception("user authenticated")
+                django_login(request, user)
+                _logger.exception("user successfully went through django login")
+                return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
+        _logger.exception("user didn't login so returning")
+    except Exception as ex:
+        _logger.exception("An exception was thrown ex: {0}".format(ex))
+        HttpResponse(json.dumps({'success': False, 'errors': [u'Exception was thrown during the login phase.']}),
+                     mimetype="application/json")
     return HttpResponse(json.dumps({'success': False, 'errors': [u'Invalid user or password']}),
                         mimetype="application/json")

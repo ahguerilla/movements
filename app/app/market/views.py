@@ -115,8 +115,10 @@ def show_post(request, post_id):
     }
     news_data = {}
     if post.item_type == MarketItem.TYPE_CHOICES.NEWS:
+        news_form = NewsOfferForm(None)
+        news_form.fields['interests'].initial = request.user.userprofile.interests.values_list('id', flat=True)
         news_data = {
-            'news_form': NewsOfferForm(None),
+            'news_form': news_form,
             'news_offers': post.get_direct_offers()
         }
     post_data.update(news_data)

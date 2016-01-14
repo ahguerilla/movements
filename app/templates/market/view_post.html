@@ -194,7 +194,6 @@
           <div style="margin-bottom: 15px;"><a target="_blank" href="/market/{{ p.related_market_item.id }}" >{{ p.related_market_item.title|striptags }}</a></div>
         {% endfor %}
       {% endif %}
-
       <div class="comments-header">{% trans "Offers" %}</div>
       <div {% if news_offers %}style="display: none;"{% endif %} id="no_post_offers">
         {% blocktrans %}This post currently has no offers. Why not be the <a class="news_help" href="#">first</a>.{% endblocktrans %}

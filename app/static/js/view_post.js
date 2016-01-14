@@ -885,8 +885,6 @@
       });
     },
     clearNewsOfferForm: function() {
-      this.$el.find('#skills-select').find('input[type="checkbox"]').prop("checked", false);
-      this.$el.find('#skills-select').find('.checked').removeClass('checked');
       this.$el.find('#id_specific_interest').val('');
       this.$el.find('#id_details').val('');
     },
