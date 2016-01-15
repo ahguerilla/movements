@@ -57,6 +57,7 @@
         url: window.ahr.app_urls.apiSignupStart,
         data: this.$el.find('#home_login_form').serialize(),
         context: this,
+        cache: false,
         success: function(data){
           if(data.success) {
             window.location.href = data.next;

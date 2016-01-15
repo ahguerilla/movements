@@ -122,6 +122,7 @@ class NewsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(NewsForm, self).__init__(*args, **kwargs)
         self.fields['details'].required = False
+        self.fields['related_post_url'].required = False
 
     def clean_news_url(self):
         try:
@@ -131,11 +132,17 @@ class NewsForm(forms.ModelForm):
         return self.cleaned_data.get('news_url')
 
     def clean_related_post_url(self):
-        url = self.cleaned_data['related_post_url']
-        post_id = url.split('/')[-1]
-        related_post = market.models.MarketItem.objects.filter(pk=post_id)
-        if not related_post:
-            raise forms.ValidationError(_("This is not a valid Movements.Org post"))
+        url = self.cleaned_data.get('related_post_url', '')
+        # it's OK for the URL to be empty
+        if not url.strip():
+            return url
+        try:
+            post_id = url.split('/')[-1]
+            related_post = market.models.MarketItem.objects.filter(pk=post_id)
+            if not related_post:
+                raise ValueError
+        except ValueError:
+            raise forms.ValidationError(_("This is not a valid Movements post"))
         return url
 
     def clean_issues(self):

@@ -58,8 +58,13 @@
         {% render_field form.details class="form-control input-sm" placeholder="" %}
         {{ form.details.errors }}
       </div>
-      <div class="form-sub-title"><h2>{% trans "4. Related Movements.Org post" %}</h2></div>
-      {% render_field form.related_post_url class="form-control input-sm" placeholder="" %}
+      <div class="form-sub-title"><h2>{% trans "4. Related Movements post" %}</h2></div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          {% render_field form.related_post_url class="form-control input-sm" placeholder="" %}
+          {{ form.related_post_url.errors }}
+        </div>
+      </div>
       <div style="margin-top: 20px;">
         <div class="form-group">
           <div class="col-xs-12">
@@ -97,7 +102,7 @@
 {% block javascript %}
   <script type="text/template" id="news-item-card-template">
     <div class="news-item-card">
-      <h2><a href="<%= url %>"><%- title %></a></h2>
+      <h2><a href="<%= url %>"><%= title %></a></h2>
       <img style="margin-bottom: 10px;" width="100%" src="<%= image %>">
       <p><a href="<%= url %>"><%- description %></a></p>
       <div class="row news-card-footer">
