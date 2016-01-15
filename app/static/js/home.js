@@ -36,7 +36,7 @@
         cache: false,
         success: function(data){
           if(data.success) {
-            window.location.reload();
+            window.location.replace("/market");
           } else {
             this.displayError(data.errors);
           }
