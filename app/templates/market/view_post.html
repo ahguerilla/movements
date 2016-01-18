@@ -189,7 +189,7 @@
       {% endif %}
       {% if post.item_type == 'news' %}
       {% if post.marketitemrelatedpost_set.count > 0 %}
-      <div class="comments-header">{% trans "Releated Movements.Org posts" %}</div>
+      <div class="comments-header">{% trans "Releated Movements posts" %}</div>
         {% for p in post.marketitemrelatedpost_set.all %}
           <div style="margin-bottom: 15px;"><a target="_blank" href="/market/{{ p.related_market_item.id }}" >{{ p.related_market_item.title|striptags }}</a></div>
         {% endfor %}
