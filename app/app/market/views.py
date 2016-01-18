@@ -3,6 +3,7 @@ import json
 from collections import defaultdict
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.conf import settings
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
@@ -218,8 +219,17 @@ def edit_news(request, post_id):
     form = NewsForm(request.POST or None, instance=market_item)
     if request.method == 'POST' and form.is_valid():
         save_market_item(form, request.user)
+        related_post_url = form.cleaned_data.get('related_post_url')
+        if related_post_url:
+            post_id = related_post_url.split('/')[-1]
+            market_item.add_related_post(post_id, request.user)
+        return redirect(reverse('show_post', args=[market_item.id]))
     else:
         form.fields['news_url'].initial = market_item.marketnewsitemdata.original_url
+        related_post = market_item.marketitemrelatedpost_set.last()
+        if related_post:
+            market_item_url = settings.BASE_URL + reverse('show_post', args=[related_post.related_market_item.id])
+            form.fields['related_post_url'].initial = market_item_url
     return render_to_response('market/create_news.html', {'form': form, 'news_item': market_item.marketnewsitemdata},
                               context_instance=RequestContext(request))
 

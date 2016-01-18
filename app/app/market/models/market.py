@@ -199,9 +199,10 @@ class MarketItem(models.Model):
             news_item.save()
         return news_item
 
-    def add_related_post(self, id, owner):
-        related_post = MarketItem.objects.filter(pk=id).first()
-        if not related_post:
+    def add_related_post(self, related_post_id, owner):
+        related_post = MarketItem.objects.filter(pk=related_post_id).first()
+        exists = self.marketitemrelatedpost_set.filter(related_market_item=related_post)
+        if not related_post or exists:
             return
         MarketItemRelatedPost.objects.create(market_item=self, related_market_item=related_post, creator=owner)
 
