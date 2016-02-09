@@ -201,7 +201,7 @@
       </div>
       <div class="row" id="direct_offers">
         {% for i in news_offers %}
-          <div id="direct_offer_{{ i.id }}" class="col-lg-4 col-md-6">
+          <div id="direct_offer_{{ i.id }}" class="col-xs-12">
             <div class="direct-offer">
               <div class="direct-offer-header clearfix">
                 <div class="avatar">{% primary_avatar i.owner 60 %}</div>
@@ -219,7 +219,7 @@
                   <div class="tag">{{ i.specific_interest }}</div>
                   {% endif %}
                 </div>
-                <div>{{ i.details|slice:"70" }}{% if i.details|length > 70 %}&nbsp;...{% endif %}</div>
+                <div class="details-full">{{ i.details }}</div>
               </div>
               <div class="direct-offer-actions">
                 {% if i.owner == request.user %}
