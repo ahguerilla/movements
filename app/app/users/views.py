@@ -585,16 +585,16 @@ def api_login(request):
         HttpResponse(json.dumps({'success': False, 'errors': [u'User and password are required.']}),
                      mimetype="application/json")
     login = login.strip()
-    message = 'user {0} attempting to login'.format(login)
-    _logger.exception(message)
     if not request.limited:
         user = authenticate(username=login, password=password)
-        _logger.exception("user attempted to authenticate: user is {0}".format(user))
-        if user is not None:
-            _logger.exception("user authenticated")
-            django_login(request, user)
-            _logger.exception("user successfully went through django login")
-            return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
-    _logger.exception("user didn't login so returning")
+        # This would bypass the 2 Factor, so don't allow
+        if user:
+            if user.is_staff:
+                return HttpResponse(json.dumps({'success': False,
+                                    'errors': [u'Attempting admin login. Please use admin login form!']}),
+                                    mimetype="application/json")
+            else:
+                django_login(request, user)
+                return HttpResponse(json.dumps({'success': True}), mimetype="application/json")
     return HttpResponse(json.dumps({'success': False, 'errors': [u'Invalid user or password.']}),
                         mimetype="application/json")
