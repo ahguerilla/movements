@@ -197,7 +197,11 @@
       {% endif %}
       <div class="comments-header">{% trans "Offers" %}</div>
       <div {% if news_offers %}style="display: none;"{% endif %} id="no_post_offers">
+      {% if user.is_authenticated %}
         {% blocktrans %}This post currently has no offers. Why not be the <a class="news_help" href="#">first</a>.{% endblocktrans %}
+      {% else %}
+        {% blocktrans %}This post currently has no offers.{% endblocktrans %}
+      {% endif %}
       </div>
       <div class="row" id="direct_offers">
         {% for i in news_offers %}
@@ -230,9 +234,11 @@
           </div>
         {% endfor %}
       </div>
+      {% if user.is_authenticated %}
       <div {% if not news_offers %}style="display: none;"{% endif %} id="post_offers_add_another">
-        Get involved and <a class="news_help" href="#">offer your skills</a>.
+        {% blocktrans %}Get involved and <a class="news_help" href="#">offer your skills</a>.{% endblocktrans %}
       </div>
+      {% endif %}
       <div id="inline_reply" style="display: none;" class="inline-reply-form clearfix row">
         <div class="col-xs-12">
           {% include 'market/snippets/__news_help_form.html' %}
