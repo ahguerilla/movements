@@ -64,9 +64,6 @@
         </div>
       </div>
       <h1 id="post-title">{{ post.title }}</h1>
-      {% if post.item_type == 'news' %}
-        {% include 'market/snippets/_news_card.html' %}
-      {% endif %}
       <div class="row poster clearfix">
         <div class="col-sm-6">
           <div class="avatar">
@@ -114,6 +111,11 @@
       {% endif %}
       </div>
       {% include 'market/snippets/_post_actions.html' %}
+      {% if post.item_type == 'news' %}
+        <div style="margin-top: 15px;">
+        {% include 'market/snippets/_news_card.html' %}
+        </div>
+      {% endif %}
       <div class="post">
         {% if post.item_type == 'news' and post.details %}
         <div class="comments-header">{% trans "How can people help?" %}</div>
