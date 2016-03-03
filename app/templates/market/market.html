@@ -13,7 +13,7 @@
   <div class="modal-footer">
     <div class="row action-text">
       <div class="col-sm-offset-1 col-sm-4 form-main-button">
-        <a id="survey_dismiss" class="action-link" data-dismiss="modal">No thanks</a>
+        <a href="#" id="survey_dismiss" class="action-link" data-dismiss="modal">No thanks</a>
       </div>
       <div class="col-sm-5 form-main-button">
         <a id="survey_help" target="_blank" href="https://www.surveymonkey.com/r/movement_org">
@@ -216,7 +216,8 @@
         $.cookie('seensurvey', 'true', { expires: 365 });
         $('.popup-message').fadeOut();
       };
-      $('#survey_dismiss').click(function(){
+      $('#survey_dismiss').click(function(ev){
+        ev.preventDefault();
         surveyAction();
       });
       $('#survey_help').click(function(){
