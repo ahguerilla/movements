@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
+from django.utils.functional import curry
 import django.db as db
 
 import bleach
@@ -48,6 +49,22 @@ class MarketItemImageInline(admin.TabularInline):
     extra = 0
 
 
+class MarketItemRelatedPostInline(admin.TabularInline):
+    model = models.MarketItemRelatedPost
+    fk_name = 'market_item'
+    extra = 1
+
+    def get_formset(self, request, obj=None, **kwargs):
+        initial = []
+        if request.method == "GET":
+            initial.append({
+                'creator': request.user,
+            })
+        formset = super(MarketItemRelatedPostInline, self).get_formset(request, obj, **kwargs)
+        formset.__init__ = curry(formset.__init__, initial=initial)
+        return formset
+
+
 class PostAdmin(admin.ModelAdmin):
     exclude = ('item_type',)
     list_display = ('title', 'owner', 'staff_owner', 'pub_date', 'published')
@@ -82,6 +99,10 @@ class PostAdmin(admin.ModelAdmin):
         return formset.save()
 
 
+class NewsAdmin(PostAdmin):
+    inlines = (MarketItemRelatedPostInline, MarketItemImageInline, MarketItemHowCanYouHelpInline, )
+
+
 admin.site.register(Offer, PostAdmin)
 admin.site.register(Request, PostAdmin)
-admin.site.register(News, PostAdmin)
+admin.site.register(News, NewsAdmin)

@@ -53,7 +53,7 @@ class MarketItem(models.Model):
     staff_owner = models.ForeignKey(
         auth.models.User, blank=True, null=True, related_name='marketitems', verbose_name='Staff Manager')
     title = models.CharField(_('title'), max_length=200, blank=False)
-    details = tinymodels.HTMLField(_('details'), blank=False)
+    details = tinymodels.HTMLField(_('details'), blank=True)
     interests = models.ManyToManyField(user_models.Interest, null=True, blank=True)
     specific_skill = models.CharField(_('Specific skill'), max_length=30, blank=True, null=True)
     countries = models.ManyToManyField(user_models.Countries, null=True, blank=True)
@@ -83,10 +83,11 @@ class MarketItem(models.Model):
     language = models.CharField(_('source language'), max_length=10, blank=False, default='en')
 
     def __unicode__(self):
-        return self.details
+        return u"{0} - {1}".format(self.id, (self.title[:50] + '..') if len(self.title) > 50 else self.title )
 
     class Meta:
         app_label = "market"
+        ordering = ('-id',)
 
     def init_url(self, lang):
         return reverse('translation:market:init', args=(self.pk, lang))
