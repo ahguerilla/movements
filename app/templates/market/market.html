@@ -7,23 +7,6 @@
 {% endblock %}
 
 {% block content_outside_container %}
-<!-- survey popup -->
-<div style="display: none;" class="popup-message col-sm-offset-2 col-sm-8 col-lg-offset-4 col-lg-4">
-  <p>Would you complete a very short survey that can help make Movements better?</p>
-  <div class="modal-footer">
-    <div class="row action-text">
-      <div class="col-sm-offset-1 col-sm-4 form-main-button">
-        <a href="#" id="survey_dismiss" class="action-link" data-dismiss="modal">No thanks</a>
-      </div>
-      <div class="col-sm-5 form-main-button">
-        <a id="survey_help" target="_blank" href="https://www.surveymonkey.com/r/movement_org">
-          <button type="button" class="btn btn-action full-width send sendpm">Yes I'll help</button>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end survey popup -->
 <div class="toggle-menu-container">
   <div id="exchange-filters" class="exchange-filters clearfix ">
     <div class="container left-navigation toggled">
@@ -201,29 +184,4 @@
     })();
   </script>
 
-{% endblock %}
-
-{% block finalavascript %}
-{% if user.is_authenticated %}
-  <script>
-    $(document).ready(function(){
-      if($.cookie('seensurvey') !== 'true'){
-        window.setTimeout(function(){
-          $('.popup-message').fadeIn();
-        }, 2000);
-      }
-      var surveyAction = function(){
-        $.cookie('seensurvey', 'true', { expires: 365 });
-        $('.popup-message').fadeOut();
-      };
-      $('#survey_dismiss').click(function(ev){
-        ev.preventDefault();
-        surveyAction();
-      });
-      $('#survey_help').click(function(){
-        surveyAction();
-      });
-    });
-  </script>
-{% endif %}
 {% endblock %}
