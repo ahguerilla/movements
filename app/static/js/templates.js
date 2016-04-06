@@ -1,2 +1,0 @@
-window.JST = window.JST || {};
-window.JST['more_about_you_progress_bar'] = _.template('<% _.each(stepsOrder, function(item, index) { %>\n<div id="step-id-<%- steps[item].id %>" class="progress-item step<%- index %> <% if(index == 0){ %> current <%  } else { %> outstanding <% } %>">\n  <div class="complete-state"><span>&#8226;</span></div>\n  <div class="progress-item-description"><%- steps[item].title %></div>\n</div>\n<% }) %>');
