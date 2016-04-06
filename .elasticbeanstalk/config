@@ -2,5 +2,5 @@
 ApplicationName=Exchangivist
 AwsCredentialFile=.elasticbeanstalk/aws_credential_file
 DevToolsEndpoint=git.elasticbeanstalk.us-east-1.amazonaws.com
-EnvironmentName=movements-operations
+EnvironmentName=movements-staging
 Region=us-east-1
