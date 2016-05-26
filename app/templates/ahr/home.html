@@ -118,7 +118,8 @@
             </ul>
           </li>
           <li class="navbar-hightlight">
-            <a class="donate_button" href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>
+            <a onClick="ga('send', 'event', 'homepage-events', 'click', 'donate');" class="donate_button"
+               href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>
             <form id="donate_form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="home-page-donate">
               <input type="hidden" name="cmd" value="_donations">
               <input type="hidden" name="business" value="clarke@advancinghumanrights.org">
@@ -187,13 +188,13 @@
       <a href="{% page_url 'how_it_works' %}">
         <div class="footer-nav footer-nav-1 col-sm-5ths col-xs-3"><span>{%trans "How it Works"%}</span></div>
       </a>
-      <a href="{% url 'create_request' %}">
+      <a onClick="ga('send', 'event', 'homepage-events', 'click', 'create-request');" href="{% url 'create_request' %}">
         <div class="footer-nav footer-nav-2 col-sm-5ths col-xs-3"><span class="hidden-xs">{%trans "Create a Request"%}</span><span class="visible-xs">{%trans "Create Request"%}</span></div>
       </a>
-      <a href="{% url 'create_offer' %}">
+      <a onClick="ga('send', 'event', 'homepage-events', 'click', 'offer-services');" href="{% url 'create_offer' %}">
         <div class="footer-nav footer-nav-3 col-sm-5ths col-xs-3"><span class="hidden-xs">{%trans "Offer your Services"%}</span><span class="visible-xs">{%trans "Offer Service"%}</span></div>
       </a>
-      <a href="{% url 'create_news' %}">
+      <a onClick="ga('send', 'event', 'homepage-events', 'click', 'create-news');" href="{% url 'create_news' %}">
         <div class="footer-nav footer-nav-4 col-sm-5ths col-xs-3"><span>{%trans "Act on News"%}</span></div>
       </a>
       <a href="{% page_url 'our_partners' %}">
