@@ -19,10 +19,12 @@
     </div>
     <div class="clearfix login_buttons">
       <div class="home-login-button first" style="width: 48%; float: left; margin-right: 4%;">
-        <button type="submit" class="btn btn-secondary full-width home_login">{% trans "Login" %}</button>
+        <button onClick="ga('send', 'event', 'homepage-events', 'click', 'login');" type="submit"
+                class="btn btn-secondary full-width home_login">{% trans "Login" %}</button>
       </div>
       <div class="home-login-button" style="width: 48%; float: left; ">
-        <button type="submit" class="btn btn-action full-width home_signup">{% trans "Sign up" %}</button>
+        <button onClick="ga('send', 'event', 'homepage-events', 'click', 'sign-up');" type="submit"
+                class="btn btn-action full-width home_signup">{% trans "Sign up" %}</button>
       </div>
     </div>
     <div style="display: none;" class="clearfix submit_continue">
@@ -37,17 +39,20 @@
   <div class="login-form-title social">{%trans "SIGN IN WITH"%}</div>
   <div class="home-social-signin clearfix">
     <div class="col-xs-4">
-      <a href="{% provider_login_url "facebook" %}">
+      <a onClick="ga('send', 'event', 'homepage-events', 'click', 'facebook-connect');"
+         href="{% provider_login_url "facebook" %}">
         <div class="circle-container facebook"><i class="fa fa-facebook fa-lg"></i></div>
       </a>
     </div>
     <div class="col-xs-4">
-      <a href="{% provider_login_url "twitter" %}">
+      <a onClick="ga('send', 'event', 'homepage-events', 'click', 'twitter-connect');"
+         href="{% provider_login_url "twitter" %}">
         <div class="circle-container twitter"><i class="fa fa-twitter fa-lg"></i></div>
       </a>
     </div>
     <div class="col-xs-4">
-      <a href="{% provider_login_url "linkedin" %}">
+      <a onClick="ga('send', 'event', 'homepage-events', 'click', 'linkedin-connect');"
+         href="{% provider_login_url "linkedin" %}">
         <div class="circle-container linkedin"><i class="fa fa-linkedin fa-lg"></i></div>
       </a>
     </div>

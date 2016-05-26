@@ -20,16 +20,19 @@
           <p>{% blocktrans %}You can skip this step but you’ll be mostly invisible to the people you would want to connect
             with. {% endblocktrans %}</p>
           <div class="col-md-offset-2 col-md-8 form-main-button">
-            <button id="create-offer-button" class="btn btn-action full-width">{% trans "Create an Offer" %}&nbsp;>></button>
+            <button onClick="ga('send', 'event', 'more-about-you-page', 'click', 'offer');"
+                    id="create-offer-button" class="btn btn-action full-width">{% trans "Create an Offer" %}&nbsp;>></button>
           </div>
           <div class="col-md-offset-2 col-md-8 form-main-button">
-            <button id="create-request-button" class="btn btn-action full-width">{% trans "Create a Request" %}&nbsp;>></button>
+            <button onClick="ga('send', 'event', 'more-about-you-page', 'click', 'request');"
+                    id="create-request-button" class="btn btn-action full-width">{% trans "Create a Request" %}&nbsp;>></button>
           </div>
           {{ settings_form.post_type.as_hidden }}
         </div>
         <div class="row action-text">
           <div class="col-sm-12 form-main-button">
-            <a id="create-post-later" class="action-link" href="">{% trans "I'll create a post later" %}</a>
+            <a onClick="ga('send', 'event', 'more-about-you-page', 'click', 'later');"
+               id="create-post-later" class="action-link" href="">{% trans "I'll create a post later" %}</a>
           </div>
         </div>
       </div>

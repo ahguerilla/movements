@@ -17,16 +17,13 @@
     },
 
     clickCreateOfferButton: function(ev){
-      ev.stopPropagation();
       ev.preventDefault();
       this.$el.find('#id_user_preference_type_0').attr('checked', true);
       this.$el.find('#id_post_type').val('1');
-
       $(ev.currentTarget).closest('form').submit();
     },
 
     clickCreateRequestButton: function(ev) {
-      ev.stopPropagation();
       ev.preventDefault();
       this.$el.find('#id_user_preference_type_1').attr('checked', true);
       this.$el.find('#id_post_type').val('2');
@@ -34,7 +31,6 @@
     },
 
     createLater: function(ev) {
-      ev.stopPropagation();
       ev.preventDefault();
       this.$el.find('#id_post_type').val('0');
       $(ev.currentTarget).closest(".step").hide();
