@@ -128,7 +128,7 @@ class Command(BaseCommand):
                         if send_email:
                             items = Notification.objects.filter(valid_item).filter(user=profile.user, emailed=False,
                                                                                    pub_date__lt=notification_delay_time)
-                            send_user_notification_email(profile, items)
+                            # send_user_notification_email(profile, items)
                             items.update(emailed=True)
                 except Exception as ex:
                     logger.exception(ex)
