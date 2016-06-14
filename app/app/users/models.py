@@ -147,6 +147,7 @@ class UserProfile(models.Model):
         ('ru', 'Russian'),
         ('fa', 'Persian'),
         ('fr', 'French'),
+        ('es', 'Spanish'),
     )
 
     USER_TYPE_PREFERENCE = EnumChoices(

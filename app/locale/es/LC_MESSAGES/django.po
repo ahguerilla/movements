@@ -1,0 +1,4040 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-14 08:35+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/cms_plugins.py:10
+msgid "Safe VPN Link"
+msgstr ""
+
+#: app/cms_plugins.py:29 templates/base.html:164 templates/base_v2.html:175
+#: templates/ahr/home.html:70
+msgid "Success Stories"
+msgstr ""
+
+#: app/cms_plugins.py:40
+msgid "Raw HTML"
+msgstr ""
+
+#: app/cms_toolbar.py:43
+msgid "Menu Settings"
+msgstr ""
+
+#: app/context_processors.py:17
+msgid "Exchange"
+msgstr ""
+
+#: app/context_processors.py:18
+msgid "Members"
+msgstr ""
+
+#: app/context_processors.py:19
+msgid "Recommendation"
+msgstr ""
+
+#: app/context_processors.py:20
+msgid "more..."
+msgstr ""
+
+#: app/context_processors.py:21
+msgid "Click here to view the recommendation"
+msgstr ""
+
+#: app/context_processors.py:22
+msgid "Offering"
+msgstr ""
+
+#: app/context_processors.py:23
+msgid "Requesting"
+msgstr ""
+
+#: app/context_processors.py:24
+msgid "Search by keyword or username for Members"
+msgstr ""
+
+#: app/context_processors.py:25
+msgid "Your search did not match any market item."
+msgstr ""
+
+#: app/context_processors.py:26
+msgid "Search again without any filters"
+msgstr ""
+
+#: app/context_processors.py:27
+msgid "or"
+msgstr ""
+
+#: app/context_processors.py:28
+msgid "search again with your default filters"
+msgstr ""
+
+#: app/context_processors.py:29
+msgid ""
+"This link will take you off the Movements site.\n"
+"Make sure you trust the site that you are being redirected to."
+msgstr ""
+
+#: app/context_processors.py:30
+msgid "SIGNUP"
+msgstr ""
+
+#: app/context_processors.py:31 templates/ahr/snippets/_home_login_form.html:5
+msgid "LOGIN OR SIGNUP"
+msgstr ""
+
+#: app/market/forms.py:58 app/market/forms.py:177
+msgid "You must add at least one skill"
+msgstr ""
+
+#: app/market/forms.py:60
+msgid "Please select a maximum of 4 skills"
+msgstr ""
+
+#: app/market/forms.py:66
+msgid "Please enter a maximum of 120 characters"
+msgstr ""
+
+#: app/market/forms.py:68
+msgid "Please enter at least 25 characters"
+msgstr ""
+
+#: app/market/forms.py:74
+msgid ""
+"To help others understand a little better, please provide a few more details "
+"(at least 250 characters)"
+msgstr ""
+
+#: app/market/forms.py:91 app/market/forms.py:102 app/market/forms.py:152
+msgid "You must add at least one issue"
+msgstr ""
+
+#: app/market/forms.py:104 app/market/forms.py:154
+msgid "Please select a maximum of 3 issues"
+msgstr ""
+
+#: app/market/forms.py:131
+msgid "Invalid Url"
+msgstr ""
+
+#: app/market/forms.py:145
+msgid "This is not a valid Movements post"
+msgstr ""
+
+#: app/market/admin/report.py:40
+msgid "Additional properties"
+msgstr ""
+
+#: app/market/api/views/translation.py:73
+#: app/market/api/views/translation.py:120
+#: app/market/api/views/translation.py:180
+msgid "You do not currently have permissions to translate this item"
+msgstr ""
+
+#: app/market/api/views/translation.py:90
+msgid "Another user is currently translating this item"
+msgstr ""
+
+#: app/market/api/views/translation.py:124
+msgid "Draft saved successfully."
+msgstr ""
+
+#: app/market/api/views/translation.py:127
+#: app/market/api/views/translation.py:165
+#: app/market/api/views/translation.py:186
+msgid "This post is not currently locked for translation."
+msgstr ""
+
+#: app/market/api/views/translation.py:145
+msgid "No pending translation found to cancel."
+msgstr ""
+
+#: app/market/api/views/translation.py:195
+msgid "You do not have permission to complete this action."
+msgstr ""
+
+#: app/market/models/comment.py:16 app/market/models/report.py:19
+#: app/market/models/report.py:36
+msgid "contents"
+msgstr ""
+
+#: app/market/models/comment.py:17 app/market/models/market.py:64
+#: app/market/models/market.py:479 app/market/models/market.py:495
+#: app/market/models/notification.py:34 app/market/models/rate.py:13
+#: app/market/models/report.py:21 app/market/models/report.py:38
+#: app/users/models.py:342
+msgid "publish date"
+msgstr ""
+
+#: app/market/models/comment.py:19 app/market/models/market.py:63
+#: app/market/models/market.py:478 app/market/models/report.py:22
+msgid "is published?"
+msgstr ""
+
+#: app/market/models/comment.py:20 app/market/models/market.py:71
+#: app/market/models/market.py:480
+msgid "deleted"
+msgstr ""
+
+#: app/market/models/comment.py:21 app/market/models/market.py:83
+#: app/market/models/translation.py:154
+msgid "source language"
+msgstr ""
+
+#: app/market/models/feedback.py:11
+msgid "Yes/No"
+msgstr ""
+
+#: app/market/models/feedback.py:12
+msgid "Range (1-5)"
+msgstr ""
+
+#: app/market/models/feedback.py:13
+msgid "Free Text Long"
+msgstr ""
+
+#: app/market/models/feedback.py:17
+msgid "question"
+msgstr ""
+
+#: app/market/models/feedback.py:19
+msgid "question type"
+msgstr ""
+
+#: app/market/models/feedback.py:23
+msgid "question configuration"
+msgstr ""
+
+#: app/market/models/feedback.py:24
+msgid "question configurations"
+msgstr ""
+
+#: app/market/models/feedback.py:29
+msgid "without type"
+msgstr ""
+
+#: app/market/models/feedback.py:33 app/market/models/market.py:55
+#: app/market/models/rate.py:14 app/users/models.py:343
+msgid "title"
+msgstr ""
+
+#: app/market/models/feedback.py:35
+msgid "questions"
+msgstr ""
+
+#: app/market/models/feedback.py:37
+msgid "Market item type"
+msgstr ""
+
+#: app/market/models/feedback.py:42
+msgid "questionnaire"
+msgstr ""
+
+#: app/market/models/feedback.py:43
+msgid "questionnaires"
+msgstr ""
+
+#: app/market/models/market.py:39
+msgid "Open"
+msgstr ""
+
+#: app/market/models/market.py:40
+msgid "Watch"
+msgstr ""
+
+#: app/market/models/market.py:41
+msgid "Urgent"
+msgstr ""
+
+#: app/market/models/market.py:42
+msgid "Closed By Admin"
+msgstr ""
+
+#: app/market/models/market.py:43
+msgid "Closed By User"
+msgstr ""
+
+#: app/market/models/market.py:46 app/users/forms.py:210
+#: templates/base.html:121 templates/base.html.py:393
+#: templates/base_v2.html:132 templates/base_v2.html.py:405
+msgid "Request"
+msgstr ""
+
+#: app/market/models/market.py:47 app/users/forms.py:209
+#: templates/base.html:122 templates/base.html.py:396
+#: templates/base_v2.html:133 templates/base_v2.html.py:408
+msgid "Offer"
+msgstr ""
+
+#: app/market/models/market.py:48 templates/base_v2.html:411
+#: templates/market/create_news.html:12 templates/market/market.html:18
+msgid "News"
+msgstr ""
+
+#: app/market/models/market.py:51 app/market/models/market.py:370
+msgid "item_type"
+msgstr ""
+
+#: app/market/models/market.py:56 app/market/models/market.py:475
+msgid "details"
+msgstr ""
+
+#: app/market/models/market.py:58
+msgid "Specific skill"
+msgstr ""
+
+#: app/market/models/market.py:61
+msgid "Specific issue"
+msgstr ""
+
+#: app/market/models/market.py:62
+msgid "URL Link"
+msgstr ""
+
+#: app/market/models/market.py:66
+msgid "commentcount"
+msgstr ""
+
+#: app/market/models/market.py:67
+msgid "collaboratorcount"
+msgstr ""
+
+#: app/market/models/market.py:68 app/users/models.py:191
+msgid "ratecount"
+msgstr ""
+
+#: app/market/models/market.py:69
+msgid "reportcount"
+msgstr ""
+
+#: app/market/models/market.py:70 app/market/models/rate.py:15
+#: app/users/models.py:192 app/users/models.py:344
+msgid "score"
+msgstr ""
+
+#: app/market/models/market.py:72
+msgid "receive notifications"
+msgstr ""
+
+#: app/market/models/market.py:73
+msgid "Tweet Permission"
+msgstr ""
+
+#: app/market/models/market.py:75 app/market/models/translation.py:160
+#: app/reporting/admin/incident.py:89
+msgid "status"
+msgstr ""
+
+#: app/market/models/market.py:78
+msgid "closed date"
+msgstr ""
+
+#: app/market/models/market.py:80
+msgid "feedback response"
+msgstr ""
+
+#: app/market/models/market.py:81
+msgid "is featured"
+msgstr ""
+
+#: app/market/models/market.py:336 app/market/models/market.py:351
+#: app/market/models/market.py:367 app/market/models/market.py:378
+#: app/market/models/market.py:473 app/market/models/market.py:491
+#: app/market/models/report.py:47 app/market/models/report.py:76
+#: app/market/models/translation.py:298
+msgid "market item"
+msgstr ""
+
+#: app/market/models/market.py:337
+msgid "action"
+msgstr ""
+
+#: app/market/models/market.py:338 app/market/models/market.py:353
+msgid "date of action"
+msgstr ""
+
+#: app/market/models/market.py:342 app/market/models/market.py:343
+msgid "actions of market item"
+msgstr ""
+
+#: app/market/models/market.py:352
+msgid "next step"
+msgstr ""
+
+#: app/market/models/market.py:354
+msgid "completed"
+msgstr ""
+
+#: app/market/models/market.py:358
+msgid "next step of market item"
+msgstr ""
+
+#: app/market/models/market.py:359
+msgid "next steps of market item"
+msgstr ""
+
+#: app/market/models/market.py:371
+msgid "interaction date"
+msgstr ""
+
+#: app/market/models/market.py:477
+msgid "specific interest"
+msgstr ""
+
+#: app/market/models/market.py:492
+msgid "related market item"
+msgstr ""
+
+#: app/market/models/notification.py:13
+msgid "Needs Translation"
+msgstr ""
+
+#: app/market/models/notification.py:14 app/market/models/translation.py:143
+#: app/market/models/translation.py:148
+msgid "In translation"
+msgstr ""
+
+#: app/market/models/notification.py:15 app/market/models/translation.py:149
+msgid "In correction"
+msgstr ""
+
+#: app/market/models/notification.py:16
+msgid "Translation revoked"
+msgstr ""
+
+#: app/market/models/notification.py:17 app/market/models/translation.py:150
+msgid "Waiting for approval"
+msgstr ""
+
+#: app/market/models/notification.py:18
+msgid "Approved"
+msgstr ""
+
+#: app/market/models/notification.py:19
+msgid "Translation item count notification"
+msgstr ""
+
+#: app/market/models/notification.py:20
+msgid "Translation approval count notification"
+msgstr ""
+
+#: app/market/models/notification.py:24
+msgid "Translation status"
+msgstr ""
+
+#: app/market/models/notification.py:32
+msgid "avatar user"
+msgstr ""
+
+#: app/market/models/report.py:20 app/market/models/report.py:37
+msgid "is resolved"
+msgstr ""
+
+#: app/market/models/report.py:48
+msgid "e-mail"
+msgstr ""
+
+#: app/market/models/report.py:50
+msgid "date of recommendation"
+msgstr ""
+
+#: app/market/models/report.py:54
+msgid "email recommendation"
+msgstr ""
+
+#: app/market/models/report.py:55
+msgid "email recommendations"
+msgstr ""
+
+#: app/market/models/report.py:72
+msgid "is post recommendation"
+msgstr ""
+
+#: app/market/models/report.py:74
+msgid "is user recommendation"
+msgstr ""
+
+#: app/market/models/report.py:80 app/market/models/report.py:118
+#: templates/market/notifications.html:81
+msgid "message"
+msgstr ""
+
+#: app/market/models/report.py:81 app/market/models/report.py:119
+msgid "messages"
+msgstr ""
+
+#: app/market/models/translation.py:141
+msgid "Google"
+msgstr ""
+
+#: app/market/models/translation.py:142
+msgid "Pending a translator"
+msgstr ""
+
+#: app/market/models/translation.py:144
+msgid "Translated"
+msgstr ""
+
+#: app/market/models/translation.py:147 app/users/forms.py:208
+msgid "None"
+msgstr ""
+
+#: app/market/models/translation.py:153 app/users/models.py:89
+msgid "language"
+msgstr ""
+
+#: app/market/models/translation.py:155
+msgid "details translated"
+msgstr ""
+
+#: app/market/models/translation.py:156
+msgid "details translated candidate"
+msgstr ""
+
+#: app/market/models/translation.py:158 app/market/models/translation.py:169
+msgid "date generated"
+msgstr ""
+
+#: app/market/models/translation.py:163
+msgid "candidate status"
+msgstr ""
+
+#: app/market/models/translation.py:170 app/market/models/translation.py:171
+msgid "date edited"
+msgstr ""
+
+#: app/market/models/translation.py:172
+msgid "Needs update"
+msgstr ""
+
+#: app/market/models/translation.py:299
+msgid "title translated"
+msgstr ""
+
+#: app/market/models/translation.py:300
+msgid "title translated candidate"
+msgstr ""
+
+#: app/market/models/translation.py:382
+msgid "comment"
+msgstr ""
+
+#: app/reporting/models.py:21
+msgid "incident"
+msgstr ""
+
+#: app/reporting/models.py:22
+msgid "incident tracking"
+msgstr ""
+
+#: app/reporting/models.py:31 app/reporting/models.py:32
+msgid "user tracking"
+msgstr ""
+
+#: app/reporting/models.py:43
+msgid "addition"
+msgstr ""
+
+#: app/reporting/models.py:44
+msgid "change"
+msgstr ""
+
+#: app/reporting/models.py:45
+msgid "deletion"
+msgstr ""
+
+#: app/reporting/models.py:46
+msgid "user logged in"
+msgstr ""
+
+#: app/reporting/models.py:52
+msgid "action flag"
+msgstr ""
+
+#: app/reporting/models.py:57 app/reporting/models.py:58
+msgid "user activity"
+msgstr ""
+
+#: app/reporting/admin/incident.py:45
+msgid "number of email recommendations"
+msgstr ""
+
+#: app/reporting/admin/incident.py:57
+msgid "number of views"
+msgstr ""
+
+#: app/reporting/admin/incident.py:61
+msgid "total messages count"
+msgstr ""
+
+#: app/reporting/admin/incident.py:65
+msgid "Screen name"
+msgstr ""
+
+#: app/reporting/admin/incident.py:70
+msgid "date of post"
+msgstr ""
+
+#: app/reporting/admin/incident.py:75
+#: templates/admin/incident_change_form.html:13
+msgid "Staff manager"
+msgstr ""
+
+#: app/reporting/admin/incident.py:84
+msgid "Aging"
+msgstr ""
+
+#: app/reporting/admin/user.py:18 app/reporting/admin/user.py:144
+msgid "Movements Rating"
+msgstr ""
+
+#: app/reporting/admin/user.py:23
+msgid "Unassigned"
+msgstr ""
+
+#: app/reporting/admin/user.py:24
+msgid "0 Stars"
+msgstr ""
+
+#: app/reporting/admin/user.py:25
+msgid "1 Star"
+msgstr ""
+
+#: app/reporting/admin/user.py:26
+msgid "2 Stars"
+msgstr ""
+
+#: app/reporting/admin/user.py:27
+msgid "3 Stars"
+msgstr ""
+
+#: app/reporting/admin/user.py:28
+msgid "4 Stars"
+msgstr ""
+
+#: app/reporting/admin/user.py:29
+msgid "5 Stars"
+msgstr ""
+
+#: app/reporting/admin/user.py:40
+msgid "Email Verified"
+msgstr ""
+
+#: app/reporting/admin/user.py:45
+msgid "true"
+msgstr ""
+
+#: app/reporting/admin/user.py:46
+msgid "false"
+msgstr ""
+
+#: app/reporting/admin/user.py:88
+msgid "Screen Name"
+msgstr ""
+
+#: app/reporting/admin/user.py:92
+msgid "Last Login"
+msgstr ""
+
+#: app/reporting/admin/user.py:96
+msgid "Signup Date"
+msgstr ""
+
+#: app/reporting/admin/user.py:100
+msgid "Full Name"
+msgstr ""
+
+#: app/reporting/admin/user.py:104
+msgid "No profile"
+msgstr ""
+
+#: app/reporting/admin/user.py:106
+#: templates/market/clientside/userprofile.html:34
+msgid "Nationality"
+msgstr ""
+
+#: app/reporting/admin/user.py:112 templates/account/signup.html:55
+#: templates/users/user_settings_v2.html:69
+msgid "Country of Residence"
+msgstr ""
+
+#: app/reporting/admin/user.py:116
+msgid "Is Admin"
+msgstr ""
+
+#: app/reporting/admin/user.py:120
+msgid "Request Count"
+msgstr ""
+
+#: app/reporting/admin/user.py:124
+msgid "Offer Count"
+msgstr ""
+
+#: app/reporting/admin/user.py:128
+msgid "Comment Count"
+msgstr ""
+
+#: app/reporting/admin/user.py:134 app/reporting/admin/user.py:143
+msgid "unassigned"
+msgstr ""
+
+#: app/reporting/admin/user.py:136
+msgid "Rate user"
+msgstr ""
+
+#: app/reporting/admin/user.py:138
+msgid "Movements rating"
+msgstr ""
+
+#: app/reporting/admin/user.py:147 app/reporting/admin/user.py:151
+#: app/reporting/admin/user.py:155 app/reporting/admin/user.py:159
+#: app/reporting/admin/user.py:163
+msgid "Not supplied"
+msgstr ""
+
+#: app/reporting/admin/user.py:148 templates/base.html:145
+#: templates/base_v2.html:156 templates/ahr/home.html:51
+#: templates/users/user_settings_v2.html:108
+msgid "Facebook"
+msgstr ""
+
+#: app/reporting/admin/user.py:152 templates/base.html:139
+#: templates/base_v2.html:150 templates/ahr/home.html:45
+#: templates/users/user_settings_v2.html:101
+msgid "Twitter"
+msgstr ""
+
+#: app/reporting/admin/user.py:156
+msgid "Linked in"
+msgstr ""
+
+#: app/reporting/admin/user.py:160
+msgid "Website/blog"
+msgstr ""
+
+#: app/reporting/admin/user.py:164 templates/users/user_profile_v2.html:66
+msgid "Bio"
+msgstr ""
+
+#: app/reporting/admin/user.py:181
+msgid "Count social"
+msgstr ""
+
+#: app/reporting/admin/user.py:187
+msgid "Email verified"
+msgstr ""
+
+#: app/reporting/admin/user_activity.py:22
+msgid "Staff status"
+msgstr ""
+
+#: app/settings/base.py:100 templates/base.html:179 templates/base_v2.html:190
+#: templates/ahr/home.html:85
+msgid "Arabic"
+msgstr ""
+
+#: app/settings/base.py:101 templates/base.html:173 templates/base_v2.html:184
+#: templates/ahr/home.html:79
+msgid "English"
+msgstr ""
+
+#: app/settings/base.py:102 templates/base.html:185 templates/base_v2.html:196
+#: templates/ahr/home.html:91
+msgid "Chinese"
+msgstr ""
+
+#: app/settings/base.py:103 templates/base.html:191 templates/base_v2.html:202
+#: templates/ahr/home.html:97
+msgid "Ukrainian"
+msgstr ""
+
+#: app/settings/base.py:104 templates/base.html:197 templates/base_v2.html:208
+#: templates/ahr/home.html:103
+msgid "Russian"
+msgstr ""
+
+#: app/settings/base.py:105
+msgid "Persian"
+msgstr ""
+
+#: app/settings/base.py:106 templates/base.html:209 templates/base_v2.html:220
+#: templates/ahr/home.html:115
+msgid "French"
+msgstr ""
+
+#: app/settings/base.py:107 templates/base.html:215 templates/base_v2.html:226
+#: templates/ahr/home.html:121
+msgid "Spanish"
+msgstr ""
+
+#: app/users/forms.py:30
+msgid "Please enter a valid email"
+msgstr ""
+
+#: app/users/forms.py:32
+msgid "This email is used already"
+msgstr ""
+
+#: app/users/forms.py:39
+msgid "Please enter a password"
+msgstr ""
+
+#: app/users/forms.py:41
+msgid "Passwords must match"
+msgstr ""
+
+#: app/users/forms.py:75 app/users/forms.py:99
+msgid "Please enter a username"
+msgstr ""
+
+#: app/users/forms.py:77 app/users/forms.py:101
+msgid "This username is already in use"
+msgstr ""
+
+#: app/users/forms.py:79 app/users/forms.py:103
+msgid ""
+"Username must contain only letters, numbers - and _. White space is not "
+"allowed"
+msgstr ""
+
+#: app/users/forms.py:81 app/users/forms.py:105
+msgid ""
+"Username must be greater that 2 characters and less than 30 contain only "
+"letters, numbers - and _. White space is not allowed"
+msgstr ""
+
+#: app/users/forms.py:204
+msgid "I will offer my skills"
+msgstr ""
+
+#: app/users/forms.py:205
+msgid "I will Request help"
+msgstr ""
+
+#: app/users/forms.py:206
+msgid "I'll decide later"
+msgstr ""
+
+#: app/users/models.py:16
+msgid "skill set"
+msgstr ""
+
+#: app/users/models.py:27
+msgid "issues of interest"
+msgstr ""
+
+#: app/users/models.py:38
+msgid "countries of interest"
+msgstr ""
+
+#: app/users/models.py:50
+msgid "nationality"
+msgstr ""
+
+#: app/users/models.py:61
+msgid "country of residence"
+msgstr ""
+
+#: app/users/models.py:71
+msgid "name"
+msgstr ""
+
+#: app/users/models.py:82
+msgid "language code"
+msgstr ""
+
+#: app/users/models.py:90
+msgid "languages"
+msgstr ""
+
+#: app/users/models.py:96
+msgid "region"
+msgstr ""
+
+#: app/users/models.py:97
+msgid "regions"
+msgstr ""
+
+#: app/users/models.py:102
+msgid "interest"
+msgstr ""
+
+#: app/users/models.py:103
+msgid "interests"
+msgstr ""
+
+#: app/users/models.py:119
+msgid "Hidden - only your screen name and avatar is shared"
+msgstr ""
+
+#: app/users/models.py:120
+msgid "Secure - only your screen name, skills and country is shared"
+msgstr ""
+
+#: app/users/models.py:121
+msgid "Public - all your profile information is shared"
+msgstr ""
+
+#: app/users/models.py:125
+msgid "Never"
+msgstr ""
+
+#: app/users/models.py:126
+msgid "Weekly"
+msgstr ""
+
+#: app/users/models.py:127
+msgid "Daily"
+msgstr ""
+
+#: app/users/models.py:128
+msgid "Instantly"
+msgstr ""
+
+#: app/users/models.py:132 app/users/models.py:154
+msgid "Unknown"
+msgstr ""
+
+#: app/users/models.py:133 templates/market/view_post.html:53
+msgid "Social Media"
+msgstr ""
+
+#: app/users/models.py:134
+msgid "Staff Contact"
+msgstr ""
+
+#: app/users/models.py:135
+msgid "General Media"
+msgstr ""
+
+#: app/users/models.py:136
+msgid "Referred by Movements User"
+msgstr ""
+
+#: app/users/models.py:137
+msgid "Event"
+msgstr ""
+
+#: app/users/models.py:138 templates/market/create_news.html:47
+#: templates/market/create_offer.html:22 templates/market/create_offer.html:36
+#: templates/market/create_request.html:23
+#: templates/market/create_request.html:37
+#: templates/market/snippets/__news_help_form.html:15
+msgid "Other"
+msgstr ""
+
+#: app/users/models.py:139
+msgid "Prefer not to say"
+msgstr ""
+
+#: app/users/models.py:155
+msgid "Request User"
+msgstr ""
+
+#: app/users/models.py:156
+msgid "Offer User"
+msgstr ""
+
+#: app/users/models.py:160
+msgid "bio"
+msgstr ""
+
+#: app/users/models.py:161
+msgid "tag line"
+msgstr ""
+
+#: app/users/models.py:162
+msgid "website url"
+msgstr ""
+
+#: app/users/models.py:163
+msgid "facebook page"
+msgstr ""
+
+#: app/users/models.py:164
+msgid "linkedin page"
+msgstr ""
+
+#: app/users/models.py:165
+msgid "twitter page"
+msgstr ""
+
+#: app/users/models.py:166
+msgid "occupation"
+msgstr ""
+
+#: app/users/models.py:167
+msgid "area of expertise"
+msgstr ""
+
+#: app/users/models.py:178
+msgid "Trusted translation language"
+msgstr ""
+
+#: app/users/models.py:186
+msgid "community manager"
+msgstr ""
+
+#: app/users/models.py:187
+msgid "organisation"
+msgstr ""
+
+#: app/users/models.py:188
+msgid "individual"
+msgstr ""
+
+#: app/users/models.py:189
+msgid "journalist"
+msgstr ""
+
+#: app/users/models.py:190
+msgid "recieves newsletter"
+msgstr ""
+
+#: app/users/models.py:193
+msgid "Interface language"
+msgstr ""
+
+#: app/users/models.py:195
+msgid "first login"
+msgstr ""
+
+#: app/users/models.py:197
+msgid "profile visibility"
+msgstr ""
+
+#: app/users/models.py:200
+msgid "notification frequency"
+msgstr ""
+
+#: app/users/models.py:336
+msgid "Rated by AHR"
+msgstr ""
+
+#: app/users/views.py:545
+msgid "This unsubscribe link does not map to a valid user."
+msgstr ""
+
+#: app/users/views.py:547
+msgid "To unsubscribe click on on the button below."
+msgstr ""
+
+#: app/users/views.py:549
+msgid "You are logged in as a different user to the link followed"
+msgstr ""
+
+#: app/users/views.py:567
+msgid "Invalid unsubscribe link."
+msgstr ""
+
+#: avatar/admin.py:19
+msgid "Avatar"
+msgstr ""
+
+#: avatar/forms.py:24
+msgid "avatar"
+msgstr ""
+
+#: avatar/forms.py:37
+#, python-format
+msgid ""
+"%(ext)s is an invalid file extension. Authorized extensions are : "
+"%(valid_exts_list)s"
+msgstr ""
+
+#: avatar/forms.py:44
+#, python-format
+msgid ""
+"Your file is too big (%(size)s), the maximum allowed size is "
+"%(max_valid_size)s"
+msgstr ""
+
+#: avatar/forms.py:54
+#, python-format
+msgid ""
+"You already have %(nb_avatars)d avatars, and the maximum allowed is "
+"%(nb_max_avatars)d."
+msgstr ""
+
+#: avatar/forms.py:71 avatar/forms.py:84
+msgid "Choices"
+msgstr ""
+
+#: avatar/views.py:74
+msgid "Successfully uploaded a new avatar."
+msgstr ""
+
+#: avatar/views.py:110
+msgid "Successfully updated your avatar."
+msgstr ""
+
+#: avatar/views.py:148
+msgid "Successfully deleted the requested avatars."
+msgstr ""
+
+#: avatar/templates/avatar/add.html:6 avatar/templates/avatar/change.html:6
+#: templates/avatar/add.html:6 templates/avatar/change.html:8
+msgid "Your current avatar: "
+msgstr ""
+
+#: avatar/templates/avatar/add.html:9 avatar/templates/avatar/change.html:9
+#: templates/avatar/add.html:9 templates/avatar/change.html:11
+msgid "You haven't uploaded an avatar yet. Please upload one now."
+msgstr ""
+
+#: avatar/templates/avatar/add.html:13 avatar/templates/avatar/change.html:20
+#: templates/avatar/add.html:13 templates/avatar/change.html:25
+msgid "Upload New Image"
+msgstr ""
+
+#: avatar/templates/avatar/change.html:15 templates/avatar/change.html:19
+msgid "Choose new Default"
+msgstr ""
+
+#: avatar/templates/avatar/confirm_delete.html:6
+#: templates/avatar/confirm_delete.html:6
+msgid "Please select the avatars that you would like to delete."
+msgstr ""
+
+#: avatar/templates/avatar/confirm_delete.html:9
+#: templates/avatar/confirm_delete.html:9
+#, python-format
+msgid ""
+"You have no avatars to delete. Please <a href=\"%(avatar_change_url)s"
+"\">upload one</a> now."
+msgstr ""
+
+#: avatar/templates/avatar/confirm_delete.html:15
+#: templates/avatar/confirm_delete.html:15
+msgid "Delete These"
+msgstr ""
+
+#: avatar/templates/notification/avatar_friend_updated/full.txt:1
+#, python-format
+msgid ""
+"%(avatar_creator)s has updated their avatar %(avatar)s.\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s\n"
+msgstr ""
+
+#: avatar/templates/notification/avatar_friend_updated/notice.html:2
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(avatar_creator)s</a> has updated their avatar <a "
+"href=\"%(avatar_url)s\">%(avatar)s</a>."
+msgstr ""
+
+#: avatar/templates/notification/avatar_updated/full.txt:1
+#, python-format
+msgid ""
+"Your avatar has been updated.  %(avatar)s\n"
+"\n"
+"http://%(current_site)s%(avatar_url)s\n"
+msgstr ""
+
+#: avatar/templates/notification/avatar_updated/notice.html:2
+#, python-format
+msgid "You have updated your avatar <a href=\"%(avatar_url)s\">%(avatar)s</a>."
+msgstr ""
+
+#: avatar/templatetags/avatar_tags.py:51
+msgid "Default Avatar"
+msgstr ""
+
+#: templates/404.html:5 templates/404.html.py:10
+msgid "404"
+msgstr ""
+
+#: templates/404.html:11
+msgid "The page you are trying to visit does not exist."
+msgstr ""
+
+#: templates/500.html:5 templates/500.html.py:10
+msgid "500"
+msgstr ""
+
+#: templates/500.html:11
+msgid "Server error - we're on it."
+msgstr ""
+
+#: templates/base.html:119 templates/base.html.py:245
+#: templates/base_v2.html:130 templates/base_v2.html.py:257
+msgid "Add Post"
+msgstr ""
+
+#: templates/base.html:128 templates/base_v2.html:139
+#: templates/ahr/home.html:34
+msgid "Navigate"
+msgstr ""
+
+#: templates/base.html:134 templates/base_v2.html:145
+#: templates/ahr/home.html:40
+msgid "Connect"
+msgstr ""
+
+#: templates/base.html:151 templates/base_v2.html:162
+#: templates/ahr/home.html:57
+msgid "Advancing Human Rights"
+msgstr ""
+
+#: templates/base.html:157 templates/base_v2.html:168
+#: templates/ahr/home.html:63
+msgid "Newsletter"
+msgstr ""
+
+#: templates/base.html:163 templates/base_v2.html:174
+#: templates/ahr/home.html:69
+msgid "Movements Blog"
+msgstr ""
+
+#: templates/base.html:168 templates/base_v2.html:179
+#: templates/ahr/home.html:74
+msgid "Language"
+msgstr ""
+
+#: templates/base.html:203 templates/base_v2.html:214
+#: templates/ahr/home.html:109
+msgid "Farsi"
+msgstr ""
+
+#: templates/base.html:222 templates/base.html.py:426
+#: templates/base_v2.html:234 templates/base_v2.html.py:441
+msgid "Logout"
+msgstr ""
+
+#: templates/base.html:230 templates/base_v2.html:242
+#: templates/ahr/home.html:143
+msgid "Find out more"
+msgstr ""
+
+#: templates/base.html:235 templates/base.html.py:319
+#: templates/base_v2.html:247 templates/base_v2.html.py:331
+#: templates/ahr/home.html:159
+msgid "View Requests & Offers"
+msgstr ""
+
+#: templates/base.html:267 templates/base_v2.html:279
+msgid "Sign up now"
+msgstr ""
+
+#: templates/base.html:270 templates/base_v2.html:282
+#: templates/ahr/snippets/_home_login_form.html:23
+#: templates/two_factor/core/login.html:5
+msgid "Login"
+msgstr ""
+
+#: templates/base.html:309 templates/base_v2.html:321
+#: templates/ahr/home.html:173
+msgid "Crowdsourcing human rights."
+msgstr ""
+
+#: templates/base.html:309 templates/base_v2.html:321
+msgid "Opening closed societies."
+msgstr ""
+
+#: templates/base.html:344 templates/base_v2.html:356
+msgid "Get updates"
+msgstr ""
+
+#: templates/base.html:349 templates/base_v2.html:361
+msgid ""
+"Get all the latest updates, including featured posts, and security tips!"
+msgstr ""
+
+#: templates/base.html:352 templates/base_v2.html:364
+msgid "Connect with us"
+msgstr ""
+
+#: templates/base.html:355 templates/base_v2.html:367
+#: templates/account/signup_start.html:55
+msgid "Connect with Twitter"
+msgstr ""
+
+#: templates/base.html:358 templates/base_v2.html:370
+#: templates/account/signup_start.html:51
+msgid "Connect with Facebook"
+msgstr ""
+
+#: templates/base.html:365 templates/base_v2.html:377
+msgid "About MOVEMENTS"
+msgstr ""
+
+#: templates/base.html:366 templates/base_v2.html:378
+msgid "Crowdsourcing human rights. Opening closed societies."
+msgstr ""
+
+#: templates/base.html:378 templates/base_v2.html:390
+msgid "Copyright &copy; 2015 Advancing Human Rights"
+msgstr ""
+
+#: templates/base.html:404 templates/base_v2.html:419
+#: templates/users/snippets/profile_navigation.html:23
+msgid "Profile"
+msgstr ""
+
+#: templates/base.html:410 templates/base_v2.html:425
+#: templates/users/user_settings_v2.html:16
+#: templates/users/snippets/profile_navigation.html:30
+msgid "Settings"
+msgstr ""
+
+#: templates/base.html:417 templates/base_v2.html:432
+msgid "Translations"
+msgstr ""
+
+#: templates/account/email.html:6
+msgid "Account"
+msgstr ""
+
+#: templates/account/email.html:9
+msgid "E-mail Addresses"
+msgstr ""
+
+#: templates/account/email.html:11
+msgid "The following e-mail addresses are associated with your account:"
+msgstr ""
+
+#: templates/account/email.html:25
+msgid "Verified"
+msgstr ""
+
+#: templates/account/email.html:27
+msgid "Unverified"
+msgstr ""
+
+#: templates/account/email.html:29
+msgid "Primary"
+msgstr ""
+
+#: templates/account/email.html:35
+msgid "Make Primary"
+msgstr ""
+
+#: templates/account/email.html:36
+msgid "Re-send Verification"
+msgstr ""
+
+#: templates/account/email.html:37
+msgid "Remove"
+msgstr ""
+
+#: templates/account/email.html:44
+msgid "Warning:"
+msgstr ""
+
+#: templates/account/email.html:44
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+
+#: templates/account/email.html:49
+msgid "Add E-mail Address"
+msgstr ""
+
+#: templates/account/email.html:54
+msgid "Add E-mail"
+msgstr ""
+
+#: templates/account/email.html:63
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: templates/account/email_confirm.html:10
+#: templates/account/email_confirm.html:15
+#: templates/account/email/email_confirmation_subject.txt:3
+msgid "Confirm E-mail Address"
+msgstr ""
+
+#: templates/account/email_confirm.html:27
+#, python-format
+msgid ""
+"Before confirming that <a href=\"mailto:%(email)s\">%(email)s</a> is the e-"
+"mail address you provided for the user %(user_display)s, please read and "
+"accept the "
+msgstr ""
+
+#: templates/account/email_confirm.html:28
+msgid "acceptable use policy"
+msgstr ""
+
+#: templates/account/email_confirm.html:29
+msgid "By continuing, you are agreeing to all of our "
+msgstr ""
+
+#: templates/account/email_confirm.html:29
+msgid "terms and conditions"
+msgstr ""
+
+#: templates/account/email_confirm.html:37 templates/market/view_post.html:428
+#: templates/market/view_post.html:494
+msgid "Confirm"
+msgstr ""
+
+#: templates/account/email_confirm.html:43
+msgid "This e-mail confirmation link expired or is invalid."
+msgstr ""
+
+#: templates/account/email_confirm.html:53
+msgid "I have read and accepted the acceptable use policy"
+msgstr ""
+
+#: templates/account/login.html:9 templates/account/login.html.py:15
+#: templates/account/login.html:48 templates/openid/login.html:16
+msgid "Sign In"
+msgstr ""
+
+#: templates/account/login.html:18
+#, python-format
+msgid ""
+"\n"
+"      Welcome to Movements, please sign in below. If you don't have an "
+"account yet, please sign up <a href=\"%(home_url)s\" alt=\"sign up\">here</"
+"a>\n"
+"      "
+msgstr ""
+
+#: templates/account/login.html:26
+msgid "Email or Username"
+msgstr ""
+
+#: templates/account/login.html:33 templates/account/signup_start.html:25
+#: templates/ahr/snippets/_home_login_form.html:12
+msgid "Password"
+msgstr ""
+
+#: templates/account/login.html:45
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/account/login.html:57
+msgid "Sign In with Facebook"
+msgstr ""
+
+#: templates/account/login.html:60
+msgid "Sign In with Twitter"
+msgstr ""
+
+#: templates/account/login.html:63
+msgid "Sign In with Linked In"
+msgstr ""
+
+#: templates/account/logout.html:6 templates/account/logout.html.py:11
+#: templates/account/logout.html:19
+msgid "Sign Out"
+msgstr ""
+
+#: templates/account/logout.html:12
+msgid "Are you sure you want to sign out?"
+msgstr ""
+
+#: templates/account/password_change.html:12
+msgid "Password changed successfully"
+msgstr ""
+
+#: templates/account/password_change.html:26
+#: templates/account/password_reset_from_key.html:7
+#: templates/account/password_reset_from_key.html:19
+#: templates/account/password_reset_from_key.html:38
+#: templates/account/password_reset_from_key_done.html:5
+#: templates/users/user_settings_v2.html:186
+#: templates/users/user_settings_v2.html:249
+msgid "Change Password"
+msgstr ""
+
+#: templates/account/password_delete.html:5
+#: templates/account/password_delete.html:8
+msgid "Delete Password"
+msgstr ""
+
+#: templates/account/password_delete.html:9
+msgid ""
+"You may delete your password since you are currently logged in using OpenID."
+msgstr ""
+
+#: templates/account/password_delete.html:12
+msgid "delete my password"
+msgstr ""
+
+#: templates/account/password_delete_done.html:5
+#: templates/account/password_delete_done.html:8
+msgid "Password Deleted"
+msgstr ""
+
+#: templates/account/password_delete_done.html:9
+msgid "Your password has been deleted."
+msgstr ""
+
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset_done.html:5
+#: templates/account/password_reset_done.html:10
+msgid "Password Reset"
+msgstr ""
+
+#: templates/account/password_reset.html:12
+msgid "Forgotten Password"
+msgstr ""
+
+#: templates/account/password_reset.html:16
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: templates/account/password_reset.html:21 templates/account/signup.html:34
+#: templates/ahr/snippets/_home_login_form.html:9
+msgid "Email"
+msgstr ""
+
+#: templates/account/password_reset.html:30
+#, python-format
+msgid ""
+"\n"
+"          Please <a href=\"%(contactus_url)s\">contact us</a> if you have "
+"any trouble resetting your password.\n"
+"          "
+msgstr ""
+
+#: templates/account/password_reset.html:38
+msgid "Reset My Password"
+msgstr ""
+
+#: templates/account/password_reset_done.html:18
+#, python-format
+msgid ""
+"\n"
+"      We have sent you an e-mail. Please <a href=\"%(contactus_url)s"
+"\">contact us</a> if you do not receive it within a few minutes.\n"
+"      "
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:14
+msgid "Bad Token"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:16
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:24
+msgid "New Password"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:31
+msgid "New Password (again)"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:43
+#: templates/account/password_reset_from_key_done.html:10
+msgid "Your password has been changed."
+msgstr ""
+
+#: templates/account/password_set.html:6
+#: templates/account/password_set.html:13
+#: templates/account/password_set.html:25
+#: templates/users/user_settings_v2.html:190
+msgid "Set Password"
+msgstr ""
+
+#: templates/account/ratelimit_triggered.html:5
+msgid "Account Inactive"
+msgstr ""
+
+#: templates/account/ratelimit_triggered.html:11
+msgid "Ratelimit Triggered"
+msgstr ""
+
+#: templates/account/ratelimit_triggered.html:13
+msgid ""
+"\n"
+"          We've detected an unusual number of login attempts and that's "
+"triggered this automatic message. Please try again\n"
+"          later or contact support if the problem persists.\n"
+"        "
+msgstr ""
+
+#: templates/account/signup.html:14
+msgid "About you"
+msgstr ""
+
+#: templates/account/signup.html:17
+#, python-format
+msgid ""
+"You are about to use your %(provider_name)s account to login. We first need "
+"a few more details before you get started."
+msgstr ""
+
+#: templates/account/signup.html:19
+msgid "First we would like to know a little more about you."
+msgstr ""
+
+#: templates/account/signup.html:25
+msgid "Username (We recommend that you do not use your real name)"
+msgstr ""
+
+#: templates/account/signup.html:40
+msgid ""
+"All the following information is optional but will help Movements.org ensure "
+"that you see the postings that are most relevant to your needs and interests."
+msgstr ""
+
+#: templates/account/signup.html:43 templates/users/user_settings_v2.html:57
+msgid "First Name"
+msgstr ""
+
+#: templates/account/signup.html:48 templates/users/user_settings_v2.html:62
+msgid "Last Name"
+msgstr ""
+
+#: templates/account/signup.html:62 templates/users/user_settings_v2.html:83
+msgid "Biography"
+msgstr ""
+
+#: templates/account/signup.html:63
+msgid ""
+"If you want other users to know something about you. You can control how "
+"much if any information to make public."
+msgstr ""
+
+#: templates/account/signup.html:70
+msgid "Social Vetting"
+msgstr ""
+
+#: templates/account/signup.html:71
+msgid ""
+"To protect the safety of our members we attempt to vet all applicants to "
+"make sure that their intentions are in accord with our <a href=\"/movements/"
+"terms-and-conditions\" target=\"_blank\">terms &amp; conditions</a>. This "
+"information is optional but the more you provide the easier it will be for "
+"others to trust you."
+msgstr ""
+
+#: templates/account/signup.html:76
+msgid "Linked In Profile Url"
+msgstr ""
+
+#: templates/account/signup.html:83
+msgid "Twitter Handle"
+msgstr ""
+
+#: templates/account/signup.html:90
+msgid "Facebook Profile Url"
+msgstr ""
+
+#: templates/account/signup.html:97
+msgid "Website or Blog Url"
+msgstr ""
+
+#: templates/account/signup.html:107
+#: templates/ahr/snippets/_home_login_form.html:32
+#: templates/market/view_post.html:429 templates/market/view_post.html:495
+#: templates/market/clientside/closemarketitemdialog.html:29
+#: templates/market/clientside/messagedialog.html:23
+#: templates/market/clientside/recommenddialog.html:39
+#: templates/market/clientside/reportdialog.html:20
+#: templates/market/clientside/reportuserdialog.html:21
+#: templates/two_factor/_wizard_actions.html:4
+#: templates/users/user_settings_v2.html:219
+msgid "Cancel"
+msgstr ""
+
+#: templates/account/signup.html:110
+#: templates/two_factor/_wizard_actions.html:13
+#: templates/users/more_about_you.html:53
+#: templates/users/more_about_you.html:71
+#: templates/users/more_about_you.html:89
+#: templates/users/more_about_you.html:107
+msgid "Next"
+msgstr ""
+
+#: templates/account/signup_closed.html:6
+#: templates/account/signup_closed.html:12
+msgid "Sign Up Closed"
+msgstr ""
+
+#: templates/account/signup_closed.html:14
+msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: templates/account/signup_start.html:11
+#: templates/users/more_about_you.html:15
+msgid "Welcome to Movements"
+msgstr ""
+
+#: templates/account/signup_start.html:12
+msgid ""
+"Sign up to connect to human rights defenders and activist. Let’s get started."
+msgstr ""
+
+#: templates/account/signup_start.html:18
+msgid "Email (we will never reveal this)"
+msgstr ""
+
+#: templates/account/signup_start.html:30
+msgid "Retype password"
+msgstr ""
+
+#: templates/account/signup_start.html:36
+msgid "By registering with us you agree to our"
+msgstr ""
+
+#: templates/account/signup_start.html:36
+msgid "terms &amp; conditions"
+msgstr ""
+
+#: templates/account/signup_start.html:39
+msgid "Register"
+msgstr ""
+
+#: templates/account/signup_start.html:46
+msgid "Use your social details to sign in."
+msgstr ""
+
+#: templates/account/signup_start.html:59
+msgid "Connect with Linked In"
+msgstr ""
+
+#: templates/account/unsubscribe.html:14
+msgid "Unsubscribe from notifications"
+msgstr ""
+
+#: templates/account/unsubscribe.html:17
+msgid "You have unsubscribed from notifications for the group "
+msgstr ""
+
+#: templates/account/unsubscribe.html:17
+msgid "These can be enabled again from your "
+msgstr ""
+
+#: templates/account/unsubscribe.html:19
+msgid ""
+"You have been unsubscribed from notifications from movements.org. These can "
+"be enabled again from your "
+msgstr ""
+
+#: templates/account/unsubscribe.html:21 templates/account/unsubscribe.html:30
+msgid "profile settings page."
+msgstr ""
+
+#: templates/account/unsubscribe.html:27
+msgid "Unsubscribe"
+msgstr ""
+
+#: templates/account/unsubscribe.html:30
+msgid "You can log in and unsubscribe from your "
+msgstr ""
+
+#: templates/account/verification_sent.html:4
+#: templates/account/verification_sent.html:9
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: templates/account/verification_sent.html:10
+msgid ""
+"You've now created an account. We've sent you an email to verify your email "
+"address, once you've done this you will have full access to the Movements "
+"platform."
+msgstr ""
+
+#: templates/account/verification_sent.html:12
+#, python-format
+msgid ""
+"Please <a href=\"%(contactUrl)s\">contact us</a> if you do not receive an "
+"email within a few minutes."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:7
+#: templates/account/email/email_confirmation_message.txt:5
+msgid ""
+"Thank you for registering on Movements.Org, the platform that is "
+"crowdsourcing the fight for human rights."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:11
+#: templates/account/email/email_confirmation_message.txt:7
+msgid ""
+"Please confirm your email address by following the link below. It will take "
+"you to the Sign-In page where you will enter your screen name and the "
+"password you created."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:15
+#: templates/account/email/email_confirmation_message.txt:9
+msgid "This process helps to ensure your security."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:19
+#: templates/account/email/email_confirmation_message.txt:11
+msgid ""
+"By creating an account you are agreeing to all of our terms and conditions."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:22
+msgid "Confirm your email address"
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:24
+#: templates/account/email/email_confirmation_message.txt:15
+msgid "Thanks for joining the fight."
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.html:6
+#, python-format
+msgid ""
+"\n"
+"\n"
+"  <p>\n"
+"    A registered member of Movements.Org using this email address has made a "
+"request to reset their\n"
+"    password. You can reset your password by following the link below.\n"
+"  </p>\n"
+"\n"
+"  <p>\n"
+"    If you did not request this reset please forward this message to <a href="
+"\" mailto:security@movements.org\">security@movements.org</a> as we may\n"
+"    want to double check the security of your information.\n"
+"  </p>\n"
+"\n"
+"  <p><a href=\"%(password_reset_url)s\">Reset your password here</a></p>\n"
+"\n"
+"  "
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.txt:5
+#, python-format
+msgid ""
+"\n"
+"A registered member of Movements.Org using this email address has made a "
+"request to reset their password. You can reset you’re your password by "
+"following the link below.\n"
+"\n"
+"If you did not request this reset please forward this message to "
+"security@movements.org as we may want to double check the security of your "
+"information.\n"
+"\n"
+"%(password_reset_url)s\n"
+msgstr ""
+
+#: templates/account/email/password_reset_key_subject.txt:3
+msgid "Forgot Password on Movements.org"
+msgstr ""
+
+#: templates/account/email/user_confirmed_email_message.txt:5
+#, python-format
+msgid "User %(user)s at %(site_name)s confirmed his/her email address."
+msgstr ""
+
+#: templates/account/email/user_confirmed_email_message.txt:8
+msgid "This user is already activated, to review the users score go to"
+msgstr ""
+
+#: templates/account/email/user_confirmed_email_message.txt:10
+msgid "To vet this user, go to"
+msgstr ""
+
+#: templates/account/email/user_confirmed_email_subject.txt:3
+msgid "Activate User"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.html:3
+#: templates/emails/delete_account_request.html:3
+msgid "Dear Admin"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.html:6
+msgid "A new user has signed up to Movements using the details below:"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.html:17
+msgid "Please vet this user by clicking on the link below:"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.html:22
+msgid ""
+"Once the user has confirmed their email address you will receive another "
+"email\n"
+"to let you know. From the list above <strong>only</strong> the username and "
+"email are currently \n"
+"stored on the server. Once you have  vetted the user, the user will then be "
+"able \n"
+"to fill out all their profile information. Sharing via their settings what\n"
+"personal information they feel comfortable with."
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.txt:2
+#, python-format
+msgid ""
+"A new user has signed up to Movements using the details below:\n"
+"\n"
+"First Name : %(form.data.first_name)s\n"
+"Last Name  : %(form.data.last_name)s\n"
+"Username   : %(user.username)s\n"
+"Email      : %(user.email)s\n"
+"Linked In  : %(form.data.linkedin_url)s\n"
+"Facebook   : %(form.data.fb_url)s\n"
+"Twitter    : %(form.data.tweet_url)s\n"
+"Website    : %(form.data.web_url)s\n"
+"\n"
+"Please vet this user by clicking on the link below:"
+msgstr ""
+
+#: templates/account/email/user_vetting_email_message.txt:17
+msgid ""
+"Once the user has confirmed their email address you will receive another "
+"email\n"
+"to let you know. From the list above only the username and email are "
+"currently\n"
+"stored on the server. Once you have  vetted the user, the user will then be "
+"able\n"
+"to fill out all their profile information. Sharing via their settings what\n"
+"personal information they feel comfortable with."
+msgstr ""
+
+#: templates/account/email/user_vetting_email_subject.txt:3
+msgid "New User for Vetting on Movements"
+msgstr ""
+
+#: templates/account/messages/cannot_delete_primary_email.txt:2
+#, python-format
+msgid "You cannot remove your primary e-mail address (%(email)s)."
+msgstr ""
+
+#: templates/account/messages/email_confirmation_sent.txt:2
+#, python-format
+msgid "Confirmation e-mail sent to %(email)s."
+msgstr ""
+
+#: templates/account/messages/email_confirmed.txt:2
+#, python-format
+msgid "You have confirmed %(email)s."
+msgstr ""
+
+#: templates/account/messages/email_deleted.txt:2
+#, python-format
+msgid "Removed e-mail address %(email)s."
+msgstr ""
+
+#: templates/account/messages/logged_in.txt:4
+#, python-format
+msgid "Successfully signed in as %(name)s."
+msgstr ""
+
+#: templates/account/messages/logged_out.txt:2
+msgid "You have signed out."
+msgstr ""
+
+#: templates/account/messages/password_changed.txt:2
+msgid "Password successfully changed."
+msgstr ""
+
+#: templates/account/messages/password_set.txt:2
+msgid "Password successfully set."
+msgstr ""
+
+#: templates/account/messages/primary_email_set.txt:2
+msgid "Primary e-mail address set."
+msgstr ""
+
+#: templates/account/messages/unverified_primary_email.txt:2
+msgid "Your primary e-mail address must be verified."
+msgstr ""
+
+#: templates/account/snippets/already_logged_in.html:5
+msgid "Note"
+msgstr ""
+
+#: templates/account/snippets/already_logged_in.html:5
+#, python-format
+msgid "you are already logged in as %(user_display)s."
+msgstr ""
+
+#: templates/admin/group_user_management_list.html:13
+#: templates/admin/incident_change_list.html:17
+#: templates/admin/user_tracking_change_list.html:22
+msgid "Export as CSV"
+msgstr ""
+
+#: templates/admin/incident_change_form.html:7
+msgid "Community"
+msgstr ""
+
+#: templates/admin/incident_change_form.html:10
+msgid "Post creator"
+msgstr ""
+
+#: templates/admin/incident_change_form.html:17
+msgid "Post commenters"
+msgstr ""
+
+#: templates/admin/incident_change_form.html:27
+msgid "People that have private messages regarding the post"
+msgstr ""
+
+#: templates/admin/incident_change_form.html:39
+msgid "Feedback"
+msgstr ""
+
+#: templates/admin/index.html:22
+#, python-format
+msgid "Models in the %(name)s application"
+msgstr ""
+
+#: templates/admin/index.html:23
+#, python-format
+msgid "%(name)s"
+msgstr ""
+
+#: templates/admin/index.html:35
+msgid "Add"
+msgstr ""
+
+#: templates/admin/index.html:41
+msgid "Change"
+msgstr ""
+
+#: templates/admin/index.html:51
+msgid "You don't have permission to edit anything."
+msgstr ""
+
+#: templates/admin/index.html:61
+msgid "Recent Actions"
+msgstr ""
+
+#: templates/admin/index.html:63
+msgid "My Actions"
+msgstr ""
+
+#: templates/admin/index.html:67
+msgid "None available"
+msgstr ""
+
+#: templates/admin/index.html:82
+msgid "Unknown content"
+msgstr ""
+
+#: templates/admin/user_tracking_change_form.html:11
+msgid "User details"
+msgstr ""
+
+#: templates/admin/user_tracking_change_form.html:30
+msgid "Request List"
+msgstr ""
+
+#: templates/admin/user_tracking_change_form.html:44
+msgid "Offer List"
+msgstr ""
+
+#: templates/admin/user_tracking_change_list.html:27
+msgid "Export as CSV in safe mode"
+msgstr ""
+
+#: templates/admin/user_tracking_change_list.html:32
+msgid "Export Unverified"
+msgstr ""
+
+#: templates/admin/auth/user/rate_lang.html:7
+#: templates/admin/auth/user/vet_user.html:7
+#: templates/admin/testing/notification_ping.html:7
+msgid "Home"
+msgstr ""
+
+#: templates/admin/auth/user/rate_lang.html:11
+#: templates/admin/auth/user/vet_user.html:11
+msgid "Vet User"
+msgstr ""
+
+#: templates/admin/auth/user/rate_lang.html:22
+#: templates/admin/auth/user/vet_user.html:22
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/auth/user/rate_lang.html:25
+msgid "Here you can set the user to be a trusted translator for a language."
+msgstr ""
+
+#: templates/admin/auth/user/rate_lang.html:33
+#: templates/admin/auth/user/vet_user.html:67
+msgid "Update"
+msgstr ""
+
+#: templates/admin/testing/notification_ping.html:8
+msgid "Notification Ping"
+msgstr ""
+
+#: templates/admin/testing/notification_ping.html:17
+msgid ""
+"Send a ping via the notifications process to test that it's all running."
+msgstr ""
+
+#: templates/admin/testing/notification_ping.html:23
+msgid "SEND PING"
+msgstr ""
+
+#: templates/admin_static/tinymce_admin/views.py:74
+msgid "Error running spellchecker"
+msgstr ""
+
+#: templates/ahr/home.html:128
+msgid "Donate"
+msgstr ""
+
+#: templates/ahr/home.html:148
+msgid "Partners"
+msgstr ""
+
+#: templates/ahr/home.html:195
+msgid "How it Works"
+msgstr ""
+
+#: templates/ahr/home.html:198 templates/users/more_about_you.html:28
+msgid "Create a Request"
+msgstr ""
+
+#: templates/ahr/home.html:198
+msgid "Create Request"
+msgstr ""
+
+#: templates/ahr/home.html:201
+msgid "Offer your Services"
+msgstr ""
+
+#: templates/ahr/home.html:201
+msgid "Offer Service"
+msgstr ""
+
+#: templates/ahr/home.html:204
+msgid "Act on News"
+msgstr ""
+
+#: templates/ahr/home.html:207
+msgid "Our Partners"
+msgstr ""
+
+#: templates/ahr/snippets/_home_login_form.html:15
+msgid "Retype Password "
+msgstr ""
+
+#: templates/ahr/snippets/_home_login_form.html:27
+msgid "Sign up"
+msgstr ""
+
+#: templates/ahr/snippets/_home_login_form.html:35
+msgid "Continue"
+msgstr ""
+
+#: templates/ahr/snippets/_home_login_form.html:39
+msgid "SIGN IN WITH"
+msgstr ""
+
+#: templates/ahr/snippets/_home_page_buttons.html:9
+msgid "SUCCESS STORIES"
+msgstr ""
+
+#: templates/ahr/snippets/_home_page_buttons.html:17
+msgid "SEE REQUESTS"
+msgstr ""
+
+#: templates/ahr/snippets/_home_page_buttons.html:18
+msgid "REQUESTS"
+msgstr ""
+
+#: templates/ahr/snippets/_home_page_buttons.html:25
+msgid "SEE OFFERS"
+msgstr ""
+
+#: templates/ahr/snippets/_home_page_buttons.html:26
+msgid "OFFERS"
+msgstr ""
+
+#: templates/ahr/snippets/_home_page_buttons.html:33
+msgid "SEE NEWS STORIES"
+msgstr ""
+
+#: templates/ahr/snippets/_home_page_buttons.html:34
+msgid "NEWS"
+msgstr ""
+
+#: templates/emails/base_email.html:4 templates/emails/base_email.txt:3
+msgid "Hello Movements.Org user,"
+msgstr ""
+
+#: templates/emails/base_email.html:12 templates/emails/base_email.txt:11
+msgid "The Movements.Org Team"
+msgstr ""
+
+#: templates/emails/base_email.html:13 templates/emails/base_email.txt:12
+msgid ""
+"Movements are made up of individuals. Movements.Org brings them together."
+msgstr ""
+
+#: templates/emails/base_email.html:17 templates/emails/base_email.txt:14
+#: templates/emails/notification_email.html:51
+#: templates/emails/snippets/_group_email_notification_settings.html:5
+msgid "You can update your notification preferences in "
+msgstr ""
+
+#: templates/emails/base_email.html:18 templates/emails/base_email.txt:14
+msgid "your settings page."
+msgstr ""
+
+#: templates/emails/getstarted.html:3
+msgid "Dear"
+msgstr ""
+
+#: templates/emails/getstarted.html:6
+#, python-format
+msgid ""
+"Thank you for signing up to be part of Movements, a new innovative platform\n"
+"that is crowd-sourcing the fight for human rights. We are writing to confirm "
+"that \n"
+"you are now approved to use the site as an Member. To get started, \n"
+"log-in <a href=\"%(login_url)s\">here</a> (using the username and password "
+"you signed up with) \n"
+"and create a user profile. Once you're finished, you can begin posting on "
+"the Exchange!"
+msgstr ""
+
+#: templates/emails/getstarted.html:14 templates/emails/notready.html:8
+#: templates/emails/securityalert.html:11
+msgid "Thanks"
+msgstr ""
+
+#: templates/emails/getstarted.html:15 templates/emails/notready.html:9
+#: templates/emails/securityalert.html:12
+msgid "The Movements Team"
+msgstr ""
+
+#: templates/emails/getstarted_subject.html:3
+msgid ""
+"You can now get started on Movements. Your Username and Password is now "
+"active."
+msgstr ""
+
+#: templates/emails/itemreport.html:3
+msgid "User message:"
+msgstr ""
+
+#: templates/emails/itemreport.html:7
+msgid "Link to post:"
+msgstr ""
+
+#: templates/emails/itemreport_subject.html:3
+#, python-format
+msgid ""
+"User \"%(user)s\" reported the %(item_type)s \"%(item_title)s\" by "
+"\"%(item_owner)s\""
+msgstr ""
+
+#: templates/emails/notification_email.html:5
+msgid "You have the following new notifications."
+msgstr ""
+
+#: templates/emails/notification_email.html:13
+#: templates/market/notifications.html:33
+msgid "There is 1 item that we need your help translating."
+msgstr ""
+
+#: templates/emails/notification_email.html:15
+#: templates/emails/notification_email.html:23
+#: templates/market/notifications.html:35
+#: templates/market/notifications.html:43
+msgid "There are "
+msgstr ""
+
+#: templates/emails/notification_email.html:15
+msgid " items that we need your help translating."
+msgstr ""
+
+#: templates/emails/notification_email.html:21
+#: templates/market/notifications.html:41
+msgid "There is 1 translation that needs your approval."
+msgstr ""
+
+#: templates/emails/notification_email.html:23
+#: templates/market/notifications.html:43
+msgid " translations that need your approval."
+msgstr ""
+
+#: templates/emails/notification_email.html:27
+#: templates/emails/notification_email.html:31
+#: templates/market/notifications.html:47
+#: templates/market/notifications.html:51
+msgid "Your translation for"
+msgstr ""
+
+#: templates/emails/notification_email.html:29
+#: templates/market/notifications.html:49
+msgid "has been approved"
+msgstr ""
+
+#: templates/emails/notification_email.html:33
+#: templates/market/notifications.html:53
+msgid "has been rejected"
+msgstr ""
+
+#: templates/emails/notification_email.html:36
+#: templates/emails/notification_email.html:39
+#: templates/emails/notification_email.html:43
+msgid "On"
+msgstr ""
+
+#: templates/emails/notification_email.html:36
+msgid "commented on a post titled"
+msgstr ""
+
+#: templates/emails/notification_email.html:40
+#: templates/market/notifications.html:70
+#: templates/market/clientside/notifications.html:12
+msgid "updated"
+msgstr ""
+
+#: templates/emails/notification_email.html:40
+msgid "created"
+msgstr ""
+
+#: templates/emails/notification_email.html:40
+#: templates/market/notifications.html:71
+msgid "the"
+msgstr ""
+
+#: templates/emails/notification_email.html:43
+msgid "sent you"
+msgstr ""
+
+#: templates/emails/notification_email.html:43
+msgid "a private message"
+msgstr ""
+
+#: templates/emails/notification_email.html:44
+msgid "with the subject"
+msgstr ""
+
+#: templates/emails/notification_email.html:52
+#: templates/emails/snippets/_group_email_notification_settings.html:6
+msgid "your settings page"
+msgstr ""
+
+#: templates/emails/notready.html:4
+msgid ""
+"You or someone recently tried to register on Movements using your email "
+"address.\n"
+"This account is currently being vetted for approval. Please be patient, and "
+"contact us\n"
+"if you have any concerns."
+msgstr ""
+
+#: templates/emails/notready_subject.html:3
+msgid "Not quite ready yet"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:5
+msgid "A message from Movements.Org,"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:14
+#, python-format
+msgid ""
+"This email was sent to you by %(screen_name)s, a registered user on "
+"Movements.org.\n"
+"    Movements helps activists in need connect directly with the people who "
+"have the skills and\n"
+"    expertise that can help."
+msgstr ""
+
+#: templates/emails/recommendation_message.html:19
+#, python-format
+msgid ""
+"All personal information on Movements.org is confidential. To view the full "
+"post that they\n"
+"    have recommended to you please go to %(post_link)s. If you wish to "
+"respond to the post please\n"
+"    <a href=\"%(registration_link)s\">register</a>. The registration process "
+"is designed to help protect the security and privacy of all users."
+msgstr ""
+
+#: templates/emails/recommendation_message.html:24
+msgid "Post Title:"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:27
+msgid "Post URL:"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:30
+msgid "Date of Post:"
+msgstr ""
+
+#: templates/emails/recommendation_message.html:33
+#, python-format
+msgid ""
+"This email was automatically created by Movements.org. You cannot reply to "
+"this email but can reply\n"
+"    to %(screen_name)s on Movements.org once you register."
+msgstr ""
+
+#: templates/emails/recommendation_message.html:37
+msgid "Thank you,"
+msgstr ""
+
+#: templates/emails/securityalert.html:4
+msgid ""
+"You or someone recently tried to register on Movements using your email "
+"address.\n"
+"If this was not you and you did not make this request, it's likely that "
+"another user entered\n"
+"your email address by mistake. If you believe an unauthorised person has "
+"accessed your account\n"
+"we advise that you change your password for both your email account and "
+"Movements.\n"
+"Movements did not reveal that you are registered with the site or any of "
+"your personal\n"
+"Information. We are sending this email as a precautionary measure only."
+msgstr ""
+
+#: templates/emails/unread_messages_email.html:7
+msgid "You have an unread message on Movements.Org."
+msgstr ""
+
+#: templates/emails/unread_messages_email.html:9
+msgid "You have {{ number_unread }} unread messages on Movements.Org."
+msgstr ""
+
+#: templates/emails/unread_messages_email.html:12
+msgid "Login now"
+msgstr ""
+
+#: templates/emails/unread_messages_email.html:12
+msgid "to read your messages."
+msgstr ""
+
+#: templates/emails/userreport.html:3
+msgid "User message"
+msgstr ""
+
+#: templates/emails/userreport.html:5
+msgid "Link to user:"
+msgstr ""
+
+#: templates/emails/userreport_subject.html:3
+#, python-format
+msgid "User \"%(user)s\" reported user \"%(another_user)s\""
+msgstr ""
+
+#: templates/emails/snippets/_group_email_notification_settings.html:4
+#, python-format
+msgid ""
+"You are receiving this message because you are a member of the group "
+"%(group_name)s."
+msgstr ""
+
+#: templates/emails/snippets/_group_email_notification_settings.html:7
+msgid "To stop getting notifications from this group you can"
+msgstr ""
+
+#: templates/emails/snippets/_group_email_notification_settings.html:8
+#: templates/emails/snippets/_group_email_notification_settings.html:10
+#: templates/market/clientside/userprofile.html:50
+msgid "click here"
+msgstr ""
+
+#: templates/emails/snippets/_group_email_notification_settings.html:9
+msgid "To stop all notification emails you can"
+msgstr ""
+
+#: templates/market/create_news.html:16
+msgid "Start a discussion about human rights violations in closed societies."
+msgstr ""
+
+#: templates/market/create_news.html:17
+msgid "1. Paste the news item link into the box below"
+msgstr ""
+
+#: templates/market/create_news.html:33
+msgid "GO"
+msgstr ""
+
+#: templates/market/create_news.html:43 templates/market/create_offer.html:32
+#: templates/market/create_request.html:33
+msgid "2. What issues does this relate to?"
+msgstr ""
+
+#: templates/market/create_news.html:57
+msgid "3. How can people help?"
+msgstr ""
+
+#: templates/market/create_news.html:61
+msgid "4. Related Movements post"
+msgstr ""
+
+#: templates/market/create_news.html:71 templates/market/create_offer.html:109
+#: templates/market/create_request.html:116
+#: templates/market/snippets/__news_help_form.html:33
+msgid "Post now"
+msgstr ""
+
+#: templates/market/create_offer.html:12
+msgid "Offer a service"
+msgstr ""
+
+#: templates/market/create_offer.html:13
+msgid "Do you have expertise to offer?"
+msgstr ""
+
+#: templates/market/create_offer.html:14
+msgid ""
+"An Offer can be technical or professional skills, an opportunity to publish "
+"a story, or any skill that may be of help to others. Your Offer will be "
+"posted on Movements and will be seen by all members."
+msgstr ""
+
+#: templates/market/create_offer.html:18
+msgid "1. What skills can you offer?"
+msgstr ""
+
+#: templates/market/create_offer.html:46
+msgid "3. Which countries are you interested in helping?"
+msgstr ""
+
+#: templates/market/create_offer.html:52
+msgid ""
+"Movements.org provides access to skills and experts. Please describe your "
+"skills, abilities, or services below. Be as explicit and clear as possible."
+msgstr ""
+
+#: templates/market/create_offer.html:53
+msgid "4. How can you help?"
+msgstr ""
+
+#: templates/market/create_offer.html:54
+#: templates/market/create_request.html:59
+msgid "Be specific and clear."
+msgstr ""
+
+#: templates/market/create_offer.html:54
+#: templates/market/create_request.html:59
+msgid "(max 120 characters)"
+msgstr ""
+
+#: templates/market/create_offer.html:64
+#: templates/market/create_request.html:69
+msgid "5. Please write your post"
+msgstr ""
+
+#: templates/market/create_offer.html:65
+msgid ""
+"Tell a compelling story. Youtube, vimeo and FaceBook video links will show "
+"the respective video players where possible."
+msgstr ""
+
+#: templates/market/create_offer.html:71
+#: templates/market/create_request.html:76
+msgid "6. Add images to your post"
+msgstr ""
+
+#: templates/market/create_offer.html:83
+#: templates/market/create_request.html:89
+msgid ""
+"Click here or drag files into this box in order to add an image into your "
+"post."
+msgstr ""
+
+#: templates/market/create_offer.html:90
+#: templates/market/create_request.html:97
+msgid "May we share this on social media?"
+msgstr ""
+
+#: templates/market/create_offer.html:93
+#: templates/market/create_request.html:100
+msgid "We won’t use your name or any identifying information"
+msgstr ""
+
+#: templates/market/create_offer.html:100
+#: templates/market/create_request.html:107
+msgid "Receive notifications"
+msgstr ""
+
+#: templates/market/create_request.html:12
+msgid "Request a service"
+msgstr ""
+
+#: templates/market/create_request.html:14
+msgid ""
+"A Request is a way to ask for help from experts on Movements. Be as specific "
+"and clear as possible about what you need.  If you need a lawyer tell us "
+"what kind (asylum or civil?) Where do you need that lawyer (In the UK,  US "
+"or China?)  The more you explain your need, the easier it will be for "
+"someone to help."
+msgstr ""
+
+#: templates/market/create_request.html:19
+msgid "1. What skills do you need?"
+msgstr ""
+
+#: templates/market/create_request.html:48
+msgid "3. What countries does this request apply to?"
+msgstr ""
+
+#: templates/market/create_request.html:49
+msgid "Indicate the region and/or specific country."
+msgstr ""
+
+#: templates/market/create_request.html:56
+msgid ""
+" Movements.org provides access to skills and experts. At this time, we "
+"cannot provide funding or equipment. If you need either please see the <a "
+"href=\"/movements/resources/\">Resources</a> page. What might be available "
+"is a proposal writer to help you secure funding from a different source. "
+msgstr ""
+
+#: templates/market/create_request.html:57
+msgid ""
+"Please describe your request below. Be as explicit and clear as possible."
+msgstr ""
+
+#: templates/market/create_request.html:58
+msgid "4. What do you need?"
+msgstr ""
+
+#: templates/market/create_request.html:70
+msgid ""
+"Tell a compelling story and state your needs. Youtube, vimeo and FaceBook "
+"video links will show the respective video players where possible."
+msgstr ""
+
+#: templates/market/market.html:15
+msgid "See all"
+msgstr ""
+
+#: templates/market/market.html:16
+msgid "Requests"
+msgstr ""
+
+#: templates/market/market.html:17 templates/market/view_post.html:200
+msgid "Offers"
+msgstr ""
+
+#: templates/market/market.html:26
+msgid "Hide/Show"
+msgstr ""
+
+#: templates/market/market.html:33 templates/users/more_about_you.html:95
+#: templates/users/more_about_you.html:169
+#: templates/users/user_profile_v2.html:71
+msgid "Skills"
+msgstr ""
+
+#: templates/market/market.html:39
+msgid "Issues"
+msgstr ""
+
+#: templates/market/market.html:45 templates/users/more_about_you.html:77
+msgid "Countries"
+msgstr ""
+
+#: templates/market/market.html:51
+msgid "Search"
+msgstr ""
+
+#: templates/market/market.html:64
+msgid "Press enter to search"
+msgstr ""
+
+#: templates/market/market.html:65
+msgid "Click \"Search\" above to close"
+msgstr ""
+
+#: templates/market/market.html:80
+msgid "Featured posts"
+msgstr ""
+
+#: templates/market/market.html:89
+msgid "Sticky posts"
+msgstr ""
+
+#: templates/market/market.html:100
+msgid "Newest Posts"
+msgstr ""
+
+#: templates/market/market.html:115
+msgid "Show hidden"
+msgstr ""
+
+#: templates/market/market.html:120 templates/market/market.html.py:129
+#: templates/market/market.html:138 templates/market/market.html.py:144
+msgid "Select all"
+msgstr ""
+
+#: templates/market/market.html:124
+msgid "Other skills"
+msgstr ""
+
+#: templates/market/market.html:133
+msgid "Other issues"
+msgstr ""
+
+#: templates/market/market.html:143
+#: templates/two_factor/_wizard_actions.html:8
+#: templates/two_factor/_wizard_actions.html:11
+msgid "Back"
+msgstr ""
+
+#: templates/market/notifications.html:13
+msgid "Alert History"
+msgstr ""
+
+#: templates/market/notifications.html:16
+msgid "All notifications loaded"
+msgstr ""
+
+#: templates/market/notifications.html:17
+msgid "More"
+msgstr ""
+
+#: templates/market/notifications.html:35
+msgid " item that we need your help translating."
+msgstr ""
+
+#: templates/market/notifications.html:60
+msgid "commented on"
+msgstr ""
+
+#: templates/market/notifications.html:60
+#: templates/market/clientside/notifications.html:15
+msgid "your"
+msgstr ""
+
+#: templates/market/notifications.html:62
+#: templates/market/notifications.html:73
+msgid "offer"
+msgstr ""
+
+#: templates/market/notifications.html:64
+#: templates/market/notifications.html:75
+msgid "request"
+msgstr ""
+
+#: templates/market/notifications.html:70
+#: templates/market/clientside/notifications.html:12
+msgid "posted"
+msgstr ""
+
+#: templates/market/notifications.html:81
+msgid "sent you a private "
+msgstr ""
+
+#: templates/market/request_posted.html:11
+msgid "Request Posted"
+msgstr ""
+
+#: templates/market/request_posted.html:13
+msgid ""
+"Thanks for creating your request on Movements.  Here’s what you can expect."
+msgstr ""
+
+#: templates/market/request_posted.html:15
+msgid ""
+"Anyone who has asked to get an alert on your topic will get an email about "
+"your request.  If they are interested they will message you back either with "
+"a public comment or a Direct Message."
+msgstr ""
+
+#: templates/market/request_posted.html:16
+msgid ""
+"Movements will look for people or organizations that might be helpful.  If "
+"you’re looking for media coverage they may try to pitch your story.  If you "
+"need help with refugee status they’ll contact legal organizations."
+msgstr ""
+
+#: templates/market/request_posted.html:20
+msgid ""
+"There are no guarantees.  The journalists who follow Movements may not be "
+"able to use your story this month.  But they may be able to use some other "
+"story that you suggest in the future.   The lawyers on Movements may not "
+"have the time to get involved this week.  But they may have time next month."
+msgstr ""
+
+#: templates/market/request_posted.html:23
+msgid ""
+"A journalist may read your post and then wait to see if you communicate with "
+"others on Movements (which would make you more interesting to them).  A "
+"lawyer might want to see the same thing."
+msgstr ""
+
+#: templates/market/request_posted.html:26
+msgid "Please read "
+msgstr ""
+
+#: templates/market/request_posted.html:26
+msgid "How to make a good post on Movements"
+msgstr ""
+
+#: templates/market/request_posted.html:26
+msgid " for tips on making your request interesting to other users."
+msgstr ""
+
+#: templates/market/request_posted.html:29
+msgid ""
+"Movements is not a magic wand.  (We wish it were!)  It’s just like any other "
+"social media – the more you participate the more benefit you’ll get."
+msgstr ""
+
+#: templates/market/request_posted.html:36
+msgid "Return to Market"
+msgstr ""
+
+#: templates/market/translations.html:10
+msgid "Translations for approval"
+msgstr ""
+
+#: templates/market/translations.html:19
+msgid "Your translations in progress"
+msgstr ""
+
+#: templates/market/translations.html:27
+msgid "Translations needed"
+msgstr ""
+
+#: templates/market/translations.html:40
+msgid "You are not currently working on any translations."
+msgstr ""
+
+#: templates/market/translations.html:46 templates/market/translations.html:65
+msgid "Translating post from "
+msgstr ""
+
+#: templates/market/translations.html:48 templates/market/translations.html:67
+msgid " to "
+msgstr ""
+
+#: templates/market/translations.html:50 templates/market/translations.html:69
+msgid " - go to item"
+msgstr ""
+
+#: templates/market/translations.html:52 templates/market/translations.html:71
+msgid "Original"
+msgstr ""
+
+#: templates/market/translations.html:53
+msgid "Translation"
+msgstr ""
+
+#: templates/market/translations.html:59
+msgid "There is nothing that currently needs translating."
+msgstr ""
+
+#: templates/market/translations.html:77
+msgid "There are no translations waiting approval."
+msgstr ""
+
+#: templates/market/translations.html:81
+msgid "Translator"
+msgstr ""
+
+#: templates/market/translations.html:86
+msgid "Original title"
+msgstr ""
+
+#: templates/market/translations.html:91
+msgid "Translated title"
+msgstr ""
+
+#: templates/market/translations.html:92
+msgid "Original body"
+msgstr ""
+
+#: templates/market/translations.html:94
+msgid "Translated body"
+msgstr ""
+
+#: templates/market/translations.html:96 templates/market/view_post.html:405
+#: templates/market/view_post.html:472
+msgid "Approve"
+msgstr ""
+
+#: templates/market/translations.html:97 templates/market/view_post.html:406
+#: templates/market/view_post.html:473
+msgid "Discard"
+msgstr ""
+
+#: templates/market/view_post.html:42
+msgid "on"
+msgstr ""
+
+#: templates/market/view_post.html:47
+msgid "Edit Post"
+msgstr ""
+
+#: templates/market/view_post.html:51
+msgid "How you can Help"
+msgstr ""
+
+#: templates/market/view_post.html:53
+msgid ""
+"Share Movements' posts across your social media platforms. For example, you "
+"can share Movements' users' requests with your representatives."
+msgstr ""
+
+#: templates/market/view_post.html:54
+msgid "Tweet"
+msgstr ""
+
+#: templates/market/view_post.html:54
+msgid "posts that interest you."
+msgstr ""
+
+#: templates/market/view_post.html:55
+msgid "Recommend a Friend"
+msgstr ""
+
+#: templates/market/view_post.html:55
+msgid ""
+"If you have a friend with the skills in demand on our network, tell them "
+"about us!"
+msgstr ""
+
+#: templates/market/view_post.html:73 templates/market/view_post.html:215
+msgid "Posted by"
+msgstr ""
+
+#: templates/market/view_post.html:89 templates/market/view_post.html.py:98
+msgid "I WANT TO HELP"
+msgstr ""
+
+#: templates/market/view_post.html:108
+msgid "CONTACT THIS OFFER"
+msgstr ""
+
+#: templates/market/view_post.html:121
+msgid "How can people help?"
+msgstr ""
+
+#: templates/market/view_post.html:125 templates/market/view_post.html:324
+#: templates/market/view_post.html:329
+msgid "via Google Translate"
+msgstr ""
+
+#: templates/market/view_post.html:126 templates/market/view_post.html:326
+#: templates/market/view_post.html:331
+msgid "via"
+msgstr ""
+
+#: templates/market/view_post.html:139
+msgid "Translate this post"
+msgstr ""
+
+#: templates/market/view_post.html:184
+msgid "TRANSLATE THIS POST"
+msgstr ""
+
+#: templates/market/view_post.html:195
+msgid "Releated Movements posts"
+msgstr ""
+
+#: templates/market/view_post.html:203
+msgid ""
+"This post currently has no offers. Why not be the <a class=\"news_help\" "
+"href=\"#\">first</a>."
+msgstr ""
+
+#: templates/market/view_post.html:205
+msgid "This post currently has no offers."
+msgstr ""
+
+#: templates/market/view_post.html:241
+msgid ""
+"Get involved and <a class=\"news_help\" href=\"#\">offer your skills</a>."
+msgstr ""
+
+#: templates/market/view_post.html:259
+msgid "Leave a comment"
+msgstr ""
+
+#: templates/market/view_post.html:266
+#, python-format
+msgid ""
+"Please note that you will need to <a href=\"%(accountUrl)s\">login</a>\n"
+"              or <a href=\"%(signupUrl)s\">sign up</a> before you will be "
+"able to contact the author or comment."
+msgstr ""
+
+#: templates/market/view_post.html:273
+msgid "POST COMMENT"
+msgstr ""
+
+#: templates/market/view_post.html:306
+#, python-format
+msgid ""
+"You don't have any languages selected. Please add some in your <a href="
+"\"%(settingsUrl)s#skills\">settings</a>"
+msgstr ""
+
+#: templates/market/view_post.html:355
+msgid "Provide a translation"
+msgstr ""
+
+#: templates/market/view_post.html:361
+msgid "Delete"
+msgstr ""
+
+#: templates/market/view_post.html:374 templates/market/view_post.html:439
+msgid "Waiting for approval. Translator - "
+msgstr ""
+
+#: templates/market/view_post.html:378 templates/market/view_post.html:444
+msgid "In correction now. Translator - "
+msgstr ""
+
+#: templates/market/view_post.html:380 templates/market/view_post.html:446
+msgid "In translation now. Translator - "
+msgstr ""
+
+#: templates/market/view_post.html:389 templates/market/view_post.html:456
+msgid "Translation completed"
+msgstr ""
+
+#: templates/market/view_post.html:390 templates/market/view_post.html:457
+msgid "Save draft"
+msgstr ""
+
+#: templates/market/view_post.html:391 templates/market/view_post.html:458
+msgid "Cancel translation"
+msgstr ""
+
+#: templates/market/view_post.html:399 templates/market/view_post.html:466
+msgid "Cancel editing"
+msgstr ""
+
+#: templates/market/view_post.html:401 templates/market/view_post.html:468
+#: templates/market/clientside/marketitem.html:99
+msgid "Edit"
+msgstr ""
+
+#: templates/market/view_post.html:427 templates/market/view_post.html:493
+msgid ""
+"If you want to take over the translation from another user you can do so "
+"below by clicking on the confirm button. That will make you the current "
+"owner of the translation and the existing owner will not be able to complete "
+"their translation."
+msgstr ""
+
+#: templates/market/clientside/closemarketitemdialog.html:10
+msgid "CLOSE A REQUEST"
+msgstr ""
+
+#: templates/market/clientside/closemarketitemdialog.html:11
+msgid "CLOSE AN OFFER"
+msgstr ""
+
+#: templates/market/clientside/closemarketitemdialog.html:32
+#: templates/market/clientside/marketitem.html:100
+msgid "Close"
+msgstr ""
+
+#: templates/market/clientside/closemarketitemdialog.html:111
+msgid "Please enter your answer"
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:31
+msgid "Auto translated by Google Translate."
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:31
+msgid "In translation now."
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:32
+msgid "Translated by"
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:35
+#: templates/market/clientside/marketitem.html:90
+#, python-format
+msgid ""
+"by <a href=\"/user/profile/<%%- owner %%>\">%(user_name)s</a>, posted on <"
+"%%- moment(pub_date).format('MMMM Do YYYY, h:mm a') %%>."
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:78
+msgid "FEATURED OFFER"
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:80
+msgid "FEATURED REQUEST"
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:86
+msgid "Auto translated by Google Translate"
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:97
+msgid "Hide"
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:98
+msgid "Stick"
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:101
+msgid "Report"
+msgstr ""
+
+#: templates/market/clientside/marketitem.html:102
+msgid "Unpublish"
+msgstr ""
+
+#: templates/market/clientside/messagedialog.html:8
+msgid "New message to "
+msgstr ""
+
+#: templates/market/clientside/messagedialog.html:12
+#: templates/market/clientside/recommenddialog.html:28
+msgid "Subject"
+msgstr ""
+
+#: templates/market/clientside/messagedialog.html:16
+#: templates/market/clientside/recommenddialog.html:32
+#: templates/market/clientside/reportdialog.html:13
+#: templates/market/clientside/reportuserdialog.html:14
+msgid "Message"
+msgstr ""
+
+#: templates/market/clientside/messagedialog.html:26
+#: templates/market/clientside/recommenddialog.html:42
+#: templates/market/clientside/reportdialog.html:23
+#: templates/market/clientside/reportuserdialog.html:24
+msgid "Send"
+msgstr ""
+
+#: templates/market/clientside/messagedialog.html:85
+msgid ". Please try again."
+msgstr ""
+
+#: templates/market/clientside/messagedialog.html:89
+msgid "Please provide a subject and message."
+msgstr ""
+
+#: templates/market/clientside/notifications.html:15
+msgid "commented on "
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:7
+msgid "Recommend this"
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:11
+msgid "To: username or email address"
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:13
+msgid "Start typing a username or enter an email address"
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:16
+msgid "To: Group"
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:18
+msgid "Start typing a group name"
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:98
+msgid "post"
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:110
+msgid "Please enter both a subject and a message."
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:117
+msgid "Please enter a valid username, email address or group. "
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:121
+msgid "Please enter a valid username and or email address. "
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:150
+msgid "Failed to send message to user:"
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:153
+msgid "Failed to send message to users:"
+msgstr ""
+
+#: templates/market/clientside/recommenddialog.html:159
+msgid "Failed to send message"
+msgstr ""
+
+#: templates/market/clientside/reportdialog.html:8
+msgid "Report Post"
+msgstr ""
+
+#: templates/market/clientside/reportuserdialog.html:9
+msgid "Report User "
+msgstr ""
+
+#: templates/market/clientside/userprofile.html:13
+msgid "AHR rating"
+msgstr ""
+
+#: templates/market/clientside/userprofile.html:16
+msgid "Community rating:"
+msgstr ""
+
+#: templates/market/clientside/userprofile.html:26
+msgid "Stars"
+msgstr ""
+
+#: templates/market/clientside/userprofile.html:27
+msgid "votes"
+msgstr ""
+
+#: templates/market/clientside/userprofile.html:37
+msgid "Country of residence"
+msgstr ""
+
+#: templates/market/clientside/userprofile.html:44
+msgid ""
+"\n"
+"          For your own safety and security, do not share personal contact "
+"information\n"
+"          (such as your phone number, address, email address, etc.) with "
+"other users.\n"
+"          Movements also prohibits abusive language or harassment.\n"
+"          To report an abusive user,\n"
+"          "
+msgstr ""
+
+#: templates/market/snippets/__news_help_form.html:11
+msgid "I want to help and I'm a"
+msgstr ""
+
+#: templates/market/snippets/__news_help_form.html:25
+msgid "I can help by"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:13
+msgid "I WANT<br>TO HELP"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:21
+msgid "CONTACT<br>PRIVATELY"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:30
+msgid "RECOMMEND<br>THIS POST"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:39
+msgid "SHARE ON<br>FACEBOOK"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:46
+msgid "SHARE ON<br>TWITTER"
+msgstr ""
+
+#: templates/market/snippets/_post_actions.html:56
+msgid ">REPORT<br>THIS POST"
+msgstr ""
+
+#: templates/openid/login.html:6 templates/openid/login.html.py:10
+msgid "OpenID Sign In"
+msgstr ""
+
+#: templates/postman/base_folder.html:31 templates/postman/inbox.html:5
+#: templates/users/snippets/profile_navigation.html:9
+msgid "Inbox"
+msgstr ""
+
+#: templates/postman/base_folder.html:32 templates/postman/sent.html:10
+msgid "Sent"
+msgstr ""
+
+#: templates/postman/base_folder.html:43
+msgid "g:i A,M j,n/j/y"
+msgstr ""
+
+#: templates/postman/base_folder.html:64
+msgid "No messages."
+msgstr ""
+
+#: templates/postman/base_folder.html:73
+msgid "Sorry, this page number is invalid."
+msgstr ""
+
+#: templates/postman/email_user.txt:3
+msgid "Dear Member,"
+msgstr ""
+
+#: templates/postman/email_user.txt:5
+#, python-format
+msgid ""
+"\n"
+"    On %(date)s, you asked to send a message to the user '%(recipient)s'.\n"
+"    "
+msgstr ""
+
+#: templates/postman/email_user.txt:8 templates/postman/email_visitor.txt:5
+msgid "Your message has been rejected by the moderator"
+msgstr ""
+
+#: templates/postman/email_user.txt:10 templates/postman/email_visitor.txt:5
+msgid ", for the following reason:"
+msgstr ""
+
+#: templates/postman/email_user.txt:18 templates/postman/email_user.txt:26
+#, python-format
+msgid ""
+"'%(sender)s' has sent you a message. To view your message please login to "
+"Movements."
+msgstr ""
+
+#: templates/postman/email_user.txt:19
+msgid "Your correspondent has given you an answer."
+msgstr ""
+
+#: templates/postman/email_user.txt:21
+#, python-format
+msgid ""
+"\n"
+"You have received a copy of a response from the user '%(sender)s'.\n"
+msgstr ""
+
+#: templates/postman/email_user.txt:29 templates/postman/email_visitor.txt:14
+msgid "Note: This message is issued by an automated system. Do not reply."
+msgstr ""
+
+#: templates/postman/email_user_subject.txt:1
+#: templates/postman/email_visitor_subject.txt:1
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr ""
+
+#: templates/postman/email_visitor.txt:1
+msgid "Dear visitor,"
+msgstr ""
+
+#: templates/postman/email_visitor.txt:3
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr ""
+
+#: templates/postman/email_visitor.txt:8
+msgid "As a reminder, please find below the content of your message."
+msgstr ""
+
+#: templates/postman/email_visitor.txt:10
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender)s'."
+msgstr ""
+
+#: templates/postman/email_visitor.txt:11
+msgid "Please find below the answer from your correspondent."
+msgstr ""
+
+#: templates/postman/inbox.html:9
+msgid "Received"
+msgstr ""
+
+#: templates/postman/sent.html:6
+msgid "Sent Messages"
+msgstr ""
+
+#: templates/postman/view.html:17
+msgid "Reply"
+msgstr ""
+
+#: templates/postman/view.html:28
+msgid "to"
+msgstr ""
+
+#: templates/socialaccount/authentication_error.html:5
+#: templates/socialaccount/authentication_error.html:10
+msgid "Social Network Login Failure"
+msgstr ""
+
+#: templates/socialaccount/authentication_error.html:11
+msgid ""
+"An error occurred while attempting to login via your social network account."
+msgstr ""
+
+#: templates/socialaccount/login_cancelled.html:4
+#: templates/socialaccount/login_cancelled.html:9
+msgid "Login Cancelled"
+msgstr ""
+
+#: templates/socialaccount/login_cancelled.html:11
+#, python-format
+msgid ""
+"You decided to cancel logging in to our site using one of your existing "
+"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
+"\">sign in</a>."
+msgstr ""
+
+#: templates/socialaccount/messages/account_connected.txt:2
+msgid "The social account has been connected."
+msgstr ""
+
+#: templates/socialaccount/messages/account_connected_other.txt:2
+msgid "The social account is already connected to a different account."
+msgstr ""
+
+#: templates/socialaccount/messages/account_disconnected.txt:2
+msgid "The social account has been disconnected."
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:5
+#: templates/two_factor/profile/profile.html:35
+msgid "Backup Tokens"
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:6
+msgid ""
+"Backup tokens can be used when your primary and backup\n"
+"      phone numbers aren't available. The backup tokens below can be used\n"
+"      for login verification. If you've used up all your backup tokens, you\n"
+"      can generate a new set of backup tokens. Only the backup tokens shown\n"
+"      below will be valid."
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:18
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:20
+msgid "You don't have any backup codes yet."
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:25
+msgid "Back to Account Security"
+msgstr ""
+
+#: templates/two_factor/core/backup_tokens.html:26
+msgid "Generate Tokens"
+msgstr ""
+
+#: templates/two_factor/core/login.html:8
+msgid "Enter your credentials."
+msgstr ""
+
+#: templates/two_factor/core/login.html:11
+#: templates/two_factor/core/setup.html:28
+msgid ""
+"We are calling your phone right now, please enter the\n"
+"        digits you hear."
+msgstr ""
+
+#: templates/two_factor/core/login.html:14
+#: templates/two_factor/core/setup.html:31
+msgid ""
+"We sent you a text message, please enter the tokens we\n"
+"        sent."
+msgstr ""
+
+#: templates/two_factor/core/login.html:17
+msgid ""
+"Please enter the tokens generated by your token\n"
+"        generator."
+msgstr ""
+
+#: templates/two_factor/core/login.html:21
+msgid ""
+"Use this form for entering backup tokens for logging in.\n"
+"      These tokens have been generated for you to print and keep safe. "
+"Please\n"
+"      enter one of these backup tokens to login to your account."
+msgstr ""
+
+#: templates/two_factor/core/login.html:33
+msgid "Or, alternatively, use one of your backup phones:"
+msgstr ""
+
+#: templates/two_factor/core/login.html:43
+msgid "As a last resort, you can use a backup token:"
+msgstr ""
+
+#: templates/two_factor/core/login.html:46
+msgid "Use Backup Token"
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:5
+msgid "Permission Denied"
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:7
+msgid ""
+"The page you requested, enforces users to verify using\n"
+"    two-factor authentication for security reasons. You need to enable "
+"these\n"
+"    security features in order to access this page."
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:11
+msgid ""
+"Two-factor authentication is not enabled for your\n"
+"    account. Enable two-factor authentication for enhanced account\n"
+"    security."
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:16
+msgid "Go back"
+msgstr ""
+
+#: templates/two_factor/core/otp_required.html:18
+#: templates/two_factor/core/setup.html:5
+#: templates/two_factor/core/setup_complete.html:5
+#: templates/two_factor/profile/profile.html:58
+msgid "Enable Two-Factor Authentication"
+msgstr ""
+
+#: templates/two_factor/core/phone_register.html:5
+msgid "Add Backup Phone"
+msgstr ""
+
+#: templates/two_factor/core/phone_register.html:8
+msgid ""
+"You'll be adding a backup phone number to your\n"
+"        account. This number will be used if your primary method of\n"
+"        registration is not available."
+msgstr ""
+
+#: templates/two_factor/core/phone_register.html:12
+msgid ""
+"We've sent a token to your phone number. Please\n"
+"        enter the token you've received."
+msgstr ""
+
+#: templates/two_factor/core/setup.html:7
+msgid ""
+"You are about to take your account security to the\n"
+"        next level. Follow the steps in this wizard to enable two-factor\n"
+"        authentication."
+msgstr ""
+
+#: templates/two_factor/core/setup.html:11
+msgid ""
+"Please select which authentication method you would\n"
+"        like to use."
+msgstr ""
+
+#: templates/two_factor/core/setup.html:14
+msgid ""
+"To start using a token generator, please use your\n"
+"        smartphone to scan the QR code below. For example, use Google\n"
+"        Authenticator. Then, enter the token generated by the app.\n"
+"        "
+msgstr ""
+
+#: templates/two_factor/core/setup.html:20
+msgid ""
+"Please enter the phone number you wish to receive the\n"
+"      text messages on. This number will be validated in the next step.\n"
+"      "
+msgstr ""
+
+#: templates/two_factor/core/setup.html:24
+msgid ""
+"Please enter the phone number you wish to be called on.\n"
+"      This number will be validated in the next step. "
+msgstr ""
+
+#: templates/two_factor/core/setup.html:35
+msgid ""
+"To identify and verify your YubiKey, please insert a\n"
+"      token in the field below. Your YubiKey will be linked to your\n"
+"      account."
+msgstr ""
+
+#: templates/two_factor/core/setup_complete.html:7
+msgid ""
+"Congratulations, you've successfully enabled two-factor\n"
+"      authentication."
+msgstr ""
+
+#: templates/two_factor/core/setup_complete.html:12
+#: templates/two_factor/core/setup_complete.html:19
+msgid "Back to Profile"
+msgstr ""
+
+#: templates/two_factor/core/setup_complete.html:14
+msgid ""
+"However, it might happen that you don't have access to\n"
+"      your primary token device. To enable account recovery, add a phone \n"
+"      number."
+msgstr ""
+
+#: templates/two_factor/core/setup_complete.html:21
+msgid "Add Phone Number"
+msgstr ""
+
+#: templates/two_factor/profile/disable.html:5
+msgid "Disable Two-factor Authentication"
+msgstr ""
+
+#: templates/two_factor/profile/disable.html:6
+msgid ""
+"You are about to disable two-factor authentication. This\n"
+"    compromises your account security, are you sure?"
+msgstr ""
+
+#: templates/two_factor/profile/disable.html:12
+msgid "Disable"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:5
+msgid "Account Security"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:9
+msgid "Tokens will be generated by your token generator."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:11
+#, python-format
+msgid "Primary method: %(primary)s"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:13
+msgid "Tokens will be generated by your YubiKey."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:37
+msgid ""
+"If you don't have any device with you, you can access\n"
+"        your account using backup tokens."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:39
+#, python-format
+msgid ""
+"\n"
+"        You have only one backup token remaining.\n"
+"      "
+msgid_plural ""
+"\n"
+"        You have %(counter)s backup tokens remaining.\n"
+"      "
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/two_factor/profile/profile.html:46
+msgid "Show Codes"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:48
+#: templates/two_factor/profile/profile.html:52
+msgid "Disable Two-Factor Authentication"
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:49
+msgid ""
+"However we strongly discourage you to do so, you can\n"
+"      also disable two-factor authentication for your account."
+msgstr ""
+
+#: templates/two_factor/profile/profile.html:54
+msgid ""
+"Two-factor authentication is not enabled for your\n"
+"      account. Enable two-factor authentication for enhanced account\n"
+"      security."
+msgstr ""
+
+#: templates/users/more_about_you.html:17
+msgid "Your account is now fully active."
+msgstr ""
+
+#: templates/users/more_about_you.html:18
+msgid ""
+"As a new user you should either <strong>Request</strong> support or "
+"<strong>Offer</strong>\n"
+"            your skills. After you enter some basic information you can "
+"create your first post."
+msgstr ""
+
+#: templates/users/more_about_you.html:20
+msgid ""
+"You can skip this step but you’ll be mostly invisible to the people you "
+"would want to connect\n"
+"            with. "
+msgstr ""
+
+#: templates/users/more_about_you.html:24
+msgid "Create an Offer"
+msgstr ""
+
+#: templates/users/more_about_you.html:35
+msgid "I'll create a post later"
+msgstr ""
+
+#: templates/users/more_about_you.html:41
+msgid "Your Movements.Org goals"
+msgstr ""
+
+#: templates/users/more_about_you.html:44
+msgid "Will you be looking to offer your skills or ask for help?"
+msgstr ""
+
+#: templates/users/more_about_you.html:50
+#: templates/users/more_about_you.html:68
+#: templates/users/more_about_you.html:86
+#: templates/users/more_about_you.html:104
+msgid "Skip"
+msgstr ""
+
+#: templates/users/more_about_you.html:59
+#: templates/users/more_about_you.html:167
+#: templates/users/user_profile_v2.html:82
+#: templates/users/user_settings_v2.html:136
+msgid "Languages"
+msgstr ""
+
+#: templates/users/more_about_you.html:62
+msgid ""
+"Please indicate which languages you speak. Google Translate is also "
+"available, but it is not fully accurate."
+msgstr ""
+
+#: templates/users/more_about_you.html:80
+msgid ""
+"Please indicate which regions and countries you are interested in helping."
+msgstr ""
+
+#: templates/users/more_about_you.html:98
+msgid "Please indicate your skill set."
+msgstr ""
+
+#: templates/users/more_about_you.html:113
+msgid "How you can help"
+msgstr ""
+
+#: templates/users/more_about_you.html:115
+msgid ""
+"\n"
+"          <p>\n"
+"              While there are certain skills that are particularly in demand "
+"from our activist users — namely,\n"
+"              legal assistance, media coverage — there are plenty of ways "
+"you can be involved if you do not fall into\n"
+"              those categories.\n"
+"          </p>\n"
+"          <ul>\n"
+"            <li>\n"
+"              <strong>Social media.</strong> Share Movements’ posts across "
+"your social media platforms. For example,\n"
+"              you can share Movements’ users’ requests with your "
+"representatives.\n"
+"            </li>\n"
+"            <li>\n"
+"              <strong>Tweet</strong> the posts that most interest you. "
+"There’s a button on almost every post.\n"
+"            </li>\n"
+"            <li>\n"
+"              <strong>Recommend a friend.</strong> If you have a friend with "
+"the skills in demand on our network, tell\n"
+"              them about us!\n"
+"            </li>\n"
+"          </ul>\n"
+"          "
+msgstr ""
+
+#: templates/users/more_about_you.html:137
+msgid "Done"
+msgstr ""
+
+#: templates/users/more_about_you.html:140
+msgid "Thank You! You are one step closer to opening a closed society!"
+msgstr ""
+
+#: templates/users/more_about_you.html:143
+msgid ""
+"If you would like to update these details at any time, this can be done in "
+"easily in your settings panel."
+msgstr ""
+
+#: templates/users/more_about_you.html:145
+msgid "Your Safety"
+msgstr ""
+
+#: templates/users/more_about_you.html:147
+#, python-format
+msgid ""
+"Please remember that no online platform is 100%% secure. We have gone to "
+"great lengths to try and protect your personal privacy and are working with "
+"some of the best experts in the field who share and appreciate your concern "
+"for digital security. However it is important to always stay safe online and "
+"only share personal information with people you trust. Please see our "
+"Security and Privacy pages for more information."
+msgstr ""
+
+#: templates/users/more_about_you.html:152
+#: templates/users/more_about_you.html:170
+msgid "Finish"
+msgstr ""
+
+#: templates/users/more_about_you.html:166
+msgid "Start"
+msgstr ""
+
+#: templates/users/more_about_you.html:168
+msgid "Regions"
+msgstr ""
+
+#: templates/users/thanksforactivation.html:7
+#: templates/users/thanksforactivation.html:12
+msgid "Email Confirmed"
+msgstr ""
+
+#: templates/users/thanksforactivation.html:13
+msgid "Your account is now activated."
+msgstr ""
+
+#: templates/users/user_profile_v2.html:30
+msgid "View Public Profile"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:37
+msgid "Direct Message"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:41
+msgid "Report User"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:46
+msgid "Rate user language skills"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:55
+msgid "About"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:57
+msgid "Name:"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:59
+msgid "Nationality:"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:61
+msgid "Residence:"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:79
+msgid "No interests specified"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:90
+msgid "No languages specified"
+msgstr ""
+
+#: templates/users/user_profile_v2.html:97
+msgid "Posts"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:25
+msgid "Change picture"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:31
+msgid "Personal Details"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:32
+msgid "Skills & Interests"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:33
+msgid "Security & Alerts"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:47
+msgid "Username"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:53
+msgid ""
+"This information is optional but the more you provide the more trusted "
+"you’ll be by other users."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:76
+msgid "Interface Language"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:88
+msgid "Digital Presence"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:90
+msgid ""
+"The more links you provide, the higher your star rating will be. Link to "
+"Twitter, LinkedIn, and Facebook to help verify your identity."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:94
+msgid "Linked In"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:115
+msgid "Website or Blog"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:122
+msgid "Skills/Interests"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:124
+msgid ""
+"The skills and interests you provide will help others find the right "
+"expertise for you. This will also help us to show the postings that are the "
+"most relevant for you."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:128
+msgid "Regions/Countries"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:130
+msgid ""
+"Where do you need help and/or where would you like to be able to help out?"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:138
+#, python-format
+msgid ""
+"Please indicate which languages you are able to communicate in. Google "
+"Translate is also available however it is not 100%% accurate."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:144
+msgid "Control the visibility of your profile and notifications."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:148
+msgid "Profile Visibility"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:150
+msgid ""
+"How much information do you want to make public? So as to help protect your "
+"security and privacy, you may not want to expose your email address."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:157
+msgid "Notifications"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:159
+msgid ""
+"When would you like to receive a notification if someone responds to your "
+"post or creates one that matches your interest?"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:167
+msgid "Group Notifications"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:169
+msgid ""
+"Movements.Org has assigned you to the following groups. Here you can choose "
+"to disable group updates from the Movements.Org admins."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:176
+msgid "Receive updates from the group"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:196
+msgid "Mark Account for Deletion"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:198
+msgid ""
+"As soon as your account has been marked for deletion your profile, posts and "
+"comments will\n"
+"              no longer be visible on the Movements.Org platform. The "
+"Movements.Org team will also be notified that you\n"
+"              wish to delete your account and will look to permanently "
+"delete your Movements.Org footprint over the next\n"
+"              2 days after which time you will no longer be able to login or "
+"use any of the Movements.Org services."
+msgstr ""
+
+#: templates/users/user_settings_v2.html:222
+msgid "Save"
+msgstr ""
+
+#: templates/users/user_settings_v2.html:233
+msgid "Upload Avatar"
+msgstr ""
+
+#: templates/users/snippets/profile_navigation.html:16
+msgid "Alerts"
+msgstr ""
+
+#: templates/users/snippets/star_rating.html:12
+msgid "MOVEMENTS STAR RATING"
+msgstr ""
+
+#: templates/users/snippets/star_rating.html:13
+msgid ""
+"0 Stars: Confirmed Email<br>\n"
+"                   1 Star: Confirmed 1 social media account<br>\n"
+"                   2 Stars: Confirmed 2 social media accounts<br>\n"
+"                   3 Stars: Confirmed all social media and bio<br>\n"
+"                   4 Stars: Confirmed significant online presence<br>\n"
+"                   5 Stars: Personally known by Movements.org<br>"
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:11
+msgid "MOVEMENTS TRANSLATOR RATING"
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:13
+msgid ""
+"1 Star: Beginner - Has a basic understanding of this language. User can not "
+"translate on the Movements.org website."
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:14
+msgid ""
+"2 Stars: Intermediate - Has a good understanding of this language. User can "
+"not translate on the Movemetns.org website."
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:15
+msgid "3 Stars: Advanced -  Can make translations. Is fluent in this language."
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:16
+msgid ""
+"4 Stars: Trusted Translator - Has experience in translation work. Can make "
+"translations and corrections."
+msgstr ""
+
+#: templates/users/snippets/trans_rating.html:17
+msgid ""
+"5 Stars: Personally known by Movements.org and is a Trusted Translator. Can "
+"make translations and corrections."
+msgstr ""
