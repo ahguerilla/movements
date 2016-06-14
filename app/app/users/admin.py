@@ -19,7 +19,7 @@ class UserProfileInline(admin.StackedInline):
 class MovementsUserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
     list_display = ('username', 'email', 'first_name', 'last_name', 'star_rating', 'rated_by')
-    list_filter = UserAdmin.list_filter + ('userprofile__skills',)
+    list_filter = UserAdmin.list_filter + ('userprofile__countries', 'userprofile__skills', )
 
     def star_rating(self, obj):
         try:
