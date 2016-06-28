@@ -21,7 +21,7 @@ class Command(BaseCommand):
         count_all = Countries.objects.all().count()
         count_middle_east = Countries.objects.filter(region=middle_east_region).count()
 
-        journalist_group = Group.objects.get(name='Journalist')
+        journalist_group = Group.objects.get(name='Journalists')
         lawyer_group = Group.objects.get(name='Lawyers')
         provider_group = Group.objects.get(name='Provider')
 
