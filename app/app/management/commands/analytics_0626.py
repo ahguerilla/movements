@@ -15,7 +15,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         user_list = []
-        all_users = User.objects.all()[:50]
+        all_users = User.objects.all()
 
         middle_east_region = Region.objects.get(name='Middle East')
         count_all = Countries.objects.all().count()
