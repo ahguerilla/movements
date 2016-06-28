@@ -96,7 +96,8 @@ class Command(BaseCommand):
                         'HAS POSTED OFFER', 'HAS POSTED REQUEST', 'MEMBER OF PROVIDERS', 'MEMBER OF LAWYERS',
                         'MEMBER OF JOURNALIST GROUP', 'SKILLS'])
             for u in user_list:
-                row = [u['id'], u['email'], u['username'], u['has_iran'], u['has_all_middle_east'],
-                       u['has_all_countries'], u['has_offer'], u['has_request'], u['in_provider_group'],
-                       u['in_lawyer_group'], u['in_journalist_group'], u['skills_list']]
+                row = [u['id'], unicode(u['email']).encode('utf-8'), unicode(u['username']).encode('utf-8'), 
+                       u['has_iran'], u['has_all_middle_east'], u['has_all_countries'], u['has_offer'],
+                       u['has_request'], u['in_provider_group'], u['in_lawyer_group'], u['in_journalist_group'],
+                       u['skills_list']]
                 w.writerow(row)
