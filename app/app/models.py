@@ -9,6 +9,7 @@ from cms.models.pluginmodel import CMSPlugin
 from django.db import models
 
 from tinymce import models as tinymodels
+from market.models import MarketItem
 
 
 class MenuExtension(PageExtension):
@@ -105,6 +106,7 @@ class SuccessStories(models.Model):
     image = models.ImageField(upload_to=partner_image_upload_handler, blank=True, null=True)
     content = tinymodels.HTMLField()
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    related_post = models.ForeignKey(MarketItem, blank=True, null=True)
 
     class Meta(object):
         ordering = ('order',)

@@ -458,7 +458,13 @@ $(function () {
         this.skills.selected = queryMap['skills'];
       }
       if ('issues' in queryMap) {
-        this.issues.selected = queryMap['issues'];
+        var i = queryMap['issues'];
+        if (i instanceof Array) {
+          this.issues.selected = queryMap['issues'];
+        }
+        else {
+          this.issues.selected = [i];
+        }
       }
       if ('regions' in queryMap) {
         this.regions = queryMap['regions'];

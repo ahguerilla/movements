@@ -92,7 +92,7 @@ class SortableAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 
 class SuccessStoriesAdmin(SortableAdmin):
-    list_display = ('success_stories', 'direct_link_id', )
+    list_display = ('success_stories', 'direct_link_id', 'related_post', )
 
     def success_stories(self, obj):
         return str(obj)

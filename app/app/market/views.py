@@ -1,4 +1,5 @@
 import json
+import urllib
 
 from collections import defaultdict
 from django.contrib.auth.decorators import login_required
@@ -8,7 +9,7 @@ from django.core.exceptions import MultipleObjectsReturned
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from app.market.api.utils import HttpResponseForbiden
 
 from app.users.models import Interest, Countries, Issues
@@ -175,6 +176,12 @@ def _create_or_update_post(request, template, form_class, build_redir_url, marke
     if market_item:
         ctx['images'] = market_item.marketitemimage_set.all()
     return render_to_response(template, ctx, context_instance=RequestContext(request))
+
+
+def show_similar_posts(request, post_id):
+    post = get_object_or_404(MarketItem.objects.defer('comments'), pk=post_id, deleted=False, owner__is_active=True)
+    issues = post.issues.all().values_list('id', flat=True)
+    return HttpResponseRedirect(reverse('show_market') + "#{0}".format(urllib.urlencode({'issues': issues}, doseq=True)))
 
 
 @login_required

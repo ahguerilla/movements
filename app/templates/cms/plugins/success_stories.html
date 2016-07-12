@@ -20,5 +20,14 @@
     </div>
     {% endif %}
   </div>
+  {% if s.related_post %}
+
+    <div class="success-storey-actions">
+      <hr>
+      <a href="{% url 'show_similar_posts' s.related_post.id %}">
+        <div class="show-similar">I WANT TO HELP SIMILAR<br>ACTIVISTS</div>
+      </a>
+    </div>
+  {% endif %}
 {% endfor %}
 </div>
