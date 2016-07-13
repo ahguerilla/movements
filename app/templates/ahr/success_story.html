@@ -1,0 +1,66 @@
+{% extends "base_v2.html" %}
+{% load thumbnail %}
+{% load i18n %}
+
+{% block header_padding %}
+  <div style="height: 10px;"></div>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-offset-1 col-lg-10">
+      <div class="cms-body-content">
+        <h2 style="text-align: center;">Movements Success Stories</h2>
+        <div class="success-stories">
+          <a class="success-story-anchor" href="#" id="ss137"></a>
+          <hr style="height: 2px; margin-top: 20px; margin-bottom: 20px; background-color: rgb(0, 102, 153);">
+          <div class="row">
+            {% if success_story.image %}
+            <div class="col-lg-3 col-sm-4 col-xs-12 success-storey">
+              {% thumbnail success_story.image "250x167" crop="center" as im %}
+              <img class="success-story-image" style="width: 100%" src="{{ im.url }}" alt="success story">
+            </div>
+            <div class="col-lg-9 col-sm-8 col-xs-12">
+              {{ success_story.content|safe }}
+            </div>
+            {% else %}
+            <div class="col-xs-12">
+              {{ success_story.content|safe }}
+            </div>
+            {% endif %}
+          </div>
+          <div class="success-storey-actions">
+            <hr style="border-top: 1px solid #cdcbcc;">
+            <a href="{% url 'success_story_item_prev' success_story.id %}">
+              <div class="previous navigation"><i class="fa fa-angle-left fa-2x"></i></div>
+            </a>
+            <a href="{% url 'success_story_item_next' success_story.id %}">
+              <div class="next navigation"><i class="fa fa-angle-right fa-2x"></i></div>
+            </a>
+            <div class="actions-wrap">
+              <div class="show-similar center">
+                {% if success_story.related_post %}
+                <a href="{% url 'show_similar_posts' success_story.related_post.id %}">
+                  <div>I WANT TO HELP SIMILAR<br>ACTIVISTS</div>
+                </a>
+                {% else %}
+                <a href="{% url 'show_market' %}">
+                  <div>SEE MORE<br>REQUESTS & OFFERS</div>
+                </a>
+                {% endif %}
+              </div>
+              <a obj_id="2210" class="facebook" href="#">
+                <img width="26" style="margin-top: 10px; margin-left: 10px;"
+                     src="https://d1vw9gf2oosnrq.cloudfront.net/static/images/v2/facebook_bigger_grey.png"
+                     alt="Share On Facebook">
+                <div class="share-text">SHARE ON<br>FACEBOOK</div>
+              </a>
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+        </div>
+      </div>
+      <div class="hidden-xs" style="height: 180px;"></div>
+    </div>
+  </div>
+{% endblock %}

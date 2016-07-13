@@ -2,8 +2,8 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.template import RequestContext
-from django.shortcuts import render_to_response
-from .models import NewsletterSignups, Partner, HomePageBanner
+from django.shortcuts import render_to_response, get_object_or_404
+from .models import NewsletterSignups, Partner, HomePageBanner, SuccessStories
 from django.utils import translation
 from market.models import MarketItem, Comment, EmailRecommendation
 from postman.models import Message
@@ -29,6 +29,27 @@ def get_stats(request):
         'countries': '153',
     }
     return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
+def success_story_item(request, success_story_id):
+    ss = get_object_or_404(SuccessStories, pk=success_story_id)
+    return render_to_response('ahr/success_story.html', {'success_story': ss},
+                              context_instance=RequestContext(request))
+
+
+def success_story_item_next(request, success_story_id):
+    ss = SuccessStories.objects.filter(id__gt=success_story_id).order_by('id').first()
+    if not ss:
+        ss = SuccessStories.objects.order_by('id').first()
+    return HttpResponseRedirect(reverse('success_story_item', args=[ss.id]))
+
+
+def success_story_item_prev(request, success_story_id):
+
+    ss = SuccessStories.objects.filter(id__lt=success_story_id).order_by('-id').first()
+    if not ss:
+        ss = SuccessStories.objects.order_by('-id').first()
+    return HttpResponseRedirect(reverse('success_story_item', args=[ss.id]))
 
 
 def success_stories(request, success_story_id):

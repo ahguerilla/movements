@@ -50,6 +50,15 @@ urlpatterns = patterns(
     url(r'^avatar/render_primary/(?P<user>[\w\@\d\.\-_]{1,30})/(?P<size>[\d]+)/$', 'avatar.views.render_primary',
         name='avatar_render_primary'),
     url(r'^avatar/', include('avatar.urls')),
+    url(r'^en/movements/success-stories/(?P<success_story_id>\d+)/$', 'app.views.success_story_item',
+        name='success_story_item'),
+
+    url(r'^en/movements/success-stories/(?P<success_story_id>\d+)/next$', 'app.views.success_story_item_next',
+        name='success_story_item_next'),
+
+    url(r'^en/movements/success-stories/(?P<success_story_id>\d+)/prev$', 'app.views.success_story_item_prev',
+        name='success_story_item_prev'),
+
     url(r'^en/movements/about-movements/success-stories/(?P<success_story_id>\d+)/$',
         'app.views.success_stories', name='success_stories'),
     # Account View Overrides
