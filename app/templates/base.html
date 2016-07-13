@@ -77,6 +77,7 @@
 {% if config.GOOGLE_TAG_MANAGER %}
 {{ config.GOOGLE_TAG_MANAGER|safe }}
 {% endif %}
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -87,6 +88,8 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 {% cms_toolbar %}
+
+{% block extra_body_script %}{% endblock %}
 
 {% if messages %}
   {% for message in messages %}
@@ -211,7 +214,7 @@
               </a></li>
               <!--<li class="image-item"><a data-language="es" class="set-lang" href="#">
                 <div class="dropdown-flag">
-                  <img src="{{ STATIC_URL }}images/v2/spanish_french.png">
+                  <img src="{{ STATIC_URL }}images/v2/flag_spanish.png">
                   <span>{% trans "Spanish" %}</span>
                 </div>
               </a></li>-->
@@ -358,7 +361,7 @@
               <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="{%trans "Connect with Facebook"%}" >
             </a>
           </div>
-          <div style="margin-top: 15px;" class="fb-like" data-href="https://www.facebook.com/Movements.org"
+          <div class="fb-like" data-href="https://www.facebook.com/Movements.org"
                data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
         </div>
         <div class="col-sm-5">
@@ -390,10 +393,13 @@
 <div id="modal-placeholder"></div>
 <script type="text/template" id="add-post-template">
   <a onClick="ga('send', 'event', 'button', 'click', 'create-request');" class="btn btn-request" href="{% url 'create_request' %}">
-    <img src="{{ STATIC_URL }}images/v2/request_icon.png"/>{%trans "Request"%}
+    <img src="{{ STATIC_URL }}images/v2/request_icon.png"/>{% trans "Request" %}
   </a>
   <a onClick="ga('send', 'event', 'button', 'click', 'create-offer');" class="btn btn-offer" href="{% url 'create_offer' %}">
-    <img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>{%trans "Offer"%}
+    <img src="{{ STATIC_URL }}images/v2/offer_icon.png"/>{% trans "Offer" %}
+  </a>
+  <a onClick="ga('send', 'event', 'button', 'click', 'create-news');" class="btn btn-news" href="{% url 'create_news' %}">
+    <i class="fa fa-lg fa-newspaper-o"></i>{% trans "News" %}
   </a>
 </script>
 <script type="text/template" id="content-menu-template">
@@ -401,20 +407,20 @@
   <li><a href="{% url 'user_profile' %}">
     <div class="nav-menu-item-wrap profile">
       <div class="nav-menu-item"></div>
-      {% trans "Profile"%}
+      {% trans "Profile" %}
     </div>
   </a></li>
   <li><a href="{% url 'user_settings' %}">
     <div class="nav-menu-item-wrap settings">
       <div class="nav-menu-item"></div>
-      {% trans "Settings"%}
+      {% trans "Settings" %}
     </div>
   </a></li>
   {% if request.user.userprofile.is_translator %}
   <li><a href="{% url 'show_translations' %}">
     <div class="nav-menu-item-wrap translations">
       <div class="nav-menu-item"></div>
-      {% trans "Translations"%}
+      {% trans "Translations" %}
     </div>
   </a></li>
   {% endif %}

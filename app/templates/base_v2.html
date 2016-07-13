@@ -65,8 +65,6 @@
     {% assets "css_language_ar" %}
       <LINK href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
     {% endassets %}
-
-{#    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/language_ar.css" />#}
   {% endif %}
 
   {% block extra_head %}
@@ -81,7 +79,7 @@
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
-<body>
+<body class="{% block bodyclass %}{% endblock %}">
 {% if config.GOOGLE_TAG_MANAGER %}
 {{ config.GOOGLE_TAG_MANAGER|safe }}
 {% endif %}
@@ -321,7 +319,7 @@
       </div>
     </div>
   </div>
-  <div style="height: 80px">&nbsp;</div>
+{% block nav_padding %}<div style="height: 80px">&nbsp;</div>{% endblock %}
   <div id="main-cms-nav" style="display: none;">
     <div class="main-menu-slider">
       <ul>
