@@ -36,6 +36,7 @@ js = Bundle(
         './js/email_confirmation.js',
         './js/signup.js',
         './js/home.js',
+        './js/share_dialog.js',
         Bundle(
             './js/templates/more_about_you_progress_bar.jst',
             './js/templates/home_page_stats.jst',

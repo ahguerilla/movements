@@ -6,6 +6,21 @@
   <div style="height: 10px;"></div>
 {% endblock %}
 
+{% block open_graph_data %}
+<meta property="fb:app_id" content="261373627348815"/>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Movements Success Story">
+<meta property="og:description" content="{{ success_story.content|striptags }}">
+<meta property="og:url" content="https://www.movements.org{% url 'success_story_item' success_story.id %}">
+<meta property="og:site_name" content="Movements.Org">
+  {% if success_story.image %}
+    {% thumbnail success_story.image 1200x630 upscale as thumb %}
+    <meta property="og:image" content="{{ thumb.url }}">
+  {% else %}
+    <meta property="og:image" content="https://www.movements.org/static/images/logos/logo_large.png">
+  {% endif %}
+{% endblock %}
+
 {% block content %}
   <div class="row">
     <div class="col-lg-offset-1 col-lg-10">
@@ -49,9 +64,9 @@
                 </a>
                 {% endif %}
               </div>
-              <a obj_id="2210" class="facebook" href="#">
+              <a class="facebook" href="#">
                 <img width="26" style="margin-top: 10px; margin-left: 10px;"
-                     src="https://d1vw9gf2oosnrq.cloudfront.net/static/images/v2/facebook_bigger_grey.png"
+                     src="{{ STATIC_URL }}images/v2/facebook_bigger_grey.png"
                      alt="Share On Facebook">
                 <div class="share-text">SHARE ON<br>FACEBOOK</div>
               </a>
@@ -63,4 +78,13 @@
       <div class="hidden-xs" style="height: 180px;"></div>
     </div>
   </div>
+{% endblock %}
+
+
+{% block endjavascript %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      window.ahr.initShareDialog({el: '.success-stories'});
+    });
+  </script>
 {% endblock %}

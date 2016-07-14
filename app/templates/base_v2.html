@@ -455,6 +455,7 @@
 <script type="text/javascript">
   window.ahr.string_constants = {{ string_constants|safe }};
   window.ahr.siteData = {
+    baseUrl: '{{ settings.BASE_URL }}',
     isAuthenticated: {% if user.is_authenticated %}true{% else %}false{% endif %},
   }
 </script>

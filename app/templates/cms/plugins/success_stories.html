@@ -20,14 +20,29 @@
     </div>
     {% endif %}
   </div>
-  {% if s.related_post %}
   <div class="success-storey-actions">
     <hr style="border-top: 1px solid #cdcbcc;">
-    <a href="{% url 'show_similar_posts' s.related_post.id %}">
-      <div class="show-similar">I WANT TO HELP SIMILAR<br>ACTIVISTS</div>
+    <a class="facebook" href="#"
+       data-href="{% url 'success_story_item' s.id %}">
+      <img width="26" style="float: left; margin-top: 10px;"
+           src="{{ STATIC_URL }}images/v2/facebook_bigger_grey.png"
+           alt="Share On Facebook">
+      <div class="share-text">SHARE ON<br>FACEBOOK</div>
     </a>
+    {% if s.related_post %}
+    <a href="{% url 'show_similar_posts' s.related_post.id %}">
+      <div style="margin-left: 10px;" class="show-similar">I WANT TO HELP SIMILAR<br>ACTIVISTS</div>
+    </a>
+    {% endif %}
   </div>
   <div style="clear: both;"></div>
-  {% endif %}
 {% endfor %}
 </div>
+
+{% addtoblock "js" %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      window.ahr.initShareDialog({el: '.success-stories'});
+    });
+  </script>
+{% endaddtoblock %}

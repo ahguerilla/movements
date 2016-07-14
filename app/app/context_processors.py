@@ -7,6 +7,7 @@ def app_settings(context):
     return {
         'settings': {
             'ADMIN_ENABLED': settings.ADMIN_ENABLED,
+            'BASE_URL': settings.BASE_URL,
         }
     }
 
