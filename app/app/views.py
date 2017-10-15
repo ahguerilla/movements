@@ -20,6 +20,16 @@ def home(request):
     return render_to_response('ahr/home.html', view_dict, context_instance=RequestContext(request))
 
 
+def creating_requests(request):
+    return render_to_response('ahr/creating_requests.html', {},
+                              context_instance=RequestContext(request))
+
+
+def creating_offers(request):
+    return render_to_response('ahr/creating_offers.html', {},
+                              context_instance=RequestContext(request))
+
+
 def get_stats(request):
     total_connections = MarketItem.objects.count() + Comment.objects.count() + \
                         Message.objects.count() + EmailRecommendation.objects.count()

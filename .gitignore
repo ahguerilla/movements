@@ -24,6 +24,7 @@ setenv.sh
 # PyCharm project files
 .idea
 .elasticbeanstalk/aws_credential_file
+.elasticbeanstalk/aws_credential_file_v2
 
 dump.rdb
 celerybeat-schedule
