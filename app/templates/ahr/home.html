@@ -21,24 +21,37 @@
           <img width="100" src="{{ STATIC_URL }}images/v2/logo.png" alt="Movements Logo" />
         </a>
       </div>
-      <ul class="navbar-right hidden-xs">
-        <div id="view-content-menu" class="menu-selector low-nav">
-          <div class="menu-icon"></div>
-        </div>
-      </ul>
       <div id="collapse-menu" class="collapse navbar-collapse">
         <ul class="nav navbar-nav low-nav navbar-main">
-          <li class="dropdown visible-xs">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-               role="button" aria-haspopup="true"
-               aria-expanded="false">{% trans "Navigate" %} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              {% show_menu 0 100 100 100 "cms/navs/top_nav_responsive.html" %}
-            </ul>
+          <li class="navbar-add-border">
+            <a href="{% page_url 'about_movements' %}">{% trans "About us" %}</a>
           </li>
-          <li class="dropdown navbar-add-border">
+          <li>
+            <a href="{% page_url 'how_it_works' %}">{% trans "How it works" %}</a>
+          </li>
+          <li>
+            <a href="{% page_url 'contact_us' %}">{% trans "Contact us" %}</a>
+          </li>
+        </ul>
+        <ul style="float: right; margin-right: -15px;" class="nav navbar-nav low-nav navbar-main">
+          <li class="navbar-hightlight">
+            <a onClick="ga('send', 'event', 'homepage-events', 'click', 'donate');" class="donate_button"
+               href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>
+            <form id="donate_form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="home-page-donate">
+              <input type="hidden" name="cmd" value="_donations">
+              <input type="hidden" name="business" value="clarke@advancinghumanrights.org">
+              <input type="hidden" name="lc" value="US">
+              <input type="hidden" name="item_name" value="Movements Tax Exempt Donation">
+              <input type="hidden" name="page_style" value="MOVEMENTS">
+              <input type="hidden" name="no_note" value="0">
+              <input type="hidden" name="currency_code" value="USD">
+              <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+              <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+          </li>
+          <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Connect" %} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li class="image-item"><a target="_blank" href="https://twitter.com/movements_org">
                 <div class="nav-twitter">
                   <img src="{{ STATIC_URL }}images/v2/twitter-dualstate.png" alt="Connect with Twitter">
@@ -51,19 +64,13 @@
                   <span>{% trans "Facebook" %}</span>
                 </div>
               </a></li>
-              <li class="image-item"><a target="_blank" href="http://visitor.r20.constantcontact.com/d.jsp?llr=wxajvkuab&p=oi&m=1121344324342&sit=9dtkorxjb&f=09ba4864-11fb-4fe6-95cd-46c7867064ca">
-                <div class="nav-newsletter">
-                  <img src="{{ STATIC_URL }}images/v2/newsletter-icon.png" alt="Sign up to our Newsletter">
-                  <span>{% trans "Newsletter" %}</span>
-                </div>
-              </a></li>
               <li style="margin: 10px 14px 5px 20px;" ><div class="fb-like" data-href="https://www.facebook.com/Movements.org"
                data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></li>
             </ul>
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Language" %} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li class="image-item"><a data-language="en" class="set-lang" href="#">
                 <div class="dropdown-flag">
                   <img src="{{ STATIC_URL }}images/v2/flag_uk.png">
@@ -82,12 +89,12 @@
                   <span>{% trans "Chinese" %}</span>
                 </div>
               </a></li>
-              <li class="image-item"><a data-language="uk" class="set-lang" href="#">
+              <!-- <li class="image-item"><a data-language="uk" class="set-lang" href="#">
                 <div class="dropdown-flag">
                   <img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png">
                   <span>{% trans "Ukrainian" %}</span>
                 </div>
-              </a></li>
+              </a></li> -->
               <li class="image-item"><a data-language="ru" class="set-lang" href="#">
                 <div class="dropdown-flag">
                   <img src="{{ STATIC_URL }}images/v2/flag_russian.png">
@@ -114,31 +121,6 @@
               </a></li>-->
             </ul>
           </li>
-          <li class="navbar-hightlight">
-            <a onClick="ga('send', 'event', 'homepage-events', 'click', 'donate');" class="donate_button"
-               href="#" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate" %}</a>
-            <form id="donate_form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="home-page-donate">
-              <input type="hidden" name="cmd" value="_donations">
-              <input type="hidden" name="business" value="clarke@advancinghumanrights.org">
-              <input type="hidden" name="lc" value="US">
-              <input type="hidden" name="item_name" value="Movements Tax Exempt Donation">
-              <input type="hidden" name="page_style" value="MOVEMENTS">
-              <input type="hidden" name="no_note" value="0">
-              <input type="hidden" name="currency_code" value="USD">
-              <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
-              <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-            </form>
-          </li>
-          <li class="visible-xs">
-            <a href="{% page_url 'how_it_works' %}">
-              <span>{% trans "Find out more" %}</span>
-            </a>
-          </li>
-          <li class="visible-xs">
-            <a href="{% page_url 'our_partners' %}">
-              <span>{%trans "Partners"%}</span>
-            </a>
-          </li>
         </ul>
       </div>
     </div>
@@ -147,7 +129,7 @@
     <div class="main-menu-slider">
       <ul>
         {% show_menu 0 100 100 100 "cms/navs/top_nav_v2.html" %}
-        <li><a href="{% url 'show_market' %}"><h3>{%trans "View Requests & Offers"%}</h3></a></li>
+        <li><a href="{% url 'show_market' %}"><h3>{% trans "View Requests & Offers" %}</h3></a></li>
       </ul>
     </div>
   </div>
@@ -162,8 +144,10 @@
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 landing-page-middle">
           <img class="visible-lg" src="{{ STATIC_URL }}images/logos/logo_large_crop.png" width="40%">
           <h2 class="visible-xs">{% trans "Crowdsourcing human rights." %}</h2>
-          <h2 class="hiddenxs" id="banner_title">{{ banner.0.title_text }}</h2>
-          {% include 'ahr/snippets/_home_page_buttons.html' %}
+          <h2 class="hiddenxs" id="banner_title">
+            {% trans "Where anyone with a skill can connect directly with human rights activists who need help to achieve their goals. Once you sign up, you can submit your request for help, or offer your skills to those who may need it." %}
+          </h2>
+{#          {% include 'ahr/snippets/_home_page_buttons.html' %}#}
           <div style="margin-top: 10px;">
             {% include 'ahr/snippets/_home_login_form.html' %}
           </div>
@@ -179,27 +163,27 @@
 {% block content %}{% endblock %}
 {% block footer_padding %}{% endblock %}
 {% block base_footer %}
-<div>
-  <nav class="navbar navbar-default navbar-fixed-bottom homepage-footer">
-    <div class="container-fluid">
-      <a href="{% url 'creating_requests' %}">
-        <div class="footer-nav footer-nav-2 col-xs-6"><span>{%trans "How to Create a Request"%}</span></div>
-      </a>
-      <a href="{% url 'creating_offers' %}">
-        <div class="footer-nav footer-nav-3 col-xs-6"><span>{%trans "How to Offer Your Services"%}</span></div>
-      </a>
-    </div>
-  </nav>
-</div>
+{#<div>#}
+{#  <nav class="navbar navbar-default navbar-fixed-bottom homepage-footer">#}
+{#    <div class="container-fluid">#}
+{#      <a href="{% url 'creating_requests' %}">#}
+{#        <div class="footer-nav footer-nav-2 col-xs-6"><span>{%trans "How to Create a Request"%}</span></div>#}
+{#      </a>#}
+{#      <a href="{% url 'creating_offers' %}">#}
+{#        <div class="footer-nav footer-nav-3 col-xs-6"><span>{%trans "How to Offer Your Services"%}</span></div>#}
+{#      </a>#}
+{#    </div>#}
+{#  </nav>#}
+{#</div>#}
 {% endblock %}
 
 {% block javascript %}
   <script type="text/javascript">
   (function() {
-    var titleText = [];
-    {% for item in banner %}
-    titleText.push('{{ item.title_text }}');
-    {% endfor %}
+{#    var titleText = [];#}
+{#    {% for item in banner %}#}
+{#    titleText.push('{{ item.title_text }}');#}
+{#    {% endfor %}#}
 
 {#    $.backstretch([#}
 {#      {% for item in banner %}#}
@@ -211,7 +195,7 @@
       '{{ banner.0.main_image.url }}'
     ], {duration: 7000, fade: 750});
 
-    var idx = 0;
+{#    var idx = 0;#}
 {#    $(window).on("backstretch.before", function(){#}
 {#      idx++;#}
 {#      if (idx === titleText.length) {#}
@@ -223,19 +207,19 @@
 {#        $bannerTitle.fadeIn(400);#}
 {#      });#}
 {#    });#}
-
-    var switchTitle = function(){
-      idx++;
-      if (idx === titleText.length) {
-        idx = 0;
-      }
-      var $bannerTitle = $('#banner_title');
-      $bannerTitle.fadeOut(350, function(){
-        $bannerTitle.text(titleText[idx]);
-        $bannerTitle.fadeIn(400);
-      });
-    };
-    window.setInterval(switchTitle, 7000);
+{##}
+{#    var switchTitle = function(){#}
+{#      idx++;#}
+{#      if (idx === titleText.length) {#}
+{#        idx = 0;#}
+{#      }#}
+{#      var $bannerTitle = $('#banner_title');#}
+{#      $bannerTitle.fadeOut(350, function(){#}
+{#        $bannerTitle.text(titleText[idx]);#}
+{#        $bannerTitle.fadeIn(400);#}
+{#      });#}
+{#    };#}
+{#    window.setInterval(switchTitle, 7000);#}
 
     $('.donate_button').click(function(ev){
       ev.preventDefault();

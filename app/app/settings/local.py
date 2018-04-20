@@ -44,6 +44,7 @@ if 'test' in sys.argv or 'tests' in sys.argv:
     }
 
 ########## EMAIL CONFIGURATION
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
 EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', False)
 EMAIL_HOST = os.environ.get('EMAIL_HOST', '')

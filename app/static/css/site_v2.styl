@@ -415,6 +415,10 @@ $navigation-font-size = 16px
       vertical-align middle
       line-height normal
       margin 0
+  .navbar-nav
+    .dropdown-menu.dropdown-menu-right
+      right 0
+      left inherit
   .navbar-nav > li
     border-right solid $divider-color 1px
   .navbar-nav > li:first-child
@@ -428,7 +432,7 @@ $navigation-font-size = 16px
   .navbar-nav > li > a
     color $font-color
     line-height 80px
-    padding 0 20px 0 20px
+    padding 0 10px
   .navbar-nav.low-nav > li > a
     line-height 50px
   .navbar-nav > li.active > a
@@ -603,7 +607,7 @@ $navigation-font-size = 16px
   #add-post-popup-container
     .popover
       left inherit
-      right 63px
+      right 0
       width 136px
       height 126px
       z-index 1000000
@@ -1052,7 +1056,7 @@ h1,h2,h3,h4,h5,h6
       h2
         min-height 45px
         font-family "HurmeGeometricSans3-SemiBold", "Helvetica Neue", Helvetica, Arial, sans-serif
-        font-size 20px
+        font-size 18px
         color #ffffff
         margin 0
       .home-stats
