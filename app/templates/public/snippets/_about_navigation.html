@@ -1,0 +1,20 @@
+<ul class="left-navigation toggled">
+  <li class="{% if selected_item == 'about' %}active{% endif %}">
+    <a href="{% url 'about' %}"><span>About MOVEMENTS</span></a>
+  </li>
+  <li class="{% if selected_item == 'team' %}active{% endif %}">
+    <a href="{% url 'team' %}"><span>Our Team</span></a>
+  </li>
+  <li class="{% if selected_item == 'board' %}active{% endif %}">
+    <a href="{% url 'board' %}"><span>Our Board</span></a>
+  </li>
+  <li class="{% if selected_item == 'partners' %}active{% endif %}">
+    <a href="{% url 'partners' %}"><span>Our Partners</span></a>
+  </li>
+  <li class="{% if selected_item == 'faq' %}active{% endif %}">
+    <a href="{% url 'faq' %}"><span>FAQ's</span></a>
+  </li>
+</ul>
+<div class="toggle-menu text-center visible-xs visible-sm">
+  SHOW MENU
+</div>

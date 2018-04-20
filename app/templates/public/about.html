@@ -1,0 +1,57 @@
+{% extends "base_v2.html" %}
+{% load cms_tags sekizai_tags menu_tags %}
+{% load i18n %}
+
+{% block head_title %}
+About Us
+{% endblock %}
+
+{% block extra_body_script %}
+  {% placeholder "extra_body_script" %}
+{% endblock %}
+
+{% block content %}
+<div class="hidden-xs hidden-sm" style="height:30px;"></div>
+<div class="content-page">
+  <div class="row">
+    <div class="col-md-4 cms-left-column toggle-menu-container">
+      {% include 'public/snippets/_about_navigation.html' with selected_item=selected_item %}
+    </div>
+    <div class="col-md-8 cms-body-content">
+      <h1>About MOVEMENTS</h1>
+      <p>At the nexus of technology and human rights, Movements connects dissidents in closed societies with
+        individuals around the world with skills to help.</p>
+      <p>This powerful combination provides those fighting for human rights in dictatorships with the expertise they
+        need to strengthen their voice. Movements takes out the middleman in human rights and creates links to
+        strengthen dissidents and weaken dictators.</p>
+      <p>It gives average people with unique skills the ability to help activists in need. Crowdsourcing the fight
+        for human rights is a new solution to an old problem. Movements is where anyone with a skill - artists,
+        writers, journalists, translators, technologists, PR experts, policy-makers and more - can connect directly
+        with human rights activists in closed societies.</p>
+      <p>Our philosophy is that big, collective actions are only possible through small, individual ones. Everyone
+        has a role to play.</p>
+      <p>Movements.org was created by&nbsp;Advancing Human Rights,&nbsp;a New York-based organization, and its
+        ownership was transferred to <a target="_blank" href="https://www.democracycouncil.org/">Democracy Council</a>
+        in 2016. Democracy Council uses the tools of democracy and technology to empower civil and human rights
+        activists and to support dissidents in closed societies who are struggling to attain basic human rights.</p>
+      <p>We thank <a target="_blank" href="http://guerillasoftware.net/">Guerilla Software</a> who has generously
+        donated their time and creativity to shape the initial vision of Movements.org. Ronin Analytics designed the
+        digital security perimeter that protects our users from breaches of privacy. We also recognize and thank
+        Google Ideas for their technological innovations, encouragement, and support towards Movements.org.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block endjavascript %}
+  <script type="text/javascript">
+    (function() {
+      var $leftNavigation = $('.toggle-menu-container .left-navigation');
+      var $toggle = $('.toggle-menu-container .toggle-menu');
+      $toggle.click(function(ev) {
+        $leftNavigation.toggleClass('toggled');
+        $toggle.html($leftNavigation.hasClass('toggled') ? 'SHOW MENU' : 'HIDE MENU');
+      });
+    })();
+  </script>
+{% endblock %}

@@ -30,6 +30,14 @@ urlpatterns = patterns(
     url(r'^google9e5bfcc08bec3049.html$', 'app.views.project_shield_verification', name='project_shield_verification'),
     url(r'^human-rights-support-pro-bono-recognition$', 'app.views.citation', name='citation'),
     url(r'^set-language', 'app.views.set_language', name='set_lang'),
+
+    # public pages
+    url(r'^about$', 'app.views.about', name='about'),
+    url(r'^team$', 'app.views.team', name='team'),
+    url(r'^board$', 'app.views.board', name='board'),
+    url(r'^partners$', 'app.views.partners', name='partners'),
+    url(r'^faq$', 'app.views.faq', name='faq'),
+
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
     url(r'^contact-us$', 'app.views.contact_us', name='contact_us'),
     url(r'^newsletter-signup$', 'app.views.newsletter_signup', name='newsletter_signup'),

@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.template import RequestContext
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, render
 from .models import NewsletterSignups, Partner, HomePageBanner, SuccessStories
 from django.utils import translation
 from market.models import MarketItem, Comment, EmailRecommendation
@@ -81,6 +81,27 @@ def citation(request):
 
 def terms_and_conditions(request):
     return HttpResponseRedirect('/movements/terms-and-conditions/')
+
+
+# public pages
+def about(request):
+    return render(request, 'public/about.html', {'selected_item': 'about'})
+
+
+def team(request):
+    return render(request, 'public/team.html', {'selected_item': 'team'})
+
+
+def board(request):
+    return render(request, 'public/board.html', {'selected_item': 'board'})
+
+
+def partners(request):
+    return render(request, 'public/partners.html', {'selected_item': 'partners'})
+
+
+def faq(request):
+    return render(request, 'public/faq.html', {'selected_item': 'faq'})
 
 
 def set_language(request):

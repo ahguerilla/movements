@@ -1,0 +1,86 @@
+{% extends "base_v2.html" %}
+{% load cms_tags sekizai_tags menu_tags %}
+{% load i18n %}
+
+{% block head_title %}
+  FAQ's
+{% endblock %}
+
+{% block extra_body_script %}
+  {% placeholder "extra_body_script" %}
+{% endblock %}
+
+{% block content %}
+  <div class="hidden-xs hidden-sm" style="height:30px;"></div>
+  <div class="content-page">
+    <div class="row">
+      <div class="col-md-4 cms-left-column toggle-menu-container">
+        {% include 'public/snippets/_about_navigation.html' with selected_item=selected_item %}
+      </div>
+      <div class="col-md-8 cms-body-content">
+        <h1>FAQ</h1>
+        <h4>What is it?</h4>
+        <p>Movements.org is an online platform that links human rights activists in closed societies with people
+          around the world with skills to help. Movements is aimed at activists and individuals dedicated to defending
+          and expanding human rights.</p>
+        <h4>Why use it?</h4>
+        <p>Movements.org links those who need help with those who can help. It’s a tool that makes life easier for
+          dissidents and harder for dictators.</p>
+        <h4>Is this platform secure?</h4>
+        <p>No online platform is completely secure. That said, we have gone to great lengths to try and protect your
+          personal privacy. We are working with some of the top experts in the field who share and appreciate your
+          concern for digital security. It is important to maximize safety online and only share personal information
+          with people you trust.</p>
+        <h4>Can I remain anonymous?</h4>
+        <p>Yes. When you register, you can create any username you like. If you send a private message or post a
+          comment, only your username will be shared. Make sure you don't use your real name as part of your username
+          if you want to remain anonymous.</p>
+        <h4>Are users vetted?</h4>
+        <p>We try to review all requests to join Movements. If a user provides information such as their Facebook or
+          LinkedIn page we give them a "star" rating according to how much information they provide that we can
+          confirm.&nbsp; This process may take us a day or so to complete. If you would like us to take a second look
+          at a profile, contact us at info@movements.org.</p>
+        <h4>How does the Movements.org rating system work?</h4>
+        <p>When a new user joins Movements, we review their digital presence and try to confirm their identity. The
+          more information (social media accounts, website, bio) you add to your profile, the higher your Movements
+          Rating. Five stars indicates that we know you, have spoken with you, and trust you.</p>
+        <h4>How do you choose the countries listed on Movements?</h4>
+        <p>We use Freedom House's list of "Not Free" and "Partially Free" countries. Of
+          these, we are currently focusing on those countries with populations over 5 million. Given limited
+          resources, we have chosen to focus on the largest dictatorships. As Movements expands, we look forward to
+          helping smaller unfree nations. We focus on closed societies because citizens of democracies have means to
+          redress their human rights problems through voting, free speech, independent judiciaries, and a free press.
+        </p>
+        <h4>What am I allowed to post?</h4>
+        <p>You may post anything that addresses a human rights abuse. Keep in mind that requests for advice, contacts,
+          training, services or knowledge are much easier to address than those for equipment and other hardware that
+          would need to be shipped internationally or would involve import/export restrictions. See our <a
+              href="https://www.movements.org/movements/our-terms/acceptable-use-policy/"><strong>Acceptable Use
+            Policy</strong></a>.</p>
+        <h4>Is anything off limits?</h4>
+        <p>Anything that incites violence, terrorism, xenophobia or intolerance. Individuals who belong to
+          organizations that advocate terrorism, racism, or violence are not welcome to post. At this time Movements
+          also does not support requests for donations or monetary transfers.</p>
+        <h4>Is the board moderated?</h4>
+        <p>The Movements administrators reserve the right to delete any offensive or inappropriate posts.</p>
+        <h4>Does the Movements team help?</h4>
+        <p>The Movements team reviews posts that come in. If we know an individual or organization that could respond,
+          we reach out to them. As part of the process, our Community Managers may send you a Direct Message asking
+          for more information or clarification.</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block endjavascript %}
+  <script type="text/javascript">
+    (function () {
+      var $leftNavigation = $('.toggle-menu-container .left-navigation');
+      var $toggle = $('.toggle-menu-container .toggle-menu');
+      $toggle.click(function (ev) {
+        $leftNavigation.toggleClass('toggled');
+        $toggle.html($leftNavigation.hasClass('toggled') ? 'SHOW MENU' : 'HIDE MENU');
+      });
+    })();
+  </script>
+{% endblock %}

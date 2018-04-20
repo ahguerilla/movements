@@ -1,0 +1,38 @@
+{% extends "base_v2.html" %}
+{% load cms_tags sekizai_tags menu_tags %}
+{% load i18n %}
+
+{% block head_title %}
+Our Board
+{% endblock %}
+
+{% block extra_body_script %}
+  {% placeholder "extra_body_script" %}
+{% endblock %}
+
+{% block content %}
+<div class="hidden-xs hidden-sm" style="height:30px;"></div>
+<div class="content-page">
+  <div class="row">
+    <div class="col-md-4 cms-left-column toggle-menu-container">
+      {% include 'public/snippets/_about_navigation.html' with selected_item=selected_item %}
+    </div>
+    <div class="col-md-8 cms-body-content">
+      <h1>Our Board</h1>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block endjavascript %}
+  <script type="text/javascript">
+    (function() {
+      var $leftNavigation = $('.toggle-menu-container .left-navigation');
+      var $toggle = $('.toggle-menu-container .toggle-menu');
+      $toggle.click(function(ev) {
+        $leftNavigation.toggleClass('toggled');
+        $toggle.html($leftNavigation.hasClass('toggled') ? 'SHOW MENU' : 'HIDE MENU');
+      });
+    })();
+  </script>
+{% endblock %}
