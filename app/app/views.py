@@ -104,6 +104,18 @@ def faq(request):
     return render(request, 'public/faq.html', {'selected_item': 'faq'})
 
 
+def how_it_works(request):
+    return render(request, 'public/how_it_works.html', {'selected_item': 'how_it_works'})
+
+
+def offer_skills(request):
+    return render(request, 'public/offer_skills.html', {'selected_item': 'offer_skills'})
+
+
+def request_help(request):
+    return render(request, 'public/request_help.html', {'selected_item': 'request_help'})
+
+
 def set_language(request):
     lang_code = request.POST.get('language_code')
     result = 'error'

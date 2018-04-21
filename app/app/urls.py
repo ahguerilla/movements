@@ -37,6 +37,10 @@ urlpatterns = patterns(
     url(r'^board$', 'app.views.board', name='board'),
     url(r'^partners$', 'app.views.partners', name='partners'),
     url(r'^faq$', 'app.views.faq', name='faq'),
+    url(r'^how-it-works$', 'app.views.how_it_works', name='how_it_works'),
+    url(r'^offer-skills$', 'app.views.offer_skills', name='offer_skills'),
+    url(r'^request-help$', 'app.views.request_help', name='request_help'),
+
 
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
     url(r'^contact-us$', 'app.views.contact_us', name='contact_us'),

@@ -1,0 +1,52 @@
+{% extends "base_v2.html" %}
+{% load cms_tags sekizai_tags menu_tags %}
+{% load i18n %}
+
+{% block head_title %}
+How to Request Help
+{% endblock %}
+
+{% block extra_body_script %}
+  {% placeholder "extra_body_script" %}
+{% endblock %}
+
+{% block content %}
+<div class="hidden-xs hidden-sm" style="height:30px;"></div>
+<div class="content-page">
+  <div class="row">
+    <div class="col-md-4 cms-left-column toggle-menu-container">
+      {% include 'public/snippets/_how_it_works_navigation.html' with selected_item=selected_item %}
+    </div>
+    <div class="col-md-8 cms-body-content">
+      <h1>How to Request Help</h1>
+      <div class="videoWrapper">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/CbTwzwXETfg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <p>&nbsp;</p>
+      <p>If you'd like to make a request for help, click on MOVEMENTS at the top of your page to get to your dashboard. Click <em>add post </em>at the top right, and then click <i>Request.</i></p>
+      <ul>
+        <li>Indicate which skills you need.</li>
+        <li>Indicate in which regions or countries this help is needed.</li>
+        <li>In the first text entry field (What Do You Need), state what kind of help you need.</li>
+        <li>In the next box, describe the situation in more detail.</li>
+        <li>Indicate whether we can tweet your offer (we will not use personal information)</li>
+        <li>Click <i>Post Now</i></li>
+      </ul>
+      <p>Get started and <a href="{% url 'create_request' %}"><strong>request help now</strong></a>.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block endjavascript %}
+  <script type="text/javascript">
+    (function() {
+      var $leftNavigation = $('.toggle-menu-container .left-navigation');
+      var $toggle = $('.toggle-menu-container .toggle-menu');
+      $toggle.click(function(ev) {
+        $leftNavigation.toggleClass('toggled');
+        $toggle.html($leftNavigation.hasClass('toggled') ? 'SHOW MENU' : 'HIDE MENU');
+      });
+    })();
+  </script>
+{% endblock %}

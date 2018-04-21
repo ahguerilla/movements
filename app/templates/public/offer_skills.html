@@ -1,0 +1,52 @@
+{% extends "base_v2.html" %}
+{% load cms_tags sekizai_tags menu_tags %}
+{% load i18n %}
+
+{% block head_title %}
+How to Offer your Skills
+{% endblock %}
+
+{% block extra_body_script %}
+  {% placeholder "extra_body_script" %}
+{% endblock %}
+
+{% block content %}
+<div class="hidden-xs hidden-sm" style="height:30px;"></div>
+<div class="content-page">
+  <div class="row">
+    <div class="col-md-4 cms-left-column toggle-menu-container">
+      {% include 'public/snippets/_how_it_works_navigation.html' with selected_item=selected_item %}
+    </div>
+    <div class="col-md-8 cms-body-content">
+      <h1>How to Offer your Skills</h1>
+      <div class="videoWrapper">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/foDR7ioL9kE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <p>&nbsp;</p>
+      <p>To offer your skills, click on MOVEMENTS at the top of the page to get to your dashboard. Click <em>Add Post </em>at the top right of your page, and then click</p>
+      <ul>
+        <li>Indicate which skills you have to offer.</li>
+        <li>Indicate which regions or countries you&#39;d like to help (ALL is default).</li>
+        <li>In the first text entry field (How Can You Help) state what you are able to do and what help you can provide.</li>
+        <li>In then next box, describe what you can do in a little more detail.</li>
+        <li>Indicate whether we can tweet your offer (we will not use any personal information)</li>
+        <li>Click <em>Post Now</em></li>
+      </ul>
+      <p>Get started and <a href="{% url 'create_offer' %}"><strong>offer your skills</strong></a>.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block endjavascript %}
+  <script type="text/javascript">
+    (function() {
+      var $leftNavigation = $('.toggle-menu-container .left-navigation');
+      var $toggle = $('.toggle-menu-container .toggle-menu');
+      $toggle.click(function(ev) {
+        $leftNavigation.toggleClass('toggled');
+        $toggle.html($leftNavigation.hasClass('toggled') ? 'SHOW MENU' : 'HIDE MENU');
+      });
+    })();
+  </script>
+{% endblock %}

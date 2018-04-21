@@ -1,0 +1,49 @@
+{% extends "base_v2.html" %}
+{% load cms_tags sekizai_tags menu_tags %}
+{% load i18n %}
+
+{% block head_title %}
+How it Works
+{% endblock %}
+
+{% block extra_body_script %}
+  {% placeholder "extra_body_script" %}
+{% endblock %}
+
+{% block content %}
+<div class="hidden-xs hidden-sm" style="height:30px;"></div>
+<div class="content-page">
+  <div class="row">
+    <div class="col-md-4 cms-left-column toggle-menu-container">
+      {% include 'public/snippets/_how_it_works_navigation.html' with selected_item=selected_item %}
+    </div>
+    <div class="col-md-8 cms-body-content">
+      <h1>How it Works</h1>
+      <p>It's simple. If you're an activist in need, or a concerned citizen who wants to help, signing up only
+        takes a minute.</p>
+      <p>1) Create an <a href="{% url 'signup_start' %}"><strong>account</strong></a> and fill in your profile.
+        Provide however much information you are comfortable giving.</p>
+      <p>2) Post a <a href="{% url 'create_request' %}"><strong>request</strong></a> or an
+        <a href="{% url 'create_offer' %}"><strong>offer</strong></a> while being as specific as possible.</p>
+      <p>3) Search other requests and offers and connect with activists around the world.</p>
+      <p>4) Send a direct message or post a comment to connect with other users. Work together to help secure human
+        rights and open closed societies.</p>
+      <p>Read more about <a href="{% url 'offer_skills' %}">how to offer your skills</a> and
+        <a href="{% url 'request_help' %}">how to request help</a>.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block endjavascript %}
+  <script type="text/javascript">
+    (function() {
+      var $leftNavigation = $('.toggle-menu-container .left-navigation');
+      var $toggle = $('.toggle-menu-container .toggle-menu');
+      $toggle.click(function(ev) {
+        $leftNavigation.toggleClass('toggled');
+        $toggle.html($leftNavigation.hasClass('toggled') ? 'SHOW MENU' : 'HIDE MENU');
+      });
+    })();
+  </script>
+{% endblock %}

@@ -1,0 +1,14 @@
+<ul class="left-navigation toggled">
+  <li class="{% if selected_item == 'how_it_works' %}active{% endif %}">
+    <a href="{% url 'how_it_works' %}"><span>How it Works</span></a>
+  </li>
+  <li class="{% if selected_item == 'offer_skills' %}active{% endif %}">
+    <a href="{% url 'offer_skills' %}"><span>How to Offer your Skills</span></a>
+  </li>
+  <li class="{% if selected_item == 'request_help' %}active{% endif %}">
+    <a href="{% url 'request_help' %}"><span>How to Request Help</span></a>
+  </li>
+</ul>
+<div class="toggle-menu text-center visible-xs visible-sm">
+  SHOW MENU
+</div>
