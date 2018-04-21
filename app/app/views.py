@@ -116,6 +116,10 @@ def request_help(request):
     return render(request, 'public/request_help.html', {'selected_item': 'request_help'})
 
 
+def take_action(request):
+    return render(request, 'public/take_action.html', {})
+
+
 def set_language(request):
     lang_code = request.POST.get('language_code')
     result = 'error'

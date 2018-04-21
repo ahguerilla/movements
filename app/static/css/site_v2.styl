@@ -133,6 +133,9 @@ box-shadow()
 .right-align
   text-align right
 
+.nowrap
+  white-space nowrap
+
 .news-item-card
   position relative
   border 1px solid $hr-color
@@ -204,6 +207,17 @@ box-shadow()
 .btn-news
   background-color $news-color
   color $white-font
+
+a.btn-take-action,
+.btn-take-action
+  background-color #FFFF00
+  color #333333
+
+.btn-take-action:hover
+  color #333333
+
+.btn-full-width
+  width 100%
 
 
 .btn-action:hover,
@@ -842,6 +856,82 @@ h1,h2,h3,h4,h5,h6
     font-weight bold
     text-decoration underline
 
+
+.take-action-hero
+  width 100%
+  height 500px
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  .hero-text {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    z-index: 1000;
+    h1 {
+      margin 0
+      background-color: rgba(236,236,236,0.75);
+      padding: 5px 10px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    h1:last-child {
+      margin-left: 30px;
+    }
+    h1.visible-small {
+      display none;
+    }
+  }
+
+@media (max-width: 1000px) {
+  .take-action-hero {
+    .hero-text {
+      left: 3%;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .take-action-hero {
+    .hero-text {
+      left: 0;
+      h1 {
+        text-align center
+      }
+      h1:last-child {
+         margin-left: 0;
+      }
+      h1.visible-small {
+        display block;
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+      h1.visible-big {
+        display none;
+      }
+
+
+    }
+  }
+}
+
+.take-action-item {
+  background-color: #FFFFFF;
+  padding 1px 15px 15px 15px
+  margin-bottom 20px
+  .body-content {
+    height: 125px
+  }
+}
+
+@media (max-width: 1199px) {
+  .take-action-item {
+    .body-content {
+      height: inherit;
+    }
+  }
+}
 
 .avatar
   img

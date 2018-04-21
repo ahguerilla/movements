@@ -1,0 +1,56 @@
+{% extends "base_v2.html" %}
+{% load cms_tags sekizai_tags menu_tags %}
+{% load i18n %}
+
+{% block head_title %}
+Take Quick Action
+{% endblock %}
+
+{% block extra_body_script %}
+  {% placeholder "extra_body_script" %}
+{% endblock %}
+
+{% block header_padding %}{% endblock %}
+
+{% block content_outside_container %}
+  <div class="take-action-hero"  style="background-image: url('{{ STATIC_URL }}images/public/banner-image.jpg')">
+    <div class="hero-text">
+      <h1 class="visible-small">By completing any of the quick tasks you can help a great human rights cause</h1>
+      <h1 class="visible-big">By completing any of the quick tasks</h1>
+      <h1 class="visible-big">You can help a great human rights cause</h1>
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div style="height:30px;"></div>
+  <div class="row">
+    <div class="col-lg-offset-1 col-lg-5">
+      <div class="take-action-item">
+        <h2>Demand justice for Taner Kılıç</h2>
+        <div class="body-content">
+          <p>Our dear friend, the Honorary Chair of Amnesty Turkey Taner Kılıç, has been in prison since June 2017.
+            He is on trial for crimes he did not commit, just because he spoke out against the government. Now the
+            government is punishing him.</p>
+        </div>
+        <a href="https://www.amnesty.org/en/get-involved/take-action/free-the-rights-defenders-in-turkey/"
+           target="_blank"
+           class="btn btn-take-action btn-full-width">TAKE ACTION</a>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="take-action-item">
+        <h2>End Sexist Laws at the Commonwealth</h2>
+        <div class="body-content">
+          <p>No Girl Should be Forced to Marry. Tell Bangladesh to Close the Loophole on Child Marriage.</p>
+        </div>
+        <a href="https://www.globalcitizen.org/en/action/set/end-sexist-laws-at-the-commonwealth/"
+           target="_blank"
+           class="btn btn-take-action btn-full-width">TAKE ACTION</a>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

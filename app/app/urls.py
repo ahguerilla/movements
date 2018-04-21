@@ -40,6 +40,8 @@ urlpatterns = patterns(
     url(r'^how-it-works$', 'app.views.how_it_works', name='how_it_works'),
     url(r'^offer-skills$', 'app.views.offer_skills', name='offer_skills'),
     url(r'^request-help$', 'app.views.request_help', name='request_help'),
+    url(r'^take-action$', 'app.views.take_action', name='take_action'),
+
 
 
     url(r'^terms-and-conditions$', 'app.views.terms_and_conditions', name='terms_and_conditions'),
