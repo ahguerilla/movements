@@ -144,20 +144,9 @@
                 <img src="{{ STATIC_URL }}images/v2/add_icon.png"/>
                 <span id="AddPostText"> {% trans "Add Post" %}</span>
               </a>
-{#              <li class="hidden-xs">{% if config.DONATE_BUTTON_LOGGED_IN %}{{ config.DONATE_BUTTON_LOGGED_IN|safe }}{% endif %}</li>#}
               <li class="hidden-xs">
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                  <input type="hidden" name="cmd" value="_donations">
-                  <input type="hidden" name="business" value="clarke@advancinghumanrights.org">
-                  <input type="hidden" name="lc" value="US">
-                  <input type="hidden" name="item_name" value="Movements Tax Exempt Donation">
-                  <input type="hidden" name="page_style" value="MOVEMENTS">
-                  <input type="hidden" name="no_note" value="0">
-                  <input type="hidden" name="currency_code" value="USD">
-                  <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
-                  <button type="submit" class="btn action-btn" style="float: right; margin-top: 6px; color: white; background-color: #005d86;">DONATE</button>
-                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
+                <a target="_blank" href="http://demcouncil.org/?page_id=776"
+                   class="btn action-btn" style="line-height: inherit; float: right; margin-top: 6px; color: white; background-color: #005d86;">DONATE</a>
               </li>
               <div id="add-post-popup-container"></div>
             {% endif %}
