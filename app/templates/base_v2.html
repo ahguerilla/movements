@@ -200,11 +200,8 @@
     
     </div>
     <div class="central-logo hidden-xs hidden-sm hidden-md">
-      <div class="header-nav-wrapper">
-        <a href="/"><img class="main-logo" src="{{ STATIC_URL }}images/v2/movements-logo-v2.png"></a>
-      </div>
       <div class="header-nav-text">
-        <p>Crowdsourcing the protection<br> of human rights.</p>
+        <p>Crowdsourcing human rights.<br>Everyone has a role.</p>
       </div>
     </div>
   </div>
@@ -228,15 +225,15 @@
   <div id="FooterSocialMedia_Big" class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-sm-4 hidden-xs">
-          <h4>{% trans "Get updates"  %}</h4>
-          <!-- BEGIN: Constant Contact Email List Form Button -->
-          <a target="_blank" class="nav-button" href="http://visitor.r20.constantcontact.com/d.jsp?llr=wxajvkuab&amp;p=oi&amp;m=1121344324342&amp;sit=9dtkorxjb&amp;f=09ba4864-11fb-4fe6-95cd-46c7867064ca">
-            <button style="background-color: #005d86; margin-bottom: 5px;" class="btn btn-action btn-thinner">Get Movements.Org Updates</button>
-          </a>
-          <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>
-        </div>
-        <div class="col-sm-3 hidden-xs" style="margin-bottom: 10px;">
+{#        <div class="col-sm-6 hidden-xs">#}
+{#          <h4>{% trans "Get updates"  %}</h4>#}
+{#          <!-- BEGIN: Constant Contact Email List Form Button -->#}
+{#          <a target="_blank" class="nav-button" href="http://visitor.r20.constantcontact.com/d.jsp?llr=wxajvkuab&amp;p=oi&amp;m=1121344324342&amp;sit=9dtkorxjb&amp;f=09ba4864-11fb-4fe6-95cd-46c7867064ca">#}
+{#            <button style="background-color: #005d86; margin-bottom: 5px;" class="btn btn-action btn-thinner">Get Movements.Org Updates</button>#}
+{#          </a>#}
+{#          <p>{% blocktrans %}Get all the latest updates, including featured posts, and security tips!{% endblocktrans %}</p>#}
+{#        </div>#}
+        <div class="col-sm-6 hidden-xs" style="margin-bottom: 10px;">
           <h4>{% trans "Connect with us"  %}</h4>
           <div class="social-icons" style="margin-bottom: 10px;">
             <a target="_blank" href="https://twitter.com/movements_org">
@@ -246,24 +243,18 @@
               <img src="{{ STATIC_URL }}images/v2/facebook-bigger.png" alt="{%trans "Connect with Facebook"%}" >
             </a>
             <a target="_blank" href="https://www.youtube.com/channel/UCTnx-BN-xXg8_0zT1-FRLWA">
-              <img src="{{ STATIC_URL }}images/v2/youtube_white.png" alt="{%trans "Connect with YouTube"%}" >
+              <img style="margin-right: 0;" src="{{ STATIC_URL }}images/v2/youtube_white.png" alt="{%trans "Connect with YouTube"%}" >
             </a>
           </div>
           <div class="fb-like" data-href="https://www.facebook.com/Movements.org"
                data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
         </div>
-        <div class="col-sm-5">
-          <h4>{% trans "About MOVEMENTS"  %}</h4>
-          <p>{% blocktrans %}Crowdsourcing Protection of Human Rights. Everyone Has a Role{% endblocktrans %}</p>
-        </div>
+{#        <div class="col-sm-5">#}
+{#          <h4>{% trans "About MOVEMENTS"  %}</h4>#}
+{#          <p>{% blocktrans %}Crowdsourcing Protection of Human Rights. Everyone Has a Role{% endblocktrans %}</p>#}
+{#        </div>#}
       </div>
       <hr>
-      <div class="row visible-xs" >
-        <div class="col-xs-12" style="margin-bottom: 15px;">
-          <div class="fb-like" data-href="https://www.facebook.com/Movements.org"
-               data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="footer-copyright">Copyright &copy; {% now "Y" %} Democracy council</div>
