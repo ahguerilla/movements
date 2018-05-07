@@ -97,13 +97,13 @@ LOCALE_PATHS = (
 
 ugettext = lambda s: s
 LANGUAGES = [
-    # ('ar', ugettext('Arabic')),
+    ('ar', ugettext('Arabic')),
     ('en', ugettext('English')),
-    # ('zh-cn', ugettext('Chinese')),
+    ('zh-cn', ugettext('Chinese')),
     # ('uk', ugettext('Ukrainian')),
-    # ('ru', ugettext('Russian')),
-    # ('fa', ugettext('Persian')),
-    # ('fr', ugettext('French')),
+    ('ru', ugettext('Russian')),
+    ('fa', ugettext('Persian')),
+    ('fr', ugettext('French')),
     # ('es', ugettext('Spanish')),
 ]
 

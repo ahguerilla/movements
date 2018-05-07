@@ -128,6 +128,60 @@
           <li>
             <a href="{% url 'how_it_works' %}">{% trans "How it works" %}</a>
           </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Language" %} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="image-item"><a data-language="en" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_uk.png">
+                  <span>{% trans "English" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ar" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_arabic.png">
+                  <span>{% trans "Arabic" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="zh-cn" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_chinese.png">
+                  <span>{% trans "Chinese" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="uk" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_ukrainian.png">
+                  <span>{% trans "Ukrainian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="ru" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_russian.png">
+                  <span>{% trans "Russian" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="fa" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_iran.png">
+                  <span>{% trans "Farsi" %}</span>
+                </div>
+              </a></li>
+              <li class="image-item"><a data-language="fr" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_french.png">
+                  <span>{% trans "French" %}</span>
+                </div>
+              </a></li>
+              <!--<li class="image-item"><a data-language="es" class="set-lang" href="#">
+                <div class="dropdown-flag">
+                  <img src="{{ STATIC_URL }}images/v2/flag_spanish.png">
+                  <span>{% trans "Spanish" %}</span>
+                </div>
+              </a></li>-->
+            </ul>
+          </li>
+
           {% if user.is_authenticated %}
           <li class="visible-xs">
             <a href="#" id="logout-link">{% trans "Logout" %}</a>
