@@ -18,6 +18,7 @@ How to Request Help
       {% include 'public/snippets/_how_it_works_navigation.html' with selected_item=selected_item %}
     </div>
     <div class="col-md-8 cms-body-content">
+      {% blocktrans %}
       <h1>How to Request Help</h1>
       <div class="videoWrapper">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/CbTwzwXETfg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -32,6 +33,7 @@ How to Request Help
         <li>Indicate whether we can tweet your offer (we will not use personal information)</li>
         <li>Click <i>Post Now</i></li>
       </ul>
+      {% endblocktrans %}
       <p>Get started and <a href="{% url 'create_request' %}"><strong>request help now</strong></a>.</p>
     </div>
   </div>
