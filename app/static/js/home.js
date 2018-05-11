@@ -113,8 +113,11 @@
     buildStatsBanner: function(data) {
       var ctx = {
         connections: window.ahr.addCommasToNumber(data.connections),
+        human_rights_text: window.ahr.string_constants.human_rights_connections,
         users: window.ahr.addCommasToNumber(data.user),
-        countries:  window.ahr.addCommasToNumber(data.countries)
+        active_users_text: window.ahr.string_constants.active_users,
+        countries: window.ahr.addCommasToNumber(data.countries),
+        countries_text:window.ahr.string_constants.countries
       };
       return JST.home_page_stats(ctx);
     }

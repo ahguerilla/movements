@@ -30,6 +30,10 @@ def string_constants(context):
             'redirect_off_site': _('This link will take you off the Movements site.\nMake sure you trust the site that you are being redirected to.'),
             'signup_text': _('SIGNUP'),
             'signup_login_text': _('LOGIN OR SIGNUP'),
+            'human_rights_connections': _('Human Rights Connections'),
+            'active_users': _('Active Users'),
+            'countries': _('Countries'),
+
         })
 
     return {
