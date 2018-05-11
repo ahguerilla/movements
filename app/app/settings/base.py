@@ -104,7 +104,7 @@ LANGUAGES = [
     ('ru', ugettext('Russian')),
     ('fa', ugettext('Persian')),
     ('fr', ugettext('French')),
-    # ('es', ugettext('Spanish')),
+    ('es', ugettext('Spanish')),
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
