@@ -101,7 +101,6 @@ msgid "Human Rights Connections"
 msgstr "ارتباطات حقوق بشری"
 
 #: app/context_processors.py:34
-#, fuzzy
 msgid "Active Users"
 msgstr "کاربرهای فعال"
 
